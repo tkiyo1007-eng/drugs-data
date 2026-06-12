@@ -1,0 +1,176 @@
+name: 毎日データ更新
+
+on:
+  schedule:
+    - cron: '0 21 * * *'  # 日本時間 毎朝6時
+  workflow_dispatch:       # 手動実行も可能
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: チェックアウト
+        uses: actions/checkout@v4
+
+      - name: Python セットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 依存ライブラリインストール
+        run: pip install pandas openpyxl requests
+
+      - name: 供給状況Excel ダウンロード
+        run: |
+          python3 - <<'EOF'
+          import requests
+          from datetime import datetime
+          import pytz
+
+          jst = pytz.timezone('Asia/Tokyo')
+          today = datetime.now(jst)
+          date_str = today.strftime('%y%m%d')
+          url = f"https://www.mhlw.go.jp/content/10800000/{date_str}iyakuhinkyoukyu.xlsx"
+          print(f"ダウンロード: {url}")
+          r = requests.get(url, timeout=30)
+          if r.status_code == 200:
+              with open(f"{date_str}iyakuhinkyoukyu.xlsx", "wb") as f:
+                  f.write(r.content)
+              print("✅ ダウンロード成功")
+          else:
+              print(f"❌ 失敗: {r.status_code} - 今日のデータはまだ未公開の可能性があります")
+              exit(1)
+          EOF
+
+      - name: CSV変換スクリプト実行
+        run: |
+          python3 - <<'EOF'
+          import os, glob, pandas as pd
+          from datetime import datetime
+
+          SUPPLY_FILE_PATTERN = "*iyakuhin*kyu*.xlsx"
+          YAKKA_FILES = ["薬価情報医薬品.xlsx","薬価情報_注射.xlsx","薬価情報_外用.xlsx","薬価情報_歯科.xlsx"]
+          OUTPUT_FILE = "drugs_app_ready.csv"
+
+          def load_supply_data():
+              files = glob.glob(SUPPLY_FILE_PATTERN)
+              if not files: raise FileNotFoundError("供給状況Excelが見つかりません")
+              path = sorted(files)[-1]
+              print(f"[供給状況] 読み込み: {path}")
+              df = pd.read_excel(path, header=1, dtype=str)
+              df.columns = [str(c).strip() for c in df.columns]
+              col_map = {
+                  "⑥品名": "商品名", "③成分名": "一般名", "⑦製造販売業者名": "製造メーカー",
+                  "⑫製造販売業者": "供給状況", "⑭限定出荷": "理由",
+                  "⑮限定出荷の解除": "解除見込み", "⑰製造販売業者の\n「出荷量」": "出荷量状況",
+                  "⑳当該品目": "更新日", "⑤YJコード": "YJコード",
+                  "②薬効分類": "薬効分類", "④規格単位": "規格",
+              }
+              rename = {}
+              for col in df.columns:
+                  for key, val in col_map.items():
+                      if key.replace("\n","") in col.replace("\n","") and val not in rename.values():
+                          rename[col] = val; break
+              df = df.rename(columns=rename)
+              if "解除見込み" in df.columns and "出荷量状況" in df.columns:
+                  df["代替候補"] = "解除/解消見込み: " + df["解除見込み"].fillna("－") + " / 出荷量状況: " + df["出荷量状況"].fillna("－")
+              else:
+                  df["代替候補"] = ""
+              if "更新日" in df.columns:
+                  def fmt(v):
+                      if pd.isna(v) or str(v).strip() in ("","nan"): return ""
+                      try:
+                          if str(v).replace(".","").isdigit():
+                              d = pd.to_datetime("1899-12-30") + pd.Timedelta(days=int(float(v)))
+                              return d.strftime("%Y/%m/%d")
+                          return pd.to_datetime(str(v)).strftime("%Y/%m/%d")
+                      except: return str(v)
+                  df["更新日"] = df["更新日"].apply(fmt)
+              df = df[df["商品名"].notna() & (df["商品名"].str.strip() != "")]
+              print(f"  供給状況データ: {len(df)}件"); return df
+
+          def load_yakka_data():
+              records = []
+              for fname in YAKKA_FILES:
+                  if not os.path.exists(fname): print(f"  スキップ: {fname}"); continue
+                  print(f"[薬価] 読み込み: {fname}")
+                  df = pd.read_excel(fname, header=0, dtype=str)
+                  df.columns = [str(c).strip() for c in df.columns]
+                  rename = {}
+                  for col in df.columns:
+                      if "薬価基準収載医薬品コード" in col: rename[col] = "YJコード薬価"
+                      elif col == "メーカー名": rename[col] = "販売メーカー"
+                      elif col == "薬価": rename[col] = "薬価"
+                      elif "経過措置" in col: rename[col] = "経過措置期限"
+                  df = df.rename(columns=rename)
+                  if "YJコード薬価" in df.columns: records.append(df)
+              if not records: return {}
+              combined = pd.concat(records, ignore_index=True)
+              d = {}
+              for _, row in combined.iterrows():
+                  yj = str(row.get("YJコード薬価","")).strip()
+                  if not yj or yj == "nan": continue
+                  if yj not in d:
+                      d[yj] = {
+                          "販売メーカー": "" if pd.isna(row.get("販売メーカー")) else str(row.get("販売メーカー","")).strip(),
+                          "薬価": "" if "薬価" not in row or pd.isna(row.get("薬価")) else str(row.get("薬価","")).strip(),
+                          "経過措置期限": "" if "経過措置期限" not in row or pd.isna(row.get("経過措置期限")) else str(row.get("経過措置期限","")).strip(),
+                      }
+              print(f"[薬価] 辞書: {len(d)}件"); return d
+
+          supply_df = load_supply_data()
+          yakka_dict = load_yakka_data()
+
+          vm, vk, ve = [], [], []
+          for _, row in supply_df.iterrows():
+              yj = str(row.get("YJコード","")).strip()
+              info = yakka_dict.get(yj, {})
+              vm.append(info.get("販売メーカー","")); vk.append(info.get("薬価","")); ve.append(info.get("経過措置期限",""))
+          supply_df["販売メーカー"] = vm; supply_df["薬価"] = vk; supply_df["経過措置期限"] = ve
+
+          manual_corrections = {
+              "2139005F1052": "東和薬品",
+              "2139005F2342": "東和薬品",
+              "2139005F3039": "東和薬品",
+              "2139401A1033": "東和薬品",
+              "2139401A2137": "東和薬品",
+          }
+
+          out_cols = ["商品名","一般名","製造メーカー","販売メーカー","供給状況","理由","代替候補","更新日","YJコード","薬効分類","規格","薬価","経過措置期限"]
+          out_cols = [c for c in out_cols if c in supply_df.columns]
+          out = supply_df[out_cols].fillna("")
+          for yj_code, sales_mfr in manual_corrections.items():
+              mask = out["YJコード"] == yj_code
+              out.loc[mask, "販売メーカー"] = sales_mfr
+          out.to_csv(OUTPUT_FILE, index=False, encoding="utf-8-sig")
+          print(f"✅ CSV出力完了: {len(out)}件")
+          EOF
+
+      - name: version.json 更新
+        run: |
+          python3 - <<'EOF'
+          import json
+          from datetime import datetime
+          import pytz
+
+          jst = pytz.timezone('Asia/Tokyo')
+          today = datetime.now(jst)
+          version = int(today.strftime('%Y%m%d'))
+
+          data = {
+              "version": version,
+              "csv_url": "https://raw.githubusercontent.com/tkiyo1007-eng/drugs-data/main/drugs_app_ready.csv",
+              "note": f"{today.strftime('%Y年%m月%d日')}厚労省データ反映"
+          }
+          with open("version.json", "w", encoding="utf-8") as f:
+              json.dump(data, f, ensure_ascii=False, indent=2)
+          print(f"✅ version.json更新: {version}")
+          EOF
+
+      - name: GitHubにプッシュ
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add drugs_app_ready.csv version.json
+          git diff --staged --quiet || git commit -m "データ自動更新: $(date +'%Y/%m/%d')"
+          git push
