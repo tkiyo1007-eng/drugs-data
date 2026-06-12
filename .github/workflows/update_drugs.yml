@@ -2,7 +2,7 @@ name: 毎日データ更新
 
 on:
   schedule:
-    - cron: '0 21 * * *'  # 日本時間 毎朝6時
+    - cron: '0 21 * * 1-5'  # 日本時間 平日朝6時のみ
   workflow_dispatch:       # 手動実行も可能
 
 jobs:
