@@ -1,5 +1,5 @@
 {
-  "version": 20260610,
+  "version": 20260611,
   "csv_url": "https://raw.githubusercontent.com/tkiyo1007-eng/drugs-data/main/drugs_app_ready.csv",
   "note": "2026年6月厚労省データ反映"
 }
