@@ -24,21 +24,30 @@ jobs:
         run: |
           python3 - <<'EOF'
           import requests
-          from datetime import datetime
+          from datetime import datetime, timedelta
           import pytz
 
           jst = pytz.timezone('Asia/Tokyo')
           today = datetime.now(jst)
-          date_str = today.strftime('%y%m%d')
-          url = f"https://www.mhlw.go.jp/content/10800000/{date_str}iyakuhinkyoukyu.xlsx"
-          print(f"ダウンロード: {url}")
-          r = requests.get(url, timeout=30)
-          if r.status_code == 200:
-              with open(f"{date_str}iyakuhinkyoukyu.xlsx", "wb") as f:
-                  f.write(r.content)
-              print("✅ ダウンロード成功")
-          else:
-              print(f"❌ 失敗: {r.status_code} - 今日のデータはまだ未公開の可能性があります")
+
+          downloaded = False
+          for i in range(5):
+              target = today - timedelta(days=i)
+              date_str = target.strftime('%y%m%d')
+              url = f"https://www.mhlw.go.jp/content/10800000/{date_str}iyakuhinkyoukyu.xlsx"
+              print(f"試行 {i+1}: {url}")
+              r = requests.get(url, timeout=30)
+              if r.status_code == 200:
+                  with open(f"{date_str}iyakuhinkyoukyu.xlsx", "wb") as f:
+                      f.write(r.content)
+                  print(f"✅ ダウンロード成功: {date_str}")
+                  downloaded = True
+                  break
+              else:
+                  print(f"  → {r.status_code} 未公開、前日を試します")
+
+          if not downloaded:
+              print("❌ 5日分さかのぼっても見つかりませんでした")
               exit(1)
           EOF
 
