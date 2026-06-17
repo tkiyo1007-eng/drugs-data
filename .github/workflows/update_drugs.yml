@@ -11,7 +11,6 @@
           with open("drugs_app_ready.csv", "rb") as f:
               csv_hash = hashlib.md5(f.read()).hexdigest()
           version = int(csv_hash[:8], 16)
-
           data = {
               "version": version,
               "csv_url": "https://raw.githubusercontent.com/tkiyo1007-eng/drugs-data/main/drugs_app_ready.csv",
