@@ -74,6 +74,7 @@ jobs:
                   "⑮限定出荷の解除": "解除見込み", "⑰製造販売業者の\n「出荷量」": "出荷量状況",
                   "⑳当該品目": "更新日", "⑤YJコード": "YJコード",
                   "②薬効分類": "薬効分類", "④規格単位": "規格",
+                  "今回掲載時の更新有無": "今回更新",
               }
               rename = {}
               for col in df.columns:
@@ -137,7 +138,7 @@ jobs:
               vm.append(info.get("販売メーカー","")); vk.append(info.get("薬価","")); ve.append(info.get("経過措置期限",""))
           supply_df["販売メーカー"] = vm; supply_df["薬価"] = vk; supply_df["経過措置期限"] = ve
 
-          out_cols = ["商品名","一般名","製造メーカー","販売メーカー","供給状況","理由","代替候補","更新日","YJコード","薬効分類","規格","薬価","経過措置期限"]
+          out_cols = ["商品名","一般名","製造メーカー","販売メーカー","供給状況","理由","代替候補","更新日","今回更新","YJコード","薬効分類","規格","薬価","経過措置期限"]
           out_cols = [c for c in out_cols if c in supply_df.columns]
           out = supply_df[out_cols].fillna("")
           out.to_csv(OUTPUT_FILE, index=False, encoding="utf-8-sig")
