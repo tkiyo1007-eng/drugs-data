@@ -1,6 +1,9 @@
-# Aurora Weather ☀️🌙
+# そらだま(空玉)☀️🌙
 
 世界最高峰のデザイン品質を目指した、SwiftUI 製の天気予報 iOS アプリ。
+アイコンの「空を閉じ込めたガラス玉」がそのまま名前になっています。
+
+> 内部のプロジェクト名・ターゲット名・バンドル ID は `AuroraWeather` のままです(表示名のみ「そらだま」)。ストア公開時にバンドル ID を自分のドメインに変更してください。
 
 ## デザインのこだわり
 
@@ -56,4 +59,4 @@ AuroraWeather/
 
 ### ウィジェットについて
 
-ホーム画面長押し → 「+」→ Aurora Weather で追加できます。アプリで選んだ地点をウィジェットにも反映したい場合は、**両ターゲット**の Signing & Capabilities に App Group `group.com.example.AuroraWeather` を追加してください(`Shared/SharedStore.swift` の ID と一致させる)。App Group 未設定でも、ウィジェットは東京の天気を表示して動作します。
+ホーム画面長押し → 「+」→ そらだま で追加できます。アプリで選んだ地点をウィジェットにも反映したい場合は、**両ターゲット**の Signing & Capabilities に App Group `group.com.example.AuroraWeather` を追加してください(`Shared/SharedStore.swift` の ID と一致させる)。App Group 未設定でも、ウィジェットは東京の天気を表示して動作します。
