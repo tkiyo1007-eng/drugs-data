@@ -525,6 +525,19 @@ footer a:hover{color:var(--blue)}
 </footer>
 
 <script>
+/* ===== スクロール出現（最優先で登録: 後続のJSエラーでも非表示のまま残らないように） ===== */
+(function(){
+  const els = document.querySelectorAll(".reveal");
+  if(!("IntersectionObserver" in window)){ els.forEach(el=>el.classList.add("on")); return; }
+  // threshold:0 = 1pxでも見えたら表示（縦長セクションでも確実に発火する）
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add("on"); io.unobserve(en.target);} });
+  },{threshold:0, rootMargin:"0px 0px -40px 0px"});
+  els.forEach(el=>io.observe(el));
+  // 保険: 何かの理由で発火しなかった要素も8秒後には表示する
+  setTimeout(()=>els.forEach(el=>el.classList.add("on")), 8000);
+})();
+
 /* ===== サンプルデータ ===== */
 const STATUS = {
   ok:      {label:"通常出荷", color:"#2FAE6E"},
@@ -728,11 +741,6 @@ async function fetchFirst(urls){
   }
 })();
 
-/* ===== スクロール出現 ===== */
-const io = new IntersectionObserver(entries=>{
-  entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add("on"); io.unobserve(en.target);} });
-},{threshold:.12});
-document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
 </script>
 </body>
 </html>
