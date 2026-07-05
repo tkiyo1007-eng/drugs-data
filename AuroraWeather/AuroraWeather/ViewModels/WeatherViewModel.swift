@@ -1,6 +1,7 @@
 import Foundation
 import Observation
 import CoreLocation
+import WidgetKit
 
 enum LoadPhase: Equatable {
     case idle
@@ -26,7 +27,6 @@ final class WeatherViewModel {
 
     private static let placesKey = "aurora.savedPlaces"
     private static let unitsKey = "aurora.units"
-    private static let lastPlaceKey = "aurora.lastPlace"
 
     init() {
         let defaults = UserDefaults.standard
@@ -41,12 +41,7 @@ final class WeatherViewModel {
         } else {
             savedPlaces = []
         }
-        if let data = defaults.data(forKey: Self.lastPlaceKey),
-           let stored = try? JSONDecoder().decode(SavedPlace.self, from: data) {
-            place = stored
-        } else {
-            place = .fallback
-        }
+        place = SharedStore.lastPlace()
     }
 
     // MARK: - 読み込み
@@ -132,9 +127,8 @@ final class WeatherViewModel {
     }
 
     private func persistLastPlace() {
-        if let data = try? JSONEncoder().encode(place) {
-            UserDefaults.standard.set(data, forKey: Self.lastPlaceKey)
-        }
+        SharedStore.saveLastPlace(place)
+        WidgetCenter.shared.reloadAllTimelines()
     }
 
     // MARK: - 表示用フォーマット

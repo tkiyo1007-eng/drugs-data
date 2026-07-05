@@ -21,21 +21,25 @@
 - 現在・24時間・10日間の予報、詳細メトリクス7種
 - °C / °F 切り替え(設定は永続化)
 - タイムゾーン対応(検索した都市の現地時刻で表示)
+- **ホーム画面ウィジェット(WidgetKit)** — 小: 現在の天気と最高/最低、中: +2時間おきの予報。背景はアプリと同じ天候グラデーション。30分ごとに自動更新
+- プログラム生成のアプリアイコン(1024px)
 
 ## アーキテクチャ
 
 ```
 AuroraWeather/
-├── App/            エントリポイント
-├── Models/         APIレスポンス / ドメインモデル / WMOコード→天候マッピング
-├── Services/       WeatherService(Open-Meteo)/ Geocoding / Location(async/await)
-├── ViewModels/     WeatherViewModel(@Observable, MVVM)
-├── Views/
-│   ├── Sky/        背景グラデーション・パーティクル演出
-│   ├── Components/ GlassCard
-│   ├── Sections/   ヘッダー / 毎時 / チャート / 10日間 / 詳細グリッド
-│   └── Search/     都市検索シート
-└── Utilities/      ハプティクス・日付フォーマット
+├── AuroraWeather/          アプリ本体ターゲット
+│   ├── App/                エントリポイント
+│   ├── Services/           Geocoding / Location(async/await)
+│   ├── ViewModels/         WeatherViewModel(@Observable, MVVM)
+│   ├── Views/
+│   │   ├── Sky/            背景グラデーション・パーティクル演出
+│   │   ├── Components/     GlassCard
+│   │   ├── Sections/       ヘッダー / 毎時 / チャート / 10日間 / 詳細グリッド
+│   │   └── Search/         都市検索シート
+│   └── Utilities/          ハプティクス
+├── Shared/                 両ターゲット共有: モデル / WeatherService / SharedStore
+└── AuroraWeatherWidget/    ホーム画面ウィジェット(WidgetKit)
 ```
 
 - **API**: [Open-Meteo](https://open-meteo.com/)(無料・APIキー不要)
@@ -49,3 +53,7 @@ AuroraWeather/
 3. シミュレータまたは実機で ⌘R
 
 初回起動時に位置情報の許可を求められます。許可しない場合は東京の天気が表示され、右上の🔍から任意の都市を検索できます。
+
+### ウィジェットについて
+
+ホーム画面長押し → 「+」→ Aurora Weather で追加できます。アプリで選んだ地点をウィジェットにも反映したい場合は、**両ターゲット**の Signing & Capabilities に App Group `group.com.example.AuroraWeather` を追加してください(`Shared/SharedStore.swift` の ID と一致させる)。App Group 未設定でも、ウィジェットは東京の天気を表示して動作します。
