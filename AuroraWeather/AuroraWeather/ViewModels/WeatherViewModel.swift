@@ -17,16 +17,20 @@ final class WeatherViewModel {
 
     private(set) var savedPlaces: [SavedPlace] = []
     var units: UnitSystem = .celsius
+    private(set) var rainAlertsEnabled: Bool
 
     private var primaryPlace: SavedPlace
     private let weatherService = WeatherService()
     private let locationService = LocationService()
     private let cache = WeatherCache()
+    private let notifications = NotificationService()
 
     private static let placesKey = "aurora.savedPlaces"
+    private static let rainAlertsKey = "aurora.rainAlerts"
 
     init() {
         primaryPlace = SharedStore.lastPlace()
+        rainAlertsEnabled = UserDefaults.standard.bool(forKey: Self.rainAlertsKey)
         if let data = UserDefaults.standard.data(forKey: Self.placesKey),
            let stored = try? JSONDecoder().decode([SavedPlace].self, from: data) {
             savedPlaces = stored
@@ -83,6 +87,9 @@ final class WeatherViewModel {
             if id == primaryPlace.id {
                 SharedStore.saveLastPlace(place)
                 WidgetCenter.shared.reloadAllTimelines()
+                if rainAlertsEnabled {
+                    notifications.scheduleRainAlert(for: bundle, placeName: place.name)
+                }
             }
         } catch {
             errors[id] = error.localizedDescription
@@ -163,6 +170,23 @@ final class WeatherViewModel {
         if let data = try? JSONEncoder().encode(savedPlaces) {
             UserDefaults.standard.set(data, forKey: Self.placesKey)
         }
+    }
+
+    // MARK: - 雨の通知
+
+    @MainActor
+    func setRainAlerts(_ enabled: Bool) async {
+        if enabled {
+            let granted = await notifications.requestAuthorization()
+            rainAlertsEnabled = granted
+            if granted, let bundle = bundles[primaryPlace.id] {
+                notifications.scheduleRainAlert(for: bundle, placeName: primaryPlace.name)
+            }
+        } else {
+            rainAlertsEnabled = false
+            notifications.cancel()
+        }
+        UserDefaults.standard.set(rainAlertsEnabled, forKey: Self.rainAlertsKey)
     }
 
     // MARK: - 表示用フォーマット

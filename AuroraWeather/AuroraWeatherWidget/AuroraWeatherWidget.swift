@@ -51,7 +51,10 @@ struct AuroraWeatherWidget: Widget {
         }
         .configurationDisplayName("現在の天気")
         .description("選択中の地点の天気と気温をひと目で。")
-        .supportedFamilies([.systemSmall, .systemMedium])
+        .supportedFamilies([
+            .systemSmall, .systemMedium,
+            .accessoryCircular, .accessoryRectangular, .accessoryInline,
+        ])
     }
 }
 
@@ -64,14 +67,27 @@ struct AuroraWeatherWidgetView: View {
     private var kind: WeatherKind { entry.weather?.kind ?? .partlyCloudy }
     private var isDay: Bool { entry.weather?.isDay ?? true }
 
+    private var isAccessory: Bool {
+        switch family {
+        case .accessoryCircular, .accessoryRectangular, .accessoryInline:
+            return true
+        default:
+            return false
+        }
+    }
+
     var body: some View {
         content
             .containerBackground(for: .widget) {
-                LinearGradient(
-                    colors: kind.skyColors(isDay: isDay),
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
+                if isAccessory {
+                    AccessoryWidgetBackground()
+                } else {
+                    LinearGradient(
+                        colors: kind.skyColors(isDay: isDay),
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                }
             }
     }
 
@@ -80,9 +96,57 @@ struct AuroraWeatherWidgetView: View {
         switch family {
         case .systemMedium:
             mediumView
+        case .accessoryInline:
+            inlineView
+        case .accessoryCircular:
+            circularView
+        case .accessoryRectangular:
+            rectangularView
         default:
             smallView
         }
+    }
+
+    // MARK: - ロック画面ウィジェット
+
+    private var inlineView: some View {
+        Label(
+            "\(degrees(entry.weather?.temperature)) \(kind.label)",
+            systemImage: kind.symbolName(isDay: isDay)
+        )
+    }
+
+    private var circularView: some View {
+        VStack(spacing: -1) {
+            Image(systemName: kind.symbolName(isDay: isDay))
+                .font(.system(size: 16, weight: .medium))
+            Text(degrees(entry.weather?.temperature))
+                .font(.system(size: 17, weight: .semibold, design: .rounded))
+        }
+        .widgetAccentable()
+    }
+
+    private var rectangularView: some View {
+        VStack(alignment: .leading, spacing: 1) {
+            Text(entry.placeName)
+                .font(.caption2)
+                .opacity(0.8)
+                .lineLimit(1)
+            HStack(spacing: 5) {
+                Image(systemName: kind.symbolName(isDay: isDay))
+                    .font(.caption)
+                Text(degrees(entry.weather?.temperature))
+                    .font(.headline)
+                    .widgetAccentable()
+            }
+            if let weather = entry.weather {
+                Text("↑\(degrees(weather.todayMax)) ↓\(degrees(weather.todayMin)) \(kind.label)")
+                    .font(.caption2)
+                    .opacity(0.85)
+                    .lineLimit(1)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     private var smallView: some View {

@@ -26,6 +26,18 @@ struct CitySearchView: View {
                     }
                 }
 
+                // 通知
+                Section {
+                    Toggle(isOn: Binding(
+                        get: { viewModel.rainAlertsEnabled },
+                        set: { newValue in Task { await viewModel.setRainAlerts(newValue) } }
+                    )) {
+                        Label("雨が近づいたら通知", systemImage: "umbrella")
+                    }
+                } footer: {
+                    Text("アプリを開いた時点の予報をもとに、降り出しの約30分前にお知らせします(降水確率50%以上のとき)。")
+                }
+
                 // 検索結果
                 if !results.isEmpty {
                     Section("検索結果") {
