@@ -3,7 +3,7 @@
 世界最高峰のデザイン品質を目指した、SwiftUI 製の天気予報 iOS アプリ。
 アイコンの「空を閉じ込めたガラス玉」がそのまま名前になっています。
 
-> 内部のプロジェクト名・ターゲット名・バンドル ID は `AuroraWeather` のままです(表示名のみ「そらだま」)。ストア公開時にバンドル ID を自分のドメインに変更してください。
+> 内部のプロジェクト名・ターゲット名は `AuroraWeather` のままです(表示名は「そらだま」)。バンドル ID は公開用に `com.tkiyo1007.soradama` を設定済み。公開手順は **AppStore公開ガイド.md** を参照してください。
 
 ## デザインのこだわり
 
@@ -27,7 +27,9 @@
 - 現在・24時間・10日間の予報、詳細メトリクス7種
 - タイムゾーン対応(検索した都市の現地時刻で表示)
 - **ホーム画面ウィジェット(WidgetKit)** — 小: 現在の天気と最高/最低、中: +2時間おきの予報。背景はアプリと同じ天候グラデーション。30分ごとに自動更新
+- **Apple Watch アプリ** — 現在の天気・6時間分の毎時・5日間予報。文字盤からすぐ確認
 - **アクセシビリティ** — 毎時/10日間/風向コンパスなどにVoiceOver読み上げラベル、「視差効果を減らす」設定でパーティクルを静止画に切り替え
+- **App Store 提出準備済み** — プライバシーマニフェスト同梱・暗号化申告済み・プライバシーポリシー付き(詳細は AppStore公開ガイド.md)
 
 ## アーキテクチャ
 
@@ -43,8 +45,9 @@ AuroraWeather/
 │   │   ├── Sections/       ヘッダー / 毎時 / チャート / 10日間 / 詳細グリッド
 │   │   └── Search/         都市検索シート
 │   └── Utilities/          ハプティクス
-├── Shared/                 両ターゲット共有: モデル / WeatherService / SharedStore
-└── AuroraWeatherWidget/    ホーム画面ウィジェット(WidgetKit)
+├── Shared/                 全ターゲット共有: モデル / WeatherService / LocationService / SharedStore
+├── AuroraWeatherWidget/    ホーム画面ウィジェット(WidgetKit)
+└── SoradamaWatch/          Apple Watch アプリ(watchOS 10+)
 ```
 
 - **API**: [Open-Meteo](https://open-meteo.com/)(無料・APIキー不要)
@@ -61,4 +64,4 @@ AuroraWeather/
 
 ### ウィジェットについて
 
-ホーム画面長押し → 「+」→ そらだま で追加できます。アプリで選んだ地点をウィジェットにも反映したい場合は、**両ターゲット**の Signing & Capabilities に App Group `group.com.example.AuroraWeather` を追加してください(`Shared/SharedStore.swift` の ID と一致させる)。App Group 未設定でも、ウィジェットは東京の天気を表示して動作します。
+ホーム画面長押し → 「+」→ そらだま で追加できます。アプリで選んだ地点をウィジェットにも反映したい場合は、**アプリ本体とウィジェットの両ターゲット**の Signing & Capabilities に App Group `group.com.tkiyo1007.soradama` を追加してください(`Shared/SharedStore.swift` の ID と一致させる)。App Group 未設定でも、ウィジェットは東京の天気を表示して動作します。

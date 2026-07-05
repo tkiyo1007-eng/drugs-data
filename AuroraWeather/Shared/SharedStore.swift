@@ -5,7 +5,7 @@ import Foundation
 /// UserDefaults を使う(その場合ウィジェットは既定の東京にフォールバック)。
 enum SharedStore {
     /// Signing & Capabilities で App Group を追加する場合はこの ID を使う
-    static let appGroupID = "group.com.example.AuroraWeather"
+    static let appGroupID = "group.com.tkiyo1007.soradama"
     static let lastPlaceKey = "aurora.lastPlace"
 
     private static var stores: [UserDefaults] {
