@@ -402,7 +402,7 @@ footer a:hover{color:var(--blue)}
   <div class="demo-shell glass">
     <div class="search-box">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-      <input id="q" type="search" placeholder="薬品名・成分名・メーカー名で検索（例: アセトアミノフェン）" autocomplete="off">
+      <input id="q" type="search" placeholder="薬品名・成分名・メーカー名で検索" autocomplete="off">
     </div>
     <div class="pills" id="pills">
       <button class="pill active" data-f="all">すべて</button>
@@ -572,8 +572,10 @@ const DRUGS = [
 const $q = document.getElementById("q");
 const $list = document.getElementById("list");
 const $meta = document.getElementById("meta");
+// 狭い画面ではプレースホルダーが検索窓に収まらないため短縮版に
+if(matchMedia("(max-width: 480px)").matches) $q.placeholder = "薬品名・成分名で検索";
 let filter = "all";
-const MAX_CARDS = 60;
+const MAX_CARDS = 30;
 
 // 検索用正規化: NFKC(全角→半角等) + 小文字 + ひらがな→カタカナ
 function norm(s){
@@ -711,7 +713,6 @@ async function fetchFirst(urls){
   render();
   document.getElementById("demoNote").textContent =
     "※ 厚生労働省公表の実データを表示しています。お気に入り登録や掲示板は iOS アプリでご利用いただけます。";
-  document.getElementById("q").placeholder = `薬品名・成分名・メーカー名で検索（全 ${items.length.toLocaleString()} 品目）`;
 
   // ヒーローを実数値に更新
   const total = items.length;
