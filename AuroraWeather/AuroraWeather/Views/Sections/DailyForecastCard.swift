@@ -80,6 +80,17 @@ private struct DailyRow: View {
                 .frame(width: 38, alignment: .trailing)
         }
         .padding(.vertical, 11)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(accessibilityText)
+    }
+
+    private var accessibilityText: String {
+        var text = isToday ? "今日" : "\(day.date.weekdayLabel(in: timeZone))曜日"
+        text += "、\(day.kind.label)、最低\(degrees(day.tempMin))、最高\(degrees(day.tempMax))"
+        if let probability = day.precipitationProbability, probability >= 20 {
+            text += "、降水確率\(Int(probability))パーセント"
+        }
+        return text
     }
 }
 

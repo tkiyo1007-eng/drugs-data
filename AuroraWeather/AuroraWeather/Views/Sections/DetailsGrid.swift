@@ -12,6 +12,8 @@ struct DetailsGrid: View {
             GlassCard(title: "日の出・日の入り", systemImage: "sunrise") {
                 SunArcView(sunrise: weather.sunrise, sunset: weather.sunset, now: Date(), timeZone: weather.timeZone)
             }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("日の出 \(weather.sunrise.timeLabel(in: weather.timeZone))、日の入り \(weather.sunset.timeLabel(in: weather.timeZone))")
             GlassCard(title: "風", systemImage: "wind") {
                 WindCompassView(direction: weather.windDirection, speed: weather.windSpeed)
             }
@@ -169,6 +171,14 @@ struct WindCompassView: View {
     let direction: Double // 風が「吹いてくる」方角(度)
     let speed: Double     // m/s
 
+    /// 16方位の日本語名(VoiceOver 用)
+    static func directionName(_ degrees: Double) -> String {
+        let names = ["北", "北北東", "北東", "東北東", "東", "東南東", "南東", "南南東",
+                     "南", "南南西", "南西", "西南西", "西", "西北西", "北西", "北北西"]
+        let index = Int(((degrees + 11.25) / 22.5).rounded(.down)) % 16
+        return names[index]
+    }
+
     var body: some View {
         HStack {
             Spacer(minLength: 0)
@@ -210,6 +220,8 @@ struct WindCompassView: View {
             .frame(width: 110, height: 110)
             Spacer(minLength: 0)
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(Self.directionName(direction))の風、秒速\(Int(speed.rounded()))メートル")
     }
 }
 

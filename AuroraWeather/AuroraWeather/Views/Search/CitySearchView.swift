@@ -113,7 +113,7 @@ struct CitySearchView: View {
 
     private func select(_ place: SavedPlace) {
         dismiss()
-        Task { await viewModel.select(place: place) }
+        Task { await viewModel.selectSearched(place) }
     }
 
     /// 入力から 0.35 秒デバウンスして検索する

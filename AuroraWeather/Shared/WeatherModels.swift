@@ -92,7 +92,7 @@ struct GeoPlace: Decodable, Identifiable {
 
 // MARK: - アプリ内ドメインモデル
 
-struct HourForecast: Identifiable {
+struct HourForecast: Identifiable, Codable {
     let id: Int
     let date: Date
     let temperature: Double
@@ -101,7 +101,7 @@ struct HourForecast: Identifiable {
     let precipitationProbability: Double?
 }
 
-struct DayForecast: Identifiable {
+struct DayForecast: Identifiable, Codable {
     let id: Int
     let date: Date
     let kind: WeatherKind
@@ -110,9 +110,12 @@ struct DayForecast: Identifiable {
     let precipitationProbability: Double?
 }
 
-struct WeatherBundle {
+/// オフラインキャッシュのため Codable。タイムゾーンは識別子文字列で保持する。
+struct WeatherBundle: Codable {
     let fetchedAt: Date
-    let timeZone: TimeZone
+    let timeZoneID: String
+
+    var timeZone: TimeZone { TimeZone(identifier: timeZoneID) ?? .current }
 
     let temperature: Double
     let apparentTemperature: Double

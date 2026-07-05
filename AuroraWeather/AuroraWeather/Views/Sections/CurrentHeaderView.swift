@@ -70,5 +70,7 @@ struct CurrentHeaderView: View {
         }
         .frame(maxWidth: .infinity)
         .padding(.top, 8)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(placeName)、\(weather.kind.label)、現在\(degrees(weather.temperature))、最高\(degrees(weather.todayMax))、最低\(degrees(weather.todayMin))")
     }
 }

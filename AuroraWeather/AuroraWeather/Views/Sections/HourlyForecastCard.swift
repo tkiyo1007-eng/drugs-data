@@ -35,10 +35,21 @@ struct HourlyForecastCard: View {
                                 .font(.callout.weight(.semibold))
                                 .foregroundStyle(.white)
                         }
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel(accessibilityText(index: index, hour: hour))
                     }
                 }
                 .padding(.vertical, 2)
             }
         }
+    }
+
+    private func accessibilityText(index: Int, hour: HourForecast) -> String {
+        var text = index == 0 ? "現在" : hour.date.hourLabel(in: weather.timeZone)
+        text += "、\(hour.kind.label)、\(degrees(hour.temperature))"
+        if let probability = hour.precipitationProbability, probability >= 20 {
+            text += "、降水確率\(Int(probability))パーセント"
+        }
+        return text
     }
 }

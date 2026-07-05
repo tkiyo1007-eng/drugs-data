@@ -43,7 +43,6 @@ struct WeatherService {
     }
 
     static func bundle(from response: ForecastResponse) -> WeatherBundle {
-        let timeZone = TimeZone(identifier: response.timezone) ?? .current
         let now = Date(timeIntervalSince1970: response.current.time)
         let isDay = response.current.isDay == 1
 
@@ -104,7 +103,7 @@ struct WeatherService {
 
         return WeatherBundle(
             fetchedAt: now,
-            timeZone: timeZone,
+            timeZoneID: response.timezone,
             temperature: response.current.temperature,
             apparentTemperature: response.current.apparentTemperature,
             kind: WeatherKind(wmoCode: response.current.weatherCode),

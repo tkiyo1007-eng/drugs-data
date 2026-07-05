@@ -3,93 +3,115 @@ import Observation
 import CoreLocation
 import WidgetKit
 
-enum LoadPhase: Equatable {
-    case idle
-    case loading
-    case loaded
-    case failed(String)
-}
-
 @Observable
 final class WeatherViewModel {
-    var phase: LoadPhase = .idle
-    var weather: WeatherBundle?
-    var place: SavedPlace
-    var savedPlaces: [SavedPlace] {
-        didSet { persistPlaces() }
-    }
-    var units: UnitSystem {
-        didSet { UserDefaults.standard.set(units.rawValue, forKey: Self.unitsKey) }
-    }
+    /// 表示するページ(先頭: 現在地または前回の地点、以降: マイシティ)
+    private(set) var pages: [SavedPlace] = []
+    /// 現在表示中のページ(SavedPlace.id)
+    var selectionID: String = SavedPlace.fallback.id
 
+    private(set) var bundles: [String: WeatherBundle] = [:]
+    private(set) var loadingIDs: Set<String> = []
+    /// 直近の取得に失敗した地点 → エラーメッセージ(キャッシュがあれば表示は継続する)
+    private(set) var errors: [String: String] = [:]
+
+    private(set) var savedPlaces: [SavedPlace] = []
+    var units: UnitSystem = .celsius
+
+    private var primaryPlace: SavedPlace
     private let weatherService = WeatherService()
     private let locationService = LocationService()
+    private let cache = WeatherCache()
 
     private static let placesKey = "aurora.savedPlaces"
-    private static let unitsKey = "aurora.units"
 
     init() {
-        let defaults = UserDefaults.standard
-        if let raw = defaults.string(forKey: Self.unitsKey), let stored = UnitSystem(rawValue: raw) {
-            units = stored
-        } else {
-            units = .celsius
-        }
-        if let data = defaults.data(forKey: Self.placesKey),
+        primaryPlace = SharedStore.lastPlace()
+        if let data = UserDefaults.standard.data(forKey: Self.placesKey),
            let stored = try? JSONDecoder().decode([SavedPlace].self, from: data) {
             savedPlaces = stored
-        } else {
-            savedPlaces = []
         }
-        place = SharedStore.lastPlace()
+        bundles = cache.load()
+        selectionID = primaryPlace.id
+        rebuildPages()
     }
+
+    // MARK: - 現在ページの便宜プロパティ
+
+    var currentBundle: WeatherBundle? { bundles[selectionID] }
+    var currentKind: WeatherKind { currentBundle?.kind ?? .partlyCloudy }
+    var currentIsDay: Bool { currentBundle?.isDay ?? true }
 
     // MARK: - 読み込み
 
     @MainActor
     func loadInitial() async {
-        // まず現在地を試み、拒否されたら前回の地点(既定: 東京)へフォールバック
-        phase = .loading
+        // 現在地の解決を試み、拒否/失敗時は前回の地点(既定: 東京)を使う
         if let located = await resolveCurrentLocation() {
-            place = located
+            primaryPlace = located
+            rebuildPages()
+            selectionID = located.id
         }
-        await refresh()
+        await ensureLoaded(selectionID, force: true)
+
+        // 残りのページは裏で先読みしておく
+        for page in pages where page.id != selectionID {
+            let id = page.id
+            Task { await self.ensureLoaded(id) }
+        }
     }
 
+    /// 指定ページのデータを(未取得または30分以上古い場合に)取得する
     @MainActor
-    func refresh() async {
-        if weather == nil { phase = .loading }
+    func ensureLoaded(_ id: String, force: Bool = false) async {
+        guard let place = pages.first(where: { $0.id == id }) else { return }
+        if !force,
+           let bundle = bundles[id],
+           Date().timeIntervalSince(bundle.fetchedAt) < 1800,
+           errors[id] == nil {
+            return
+        }
+        guard !loadingIDs.contains(id) else { return }
+        loadingIDs.insert(id)
+        defer { loadingIDs.remove(id) }
+
         do {
             let bundle = try await weatherService.fetch(latitude: place.latitude, longitude: place.longitude)
-            weather = bundle
-            phase = .loaded
-            persistLastPlace()
-        } catch {
-            if weather == nil {
-                phase = .failed(error.localizedDescription)
+            bundles[id] = bundle
+            errors[id] = nil
+            cache.save(bundles)
+            if id == primaryPlace.id {
+                SharedStore.saveLastPlace(place)
+                WidgetCenter.shared.reloadAllTimelines()
             }
+        } catch {
+            errors[id] = error.localizedDescription
         }
     }
 
+    /// 検索結果から地点を選択(未保存ならマイシティへ追加してからページ移動)
     @MainActor
-    func select(place newPlace: SavedPlace) async {
-        guard newPlace != place else { return }
-        place = newPlace
-        weather = nil
+    func selectSearched(_ place: SavedPlace) async {
+        if place.id != primaryPlace.id, !savedPlaces.contains(where: { $0.id == place.id }) {
+            savedPlaces.append(place)
+            persistPlaces()
+            rebuildPages()
+        }
+        selectionID = place.id
         Haptics.selection()
-        await refresh()
+        await ensureLoaded(place.id)
     }
 
     @MainActor
     func useCurrentLocation() async {
-        phase = weather == nil ? .loading : phase
-        if let located = await resolveCurrentLocation() {
-            place = located
-            weather = nil
-            await refresh()
-        } else if weather == nil {
-            phase = .failed(LocationError.denied.localizedDescription)
+        guard let located = await resolveCurrentLocation() else {
+            errors[selectionID] = errors[selectionID] ?? LocationError.denied.localizedDescription
+            return
         }
+        primaryPlace = located
+        rebuildPages()
+        selectionID = located.id
+        await ensureLoaded(located.id, force: true)
     }
 
     private func resolveCurrentLocation() async -> SavedPlace? {
@@ -112,23 +134,35 @@ final class WeatherViewModel {
     // MARK: - 保存地点
 
     func save(place newPlace: SavedPlace) {
-        guard !savedPlaces.contains(newPlace) else { return }
+        guard !savedPlaces.contains(where: { $0.id == newPlace.id }) else { return }
         savedPlaces.append(newPlace)
+        persistPlaces()
+        rebuildPages()
     }
 
     func removePlaces(at offsets: IndexSet) {
+        let removedIDs = offsets.map { savedPlaces[$0].id }
         savedPlaces.remove(atOffsets: offsets)
+        persistPlaces()
+        rebuildPages()
+        // 表示中のページが消えた場合は先頭へ戻す
+        if removedIDs.contains(selectionID) {
+            selectionID = primaryPlace.id
+        }
+    }
+
+    private func rebuildPages() {
+        var result = [primaryPlace]
+        for place in savedPlaces where place.id != primaryPlace.id {
+            result.append(place)
+        }
+        pages = result
     }
 
     private func persistPlaces() {
         if let data = try? JSONEncoder().encode(savedPlaces) {
             UserDefaults.standard.set(data, forKey: Self.placesKey)
         }
-    }
-
-    private func persistLastPlace() {
-        SharedStore.saveLastPlace(place)
-        WidgetCenter.shared.reloadAllTimelines()
     }
 
     // MARK: - 表示用フォーマット

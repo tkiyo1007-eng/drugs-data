@@ -6,6 +6,8 @@ struct SkyBackground: View {
     let kind: WeatherKind
     let isDay: Bool
 
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
     var body: some View {
         ZStack {
             LinearGradient(
@@ -20,20 +22,55 @@ struct SkyBackground: View {
                 SunGlow()
             }
             if !isDay {
-                StarField(intensity: kind == .clear ? 1.0 : 0.35)
+                if !reduceMotion {
+                    StarField(intensity: kind == .clear ? 1.0 : 0.35)
+                }
                 if kind == .clear || kind == .partlyCloudy {
                     MoonView()
                 }
             }
             if kind.hasCloudLayer {
-                DriftingClouds(dark: !isDay || kind == .thunderstorm)
+                if reduceMotion {
+                    StaticClouds(dark: !isDay || kind == .thunderstorm)
+                } else {
+                    DriftingClouds(dark: !isDay || kind == .thunderstorm)
+                }
             }
-            if kind == .thunderstorm {
+            if kind == .thunderstorm && !reduceMotion {
                 LightningFlash()
             }
-            WeatherParticles(kind: kind.particle)
+            if !reduceMotion {
+                WeatherParticles(kind: kind.particle)
+            }
         }
         .ignoresSafeArea()
+    }
+}
+
+// MARK: - 静止した雲(視差効果を減らす設定時)
+
+private struct StaticClouds: View {
+    let dark: Bool
+
+    var body: some View {
+        GeometryReader { proxy in
+            let width = proxy.size.width
+            ZStack {
+                cloudBlob(width: width * 1.1, height: 130, opacity: dark ? 0.22 : 0.5)
+                    .position(x: width * 0.35, y: proxy.size.height * 0.10)
+                cloudBlob(width: width * 0.9, height: 110, opacity: dark ? 0.16 : 0.38)
+                    .position(x: width * 0.75, y: proxy.size.height * 0.20)
+            }
+        }
+        .allowsHitTesting(false)
+    }
+
+    private func cloudBlob(width: Double, height: Double, opacity: Double) -> some View {
+        Ellipse()
+            .fill(dark ? Color(white: 0.65) : Color.white)
+            .frame(width: width, height: height)
+            .blur(radius: 42)
+            .opacity(opacity)
     }
 }
 
