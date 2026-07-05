@@ -369,21 +369,21 @@ footer a:hover{color:var(--blue)}
       <div class="pulse-head"><span>SUPPLY PULSE</span><span id="today" class="num"></span></div>
       <div class="pulse-total"><span class="num" id="counter">0</span><small>品目を収載</small></div>
       <div class="pulse-sub">全国の医療用医薬品の供給ステータスを毎日集計</div>
-      <div class="supply-bar">
+      <div class="supply-bar" id="sbar">
         <span style="width:76%;background:linear-gradient(90deg,#3CC383,#2FAE6E)"></span>
         <span style="width:15%;background:linear-gradient(90deg,#F2A94F,#E8912F);animation-delay:.5s"></span>
         <span style="width:6%;background:linear-gradient(90deg,#F06B6B,#E14D4D);animation-delay:.65s"></span>
         <span style="width:3%;background:linear-gradient(90deg,#A5876C,#8A6A52);animation-delay:.8s"></span>
       </div>
-      <div class="legend">
+      <div class="legend" id="legend">
         <div><span class="dot" style="color:#3CC383;background:#3CC383"></span>通常出荷 76%</div>
         <div><span class="dot" style="color:#F2A94F;background:#F2A94F"></span>限定出荷 15%</div>
         <div><span class="dot" style="color:#F06B6B;background:#F06B6B"></span>供給停止 6%</div>
         <div><span class="dot" style="color:#B08E73;background:#B08E73"></span>販売中止 3%</div>
       </div>
     </div>
-    <div class="float-chip glass chip1"><span class="big num">2,441</span>限定出荷</div>
-    <div class="float-chip glass chip2"><span class="big num">977</span>供給停止</div>
+    <div class="float-chip glass chip1"><span class="big num" id="chipLim">2,441</span>限定出荷</div>
+    <div class="float-chip glass chip2"><span class="big num" id="chipStop">977</span>供給停止</div>
   </div>
 </header>
 
@@ -406,7 +406,7 @@ footer a:hover{color:var(--blue)}
     </div>
     <p class="result-meta" id="meta"></p>
     <div class="drug-list" id="list"></div>
-    <p class="demo-note">※ デモ用サンプルデータです。実データの検索は iOS アプリ「医薬品供給ナビ」でご利用いただけます。</p>
+    <p class="demo-note" id="demoNote">※ デモ用サンプルデータです。実データの検索は iOS アプリ「医薬品供給ナビ」でご利用いただけます。</p>
   </div>
 </section>
 
@@ -548,29 +548,43 @@ const DRUGS = [
   {n:"イトプリド塩酸塩錠50mg「デモ」", m:"デモファーマ", s:"limited", d:"2026-07-01", kw:"いとぷりど 消化管運動"},
 ];
 
-/* ===== 検索デモ ===== */
+/* ===== 検索（サンプル→実データに差し替え） ===== */
 const $q = document.getElementById("q");
 const $list = document.getElementById("list");
 const $meta = document.getElementById("meta");
 let filter = "all";
+const MAX_CARDS = 60;
+
+// 検索用正規化: NFKC(全角→半角等) + 小文字 + ひらがな→カタカナ
+function norm(s){
+  return s.normalize("NFKC").toLowerCase()
+    .replace(/[ぁ-ゖ]/g, c=>String.fromCharCode(c.charCodeAt(0)+0x60));
+}
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+
+// 表示中データ。初期値=サンプル、実CSV読込後に差し替わる
+let ITEMS = DRUGS.map(d=>({...d, q:norm(d.n+d.m+d.kw)}));
+let LIVE = false;
 
 function render(){
-  const q = $q.value.trim().toLowerCase();
-  const hits = DRUGS.filter(d=>{
+  const q = norm($q.value.trim());
+  const hits = ITEMS.filter(d=>{
     if(filter!=="all" && d.s!==filter) return false;
-    if(!q) return true;
-    return (d.n+d.m+d.kw).toLowerCase().includes(q);
+    return !q || d.q.includes(q);
   });
-  $meta.innerHTML = `<strong class="num">${hits.length}</strong> 件ヒット（サンプル ${DRUGS.length} 品目中）`;
+  const shown = hits.slice(0, MAX_CARDS);
+  const src = LIVE ? `全 ${ITEMS.length.toLocaleString()} 品目中` : `サンプル ${ITEMS.length} 品目中`;
+  const cap = hits.length > shown.length ? `・最新更新順に ${shown.length} 件を表示` : "";
+  $meta.innerHTML = `<strong class="num">${hits.length.toLocaleString()}</strong> 件ヒット（${src}${cap}）`;
   if(!hits.length){
     $list.innerHTML = `<div class="empty">該当する品目が見つかりませんでした。<br>キーワードや絞り込みを変えてお試しください。</div>`;
     return;
   }
-  $list.innerHTML = hits.map((d,i)=>{
+  $list.innerHTML = shown.map((d,i)=>{
     const st = STATUS[d.s];
     return `<div class="drug-card" style="--sc:${st.color};animation-delay:${Math.min(i*35,350)}ms">
-      <div class="drug-name">${d.n}</div>
-      <div class="drug-maker">${d.m}</div>
+      <div class="drug-name">${esc(d.n)}</div>
+      <div class="drug-maker">${esc(d.m)}</div>
       <div class="drug-foot">
         <span class="status-tag">${st.label}</span>
         <span class="drug-date num">更新 ${d.d}</span>
@@ -590,18 +604,122 @@ document.getElementById("pills").addEventListener("click", e=>{
 render();
 
 /* ===== ヒーロー: カウントアップ & 日付 ===== */
-const TOTAL = 16280;
 const $c = document.getElementById("counter");
-const t0 = performance.now();
-(function tick(now){
-  const p = Math.min((now - t0) / 1200, 1);
-  const eased = 1 - Math.pow(1 - p, 3);
-  $c.textContent = Math.round(TOTAL * eased).toLocaleString();
-  if(p < 1) requestAnimationFrame(tick);
-})(t0);
+function countUp(total){
+  const t0 = performance.now();
+  (function tick(now){
+    const p = Math.min((now - t0) / 1200, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    $c.textContent = Math.round(total * eased).toLocaleString();
+    if(p < 1) requestAnimationFrame(tick);
+  })(t0);
+}
+countUp(16280);
 const today = new Date();
 document.getElementById("today").textContent =
   `${today.getFullYear()}.${String(today.getMonth()+1).padStart(2,"0")}.${String(today.getDate()).padStart(2,"0")} 時点`;
+
+/* ===== 実データ読み込み（drugs_app_ready.csv / version.json） ===== */
+const CSV_SOURCES = ["drugs_app_ready.csv", "https://tkiyo1007-eng.github.io/drugs-data/drugs_app_ready.csv"];
+const VER_SOURCES = ["version.json", "https://tkiyo1007-eng.github.io/drugs-data/version.json"];
+const STATUS_GRAD = {
+  ok:"linear-gradient(90deg,#3CC383,#2FAE6E)",
+  limited:"linear-gradient(90deg,#F2A94F,#E8912F)",
+  stopped:"linear-gradient(90deg,#F06B6B,#E14D4D)",
+  ended:"linear-gradient(90deg,#A5876C,#8A6A52)",
+};
+const STATUS_DOT = {ok:"#3CC383", limited:"#F2A94F", stopped:"#F06B6B", ended:"#B08E73"};
+
+function mapStatus(s){
+  if(s.includes("停止")) return "stopped";
+  if(s.includes("限定")) return "limited";
+  if(s.includes("中止")) return "ended";
+  return "ok";
+}
+
+// 引用符対応の簡易CSVパーサ
+function parseCSV(text){
+  const rows=[]; let row=[], cell="", inQ=false;
+  for(let i=0;i<text.length;i++){
+    const ch=text[i];
+    if(inQ){
+      if(ch==='"'){ if(text[i+1]==='"'){cell+='"';i++;} else inQ=false; }
+      else cell+=ch;
+    }else if(ch==='"') inQ=true;
+    else if(ch===","){ row.push(cell); cell=""; }
+    else if(ch==="\n"){ row.push(cell); rows.push(row); row=[]; cell=""; }
+    else if(ch!=="\r") cell+=ch;
+  }
+  if(cell!=="" || row.length){ row.push(cell); rows.push(row); }
+  return rows;
+}
+
+async function fetchFirst(urls){
+  for(const u of urls){
+    try{ const r=await fetch(u); if(r.ok) return r; }catch(e){}
+  }
+  return null;
+}
+
+(async function loadRealData(){
+  const res = await fetchFirst(CSV_SOURCES);
+  if(!res) return; // 取得失敗時はサンプル表示のまま
+  const rows = parseCSV((await res.text()).replace(/^﻿/,""));
+  const head = rows.shift();
+  const col = name => head.indexOf(name);
+  const iName=col("商品名"), iGen=col("一般名"), iMk1=col("製造メーカー"),
+        iMk2=col("販売メーカー"), iSt=col("供給状況"), iDate=col("更新日");
+  if(iName<0 || iSt<0) return;
+
+  const items=[];
+  const counts={ok:0,limited:0,stopped:0,ended:0};
+  for(const r of rows){
+    if(!r[iName]) continue;
+    const s = mapStatus(r[iSt]||"");
+    counts[s]++;
+    const maker = r[iMk2] || r[iMk1] || "";
+    items.push({
+      n:r[iName], m:maker, s, d:(r[iDate]||"").replaceAll("/","-"),
+      q:norm(r[iName]+(r[iGen]||"")+maker),
+    });
+  }
+  if(items.length < 100) return; // 異常データなら差し替えない
+
+  // 最新更新順に並べて差し替え
+  items.sort((a,b)=> b.d.localeCompare(a.d));
+  ITEMS = items; LIVE = true;
+  render();
+  document.getElementById("demoNote").textContent =
+    "※ 厚生労働省公表の実データを表示しています。お気に入り登録や掲示板は iOS アプリでご利用いただけます。";
+  document.getElementById("q").placeholder = `薬品名・成分名・メーカー名で検索（全 ${items.length.toLocaleString()} 品目）`;
+
+  // ヒーローを実数値に更新
+  const total = items.length;
+  countUp(total);
+  document.getElementById("chipLim").textContent = counts.limited.toLocaleString();
+  document.getElementById("chipStop").textContent = counts.stopped.toLocaleString();
+  const order=[["ok","通常出荷"],["limited","限定出荷"],["stopped","供給停止"],["ended","販売中止"]];
+  const active = order.filter(([k])=>counts[k]>0);
+  // 0件のステータスは絞り込みピルも非表示に
+  for(const [k] of order){
+    if(!counts[k]){ const p=document.querySelector(`.pill[data-f="${k}"]`); if(p) p.style.display="none"; }
+  }
+  const pct = k => Math.max(counts[k]/total*100, 1.2); // 少数派も見えるよう最低幅
+  document.getElementById("sbar").innerHTML = active.map(([k],i)=>
+    `<span style="width:${pct(k)}%;background:${STATUS_GRAD[k]};animation-delay:${.3+i*.15}s"></span>`).join("");
+  document.getElementById("legend").innerHTML = active.map(([k,label])=>
+    `<div><span class="dot" style="color:${STATUS_DOT[k]};background:${STATUS_DOT[k]}"></span>${label} ${(counts[k]/total*100).toFixed(1)}%</div>`).join("");
+
+  // データ日付(version.json)
+  const vres = await fetchFirst(VER_SOURCES);
+  if(vres){
+    try{
+      const v = await vres.json();
+      const m = (v.note||"").match(/(\d{4})年(\d{2})月(\d{2})日/);
+      if(m) document.getElementById("today").textContent = `${m[1]}.${m[2]}.${m[3]} 時点`;
+    }catch(e){}
+  }
+})();
 
 /* ===== スクロール出現 ===== */
 const io = new IntersectionObserver(entries=>{
