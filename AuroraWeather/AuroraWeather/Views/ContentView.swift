@@ -98,20 +98,6 @@ struct ContentView: View {
     private var topBar: some View {
         VStack {
             HStack {
-                Menu {
-                    Picker("単位", selection: Bindable(viewModel).units) {
-                        ForEach(UnitSystem.allCases) { unit in
-                            Text(unit.label).tag(unit)
-                        }
-                    }
-                } label: {
-                    Image(systemName: "ellipsis.circle")
-                        .font(.title3)
-                        .foregroundStyle(.white)
-                        .frame(width: 40, height: 40)
-                        .background(.ultraThinMaterial, in: Circle())
-                }
-
                 Spacer()
 
                 Button {
