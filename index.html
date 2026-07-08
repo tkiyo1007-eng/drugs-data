@@ -755,10 +755,11 @@ let LIVE = false;
 let SHOWN = [];
 const $loadMore = document.getElementById("loadMore");
 function render(){
-  const q = norm($q.value.trim());
+  // スペース区切りの複数キーワードはAND検索にする（NFKCで全角スペースも半角化済み）
+  const terms = norm($q.value.trim()).split(/\s+/).filter(Boolean);
   const hits = ITEMS.filter(d=>{
     if(filter!=="all" && d.s!==filter) return false;
-    return !q || d.q.includes(q);
+    return terms.every(t=>d.q.includes(t));
   });
   const shown = hits.slice(0, visibleCount);
   SHOWN = shown;
