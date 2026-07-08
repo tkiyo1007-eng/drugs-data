@@ -273,24 +273,6 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .load-more:hover{background:#fff;transform:translateY(-1px);box-shadow:0 8px 18px -8px rgba(47,99,232,.4)}
 .load-more[hidden]{display:none}
 
-/* ===== 直近の更新ストリップ ===== */
-.recent-strip{margin-bottom:24px}
-.recent-label{font-size:12px;font-weight:800;color:var(--blue);letter-spacing:.08em;margin-bottom:10px}
-.recent-scroll{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;scrollbar-width:thin}
-.recent-scroll::-webkit-scrollbar{height:6px}
-.recent-scroll::-webkit-scrollbar-thumb{background:rgba(79,128,244,.3);border-radius:99px}
-.recent-chip{
-  flex:none;display:flex;align-items:center;gap:10px;cursor:pointer;font-family:inherit;
-  border:1px solid rgba(255,255,255,.9);border-left:4px solid var(--sc);
-  background:rgba(255,255,255,.7);border-radius:14px;padding:10px 16px 10px 12px;
-  box-shadow:0 6px 16px -10px rgba(31,63,160,.3);transition:transform .2s,box-shadow .2s,background .2s;
-  text-align:left;
-}
-.recent-chip:hover{transform:translateY(-2px);background:#fff;box-shadow:0 10px 22px -10px rgba(31,63,160,.4)}
-.recent-chip .status-tag{flex:none}
-.recent-name{font-size:12.5px;font-weight:700;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.recent-date{font-size:10.5px;color:#9AA8CB;flex:none}
-
 /* ===== 薬品詳細モーダル ===== */
 .modal-backdrop{
   position:fixed;inset:0;z-index:200;display:none;
@@ -511,10 +493,6 @@ footer a:hover{color:var(--blue)}
   <p class="sec-lede">薬品名・成分名・メーカー名から瞬時に検索。厚生労働省の公表データ全品目を、アプリを入れなくてもこのままWeb上で確認できます。</p>
 
   <div class="demo-shell glass">
-    <div class="recent-strip">
-      <p class="recent-label">直近の更新</p>
-      <div class="recent-scroll" id="recentList"></div>
-    </div>
     <div class="search-box">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       <input id="q" type="search" placeholder="薬品名・成分名・メーカー名で検索" autocomplete="off">
@@ -760,7 +738,7 @@ const $meta = document.getElementById("meta");
 // 狭い画面ではプレースホルダーが検索窓に収まらないため短縮版に
 if(matchMedia("(max-width: 480px)").matches) $q.placeholder = "薬品名・成分名で検索";
 let filter = "all";
-const PAGE_SIZE = 30;
+const PAGE_SIZE = 15;
 let visibleCount = PAGE_SIZE;
 
 // 検索用正規化: NFKC(全角→半角等) + 小文字 + ひらがな→カタカナ
@@ -892,23 +870,6 @@ $list.addEventListener("keydown", e=>{
   if(card){ e.preventDefault(); openDetail(SHOWN[+card.dataset.i]); }
 });
 
-/* ===== 直近の更新ストリップ ===== */
-const $recentList = document.getElementById("recentList");
-function renderRecent(){
-  const top = [...ITEMS].sort((a,b)=> b.d.localeCompare(a.d)).slice(0, 10);
-  $recentList.innerHTML = top.map(d=>{
-    const st = STATUS[d.s];
-    return `<button type="button" class="recent-chip" data-name="${esc(d.n)}" style="--sc:${st.color}">
-      <span class="status-tag">${st.label}</span>
-      <span class="recent-name">${esc(d.n)}</span>
-      <span class="recent-date num">${d.d}</span>
-    </button>`;
-  }).join("");
-}
-$recentList.addEventListener("click", e=>{
-  const chip = e.target.closest(".recent-chip");
-  if(chip) openDetail(findByName(chip.dataset.name));
-});
 document.getElementById("pills").addEventListener("click", e=>{
   const btn = e.target.closest(".pill");
   if(!btn) return;
@@ -919,7 +880,6 @@ document.getElementById("pills").addEventListener("click", e=>{
   render();
 });
 render();
-renderRecent();
 tryOpenFromHash();
 
 /* ===== ヒーロー: カウントアップ & 日付 ===== */
@@ -1012,7 +972,6 @@ async function fetchFirst(urls){
   ITEMS = items; LIVE = true;
   visibleCount = PAGE_SIZE;
   render();
-  renderRecent();
   tryOpenFromHash();
   document.getElementById("demoNote").textContent =
     "※ 厚生労働省公表の実データを表示しています。お気に入り登録や掲示板は iOS アプリでご利用いただけます。";
