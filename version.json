@@ -1,5 +1,5 @@
 {
-  "version": 202607090137,
+  "version": 202607090357,
   "csv_url": "https://raw.githubusercontent.com/tkiyo1007-eng/drugs-data/main/drugs_app_ready.csv",
-  "note": "2026年07月09日 メーカー情報の突合ロジック改善（発売元表記対応等）を反映"
+  "note": "2026年07月09日厚労省データ反映"
 }
