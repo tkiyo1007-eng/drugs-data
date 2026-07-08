@@ -262,6 +262,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   border:1px solid color-mix(in srgb,var(--sc) 30%,white);
 }
 .drug-date{font-size:11px;color:#9AA8CB}
+.drug-ago{font-size:10.5px;color:#B7C1DA;margin-left:2px}
 .empty{grid-column:1/-1;text-align:center;padding:40px;color:var(--sub);font-size:14px}
 .demo-note{margin-top:20px;font-size:12px;color:var(--sub);text-align:center}
 .load-more{
@@ -647,6 +648,10 @@ footer a:hover{color:var(--blue)}
       <summary>表示されている情報は100%正確ですか？</summary>
       <p>厚生労働省の公表時点の情報をそのまま表示しており、独自の加工・推測は行っていません。ただし公表と実際の流通状況にタイムラグが生じる場合があるため、採用や代替薬の選定は必ず医師・薬剤師にご確認のうえご判断ください。</p>
     </details>
+    <details class="faq-item">
+      <summary>「通常出荷」なのに実際は製造中止になっている品目があるのはなぜですか？</summary>
+      <p>本サービスが利用している厚生労働省「医療用医薬品供給状況」データは、限定出荷・供給停止といった一時的な出荷調整を追跡するための資料であり、製造中止（販売中止）の把握を主目的とした資料ではありません。そのため、メーカーが製造を終了していても、この資料上は最後に確認された「通常出荷」のまま長期間更新されずに残ってしまうことがあります。各品目の詳細に表示される「情報の鮮度（最終確認からの経過日数）」を目安に、経過が長い品目については卸・メーカーへの確認もあわせてご検討ください。</p>
+    </details>
   </div>
 </section>
 
@@ -747,6 +752,12 @@ function norm(s){
     .replace(/[ぁ-ゖ]/g, c=>String.fromCharCode(c.charCodeAt(0)+0x60));
 }
 function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+// 更新日からの経過日数（情報の鮮度の目安。事実の提示のみで「古い＝誤り」の判定はしない）
+function daysAgo(dstr){
+  const dt = new Date(String(dstr).replaceAll("/","-"));
+  if(isNaN(dt)) return null;
+  return Math.max(0, Math.round((Date.now() - dt.getTime()) / 86400000));
+}
 
 // 表示中データ。初期値=サンプル、実CSV読込後に差し替わる
 let ITEMS = DRUGS.map(d=>({...d, q:norm(d.n+d.m+d.kw)}));
@@ -772,12 +783,14 @@ function render(){
   }
   $list.innerHTML = shown.map((d,i)=>{
     const st = STATUS[d.s];
+    const days = daysAgo(d.d);
+    const ago = days!=null ? `<span class="drug-ago num">（${days.toLocaleString()}日前）</span>` : "";
     return `<div class="drug-card" role="button" tabindex="0" data-i="${i}" aria-haspopup="dialog" aria-label="${esc(d.n)} の詳細を見る" style="--sc:${st.color};animation-delay:${Math.min(i*35,350)}ms">
       <div class="drug-name">${esc(d.n)}</div>
       <div class="drug-maker">${esc(d.m)}</div>
       <div class="drug-foot">
         <span class="status-tag">${st.label}</span>
-        <span class="drug-date num">更新 ${d.d}</span>
+        <span class="drug-date num">更新 ${d.d}${ago}</span>
       </div>
     </div>`;
   }).join("");
@@ -800,17 +813,22 @@ let lastFocus = null;
 // クリックした品目の詳細項目 [ラベル, 値] を組み立てる
 // 実データ時は CSV の全列（空欄を除く）をそのまま表示するので、列が増えても自動で反映される
 function detailPairs(d){
+  let pairs;
   if(d.row && CSV_HEAD){
-    return CSV_HEAD
+    pairs = CSV_HEAD
       .map((h,i)=>[h, String(d.row[i]||"").trim()])
       .filter(([h,v])=>v && h!=="商品名");
+  }else{
+    pairs = [
+      ["一般名", d.g],
+      ["メーカー", d.m],
+      ["供給状況", STATUS[d.s].label],
+      ["情報更新日", d.d],
+    ].filter(([,v])=>v);
   }
-  return [
-    ["一般名", d.g],
-    ["メーカー", d.m],
-    ["供給状況", STATUS[d.s].label],
-    ["情報更新日", d.d],
-  ].filter(([,v])=>v);
+  const days = daysAgo(d.d);
+  if(days!=null) pairs.push(["情報の鮮度", `最終確認から${days.toLocaleString()}日経過`]);
+  return pairs;
 }
 
 // URLハッシュ経由で品目詳細を直接開けるようにする（#drug=商品名 でシェア可能なリンクに）
