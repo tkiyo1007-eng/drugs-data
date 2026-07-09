@@ -101,6 +101,18 @@ def is_supply_related(title):
     return any(k in title for k in SUPPLY_KEYWORDS)
 
 
+def base_name_and_specs(name_n):
+    """規格違いをまとめて案内する表記（例: シロドシンOD錠2mg/4mg「サワイ」）に対応するため、
+    正規化済み商品名から (メーカー括弧を除いたコア名, 含まれる規格数値の集合, メーカー括弧) を抽出する。
+    """
+    m = re.search(r"「[^」]+」\s*$", name_n)
+    maker_paren = m.group(0) if m else ""
+    body = name_n[: m.start()] if m else name_n
+    specs = set(re.findall(r"\d+(?:\.\d+)?", body))
+    core = re.sub(r"\d+(?:\.\d+)?\s*(mg|g|ml|%|μg|mcg)?", "", body).strip()
+    return core, specs, maker_paren
+
+
 def match_to_csv(announcements, csv_path, existing=None):
     """既存の対応表(existing)があれば引き継ぎつつ、今回の取得分で追加・上書きする。
     対象(出荷調整等)でなくなった品目は既存分から取り除く。
@@ -112,16 +124,32 @@ def match_to_csv(announcements, csv_path, existing=None):
     targets = [r for r in rows if "通常出荷" not in r["供給状況"] or "薬価削除予定" in (r.get("代替候補") or "")]
     target_names = {r["商品名"] for r in targets}
 
+    supply_anns = [(m, t, u, norm(t)) for m, t, u in announcements if is_supply_related(t)]
+
     result = {name: v for name, v in (existing or {}).items() if name in target_names}
     for r in targets:
         name = r["商品名"]
         name_n = norm(name)
         if not name_n:
             continue
-        for maker, title, url in announcements:
-            if not is_supply_related(title):
-                continue
-            if name_n in norm(title):
+        matched = False
+        for maker, title, url, title_n in supply_anns:
+            if name_n in title_n:
+                result[name] = {"maker": maker, "title": title, "url": url}
+                matched = True
+                break
+        if matched:
+            continue
+        # 完全一致しない場合、規格違いをまとめた表記（例: 2mg/4mg）にも対応するフォールバック。
+        # メーカー括弧の一致に加え規格数値も1つ以上一致させることで誤マッチを防ぐ
+        core, specs, maker_paren = base_name_and_specs(name_n)
+        if not (core and maker_paren and specs):
+            continue
+        # spec は日付(2026/07/08)等の数字と衝突しやすいため、前後が数字でない場合のみ一致とみなす
+        def spec_hit(spec):
+            return re.search(rf"(?<!\d){re.escape(spec)}(?!\d)", title_n) is not None
+        for maker, title, url, title_n in supply_anns:
+            if core in title_n and maker_paren in title_n and any(spec_hit(s) for s in specs):
                 result[name] = {"maker": maker, "title": title, "url": url}
                 break
     return result
