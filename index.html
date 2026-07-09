@@ -332,6 +332,14 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   overflow-wrap:anywhere;line-height:1.65;
 }
 .modal-note{font-size:11.5px;color:var(--sub);margin-top:14px;line-height:1.8}
+.maker-link{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  margin-top:16px;padding:13px 16px;border-radius:14px;text-decoration:none;
+  background:rgba(79,128,244,.08);border:1px solid rgba(79,128,244,.22);
+  font-size:12.5px;font-weight:700;color:var(--blue);transition:.2s;
+}
+.maker-link:hover{background:rgba(79,128,244,.14)}
+.maker-link::after{content:"↗";font-size:14px;flex:none}
 @media(max-width:640px){
   .modal-backdrop{padding:0;align-items:flex-end}
   .modal{width:100%;max-height:86vh;border-radius:24px 24px 0 0;padding:26px 22px calc(22px + env(safe-area-inset-bottom))}
@@ -731,6 +739,7 @@ footer a:hover{color:var(--blue)}
     <h3 id="mTitle"></h3>
     <p class="modal-maker" id="mMaker"></p>
     <dl class="detail-grid" id="mGrid"></dl>
+    <a class="maker-link" id="mMakerLink" href="#" target="_blank" rel="noopener" hidden></a>
     <p class="modal-note" id="mNote"></p>
   </div>
 </div>
@@ -900,6 +909,27 @@ function detailPairs(d){
   return pairs;
 }
 
+// メーカー名(製造/販売メーカー欄への部分一致)→公式サイトの供給状況ページ
+// 掲載数の多い上位メーカーのみ対応。個別品目のPDF直リンクは厚労省データに含まれないため、
+// 各社の供給情報一覧ページへの誘導に留める（未対応メーカーはリンク非表示）
+const MAKER_LINKS = [
+  ["沢井製薬", "https://med.sawai.co.jp/con_list.php?cate=5"],
+  ["東和薬品", "https://med.towayakuhin.co.jp/medical/information_supply.html"],
+  ["ニプロ", "https://med.nipro.co.jp/ph_news_supply"],
+  ["日医工", "https://www.nichiiko.co.jp/medicine/supply_status/"],
+  ["共和薬品工業", "https://www.kyowayakuhin.co.jp/amel-di/"],
+  ["陽進堂", "https://yoshindoholdings.co.jp/database"],
+  ["日新製薬", "https://www.yg-nissin.co.jp/pro/supplystate.html"],
+  ["日本ジェネリック", "https://medical.nihon-generic.co.jp/information_of_stablesupply/"],
+  ["キョーリンリメディオ", "https://www.med.kyorin-rmd.com/product/supply_limit/"],
+  ["第一三共エスファ", "https://www.daiichisankyo-ep.co.jp/news/"],
+];
+function findMakerLink(makerText){
+  if(!makerText) return null;
+  const hit = MAKER_LINKS.find(([name])=>makerText.includes(name));
+  return hit ? {name:hit[0], url:hit[1]} : null;
+}
+
 // URLハッシュ経由で品目詳細を直接開けるようにする（#drug=商品名 でシェア可能なリンクに）
 function pathNoHash(){ return location.pathname + location.search; }
 function findByName(name){ return ITEMS.find(x=>x.n===name); }
@@ -915,6 +945,16 @@ function openDetail(d, opts={}){
   document.getElementById("mMaker").textContent = d.m;
   document.getElementById("mGrid").innerHTML = detailPairs(d)
     .map(([h,v])=>`<dt>${esc(h)}</dt><dd>${esc(v)}</dd>`).join("");
+  const makerRowText = d.row ? d.row.join(" ") : d.m; // 製造/販売メーカー両方を対象に検索
+  const mLink = findMakerLink(makerRowText);
+  const $mMakerLink = document.getElementById("mMakerLink");
+  if(mLink){
+    $mMakerLink.href = mLink.url;
+    $mMakerLink.textContent = `${mLink.name}の供給情報を見る（メーカー公式サイト）`;
+    $mMakerLink.hidden = false;
+  }else{
+    $mMakerLink.hidden = true;
+  }
   document.getElementById("mNote").textContent = d.delist
     ? "※ 厚生労働省の公表データ上、出荷量区分が「薬価削除予定」となっている品目です。供給状況欄の表示に関わらず、近く販売終了となる見込みがあります。採用の見直しをご検討ください。"
     : LIVE
