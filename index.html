@@ -845,7 +845,8 @@ function render(){
     const days = daysAgo(d.d);
     const ago = days!=null ? `<span class="drug-ago num">（${days.toLocaleString()}日前）</span>` : "";
     const delistBadge = d.delist ? `<span class="delist-badge">薬価削除予定</span>` : "";
-    const spec = d.spec ? `<span class="drug-spec">${esc(d.spec)}</span>` : "";
+    const specText = [d.spec, d.price && `薬価${d.price}円`].filter(Boolean).join(" ・ ");
+    const spec = specText ? `<span class="drug-spec">${esc(specText)}</span>` : "";
     return `<div class="drug-card" role="button" tabindex="0" data-i="${i}" aria-haspopup="dialog" aria-label="${esc(d.n)} の詳細を見る" style="--sc:${st.color};animation-delay:${Math.min(i*35,350)}ms">
       <div class="drug-name">${esc(d.n)}</div>
       <div class="drug-maker">${esc(d.m)}${spec}</div>
@@ -1038,7 +1039,7 @@ async function fetchFirst(urls){
   const head = rows.shift();
   const col = name => head.indexOf(name);
   const iName=col("商品名"), iGen=col("一般名"), iMk1=col("製造メーカー"),
-        iMk2=col("販売メーカー"), iSt=col("供給状況"), iDate=col("更新日"), iAlt=col("代替候補"), iSpec=col("規格");
+        iMk2=col("販売メーカー"), iSt=col("供給状況"), iDate=col("更新日"), iAlt=col("代替候補"), iSpec=col("規格"), iPrice=col("薬価");
   if(iName<0 || iSt<0) return;
 
   const items=[];
@@ -1054,6 +1055,7 @@ async function fetchFirst(urls){
     items.push({
       n:r[iName], m:maker, s, d:(r[iDate]||"").replaceAll("/","-"), delist,
       spec: iSpec>=0 ? (r[iSpec]||"").trim() : "",
+      price: iPrice>=0 ? (r[iPrice]||"").trim() : "",
       q:norm(r[iName]+(r[iGen]||"")+maker),
       row:r, // 詳細モーダル用に元の行を保持
     });
