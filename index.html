@@ -930,6 +930,11 @@ function findMakerLink(makerText){
   return hit ? {name:hit[0], url:hit[1]} : null;
 }
 
+// 品目名→メーカー公式の個別案内文(PDF)。取得できたものだけ登録される（ページ読込時にfetch）
+let ANNOUNCEMENTS = {};
+fetchFirst(["maker_announcements.json", "https://tkiyo1007-eng.github.io/drugs-data/maker_announcements.json"])
+  .then(res => res && res.json()).then(data => { if(data) ANNOUNCEMENTS = data; }).catch(()=>{});
+
 // URLハッシュ経由で品目詳細を直接開けるようにする（#drug=商品名 でシェア可能なリンクに）
 function pathNoHash(){ return location.pathname + location.search; }
 function findByName(name){ return ITEMS.find(x=>x.n===name); }
@@ -948,9 +953,14 @@ function openDetail(d, opts={}){
   // メーカーリンクは出荷調整・供給停止・販売中止・薬価削除予定の品目のみ（通常出荷では不要）
   const needsMakerLink = d.s !== "ok" || d.delist;
   const makerRowText = d.row ? d.row.join(" ") : d.m; // 製造/販売メーカー両方を対象に検索
+  const announcement = needsMakerLink ? ANNOUNCEMENTS[d.n] : null; // 個別案内文(PDF)が見つかっていれば優先
   const mLink = needsMakerLink ? findMakerLink(makerRowText) : null;
   const $mMakerLink = document.getElementById("mMakerLink");
-  if(mLink){
+  if(announcement){
+    $mMakerLink.href = announcement.url;
+    $mMakerLink.textContent = `${announcement.maker}の案内文を見る（PDF）`;
+    $mMakerLink.hidden = false;
+  }else if(mLink){
     $mMakerLink.href = mLink.url;
     $mMakerLink.textContent = `${mLink.name}の供給情報を見る（メーカー公式サイト）`;
     $mMakerLink.hidden = false;
