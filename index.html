@@ -909,6 +909,18 @@ function detailPairs(d){
   return pairs;
 }
 
+// 案内文タイトルから日付・カテゴリラベル・"PDF"/"NEW"表記を除いた本文だけを取り出す。
+// 「一部包装のみ販売中止」等の限定条件がタイトルに含まれることがあるため、
+// リンクラベルを汎用文言にせず実タイトルをそのまま見せる（誤解を防ぐため）
+function cleanAnnouncementTitle(title){
+  return title
+    .replace(/^\d{4}[.\/]\d{2}[.\/]\d{2}\s*/, "")
+    .replace(/\bPDF\b/g, "")
+    .replace(/\bNEW\b/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 // メーカー名(製造/販売メーカー欄への部分一致)→公式サイトの供給状況ページ
 // 掲載数の多い上位メーカーのみ対応。個別品目のPDF直リンクは厚労省データに含まれないため、
 // 各社の供給情報一覧ページへの誘導に留める（未対応メーカーはリンク非表示）
@@ -959,7 +971,7 @@ function openDetail(d, opts={}){
   const $mMakerLink = document.getElementById("mMakerLink");
   if(announcement){
     $mMakerLink.href = announcement.url;
-    $mMakerLink.textContent = `${announcement.maker}の案内文を見る（PDF）`;
+    $mMakerLink.textContent = `${cleanAnnouncementTitle(announcement.title)}（${announcement.maker} PDF）`;
     $mMakerLink.hidden = false;
   }else if(mLink){
     $mMakerLink.href = mLink.url;
