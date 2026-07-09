@@ -18,7 +18,7 @@ jobs:
           python-version: '3.11'
 
       - name: 依存ライブラリインストール
-        run: pip install openpyxl requests pytz
+        run: pip install openpyxl requests pytz pypdf
 
       - name: 供給状況Excel ダウンロード（厚労省ページからリンク取得）
         run: |
@@ -119,7 +119,7 @@ jobs:
           EOF
 
       - name: メーカー案内文(PDF)を取得してマッチング
-        run: python3 scripts/fetch_maker_announcements.py drugs_app_ready.csv maker_announcements.json 2
+        run: python3 scripts/fetch_maker_announcements.py drugs_app_ready.csv maker_announcements.json 2 30
         continue-on-error: true  # メーカーサイト側の一時的な障害でデータ更新自体を止めない
 
       - name: 不要ファイル削除
