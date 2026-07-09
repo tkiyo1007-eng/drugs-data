@@ -232,7 +232,14 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .pill[data-f="stopped"].active{background:linear-gradient(135deg,#F06B6B,var(--stopped));box-shadow:0 6px 16px -6px rgba(225,77,77,.6)}
 .pill[data-f="ended"].active{background:linear-gradient(135deg,#A5876C,var(--ended));box-shadow:0 6px 16px -6px rgba(138,106,82,.6)}
 .pill[data-f="ok"].active{background:linear-gradient(135deg,#4BC98B,var(--ok));box-shadow:0 6px 16px -6px rgba(47,174,110,.6)}
-.result-meta{font-size:12.5px;color:var(--sub);margin-bottom:14px}
+.result-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;margin-bottom:14px}
+.result-meta{font-size:12.5px;color:var(--sub)}
+.page-size{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--sub);font-weight:700;white-space:nowrap}
+.page-size select{
+  font-family:inherit;font-size:12.5px;font-weight:700;color:var(--ink);
+  padding:6px 10px;border-radius:10px;border:1px solid rgba(90,107,148,.25);
+  background:rgba(255,255,255,.8);cursor:pointer;
+}
 .drug-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
 .drug-card{
   position:relative;padding:18px 34px 16px 24px;border-radius:18px;
@@ -255,6 +262,8 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .drug-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;border-radius:0 4px 4px 0;background:var(--sc)}
 .drug-name{font-weight:700;font-size:14.5px;line-height:1.5;margin-bottom:6px}
 .drug-maker{font-size:12px;color:var(--sub);margin-bottom:10px}
+.drug-spec{color:#B7C1DA;margin-left:6px}
+.drug-spec::before{content:"・"}
 .drug-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:4px 10px}
 .status-tag{
   font-size:11.5px;font-weight:800;padding:4px 12px;border-radius:999px;
@@ -328,6 +337,18 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   .modal{width:100%;max-height:86vh;border-radius:24px 24px 0 0;padding:26px 22px calc(22px + env(safe-area-inset-bottom))}
   @keyframes modalIn{from{opacity:0;transform:translateY(46px)}}
 }
+
+/* ===== お知らせ ===== */
+.news-list{padding:8px 28px}
+.news-item{display:flex;gap:18px;padding:18px 0;border-bottom:1px solid rgba(90,107,148,.14)}
+.news-item:last-child{border-bottom:none}
+.news-date{flex:none;width:104px;font-size:12px;color:var(--sub);font-weight:700;padding-top:2px}
+.news-body p{font-size:13.8px;color:var(--sub);margin-top:4px}
+.news-tag{
+  display:inline-block;font-size:11px;font-weight:800;padding:2px 10px;border-radius:999px;
+  color:var(--blue);background:rgba(79,128,244,.12);margin-right:8px;
+}
+@media(max-width:560px){.news-item{flex-direction:column;gap:4px}.news-date{width:auto}}
 
 /* ===== 特徴グリッド ===== */
 .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
@@ -450,6 +471,7 @@ footer a:hover{color:var(--blue)}
   </a>
   <div class="nav-links">
     <a href="#demo">薬を検索</a>
+    <a href="#news">お知らせ</a>
     <a href="#features">特徴</a>
     <a href="#compare">従来サイトとの違い</a>
     <a href="#glossary">用語解説</a>
@@ -513,10 +535,36 @@ footer a:hover{color:var(--blue)}
       <button class="pill" data-f="stopped">供給停止</button>
       <button class="pill" data-f="ended">販売中止</button>
     </div>
-    <p class="result-meta" id="meta"></p>
+    <div class="result-bar">
+      <p class="result-meta" id="meta"></p>
+      <label class="page-size">表示件数
+        <select id="pageSize">
+          <option value="15">15件</option>
+          <option value="30">30件</option>
+          <option value="60">60件</option>
+          <option value="99999">全件</option>
+        </select>
+      </label>
+    </div>
     <div class="drug-list" id="list"></div>
     <button type="button" class="load-more" id="loadMore" hidden></button>
     <p class="demo-note" id="demoNote">※ デモ用サンプルデータです。実データの検索は iOS アプリ「医薬品供給ナビ」でご利用いただけます。</p>
+  </div>
+</section>
+
+<section id="news" class="reveal">
+  <p class="sec-eyebrow">NEWS</p>
+  <h2>お知らせ。</h2>
+  <p class="sec-lede">医薬品供給ナビはまだ生まれたばかりのサービスです。データ・機能ともに、これからも継続して更新していきます。</p>
+  <div class="news-list glass">
+    <div class="news-item">
+      <div class="news-date num">2026.07.08</div>
+      <div class="news-body"><span class="news-tag">機能追加</span>薬品名クリックで詳細情報を表示できるようになりました。規格・薬価・代替候補など、厚生労働省データの全項目を確認できます。<p>あわせて複数キーワードでの絞り込み検索にも対応しました。</p></div>
+    </div>
+    <div class="news-item">
+      <div class="news-date num">2026.07.07</div>
+      <div class="news-body"><span class="news-tag">リリース</span>iOSアプリ「医薬品供給ナビ」をApp Storeで公開しました。Web版と同じデータに、お気に入り登録や医療従事者向け掲示板が加わります。</div>
+    </div>
   </div>
 </section>
 
@@ -691,6 +739,7 @@ footer a:hover{color:var(--blue)}
   <div class="foot-links">
     <a href="#top">トップ</a>
     <a href="#demo">薬を検索</a>
+    <a href="#news">お知らせ</a>
     <a href="#data">データについて</a>
     <a href="#glossary">用語解説</a>
     <a href="#faq">よくある質問</a>
@@ -752,7 +801,8 @@ const $meta = document.getElementById("meta");
 // 狭い画面ではプレースホルダーが検索窓に収まらないため短縮版に
 if(matchMedia("(max-width: 480px)").matches) $q.placeholder = "薬品名・成分名で検索";
 let filter = "all";
-const PAGE_SIZE = 15;
+const $pageSize = document.getElementById("pageSize");
+let PAGE_SIZE = 15;
 let visibleCount = PAGE_SIZE;
 
 // 検索用正規化: NFKC(全角→半角等) + 小文字 + ひらがな→カタカナ
@@ -795,9 +845,10 @@ function render(){
     const days = daysAgo(d.d);
     const ago = days!=null ? `<span class="drug-ago num">（${days.toLocaleString()}日前）</span>` : "";
     const delistBadge = d.delist ? `<span class="delist-badge">薬価削除予定</span>` : "";
+    const spec = d.spec ? `<span class="drug-spec">${esc(d.spec)}</span>` : "";
     return `<div class="drug-card" role="button" tabindex="0" data-i="${i}" aria-haspopup="dialog" aria-label="${esc(d.n)} の詳細を見る" style="--sc:${st.color};animation-delay:${Math.min(i*35,350)}ms">
       <div class="drug-name">${esc(d.n)}</div>
-      <div class="drug-maker">${esc(d.m)}</div>
+      <div class="drug-maker">${esc(d.m)}${spec}</div>
       <div class="drug-foot">
         <span class="drug-tags"><span class="status-tag">${st.label}</span>${delistBadge}</span>
         <span class="drug-date num">更新 ${d.d}${ago}</span>
@@ -814,6 +865,7 @@ function render(){
 }
 $q.addEventListener("input", ()=>{ visibleCount = PAGE_SIZE; render(); });
 $loadMore.addEventListener("click", ()=>{ visibleCount += PAGE_SIZE; render(); });
+$pageSize.addEventListener("change", ()=>{ PAGE_SIZE = +$pageSize.value; visibleCount = PAGE_SIZE; render(); });
 
 /* ===== 薬品詳細モーダル ===== */
 const $mBack = document.getElementById("mBack");
@@ -822,12 +874,18 @@ let lastFocus = null;
 
 // クリックした品目の詳細項目 [ラベル, 値] を組み立てる
 // 実データ時は CSV の全列（空欄を除く）をそのまま表示するので、列が増えても自動で反映される
+// 規格・供給状況など現場で先に確認したい項目を上位に、コード類は下位に並べる
+const DETAIL_ORDER = ["規格","供給状況","理由","代替候補","一般名","製造メーカー","販売メーカー","薬効分類","薬価","経過措置期限","更新日","YJコード"];
 function detailPairs(d){
   let pairs;
   if(d.row && CSV_HEAD){
     pairs = CSV_HEAD
       .map((h,i)=>[h, String(d.row[i]||"").trim()])
-      .filter(([h,v])=>v && h!=="商品名");
+      .filter(([h,v])=>v && h!=="商品名" && h!=="今回更新")
+      .sort((a,b)=>{
+        const ia=DETAIL_ORDER.indexOf(a[0]), ib=DETAIL_ORDER.indexOf(b[0]);
+        return (ia<0?999:ia)-(ib<0?999:ib);
+      });
   }else{
     pairs = [
       ["一般名", d.g],
@@ -980,7 +1038,7 @@ async function fetchFirst(urls){
   const head = rows.shift();
   const col = name => head.indexOf(name);
   const iName=col("商品名"), iGen=col("一般名"), iMk1=col("製造メーカー"),
-        iMk2=col("販売メーカー"), iSt=col("供給状況"), iDate=col("更新日"), iAlt=col("代替候補");
+        iMk2=col("販売メーカー"), iSt=col("供給状況"), iDate=col("更新日"), iAlt=col("代替候補"), iSpec=col("規格");
   if(iName<0 || iSt<0) return;
 
   const items=[];
@@ -995,6 +1053,7 @@ async function fetchFirst(urls){
     const delist = iAlt>=0 && (r[iAlt]||"").includes("薬価削除予定");
     items.push({
       n:r[iName], m:maker, s, d:(r[iDate]||"").replaceAll("/","-"), delist,
+      spec: iSpec>=0 ? (r[iSpec]||"").trim() : "",
       q:norm(r[iName]+(r[iGen]||"")+maker),
       row:r, // 詳細モーダル用に元の行を保持
     });
