@@ -101,12 +101,18 @@ def is_supply_related(title):
     return any(k in title for k in SUPPLY_KEYWORDS)
 
 
-def match_to_csv(announcements, csv_path):
+def match_to_csv(announcements, csv_path, existing=None):
+    """既存の対応表(existing)があれば引き継ぎつつ、今回の取得分で追加・上書きする。
+    対象(出荷調整等)でなくなった品目は既存分から取り除く。
+    日次実行はメーカー側お知らせの直近数件しか見ないため、これがないと
+    過去に一度だけ広く取得した分が毎回の実行で失われてしまう。
+    """
     with open(csv_path, encoding="utf-8-sig") as f:
         rows = list(csv.DictReader(f))
     targets = [r for r in rows if "通常出荷" not in r["供給状況"] or "薬価削除予定" in (r.get("代替候補") or "")]
+    target_names = {r["商品名"] for r in targets}
 
-    result = {}
+    result = {name: v for name, v in (existing or {}).items() if name in target_names}
     for r in targets:
         name = r["商品名"]
         name_n = norm(name)
@@ -126,12 +132,20 @@ def main():
     out_path = sys.argv[2] if len(sys.argv) > 2 else "maker_announcements.json"
     pages = int(sys.argv[3]) if len(sys.argv) > 3 else 3
 
+    existing = {}
+    try:
+        with open(out_path, encoding="utf-8") as f:
+            existing = json.load(f)
+        print(f"既存データ引き継ぎ: {len(existing)}件", file=sys.stderr)
+    except FileNotFoundError:
+        pass
+
     print("メーカーお知らせ取得中...", file=sys.stderr)
     announcements = collect_announcements(nihon_generic_pages=pages)
     print(f"取得件数: {len(announcements)}", file=sys.stderr)
 
-    matched = match_to_csv(announcements, csv_path)
-    print(f"マッチ件数: {len(matched)}", file=sys.stderr)
+    matched = match_to_csv(announcements, csv_path, existing=existing)
+    print(f"マッチ件数: {len(matched)}（新規/更新分含む）", file=sys.stderr)
 
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(matched, f, ensure_ascii=False, indent=1)
