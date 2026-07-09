@@ -7,7 +7,7 @@ maker_announcements.json を生成する。
 拾えるため、MAX_PAGES を小さく保てる。初回だけ広めに遡る。
 
 対応メーカー: 沢井製薬・日医工・日本ジェネリック・キョーリンリメディオ・
-             第一三共エスファ（他社は個別案内文の構造上、現状スコープ外）
+             第一三共エスファ・日本ケミファ（他社は個別案内文の構造上、現状スコープ外）
 """
 import csv
 import json
@@ -79,7 +79,16 @@ def parse_dsep(pages=1):
     return [("第一三共エスファ", t, u) for t, u in items]
 
 
-PARSERS = [parse_sawai, parse_nichiiko, parse_nihon_generic, parse_kyorin, parse_dsep]
+def parse_kemifa(pages=1):
+    items = []
+    html = fetch("https://www.nc-medical.com/product/information/")
+    for m in re.finditer(r'<a[^>]*href="(/product_topics/[^"]+\.pdf)"[^>]*>(.*?)</a>', html, re.S):
+        href, text = m.group(1), re.sub(r"<[^>]+>", " ", m.group(2))
+        items.append((re.sub(r"\s+", " ", text).strip(), "https://www.nc-medical.com" + href))
+    return [("日本ケミファ", t, u) for t, u in items]
+
+
+PARSERS = [parse_sawai, parse_nichiiko, parse_nihon_generic, parse_kyorin, parse_dsep, parse_kemifa]
 
 
 # ===== 沢井製薬: 全製品供給状況一覧PDF経由の深掘り =====
