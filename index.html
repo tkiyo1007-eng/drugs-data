@@ -945,8 +945,10 @@ function openDetail(d, opts={}){
   document.getElementById("mMaker").textContent = d.m;
   document.getElementById("mGrid").innerHTML = detailPairs(d)
     .map(([h,v])=>`<dt>${esc(h)}</dt><dd>${esc(v)}</dd>`).join("");
+  // メーカーリンクは出荷調整・供給停止・販売中止・薬価削除予定の品目のみ（通常出荷では不要）
+  const needsMakerLink = d.s !== "ok" || d.delist;
   const makerRowText = d.row ? d.row.join(" ") : d.m; // 製造/販売メーカー両方を対象に検索
-  const mLink = findMakerLink(makerRowText);
+  const mLink = needsMakerLink ? findMakerLink(makerRowText) : null;
   const $mMakerLink = document.getElementById("mMakerLink");
   if(mLink){
     $mMakerLink.href = mLink.url;
