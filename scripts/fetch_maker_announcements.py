@@ -120,8 +120,33 @@ def parse_towa(pages=3):
     return [("東和薬品", t, u) for t, u in items]
 
 
-PARSERS = [parse_sawai, parse_nichiiko, parse_nihon_generic, parse_kyorin, parse_dsep, parse_kemifa, parse_towa]
-PAGINATED_PARSERS = {"parse_nihon_generic", "parse_towa"}  # pagesパラメータを渡すパーサー
+def parse_takata(pages=2):
+    """高田製薬: Cookie medical=yes で医療関係者ゲートを通過。
+    お知らせは年別アーカイブ /medical/topics/{年}.html に集約されている。
+    pages=遡る年数（日次実行では当年分だけで十分だが、年始の取りこぼし防止に2年分）"""
+    import datetime
+    this_year = datetime.date.today().year
+    items = []
+    for year in range(this_year, this_year - max(1, min(pages, 4)), -1):
+        req = urllib.request.Request(
+            f"https://www.takata-seiyaku.co.jp/medical/topics/{year}.html",
+            headers={"User-Agent": UA, "Cookie": "medical=yes"})
+        try:
+            with urllib.request.urlopen(req, timeout=30) as r:
+                html = r.read().decode("utf-8", errors="ignore")
+        except Exception:
+            continue  # 存在しない年は無視
+        for m in re.finditer(r'<a[^>]*href="([^"]+\.pdf)"[^>]*>(.*?)</a>', html, re.S):
+            href = m.group(1)
+            if href.startswith("/"):
+                href = "https://www.takata-seiyaku.co.jp" + href
+            text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", m.group(2))).strip()
+            items.append((text, href))
+    return [("高田製薬", t, u) for t, u in items]
+
+
+PARSERS = [parse_sawai, parse_nichiiko, parse_nihon_generic, parse_kyorin, parse_dsep, parse_kemifa, parse_towa, parse_takata]
+PAGINATED_PARSERS = {"parse_nihon_generic", "parse_towa", "parse_takata"}  # pagesパラメータを渡すパーサー
 
 
 # ===== 沢井製薬: 全製品供給状況一覧PDF経由の深掘り =====
