@@ -88,7 +88,40 @@ def parse_kemifa(pages=1):
     return [("日本ケミファ", t, u) for t, u in items]
 
 
-PARSERS = [parse_sawai, parse_nichiiko, parse_nihon_generic, parse_kyorin, parse_dsep, parse_kemifa]
+def parse_towa(pages=3):
+    """東和薬品: 職種選択セッションが必要。CookieJar付きで job_selector?job=2(薬剤師) を
+    先に踏むと以降のページが本文を返す。tab=5=「供給・販売・中止」カテゴリ、20件/ページ。
+    案内文PDFは fileloader.php 経由の直リンク（セッション無しでも開ける）。"""
+    import http.cookiejar
+    cj = http.cookiejar.CookieJar()
+    opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
+    opener.addheaders = [("User-Agent", UA)]
+
+    def get(url):
+        with opener.open(url, timeout=30) as r:
+            return r.read().decode("utf-8", errors="ignore")
+
+    get("https://med.towayakuhin.co.jp/medical/job_selector?job=2")
+    items = []
+    for p in range(1, pages + 1):
+        url = ("https://med.towayakuhin.co.jp/medical/product/info.php?tab=5" if p == 1
+               else f"https://med.towayakuhin.co.jp/medical/product/info.php?tab=5&_section=medical&page={p}")
+        html = get(url)
+        found = 0
+        for m in re.finditer(r'<a[^>]*href="([^"]*fileloader\.php[^"]*)"[^>]*>(.*?)</a>', html, re.S):
+            href = m.group(1).replace("&amp;", "&")
+            if href.startswith("/"):
+                href = "https://med.towayakuhin.co.jp" + href
+            text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", m.group(2))).strip()
+            items.append((text, href))
+            found += 1
+        if found == 0:
+            break  # 最終ページ到達
+    return [("東和薬品", t, u) for t, u in items]
+
+
+PARSERS = [parse_sawai, parse_nichiiko, parse_nihon_generic, parse_kyorin, parse_dsep, parse_kemifa, parse_towa]
+PAGINATED_PARSERS = {"parse_nihon_generic", "parse_towa"}  # pagesパラメータを渡すパーサー
 
 
 # ===== 沢井製薬: 全製品供給状況一覧PDF経由の深掘り =====
@@ -187,7 +220,7 @@ def collect_announcements(nihon_generic_pages=3):
     all_items = []
     for parser in PARSERS:
         try:
-            kwargs = {"pages": nihon_generic_pages} if parser is parse_nihon_generic else {}
+            kwargs = {"pages": nihon_generic_pages} if parser.__name__ in PAGINATED_PARSERS else {}
             all_items.extend(parser(**kwargs))
         except Exception as e:
             print(f"[WARN] {parser.__name__} failed: {e}", file=sys.stderr)
