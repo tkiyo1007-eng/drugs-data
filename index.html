@@ -278,6 +278,11 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   color:#B0500E;background:rgba(232,145,47,.16);border:1px solid rgba(232,145,47,.4);
   white-space:nowrap;
 }
+.change-badge{
+  font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:999px;white-space:nowrap;
+}
+.change-badge.to-ok{color:#1B7A4C;background:rgba(47,174,110,.14);border:1px solid rgba(47,174,110,.4)}
+.change-badge.to-warn{color:#A03030;background:rgba(225,77,77,.12);border:1px solid rgba(225,77,77,.38)}
 .empty{grid-column:1/-1;text-align:center;padding:40px;color:var(--sub);font-size:14px}
 .demo-note{margin-top:20px;font-size:12px;color:var(--sub);text-align:center}
 .load-more{
@@ -596,7 +601,7 @@ footer a:hover{color:var(--blue)}
   <div class="news-list glass">
     <div class="news-item">
       <div class="news-date num">2026.07.11</div>
-      <div class="news-body"><span class="news-tag">機能追加</span>出荷調整・販売中止品の詳細画面に、メーカー案内文に記載されている包装単位（PTP100錠など）と時期を表示するようになりました。「どの包装が対象か」をその場で確認できます。<p>対応メーカーに東和薬品・高田製薬が加わり、案内文リンクは300品目超に拡大しました。</p></div>
+      <div class="news-body"><span class="news-tag">機能追加</span>出荷調整・販売中止品の詳細画面に、メーカー案内文に記載されている包装単位（PTP100錠など）と時期を表示するようになりました。「どの包装が対象か」をその場で確認できます。<p>対応メーカーに東和薬品・高田製薬が加わり、案内文リンクは300品目超に拡大しました。</p><p>あわせて検索結果の並び順を「供給状況が実際に変わった順」に改善しました。「限定出荷→通常出荷」のような変化がバッジで表示され、新発売品の収載だけで上位に並ぶことはなくなりました。</p></div>
     </div>
     <div class="news-item">
       <div class="news-date num">2026.07.10</div>
@@ -892,13 +897,22 @@ function render(){
     const days = daysAgo(d.d);
     const ago = days!=null ? `<span class="drug-ago num">（${days.toLocaleString()}日前）</span>` : "";
     const delistBadge = d.delist ? `<span class="delist-badge">薬価削除予定</span>` : "";
+    // 直近30日以内に供給状況が実際に変わった品目は「旧→新」バッジで変化を明示
+    const ch = LIVE ? CHANGES[d.n] : null;
+    const chDays = ch ? daysAgo(ch.date) : null;
+    let changeBadge = "";
+    if(ch && chDays!=null && chDays <= 30){
+      const fromL = STATUS[mapStatus(ch.from)].label, toL = STATUS[mapStatus(ch.to)].label;
+      const txt = fromL===toL ? `${toL}（区分変更）` : `${fromL}→${toL}`; // 例: 限定出荷（他社品の影響）→（自社の事情）
+      changeBadge = `<span class="change-badge ${mapStatus(ch.to)==='ok' ? 'to-ok' : 'to-warn'}">${txt} ${esc(ch.date.slice(5))}</span>`;
+    }
     const specText = [d.spec, d.price && `薬価${d.price}円`].filter(Boolean).join(" ・ ");
     const spec = specText ? `<span class="drug-spec">${esc(specText)}</span>` : "";
     return `<div class="drug-card" role="button" tabindex="0" data-i="${i}" aria-haspopup="dialog" aria-label="${esc(d.n)} の詳細を見る" style="--sc:${st.color};animation-delay:${Math.min(i*35,350)}ms">
       <div class="drug-name">${esc(d.n)}</div>
       <div class="drug-maker">${esc(d.m)}${spec}</div>
       <div class="drug-foot">
-        <span class="drug-tags"><span class="status-tag">${st.label}</span>${delistBadge}</span>
+        <span class="drug-tags"><span class="status-tag">${st.label}</span>${changeBadge}${delistBadge}</span>
         <span class="drug-date num">更新 ${d.d}${ago}</span>
       </div>
     </div>`;
@@ -923,7 +937,7 @@ let lastFocus = null;
 // クリックした品目の詳細項目 [ラベル, 値] を組み立てる
 // 実データ時は CSV の全列（空欄を除く）をそのまま表示するので、列が増えても自動で反映される
 // 規格・供給状況など現場で先に確認したい項目を上位に、コード類は下位に並べる
-const DETAIL_ORDER = ["規格","供給状況","理由","代替候補","一般名","製造メーカー","販売メーカー","薬効分類","薬価","経過措置期限","更新日","YJコード"];
+const DETAIL_ORDER = ["規格","供給状況","理由","代替候補","一般名","製造メーカー","販売メーカー","薬効分類","薬価","経過措置期限","ステータス更新日","更新日","YJコード"];
 function detailPairs(d){
   let pairs;
   if(d.row && CSV_HEAD){
@@ -991,6 +1005,9 @@ let PACKAGES = {};
 fetchFirst(["announcement_packages.json", "https://tkiyo1007-eng.github.io/drugs-data/announcement_packages.json"])
   .then(res => res && res.json()).then(data => { if(data) PACKAGES = data; }).catch(()=>{});
 
+// 品目名→直近の供給状況の変化 {date, from, to}（日々のスナップショット差分。新発売の収載は含まれない）
+let CHANGES = {};
+
 // URLハッシュ経由で品目詳細を直接開けるようにする（#drug=商品名 でシェア可能なリンクに）
 function pathNoHash(){ return location.pathname + location.search; }
 function findByName(name){ return ITEMS.find(x=>x.n===name); }
@@ -1006,6 +1023,12 @@ function openDetail(d, opts={}){
   document.getElementById("mMaker").textContent = d.m;
   document.getElementById("mGrid").innerHTML = detailPairs(d)
     .map(([h,v])=>`<dt>${esc(h)}</dt><dd>${esc(v)}</dd>`).join("");
+  // 実際に供給状況が変わった記録があれば先頭に表示（スナップショット差分由来）
+  const chg = CHANGES[d.n];
+  if(chg){
+    document.getElementById("mGrid").insertAdjacentHTML("afterbegin",
+      `<dt>直近の状況変化</dt><dd>${esc(chg.from)} → ${esc(chg.to)}（${esc(chg.date)}）</dd>`);
+  }
   // メーカーリンクは出荷調整・供給停止・販売中止・薬価削除予定の品目のみ（通常出荷では不要）
   const needsMakerLink = d.s !== "ok" || d.delist;
   const makerRowText = d.row ? d.row.join(" ") : d.m; // 製造/販売メーカー両方を対象に検索
@@ -1214,8 +1237,26 @@ async function fetchFirst(urls){
   }
   if(items.length < 100) return; // 異常データなら差し替えない
 
-  // 最新更新順に並べて差し替え
-  items.sort((a,b)=> b.d.localeCompare(a.d));
+  // 供給状況の変化ログを読み込む（新しい順に並んでいるので最初の1件=最新の変化）
+  try{
+    const cres = await fetchFirst(["status_changes.json", "https://tkiyo1007-eng.github.io/drugs-data/status_changes.json"]);
+    if(cres){
+      for(const e of await cres.json()){
+        if(!CHANGES[e.name]) CHANGES[e.name] = e;
+      }
+    }
+  }catch(e){}
+
+  // 並び順: 「供給状況が実際に変わった品目」を変化が新しい順に先頭へ。
+  // 厚労省の更新日は新発売収載や連絡先変更でも動くため、それだけで並べると
+  // 通常出荷の新製品が上位を占めてしまう（スナップショット差分ログで解決）
+  items.sort((a,b)=>{
+    const ca = CHANGES[a.n], cb = CHANGES[b.n];
+    if(ca && cb) return cb.date.localeCompare(ca.date) || b.d.localeCompare(a.d);
+    if(ca) return -1;
+    if(cb) return 1;
+    return b.d.localeCompare(a.d);
+  });
   CSV_HEAD = head;
   ITEMS = items; LIVE = true;
   visibleCount = PAGE_SIZE;
