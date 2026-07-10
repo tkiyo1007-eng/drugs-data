@@ -39,6 +39,9 @@ jobs:
           print(f"✅ ダウンロード成功: {len(r2.content)} bytes")
           EOF
 
+      - name: 前日CSVを退避（供給状況の変化ログ用）
+        run: cp drugs_app_ready.csv /tmp/prev_drugs.csv
+
       - name: 供給状況だけ更新（既存CSVの薬価・メーカーは保持）
         run: |
           python3 - <<'EOF'
@@ -65,7 +68,7 @@ jobs:
           if len(data) < 10000:
               print(f"❌ 供給データが少なすぎます({len(data)}件)。誤ダウンロードの可能性があるため中断"); exit(1)
 
-          # Excel列: 1②薬効 2③成分 3④規格 4⑤YJ 5⑥品名 6⑦製販 11⑫状況 13⑭理由 14⑮ 16⑰ 19⑳ 20㉑
+          # Excel列: 1②薬効 2③成分 3④規格 4⑤YJ 5⑥品名 6⑦製販 11⑫状況 12⑬状況更新日 13⑭理由 14⑮ 16⑰ 19⑳ 20㉑
           xl = {}
           for r in data:
               yj = s(r[4])
@@ -74,6 +77,7 @@ jobs:
                   jokyo=s(r[11]), riyu=s(r[13]),
                   daitai=f"解除/解消見込み: {kaijo} / 出荷量状況: {ryo}",
                   date=to_date(r[19]), new=("New" if s(r[20]) == "New" else ""),
+                  stdate=to_date(r[12]),
                   name=s(r[5]), ippan=s(r[2]), kikaku=s(r[3]), yakkou=s(r[1]), seizou=s(r[6]),
               )
 
@@ -89,13 +93,15 @@ jobs:
               if yj in xl:
                   x = xl[yj]; c = c[:]
                   c[4], c[5], c[6], c[7], c[8] = x["jokyo"], x["riyu"], x["daitai"], x["date"], x["new"]
+                  while len(c) < 15: c.append("")   # 旧14列CSVへの後方互換
+                  c[14] = x["stdate"]               # ステータス更新日(⑬)
                   out.append(c); seen.add(yj)
               # Excel(公式一覧)に無い既存品目はドロップ
           # Excelの新規品目を追加（薬価・販売メーカーは空。次回ローカル変換で補完）
           for yj, x in xl.items():
               if yj in seen: continue
               out.append([x["name"], x["ippan"], x["seizou"], "", x["jokyo"], x["riyu"],
-                          x["daitai"], x["date"], x["new"], yj, x["yakkou"], x["kikaku"], "", ""])
+                          x["daitai"], x["date"], x["new"], yj, x["yakkou"], x["kikaku"], "", "", x["stdate"]])
 
           with open("drugs_app_ready.csv", "w", encoding="utf-8-sig", newline="") as f:
               csv.writer(f, lineterminator="\n").writerows(out)
@@ -118,6 +124,10 @@ jobs:
           print(f"✅ version.json更新: {version}")
           EOF
 
+      - name: 供給状況の変化ログを更新（前日CSVとの差分）
+        run: python3 scripts/build_status_changes.py diff /tmp/prev_drugs.csv drugs_app_ready.csv
+        continue-on-error: true
+
       - name: メーカー案内文(PDF)を取得してマッチング
         run: python3 scripts/fetch_maker_announcements.py drugs_app_ready.csv maker_announcements.json 2 30
         continue-on-error: true  # メーカーサイト側の一時的な障害でデータ更新自体を止めない
@@ -133,7 +143,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add drugs_app_ready.csv version.json maker_announcements.json announcement_packages.json packages_cache.json
+          git add drugs_app_ready.csv version.json maker_announcements.json announcement_packages.json packages_cache.json status_changes.json
           git diff --cached --quiet && echo "変更なし" && exit 0
           git commit -m "データ自動更新: $(TZ=Asia/Tokyo date +'%Y/%m/%d')"
           git pull --rebase origin main || true
