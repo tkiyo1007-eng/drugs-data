@@ -340,6 +340,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 .maker-link:hover{background:rgba(79,128,244,.14)}
 .maker-link::after{content:"↗";font-size:14px;flex:none}
+.maker-link[hidden]{display:none}
 @media(max-width:640px){
   .modal-backdrop{padding:0;align-items:flex-end}
   .modal{width:100%;max-height:86vh;border-radius:24px 24px 0 0;padding:26px 22px calc(22px + env(safe-area-inset-bottom))}
@@ -357,6 +358,17 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   color:var(--blue);background:rgba(79,128,244,.12);margin-right:8px;
 }
 @media(max-width:560px){.news-item{flex-direction:column;gap:4px}.news-date{width:auto}}
+
+/* ===== 最近問い合わせが多い製品 ===== */
+.trending-list{display:flex;flex-wrap:wrap;gap:10px;padding:28px}
+.trending-chip{
+  border:none;cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:700;
+  padding:11px 20px;border-radius:999px;color:var(--blue-deep);
+  background:rgba(79,128,244,.08);border:1px solid rgba(79,128,244,.22);
+  transition:.2s;
+}
+.trending-chip:hover{background:rgba(79,128,244,.16);transform:translateY(-1px)}
+@media(max-width:640px){.trending-list{padding:20px}}
 
 /* ===== 特徴グリッド ===== */
 .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
@@ -558,6 +570,13 @@ footer a:hover{color:var(--blue)}
     <button type="button" class="load-more" id="loadMore" hidden></button>
     <p class="demo-note" id="demoNote">※ デモ用サンプルデータです。実データの検索は iOS アプリ「医薬品供給ナビ」でご利用いただけます。</p>
   </div>
+</section>
+
+<section id="trending" class="reveal">
+  <p class="sec-eyebrow">TRENDING</p>
+  <h2>最近、お問い合わせの多い製品。</h2>
+  <p class="sec-lede">お問い合わせが増えている製品をまとめました。タップすると上の検索結果に絞り込んで表示します。</p>
+  <div class="trending-list glass" id="trendingList"></div>
 </section>
 
 <section id="news" class="reveal">
@@ -983,6 +1002,8 @@ function openDetail(d, opts={}){
     $mMakerLink.hidden = false;
   }else{
     $mMakerLink.hidden = true;
+    $mMakerLink.removeAttribute("href");
+    $mMakerLink.textContent = "";
   }
   document.getElementById("mNote").textContent = d.delist
     ? "※ 厚生労働省の公表データ上、出荷量区分が「薬価削除予定」となっている品目です。供給状況欄の表示に関わらず、近く販売終了となる見込みがあります。採用の見直しをご検討ください。"
@@ -1039,6 +1060,34 @@ document.getElementById("pills").addEventListener("click", e=>{
   visibleCount = PAGE_SIZE;
   render();
 });
+
+/* ===== 最近問い合わせが多い製品（タップで検索欄に反映） ===== */
+// qは検索欄に入れる語（AND検索）。ブランド名だけでヒットしない場合は一般名を補って絞り込む
+const TRENDING = [
+  {label:"ユベラ軟膏", q:"ユベラ軟膏"},
+  {label:"ルリコンクリーム", q:"ルリコン"},
+  {label:"ジクトルテープ", q:"ジクトル"},
+  {label:"コンサータ", q:"コンサータ"},
+  {label:"アロチノロール", q:"アロチノロール"},
+  {label:"ナウゼリンOD", q:"ナウゼリン OD"},
+  {label:"マンジャロ", q:"マンジャロ"},
+  {label:"ロキソプロフェンテープ（温感タイプ）", q:"ロキソプロフェン 温感"},
+  {label:"シベンゾリンコハク酸", q:"シベンゾリン"},
+];
+document.getElementById("trendingList").innerHTML = TRENDING.map(t=>
+  `<button type="button" class="trending-chip" data-q="${esc(t.q)}">${esc(t.label)}</button>`).join("");
+document.getElementById("trendingList").addEventListener("click", e=>{
+  const chip = e.target.closest(".trending-chip");
+  if(!chip) return;
+  $q.value = chip.dataset.q;
+  filter = "all";
+  document.querySelectorAll(".pill").forEach(p=>p.classList.remove("active"));
+  document.querySelector('.pill[data-f="all"]').classList.add("active");
+  visibleCount = PAGE_SIZE;
+  render();
+  document.getElementById("demo").scrollIntoView({behavior:"smooth", block:"start"});
+});
+
 render();
 tryOpenFromHash();
 
