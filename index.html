@@ -923,6 +923,13 @@ function norm(s){
     .replace(/[ぁ-ゖ]/g, c=>String.fromCharCode(c.charCodeAt(0)+0x60));
 }
 function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+// 規格（薬価基準の規格単位）の表示用整形。
+// 配合錠などは「１錠」「１カプセル」だけの値になり、強度情報がなく紛らわしいので表示しない。
+// 「３０ｍｇ１錠」「１０％１ｇ」のように含量・濃度を含むものだけ表示する
+function dispSpec(spec){
+  if(!spec) return "";
+  return /^[0-9０-９.．]+(錠|カプセル|包|枚|瓶|管|筒|袋|個|本|組|回分|キット|セット|シート|ｇ|g)$/.test(spec) ? "" : spec;
+}
 // 更新日からの経過日数（情報の鮮度の目安。事実の提示のみで「古い＝誤り」の判定はしない）
 function daysAgo(dstr){
   const dt = new Date(String(dstr).replaceAll("/","-"));
@@ -974,7 +981,9 @@ function render(){
       const txt = fromL===toL ? `${toL}（区分変更）` : `${fromL}→${toL}`; // 例: 限定出荷（他社品の影響）→（自社の事情）
       changeBadge = `<span class="change-badge ${mapStatus(ch.to)==='ok' ? 'to-ok' : 'to-warn'}">${txt} ${esc(ch.date.slice(5))}</span>`;
     }
-    const specText = [d.spec, d.price && `薬価${d.price}円`].filter(Boolean).join(" ・ ");
+    const specText = d.price
+      ? (d.spec ? `${d.spec}＝${d.price}円` : `薬価${d.price}円`)
+      : dispSpec(d.spec);
     const spec = specText ? `<span class="drug-spec">${esc(specText)}</span>` : "";
     return `<div class="drug-card" role="button" tabindex="0" data-i="${i}" aria-haspopup="dialog" aria-label="${esc(d.n)} の詳細を見る" style="--sc:${st.color};animation-delay:${Math.min(i*35,350)}ms">
       <div class="drug-head">
@@ -1030,7 +1039,13 @@ function detailPairs(d){
   if(d.row && CSV_HEAD){
     pairs = CSV_HEAD
       .map((h,i)=>[h, String(d.row[i]||"").trim()])
-      .filter(([h,v])=>v && h!=="商品名" && h!=="今回更新")
+      .filter(([h,v])=>v && h!=="商品名" && h!=="今回更新" && !(h==="規格" && !dispSpec(v)))
+      .map(([h,v])=>{
+        // 薬価は規格単位あたりの値段なので「１錠＝25.90円」の形で表示する
+        if(h!=="薬価") return [h,v];
+        const spec = String(d.row[CSV_HEAD.indexOf("規格")]||"").trim();
+        return [h, (spec ? spec+"＝" : "") + v + "円"];
+      })
       .sort((a,b)=>{
         const ia=DETAIL_ORDER.indexOf(a[0]), ib=DETAIL_ORDER.indexOf(b[0]);
         return (ia<0?999:ia)-(ib<0?999:ib);
