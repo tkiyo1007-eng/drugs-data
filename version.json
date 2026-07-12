@@ -1,5 +1,5 @@
 {
-  "version": 202607122243,
+  "version": 202607130012,
   "csv_url": "https://raw.githubusercontent.com/tkiyo1007-eng/drugs-data/main/drugs_app_ready.csv",
-  "note": "2026年07月12日厚労省データ反映（薬価補完・外用剤対応）"
+  "note": "2026年07月13日厚労省データ反映"
 }
