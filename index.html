@@ -283,6 +283,56 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 .change-badge.to-ok{color:#1B7A4C;background:rgba(47,174,110,.14);border:1px solid rgba(47,174,110,.4)}
 .change-badge.to-warn{color:#A03030;background:rgba(225,77,77,.12);border:1px solid rgba(225,77,77,.38)}
+/* お気に入り（★）: カード右上とモーダル。localStorage保存 */
+.drug-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.drug-head .drug-name{margin-bottom:6px;flex:1}
+.fav-btn{
+  flex:none;background:none;border:none;cursor:pointer;padding:0 2px;
+  font-size:19px;line-height:1.3;color:#C9D4EA;transition:.15s;
+}
+.fav-btn:hover{transform:scale(1.15)}
+.fav-btn.on{color:#F5B301}
+.modal-fav{
+  position:absolute;top:14px;right:60px;width:36px;height:36px;border-radius:50%;
+  border:1px solid rgba(90,107,148,.2);background:rgba(255,255,255,.8);
+  color:#C9D4EA;font-size:19px;line-height:1;cursor:pointer;
+  display:grid;place-items:center;transition:.2s;
+}
+.modal-fav:hover{background:#fff;transform:scale(1.1)}
+.modal-fav.on{color:#F5B301}
+/* お気に入りの変化通知（検索リストの上） */
+.fav-notice{padding:14px 16px;border-radius:16px;margin-bottom:14px;
+  border:1px solid rgba(232,145,47,.3);background:rgba(255,250,240,.75)}
+.fav-notice-title{font-size:13px;font-weight:800;color:#B0500E;margin-bottom:10px}
+.fav-chg{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;
+  background:rgba(255,255,255,.75);border:1px solid rgba(90,107,148,.15);border-radius:12px;
+  padding:9px 13px;margin-top:6px;cursor:pointer;font-size:13px;font-weight:700;color:var(--ink);
+  text-align:left;transition:.15s;
+}
+.fav-chg:hover{background:#fff}
+.fav-chg span{flex:none;font-size:11.5px;font-weight:800;color:#A03030}
+.fav-chg.ok span{color:#1B7A4C}
+/* 同成分・同分類の関連品目（モーダル内） */
+.rel-title{font-size:13px;font-weight:800;color:var(--ink);margin:16px 0 8px}
+.rel-row{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;
+  background:rgba(79,128,244,.05);border:1px solid rgba(90,107,148,.14);border-radius:12px;
+  padding:9px 13px;margin-top:6px;cursor:pointer;font-size:13px;font-weight:600;color:var(--ink);
+  text-align:left;transition:.15s;
+}
+.rel-row:hover{background:rgba(79,128,244,.12)}
+.rel-status{
+  flex:none;font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px;
+  color:var(--sc);background:color-mix(in srgb, var(--sc) 14%, transparent);
+  border:1px solid color-mix(in srgb, var(--sc) 40%, transparent);
+}
+/* CSVダウンロード */
+.csv-btn{
+  flex:none;font-size:12px;font-weight:700;padding:7px 14px;border-radius:999px;cursor:pointer;
+  color:var(--blue);background:rgba(79,128,244,.08);border:1px solid rgba(79,128,244,.35);transition:.15s;
+}
+.csv-btn:hover{background:rgba(79,128,244,.16)}
 .empty{grid-column:1/-1;text-align:center;padding:40px;color:var(--sub);font-size:14px}
 .demo-note{margin-top:20px;font-size:12px;color:var(--sub);text-align:center}
 .load-more{
@@ -569,9 +619,11 @@ footer a:hover{color:var(--blue)}
       <button class="pill" data-f="limited">限定出荷</button>
       <button class="pill" data-f="stopped">供給停止</button>
       <button class="pill" data-f="ended">販売中止</button>
+      <button class="pill" data-f="changed" id="pillChanged" style="display:none"></button>
     </div>
     <div class="result-bar">
       <p class="result-meta" id="meta"></p>
+      <button type="button" class="csv-btn" id="csvBtn" hidden>CSV保存</button>
       <label class="page-size">表示件数
         <select id="pageSize">
           <option value="15">15件</option>
@@ -581,6 +633,7 @@ footer a:hover{color:var(--blue)}
         </select>
       </label>
     </div>
+    <div class="fav-notice" id="favNotice" hidden></div>
     <div class="drug-list" id="list"></div>
     <button type="button" class="load-more" id="loadMore" hidden></button>
     <p class="demo-note" id="demoNote">※ デモ用サンプルデータです。実データの検索は iOS アプリ「医薬品供給ナビ」でご利用いただけます。</p>
@@ -599,6 +652,10 @@ footer a:hover{color:var(--blue)}
   <h2>お知らせ。</h2>
   <p class="sec-lede">医薬品供給ナビはまだ生まれたばかりのサービスです。データ・機能ともに、これからも継続して更新していきます。</p>
   <div class="news-list glass">
+    <div class="news-item">
+      <div class="news-date num">2026.07.12</div>
+      <div class="news-body"><span class="news-tag">機能追加</span>Web版に、iOSアプリ版の新機能をまとめて追加しました。<p>【お気に入り】品目の★を押すとこのブラウザに保存され、供給状況が変わったとき検索結果の上にお知らせが表示されます（定点観測がWebでも可能に）。</p><p>【本日の更新】絞り込みに「本日の更新」が加わり、その日実際に供給状況が変わった品目だけを一覧できます。</p><p>【詳細画面】添付文書を探せるPMDA公式検索へのリンク（品目名入力済み）、出荷再開・解除の見込み、同成分の他社品・同じ薬効分類の医薬品の一覧を追加しました。</p><p>【CSV保存】検索結果をCSVファイルとしてダウンロードできるようになりました（DI業務のリスト作成に）。</p></div>
+    </div>
     <div class="news-item">
       <div class="news-date num">2026.07.11</div>
       <div class="news-body"><span class="news-tag">機能追加</span>出荷調整・販売中止品の詳細画面に、メーカー案内文に記載されている包装単位（PTP100錠など）と時期を表示するようになりました。「どの包装が対象か」をその場で確認できます。<p>対応メーカーに東和薬品・高田製薬が加わり、案内文リンクは300品目超に拡大しました。</p><p>あわせて検索結果の並び順を「供給状況が実際に変わった順」に改善しました。「限定出荷→通常出荷」のような変化がバッジで表示され、新発売品の収載だけで上位に並ぶことはなくなりました。</p></div>
@@ -776,13 +833,16 @@ footer a:hover{color:var(--blue)}
 <div class="modal-backdrop" id="mBack">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
     <button class="modal-close" id="mClose" aria-label="閉じる">✕</button>
+    <button class="modal-fav" id="mFav" aria-label="お気に入りに登録/解除">★</button>
     <span class="status-tag" id="mTag"></span>
     <span class="delist-badge" id="mDelist" hidden>薬価削除予定</span>
     <h3 id="mTitle"></h3>
     <p class="modal-maker" id="mMaker"></p>
     <a class="maker-link" id="mMakerLink" href="#" target="_blank" rel="noopener" hidden></a>
+    <a class="maker-link" id="mPmdaLink" href="#" target="_blank" rel="noopener" hidden></a>
     <div class="pkg-box" id="mPkgs" hidden></div>
     <dl class="detail-grid" id="mGrid"></dl>
+    <div id="mRelated" hidden></div>
     <p class="modal-note" id="mNote"></p>
   </div>
 </div>
@@ -875,16 +935,24 @@ let ITEMS = DRUGS.map(d=>({...d, q:norm(d.n+d.m+d.kw)}));
 let LIVE = false;
 
 let SHOWN = [];
+let LAST_HITS = []; // 現在の絞り込み結果（CSVダウンロード用）
 const $loadMore = document.getElementById("loadMore");
+const $csvBtn = document.getElementById("csvBtn");
 function render(){
   // スペース区切りの複数キーワードはAND検索にする（NFKCで全角スペースも半角化済み）
   const terms = norm($q.value.trim()).split(/\s+/).filter(Boolean);
   const hits = ITEMS.filter(d=>{
-    if(filter!=="all" && d.s!==filter) return false;
+    if(filter==="changed"){
+      // 「本日の更新」: 最新の変化日に供給状況が実際に変わった品目だけ
+      const c = CHANGES[d.n];
+      if(!c || c.date !== LATEST_CHANGE_DATE) return false;
+    }else if(filter!=="all" && d.s!==filter) return false;
     return terms.every(t=>d.q.includes(t));
   });
   const shown = hits.slice(0, visibleCount);
   SHOWN = shown;
+  LAST_HITS = hits;
+  $csvBtn.hidden = !LIVE || !hits.length;
   const src = LIVE ? `全 ${ITEMS.length.toLocaleString()} 品目中` : `サンプル ${ITEMS.length} 品目中`;
   $meta.innerHTML = `<strong class="num">${hits.length.toLocaleString()}</strong> 件ヒット（${src}）`;
   if(!hits.length){
@@ -909,7 +977,10 @@ function render(){
     const specText = [d.spec, d.price && `薬価${d.price}円`].filter(Boolean).join(" ・ ");
     const spec = specText ? `<span class="drug-spec">${esc(specText)}</span>` : "";
     return `<div class="drug-card" role="button" tabindex="0" data-i="${i}" aria-haspopup="dialog" aria-label="${esc(d.n)} の詳細を見る" style="--sc:${st.color};animation-delay:${Math.min(i*35,350)}ms">
-      <div class="drug-name">${esc(d.n)}</div>
+      <div class="drug-head">
+        <div class="drug-name">${esc(d.n)}</div>
+        <button type="button" class="fav-btn${FAVS.has(d.n)?" on":""}" data-name="${esc(d.n)}" aria-label="お気に入りに登録/解除" aria-pressed="${FAVS.has(d.n)}">★</button>
+      </div>
       <div class="drug-maker">${esc(d.m)}${spec}</div>
       <div class="drug-foot">
         <span class="drug-tags"><span class="status-tag">${st.label}</span>${changeBadge}${delistBadge}</span>
@@ -928,6 +999,22 @@ function render(){
 $q.addEventListener("input", ()=>{ visibleCount = PAGE_SIZE; render(); });
 $loadMore.addEventListener("click", ()=>{ visibleCount += PAGE_SIZE; render(); });
 $pageSize.addEventListener("change", ()=>{ PAGE_SIZE = +$pageSize.value; visibleCount = PAGE_SIZE; render(); });
+
+// 現在の絞り込み結果をCSVでダウンロード（BOM付きUTF-8: Excelで開いても文字化けしない）
+$csvBtn.addEventListener("click", ()=>{
+  if(!CSV_HEAD || !LAST_HITS.length) return;
+  const escCSV = v => /[",\n]/.test(v) ? `"${v.replace(/"/g,'""')}"` : v;
+  const lines = [CSV_HEAD.map(escCSV).join(",")];
+  for(const d of LAST_HITS){
+    if(d.row) lines.push(d.row.map(c=>escCSV(String(c ?? ""))).join(","));
+  }
+  const blob = new Blob(["\uFEFF"+lines.join("\r\n")], {type:"text/csv;charset=utf-8"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "医薬品供給ナビ_検索結果.csv";
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
 
 /* ===== 薬品詳細モーダル ===== */
 const $mBack = document.getElementById("mBack");
@@ -1007,6 +1094,46 @@ fetchFirst(["announcement_packages.json", "https://tkiyo1007-eng.github.io/drugs
 
 // 品目名→直近の供給状況の変化 {date, from, to}（日々のスナップショット差分。新発売の収載は含まれない）
 let CHANGES = {};
+let LATEST_CHANGE_DATE = null; // 変化ログ上で最も新しい日（「本日の更新」フィルタ用）
+const SEV = {ok:0, limited:1, stopped:2, ended:3}; // 深刻度（関連品目の並び順用）
+
+/* ===== お気に入り（このブラウザのlocalStorageに保存。アプリ版①の定点観測をWebでも） ===== */
+let FAVS = new Set();
+try{ FAVS = new Set(JSON.parse(localStorage.getItem("favDrugs")||"[]")); }catch(e){}
+function saveFavs(){ try{ localStorage.setItem("favDrugs", JSON.stringify([...FAVS])); }catch(e){} }
+let currentDetailName = null;
+function toggleFav(name){
+  FAVS.has(name) ? FAVS.delete(name) : FAVS.add(name);
+  saveFavs();
+  renderFavNotice();
+  render();
+  if(currentDetailName === name)
+    document.getElementById("mFav").classList.toggle("on", FAVS.has(name));
+}
+
+// お気に入りのうち直近30日で供給状況が変わったものを検索リストの上に表示
+const $favNotice = document.getElementById("favNotice");
+function renderFavNotice(){
+  if(!LIVE || !FAVS.size){ $favNotice.hidden = true; return; }
+  const changed = [...FAVS]
+    .map(n => ({n, c: CHANGES[n]}))
+    .filter(x => x.c && daysAgo(x.c.date) != null && daysAgo(x.c.date) <= 30)
+    .sort((a,b) => b.c.date.localeCompare(a.c.date));
+  if(!changed.length){ $favNotice.hidden = true; return; }
+  $favNotice.innerHTML =
+    `<div class="fav-notice-title">⭐ お気に入りの変化（直近30日で${changed.length}件）</div>` +
+    changed.map(x=>{
+      const toOk = mapStatus(x.c.to) === "ok";
+      return `<button type="button" class="fav-chg${toOk?" ok":""}" data-name="${esc(x.n)}">
+        ${esc(x.n)}<span>${esc(STATUS[mapStatus(x.c.from)].label)}→${esc(STATUS[mapStatus(x.c.to)].label)} ${esc(x.c.date.slice(5))}</span>
+      </button>`;
+    }).join("");
+  $favNotice.hidden = false;
+}
+$favNotice.addEventListener("click", e=>{
+  const btn = e.target.closest(".fav-chg");
+  if(btn){ const found = findByName(btn.dataset.name); if(found) openDetail(found); }
+});
 
 // URLハッシュ経由で品目詳細を直接開けるようにする（#drug=商品名 でシェア可能なリンクに）
 function pathNoHash(){ return location.pathname + location.search; }
@@ -1021,13 +1148,70 @@ function openDetail(d, opts={}){
   document.getElementById("mDelist").hidden = !d.delist;
   document.getElementById("mTitle").textContent = d.n;
   document.getElementById("mMaker").textContent = d.m;
+  currentDetailName = d.n;
+  document.getElementById("mFav").classList.toggle("on", FAVS.has(d.n));
   document.getElementById("mGrid").innerHTML = detailPairs(d)
     .map(([h,v])=>`<dt>${esc(h)}</dt><dd>${esc(v)}</dd>`).join("");
+  // 出荷再開・解消の見込み（厚労省コード ア/イ/ウ＋案内文PDF記載の時期。アプリ版⑪と同等）
+  if(d.s !== "ok" || d.delist){
+    const altRaw = (d.row && CSV_HEAD) ? String(d.row[CSV_HEAD.indexOf("代替候補")]||"") : "";
+    const pm = altRaw.match(/解除\/解消見込み:\s*([アイウ])/);
+    const prospect = pm ? ({"ア":"あり（メーカー回答）","イ":"なし（メーカー回答）","ウ":"未定（メーカー回答）"})[pm[1]] : null;
+    // 「2026年7月」等を年月の数値で並べる（文字列順だと11月が7月より先に来てしまう）
+    const untils = [...new Set(((PACKAGES[d.n])||[]).map(p=>p.until).filter(Boolean))]
+      .sort((a,b)=>{
+        const ka=a.match(/\d+/g)||[], kb=b.match(/\d+/g)||[];
+        return (+ka[0]||9999)-(+kb[0]||9999) || (+ka[1]||99)-(+kb[1]||99);
+      });
+    const parts = [];
+    if(prospect) parts.push(`解除見込み: ${prospect}`);
+    if(untils.length) parts.push(`案内文記載の時期: ${untils.join("、")}`);
+    if(parts.length)
+      document.getElementById("mGrid").insertAdjacentHTML("afterbegin",
+        `<dt>出荷再開・解除の見込み</dt><dd>${esc(parts.join(" ／ "))}</dd>`);
+  }
   // 実際に供給状況が変わった記録があれば先頭に表示（スナップショット差分由来）
   const chg = CHANGES[d.n];
   if(chg){
     document.getElementById("mGrid").insertAdjacentHTML("afterbegin",
       `<dt>直近の状況変化</dt><dd>${esc(chg.from)} → ${esc(chg.to)}（${esc(chg.date)}）</dd>`);
+  }
+  // PMDAの添付文書検索を品目名入力済みで開く（?nameWord= は検索欄への事前入力。アプリ版⑨と同等）
+  const $mPmda = document.getElementById("mPmdaLink");
+  $mPmda.href = "https://www.pmda.go.jp/PmdaSearch/iyakuSearch/?nameWord=" + encodeURIComponent(d.n);
+  $mPmda.textContent = "添付文書・IFを探す（PMDA公式検索・品目名入力済み）";
+  $mPmda.hidden = false;
+  // 同成分・同分類の関連品目（アプリ版⑤⑩と同等の確認補助）
+  const $mRel = document.getElementById("mRelated");
+  let relHtml = "";
+  const relatedBlock = (title, list) =>
+    `<div class="rel-title">${esc(title)}</div>` + list.map(x=>
+      `<button type="button" class="rel-row" data-name="${esc(x.n)}">
+         <span>${esc(x.n)}</span>
+         <span class="rel-status" style="--sc:${STATUS[x.s].color}">${STATUS[x.s].label}</span>
+       </button>`).join("");
+  if(LIVE && d.g){
+    const sameG = ITEMS.filter(x=>x.g===d.g && x.n!==d.n)
+      .sort((a,b)=>(SEV[a.s]-SEV[b.s]) || a.n.localeCompare(b.n,"ja"));
+    if(sameG.length) relHtml += relatedBlock(`同成分の他社品（${sameG.length}件・入手しやすい順）`, sameG.slice(0,6));
+  }
+  if(LIVE && d.cat){
+    const best = new Map(); // 一般名ごとに最も入手しやすい1品目を代表に
+    for(const x of ITEMS){
+      if(x.cat!==d.cat || !x.g || x.g===d.g) continue;
+      const cur = best.get(x.g);
+      if(!cur || SEV[x.s] < SEV[cur.s]) best.set(x.g, x);
+    }
+    const sameC = [...best.values()].sort((a,b)=>(SEV[a.s]-SEV[b.s]) || a.g.localeCompare(b.g,"ja"));
+    if(sameC.length) relHtml += relatedBlock(`同じ薬効分類「${d.cat}」の医薬品（${sameC.length}成分）`, sameC.slice(0,6));
+  }
+  if(relHtml){
+    $mRel.innerHTML = relHtml +
+      `<p class="pkg-note">※ 同成分・同分類の品目を公開データから機械的に列挙した確認補助です。おすすめ順位ではありません。適応・規格・剤形の互換性は必ず添付文書と医師・薬剤師の判断でご確認ください。</p>`;
+    $mRel.hidden = false;
+  }else{
+    $mRel.hidden = true;
+    $mRel.innerHTML = "";
   }
   // メーカーリンクは出荷調整・供給停止・販売中止・薬価削除予定の品目のみ（通常出荷では不要）
   const needsMakerLink = d.s !== "ok" || d.delist;
@@ -1099,8 +1283,17 @@ document.addEventListener("keydown", e=>{
   if(e.key==="Escape" && $mBack.classList.contains("open")) closeDetail();
 });
 $list.addEventListener("click", e=>{
+  const fav = e.target.closest(".fav-btn");
+  if(fav){ e.stopPropagation(); toggleFav(fav.dataset.name); return; }
   const card = e.target.closest(".drug-card");
   if(card) openDetail(SHOWN[+card.dataset.i]);
+});
+document.getElementById("mFav").addEventListener("click", ()=>{
+  if(currentDetailName) toggleFav(currentDetailName);
+});
+document.getElementById("mRelated").addEventListener("click", e=>{
+  const row = e.target.closest(".rel-row");
+  if(row){ const found = findByName(row.dataset.name); if(found) openDetail(found); }
 });
 $list.addEventListener("keydown", e=>{
   if(e.key!=="Enter" && e.key!==" ") return;
@@ -1214,7 +1407,8 @@ async function fetchFirst(urls){
   const head = rows.shift();
   const col = name => head.indexOf(name);
   const iName=col("商品名"), iGen=col("一般名"), iMk1=col("製造メーカー"),
-        iMk2=col("販売メーカー"), iSt=col("供給状況"), iDate=col("更新日"), iAlt=col("代替候補"), iSpec=col("規格"), iPrice=col("薬価");
+        iMk2=col("販売メーカー"), iSt=col("供給状況"), iDate=col("更新日"), iAlt=col("代替候補"), iSpec=col("規格"), iPrice=col("薬価"),
+        iCat=col("薬効分類");
   if(iName<0 || iSt<0) return;
 
   const items=[];
@@ -1231,6 +1425,8 @@ async function fetchFirst(urls){
       n:r[iName], m:maker, s, d:(r[iDate]||"").replaceAll("/","-"), delist,
       spec: iSpec>=0 ? (r[iSpec]||"").trim() : "",
       price: iPrice>=0 ? (r[iPrice]||"").trim() : "",
+      g:(r[iGen]||"").trim(),                       // 一般名（同成分の他社品の検索用）
+      cat: iCat>=0 ? (r[iCat]||"").trim() : "",     // 薬効分類（類似薬の検索用）
       q:norm(r[iName]+(r[iGen]||"")+maker),
       row:r, // 詳細モーダル用に元の行を保持
     });
@@ -1260,7 +1456,20 @@ async function fetchFirst(urls){
   CSV_HEAD = head;
   ITEMS = items; LIVE = true;
   visibleCount = PAGE_SIZE;
+
+  // 「本日の更新」ピル: 変化ログの最新日に実際に供給状況が変わった品目だけを絞り込む
+  LATEST_CHANGE_DATE = Object.values(CHANGES).reduce((m,c)=>c.date>m?c.date:m, "") || null;
+  if(LATEST_CHANGE_DATE){
+    const count = items.filter(x=>CHANGES[x.n] && CHANGES[x.n].date===LATEST_CHANGE_DATE).length;
+    if(count){
+      const $pc = document.getElementById("pillChanged");
+      $pc.textContent = (daysAgo(LATEST_CHANGE_DATE)===0 ? "本日の更新" : `直近の更新(${LATEST_CHANGE_DATE.slice(5)})`) + ` ${count}`;
+      $pc.style.display = "";
+    }
+  }
+
   render();
+  renderFavNotice();
   tryOpenFromHash();
   document.getElementById("demoNote").textContent =
     "※ 厚生労働省公表の実データを表示しています。お気に入り登録や掲示板は iOS アプリでご利用いただけます。";
