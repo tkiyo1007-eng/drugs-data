@@ -42,6 +42,23 @@ def load_master(path):
     return exact, group9
 
 
+import re
+
+# カッコ内が含量・寸法など数量表記だけなら統一名の一部（例: （１５ｍｇ））、
+# かな・漢字を含むなら会社名など（例: （岩城））とみなす
+_QTY_PAREN = re.compile(r"[（(]([0-9０-９.．,、％%×xｘmgｍｇMLｍＬLcmｃｍ単位国際w/vWV・\s〜~-]+)[）)]")
+
+
+def looks_unified(e) -> bool:
+    if not e["seibun"] or not nfkc(e["name"]).startswith(nfkc(e["seibun"])[:6]):
+        return False
+    if "「" in e["name"]:
+        return False
+    # 数量カッコを除去した後にまだカッコが残る＝会社名カッコ→統一名ではない
+    rest = _QTY_PAREN.sub("", e["name"])
+    return "（" not in rest and "(" not in rest
+
+
 def pick_entry(row, exact, group9):
     yj = (row.get("YJコード") or "").strip()
     if not yj:
@@ -58,12 +75,12 @@ def pick_entry(row, exact, group9):
     brand = [e for e in cands if nfkc(e["name"]) == name]
     if brand:
         return brand[0]
-    # 3. 統一名収載（カッコなしの共通名。成分名で始まるものに限定）
-    unified = [
-        e for e in cands
-        if "「" not in e["name"] and "（" not in e["name"] and "(" not in e["name"]
-        and e["seibun"] and nfkc(e["name"]).startswith(nfkc(e["seibun"])[:6])
-    ]
+    # 3. グループ内の薬価が1種類だけなら安全に採用できる
+    prices_all = {e["price"] for e in cands}
+    if len(prices_all) == 1:
+        return cands[0]
+    # 4. 統一名収載（成分名で始まる共通名）の薬価が一意ならそれを採用
+    unified = [e for e in cands if looks_unified(e)]
     prices = {e["price"] for e in unified}
     if len(prices) == 1:
         return unified[0]
