@@ -805,7 +805,7 @@ footer a:hover{color:var(--blue)}
     </details>
     <details class="faq-item">
       <summary>Web版とiOSアプリ版で機能に違いはありますか？</summary>
-      <p>検索や供給ステータスの確認はWeb版でもすべてご利用いただけます。品目のお気に入り登録による定点観測や、医療従事者向け掲示板はiOSアプリ限定の機能です。</p>
+      <p>検索・供給ステータスの確認・お気に入り登録による定点観測（ブラウザ保存）・CSV保存はWeb版でもご利用いただけます。お気に入りの変化のプッシュ通知と医療従事者向け掲示板はiOSアプリ限定の機能です。</p>
     </details>
     <details class="faq-item">
       <summary>表示されている情報は100%正確ですか？</summary>
@@ -1488,7 +1488,7 @@ async function fetchFirst(urls){
   renderFavNotice();
   tryOpenFromHash();
   document.getElementById("demoNote").textContent =
-    "※ 厚生労働省公表の実データを表示しています。お気に入り登録や掲示板は iOS アプリでご利用いただけます。";
+    "※ 厚生労働省公表の実データを表示しています。★でお気に入り登録もできます（このブラウザに保存）。通知や掲示板は iOS アプリでご利用いただけます。";
 
   // ヒーローを実数値に更新
   const total = items.length;
