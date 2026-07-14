@@ -140,6 +140,10 @@ jobs:
         run: python3 scripts/extract_pdf_packages.py maker_announcements.json announcement_packages.json 60
         continue-on-error: true
 
+      - name: 医療ニュース（PMDA新着）を更新
+        run: python3 scripts/fetch_news.py news.json
+        continue-on-error: true
+
       - name: 不要ファイル削除
         run: rm -f supply_latest.xlsx
 
@@ -147,7 +151,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add drugs_app_ready.csv version.json maker_announcements.json announcement_packages.json packages_cache.json status_changes.json
+          git add drugs_app_ready.csv version.json maker_announcements.json announcement_packages.json packages_cache.json status_changes.json news.json
           git diff --cached --quiet && echo "変更なし" && exit 0
           git commit -m "データ自動更新: $(TZ=Asia/Tokyo date +'%Y/%m/%d')"
           git pull --rebase origin main || true
