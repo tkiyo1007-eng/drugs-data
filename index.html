@@ -309,6 +309,19 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 .change-badge.to-ok{color:#1B7A4C;background:rgba(47,174,110,.14);border:1px solid rgba(47,174,110,.4)}
 .change-badge.to-warn{color:#A03030;background:rgba(225,77,77,.12);border:1px solid rgba(225,77,77,.38)}
+/* 医療ニュース（PMDA新着） */
+.mednews{margin-top:26px}
+.mednews h3{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:10px}
+.mednews-list{padding:6px 18px;border-radius:16px}
+.mednews-item{display:flex;gap:12px;align-items:baseline;padding:11px 0;border-bottom:1px solid rgba(90,107,148,.12)}
+.mednews-item:last-child{border-bottom:none}
+.mednews-date{flex:none;font-size:11.5px;color:var(--sub)}
+.mednews-tag{flex:none;font-size:10.5px;font-weight:800;padding:3px 9px;border-radius:999px;
+  color:var(--blue);background:rgba(79,128,244,.1);border:1px solid rgba(79,128,244,.3)}
+.mednews-tag.recall{color:#A03030;background:rgba(225,77,77,.1);border-color:rgba(225,77,77,.35)}
+.mednews-item a{font-size:13px;color:var(--ink);text-decoration:none;line-height:1.7}
+.mednews-item a:hover{color:var(--blue);text-decoration:underline}
+.mednews-note{font-size:10.5px;color:var(--sub);margin-top:8px}
 /* 案内文のAI要約（モーダル内） */
 .sum-box{margin-top:12px;padding:13px 16px;border-radius:14px;background:rgba(79,128,244,.06);border:1px solid rgba(79,128,244,.22)}
 .sum-box[hidden]{display:none}
@@ -684,6 +697,12 @@ footer a:hover{color:var(--blue)}
   <p class="sec-eyebrow">NEWS</p>
   <h2>お知らせ。</h2>
   <p class="sec-lede">医薬品供給ナビはまだ生まれたばかりのサービスです。データ・機能ともに、これからも継続して更新していきます。</p>
+  <div class="mednews" id="medNews" hidden>
+    <h3>医療ニュース（PMDA新着）</h3>
+    <div class="mednews-list glass" id="medNewsList"></div>
+    <p class="mednews-note">出典：医薬品医療機器総合機構（PMDA）新着情報。タイトルをタップするとPMDAの該当ページが開きます。</p>
+  </div>
+  <h3 style="font-size:15px;font-weight:800;margin:26px 0 10px">医薬品供給ナビからのお知らせ</h3>
   <div class="news-list glass">
     <div class="news-item">
       <div class="news-date num">2026.07.12</div>
@@ -1409,6 +1428,19 @@ document.getElementById("trendingList").addEventListener("click", e=>{
 
 render();
 tryOpenFromHash();
+
+/* ===== 医療ニュース（PMDA新着、news.json） ===== */
+fetchFirst(["news.json", "https://tkiyo1007-eng.github.io/drugs-data/news.json"])
+  .then(res => res && res.json()).then(data => {
+    if(!data || !data.length) return;
+    document.getElementById("medNewsList").innerHTML = data.slice(0, 8).map(n =>
+      `<div class="mednews-item">
+         <span class="mednews-date num">${esc(n.date)}</span>
+         <span class="mednews-tag${n.tag==="回収" ? " recall" : ""}">${esc(n.tag)}</span>
+         <a href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.title)}</a>
+       </div>`).join("");
+    document.getElementById("medNews").hidden = false;
+  }).catch(()=>{});
 
 /* ===== ヒーロー: カウントアップ & 日付 ===== */
 const $c = document.getElementById("counter");
