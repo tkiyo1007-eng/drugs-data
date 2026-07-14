@@ -343,6 +343,16 @@ def main():
         matched = deepen_sawai(matched, csv_path, limit=deepen_limit)
         print(f"沢井深掘り後マッチ件数: {len(matched)}", file=sys.stderr)
 
+    # 手動登録分（manual_announcements.json）を最後に重ねる（手動が優先）
+    # 自動収集が対応していないメーカーの案内文をピンポイントで連携するための仕組み
+    try:
+        with open("manual_announcements.json", encoding="utf-8") as f:
+            manual = json.load(f)
+        matched.update(manual)
+        print(f"手動登録を反映: {len(manual)}件", file=sys.stderr)
+    except FileNotFoundError:
+        pass
+
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(matched, f, ensure_ascii=False, indent=1)
     print(f"saved: {out_path}", file=sys.stderr)
