@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tkiyo1007-eng.github.io/drugs-data/sitemap.xml
