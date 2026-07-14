@@ -17,32 +17,6 @@
 <meta name="twitter:description" content="出荷調整・欠品・代替薬を毎日チェック。厚労省データを最速・最良のUIで。">
 <meta name="twitter:image" content="https://tkiyo1007-eng.github.io/drugs-data/og_image.png">
 <meta name="apple-itunes-app" content="app-id=6777696446">
-<meta name="google-site-verification" content="BCISo-785N0fmuhOBKHvUEU5hk8hRCVHrWVVAXCq1oo" />
-<link rel="canonical" href="https://tkiyo1007-eng.github.io/drugs-data/">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebSite",
-      "name": "医薬品供給ナビ",
-      "alternateName": "いやくひんきょうきゅうなび",
-      "url": "https://tkiyo1007-eng.github.io/drugs-data/",
-      "description": "厚生労働省の医薬品供給状況データを毎日自動更新。限定出荷・供給停止・販売中止・代替薬をスマホでもPCでも一瞬で確認。",
-      "inLanguage": "ja"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "name": "医薬品供給ナビ",
-      "operatingSystem": "iOS",
-      "applicationCategory": "MedicalApplication",
-      "url": "https://apps.apple.com/jp/app/id6777696446",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
-      "description": "出荷調整・欠品・代替薬を毎日チェックできる無料iOSアプリ。厚労省の医薬品供給状況データ約16,000品目を毎日自動更新。"
-    }
-  ]
-}
-</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232F63E8'/%3E%3Cpath d='M32 16v32M16 32h32' stroke='white' stroke-width='9' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -309,6 +283,13 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 .change-badge.to-ok{color:#1B7A4C;background:rgba(47,174,110,.14);border:1px solid rgba(47,174,110,.4)}
 .change-badge.to-warn{color:#A03030;background:rgba(225,77,77,.12);border:1px solid rgba(225,77,77,.38)}
+/* 案内文のAI要約（モーダル内） */
+.sum-box{margin-top:12px;padding:13px 16px;border-radius:14px;background:rgba(79,128,244,.06);border:1px solid rgba(79,128,244,.22)}
+.sum-box[hidden]{display:none}
+.sum-title{font-size:11.5px;font-weight:800;color:var(--blue);margin-bottom:8px}
+.sum-box ul{margin:0;padding-left:18px}
+.sum-box li{font-size:13px;line-height:1.75;color:var(--ink)}
+.sum-note{font-size:10.5px;color:var(--sub);margin-top:8px;line-height:1.7}
 /* お気に入り（★）: カード右上とモーダル。localStorage保存 */
 .drug-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
 .drug-head .drug-name{margin-bottom:6px;flex:1}
@@ -866,6 +847,7 @@ footer a:hover{color:var(--blue)}
     <p class="modal-maker" id="mMaker"></p>
     <a class="maker-link" id="mMakerLink" href="#" target="_blank" rel="noopener" hidden></a>
     <a class="maker-link" id="mPmdaLink" href="#" target="_blank" rel="noopener" hidden></a>
+    <div class="sum-box" id="mSummary" hidden></div>
     <div class="pkg-box" id="mPkgs" hidden></div>
     <dl class="detail-grid" id="mGrid"></dl>
     <div id="mRelated" hidden></div>
@@ -1128,6 +1110,11 @@ let ANNOUNCEMENTS = {};
 fetchFirst(["maker_announcements.json", "https://tkiyo1007-eng.github.io/drugs-data/maker_announcements.json"])
   .then(res => res && res.json()).then(data => { if(data) ANNOUNCEMENTS = data; }).catch(()=>{});
 
+// 品目名→案内文PDFのAI要約 {lines:[3行], date}
+let SUMMARIES = {};
+fetchFirst(["announcement_summaries.json", "https://tkiyo1007-eng.github.io/drugs-data/announcement_summaries.json"])
+  .then(res => res && res.json()).then(data => { if(data) SUMMARIES = data; }).catch(()=>{});
+
 // 品目名→案内文PDFから自動抽出した包装単位情報 [{pkg, until}]
 let PACKAGES = {};
 fetchFirst(["announcement_packages.json", "https://tkiyo1007-eng.github.io/drugs-data/announcement_packages.json"])
@@ -1287,6 +1274,20 @@ function openDetail(d, opts={}){
     $mPkgs.hidden = true;
     $mPkgs.innerHTML = "";
   }
+  // 案内文PDFのAI要約（案内文リンクがある品目のみ）
+  const $mSum = document.getElementById("mSummary");
+  const summary = (announcement && SUMMARIES[d.n]) || null;
+  if(summary && summary.lines && summary.lines.length){
+    $mSum.innerHTML =
+      `<div class="sum-title">案内文のポイント（AI要約）</div>
+       <ul>${summary.lines.map(l=>`<li>${esc(l)}</li>`).join("")}</ul>
+       <p class="sum-note">※ メーカー案内文PDFをAIが自動要約したものです。正確な条件・数値は必ず上の案内文原文でご確認ください。</p>`;
+    $mSum.hidden = false;
+  }else{
+    $mSum.hidden = true;
+    $mSum.innerHTML = "";
+  }
+
   document.getElementById("mNote").textContent = d.delist
     ? "※ 厚生労働省の公表データ上、出荷量区分が「薬価削除予定」となっている品目です。供給状況欄の表示に関わらず、近く販売終了となる見込みがあります。採用の見直しをご検討ください。"
     : LIVE
