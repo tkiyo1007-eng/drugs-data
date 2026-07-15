@@ -1263,20 +1263,28 @@ function openDetail(d, opts={}){
          <span>${esc(x.n)}</span>
          <span class="rel-status" style="--sc:${STATUS[x.s].color}">${STATUS[x.s].label}</span>
        </button>`).join("");
+  // YJコード先頭8桁（薬効細分類4桁+成分3桁+剤形1桁）が一致 = 同成分・同剤形。
+  // 一般名の文字列一致だけだと、注射剤に対して軟膏・貼付剤など投与経路の違う
+  // 品目まで「他社品」に並んでしまう（例: ケナコルト-A注に対するレダコート軟膏）
+  const yj8 = (d.yj||"").slice(0,8);
   if(LIVE && d.g){
-    const sameG = ITEMS.filter(x=>x.g===d.g && x.n!==d.n)
+    const sameG = ITEMS.filter(x=>x.g===d.g && x.n!==d.n && (!yj8 || (x.yj||"").slice(0,8)===yj8))
       .sort((a,b)=>(SEV[a.s]-SEV[b.s]) || a.n.localeCompare(b.n,"ja"));
-    if(sameG.length) relHtml += relatedBlock(`同成分の他社品（${sameG.length}件・入手しやすい順）`, sameG.slice(0,6));
+    if(sameG.length) relHtml += relatedBlock(`同成分・同剤形の品目（${sameG.length}件・入手しやすい順）`, sameG.slice(0,6));
   }
+  // 薬効分類はYJコード先頭4桁（細分類）で絞る。厚労省の3桁分類名のままだと
+  // 「副腎ホルモン剤」にアドレナリン等の別系統（細分類違い）まで含まれてしまう
+  const yj4 = (d.yj||"").slice(0,4);
   if(LIVE && d.cat){
     const best = new Map(); // 一般名ごとに最も入手しやすい1品目を代表に
     for(const x of ITEMS){
       if(x.cat!==d.cat || !x.g || x.g===d.g) continue;
+      if(yj4 && (x.yj||"").slice(0,4)!==yj4) continue;
       const cur = best.get(x.g);
       if(!cur || SEV[x.s] < SEV[cur.s]) best.set(x.g, x);
     }
     const sameC = [...best.values()].sort((a,b)=>(SEV[a.s]-SEV[b.s]) || a.g.localeCompare(b.g,"ja"));
-    if(sameC.length) relHtml += relatedBlock(`同じ薬効分類「${d.cat}」の医薬品（${sameC.length}成分）`, sameC.slice(0,6));
+    if(sameC.length) relHtml += relatedBlock(`同じ薬効分類「${d.cat}」の同系統医薬品（${sameC.length}成分）`, sameC.slice(0,6));
   }
   if(relHtml){
     $mRel.innerHTML = relHtml +
@@ -1509,7 +1517,7 @@ async function fetchFirst(urls){
   const col = name => head.indexOf(name);
   const iName=col("商品名"), iGen=col("一般名"), iMk1=col("製造メーカー"),
         iMk2=col("販売メーカー"), iSt=col("供給状況"), iDate=col("更新日"), iAlt=col("代替候補"), iSpec=col("規格"), iPrice=col("薬価"),
-        iCat=col("薬効分類");
+        iCat=col("薬効分類"), iYJ=col("YJコード");
   if(iName<0 || iSt<0) return;
 
   const items=[];
@@ -1528,6 +1536,7 @@ async function fetchFirst(urls){
       price: iPrice>=0 ? (r[iPrice]||"").trim() : "",
       g:(r[iGen]||"").trim(),                       // 一般名（同成分の他社品の検索用）
       cat: iCat>=0 ? (r[iCat]||"").trim() : "",     // 薬効分類（類似薬の検索用）
+      yj: iYJ>=0 ? (r[iYJ]||"").trim() : "",        // YJコード（剤形・細分類の判定用）
       q:norm(r[iName]+(r[iGen]||"")+maker),
       row:r, // 詳細モーダル用に元の行を保持
     });
