@@ -844,11 +844,6 @@
   "title": "アゼルニジピン錠16mg「ケミファ」 製品供給に関するお知らせ",
   "url": "https://www.nc-medical.com/product_topics/f4bj0h000000knxs-att/f4bj0h000000knyg.pdf"
  },
- "クロピドグレル錠７５ｍｇ「ケミファ」": {
-  "maker": "日本ケミファ",
-  "title": "クロピドグレル錠75mg「ケミファ」100錠包装 製品供給に関するお知らせ",
-  "url": "https://www.nc-medical.com/product_topics/p5ib910000000i1b-att/p5ib910000000i1z.pdf"
- },
  "セレコキシブ錠１００ｍｇ「ケミファ」": {
   "maker": "日本ケミファ",
   "title": "セレコキシブ錠100mg「ケミファ」 製品供給に関するお知らせ",
@@ -882,12 +877,12 @@
  "シロドシンＯＤ錠２ｍｇ「サワイ」": {
   "maker": "沢井製薬",
   "title": "2026/07/08 供給関連 PDF NEW シロドシンOD錠2mg/4mg「サワイ」の供給に関するお詫びとお願い PDF NEW",
-  "url": "https://med.sawai.co.jp/file/pr27_4659_1.pdf"
+  "url": "https://med.sawai.co.jp/file/pr27_4658_1.pdf"
  },
  "シロドシンＯＤ錠４ｍｇ「サワイ」": {
   "maker": "沢井製薬",
   "title": "2026/07/08 供給関連 PDF NEW シロドシンOD錠2mg/4mg「サワイ」の供給に関するお詫びとお願い PDF NEW",
-  "url": "https://med.sawai.co.jp/file/pr27_4659_1.pdf"
+  "url": "https://med.sawai.co.jp/file/pr27_4658_1.pdf"
  },
  "ランソプラゾールＯＤ錠１５ｍｇ「サワイ」": {
   "maker": "沢井製薬",
@@ -1558,5 +1553,25 @@
   "maker": "東和薬品",
   "title": "ジクロフェナクNaテープ15mg/30mg「トーワ」 販売中止のお知らせ",
   "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=81671&t=4&f=20260129_%E3%82%B8%E3%82%AF%E3%83%AD%E3%83%95%E3%82%A7%E3%83%8A%E3%82%AFNa%E3%83%86%E3%83%BC%E3%83%9715mg30mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf"
+ },
+ "トスフロキサシントシル酸塩錠１５０ｍｇ「サワイ」": {
+  "maker": "沢井製薬",
+  "title": "2026/07/15 供給関連 PDF NEW トスフロキサシントシル酸塩錠75mg/150mg「サワイ」の供給に関するお詫びとお願い PDF NEW",
+  "url": "https://med.sawai.co.jp/file/pr27_1271_1.pdf"
+ },
+ "セフジニル錠１００ｍｇ「サワイ」": {
+  "maker": "沢井製薬",
+  "title": "2026/07/08 供給関連 PDF 一部製品 限定出荷解除のお知らせ PDF",
+  "url": "https://med.sawai.co.jp/file/pr27_1216_1.pdf"
+ },
+ "セフポドキシムプロキセチル錠１００ｍｇ「ＳＷ」": {
+  "maker": "沢井製薬",
+  "title": "2025/07/24 供給関連 PDF 製造委託品の供給に関するお詫び（2025年7月更新） PDF",
+  "url": "https://med.sawai.co.jp/file/pr27_4802_5.pdf"
+ },
+ "セフポドキシムプロキセチルＤＳ小児用５％「サワイ」": {
+  "maker": "沢井製薬",
+  "title": "2025/07/24 供給関連 PDF 製造委託品の供給に関するお詫び（2025年7月更新） PDF",
+  "url": "https://med.sawai.co.jp/file/pr27_1122_4.pdf"
  }
 }
