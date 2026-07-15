@@ -10,6 +10,7 @@ maker_announcements.json を生成する。
              第一三共エスファ・日本ケミファ（他社は個別案内文の構造上、現状スコープ外）
 """
 import csv
+import datetime
 import json
 import re
 import sys
@@ -210,12 +211,22 @@ def fetch_sawai_prodid_announcement(prodid):
 
 
 def deepen_sawai(result, csv_path, limit=200):
-    """まだ案内文が見つかっていない沢井製薬の対象品目について、prodid経由で追加取得する"""
+    """沢井製薬の対象品目について、prodid経由で最新の案内文を取得する。
+    未取得の品目を優先しつつ、既に案内文がある品目も「最終確認が古い順」で
+    再チェックしてローテーションする。これにより、メーカーが状況変化で新しい
+    案内文を出したとき（例: 供給停止→限定出荷）に古い案内文へ差し替えられる。
+    limit件/回で回すため、対象全体は数日かけて一巡する。"""
+    today = datetime.date.today().isoformat()
     with open(csv_path, encoding="utf-8-sig") as f:
         rows = list(csv.DictReader(f))
     targets = [r for r in rows if "通常出荷" not in r["供給状況"] or "薬価削除予定" in (r.get("代替候補") or "")]
     sawai_targets = [r for r in targets
-                      if "沢井製薬" in (r["販売メーカー"] or r["製造メーカー"]) and r["商品名"] not in result]
+                      if "沢井製薬" in (r["販売メーカー"] or r["製造メーカー"])]
+    # 並び順: 未取得(0)を最優先、既存(1)は最終確認日が古い順（未記録は最古扱い）
+    def sort_key(r):
+        cur = result.get(r["商品名"])
+        return ("0", "") if cur is None else ("1", cur.get("checked", ""))
+    sawai_targets.sort(key=sort_key)
     if not sawai_targets:
         return result
 
@@ -226,7 +237,7 @@ def deepen_sawai(result, csv_path, limit=200):
         return result
     print(f"沢井prodidマップ: {len(prodid_map)}件", file=sys.stderr)
 
-    checked = 0
+    checked = updated = 0
     for r in sawai_targets[:limit]:
         name = r["商品名"]
         prodid = prodid_map.get(norm(name))
@@ -236,8 +247,14 @@ def deepen_sawai(result, csv_path, limit=200):
         found = fetch_sawai_prodid_announcement(prodid)
         if found:
             title, url = found
-            result[name] = {"maker": "沢井製薬", "title": title, "url": url}
-    print(f"沢井個別ページ確認: {checked}件", file=sys.stderr)
+            prev = result.get(name, {})
+            if prev.get("url") != url:
+                updated += 1
+            result[name] = {"maker": "沢井製薬", "title": title, "url": url, "checked": today}
+        elif result.get(name, {}).get("maker") == "沢井製薬":
+            # 既存はあるが今回見つからなかった場合は最終確認日だけ更新（案内文は残す）
+            result[name]["checked"] = today
+    print(f"沢井個別ページ確認: {checked}件（うちURL差し替え {updated}件）", file=sys.stderr)
     return result
 
 
