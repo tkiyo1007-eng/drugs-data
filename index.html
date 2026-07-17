@@ -1147,6 +1147,7 @@ const MAKER_LINKS = [
   ["キョーリンリメディオ", "https://www.med.kyorin-rmd.com/product/supply_limit/"],
   ["第一三共エスファ", "https://www.daiichisankyo-ep.co.jp/news/"],
   ["日本ケミファ", "https://www.nc-medical.com/product/information/"],
+  ["塩野義", "https://med.shionogi.co.jp/news/package.html"],
 ];
 function findMakerLink(makerText){
   if(!makerText) return null;
@@ -1332,6 +1333,15 @@ function openDetail(d, opts={}){
   const needsMakerLink = d.s !== "ok" || d.delist;
   const makerRowText = d.row ? d.row.join(" ") : d.m; // 製造/販売メーカー両方を対象に検索
   const announcement = needsMakerLink ? ANNOUNCEMENTS[d.n] : null; // 個別案内文(PDF)が見つかっていれば優先
+  // メーカーが販売中止を公表していても、厚労省の供給状況区分への反映が遅れて
+  // 「限定出荷」等のまま表示され続ける場合がある（例: イソジンシュガーパスタ軟膏は
+  // 2025-12に販売中止案内・2026-05出荷終了）。供給状況欄は公表データのまま変えず、
+  // 案内文の存在を詳細の先頭で補足する（タイトルは「一部包装のみ」等の限定条件を
+  // 落とさないよう原文のまま引用）
+  if(announcement && d.s !== "ended" && /販売中止|販売終了|製造中止/.test(announcement.title)){
+    document.getElementById("mGrid").insertAdjacentHTML("afterbegin",
+      `<dt>メーカー案内</dt><dd>「${esc(cleanAnnouncementTitle(announcement.title))}」が公表されています（下の案内文リンク参照）。供給状況欄は厚労省公表データの区分のため、反映が遅れている場合があります。</dd>`);
+  }
   const mLink = needsMakerLink ? findMakerLink(makerRowText) : null;
   const $mMakerLink = document.getElementById("mMakerLink");
   if(announcement){
