@@ -1,5 +1,11 @@
 [
  {
+  "date": "2026/07/17",
+  "title": "「副作用が疑われる症例報告に関する情報」に2026年3月分の情報を追加しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/adr-info/suspected-adr/0005.html",
+  "tag": "安全対策"
+ },
+ {
   "date": "2026/07/15",
   "title": "［MID-NET］利活用状況を更新しました",
   "url": "https://www.pmda.go.jp/safety/mid-net/0010.html",
@@ -51,12 +57,6 @@
   "date": "2026/07/10",
   "title": "IRB登録情報を更新しました",
   "url": "https://www.pmda.go.jp/review-services/trials/0008.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/07/09",
-  "title": "「後発医薬品の相談」のページを更新しました",
-  "url": "https://www.pmda.go.jp/review-services/f2f-pre/consultations/0018.html",
   "tag": "承認審査"
  }
 ]
