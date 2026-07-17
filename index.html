@@ -1155,10 +1155,21 @@ function findMakerLink(makerText){
   return hit ? {name:hit[0], url:hit[1]} : null;
 }
 
+// 自動収集（drugs-data側パイプライン）が拾えていないメーカー公式案内の手動キュレーション。
+// 収集対象外メーカーの販売中止案内などを得意先指摘ベースでここに追加する。
+// 同名品目が自動収集された場合はそちらが優先される
+const MANUAL_ANNOUNCEMENTS = {
+  "イソジンシュガーパスタ軟膏": {
+    url: "https://med.shionogi.co.jp/news/package/2026/260511_pdf.html",
+    title: "イソジンシュガーパスタ軟膏 販売中止のご案内（第2報）",
+    maker: "塩野義製薬",
+  },
+};
+
 // 品目名→メーカー公式の個別案内文(PDF)。取得できたものだけ登録される（ページ読込時にfetch）
-let ANNOUNCEMENTS = {};
+let ANNOUNCEMENTS = {...MANUAL_ANNOUNCEMENTS};
 fetchFirst(["maker_announcements.json", "https://tkiyo1007-eng.github.io/drugs-data/maker_announcements.json"])
-  .then(res => res && res.json()).then(data => { if(data) ANNOUNCEMENTS = data; }).catch(()=>{});
+  .then(res => res && res.json()).then(data => { if(data) ANNOUNCEMENTS = {...MANUAL_ANNOUNCEMENTS, ...data}; }).catch(()=>{});
 
 // 品目名→案内文PDFのAI要約 {lines:[3行], date}
 let SUMMARIES = {};
