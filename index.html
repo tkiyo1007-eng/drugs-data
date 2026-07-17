@@ -1174,6 +1174,24 @@ let CHANGES = {};
 let LATEST_CHANGE_DATE = null; // 変化ログ上で最も新しい日（「本日の更新」フィルタ用）
 const SEV = {ok:0, limited:1, stopped:2, ended:3}; // 深刻度（関連品目の並び順用）
 
+/* ===== 貼付剤の温感/剤形サブタイプ判定（関連品目の混入防止用） =====
+   温感タイプはYJコードでは非温感と区別できない（例: ロキソニンテープ50mg=2649735S2024 と
+   温感のテープ50mg「タイホウ」=2649735S2237 は先頭9桁まで同一）うえ、「三友」「タイホウ」の
+   温感テープは商品名にも「温感」の表記がない。商品名の表記と既知の温感品目リストの両方で判定する */
+const WARM_PATCH_YJ = new Set([
+  "2649735S2237", "2649735S3233", // ロキソプロフェンナトリウムテープ50/100mg「タイホウ」（温感）
+  "2649735S2261", "2649735S3268", // ロキソプロフェンNaテープ50/100mg「三友」（温感）
+]);
+const isWarmPatch = x =>
+  WARM_PATCH_YJ.has(x.yj || "") ||
+  /温感|温シップ|温湿布/.test((x.n || "") + (x.spec || "")) ||
+  /ロキソプロフェン.*テープ.*(三友|タイホウ)/.test(x.n || "");
+// 貼付剤はYJ剤形コードが全て「S」でテープ/パップを区別できないため商品名で判定
+// （判定できない商品名は "" を返し、混入除外の対象にしない）
+const patchKind = x =>
+  /テープ|プラスター/.test(x.n || "") ? "tape" :
+  /パップ|シップ/.test(x.n || "") ? "pap" : "";
+
 /* ===== お気に入り（このブラウザのlocalStorageに保存。アプリ版①の定点観測をWebでも） ===== */
 let FAVS = new Set();
 try{ FAVS = new Set(JSON.parse(localStorage.getItem("favDrugs")||"[]")); }catch(e){}
@@ -1229,6 +1247,11 @@ function openDetail(d, opts={}){
   document.getElementById("mFav").classList.toggle("on", FAVS.has(d.n));
   document.getElementById("mGrid").innerHTML = detailPairs(d)
     .map(([h,v])=>`<dt>${esc(h)}</dt><dd>${esc(v)}</dd>`).join("");
+  // 温感タイプの貼付剤は商品名に「温感」の表記がない品目があるため明示
+  // （非温感品と取り違えて代替すると温感刺激の苦情・皮膚トラブルにつながる）
+  if(isWarmPatch(d))
+    document.getElementById("mGrid").insertAdjacentHTML("afterbegin",
+      `<dt>貼付タイプ</dt><dd>温感タイプ（非温感タイプとの相互の代替にはご注意ください）</dd>`);
   // 出荷再開・解消の見込み（厚労省コード ア/イ/ウ＋案内文PDF記載の時期。アプリ版⑪と同等）
   if(d.s !== "ok" || d.delist){
     const altRaw = (d.row && CSV_HEAD) ? String(d.row[CSV_HEAD.indexOf("代替候補")]||"") : "";
@@ -1264,17 +1287,23 @@ function openDetail(d, opts={}){
   const relatedBlock = (title, list) =>
     `<div class="rel-title">${esc(title)}</div>` + list.map(x=>
       `<button type="button" class="rel-row" data-name="${esc(x.n)}">
-         <span>${esc(x.n)}</span>
+         <span>${esc(x.n)}${isWarmPatch(x) && !x.n.includes("温") ? "（温感タイプ）" : ""}</span>
          <span class="rel-status" style="--sc:${STATUS[x.s].color}">${STATUS[x.s].label}</span>
        </button>`).join("");
   // YJコード先頭8桁（薬効細分類4桁+成分3桁+剤形1桁）が一致 = 同成分・同剤形。
   // 一般名の文字列一致だけだと、注射剤に対して軟膏・貼付剤など投与経路の違う
   // 品目まで「他社品」に並んでしまう（例: ケナコルト-A注に対するレダコート軟膏）
+  // ただし貼付剤は剤形コードが全て「S」のため、テープ/パップと温感/非温感は
+  // 商品名ベースの判定（isWarmPatch / patchKind）で追加で絞り込む
   const yj8 = (d.yj||"").slice(0,8);
+  const dWarm = isWarmPatch(d), dKind = patchKind(d);
   if(LIVE && d.g){
-    const sameG = ITEMS.filter(x=>x.g===d.g && x.n!==d.n && (!yj8 || (x.yj||"").slice(0,8)===yj8))
+    const sameG = ITEMS.filter(x=>x.g===d.g && x.n!==d.n
+        && (!yj8 || (x.yj||"").slice(0,8)===yj8)
+        && isWarmPatch(x)===dWarm
+        && (!dKind || !patchKind(x) || patchKind(x)===dKind))
       .sort((a,b)=>(SEV[a.s]-SEV[b.s]) || a.n.localeCompare(b.n,"ja"));
-    if(sameG.length) relHtml += relatedBlock(`同成分・同剤形の品目（${sameG.length}件・入手しやすい順）`, sameG.slice(0,6));
+    if(sameG.length) relHtml += relatedBlock(`同成分・同剤形${dWarm ? "（温感タイプ）" : ""}の品目（${sameG.length}件・入手しやすい順）`, sameG.slice(0,6));
   }
   // 薬効分類はYJコード先頭4桁（細分類）で絞る。厚労省の3桁分類名のままだと
   // 「副腎ホルモン剤」にアドレナリン等の別系統（細分類違い）まで含まれてしまう
@@ -1284,6 +1313,7 @@ function openDetail(d, opts={}){
     for(const x of ITEMS){
       if(x.cat!==d.cat || !x.g || x.g===d.g) continue;
       if(yj4 && (x.yj||"").slice(0,4)!==yj4) continue;
+      if(isWarmPatch(x)!==dWarm) continue; // 温感品目には温感の同系統のみ（逆も同様）
       const cur = best.get(x.g);
       if(!cur || SEV[x.s] < SEV[cur.s]) best.set(x.g, x);
     }
@@ -1292,7 +1322,7 @@ function openDetail(d, opts={}){
   }
   if(relHtml){
     $mRel.innerHTML = relHtml +
-      `<p class="pkg-note">※ 同成分・同分類の品目を公開データから機械的に列挙した確認補助です。おすすめ順位ではありません。適応・規格・剤形の互換性は必ず添付文書と医師・薬剤師の判断でご確認ください。</p>`;
+      `<p class="pkg-note">※ 同成分・同分類の品目を公開データから機械的に列挙した確認補助です。おすすめ順位ではありません。${dWarm ? "この品目は温感タイプのため、温感タイプの品目のみを表示しています。" : ""}適応・規格・剤形の互換性は必ず添付文書と医師・薬剤師の判断でご確認ください。</p>`;
     $mRel.hidden = false;
   }else{
     $mRel.hidden = true;
