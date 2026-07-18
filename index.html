@@ -258,6 +258,8 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .pill[data-f="stopped"].active{background:linear-gradient(135deg,#F06B6B,var(--stopped));box-shadow:0 6px 16px -6px rgba(225,77,77,.6)}
 .pill[data-f="ended"].active{background:linear-gradient(135deg,#A5876C,var(--ended));box-shadow:0 6px 16px -6px rgba(138,106,82,.6)}
 .pill[data-f="ok"].active{background:linear-gradient(135deg,#4BC98B,var(--ok));box-shadow:0 6px 16px -6px rgba(47,174,110,.6)}
+.pill[data-f="fav"].active{color:#5C4300;background:linear-gradient(135deg,#FFD966,#F5B301);box-shadow:0 6px 16px -6px rgba(245,179,1,.55)}
+.pill[data-f="delist"].active{background:linear-gradient(135deg,#E8912F,#B0500E);box-shadow:0 6px 16px -6px rgba(176,80,14,.55)}
 .result-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;margin-bottom:14px}
 .result-meta{font-size:12.5px;color:var(--sub)}
 .page-size{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--sub);font-weight:700;white-space:nowrap}
@@ -346,6 +348,14 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 .modal-fav:hover{background:#fff;transform:scale(1.1)}
 .modal-fav.on{color:#F5B301}
+.modal-share{
+  position:absolute;top:14px;right:106px;width:36px;height:36px;border-radius:50%;
+  border:1px solid rgba(90,107,148,.2);background:rgba(255,255,255,.8);
+  color:var(--sub);cursor:pointer;
+  display:grid;place-items:center;transition:.2s;
+}
+.modal-share:hover{background:#fff;color:var(--blue);transform:scale(1.1)}
+.modal-share.done{color:var(--ok)}
 /* お気に入りの変化通知（検索リストの上） */
 .fav-notice{padding:14px 16px;border-radius:16px;margin-bottom:14px;
   border:1px solid rgba(232,145,47,.3);background:rgba(255,250,240,.75)}
@@ -380,6 +390,13 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 .csv-btn:hover{background:rgba(79,128,244,.16)}
 .empty{grid-column:1/-1;text-align:center;padding:40px;color:var(--sub);font-size:14px}
+.empty-reset{
+  display:inline-block;margin-top:14px;cursor:pointer;font-family:inherit;
+  font-size:13px;font-weight:700;color:var(--blue);
+  padding:9px 22px;border-radius:999px;border:1.5px solid rgba(79,128,244,.3);
+  background:rgba(255,255,255,.7);transition:.2s;
+}
+.empty-reset:hover{background:#fff;transform:translateY(-1px)}
 .demo-note{margin-top:20px;font-size:12px;color:var(--sub);text-align:center}
 .load-more{
   display:block;margin:22px auto 0;cursor:pointer;font-family:inherit;
@@ -560,20 +577,28 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .app-cta{
   border-radius:32px;padding:56px 48px;position:relative;overflow:hidden;
   background:linear-gradient(140deg,#14275E,#1E44B8 55%,#2F63E8 85%,#48A7E8);
-  color:#fff;text-align:center;
+  color:#fff;
   box-shadow:0 34px 80px -24px rgba(20,39,94,.6),inset 0 1.6px 0 rgba(255,255,255,.3);
   border:1px solid rgba(255,255,255,.22);
+  display:flex;align-items:center;justify-content:space-between;gap:48px;text-align:left;
 }
 .app-cta::before{content:"";position:absolute;top:-50%;left:20%;width:60%;height:100%;background:radial-gradient(ellipse,rgba(95,212,244,.3),transparent 65%)}
+.app-cta-text{flex:1;min-width:0}
 .app-cta h2{color:#fff}
-.app-cta p{opacity:.85;max-width:36em;margin:0 auto 32px;font-size:15px}
+.app-cta p{opacity:.85;max-width:36em;margin:0 0 32px;font-size:15px}
 .store-btn{
   display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:var(--blue-deep);
   background:#fff;font-weight:800;font-size:16px;padding:16px 34px;border-radius:18px;
   box-shadow:0 16px 36px -10px rgba(0,0,0,.4);transition:transform .2s;
 }
 .store-btn:hover{transform:translateY(-2px) scale(1.02)}
-@media(max-width:640px){.app-cta{padding:44px 24px}}
+.app-cta-qr{flex:none;text-align:center;position:relative;z-index:1}
+.app-cta-qr svg{width:190px;height:190px;display:block;border-radius:24px;box-shadow:0 20px 44px -14px rgba(0,0,0,.5)}
+.app-cta-qr span{display:block;margin-top:14px;font-size:12.5px;font-weight:700;opacity:.85;letter-spacing:.02em}
+@media(max-width:760px){
+  .app-cta{flex-direction:column;text-align:center;padding:44px 24px}
+  .app-cta p{margin:0 auto 32px}
+}
 
 /* ===== フッター ===== */
 footer{max-width:1120px;margin:0 auto;padding:48px 24px 60px;text-align:center;color:var(--sub);font-size:12.5px}
@@ -657,7 +682,7 @@ footer a:hover{color:var(--blue)}
   <div class="demo-shell glass">
     <div class="search-box">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-      <input id="q" type="search" placeholder="薬品名・成分名・メーカー名で検索" autocomplete="off">
+      <input id="q" type="search" placeholder="薬品名・成分名・メーカー名で検索" aria-label="薬品名・成分名・メーカー名で検索" autocomplete="off">
     </div>
     <div class="pills" id="pills">
       <button class="pill active" data-f="all">すべて</button>
@@ -666,6 +691,8 @@ footer a:hover{color:var(--blue)}
       <button class="pill" data-f="stopped">供給停止</button>
       <button class="pill" data-f="ended">販売中止</button>
       <button class="pill" data-f="changed" id="pillChanged" style="display:none"></button>
+      <button class="pill" data-f="delist" id="pillDelist" style="display:none"></button>
+      <button class="pill" data-f="fav" id="pillFav" style="display:none"></button>
     </div>
     <div class="result-bar">
       <p class="result-meta" id="meta"></p>
@@ -704,6 +731,10 @@ footer a:hover{color:var(--blue)}
   </div>
   <h3 style="font-size:15px;font-weight:800;margin:26px 0 10px">医薬品供給ナビからのお知らせ</h3>
   <div class="news-list glass">
+    <div class="news-item">
+      <div class="news-date num">2026.07.19</div>
+      <div class="news-body"><span class="news-tag">機能追加</span>検索の絞り込みに「★ お気に入り」と「薬価削除予定」を追加しました。★を付けた品目の一覧確認と、近く販売終了見込みの品目の洗い出しがワンタップでできます。<p>あわせて詳細画面に「共有」ボタンを追加しました。品目ページへの直リンクをコピー・共有できます（スマホでは共有シートが開きます）。</p></div>
+    </div>
     <div class="news-item">
       <div class="news-date num">2026.07.17</div>
       <div class="news-body"><span class="news-tag">機能追加</span>出荷調整品の詳細に「案内文のポイント（AI要約）」を追加しました。メーカー案内文PDFの要点（停止理由・再開見込み・代替候補）が3行でわかります。<p>あわせて、PMDA新着の回収・安全対策情報をまとめた「医療ニュース」をお知らせ欄に開設。同成分・同分類の関連品目一覧も、剤形・系統まで一致するものに絞り込んで精度を改善しました。</p><p>薬価データも大幅拡充（収載品目の約95%をカバー）。iOSアプリ版v1.5にも同じ機能が搭載されます。</p></div>
@@ -876,12 +907,18 @@ footer a:hover{color:var(--blue)}
 
 <section id="app" class="reveal">
   <div class="app-cta">
-    <p class="sec-eyebrow" style="color:#9BD8FA">GET THE APP</p>
-    <h2>供給状況のチェックを、毎日の習慣に。</h2>
-    <p>医薬品供給ナビは iOS アプリとして無料でご利用いただけます。検索・お気に入り・サマリー・掲示板、すべての機能をあなたのポケットに。</p>
-    <a class="store-btn" href="https://apps.apple.com/jp/app/%E5%8C%BB%E8%96%AC%E5%93%81%E4%BE%9B%E7%B5%A6%E3%83%8A%E3%83%93/id6777696446" target="_blank" rel="noopener">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.7 12.6c0-3 2.5-4.5 2.6-4.6-1.4-2.1-3.6-2.4-4.4-2.4-1.9-.2-3.6 1.1-4.6 1.1-.9 0-2.4-1.1-4-1-2 0-3.9 1.2-5 3-2.1 3.7-.5 9.1 1.5 12.1 1 1.5 2.2 3.1 3.8 3 1.5-.1 2.1-1 3.9-1s2.4 1 4 1 2.7-1.5 3.7-2.9c1.2-1.7 1.6-3.3 1.7-3.4-.1-.1-3.2-1.3-3.2-4.9zM15.6 3.5c.8-1 1.4-2.4 1.2-3.5-1.2 0-2.7.8-3.5 1.8-.8.9-1.5 2.3-1.3 3.7 1.4.1 2.8-.9 3.6-2z"/></svg>
-      App Store でダウンロード
+    <div class="app-cta-text">
+      <p class="sec-eyebrow" style="color:#9BD8FA">GET THE APP</p>
+      <h2>供給状況のチェックを、毎日の習慣に。</h2>
+      <p>医薬品供給ナビは iOS アプリとして無料でご利用いただけます。検索・お気に入り・サマリー・掲示板、すべての機能をあなたのポケットに。</p>
+      <a class="store-btn" href="https://apps.apple.com/jp/app/%E5%8C%BB%E8%96%AC%E5%93%81%E4%BE%9B%E7%B5%A6%E3%83%8A%E3%83%93/id6777696446" target="_blank" rel="noopener">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.7 12.6c0-3 2.5-4.5 2.6-4.6-1.4-2.1-3.6-2.4-4.4-2.4-1.9-.2-3.6 1.1-4.6 1.1-.9 0-2.4-1.1-4-1-2 0-3.9 1.2-5 3-2.1 3.7-.5 9.1 1.5 12.1 1 1.5 2.2 3.1 3.8 3 1.5-.1 2.1-1 3.9-1s2.4 1 4 1 2.7-1.5 3.7-2.9c1.2-1.7 1.6-3.3 1.7-3.4-.1-.1-3.2-1.3-3.2-4.9zM15.6 3.5c.8-1 1.4-2.4 1.2-3.5-1.2 0-2.7.8-3.5 1.8-.8.9-1.5 2.3-1.3 3.7 1.4.1 2.8-.9 3.6-2z"/></svg>
+        App Store でダウンロード
+      </a>
+    </div>
+    <a class="app-cta-qr" href="https://apps.apple.com/jp/app/id6777696446" target="_blank" rel="noopener" aria-label="QRコードからApp Storeへ">
+      <svg viewBox="0 0 370 370" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="App StoreへのQRコード"><rect width="370" height="370" rx="30" fill="#ffffff"/><rect x="40" y="40" width="10" height="10" fill="#14275E"/><rect x="50" y="40" width="10" height="10" fill="#14275E"/><rect x="60" y="40" width="10" height="10" fill="#14275E"/><rect x="70" y="40" width="10" height="10" fill="#14275E"/><rect x="80" y="40" width="10" height="10" fill="#14275E"/><rect x="90" y="40" width="10" height="10" fill="#14275E"/><rect x="100" y="40" width="10" height="10" fill="#14275E"/><rect x="120" y="40" width="10" height="10" fill="#14275E"/><rect x="130" y="40" width="10" height="10" fill="#14275E"/><rect x="150" y="40" width="10" height="10" fill="#14275E"/><rect x="170" y="40" width="10" height="10" fill="#14275E"/><rect x="190" y="40" width="10" height="10" fill="#14275E"/><rect x="210" y="40" width="10" height="10" fill="#14275E"/><rect x="220" y="40" width="10" height="10" fill="#14275E"/><rect x="240" y="40" width="10" height="10" fill="#14275E"/><rect x="260" y="40" width="10" height="10" fill="#14275E"/><rect x="270" y="40" width="10" height="10" fill="#14275E"/><rect x="280" y="40" width="10" height="10" fill="#14275E"/><rect x="290" y="40" width="10" height="10" fill="#14275E"/><rect x="300" y="40" width="10" height="10" fill="#14275E"/><rect x="310" y="40" width="10" height="10" fill="#14275E"/><rect x="320" y="40" width="10" height="10" fill="#14275E"/><rect x="40" y="50" width="10" height="10" fill="#14275E"/><rect x="100" y="50" width="10" height="10" fill="#14275E"/><rect x="130" y="50" width="10" height="10" fill="#14275E"/><rect x="200" y="50" width="10" height="10" fill="#14275E"/><rect x="210" y="50" width="10" height="10" fill="#14275E"/><rect x="230" y="50" width="10" height="10" fill="#14275E"/><rect x="260" y="50" width="10" height="10" fill="#14275E"/><rect x="320" y="50" width="10" height="10" fill="#14275E"/><rect x="40" y="60" width="10" height="10" fill="#14275E"/><rect x="60" y="60" width="10" height="10" fill="#14275E"/><rect x="70" y="60" width="10" height="10" fill="#14275E"/><rect x="80" y="60" width="10" height="10" fill="#14275E"/><rect x="100" y="60" width="10" height="10" fill="#14275E"/><rect x="140" y="60" width="10" height="10" fill="#14275E"/><rect x="150" y="60" width="10" height="10" fill="#14275E"/><rect x="160" y="60" width="10" height="10" fill="#14275E"/><rect x="210" y="60" width="10" height="10" fill="#14275E"/><rect x="220" y="60" width="10" height="10" fill="#14275E"/><rect x="240" y="60" width="10" height="10" fill="#14275E"/><rect x="260" y="60" width="10" height="10" fill="#14275E"/><rect x="280" y="60" width="10" height="10" fill="#14275E"/><rect x="290" y="60" width="10" height="10" fill="#14275E"/><rect x="300" y="60" width="10" height="10" fill="#14275E"/><rect x="320" y="60" width="10" height="10" fill="#14275E"/><rect x="40" y="70" width="10" height="10" fill="#14275E"/><rect x="60" y="70" width="10" height="10" fill="#14275E"/><rect x="70" y="70" width="10" height="10" fill="#14275E"/><rect x="80" y="70" width="10" height="10" fill="#14275E"/><rect x="100" y="70" width="10" height="10" fill="#14275E"/><rect x="120" y="70" width="10" height="10" fill="#14275E"/><rect x="140" y="70" width="10" height="10" fill="#14275E"/><rect x="170" y="70" width="10" height="10" fill="#14275E"/><rect x="190" y="70" width="10" height="10" fill="#14275E"/><rect x="220" y="70" width="10" height="10" fill="#14275E"/><rect x="230" y="70" width="10" height="10" fill="#14275E"/><rect x="260" y="70" width="10" height="10" fill="#14275E"/><rect x="280" y="70" width="10" height="10" fill="#14275E"/><rect x="290" y="70" width="10" height="10" fill="#14275E"/><rect x="300" y="70" width="10" height="10" fill="#14275E"/><rect x="320" y="70" width="10" height="10" fill="#14275E"/><rect x="40" y="80" width="10" height="10" fill="#14275E"/><rect x="60" y="80" width="10" height="10" fill="#14275E"/><rect x="70" y="80" width="10" height="10" fill="#14275E"/><rect x="80" y="80" width="10" height="10" fill="#14275E"/><rect x="100" y="80" width="10" height="10" fill="#14275E"/><rect x="120" y="80" width="10" height="10" fill="#14275E"/><rect x="130" y="80" width="10" height="10" fill="#14275E"/><rect x="150" y="80" width="10" height="10" fill="#14275E"/><rect x="190" y="80" width="10" height="10" fill="#14275E"/><rect x="210" y="80" width="10" height="10" fill="#14275E"/><rect x="220" y="80" width="10" height="10" fill="#14275E"/><rect x="260" y="80" width="10" height="10" fill="#14275E"/><rect x="280" y="80" width="10" height="10" fill="#14275E"/><rect x="290" y="80" width="10" height="10" fill="#14275E"/><rect x="300" y="80" width="10" height="10" fill="#14275E"/><rect x="320" y="80" width="10" height="10" fill="#14275E"/><rect x="40" y="90" width="10" height="10" fill="#14275E"/><rect x="100" y="90" width="10" height="10" fill="#14275E"/><rect x="120" y="90" width="10" height="10" fill="#14275E"/><rect x="130" y="90" width="10" height="10" fill="#14275E"/><rect x="140" y="90" width="10" height="10" fill="#14275E"/><rect x="150" y="90" width="10" height="10" fill="#14275E"/><rect x="170" y="90" width="10" height="10" fill="#14275E"/><rect x="180" y="90" width="10" height="10" fill="#14275E"/><rect x="200" y="90" width="10" height="10" fill="#14275E"/><rect x="210" y="90" width="10" height="10" fill="#14275E"/><rect x="220" y="90" width="10" height="10" fill="#14275E"/><rect x="230" y="90" width="10" height="10" fill="#14275E"/><rect x="260" y="90" width="10" height="10" fill="#14275E"/><rect x="320" y="90" width="10" height="10" fill="#14275E"/><rect x="40" y="100" width="10" height="10" fill="#14275E"/><rect x="50" y="100" width="10" height="10" fill="#14275E"/><rect x="60" y="100" width="10" height="10" fill="#14275E"/><rect x="70" y="100" width="10" height="10" fill="#14275E"/><rect x="80" y="100" width="10" height="10" fill="#14275E"/><rect x="90" y="100" width="10" height="10" fill="#14275E"/><rect x="100" y="100" width="10" height="10" fill="#14275E"/><rect x="120" y="100" width="10" height="10" fill="#14275E"/><rect x="140" y="100" width="10" height="10" fill="#14275E"/><rect x="160" y="100" width="10" height="10" fill="#14275E"/><rect x="180" y="100" width="10" height="10" fill="#14275E"/><rect x="200" y="100" width="10" height="10" fill="#14275E"/><rect x="220" y="100" width="10" height="10" fill="#14275E"/><rect x="240" y="100" width="10" height="10" fill="#14275E"/><rect x="260" y="100" width="10" height="10" fill="#14275E"/><rect x="270" y="100" width="10" height="10" fill="#14275E"/><rect x="280" y="100" width="10" height="10" fill="#14275E"/><rect x="290" y="100" width="10" height="10" fill="#14275E"/><rect x="300" y="100" width="10" height="10" fill="#14275E"/><rect x="310" y="100" width="10" height="10" fill="#14275E"/><rect x="320" y="100" width="10" height="10" fill="#14275E"/><rect x="120" y="110" width="10" height="10" fill="#14275E"/><rect x="130" y="110" width="10" height="10" fill="#14275E"/><rect x="140" y="110" width="10" height="10" fill="#14275E"/><rect x="160" y="110" width="10" height="10" fill="#14275E"/><rect x="180" y="110" width="10" height="10" fill="#14275E"/><rect x="210" y="110" width="10" height="10" fill="#14275E"/><rect x="230" y="110" width="10" height="10" fill="#14275E"/><rect x="240" y="110" width="10" height="10" fill="#14275E"/><rect x="40" y="120" width="10" height="10" fill="#14275E"/><rect x="80" y="120" width="10" height="10" fill="#14275E"/><rect x="100" y="120" width="10" height="10" fill="#14275E"/><rect x="110" y="120" width="10" height="10" fill="#14275E"/><rect x="120" y="120" width="10" height="10" fill="#14275E"/><rect x="130" y="120" width="10" height="10" fill="#14275E"/><rect x="140" y="120" width="10" height="10" fill="#14275E"/><rect x="150" y="120" width="10" height="10" fill="#14275E"/><rect x="180" y="120" width="10" height="10" fill="#14275E"/><rect x="200" y="120" width="10" height="10" fill="#14275E"/><rect x="210" y="120" width="10" height="10" fill="#14275E"/><rect x="240" y="120" width="10" height="10" fill="#14275E"/><rect x="250" y="120" width="10" height="10" fill="#14275E"/><rect x="260" y="120" width="10" height="10" fill="#14275E"/><rect x="270" y="120" width="10" height="10" fill="#14275E"/><rect x="280" y="120" width="10" height="10" fill="#14275E"/><rect x="290" y="120" width="10" height="10" fill="#14275E"/><rect x="320" y="120" width="10" height="10" fill="#14275E"/><rect x="40" y="130" width="10" height="10" fill="#14275E"/><rect x="60" y="130" width="10" height="10" fill="#14275E"/><rect x="70" y="130" width="10" height="10" fill="#14275E"/><rect x="90" y="130" width="10" height="10" fill="#14275E"/><rect x="120" y="130" width="10" height="10" fill="#14275E"/><rect x="130" y="130" width="10" height="10" fill="#14275E"/><rect x="140" y="130" width="10" height="10" fill="#14275E"/><rect x="150" y="130" width="10" height="10" fill="#14275E"/><rect x="170" y="130" width="10" height="10" fill="#14275E"/><rect x="190" y="130" width="10" height="10" fill="#14275E"/><rect x="260" y="130" width="10" height="10" fill="#14275E"/><rect x="280" y="130" width="10" height="10" fill="#14275E"/><rect x="290" y="130" width="10" height="10" fill="#14275E"/><rect x="300" y="130" width="10" height="10" fill="#14275E"/><rect x="310" y="130" width="10" height="10" fill="#14275E"/><rect x="320" y="130" width="10" height="10" fill="#14275E"/><rect x="40" y="140" width="10" height="10" fill="#14275E"/><rect x="60" y="140" width="10" height="10" fill="#14275E"/><rect x="80" y="140" width="10" height="10" fill="#14275E"/><rect x="90" y="140" width="10" height="10" fill="#14275E"/><rect x="100" y="140" width="10" height="10" fill="#14275E"/><rect x="110" y="140" width="10" height="10" fill="#14275E"/><rect x="120" y="140" width="10" height="10" fill="#14275E"/><rect x="130" y="140" width="10" height="10" fill="#14275E"/><rect x="140" y="140" width="10" height="10" fill="#14275E"/><rect x="150" y="140" width="10" height="10" fill="#14275E"/><rect x="160" y="140" width="10" height="10" fill="#14275E"/><rect x="170" y="140" width="10" height="10" fill="#14275E"/><rect x="180" y="140" width="10" height="10" fill="#14275E"/><rect x="190" y="140" width="10" height="10" fill="#14275E"/><rect x="210" y="140" width="10" height="10" fill="#14275E"/><rect x="240" y="140" width="10" height="10" fill="#14275E"/><rect x="280" y="140" width="10" height="10" fill="#14275E"/><rect x="320" y="140" width="10" height="10" fill="#14275E"/><rect x="40" y="150" width="10" height="10" fill="#14275E"/><rect x="70" y="150" width="10" height="10" fill="#14275E"/><rect x="150" y="150" width="10" height="10" fill="#14275E"/><rect x="210" y="150" width="10" height="10" fill="#14275E"/><rect x="230" y="150" width="10" height="10" fill="#14275E"/><rect x="250" y="150" width="10" height="10" fill="#14275E"/><rect x="270" y="150" width="10" height="10" fill="#14275E"/><rect x="290" y="150" width="10" height="10" fill="#14275E"/><rect x="310" y="150" width="10" height="10" fill="#14275E"/><rect x="320" y="150" width="10" height="10" fill="#14275E"/><rect x="50" y="160" width="10" height="10" fill="#14275E"/><rect x="80" y="160" width="10" height="10" fill="#14275E"/><rect x="90" y="160" width="10" height="10" fill="#14275E"/><rect x="100" y="160" width="10" height="10" fill="#14275E"/><rect x="160" y="160" width="10" height="10" fill="#14275E"/><rect x="180" y="160" width="10" height="10" fill="#14275E"/><rect x="200" y="160" width="10" height="10" fill="#14275E"/><rect x="210" y="160" width="10" height="10" fill="#14275E"/><rect x="220" y="160" width="10" height="10" fill="#14275E"/><rect x="230" y="160" width="10" height="10" fill="#14275E"/><rect x="240" y="160" width="10" height="10" fill="#14275E"/><rect x="250" y="160" width="10" height="10" fill="#14275E"/><rect x="270" y="160" width="10" height="10" fill="#14275E"/><rect x="310" y="160" width="10" height="10" fill="#14275E"/><rect x="40" y="170" width="10" height="10" fill="#14275E"/><rect x="60" y="170" width="10" height="10" fill="#14275E"/><rect x="70" y="170" width="10" height="10" fill="#14275E"/><rect x="80" y="170" width="10" height="10" fill="#14275E"/><rect x="90" y="170" width="10" height="10" fill="#14275E"/><rect x="110" y="170" width="10" height="10" fill="#14275E"/><rect x="120" y="170" width="10" height="10" fill="#14275E"/><rect x="130" y="170" width="10" height="10" fill="#14275E"/><rect x="150" y="170" width="10" height="10" fill="#14275E"/><rect x="160" y="170" width="10" height="10" fill="#14275E"/><rect x="170" y="170" width="10" height="10" fill="#14275E"/><rect x="190" y="170" width="10" height="10" fill="#14275E"/><rect x="210" y="170" width="10" height="10" fill="#14275E"/><rect x="220" y="170" width="10" height="10" fill="#14275E"/><rect x="260" y="170" width="10" height="10" fill="#14275E"/><rect x="270" y="170" width="10" height="10" fill="#14275E"/><rect x="280" y="170" width="10" height="10" fill="#14275E"/><rect x="290" y="170" width="10" height="10" fill="#14275E"/><rect x="300" y="170" width="10" height="10" fill="#14275E"/><rect x="310" y="170" width="10" height="10" fill="#14275E"/><rect x="320" y="170" width="10" height="10" fill="#14275E"/><rect x="40" y="180" width="10" height="10" fill="#14275E"/><rect x="60" y="180" width="10" height="10" fill="#14275E"/><rect x="80" y="180" width="10" height="10" fill="#14275E"/><rect x="90" y="180" width="10" height="10" fill="#14275E"/><rect x="100" y="180" width="10" height="10" fill="#14275E"/><rect x="130" y="180" width="10" height="10" fill="#14275E"/><rect x="140" y="180" width="10" height="10" fill="#14275E"/><rect x="150" y="180" width="10" height="10" fill="#14275E"/><rect x="160" y="180" width="10" height="10" fill="#14275E"/><rect x="180" y="180" width="10" height="10" fill="#14275E"/><rect x="190" y="180" width="10" height="10" fill="#14275E"/><rect x="200" y="180" width="10" height="10" fill="#14275E"/><rect x="220" y="180" width="10" height="10" fill="#14275E"/><rect x="250" y="180" width="10" height="10" fill="#14275E"/><rect x="260" y="180" width="10" height="10" fill="#14275E"/><rect x="270" y="180" width="10" height="10" fill="#14275E"/><rect x="290" y="180" width="10" height="10" fill="#14275E"/><rect x="300" y="180" width="10" height="10" fill="#14275E"/><rect x="320" y="180" width="10" height="10" fill="#14275E"/><rect x="60" y="190" width="10" height="10" fill="#14275E"/><rect x="70" y="190" width="10" height="10" fill="#14275E"/><rect x="120" y="190" width="10" height="10" fill="#14275E"/><rect x="130" y="190" width="10" height="10" fill="#14275E"/><rect x="150" y="190" width="10" height="10" fill="#14275E"/><rect x="160" y="190" width="10" height="10" fill="#14275E"/><rect x="210" y="190" width="10" height="10" fill="#14275E"/><rect x="220" y="190" width="10" height="10" fill="#14275E"/><rect x="230" y="190" width="10" height="10" fill="#14275E"/><rect x="240" y="190" width="10" height="10" fill="#14275E"/><rect x="260" y="190" width="10" height="10" fill="#14275E"/><rect x="270" y="190" width="10" height="10" fill="#14275E"/><rect x="310" y="190" width="10" height="10" fill="#14275E"/><rect x="320" y="190" width="10" height="10" fill="#14275E"/><rect x="60" y="200" width="10" height="10" fill="#14275E"/><rect x="70" y="200" width="10" height="10" fill="#14275E"/><rect x="100" y="200" width="10" height="10" fill="#14275E"/><rect x="180" y="200" width="10" height="10" fill="#14275E"/><rect x="200" y="200" width="10" height="10" fill="#14275E"/><rect x="210" y="200" width="10" height="10" fill="#14275E"/><rect x="240" y="200" width="10" height="10" fill="#14275E"/><rect x="250" y="200" width="10" height="10" fill="#14275E"/><rect x="270" y="200" width="10" height="10" fill="#14275E"/><rect x="310" y="200" width="10" height="10" fill="#14275E"/><rect x="40" y="210" width="10" height="10" fill="#14275E"/><rect x="50" y="210" width="10" height="10" fill="#14275E"/><rect x="70" y="210" width="10" height="10" fill="#14275E"/><rect x="90" y="210" width="10" height="10" fill="#14275E"/><rect x="110" y="210" width="10" height="10" fill="#14275E"/><rect x="120" y="210" width="10" height="10" fill="#14275E"/><rect x="130" y="210" width="10" height="10" fill="#14275E"/><rect x="140" y="210" width="10" height="10" fill="#14275E"/><rect x="160" y="210" width="10" height="10" fill="#14275E"/><rect x="170" y="210" width="10" height="10" fill="#14275E"/><rect x="190" y="210" width="10" height="10" fill="#14275E"/><rect x="220" y="210" width="10" height="10" fill="#14275E"/><rect x="240" y="210" width="10" height="10" fill="#14275E"/><rect x="250" y="210" width="10" height="10" fill="#14275E"/><rect x="260" y="210" width="10" height="10" fill="#14275E"/><rect x="270" y="210" width="10" height="10" fill="#14275E"/><rect x="280" y="210" width="10" height="10" fill="#14275E"/><rect x="290" y="210" width="10" height="10" fill="#14275E"/><rect x="310" y="210" width="10" height="10" fill="#14275E"/><rect x="320" y="210" width="10" height="10" fill="#14275E"/><rect x="70" y="220" width="10" height="10" fill="#14275E"/><rect x="100" y="220" width="10" height="10" fill="#14275E"/><rect x="150" y="220" width="10" height="10" fill="#14275E"/><rect x="160" y="220" width="10" height="10" fill="#14275E"/><rect x="180" y="220" width="10" height="10" fill="#14275E"/><rect x="190" y="220" width="10" height="10" fill="#14275E"/><rect x="200" y="220" width="10" height="10" fill="#14275E"/><rect x="210" y="220" width="10" height="10" fill="#14275E"/><rect x="240" y="220" width="10" height="10" fill="#14275E"/><rect x="250" y="220" width="10" height="10" fill="#14275E"/><rect x="260" y="220" width="10" height="10" fill="#14275E"/><rect x="270" y="220" width="10" height="10" fill="#14275E"/><rect x="300" y="220" width="10" height="10" fill="#14275E"/><rect x="320" y="220" width="10" height="10" fill="#14275E"/><rect x="80" y="230" width="10" height="10" fill="#14275E"/><rect x="90" y="230" width="10" height="10" fill="#14275E"/><rect x="110" y="230" width="10" height="10" fill="#14275E"/><rect x="130" y="230" width="10" height="10" fill="#14275E"/><rect x="140" y="230" width="10" height="10" fill="#14275E"/><rect x="190" y="230" width="10" height="10" fill="#14275E"/><rect x="210" y="230" width="10" height="10" fill="#14275E"/><rect x="220" y="230" width="10" height="10" fill="#14275E"/><rect x="240" y="230" width="10" height="10" fill="#14275E"/><rect x="250" y="230" width="10" height="10" fill="#14275E"/><rect x="260" y="230" width="10" height="10" fill="#14275E"/><rect x="270" y="230" width="10" height="10" fill="#14275E"/><rect x="310" y="230" width="10" height="10" fill="#14275E"/><rect x="320" y="230" width="10" height="10" fill="#14275E"/><rect x="40" y="240" width="10" height="10" fill="#14275E"/><rect x="50" y="240" width="10" height="10" fill="#14275E"/><rect x="60" y="240" width="10" height="10" fill="#14275E"/><rect x="70" y="240" width="10" height="10" fill="#14275E"/><rect x="80" y="240" width="10" height="10" fill="#14275E"/><rect x="100" y="240" width="10" height="10" fill="#14275E"/><rect x="110" y="240" width="10" height="10" fill="#14275E"/><rect x="120" y="240" width="10" height="10" fill="#14275E"/><rect x="140" y="240" width="10" height="10" fill="#14275E"/><rect x="150" y="240" width="10" height="10" fill="#14275E"/><rect x="180" y="240" width="10" height="10" fill="#14275E"/><rect x="210" y="240" width="10" height="10" fill="#14275E"/><rect x="230" y="240" width="10" height="10" fill="#14275E"/><rect x="240" y="240" width="10" height="10" fill="#14275E"/><rect x="250" y="240" width="10" height="10" fill="#14275E"/><rect x="260" y="240" width="10" height="10" fill="#14275E"/><rect x="270" y="240" width="10" height="10" fill="#14275E"/><rect x="280" y="240" width="10" height="10" fill="#14275E"/><rect x="290" y="240" width="10" height="10" fill="#14275E"/><rect x="320" y="240" width="10" height="10" fill="#14275E"/><rect x="120" y="250" width="10" height="10" fill="#14275E"/><rect x="130" y="250" width="10" height="10" fill="#14275E"/><rect x="140" y="250" width="10" height="10" fill="#14275E"/><rect x="160" y="250" width="10" height="10" fill="#14275E"/><rect x="170" y="250" width="10" height="10" fill="#14275E"/><rect x="190" y="250" width="10" height="10" fill="#14275E"/><rect x="200" y="250" width="10" height="10" fill="#14275E"/><rect x="230" y="250" width="10" height="10" fill="#14275E"/><rect x="240" y="250" width="10" height="10" fill="#14275E"/><rect x="280" y="250" width="10" height="10" fill="#14275E"/><rect x="320" y="250" width="10" height="10" fill="#14275E"/><rect x="40" y="260" width="10" height="10" fill="#14275E"/><rect x="50" y="260" width="10" height="10" fill="#14275E"/><rect x="60" y="260" width="10" height="10" fill="#14275E"/><rect x="70" y="260" width="10" height="10" fill="#14275E"/><rect x="80" y="260" width="10" height="10" fill="#14275E"/><rect x="90" y="260" width="10" height="10" fill="#14275E"/><rect x="100" y="260" width="10" height="10" fill="#14275E"/><rect x="120" y="260" width="10" height="10" fill="#14275E"/><rect x="130" y="260" width="10" height="10" fill="#14275E"/><rect x="160" y="260" width="10" height="10" fill="#14275E"/><rect x="170" y="260" width="10" height="10" fill="#14275E"/><rect x="180" y="260" width="10" height="10" fill="#14275E"/><rect x="190" y="260" width="10" height="10" fill="#14275E"/><rect x="210" y="260" width="10" height="10" fill="#14275E"/><rect x="230" y="260" width="10" height="10" fill="#14275E"/><rect x="240" y="260" width="10" height="10" fill="#14275E"/><rect x="260" y="260" width="10" height="10" fill="#14275E"/><rect x="280" y="260" width="10" height="10" fill="#14275E"/><rect x="290" y="260" width="10" height="10" fill="#14275E"/><rect x="300" y="260" width="10" height="10" fill="#14275E"/><rect x="320" y="260" width="10" height="10" fill="#14275E"/><rect x="40" y="270" width="10" height="10" fill="#14275E"/><rect x="100" y="270" width="10" height="10" fill="#14275E"/><rect x="130" y="270" width="10" height="10" fill="#14275E"/><rect x="150" y="270" width="10" height="10" fill="#14275E"/><rect x="160" y="270" width="10" height="10" fill="#14275E"/><rect x="190" y="270" width="10" height="10" fill="#14275E"/><rect x="200" y="270" width="10" height="10" fill="#14275E"/><rect x="210" y="270" width="10" height="10" fill="#14275E"/><rect x="230" y="270" width="10" height="10" fill="#14275E"/><rect x="240" y="270" width="10" height="10" fill="#14275E"/><rect x="280" y="270" width="10" height="10" fill="#14275E"/><rect x="310" y="270" width="10" height="10" fill="#14275E"/><rect x="40" y="280" width="10" height="10" fill="#14275E"/><rect x="60" y="280" width="10" height="10" fill="#14275E"/><rect x="70" y="280" width="10" height="10" fill="#14275E"/><rect x="80" y="280" width="10" height="10" fill="#14275E"/><rect x="100" y="280" width="10" height="10" fill="#14275E"/><rect x="120" y="280" width="10" height="10" fill="#14275E"/><rect x="170" y="280" width="10" height="10" fill="#14275E"/><rect x="180" y="280" width="10" height="10" fill="#14275E"/><rect x="190" y="280" width="10" height="10" fill="#14275E"/><rect x="210" y="280" width="10" height="10" fill="#14275E"/><rect x="230" y="280" width="10" height="10" fill="#14275E"/><rect x="240" y="280" width="10" height="10" fill="#14275E"/><rect x="250" y="280" width="10" height="10" fill="#14275E"/><rect x="260" y="280" width="10" height="10" fill="#14275E"/><rect x="270" y="280" width="10" height="10" fill="#14275E"/><rect x="280" y="280" width="10" height="10" fill="#14275E"/><rect x="290" y="280" width="10" height="10" fill="#14275E"/><rect x="320" y="280" width="10" height="10" fill="#14275E"/><rect x="40" y="290" width="10" height="10" fill="#14275E"/><rect x="60" y="290" width="10" height="10" fill="#14275E"/><rect x="70" y="290" width="10" height="10" fill="#14275E"/><rect x="80" y="290" width="10" height="10" fill="#14275E"/><rect x="100" y="290" width="10" height="10" fill="#14275E"/><rect x="140" y="290" width="10" height="10" fill="#14275E"/><rect x="150" y="290" width="10" height="10" fill="#14275E"/><rect x="180" y="290" width="10" height="10" fill="#14275E"/><rect x="190" y="290" width="10" height="10" fill="#14275E"/><rect x="200" y="290" width="10" height="10" fill="#14275E"/><rect x="230" y="290" width="10" height="10" fill="#14275E"/><rect x="240" y="290" width="10" height="10" fill="#14275E"/><rect x="250" y="290" width="10" height="10" fill="#14275E"/><rect x="270" y="290" width="10" height="10" fill="#14275E"/><rect x="320" y="290" width="10" height="10" fill="#14275E"/><rect x="40" y="300" width="10" height="10" fill="#14275E"/><rect x="60" y="300" width="10" height="10" fill="#14275E"/><rect x="70" y="300" width="10" height="10" fill="#14275E"/><rect x="80" y="300" width="10" height="10" fill="#14275E"/><rect x="100" y="300" width="10" height="10" fill="#14275E"/><rect x="130" y="300" width="10" height="10" fill="#14275E"/><rect x="140" y="300" width="10" height="10" fill="#14275E"/><rect x="160" y="300" width="10" height="10" fill="#14275E"/><rect x="170" y="300" width="10" height="10" fill="#14275E"/><rect x="180" y="300" width="10" height="10" fill="#14275E"/><rect x="190" y="300" width="10" height="10" fill="#14275E"/><rect x="210" y="300" width="10" height="10" fill="#14275E"/><rect x="230" y="300" width="10" height="10" fill="#14275E"/><rect x="240" y="300" width="10" height="10" fill="#14275E"/><rect x="290" y="300" width="10" height="10" fill="#14275E"/><rect x="300" y="300" width="10" height="10" fill="#14275E"/><rect x="310" y="300" width="10" height="10" fill="#14275E"/><rect x="320" y="300" width="10" height="10" fill="#14275E"/><rect x="40" y="310" width="10" height="10" fill="#14275E"/><rect x="100" y="310" width="10" height="10" fill="#14275E"/><rect x="150" y="310" width="10" height="10" fill="#14275E"/><rect x="160" y="310" width="10" height="10" fill="#14275E"/><rect x="180" y="310" width="10" height="10" fill="#14275E"/><rect x="210" y="310" width="10" height="10" fill="#14275E"/><rect x="240" y="310" width="10" height="10" fill="#14275E"/><rect x="250" y="310" width="10" height="10" fill="#14275E"/><rect x="260" y="310" width="10" height="10" fill="#14275E"/><rect x="290" y="310" width="10" height="10" fill="#14275E"/><rect x="310" y="310" width="10" height="10" fill="#14275E"/><rect x="320" y="310" width="10" height="10" fill="#14275E"/><rect x="40" y="320" width="10" height="10" fill="#14275E"/><rect x="50" y="320" width="10" height="10" fill="#14275E"/><rect x="60" y="320" width="10" height="10" fill="#14275E"/><rect x="70" y="320" width="10" height="10" fill="#14275E"/><rect x="80" y="320" width="10" height="10" fill="#14275E"/><rect x="90" y="320" width="10" height="10" fill="#14275E"/><rect x="100" y="320" width="10" height="10" fill="#14275E"/><rect x="120" y="320" width="10" height="10" fill="#14275E"/><rect x="130" y="320" width="10" height="10" fill="#14275E"/><rect x="140" y="320" width="10" height="10" fill="#14275E"/><rect x="160" y="320" width="10" height="10" fill="#14275E"/><rect x="180" y="320" width="10" height="10" fill="#14275E"/><rect x="190" y="320" width="10" height="10" fill="#14275E"/><rect x="210" y="320" width="10" height="10" fill="#14275E"/><rect x="220" y="320" width="10" height="10" fill="#14275E"/><rect x="240" y="320" width="10" height="10" fill="#14275E"/><rect x="280" y="320" width="10" height="10" fill="#14275E"/><rect x="290" y="320" width="10" height="10" fill="#14275E"/><rect x="310" y="320" width="10" height="10" fill="#14275E"/></svg>
+      <span>スマホでかざして<br>今すぐダウンロード</span>
     </a>
   </div>
 </section>
@@ -890,6 +927,9 @@ footer a:hover{color:var(--blue)}
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
     <button class="modal-close" id="mClose" aria-label="閉じる">✕</button>
     <button class="modal-fav" id="mFav" aria-label="お気に入りに登録/解除">★</button>
+    <button class="modal-share" id="mShare" aria-label="この品目へのリンクを共有" title="リンクを共有">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>
+    </button>
     <span class="status-tag" id="mTag"></span>
     <span class="delist-badge" id="mDelist" hidden>薬価削除予定</span>
     <h3 id="mTitle"></h3>
@@ -1010,6 +1050,10 @@ function render(){
       // 「本日の更新」: 最新の変化日に供給状況が実際に変わった品目だけ
       const c = CHANGES[d.n];
       if(!c || c.date !== LATEST_CHANGE_DATE) return false;
+    }else if(filter==="fav"){
+      if(!FAVS.has(d.n)) return false;
+    }else if(filter==="delist"){
+      if(!d.delist) return false;
     }else if(filter!=="all" && d.s!==filter) return false;
     return terms.every(t=>d.q.includes(t));
   });
@@ -1020,7 +1064,11 @@ function render(){
   const src = LIVE ? `全 ${ITEMS.length.toLocaleString()} 品目中` : `サンプル ${ITEMS.length} 品目中`;
   $meta.innerHTML = `<strong class="num">${hits.length.toLocaleString()}</strong> 件ヒット（${src}）`;
   if(!hits.length){
-    $list.innerHTML = `<div class="empty">該当する品目が見つかりませんでした。<br>キーワードや絞り込みを変えてお試しください。</div>`;
+    const msg = filter==="fav" && !FAVS.size
+      ? `お気に入りはまだ登録されていません。<br>品目カードの ★ を押すとこのブラウザに保存され、ここに一覧表示されます。`
+      : `該当する品目が見つかりませんでした。<br>キーワードや絞り込みを変えてお試しください。`;
+    const canReset = filter!=="all" || $q.value.trim();
+    $list.innerHTML = `<div class="empty">${msg}${canReset ? `<br><button type="button" class="empty-reset" id="emptyReset">検索条件をクリア</button>` : ""}</div>`;
     $loadMore.hidden = true;
     return;
   }
@@ -1209,14 +1257,34 @@ let FAVS = new Set();
 try{ FAVS = new Set(JSON.parse(localStorage.getItem("favDrugs")||"[]")); }catch(e){}
 function saveFavs(){ try{ localStorage.setItem("favDrugs", JSON.stringify([...FAVS])); }catch(e){} }
 let currentDetailName = null;
+// 絞り込みピルをコードから切り替える（0件時のクリアボタン・★全解除時のフォールバック用）
+function setFilter(f){
+  filter = f;
+  document.querySelectorAll(".pill").forEach(p=>p.classList.toggle("active", p.dataset.f===f));
+  visibleCount = PAGE_SIZE;
+  render();
+}
+// 「★ お気に入り」ピル: 登録が1件以上あるときだけ表示（件数付き）
+function updateFavPill(){
+  const $pf = document.getElementById("pillFav");
+  if(FAVS.size){
+    $pf.textContent = `★ お気に入り ${FAVS.size}`;
+    $pf.style.display = "";
+  }else{
+    $pf.style.display = "none";
+    if(filter === "fav") setFilter("all");
+  }
+}
 function toggleFav(name){
   FAVS.has(name) ? FAVS.delete(name) : FAVS.add(name);
   saveFavs();
   renderFavNotice();
+  updateFavPill();
   render();
   if(currentDetailName === name)
     document.getElementById("mFav").classList.toggle("on", FAVS.has(name));
 }
+updateFavPill();
 
 // お気に入りのうち直近30日で供給状況が変わったものを検索リストの上に表示
 const $favNotice = document.getElementById("favNotice");
@@ -1433,10 +1501,27 @@ document.addEventListener("keydown", e=>{
   if(e.key==="Escape" && $mBack.classList.contains("open")) closeDetail();
 });
 $list.addEventListener("click", e=>{
+  if(e.target.id === "emptyReset"){ $q.value = ""; setFilter("all"); return; }
   const fav = e.target.closest(".fav-btn");
   if(fav){ e.stopPropagation(); toggleFav(fav.dataset.name); return; }
   const card = e.target.closest(".drug-card");
   if(card) openDetail(SHOWN[+card.dataset.i]);
+});
+// 品目詳細の直リンク（#drug=商品名）を共有シート or クリップボードで共有
+document.getElementById("mShare").addEventListener("click", async e=>{
+  if(!currentDetailName) return;
+  const btn = e.currentTarget;
+  const url = location.origin + pathNoHash() + "#drug=" + encodeURIComponent(currentDetailName);
+  if(navigator.share){
+    try{ await navigator.share({title:`${currentDetailName} の供給状況 — 医薬品供給ナビ`, url}); }catch(err){}
+    return;
+  }
+  try{
+    await navigator.clipboard.writeText(url);
+    btn.classList.add("done");
+    btn.title = "リンクをコピーしました";
+    setTimeout(()=>{ btn.classList.remove("done"); btn.title = "リンクを共有"; }, 1600);
+  }catch(err){}
 });
 document.getElementById("mFav").addEventListener("click", ()=>{
   if(currentDetailName) toggleFav(currentDetailName);
@@ -1631,6 +1716,14 @@ async function fetchFirst(urls){
       $pc.textContent = (daysAgo(LATEST_CHANGE_DATE)===0 ? "本日の更新" : `直近の更新(${LATEST_CHANGE_DATE.slice(5)})`) + ` ${count}`;
       $pc.style.display = "";
     }
+  }
+
+  // 「薬価削除予定」ピル: 供給状況欄に関わらず近く販売終了見込みの品目を洗い出す
+  const delistCount = items.filter(x=>x.delist).length;
+  if(delistCount){
+    const $pd = document.getElementById("pillDelist");
+    $pd.textContent = `薬価削除予定 ${delistCount.toLocaleString()}`;
+    $pd.style.display = "";
   }
 
   render();
