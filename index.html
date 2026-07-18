@@ -498,6 +498,25 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .trending-chip:hover{background:rgba(79,128,244,.16);transform:translateY(-1px)}
 @media(max-width:640px){.trending-list{padding:20px}}
 
+/* ===== メーカー別の供給状況 ===== */
+.maker-list{padding:10px 20px}
+.maker-row{
+  display:flex;align-items:center;gap:12px;width:100%;
+  background:none;border:none;border-bottom:1px solid rgba(90,107,148,.12);
+  padding:13px 6px;cursor:pointer;font-family:inherit;text-align:left;transition:.15s;
+}
+.maker-row:last-child{border-bottom:none}
+.maker-row:hover{background:rgba(79,128,244,.07)}
+.maker-rank{flex:none;width:26px;font-size:12px;font-weight:800;color:var(--blue-mid);text-align:center}
+.maker-name{flex:1;min-width:0;font-size:13.5px;font-weight:700;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.maker-count{
+  flex:none;font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px;white-space:nowrap;
+}
+.maker-count.lim{color:#B0500E;background:rgba(232,145,47,.14);border:1px solid rgba(232,145,47,.35)}
+.maker-count.stp{color:#A03030;background:rgba(225,77,77,.12);border:1px solid rgba(225,77,77,.35)}
+.maker-note{font-size:11px;color:var(--sub);margin-top:10px;line-height:1.7}
+@media(max-width:560px){.maker-count.lim,.maker-count.stp{padding:3px 7px;font-size:10.5px}}
+
 /* ===== 特徴グリッド ===== */
 .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
 .feature{padding:30px 28px;transition:transform .25s,box-shadow .25s}
@@ -720,6 +739,14 @@ footer a:hover{color:var(--blue)}
   <div class="trending-list glass" id="trendingList"></div>
 </section>
 
+<section id="makers" class="reveal" style="display:none">
+  <p class="sec-eyebrow">MAKERS</p>
+  <h2>メーカー別の供給状況。</h2>
+  <p class="sec-lede">限定出荷・供給停止の品目が多い順のランキングです。メーカー名をタップすると、上の検索でそのメーカーの品目に絞り込めます。</p>
+  <div class="maker-list glass" id="makerList"></div>
+  <p class="maker-note">※ 厚生労働省データの販売メーカー欄をもとに機械的に集計しています。収載品目数が多いメーカーほど件数も多くなる傾向があるため、件数のみでメーカーの供給体制を評価するものではありません。</p>
+</section>
+
 <section id="news" class="reveal">
   <p class="sec-eyebrow">NEWS</p>
   <h2>お知らせ。</h2>
@@ -733,7 +760,7 @@ footer a:hover{color:var(--blue)}
   <div class="news-list glass">
     <div class="news-item">
       <div class="news-date num">2026.07.19</div>
-      <div class="news-body"><span class="news-tag">機能追加</span>検索の絞り込みに「★ お気に入り」と「薬価削除予定」を追加しました。★を付けた品目の一覧確認と、近く販売終了見込みの品目の洗い出しがワンタップでできます。<p>あわせて詳細画面に「共有」ボタンを追加しました。品目ページへの直リンクをコピー・共有できます（スマホでは共有シートが開きます）。</p></div>
+      <div class="news-body"><span class="news-tag">機能追加</span>検索の絞り込みに「★ お気に入り」と「薬価削除予定」を追加しました。★を付けた品目の一覧確認と、近く販売終了見込みの品目の洗い出しがワンタップでできます。<p>あわせて詳細画面に「共有」ボタンを追加しました。品目ページへの直リンクをコピー・共有できます（スマホでは共有シートが開きます）。検索語・絞り込み条件もURLに保持されるようになり、検索結果ごと共有・ブックマークできます。</p><p>さらに「メーカー別の供給状況」ランキングを新設。限定出荷・供給停止の多いメーカー順に一覧でき、タップでそのメーカーの品目に絞り込めます。</p></div>
     </div>
     <div class="news-item">
       <div class="news-date num">2026.07.17</div>
@@ -1109,6 +1136,29 @@ function render(){
   }else{
     $loadMore.hidden = true;
   }
+  syncHash();
+}
+
+// 検索語と絞り込みをURLハッシュに保持（リロード・共有で同じ検索結果を再現できる）
+// #drug=（品目詳細の直リンク）が開いているときは上書きしない
+const HASH_FILTERS = ["ok","limited","stopped","ended","changed","delist","fav"];
+function syncHash(){
+  if(location.hash.startsWith("#drug=")) return;
+  const p = new URLSearchParams();
+  if($q.value.trim()) p.set("q", $q.value.trim());
+  if(filter !== "all") p.set("f", filter);
+  const s = p.toString();
+  history.replaceState(null, "", s ? "#"+s : pathNoHash());
+}
+function applyHashState(){
+  if(location.hash.startsWith("#drug=")) return;
+  const p = new URLSearchParams(location.hash.slice(1));
+  const q = p.get("q"), f = p.get("f");
+  if(q) $q.value = q;
+  if(f && HASH_FILTERS.includes(f)){
+    filter = f;
+    document.querySelectorAll(".pill").forEach(pl=>pl.classList.toggle("active", pl.dataset.f===f));
+  }
 }
 $q.addEventListener("input", ()=>{ visibleCount = PAGE_SIZE; render(); });
 $loadMore.addEventListener("click", ()=>{ visibleCount += PAGE_SIZE; render(); });
@@ -1479,7 +1529,10 @@ function openDetail(d, opts={}){
 function closeDetail(opts={}){
   $mBack.classList.remove("open");
   document.body.style.overflow = "";
-  if(opts.route !== false && location.hash.startsWith("#drug=")) history.pushState(null, "", pathNoHash());
+  if(opts.route !== false && location.hash.startsWith("#drug=")){
+    history.pushState(null, "", pathNoHash());
+    syncHash(); // 検索語・絞り込みをURLに復元
+  }
   if(lastFocus && lastFocus.isConnected) lastFocus.focus();
 }
 window.addEventListener("popstate", ()=>{
@@ -1574,6 +1627,16 @@ document.getElementById("trendingList").addEventListener("click", e=>{
   document.getElementById("demo").scrollIntoView({behavior:"smooth", block:"start"});
 });
 
+/* ===== メーカー別ランキング（タップでそのメーカーの品目に絞り込み） ===== */
+document.getElementById("makerList").addEventListener("click", e=>{
+  const row = e.target.closest(".maker-row");
+  if(!row) return;
+  $q.value = row.dataset.maker;
+  setFilter("all");
+  document.getElementById("demo").scrollIntoView({behavior:"smooth", block:"start"});
+});
+
+applyHashState();
 render();
 tryOpenFromHash();
 
@@ -1724,6 +1787,31 @@ async function fetchFirst(urls){
     const $pd = document.getElementById("pillDelist");
     $pd.textContent = `薬価削除予定 ${delistCount.toLocaleString()}`;
     $pd.style.display = "";
+  }
+
+  // メーカー別の供給状況ランキング（限定出荷+供給停止の多い順・上位12社）
+  const byMaker = new Map();
+  for(const x of items){
+    if(!x.m) continue;
+    const e = byMaker.get(x.m) || {lim:0, stp:0, total:0};
+    if(x.s==="limited") e.lim++;
+    else if(x.s==="stopped") e.stp++;
+    e.total++;
+    byMaker.set(x.m, e);
+  }
+  const ranked = [...byMaker.entries()]
+    .filter(([,e])=>e.lim+e.stp > 0)
+    .sort((a,b)=>(b[1].lim+b[1].stp)-(a[1].lim+a[1].stp))
+    .slice(0,12);
+  if(ranked.length){
+    document.getElementById("makerList").innerHTML = ranked.map(([name,e],i)=>
+      `<button type="button" class="maker-row" data-maker="${esc(name)}">
+         <span class="maker-rank num">${i+1}</span>
+         <span class="maker-name">${esc(name)}</span>
+         ${e.lim ? `<span class="maker-count lim num">限定 ${e.lim.toLocaleString()}</span>` : ""}
+         ${e.stp ? `<span class="maker-count stp num">停止 ${e.stp.toLocaleString()}</span>` : ""}
+       </button>`).join("");
+    document.getElementById("makers").style.display = "";
   }
 
   render();
