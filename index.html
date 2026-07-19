@@ -1264,6 +1264,22 @@ const MANUAL_ANNOUNCEMENTS = {
   },
 };
 
+// 手動キュレーションのパターン版。厚労省CSV上の正確な品目名が事前に分からない
+// （規格表記などにゆれがある）場合に、商品名の正規表現でマッチさせる。
+// 完全一致（ANNOUNCEMENTS）にヒットしなかった品目のみ照合される
+const MANUAL_ANNOUNCEMENT_PATTERNS = [
+  [/^ルリコナゾール(クリーム|軟膏).*イワキ/, {
+    url: "https://www.iwakiseiyaku.co.jp/dcms_media/other/luoosirase20260717.pdf",
+    title: "ルリコナゾールクリーム1%・軟膏1%「イワキ」出荷再開のご案内（2026年7月17日付）",
+    maker: "岩城製薬",
+  }],
+];
+function findAnnouncement(name){
+  if(ANNOUNCEMENTS[name]) return ANNOUNCEMENTS[name];
+  const hit = MANUAL_ANNOUNCEMENT_PATTERNS.find(([re])=>re.test(name));
+  return hit ? hit[1] : null;
+}
+
 // 品目名→メーカー公式の個別案内文(PDF)。取得できたものだけ登録される（ページ読込時にfetch）
 let ANNOUNCEMENTS = {...MANUAL_ANNOUNCEMENTS};
 fetchFirst(["maker_announcements.json", "https://tkiyo1007-eng.github.io/drugs-data/maker_announcements.json"])
@@ -1461,13 +1477,18 @@ function openDetail(d, opts={}){
   // メーカーリンクは出荷調整・供給停止・販売中止・薬価削除予定の品目のみ（通常出荷では不要）
   const needsMakerLink = d.s !== "ok" || d.delist;
   const makerRowText = d.row ? d.row.join(" ") : d.m; // 製造/販売メーカー両方を対象に検索
-  const announcement = needsMakerLink ? ANNOUNCEMENTS[d.n] : null; // 個別案内文(PDF)が見つかっていれば優先
+  const announcement = needsMakerLink ? findAnnouncement(d.n) : null; // 個別案内文(PDF)が見つかっていれば優先
   // メーカーが販売中止を公表していても、厚労省の供給状況区分への反映が遅れて
   // 「限定出荷」等のまま表示され続ける場合がある（例: イソジンシュガーパスタ軟膏は
   // 2025-12に販売中止案内・2026-05出荷終了）。供給状況欄は公表データのまま変えず、
   // 案内文の存在を詳細の先頭で補足する（タイトルは「一部包装のみ」等の限定条件を
   // 落とさないよう原文のまま引用）
   if(announcement && d.s !== "ended" && /販売中止|販売終了|製造中止/.test(announcement.title)){
+    document.getElementById("mGrid").insertAdjacentHTML("afterbegin",
+      `<dt>メーカー案内</dt><dd>「${esc(cleanAnnouncementTitle(announcement.title))}」が公表されています（下の案内文リンク参照）。供給状況欄は厚労省公表データの区分のため、反映が遅れている場合があります。</dd>`);
+  }
+  // 出荷再開の案内も同様: 供給状況欄は公表データのまま変えず、案内済みであることを補足する
+  if(announcement && d.s !== "ok" && /出荷再開|供給再開|出荷調整解除/.test(announcement.title)){
     document.getElementById("mGrid").insertAdjacentHTML("afterbegin",
       `<dt>メーカー案内</dt><dd>「${esc(cleanAnnouncementTitle(announcement.title))}」が公表されています（下の案内文リンク参照）。供給状況欄は厚労省公表データの区分のため、反映が遅れている場合があります。</dd>`);
   }
