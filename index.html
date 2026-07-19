@@ -1741,7 +1741,7 @@ async function fetchFirst(urls){
   const col = name => head.indexOf(name);
   const iName=col("商品名"), iGen=col("一般名"), iMk1=col("製造メーカー"),
         iMk2=col("販売メーカー"), iSt=col("供給状況"), iDate=col("更新日"), iAlt=col("代替候補"), iSpec=col("規格"), iPrice=col("薬価"),
-        iCat=col("薬効分類"), iYJ=col("YJコード");
+        iCat=col("薬効分類"), iYJ=col("YJコード"), iKeika=col("経過措置期限");
   if(iName<0 || iSt<0) return;
 
   const items=[];
@@ -1752,8 +1752,10 @@ async function fetchFirst(urls){
     counts[s]++;
     const maker = r[iMk2] || r[iMk1] || "";
     // 厚労省Excelの「出荷量状況」区分に「薬価削除予定」が含まれる品目は、
-    // 供給状況欄が「通常出荷」のままでも近く販売終了となる見込みがあるため別途フラグ化
-    const delist = iAlt>=0 && (r[iAlt]||"").includes("薬価削除予定");
+    // 供給状況欄が「通常出荷」のままでも近く販売終了となる見込みがあるため別途フラグ化。
+    // 経過措置期限が設定済み＝薬価基準からの削除が決定済みなので同様に扱う（アプリ版と同じ判定）
+    const delist = (iAlt>=0 && (r[iAlt]||"").includes("薬価削除予定"))
+                || (iKeika>=0 && !!(r[iKeika]||"").trim());
     items.push({
       n:r[iName], m:maker, s, d:(r[iDate]||"").replaceAll("/","-"), delist,
       spec: iSpec>=0 ? (r[iSpec]||"").trim() : "",
