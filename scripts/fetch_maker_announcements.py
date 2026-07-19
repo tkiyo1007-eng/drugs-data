@@ -51,6 +51,33 @@ def parse_nichiiko(pages=1):
     return [("日医工", t, u) for t, u in items]
 
 
+def fetch_bytes(url):
+    req = urllib.request.Request(url, headers={"User-Agent": UA})
+    with urllib.request.urlopen(req, timeout=60) as r:
+        return r.read()
+
+
+def parse_nichiiko_excel(pages=1):
+    """日医工「製品供給状況一覧」Excel（excel_index.php が xlsx を直接返す）。
+    I列に品目ごとの案内文書PDFへのハイパーリンクが埋め込まれており、
+    whatsnew（直近数件のみ・品目が通常出荷へ戻ると対象外）と違い調整中の全品目をカバーできる。
+    実PDFの題名は取れないため、タイトルは「販売名＋供給状況に関するお知らせ」の汎用形式。
+    """
+    import io
+    import openpyxl
+    raw = fetch_bytes("https://www.nichiiko.co.jp/medicine/significant/excel_index.php")
+    wb = openpyxl.load_workbook(io.BytesIO(raw), data_only=True)
+    ws = wb["HP掲載用"]
+    items = []
+    for row in ws.iter_rows(min_row=6):
+        name = row[2].value          # C列: 販売名
+        cell = row[8]                # I列: 案内文書リンク
+        if not name or cell.hyperlink is None or not cell.hyperlink.target:
+            continue
+        items.append((f"{str(name).strip()} 供給状況に関するお知らせ", cell.hyperlink.target))
+    return [("日医工", t, u) for t, u in items]
+
+
 def parse_nihon_generic(pages=3):
     items = []
     for p in range(1, pages + 1):
@@ -146,7 +173,7 @@ def parse_takata(pages=2):
     return [("高田製薬", t, u) for t, u in items]
 
 
-PARSERS = [parse_sawai, parse_nichiiko, parse_nihon_generic, parse_kyorin, parse_dsep, parse_kemifa, parse_towa, parse_takata]
+PARSERS = [parse_sawai, parse_nichiiko, parse_nichiiko_excel, parse_nihon_generic, parse_kyorin, parse_dsep, parse_kemifa, parse_towa, parse_takata]
 PAGINATED_PARSERS = {"parse_nihon_generic", "parse_towa", "parse_takata"}  # pagesパラメータを渡すパーサー
 
 

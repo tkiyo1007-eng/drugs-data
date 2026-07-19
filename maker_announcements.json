@@ -855,9 +855,9 @@
   "url": "https://www.nc-medical.com/product_topics/f4bj0h000000es1m-att/f4bj0h000000es2a.pdf"
  },
  "メトホルミン塩酸塩錠２５０ｍｇ「ＳＮ」": {
-  "maker": "日本ケミファ",
-  "title": "メトホルミン塩酸塩錠250mg「SN」 出荷調整に関するお知らせ",
-  "url": "https://www.nc-medical.com/product_topics/f4bj0h000000knx2-att/f4bj0h000000knxq.pdf"
+  "maker": "日医工",
+  "title": "メトホルミン塩酸塩錠250mg「SN」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/80935/information/20260422cI1.pdf"
  },
  "メマンチン塩酸塩ＯＤ錠５ｍｇ「ケミファ」": {
   "maker": "日本ケミファ",
@@ -1593,5 +1593,565 @@
   "maker": "ニプロ",
   "title": "2026.03.12 販売中止品の経過措置期間延長についてのご案内（オルメサルタンOD錠ほか対象品目一覧）",
   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q8000012YhX7IAK"
+ },
+ "アゼルニジピン錠１６ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "アゼルニジピン錠16mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/04330/information/20260624cI14.pdf"
+ },
+ "アマルエット配合錠１番「日医工」": {
+  "maker": "日医工",
+  "title": "アマルエット配合錠1番「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/31950/information/20251212cI1.pdf"
+ },
+ "アマルエット配合錠２番「日医工」": {
+  "maker": "日医工",
+  "title": "アマルエット配合錠2番「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/31960/information/20260624cI15.pdf"
+ },
+ "アマルエット配合錠３番「日医工」": {
+  "maker": "日医工",
+  "title": "アマルエット配合錠3番「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/31970/information/20260212cI1.pdf"
+ },
+ "アマルエット配合錠４番「日医工」": {
+  "maker": "日医工",
+  "title": "アマルエット配合錠4番「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/31980/information/20251212cI1.pdf"
+ },
+ "アモキシシリンカプセル１２５ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "アモキシシリンカプセル125mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/00990/information/20230711cI4.pdf"
+ },
+ "アモキシシリンカプセル２５０ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "アモキシシリンカプセル250mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/01150/information/20250709cI1.pdf"
+ },
+ "アラセプリル錠１２．５ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "アラセプリル錠12.5mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/30940/information/IA21011-01.pdf"
+ },
+ "アラセプリル錠２５ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "アラセプリル錠25mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/30930/information/IA21011-01.pdf"
+ },
+ "アラセプリル錠５０ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "アラセプリル錠50mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/30950/information/IA21011-01.pdf"
+ },
+ "アルファカルシドールカプセル０．２５μｇ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "アルファカルシドールカプセル0.25μg「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/71720/information/GHJ0112-01.pdf"
+ },
+ "アルファカルシドールカプセル０．５μｇ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "アルファカルシドールカプセル0.5μg「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/71730/information/GHJ0112-01.pdf"
+ },
+ "アルファカルシドールカプセル１μｇ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "アルファカルシドールカプセル1μg「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/71740/information/GHJ0112-01.pdf"
+ },
+ "アンブロキソール塩酸塩錠１５ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "アンブロキソール塩酸塩錠15mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/32970/information/IA21031-01.pdf"
+ },
+ "イトラコナゾール錠１００ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "イトラコナゾール錠100mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/50770/information/20230711cI3.pdf"
+ },
+ "イルソグラジンマレイン酸塩錠２ｍｇ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "イルソグラジンマレイン酸塩錠2mg「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/72500/information/20260311cI1.pdf"
+ },
+ "イルソグラジンマレイン酸塩錠４ｍｇ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "イルソグラジンマレイン酸塩錠4mg「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/72510/information/20260311cI1.pdf"
+ },
+ "エチゾラム錠１ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "エチゾラム錠1mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/50750/information/HJ01011-01.pdf"
+ },
+ "クリアミン配合錠Ａ１．０": {
+  "maker": "日医工",
+  "title": "クリアミン配合錠A1.0 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/01850/information/20250129cI1.pdf"
+ },
+ "クリアミン配合錠Ｓ０．５": {
+  "maker": "日医工",
+  "title": "クリアミン配合錠S0.5 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/01860/information/20250129cI1.pdf"
+ },
+ "エレトリプタン錠２０ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "エレトリプタン錠20mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/61440/information/HJ01021-01.pdf"
+ },
+ "エルサメット配合錠": {
+  "maker": "日医工",
+  "title": "エルサメット配合錠 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/72780/information/GHG0911-01.pdf"
+ },
+ "オランザピン細粒１％「日医工」": {
+  "maker": "日医工",
+  "title": "オランザピン細粒1%「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/02490/information/HJ01121-01.pdf"
+ },
+ "オルメサルタン錠１０ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "オルメサルタン錠10mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/11130/information/20260610cI8.pdf"
+ },
+ "オルメサルタン錠２０ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "オルメサルタン錠20mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/11140/information/20260610cI8.pdf"
+ },
+ "オルメサルタン錠５ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "オルメサルタン錠5mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/11120/information/20260610cI8.pdf"
+ },
+ "オルメサルタン錠４０ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "オルメサルタン錠40mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/11150/information/20260610cI8.pdf"
+ },
+ "オルメサルタンＯＤ錠１０ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "オルメサルタンOD錠10mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/01820/information/20260507cI1.pdf"
+ },
+ "オルメサルタンＯＤ錠２０ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "オルメサルタンOD錠20mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/01830/information/20260507cI1.pdf"
+ },
+ "オルメサルタンＯＤ錠４０ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "オルメサルタンOD錠40mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/01840/information/20260507cI1.pdf"
+ },
+ "オルメサルタンＯＤ錠５ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "オルメサルタンOD錠5mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/61460/information/20260507cI1.pdf"
+ },
+ "カリジノゲナーゼ錠２５単位「日医工」": {
+  "maker": "日医工",
+  "title": "カリジノゲナーゼ錠25単位「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/32180/information/IA21041-01.pdf"
+ },
+ "ザルトプロフェン錠８０ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "ザルトプロフェン錠80mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/07740/information/20260629cI1.pdf"
+ },
+ "ペリアクチン錠４ｍｇ": {
+  "maker": "日医工",
+  "title": "ペリアクチン錠4mg 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/10500/information/IA21081-01.pdf"
+ },
+ "ジルチアゼム塩酸塩徐放カプセル１００ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "ジルチアゼム塩酸塩徐放カプセル100mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/32750/information/20240927cI1.pdf"
+ },
+ "ジルチアゼム塩酸塩徐放カプセル２００ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "ジルチアゼム塩酸塩徐放カプセル200mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/32760/information/20250820cI1.pdf"
+ },
+ "シルニジピン錠５ｍｇ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "シルニジピン錠5mg「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/74020/information/20240529cG1.pdf"
+ },
+ "シルニジピン錠１０ｍｇ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "シルニジピン錠10mg「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/74030/information/20240509cG1.pdf"
+ },
+ "シルニジピン錠２０ｍｇ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "シルニジピン錠20mg「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/74040/information/20250730cG1.pdf"
+ },
+ "シロスタゾール内服ゼリー５０ｍｇ「ＥＥ」": {
+  "maker": "日医工",
+  "title": "シロスタゾール内服ゼリー50mg「EE」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/55470/information/HJ01131-01.pdf"
+ },
+ "シロスタゾール内服ゼリー１００ｍｇ「ＥＥ」": {
+  "maker": "日医工",
+  "title": "シロスタゾール内服ゼリー100mg「EE」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/55480/information/HJ01131-01.pdf"
+ },
+ "セチリジン塩酸塩錠５ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "セチリジン塩酸塩錠5mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/03110/information/IA21052-01.pdf"
+ },
+ "セチリジン塩酸塩錠１０ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "セチリジン塩酸塩錠10mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/03120/information/IA21052-01.pdf"
+ },
+ "セファクロル細粒２０％「日医工」": {
+  "maker": "日医工",
+  "title": "セファクロル細粒20%「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/50520/information/20260629cI2.pdf"
+ },
+ "セファレキシンドライシロップ小児用５０％「日医工」": {
+  "maker": "日医工",
+  "title": "セファレキシンドライシロップ小児用50%「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/54000/information/FG110831-01.pdf"
+ },
+ "セフジニルカプセル５０ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "セフジニルカプセル50mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/03050/information/20240527cI1.pdf"
+ },
+ "ゾルピデム酒石酸塩ＯＤ錠１０ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "ゾルピデム酒石酸塩OD錠10mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/01810/information/HJ01031_01.pdf"
+ },
+ "タムスロシン塩酸塩ＯＤ錠０．２ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "タムスロシン塩酸塩OD錠0.2mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/07020/information/20260212cI2.pdf"
+ },
+ "タムスロシン塩酸塩カプセル０．１ｍｇ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "タムスロシン塩酸塩カプセル0.1mg「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/78330/information/GHG0921_01.pdf"
+ },
+ "タムスロシン塩酸塩カプセル０．２ｍｇ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "タムスロシン塩酸塩カプセル0.2mg「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/78340/information/GHG0921_01.pdf"
+ },
+ "ユニコン錠４００": {
+  "maker": "日医工",
+  "title": "ユニコン錠400 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/18310/information/20221116cI5.pdf"
+ },
+ "ユニコン錠１００": {
+  "maker": "日医工",
+  "title": "ユニコン錠100 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/18370/information/20221116cI5.pdf"
+ },
+ "デュロキセチンカプセル２０ｍｇ「日医工Ｇ」": {
+  "maker": "日医工",
+  "title": "デュロキセチンカプセル20mg「日医工G」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/78430/information/20230829cl01.pdf"
+ },
+ "デュロキセチンカプセル３０ｍｇ「日医工Ｇ」": {
+  "maker": "日医工",
+  "title": "デュロキセチンカプセル30mg「日医工G」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/78440/information/20230829cl01.pdf"
+ },
+ "テラムロ配合錠ＡＰ「ＥＥ」": {
+  "maker": "日医工",
+  "title": "テラムロ配合錠AP「EE」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/90830/information/20250514cI6.pdf"
+ },
+ "テラムロ配合錠ＢＰ「ＥＥ」": {
+  "maker": "日医工",
+  "title": "テラムロ配合錠BP「EE」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/90840/information/20250514cI6.pdf"
+ },
+ "テラムロ配合錠ＡＰ「日医工」": {
+  "maker": "日医工",
+  "title": "テラムロ配合錠AP「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/00820/information/HJ01042-01.pdf"
+ },
+ "テラムロ配合錠ＢＰ「日医工」": {
+  "maker": "日医工",
+  "title": "テラムロ配合錠BP「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/00830/information/HJ01042-01.pdf"
+ },
+ "テラムロ配合錠ＡＰ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "テラムロ配合錠AP「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/78450/information/20250514cG7.pdf"
+ },
+ "テラムロ配合錠ＢＰ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "テラムロ配合錠BP「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/78460/information/20250514cG7.pdf"
+ },
+ "テルチア配合錠ＢＰ「日医工」": {
+  "maker": "日医工",
+  "title": "テルチア配合錠BP「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/00900/information/20251212cI2.pdf"
+ },
+ "トコフェロールニコチン酸エステルカプセル１００ｍｇ「トーワ」": {
+  "maker": "日医工",
+  "title": "トコフェロールニコチン酸エステルカプセル100mg「トーワ」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/files/20240904cI1.pdf"
+ },
+ "トアラセット配合錠「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "トアラセット配合錠「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/78540/information/20250625cG1.pdf"
+ },
+ "ドンペリドン錠５ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "ドンペリドン錠5mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/31240/information/HG0921_01.pdf"
+ },
+ "ドンペリドン錠１０ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "ドンペリドン錠10mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/06870/information/HG0921_01.pdf"
+ },
+ "バルサルタン錠１６０ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "バルサルタン錠160mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/03530/information/HJ01051-01.pdf"
+ },
+ "フェンラーゼ配合カプセル": {
+  "maker": "日医工",
+  "title": "フェンラーゼ配合カプセル 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/01730/information/HJ01152-01.pdf"
+ },
+ "プソフェキ配合錠「ＳＡＮＩＫ」": {
+  "maker": "日医工",
+  "title": "プソフェキ配合錠「SANIK」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/64840/information/20231220cI1.pdf"
+ },
+ "プラミペキソール塩酸塩錠０．１２５ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "プラミペキソール塩酸塩錠0.125mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/06380/information/20230906cI5.pdf"
+ },
+ "プラミペキソール塩酸塩錠０．５ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "プラミペキソール塩酸塩錠0.5mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/06390/information/20230906cI5.pdf"
+ },
+ "プランルカストカプセル１１２．５ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "プランルカストカプセル112.5mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/05680/information/20231011cI2.pdf"
+ },
+ "プランルカストカプセル２２５ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "プランルカストカプセル225mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/05810/information/HJ01061-01.pdf"
+ },
+ "プロプラノロール塩酸塩錠１０ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "プロプラノロール塩酸塩錠10mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/36650/information/IE2081-01.pdf"
+ },
+ "ブロムヘキシン塩酸塩錠４ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "ブロムヘキシン塩酸塩錠4mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/40860/information/IA21071-01.pdf"
+ },
+ "サクコルチン配合錠": {
+  "maker": "日医工",
+  "title": "サクコルチン配合錠 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/03130/information/IE2041-01.pdf"
+ },
+ "ボグリボース錠０．３ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "ボグリボース錠0.3mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/08040/information/HJ01071-01.pdf"
+ },
+ "ポリカルボフィルＣａ細粒８３．３％「日医工」": {
+  "maker": "日医工",
+  "title": "ポリカルボフィルCa細粒83.3%「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/06680/information/20241016cI3.pdf"
+ },
+ "プリンペラン錠５": {
+  "maker": "日医工",
+  "title": "プリンペラン錠5 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/24440/information/20240124cI3.pdf"
+ },
+ "メトホルミン塩酸塩錠２５０ｍｇＭＴ「日医工」": {
+  "maker": "日医工",
+  "title": "メトホルミン塩酸塩錠250mgMT「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/07580/information/20260610cI9.pdf"
+ },
+ "メトホルミン塩酸塩錠５００ｍｇＭＴ「日医工」": {
+  "maker": "日医工",
+  "title": "メトホルミン塩酸塩錠500mgMT「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/07590/information/20260318cI1.pdf"
+ },
+ "メフルシド錠２５ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "メフルシド錠25mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/20200/information/IA21091-01.pdf"
+ },
+ "ラベプラゾールナトリウム錠１０ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "ラベプラゾールナトリウム錠10mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/18920/information/IA21102-01.pdf"
+ },
+ "ラベプラゾールナトリウム錠２０ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "ラベプラゾールナトリウム錠20mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/18930/information/IA21102-01.pdf"
+ },
+ "ラベプラゾールＮａ錠１０ｍｇ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "ラベプラゾールNa錠10mg「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/70620/information/20260513cI6.pdf"
+ },
+ "リセドロン酸Ｎａ錠２．５ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "リセドロン酸Na錠2.5mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/18220/information/HJ01081-01.pdf"
+ },
+ "ロサルヒド配合錠ＨＤ「日医工」": {
+  "maker": "日医工",
+  "title": "ロサルヒド配合錠HD「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/08540/information/20260129cI6.pdf"
+ },
+ "ロサルヒド配合錠ＨＤ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "ロサルヒド配合錠HD「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/70870/information/20250625cG2.pdf"
+ },
+ "ロスバスタチン錠２．５ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "ロスバスタチン錠2.5mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/00150/information/HJ01092-01.pdf"
+ },
+ "ロスバスタチン錠５ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "ロスバスタチン錠5mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/00160/information/HJ01092-01.pdf"
+ },
+ "ロラタジンドライシロップ１％「日医工」": {
+  "maker": "日医工",
+  "title": "ロラタジンドライシロップ1%「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/01890/information/HJ01101-01.pdf"
+ },
+ "ヘパリン類似物質クリーム０．３％「日医工」": {
+  "maker": "日医工",
+  "title": "ヘパリン類似物質クリーム0.3%「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/55980/information/20241211cI1.pdf"
+ },
+ "亜鉛華軟膏「日医工」": {
+  "maker": "日医工",
+  "title": "亜鉛華軟膏「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/59440/information/20230425cI4.pdf"
+ },
+ "尿素クリーム１０％「日医工」": {
+  "maker": "日医工",
+  "title": "尿素クリーム10%「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/23650/information/20241204cI2.pdf"
+ },
+ "インフリキシマブＢＳ点滴静注用１００ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "インフリキシマブBS点滴静注用100mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/00070/information/HJ01111-01.pdf"
+ },
+ "エタネルセプトＢＳ皮下注２５ｍｇシリンジ０．５ｍＬ「日医工」": {
+  "maker": "日医工",
+  "title": "エタネルセプトBS皮下注25mgシリンジ0.5mL「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/03870/information/20260624cI16.pdf"
+ },
+ "エタネルセプトＢＳ皮下注５０ｍｇシリンジ１．０ｍＬ「日医工」": {
+  "maker": "日医工",
+  "title": "エタネルセプトBS皮下注50mgシリンジ1.0mL「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/03880/information/20260624cI16.pdf"
+ },
+ "エタネルセプトＢＳ皮下注５０ｍｇペン１．０ｍＬ「日医工」": {
+  "maker": "日医工",
+  "title": "エタネルセプトBS皮下注50mgペン1.0mL「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/03890/information/20260624cI16.pdf"
+ },
+ "エトポシド点滴静注１００ｍｇ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "エトポシド点滴静注100mg「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/72600/information/20250514cG6.pdf"
+ },
+ "オザグレルＮａ静注液８０ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "オザグレルNa静注液80mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/21480/information/20250910cI2.pdf"
+ },
+ "オザグレルＮａ静注液４０ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "オザグレルNa静注液40mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/21470/information/20250910cI2.pdf"
+ },
+ "オザグレルＮａ点滴静注４０ｍｇシリンジ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "オザグレルNa点滴静注40mgシリンジ「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/72940/information/20251204cG1.pdf"
+ },
+ "オザグレルＮａ点滴静注８０ｍｇシリンジ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "オザグレルNa点滴静注80mgシリンジ「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/72950/information/20250917cG1.pdf"
+ },
+ "イソゾール注射用０．５ｇ": {
+  "maker": "日医工",
+  "title": "イソゾール注射用0.5g 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/26750/information/20260630cI1.pdf"
+ },
+ "トラネキサム酸注射液１０００ｍｇ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "トラネキサム酸注射液1000mg「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/78660/information/20260105cG1.pdf"
+ },
+ "ヘパリンＮａ透析用２００単位／ｍＬシリンジ２０ｍＬ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "ヘパリンNa透析用200単位/mLシリンジ20mL「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/79700/information/20240319cG6.pdf"
+ },
+ "ヘパリンＮａ透析用２５０単位／ｍＬシリンジ２０ｍＬ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "ヘパリンNa透析用250単位/mLシリンジ20mL「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/79710/information/20240319cG6.pdf"
+ },
+ "マキサカルシトール静注透析用２．５μｇ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "マキサカルシトール静注透析用2.5μg「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/79930/information/20250130cG5.pdf"
+ },
+ "マキサカルシトール静注透析用５μｇ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "マキサカルシトール静注透析用5μg「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/79940/information/20251203cG1.pdf"
+ },
+ "マキサカルシトール静注透析用１０μｇ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "マキサカルシトール静注透析用10μg「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/79950/information/20250130cG5.pdf"
+ },
+ "プリンペラン注射液１０ｍｇ": {
+  "maker": "日医工",
+  "title": "プリンペラン注射液10mg 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/24420/information/20250910cI1.pdf"
+ },
+ "メトクロプラミド注１０ｍｇ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "メトクロプラミド注10mg「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/80890/information/20250910cG1.pdf"
+ },
+ "ダイメジン・マルチ注": {
+  "maker": "日医工",
+  "title": "ダイメジン・マルチ注 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/24060/information/20231004cI3.pdf"
  }
 }
