@@ -136,6 +136,10 @@ jobs:
         run: python3 scripts/build_resolution_stats.py
         continue-on-error: true
 
+      - name: 供給危機指数を算出
+        run: python3 scripts/build_crisis_index.py
+        continue-on-error: true
+
       - name: メーカー案内文(PDF)を取得してマッチング
         run: python3 scripts/fetch_maker_announcements.py drugs_app_ready.csv maker_announcements.json 2 60
         continue-on-error: true  # メーカーサイト側の一時的な障害でデータ更新自体を止めない
