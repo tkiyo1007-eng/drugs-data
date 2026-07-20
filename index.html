@@ -340,6 +340,18 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 .fav-btn:hover{transform:scale(1.15)}
 .fav-btn.on{color:#F5B301}
+/* お気に入り登録時の光の粒アニメーション（fav-btn/modal-favの★を押した瞬間だけ発生） */
+.spark-burst{position:fixed;z-index:300;pointer-events:none;width:0;height:0}
+.spark-burst span{
+  position:absolute;top:0;left:0;width:6px;height:6px;border-radius:50%;
+  background:#F5B301;box-shadow:0 0 5px rgba(245,179,1,.8);
+  animation:sparkFly .55s cubic-bezier(.2,.7,.3,1) forwards;
+}
+@keyframes sparkFly{
+  0%{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(.3)}
+}
+@media(prefers-reduced-motion:reduce){.spark-burst{display:none}}
 .modal-fav{
   position:absolute;top:14px;right:60px;width:36px;height:36px;border-radius:50%;
   border:1px solid rgba(90,107,148,.2);background:rgba(255,255,255,.8);
@@ -390,6 +402,9 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 .csv-btn:hover{background:rgba(79,128,244,.16)}
 .empty{grid-column:1/-1;text-align:center;padding:40px;color:var(--sub);font-size:14px}
+.empty-icon{width:64px;height:64px;margin:0 auto 16px;color:var(--blue-light);opacity:.9}
+.empty-icon svg{width:100%;height:100%;display:block;animation:emptyFloat 3.2s ease-in-out infinite}
+@keyframes emptyFloat{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-6px) rotate(4deg)}}
 .empty-reset{
   display:inline-block;margin-top:14px;cursor:pointer;font-family:inherit;
   font-size:13px;font-weight:700;color:var(--blue);
@@ -1095,11 +1110,16 @@ function render(){
   const src = LIVE ? `全 ${ITEMS.length.toLocaleString()} 品目中` : `サンプル ${ITEMS.length} 品目中`;
   $meta.innerHTML = `<strong class="num">${hits.length.toLocaleString()}</strong> 件ヒット（${src}）`;
   if(!hits.length){
-    const msg = filter==="fav" && !FAVS.size
+    const isFavEmpty = filter==="fav" && !FAVS.size;
+    const msg = isFavEmpty
       ? `お気に入りはまだ登録されていません。<br>品目カードの ★ を押すとこのブラウザに保存され、ここに一覧表示されます。`
       : `該当する品目が見つかりませんでした。<br>キーワードや絞り込みを変えてお試しください。`;
     const canReset = filter!=="all" || $q.value.trim();
-    $list.innerHTML = `<div class="empty">${msg}${canReset ? `<br><button type="button" class="empty-reset" id="emptyReset">検索条件をクリア</button>` : ""}</div>`;
+    // 空状態のイラスト: お気に入り0件は★、検索0件はカプセル+虫眼鏡（線画・currentColorでテーマ追従）
+    const icon = isFavEmpty
+      ? `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 12l5.9 12 13.2 1.9-9.6 9.3 2.3 13.1L32 42l-11.8 6.3 2.3-13.1-9.6-9.3 13.2-1.9z"/></svg>`
+      : `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="24" width="30" height="14" rx="7" transform="rotate(-18 29 31)"/><path d="M18 27l18 8" transform="rotate(-18 29 31)"/><circle cx="46" cy="46" r="8"/><path d="M52 52l6 6"/></svg>`;
+    $list.innerHTML = `<div class="empty"><div class="empty-icon">${icon}</div>${msg}${canReset ? `<br><button type="button" class="empty-reset" id="emptyReset">検索条件をクリア</button>` : ""}</div>`;
     $loadMore.hidden = true;
     return;
   }
@@ -1589,10 +1609,36 @@ $mBack.addEventListener("click", e=>{ if(e.target===$mBack) closeDetail(); });
 document.addEventListener("keydown", e=>{
   if(e.key==="Escape" && $mBack.classList.contains("open")) closeDetail();
 });
+// お気に入り登録（★をON）した瞬間だけ、押した位置から光の粒を飛ばす小さな演出
+function sparkAt(el){
+  const r = el.getBoundingClientRect();
+  const cx = r.left + r.width/2, cy = r.top + r.height/2;
+  const burst = document.createElement("div");
+  burst.className = "spark-burst";
+  burst.style.left = cx+"px"; burst.style.top = cy+"px";
+  const n = 7;
+  for(let i=0;i<n;i++){
+    const s = document.createElement("span");
+    const angle = (Math.PI*2*i/n) + Math.random()*0.4;
+    const dist = 22 + Math.random()*14;
+    s.style.setProperty("--dx", Math.cos(angle)*dist+"px");
+    s.style.setProperty("--dy", Math.sin(angle)*dist+"px");
+    s.style.animationDelay = (Math.random()*40)+"ms";
+    burst.appendChild(s);
+  }
+  document.body.appendChild(burst);
+  setTimeout(()=>burst.remove(), 700);
+}
 $list.addEventListener("click", e=>{
   if(e.target.id === "emptyReset"){ $q.value = ""; setFilter("all"); return; }
   const fav = e.target.closest(".fav-btn");
-  if(fav){ e.stopPropagation(); toggleFav(fav.dataset.name); return; }
+  if(fav){
+    e.stopPropagation();
+    const turningOn = !FAVS.has(fav.dataset.name);
+    toggleFav(fav.dataset.name);
+    if(turningOn) sparkAt(fav);
+    return;
+  }
   const card = e.target.closest(".drug-card");
   if(card) openDetail(SHOWN[+card.dataset.i]);
 });
@@ -1612,8 +1658,11 @@ document.getElementById("mShare").addEventListener("click", async e=>{
     setTimeout(()=>{ btn.classList.remove("done"); btn.title = "リンクを共有"; }, 1600);
   }catch(err){}
 });
-document.getElementById("mFav").addEventListener("click", ()=>{
-  if(currentDetailName) toggleFav(currentDetailName);
+document.getElementById("mFav").addEventListener("click", e=>{
+  if(!currentDetailName) return;
+  const turningOn = !FAVS.has(currentDetailName);
+  toggleFav(currentDetailName);
+  if(turningOn) sparkAt(e.currentTarget);
 });
 document.getElementById("mRelated").addEventListener("click", e=>{
   const row = e.target.closest(".rel-row");
