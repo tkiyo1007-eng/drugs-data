@@ -774,6 +774,10 @@ footer a:hover{color:var(--blue)}
   <h3 style="font-size:15px;font-weight:800;margin:26px 0 10px">医薬品供給ナビからのお知らせ</h3>
   <div class="news-list glass">
     <div class="news-item">
+      <div class="news-date num">2026.07.21</div>
+      <div class="news-body"><span class="news-tag">精度改善</span>詳細画面の「同成分・同剤形の品目」「同じ薬効分類の同系統医薬品」の並び順を改善しました。供給状況欄が「通常出荷」等でも薬価削除予定・経過措置期限ありの品目は、これまで通常品と同列で「入手しやすい」上位に表示されることがありました。近く販売終了となる品目を代替候補の上位に誤って示さないよう、そうした品目は順位を下げ「薬価削除予定」バッジを表示するようにしました。</div>
+    </div>
+    <div class="news-item">
       <div class="news-date num">2026.07.20</div>
       <div class="news-body"><span class="news-tag">新機能</span>限定出荷・供給停止の品目の詳細に「解除までの平均日数」を追加しました。厚労省データを毎日記録してきた変化ログをもとに、実際に解除された品目の日数を集計した独自の目安です（現在は限定出荷28件・供給停止22件の実績が母数。データが増えるほど精度が上がります）。<p>あわせてメーカー案内文リンクの対応を大幅拡大。日医工の公式「製品供給状況一覧」から品目別の案内文書PDFを取り込み、日医工の出荷調整品113品目に案内文リンクが付きました（案内文リンク全体で319→431品目に）。</p></div>
     </div>
@@ -1465,11 +1469,17 @@ function openDetail(d, opts={}){
   // 同成分・同分類の関連品目（アプリ版⑤⑩と同等の確認補助）
   const $mRel = document.getElementById("mRelated");
   let relHtml = "";
+  // 薬価削除予定（供給状況欄が「通常出荷」等でも近く販売終了見込み）の品目を
+  // 「入手しやすい」上位に誤って並べない・緑バッジで誤解させないための実効深刻度
+  const effSev = x => x.delist ? Math.max(SEV.ended, SEV[x.s]) : SEV[x.s];
   const relatedBlock = (title, list) =>
     `<div class="rel-title">${esc(title)}</div>` + list.map(x=>
       `<button type="button" class="rel-row" data-name="${esc(x.n)}">
          <span>${esc(x.n)}${isWarmPatch(x) && !x.n.includes("温") ? "（温感タイプ）" : ""}</span>
-         <span class="rel-status" style="--sc:${STATUS[x.s].color}">${STATUS[x.s].label}</span>
+         <span style="display:flex;align-items:center;gap:4px;flex:none">
+           <span class="rel-status" style="--sc:${STATUS[x.s].color}">${STATUS[x.s].label}</span>
+           ${x.delist && x.s!=="ended" ? `<span class="delist-badge">薬価削除予定</span>` : ""}
+         </span>
        </button>`).join("");
   // YJコード先頭8桁（薬効細分類4桁+成分3桁+剤形1桁）が一致 = 同成分・同剤形。
   // 一般名の文字列一致だけだと、注射剤に対して軟膏・貼付剤など投与経路の違う
@@ -1483,7 +1493,7 @@ function openDetail(d, opts={}){
         && (!yj8 || (x.yj||"").slice(0,8)===yj8)
         && isWarmPatch(x)===dWarm
         && (!dKind || !patchKind(x) || patchKind(x)===dKind))
-      .sort((a,b)=>(SEV[a.s]-SEV[b.s]) || a.n.localeCompare(b.n,"ja"));
+      .sort((a,b)=>(effSev(a)-effSev(b)) || a.n.localeCompare(b.n,"ja"));
     if(sameG.length) relHtml += relatedBlock(`同成分・同剤形${dWarm ? "（温感タイプ）" : ""}の品目（${sameG.length}件・入手しやすい順）`, sameG.slice(0,6));
   }
   // 薬効分類はYJコード先頭4桁（細分類）で絞る。厚労省の3桁分類名のままだと
@@ -1496,9 +1506,9 @@ function openDetail(d, opts={}){
       if(yj4 && (x.yj||"").slice(0,4)!==yj4) continue;
       if(isWarmPatch(x)!==dWarm) continue; // 温感品目には温感の同系統のみ（逆も同様）
       const cur = best.get(x.g);
-      if(!cur || SEV[x.s] < SEV[cur.s]) best.set(x.g, x);
+      if(!cur || effSev(x) < effSev(cur)) best.set(x.g, x);
     }
-    const sameC = [...best.values()].sort((a,b)=>(SEV[a.s]-SEV[b.s]) || a.g.localeCompare(b.g,"ja"));
+    const sameC = [...best.values()].sort((a,b)=>(effSev(a)-effSev(b)) || a.g.localeCompare(b.g,"ja"));
     if(sameC.length) relHtml += relatedBlock(`同じ薬効分類「${d.cat}」の同系統医薬品（${sameC.length}成分）`, sameC.slice(0,6));
   }
   if(relHtml){
