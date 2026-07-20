@@ -1707,6 +1707,10 @@ const TRENDING = [
   {label:"マンジャロ皮下注", q:"マンジャロ皮下注"},
   {label:"ロキソプロフェンナトリウムテープ", q:"ロキソプロフェンナトリウムテープ"},
   {label:"シベンゾリンコハク酸塩錠", q:"シベンゾリンコハク酸塩錠"},
+  {label:"水溶性プレドニン１０ｍｇ", q:"水溶性プレドニン10mg"},
+  {label:"水溶性プレドニン２０ｍｇ", q:"水溶性プレドニン20mg"},
+  {label:"リンデロン注", q:"リンデロン注"},
+  {label:"セレコックス錠", q:"セレコックス錠"},
 ];
 document.getElementById("trendingList").innerHTML = TRENDING.map(t=>
   `<button type="button" class="trending-chip" data-q="${esc(t.q)}">${esc(t.label)}</button>`).join("");
