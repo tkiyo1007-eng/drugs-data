@@ -204,6 +204,20 @@ h1 .grad{
 .pulse-total{font-size:clamp(44px,5vw,58px);font-weight:800;line-height:1.15;margin:10px 0 2px}
 .pulse-total small{font-size:.38em;font-weight:700;opacity:.85;margin-left:4px}
 .pulse-sub{font-size:12.5px;opacity:.78;margin-bottom:20px}
+/* 供給危機指数（花粉指数のように毎日チェックする定点観測の独自指標） */
+.crisis-strip{
+  display:flex;align-items:center;gap:10px;margin:2px 0 16px;padding:10px 14px;border-radius:14px;
+  background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);
+}
+.crisis-strip[hidden]{display:none}
+.crisis-dot{width:9px;height:9px;border-radius:50%;flex:none;box-shadow:0 0 8px currentColor}
+.crisis-label{font-size:11px;font-weight:700;opacity:.85}
+.crisis-score{font-size:19px;font-weight:800;line-height:1}
+.crisis-level{
+  font-size:11px;font-weight:800;padding:2px 10px;border-radius:999px;
+  background:color-mix(in srgb, currentColor 22%, transparent);
+}
+.crisis-delta{font-size:11px;font-weight:700;opacity:.9;margin-left:auto}
 .supply-bar{display:flex;height:14px;border-radius:99px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.25);margin-bottom:16px}
 .supply-bar span{transform-origin:left;animation:grow 1.1s cubic-bezier(.2,.8,.2,1) both .3s}
 @keyframes grow{from{transform:scaleX(0)}}
@@ -688,6 +702,13 @@ footer a:hover{color:var(--blue)}
   <div class="hero-visual">
     <div class="pulse-card">
       <div class="pulse-head"><span>SUPPLY PULSE</span><span id="today" class="num"></span></div>
+      <div class="crisis-strip" id="crisisStrip" hidden>
+        <span class="crisis-dot" id="crisisDot"></span>
+        <span class="crisis-label">供給危機指数</span>
+        <span class="crisis-score num" id="crisisScore"></span>
+        <span class="crisis-level" id="crisisLevel"></span>
+        <span class="crisis-delta num" id="crisisDelta"></span>
+      </div>
       <div class="pulse-total"><span class="num" id="counter">0</span><small>品目を収載</small></div>
       <div class="pulse-sub">全国の医療用医薬品の供給ステータスを毎日集計</div>
       <div class="supply-bar" id="sbar">
@@ -775,7 +796,7 @@ footer a:hover{color:var(--blue)}
   <div class="news-list glass">
     <div class="news-item">
       <div class="news-date num">2026.07.21</div>
-      <div class="news-body"><span class="news-tag">精度改善</span>詳細画面の「同成分・同剤形の品目」「同じ薬効分類の同系統医薬品」の並び順を改善しました。供給状況欄が「通常出荷」等でも薬価削除予定・経過措置期限ありの品目は、これまで通常品と同列で「入手しやすい」上位に表示されることがありました。近く販売終了となる品目を代替候補の上位に誤って示さないよう、そうした品目は順位を下げ「薬価削除予定」バッジを表示するようにしました。</div>
+      <div class="news-body"><span class="news-tag">新機能</span>トップのSUPPLY PULSEカードに「供給危機指数」を追加しました。限定出荷・供給停止の品目の割合から算出する独自の0〜100指数で、毎日算出・前日比も表示します。花粉指数のように、毎日の医薬品供給の逼迫度を数字でチェックできます（算出方法はFAQをご参照ください）。<p>あわせて詳細画面の「同成分・同剤形の品目」「同じ薬効分類の同系統医薬品」の並び順を改善しました。</p></div>
     </div>
     <div class="news-item">
       <div class="news-date num">2026.07.20</div>
@@ -951,6 +972,10 @@ footer a:hover{color:var(--blue)}
     <details class="faq-item">
       <summary>「通常出荷」なのに実際は製造中止になっている品目があるのはなぜですか？</summary>
       <p>本サービスが利用している厚生労働省「医療用医薬品供給状況」データは、限定出荷・供給停止といった一時的な出荷調整を追跡するための資料であり、製造中止（販売中止）の把握を主目的とした資料ではありません。そのため、メーカーが製造を終了していても、この資料上は最後に確認された「通常出荷」のまま長期間更新されずに残ってしまうことがあります。厚労省データに「薬価削除予定」の区分が含まれる品目については「薬価削除予定」バッジを表示していますが、それ以外の品目については各詳細に表示される「情報の鮮度（最終確認からの経過日数）」を目安に、経過が長い場合は卸・メーカーへの確認もあわせてご検討ください。</p>
+    </details>
+    <details class="faq-item">
+      <summary>「供給危機指数」はどのように算出していますか？</summary>
+      <p>厚生労働省データ全品目のうち、限定出荷・供給停止となっている品目の割合から算出する独自の指数です（供給停止は限定出荷より深刻なため重み付けを2倍にしています）。0〜100の値で毎日算出し、値が高いほど医薬品供給の逼迫度が高いことを示します。厚労省が公式に発表している指数ではなく、本サービスが公開データをもとに機械的に算出した参考指標です。個別の医薬品の入手可否を保証するものではありません。</p>
     </details>
   </div>
 </section>
@@ -1750,6 +1775,27 @@ fetchFirst(["news.json", "https://tkiyo1007-eng.github.io/drugs-data/news.json"]
          <a href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.title)}</a>
        </div>`).join("");
     document.getElementById("medNews").hidden = false;
+  }).catch(()=>{});
+
+/* ===== 供給危機指数（crisis_index.json。毎日算出の独自指標） ===== */
+const CRISIS_COLORS = {"平常":"#2FAE6E","やや注意":"#8BC34A","注意":"#E8912F","警戒":"#F06B4D","厳重警戒":"#E14D4D"};
+fetchFirst(["crisis_index.json", "https://tkiyo1007-eng.github.io/drugs-data/crisis_index.json"])
+  .then(res => res && res.json()).then(data => {
+    if(!data || typeof data.score !== "number") return;
+    const color = CRISIS_COLORS[data.level] || "#F06B4D";
+    document.getElementById("crisisDot").style.color = color;
+    document.getElementById("crisisDot").style.background = color;
+    document.getElementById("crisisScore").textContent = data.score;
+    const $level = document.getElementById("crisisLevel");
+    $level.textContent = data.level;
+    $level.style.color = color;
+    const $delta = document.getElementById("crisisDelta");
+    if(typeof data.delta === "number" && data.delta !== 0){
+      $delta.textContent = (data.delta > 0 ? "前日比 +" : "前日比 ") + data.delta;
+    }else{
+      $delta.textContent = "";
+    }
+    document.getElementById("crisisStrip").hidden = false;
   }).catch(()=>{});
 
 /* ===== ヒーロー: カウントアップ & 日付 ===== */
