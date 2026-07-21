@@ -1,5 +1,23 @@
 [
  {
+  "date": "2026/07/21",
+  "title": "添付文書改訂相談に基づく添付文書改訂（医薬品）を掲載しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/revision-based-on-the-consultation/0001.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/07/21",
+  "title": "プログラム医療機器審査部が実施する対面助言の調整可能な時期を更新しました",
+  "url": "https://www.pmda.go.jp/review-services/drug-reviews/about-reviews/devices/0048.html",
+  "tag": "承認審査"
+ },
+ {
+  "date": "2026/07/21",
+  "title": "再生医療等製品の最適使用推進ガイドラインを掲載しました",
+  "url": "https://www.pmda.go.jp/review-services/drug-reviews/review-information/ctp/0011.html",
+  "tag": "承認審査"
+ },
+ {
   "date": "2026/07/17",
   "title": "「副作用が疑われる症例報告に関する情報」に2026年3月分の情報を追加しました",
   "url": "https://www.pmda.go.jp/safety/info-services/drugs/adr-info/suspected-adr/0005.html",
@@ -39,24 +57,6 @@
   "date": "2026/07/13",
   "title": "プログラム医療機器の製造販売承認品目の一覧情報を更新しました（製造販売承認された製品一覧）",
   "url": "https://www.pmda.go.jp/review-services/drug-reviews/about-reviews/devices/0052.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/07/13",
-  "title": "患者副作用報告（2025年12月1日から2026年3月31日受付分）を追加しました",
-  "url": "https://www.pmda.go.jp/safety/reports/patients/0005.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/07/10",
-  "title": "クラスI回収 該当回収品目　新鮮凍結血漿-LR「日赤」240",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html",
-  "tag": "回収"
- },
- {
-  "date": "2026/07/10",
-  "title": "IRB登録情報を更新しました",
-  "url": "https://www.pmda.go.jp/review-services/trials/0008.html",
   "tag": "承認審査"
  }
 ]

@@ -3080,5 +3080,160 @@
    "pkg": "バラ500錠",
    "until": ""
   }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/50750/information/HJ01011-01.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP1000錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ1000錠",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/01850/information/20250129cI1.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP12錠",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/01860/information/20250129cI1.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP12錠",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/61440/information/HJ01021-01.pdf": [
+  {
+   "pkg": "PTP10錠",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/72780/information/GHG0911-01.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP1000錠",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/02490/information/HJ01121-01.pdf": [],
+ "https://www.nichiiko.co.jp/medicine/file/11130/information/20260610cI8.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/11140/information/20260610cI8.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/11120/information/20260610cI8.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/11150/information/20260610cI8.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/01820/information/20260507cI1.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/01830/information/20260507cI1.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/01840/information/20260507cI1.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/61460/information/20260507cI1.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/32180/information/IA21041-01.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP1000錠",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/07740/information/20260629cI1.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/10500/information/IA21081-01.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ500g",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/32750/information/20240927cI1.pdf": [
+  {
+   "pkg": "PTP100カプセル",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500カプセル",
+   "until": ""
+  },
+  {
+   "pkg": "PTP1000カプセル",
+   "until": ""
+  },
+  {
+   "pkg": "バラ500カプセル",
+   "until": ""
+  }
  ]
 }
