@@ -1,5 +1,29 @@
 [
  {
+  "date": "2026/07/22",
+  "title": "「不具合が疑われる症例報告に関する情報（コンビネーション製品）」に2026年3月分の情報を追加しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/adr-info/malfunctions-combination-drugs/0001.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/07/22",
+  "title": "「不具合が疑われる症例報告に関する情報（医療機器）」に2026年3月分の情報を追加しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/devices/0090.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/07/22",
+  "title": "「不具合が疑われる症例報告に関する情報（再生医療等製品）」に2026年3月分の情報を追加しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/ctp/0006.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/07/22",
+  "title": "外国製造業者認定・登録番号を掲載しました",
+  "url": "https://www.pmda.go.jp/review-services/drug-reviews/foreign-mfr/0003.html",
+  "tag": "承認審査"
+ },
+ {
   "date": "2026/07/21",
   "title": "添付文書改訂相談に基づく添付文書改訂（医薬品）を掲載しました",
   "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/revision-based-on-the-consultation/0001.html",
@@ -34,29 +58,5 @@
   "title": "医薬品・医療機器等安全性情報 No.430（厚生労働省発行）を掲載しました",
   "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/safety-info/0166.html",
   "tag": "安全対策"
- },
- {
-  "date": "2026/07/14",
-  "title": "使用上の注意の改訂指示通知（医薬品）2026年07月14日付（厚生労働省より発出）を掲載しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/revision-of-precautions/0375.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/07/14",
-  "title": "「医薬品に関する評価中のリスク等の情報について」を掲載しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/risk-communications/0001.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/07/13",
-  "title": "「「ガストログラフイン経口・注腸用」 ニトロソアミン化合物検出のお知らせ（第2版）」を掲載しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/0371.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/07/13",
-  "title": "プログラム医療機器の製造販売承認品目の一覧情報を更新しました（製造販売承認された製品一覧）",
-  "url": "https://www.pmda.go.jp/review-services/drug-reviews/about-reviews/devices/0052.html",
-  "tag": "承認審査"
  }
 ]
