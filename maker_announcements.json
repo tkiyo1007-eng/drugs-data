@@ -1764,16 +1764,6 @@
   "title": "ペリアクチン錠4mg 供給状況に関するお知らせ",
   "url": "https://www.nichiiko.co.jp/medicine/file/10500/information/IA21081-01.pdf"
  },
- "ジルチアゼム塩酸塩徐放カプセル１００ｍｇ「日医工」": {
-  "maker": "日医工",
-  "title": "ジルチアゼム塩酸塩徐放カプセル100mg「日医工」 供給状況に関するお知らせ",
-  "url": "https://www.nichiiko.co.jp/medicine/file/32750/information/20240927cI1.pdf"
- },
- "ジルチアゼム塩酸塩徐放カプセル２００ｍｇ「日医工」": {
-  "maker": "日医工",
-  "title": "ジルチアゼム塩酸塩徐放カプセル200mg「日医工」 供給状況に関するお知らせ",
-  "url": "https://www.nichiiko.co.jp/medicine/file/32760/information/20250820cI1.pdf"
- },
  "シルニジピン錠５ｍｇ「ＮＩＧ」": {
   "maker": "日医工",
   "title": "シルニジピン錠5mg「NIG」 供給状況に関するお知らせ",
@@ -2168,5 +2158,20 @@
   "maker": "日本ジェネリック",
   "title": "2026/05/22 供給に関するお知らせ ケトプロフェン坐剤50mg/75mg「JG」 販売中止のご案内を掲載いたしました",
   "url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/KETOX00_CHUUSHI_2605.pdf"
+ },
+ "ボリコナゾール錠５０ｍｇ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "ボリコナゾール錠50mg「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/79890/information/20260722cI2.pdf"
+ },
+ "ボリコナゾール錠２００ｍｇ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "ボリコナゾール錠200mg「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/79900/information/20260722cI2.pdf"
+ },
+ "メチルジゴキシン錠０．０５ｍｇ「ＮＩＧ」": {
+  "maker": "日医工",
+  "title": "メチルジゴキシン錠0.05mg「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/70180/information/20260722cI3.pdf"
  }
 }
