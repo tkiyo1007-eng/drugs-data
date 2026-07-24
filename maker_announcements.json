@@ -741,8 +741,8 @@
  },
  "ユビデカレノン錠１０ｍｇ「サワイ」": {
   "maker": "沢井製薬",
-  "title": "2026/05/28 供給関連 PDF ユビデカレノン錠10mg「サワイ」の供給に関するお詫びとお願い PDF",
-  "url": "https://med.sawai.co.jp/file/pr27_53_2.pdf"
+  "title": "2026/07/24 供給関連 PDF NEW ユビデカレノン錠10mg「サワイ」PTP1000錠包装出荷再開のご案内 PDF NEW",
+  "url": "https://med.sawai.co.jp/file/pr27_53_3.pdf"
  },
  "ラベプラゾールＮａ錠５ｍｇ「サワイ」": {
   "maker": "沢井製薬",
@@ -1556,8 +1556,8 @@
  },
  "トスフロキサシントシル酸塩錠１５０ｍｇ「サワイ」": {
   "maker": "沢井製薬",
-  "title": "2026/07/15 供給関連 PDF NEW トスフロキサシントシル酸塩錠75mg/150mg「サワイ」の供給に関するお詫びとお願い PDF NEW",
-  "url": "https://med.sawai.co.jp/file/pr27_1271_1.pdf"
+  "title": "2026/07/15 供給関連 PDF トスフロキサシントシル酸塩錠75mg/150mg「サワイ」の供給に関するお詫びとお願い PDF",
+  "url": "https://med.sawai.co.jp/file/pr27_1270_1.pdf"
  },
  "セフジニル錠１００ｍｇ「サワイ」": {
   "maker": "沢井製薬",
@@ -2146,8 +2146,8 @@
  },
  "トスフロキサシントシル酸塩錠７５ｍｇ「サワイ」": {
   "maker": "沢井製薬",
-  "title": "2026/07/15 供給関連 PDF NEW トスフロキサシントシル酸塩錠75mg/150mg「サワイ」の供給に関するお詫びとお願い PDF NEW",
-  "url": "https://med.sawai.co.jp/file/pr27_1271_1.pdf"
+  "title": "2026/07/15 供給関連 PDF トスフロキサシントシル酸塩錠75mg/150mg「サワイ」の供給に関するお詫びとお願い PDF",
+  "url": "https://med.sawai.co.jp/file/pr27_1270_1.pdf"
  },
  "ケトプロフェン坐剤５０ｍｇ「ＪＧ」": {
   "maker": "日本ジェネリック",
@@ -2173,5 +2173,11 @@
   "maker": "日医工",
   "title": "メチルジゴキシン錠0.05mg「NIG」 供給状況に関するお知らせ",
   "url": "https://www.nichiiko.co.jp/medicine/file/70180/information/20260722cI3.pdf"
+ },
+ "ランソプラゾールカプセル１５ｍｇ「サワイ」": {
+  "maker": "沢井製薬",
+  "title": "2026/07/15 供給関連 PDF 弊社製品の供給に関するご連絡とお詫び PDF",
+  "url": "https://med.sawai.co.jp/file/pr27_1059_1.pdf",
+  "checked": "2026-07-24"
  }
 }
