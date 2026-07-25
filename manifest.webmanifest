@@ -1,0 +1,30 @@
+{
+  "name": "医薬品供給ナビ",
+  "short_name": "供給ナビ",
+  "description": "厚生労働省の医薬品供給状況データを毎日自動更新。限定出荷・供給停止・販売中止・代替薬を一瞬で確認できます。",
+  "lang": "ja",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#EEF3FE",
+  "theme_color": "#2F63E8",
+  "categories": ["medical", "productivity"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "限定出荷の品目を見る",
+      "short_name": "限定出荷",
+      "url": "./#f=limited"
+    },
+    {
+      "name": "お気に入りを見る",
+      "short_name": "お気に入り",
+      "url": "./#f=fav"
+    }
+  ]
+}

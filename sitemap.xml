@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- LP本体の lastmod は同期ワークフロー(sync-to-drugs-data.yml)が公開時のJST日付に書き換える。
+     品目別ページ(items/)は自動生成側の sitemap-items.xml が index.html ごと列挙しているので、
+     ここには載せない(同じURLを2つのサイトマップに重複させ、lastmod が食い違うのを避ける)。
+     privacy.html は drugs-data 側で管理していて更新日を把握できないため lastmod を付けない。 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://tkiyo1007-eng.github.io/drugs-data/</loc>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://tkiyo1007-eng.github.io/drugs-data/privacy.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
 </urlset>

@@ -19,6 +19,10 @@
 <meta name="apple-itunes-app" content="app-id=6777696446">
 <meta name="google-site-verification" content="BCISo-785N0fmuhOBKHvUEU5hk8hRCVHrWVVAXCq1oo" />
 <link rel="canonical" href="https://tkiyo1007-eng.github.io/drugs-data/">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#EEF3FE" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B1226" media="(prefers-color-scheme: dark)">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -39,6 +43,46 @@
       "url": "https://apps.apple.com/jp/app/id6777696446",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
       "description": "出荷調整・欠品・代替薬を毎日チェックできる無料iOSアプリ。厚労省の医薬品供給状況データ約16,000品目を毎日自動更新。"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "データはどのくらいの頻度で更新されますか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "厚生労働省が公表する「医療用医薬品供給状況」データを毎晩自動で取得し、翌朝には最新の状態に更新されます（公表自体は厚労省による平日ごとの更新です）。" }
+        },
+        {
+          "@type": "Question",
+          "name": "利用は無料ですか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "Web版・iOSアプリともに無料でご利用いただけます。会員登録も不要です。" }
+        },
+        {
+          "@type": "Question",
+          "name": "対象になっている医薬品の範囲は？",
+          "acceptedAnswer": { "@type": "Answer", "text": "厚生労働省が公表している医療用医薬品の供給状況データが対象です。一般用医薬品（OTC）や医療機器は対象に含まれません。" }
+        },
+        {
+          "@type": "Question",
+          "name": "Web版とiOSアプリ版で機能に違いはありますか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "検索・供給ステータスの確認・お気に入り登録による定点観測（ブラウザ保存）・CSV保存はWeb版でもご利用いただけます。お気に入りの変化のプッシュ通知と医療従事者向け掲示板はiOSアプリ限定の機能です。" }
+        },
+        {
+          "@type": "Question",
+          "name": "Android版のアプリはありますか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "現在ネイティブアプリはiOS版のみですが、このWeb版はホーム画面に追加してアプリと同じように使えます（Chromeのメニューから「アプリをインストール」または「ホーム画面に追加」）。追加すると全画面で起動し、電波の届かない場所でも直前に取得したデータを表示できます。検索・お気に入り・CSV保存はWeb版でもすべてご利用いただけます。" }
+        },
+        {
+          "@type": "Question",
+          "name": "表示されている情報は100%正確ですか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "厚生労働省の公表時点の情報をそのまま表示しており、独自の加工・推測は行っていません。ただし公表と実際の流通状況にタイムラグが生じる場合があるため、採用や代替薬の選定は必ず医師・薬剤師にご確認のうえご判断ください。" }
+        },
+        {
+          "@type": "Question",
+          "name": "「通常出荷」なのに実際は製造中止になっている品目があるのはなぜですか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "本サービスが利用している厚生労働省「医療用医薬品供給状況」データは、限定出荷・供給停止といった一時的な出荷調整を追跡するための資料であり、製造中止（販売中止）の把握を主目的とした資料ではありません。そのため、メーカーが製造を終了していても、この資料上は最後に確認された「通常出荷」のまま長期間更新されずに残ってしまうことがあります。厚労省データに「薬価削除予定」の区分が含まれる品目については「薬価削除予定」バッジを表示していますが、それ以外の品目については各詳細に表示される「情報の鮮度（最終確認からの経過日数）」を目安に、経過が長い場合は卸・メーカーへの確認もあわせてご検討ください。" }
+        }
+      ]
     }
   ]
 }
@@ -46,7 +90,11 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232F63E8'/%3E%3Cpath d='M32 16v32M16 32h32' stroke='white' stroke-width='9' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<!-- 本文用のみ。数字(.num)は端末標準フォントのタブular数字を使うので Inter は読み込まない。
+     ウェイトも実際に使う 400/700/900 だけに絞り、描画をブロックしないよう遅延適用する -->
+<link rel="stylesheet" media="print" onload="this.media='all'"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap"></noscript>
 <style>
 :root{
   --blue-deep:#1B3FA0;
@@ -64,6 +112,7 @@
   --limited:#E8912F;
   --stopped:#E14D4D;
   --ended:#8A6A52;
+  --mix:white; /* ステータスタグの地色。ダークテーマでは暗色に差し替える */
   --radius:22px;
   --shadow-soft:0 18px 50px -18px rgba(31,63,160,.25), 0 4px 14px -6px rgba(31,63,160,.12);
 }
@@ -77,7 +126,9 @@ body{
   line-height:1.7;
   -webkit-font-smoothing:antialiased;
 }
-.num{font-family:'Inter','Noto Sans JP',sans-serif;font-variant-numeric:tabular-nums}
+/* 数字は端末標準のUIフォント（iOS/macOSならSF、WindowsならSegoe UI）のタブular数字を使う。
+   Webフォントを1本減らせるうえ、桁揃えの品質も落ちない */
+.num{font-family:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Noto Sans JP',sans-serif;font-variant-numeric:tabular-nums}
 
 /* ===== 背景オーロラ ===== */
 .aurora{position:fixed;inset:0;z-index:-2;background:linear-gradient(160deg,#F2F6FF 0%,#E7EEFD 45%,#DFEAFE 100%)}
@@ -150,7 +201,8 @@ header{
 @media(max-width:900px){header{grid-template-columns:1fr;padding-top:120px;gap:40px}}
 .eyebrow{
   display:inline-flex;align-items:center;gap:8px;
-  font-size:12.5px;font-weight:700;color:var(--blue);
+  /* 淡い青地の上では --blue だと 4.2:1 で AA に届かないため、濃い方の青を使う */
+  font-size:12.5px;font-weight:700;color:var(--blue-deep);
   background:rgba(79,128,244,.12);border:1px solid rgba(79,128,244,.25);
   padding:6px 14px;border-radius:999px;margin-bottom:22px;
 }
@@ -289,14 +341,24 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 @keyframes cardIn{from{opacity:0;transform:translateY(10px)}}
 .drug-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;border-radius:0 4px 4px 0;background:var(--sc)}
 .drug-name{font-weight:700;font-size:14.5px;line-height:1.5;margin-bottom:6px}
+/* 品目名の <button>。見た目は通常のテキストのまま、キーボード操作だけ本物のボタンにする */
+.drug-open{
+  all:unset;display:block;cursor:pointer;
+  font:inherit;color:inherit;text-align:left;
+}
+.drug-open:focus-visible{outline:2px solid var(--blue-mid);outline-offset:3px;border-radius:4px}
 .drug-maker{font-size:12px;color:var(--sub);margin-bottom:10px}
 .drug-spec{color:#B7C1DA;margin-left:6px}
 .drug-spec::before{content:"・"}
 .drug-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:4px 10px}
 .status-tag{
   font-size:11.5px;font-weight:800;padding:4px 12px;border-radius:999px;
-  color:var(--sc);background:color-mix(in srgb,var(--sc) 13%,white);
-  border:1px solid color-mix(in srgb,var(--sc) 30%,white);
+  /* 淡い地色の上にステータス色をそのまま置くとコントラストが 2.2〜3.3:1 にしかならない。
+     色相は保ったまま文字だけ暗くして WCAG AA(4.5:1) を満たす（ダークテーマ側は変数が
+     既に明るいので上書きしない）。供給状況はこのアプリの中心情報なので読めることを優先する */
+  color:color-mix(in srgb,var(--sc) 67%,black);
+  background:color-mix(in srgb,var(--sc) 13%,var(--mix));
+  border:1px solid color-mix(in srgb,var(--sc) 30%,var(--mix));
 }
 .drug-date{font-size:11px;color:#9AA8CB;white-space:nowrap}
 .drug-ago{font-size:10.5px;color:#B7C1DA;margin-left:2px}
@@ -392,7 +454,8 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .rel-row:hover{background:rgba(79,128,244,.12)}
 .rel-status{
   flex:none;font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px;
-  color:var(--sc);background:color-mix(in srgb, var(--sc) 14%, transparent);
+  color:color-mix(in srgb,var(--sc) 67%,black);
+  background:color-mix(in srgb, var(--sc) 14%, transparent);
   border:1px solid color-mix(in srgb, var(--sc) 40%, transparent);
 }
 /* CSVダウンロード */
@@ -413,6 +476,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 .empty-reset:hover{background:#fff;transform:translateY(-1px)}
 .demo-note{margin-top:20px;font-size:12px;color:var(--sub);text-align:center}
+.demo-note a{color:var(--blue);font-weight:700} /* 既定のリンク色だと暗背景で沈むためテーマ色に揃える */
 .load-more{
   display:block;margin:22px auto 0;cursor:pointer;font-family:inherit;
   font-size:13.5px;font-weight:700;color:var(--blue);
@@ -473,6 +537,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 .maker-link:hover{background:rgba(79,128,244,.14)}
 .maker-link::after{content:"↗";font-size:14px;flex:none}
+#mItemLink::after{content:"→"} /* 同一サイト内リンクなので外部リンク記号は使わない */
 .maker-link[hidden]{display:none}
 .pkg-box{margin-top:12px;padding:13px 16px;border-radius:14px;background:rgba(232,145,47,.07);border:1px solid rgba(232,145,47,.2)}
 .pkg-box[hidden]{display:none}
@@ -570,6 +635,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .maker-count.lim{color:#B0500E;background:rgba(232,145,47,.14);border:1px solid rgba(232,145,47,.35)}
 .maker-count.stp{color:#A03030;background:rgba(225,77,77,.12);border:1px solid rgba(225,77,77,.35)}
 .maker-note{font-size:11px;color:var(--sub);margin-top:10px;line-height:1.7}
+.compare-note{font-size:11px;color:var(--sub);margin-top:12px;line-height:1.7;text-align:center}
 @media(max-width:560px){.maker-count.lim,.maker-count.stp{padding:3px 7px;font-size:10.5px}}
 
 /* ===== 特徴グリッド ===== */
@@ -604,7 +670,8 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   font-weight:800;color:var(--blue);
 }
 .yes{color:var(--ok);font-weight:800}
-.no{color:#B7C1DA;font-weight:700}
+/* 「—」だけでなく理由の文言が入るようになったため、読める濃さにする（#B7C1DAは白地で1.9:1しかなかった） */
+.no{color:var(--sub);font-weight:700}
 @media(max-width:640px){.compare th,.compare td{padding:12px 8px;font-size:12px}}
 
 /* ===== 用語解説 ===== */
@@ -612,8 +679,9 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .term-card{padding:26px 26px 24px}
 .term-tag{
   display:inline-block;font-size:11.5px;font-weight:800;padding:4px 13px;border-radius:999px;
-  color:var(--sc);background:color-mix(in srgb,var(--sc) 13%,white);
-  border:1px solid color-mix(in srgb,var(--sc) 30%,white);margin-bottom:14px;
+  color:color-mix(in srgb,var(--sc) 67%,black);
+  background:color-mix(in srgb,var(--sc) 13%,var(--mix));
+  border:1px solid color-mix(in srgb,var(--sc) 30%,var(--mix));margin-bottom:14px;
 }
 .term-card h3{font-size:16px;font-weight:800;margin-bottom:8px;line-height:1.5}
 .term-card p{font-size:13.5px;color:var(--sub)}
@@ -666,8 +734,17 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   box-shadow:0 16px 36px -10px rgba(0,0,0,.4);transition:transform .2s;
 }
 .store-btn:hover{transform:translateY(-2px) scale(1.02)}
-.app-cta-qr{flex:none;text-align:center;position:relative;z-index:1}
-.app-cta-qr svg{width:190px;height:190px;display:block;border-radius:24px;box-shadow:0 20px 44px -14px rgba(0,0,0,.5)}
+/* Android等でホーム画面に追加できるときだけ出す副次ボタン（App Storeボタンより控えめに） */
+.store-btn.ghost{
+  background:rgba(255,255,255,.14);color:#fff;border:1.5px solid rgba(255,255,255,.5);
+  font-family:inherit;font-size:15px;cursor:pointer;box-shadow:none;margin-left:12px;
+}
+.store-btn.ghost:hover{background:rgba(255,255,255,.24)}
+.store-btn.ghost[hidden]{display:none}
+.app-cta-note{font-size:12.5px;opacity:.82;margin-top:14px;line-height:1.8}
+@media(max-width:560px){.store-btn.ghost{margin:12px 0 0}}
+.app-cta-qr{flex:none;text-align:center;position:relative;z-index:1;text-decoration:none;color:#fff}
+.app-cta-qr svg,.app-cta-qr img{width:190px;height:190px;display:block;border-radius:24px;box-shadow:0 20px 44px -14px rgba(0,0,0,.5)}
 .app-cta-qr span{display:block;margin-top:14px;font-size:12.5px;font-weight:700;opacity:.85;letter-spacing:.02em}
 @media(max-width:760px){
   .app-cta{flex-direction:column;text-align:center;padding:44px 24px}
@@ -679,7 +756,9 @@ footer{max-width:1120px;margin:0 auto;padding:48px 24px 60px;text-align:center;c
 footer .foot-links{display:flex;justify-content:center;gap:22px;margin-bottom:16px;flex-wrap:wrap}
 footer a{color:var(--sub);text-decoration:none;font-weight:700}
 footer a:hover{color:var(--blue)}
-.disclaimer{max-width:46em;margin:0 auto 14px;line-height:1.9;opacity:.85}
+/* 医療上の免責文なので薄くしない。opacity:.85 だとコントラストが 3.6:1 まで落ちていた
+   （不透明なら 4.8:1 で AA を満たす） */
+.disclaimer{max-width:46em;margin:0 auto 14px;line-height:1.9}
 
 /* スクロール出現 */
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
@@ -687,6 +766,88 @@ footer a:hover{color:var(--blue)}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none !important;transition:none !important}
   .reveal{opacity:1;transform:none}
+}
+
+/* ===== ダークテーマ =====
+   夜勤・当直帯の利用を想定。ガラス質感の設計はそのままに、
+   「白いすりガラス」を「暗い藍のすりガラス」に置き換える。
+   ステータス4色（緑/橙/赤/茶）は識別性が命なので色相は変えず、
+   暗背景でのコントラストを確保するために明度だけ上げる。 */
+@media (prefers-color-scheme: dark){
+  :root{
+    --blue-deep:#7FA6FF;
+    --blue:#6D9BFF;
+    --blue-mid:#8FB4FF;
+    --blue-light:#3B5BA8;
+    --ink:#E6ECFA;
+    --sub:#95A5C8;
+    --bg:#0B1226;
+    --card:rgba(30,44,84,.62);
+    --card-strong:rgba(32,47,89,.78);
+    --stroke:rgba(126,152,214,.22);
+    --mix:#16203C;
+    --ok:#4FD08C;
+    --limited:#F2A94F;
+    --stopped:#FF7A7A;
+    --ended:#C0A183;
+    --shadow-soft:0 18px 50px -18px rgba(0,0,0,.6), 0 4px 14px -6px rgba(0,0,0,.4);
+  }
+  /* 背景 */
+  .aurora{background:linear-gradient(160deg,#0C1329 0%,#0A1024 45%,#0A1128 100%)}
+  .aurora::before{opacity:.22}
+  .aurora::after{opacity:.14}
+  .aurora .blob{opacity:.12}
+  .grain{background-image:radial-gradient(rgba(143,180,255,.06) 1px,transparent 1px)}
+
+  /* ガラス面（.glass を使うカード類はここで一括して暗色化される） */
+  .glass{
+    background:linear-gradient(165deg,rgba(32,47,89,.72),rgba(20,31,62,.62));
+    border:1px solid var(--stroke);
+    border-top:1.6px solid rgba(150,178,240,.28);
+    box-shadow:var(--shadow-soft), inset 0 1px 0 rgba(150,178,240,.12);
+  }
+  nav{
+    background:rgba(16,26,54,.72);
+    border:1px solid rgba(126,152,214,.2);
+    box-shadow:0 8px 32px -12px rgba(0,0,0,.7);
+  }
+  .btn-ghost{background:rgba(40,58,108,.6);border-color:rgba(143,180,255,.32);color:var(--ink)}
+  .btn-ghost:hover{background:rgba(52,74,134,.75)}
+
+  /* 検索まわり */
+  .search-box{background:rgba(18,29,60,.85);border-color:rgba(143,180,255,.25);box-shadow:inset 0 2px 6px rgba(0,0,0,.35)}
+  .search-box input::placeholder{color:#7386AD}
+  .pill{background:rgba(38,55,102,.7);border:1px solid rgba(126,152,214,.18);color:var(--ink)}
+  .pill.active{color:#0B1226}
+  .pill[data-f="delist"].active{color:#fff}
+  .page-size select{background:rgba(38,55,102,.7);border-color:rgba(126,152,214,.25);color:var(--ink)}
+  .drug-card{
+    background:var(--card-strong);
+    border:1px solid rgba(126,152,214,.18);
+    box-shadow:0 8px 24px -12px rgba(0,0,0,.6),inset 0 1px 0 rgba(150,178,240,.1);
+  }
+  .drug-spec,.drug-date,.drug-card::after{color:#7386AD}
+  /* ダークテーマのステータス色は暗背景向けに明度を上げてあり、そのままで
+     コントラスト 5.2〜6.4:1 を満たす。ライト用の暗色化は打ち消す */
+  .status-tag,.term-tag,.rel-status{color:var(--sc)}
+
+  /* モーダル */
+  .modal{
+    background:linear-gradient(165deg,rgba(26,39,76,.98),rgba(17,27,55,.96));
+    border:1px solid rgba(126,152,214,.24);
+    border-top:1.6px solid rgba(150,178,240,.3);
+    box-shadow:0 40px 90px -24px rgba(0,0,0,.8),inset 0 1px 0 rgba(150,178,240,.14);
+  }
+  .modal-close,.modal-fav,.modal-share{background:rgba(45,63,114,.8);border-color:rgba(126,152,214,.22)}
+  .modal-close:hover{background:rgba(60,84,150,.9)}
+  .detail-grid,.detail-grid dt,.detail-grid dd{border-color:rgba(126,152,214,.18)}
+
+  /* 比較表・FAQ・お知らせ・トピックなどの明色ベタ塗り */
+  .compare tbody tr:nth-child(odd) td,.compare tbody tr:nth-child(odd) th{background:rgba(126,152,214,.06)}
+  .compare th,.compare td{border-color:rgba(126,152,214,.16)}
+  .faq-item,.news-item,.mednews-item,.maker-row{border-color:rgba(126,152,214,.16)}
+  .trending-chip{background:rgba(38,55,102,.7);border-color:rgba(126,152,214,.2);color:var(--ink)}
+  .topic-points li{border-color:rgba(126,152,214,.16)}
 }
 </style>
 </head>
@@ -704,7 +865,7 @@ footer a:hover{color:var(--blue)}
     <a href="#topics">話題のニュース</a>
     <a href="#news">お知らせ</a>
     <a href="#features">特徴</a>
-    <a href="#compare">従来サイトとの違い</a>
+    <a href="#compare">元データとの違い</a>
     <a href="#glossary">用語解説</a>
     <a href="#faq">よくある質問</a>
     <a class="nav-cta" href="#app">アプリを入手</a>
@@ -749,6 +910,10 @@ footer a:hover{color:var(--blue)}
   </div>
 </header>
 
+<!-- 主要コンテンツを main ランドマークに入れる。支援技術でセクションを飛ばして
+     本文へ移動できるようにするため（axe の region 違反83件の解消） -->
+<main>
+
 <section id="demo" class="reveal">
   <p class="sec-eyebrow">LIVE SEARCH</p>
   <h2>知りたい薬が、すぐに見つかる。</h2>
@@ -759,18 +924,18 @@ footer a:hover{color:var(--blue)}
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       <input id="q" type="search" placeholder="薬品名・成分名・メーカー名で検索" aria-label="薬品名・成分名・メーカー名で検索" autocomplete="off">
     </div>
-    <div class="pills" id="pills">
-      <button class="pill active" data-f="all">すべて</button>
-      <button class="pill" data-f="ok">通常出荷</button>
-      <button class="pill" data-f="limited">限定出荷</button>
-      <button class="pill" data-f="stopped">供給停止</button>
-      <button class="pill" data-f="ended">販売中止</button>
-      <button class="pill" data-f="changed" id="pillChanged" style="display:none"></button>
-      <button class="pill" data-f="delist" id="pillDelist" style="display:none"></button>
-      <button class="pill" data-f="fav" id="pillFav" style="display:none"></button>
+    <div class="pills" id="pills" role="group" aria-label="供給状況で絞り込む">
+      <button type="button" class="pill active" data-f="all" aria-pressed="true">すべて</button>
+      <button type="button" class="pill" data-f="ok" aria-pressed="false">通常出荷</button>
+      <button type="button" class="pill" data-f="limited" aria-pressed="false">限定出荷</button>
+      <button type="button" class="pill" data-f="stopped" aria-pressed="false">供給停止</button>
+      <button type="button" class="pill" data-f="ended" aria-pressed="false">販売中止</button>
+      <button type="button" class="pill" data-f="changed" id="pillChanged" aria-pressed="false" style="display:none"></button>
+      <button type="button" class="pill" data-f="delist" id="pillDelist" aria-pressed="false" style="display:none"></button>
+      <button type="button" class="pill" data-f="fav" id="pillFav" aria-pressed="false" style="display:none"></button>
     </div>
     <div class="result-bar">
-      <p class="result-meta" id="meta"></p>
+      <p class="result-meta" id="meta" role="status" aria-live="polite"></p>
       <button type="button" class="csv-btn" id="csvBtn" hidden>CSV保存</button>
       <label class="page-size">表示件数
         <select id="pageSize">
@@ -785,6 +950,7 @@ footer a:hover{color:var(--blue)}
     <div class="drug-list" id="list"></div>
     <button type="button" class="load-more" id="loadMore" hidden></button>
     <p class="demo-note" id="demoNote">※ デモ用サンプルデータです。実データの検索は iOS アプリ「医薬品供給ナビ」でご利用いただけます。</p>
+    <p class="demo-note">限定出荷・供給停止・販売中止・薬価削除予定の品目には、1品目ごとの詳細ページがあります → <a href="items/index.html">品目別の供給状況ページ一覧</a></p>
   </div>
 </section>
 
@@ -904,24 +1070,26 @@ footer a:hover{color:var(--blue)}
 </section>
 
 <section id="compare" class="reveal">
-  <p class="sec-eyebrow">WHY US</p>
+  <p class="sec-eyebrow">WHAT WE ADD</p>
   <h2>「確認できる」から「確認したくなる」へ。</h2>
-  <p class="sec-lede">既存の供給情報データベースは検索の入口としては優秀です。医薬品供給ナビは、その先の「毎日使い続ける体験」まで設計しました。</p>
+  <p class="sec-lede">厚生労働省が公表しているデータそのものは、Excelファイルとして提供されています。医薬品供給ナビは、そこに「毎日使い続けるための体験」を足しました。</p>
   <div class="compare glass">
     <table>
       <thead>
-        <tr><th>できること</th><th class="col-us">医薬品供給ナビ</th><th>従来の供給情報サイト</th></tr>
+        <tr><th>できること</th><th class="col-us">医薬品供給ナビ</th><th>厚労省の公表データ（元データ）</th></tr>
       </thead>
       <tbody>
-        <tr><th>供給ステータス検索</th><td class="col-us yes">◎ 即時絞り込み</td><td class="yes">○</td></tr>
-        <tr><th>スマホ最適化 UI</th><td class="col-us yes">◎ ネイティブアプリ</td><td class="no">△</td></tr>
-        <tr><th>変化のあった品目の時系列表示</th><td class="col-us yes">◎</td><td class="no">—</td></tr>
-        <tr><th>お気に入り登録・定点観測</th><td class="col-us yes">◎</td><td class="no">—</td></tr>
-        <tr><th>市場全体のサマリー可視化</th><td class="col-us yes">◎ ドーナツ図</td><td class="no">—</td></tr>
-        <tr><th>医療従事者コミュニティ</th><td class="col-us yes">◎ 掲示板内蔵</td><td class="no">—</td></tr>
+        <tr><th>供給ステータスの検索</th><td class="col-us yes">◎ 商品名・成分名・メーカー名で即時絞り込み</td><td class="yes">○ Excelの絞り込み機能で可能</td></tr>
+        <tr><th>スマホでの閲覧</th><td class="col-us yes">◎ スマホ最適化UI・iOSアプリ</td><td class="no">△ Excelファイルのため実用的ではない</td></tr>
+        <tr><th>変化のあった品目の時系列表示</th><td class="col-us yes">◎ 前日差分を自動検出</td><td class="no">— 各回のスナップショットのみ</td></tr>
+        <tr><th>お気に入り登録・定点観測</th><td class="col-us yes">◎ 変化があればお知らせ</td><td class="no">—</td></tr>
+        <tr><th>全体像のサマリー可視化</th><td class="col-us yes">◎ 構成比・供給危機指数</td><td class="no">—</td></tr>
+        <tr><th>品目ごとの関連情報</th><td class="col-us yes">◎ 代替候補・メーカー案内文・同成分の他社品</td><td class="no">— 一部は別資料を要確認</td></tr>
+        <tr><th>医療従事者コミュニティ</th><td class="col-us yes">◎ 掲示板内蔵（iOSアプリ）</td><td class="no">—</td></tr>
       </tbody>
     </table>
   </div>
+  <p class="compare-note">※ 比較対象は厚生労働省が公表している元データ（Excel）です。他の供給情報サービスとの優劣を示すものではありません。</p>
 </section>
 
 <section id="data" class="reveal">
@@ -954,22 +1122,22 @@ footer a:hover{color:var(--blue)}
   <p class="sec-lede">厚生労働省の報告内容を、医薬品供給ナビでは4つの状態に整理して表示しています。この見方を押さえておくと、検索結果がぐっと読み取りやすくなります。</p>
   <div class="glossary-grid">
     <div class="term-card glass">
-      <span class="term-tag" style="--sc:#2FAE6E">通常出荷</span>
+      <span class="term-tag" style="--sc:var(--ok)">通常出荷</span>
       <h3>制限なく入手できる状態</h3>
       <p>特に出荷の制限はなく、通常どおり注文・入荷ができる状態です。</p>
     </div>
     <div class="term-card glass">
-      <span class="term-tag" style="--sc:#E8912F">限定出荷</span>
+      <span class="term-tag" style="--sc:var(--limited)">限定出荷</span>
       <h3>数量や販売先が制限された状態</h3>
       <p>需要の急増や増産対応などにより、メーカーが出荷数量・販売先を制限している状態です。入手しづらくなる場合があります。</p>
     </div>
     <div class="term-card glass">
-      <span class="term-tag" style="--sc:#E14D4D">供給停止</span>
+      <span class="term-tag" style="--sc:var(--stopped)">供給停止</span>
       <h3>一時的に出荷できない状態</h3>
       <p>原薬調達や製造工程の問題などにより、一時的に出荷ができなくなっている状態です。再開時期は品目により異なります。</p>
     </div>
     <div class="term-card glass">
-      <span class="term-tag" style="--sc:#8A6A52">販売中止</span>
+      <span class="term-tag" style="--sc:var(--ended)">販売中止</span>
       <h3>製造・販売が終了した状態</h3>
       <p>メーカーが製造・販売を終了した状態です。今後の出荷再開はないため、代替薬への切り替え検討が必要です。</p>
     </div>
@@ -998,6 +1166,10 @@ footer a:hover{color:var(--blue)}
       <p>検索・供給ステータスの確認・お気に入り登録による定点観測（ブラウザ保存）・CSV保存はWeb版でもご利用いただけます。お気に入りの変化のプッシュ通知と医療従事者向け掲示板はiOSアプリ限定の機能です。</p>
     </details>
     <details class="faq-item">
+      <summary>Android版のアプリはありますか？</summary>
+      <p>現在ネイティブアプリは iOS 版のみですが、この Web 版はホーム画面に追加してアプリと同じように使えます（Chrome のメニューから「アプリをインストール」または「ホーム画面に追加」）。追加すると全画面で起動し、電波の届かない場所でも直前に取得したデータを表示できます。検索・お気に入り・CSV保存は Web 版でもすべてご利用いただけます。</p>
+    </details>
+    <details class="faq-item">
       <summary>表示されている情報は100%正確ですか？</summary>
       <p>厚生労働省の公表時点の情報をそのまま表示しており、独自の加工・推測は行っていません。ただし公表と実際の流通状況にタイムラグが生じる場合があるため、採用や代替薬の選定は必ず医師・薬剤師にご確認のうえご判断ください。</p>
     </details>
@@ -1018,13 +1190,20 @@ footer a:hover{color:var(--blue)}
         <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.7 12.6c0-3 2.5-4.5 2.6-4.6-1.4-2.1-3.6-2.4-4.4-2.4-1.9-.2-3.6 1.1-4.6 1.1-.9 0-2.4-1.1-4-1-2 0-3.9 1.2-5 3-2.1 3.7-.5 9.1 1.5 12.1 1 1.5 2.2 3.1 3.8 3 1.5-.1 2.1-1 3.9-1s2.4 1 4 1 2.7-1.5 3.7-2.9c1.2-1.7 1.6-3.3 1.7-3.4-.1-.1-3.2-1.3-3.2-4.9zM15.6 3.5c.8-1 1.4-2.4 1.2-3.5-1.2 0-2.7.8-3.5 1.8-.8.9-1.5 2.3-1.3 3.7 1.4.1 2.8-.9 3.6-2z"/></svg>
         App Store でダウンロード
       </a>
+      <button type="button" class="store-btn ghost" id="installBtn" hidden>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg>
+        ホーム画面に追加
+      </button>
+      <p class="app-cta-note">Android をお使いの方は、この Web 版をホーム画面に追加するとアプリと同じように起動でき、電波の弱い場所でも前回のデータを表示できます（Chrome のメニュー →「アプリをインストール」／「ホーム画面に追加」）。</p>
     </div>
     <a class="app-cta-qr" href="https://apps.apple.com/jp/app/id6777696446" target="_blank" rel="noopener" aria-label="QRコードからApp Storeへ">
-      <svg viewBox="0 0 370 370" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="App StoreへのQRコード"><rect width="370" height="370" rx="30" fill="#ffffff"/><rect x="40" y="40" width="10" height="10" fill="#14275E"/><rect x="50" y="40" width="10" height="10" fill="#14275E"/><rect x="60" y="40" width="10" height="10" fill="#14275E"/><rect x="70" y="40" width="10" height="10" fill="#14275E"/><rect x="80" y="40" width="10" height="10" fill="#14275E"/><rect x="90" y="40" width="10" height="10" fill="#14275E"/><rect x="100" y="40" width="10" height="10" fill="#14275E"/><rect x="120" y="40" width="10" height="10" fill="#14275E"/><rect x="130" y="40" width="10" height="10" fill="#14275E"/><rect x="150" y="40" width="10" height="10" fill="#14275E"/><rect x="170" y="40" width="10" height="10" fill="#14275E"/><rect x="190" y="40" width="10" height="10" fill="#14275E"/><rect x="210" y="40" width="10" height="10" fill="#14275E"/><rect x="220" y="40" width="10" height="10" fill="#14275E"/><rect x="240" y="40" width="10" height="10" fill="#14275E"/><rect x="260" y="40" width="10" height="10" fill="#14275E"/><rect x="270" y="40" width="10" height="10" fill="#14275E"/><rect x="280" y="40" width="10" height="10" fill="#14275E"/><rect x="290" y="40" width="10" height="10" fill="#14275E"/><rect x="300" y="40" width="10" height="10" fill="#14275E"/><rect x="310" y="40" width="10" height="10" fill="#14275E"/><rect x="320" y="40" width="10" height="10" fill="#14275E"/><rect x="40" y="50" width="10" height="10" fill="#14275E"/><rect x="100" y="50" width="10" height="10" fill="#14275E"/><rect x="130" y="50" width="10" height="10" fill="#14275E"/><rect x="200" y="50" width="10" height="10" fill="#14275E"/><rect x="210" y="50" width="10" height="10" fill="#14275E"/><rect x="230" y="50" width="10" height="10" fill="#14275E"/><rect x="260" y="50" width="10" height="10" fill="#14275E"/><rect x="320" y="50" width="10" height="10" fill="#14275E"/><rect x="40" y="60" width="10" height="10" fill="#14275E"/><rect x="60" y="60" width="10" height="10" fill="#14275E"/><rect x="70" y="60" width="10" height="10" fill="#14275E"/><rect x="80" y="60" width="10" height="10" fill="#14275E"/><rect x="100" y="60" width="10" height="10" fill="#14275E"/><rect x="140" y="60" width="10" height="10" fill="#14275E"/><rect x="150" y="60" width="10" height="10" fill="#14275E"/><rect x="160" y="60" width="10" height="10" fill="#14275E"/><rect x="210" y="60" width="10" height="10" fill="#14275E"/><rect x="220" y="60" width="10" height="10" fill="#14275E"/><rect x="240" y="60" width="10" height="10" fill="#14275E"/><rect x="260" y="60" width="10" height="10" fill="#14275E"/><rect x="280" y="60" width="10" height="10" fill="#14275E"/><rect x="290" y="60" width="10" height="10" fill="#14275E"/><rect x="300" y="60" width="10" height="10" fill="#14275E"/><rect x="320" y="60" width="10" height="10" fill="#14275E"/><rect x="40" y="70" width="10" height="10" fill="#14275E"/><rect x="60" y="70" width="10" height="10" fill="#14275E"/><rect x="70" y="70" width="10" height="10" fill="#14275E"/><rect x="80" y="70" width="10" height="10" fill="#14275E"/><rect x="100" y="70" width="10" height="10" fill="#14275E"/><rect x="120" y="70" width="10" height="10" fill="#14275E"/><rect x="140" y="70" width="10" height="10" fill="#14275E"/><rect x="170" y="70" width="10" height="10" fill="#14275E"/><rect x="190" y="70" width="10" height="10" fill="#14275E"/><rect x="220" y="70" width="10" height="10" fill="#14275E"/><rect x="230" y="70" width="10" height="10" fill="#14275E"/><rect x="260" y="70" width="10" height="10" fill="#14275E"/><rect x="280" y="70" width="10" height="10" fill="#14275E"/><rect x="290" y="70" width="10" height="10" fill="#14275E"/><rect x="300" y="70" width="10" height="10" fill="#14275E"/><rect x="320" y="70" width="10" height="10" fill="#14275E"/><rect x="40" y="80" width="10" height="10" fill="#14275E"/><rect x="60" y="80" width="10" height="10" fill="#14275E"/><rect x="70" y="80" width="10" height="10" fill="#14275E"/><rect x="80" y="80" width="10" height="10" fill="#14275E"/><rect x="100" y="80" width="10" height="10" fill="#14275E"/><rect x="120" y="80" width="10" height="10" fill="#14275E"/><rect x="130" y="80" width="10" height="10" fill="#14275E"/><rect x="150" y="80" width="10" height="10" fill="#14275E"/><rect x="190" y="80" width="10" height="10" fill="#14275E"/><rect x="210" y="80" width="10" height="10" fill="#14275E"/><rect x="220" y="80" width="10" height="10" fill="#14275E"/><rect x="260" y="80" width="10" height="10" fill="#14275E"/><rect x="280" y="80" width="10" height="10" fill="#14275E"/><rect x="290" y="80" width="10" height="10" fill="#14275E"/><rect x="300" y="80" width="10" height="10" fill="#14275E"/><rect x="320" y="80" width="10" height="10" fill="#14275E"/><rect x="40" y="90" width="10" height="10" fill="#14275E"/><rect x="100" y="90" width="10" height="10" fill="#14275E"/><rect x="120" y="90" width="10" height="10" fill="#14275E"/><rect x="130" y="90" width="10" height="10" fill="#14275E"/><rect x="140" y="90" width="10" height="10" fill="#14275E"/><rect x="150" y="90" width="10" height="10" fill="#14275E"/><rect x="170" y="90" width="10" height="10" fill="#14275E"/><rect x="180" y="90" width="10" height="10" fill="#14275E"/><rect x="200" y="90" width="10" height="10" fill="#14275E"/><rect x="210" y="90" width="10" height="10" fill="#14275E"/><rect x="220" y="90" width="10" height="10" fill="#14275E"/><rect x="230" y="90" width="10" height="10" fill="#14275E"/><rect x="260" y="90" width="10" height="10" fill="#14275E"/><rect x="320" y="90" width="10" height="10" fill="#14275E"/><rect x="40" y="100" width="10" height="10" fill="#14275E"/><rect x="50" y="100" width="10" height="10" fill="#14275E"/><rect x="60" y="100" width="10" height="10" fill="#14275E"/><rect x="70" y="100" width="10" height="10" fill="#14275E"/><rect x="80" y="100" width="10" height="10" fill="#14275E"/><rect x="90" y="100" width="10" height="10" fill="#14275E"/><rect x="100" y="100" width="10" height="10" fill="#14275E"/><rect x="120" y="100" width="10" height="10" fill="#14275E"/><rect x="140" y="100" width="10" height="10" fill="#14275E"/><rect x="160" y="100" width="10" height="10" fill="#14275E"/><rect x="180" y="100" width="10" height="10" fill="#14275E"/><rect x="200" y="100" width="10" height="10" fill="#14275E"/><rect x="220" y="100" width="10" height="10" fill="#14275E"/><rect x="240" y="100" width="10" height="10" fill="#14275E"/><rect x="260" y="100" width="10" height="10" fill="#14275E"/><rect x="270" y="100" width="10" height="10" fill="#14275E"/><rect x="280" y="100" width="10" height="10" fill="#14275E"/><rect x="290" y="100" width="10" height="10" fill="#14275E"/><rect x="300" y="100" width="10" height="10" fill="#14275E"/><rect x="310" y="100" width="10" height="10" fill="#14275E"/><rect x="320" y="100" width="10" height="10" fill="#14275E"/><rect x="120" y="110" width="10" height="10" fill="#14275E"/><rect x="130" y="110" width="10" height="10" fill="#14275E"/><rect x="140" y="110" width="10" height="10" fill="#14275E"/><rect x="160" y="110" width="10" height="10" fill="#14275E"/><rect x="180" y="110" width="10" height="10" fill="#14275E"/><rect x="210" y="110" width="10" height="10" fill="#14275E"/><rect x="230" y="110" width="10" height="10" fill="#14275E"/><rect x="240" y="110" width="10" height="10" fill="#14275E"/><rect x="40" y="120" width="10" height="10" fill="#14275E"/><rect x="80" y="120" width="10" height="10" fill="#14275E"/><rect x="100" y="120" width="10" height="10" fill="#14275E"/><rect x="110" y="120" width="10" height="10" fill="#14275E"/><rect x="120" y="120" width="10" height="10" fill="#14275E"/><rect x="130" y="120" width="10" height="10" fill="#14275E"/><rect x="140" y="120" width="10" height="10" fill="#14275E"/><rect x="150" y="120" width="10" height="10" fill="#14275E"/><rect x="180" y="120" width="10" height="10" fill="#14275E"/><rect x="200" y="120" width="10" height="10" fill="#14275E"/><rect x="210" y="120" width="10" height="10" fill="#14275E"/><rect x="240" y="120" width="10" height="10" fill="#14275E"/><rect x="250" y="120" width="10" height="10" fill="#14275E"/><rect x="260" y="120" width="10" height="10" fill="#14275E"/><rect x="270" y="120" width="10" height="10" fill="#14275E"/><rect x="280" y="120" width="10" height="10" fill="#14275E"/><rect x="290" y="120" width="10" height="10" fill="#14275E"/><rect x="320" y="120" width="10" height="10" fill="#14275E"/><rect x="40" y="130" width="10" height="10" fill="#14275E"/><rect x="60" y="130" width="10" height="10" fill="#14275E"/><rect x="70" y="130" width="10" height="10" fill="#14275E"/><rect x="90" y="130" width="10" height="10" fill="#14275E"/><rect x="120" y="130" width="10" height="10" fill="#14275E"/><rect x="130" y="130" width="10" height="10" fill="#14275E"/><rect x="140" y="130" width="10" height="10" fill="#14275E"/><rect x="150" y="130" width="10" height="10" fill="#14275E"/><rect x="170" y="130" width="10" height="10" fill="#14275E"/><rect x="190" y="130" width="10" height="10" fill="#14275E"/><rect x="260" y="130" width="10" height="10" fill="#14275E"/><rect x="280" y="130" width="10" height="10" fill="#14275E"/><rect x="290" y="130" width="10" height="10" fill="#14275E"/><rect x="300" y="130" width="10" height="10" fill="#14275E"/><rect x="310" y="130" width="10" height="10" fill="#14275E"/><rect x="320" y="130" width="10" height="10" fill="#14275E"/><rect x="40" y="140" width="10" height="10" fill="#14275E"/><rect x="60" y="140" width="10" height="10" fill="#14275E"/><rect x="80" y="140" width="10" height="10" fill="#14275E"/><rect x="90" y="140" width="10" height="10" fill="#14275E"/><rect x="100" y="140" width="10" height="10" fill="#14275E"/><rect x="110" y="140" width="10" height="10" fill="#14275E"/><rect x="120" y="140" width="10" height="10" fill="#14275E"/><rect x="130" y="140" width="10" height="10" fill="#14275E"/><rect x="140" y="140" width="10" height="10" fill="#14275E"/><rect x="150" y="140" width="10" height="10" fill="#14275E"/><rect x="160" y="140" width="10" height="10" fill="#14275E"/><rect x="170" y="140" width="10" height="10" fill="#14275E"/><rect x="180" y="140" width="10" height="10" fill="#14275E"/><rect x="190" y="140" width="10" height="10" fill="#14275E"/><rect x="210" y="140" width="10" height="10" fill="#14275E"/><rect x="240" y="140" width="10" height="10" fill="#14275E"/><rect x="280" y="140" width="10" height="10" fill="#14275E"/><rect x="320" y="140" width="10" height="10" fill="#14275E"/><rect x="40" y="150" width="10" height="10" fill="#14275E"/><rect x="70" y="150" width="10" height="10" fill="#14275E"/><rect x="150" y="150" width="10" height="10" fill="#14275E"/><rect x="210" y="150" width="10" height="10" fill="#14275E"/><rect x="230" y="150" width="10" height="10" fill="#14275E"/><rect x="250" y="150" width="10" height="10" fill="#14275E"/><rect x="270" y="150" width="10" height="10" fill="#14275E"/><rect x="290" y="150" width="10" height="10" fill="#14275E"/><rect x="310" y="150" width="10" height="10" fill="#14275E"/><rect x="320" y="150" width="10" height="10" fill="#14275E"/><rect x="50" y="160" width="10" height="10" fill="#14275E"/><rect x="80" y="160" width="10" height="10" fill="#14275E"/><rect x="90" y="160" width="10" height="10" fill="#14275E"/><rect x="100" y="160" width="10" height="10" fill="#14275E"/><rect x="160" y="160" width="10" height="10" fill="#14275E"/><rect x="180" y="160" width="10" height="10" fill="#14275E"/><rect x="200" y="160" width="10" height="10" fill="#14275E"/><rect x="210" y="160" width="10" height="10" fill="#14275E"/><rect x="220" y="160" width="10" height="10" fill="#14275E"/><rect x="230" y="160" width="10" height="10" fill="#14275E"/><rect x="240" y="160" width="10" height="10" fill="#14275E"/><rect x="250" y="160" width="10" height="10" fill="#14275E"/><rect x="270" y="160" width="10" height="10" fill="#14275E"/><rect x="310" y="160" width="10" height="10" fill="#14275E"/><rect x="40" y="170" width="10" height="10" fill="#14275E"/><rect x="60" y="170" width="10" height="10" fill="#14275E"/><rect x="70" y="170" width="10" height="10" fill="#14275E"/><rect x="80" y="170" width="10" height="10" fill="#14275E"/><rect x="90" y="170" width="10" height="10" fill="#14275E"/><rect x="110" y="170" width="10" height="10" fill="#14275E"/><rect x="120" y="170" width="10" height="10" fill="#14275E"/><rect x="130" y="170" width="10" height="10" fill="#14275E"/><rect x="150" y="170" width="10" height="10" fill="#14275E"/><rect x="160" y="170" width="10" height="10" fill="#14275E"/><rect x="170" y="170" width="10" height="10" fill="#14275E"/><rect x="190" y="170" width="10" height="10" fill="#14275E"/><rect x="210" y="170" width="10" height="10" fill="#14275E"/><rect x="220" y="170" width="10" height="10" fill="#14275E"/><rect x="260" y="170" width="10" height="10" fill="#14275E"/><rect x="270" y="170" width="10" height="10" fill="#14275E"/><rect x="280" y="170" width="10" height="10" fill="#14275E"/><rect x="290" y="170" width="10" height="10" fill="#14275E"/><rect x="300" y="170" width="10" height="10" fill="#14275E"/><rect x="310" y="170" width="10" height="10" fill="#14275E"/><rect x="320" y="170" width="10" height="10" fill="#14275E"/><rect x="40" y="180" width="10" height="10" fill="#14275E"/><rect x="60" y="180" width="10" height="10" fill="#14275E"/><rect x="80" y="180" width="10" height="10" fill="#14275E"/><rect x="90" y="180" width="10" height="10" fill="#14275E"/><rect x="100" y="180" width="10" height="10" fill="#14275E"/><rect x="130" y="180" width="10" height="10" fill="#14275E"/><rect x="140" y="180" width="10" height="10" fill="#14275E"/><rect x="150" y="180" width="10" height="10" fill="#14275E"/><rect x="160" y="180" width="10" height="10" fill="#14275E"/><rect x="180" y="180" width="10" height="10" fill="#14275E"/><rect x="190" y="180" width="10" height="10" fill="#14275E"/><rect x="200" y="180" width="10" height="10" fill="#14275E"/><rect x="220" y="180" width="10" height="10" fill="#14275E"/><rect x="250" y="180" width="10" height="10" fill="#14275E"/><rect x="260" y="180" width="10" height="10" fill="#14275E"/><rect x="270" y="180" width="10" height="10" fill="#14275E"/><rect x="290" y="180" width="10" height="10" fill="#14275E"/><rect x="300" y="180" width="10" height="10" fill="#14275E"/><rect x="320" y="180" width="10" height="10" fill="#14275E"/><rect x="60" y="190" width="10" height="10" fill="#14275E"/><rect x="70" y="190" width="10" height="10" fill="#14275E"/><rect x="120" y="190" width="10" height="10" fill="#14275E"/><rect x="130" y="190" width="10" height="10" fill="#14275E"/><rect x="150" y="190" width="10" height="10" fill="#14275E"/><rect x="160" y="190" width="10" height="10" fill="#14275E"/><rect x="210" y="190" width="10" height="10" fill="#14275E"/><rect x="220" y="190" width="10" height="10" fill="#14275E"/><rect x="230" y="190" width="10" height="10" fill="#14275E"/><rect x="240" y="190" width="10" height="10" fill="#14275E"/><rect x="260" y="190" width="10" height="10" fill="#14275E"/><rect x="270" y="190" width="10" height="10" fill="#14275E"/><rect x="310" y="190" width="10" height="10" fill="#14275E"/><rect x="320" y="190" width="10" height="10" fill="#14275E"/><rect x="60" y="200" width="10" height="10" fill="#14275E"/><rect x="70" y="200" width="10" height="10" fill="#14275E"/><rect x="100" y="200" width="10" height="10" fill="#14275E"/><rect x="180" y="200" width="10" height="10" fill="#14275E"/><rect x="200" y="200" width="10" height="10" fill="#14275E"/><rect x="210" y="200" width="10" height="10" fill="#14275E"/><rect x="240" y="200" width="10" height="10" fill="#14275E"/><rect x="250" y="200" width="10" height="10" fill="#14275E"/><rect x="270" y="200" width="10" height="10" fill="#14275E"/><rect x="310" y="200" width="10" height="10" fill="#14275E"/><rect x="40" y="210" width="10" height="10" fill="#14275E"/><rect x="50" y="210" width="10" height="10" fill="#14275E"/><rect x="70" y="210" width="10" height="10" fill="#14275E"/><rect x="90" y="210" width="10" height="10" fill="#14275E"/><rect x="110" y="210" width="10" height="10" fill="#14275E"/><rect x="120" y="210" width="10" height="10" fill="#14275E"/><rect x="130" y="210" width="10" height="10" fill="#14275E"/><rect x="140" y="210" width="10" height="10" fill="#14275E"/><rect x="160" y="210" width="10" height="10" fill="#14275E"/><rect x="170" y="210" width="10" height="10" fill="#14275E"/><rect x="190" y="210" width="10" height="10" fill="#14275E"/><rect x="220" y="210" width="10" height="10" fill="#14275E"/><rect x="240" y="210" width="10" height="10" fill="#14275E"/><rect x="250" y="210" width="10" height="10" fill="#14275E"/><rect x="260" y="210" width="10" height="10" fill="#14275E"/><rect x="270" y="210" width="10" height="10" fill="#14275E"/><rect x="280" y="210" width="10" height="10" fill="#14275E"/><rect x="290" y="210" width="10" height="10" fill="#14275E"/><rect x="310" y="210" width="10" height="10" fill="#14275E"/><rect x="320" y="210" width="10" height="10" fill="#14275E"/><rect x="70" y="220" width="10" height="10" fill="#14275E"/><rect x="100" y="220" width="10" height="10" fill="#14275E"/><rect x="150" y="220" width="10" height="10" fill="#14275E"/><rect x="160" y="220" width="10" height="10" fill="#14275E"/><rect x="180" y="220" width="10" height="10" fill="#14275E"/><rect x="190" y="220" width="10" height="10" fill="#14275E"/><rect x="200" y="220" width="10" height="10" fill="#14275E"/><rect x="210" y="220" width="10" height="10" fill="#14275E"/><rect x="240" y="220" width="10" height="10" fill="#14275E"/><rect x="250" y="220" width="10" height="10" fill="#14275E"/><rect x="260" y="220" width="10" height="10" fill="#14275E"/><rect x="270" y="220" width="10" height="10" fill="#14275E"/><rect x="300" y="220" width="10" height="10" fill="#14275E"/><rect x="320" y="220" width="10" height="10" fill="#14275E"/><rect x="80" y="230" width="10" height="10" fill="#14275E"/><rect x="90" y="230" width="10" height="10" fill="#14275E"/><rect x="110" y="230" width="10" height="10" fill="#14275E"/><rect x="130" y="230" width="10" height="10" fill="#14275E"/><rect x="140" y="230" width="10" height="10" fill="#14275E"/><rect x="190" y="230" width="10" height="10" fill="#14275E"/><rect x="210" y="230" width="10" height="10" fill="#14275E"/><rect x="220" y="230" width="10" height="10" fill="#14275E"/><rect x="240" y="230" width="10" height="10" fill="#14275E"/><rect x="250" y="230" width="10" height="10" fill="#14275E"/><rect x="260" y="230" width="10" height="10" fill="#14275E"/><rect x="270" y="230" width="10" height="10" fill="#14275E"/><rect x="310" y="230" width="10" height="10" fill="#14275E"/><rect x="320" y="230" width="10" height="10" fill="#14275E"/><rect x="40" y="240" width="10" height="10" fill="#14275E"/><rect x="50" y="240" width="10" height="10" fill="#14275E"/><rect x="60" y="240" width="10" height="10" fill="#14275E"/><rect x="70" y="240" width="10" height="10" fill="#14275E"/><rect x="80" y="240" width="10" height="10" fill="#14275E"/><rect x="100" y="240" width="10" height="10" fill="#14275E"/><rect x="110" y="240" width="10" height="10" fill="#14275E"/><rect x="120" y="240" width="10" height="10" fill="#14275E"/><rect x="140" y="240" width="10" height="10" fill="#14275E"/><rect x="150" y="240" width="10" height="10" fill="#14275E"/><rect x="180" y="240" width="10" height="10" fill="#14275E"/><rect x="210" y="240" width="10" height="10" fill="#14275E"/><rect x="230" y="240" width="10" height="10" fill="#14275E"/><rect x="240" y="240" width="10" height="10" fill="#14275E"/><rect x="250" y="240" width="10" height="10" fill="#14275E"/><rect x="260" y="240" width="10" height="10" fill="#14275E"/><rect x="270" y="240" width="10" height="10" fill="#14275E"/><rect x="280" y="240" width="10" height="10" fill="#14275E"/><rect x="290" y="240" width="10" height="10" fill="#14275E"/><rect x="320" y="240" width="10" height="10" fill="#14275E"/><rect x="120" y="250" width="10" height="10" fill="#14275E"/><rect x="130" y="250" width="10" height="10" fill="#14275E"/><rect x="140" y="250" width="10" height="10" fill="#14275E"/><rect x="160" y="250" width="10" height="10" fill="#14275E"/><rect x="170" y="250" width="10" height="10" fill="#14275E"/><rect x="190" y="250" width="10" height="10" fill="#14275E"/><rect x="200" y="250" width="10" height="10" fill="#14275E"/><rect x="230" y="250" width="10" height="10" fill="#14275E"/><rect x="240" y="250" width="10" height="10" fill="#14275E"/><rect x="280" y="250" width="10" height="10" fill="#14275E"/><rect x="320" y="250" width="10" height="10" fill="#14275E"/><rect x="40" y="260" width="10" height="10" fill="#14275E"/><rect x="50" y="260" width="10" height="10" fill="#14275E"/><rect x="60" y="260" width="10" height="10" fill="#14275E"/><rect x="70" y="260" width="10" height="10" fill="#14275E"/><rect x="80" y="260" width="10" height="10" fill="#14275E"/><rect x="90" y="260" width="10" height="10" fill="#14275E"/><rect x="100" y="260" width="10" height="10" fill="#14275E"/><rect x="120" y="260" width="10" height="10" fill="#14275E"/><rect x="130" y="260" width="10" height="10" fill="#14275E"/><rect x="160" y="260" width="10" height="10" fill="#14275E"/><rect x="170" y="260" width="10" height="10" fill="#14275E"/><rect x="180" y="260" width="10" height="10" fill="#14275E"/><rect x="190" y="260" width="10" height="10" fill="#14275E"/><rect x="210" y="260" width="10" height="10" fill="#14275E"/><rect x="230" y="260" width="10" height="10" fill="#14275E"/><rect x="240" y="260" width="10" height="10" fill="#14275E"/><rect x="260" y="260" width="10" height="10" fill="#14275E"/><rect x="280" y="260" width="10" height="10" fill="#14275E"/><rect x="290" y="260" width="10" height="10" fill="#14275E"/><rect x="300" y="260" width="10" height="10" fill="#14275E"/><rect x="320" y="260" width="10" height="10" fill="#14275E"/><rect x="40" y="270" width="10" height="10" fill="#14275E"/><rect x="100" y="270" width="10" height="10" fill="#14275E"/><rect x="130" y="270" width="10" height="10" fill="#14275E"/><rect x="150" y="270" width="10" height="10" fill="#14275E"/><rect x="160" y="270" width="10" height="10" fill="#14275E"/><rect x="190" y="270" width="10" height="10" fill="#14275E"/><rect x="200" y="270" width="10" height="10" fill="#14275E"/><rect x="210" y="270" width="10" height="10" fill="#14275E"/><rect x="230" y="270" width="10" height="10" fill="#14275E"/><rect x="240" y="270" width="10" height="10" fill="#14275E"/><rect x="280" y="270" width="10" height="10" fill="#14275E"/><rect x="310" y="270" width="10" height="10" fill="#14275E"/><rect x="40" y="280" width="10" height="10" fill="#14275E"/><rect x="60" y="280" width="10" height="10" fill="#14275E"/><rect x="70" y="280" width="10" height="10" fill="#14275E"/><rect x="80" y="280" width="10" height="10" fill="#14275E"/><rect x="100" y="280" width="10" height="10" fill="#14275E"/><rect x="120" y="280" width="10" height="10" fill="#14275E"/><rect x="170" y="280" width="10" height="10" fill="#14275E"/><rect x="180" y="280" width="10" height="10" fill="#14275E"/><rect x="190" y="280" width="10" height="10" fill="#14275E"/><rect x="210" y="280" width="10" height="10" fill="#14275E"/><rect x="230" y="280" width="10" height="10" fill="#14275E"/><rect x="240" y="280" width="10" height="10" fill="#14275E"/><rect x="250" y="280" width="10" height="10" fill="#14275E"/><rect x="260" y="280" width="10" height="10" fill="#14275E"/><rect x="270" y="280" width="10" height="10" fill="#14275E"/><rect x="280" y="280" width="10" height="10" fill="#14275E"/><rect x="290" y="280" width="10" height="10" fill="#14275E"/><rect x="320" y="280" width="10" height="10" fill="#14275E"/><rect x="40" y="290" width="10" height="10" fill="#14275E"/><rect x="60" y="290" width="10" height="10" fill="#14275E"/><rect x="70" y="290" width="10" height="10" fill="#14275E"/><rect x="80" y="290" width="10" height="10" fill="#14275E"/><rect x="100" y="290" width="10" height="10" fill="#14275E"/><rect x="140" y="290" width="10" height="10" fill="#14275E"/><rect x="150" y="290" width="10" height="10" fill="#14275E"/><rect x="180" y="290" width="10" height="10" fill="#14275E"/><rect x="190" y="290" width="10" height="10" fill="#14275E"/><rect x="200" y="290" width="10" height="10" fill="#14275E"/><rect x="230" y="290" width="10" height="10" fill="#14275E"/><rect x="240" y="290" width="10" height="10" fill="#14275E"/><rect x="250" y="290" width="10" height="10" fill="#14275E"/><rect x="270" y="290" width="10" height="10" fill="#14275E"/><rect x="320" y="290" width="10" height="10" fill="#14275E"/><rect x="40" y="300" width="10" height="10" fill="#14275E"/><rect x="60" y="300" width="10" height="10" fill="#14275E"/><rect x="70" y="300" width="10" height="10" fill="#14275E"/><rect x="80" y="300" width="10" height="10" fill="#14275E"/><rect x="100" y="300" width="10" height="10" fill="#14275E"/><rect x="130" y="300" width="10" height="10" fill="#14275E"/><rect x="140" y="300" width="10" height="10" fill="#14275E"/><rect x="160" y="300" width="10" height="10" fill="#14275E"/><rect x="170" y="300" width="10" height="10" fill="#14275E"/><rect x="180" y="300" width="10" height="10" fill="#14275E"/><rect x="190" y="300" width="10" height="10" fill="#14275E"/><rect x="210" y="300" width="10" height="10" fill="#14275E"/><rect x="230" y="300" width="10" height="10" fill="#14275E"/><rect x="240" y="300" width="10" height="10" fill="#14275E"/><rect x="290" y="300" width="10" height="10" fill="#14275E"/><rect x="300" y="300" width="10" height="10" fill="#14275E"/><rect x="310" y="300" width="10" height="10" fill="#14275E"/><rect x="320" y="300" width="10" height="10" fill="#14275E"/><rect x="40" y="310" width="10" height="10" fill="#14275E"/><rect x="100" y="310" width="10" height="10" fill="#14275E"/><rect x="150" y="310" width="10" height="10" fill="#14275E"/><rect x="160" y="310" width="10" height="10" fill="#14275E"/><rect x="180" y="310" width="10" height="10" fill="#14275E"/><rect x="210" y="310" width="10" height="10" fill="#14275E"/><rect x="240" y="310" width="10" height="10" fill="#14275E"/><rect x="250" y="310" width="10" height="10" fill="#14275E"/><rect x="260" y="310" width="10" height="10" fill="#14275E"/><rect x="290" y="310" width="10" height="10" fill="#14275E"/><rect x="310" y="310" width="10" height="10" fill="#14275E"/><rect x="320" y="310" width="10" height="10" fill="#14275E"/><rect x="40" y="320" width="10" height="10" fill="#14275E"/><rect x="50" y="320" width="10" height="10" fill="#14275E"/><rect x="60" y="320" width="10" height="10" fill="#14275E"/><rect x="70" y="320" width="10" height="10" fill="#14275E"/><rect x="80" y="320" width="10" height="10" fill="#14275E"/><rect x="90" y="320" width="10" height="10" fill="#14275E"/><rect x="100" y="320" width="10" height="10" fill="#14275E"/><rect x="120" y="320" width="10" height="10" fill="#14275E"/><rect x="130" y="320" width="10" height="10" fill="#14275E"/><rect x="140" y="320" width="10" height="10" fill="#14275E"/><rect x="160" y="320" width="10" height="10" fill="#14275E"/><rect x="180" y="320" width="10" height="10" fill="#14275E"/><rect x="190" y="320" width="10" height="10" fill="#14275E"/><rect x="210" y="320" width="10" height="10" fill="#14275E"/><rect x="220" y="320" width="10" height="10" fill="#14275E"/><rect x="240" y="320" width="10" height="10" fill="#14275E"/><rect x="280" y="320" width="10" height="10" fill="#14275E"/><rect x="290" y="320" width="10" height="10" fill="#14275E"/><rect x="310" y="320" width="10" height="10" fill="#14275E"/></svg>
+      <img src="qr-appstore.svg" width="190" height="190" alt="App Store の QR コード" loading="lazy" decoding="async">
       <span>スマホでかざして<br>今すぐダウンロード</span>
     </a>
   </div>
 </section>
+
+</main>
 
 <div class="modal-backdrop" id="mBack">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
@@ -1039,6 +1218,7 @@ footer a:hover{color:var(--blue)}
     <p class="modal-maker" id="mMaker"></p>
     <a class="maker-link" id="mMakerLink" href="#" target="_blank" rel="noopener" hidden></a>
     <a class="maker-link" id="mPmdaLink" href="#" target="_blank" rel="noopener" hidden></a>
+    <a class="maker-link" id="mItemLink" href="#" hidden></a>
     <div class="sum-box" id="mSummary" hidden></div>
     <div class="pkg-box" id="mPkgs" hidden></div>
     <dl class="detail-grid" id="mGrid"></dl>
@@ -1056,6 +1236,7 @@ footer a:hover{color:var(--blue)}
     <a href="#data">データについて</a>
     <a href="#glossary">用語解説</a>
     <a href="#faq">よくある質問</a>
+    <a href="items/index.html">品目別の供給状況</a>
     <a href="privacy.html">プライバシーポリシー</a>
     <a href="mailto:tkiyo1007@gmail.com">サポート</a>
   </div>
@@ -1123,7 +1304,8 @@ function norm(s){
   return s.normalize("NFKC").toLowerCase()
     .replace(/[ぁ-ゖ]/g, c=>String.fromCharCode(c.charCodeAt(0)+0x60));
 }
-function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+// 外部JSON（news.json 等）に null や数値が混ざっても描画全体が例外で止まらないよう文字列化してから処理する
+function esc(s){return String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
 // 規格（薬価基準の規格単位）の表示用整形。
 // 配合錠などは「１錠」「１カプセル」だけの値になり、強度情報がなく紛らわしいので表示しない。
 // 「３０ｍｇ１錠」「１０％１ｇ」のように含量・濃度を含むものだけ表示する
@@ -1179,6 +1361,7 @@ function render(){
       : `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="24" width="30" height="14" rx="7" transform="rotate(-18 29 31)"/><path d="M18 27l18 8" transform="rotate(-18 29 31)"/><circle cx="46" cy="46" r="8"/><path d="M52 52l6 6"/></svg>`;
     $list.innerHTML = `<div class="empty"><div class="empty-icon">${icon}</div>${msg}${canReset ? `<br><button type="button" class="empty-reset" id="emptyReset">検索条件をクリア</button>` : ""}</div>`;
     $loadMore.hidden = true;
+    syncHashSoon(); // 0件でも検索語をURLに残す（リロード・共有で同じ状態を再現できる）
     return;
   }
   $list.innerHTML = shown.map((d,i)=>{
@@ -1199,9 +1382,13 @@ function render(){
       ? (d.spec ? `${d.spec}＝${d.price}円` : `薬価${d.price}円`)
       : dispSpec(d.spec);
     const spec = specText ? `<span class="drug-spec">${esc(specText)}</span>` : "";
-    return `<div class="drug-card" role="button" tabindex="0" data-i="${i}" aria-haspopup="dialog" aria-label="${esc(d.n)} の詳細を見る" style="--sc:${st.color};animation-delay:${Math.min(i*35,350)}ms">
+    // カード自体は role="button" にしない。中にお気に入り★ボタンを持つため、
+    // カードをボタン化すると操作要素の入れ子になり支援技術での操作が壊れる。
+    // 品目名を本物の <button> にしてキーボード操作をそこに集約し、
+    // マウス利用者向けにはカード全体のクリックをJS側で拾う
+    return `<article class="drug-card" data-i="${i}" style="--sc:${st.color};animation-delay:${Math.min(i*35,350)}ms">
       <div class="drug-head">
-        <div class="drug-name">${esc(d.n)}</div>
+        <div class="drug-name"><button type="button" class="drug-open" aria-haspopup="dialog">${esc(d.n)}</button></div>
         <button type="button" class="fav-btn${FAVS.has(d.n)?" on":""}" data-name="${esc(d.n)}" aria-label="お気に入りに登録/解除" aria-pressed="${FAVS.has(d.n)}">★</button>
       </div>
       <div class="drug-maker">${esc(d.m)}${spec}</div>
@@ -1209,7 +1396,7 @@ function render(){
         <span class="drug-tags"><span class="status-tag">${st.label}</span>${changeBadge}${delistBadge}</span>
         <span class="drug-date num">更新 ${d.d}${ago}</span>
       </div>
-    </div>`;
+    </article>`;
   }).join("");
   const remaining = hits.length - shown.length;
   if(remaining > 0){
@@ -1218,7 +1405,7 @@ function render(){
   }else{
     $loadMore.hidden = true;
   }
-  syncHash();
+  syncHashSoon();
 }
 
 // 検索語と絞り込みをURLハッシュに保持（リロード・共有で同じ検索結果を再現できる）
@@ -1232,6 +1419,13 @@ function syncHash(){
   const s = p.toString();
   history.replaceState(null, "", s ? "#"+s : pathNoHash());
 }
+// Safari は history.replaceState を 30秒あたり100回でスロットルし、超えると例外を投げる。
+// 打鍵ごとに render()→syncHash() が走ると長い品目名の入力で到達し得るため、URL更新は必ず遅延させる。
+let hashTimer = null;
+function syncHashSoon(){
+  clearTimeout(hashTimer);
+  hashTimer = setTimeout(syncHash, 400);
+}
 function applyHashState(){
   if(location.hash.startsWith("#drug=")) return;
   const p = new URLSearchParams(location.hash.slice(1));
@@ -1239,10 +1433,16 @@ function applyHashState(){
   if(q) $q.value = q;
   if(f && HASH_FILTERS.includes(f)){
     filter = f;
-    document.querySelectorAll(".pill").forEach(pl=>pl.classList.toggle("active", pl.dataset.f===f));
+    setActivePill(f);
   }
 }
-$q.addEventListener("input", ()=>{ visibleCount = PAGE_SIZE; render(); });
+// 16,000品目のフィルタとカード再構築を打鍵ごとに走らせると低速端末で入力が詰まるため、
+// 入力が落ち着いてから描画する（IME変換中の中間文字列で無駄に描画しない効果もある）
+let searchTimer = null;
+$q.addEventListener("input", ()=>{
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(()=>{ visibleCount = PAGE_SIZE; render(); }, 180);
+});
 $loadMore.addEventListener("click", ()=>{ visibleCount += PAGE_SIZE; render(); });
 $pageSize.addEventListener("change", ()=>{ PAGE_SIZE = +$pageSize.value; visibleCount = PAGE_SIZE; render(); });
 
@@ -1259,7 +1459,9 @@ $csvBtn.addEventListener("click", ()=>{
   a.href = URL.createObjectURL(blob);
   a.download = "医薬品供給ナビ_検索結果.csv";
   a.click();
-  URL.revokeObjectURL(a.href);
+  // click 直後に同期で revoke すると、ブラウザがBlobを読み終える前にURLが無効になり
+  // ダウンロードが中断され得る（仕様上そうなる余地がある）。解放は次のタイミングに回す
+  setTimeout(()=>URL.revokeObjectURL(a.href), 10000);
 });
 
 /* ===== 薬品詳細モーダル ===== */
@@ -1367,6 +1569,21 @@ let ANNOUNCEMENTS = {...MANUAL_ANNOUNCEMENTS};
 fetchFirst(["maker_announcements.json", "https://tkiyo1007-eng.github.io/drugs-data/maker_announcements.json"])
   .then(res => res && res.json()).then(data => { if(data) ANNOUNCEMENTS = {...MANUAL_ANNOUNCEMENTS, ...data}; }).catch(()=>{});
 
+// 生成済みの品目別ページのキー（YJコード）一覧。詳細モーダルのリンク可否の判定に使う。
+// 読み込み前・取得失敗時は空集合＝リンクを出さない（存在しないページへ誘導しない側に倒す）
+let ITEM_PAGES = new Set();
+fetchFirst(["items/keys.json", "https://tkiyo1007-eng.github.io/drugs-data/items/keys.json"])
+  .then(res => res && res.json())
+  .then(keys => {
+    if(!Array.isArray(keys) || !keys.length) return;
+    ITEM_PAGES = new Set(keys);
+    // 読み込みより先に詳細が開かれていた場合（#drug= の直リンクなど）は出し直す
+    if(currentDetailName && document.getElementById("mBack").classList.contains("open")){
+      const d = findByName(currentDetailName);
+      if(d) refreshItemLink(d);
+    }
+  }).catch(()=>{});
+
 // 品目名→案内文PDFのAI要約 {lines:[3行], date}
 let SUMMARIES = {};
 fetchFirst(["announcement_summaries.json", "https://tkiyo1007-eng.github.io/drugs-data/announcement_summaries.json"])
@@ -1411,10 +1628,18 @@ let FAVS = new Set();
 try{ FAVS = new Set(JSON.parse(localStorage.getItem("favDrugs")||"[]")); }catch(e){}
 function saveFavs(){ try{ localStorage.setItem("favDrugs", JSON.stringify([...FAVS])); }catch(e){} }
 let currentDetailName = null;
-// 絞り込みピルをコードから切り替える（0件時のクリアボタン・★全解除時のフォールバック用）
+// 絞り込みピルの選択状態。見た目(.active)だけでなく aria-pressed も必ず同時に更新する
+// （クラスだけだとスクリーンリーダーにどれが選択中か伝わらない）
+function setActivePill(f){
+  document.querySelectorAll(".pill").forEach(p=>{
+    const on = p.dataset.f === f;
+    p.classList.toggle("active", on);
+    p.setAttribute("aria-pressed", String(on));
+  });
+}
 function setFilter(f){
   filter = f;
-  document.querySelectorAll(".pill").forEach(p=>p.classList.toggle("active", p.dataset.f===f));
+  setActivePill(f);
   visibleCount = PAGE_SIZE;
   render();
 }
@@ -1468,6 +1693,22 @@ $favNotice.addEventListener("click", e=>{
 function pathNoHash(){ return location.pathname + location.search; }
 function findByName(name){ return ITEMS.find(x=>x.n===name); }
 
+// 品目別ページ（items/<YJコード>.html）への内部リンクを出す。
+// 「どの品目のページが生成されるか」を推測せず、生成側が出力した実在キー一覧
+// （items/keys.json）と照合する。推測だと判定ロジックのずれや生成タイミングのずれ
+// （データ更新23:50 / ページ生成1:30）でリンク先が404になる
+function refreshItemLink(d){
+  const $mItem = document.getElementById("mItemLink");
+  const itemKey = (d.yj||"").replace(/[^0-9A-Za-z]/g, ""); // 生成側の item_key() と同じ作り方
+  if(itemKey && ITEM_PAGES.has(itemKey)){
+    $mItem.href = `items/${itemKey}.html`;
+    $mItem.textContent = "この品目の供給状況ページ（共有・ブックマーク用）";
+    $mItem.hidden = false;
+  }else{
+    $mItem.hidden = true;
+  }
+}
+
 function openDetail(d, opts={}){
   if(!d) return;
   const st = STATUS[d.s];
@@ -1520,6 +1761,7 @@ function openDetail(d, opts={}){
   $mPmda.href = "https://www.pmda.go.jp/PmdaSearch/iyakuSearch/?nameWord=" + encodeURIComponent(d.n);
   $mPmda.textContent = "添付文書・IFを探す（PMDA公式検索・品目名入力済み）";
   $mPmda.hidden = false;
+  refreshItemLink(d);
   // 同成分・同分類の関連品目（アプリ版⑤⑩と同等の確認補助）
   const $mRel = document.getElementById("mRelated");
   let relHtml = "";
@@ -1575,7 +1817,14 @@ function openDetail(d, opts={}){
   }
   // メーカーリンクは出荷調整・供給停止・販売中止・薬価削除予定の品目のみ（通常出荷では不要）
   const needsMakerLink = d.s !== "ok" || d.delist;
-  const makerRowText = d.row ? d.row.join(" ") : d.m; // 製造/販売メーカー両方を対象に検索
+  // 検索対象は製造メーカー・販売メーカーの欄だけに限る。
+  // 行全体を連結して探すと、代替候補欄に載った他社品（「〜錠「ニプロ」」など）や
+  // 理由欄の他社名を拾ってしまい、その品目とは無関係のメーカーの供給情報ページへ
+  // 「◯◯社の供給情報を見る」と案内してしまう
+  const MAKER_COLS = ["販売メーカー", "製造メーカー"];
+  const makerRowText = (d.row && CSV_HEAD)
+    ? MAKER_COLS.map(c=>{ const i = CSV_HEAD.indexOf(c); return i>=0 ? (d.row[i]||"") : ""; }).join(" ")
+    : d.m;
   const announcement = needsMakerLink ? findAnnouncement(d.n) : null; // 個別案内文(PDF)が見つかっていれば優先
   // メーカーが販売中止を公表していても、厚労省の供給状況区分への反映が遅れて
   // 「限定出荷」等のまま表示され続ける場合がある（例: イソジンシュガーパスタ軟膏は
@@ -1671,7 +1920,18 @@ function tryOpenFromHash(){
 $mClose.addEventListener("click", ()=>closeDetail());
 $mBack.addEventListener("click", e=>{ if(e.target===$mBack) closeDetail(); });
 document.addEventListener("keydown", e=>{
-  if(e.key==="Escape" && $mBack.classList.contains("open")) closeDetail();
+  if(!$mBack.classList.contains("open")) return;
+  if(e.key==="Escape"){ closeDetail(); return; }
+  // フォーカストラップ: モーダルを開いている間は Tab が背後のページへ抜けないようにする
+  // （aria-modal="true" だけでは実際のフォーカス移動までは制御されない）
+  if(e.key!=="Tab") return;
+  const focusable = [...$mBack.querySelectorAll('a[href], button, select, input, [tabindex]:not([tabindex="-1"])')]
+    .filter(el=>!el.hasAttribute("hidden") && !el.disabled && el.offsetParent !== null);
+  if(!focusable.length) return;
+  const first = focusable[0], last = focusable[focusable.length-1];
+  if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+  else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+  else if(!$mBack.contains(document.activeElement)){ e.preventDefault(); first.focus(); }
 });
 // お気に入り登録（★をON）した瞬間だけ、押した位置から光の粒を飛ばす小さな演出
 function sparkAt(el){
@@ -1732,18 +1992,14 @@ document.getElementById("mRelated").addEventListener("click", e=>{
   const row = e.target.closest(".rel-row");
   if(row){ const found = findByName(row.dataset.name); if(found) openDetail(found); }
 });
-$list.addEventListener("keydown", e=>{
-  if(e.key!=="Enter" && e.key!==" ") return;
-  const card = e.target.closest(".drug-card");
-  if(card){ e.preventDefault(); openDetail(SHOWN[+card.dataset.i]); }
-});
+// キーボード操作は品目名の <button>（.drug-open）が標準で処理するため、
+// 独自の keydown ハンドラは不要（残すと Enter で openDetail が二重に走り履歴が余分に積まれる）
 
 document.getElementById("pills").addEventListener("click", e=>{
   const btn = e.target.closest(".pill");
   if(!btn) return;
-  document.querySelectorAll(".pill").forEach(p=>p.classList.remove("active"));
-  btn.classList.add("active");
   filter = btn.dataset.f;
+  setActivePill(filter);
   visibleCount = PAGE_SIZE;
   render();
 });
@@ -1947,18 +2203,35 @@ function mapStatus(s){
   return "ok";
 }
 
-// 引用符対応の簡易CSVパーサ
+// 引用符対応の簡易CSVパーサ。
+// 約1MB・16,000行を1文字ずつ舐めると低速端末で体感できるほど遅くなるため、
+// 特殊文字（" , CR LF）までを slice でまとめて切り出す。挙動は1文字ずつ版と同一
+// （ランダム入力30万件で出力一致を確認済み）。
 function parseCSV(text){
-  const rows=[]; let row=[], cell="", inQ=false;
-  for(let i=0;i<text.length;i++){
-    const ch=text[i];
+  const rows=[]; let row=[], cell="", inQ=false, i=0;
+  const n=text.length;
+  while(i<n){
     if(inQ){
-      if(ch==='"'){ if(text[i+1]==='"'){cell+='"';i++;} else inQ=false; }
-      else cell+=ch;
-    }else if(ch==='"') inQ=true;
-    else if(ch===","){ row.push(cell); cell=""; }
-    else if(ch==="\n"){ row.push(cell); rows.push(row); row=[]; cell=""; }
-    else if(ch!=="\r") cell+=ch;
+      // 引用符の中: 次の " までは中身をそのまま取り込む（"" はエスケープされた引用符）
+      const j=text.indexOf('"', i);
+      if(j<0){ cell+=text.slice(i); i=n; break; }
+      cell+=text.slice(i,j);
+      if(text[j+1]==='"'){ cell+='"'; i=j+2; }
+      else { inQ=false; i=j+1; }
+      continue;
+    }
+    let j=i;
+    while(j<n){
+      const c=text.charCodeAt(j);
+      if(c===34||c===44||c===10||c===13) break; // " , LF CR
+      j++;
+    }
+    if(j>i){ cell+=text.slice(i,j); i=j; if(i>=n) break; }
+    const ch=text[i];
+    if(ch==='"'){ inQ=true; i++; }
+    else if(ch===","){ row.push(cell); cell=""; i++; }
+    else if(ch==="\n"){ row.push(cell); rows.push(row); row=[]; cell=""; i++; }
+    else i++; // CR は捨てる
   }
   if(cell!=="" || row.length){ row.push(cell); rows.push(row); }
   return rows;
@@ -2108,6 +2381,46 @@ async function fetchFirst(urls){
     }catch(e){}
   }
 })();
+
+/* ===== PWA: Service Worker 登録 =====
+   ねらいは高速化ではなくオフライン耐性（調剤室・病棟は電波が悪いことが多い）。
+   供給データはネットワーク優先で取りに行くので、鮮度は従来どおり保たれる。 */
+if("serviceWorker" in navigator && window.isSecureContext){
+  // 通常は load 後（本体の読み込みと競合させない）。ただし load は外部リソース
+  // （Webフォント・アクセス解析）を待つため、通信が悪い環境ほど発火が遅れる。
+  // オフライン対策が目的のSWが、まさに必要な状況で登録されないのは本末転倒なので
+  // 一定時間経ったら load を待たずに登録する
+  let swDone = false;
+  const registerSW = ()=>{
+    if(swDone) return;
+    swDone = true;
+    navigator.serviceWorker.register("sw.js").catch(()=>{});
+  };
+  if(document.readyState === "complete") registerSW();
+  else window.addEventListener("load", registerSW);
+  setTimeout(registerSW, 3000);
+}
+
+/* ===== ホーム画面に追加（主にAndroid） =====
+   iOSにはネイティブアプリがあるので、インストール可能な環境でだけ案内を出す。
+   Chrome系は beforeinstallprompt を捕まえて任意のタイミングで表示できる。 */
+let deferredPrompt = null;
+const $install = document.getElementById("installBtn");
+window.addEventListener("beforeinstallprompt", e=>{
+  e.preventDefault();
+  deferredPrompt = e;
+  if($install) $install.hidden = false;
+});
+if($install){
+  $install.addEventListener("click", async ()=>{
+    if(!deferredPrompt) return;
+    $install.hidden = true;
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    deferredPrompt = null;
+  });
+}
+window.addEventListener("appinstalled", ()=>{ if($install) $install.hidden = true; });
 
 </script>
 <script data-goatcounter="https://kt1007.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
