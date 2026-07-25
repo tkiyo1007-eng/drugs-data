@@ -516,6 +516,36 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 @media(max-width:560px){.news-item{flex-direction:column;gap:4px}.news-date{width:auto}}
 
+/* ===== 話題のニュース ===== */
+.topic-list{display:grid;gap:16px}
+.topic-card{padding:24px 28px}
+.topic-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.topic-tag{
+  font-size:10.5px;font-weight:800;padding:4px 11px;border-radius:999px;
+  color:var(--blue);background:rgba(79,128,244,.1);border:1px solid rgba(79,128,244,.3);
+}
+.topic-tag.warn{color:#A8620E;background:rgba(232,145,47,.12);border-color:rgba(232,145,47,.38)}
+.topic-tag.alert{color:#A03030;background:rgba(225,77,77,.1);border-color:rgba(225,77,77,.35)}
+.topic-date{font-size:11.5px;color:var(--sub);font-weight:700}
+.topic-title{font-size:16.5px;font-weight:800;color:var(--ink);line-height:1.6;margin-bottom:8px}
+.topic-lede{font-size:13.5px;color:var(--sub);line-height:1.85}
+.topic-points{
+  margin-top:13px;padding:13px 18px 13px 34px;border-radius:14px;
+  background:rgba(79,128,244,.06);border:1px solid rgba(79,128,244,.18);
+}
+.topic-points li{font-size:13px;line-height:1.8;color:var(--ink)}
+.topic-points li+li{margin-top:5px}
+.topic-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:15px}
+.topic-search{
+  border:1px solid rgba(79,128,244,.28);cursor:pointer;font-family:inherit;font-size:12.5px;font-weight:800;
+  padding:9px 17px;border-radius:999px;color:var(--blue-deep);background:rgba(79,128,244,.1);transition:.2s;
+}
+.topic-search:hover{background:rgba(79,128,244,.18);transform:translateY(-1px)}
+.topic-src{font-size:11.5px;color:var(--sub);text-decoration:none;border-bottom:1px solid rgba(90,107,148,.3)}
+.topic-src:hover{color:var(--blue);border-bottom-color:var(--blue)}
+.topic-note{font-size:10.5px;color:var(--sub);margin-top:14px;line-height:1.7}
+@media(max-width:640px){.topic-card{padding:20px}.topic-title{font-size:15px}.topic-points{padding-left:30px}}
+
 /* ===== 最近問い合わせが多い製品 ===== */
 .trending-list{display:flex;flex-wrap:wrap;gap:10px;padding:28px}
 .trending-chip{
@@ -675,6 +705,7 @@ footer a:hover{color:var(--blue)}
   </a>
   <div class="nav-links">
     <a href="#demo">薬を検索</a>
+    <a href="#topics">話題のニュース</a>
     <a href="#news">お知らせ</a>
     <a href="#features">特徴</a>
     <a href="#compare">従来サイトとの違い</a>
@@ -775,6 +806,14 @@ footer a:hover{color:var(--blue)}
   <div class="trending-list glass" id="trendingList"></div>
 </section>
 
+<section id="topics" class="reveal">
+  <p class="sec-eyebrow">TOPICS</p>
+  <h2>いま話題のニュース。</h2>
+  <p class="sec-lede">販売移管・発売延期など、現場で話題になっている製品ニュースを要点だけまとめました。関連する品目は、そのまま上の検索で供給状況を確認できます。</p>
+  <div class="topic-list" id="topicList"></div>
+  <p class="topic-note">※ 各社の公式発表をもとに編集しています。実際の対応にあたっては、必ず出典の原文をご確認ください。</p>
+</section>
+
 <section id="makers" class="reveal" style="display:none">
   <p class="sec-eyebrow">MAKERS</p>
   <h2>メーカー別の供給状況。</h2>
@@ -794,6 +833,10 @@ footer a:hover{color:var(--blue)}
   </div>
   <h3 style="font-size:15px;font-weight:800;margin:26px 0 10px">医薬品供給ナビからのお知らせ</h3>
   <div class="news-list glass">
+    <div class="news-item">
+      <div class="news-date num">2026.07.25</div>
+      <div class="news-body"><span class="news-tag">新機能</span>「いま話題のニュース」を新設しました。販売移管・発売延期など、現場で話題になっている製品ニュースを要点だけまとめて掲載します。関連品目はボタン一つで上の検索に送れるので、供給状況をその場で確認できます。<p>初回は、ロコイド軟膏0.1%・クリーム0.1%の鳥居薬品からチェプラファームへの製造販売承認承継（取引特約店の変更が必要な施設あり）と、高用量インフルエンザHAワクチン「エフルエルダ筋注」の発売延期・2026/27シーズンの定期接種見送りの2件を掲載しています。</p></div>
+    </div>
     <div class="news-item">
       <div class="news-date num">2026.07.21</div>
       <div class="news-body"><span class="news-tag">新機能</span>トップのSUPPLY PULSEカードに「供給危機指数」を追加しました。限定出荷・供給停止の品目の割合から算出する独自の0〜100指数で、毎日算出・前日比も表示します。花粉指数のように、毎日の医薬品供給の逼迫度を数字でチェックできます（算出方法はFAQをご参照ください）。<p>あわせて詳細画面の「同成分・同剤形の品目」「同じ薬効分類の同系統医薬品」の並び順を改善しました。</p></div>
@@ -1023,6 +1066,7 @@ footer a:hover{color:var(--blue)}
   <div class="foot-links">
     <a href="#top">トップ</a>
     <a href="#demo">薬を検索</a>
+    <a href="#topics">話題のニュース</a>
     <a href="#news">お知らせ</a>
     <a href="#data">データについて</a>
     <a href="#glossary">用語解説</a>
@@ -1748,6 +1792,82 @@ document.getElementById("trendingList").addEventListener("click", e=>{
   document.querySelector('.pill[data-f="all"]').classList.add("active");
   visibleCount = PAGE_SIZE;
   render();
+  document.getElementById("demo").scrollIntoView({behavior:"smooth", block:"start"});
+});
+
+/* ===== 話題のニュース（TOPICS） =====
+   現場で話題になっている製品ニュースの手動キュレーション。自動収集はしない
+   （拾いたいニュースの取捨選択が自動では効かないため、掲載は都度こちらで判断する）。
+
+   ▼ 追加するときは、このテンプレートを下の配列の「先頭」にコピーして埋める
+      （表示は配列の上から順に最大4件。5件目以降は自動的に載らなくなる）
+   {
+     date: "2026.08.01",              // 表示用の日付
+     tag: "販売移管",                  // バッジ文言（販売移管／発売延期／自主回収／薬価 など自由）
+     tone: "warn",                    // 省略=青／"warn"=橙（供給に影響する予定変更）／"alert"=赤（回収・中止）
+     title: "見出し",
+     lede: "2〜3行の概要。現場が何をすればよいかが分かる書き方にする",
+     points: ["要点1", "要点2"],       // 日付・特約店・問い合わせ先など。省略可
+     q: "検索語",                      // 「関連品目の供給状況を見る」ボタンの検索語。
+                                      // 厚労省CSVに載っている品目だけ指定する（未発売品などは省略＝ボタン非表示）
+     source: { name: "◯◯社 プレスリリース（PDF）", url: "https://..." },  // 公式発表の原文を必ず張る
+   },
+*/
+const TOPICS = [
+  {
+    date: "2026.07.23",
+    tag: "販売移管",
+    title: "ロコイド軟膏0.1%・ロコイドクリーム0.1%、鳥居薬品からチェプラファームへ製造販売承認を承継",
+    lede: "鳥居薬品とチェプラファームがライセンス契約を解消し、1975年発売のロコイドの製造販売承認をチェプラファームへ承継することで合意しました。取引特約店が入れ替わるため、卸の変更手続きが必要になる施設があります。",
+    points: [
+      "製造販売承認承継日：2026年12月1日（鳥居薬品が販売した製品は使用期限まで使用可）",
+      "販売移管日：2027年1月5日（チェプラファームから取引特約店への出荷開始日）",
+      "医療機関からチェプラファーム取引特約店への発注可能日：2027年1月13日",
+      "取引特約店はアステム・アルフレッサ・メディセオ・バイタルネットなど計15社。取引のない卸を使っている場合は変更手続きが必要",
+      "包装・各種コードの変更は2026年10月頃に別途案内予定",
+      "問い合わせ先は2026年11月30日まで鳥居薬品、12月1日以降はチェプラファーム",
+    ],
+    q: "ロコイド",
+    source: { name: "鳥居薬品・チェプラファーム プレスリリース（PDF）", url: "https://www.torii.co.jp/release/2026/20260723_1.pdf" },
+  },
+  {
+    date: "2026.07.21",
+    tag: "発売延期",
+    tone: "warn",
+    title: "高用量インフルエンザHAワクチン「エフルエルダ筋注」が発売延期、2026/27シーズンの定期接種への導入も見送り",
+    lede: "サノフィは2026年秋頃の発売に向けて準備を進めていましたが、国内製造委託先での一部製造プロセスの確立・検証に想定を上回る期間を要し、計画通りの供給が困難になったと発表しました。75歳以上を対象とした定期接種化の方針が了承されていましたが、今シーズンの導入は見送られます。",
+    points: [
+      "2026年10月1日より75歳以上の成人を対象に定期接種化される方針が第64回厚生科学審議会で了承されていた",
+      "供給状況を踏まえ、2026/27シーズンの定期接種への導入は見送り（厚労省「令和8年度のインフルエンザに係る定期の予防接種について」2026年7月21日発出）",
+      "臨床試験で評価された有効性・安全性に影響を与えるものではない",
+      "日本以外で供給されるエフルエルダに影響はない",
+    ],
+    source: { name: "サノフィ プレスリリース（PDF）", url: "https://www.sanofi.co.jp/assets/dot-jp/pressreleases/2026/260721-02.pdf" },
+  },
+];
+const $topicList = document.getElementById("topicList");
+function renderTopics(list){
+  $topicList.innerHTML = list.slice(0, 4).map(t=>`
+    <article class="topic-card glass">
+      <div class="topic-head">
+        <span class="topic-tag${t.tone==="warn" ? " warn" : t.tone==="alert" ? " alert" : ""}">${esc(t.tag)}</span>
+        <span class="topic-date num">${esc(t.date)}</span>
+      </div>
+      <h3 class="topic-title">${esc(t.title)}</h3>
+      <p class="topic-lede">${esc(t.lede)}</p>
+      ${(t.points && t.points.length) ? `<ul class="topic-points">${t.points.map(p=>`<li>${esc(p)}</li>`).join("")}</ul>` : ""}
+      <div class="topic-actions">
+        ${t.q ? `<button type="button" class="topic-search" data-q="${esc(t.q)}">関連品目の供給状況を見る</button>` : ""}
+        ${(t.source && t.source.url) ? `<a class="topic-src" href="${esc(t.source.url)}" target="_blank" rel="noopener">出典：${esc(t.source.name)}</a>` : ""}
+      </div>
+    </article>`).join("");
+}
+renderTopics(TOPICS);
+$topicList.addEventListener("click", e=>{
+  const btn = e.target.closest(".topic-search");
+  if(!btn) return;
+  $q.value = btn.dataset.q;
+  setFilter("all");
   document.getElementById("demo").scrollIntoView({behavior:"smooth", block:"start"});
 });
 
