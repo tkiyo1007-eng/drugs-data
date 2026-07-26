@@ -2040,11 +2040,10 @@ document.getElementById("trendingList").addEventListener("click", e=>{
   const chip = e.target.closest(".trending-chip");
   if(!chip) return;
   $q.value = chip.dataset.q;
-  filter = "all";
-  document.querySelectorAll(".pill").forEach(p=>p.classList.remove("active"));
-  document.querySelector('.pill[data-f="all"]').classList.add("active");
-  visibleCount = PAGE_SIZE;
-  render();
+  // ピルの切り替えを自前で書かず setFilter() を通す。
+  // ここだけ classList を直接いじっていたため aria-pressed が更新されず、
+  // 見た目は「すべて」なのに支援技術には前の絞り込みが選択中と伝わっていた
+  setFilter("all");
   document.getElementById("demo").scrollIntoView({behavior:"smooth", block:"start"});
 });
 
