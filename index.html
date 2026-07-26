@@ -257,6 +257,13 @@ h1 .grad{
 .pulse-total small{font-size:.38em;font-weight:700;opacity:.85;margin-left:4px}
 .pulse-sub{font-size:12.5px;opacity:.78;margin-bottom:20px}
 .supply-bar{display:flex;height:14px;border-radius:99px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.25);margin-bottom:16px}
+/* 実データ読込前のプレースホルダー。具体的な比率を示さない中立の帯 */
+.sbar-skeleton{flex:1;background:rgba(255,255,255,.16)}
+/* 「—」と実数値で幅が変わるとレイアウトがずれるため、最小幅を確保しておく */
+#counter{display:inline-block;min-width:3.6ch}
+.float-chip .big{min-width:2.6ch;display:inline-block}
+/* 凡例は実データが載るまで高さだけ確保して空にしておく */
+.legend:empty{min-height:19px}
 .supply-bar span{transform-origin:left;animation:grow 1.1s cubic-bezier(.2,.8,.2,1) both .3s}
 @keyframes grow{from{transform:scaleX(0)}}
 .legend{display:flex;flex-wrap:wrap;gap:12px 14px;font-size:12px;position:relative;padding-right:86px}
@@ -890,23 +897,18 @@ footer a:hover{color:var(--blue)}
   <div class="hero-visual">
     <div class="pulse-card">
       <div class="pulse-head"><span>SUPPLY PULSE</span><span id="today" class="num"></span></div>
-      <div class="pulse-total"><span class="num" id="counter">0</span><small>品目を収載</small></div>
-      <div class="pulse-sub">全国の医療用医薬品の供給ステータスを毎日集計</div>
-      <div class="supply-bar" id="sbar">
-        <span style="width:76%;background:linear-gradient(90deg,#3CC383,#2FAE6E)"></span>
-        <span style="width:15%;background:linear-gradient(90deg,#F2A94F,#E8912F);animation-delay:.5s"></span>
-        <span style="width:6%;background:linear-gradient(90deg,#F06B6B,#E14D4D);animation-delay:.65s"></span>
-        <span style="width:3%;background:linear-gradient(90deg,#A5876C,#8A6A52);animation-delay:.8s"></span>
+      <div class="pulse-total"><span class="num" id="counter">—</span><small>品目を収載</small></div>
+      <div class="pulse-sub" id="pulseSub">全国の医療用医薬品の供給ステータスを毎日集計</div>
+      <!-- 帯グラフ・凡例・数値は、実データを読み込むまで具体的な値を出さない。
+           固定値を置いておくと、取得に失敗したときに根拠のない数字が
+           本物の集計のように表示され続けてしまう（供給状況を扱う以上これは避ける） -->
+      <div class="supply-bar" id="sbar" aria-hidden="true">
+        <span class="sbar-skeleton"></span>
       </div>
-      <div class="legend" id="legend">
-        <div><span class="dot" style="color:#3CC383;background:#3CC383"></span>通常出荷 76%</div>
-        <div><span class="dot" style="color:#F2A94F;background:#F2A94F"></span>限定出荷 15%</div>
-        <div><span class="dot" style="color:#F06B6B;background:#F06B6B"></span>供給停止 6%</div>
-        <div><span class="dot" style="color:#B08E73;background:#B08E73"></span>販売中止 3%</div>
-      </div>
+      <div class="legend" id="legend"></div>
     </div>
-    <div class="float-chip glass chip1"><span class="big num" id="chipLim">2,441</span>限定出荷</div>
-    <div class="float-chip glass chip2"><span class="big num" id="chipStop">977</span>供給停止</div>
+    <div class="float-chip glass chip1"><span class="big num" id="chipLim">—</span>限定出荷</div>
+    <div class="float-chip glass chip2"><span class="big num" id="chipStop">—</span>供給停止</div>
   </div>
 </header>
 
@@ -2179,7 +2181,7 @@ function countUp(total){
     if(p < 1) requestAnimationFrame(tick);
   })(t0);
 }
-countUp(16280);
+// 総品目数は実データ読込後に countUp() する（固定値を先に見せない）
 const today = new Date();
 document.getElementById("today").textContent =
   `${today.getFullYear()}.${String(today.getMonth()+1).padStart(2,"0")}.${String(today.getDate()).padStart(2,"0")} 時点`;
@@ -2246,7 +2248,13 @@ async function fetchFirst(urls){
 
 (async function loadRealData(){
   const res = await fetchFirst(CSV_SOURCES);
-  if(!res) return; // 取得失敗時はサンプル表示のまま
+  if(!res){
+    // 取得失敗。ヒーローの数値はプレースホルダーのまま据え置き、
+    // 集計を出せていないことを明示する（固定値を本物のように見せない）
+    document.getElementById("pulseSub").textContent =
+      "供給状況データを取得できませんでした。時間をおいて再読み込みしてください。";
+    return;
+  }
   const rows = parseCSV((await res.text()).replace(/^﻿/,""));
   const head = rows.shift();
   const col = name => head.indexOf(name);
