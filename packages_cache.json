@@ -3793,5 +3793,32 @@
  "https://www.nichiiko.co.jp/medicine/file/72940/information/20251204cG1.pdf": [],
  "https://www.nichiiko.co.jp/medicine/file/72950/information/20250917cG1.pdf": [],
  "https://www.nichiiko.co.jp/medicine/file/26750/information/20260630cI1.pdf": [],
- "https://www.nichiiko.co.jp/medicine/file/78660/information/20260105cG1.pdf": []
+ "https://www.nichiiko.co.jp/medicine/file/78660/information/20260105cG1.pdf": [],
+ "https://www.nichiiko.co.jp/medicine/file/79700/information/20240319cG6.pdf": [],
+ "https://www.nichiiko.co.jp/medicine/file/79710/information/20240319cG6.pdf": [],
+ "https://www.nichiiko.co.jp/medicine/file/79930/information/20250130cG5.pdf": [],
+ "https://www.nichiiko.co.jp/medicine/file/79940/information/20251203cG1.pdf": [],
+ "https://www.nichiiko.co.jp/medicine/file/79950/information/20250130cG5.pdf": [],
+ "https://www.nichiiko.co.jp/medicine/file/24420/information/20250910cI1.pdf": [],
+ "https://www.nichiiko.co.jp/medicine/file/80890/information/20250910cG1.pdf": [],
+ "https://www.nichiiko.co.jp/medicine/file/24060/information/20231004cI3.pdf": [],
+ "https://medical.nihon-generic.co.jp/uploadfiles/medicine/KETOX00_CHUUSHI_2605.pdf": [],
+ "https://www.nichiiko.co.jp/medicine/file/79890/information/20260722cI2.pdf": [
+  {
+   "pkg": "PTP50錠",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/70180/information/20260722cI3.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr27_1059_1.pdf": [
+  {
+   "pkg": "PTP100Cap",
+   "until": ""
+  }
+ ]
 }
