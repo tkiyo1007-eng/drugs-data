@@ -1572,19 +1572,28 @@ fetchFirst(["maker_announcements.json", "https://tkiyo1007-eng.github.io/drugs-d
   .then(res => res && res.json()).then(data => { if(data) ANNOUNCEMENTS = {...MANUAL_ANNOUNCEMENTS, ...data}; }).catch(()=>{});
 
 // 生成済みの品目別ページのキー（YJコード）一覧。詳細モーダルのリンク可否の判定に使う。
-// 読み込み前・取得失敗時は空集合＝リンクを出さない（存在しないページへ誘導しない側に倒す）
+// 読み込み前・取得失敗時は空集合＝リンクを出さない（存在しないページへ誘導しない側に倒す）。
+//
+// 詳細を開いたときに初めて取得する。約2,100件のキーで30KB弱あり、ページを開いた
+// だけの人には不要。読み込みの遅い回線では本体のCSV(約1MB)と帯域を奪い合うため、
+// 必要になるまで取りに行かない
 let ITEM_PAGES = new Set();
-fetchFirst(["items/keys.json", "https://tkiyo1007-eng.github.io/drugs-data/items/keys.json"])
-  .then(res => res && res.json())
-  .then(keys => {
-    if(!Array.isArray(keys) || !keys.length) return;
-    ITEM_PAGES = new Set(keys);
-    // 読み込みより先に詳細が開かれていた場合（#drug= の直リンクなど）は出し直す
-    if(currentDetailName && document.getElementById("mBack").classList.contains("open")){
-      const d = findByName(currentDetailName);
-      if(d) refreshItemLink(d);
-    }
-  }).catch(()=>{});
+let itemPagesLoading = null;
+function loadItemPages(){
+  if(itemPagesLoading) return itemPagesLoading;
+  itemPagesLoading = fetchFirst(["items/keys.json", "https://tkiyo1007-eng.github.io/drugs-data/items/keys.json"])
+    .then(res => res && res.json())
+    .then(keys => {
+      if(!Array.isArray(keys) || !keys.length) return;
+      ITEM_PAGES = new Set(keys);
+      // 取得を待たずにモーダルを開いているので、届いた時点でリンクを出し直す
+      if(currentDetailName && document.getElementById("mBack").classList.contains("open")){
+        const d = findByName(currentDetailName);
+        if(d) refreshItemLink(d);
+      }
+    }).catch(()=>{});
+  return itemPagesLoading;
+}
 
 // 品目名→案内文PDFのAI要約 {lines:[3行], date}
 let SUMMARIES = {};
@@ -1700,6 +1709,7 @@ function findByName(name){ return ITEMS.find(x=>x.n===name); }
 // （items/keys.json）と照合する。推測だと判定ロジックのずれや生成タイミングのずれ
 // （データ更新23:50 / ページ生成1:30）でリンク先が404になる
 function refreshItemLink(d){
+  loadItemPages(); // 初回だけ取得が走る（2回目以降は同じPromiseを返すだけ）
   const $mItem = document.getElementById("mItemLink");
   const itemKey = (d.yj||"").replace(/[^0-9A-Za-z]/g, ""); // 生成側の item_key() と同じ作り方
   if(itemKey && ITEM_PAGES.has(itemKey)){
