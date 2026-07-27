@@ -896,7 +896,7 @@ footer a:hover{color:var(--blue)}
 
   <div class="hero-visual">
     <div class="pulse-card">
-      <div class="pulse-head"><span>SUPPLY PULSE</span><span id="today" class="num"></span></div>
+      <div class="pulse-head"><span>SUPPLY PULSE</span><span id="today" class="num">—</span></div>
       <div class="pulse-total"><span class="num" id="counter">—</span><small>品目を収載</small></div>
       <div class="pulse-sub" id="pulseSub">全国の医療用医薬品の供給ステータスを毎日集計</div>
       <!-- 帯グラフ・凡例・数値は、実データを読み込むまで具体的な値を出さない。
@@ -1316,10 +1316,21 @@ function dispSpec(spec){
   return /^[0-9０-９.．]+(錠|カプセル|包|枚|瓶|管|筒|袋|個|本|組|回分|キット|セット|シート|ｇ|g)$/.test(spec) ? "" : spec;
 }
 // 更新日からの経過日数（情報の鮮度の目安。事実の提示のみで「古い＝誤り」の判定はしない）
+//
+// 厚労省データの更新日は「日本時間の暦日」なので、日本時間の暦日どうしで引き算する。
+// 以前は new Date("2026-07-20") をUTCの0時として解釈したまま現在時刻との差をとって
+// いたため、JSTとの9時間差で毎日21時〜24時だけ1日多く表示されていた
+// （更新当日の21時に「1日前」と出る。夜勤帯がまるごと該当する）
+function jstDayNumber(ms){
+  const d = new Date(ms + 9 * 3600 * 1000);   // 日本時間の壁時計に合わせる
+  return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()) / 86400000;
+}
 function daysAgo(dstr){
-  const dt = new Date(String(dstr).replaceAll("/","-"));
-  if(isNaN(dt)) return null;
-  return Math.max(0, Math.round((Date.now() - dt.getTime()) / 86400000));
+  const m = String(dstr).replaceAll("/", "-").match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  if(!m) return null;
+  const data = Date.UTC(+m[1], +m[2] - 1, +m[3]) / 86400000;
+  if(isNaN(data)) return null;
+  return Math.max(0, Math.round(jstDayNumber(Date.now()) - data));
 }
 
 // 表示中データ。初期値=サンプル、実CSV読込後に差し替わる
@@ -1428,16 +1439,38 @@ function syncHashSoon(){
   clearTimeout(hashTimer);
   hashTimer = setTimeout(syncHash, 400);
 }
+// 「★お気に入り」ピルは登録が1件以上あるときだけ表示している。
+// お気に入りが空のまま #f=fav で開くと、押されているピルが画面上に無いのに
+// 0件だけが出る（PWAのショートカット「お気に入りを見る」から起きる）ので「すべて」に戻す
+function resolveFilter(f){
+  if(!f || !HASH_FILTERS.includes(f)) return "all";
+  if(f === "fav" && !FAVS.size) return "all";
+  return f;
+}
 function applyHashState(){
   if(location.hash.startsWith("#drug=")) return;
   const p = new URLSearchParams(location.hash.slice(1));
   const q = p.get("q"), f = p.get("f");
   if(q) $q.value = q;
-  if(f && HASH_FILTERS.includes(f)){
-    filter = f;
-    setActivePill(f);
+  const resolved = resolveFilter(f);
+  if(resolved !== "all"){
+    filter = resolved;
+    setActivePill(resolved);
   }
 }
+// アプリを開いたまま #f=... / #q=... へ移動したときにも状態を反映する。
+// PWAのショートカット（#f=limited / #f=fav）や共有リンクを、すでに開いている
+// タブ・ホーム画面アプリで踏むとハッシュだけが変わり、起動時の applyHashState() は
+// もう走らない。自前のURL更新は replaceState（syncHash）と pushState（品目詳細）で
+// どちらも hashchange を発火させないので、ここで自分の更新を拾い直す心配はない
+window.addEventListener("hashchange", ()=>{
+  if(location.hash.startsWith("#drug=")) return;
+  const p = new URLSearchParams(location.hash.slice(1));
+  if(!p.has("q") && !p.has("f")) return; // #demo などページ内リンクは無視する
+  $q.value = p.get("q") || "";
+  visibleCount = PAGE_SIZE;
+  setFilter(resolveFilter(p.get("f")));
+});
 // 16,000品目のフィルタとカード再構築を打鍵ごとに走らせると低速端末で入力が詰まるため、
 // 入力が落ち着いてから描画する（IME変換中の中間文字列で無駄に描画しない効果もある）
 let searchTimer = null;
@@ -2191,9 +2224,12 @@ function countUp(total){
   })(t0);
 }
 // 総品目数は実データ読込後に countUp() する（固定値を先に見せない）
-const today = new Date();
-document.getElementById("today").textContent =
-  `${today.getFullYear()}.${String(today.getMonth()+1).padStart(2,"0")}.${String(today.getDate()).padStart(2,"0")} 時点`;
+
+// 「◯◯ 時点」はデータの日付であって今日の日付ではない。
+// 以前はここで端末の今日を入れていたため、version.json が取れないと
+// 実際より新しい日付を「データの時点」として示してしまっていた
+// （取得失敗のメッセージと同時に「本日時点」と出る矛盾も起きていた）。
+// 日付は version.json から得られたときにだけ表示する
 
 /* ===== 実データ読み込み（drugs_app_ready.csv / version.json） ===== */
 const CSV_SOURCES = ["drugs_app_ready.csv", "https://tkiyo1007-eng.github.io/drugs-data/drugs_app_ready.csv"];
