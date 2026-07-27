@@ -924,7 +924,7 @@ footer a:hover{color:var(--blue)}
   <div class="demo-shell glass">
     <div class="search-box">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-      <input id="q" type="search" placeholder="薬品名・成分名・メーカー名で検索" aria-label="薬品名・成分名・メーカー名で検索" autocomplete="off">
+      <input id="q" type="search" placeholder="薬品名・成分名・メーカー名・YJコードで検索" aria-label="薬品名・成分名・メーカー名・YJコードで検索" autocomplete="off">
     </div>
     <div class="pills" id="pills" role="group" aria-label="供給状況で絞り込む">
       <button type="button" class="pill active" data-f="all" aria-pressed="true">すべて</button>
@@ -1343,7 +1343,13 @@ const $loadMore = document.getElementById("loadMore");
 const $csvBtn = document.getElementById("csvBtn");
 function render(){
   // スペース区切りの複数キーワードはAND検索にする（NFKCで全角スペースも半角化済み）
-  const terms = norm($q.value.trim()).split(/\s+/).filter(Boolean);
+  //
+  // YJコード（薬価基準収載医薬品コード）でも引けるようにする。レセコンや薬歴から
+  // 品名ではなくコードを手元に持っていることがあるため。
+  // ただし常に照合すると「200」で検索したときにYJコードの一部に当たった無関係な
+  // 品目が混ざるので、コードとして書かれた語（数字始まりの7文字以上）のときだけ見る
+  const terms = norm($q.value.trim()).split(/\s+/).filter(Boolean)
+    .map(t => ({t, code: /^[0-9][0-9a-z]{6,}$/.test(t)}));
   const hits = ITEMS.filter(d=>{
     if(filter==="changed"){
       // 「本日の更新」: 最新の変化日に供給状況が実際に変わった品目だけ
@@ -1354,7 +1360,7 @@ function render(){
     }else if(filter==="delist"){
       if(!d.delist) return false;
     }else if(filter!=="all" && d.s!==filter) return false;
-    return terms.every(t=>d.q.includes(t));
+    return terms.every(x => d.q.includes(x.t) || (x.code && d.yj && d.yj.toLowerCase().includes(x.t)));
   });
   const shown = hits.slice(0, visibleCount);
   SHOWN = shown;
