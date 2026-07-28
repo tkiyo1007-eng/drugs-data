@@ -1,5 +1,11 @@
 [
  {
+  "date": "2026/07/28",
+  "title": "クラスI回収 該当回収品目　新鮮凍結血漿-LR「日赤」480、照射濃厚血小板-LRBS「日赤」",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html",
+  "tag": "回収"
+ },
+ {
   "date": "2026/07/27",
   "title": "治験エコシステム導入推進事業に関する新たな活動を開始しました",
   "url": "https://www.pmda.go.jp/relief-services/0011.html",
@@ -52,11 +58,5 @@
   "title": "外国製造業者認定・登録番号を掲載しました",
   "url": "https://www.pmda.go.jp/review-services/drug-reviews/foreign-mfr/0003.html",
   "tag": "承認審査"
- },
- {
-  "date": "2026/07/21",
-  "title": "添付文書改訂相談に基づく添付文書改訂（医薬品）を掲載しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/revision-based-on-the-consultation/0001.html",
-  "tag": "安全対策"
  }
 ]
