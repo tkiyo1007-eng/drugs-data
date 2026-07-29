@@ -3820,5 +3820,15 @@
    "pkg": "PTP100Cap",
    "until": ""
   }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/64840/information/20260728cI5.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  }
  ]
 }
