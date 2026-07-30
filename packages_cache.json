@@ -3830,5 +3830,35 @@
    "pkg": "PTP500錠",
    "until": ""
   }
+ ],
+ "https://med.sawai.co.jp/file/pr27_1106_2.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/91090/information/20260728cI3.pdf": [
+  {
+   "pkg": "PTP42錠",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr27_1591_2.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP140錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ200錠",
+   "until": ""
+  }
  ]
 }
