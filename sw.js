@@ -26,6 +26,11 @@ const DATA_FILES = [
   "status_changes.json",
   "news.json",
   "crisis_index.json",
+  "maker_announcements.json",
+  "announcement_summaries.json",
+  "announcement_packages.json",
+  "resolution_stats.json",
+  "items/keys.json",
 ];
 
 self.addEventListener("install", event => {
@@ -68,29 +73,47 @@ function revalidatingFetch(request){
   }
 }
 
-async function networkFirst(request, cacheName){
-  const cache = await caches.open(cacheName);
-  const network = revalidatingFetch(request).then(res => {
-    if(res && res.ok) cache.put(request, res.clone());
-    return res;
+function networkFirst(request, cacheName, {fallbackOnHttpError=false, event=null}={}){
+  const cachePromise = caches.open(cacheName);
+  const network = cachePromise.then(async cache => {
+    const res = await revalidatingFetch(request);
+    if(res && res.ok){
+      // 保存完了まで追跡する。put()を待たずにレスポンスだけ返すと、Service Workerが
+      // 停止されて次回オフライン時のキャッシュが残っていないことがある
+      await cache.put(request, res.clone());
+      return res;
+    }
+    // CSV/JSONは一時的な5xxや配信エラーでも前回値を使えるようにする。
+    // ナビゲーションは404をLPへ化けさせないため、HTTPレスポンスをそのまま返す
+    return fallbackOnHttpError ? null : res;
   });
-  network.catch(() => {}); // 下の race とは別に握りつぶし、未処理の拒否にしない
 
-  const hit = await cache.match(request);
-  if(!hit) return network; // キャッシュが無ければネットワークを待つしかない
+  // タイムアウト後にキャッシュを先に返しても、進行中の取得と保存をWorkerの
+  // ライフタイムに結び付ける。waitUntilはイベント処理中に同期的に呼ぶ必要がある
+  if(event) event.waitUntil(network.then(()=>{}, ()=>{}));
 
-  let timer;
-  try{
-    const res = await Promise.race([
-      network.catch(() => null),
-      new Promise(resolve => { timer = setTimeout(() => resolve(null), NETWORK_TIMEOUT_MS); }),
-    ]);
-    // タイムアウトしてキャッシュを返したあとも network は動き続け、
-    // 応答が返ればキャッシュを更新するので次回は新しい方が出る
-    return res || hit;
-  }finally{
-    clearTimeout(timer);
-  }
+  return (async ()=>{
+    const cache = await cachePromise;
+    const hit = await cache.match(request);
+    if(!hit){
+      const res = await network; // キャッシュが無ければネットワークを待つしかない
+      if(res) return res;
+      throw new Error("Network response was not successful");
+    }
+
+    let timer;
+    try{
+      const res = await Promise.race([
+        network.catch(() => null),
+        new Promise(resolve => { timer = setTimeout(() => resolve(null), NETWORK_TIMEOUT_MS); }),
+      ]);
+      // タイムアウトしてキャッシュを返したあとも network は動き続け、
+      // 応答が返ればキャッシュを更新するので次回は新しい方が出る
+      return res || hit;
+    }finally{
+      clearTimeout(timer);
+    }
+  })();
 }
 
 // キャッシュ優先。無ければ取得してから入れる
@@ -121,14 +144,14 @@ self.addEventListener("fetch", event => {
   // ページ遷移（LP本体・品目別ページ）
   if(req.mode === "navigate"){
     event.respondWith(
-      networkFirst(req, SHELL_CACHE).catch(() => caches.match("./index.html"))
+      networkFirst(req, SHELL_CACHE, {event}).catch(() => caches.match("./index.html"))
     );
     return;
   }
 
   // 供給データ
   if(DATA_FILES.some(f => url.pathname.endsWith("/" + f) || url.pathname.endsWith(f))){
-    event.respondWith(networkFirst(req, DATA_CACHE));
+    event.respondWith(networkFirst(req, DATA_CACHE, {fallbackOnHttpError:true, event}));
     return;
   }
 
