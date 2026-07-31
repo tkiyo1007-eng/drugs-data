@@ -1,5 +1,35 @@
 [
  {
+  "date": "2026/07/31",
+  "title": "「高齢者におけるポリファーマシー対策の普及啓発資材について」を掲載しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/0010.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/07/31",
+  "title": "人道的見地から実施される治験の情報（医薬品、機器・再生）を更新しました",
+  "url": "https://www.pmda.go.jp/review-services/trials/0016.html",
+  "tag": "承認審査"
+ },
+ {
+  "date": "2026/07/31",
+  "title": "未承認薬データベースを更新しました",
+  "url": "https://www.pmda.go.jp/review-services/drug-reviews/review-information/p-drugs/0013.html",
+  "tag": "承認審査"
+ },
+ {
+  "date": "2026/07/31",
+  "title": "放射性医薬品の医薬品事前評価相談の受付方法等を掲載しました",
+  "url": "https://www.pmda.go.jp/review-services/f2f-pre/consultations/0025.html",
+  "tag": "承認審査"
+ },
+ {
+  "date": "2026/07/31",
+  "title": "Annual Report 2025を掲載しました。",
+  "url": "https://www.pmda.go.jp/review-services/gmp-qms-gctp/gmp/0011.html",
+  "tag": "承認審査"
+ },
+ {
   "date": "2026/07/30",
   "title": "クラスI回収 該当回収品目　新鮮凍結血漿-LR「日赤」240",
   "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html",
@@ -18,12 +48,6 @@
   "tag": "承認審査"
  },
  {
-  "date": "2026/07/27",
-  "title": "オレンジレターNo.27を掲載しました。",
-  "url": "https://www.pmda.go.jp/review-services/gmp-qms-gctp/gmp/0011.html",
-  "tag": "承認審査"
- },
- {
   "date": "2026/07/24",
   "title": "9月の簡易相談実施予定を掲載しました（医療機器等）",
   "url": "https://www.pmda.go.jp/review-services/f2f-pre/consultations/0015.html",
@@ -33,30 +57,6 @@
   "date": "2026/07/24",
   "title": "[イベント]Early Consideration「少数例臨床試験に関する留意事項」説明会開催のお知らせを掲載しました",
   "url": "https://www.pmda.go.jp/review-services/symposia/0207.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/07/22",
-  "title": "「不具合が疑われる症例報告に関する情報（コンビネーション製品）」に2026年3月分の情報を追加しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/adr-info/malfunctions-combination-drugs/0001.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/07/22",
-  "title": "「不具合が疑われる症例報告に関する情報（医療機器）」に2026年3月分の情報を追加しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/devices/0090.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/07/22",
-  "title": "「不具合が疑われる症例報告に関する情報（再生医療等製品）」に2026年3月分の情報を追加しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/ctp/0006.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/07/22",
-  "title": "外国製造業者認定・登録番号を掲載しました",
-  "url": "https://www.pmda.go.jp/review-services/drug-reviews/foreign-mfr/0003.html",
   "tag": "承認審査"
  }
 ]
