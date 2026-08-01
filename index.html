@@ -377,6 +377,11 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   color:#B0500E;background:rgba(232,145,47,.16);border:1px solid rgba(232,145,47,.4);
   white-space:nowrap;
 }
+.discontinued-badge{
+  font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:999px;
+  color:#7B3F28;background:rgba(138,106,82,.15);border:1px solid rgba(138,106,82,.42);
+  white-space:nowrap;
+}
 .change-badge{
   font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:999px;white-space:nowrap;
 }
@@ -1392,6 +1397,13 @@ function render(){
     const days = daysAgo(d.d);
     const ago = days!=null ? `<span class="drug-ago num">（${days.toLocaleString()}日前）</span>` : "";
     const delistBadge = d.delist ? `<span class="delist-badge">薬価削除予定</span>` : "";
+    // 厚労省の現在の供給区分と、メーカーが公表した将来の販売中止は両立し得る。
+    // 「通常出荷」を上書きせず、別のバッジで販売中止予定を明示する。
+    const announcement = findAnnouncement(d.n);
+    const discontinuedBadge = d.s !== "ended" && isDiscontinuationAnnouncement(announcement)
+      ? `<span class="discontinued-badge">販売中止予定</span>`
+      : (isPackageDiscontinuationAnnouncement(announcement)
+        ? `<span class="discontinued-badge">一部包装中止</span>` : "");
     // 直近30日以内に供給状況が実際に変わった品目は「旧→新」バッジで変化を明示
     const ch = LIVE ? CHANGES[d.n] : null;
     const chDays = ch ? daysAgo(ch.date) : null;
@@ -1416,7 +1428,7 @@ function render(){
       </div>
       <div class="drug-maker">${esc(d.m)}${spec}</div>
       <div class="drug-foot">
-        <span class="drug-tags"><span class="status-tag">${st.label}</span>${changeBadge}${delistBadge}</span>
+        <span class="drug-tags"><span class="status-tag">${st.label}</span>${changeBadge}${delistBadge}${discontinuedBadge}</span>
         <span class="drug-date num">更新 ${d.d}${ago}</span>
       </div>
     </article>`;
@@ -1586,6 +1598,11 @@ function findMakerLink(makerText){
 // 収集対象外メーカーの販売中止案内などを得意先指摘ベースでここに追加する。
 // 同名品目が自動収集された場合はそちらが優先される
 const MANUAL_ANNOUNCEMENTS = {
+  "インサイドパップ７０ｍｇ": {
+    url: "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
+    title: "インサイドパップ70mg 販売中止品目のご案内（2026年4月3日付）",
+    maker: "久光製薬",
+  },
   "イソジンシュガーパスタ軟膏": {
     url: "https://med.shionogi.co.jp/news/package/2026/260511_pdf.html",
     title: "イソジンシュガーパスタ軟膏 販売中止のご案内（第2報）",
@@ -1597,6 +1614,11 @@ const MANUAL_ANNOUNCEMENTS = {
 // （規格表記などにゆれがある）場合に、商品名の正規表現でマッチさせる。
 // 完全一致（ANNOUNCEMENTS）にヒットしなかった品目のみ照合される
 const MANUAL_ANNOUNCEMENT_PATTERNS = [
+  [/^テモカプリル塩酸塩錠[１２４124](?:ｍｇ|mg)「サワイ」$/i, {
+    url: "https://med.sawai.co.jp/file/pr28_1235_1.pdf",
+    title: "テモカプリル塩酸塩錠1mg・2mg・4mg「サワイ」販売中止のご案内（2026年4月）",
+    maker: "沢井製薬",
+  }],
   [/^ルリコナゾール(クリーム|軟膏).*イワキ/, {
     url: "https://www.iwakiseiyaku.co.jp/dcms_media/other/luoosirase20260717.pdf",
     title: "ルリコナゾールクリーム1%・軟膏1%「イワキ」出荷再開のご案内（2026年7月17日付）",
@@ -1607,6 +1629,19 @@ function findAnnouncement(name){
   if(ANNOUNCEMENTS[name]) return ANNOUNCEMENTS[name];
   const hit = MANUAL_ANNOUNCEMENT_PATTERNS.find(([re])=>re.test(name));
   return hit ? hit[1] : null;
+}
+function isDiscontinuationAnnouncement(announcement){
+  if(!announcement) return false;
+  // drugs-data側で構造化済みならその判定を優先する。一部包装中止や
+  // 「他社品販売中止に伴う限定出荷」を製品全体の中止と誤表示しない。
+  if(announcement.event_type) return announcement.event_type === "discontinued";
+  return /販売中止|販売終了|製造中止/.test(announcement.title)
+    && !/一部包装|包装中止|他社(?:品|製品).*販売中止.*(?:影響|伴)/.test(announcement.title);
+}
+function isPackageDiscontinuationAnnouncement(announcement){
+  if(!announcement) return false;
+  if(announcement.event_type) return announcement.event_type === "package_discontinued";
+  return /一部包装.*(?:販売|発売)中止|包装中止/.test(announcement.title);
 }
 
 // 品目名→メーカー公式の個別案内文(PDF)。取得できたものだけ登録される
@@ -1664,6 +1699,9 @@ function loadSupplementalData(){
     fetchFirst(["resolution_stats.json", "https://tkiyo1007-eng.github.io/drugs-data/resolution_stats.json"])
       .then(res => res && res.json()).then(data => { if(data) RESOLUTION_STATS = data; }).catch(()=>{}),
   ]).then(()=>{
+    // 自動収集された案内にもカードの「販売中止予定」バッジを反映する。
+    // 検索語・絞り込み・表示件数は現在値を保ったまま再描画される。
+    if(LIVE) render();
     // 読込中に詳細を開いた場合は、届いた案内文・要約・包装情報をその場で反映する
     if(currentDetailName && document.getElementById("mBack").classList.contains("open")){
       const d = findByName(currentDetailName);
@@ -1894,8 +1932,10 @@ function openDetail(d, opts={}){
     $mRel.hidden = true;
     $mRel.innerHTML = "";
   }
-  // メーカーリンクは出荷調整・供給停止・販売中止・薬価削除予定の品目のみ（通常出荷では不要）
-  const needsMakerLink = d.s !== "ok" || d.delist;
+  // 個別のメーカー案内は「通常出荷」でも必要。現在の出荷と将来の販売中止は
+  // 両立するため、供給区分だけで案内検索を止めない。
+  const announcement = findAnnouncement(d.n);
+  const needsMakerLink = d.s !== "ok" || d.delist || !!announcement;
   // 検索対象は製造メーカー・販売メーカーの欄だけに限る。
   // 行全体を連結して探すと、代替候補欄に載った他社品（「〜錠「ニプロ」」など）や
   // 理由欄の他社名を拾ってしまい、その品目とは無関係のメーカーの供給情報ページへ
@@ -1904,15 +1944,18 @@ function openDetail(d, opts={}){
   const makerRowText = (d.row && CSV_HEAD)
     ? MAKER_COLS.map(c=>{ const i = CSV_HEAD.indexOf(c); return i>=0 ? (d.row[i]||"") : ""; }).join(" ")
     : d.m;
-  const announcement = needsMakerLink ? findAnnouncement(d.n) : null; // 個別案内文(PDF)が見つかっていれば優先
   // メーカーが販売中止を公表していても、厚労省の供給状況区分への反映が遅れて
   // 「限定出荷」等のまま表示され続ける場合がある（例: イソジンシュガーパスタ軟膏は
   // 2025-12に販売中止案内・2026-05出荷終了）。供給状況欄は公表データのまま変えず、
   // 案内文の存在を詳細の先頭で補足する（タイトルは「一部包装のみ」等の限定条件を
   // 落とさないよう原文のまま引用）
-  if(announcement && d.s !== "ended" && /販売中止|販売終了|製造中止/.test(announcement.title)){
+  if(d.s !== "ended" && isDiscontinuationAnnouncement(announcement)){
     document.getElementById("mGrid").insertAdjacentHTML("afterbegin",
-      `<dt>メーカー案内</dt><dd>「${esc(cleanAnnouncementTitle(announcement.title))}」が公表されています（下の案内文リンク参照）。供給状況欄は厚労省公表データの区分のため、反映が遅れている場合があります。</dd>`);
+      `<dt>メーカー案内</dt><dd>「${esc(cleanAnnouncementTitle(announcement.title))}」が公表されています（下の案内文リンク参照）。供給状況欄は現在の出荷区分、メーカー案内は今後の販売予定を示すため、「通常出荷」と「販売中止予定」が同時に表示される場合があります。</dd>`);
+  }
+  if(isPackageDiscontinuationAnnouncement(announcement)){
+    document.getElementById("mGrid").insertAdjacentHTML("afterbegin",
+      `<dt>メーカー案内</dt><dd>「${esc(cleanAnnouncementTitle(announcement.title))}」が公表されています（下の案内文リンク参照）。製品全体ではなく一部の包装単位に関する案内です。対象包装は必ず原文でご確認ください。</dd>`);
   }
   // 出荷再開の案内も同様: 供給状況欄は公表データのまま変えず、案内済みであることを補足する
   if(announcement && d.s !== "ok" && /出荷再開|供給再開|出荷調整解除/.test(announcement.title)){
