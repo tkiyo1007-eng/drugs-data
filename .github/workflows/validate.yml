@@ -1,0 +1,24 @@
+name: Validate data pipeline
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Python構文検査
+        run: python3 -m py_compile scripts/*.py
+      - name: 回帰テスト
+        run: python3 -m unittest discover -s scripts -p 'test_*.py'
+      - name: 現行メーカー案内データ品質検査
+        run: python3 scripts/validate_maker_announcements.py --min-count 300

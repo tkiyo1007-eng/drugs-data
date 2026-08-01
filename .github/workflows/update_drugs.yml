@@ -20,6 +20,9 @@ jobs:
       - name: 依存ライブラリインストール
         run: pip install openpyxl requests pytz pypdf
 
+      - name: メーカー案内収集の回帰テスト
+        run: python3 -m unittest discover -s scripts -p 'test_*.py'
+
       - name: 供給状況Excel ダウンロード（厚労省ページからリンク取得）
         run: |
           python3 - <<'EOF'
@@ -142,7 +145,9 @@ jobs:
 
       - name: メーカー案内文(PDF)を取得してマッチング
         run: python3 scripts/fetch_maker_announcements.py drugs_app_ready.csv maker_announcements.json 2 60
-        continue-on-error: true  # メーカーサイト側の一時的な障害でデータ更新自体を止めない
+
+      - name: メーカー案内データ品質検査
+        run: python3 scripts/validate_maker_announcements.py --min-count 300
 
       - name: 案内文PDFから包装単位を抽出（新規URLのみ）
         run: python3 scripts/extract_pdf_packages.py maker_announcements.json announcement_packages.json 60
@@ -159,7 +164,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add drugs_app_ready.csv version.json maker_announcements.json announcement_packages.json packages_cache.json status_changes.json news.json
+          git add drugs_app_ready.csv version.json maker_announcements.json manual_announcements.json \
+            maker_announcement_events.json maker_collection_health.json unmatched_maker_announcements.json \
+            announcement_packages.json packages_cache.json status_changes.json news.json
           git diff --cached --quiet && echo "変更なし" && exit 0
           git commit -m "データ自動更新: $(TZ=Asia/Tokyo date +'%Y/%m/%d')"
           git pull --rebase origin main || true
