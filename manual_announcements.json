@@ -23,5 +23,47 @@
   "maker": "ニプロ",
   "title": "2026.03.12 販売中止品の経過措置期間延長についてのご案内（オルメサルタンOD錠ほか対象品目一覧）",
   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q8000012YhX7IAK"
+ },
+ "インサイドパップ７０ｍｇ": {
+  "maker": "久光製薬",
+  "title": "2026.04.03 インサイドパップ70mg 販売中止に関するご案内",
+  "url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
+  "event_type": "discontinued",
+  "announced_at": "2026-04-03"
+ },
+ "テモカプリル塩酸塩錠１ｍｇ「サワイ」": {
+  "maker": "沢井製薬",
+  "title": "2026.04 テモカプリル塩酸塩錠1mg・2mg・4mg「サワイ」販売中止のご案内",
+  "url": "https://med.sawai.co.jp/file/pr28_1235_1.pdf",
+  "event_type": "discontinued",
+  "announced_at": "2026-04-01"
+ },
+ "テモカプリル塩酸塩錠２ｍｇ「サワイ」": {
+  "maker": "沢井製薬",
+  "title": "2026.04 テモカプリル塩酸塩錠1mg・2mg・4mg「サワイ」販売中止のご案内",
+  "url": "https://med.sawai.co.jp/file/pr28_1235_1.pdf",
+  "event_type": "discontinued",
+  "announced_at": "2026-04-01"
+ },
+ "テモカプリル塩酸塩錠４ｍｇ「サワイ」": {
+  "maker": "沢井製薬",
+  "title": "2026.04 テモカプリル塩酸塩錠1mg・2mg・4mg「サワイ」販売中止のご案内",
+  "url": "https://med.sawai.co.jp/file/pr28_1235_1.pdf",
+  "event_type": "discontinued",
+  "announced_at": "2026-04-01"
+ },
+ "テモカプリル塩酸塩錠１ｍｇ「ＮＰ」": {
+  "maker": "ニプロ",
+  "title": "2024.01.19 テモカプリル塩酸塩錠1mg・2mg・4mg「NP」販売中止品のご案内",
+  "url": "https://med.nipro.co.jp/servlet/servlet.FileDownload?file=00P5h00000GAer2EAD",
+  "event_type": "discontinued",
+  "announced_at": "2024-01-19"
+ },
+ "テモカプリル塩酸塩錠２ｍｇ「ＮＰ」": {
+  "maker": "ニプロ",
+  "title": "2024.01.19 テモカプリル塩酸塩錠1mg・2mg・4mg「NP」販売中止品のご案内",
+  "url": "https://med.nipro.co.jp/servlet/servlet.FileDownload?file=00P5h00000GAer2EAD",
+  "event_type": "discontinued",
+  "announced_at": "2024-01-19"
  }
 }

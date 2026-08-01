@@ -1,0 +1,72 @@
+{
+ "checked": "2026-08-01",
+ "sources": [
+  {
+   "source": "parse_sawai",
+   "ok": true,
+   "count": 20,
+   "error": ""
+  },
+  {
+   "source": "parse_nichiiko",
+   "ok": true,
+   "count": 9,
+   "error": ""
+  },
+  {
+   "source": "parse_nichiiko_excel",
+   "ok": true,
+   "count": 503,
+   "error": ""
+  },
+  {
+   "source": "parse_nihon_generic",
+   "ok": true,
+   "count": 214,
+   "error": ""
+  },
+  {
+   "source": "parse_kyorin",
+   "ok": true,
+   "count": 2,
+   "error": ""
+  },
+  {
+   "source": "parse_dsep",
+   "ok": true,
+   "count": 2568,
+   "error": ""
+  },
+  {
+   "source": "parse_kemifa",
+   "ok": true,
+   "count": 61,
+   "error": ""
+  },
+  {
+   "source": "parse_towa",
+   "ok": true,
+   "count": 40,
+   "error": ""
+  },
+  {
+   "source": "parse_takata",
+   "ok": true,
+   "count": 470,
+   "error": ""
+  },
+  {
+   "source": "parse_hisamitsu",
+   "ok": true,
+   "count": 58,
+   "error": ""
+  },
+  {
+   "source": "parse_nipro",
+   "ok": true,
+   "count": 80,
+   "error": ""
+  }
+ ],
+ "total": 4025
+}

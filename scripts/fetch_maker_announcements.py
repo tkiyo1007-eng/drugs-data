@@ -7,11 +7,12 @@ maker_announcements.json を生成する。
 拾えるため、MAX_PAGES を小さく保てる。初回だけ広めに遡る。
 
 対応メーカー: 沢井製薬・日医工・日本ジェネリック・キョーリンリメディオ・
-             第一三共エスファ・日本ケミファ（他社は個別案内文の構造上、現状スコープ外）
+             第一三共エスファ・日本ケミファ・東和薬品・高田製薬・久光製薬・ニプロ
 """
 import csv
 import datetime
 import json
+import os
 import re
 import sys
 import unicodedata
@@ -173,8 +174,86 @@ def parse_takata(pages=2):
     return [("高田製薬", t, u) for t, u in items]
 
 
-PARSERS = [parse_sawai, parse_nichiiko, parse_nichiiko_excel, parse_nihon_generic, parse_kyorin, parse_dsep, parse_kemifa, parse_towa, parse_takata]
-PAGINATED_PARSERS = {"parse_nihon_generic", "parse_towa", "parse_takata"}  # pagesパラメータを渡すパーサー
+def parse_hisamitsu(pages=2):
+    """久光製薬のお知らせ一覧から、直近 ``pages`` 年分のPDFを取得する。
+
+    一覧は過去分まで1ページにまとまっているため、URL先頭の yymmdd を使って
+    年を絞る。タイトルに複数品目が列挙される販売中止案内もそのまま保持する。
+    """
+    html = fetch("https://www.hisamitsu-pharm.jp/product/whatsnew/index.html?category=c3")
+    this_year = datetime.date.today().year
+    min_year = this_year - max(1, min(pages, 5)) + 1
+    items = []
+    seen = set()
+    for m in re.finditer(r'<a[^>]*href="([^"]+\.pdf(?:/[^"]+)?)"[^>]*>(.*?)</a>', html, re.S | re.I):
+        href, text = m.group(1), re.sub(r"<[^>]+>", " ", m.group(2))
+        title = re.sub(r"\s+", " ", text).strip()
+        dm = re.search(r"/(\d{2})(\d{2})(\d{2})(?:[_-]|\.|[a-z])", href, re.I)
+        if not (title and dm):
+            continue
+        year = 2000 + int(dm.group(1))
+        if year < min_year:
+            continue
+        url = href if href.startswith("http") else "https://www.hisamitsu-pharm.jp" + href
+        if url in seen:
+            continue
+        seen.add(url)
+        date = f"{year:04d}.{int(dm.group(2)):02d}.{int(dm.group(3)):02d}"
+        items.append((f"{date} {title}", url))
+    return [("久光製薬", t, u) for t, u in items]
+
+
+NIPRO_API = "https://med.nipro.co.jp/webruntime/api/apex/execute?language=ja&asGuest=true&htmlEncode=false"
+NIPRO_APEX_CLASS = "@udd/01p5g00000jrWnK"
+
+
+def fetch_nipro_page(category, page):
+    """ニプロのお知らせ公開APIから1ページ取得する。"""
+    payload = {
+        "namespace": "", "classname": NIPRO_APEX_CLASS, "method": "all",
+        "isContinuation": False,
+        "params": {"keyword": "", "year": "", "category": category,
+                   "perPage": 20, "currentPage": page},
+        "cacheable": False,
+    }
+    req = urllib.request.Request(
+        NIPRO_API, data=json.dumps(payload).encode("utf-8"),
+        headers={"User-Agent": UA, "Content-Type": "application/json",
+                 "Origin": "https://med.nipro.co.jp",
+                 "Referer": "https://med.nipro.co.jp/pharmaceuticals/news"})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return json.load(r).get("returnValue", {})
+
+
+def parse_nipro(pages=2):
+    """ニプロの「販売中止」「供給関連情報」を公開APIから取得する。"""
+    items = []
+    seen = set()
+    for category in ("販売中止", "供給関連情報"):
+        for page in range(1, pages + 1):
+            data = fetch_nipro_page(category, page)
+            records = data.get("data") or []
+            for row in records:
+                title = (row.get("c_NpNewsTitle__c") or "").strip()
+                href = row.get("newsPDFUrl__c") or ""
+                date = (row.get("c_NpNewsDateTimeToShowFormula__c") or "").strip()
+                if not (title and href):
+                    continue
+                url = href if href.startswith("http") else "https://med.nipro.co.jp" + href
+                if url in seen:
+                    continue
+                seen.add(url)
+                items.append((f"{date} {title}".strip(), url))
+            if not records or page >= int(data.get("lastPage") or page):
+                break
+    return [("ニプロ", t, u) for t, u in items]
+
+
+PARSERS = [parse_sawai, parse_nichiiko, parse_nichiiko_excel, parse_nihon_generic,
+           parse_kyorin, parse_dsep, parse_kemifa, parse_towa, parse_takata,
+           parse_hisamitsu, parse_nipro]
+PAGINATED_PARSERS = {"parse_nihon_generic", "parse_towa", "parse_takata",
+                     "parse_hisamitsu", "parse_nipro"}  # pagesパラメータを渡すパーサー
 
 
 # ===== 沢井製薬: 全製品供給状況一覧PDF経由の深掘り =====
@@ -246,8 +325,9 @@ def deepen_sawai(result, csv_path, limit=200):
     today = datetime.date.today().isoformat()
     with open(csv_path, encoding="utf-8-sig") as f:
         rows = list(csv.DictReader(f))
-    targets = [r for r in rows if "通常出荷" not in r["供給状況"] or "薬価削除予定" in (r.get("代替候補") or "")]
-    sawai_targets = [r for r in targets
+    # 現在「通常出荷」でも将来の販売中止案内が出ていることがあるため、
+    # 沢井製薬の全品目をローテーション対象にする。
+    sawai_targets = [r for r in rows
                       if "沢井製薬" in (r["販売メーカー"] or r["製造メーカー"])]
     # 並び順: 未取得(0)を最優先、既存(1)は最終確認日が古い順（未記録は最古扱い）
     def sort_key(r):
@@ -277,7 +357,7 @@ def deepen_sawai(result, csv_path, limit=200):
             prev = result.get(name, {})
             if prev.get("url") != url:
                 updated += 1
-            result[name] = {"maker": "沢井製薬", "title": title, "url": url, "checked": today}
+            result[name] = make_announcement_record("沢井製薬", title, url, checked=today)
         elif result.get(name, {}).get("maker") == "沢井製薬":
             # 既存はあるが今回見つからなかった場合は最終確認日だけ更新（案内文は残す）
             result[name]["checked"] = today
@@ -287,13 +367,18 @@ def deepen_sawai(result, csv_path, limit=200):
 
 def collect_announcements(nihon_generic_pages=3):
     all_items = []
+    health = []
     for parser in PARSERS:
         try:
             kwargs = {"pages": nihon_generic_pages} if parser.__name__ in PAGINATED_PARSERS else {}
-            all_items.extend(parser(**kwargs))
+            items = parser(**kwargs)
+            all_items.extend(items)
+            health.append({"source": parser.__name__, "ok": bool(items), "count": len(items),
+                           "error": "" if items else "取得件数が0件"})
         except Exception as e:
             print(f"[WARN] {parser.__name__} failed: {e}", file=sys.stderr)
-    return all_items
+            health.append({"source": parser.__name__, "ok": False, "count": 0, "error": str(e)})
+    return all_items, health
 
 
 # 供給状況と無関係なお知らせ(電子添文改訂・学会情報など)を除外するキーワード
@@ -308,6 +393,98 @@ def is_supply_related(title):
     return any(k in title for k in SUPPLY_KEYWORDS)
 
 
+def classify_event(title):
+    """案内タイトルを表示用の安定した種別に分類する。
+
+    「他社品販売中止に伴う限定出荷」を自社品の販売中止と誤判定しないこと、
+    一部包装の中止を製品全体の中止と分けることを優先する。
+    """
+    t = norm(title)
+    if re.search(r"一部包装.*(?:販売|発売)中止|包装中止", t):
+        return "package_discontinued"
+    if (re.search(r"販売中止|販売終了|製造中止|取り扱い中止|取扱い販売中止", t)
+            and not re.search(r"他社(?:品|製品).*販売中止.*(?:影響|伴)", t)):
+        return "discontinued"
+    if re.search(r"出荷再開|供給再開|限定出荷解除|出荷調整解除|供給停止解除", t):
+        return "resumed"
+    if re.search(r"出荷停止|供給停止|欠品", t):
+        return "stopped"
+    if re.search(r"限定出荷|出荷調整|納品調整|注文辞退", t):
+        return "limited"
+    if re.search(r"供給|出荷", t):
+        return "supply"
+    return "other"
+
+
+def extract_announcement_date(title):
+    t = norm(title)
+    for pattern in (r"(20\d{2})[./年](\d{1,2})[./月](\d{1,2})日?",
+                    r"^(20\d{2})(\d{2})(\d{2})"):
+        m = re.search(pattern, t)
+        if m:
+            return f"{int(m.group(1)):04d}-{int(m.group(2)):02d}-{int(m.group(3)):02d}"
+    return ""
+
+
+def make_announcement_record(maker, title, url, checked=None):
+    record = {"maker": maker, "title": title, "url": url,
+              "event_type": classify_event(title)}
+    announced_at = extract_announcement_date(title)
+    if announced_at:
+        record["announced_at"] = announced_at
+    if checked:
+        record["checked"] = checked
+    return record
+
+
+MAKER_ALIASES = {
+    "沢井製薬": ("沢井製薬",), "日医工": ("日医工",),
+    "日本ジェネリック": ("日本ジェネリック",),
+    "キョーリンリメディオ": ("キョーリンリメディオ",),
+    "第一三共エスファ": ("第一三共エスファ",),
+    "日本ケミファ": ("日本ケミファ",), "東和薬品": ("東和薬品",),
+    "高田製薬": ("高田製薬",), "久光製薬": ("久光製薬",),
+    "ニプロ": ("ニプロ",),
+}
+
+
+def maker_matches_row(maker, row):
+    maker_text = norm((row.get("販売メーカー") or "") + " " + (row.get("製造メーカー") or ""))
+    return any(alias in maker_text for alias in MAKER_ALIASES.get(maker, (maker,)))
+
+
+def is_normal_row(row):
+    return "通常出荷" in (row.get("供給状況") or "")
+
+
+def has_delist_notice(row):
+    return "薬価削除予定" in (row.get("代替候補") or "")
+
+
+def update_event_history(history, current, today=None):
+    """現在の代表案内を品目別履歴へ追記する。同じURLは重複させない。"""
+    today = today or datetime.date.today().isoformat()
+    result = {name: [dict(e) for e in events]
+              for name, events in (history or {}).items() if isinstance(events, list)}
+    for name, info in current.items():
+        events = result.setdefault(name, [])
+        found = next((e for e in events
+                      if e.get("url") == info.get("url") and e.get("title") == info.get("title")), None)
+        if found is None:
+            found = {k: info[k] for k in ("maker", "title", "url", "event_type", "announced_at")
+                     if info.get(k)}
+            found["first_seen"] = today
+            events.append(found)
+        else:
+            # event_type追加前に作られた履歴など、同一URLの既存レコードを移行する。
+            for key in ("maker", "event_type", "announced_at"):
+                if info.get(key):
+                    found[key] = info[key]
+        found["last_checked"] = info.get("checked") or today
+        events.sort(key=lambda e: (e.get("announced_at", ""), e.get("first_seen", "")), reverse=True)
+    return result
+
+
 def base_name_and_specs(name_n):
     """規格違いをまとめて案内する表記（例: シロドシンOD錠2mg/4mg「サワイ」）に対応するため、
     正規化済み商品名から (メーカー括弧を除いたコア名, 含まれる規格数値の集合, メーカー括弧) を抽出する。
@@ -320,20 +497,33 @@ def base_name_and_specs(name_n):
     return core, specs, maker_paren
 
 
-def match_to_csv(announcements, csv_path, existing=None):
+def match_to_csv(announcements, csv_path, existing=None, unmatched_out=None):
     """既存の対応表(existing)があれば引き継ぎつつ、今回の取得分で追加・上書きする。
-    対象(出荷調整等)でなくなった品目は既存分から取り除く。
+    CSVから消えた品目は既存分から取り除く。通常出荷へ戻った品目の一時的な
+    供給案内は除くが、販売中止・包装中止は将来情報なので保持する。
     日次実行はメーカー側お知らせの直近数件しか見ないため、これがないと
     過去に一度だけ広く取得した分が毎回の実行で失われてしまう。
     """
     with open(csv_path, encoding="utf-8-sig") as f:
         rows = list(csv.DictReader(f))
-    targets = [r for r in rows if "通常出荷" not in r["供給状況"] or "薬価削除予定" in (r.get("代替候補") or "")]
-    target_names = {r["商品名"] for r in targets}
+    rows_by_name = {r["商品名"]: r for r in rows}
+    targets = rows  # 「通常出荷」でも販売中止予定を拾うため全品目を対象にする
 
     supply_anns = [(m, t, u, norm(t)) for m, t, u in announcements if is_supply_related(t)]
 
-    result = {name: v for name, v in (existing or {}).items() if name in target_names}
+    result = {}
+    for name, value in (existing or {}).items():
+        row = rows_by_name.get(name)
+        if not row:
+            continue
+        event_type = value.get("event_type") or classify_event(value.get("title", ""))
+        if not is_normal_row(row) or has_delist_notice(row) or event_type in {"discontinued", "package_discontinued"}:
+            value = dict(value)
+            value.setdefault("event_type", event_type)
+            result[name] = value
+
+    used_urls = set()
+    today = datetime.date.today().isoformat()
     for r in targets:
         name = r["商品名"]
         name_n = norm(name)
@@ -341,8 +531,9 @@ def match_to_csv(announcements, csv_path, existing=None):
             continue
         matched = False
         for maker, title, url, title_n in supply_anns:
-            if name_n in title_n:
-                result[name] = {"maker": maker, "title": title, "url": url}
+            if maker_matches_row(maker, r) and name_n in title_n:
+                result[name] = make_announcement_record(maker, title, url, checked=today)
+                used_urls.add(url)
                 matched = True
                 break
         if matched:
@@ -356,9 +547,14 @@ def match_to_csv(announcements, csv_path, existing=None):
         def spec_hit(spec):
             return re.search(rf"(?<!\d){re.escape(spec)}(?!\d)", title_n) is not None
         for maker, title, url, title_n in supply_anns:
-            if core in title_n and maker_paren in title_n and any(spec_hit(s) for s in specs):
-                result[name] = {"maker": maker, "title": title, "url": url}
+            if (maker_matches_row(maker, r) and core in title_n and maker_paren in title_n
+                    and any(spec_hit(s) for s in specs)):
+                result[name] = make_announcement_record(maker, title, url, checked=today)
+                used_urls.add(url)
                 break
+    if unmatched_out is not None:
+        unmatched_out.extend(make_announcement_record(m, t, u)
+                             for m, t, u, _ in supply_anns if u not in used_urls)
     return result
 
 
@@ -376,11 +572,32 @@ def main():
         pass
 
     print("メーカーお知らせ取得中...", file=sys.stderr)
-    announcements = collect_announcements(nihon_generic_pages=pages)
+    announcements, health = collect_announcements(nihon_generic_pages=pages)
     print(f"取得件数: {len(announcements)}", file=sys.stderr)
 
-    matched = match_to_csv(announcements, csv_path, existing=existing)
+    health_path = os.path.join(os.path.dirname(out_path) or ".", "maker_collection_health.json")
+    health_doc = {"checked": datetime.date.today().isoformat(), "sources": health,
+                  "total": len(announcements)}
+    with open(health_path, "w", encoding="utf-8") as f:
+        json.dump(health_doc, f, ensure_ascii=False, indent=1)
+    failed = [h for h in health if not h["ok"]]
+    for h in failed:
+        # GitHub Actionsの画面に警告注釈を出し、単一ソース障害もログに埋もれさせない。
+        print(f"::warning title=メーカー案内収集失敗::{h['source']}: {h['error']}", file=sys.stderr)
+    # 1社の一時障害では厚労省データ更新を止めないが、複数ソースが同時に壊れた場合は
+    # HTML/API変更の可能性が高いためCIを失敗させ、静かな取りこぼしを防ぐ。
+    if len(failed) > max(2, len(PARSERS) // 3) or len(announcements) < 20:
+        print(f"❌ メーカー案内の取得異常: {len(failed)}ソース失敗 / {len(announcements)}件", file=sys.stderr)
+        raise SystemExit(1)
+
+    unmatched = []
+    matched = match_to_csv(announcements, csv_path, existing=existing, unmatched_out=unmatched)
     print(f"マッチ件数: {len(matched)}（新規/更新分含む）", file=sys.stderr)
+
+    unmatched_path = os.path.join(os.path.dirname(out_path) or ".", "unmatched_maker_announcements.json")
+    with open(unmatched_path, "w", encoding="utf-8") as f:
+        json.dump(unmatched, f, ensure_ascii=False, indent=1)
+    print(f"未マッチ案内: {len(unmatched)}件（{unmatched_path}）", file=sys.stderr)
 
     deepen_limit = int(sys.argv[4]) if len(sys.argv) > 4 else 0
     if deepen_limit > 0:
@@ -392,10 +609,28 @@ def main():
     try:
         with open("manual_announcements.json", encoding="utf-8") as f:
             manual = json.load(f)
-        matched.update(manual)
+        for name, info in manual.items():
+            info = dict(info)
+            info.setdefault("event_type", classify_event(info.get("title", "")))
+            announced_at = extract_announcement_date(info.get("title", ""))
+            if announced_at:
+                info.setdefault("announced_at", announced_at)
+            matched[name] = info
         print(f"手動登録を反映: {len(manual)}件", file=sys.stderr)
     except FileNotFoundError:
         pass
+
+    # 代表案内はWeb/iOS向けに1件だけ保持しつつ、差し替え前の案内も履歴へ残す。
+    events_path = os.path.join(os.path.dirname(out_path) or ".", "maker_announcement_events.json")
+    try:
+        with open(events_path, encoding="utf-8") as f:
+            history = json.load(f)
+    except FileNotFoundError:
+        history = {}
+    history = update_event_history(history, matched)
+    with open(events_path, "w", encoding="utf-8") as f:
+        json.dump(history, f, ensure_ascii=False, indent=1)
+    print(f"案内履歴: {sum(map(len, history.values()))}件（{events_path}）", file=sys.stderr)
 
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(matched, f, ensure_ascii=False, indent=1)
