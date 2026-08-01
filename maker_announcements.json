@@ -4122,6 +4122,14 @@
   "event_type": "discontinued",
   "announced_at": "2024-01-19"
  },
+ "イコサペント酸エチル粒状カプセル３００ｍｇ「サワイ」": {
+  "maker": "沢井製薬",
+  "title": "2025/04/07 発売情報 PDF イコサペント酸エチル粒状カプセル300mg「サワイ」 一部包装販売中止のお知らせ PDF",
+  "url": "https://med.sawai.co.jp/file/pr28_1203_1.pdf",
+  "event_type": "package_discontinued",
+  "announced_at": "2025-04-07",
+  "checked": "2026-08-01"
+ },
  "ｄ－クロルフェニラミンマレイン酸塩錠２ｍｇ「ＮＩＧ」": {
   "maker": "日医工",
   "title": "d-クロルフェニラミンマレイン酸塩錠2mg「NIG」 供給状況に関するお知らせ",
@@ -8339,14 +8347,6 @@
   "announced_at": "2024-07-08",
   "checked": "2026-08-01"
  },
- "イコサペント酸エチル粒状カプセル３００ｍｇ「サワイ」": {
-  "maker": "沢井製薬",
-  "title": "2025/04/07 発売情報 PDF イコサペント酸エチル粒状カプセル300mg「サワイ」 一部包装販売中止のお知らせ PDF",
-  "url": "https://med.sawai.co.jp/file/pr28_1203_1.pdf",
-  "event_type": "package_discontinued",
-  "announced_at": "2025-04-07",
-  "checked": "2026-08-01"
- },
  "イコサペント酸エチル粒状カプセル６００ｍｇ「サワイ」": {
   "maker": "沢井製薬",
   "title": "2024/04/08 供給関連 PDF 一部製品 限定出荷解除のお知らせ PDF",
@@ -8369,6 +8369,14 @@
   "url": "https://med.sawai.co.jp/file/pr27_1302_1.pdf",
   "event_type": "resumed",
   "announced_at": "2025-04-21",
+  "checked": "2026-08-01"
+ },
+ "イフェンプロジル酒石酸塩錠２０ｍｇ「サワイ」": {
+  "maker": "沢井製薬",
+  "title": "2022/11/08 供給関連 PDF 一部製品 限定出荷解除のお知らせ PDF",
+  "url": "https://med.sawai.co.jp/file/pr27_141_1.pdf",
+  "event_type": "resumed",
+  "announced_at": "2022-11-08",
   "checked": "2026-08-01"
  }
 }
