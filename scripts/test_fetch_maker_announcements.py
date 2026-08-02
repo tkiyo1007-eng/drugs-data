@@ -1,5 +1,4 @@
 import csv
-import datetime
 import os
 import tempfile
 import unittest
@@ -102,10 +101,42 @@ class AnnouncementMatchingTests(unittest.TestCase):
         self.assertEqual(len(third["テスト錠"]), 2)
         self.assertEqual(third["テスト錠"][0]["url"], "https://example.test/end-2.pdf")
 
+    def test_collection_deduplicates_repeated_source_links(self):
+        def parser_a():
+            return [
+                ("テスト製薬", "供給案内", "https://example.test/a.pdf"),
+                ("テスト製薬", "供給案内", "https://example.test/a.pdf"),
+            ]
+
+        def parser_b():
+            return [("テスト製薬", "供給案内（別一覧）", "https://example.test/a.pdf")]
+
+        with mock.patch.object(mod, "PARSERS", [parser_a, parser_b]), \
+             mock.patch.object(mod, "PAGINATED_PARSERS", set()):
+            items, health = mod.collect_announcements()
+        self.assertEqual(items, [("テスト製薬", "供給案内", "https://example.test/a.pdf")])
+        self.assertEqual([source["count"] for source in health], [1, 1])
+
+    def test_collection_detects_large_volume_regressions(self):
+        health = [
+            {"source": "parser_a", "ok": True, "count": 150, "error": ""},
+            {"source": "parser_b", "ok": True, "count": 3, "error": ""},
+        ]
+        previous = {
+            "total": 1000,
+            "sources": [
+                {"source": "parser_a", "ok": True, "count": 200, "error": ""},
+                {"source": "parser_b", "ok": True, "count": 100, "error": ""},
+            ],
+        }
+        errors = "\n".join(mod.collection_anomalies(health, 153, previous))
+        self.assertIn("50%未満", errors)
+        self.assertIn("parser_b", errors)
+
 
 class ParserTests(unittest.TestCase):
     def test_hisamitsu_parser_extracts_recent_pdf(self):
-        yy = datetime.date.today().year % 100
+        yy = mod.jst_today().year % 100
         html = (f'<a href="/product/whatsnew/pdf/{yy:02d}0403.pdf">'
                 "インサイドパップ70mg 販売中止のご案内</a>")
         with mock.patch.object(mod, "fetch", return_value=html):

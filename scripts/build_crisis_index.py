@@ -17,9 +17,10 @@ Web版のヒーローカードに表示するために使う。
 }
 """
 import csv
-import datetime
 import json
 import sys
+
+from jst_time import jst_today
 
 CSV_FILE = "drugs_app_ready.csv"
 OUT_FILE = "crisis_index.json"
@@ -52,7 +53,7 @@ def build():
     stopped = sum(1 for r in rows if "停止" in (r.get("供給状況") or ""))
     score = min(100, round((limited * 0.5 + stopped * 1.0) / total * 1000))
 
-    today = datetime.date.today().strftime("%Y/%m/%d")
+    today = jst_today().strftime("%Y/%m/%d")
     try:
         prev = json.load(open(OUT_FILE, encoding="utf-8"))
         history = prev.get("history", [])

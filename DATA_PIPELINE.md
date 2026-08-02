@@ -30,13 +30,24 @@
 `.github/workflows/update_drugs.yml` が毎日以下を実行する。
 
 1. 厚労省データを更新
-2. メーカー公式サイトから案内を収集
-3. メーカー名・正規化商品名・規格を照合
-4. 代表案内、履歴、未マッチ一覧、収集状態を更新
-5. データ品質検査後にpush
+2. CSVの列・件数・必須値・供給区分・YJコード・日付・鮮度を検査
+3. メーカー公式サイトから案内を収集
+4. メーカー名・正規化商品名・規格を照合
+5. 代表案内、履歴、未マッチ一覧、収集状態を更新
+6. データ品質検査後にpush
+
+供給状況の変化ログから作る `resolution_stats.json` と、全品目から算出する
+`crisis_index.json` も日次コミットの対象に含める。計算だけ実行してGitの追加対象から
+漏らすと公開値が更新されないため、ワークフローの生成処理と `git add` は同時に更新する。
 
 収集元の複数同時失敗や総取得件数の急減は処理を失敗させる。単一メーカーの一時障害は
 `maker_collection_health.json` に残し、他のデータ更新は継続する。
+
+GitHub ActionsはUTCで動くが、公開データの確認日・生成日・日次統計は利用者と厚労省
+データの基準に合わせて `Asia/Tokyo` の暦日で記録する。収集元ページで同じPDFが
+複数箇所に掲載されていても、メーカーとURLの組み合わせで一意化し、取得件数や
+未マッチ確認待ちを水増ししない。総取得件数が前回の50%未満、または各収集元が
+前回の20%未満へ急減した場合も、少量だけ取得できた状態を成功扱いせず更新を停止する。
 
 ## 手動登録
 
@@ -48,7 +59,10 @@
 
 ```sh
 python3 -m unittest discover -s scripts -p 'test_*.py'
+python3 scripts/validate_supply_data.py --csv drugs_app_ready.csv
 python3 scripts/validate_maker_announcements.py --min-count 300
 ```
 
 Pull Requestとmainへのpushでは `.github/workflows/validate.yml` が同じ検証を実行する。
+日次更新ではさらに、収集確認日が日本時間の実行日と一致することを検査する。代表案内と
+履歴の参照整合性、収集状態の型・件数、未マッチ案内の重複URLも公開前に検査する。

@@ -4,7 +4,13 @@ import os
 import tempfile
 import unittest
 
-from validate_maker_announcements import validate, validate_history
+from validate_maker_announcements import (
+    validate,
+    validate_current_history,
+    validate_health,
+    validate_history,
+    validate_unmatched,
+)
 
 
 class ValidateMakerAnnouncementsTests(unittest.TestCase):
@@ -19,6 +25,12 @@ class ValidateMakerAnnouncementsTests(unittest.TestCase):
 
     def write_json(self, data):
         path = os.path.join(self.tmp.name, "announcements.json")
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False)
+        return path
+
+    def write_named_json(self, name, data):
+        path = os.path.join(self.tmp.name, name)
         with open(path, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False)
         return path
@@ -49,6 +61,42 @@ class ValidateMakerAnnouncementsTests(unittest.TestCase):
             "url": "https://example.test/a.pdf", "event_type": "discontinued",
         }]})
         self.assertTrue(any("重複" in e for e in validate_history(path)))
+
+    def test_current_announcement_must_exist_in_history(self):
+        current = self.write_named_json("current.json", {"テスト錠": {
+            "maker": "テスト製薬", "title": "販売中止のご案内",
+            "url": "https://example.test/current.pdf", "event_type": "discontinued",
+        }})
+        history = self.write_named_json("history.json", {"テスト錠": [{
+            "maker": "テスト製薬", "title": "旧案内",
+            "url": "https://example.test/old.pdf", "event_type": "limited",
+        }]})
+        self.assertTrue(any("履歴に存在しません" in e
+                            for e in validate_current_history(current, history)))
+
+    def test_duplicate_unmatched_urls_are_rejected(self):
+        record = {"maker": "テスト製薬", "title": "供給案内",
+                  "url": "https://example.test/a.pdf", "event_type": "supply"}
+        path = self.write_named_json("unmatched.json", [record, dict(record)])
+        self.assertTrue(any("重複" in e for e in validate_unmatched(path)))
+
+    def test_health_checks_expected_jst_date_and_totals(self):
+        path = self.write_named_json("health.json", {
+            "checked": "2026-08-02",
+            "sources": [{"source": "parser_a", "ok": True, "count": 2, "error": ""}],
+            "total": 3,
+        })
+        errors = "\n".join(validate_health(path, expected_checked="2026-08-03"))
+        self.assertIn("期待値2026-08-03", errors)
+        self.assertIn("合計を超えています", errors)
+
+    def test_invalid_calendar_date_is_rejected(self):
+        path = self.write_json({"テスト錠": {
+            "maker": "テスト製薬", "title": "販売中止のご案内",
+            "url": "https://example.test/a.pdf", "event_type": "discontinued",
+            "checked": "2026-02-30",
+        }})
+        self.assertTrue(any("実在日" in e for e in validate(self.csv_path, path, min_count=1)))
 
 
 if __name__ == "__main__":
