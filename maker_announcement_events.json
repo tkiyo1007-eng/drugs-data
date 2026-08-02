@@ -8,6 +8,15 @@
    "announced_at": "2025-03-07",
    "first_seen": "2026-08-01",
    "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "第一三共エスファ",
+   "title": "2025.03.04 販売中止・休止 アジスロマイシン錠250mg｢DSEP｣患者さん用パッケージ入り販売終了のご案内",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/2025/EPAZI1N00901-1.pdf",
+   "event_type": "package_discontinued",
+   "announced_at": "2025-03-04",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
   }
  ],
  "アセトアミノフェン細粒２０％「ＪＧ」": [
@@ -81,6 +90,15 @@
    "announced_at": "2026-03-09",
    "first_seen": "2026-08-01",
    "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "第一三共エスファ",
+   "title": "2025.12.02 販売中止・休止 販売終了3製品のご案内（アマルエット配合錠・パロキセチン錠・ロサルヒド配合錠）",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/2128/EPALL1N42601-1.pdf",
+   "event_type": "discontinued",
+   "announced_at": "2025-12-02",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
   }
  ],
  "アマルエット配合錠４番「ＤＳＥＰ」": [
@@ -108,15 +126,42 @@
  "エナラプリルマレイン酸塩錠２．５ｍｇ「日新」": [
   {
    "maker": "第一三共エスファ",
+   "title": "2025.06.10 販売中止・休止 エナラプリルマレイン酸塩錠｢日新｣販売終了製品のご案内",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/2064/EPENA1N00601-1.pdf",
+   "event_type": "discontinued",
+   "announced_at": "2025-06-10",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "第一三共エスファ",
    "title": "2023.09.07 供給関連情報 エナラプリルマレイン酸塩錠2.5mg「日新」再出荷のお知らせおよびPTPシートサイズ・包装表示・仕様変更のご案内",
    "url": "https://med.daiichisankyo-ep.co.jp/information/files/1793/EPENA1N00401-1.pdf",
    "event_type": "supply",
    "announced_at": "2023-09-07",
    "first_seen": "2026-08-01",
    "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "第一三共エスファ",
+   "title": "2015.03.26 販売名変更 【第二報・完】 『シンベノン錠2.5mg/錠5/錠10販売中止及びエナラプリルマレイン酸塩錠2.5mg/錠5mg/錠10mg「日新」新発売のご案内",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/0/20150318093913_4852_file_txt.pdf",
+   "event_type": "discontinued",
+   "announced_at": "2015-03-26",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
   }
  ],
  "エナラプリルマレイン酸塩錠５ｍｇ「日新」": [
+  {
+   "maker": "第一三共エスファ",
+   "title": "2025.06.10 販売中止・休止 エナラプリルマレイン酸塩錠｢日新｣販売終了製品のご案内",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/2064/EPENA1N00601-1.pdf",
+   "event_type": "discontinued",
+   "announced_at": "2025-06-10",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
   {
    "maker": "第一三共エスファ",
    "title": "2023.01.16 供給関連情報 エナラプリルマレイン酸塩錠5㎎「日新」PTP100錠、PTP1000錠限定出荷解除のお知らせ",
@@ -125,9 +170,27 @@
    "announced_at": "2023-01-16",
    "first_seen": "2026-08-01",
    "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "第一三共エスファ",
+   "title": "2015.03.26 販売名変更 【第二報・完】 『シンベノン錠2.5mg/錠5/錠10販売中止及びエナラプリルマレイン酸塩錠2.5mg/錠5mg/錠10mg「日新」新発売のご案内",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/0/20150318093913_4852_file_txt.pdf",
+   "event_type": "discontinued",
+   "announced_at": "2015-03-26",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
   }
  ],
  "エナラプリルマレイン酸塩錠１０ｍｇ「日新」": [
+  {
+   "maker": "第一三共エスファ",
+   "title": "2025.06.10 販売中止・休止 エナラプリルマレイン酸塩錠｢日新｣販売終了製品のご案内",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/2064/EPENA1N00601-1.pdf",
+   "event_type": "discontinued",
+   "announced_at": "2025-06-10",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
   {
    "maker": "第一三共エスファ",
    "title": "2023.01.16 供給関連情報 エナラプリルマレイン酸塩錠10㎎「日新」PTP100錠限定出荷解除のお知らせ",
@@ -189,6 +252,15 @@
   }
  ],
  "エペリゾン塩酸塩錠５０ｍｇ「日新」": [
+  {
+   "maker": "第一三共エスファ",
+   "title": "2025.03.04 供給関連情報 エペリゾン塩酸塩錠 50mg｢日新｣ PTP100錠、PTP1000錠 限定出荷及び新規ご採用辞退に関するお知らせ",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/2026/gentei_20250304_E1_G.pdf",
+   "event_type": "limited",
+   "announced_at": "2025-03-04",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
   {
    "maker": "第一三共エスファ",
    "title": "2024.04.11 供給関連情報 エペリゾン塩酸塩錠50mg「日新」PTP100錠、PTP1000錠 限定出荷解除のお知らせ",
@@ -342,7 +414,8 @@
    "url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/SUPLX00_CHUUSHI_2605.pdf",
    "event_type": "discontinued",
    "first_seen": "2026-08-01",
-   "last_checked": "2026-08-03"
+   "last_checked": "2026-08-03",
+   "announced_at": "2026-05-22"
   }
  ],
  "スプラタストトシル酸塩カプセル１００ｍｇ「ＪＧ」": [
@@ -352,7 +425,8 @@
    "url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/SUPLX00_CHUUSHI_2605.pdf",
    "event_type": "discontinued",
    "first_seen": "2026-08-01",
-   "last_checked": "2026-08-03"
+   "last_checked": "2026-08-03",
+   "announced_at": "2026-05-22"
   }
  ],
  "セチリジン塩酸塩錠１０ｍｇ「ＣＨ」": [
@@ -433,6 +507,15 @@
  "テラムロ配合錠ＡＰ「ＤＳＥＰ」": [
   {
    "maker": "第一三共エスファ",
+   "title": "2025.05.13 供給関連情報 テラムロ配合錠 AP「DSEP」PTP100錠、PTP500錠、テラムロ配合錠 BP「DSEP」PTP100錠 限定出荷及び新規ご採用辞退に関するお知らせ",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/2052/gentei_20250513_E1_G.pdf",
+   "event_type": "limited",
+   "announced_at": "2025-05-13",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "第一三共エスファ",
    "title": "2023.05.16 供給関連情報 テラムロ配合錠AP｢DSEP｣PTP100錠、PTP140錠、PTP500錠 限定出荷解除のお知らせ",
    "url": "https://med.daiichisankyo-ep.co.jp/information/files/1743/teaapptp100ptp140ptp500kaijyo.pdf",
    "event_type": "resumed",
@@ -442,6 +525,15 @@
   }
  ],
  "テラムロ配合錠ＢＰ「ＤＳＥＰ」": [
+  {
+   "maker": "第一三共エスファ",
+   "title": "2025.05.13 供給関連情報 テラムロ配合錠 AP「DSEP」PTP100錠、PTP500錠、テラムロ配合錠 BP「DSEP」PTP100錠 限定出荷及び新規ご採用辞退に関するお知らせ",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/2052/gentei_20250513_E1_G.pdf",
+   "event_type": "limited",
+   "announced_at": "2025-05-13",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
   {
    "maker": "第一三共エスファ",
    "title": "2023.05.16 供給関連情報 テラムロ配合錠BP｢DSEP｣PTP100錠、PTP140錠 限定出荷解除のお知らせ",
@@ -535,9 +627,27 @@
    "announced_at": "2026-06-12",
    "first_seen": "2026-08-01",
    "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "第一三共エスファ",
+   "title": "2013.08.19 新発売予定 2013年8月シルビノール錠5mg販売中止及びニコランジル錠5mg「サワイ」新発売に関するお知らせ",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/0/20130809111658_9158_file_txt.pdf",
+   "event_type": "discontinued",
+   "announced_at": "2013-08-19",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
   }
  ],
  "バラシクロビル錠５００ｍｇ「ＤＳＥＰ」": [
+  {
+   "maker": "第一三共エスファ",
+   "title": "2026.05.19 供給関連情報 バラシクロビル錠 500 ㎎「DSEP」PTP42錠、ボリコナゾール錠 50mg「DSEP」PTP50錠、ボリコナゾール錠 200mg「DSEP」PTP50錠、ラベプラゾールNa塩錠10mg「オーハラ」PTP100錠、ラベプラゾールNa塩錠10mg「オーハラ」PTP500錠、ラベプラゾールNa塩錠10mg「オーハラ」バラ100錠、 限定出荷及び新規ご採用辞退に関するお知らせ",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/2208/gentei_20260519_E1_G.pdf",
+   "event_type": "limited",
+   "announced_at": "2026-05-19",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
   {
    "maker": "第一三共エスファ",
    "title": "2022.11.01 供給関連情報 バラシクロビル錠500mg「DSEP」PTP42錠限定出荷解除のお知らせ",
@@ -682,6 +792,15 @@
  "ボリコナゾール錠５０ｍｇ「ＤＳＥＰ」": [
   {
    "maker": "第一三共エスファ",
+   "title": "2026.07.16 供給関連情報 ボリコナゾール錠 50mg/200mg「DSEP」供給停止・欠品のお知らせ",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/2245/keppin_20260716_E1_K.pdf",
+   "event_type": "stopped",
+   "announced_at": "2026-07-16",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "第一三共エスファ",
    "title": "2023.05.16 供給関連情報 ボリコナゾール錠50mg｢DSEP｣PTP50錠 限定出荷解除のお知らせ",
    "url": "https://med.daiichisankyo-ep.co.jp/information/files/1738/vor50ptp50kaijyo.pdf",
    "event_type": "resumed",
@@ -691,6 +810,15 @@
   }
  ],
  "ボリコナゾール錠２００ｍｇ「ＤＳＥＰ」": [
+  {
+   "maker": "第一三共エスファ",
+   "title": "2026.07.16 供給関連情報 ボリコナゾール錠 50mg/200mg「DSEP」供給停止・欠品のお知らせ",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/2245/keppin_20260716_E1_K.pdf",
+   "event_type": "stopped",
+   "announced_at": "2026-07-16",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
   {
    "maker": "第一三共エスファ",
    "title": "2023.05.16 供給関連情報 ボリコナゾール錠200mg｢DSEP｣PTP50錠 限定出荷解除のお知らせ",
@@ -715,6 +843,15 @@
  "モンテルカスト細粒４ｍｇ「ＤＳＥＰ」": [
   {
    "maker": "第一三共エスファ",
+   "title": "2025.07.14 供給関連情報 アジスロマイシン錠 250 ㎎「DSEP」PTP60錠、モンテルカスト細粒 4mg「DSEP」14包、140包 限定出荷及び新規ご採用辞退に関するお知らせ",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/2082/gentei_20250714_E1_G.pdf",
+   "event_type": "limited",
+   "announced_at": "2025-07-14",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "第一三共エスファ",
    "title": "2024.10.11 供給関連情報 モンテルカスト細粒4mg｢DSEP｣14包、140包 限定出荷解除のお知らせ",
    "url": "https://med.daiichisankyo-ep.co.jp/information/files/1972/MON_granules4_14.140_E1_K.pdf",
    "event_type": "resumed",
@@ -724,6 +861,15 @@
   }
  ],
  "モンテルカストチュアブル錠５ｍｇ「ＤＳＥＰ」": [
+  {
+   "maker": "第一三共エスファ",
+   "title": "2024.11.19 供給関連情報 モンテルカストチュアブル錠 5mg「DSEP」PTP100錠、アトモキセチン錠 5mg「DSEP」PTP70錠、アトモキセチン錠 10mg｢DSEP｣ PTP70錠、PTP140錠、アトモキセチン錠 25mg｢DSEP｣ PTP70錠、PTP140錠、アトモキセチン錠 40mg｢DSEP｣ PTP70錠、PTP140錠 限定出荷及び新規ご採用辞退に関するお知らせ",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/1989/gentei_20241119_E1_G.pdf",
+   "event_type": "limited",
+   "announced_at": "2024-11-19",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
   {
    "maker": "第一三共エスファ",
    "title": "2024.09.06 供給関連情報 モンテルカストチュアブル錠5mg｢DSEP｣PTP100錠 限定出荷解除のお知らせ",
@@ -885,7 +1031,8 @@
    "url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/EPOCE00_CHUUSHI_2605.pdf",
    "event_type": "discontinued",
    "first_seen": "2026-08-01",
-   "last_checked": "2026-08-03"
+   "last_checked": "2026-08-03",
+   "announced_at": "2026-05-22"
   }
  ],
  "フェルビナクパップ７０ｍｇ「東光」": [
@@ -1761,6 +1908,14 @@
   }
  ],
  "メトホルミン塩酸塩錠２５０ｍｇ「ＳＮ」": [
+  {
+   "maker": "日本ケミファ",
+   "title": "メトホルミン塩酸塩錠250mg「SN」 出荷調整に関するお知らせ",
+   "url": "https://www.nc-medical.com/product_topics/f4bj0h000000knx2-att/f4bj0h000000knxq.pdf",
+   "event_type": "limited",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
   {
    "maker": "日医工",
    "title": "メトホルミン塩酸塩錠250mg「SN」 供給状況に関するお知らせ",
@@ -2877,12 +3032,20 @@
    "maker": "高田製薬",
    "title": "一部包装における販売中止のご案内_モンテルカスト錠10mg「タカタ」PTP10錠×50",
    "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bls6-att/HOUSOUSYUYAKU20260703.pdf",
-   "event_type": "package_discontinued",
+   "event_type": "discontinued",
    "first_seen": "2026-08-01",
    "last_checked": "2026-08-03"
   }
  ],
  "リスペリドン細粒１％「タカタ」": [
+  {
+   "maker": "高田製薬",
+   "title": "リスペリドンOD錠及びリスペリドン細粒1％_製造販売中止のご案内",
+   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000a0vi-att/RISPERI.pdf",
+   "event_type": "discontinued",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
   {
    "maker": "高田製薬",
    "title": "供給に関するお知らせとお詫び_リスペリドン細粒1%「タカタ」",
@@ -2893,6 +3056,14 @@
   }
  ],
  "リスペリドンＯＤ錠１ｍｇ「タカタ」": [
+  {
+   "maker": "高田製薬",
+   "title": "リスペリドンOD錠及びリスペリドン細粒1％_製造販売中止のご案内",
+   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000a0vi-att/RISPERI.pdf",
+   "event_type": "discontinued",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
   {
    "maker": "高田製薬",
    "title": "供給に関するお知らせとお詫び_リスペリドンOD錠1㎎,2mg「タカタ」",
@@ -2913,6 +3084,14 @@
   }
  ],
  "レバミピド顆粒２０％「タカタ」": [
+  {
+   "maker": "高田製薬",
+   "title": "出荷停止に関するお知らせとお詫び_レバミピド顆粒 20%「タカタ」",
+   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000aljk-att/Rebamipide.pdf",
+   "event_type": "stopped",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
   {
    "maker": "高田製薬",
    "title": "供給に関するお知らせとお詫び_レバミピド顆粒20％「タカタ」",
@@ -2955,6 +3134,14 @@
  "ツロブテロールテープ０．５ｍｇ「タカタ」": [
   {
    "maker": "高田製薬",
+   "title": "製造販売中止のご案内_ツロブテロールテープ0.5mg,1mg,2mg「タカタ」",
+   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bc4i-att/Tulobuterol.pdf",
+   "event_type": "discontinued",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "高田製薬",
    "title": "供給に関するお知らせとお詫び ツロブテロールテープ0.5mg「タカタ」",
    "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b00000089vt-att/TUROBUTE.pdf",
    "event_type": "supply",
@@ -2963,6 +3150,14 @@
   }
  ],
  "ツロブテロールテープ１ｍｇ「タカタ」": [
+  {
+   "maker": "高田製薬",
+   "title": "製造販売中止のご案内_ツロブテロールテープ0.5mg,1mg,2mg「タカタ」",
+   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bc4i-att/Tulobuterol.pdf",
+   "event_type": "discontinued",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
   {
    "maker": "高田製薬",
    "title": "供給に関するお知らせとお詫び_ツロブテロールテープ1mg「タカタ」",
@@ -3013,6 +3208,14 @@
   }
  ],
  "オザグレルＮａ点滴静注８０ｍｇ「タカタ」": [
+  {
+   "maker": "高田製薬",
+   "title": "出荷停止に関するお知らせとお詫び_オザグレルNa点滴静注20/40/80mg「タカタ」(第２報)",
+   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000becz-att/Ozagrel.pdf",
+   "event_type": "stopped",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
   {
    "maker": "高田製薬",
    "title": "供給に関するお知らせとお詫び_オザグレルNa点滴静注80mgバッグ「タカタ」(第２報)",
@@ -3113,6 +3316,15 @@
   }
  ],
  "ナボールＳＲカプセル３７．５": [
+  {
+   "maker": "久光製薬",
+   "title": "2026.07.03 ナボールSRカプセル37.5 販売中止に関するご案内",
+   "url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260703.pdf",
+   "event_type": "discontinued",
+   "announced_at": "2026-07-03",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
   {
    "maker": "久光製薬",
    "title": "2026.07.03 ナボールSRカプセル37.5 限定出荷に関するお知らせとお詫び",
@@ -4556,7 +4768,7 @@
    "maker": "高田製薬",
    "title": "一部包装における販売中止のご案内_アンブロキソール塩酸塩DS3%「タカタ」",
    "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000ahg4-att/HOUSOUSYUYAKU.pdf",
-   "event_type": "package_discontinued",
+   "event_type": "discontinued",
    "first_seen": "2026-08-01",
    "last_checked": "2026-08-03"
   }
@@ -4863,6 +5075,15 @@
   }
  ],
  "セレコキシブ錠１００ｍｇ「ニプロ」": [
+  {
+   "maker": "ニプロ",
+   "title": "2026年7月1日 セレコキシブ錠100mg／200mg「ニプロ」　販売中止品のご案内",
+   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001CnJwXIAV",
+   "event_type": "discontinued",
+   "announced_at": "2026-07-01",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
   {
    "maker": "ニプロ",
    "title": "2026年2月2日 セレコキシブ錠100mg「ニプロ」（バラ300錠）　包装中止品のご案内",
@@ -5227,7 +5448,7 @@
    "maker": "高田製薬",
    "title": "一部包装における販売中止のご案内_ボリコナゾール顆粒20％「タカタ」",
    "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000arg8-att/VoriconazoleGranules.pdf",
-   "event_type": "package_discontinued",
+   "event_type": "discontinued",
    "first_seen": "2026-08-01",
    "last_checked": "2026-08-03"
   }
@@ -5465,6 +5686,15 @@
    "announced_at": "2026-07-16",
    "first_seen": "2026-08-01",
    "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "久光製薬",
+   "title": "2026.05.25 メノエイドコンビパッチ出荷再開と一部包装発売中止に関するご案内",
+   "url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260525.pdf",
+   "event_type": "package_discontinued",
+   "announced_at": "2026-05-25",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
   }
  ],
  "消毒用エタライト液": [
@@ -5605,6 +5835,15 @@
    "event_type": "limited",
    "announced_at": "2026-07-27",
    "first_seen": "2026-08-01",
+   "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "久光製薬",
+   "title": "2025.09.03 ナボールゲル1％ 一部包装販売中止に関するご案内",
+   "url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/250903.pdf",
+   "event_type": "package_discontinued",
+   "announced_at": "2025-09-03",
+   "first_seen": "2026-08-03",
    "last_checked": "2026-08-03"
   }
  ],
@@ -5781,6 +6020,15 @@
    "event_type": "limited",
    "announced_at": "2026-06-18",
    "first_seen": "2026-08-01",
+   "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "久光製薬",
+   "title": "2026.04.03 セクタークリーム3％、 セクターゲル3％、 ナボールパップ70㎎、 インサイドパップ70㎎、 ボレースプレー1％、 エクラー軟膏0.3％、 エクラークリーム0.3％、 エクラーローション0.3％、 ハイチオール散32％ 販売中止に関するご案内",
+   "url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
+   "event_type": "discontinued",
+   "announced_at": "2026-04-03",
+   "first_seen": "2026-08-03",
    "last_checked": "2026-08-03"
   }
  ],
@@ -6340,6 +6588,15 @@
  "アトモキセチン錠５ｍｇ「ＤＳＥＰ」": [
   {
    "maker": "第一三共エスファ",
+   "title": "2026.02.13 供給関連情報 アトモキセチン錠 5mg「DSEP」PTP70錠 限定出荷解除のお知らせ",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/2164/ATM_5_PTP70_E1_K.pdf",
+   "event_type": "resumed",
+   "announced_at": "2026-02-13",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "第一三共エスファ",
    "title": "2025.10.20 供給関連情報 アトモキセチン錠5mg｢DSEP｣ 自主回収(クラスⅡ)のお知らせとお詫び",
    "url": "https://med.daiichisankyo-ep.co.jp/information/files/2118/アトモキセチン錠5mg「DSEP」自主回収（クラスⅡ）のお知らせとお詫び.pdf",
    "event_type": "supply",
@@ -6371,6 +6628,15 @@
   }
  ],
  "アトモキセチン錠４０ｍｇ「ＤＳＥＰ」": [
+  {
+   "maker": "第一三共エスファ",
+   "title": "2026.04.06 供給関連情報 アトモキセチン錠 40mg「DSEP」PTP70錠、PTP140錠 限定出荷解除のお知らせ",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/2192/ATM_40_PTP70PTP140_E1_K.pdf",
+   "event_type": "resumed",
+   "announced_at": "2026-04-06",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
   {
    "maker": "第一三共エスファ",
    "title": "2022.05.09 供給関連情報 アトモキセチン錠5㎎「DSEP」・アトモキセチン錠40㎎「DSEP」限定出荷解除のお知らせ",
@@ -7130,6 +7396,15 @@
  "オランザピン錠５ｍｇ「ＤＳＥＰ」": [
   {
    "maker": "第一三共エスファ",
+   "title": "2022.12.09 供給関連情報 オランザピン錠2.5㎎｢DSEP｣PTP100錠、バラ100錠限定出荷解除のお知らせ",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/1602/オランザピン錠2.5㎎｢DSEP｣PTP100錠、バラ100錠限定出荷解除のお知らせ.pdf",
+   "event_type": "resumed",
+   "announced_at": "2022-12-09",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "第一三共エスファ",
    "title": "2022.11.01 供給関連情報 オランザピン錠5mg「DSEP」PTP100錠／バラ100錠限定出荷解除のお知らせ",
    "url": "https://med.daiichisankyo-ep.co.jp/information/files/1552/オランザピン錠5mg「DSEP」PTP100錠／バラ100錠限定出荷解除のお知らせ.pdf",
    "event_type": "resumed",
@@ -7150,6 +7425,15 @@
   }
  ],
  "オランザピンＯＤ錠５ｍｇ「ＤＳＥＰ」": [
+  {
+   "maker": "第一三共エスファ",
+   "title": "2022.12.09 供給関連情報 オランザピンOD錠2.5㎎｢DSEP｣PTP70錠、バラ100錠限定出荷解除のお知らせ",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/1600/オランザピンOD錠2.5㎎｢DSEP｣PTP70錠、バラ100錠限定出荷解除のお知らせ.pdf",
+   "event_type": "resumed",
+   "announced_at": "2022-12-09",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
   {
    "maker": "第一三共エスファ",
    "title": "2022.11.01 供給関連情報 オランザピンOD錠5mg「DSEP」PTP70錠／バラ100錠限定出荷解除のお知らせ",
@@ -7519,6 +7803,15 @@
  "クエチアピン錠１００ｍｇ「ＤＳＥＰ」": [
   {
    "maker": "第一三共エスファ",
+   "title": "2022.12.09 供給関連情報 クエチアピン錠25㎎｢DSEP｣PTP100錠、PTP500錠、バラ500錠限定出荷解除のお知らせ",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/1603/クエチアピン錠25㎎｢DSEP｣PTP100錠、PTP500錠、バラ500錠限定出荷解除のお知らせ.pdf",
+   "event_type": "resumed",
+   "announced_at": "2022-12-09",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "第一三共エスファ",
    "title": "2022.11.01 供給関連情報 クエチアピン錠100mg「DSEP」PTP100錠／PTP500錠／バラ500錠限定出荷解除のお知らせ",
    "url": "https://med.daiichisankyo-ep.co.jp/information/files/1557/クエチアピン錠100mg「DSEP」PTP100錠／PTP500錠／バラ500錠限定出荷解除のお知らせ.pdf",
    "event_type": "resumed",
@@ -7569,6 +7862,14 @@
   }
  ],
  "クラリシッド錠２００ｍｇ": [
+  {
+   "maker": "日本ケミファ",
+   "title": "クラリシッド錠200㎎出荷調整解除のお知らせ",
+   "url": "https://www.nc-medical.com/product_topics/f4bj0h000000h23f-att/f4bj0h000000h243.pdf",
+   "event_type": "resumed",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
   {
    "maker": "日本ケミファ",
    "title": "クラリシッド錠200mg 500錠包装 製品供給に関するお知らせ",
@@ -7753,6 +8054,14 @@
  "ジルチアゼム塩酸塩徐放カプセル１００ｍｇ「日医工」": [
   {
    "maker": "日医工",
+   "title": "ジルチアゼム塩酸塩徐放カプセル100ｍg200mg「日医工」 限定出荷解除のお知らせ",
+   "url": "https://www.nichiiko.co.jp/medicine/files/20260722cI1.pdf",
+   "event_type": "resumed",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "日医工",
    "title": "ジルチアゼム塩酸塩徐放カプセル100mg「日医工」 供給状況に関するお知らせ",
    "url": "https://www.nichiiko.co.jp/medicine/file/32750/information/20260722cI1.pdf",
    "event_type": "supply",
@@ -7761,6 +8070,14 @@
   }
  ],
  "ジルチアゼム塩酸塩徐放カプセル２００ｍｇ「日医工」": [
+  {
+   "maker": "日医工",
+   "title": "ジルチアゼム塩酸塩徐放カプセル100ｍg200mg「日医工」 限定出荷解除のお知らせ",
+   "url": "https://www.nichiiko.co.jp/medicine/files/20260722cI1.pdf",
+   "event_type": "resumed",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
   {
    "maker": "日医工",
    "title": "ジルチアゼム塩酸塩徐放カプセル200mg「日医工」 供給状況に関するお知らせ",
@@ -7976,6 +8293,14 @@
   }
  ],
  "ゾルピデム酒石酸塩内用液５ｍｇ「タカタ」": [
+  {
+   "maker": "高田製薬",
+   "title": "製造販売中止のご案内_ゾルピデム酒石酸塩内用液5mg,10mg「タカタ」",
+   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bc1p-att/Zolpidem.pdf",
+   "event_type": "discontinued",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
   {
    "maker": "高田製薬",
    "title": "出荷停止に関するお知らせとお詫び_ゾルピデム酒石酸塩内用液5mg「タカタ」",
@@ -8265,6 +8590,15 @@
  "テルミサルタン錠２０ｍｇ「ＤＳＥＰ」": [
   {
    "maker": "第一三共エスファ",
+   "title": "2026.05.19 供給関連情報 テルミサルタン錠 20mg「DSEP」PTP500錠、PTP140錠、バラ500錠 限定出荷解除のお知らせ",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/2209/TEL_20_PTP500PTP140B500_E1_K.pdf",
+   "event_type": "resumed",
+   "announced_at": "2026-05-19",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "第一三共エスファ",
    "title": "2025.11.21 供給関連情報 テルミサルタン錠20㎎「DSEP」PTP140錠、バラ500錠、テルミサルタン錠40㎎「DSEP」PTP140錠、PTP500錠、バラ500錠、テルミサルタン錠80㎎「DSEP」PTP100錠、テルチア配合錠AP「DSEP」PTP100錠、テルチア配合錠BP「DSEP」PTP100錠 限定出荷及び新規ご採用辞退に関するお知らせ",
    "url": "https://med.daiichisankyo-ep.co.jp/information/files/2131/gentei_20251121_E1_G.pdf",
    "event_type": "limited",
@@ -8274,6 +8608,15 @@
   }
  ],
  "テルミサルタン錠４０ｍｇ「ＤＳＥＰ」": [
+  {
+   "maker": "第一三共エスファ",
+   "title": "2026.05.19 供給関連情報 テルミサルタン錠 40mg「DSEP」PTP500錠、PTP140錠、バラ500錠 限定出荷解除のお知らせ",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/2210/TEL_40_PTP500PTP140B500_E1_K.pdf",
+   "event_type": "resumed",
+   "announced_at": "2026-05-19",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
   {
    "maker": "第一三共エスファ",
    "title": "2025.11.21 供給関連情報 テルミサルタン錠20㎎「DSEP」PTP140錠、バラ500錠、テルミサルタン錠40㎎「DSEP」PTP140錠、PTP500錠、バラ500錠、テルミサルタン錠80㎎「DSEP」PTP100錠、テルチア配合錠AP「DSEP」PTP100錠、テルチア配合錠BP「DSEP」PTP100錠 限定出荷及び新規ご採用辞退に関するお知らせ",
@@ -8842,6 +9185,15 @@
  "バルサルタン錠８０ｍｇ「ＤＳＥＰ」": [
   {
    "maker": "第一三共エスファ",
+   "title": "2025.06.13 供給関連情報 バルサルタン錠 80mg｢DSEP｣PTP100 錠、PTP140 錠 限定出荷解除のお知らせ",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/2072/VAS_80_PTP100PTP140_E1_K.pdf",
+   "event_type": "resumed",
+   "announced_at": "2025-06-13",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "第一三共エスファ",
    "title": "2025.03.07 供給関連情報 バルサルタン錠80mg｢DSEP｣バラ500錠 限定出荷解除のお知らせ",
    "url": "https://med.daiichisankyo-ep.co.jp/information/files/2030/VAS_80_B500_E1_K.pdf",
    "event_type": "resumed",
@@ -8955,6 +9307,15 @@
  "パロキセチン錠１０ｍｇ「ニプロ」": [
   {
    "maker": "ニプロ",
+   "title": "2026年7月1日 パロキセチン錠5mg／10mg／20mg「ニプロ」　販売中止品のご案内",
+   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001CnMCrIAN",
+   "event_type": "discontinued",
+   "announced_at": "2026-07-01",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "ニプロ",
    "title": "2026年3月18日 パロキセチン錠10mg「ニプロ」 100錠(PTP)　通常出荷による出荷再開のご案内",
    "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q8000012Yhk1IAC",
    "event_type": "resumed",
@@ -9026,6 +9387,15 @@
  "ピオグリタゾン錠１５ｍｇ「ＤＳＥＰ」": [
   {
    "maker": "第一三共エスファ",
+   "title": "2025.04.15 販売中止・休止 包装容量販売終了のご案内（アナストロゾール錠、タモキシフェン錠、トアラセット®配合錠、ビカルタミド錠、ピオグリタゾン錠15㎎）",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/2042/EPALL1N39201-1.pdf",
+   "event_type": "package_discontinued",
+   "announced_at": "2025-04-15",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "第一三共エスファ",
    "title": "2024.04.11 供給関連情報 ピオグリタゾン錠15mg「DSEP」PTP100錠、PTP500錠 限定出荷解除のお知らせ",
    "url": "https://med.daiichisankyo-ep.co.jp/information/files/1883/pio15.ptp100ptp500.kaijyo.pdf",
    "event_type": "resumed",
@@ -9054,6 +9424,15 @@
    "announced_at": "2024-04-11",
    "first_seen": "2026-08-01",
    "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "第一三共エスファ",
+   "title": "2023.04.18 供給関連情報 販売終了製品 ピオグリタゾンOD錠15mg｢DSEP｣PTP500錠 限定出荷解除のお知らせ",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/1714/piood15PTP500kaijyosyuryou.pdf",
+   "event_type": "discontinued",
+   "announced_at": "2023-04-18",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
   }
  ],
  "ピオグリタゾンＯＤ錠３０ｍｇ「ＤＳＥＰ」": [
@@ -9064,6 +9443,15 @@
    "event_type": "resumed",
    "announced_at": "2024-04-11",
    "first_seen": "2026-08-01",
+   "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "第一三共エスファ",
+   "title": "2023.04.18 供給関連情報 販売終了製品 ピオグリタゾンOD錠30mg｢DSEP｣PTP500錠 限定出荷解除のお知らせ",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/1715/piood30PTP500kaijyosyuryou.pdf",
+   "event_type": "discontinued",
+   "announced_at": "2023-04-18",
+   "first_seen": "2026-08-03",
    "last_checked": "2026-08-03"
   }
  ],
@@ -9225,6 +9613,15 @@
  "プラミペキソール塩酸塩錠０．１２５ｍｇ「ＤＳＥＰ」": [
   {
    "maker": "第一三共エスファ",
+   "title": "2025.07.03 仕様・サイズ変更 プラミペキソール塩酸塩錠｢DSEP｣患者さん用指導箋封入終了のご案内",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/2079/EPPRA1N01901-1.pdf",
+   "event_type": "other",
+   "announced_at": "2025-07-03",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "第一三共エスファ",
    "title": "2024.11.08 供給関連情報 プラミペキソール塩酸塩錠0.125mg｢DSEP｣PTP100錠 限定出荷解除のお知らせ",
    "url": "https://med.daiichisankyo-ep.co.jp/information/files/1980/PRA_0.125_PTP100_E1_K.pdf",
    "event_type": "resumed",
@@ -9234,6 +9631,15 @@
   }
  ],
  "プラミペキソール塩酸塩錠０．５ｍｇ「ＤＳＥＰ」": [
+  {
+   "maker": "第一三共エスファ",
+   "title": "2025.07.03 仕様・サイズ変更 プラミペキソール塩酸塩錠｢DSEP｣患者さん用指導箋封入終了のご案内",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/2079/EPPRA1N01901-1.pdf",
+   "event_type": "other",
+   "announced_at": "2025-07-03",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
   {
    "maker": "第一三共エスファ",
    "title": "2024.04.11 供給関連情報 プラミペキソール塩酸塩錠0.5mg「DSEP」PTP100錠 限定出荷解除のお知らせ",
@@ -10112,6 +10518,15 @@
  "ラベプラゾールＮａ塩錠５ｍｇ「オーハラ」": [
   {
    "maker": "第一三共エスファ",
+   "title": "2026.06.12 供給関連情報 ラベプラゾールNa塩錠20mg「オーハラ」バラ100錠、ニコランジル錠5mg「サワイ」PTP100錠、ニコランジル錠5mg「サワイ」PTP1000錠 限定出荷及び新規ご採用辞退に関するお知らせ",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/2220/gentei_20260612_E1_G.pdf",
+   "event_type": "limited",
+   "announced_at": "2026-06-12",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "第一三共エスファ",
    "title": "2026.05.12 包装・表示変更 ラベプラゾールNa塩錠5mg｢オーハラ｣｢処方箋医薬品｣指定解除に伴う表示変更のご案内",
    "url": "https://med.daiichisankyo-ep.co.jp/information/files/2202/EPRAB1N01701-1.pdf",
    "event_type": "other",
@@ -10121,6 +10536,14 @@
   }
  ],
  "ラベプラゾールナトリウム錠１０ｍｇ「ケミファ」": [
+  {
+   "maker": "日本ケミファ",
+   "title": "ラベプラゾールナトリウム錠5mg/10mg/20mg「ケミファ」 出荷調整に関するお知らせ",
+   "url": "https://www.nc-medical.com/product_topics/f4bj0h000000k8bw-att/f4bj0h000000k8ck.pdf",
+   "event_type": "limited",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
   {
    "maker": "日本ケミファ",
    "title": "ラベプラゾールナトリウム錠10mg「ケミファ」 一部包装の出荷調整解除のお知らせ",
@@ -10374,6 +10797,14 @@
   }
  ],
  "ロサルヒド配合錠ＨＤ「ケミファ」": [
+  {
+   "maker": "日本ケミファ",
+   "title": "販売中止のご案内（ロサルヒド配合錠LD・HD「ケミファ」）",
+   "url": "https://www.nc-medical.com/product_topics/p5ib910000001d7z-att/p5ib910000001d8n.pdf",
+   "event_type": "discontinued",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
   {
    "maker": "日本ケミファ",
    "title": "ロサルヒド配合錠ＨＤ「ケミファ」 製品供給に関するお知らせ",
@@ -11265,6 +11696,15 @@
  "タゾピペ配合点滴静注用バッグ４．５「ＤＳＥＰ」": [
   {
    "maker": "第一三共エスファ",
+   "title": "2024.07.05 供給関連情報 タゾピペ配合点滴静注用バッグ 4.5「DSEP」10袋 限定出荷及び新規ご採用辞退に関するお知らせ",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/1922/限定出荷及び新規ご採用辞退に関するお知らせ20240705.pdf",
+   "event_type": "limited",
+   "announced_at": "2024-07-05",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "第一三共エスファ",
    "title": "2024.04.11 供給関連情報 タゾピペ配合点滴静注用バッグ4.5「DSEP」10袋 限定出荷解除のお知らせ",
    "url": "https://med.daiichisankyo-ep.co.jp/information/files/1890/tazbag4.5.10.kaijyo.pdf",
    "event_type": "resumed",
@@ -11585,6 +12025,15 @@
    "announced_at": "2026-07-21",
    "first_seen": "2026-08-01",
    "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "ニプロ",
+   "title": "2026年7月1日 マキサカルシトール静注透析用2.5μg／5μg／10μg　取扱い販売中止品 のご案内",
+   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001CmzrOIAR",
+   "event_type": "discontinued",
+   "announced_at": "2026-07-01",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
   }
  ],
  "マキサカルシトール静注透析用５μｇ「ニプロ」": [
@@ -11596,6 +12045,15 @@
    "announced_at": "2026-07-21",
    "first_seen": "2026-08-01",
    "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "ニプロ",
+   "title": "2026年7月1日 マキサカルシトール静注透析用2.5μg／5μg／10μg　取扱い販売中止品 のご案内",
+   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001CmzrOIAR",
+   "event_type": "discontinued",
+   "announced_at": "2026-07-01",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
   }
  ],
  "マキサカルシトール静注透析用１０μｇ「ニプロ」": [
@@ -11606,6 +12064,15 @@
    "event_type": "resumed",
    "announced_at": "2026-07-21",
    "first_seen": "2026-08-01",
+   "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "ニプロ",
+   "title": "2026年7月1日 マキサカルシトール静注透析用2.5μg／5μg／10μg　取扱い販売中止品 のご案内",
+   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001CmzrOIAR",
+   "event_type": "discontinued",
+   "announced_at": "2026-07-01",
+   "first_seen": "2026-08-03",
    "last_checked": "2026-08-03"
   }
  ],
@@ -12018,6 +12485,15 @@
  "アルファカルシドールカプセル０．２５μｇ「フソー」": [
   {
    "maker": "沢井製薬",
+   "title": "2026/04/08 発売情報 PDF アルファカルシドールカプセル0.25μg/0.5μg/1.0μg「フソー」 取り扱い終了のご案内 PDF",
+   "url": "https://med.sawai.co.jp/file/pr28_4803_2.pdf",
+   "event_type": "other",
+   "announced_at": "2026-04-08",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "沢井製薬",
    "title": "2023/08/08 供給関連 PDF 一部製品 限定出荷解除のお知らせ PDF",
    "url": "https://med.sawai.co.jp/file/pr27_4803_1.pdf",
    "event_type": "resumed",
@@ -12029,6 +12505,15 @@
  "アルファカルシドールカプセル０．５μｇ「フソー」": [
   {
    "maker": "沢井製薬",
+   "title": "2026/04/08 発売情報 PDF アルファカルシドールカプセル0.25μg/0.5μg/1.0μg「フソー」 取り扱い終了のご案内 PDF",
+   "url": "https://med.sawai.co.jp/file/pr28_4804_2.pdf",
+   "event_type": "other",
+   "announced_at": "2026-04-08",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
+  {
+   "maker": "沢井製薬",
    "title": "2023/08/08 供給関連 PDF 一部製品 限定出荷解除のお知らせ PDF",
    "url": "https://med.sawai.co.jp/file/pr27_4804_1.pdf",
    "event_type": "resumed",
@@ -12038,6 +12523,15 @@
   }
  ],
  "アルファカルシドールカプセル１．０μｇ「フソー」": [
+  {
+   "maker": "沢井製薬",
+   "title": "2026/04/08 発売情報 PDF アルファカルシドールカプセル0.25μg/0.5μg/1.0μg「フソー」 取り扱い終了のご案内 PDF",
+   "url": "https://med.sawai.co.jp/file/pr28_4805_2.pdf",
+   "event_type": "other",
+   "announced_at": "2026-04-08",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  },
   {
    "maker": "沢井製薬",
    "title": "2023/09/08 供給関連 PDF 一部製品 限定出荷解除のお知らせ PDF",
@@ -12177,6 +12671,284 @@
    "event_type": "resumed",
    "announced_at": "2022-11-08",
    "first_seen": "2026-08-01",
+   "last_checked": "2026-08-03"
+  }
+ ],
+ "ハイチオール錠８０": [
+  {
+   "maker": "久光製薬",
+   "title": "2025.11.04 ハイチオール錠40・80 限定出荷解除に関するお知らせ",
+   "url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/251104.pdf",
+   "event_type": "resumed",
+   "announced_at": "2025-11-04",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  }
+ ],
+ "アムロジピン錠１０ｍｇ「タカタ」": [
+  {
+   "maker": "高田製薬",
+   "title": "アムロジピン錠10mg_製造販売中止のご案内",
+   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b00000096ff-att/AMROJIPIN.pdf",
+   "event_type": "discontinued",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  }
+ ],
+ "イマチニブ錠２００ｍｇ「ヤクルト」": [
+  {
+   "maker": "高田製薬",
+   "title": "イマチニブ錠200mg_製造販売中止のご案内",
+   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b00000096nr-att/IMATINIBU.pdf",
+   "event_type": "discontinued",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  }
+ ],
+ "ゾテピン錠２５ｍｇ「タカタ」": [
+  {
+   "maker": "高田製薬",
+   "title": "供給に関するお知らせとお詫び_ゾテピン錠25mg",
+   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008v5e-att/ZOTEPIN.pdf",
+   "event_type": "supply",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  }
+ ],
+ "ナフトピジルＯＤ錠５０ｍｇ「ニプロ」": [
+  {
+   "maker": "ニプロ",
+   "title": "2026年7月1日 ナフトピジルOD錠25mg／50mg／75mg　販売中止品のご案内",
+   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001CnA6tIAF",
+   "event_type": "discontinued",
+   "announced_at": "2026-07-01",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  }
+ ],
+ "ナフトピジルＯＤ錠７５ｍｇ「ニプロ」": [
+  {
+   "maker": "ニプロ",
+   "title": "2026年7月1日 ナフトピジルOD錠25mg／50mg／75mg　販売中止品のご案内",
+   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001CnA6tIAF",
+   "event_type": "discontinued",
+   "announced_at": "2026-07-01",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  }
+ ],
+ "ナフトピジルＯＤ錠２５ｍｇ「ニプロ」": [
+  {
+   "maker": "ニプロ",
+   "title": "2026年7月1日 ナフトピジルOD錠25mg／50mg／75mg　販売中止品のご案内",
+   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001CnA6tIAF",
+   "event_type": "discontinued",
+   "announced_at": "2026-07-01",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  }
+ ],
+ "バルヒディオ配合錠ＭＤ「サワイ」": [
+  {
+   "maker": "沢井製薬",
+   "title": "2026/07/15 発売情報 PDF バルヒディオ配合錠MD/EX「サワイ」販売中止のご案内 PDF",
+   "url": "https://med.sawai.co.jp/file/pr28_1775_3.pdf",
+   "event_type": "discontinued",
+   "announced_at": "2026-07-15",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  }
+ ],
+ "バルヒディオ配合錠ＥＸ「サワイ」": [
+  {
+   "maker": "沢井製薬",
+   "title": "2026/07/15 発売情報 PDF バルヒディオ配合錠MD/EX「サワイ」販売中止のご案内 PDF",
+   "url": "https://med.sawai.co.jp/file/pr28_1775_3.pdf",
+   "event_type": "discontinued",
+   "announced_at": "2026-07-15",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  }
+ ],
+ "メホビル配合錠ＬＤ「日新」": [
+  {
+   "maker": "高田製薬",
+   "title": "限定出荷解除に関するお知らせ_メホビル配合錠 LD・HD「日新」",
+   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000asgg-att/MefoVi.pdf",
+   "event_type": "resumed",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  }
+ ],
+ "メホビル配合錠ＨＤ「日新」": [
+  {
+   "maker": "高田製薬",
+   "title": "限定出荷解除に関するお知らせ_メホビル配合錠 HD「日新」",
+   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000b8xp-att/MefoVil.pdf",
+   "event_type": "resumed",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  }
+ ],
+ "ロサルヒド配合錠ＬＤ「ケミファ」": [
+  {
+   "maker": "日本ケミファ",
+   "title": "販売中止のご案内（ロサルヒド配合錠LD・HD「ケミファ」）",
+   "url": "https://www.nc-medical.com/product_topics/p5ib910000001d7z-att/p5ib910000001d8n.pdf",
+   "event_type": "discontinued",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  }
+ ],
+ "モーラスパップ３０ｍｇ": [
+  {
+   "maker": "久光製薬",
+   "title": "2025.10.02 モーラスパップ60mg、ナボールテープ15mg・L30mg、フェルビナクテープ70mg「久光」一部包装販売中止のご案内",
+   "url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/251002.pdf",
+   "event_type": "package_discontinued",
+   "announced_at": "2025-10-02",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  }
+ ],
+ "ゲンタシンクリーム０．１％": [
+  {
+   "maker": "高田製薬",
+   "title": "供給に関するお知らせとお詫び_ ｹﾞﾝﾀｼﾝｸﾘｰﾑ及び軟膏0.1%、ﾏｷｻｶﾙｼﾄｰﾙ軟膏25μg/g",
+   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bdv5-att/KYOUKYU.pdf",
+   "event_type": "supply",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  }
+ ],
+ "エポセリン坐剤２５０": [
+  {
+   "maker": "日本ジェネリック",
+   "title": "2026/05/22 供給に関するお知らせ エポセリン坐剤125/250 販売中止のご案内を掲載いたしました",
+   "url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/EPOCE00_CHUUSHI_2605.pdf",
+   "event_type": "discontinued",
+   "announced_at": "2026-05-22",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  }
+ ],
+ "ドンペリドン坐剤１０ｍｇ「タカタ」": [
+  {
+   "maker": "高田製薬",
+   "title": "供給に関するお知らせとお詫び_ドンペリドン坐剤10㎎",
+   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008lj5-att/DONPERIDON.pdf",
+   "event_type": "supply",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  }
+ ],
+ "ラボナール注射用０．５ｇ": [
+  {
+   "maker": "ニプロ",
+   "title": "2026年7月27日 ラボナール注射用0.3g／0.5g　出荷再開および限定出荷解除のご案内",
+   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001FnFT1IAN",
+   "event_type": "resumed",
+   "announced_at": "2026-07-27",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  }
+ ],
+ "注射用サイメリン１００ｍｇ": [
+  {
+   "maker": "ニプロ",
+   "title": "2026年4月27日 【第二報】注射用サイメリン50mg／100mg 供給に関するお詫びとお知らせ",
+   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q8000014sQSZIA2",
+   "event_type": "supply",
+   "announced_at": "2026-04-27",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  }
+ ],
+ "アマルエット配合錠１番「ニプロ」": [
+  {
+   "maker": "ニプロ",
+   "title": "2025年10月1日 アマルエット配合錠1番／2番／3番／4番「ニプロ」　販売中止品のご案内",
+   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uW7KfIAK",
+   "event_type": "discontinued",
+   "announced_at": "2025-10-01",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  }
+ ],
+ "アマルエット配合錠２番「ニプロ」": [
+  {
+   "maker": "ニプロ",
+   "title": "2025年10月1日 アマルエット配合錠1番／2番／3番／4番「ニプロ」　販売中止品のご案内",
+   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uW7KfIAK",
+   "event_type": "discontinued",
+   "announced_at": "2025-10-01",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  }
+ ],
+ "アマルエット配合錠３番「ニプロ」": [
+  {
+   "maker": "ニプロ",
+   "title": "2025年10月1日 アマルエット配合錠1番／2番／3番／4番「ニプロ」　販売中止品のご案内",
+   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uW7KfIAK",
+   "event_type": "discontinued",
+   "announced_at": "2025-10-01",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  }
+ ],
+ "アマルエット配合錠４番「ニプロ」": [
+  {
+   "maker": "ニプロ",
+   "title": "2025年10月1日 アマルエット配合錠1番／2番／3番／4番「ニプロ」　販売中止品のご案内",
+   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uW7KfIAK",
+   "event_type": "discontinued",
+   "announced_at": "2025-10-01",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  }
+ ],
+ "ロスバスタチンＯＤ錠２．５ｍｇ「ＤＳＥＰ」": [
+  {
+   "maker": "第一三共エスファ",
+   "title": "2026.07.16 販売中止・休止 ロスバスタチンOD錠｢DSEP｣販売終了製品のご案内",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/2236/EPROS1N02301-1.pdf",
+   "event_type": "discontinued",
+   "announced_at": "2026-07-16",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  }
+ ],
+ "ロスバスタチンＯＤ錠５ｍｇ「ＤＳＥＰ」": [
+  {
+   "maker": "第一三共エスファ",
+   "title": "2026.07.16 販売中止・休止 ロスバスタチンOD錠｢DSEP｣販売終了製品のご案内",
+   "url": "https://med.daiichisankyo-ep.co.jp/information/files/2236/EPROS1N02301-1.pdf",
+   "event_type": "discontinued",
+   "announced_at": "2026-07-16",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  }
+ ],
+ "ツロブテロールテープ０．５ｍｇ「久光」": [
+  {
+   "maker": "久光製薬",
+   "title": "2025.05.08 経皮吸収型 気管支拡張剤 ツロブテロールテープ「久光」出荷に関するお知らせ",
+   "url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/250508.pdf",
+   "event_type": "supply",
+   "announced_at": "2025-05-08",
+   "first_seen": "2026-08-03",
+   "last_checked": "2026-08-03"
+  }
+ ],
+ "ツロブテロールテープ１ｍｇ「久光」": [
+  {
+   "maker": "久光製薬",
+   "title": "2025.05.08 経皮吸収型 気管支拡張剤 ツロブテロールテープ「久光」出荷に関するお知らせ",
+   "url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/250508.pdf",
+   "event_type": "supply",
+   "announced_at": "2025-05-08",
+   "first_seen": "2026-08-03",
    "last_checked": "2026-08-03"
   }
  ]

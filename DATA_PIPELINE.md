@@ -9,7 +9,7 @@
 |---|---|
 | `maker_announcements.json` | Web・iOSが参照する品目ごとの代表案内 |
 | `maker_announcement_events.json` | 差し替え前を含む品目ごとの案内履歴 |
-| `unmatched_maker_announcements.json` | 公式サイトから取得したがCSV品目と一致しなかった確認待ち案内 |
+| `unmatched_maker_announcements.json` | 公式サイトから取得したが、既存・深掘り・手動登録を含むいずれのCSV品目にも一致しなかった確認待ち案内 |
 | `maker_collection_health.json` | 収集元ごとの取得件数・エラー |
 | `manual_announcements.json` | 自動照合が難しい案内の共通手動登録 |
 
@@ -24,6 +24,9 @@
 - `other`: 上記以外
 
 「他社品販売中止に伴う限定出荷」は `limited` とし、自社品の販売中止にしない。
+同じ品目に複数の案内がある場合、製品全体の販売中止、一部包装の中止、一時的な
+供給案内の順に代表案内を選ぶ。同じ種別では新しい案内を優先する。代表に選ばれない
+旧報・続報も照合済みとして扱い、未照合一覧には残さない。
 
 ## 日次処理
 
