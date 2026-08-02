@@ -20,5 +20,7 @@ jobs:
         run: python3 -m py_compile scripts/*.py
       - name: 回帰テスト
         run: python3 -m unittest discover -s scripts -p 'test_*.py'
+      - name: 現行供給CSV品質検査
+        run: python3 scripts/validate_supply_data.py --csv drugs_app_ready.csv
       - name: 現行メーカー案内データ品質検査
         run: python3 scripts/validate_maker_announcements.py --min-count 300

@@ -10,13 +10,14 @@ maker_announcements.json を生成する。
              第一三共エスファ・日本ケミファ・東和薬品・高田製薬・久光製薬・ニプロ
 """
 import csv
-import datetime
 import json
 import os
 import re
 import sys
 import unicodedata
 import urllib.request
+
+from jst_time import jst_today
 
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
 
@@ -154,7 +155,7 @@ def parse_takata(pages=2):
     お知らせは年別アーカイブ /medical/topics/{年}.html に集約されている。
     pages=遡る年数（日次実行では当年分だけで十分だが、年始の取りこぼし防止に2年分）"""
     import datetime
-    this_year = datetime.date.today().year
+    this_year = jst_today().year
     items = []
     for year in range(this_year, this_year - max(1, min(pages, 4)), -1):
         req = urllib.request.Request(
@@ -181,7 +182,7 @@ def parse_hisamitsu(pages=2):
     年を絞る。タイトルに複数品目が列挙される販売中止案内もそのまま保持する。
     """
     html = fetch("https://www.hisamitsu-pharm.jp/product/whatsnew/index.html?category=c3")
-    this_year = datetime.date.today().year
+    this_year = jst_today().year
     min_year = this_year - max(1, min(pages, 5)) + 1
     items = []
     seen = set()
@@ -322,7 +323,7 @@ def deepen_sawai(result, csv_path, limit=200):
     再チェックしてローテーションする。これにより、メーカーが状況変化で新しい
     案内文を出したとき（例: 供給停止→限定出荷）に古い案内文へ差し替えられる。
     limit件/回で回すため、対象全体は数日かけて一巡する。"""
-    today = datetime.date.today().isoformat()
+    today = jst_today().isoformat()
     with open(csv_path, encoding="utf-8-sig") as f:
         rows = list(csv.DictReader(f))
     # 現在「通常出荷」でも将来の販売中止案内が出ていることがあるため、
@@ -368,17 +369,54 @@ def deepen_sawai(result, csv_path, limit=200):
 def collect_announcements(nihon_generic_pages=3):
     all_items = []
     health = []
+    seen = set()
     for parser in PARSERS:
         try:
             kwargs = {"pages": nihon_generic_pages} if parser.__name__ in PAGINATED_PARSERS else {}
-            items = parser(**kwargs)
-            all_items.extend(items)
+            items = []
+            local_seen = set()
+            for maker, title, url in parser(**kwargs):
+                # 同じリンクがPC用・モバイル用など複数箇所に現れるメーカーがある。
+                # URL単位で一意化し、収集件数と未マッチ確認待ちを水増ししない。
+                key = (norm(maker), str(url).strip())
+                if not key[1] or key in local_seen:
+                    continue
+                local_seen.add(key)
+                items.append((maker, title, url))
+                if key not in seen:
+                    seen.add(key)
+                    all_items.append((maker, title, url))
             health.append({"source": parser.__name__, "ok": bool(items), "count": len(items),
                            "error": "" if items else "取得件数が0件"})
         except Exception as e:
             print(f"[WARN] {parser.__name__} failed: {e}", file=sys.stderr)
             health.append({"source": parser.__name__, "ok": False, "count": 0, "error": str(e)})
     return all_items, health
+
+
+def collection_anomalies(health, total, previous=None):
+    """複数障害・総量急減・収集元ごとの大幅減を検出する。"""
+    anomalies = []
+    failed = [source for source in health if not source.get("ok")]
+    if len(failed) > max(2, len(PARSERS) // 3):
+        anomalies.append(f"{len(failed)}ソースが失敗")
+    if total < 20:
+        anomalies.append(f"総取得件数が少なすぎます: {total}件")
+    if isinstance(previous, dict):
+        previous_total = previous.get("total")
+        if isinstance(previous_total, int) and previous_total >= 100 and total * 2 < previous_total:
+            anomalies.append(f"総取得件数が前回の50%未満です: {previous_total}→{total}件")
+        previous_sources = {
+            source.get("source"): source.get("count")
+            for source in previous.get("sources") or [] if isinstance(source, dict)
+        }
+        for source in health:
+            name, count = source.get("source"), source.get("count")
+            old_count = previous_sources.get(name)
+            if (isinstance(old_count, int) and old_count >= 20
+                    and isinstance(count, int) and count * 5 < old_count):
+                anomalies.append(f"{name}の取得件数が前回の20%未満です: {old_count}→{count}件")
+    return anomalies
 
 
 # 供給状況と無関係なお知らせ(電子添文改訂・学会情報など)を除外するキーワード
@@ -463,7 +501,7 @@ def has_delist_notice(row):
 
 def update_event_history(history, current, today=None):
     """現在の代表案内を品目別履歴へ追記する。同じURLは重複させない。"""
-    today = today or datetime.date.today().isoformat()
+    today = today or jst_today().isoformat()
     result = {name: [dict(e) for e in events]
               for name, events in (history or {}).items() if isinstance(events, list)}
     for name, info in current.items():
@@ -523,7 +561,7 @@ def match_to_csv(announcements, csv_path, existing=None, unmatched_out=None):
             result[name] = value
 
     used_urls = set()
-    today = datetime.date.today().isoformat()
+    today = jst_today().isoformat()
     for r in targets:
         name = r["商品名"]
         name_n = norm(name)
@@ -576,7 +614,12 @@ def main():
     print(f"取得件数: {len(announcements)}", file=sys.stderr)
 
     health_path = os.path.join(os.path.dirname(out_path) or ".", "maker_collection_health.json")
-    health_doc = {"checked": datetime.date.today().isoformat(), "sources": health,
+    try:
+        with open(health_path, encoding="utf-8") as f:
+            previous_health = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        previous_health = None
+    health_doc = {"checked": jst_today().isoformat(), "sources": health,
                   "total": len(announcements)}
     with open(health_path, "w", encoding="utf-8") as f:
         json.dump(health_doc, f, ensure_ascii=False, indent=1)
@@ -584,10 +627,11 @@ def main():
     for h in failed:
         # GitHub Actionsの画面に警告注釈を出し、単一ソース障害もログに埋もれさせない。
         print(f"::warning title=メーカー案内収集失敗::{h['source']}: {h['error']}", file=sys.stderr)
-    # 1社の一時障害では厚労省データ更新を止めないが、複数ソースが同時に壊れた場合は
-    # HTML/API変更の可能性が高いためCIを失敗させ、静かな取りこぼしを防ぐ。
-    if len(failed) > max(2, len(PARSERS) // 3) or len(announcements) < 20:
-        print(f"❌ メーカー案内の取得異常: {len(failed)}ソース失敗 / {len(announcements)}件", file=sys.stderr)
+    # 1社の一時障害では厚労省データ更新を止めないが、複数障害や前回比の大幅減は
+    # HTML/API変更の可能性が高いため失敗させ、少量だけ取得できた状態も見逃さない。
+    anomalies = collection_anomalies(health, len(announcements), previous_health)
+    if anomalies:
+        print(f"❌ メーカー案内の取得異常: {' / '.join(anomalies)}", file=sys.stderr)
         raise SystemExit(1)
 
     unmatched = []

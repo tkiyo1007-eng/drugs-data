@@ -21,6 +21,8 @@ import json
 import subprocess
 import sys
 
+from jst_time import jst_today
+
 LOG_FILE = "status_changes.json"
 KEEP_DAYS = 90
 
@@ -66,7 +68,7 @@ def save_log(entries):
             continue
         seen.add(k)
         uniq.append(e)
-    cutoff = (datetime.date.today() - datetime.timedelta(days=KEEP_DAYS)).strftime("%Y/%m/%d")
+    cutoff = (jst_today() - datetime.timedelta(days=KEEP_DAYS)).strftime("%Y/%m/%d")
     uniq = [e for e in uniq if e["date"] >= cutoff]
     json.dump(uniq, open(LOG_FILE, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(f"status_changes.json: {len(uniq)}件", file=sys.stderr)
@@ -102,7 +104,7 @@ def backfill():
 
 
 def daily_diff(prev_path, new_path, date_str=None):
-    date_str = date_str or datetime.date.today().strftime("%Y/%m/%d")
+    date_str = date_str or jst_today().strftime("%Y/%m/%d")
     prev = read_status_map(open(prev_path, encoding="utf-8").read())
     new = read_status_map(open(new_path, encoding="utf-8").read())
     changes = diff_maps(prev, new, date_str)

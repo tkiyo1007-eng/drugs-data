@@ -5,12 +5,13 @@ from __future__ import annotations
 
 import argparse
 import csv
-import datetime as dt
 import json
 import re
 import sys
 import unicodedata
 from pathlib import Path
+
+from jst_time import jst_now, jst_today
 
 
 END_RE = re.compile(r"販売中止|販売終了|製造中止|製造販売中止")
@@ -75,7 +76,7 @@ def main() -> int:
         products.update(previous.get("products") or {})
 
     skipped: list[str] = []
-    today = dt.date.today().isoformat()
+    today = jst_today().isoformat()
     for path in args.announcements:
         with path.open(encoding="utf-8") as handle:
             announcements = exact_announcements(json.load(handle))
@@ -115,7 +116,7 @@ def main() -> int:
 
     output = {
         "schema_version": 1,
-        "generated_at": dt.datetime.now().astimezone().isoformat(timespec="seconds"),
+        "generated_at": jst_now().isoformat(timespec="seconds"),
         "products": dict(sorted(products.items())),
     }
     args.output.write_text(json.dumps(output, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

@@ -113,7 +113,9 @@ jobs:
 
       - name: 薬価の空欄をマスタから補完（新規追加品目は薬価空欄で入るため）
         run: python3 scripts/fill_prices.py drugs_app_ready.csv yakka_master.csv
-        continue-on-error: true
+
+      - name: 公開前の供給CSV品質検査
+        run: python3 scripts/validate_supply_data.py --csv drugs_app_ready.csv
 
       - name: version.json 更新（単調増加 YYYYMMDDHHMM）
         run: |
@@ -133,21 +135,21 @@ jobs:
 
       - name: 供給状況の変化ログを更新（前日CSVとの差分）
         run: python3 scripts/build_status_changes.py diff /tmp/prev_drugs.csv drugs_app_ready.csv
-        continue-on-error: true
 
       - name: 解除までの平均日数を集計
         run: python3 scripts/build_resolution_stats.py
-        continue-on-error: true
 
       - name: 供給危機指数を算出
         run: python3 scripts/build_crisis_index.py
-        continue-on-error: true
 
       - name: メーカー案内文(PDF)を取得してマッチング
         run: python3 scripts/fetch_maker_announcements.py drugs_app_ready.csv maker_announcements.json 2 60
 
       - name: メーカー案内データ品質検査
-        run: python3 scripts/validate_maker_announcements.py --min-count 300
+        run: |
+          python3 scripts/validate_maker_announcements.py \
+            --min-count 300 \
+            --expected-checked "$(TZ=Asia/Tokyo date +%F)"
 
       - name: 販売中止案内をYJコード別ライフサイクルへ変換
         run: |
@@ -178,7 +180,8 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add drugs_app_ready.csv version.json maker_announcements.json manual_announcements.json \
             maker_announcement_events.json maker_collection_health.json unmatched_maker_announcements.json \
-            product_lifecycle.json announcement_packages.json packages_cache.json status_changes.json news.json
+            product_lifecycle.json announcement_packages.json packages_cache.json status_changes.json \
+            resolution_stats.json crisis_index.json news.json
           git diff --cached --quiet && echo "変更なし" && exit 0
           git commit -m "データ自動更新: $(TZ=Asia/Tokyo date +'%Y/%m/%d')"
           git pull --rebase origin main || true

@@ -1,5 +1,5 @@
 {
- "checked": "2026-08-02",
+ "checked": "2026-08-03",
  "sources": [
   {
    "source": "parse_sawai",
@@ -16,25 +16,25 @@
   {
    "source": "parse_nichiiko_excel",
    "ok": true,
-   "count": 503,
+   "count": 498,
    "error": ""
   },
   {
    "source": "parse_nihon_generic",
    "ok": true,
-   "count": 214,
+   "count": 88,
    "error": ""
   },
   {
    "source": "parse_kyorin",
    "ok": true,
-   "count": 2,
+   "count": 1,
    "error": ""
   },
   {
    "source": "parse_dsep",
    "ok": true,
-   "count": 2568,
+   "count": 1279,
    "error": ""
   },
   {
@@ -52,7 +52,7 @@
   {
    "source": "parse_takata",
    "ok": true,
-   "count": 470,
+   "count": 235,
    "error": ""
   },
   {
@@ -68,5 +68,5 @@
    "error": ""
   }
  ],
- "total": 4025
+ "total": 2369
 }

@@ -17,6 +17,8 @@ import json
 import statistics
 import sys
 
+from jst_time import jst_today
+
 LOG_FILE = "status_changes.json"
 OUT_FILE = "resolution_stats.json"
 
@@ -56,7 +58,7 @@ def build():
             if 0 < days <= 365:  # 異常値（ログ欠損等での誤ペア化）を除外
                 durations[to_a].append(days)
 
-    out = {"updatedAt": datetime.date.today().strftime("%Y/%m/%d")}
+    out = {"updatedAt": jst_today().strftime("%Y/%m/%d")}
     for key, vals in durations.items():
         if len(vals) < 5:  # サンプルが少なすぎる区分は出力しない（誤った印象を避ける）
             continue
