@@ -1,5 +1,35 @@
 [
  {
+  "date": "2026/08/03",
+  "title": "「バイオ後続品」のページを更新しました",
+  "url": "https://www.pmda.go.jp/review-services/drug-reviews/about-reviews/p-drugs/0034.html",
+  "tag": "承認審査"
+ },
+ {
+  "date": "2026/08/03",
+  "title": "クラスI回収 該当回収品目　新鮮凍結血漿-LR「日赤」480",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html",
+  "tag": "回収"
+ },
+ {
+  "date": "2026/08/03",
+  "title": "[MID-NET]利活用ガイドライン、事務処理手続通知を改正しました",
+  "url": "https://www.pmda.go.jp/safety/mid-net/0016.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/08/03",
+  "title": "［MID-NET］MID-NETの利活用に関する有識者会議の情報を更新しました",
+  "url": "https://www.pmda.go.jp/safety/mid-net/0011.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/08/03",
+  "title": "9月簡易相談予定表を掲載しました【医薬品等】",
+  "url": "https://www.pmda.go.jp/review-services/f2f-pre/consultations/0005.html",
+  "tag": "承認審査"
+ },
+ {
   "date": "2026/07/31",
   "title": "「高齢者におけるポリファーマシー対策の普及啓発資材について」を掲載しました",
   "url": "https://www.pmda.go.jp/safety/info-services/drugs/0010.html",
@@ -27,36 +57,6 @@
   "date": "2026/07/31",
   "title": "Annual Report 2025を掲載しました。",
   "url": "https://www.pmda.go.jp/review-services/gmp-qms-gctp/gmp/0011.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/07/30",
-  "title": "クラスI回収 該当回収品目　新鮮凍結血漿-LR「日赤」240",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html",
-  "tag": "回収"
- },
- {
-  "date": "2026/07/27",
-  "title": "治験エコシステム導入推進事業に関する新たな活動を開始しました",
-  "url": "https://www.pmda.go.jp/relief-services/0011.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/07/27",
-  "title": "2026年度 新再生医療等製品の承認品目一覧（2026年6月承認分まで）を掲載しました",
-  "url": "https://www.pmda.go.jp/review-services/drug-reviews/review-information/ctp/0018.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/07/24",
-  "title": "9月の簡易相談実施予定を掲載しました（医療機器等）",
-  "url": "https://www.pmda.go.jp/review-services/f2f-pre/consultations/0015.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/07/24",
-  "title": "[イベント]Early Consideration「少数例臨床試験に関する留意事項」説明会開催のお知らせを掲載しました",
-  "url": "https://www.pmda.go.jp/review-services/symposia/0207.html",
   "tag": "承認審査"
  }
 ]
