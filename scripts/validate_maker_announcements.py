@@ -148,7 +148,7 @@ def validate_manual_groups(csv_path, path):
     if not isinstance(data, list):
         return ["手動グループ案内のルートが配列ではありません"]
     errors = []
-    seen_products = set()
+    seen_product_urls = set()
     for index, group in enumerate(data):
         label = f"手動グループ案内[{index}]"
         if not isinstance(group, dict):
@@ -164,9 +164,6 @@ def validate_manual_groups(csv_path, path):
                     continue
                 if name not in product_names:
                     errors.append(f"{label}: CSVに存在しない品目: {name}")
-                if name in seen_products:
-                    errors.append(f"手動グループ案内の品目が重複しています: {name}")
-                seen_products.add(name)
         info = group.get("announcement")
         if not isinstance(info, dict):
             errors.append(f"{label}.announcementがオブジェクトではありません")
@@ -181,6 +178,12 @@ def validate_manual_groups(csv_path, path):
         if event_type is not None and event_type not in ALLOWED_EVENT_TYPES:
             errors.append(f"{label}.announcement.event_typeが不正です: {event_type}")
         _validate_date(info.get("announced_at"), f"{label}.announcement.announced_at", errors)
+        if isinstance(products, list):
+            for name in products:
+                key = (name, url)
+                if key in seen_product_urls:
+                    errors.append(f"手動グループ案内の品目とURLが重複しています: {name} ({url})")
+                seen_product_urls.add(key)
     return errors
 
 

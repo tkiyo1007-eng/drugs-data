@@ -605,9 +605,10 @@ def announcement_rank(info):
             TRANSIENT_PRIORITY.get(event_type, 0))
 
 
-def filter_resolved_unmatched(unmatched, matched):
+def filter_resolved_unmatched(unmatched, matched, extra_resolved_urls=None):
     """深掘り・手動登録・既存引継ぎで解決済みのURLを未照合から除く。"""
     resolved_urls = {info.get("url") for info in matched.values() if info.get("url")}
+    resolved_urls.update(extra_resolved_urls or ())
     return [info for info in unmatched if info.get("url") not in resolved_urls]
 
 
@@ -619,22 +620,38 @@ def load_manual_announcements(single_path="manual_announcements.json",
     個別ファイルで上書きできるようにする。
     """
     manual = {}
+    resolved_urls = set()
+    group_events = []
     try:
         with open(groups_path, encoding="utf-8") as f:
             groups = json.load(f)
         for group in groups:
-            info = group["announcement"]
+            info = dict(group["announcement"])
+            info.setdefault("event_type", classify_event(info.get("title", "")))
+            announced_at = extract_announcement_date(info.get("title", ""))
+            if announced_at:
+                info.setdefault("announced_at", announced_at)
+            if info.get("url"):
+                resolved_urls.add(info["url"])
+            event_group = {}
             for name in group["products"]:
-                manual[name] = dict(info)
+                event_group[name] = dict(info)
+                current = manual.get(name)
+                if current is None or announcement_rank(info) > announcement_rank(current):
+                    manual[name] = dict(info)
+            group_events.append(event_group)
     except FileNotFoundError:
         pass
 
     try:
         with open(single_path, encoding="utf-8") as f:
-            manual.update(json.load(f))
+            single = json.load(f)
+        # 品目固有の明示登録はグループの優先順位より常に優先する。
+        manual.update(single)
+        resolved_urls.update(info.get("url") for info in single.values() if info.get("url"))
     except FileNotFoundError:
         pass
-    return manual
+    return manual, resolved_urls, group_events
 
 
 def match_to_csv(announcements, csv_path, existing=None, unmatched_out=None):
@@ -779,7 +796,7 @@ def main():
 
     # 手動登録分（manual_announcements.json）を最後に重ねる（手動が優先）
     # 自動収集が対応していないメーカーの案内文をピンポイントで連携するための仕組み
-    manual = load_manual_announcements()
+    manual, manual_urls, manual_group_events = load_manual_announcements()
     for name, info in manual.items():
         info = dict(info)
         info.setdefault("event_type", classify_event(info.get("title", "")))
@@ -792,7 +809,7 @@ def main():
 
     # 自動照合の代表に選ばれなかった旧報・続報や、沢井深掘り・手動登録・
     # 既存引継ぎで解決済みのURLはレビュー待ち一覧から除外する。
-    unmatched = filter_resolved_unmatched(unmatched, matched)
+    unmatched = filter_resolved_unmatched(unmatched, matched, manual_urls)
     unmatched_path = os.path.join(os.path.dirname(out_path) or ".", "unmatched_maker_announcements.json")
     with open(unmatched_path, "w", encoding="utf-8") as f:
         json.dump(unmatched, f, ensure_ascii=False, indent=1)
@@ -806,6 +823,9 @@ def main():
     except FileNotFoundError:
         history = {}
     history = update_event_history(history, matched)
+    # 同一品目に複数のグループ通知がある場合、代表に選ばれない旧通知も履歴へ残す。
+    for group_events in manual_group_events:
+        history = update_event_history(history, group_events)
     with open(events_path, "w", encoding="utf-8") as f:
         json.dump(history, f, ensure_ascii=False, indent=1)
     print(f"案内履歴: {sum(map(len, history.values()))}件（{events_path}）", file=sys.stderr)

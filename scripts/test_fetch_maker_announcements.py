@@ -199,9 +199,32 @@ class AnnouncementMatchingTests(unittest.TestCase):
                 "テスト錠２ｍｇ": {"maker": "テスト製薬", "title": "訂正版", "url": "single"},
             }, single_file, ensure_ascii=False)
 
-        result = mod.load_manual_announcements(single_file.name, group_file.name)
+        result, resolved_urls, group_events = mod.load_manual_announcements(
+            single_file.name, group_file.name)
         self.assertEqual(result["テスト錠１ｍｇ"]["url"], "group")
         self.assertEqual(result["テスト錠２ｍｇ"]["url"], "single")
+        self.assertEqual(resolved_urls, {"group", "single"})
+        self.assertEqual(group_events[0]["テスト錠２ｍｇ"]["url"], "group")
+
+    def test_manual_groups_keep_history_and_choose_newest_terminal_notice(self):
+        group_file = tempfile.NamedTemporaryFile("w", encoding="utf-8", delete=False)
+        self.addCleanup(lambda: os.path.exists(group_file.name) and os.unlink(group_file.name))
+        with group_file:
+            json.dump([{
+                "products": ["テスト錠"],
+                "announcement": {"maker": "テスト製薬", "title": "2024.01.01 販売中止",
+                                 "url": "old", "event_type": "discontinued"},
+            }, {
+                "products": ["テスト錠"],
+                "announcement": {"maker": "テスト製薬", "title": "2026.01.01 経過措置の販売終了",
+                                 "url": "new", "event_type": "discontinued"},
+            }], group_file, ensure_ascii=False)
+
+        result, resolved_urls, group_events = mod.load_manual_announcements(
+            os.path.join(os.path.dirname(group_file.name), "missing.json"), group_file.name)
+        self.assertEqual(result["テスト錠"]["url"], "new")
+        self.assertEqual(resolved_urls, {"old", "new"})
+        self.assertEqual([events["テスト錠"]["url"] for events in group_events], ["old", "new"])
 
     def test_sawai_deep_scan_includes_normal_supply(self):
         name = "テスト錠１ｍｇ「サワイ」"

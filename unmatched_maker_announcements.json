@@ -824,12 +824,6 @@
   "event_type": "resumed"
  },
  {
-  "maker": "東和薬品",
-  "title": "製造販売中止に伴う経過措置移行のお知らせ",
-  "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82067&t=4&f=20260306-%E7%B5%8C%E9%81%8E%E6%8E%AA%E7%BD%AE%E7%A7%BB%E8%A1%8C%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-  "event_type": "discontinued"
- },
- {
   "maker": "高田製薬",
   "title": "限定出荷解除に関するお知らせ",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000blya-att/KAIJYO.pdf",
@@ -864,12 +858,6 @@
   "title": "限定出荷解除に関するお知らせ",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bbex-att/KAIJYO.pdf",
   "event_type": "resumed"
- },
- {
-  "maker": "高田製薬",
-  "title": "販売中止品の経過措置期間延長についてのご案内",
-  "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000b5nu-att/20260401.pdf",
-  "event_type": "discontinued"
  },
  {
   "maker": "高田製薬",
