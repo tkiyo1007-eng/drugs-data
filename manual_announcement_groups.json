@@ -150,5 +150,200 @@
    "event_type": "discontinued",
    "announced_at": "2026-04-01"
   }
+ },
+ {
+  "products": [
+   "アリピプラゾールＯＤ錠３ｍｇ「ニプロ」",
+   "アリピプラゾールＯＤ錠６ｍｇ「ニプロ」",
+   "アリピプラゾールＯＤ錠１２ｍｇ「ニプロ」",
+   "アリピプラゾールＯＤ錠２４ｍｇ「ニプロ」",
+   "アリピプラゾール散１％「ニプロ」",
+   "エバスチンＯＤ錠５ｍｇ「ＮＰ」",
+   "エバスチンＯＤ錠１０ｍｇ「ＮＰ」",
+   "セスデン注７．５ｍｇ",
+   "セレコキシブ錠１００ｍｇ「ニプロ」",
+   "セレコキシブ錠２００ｍｇ「ニプロ」",
+   "パロキセチン錠５ｍｇ「ニプロ」",
+   "パロキセチン錠１０ｍｇ「ニプロ」",
+   "パロキセチン錠２０ｍｇ「ニプロ」",
+   "ピペラシリンナトリウム点滴静注用バッグ２ｇ「ＮＰ」",
+   "プレガバリンＯＤ錠２５ｍｇ「ニプロ」",
+   "プレガバリンＯＤ錠７５ｍｇ「ニプロ」",
+   "プレガバリンＯＤ錠１５０ｍｇ「ニプロ」"
+  ],
+  "announcement": {
+   "maker": "ニプロ",
+   "title": "2026.07.01 販売中止品・取扱い販売中止品のご案内",
+   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001CesNNIAZ",
+   "event_type": "discontinued",
+   "announced_at": "2026-07-01"
+  }
+ },
+ {
+  "products": [
+   "オランザピン錠１０ｍｇ「ニプロ」",
+   "消毒用エタライト液",
+   "炭酸ランタン顆粒分包２５０ｍｇ「ニプロ」",
+   "炭酸ランタン顆粒分包５００ｍｇ「ニプロ」",
+   "デキストロメトルファン臭化水素酸塩錠１５ｍｇ「ＮＰ」",
+   "メマンチン塩酸塩錠２０ｍｇ「ニプロ」",
+   "ヒシセオール配合点滴静注"
+  ],
+  "announcement": {
+   "maker": "ニプロ",
+   "title": "2026.07.01 一部包装中止品のご案内",
+   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001CesNNIAZ",
+   "event_type": "package_discontinued",
+   "announced_at": "2026-07-01"
+  }
+ },
+ {
+  "products": [
+   "サブパック血液ろ過用補充液－Ｂｉ"
+  ],
+  "announcement": {
+   "maker": "ニプロ",
+   "title": "2026.04.14 サブパック血液ろ過用補充液Bi 包装中止品のご案内",
+   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q8000012YTSZIA4",
+   "event_type": "package_discontinued",
+   "announced_at": "2026-04-14"
+  }
+ },
+ {
+  "products": [
+   "ベポタスチンベシル酸塩錠１０ｍｇ「タナベ」"
+  ],
+  "announcement": {
+   "maker": "ニプロ",
+   "title": "2025.10.01 ベポタスチンベシル酸塩錠10mg「タナベ」バラ500錠 包装中止品のご案内",
+   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uW7FpIAK",
+   "event_type": "package_discontinued",
+   "announced_at": "2025-10-01"
+  }
+ },
+ {
+  "products": [
+   "インドメタシン坐剤２５「ＮＰ」",
+   "インドメタシン坐剤５０「ＮＰ」",
+   "エパルレスタット錠５０ｍｇ「ＮＰ」",
+   "オメプラゾール注用２０ｍｇ「ＮＰ」",
+   "カンデサルタン錠２ｍｇ「ニプロ」",
+   "カンデサルタン錠４ｍｇ「ニプロ」",
+   "カンデサルタン錠８ｍｇ「ニプロ」",
+   "カンデサルタン錠１２ｍｇ「ニプロ」",
+   "シロドシン錠２ｍｇ「ニプロ」",
+   "シロドシン錠４ｍｇ「ニプロ」",
+   "テルミサルタン錠２０ｍｇ「ニプロ」",
+   "テルミサルタン錠４０ｍｇ「ニプロ」",
+   "テルミサルタン錠８０ｍｇ「ニプロ」",
+   "メコバラミン錠５００μｇ「ＮＰ」",
+   "レトロゾール錠２．５ｍｇ「ニプロ」",
+   "レボフロキサシン点眼液０．５％「ニプロ」",
+   "レボフロキサシン点眼液１．５％「ニプロ」",
+   "ジクロフェナクナトリウムテープ１５ｍｇ「ＮＰ」",
+   "ジクロフェナクナトリウムテープ３０ｍｇ「ＮＰ」"
+  ],
+  "announcement": {
+   "maker": "ニプロ",
+   "title": "2025.10.01 販売中止品・取扱い販売中止品のご案内",
+   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uW72vIAC",
+   "event_type": "discontinued",
+   "announced_at": "2025-10-01"
+  }
+ },
+ {
+  "products": [
+   "ハルトマン輸液ｐＨ８「ＮＰ」",
+   "ヒシファーゲン配合静注",
+   "ミノドロン酸錠５０ｍｇ「ニプロ」"
+  ],
+  "announcement": {
+   "maker": "ニプロ",
+   "title": "2025.10.01 一部包装中止品のご案内",
+   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uW72vIAC",
+   "event_type": "package_discontinued",
+   "announced_at": "2025-10-01"
+  }
+ },
+ {
+  "products": [
+   "ヘパリンＮａロック用１０単位／ｍＬシリンジ５ｍＬ「ニプロ」",
+   "ヘパリンＮａロック用１０単位／ｍＬシリンジ１０ｍＬ「ニプロ」",
+   "ヘパリンＮａロック用１００単位／ｍＬシリンジ５ｍＬ「ニプロ」",
+   "ヘパリンＮａロック用１００単位／ｍＬシリンジ１０ｍＬ「ニプロ」"
+  ],
+  "announcement": {
+   "maker": "ニプロ",
+   "title": "2026.07.02 ヘパリンNaロック用シリンジ「ニプロ」限定出荷解除のご案内",
+   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001CyS5FIAV",
+   "event_type": "resumed",
+   "announced_at": "2026-07-02"
+  }
+ },
+ {
+  "products": [
+   "トルバプタンＯＤ錠３．７５ｍｇ「ニプロ」"
+  ],
+  "announcement": {
+   "maker": "ニプロ",
+   "title": "2026.01.14 トルバプタンOD錠3.75mg「ニプロ」100錠（PTP）限定出荷による出荷再開予定のご案内",
+   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uV2muIAC",
+   "event_type": "limited",
+   "announced_at": "2026-01-14"
+  }
+ },
+ {
+  "products": [
+   "トルバプタンＯＤ錠３．７５ｍｇ「ニプロ」"
+  ],
+  "announcement": {
+   "maker": "ニプロ",
+   "title": "2026.03.11 トルバプタンOD錠3.75mg「ニプロ」限定出荷解除のご案内",
+   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q8000012YBIkIAO",
+   "event_type": "resumed",
+   "announced_at": "2026-03-11"
+  }
+ },
+ {
+  "products": [
+   "ヘパリンＮａ透析用２５０単位／ｍＬシリンジ２０ｍＬ「ニプロ」",
+   "ヘパリンＮａ透析用５００単位／ｍＬシリンジ１０ｍＬ「ＮＰ」",
+   "ヘパリンＮａ透析用５００単位／ｍＬシリンジ２０ｍＬ「ＮＰ」"
+  ],
+  "announcement": {
+   "maker": "ニプロ",
+   "title": "2026.03.02 ヘパリンNa透析用シリンジ限定出荷解除のご案内",
+   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q8000012YhIbIAK",
+   "event_type": "resumed",
+   "announced_at": "2026-03-02"
+  }
+ },
+ {
+  "products": [
+   "ダルテパリンＮａ静注２５００単位／１０ｍＬシリンジ「ニプロ」",
+   "ダルテパリンＮａ静注４０００単位／１６ｍＬシリンジ「ニプロ」"
+  ],
+  "announcement": {
+   "maker": "ニプロ",
+   "title": "2026.03.06 ダルテパリンNa静注シリンジ「ニプロ」限定出荷のご案内",
+   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q8000012XrFFIA0",
+   "event_type": "limited",
+   "announced_at": "2026-03-06"
+  }
+ },
+ {
+  "products": [
+   "ヘパリンＮａロック用１０単位／ｍＬシリンジ５ｍＬ「ＮＩＧ」",
+   "ヘパリンＮａロック用１０単位／ｍＬシリンジ１０ｍＬ「ＮＩＧ」",
+   "ヘパリンＮａロック用１００単位／ｍＬシリンジ５ｍＬ「ＮＩＧ」",
+   "ヘパリンＮａロック用１００単位／ｍＬシリンジ１０ｍＬ「ＮＩＧ」"
+  ],
+  "announcement": {
+   "maker": "日医工",
+   "title": "2026.07.08 ヘパリンNaロック用10単位/mL・100単位/mLシリンジ「NIG」限定出荷解除のお知らせ",
+   "url": "https://www.nichiiko.co.jp/medicine/files/20260708cI2.pdf",
+   "event_type": "resumed",
+   "announced_at": "2026-07-08"
+  }
  }
 ]

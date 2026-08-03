@@ -1,11 +1,5 @@
 [
  {
-  "maker": "日医工",
-  "title": "ヘパリンNaロック用10単位mLシリンジ5mL10mL 100単位mLシリンジ5mL10mL「NIG」 限定出荷解除のお知らせ",
-  "url": "https://www.nichiiko.co.jp/medicine/files/20260708cI2.pdf",
-  "event_type": "resumed"
- },
- {
   "maker": "第一三共エスファ",
   "title": "2026.07.16 販売中止・休止 包装容量販売終了のご案内(シロドシン錠・OD錠｢DSEP｣)",
   "url": "https://med.daiichisankyo-ep.co.jp/information/files/2237/EPURAG1L01301-1.pdf",
@@ -1217,45 +1211,10 @@
  },
  {
   "maker": "ニプロ",
-  "title": "2026年7月1日 販売中止品・取扱い販売中止品・包装中止品のご案内",
-  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001CesNNIAZ",
-  "event_type": "package_discontinued",
-  "announced_at": "2026-07-01"
- },
- {
-  "maker": "ニプロ",
   "title": "2026年7月1日 デキストロメトルファン臭化水素酸塩錠10mg「NP」(バラ1000錠)　包装中止品のご案内",
   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001CnUQXIA3",
   "event_type": "package_discontinued",
   "announced_at": "2026-07-01"
- },
- {
-  "maker": "ニプロ",
-  "title": "2026年4月14日 サブパック血液ろ過用補充液Bi　包装中止品のご案内",
-  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q8000012YTSZIA4",
-  "event_type": "package_discontinued",
-  "announced_at": "2026-04-14"
- },
- {
-  "maker": "ニプロ",
-  "title": "2025年10月1日 ベポタスチンべシル酸塩錠10mg「タナベ」（バラ500錠） 包装中止品のご案内",
-  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uW7FpIAK",
-  "event_type": "package_discontinued",
-  "announced_at": "2025-10-01"
- },
- {
-  "maker": "ニプロ",
-  "title": "2025年10月1日 販売中止品・取扱い販売中止品・包装中止品のご案内",
-  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uW72vIAC",
-  "event_type": "package_discontinued",
-  "announced_at": "2025-10-01"
- },
- {
-  "maker": "ニプロ",
-  "title": "2026年7月2日 ヘパリンNaロック用シリンジ「ニプロ」　限定出荷解除のご案内",
-  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001CyS5FIAV",
-  "event_type": "resumed",
-  "announced_at": "2026-07-02"
  },
  {
   "maker": "ニプロ",
@@ -1287,37 +1246,9 @@
  },
  {
   "maker": "ニプロ",
-  "title": "2026年3月11日 トルバプタンOD 錠3.75mg｢ニプロ｣ 限定出荷解除のご案内",
-  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q8000012YBIkIAO",
-  "event_type": "resumed",
-  "announced_at": "2026-03-11"
- },
- {
-  "maker": "ニプロ",
   "title": "2026年3月9日 新規ご注文辞退および限定出荷(出荷数割当運用)のお願い",
   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q8000012YhQfIAK",
   "event_type": "limited",
   "announced_at": "2026-03-09"
- },
- {
-  "maker": "ニプロ",
-  "title": "2026年3月6日 ダルテパリンNa静注シリンジ「ニプロ」　限定出荷のご案内",
-  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q8000012XrFFIA0",
-  "event_type": "limited",
-  "announced_at": "2026-03-06"
- },
- {
-  "maker": "ニプロ",
-  "title": "2026年3月2日 ヘパリンNa透析用シリンジ　限定出荷解除のご案内",
-  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q8000012YhIbIAK",
-  "event_type": "resumed",
-  "announced_at": "2026-03-02"
- },
- {
-  "maker": "ニプロ",
-  "title": "2026年1月14日 トルバプタンOD 錠3.75mg｢ニプロ｣ 100 錠(PTP)　限定出荷（出荷数割当運用）による出荷再開予定のご案内",
-  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uV2muIAC",
-  "event_type": "resumed",
-  "announced_at": "2026-01-14"
  }
 ]
