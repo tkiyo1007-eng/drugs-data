@@ -4368,5 +4368,135 @@
    "pkg": "バラ1000錠",
    "until": ""
   }
+ ],
+ "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=81672&t=4&f=20260129_%E3%83%91%E3%83%BC%E3%82%AD%E3%83%8D%E3%82%B9%E9%8C%A02_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP1000錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ1000錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ1200錠",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr28_1099_2.pdf": [
+  {
+   "pkg": "PTP700錠",
+   "until": "2027年2月"
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  }
+ ],
+ "https://medical.nihon-generic.co.jp/uploadfiles/medicine/VALAC_CHUUSHI_2607.pdf": [
+  {
+   "pkg": "PTP42錠",
+   "until": "2026年10月"
+  },
+  {
+   "pkg": "PTP42錠",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr28_1589_2.pdf": [
+  {
+   "pkg": "PTP140錠",
+   "until": "2027年4月"
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ200錠",
+   "until": ""
+  }
+ ],
+ "https://medical.nihon-generic.co.jp/uploadfiles/medicine/AMVAL_CHUUSHI_2605.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP140錠",
+   "until": "2026年8月"
+  }
+ ],
+ "https://www.nc-medical.com/product_topics/p5ib910000001d9f-att/p5ib910000001da3.pdf": [],
+ "https://www.nc-medical.com/product_topics/f4bj0h000000e9lq-att/f4bj0h000000e9me.pdf": [
+  {
+   "pkg": "瓶10本",
+   "until": ""
+  }
+ ],
+ "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001FfLx1IAF": [],
+ "https://med.sawai.co.jp/file/pr28_1003_1.pdf": [
+  {
+   "pkg": "PTP700錠",
+   "until": "2027年3月"
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP1000錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ1000錠",
+   "until": ""
+  }
+ ],
+ "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82492&t=4&f=20260428_%E3%83%95%E3%83%AB%E3%83%9C%E3%82%AD%E3%82%B5%E3%83%9F%E3%83%B3%E3%83%9E%E3%83%AC%E3%82%A4%E3%83%B3%E9%85%B8%E5%A1%A9%E9%8C%A025mg50mg75mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ500錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ1000錠",
+   "until": ""
+  }
+ ],
+ "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uVotAIAS": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ1000錠",
+   "until": ""
+  }
+ ],
+ "https://medical.nihon-generic.co.jp/uploadfiles/medicine/BEPOT10_CHUUSHI_2604.pdf": [
+  {
+   "pkg": "PTP500錠",
+   "until": "2026年7月"
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
  ]
 }
