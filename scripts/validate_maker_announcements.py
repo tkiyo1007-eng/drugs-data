@@ -138,6 +138,55 @@ def validate_unmatched(path):
     return errors
 
 
+def validate_manual_groups(csv_path, path):
+    """複数品目向け手動登録の構造とCSV参照を検査する。"""
+    if not os.path.exists(path):
+        return []
+    with open(csv_path, encoding="utf-8-sig") as f:
+        product_names = {r.get("商品名", "") for r in csv.DictReader(f)}
+    data = _load_json(path)
+    if not isinstance(data, list):
+        return ["手動グループ案内のルートが配列ではありません"]
+    errors = []
+    seen_product_urls = set()
+    for index, group in enumerate(data):
+        label = f"手動グループ案内[{index}]"
+        if not isinstance(group, dict):
+            errors.append(f"{label}がオブジェクトではありません")
+            continue
+        products = group.get("products")
+        if not isinstance(products, list) or not products:
+            errors.append(f"{label}.productsが空または配列ではありません")
+        else:
+            for name in products:
+                if not isinstance(name, str) or not name.strip():
+                    errors.append(f"{label}.productsに空または文字列以外の品目があります")
+                    continue
+                if name not in product_names:
+                    errors.append(f"{label}: CSVに存在しない品目: {name}")
+        info = group.get("announcement")
+        if not isinstance(info, dict):
+            errors.append(f"{label}.announcementがオブジェクトではありません")
+            continue
+        for field in REQUIRED_FIELDS:
+            if not str(info.get(field, "")).strip():
+                errors.append(f"{label}.announcement.{field}が空です")
+        url = str(info.get("url", ""))
+        if url and not url.startswith("https://"):
+            errors.append(f"{label}.announcement.urlがHTTPSではありません: {url}")
+        event_type = info.get("event_type")
+        if event_type is not None and event_type not in ALLOWED_EVENT_TYPES:
+            errors.append(f"{label}.announcement.event_typeが不正です: {event_type}")
+        _validate_date(info.get("announced_at"), f"{label}.announcement.announced_at", errors)
+        if isinstance(products, list):
+            for name in products:
+                key = (name, url)
+                if key in seen_product_urls:
+                    errors.append(f"手動グループ案内の品目とURLが重複しています: {name} ({url})")
+                seen_product_urls.add(key)
+    return errors
+
+
 def validate_health(path, expected_checked=None):
     data = _load_json(path)
     if not isinstance(data, dict):
@@ -189,6 +238,7 @@ def main():
     p.add_argument("--events", default="maker_announcement_events.json")
     p.add_argument("--unmatched", default="unmatched_maker_announcements.json")
     p.add_argument("--health", default="maker_collection_health.json")
+    p.add_argument("--manual-groups", default="manual_announcement_groups.json")
     p.add_argument("--expected-checked")
     p.add_argument("--min-count", type=int, default=300)
     args = p.parse_args()
@@ -196,6 +246,7 @@ def main():
     errors.extend(validate_history(args.events))
     errors.extend(validate_current_history(args.announcements, args.events))
     errors.extend(validate_unmatched(args.unmatched))
+    errors.extend(validate_manual_groups(args.csv, args.manual_groups))
     errors.extend(validate_health(args.health, args.expected_checked))
     if errors:
         for e in errors[:50]:

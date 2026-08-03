@@ -420,7 +420,7 @@ def collection_anomalies(health, total, previous=None):
 
 
 # 供給状況と無関係なお知らせ(電子添文改訂・学会情報など)を除外するキーワード
-SUPPLY_KEYWORDS = ["供給", "出荷", "限定", "停止", "中止", "お詫び", "欠品", "再開", "解除", "納品調整"]
+SUPPLY_KEYWORDS = ["供給", "出荷", "限定", "停止", "中止", "終了", "お詫び", "欠品", "再開", "解除", "納品調整"]
 # 品目固有ではない汎用アナウンス(「一覧を更新しました」等)は情報として無価値なため除外
 GENERIC_TITLE_PATTERNS = ["供給状況一覧を更新", "情報を更新しました", "を更新いたしました"]
 
@@ -438,7 +438,9 @@ def classify_event(title):
     一部包装の中止を製品全体の中止と分けることを優先する。
     """
     t = norm(title)
-    if re.search(r"一部包装.*(?:販売|発売)中止|包装中止", t):
+    if re.search(
+            r"(?:一部)?包装(?:容量)?(?:における|の)?(?:販売|発売)?(?:中止|終了)"
+            r"|患者(?:さん)?用パッケージ(?:入り)?.*(?:販売|発売)(?:中止|終了)", t):
         return "package_discontinued"
     if (re.search(r"販売中止|販売終了|製造中止|取り扱い中止|取扱い販売中止", t)
             and not re.search(r"他社(?:品|製品).*販売中止.*(?:影響|伴)", t)):
@@ -477,7 +479,8 @@ def make_announcement_record(maker, title, url, checked=None):
 
 MAKER_ALIASES = {
     "沢井製薬": ("沢井製薬",), "日医工": ("日医工",),
-    "日本ジェネリック": ("日本ジェネリック",),
+    # 日本ジェネリックの案内には、製造販売元の長生堂製薬品も掲載される。
+    "日本ジェネリック": ("日本ジェネリック", "長生堂製薬"),
     "キョーリンリメディオ": ("キョーリンリメディオ",),
     "第一三共エスファ": ("第一三共エスファ",),
     "日本ケミファ": ("日本ケミファ",), "東和薬品": ("東和薬品",),
@@ -531,8 +534,124 @@ def base_name_and_specs(name_n):
     maker_paren = m.group(0) if m else ""
     body = name_n[: m.start()] if m else name_n
     specs = set(re.findall(r"\d+(?:\.\d+)?", body))
-    core = re.sub(r"\d+(?:\.\d+)?\s*(mg|g|ml|%|μg|mcg)?", "", body).strip()
+    core = re.sub(r"\d+(?:\.\d+)?\s*(mg|g|ml|%|μg|mcg|番)?", "", body).strip()
     return core, specs, maker_paren
+
+
+def base_name_and_variant(name_n):
+    """MD/EX、LD/HDなど、数字を含まない規格記号を分離する。"""
+    m = re.search(r"「[^」]+」\s*$", name_n)
+    maker_paren = m.group(0) if m else ""
+    body = name_n[: m.start()] if m else name_n
+    variant = re.search(r"([A-Z]{1,3})$", body)
+    if not variant:
+        return "", "", maker_paren
+    return body[:variant.start()].strip(), variant.group(1), maker_paren
+
+
+def maker_suffix_matches(maker_paren, title_n):
+    """商品名のメーカー括弧を確認する。
+
+    メーカー公式の案内タイトルでは「ニプロ」等が省略されることがあるため、
+    タイトル側に括弧がない場合のみ省略を許す。別メーカーの括弧がある場合は
+    ソースのメーカーが一致していても照合しない。
+    """
+    if not maker_paren:
+        return False
+    suffixes = re.findall(r"「[^」]+」", title_n)
+    return not suffixes or maker_paren in suffixes
+
+
+def terminal_family_title_matches(core, title_n):
+    """規格・メーカー括弧を省略した全規格の販売中止タイトルを判定する。
+
+    製品名の直後に販売中止等が続く場合だけを対象にし、複数製品文書の括弧内で
+    一般名が列挙されただけのケースを拾わない。
+    """
+    if classify_event(title_n) != "discontinued" or re.findall(r"「[^」]+」", title_n):
+        return False
+    return re.search(
+        rf"{re.escape(core)}[_\s]*(?:の)?(?:製造販売|販売|製造)(?:中止|終了)",
+        title_n,
+    ) is not None
+
+
+EVENT_PRIORITY = {
+    "discontinued": 3,
+    "package_discontinued": 2,
+    "stopped": 1,
+    "limited": 1,
+    "resumed": 1,
+    "supply": 1,
+    "other": 1,
+}
+TRANSIENT_PRIORITY = {
+    "stopped": 4,
+    "limited": 3,
+    "resumed": 2,
+    "supply": 1,
+    "other": 0,
+}
+
+
+def announcement_rank(info):
+    """Web/iOSに表示する代表案内の優先順位を返す。
+
+    製品全体の販売中止を包装中止や一時的な供給案内より常に優先し、
+    同じ種別では新しい案内を採用する。
+    """
+    event_type = info.get("event_type") or classify_event(info.get("title", ""))
+    return (EVENT_PRIORITY.get(event_type, 1), info.get("announced_at", ""),
+            TRANSIENT_PRIORITY.get(event_type, 0))
+
+
+def filter_resolved_unmatched(unmatched, matched, extra_resolved_urls=None):
+    """深掘り・手動登録・既存引継ぎで解決済みのURLを未照合から除く。"""
+    resolved_urls = {info.get("url") for info in matched.values() if info.get("url")}
+    resolved_urls.update(extra_resolved_urls or ())
+    return [info for info in unmatched if info.get("url") not in resolved_urls]
+
+
+def load_manual_announcements(single_path="manual_announcements.json",
+                              groups_path="manual_announcement_groups.json"):
+    """個別登録と、1文書に複数品目を列挙するグループ登録を統合する。
+
+    グループを先に展開し、個別登録を後から重ねることで、例外的な1品目だけを
+    個別ファイルで上書きできるようにする。
+    """
+    manual = {}
+    resolved_urls = set()
+    group_events = []
+    try:
+        with open(groups_path, encoding="utf-8") as f:
+            groups = json.load(f)
+        for group in groups:
+            info = dict(group["announcement"])
+            info.setdefault("event_type", classify_event(info.get("title", "")))
+            announced_at = extract_announcement_date(info.get("title", ""))
+            if announced_at:
+                info.setdefault("announced_at", announced_at)
+            if info.get("url"):
+                resolved_urls.add(info["url"])
+            event_group = {}
+            for name in group["products"]:
+                event_group[name] = dict(info)
+                current = manual.get(name)
+                if current is None or announcement_rank(info) > announcement_rank(current):
+                    manual[name] = dict(info)
+            group_events.append(event_group)
+    except FileNotFoundError:
+        pass
+
+    try:
+        with open(single_path, encoding="utf-8") as f:
+            single = json.load(f)
+        # 品目固有の明示登録はグループの優先順位より常に優先する。
+        manual.update(single)
+        resolved_urls.update(info.get("url") for info in single.values() if info.get("url"))
+    except FileNotFoundError:
+        pass
+    return manual, resolved_urls, group_events
 
 
 def match_to_csv(announcements, csv_path, existing=None, unmatched_out=None):
@@ -554,10 +673,12 @@ def match_to_csv(announcements, csv_path, existing=None, unmatched_out=None):
         row = rows_by_name.get(name)
         if not row:
             continue
-        event_type = value.get("event_type") or classify_event(value.get("title", ""))
+        # 分類規則の改善を既存生成データにも反映し、過去の誤分類を固定化しない。
+        # 手動登録の明示event_typeはこの後のオーバーレイで再適用される。
+        event_type = classify_event(value.get("title", ""))
         if not is_normal_row(row) or has_delist_notice(row) or event_type in {"discontinued", "package_discontinued"}:
             value = dict(value)
-            value.setdefault("event_type", event_type)
+            value["event_type"] = event_type
             result[name] = value
 
     used_urls = set()
@@ -567,29 +688,59 @@ def match_to_csv(announcements, csv_path, existing=None, unmatched_out=None):
         name_n = norm(name)
         if not name_n:
             continue
-        matched = False
+        candidates = []
+        if name in result:
+            candidates.append(result[name])
+
+        def add_candidate(maker, title, url):
+            candidates.append(make_announcement_record(maker, title, url, checked=today))
+            # 代表案内に選ばれなかった旧報・続報も、製品への照合自体は完了している。
+            used_urls.add(url)
+
         for maker, title, url, title_n in supply_anns:
             if maker_matches_row(maker, r) and name_n in title_n:
-                result[name] = make_announcement_record(maker, title, url, checked=today)
-                used_urls.add(url)
-                matched = True
-                break
-        if matched:
-            continue
+                add_candidate(maker, title, url)
+
         # 完全一致しない場合、規格違いをまとめた表記（例: 2mg/4mg）にも対応するフォールバック。
-        # メーカー括弧の一致に加え規格数値も1つ以上一致させることで誤マッチを防ぐ
+        # 公式ソースのメーカー一致に加え規格数値も1つ以上一致させることで誤マッチを防ぐ。
         core, specs, maker_paren = base_name_and_specs(name_n)
-        if not (core and maker_paren and specs):
-            continue
-        # spec は日付(2026/07/08)等の数字と衝突しやすいため、前後が数字でない場合のみ一致とみなす
-        def spec_hit(spec):
-            return re.search(rf"(?<!\d){re.escape(spec)}(?!\d)", title_n) is not None
-        for maker, title, url, title_n in supply_anns:
-            if (maker_matches_row(maker, r) and core in title_n and maker_paren in title_n
-                    and any(spec_hit(s) for s in specs)):
-                result[name] = make_announcement_record(maker, title, url, checked=today)
-                used_urls.add(url)
-                break
+        if core and specs:
+            for maker, title, url, title_n in supply_anns:
+                # spec は日付(2026/07/08)等の数字と衝突しやすいため、前後が数字でない場合のみ一致とみなす
+                spec_hit = any(re.search(rf"(?<!\d){re.escape(spec)}(?!\d)", title_n)
+                               for spec in specs)
+                if (maker_matches_row(maker, r) and core in title_n
+                        and (not maker_paren or maker_suffix_matches(maker_paren, title_n))
+                        and spec_hit):
+                    add_candidate(maker, title, url)
+
+                # 全規格が対象の案内では、タイトルから強度が省略されることがある。
+                # 正規化した剤形とメーカー括弧が連続して明記される場合だけ許可する。
+                if (maker_paren and maker_matches_row(maker, r)
+                        and f"{core}{maker_paren}" in title_n):
+                    add_candidate(maker, title, url)
+
+                # メーカー公式タイトルが規格と「タカタ」等を省略し、製品ファミリー名の
+                # 直後に製造販売中止を明記する場合は、そのメーカーの全規格へ紐づける。
+                if (maker_paren and maker_matches_row(maker, r)
+                        and terminal_family_title_matches(core, title_n)):
+                    add_candidate(maker, title, url)
+
+        # 数字のない規格記号をまとめた表記（例: MD/EX、LD/HD）にも対応する。
+        variant_core, variant, variant_maker = base_name_and_variant(name_n)
+        if variant_core and variant:
+            for maker, title, url, title_n in supply_anns:
+                variant_hit = re.search(
+                    rf"(?<![A-Z]){re.escape(variant)}(?![A-Z])", title_n) is not None
+                if (maker_matches_row(maker, r) and variant_core in title_n
+                        and (not variant_maker or maker_suffix_matches(variant_maker, title_n))
+                        and variant_hit):
+                    add_candidate(maker, title, url)
+
+        if candidates:
+            # 同一URLが完全一致とフォールバックの両方で見つかっても1件にする。
+            unique = {(info.get("url"), info.get("title")): info for info in candidates}
+            result[name] = max(unique.values(), key=announcement_rank)
     if unmatched_out is not None:
         unmatched_out.extend(make_announcement_record(m, t, u)
                              for m, t, u, _ in supply_anns if u not in used_urls)
@@ -638,11 +789,6 @@ def main():
     matched = match_to_csv(announcements, csv_path, existing=existing, unmatched_out=unmatched)
     print(f"マッチ件数: {len(matched)}（新規/更新分含む）", file=sys.stderr)
 
-    unmatched_path = os.path.join(os.path.dirname(out_path) or ".", "unmatched_maker_announcements.json")
-    with open(unmatched_path, "w", encoding="utf-8") as f:
-        json.dump(unmatched, f, ensure_ascii=False, indent=1)
-    print(f"未マッチ案内: {len(unmatched)}件（{unmatched_path}）", file=sys.stderr)
-
     deepen_limit = int(sys.argv[4]) if len(sys.argv) > 4 else 0
     if deepen_limit > 0:
         matched = deepen_sawai(matched, csv_path, limit=deepen_limit)
@@ -650,19 +796,24 @@ def main():
 
     # 手動登録分（manual_announcements.json）を最後に重ねる（手動が優先）
     # 自動収集が対応していないメーカーの案内文をピンポイントで連携するための仕組み
-    try:
-        with open("manual_announcements.json", encoding="utf-8") as f:
-            manual = json.load(f)
-        for name, info in manual.items():
-            info = dict(info)
-            info.setdefault("event_type", classify_event(info.get("title", "")))
-            announced_at = extract_announcement_date(info.get("title", ""))
-            if announced_at:
-                info.setdefault("announced_at", announced_at)
-            matched[name] = info
+    manual, manual_urls, manual_group_events = load_manual_announcements()
+    for name, info in manual.items():
+        info = dict(info)
+        info.setdefault("event_type", classify_event(info.get("title", "")))
+        announced_at = extract_announcement_date(info.get("title", ""))
+        if announced_at:
+            info.setdefault("announced_at", announced_at)
+        matched[name] = info
+    if manual:
         print(f"手動登録を反映: {len(manual)}件", file=sys.stderr)
-    except FileNotFoundError:
-        pass
+
+    # 自動照合の代表に選ばれなかった旧報・続報や、沢井深掘り・手動登録・
+    # 既存引継ぎで解決済みのURLはレビュー待ち一覧から除外する。
+    unmatched = filter_resolved_unmatched(unmatched, matched, manual_urls)
+    unmatched_path = os.path.join(os.path.dirname(out_path) or ".", "unmatched_maker_announcements.json")
+    with open(unmatched_path, "w", encoding="utf-8") as f:
+        json.dump(unmatched, f, ensure_ascii=False, indent=1)
+    print(f"未照合案内: {len(unmatched)}件（{unmatched_path}）", file=sys.stderr)
 
     # 代表案内はWeb/iOS向けに1件だけ保持しつつ、差し替え前の案内も履歴へ残す。
     events_path = os.path.join(os.path.dirname(out_path) or ".", "maker_announcement_events.json")
@@ -672,6 +823,9 @@ def main():
     except FileNotFoundError:
         history = {}
     history = update_event_history(history, matched)
+    # 同一品目に複数のグループ通知がある場合、代表に選ばれない旧通知も履歴へ残す。
+    for group_events in manual_group_events:
+        history = update_event_history(history, group_events)
     with open(events_path, "w", encoding="utf-8") as f:
         json.dump(history, f, ensure_ascii=False, indent=1)
     print(f"案内履歴: {sum(map(len, history.values()))}件（{events_path}）", file=sys.stderr)

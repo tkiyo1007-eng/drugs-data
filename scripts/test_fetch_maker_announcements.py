@@ -1,4 +1,5 @@
 import csv
+import json
 import os
 import tempfile
 import unittest
@@ -48,6 +49,16 @@ class AnnouncementMatchingTests(unittest.TestCase):
         result = mod.match_to_csv([], path, existing=existing)
         self.assertEqual(result[name]["event_type"], "discontinued")
 
+    def test_existing_event_type_is_reclassified_after_rule_improvement(self):
+        name = "テスト錠１ｍｇ「サワイ」"
+        path = self.make_csv([self.row(name)])
+        existing = {name: {
+            "maker": "沢井製薬", "title": "一部包装における販売中止のご案内",
+            "url": "https://example.test/package.pdf", "event_type": "discontinued",
+        }}
+        result = mod.match_to_csv([], path, existing=existing)
+        self.assertEqual(result[name]["event_type"], "package_discontinued")
+
     def test_transient_notice_is_removed_after_normal_supply(self):
         name = "テスト錠１ｍｇ「サワイ」"
         path = self.make_csv([self.row(name)])
@@ -68,7 +79,152 @@ class AnnouncementMatchingTests(unittest.TestCase):
     def test_event_classification_avoids_false_discontinuation(self):
         self.assertEqual(mod.classify_event("他社品販売中止に伴う限定出荷のお願い"), "limited")
         self.assertEqual(mod.classify_event("一部包装販売中止のご案内"), "package_discontinued")
+        self.assertEqual(mod.classify_event("包装容量販売終了のご案内"), "package_discontinued")
+        self.assertEqual(mod.classify_event("患者さん用パッケージ入り販売終了"), "package_discontinued")
         self.assertEqual(mod.classify_event("製品販売中止のご案内"), "discontinued")
+
+    def test_full_discontinuation_wins_and_secondary_notice_is_resolved(self):
+        name = "ナボールＳＲカプセル３７．５"
+        path = self.make_csv([self.row(name, maker="久光製薬")])
+        unmatched = []
+        result = mod.match_to_csv([
+            ("久光製薬", "2026.07.03 ナボールSRカプセル37.5 限定出荷のお知らせ",
+             "https://example.test/limited.pdf"),
+            ("久光製薬", "2026.07.03 ナボールSRカプセル37.5 販売中止のご案内",
+             "https://example.test/end.pdf"),
+        ], path, unmatched_out=unmatched)
+        self.assertEqual(result[name]["event_type"], "discontinued")
+        self.assertEqual(result[name]["url"], "https://example.test/end.pdf")
+        self.assertEqual(unmatched, [])
+
+    def test_older_terminal_notice_wins_over_newer_transient_notice(self):
+        name = "テスト錠１ｍｇ「サワイ」"
+        path = self.make_csv([self.row(name, status="②限定出荷")])
+        result = mod.match_to_csv([
+            ("沢井製薬", "2026/07/01 テスト錠1mg「サワイ」販売中止のご案内",
+             "https://example.test/end.pdf"),
+            ("沢井製薬", "2026/08/01 テスト錠1mg「サワイ」限定出荷のご案内",
+             "https://example.test/limited.pdf"),
+        ], path)
+        self.assertEqual(result[name]["event_type"], "discontinued")
+
+    def test_suffixless_grouped_nipro_title_matches_only_nipro_rows(self):
+        names = [f"ナフトピジルＯＤ錠{x}ｍｇ「ニプロ」" for x in ("２５", "５０", "７５")]
+        rows = [self.row(name, maker="ニプロ") for name in names]
+        other = "ナフトピジルＯＤ錠２５ｍｇ「サワイ」"
+        rows.append(self.row(other))
+        path = self.make_csv(rows)
+        result = mod.match_to_csv([
+            ("ニプロ", "2026年7月1日 ナフトピジルOD錠25mg／50mg／75mg 販売中止品のご案内",
+             "https://example.test/nipro.pdf")
+        ], path)
+        self.assertEqual(set(result), set(names))
+        self.assertNotIn(other, result)
+
+    def test_numbered_products_are_matched_from_grouped_title(self):
+        names = [f"アマルエット配合錠{x}番「ニプロ」" for x in "１２３４"]
+        path = self.make_csv([self.row(name, maker="ニプロ") for name in names])
+        result = mod.match_to_csv([
+            ("ニプロ", "2025年10月1日 アマルエット配合錠1番／2番／3番／4番「ニプロ」販売中止品のご案内",
+             "https://example.test/amalett.pdf")
+        ], path)
+        self.assertEqual(set(result), set(names))
+
+    def test_all_strength_title_without_strength_matches_explicit_maker_product(self):
+        names = [f"ロスバスタチンＯＤ錠{x}ｍｇ「ＤＳＥＰ」" for x in ("２．５", "５")]
+        path = self.make_csv([self.row(name, maker="第一三共エスファ") for name in names])
+        result = mod.match_to_csv([
+            ("第一三共エスファ", "2026.07.16 ロスバスタチンOD錠「DSEP」販売終了製品のご案内",
+             "https://example.test/rosuvastatin.pdf")
+        ], path)
+        self.assertEqual(set(result), set(names))
+
+    def test_terminal_family_title_matches_all_strengths_for_source_maker(self):
+        names = [f"アリピプラゾールＯＤ錠{x}ｍｇ「タカタ」" for x in ("３", "６")]
+        other = "アリピプラゾールＯＤ錠３ｍｇ「サワイ」"
+        rows = [self.row(name, maker="高田製薬") for name in names]
+        rows.append(self.row(other))
+        path = self.make_csv(rows)
+        result = mod.match_to_csv([
+            ("高田製薬", "アリピプラゾールOD錠_製造販売中止のご案内",
+             "https://example.test/aripiprazole.pdf")
+        ], path)
+        self.assertEqual(set(result), set(names))
+
+    def test_terminal_family_match_ignores_names_only_listed_in_group_title(self):
+        name = "カンデサルタン錠８ｍｇ「ＤＳＥＰ」"
+        path = self.make_csv([self.row(name, maker="第一三共エスファ")])
+        result = mod.match_to_csv([
+            ("第一三共エスファ", "販売終了製品のご案内（オランザピン錠・カンデサルタン錠）",
+             "https://example.test/group.pdf")
+        ], path)
+        self.assertNotIn(name, result)
+
+    def test_grouped_letter_variants_are_matched(self):
+        names = [f"バルヒディオ配合錠{x}「サワイ」" for x in ("ＭＤ", "ＥＸ")]
+        path = self.make_csv([self.row(name) for name in names])
+        result = mod.match_to_csv([
+            ("沢井製薬", "2026/07/01 バルヒディオ配合錠MD/EX「サワイ」販売中止のご案内",
+             "https://example.test/balhydio.pdf")
+        ], path)
+        self.assertEqual(set(result), set(names))
+
+    def test_japanese_generic_source_matches_choseido_products(self):
+        names = [f"エポセリン坐剤{x}" for x in ("１２５", "２５０")]
+        path = self.make_csv([self.row(name, maker="長生堂製薬") for name in names])
+        result = mod.match_to_csv([
+            ("日本ジェネリック", "2026.05.01 エポセリン坐剤125/250 販売中止のご案内",
+             "https://example.test/epoce.pdf")
+        ], path)
+        self.assertEqual(set(result), set(names))
+
+    def test_resolved_existing_or_manual_url_is_removed_from_unmatched(self):
+        url = "https://example.test/manual.pdf"
+        unmatched = [{"maker": "テスト製薬", "title": "販売中止", "url": url}]
+        matched = {"テスト錠": {"maker": "テスト製薬", "title": "販売中止", "url": url}}
+        self.assertEqual(mod.filter_resolved_unmatched(unmatched, matched), [])
+
+    def test_manual_groups_expand_and_single_entry_can_override(self):
+        group_file = tempfile.NamedTemporaryFile("w", encoding="utf-8", delete=False)
+        single_file = tempfile.NamedTemporaryFile("w", encoding="utf-8", delete=False)
+        self.addCleanup(lambda: os.path.exists(group_file.name) and os.unlink(group_file.name))
+        self.addCleanup(lambda: os.path.exists(single_file.name) and os.unlink(single_file.name))
+        with group_file:
+            json.dump([{
+                "products": ["テスト錠１ｍｇ", "テスト錠２ｍｇ"],
+                "announcement": {"maker": "テスト製薬", "title": "販売中止", "url": "group"},
+            }], group_file, ensure_ascii=False)
+        with single_file:
+            json.dump({
+                "テスト錠２ｍｇ": {"maker": "テスト製薬", "title": "訂正版", "url": "single"},
+            }, single_file, ensure_ascii=False)
+
+        result, resolved_urls, group_events = mod.load_manual_announcements(
+            single_file.name, group_file.name)
+        self.assertEqual(result["テスト錠１ｍｇ"]["url"], "group")
+        self.assertEqual(result["テスト錠２ｍｇ"]["url"], "single")
+        self.assertEqual(resolved_urls, {"group", "single"})
+        self.assertEqual(group_events[0]["テスト錠２ｍｇ"]["url"], "group")
+
+    def test_manual_groups_keep_history_and_choose_newest_terminal_notice(self):
+        group_file = tempfile.NamedTemporaryFile("w", encoding="utf-8", delete=False)
+        self.addCleanup(lambda: os.path.exists(group_file.name) and os.unlink(group_file.name))
+        with group_file:
+            json.dump([{
+                "products": ["テスト錠"],
+                "announcement": {"maker": "テスト製薬", "title": "2024.01.01 販売中止",
+                                 "url": "old", "event_type": "discontinued"},
+            }, {
+                "products": ["テスト錠"],
+                "announcement": {"maker": "テスト製薬", "title": "2026.01.01 経過措置の販売終了",
+                                 "url": "new", "event_type": "discontinued"},
+            }], group_file, ensure_ascii=False)
+
+        result, resolved_urls, group_events = mod.load_manual_announcements(
+            os.path.join(os.path.dirname(group_file.name), "missing.json"), group_file.name)
+        self.assertEqual(result["テスト錠"]["url"], "new")
+        self.assertEqual(resolved_urls, {"old", "new"})
+        self.assertEqual([events["テスト錠"]["url"] for events in group_events], ["old", "new"])
 
     def test_sawai_deep_scan_includes_normal_supply(self):
         name = "テスト錠１ｍｇ「サワイ」"

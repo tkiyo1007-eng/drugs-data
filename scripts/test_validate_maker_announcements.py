@@ -9,6 +9,7 @@ from validate_maker_announcements import (
     validate_current_history,
     validate_health,
     validate_history,
+    validate_manual_groups,
     validate_unmatched,
 )
 
@@ -97,6 +98,27 @@ class ValidateMakerAnnouncementsTests(unittest.TestCase):
             "checked": "2026-02-30",
         }})
         self.assertTrue(any("実在日" in e for e in validate(self.csv_path, path, min_count=1)))
+
+    def test_manual_groups_validate_products_and_announcement(self):
+        valid = self.write_named_json("manual-groups-valid.json", [{
+            "products": ["テスト錠"],
+            "announcement": {
+                "maker": "テスト製薬", "title": "販売中止のご案内",
+                "url": "https://example.test/a.pdf", "event_type": "discontinued",
+                "announced_at": "2026-08-03",
+            },
+        }])
+        self.assertEqual(validate_manual_groups(self.csv_path, valid), [])
+
+        invalid = self.write_named_json("manual-groups-invalid.json", [{
+            "products": ["CSV外錠", "CSV外錠"],
+            "announcement": {"maker": "", "title": "案内", "url": "http://example.test/a.pdf"},
+        }])
+        errors = "\n".join(validate_manual_groups(self.csv_path, invalid))
+        self.assertIn("CSVに存在しない品目", errors)
+        self.assertIn("重複", errors)
+        self.assertIn("HTTPS", errors)
+        self.assertIn("makerが空", errors)
 
 
 if __name__ == "__main__":

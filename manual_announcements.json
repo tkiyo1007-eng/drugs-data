@@ -1,8 +1,10 @@
 {
  "ナボールＳＲカプセル３７．５": {
   "maker": "久光製薬",
-  "title": "2026.07.03 ナボールSRカプセル37.5 限定出荷に関するお知らせとお詫び",
-  "url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260703_2.pdf"
+  "title": "2026.07.03 ナボールSRカプセル37.5 販売中止に関するご案内",
+  "url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260703.pdf",
+  "event_type": "discontinued",
+  "announced_at": "2026-07-03"
  },
  "オルメサルタンＯＤ錠５ｍｇ「ニプロ」": {
   "maker": "ニプロ",
