@@ -1,12 +1,5 @@
 [
  {
-  "maker": "沢井製薬",
-  "title": "2026/07/15 供給関連 PDF 弊社製品の供給に関するご連絡とお詫び PDF",
-  "url": "https://med.sawai.co.jp/file/pr27_4750_1.pdf",
-  "event_type": "supply",
-  "announced_at": "2026-07-15"
- },
- {
   "maker": "日医工",
   "title": "ヘパリンNaロック用10単位mLシリンジ5mL10mL 100単位mLシリンジ5mL10mL「NIG」 限定出荷解除のお知らせ",
   "url": "https://www.nichiiko.co.jp/medicine/files/20260708cI2.pdf",
@@ -24,13 +17,6 @@
   "title": "2026.04.16 販売中止・休止 包装容量販売終了のご案内(アゾセミド錠、エゼチミブ錠、オルメサルタンＯＤ錠、カルベジロール錠、ロスバスタチン錠・OD錠)",
   "url": "https://med.daiichisankyo-ep.co.jp/information/files/2194/EPALL1N46201-1.pdf",
   "event_type": "package_discontinued",
-  "announced_at": "2026-04-16"
- },
- {
-  "maker": "第一三共エスファ",
-  "title": "2026.04.16 販売中止・休止 販売終了製品のご案内(オキサリプラチン点滴静注液、オランザピン錠・OD錠・細粒、カンデサルタン錠、ブロナンセリン錠、レバミピド錠)",
-  "url": "https://med.daiichisankyo-ep.co.jp/information/files/2193/EPALL1N45901-1.pdf",
-  "event_type": "discontinued",
   "announced_at": "2026-04-16"
  },
  {
@@ -101,13 +87,6 @@
   "title": "2024.07.23 販売中止・休止 包装容量販売終了のご案内（テラムロ ® 配合錠・テルチア ® 配合錠・テルミサルタン錠・レボフロキサシン錠）",
   "url": "https://med.daiichisankyo-ep.co.jp/information/files/1926/EPALL1N36101-1.pdf",
   "event_type": "package_discontinued",
-  "announced_at": "2024-07-23"
- },
- {
-  "maker": "第一三共エスファ",
-  "title": "2024.07.23 販売中止・休止 販売終了製品のご案内（カムシア ® 配合錠・テルビナフィン錠）",
-  "url": "https://med.daiichisankyo-ep.co.jp/information/files/1925/EPALL1N35601-1.pdf",
-  "event_type": "discontinued",
   "announced_at": "2024-07-23"
  },
  {
@@ -948,12 +927,6 @@
  },
  {
   "maker": "高田製薬",
-  "title": "アリピプラゾールOD錠_製造販売中止のご案内",
-  "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000a0y6-att/ARIPI.pdf",
-  "event_type": "discontinued"
- },
- {
-  "maker": "高田製薬",
   "title": "限定出荷解除に関するお知らせ",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000009zon-att/KAIJYO.pdf",
   "event_type": "resumed"
@@ -1032,44 +1005,8 @@
  },
  {
   "maker": "高田製薬",
-  "title": "ピタバスタチンCa錠_製造販売中止のご案内",
-  "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b00000097d4-att/PITAPA.pdf",
-  "event_type": "discontinued"
- },
- {
-  "maker": "高田製薬",
-  "title": "トリヘキシフェニジル塩酸塩錠_製造販売中止のご案内",
-  "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b00000097ac-att/TORIHEKISIFENIJIRU.pdf",
-  "event_type": "discontinued"
- },
- {
-  "maker": "高田製薬",
-  "title": "ツロブテロール塩酸塩DS小児用_製造販売中止のご案内",
-  "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000977k-att/TUROBUTE.pdf",
-  "event_type": "discontinued"
- },
- {
-  "maker": "高田製薬",
-  "title": "ゾルミトリプタンOD錠_製造販売中止のご案内",
-  "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000974s-att/ZORUMITORIPUTAN.pdf",
-  "event_type": "discontinued"
- },
- {
-  "maker": "高田製薬",
-  "title": "ゾテピン細粒・錠_製造販売中止のご案内",
-  "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000009720-att/ZOTEPIN.pdf",
-  "event_type": "discontinued"
- },
- {
-  "maker": "高田製薬",
   "title": "シオゾール注_製造販売中止のご案内",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b00000096wg-att/SIOZORU.pdf",
-  "event_type": "discontinued"
- },
- {
-  "maker": "高田製薬",
-  "title": "オロパタジン塩酸塩錠・OD錠_製造販売中止のご案内",
-  "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b00000096tb-att/OROPATAJIN.pdf",
   "event_type": "discontinued"
  },
  {
@@ -1080,27 +1017,9 @@
  },
  {
   "maker": "高田製薬",
-  "title": "アロプリノール錠_製造販売中止のご案内",
-  "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b00000096kz-att/AROPURINORU.pdf",
-  "event_type": "discontinued"
- },
- {
-  "maker": "高田製薬",
-  "title": "アリピプラゾール内用液_製造販売中止のご案内",
-  "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b00000096i7-att/ARIPIPURAZORU.pdf",
-  "event_type": "discontinued"
- },
- {
-  "maker": "高田製薬",
   "title": "供給状況品目一覧表",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b00000096ck-att/2025.07.15.pdf",
   "event_type": "supply"
- },
- {
-  "maker": "高田製薬",
-  "title": "サルポグレラート塩酸塩錠_製造販売中止のご案内",
-  "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000958x-att/SARUPOGURERATO.pdf",
-  "event_type": "discontinued"
  },
  {
   "maker": "高田製薬",
@@ -1113,12 +1032,6 @@
   "title": "供給状況品目一覧表",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000009503-att/2025.06.25.pdf",
   "event_type": "supply"
- },
- {
-  "maker": "高田製薬",
-  "title": "フェキソフェナジン塩酸塩錠_製造販売中止のご案内",
-  "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b00000096z8-att/FEKISOFENAJINS.pdf",
-  "event_type": "discontinued"
  },
  {
   "maker": "高田製薬",
@@ -1418,12 +1331,5 @@
   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uV2muIAC",
   "event_type": "resumed",
   "announced_at": "2026-01-14"
- },
- {
-  "maker": "ニプロ",
-  "title": "2025年12月23日 トルバプタンOD 錠3.75mg｢ニプロ｣  供給に関するお詫びと限定出荷（出荷数割当運用）のお願い",
-  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uVeNXIA0",
-  "event_type": "limited",
-  "announced_at": "2025-12-23"
  }
 ]

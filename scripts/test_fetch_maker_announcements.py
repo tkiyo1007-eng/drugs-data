@@ -1,4 +1,5 @@
 import csv
+import json
 import os
 import tempfile
 import unittest
@@ -47,6 +48,16 @@ class AnnouncementMatchingTests(unittest.TestCase):
                            "url": "https://example.test/end.pdf"}}
         result = mod.match_to_csv([], path, existing=existing)
         self.assertEqual(result[name]["event_type"], "discontinued")
+
+    def test_existing_event_type_is_reclassified_after_rule_improvement(self):
+        name = "テスト錠１ｍｇ「サワイ」"
+        path = self.make_csv([self.row(name)])
+        existing = {name: {
+            "maker": "沢井製薬", "title": "一部包装における販売中止のご案内",
+            "url": "https://example.test/package.pdf", "event_type": "discontinued",
+        }}
+        result = mod.match_to_csv([], path, existing=existing)
+        self.assertEqual(result[name]["event_type"], "package_discontinued")
 
     def test_transient_notice_is_removed_after_normal_supply(self):
         name = "テスト錠１ｍｇ「サワイ」"
@@ -128,6 +139,27 @@ class AnnouncementMatchingTests(unittest.TestCase):
         ], path)
         self.assertEqual(set(result), set(names))
 
+    def test_terminal_family_title_matches_all_strengths_for_source_maker(self):
+        names = [f"アリピプラゾールＯＤ錠{x}ｍｇ「タカタ」" for x in ("３", "６")]
+        other = "アリピプラゾールＯＤ錠３ｍｇ「サワイ」"
+        rows = [self.row(name, maker="高田製薬") for name in names]
+        rows.append(self.row(other))
+        path = self.make_csv(rows)
+        result = mod.match_to_csv([
+            ("高田製薬", "アリピプラゾールOD錠_製造販売中止のご案内",
+             "https://example.test/aripiprazole.pdf")
+        ], path)
+        self.assertEqual(set(result), set(names))
+
+    def test_terminal_family_match_ignores_names_only_listed_in_group_title(self):
+        name = "カンデサルタン錠８ｍｇ「ＤＳＥＰ」"
+        path = self.make_csv([self.row(name, maker="第一三共エスファ")])
+        result = mod.match_to_csv([
+            ("第一三共エスファ", "販売終了製品のご案内（オランザピン錠・カンデサルタン錠）",
+             "https://example.test/group.pdf")
+        ], path)
+        self.assertNotIn(name, result)
+
     def test_grouped_letter_variants_are_matched(self):
         names = [f"バルヒディオ配合錠{x}「サワイ」" for x in ("ＭＤ", "ＥＸ")]
         path = self.make_csv([self.row(name) for name in names])
@@ -151,6 +183,25 @@ class AnnouncementMatchingTests(unittest.TestCase):
         unmatched = [{"maker": "テスト製薬", "title": "販売中止", "url": url}]
         matched = {"テスト錠": {"maker": "テスト製薬", "title": "販売中止", "url": url}}
         self.assertEqual(mod.filter_resolved_unmatched(unmatched, matched), [])
+
+    def test_manual_groups_expand_and_single_entry_can_override(self):
+        group_file = tempfile.NamedTemporaryFile("w", encoding="utf-8", delete=False)
+        single_file = tempfile.NamedTemporaryFile("w", encoding="utf-8", delete=False)
+        self.addCleanup(lambda: os.path.exists(group_file.name) and os.unlink(group_file.name))
+        self.addCleanup(lambda: os.path.exists(single_file.name) and os.unlink(single_file.name))
+        with group_file:
+            json.dump([{
+                "products": ["テスト錠１ｍｇ", "テスト錠２ｍｇ"],
+                "announcement": {"maker": "テスト製薬", "title": "販売中止", "url": "group"},
+            }], group_file, ensure_ascii=False)
+        with single_file:
+            json.dump({
+                "テスト錠２ｍｇ": {"maker": "テスト製薬", "title": "訂正版", "url": "single"},
+            }, single_file, ensure_ascii=False)
+
+        result = mod.load_manual_announcements(single_file.name, group_file.name)
+        self.assertEqual(result["テスト錠１ｍｇ"]["url"], "group")
+        self.assertEqual(result["テスト錠２ｍｇ"]["url"], "single")
 
     def test_sawai_deep_scan_includes_normal_supply(self):
         name = "テスト錠１ｍｇ「サワイ」"

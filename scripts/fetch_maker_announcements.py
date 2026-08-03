@@ -439,7 +439,7 @@ def classify_event(title):
     """
     t = norm(title)
     if re.search(
-            r"(?:一部)?包装(?:容量)?(?:の)?(?:販売|発売)?(?:中止|終了)"
+            r"(?:一部)?包装(?:容量)?(?:における|の)?(?:販売|発売)?(?:中止|終了)"
             r"|患者(?:さん)?用パッケージ(?:入り)?.*(?:販売|発売)(?:中止|終了)", t):
         return "package_discontinued"
     if (re.search(r"販売中止|販売終了|製造中止|取り扱い中止|取扱い販売中止", t)
@@ -562,6 +562,20 @@ def maker_suffix_matches(maker_paren, title_n):
     return not suffixes or maker_paren in suffixes
 
 
+def terminal_family_title_matches(core, title_n):
+    """規格・メーカー括弧を省略した全規格の販売中止タイトルを判定する。
+
+    製品名の直後に販売中止等が続く場合だけを対象にし、複数製品文書の括弧内で
+    一般名が列挙されただけのケースを拾わない。
+    """
+    if classify_event(title_n) != "discontinued" or re.findall(r"「[^」]+」", title_n):
+        return False
+    return re.search(
+        rf"{re.escape(core)}[_\s]*(?:の)?(?:製造販売|販売|製造)(?:中止|終了)",
+        title_n,
+    ) is not None
+
+
 EVENT_PRIORITY = {
     "discontinued": 3,
     "package_discontinued": 2,
@@ -597,6 +611,32 @@ def filter_resolved_unmatched(unmatched, matched):
     return [info for info in unmatched if info.get("url") not in resolved_urls]
 
 
+def load_manual_announcements(single_path="manual_announcements.json",
+                              groups_path="manual_announcement_groups.json"):
+    """個別登録と、1文書に複数品目を列挙するグループ登録を統合する。
+
+    グループを先に展開し、個別登録を後から重ねることで、例外的な1品目だけを
+    個別ファイルで上書きできるようにする。
+    """
+    manual = {}
+    try:
+        with open(groups_path, encoding="utf-8") as f:
+            groups = json.load(f)
+        for group in groups:
+            info = group["announcement"]
+            for name in group["products"]:
+                manual[name] = dict(info)
+    except FileNotFoundError:
+        pass
+
+    try:
+        with open(single_path, encoding="utf-8") as f:
+            manual.update(json.load(f))
+    except FileNotFoundError:
+        pass
+    return manual
+
+
 def match_to_csv(announcements, csv_path, existing=None, unmatched_out=None):
     """既存の対応表(existing)があれば引き継ぎつつ、今回の取得分で追加・上書きする。
     CSVから消えた品目は既存分から取り除く。通常出荷へ戻った品目の一時的な
@@ -616,10 +656,12 @@ def match_to_csv(announcements, csv_path, existing=None, unmatched_out=None):
         row = rows_by_name.get(name)
         if not row:
             continue
-        event_type = value.get("event_type") or classify_event(value.get("title", ""))
+        # 分類規則の改善を既存生成データにも反映し、過去の誤分類を固定化しない。
+        # 手動登録の明示event_typeはこの後のオーバーレイで再適用される。
+        event_type = classify_event(value.get("title", ""))
         if not is_normal_row(row) or has_delist_notice(row) or event_type in {"discontinued", "package_discontinued"}:
             value = dict(value)
-            value.setdefault("event_type", event_type)
+            value["event_type"] = event_type
             result[name] = value
 
     used_urls = set()
@@ -659,6 +701,12 @@ def match_to_csv(announcements, csv_path, existing=None, unmatched_out=None):
                 # 正規化した剤形とメーカー括弧が連続して明記される場合だけ許可する。
                 if (maker_paren and maker_matches_row(maker, r)
                         and f"{core}{maker_paren}" in title_n):
+                    add_candidate(maker, title, url)
+
+                # メーカー公式タイトルが規格と「タカタ」等を省略し、製品ファミリー名の
+                # 直後に製造販売中止を明記する場合は、そのメーカーの全規格へ紐づける。
+                if (maker_paren and maker_matches_row(maker, r)
+                        and terminal_family_title_matches(core, title_n)):
                     add_candidate(maker, title, url)
 
         # 数字のない規格記号をまとめた表記（例: MD/EX、LD/HD）にも対応する。
@@ -731,19 +779,16 @@ def main():
 
     # 手動登録分（manual_announcements.json）を最後に重ねる（手動が優先）
     # 自動収集が対応していないメーカーの案内文をピンポイントで連携するための仕組み
-    try:
-        with open("manual_announcements.json", encoding="utf-8") as f:
-            manual = json.load(f)
-        for name, info in manual.items():
-            info = dict(info)
-            info.setdefault("event_type", classify_event(info.get("title", "")))
-            announced_at = extract_announcement_date(info.get("title", ""))
-            if announced_at:
-                info.setdefault("announced_at", announced_at)
-            matched[name] = info
+    manual = load_manual_announcements()
+    for name, info in manual.items():
+        info = dict(info)
+        info.setdefault("event_type", classify_event(info.get("title", "")))
+        announced_at = extract_announcement_date(info.get("title", ""))
+        if announced_at:
+            info.setdefault("announced_at", announced_at)
+        matched[name] = info
+    if manual:
         print(f"手動登録を反映: {len(manual)}件", file=sys.stderr)
-    except FileNotFoundError:
-        pass
 
     # 自動照合の代表に選ばれなかった旧報・続報や、沢井深掘り・手動登録・
     # 既存引継ぎで解決済みのURLはレビュー待ち一覧から除外する。

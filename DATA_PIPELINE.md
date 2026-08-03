@@ -12,6 +12,7 @@
 | `unmatched_maker_announcements.json` | 公式サイトから取得したが、既存・深掘り・手動登録を含むいずれのCSV品目にも一致しなかった確認待ち案内 |
 | `maker_collection_health.json` | 収集元ごとの取得件数・エラー |
 | `manual_announcements.json` | 自動照合が難しい案内の共通手動登録 |
+| `manual_announcement_groups.json` | 1つの公式文書に複数品目が掲載される場合の対象品目一覧 |
 
 代表案内と履歴の `event_type` は次のいずれか。
 
@@ -57,6 +58,9 @@ GitHub ActionsはUTCで動くが、公開データの確認日・生成日・日
 自動収集が難しい案内は `manual_announcements.json` に追加する。商品名は
 `drugs_app_ready.csv` の表記と完全一致させ、メーカー公式のHTTPS URLを使用する。
 手動登録は自動照合結果より優先され、Web版・iOS版で共通利用される。
+1つのPDFに複数品目が掲載され、タイトルだけでは対象規格を特定できない場合は
+`manual_announcement_groups.json` の `products` に対象商品名を列挙し、共通の案内を
+`announcement` に1回だけ記録する。個別登録はグループ登録より優先される。
 
 ## 検証
 
