@@ -13,6 +13,9 @@
 | `maker_collection_health.json` | 収集元ごとの取得件数・エラー |
 | `manual_announcements.json` | 自動照合が難しい案内の共通手動登録 |
 | `manual_announcement_groups.json` | 1つの公式文書に複数品目が掲載される場合の対象品目一覧 |
+| `maker_links.json` | Web・iOS共通のメーカー公式供給情報ページ |
+| `featured_products.json` | Web・iOS共通の注目製品と検索語 |
+| `industry_topics.json` | Web・iOS共通の業界トピック |
 
 代表案内と履歴の `event_type` は次のいずれか。
 
@@ -68,6 +71,7 @@ GitHub ActionsはUTCで動くが、公開データの確認日・生成日・日
 python3 -m unittest discover -s scripts -p 'test_*.py'
 python3 scripts/validate_supply_data.py --csv drugs_app_ready.csv
 python3 scripts/validate_maker_announcements.py --min-count 300
+python3 scripts/validate_shared_content.py
 ```
 
 Pull Requestとmainへのpushでは `.github/workflows/validate.yml` が同じ検証を実行する。

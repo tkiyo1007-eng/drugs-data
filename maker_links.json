@@ -1,0 +1,14 @@
+[
+  { "name": "沢井製薬", "url": "https://med.sawai.co.jp/con_list.php?cate=5" },
+  { "name": "東和薬品", "url": "https://med.towayakuhin.co.jp/medical/information_supply.html" },
+  { "name": "ニプロ", "url": "https://med.nipro.co.jp/ph_news_supply" },
+  { "name": "日医工", "url": "https://www.nichiiko.co.jp/medicine/supply_status/" },
+  { "name": "共和薬品工業", "url": "https://www.kyowayakuhin.co.jp/amel-di/" },
+  { "name": "陽進堂", "url": "https://yoshindoholdings.co.jp/database" },
+  { "name": "日新製薬", "url": "https://www.yg-nissin.co.jp/pro/supplystate.html" },
+  { "name": "日本ジェネリック", "url": "https://medical.nihon-generic.co.jp/information_of_stablesupply/" },
+  { "name": "キョーリンリメディオ", "url": "https://www.med.kyorin-rmd.com/product/supply_limit/" },
+  { "name": "第一三共エスファ", "url": "https://www.daiichisankyo-ep.co.jp/news/" },
+  { "name": "日本ケミファ", "url": "https://www.nc-medical.com/product/information/" },
+  { "name": "塩野義", "url": "https://med.shionogi.co.jp/news/package.html" }
+]
