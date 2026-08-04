@@ -819,6 +819,18 @@
  },
  {
   "maker": "高田製薬",
+  "title": "限定出荷解除に関するお知らせ②",
+  "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bol8-att/KAIJYO2.pdf",
+  "event_type": "resumed"
+ },
+ {
+  "maker": "高田製薬",
+  "title": "限定出荷解除に関するお知らせ①",
+  "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000boie-att/KAIJYO1.pdf",
+  "event_type": "resumed"
+ },
+ {
+  "maker": "高田製薬",
   "title": "限定出荷解除に関するお知らせ",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000blya-att/KAIJYO.pdf",
   "event_type": "resumed"
@@ -1215,6 +1227,13 @@
   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001CnUQXIA3",
   "event_type": "package_discontinued",
   "announced_at": "2026-07-01"
+ },
+ {
+  "maker": "ニプロ",
+  "title": "2026年8月4日 限定出荷解除のご案内",
+  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001HPKhCIAX",
+  "event_type": "resumed",
+  "announced_at": "2026-08-04"
  },
  {
   "maker": "ニプロ",

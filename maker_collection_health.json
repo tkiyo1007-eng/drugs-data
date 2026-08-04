@@ -1,5 +1,5 @@
 {
- "checked": "2026-08-04",
+ "checked": "2026-08-05",
  "sources": [
   {
    "source": "parse_sawai",
@@ -34,7 +34,7 @@
   {
    "source": "parse_dsep",
    "ok": true,
-   "count": 1279,
+   "count": 1281,
    "error": ""
   },
   {
@@ -52,7 +52,7 @@
   {
    "source": "parse_takata",
    "ok": true,
-   "count": 235,
+   "count": 252,
    "error": ""
   },
   {
@@ -68,5 +68,5 @@
    "error": ""
   }
  ],
- "total": 2369
+ "total": 2388
 }
