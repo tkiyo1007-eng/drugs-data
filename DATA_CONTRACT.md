@@ -1,0 +1,25 @@
+# Web・iOS 共通データ契約
+
+Web版とiOS版は画面構成を揃えるのではなく、供給情報の意味・検索対象・キュレーション内容をこのリポジトリのJSONへ揃える。
+
+| ファイル | 正本となる情報 |
+|---|---|
+| `drugs_app_ready.csv` | 現在の供給区分、品目、メーカー、YJコード |
+| `product_lifecycle.json` | YJコード単位の販売中止予定・販売終了 |
+| `maker_links.json` | メーカー公式供給情報ページ |
+| `manual_announcements.json` | 自動収集を補うメーカー公式案内 |
+| `featured_products.json` | 両版に表示する注目製品と検索語 |
+| `industry_topics.json` | 両版に表示する業界トピック |
+
+## 表示上の原則
+
+- 厚労省の現在の供給区分とメーカーの将来の販売予定は別の事実として表示する。
+- `product_lifecycle.json` の販売中止予定で `drugs_app_ready.csv` の供給区分を上書きしない。
+- 販売中止予定は品目名の推測ではなくYJコードで照合し、商品名とメーカーも検証する。
+- 検索は商品名、一般名、製造・販売メーカー、YJコードを対象にする。
+- `featured_products.json` と `industry_topics.json` の配列順を表示順とする。
+- 業界トピックは最大4件を表示し、出典URLを必須とする。報道段階の内容は見出しと本文に未確認であることを明記する。
+
+## 更新と検証
+
+`scripts/validate_shared_content.py` が共有設定の型、HTTPS URL、日付、重複、検索語がCSVの実在品目に一致することを検証する。Pull Request、mainへのpush、日次更新のすべてで実行する。

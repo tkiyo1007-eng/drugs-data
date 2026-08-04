@@ -151,6 +151,9 @@ jobs:
             --min-count 300 \
             --expected-checked "$(TZ=Asia/Tokyo date +%F)"
 
+      - name: Web・iOS共通設定の検査
+        run: python3 scripts/validate_shared_content.py
+
       - name: 販売中止案内をYJコード別ライフサイクルへ変換
         run: |
           python3 -m unittest discover -s scripts -p 'test_product_lifecycle.py'
