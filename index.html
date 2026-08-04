@@ -940,7 +940,7 @@ footer a:hover{color:var(--blue)}
       <button type="button" class="pill" data-f="ok" aria-pressed="false">通常出荷</button>
       <button type="button" class="pill" data-f="limited" aria-pressed="false">限定出荷</button>
       <button type="button" class="pill" data-f="stopped" aria-pressed="false">供給停止</button>
-      <button type="button" class="pill" data-f="ended" aria-pressed="false">販売中止</button>
+      <button type="button" class="pill" data-f="ended" aria-pressed="false">販売中止・予定</button>
       <button type="button" class="pill" data-f="changed" id="pillChanged" aria-pressed="false" style="display:none"></button>
       <button type="button" class="pill" data-f="delist" id="pillDelist" aria-pressed="false" style="display:none"></button>
       <button type="button" class="pill" data-f="fav" id="pillFav" aria-pressed="false" style="display:none"></button>
@@ -1368,6 +1368,8 @@ function render(){
       if(!FAVS.has(d.n)) return false;
     }else if(filter==="delist"){
       if(!d.delist) return false;
+    }else if(filter==="ended"){
+      if(!isSalesEnding(d)) return false;
     }else if(filter!=="all" && d.s!==filter) return false;
     return terms.every(x => d.q.includes(x.t) || (x.code && d.yj && d.yj.toLowerCase().includes(x.t)));
   });
@@ -1399,7 +1401,7 @@ function render(){
     const delistBadge = d.delist ? `<span class="delist-badge">薬価削除予定</span>` : "";
     // 厚労省の現在の供給区分と、メーカーが公表した将来の販売中止は両立し得る。
     // 「通常出荷」を上書きせず、別のバッジで販売中止予定を明示する。
-    const announcement = findAnnouncement(d.n);
+    const announcement = findAnnouncement(d);
     const discontinuedBadge = d.s !== "ended" && isDiscontinuationAnnouncement(announcement)
       ? `<span class="discontinued-badge">販売中止予定</span>`
       : (isPackageDiscontinuationAnnouncement(announcement)
@@ -1574,7 +1576,7 @@ function cleanAnnouncementTitle(title){
 // メーカー名(製造/販売メーカー欄への部分一致)→公式サイトの供給状況ページ
 // 掲載数の多い上位メーカーのみ対応。個別品目のPDF直リンクは厚労省データに含まれないため、
 // 各社の供給情報一覧ページへの誘導に留める（未対応メーカーはリンク非表示）
-const MAKER_LINKS = [
+const DEFAULT_MAKER_LINKS = [
   ["沢井製薬", "https://med.sawai.co.jp/con_list.php?cate=5"],
   ["東和薬品", "https://med.towayakuhin.co.jp/medical/information_supply.html"],
   ["ニプロ", "https://med.nipro.co.jp/ph_news_supply"],
@@ -1588,16 +1590,17 @@ const MAKER_LINKS = [
   ["日本ケミファ", "https://www.nc-medical.com/product/information/"],
   ["塩野義", "https://med.shionogi.co.jp/news/package.html"],
 ];
+let MAKER_LINKS = DEFAULT_MAKER_LINKS;
 function findMakerLink(makerText){
   if(!makerText) return null;
-  const hit = MAKER_LINKS.find(([name])=>makerText.includes(name));
-  return hit ? {name:hit[0], url:hit[1]} : null;
+  const hit = MAKER_LINKS.find(item=>makerText.includes(item.name ?? item[0]));
+  return hit ? {name:hit.name ?? hit[0], url:hit.url ?? hit[1]} : null;
 }
 
 // 自動収集（drugs-data側パイプライン）が拾えていないメーカー公式案内の手動キュレーション。
 // 収集対象外メーカーの販売中止案内などを得意先指摘ベースでここに追加する。
-// 同名品目が自動収集された場合はそちらが優先される
-const MANUAL_ANNOUNCEMENTS = {
+// 同名品目が自動収集された場合も、確認済みの手動登録を優先する
+const DEFAULT_MANUAL_ANNOUNCEMENTS = {
   "インサイドパップ７０ｍｇ": {
     url: "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
     title: "インサイドパップ70mg 販売中止品目のご案内（2026年4月3日付）",
@@ -1613,7 +1616,7 @@ const MANUAL_ANNOUNCEMENTS = {
 // 手動キュレーションのパターン版。厚労省CSV上の正確な品目名が事前に分からない
 // （規格表記などにゆれがある）場合に、商品名の正規表現でマッチさせる。
 // 完全一致（ANNOUNCEMENTS）にヒットしなかった品目のみ照合される
-const MANUAL_ANNOUNCEMENT_PATTERNS = [
+const DEFAULT_MANUAL_ANNOUNCEMENT_PATTERNS = [
   [/^テモカプリル塩酸塩錠[１２４124](?:ｍｇ|mg)「サワイ」$/i, {
     url: "https://med.sawai.co.jp/file/pr28_1235_1.pdf",
     title: "テモカプリル塩酸塩錠1mg・2mg・4mg「サワイ」販売中止のご案内（2026年4月）",
@@ -1625,9 +1628,42 @@ const MANUAL_ANNOUNCEMENT_PATTERNS = [
     maker: "岩城製薬",
   }],
 ];
-function findAnnouncement(name){
-  if(ANNOUNCEMENTS[name]) return ANNOUNCEMENTS[name];
-  const hit = MANUAL_ANNOUNCEMENT_PATTERNS.find(([re])=>re.test(name));
+let MANUAL_ANNOUNCEMENT_PATTERNS = DEFAULT_MANUAL_ANNOUNCEMENT_PATTERNS;
+let PRODUCT_LIFECYCLES = {};
+function lifecycleFor(d){
+  if(!d || !d.yj) return null;
+  const item = PRODUCT_LIFECYCLES[d.yj];
+  if(!item || !["discontinuation_announced", "discontinued"].includes(item.state)) return null;
+  // iOS版と同じく、YJ一致だけでなく商品名・メーカーも照合する。
+  if(norm(item.product_name) !== norm(d.n)) return null;
+  const makerText = d.row && CSV_HEAD
+    ? ["販売メーカー", "製造メーカー"].map(c=>{
+        const i=CSV_HEAD.indexOf(c); return i>=0 ? d.row[i]||"" : "";
+      }).join(" ")
+    : d.m;
+  if(item.maker && !norm(makerText).includes(norm(item.maker))) return null;
+  return item;
+}
+function lifecycleAnnouncement(d){
+  const item = lifecycleFor(d);
+  if(!item) return null;
+  return {
+    url:item.source_url,
+    title:item.source_title,
+    maker:item.maker,
+    event_type:"discontinued",
+    announced_at:item.announced_at,
+    lifecycle_state:item.state,
+  };
+}
+function isSalesEnding(d){
+  return d.s === "ended" || d.delist || !!lifecycleFor(d);
+}
+function findAnnouncement(d){
+  const lifecycle = lifecycleAnnouncement(d);
+  if(lifecycle) return lifecycle;
+  if(ANNOUNCEMENTS[d.n]) return ANNOUNCEMENTS[d.n];
+  const hit = MANUAL_ANNOUNCEMENT_PATTERNS.find(([re])=>re.test(d.n));
   return hit ? hit[1] : null;
 }
 function isDiscontinuationAnnouncement(announcement){
@@ -1645,6 +1681,7 @@ function isPackageDiscontinuationAnnouncement(announcement){
 }
 
 // 品目名→メーカー公式の個別案内文(PDF)。取得できたものだけ登録される
+let MANUAL_ANNOUNCEMENTS = {...DEFAULT_MANUAL_ANNOUNCEMENTS};
 let ANNOUNCEMENTS = {...MANUAL_ANNOUNCEMENTS};
 
 // 生成済みの品目別ページのキー（YJコード）一覧。詳細モーダルのリンク可否の判定に使う。
@@ -1688,9 +1725,29 @@ let supplementalDataLoading = null;
 function loadSupplementalData(){
   if(supplementalDataLoading) return supplementalDataLoading;
   supplementalDataLoading = Promise.all([
+    fetchFirst(["maker_links.json", "https://tkiyo1007-eng.github.io/drugs-data/maker_links.json"])
+      .then(res => res && res.json()).then(data => {
+        if(Array.isArray(data) && data.length) MAKER_LINKS = data;
+      }).catch(()=>{}),
+    fetchFirst(["manual_announcements.json", "https://tkiyo1007-eng.github.io/drugs-data/manual_announcements.json"])
+      .then(res => res && res.json()).then(data => {
+        if(!data || typeof data !== "object") return;
+        MANUAL_ANNOUNCEMENTS = data.exact && typeof data.exact === "object" ? data.exact : data;
+        if(Array.isArray(data.patterns)){
+          MANUAL_ANNOUNCEMENT_PATTERNS = data.patterns.flatMap(item=>{
+            try{ return [[new RegExp(item.pattern, item.flags||""), item.announcement]]; }
+            catch(e){ return []; }
+          });
+        }
+        ANNOUNCEMENTS = {...ANNOUNCEMENTS, ...MANUAL_ANNOUNCEMENTS};
+      }).catch(()=>{}),
+    fetchFirst(["product_lifecycle.json", "https://tkiyo1007-eng.github.io/drugs-data/product_lifecycle.json"])
+      .then(res => res && res.json()).then(data => {
+        if(data && data.schema_version===1 && data.products) PRODUCT_LIFECYCLES = data.products;
+      }).catch(()=>{}),
     fetchFirst(["maker_announcements.json", "https://tkiyo1007-eng.github.io/drugs-data/maker_announcements.json"])
       .then(res => res && res.json()).then(data => {
-        if(data) ANNOUNCEMENTS = {...MANUAL_ANNOUNCEMENTS, ...data};
+        if(data) ANNOUNCEMENTS = {...data, ...MANUAL_ANNOUNCEMENTS};
       }).catch(()=>{}),
     fetchFirst(["announcement_summaries.json", "https://tkiyo1007-eng.github.io/drugs-data/announcement_summaries.json"])
       .then(res => res && res.json()).then(data => { if(data) SUMMARIES = data; }).catch(()=>{}),
@@ -1698,6 +1755,20 @@ function loadSupplementalData(){
       .then(res => res && res.json()).then(data => { if(data) PACKAGES = data; }).catch(()=>{}),
     fetchFirst(["resolution_stats.json", "https://tkiyo1007-eng.github.io/drugs-data/resolution_stats.json"])
       .then(res => res && res.json()).then(data => { if(data) RESOLUTION_STATS = data; }).catch(()=>{}),
+    fetchFirst(["featured_products.json", "https://tkiyo1007-eng.github.io/drugs-data/featured_products.json"])
+      .then(res => res && res.json()).then(data => {
+        if(data && data.schema_version===1 && Array.isArray(data.products)){
+          TRENDING = data.products.map(item=>({label:item.label, q:item.query}));
+          renderTrending();
+        }
+      }).catch(()=>{}),
+    fetchFirst(["industry_topics.json", "https://tkiyo1007-eng.github.io/drugs-data/industry_topics.json"])
+      .then(res => res && res.json()).then(data => {
+        if(data && data.schema_version===1 && Array.isArray(data.topics)){
+          TOPICS = data.topics.map(item=>({...item, q:item.query}));
+          renderTopics(TOPICS);
+        }
+      }).catch(()=>{}),
   ]).then(()=>{
     // 自動収集された案内にもカードの「販売中止予定」バッジを反映する。
     // 検索語・絞り込み・表示件数は現在値を保ったまま再描画される。
@@ -1934,7 +2005,7 @@ function openDetail(d, opts={}){
   }
   // 個別のメーカー案内は「通常出荷」でも必要。現在の出荷と将来の販売中止は
   // 両立するため、供給区分だけで案内検索を止めない。
-  const announcement = findAnnouncement(d.n);
+  const announcement = findAnnouncement(d);
   const needsMakerLink = d.s !== "ok" || d.delist || !!announcement;
   // 検索対象は製造メーカー・販売メーカーの欄だけに限る。
   // 行全体を連結して探すと、代替候補欄に載った他社品（「〜錠「ニプロ」」など）や
@@ -2146,7 +2217,7 @@ document.getElementById("pills").addEventListener("click", e=>{
 
 /* ===== 最近問い合わせが多い製品（タップで検索欄に反映） ===== */
 // qは検索欄に入れる語（AND検索）。ブランド名だけでヒットしない場合は一般名を補って絞り込む
-const TRENDING = [
+let TRENDING = [
   {label:"インスリンリスプロＢＳ注ソロスター", q:"インスリン リスプロBS注ソロスター"},
   {label:"メノエイドコンビパッチ", q:"メノエイドコンビパッチ"},
   {label:"ケナコルト－Ａ注", q:"ケナコルト"},
@@ -2164,8 +2235,11 @@ const TRENDING = [
   {label:"リンデロン注", q:"リンデロン注"},
   {label:"セレコックス錠", q:"セレコックス錠"},
 ];
-document.getElementById("trendingList").innerHTML = TRENDING.map(t=>
-  `<button type="button" class="trending-chip" data-q="${esc(t.q)}">${esc(t.label)}</button>`).join("");
+function renderTrending(){
+  document.getElementById("trendingList").innerHTML = TRENDING.map(t=>
+    `<button type="button" class="trending-chip" data-q="${esc(t.q)}">${esc(t.label)}</button>`).join("");
+}
+renderTrending();
 document.getElementById("trendingList").addEventListener("click", e=>{
   const chip = e.target.closest(".trending-chip");
   if(!chip) return;
@@ -2195,7 +2269,7 @@ document.getElementById("trendingList").addEventListener("click", e=>{
      source: { name: "◯◯社 プレスリリース（PDF）", url: "https://..." },  // 原則は公式発表。報道段階では信頼できる報道元を張り、未確認であることを明記
    },
 */
-const TOPICS = [
+let TOPICS = [
   {
     date: "2026.08.03",
     tag: "業界再編",
