@@ -788,6 +788,17 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   font-size:10.5px;font-weight:900;letter-spacing:.08em;color:#087C78;
   background:rgba(255,255,255,.72);border:1px solid rgba(22,159,153,.3);
 }
+.companion-qr{
+  display:block;width:148px;margin:18px auto 0;text-decoration:none;color:var(--sub);
+  font-size:10.5px;font-weight:800;line-height:1.5;
+}
+.companion-qr img{
+  display:block;width:148px;height:148px;border-radius:16px;background:#fff;
+  box-shadow:0 14px 28px -15px rgba(10,37,75,.48);image-rendering:pixelated;
+  transition:transform .2s,box-shadow .2s;
+}
+.companion-qr:hover img{transform:translateY(-2px);box-shadow:0 18px 32px -15px rgba(10,37,75,.58)}
+.companion-qr span{display:block;margin-top:7px}
 .companion-copy{position:relative;z-index:1;min-width:0}
 .companion-copy .sec-eyebrow{color:#087C78}
 .companion-copy h2{font-size:clamp(25px,3vw,36px);margin-bottom:12px}
@@ -1289,6 +1300,10 @@ footer a:hover{color:var(--blue)}
     <div class="companion-visual">
       <img class="companion-icon" src="sonamemo-icon.png" width="132" height="132" alt="そなメモのアプリアイコン" loading="lazy" decoding="async">
       <span class="companion-badge">連携アプリ</span>
+      <a class="companion-qr" href="https://apps.apple.com/jp/app/id6796889346" target="_blank" rel="noopener" aria-label="QRコードから、そなメモのApp Storeページを開く">
+        <img src="qr-sonamemo.png" width="148" height="148" alt="" loading="lazy" decoding="async">
+        <span>スマホで読み取る</span>
+      </a>
     </div>
     <div class="companion-copy">
       <p class="sec-eyebrow">BE READY, TOGETHER</p>
@@ -1312,6 +1327,10 @@ footer a:hover{color:var(--blue)}
     <div class="companion-visual">
       <img class="companion-icon" src="lumical-icon.png" width="132" height="132" alt="ルミカレのアプリアイコン" loading="lazy" decoding="async">
       <span class="companion-badge">関連アプリ</span>
+      <a class="companion-qr" href="https://apps.apple.com/jp/app/id6794411182" target="_blank" rel="noopener" aria-label="QRコードから、ルミカレのApp Storeページを開く">
+        <img src="qr-lumical.png" width="148" height="148" alt="" loading="lazy" decoding="async">
+        <span>スマホで読み取る</span>
+      </a>
     </div>
     <div class="companion-copy">
       <p class="sec-eyebrow">CRYSTAL CALENDAR</p>
