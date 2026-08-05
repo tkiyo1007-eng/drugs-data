@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-05T01:24:08+09:00",
+  "generated_at": "2026-08-06T01:10:35+09:00",
   "products": {
     "1124007F1143": {
       "product_name": "トリアゾラム錠０．１２５ｍｇ「ＣＨ」",
@@ -9,7 +9,7 @@
       "announced_at": "2026-01-23",
       "source_title": "2026/01/23 供給に関するお知らせ トリアゾラム錠0.125mg「CH」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/TRIAX0.125_CHUUSHI_2601.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1124023F2050": {
       "product_name": "アルプラゾラム錠０．８ｍｇ「トーワ」",
@@ -17,7 +17,7 @@
       "state": "discontinuation_announced",
       "source_title": "アルプラゾラム錠0.8mg「トーワ」 販売中止のお知らせ NEW",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82885&t=4&f=20260730_%E3%82%A2%E3%83%AB%E3%83%97%E3%83%A9%E3%82%BE%E3%83%A9%E3%83%A0%E9%8C%A00.8mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1124029F2103": {
       "product_name": "ロフラゼプ酸エチル錠２ｍｇ「トーワ」",
@@ -25,7 +25,7 @@
       "state": "discontinuation_announced",
       "source_title": "ロフラゼプ酸エチル錠2mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=81675&t=4&f=20260129_%E3%83%AD%E3%83%95%E3%83%A9%E3%82%BC%E3%83%97%E9%85%B8%E3%82%A8%E3%83%81%E3%83%AB%E9%8C%A02mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1129007F1107": {
       "product_name": "ゾピクロン錠７．５ｍｇ「トーワ」",
@@ -33,7 +33,7 @@
       "state": "discontinuation_announced",
       "source_title": "ゾピクロン錠7.5mg/10mg「トーワ」 販売中止のお知らせ NEW",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82889&t=4&f=20260730_%E3%82%BE%E3%83%94%E3%82%AF%E3%83%AD%E3%83%B3%E9%8C%A07.5mg10mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1129007F2073": {
       "product_name": "ゾピクロン錠１０ｍｇ「トーワ」",
@@ -41,7 +41,7 @@
       "state": "discontinuation_announced",
       "source_title": "ゾピクロン錠7.5mg/10mg「トーワ」 販売中止のお知らせ NEW",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82889&t=4&f=20260730_%E3%82%BE%E3%83%94%E3%82%AF%E3%83%AD%E3%83%B3%E9%8C%A07.5mg10mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1129009S1023": {
       "product_name": "ゾルピデム酒石酸塩内用液５ｍｇ「タカタ」",
@@ -49,7 +49,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_ゾルピデム酒石酸塩内用液5mg,10mg「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bc1p-att/Zolpidem.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1129009S2020": {
       "product_name": "ゾルピデム酒石酸塩内用液１０ｍｇ「タカタ」",
@@ -57,7 +57,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_ゾルピデム酒石酸塩内用液5mg,10mg「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bc1p-att/Zolpidem.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1141007R1060": {
       "product_name": "アセトアミノフェンＤＳ小児用２０％「タカタ」",
@@ -65,7 +65,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_アセトアミノフェンDS小児用20％「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bbqf-att/Acetaminophen.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1147002N1123": {
       "product_name": "ナボールＳＲカプセル３７．５",
@@ -74,7 +74,7 @@
       "announced_at": "2026-07-03",
       "source_title": "2026.07.03 ナボールSRカプセル37.5 販売中止に関するご案内",
       "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260703.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1149032F1132": {
       "product_name": "エトドラク錠１００ｍｇ「ＳＷ」",
@@ -83,7 +83,7 @@
       "announced_at": "2025-10-02",
       "source_title": "2025/10/02 発売情報 PDF エトドラク錠100mg「SW」販売中止のご案内 PDF",
       "source_url": "https://med.sawai.co.jp/file/pr28_1321_1.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1149037F2174": {
       "product_name": "セレコキシブ錠２００ｍｇ「ニプロ」",
@@ -101,7 +101,7 @@
       "announced_at": "2026-05-22",
       "source_title": "2026/05/22 供給に関するお知らせ ケトプロフェン坐剤50mg/75mg「JG」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/KETOX00_CHUUSHI_2605.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1149700J2104": {
       "product_name": "ケトプロフェン坐剤７５ｍｇ「ＪＧ」",
@@ -110,7 +110,7 @@
       "announced_at": "2026-05-22",
       "source_title": "2026/05/22 供給に関するお知らせ ケトプロフェン坐剤50mg/75mg「JG」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/KETOX00_CHUUSHI_2605.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1169001F1121": {
       "product_name": "パーキネス錠２",
@@ -118,7 +118,7 @@
       "state": "discontinuation_announced",
       "source_title": "パーキネス錠2 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=81672&t=4&f=20260129_%E3%83%91%E3%83%BC%E3%82%AD%E3%83%8D%E3%82%B9%E9%8C%A02_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179038F1171": {
       "product_name": "リスペリドン錠１ｍｇ「トーワ」",
@@ -126,7 +126,7 @@
       "state": "discontinuation_announced",
       "source_title": "リスペリドン錠1mg/2mg/3mg「トーワ」 販売中止のお知らせ NEW",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82892&t=4&f=20260730_%E3%83%AA%E3%82%B9%E3%83%9A%E3%83%AA%E3%83%89%E3%83%B3%E9%8C%A01mg2mg3mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179038F2127": {
       "product_name": "リスペリドン錠２ｍｇ「トーワ」",
@@ -134,7 +134,7 @@
       "state": "discontinuation_announced",
       "source_title": "リスペリドン錠1mg/2mg/3mg「トーワ」 販売中止のお知らせ NEW",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82892&t=4&f=20260730_%E3%83%AA%E3%82%B9%E3%83%9A%E3%83%AA%E3%83%89%E3%83%B3%E9%8C%A01mg2mg3mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179038F3123": {
       "product_name": "リスペリドン錠３ｍｇ「トーワ」",
@@ -142,7 +142,7 @@
       "state": "discontinuation_announced",
       "source_title": "リスペリドン錠1mg/2mg/3mg「トーワ」 販売中止のお知らせ NEW",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82892&t=4&f=20260730_%E3%83%AA%E3%82%B9%E3%83%9A%E3%83%AA%E3%83%89%E3%83%B3%E9%8C%A01mg2mg3mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179038S1064": {
       "product_name": "リスペリドン内用液１ｍｇ／ｍＬ「タカタ」",
@@ -150,7 +150,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_リスペリドン内用液1mg/mL「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bqin-att/Risperidone.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179039F1150": {
       "product_name": "フルボキサミンマレイン酸塩錠２５ｍｇ「タカタ」",
@@ -158,7 +158,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_フルボキサミンマレイン酸塩錠25mg,50mg,75mg「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bpt3-att/Fluvoxamine.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179039F1184": {
       "product_name": "フルボキサミンマレイン酸塩錠２５ｍｇ「トーワ」",
@@ -166,7 +166,7 @@
       "state": "discontinuation_announced",
       "source_title": "フルボキサミンマレイン酸塩錠25mg/50mg/75mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82492&t=4&f=20260428_%E3%83%95%E3%83%AB%E3%83%9C%E3%82%AD%E3%82%B5%E3%83%9F%E3%83%B3%E3%83%9E%E3%83%AC%E3%82%A4%E3%83%B3%E9%85%B8%E5%A1%A9%E9%8C%A025mg50mg75mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179039F2156": {
       "product_name": "フルボキサミンマレイン酸塩錠５０ｍｇ「タカタ」",
@@ -174,7 +174,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_フルボキサミンマレイン酸塩錠25mg,50mg,75mg「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bpt3-att/Fluvoxamine.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179039F2180": {
       "product_name": "フルボキサミンマレイン酸塩錠５０ｍｇ「トーワ」",
@@ -182,7 +182,7 @@
       "state": "discontinuation_announced",
       "source_title": "フルボキサミンマレイン酸塩錠25mg/50mg/75mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82492&t=4&f=20260428_%E3%83%95%E3%83%AB%E3%83%9C%E3%82%AD%E3%82%B5%E3%83%9F%E3%83%B3%E3%83%9E%E3%83%AC%E3%82%A4%E3%83%B3%E9%85%B8%E5%A1%A9%E9%8C%A025mg50mg75mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179039F3152": {
       "product_name": "フルボキサミンマレイン酸塩錠７５ｍｇ「タカタ」",
@@ -190,7 +190,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_フルボキサミンマレイン酸塩錠25mg,50mg,75mg「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bpt3-att/Fluvoxamine.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179039F3187": {
       "product_name": "フルボキサミンマレイン酸塩錠７５ｍｇ「トーワ」",
@@ -198,7 +198,7 @@
       "state": "discontinuation_announced",
       "source_title": "フルボキサミンマレイン酸塩錠25mg/50mg/75mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82492&t=4&f=20260428_%E3%83%95%E3%83%AB%E3%83%9C%E3%82%AD%E3%82%B5%E3%83%9F%E3%83%B3%E3%83%9E%E3%83%AC%E3%82%A4%E3%83%B3%E9%85%B8%E5%A1%A9%E9%8C%A025mg50mg75mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179041F1238": {
       "product_name": "パロキセチン錠１０ｍｇ「タカタ」",
@@ -206,7 +206,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_パロキセチン錠5mg,10mg,20mg「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bc7b-att/Paroxetine.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179041F2234": {
       "product_name": "パロキセチン錠２０ｍｇ「タカタ」",
@@ -214,7 +214,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_パロキセチン錠5mg,10mg,20mg「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bc7b-att/Paroxetine.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179041F2382": {
       "product_name": "パロキセチン錠２０ｍｇ「ニプロ」",
@@ -231,7 +231,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_パロキセチン錠5mg,10mg,20mg「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bc7b-att/Paroxetine.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179041F3370": {
       "product_name": "パロキセチン錠５ｍｇ「ニプロ」",
@@ -248,7 +248,7 @@
       "state": "discontinuation_announced",
       "source_title": "パロキセチンOD錠5mg/10mg/20mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80882&t=4&f=20250730_%E3%83%91%E3%83%AD%E3%82%AD%E3%82%BB%E3%83%81%E3%83%B3OD%E9%8C%A05mg10mg20mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179041F5020": {
       "product_name": "パロキセチンＯＤ錠２０ｍｇ「トーワ」",
@@ -256,7 +256,7 @@
       "state": "discontinuation_announced",
       "source_title": "パロキセチンOD錠5mg/10mg/20mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80882&t=4&f=20250730_%E3%83%91%E3%83%AD%E3%82%AD%E3%82%BB%E3%83%81%E3%83%B3OD%E9%8C%A05mg10mg20mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179041F6027": {
       "product_name": "パロキセチンＯＤ錠５ｍｇ「トーワ」",
@@ -264,7 +264,7 @@
       "state": "discontinuation_announced",
       "source_title": "パロキセチンOD錠5mg/10mg/20mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80882&t=4&f=20250730_%E3%83%91%E3%83%AD%E3%82%AD%E3%82%BB%E3%83%81%E3%83%B3OD%E9%8C%A05mg10mg20mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179042C1139": {
       "product_name": "クエチアピン細粒５０％「タカタ」",
@@ -272,7 +272,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_クエチアピン細粒50％「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bqd1-att/Quetiapine.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179042F2077": {
       "product_name": "クエチアピン錠１００ｍｇ「ＪＧ」",
@@ -281,7 +281,7 @@
       "announced_at": "2025-12-16",
       "source_title": "2025/12/16 供給に関するお知らせ クエチアピン錠25mg/100mg/200mg「JG」 販売中止のご案内（経過措置期間等更新版）を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/QUET00_CHUUSHI_2501.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179042F3073": {
       "product_name": "クエチアピン錠２００ｍｇ「ＪＧ」",
@@ -290,7 +290,7 @@
       "announced_at": "2025-12-16",
       "source_title": "2025/12/16 供給に関するお知らせ クエチアピン錠25mg/100mg/200mg「JG」 販売中止のご案内（経過措置期間等更新版）を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/QUET00_CHUUSHI_2501.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179044F1142": {
       "product_name": "オランザピン錠２．５ｍｇ「トーワ」",
@@ -298,7 +298,7 @@
       "state": "discontinuation_announced",
       "source_title": "オランザピン錠2.5mg/5mg/10mg「トーワ」 販売中止のお知らせ NEW",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82886&t=4&f=20260730_%E3%82%AA%E3%83%A9%E3%83%B3%E3%82%B6%E3%83%94%E3%83%B3%E9%8C%A02.5mg5mg10mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179044F2149": {
       "product_name": "オランザピン錠５ｍｇ「トーワ」",
@@ -306,7 +306,7 @@
       "state": "discontinuation_announced",
       "source_title": "オランザピン錠2.5mg/5mg/10mg「トーワ」 販売中止のお知らせ NEW",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82886&t=4&f=20260730_%E3%82%AA%E3%83%A9%E3%83%B3%E3%82%B6%E3%83%94%E3%83%B3%E9%8C%A02.5mg5mg10mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179044F3145": {
       "product_name": "オランザピン錠１０ｍｇ「トーワ」",
@@ -314,7 +314,7 @@
       "state": "discontinuation_announced",
       "source_title": "オランザピン錠2.5mg/5mg/10mg「トーワ」 販売中止のお知らせ NEW",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82886&t=4&f=20260730_%E3%82%AA%E3%83%A9%E3%83%B3%E3%82%B6%E3%83%94%E3%83%B3%E9%8C%A02.5mg5mg10mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179044F4087": {
       "product_name": "オランザピンＯＤ錠５ｍｇ「タカタ」",
@@ -322,7 +322,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_オランザピンOD錠2.5mg,5mg,10mg及び細粒1%「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bq7g-att/Olanzapine.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179044F5083": {
       "product_name": "オランザピンＯＤ錠１０ｍｇ「タカタ」",
@@ -330,7 +330,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_オランザピンOD錠2.5mg,5mg,10mg及び細粒1%「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bq7g-att/Olanzapine.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179044F6080": {
       "product_name": "オランザピンＯＤ錠２．５ｍｇ「タカタ」",
@@ -338,7 +338,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_オランザピンOD錠2.5mg,5mg,10mg及び細粒1%「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bq7g-att/Olanzapine.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179045C1027": {
       "product_name": "アリピプラゾール細粒１％「タカタ」",
@@ -346,7 +346,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_アリピプラゾール細粒1％「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bbt8-att/Aripiprazole.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179045F4111": {
       "product_name": "アリピプラゾールＯＤ錠３ｍｇ「ニプロ」",
@@ -390,7 +390,7 @@
       "state": "discontinuation_announced",
       "source_title": "セルトラリンOD錠25mg/50mg/100mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80879&t=4&f=20250730_%E3%82%BB%E3%83%AB%E3%83%88%E3%83%A9%E3%83%AA%E3%83%B3OD%E9%8C%A025mg50mg100mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179046F5040": {
       "product_name": "セルトラリンＯＤ錠５０ｍｇ「トーワ」",
@@ -398,7 +398,7 @@
       "state": "discontinuation_announced",
       "source_title": "セルトラリンOD錠25mg/50mg/100mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80879&t=4&f=20250730_%E3%82%BB%E3%83%AB%E3%83%88%E3%83%A9%E3%83%AA%E3%83%B3OD%E9%8C%A025mg50mg100mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179048F1124": {
       "product_name": "ブロナンセリン錠２ｍｇ「ニプロ」",
@@ -407,7 +407,7 @@
       "announced_at": "2026-02-02",
       "source_title": "2026年2月2日 ブロナンセリン錠2mg／4mg／8mg「ニプロ」　販売中止品のご案内",
       "source_url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uVotAIAS",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179048F2120": {
       "product_name": "ブロナンセリン錠４ｍｇ「ニプロ」",
@@ -416,7 +416,7 @@
       "announced_at": "2026-02-02",
       "source_title": "2026年2月2日 ブロナンセリン錠2mg／4mg／8mg「ニプロ」　販売中止品のご案内",
       "source_url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uVotAIAS",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179048F3127": {
       "product_name": "ブロナンセリン錠８ｍｇ「ニプロ」",
@@ -425,7 +425,7 @@
       "announced_at": "2026-02-02",
       "source_title": "2026年2月2日 ブロナンセリン錠2mg／4mg／8mg「ニプロ」　販売中止品のご案内",
       "source_url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uVotAIAS",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179050F1032": {
       "product_name": "アトモキセチン錠５ｍｇ「タカタ」",
@@ -433,7 +433,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_アトモキセチン錠5mg,10mg,25mg,40mg「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bpew-att/Atomoxetine.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179050F2039": {
       "product_name": "アトモキセチン錠１０ｍｇ「タカタ」",
@@ -441,7 +441,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_アトモキセチン錠5mg,10mg,25mg,40mg「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bpew-att/Atomoxetine.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179050F3035": {
       "product_name": "アトモキセチン錠２５ｍｇ「タカタ」",
@@ -449,7 +449,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_アトモキセチン錠5mg,10mg,25mg,40mg「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bpew-att/Atomoxetine.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179050F4031": {
       "product_name": "アトモキセチン錠４０ｍｇ「タカタ」",
@@ -457,7 +457,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_アトモキセチン錠5mg,10mg,25mg,40mg「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bpew-att/Atomoxetine.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1179051F2050": {
       "product_name": "ミルタザピン錠３０ｍｇ「ＪＧ」",
@@ -466,7 +466,7 @@
       "announced_at": "2026-04-17",
       "source_title": "2026/04/17 供給に関するお知らせ ミルタザピン錠30mg「JG」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/MIRTA30_CHUUSHI_2604.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1190012F1239": {
       "product_name": "ドネペジル塩酸塩錠３ｍｇ「トーワ」",
@@ -474,7 +474,7 @@
       "state": "discontinuation_announced",
       "source_title": "ドネペジル塩酸塩錠3mg/5mg/10mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=78320&t=4&f=20240125_%E3%83%89%E3%83%8D%E3%83%9A%E3%82%B8%E3%83%AB%E5%A1%A9%E9%85%B8%E5%A1%A9%E9%8C%A03mg5mg10mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1190012F2235": {
       "product_name": "ドネペジル塩酸塩錠５ｍｇ「トーワ」",
@@ -482,7 +482,7 @@
       "state": "discontinuation_announced",
       "source_title": "ドネペジル塩酸塩錠3mg/5mg/10mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=78320&t=4&f=20240125_%E3%83%89%E3%83%8D%E3%83%9A%E3%82%B8%E3%83%AB%E5%A1%A9%E9%85%B8%E5%A1%A9%E9%8C%A03mg5mg10mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1190012F3185": {
       "product_name": "ドネペジル塩酸塩ＯＤ錠３ｍｇ「タカタ」",
@@ -490,7 +490,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_ドネペジル塩酸塩OD錠3mg,5mg,10mg「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bphv-att/Donepezil.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1190012F4181": {
       "product_name": "ドネペジル塩酸塩ＯＤ錠５ｍｇ「タカタ」",
@@ -498,7 +498,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_ドネペジル塩酸塩OD錠3mg,5mg,10mg「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bphv-att/Donepezil.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1190012F5234": {
       "product_name": "ドネペジル塩酸塩錠１０ｍｇ「トーワ」",
@@ -506,7 +506,7 @@
       "state": "discontinuation_announced",
       "source_title": "ドネペジル塩酸塩錠3mg/5mg/10mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=78320&t=4&f=20240125_%E3%83%89%E3%83%8D%E3%83%9A%E3%82%B8%E3%83%AB%E5%A1%A9%E9%85%B8%E5%A1%A9%E9%8C%A03mg5mg10mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1190012F6214": {
       "product_name": "ドネペジル塩酸塩ＯＤ錠１０ｍｇ「タカタ」",
@@ -514,7 +514,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_ドネペジル塩酸塩OD錠3mg,5mg,10mg「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bphv-att/Donepezil.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1190014F1041": {
       "product_name": "タルチレリン錠５ｍｇ「ＪＧ」",
@@ -523,7 +523,7 @@
       "announced_at": "2025-12-17",
       "source_title": "2025/12/17 供給に関するお知らせ タルチレリン錠5mg「JG」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/TALTI_CHUUSHI_2512.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1190017F1207": {
       "product_name": "プレガバリンＯＤ錠２５ｍｇ「ニプロ」",
@@ -558,7 +558,7 @@
       "state": "discontinuation_announced",
       "source_title": "プレガバリンOD錠50mg「日医工」 販売中止のご案内",
       "source_url": "https://www.nichiiko.co.jp/medicine/files/IG0811-01.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1190018F4170": {
       "product_name": "メマンチン塩酸塩ＯＤ錠５ｍｇ「タカタ」",
@@ -566,7 +566,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_メマンチン塩酸塩OD錠5mg,10mg,20mg「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bq1j-att/Memantine.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1190018F5177": {
       "product_name": "メマンチン塩酸塩ＯＤ錠１０ｍｇ「タカタ」",
@@ -574,7 +574,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_メマンチン塩酸塩OD錠5mg,10mg,20mg「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bq1j-att/Memantine.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1190018F6173": {
       "product_name": "メマンチン塩酸塩ＯＤ錠２０ｍｇ「タカタ」",
@@ -582,7 +582,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_メマンチン塩酸塩OD錠5mg,10mg,20mg「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bq1j-att/Memantine.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1190401A1112": {
       "product_name": "エダラボン点滴静注３０ｍｇ「タカタ」",
@@ -590,7 +590,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_エダラボン点滴静注30mgバッグ「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bbw3-att/Edaravone.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1190401G1050": {
       "product_name": "エダラボン点滴静注３０ｍｇバッグ「タカタ」",
@@ -598,7 +598,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_エダラボン点滴静注30mgバッグ「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bbw3-att/Edaravone.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1249400A1036": {
       "product_name": "セスデン注７．５ｍｇ",
@@ -615,7 +615,7 @@
       "state": "discontinuation_announced",
       "source_title": "ヒアルロン酸ナトリウム点眼液0.1％/0.3％「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=81673&t=4&f=20260129_%E3%83%92%E3%82%A2%E3%83%AB%E3%83%AD%E3%83%B3%E9%85%B8%E3%83%8A%E3%83%88%E3%83%AA%E3%82%A6%E3%83%A0%E7%82%B9%E7%9C%BC%E6%B6%B20.1_0.3_%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1319720Y2071": {
       "product_name": "ヒアルロン酸ナトリウム点眼液０．３％「トーワ」",
@@ -623,7 +623,7 @@
       "state": "discontinuation_announced",
       "source_title": "ヒアルロン酸ナトリウム点眼液0.1％/0.3％「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=81673&t=4&f=20260129_%E3%83%92%E3%82%A2%E3%83%AB%E3%83%AD%E3%83%B3%E9%85%B8%E3%83%8A%E3%83%88%E3%83%AA%E3%82%A6%E3%83%A0%E7%82%B9%E7%9C%BC%E6%B6%B20.1_0.3_%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1319742Q1179": {
       "product_name": "レボフロキサシン点眼液０．５％「タカタ」",
@@ -631,7 +631,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_レボフロキサシン点眼液0.5％,1.5%「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bpyp-att/Levofloxacin.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1319742Q1276": {
       "product_name": "レボフロキサシン点眼液０．５％「ニプロ」",
@@ -648,7 +648,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_レボフロキサシン点眼液0.5％,1.5%「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bpyp-att/Levofloxacin.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1319742Q2191": {
       "product_name": "レボフロキサシン点眼液１．５％「ニプロ」",
@@ -665,7 +665,7 @@
       "state": "discontinuation_announced",
       "source_title": "ベクロメタゾン鼻用パウダー25μg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=81674&t=4&f=20260129_%E3%83%99%E3%82%AF%E3%83%AD%E3%83%A1%E3%82%BF%E3%82%BE%E3%83%B3%E9%BC%BB%E7%94%A8%E3%83%91%E3%82%A6%E3%83%80%E3%83%BC25%CE%BCg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "1329710Q1060": {
       "product_name": "モメタゾン点鼻液５０μｇ「タカタ」５６噴霧用",
@@ -673,7 +673,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_モメタゾン点鼻液50μg「タカタ」56噴霧用,112噴霧用",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bq4c-att/Mometasone.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2119408G1035": {
       "product_name": "ミルリノン注２２．５ｍｇバッグ「タカタ」",
@@ -681,7 +681,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_ミルリノン注22.5㎎バッグ「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bccx-att/Milrinone.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2123014F1132": {
       "product_name": "アロチノロール塩酸塩錠５ｍｇ「トーワ」",
@@ -689,7 +689,7 @@
       "state": "discontinuation_announced",
       "source_title": "アロチノロール塩酸塩錠5mg/10mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=79418&t=4&f=20240725_%E3%82%A2%E3%83%AD%E3%83%81%E3%83%8E%E3%83%AD%E3%83%BC%E3%83%AB%E5%A1%A9%E9%85%B8%E5%A1%A9%E9%8C%A05mg10mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2123014F2244": {
       "product_name": "アロチノロール塩酸塩錠１０ｍｇ「トーワ」",
@@ -697,7 +697,7 @@
       "state": "discontinuation_announced",
       "source_title": "アロチノロール塩酸塩錠5mg/10mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=79418&t=4&f=20240725_%E3%82%A2%E3%83%AD%E3%83%81%E3%83%8E%E3%83%AD%E3%83%BC%E3%83%AB%E5%A1%A9%E9%85%B8%E5%A1%A9%E9%8C%A05mg10mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2129003M1200": {
       "product_name": "メキシレチン塩酸塩カプセル５０ｍｇ「トーワ」",
@@ -705,7 +705,7 @@
       "state": "discontinuation_announced",
       "source_title": "メキシレチン塩酸塩カプセル50mg/100mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80001&t=4&f=20241030_%E3%83%A1%E3%82%AD%E3%82%B7%E3%83%AC%E3%83%81%E3%83%B3%E5%A1%A9%E9%85%B8%E5%A1%A9%E3%82%AB%E3%83%97%E3%82%BB%E3%83%AB50mg100mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2129003M2222": {
       "product_name": "メキシレチン塩酸塩カプセル１００ｍｇ「トーワ」",
@@ -713,7 +713,7 @@
       "state": "discontinuation_announced",
       "source_title": "メキシレチン塩酸塩カプセル50mg/100mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80001&t=4&f=20241030_%E3%83%A1%E3%82%AD%E3%82%B7%E3%83%AC%E3%83%81%E3%83%B3%E5%A1%A9%E9%85%B8%E5%A1%A9%E3%82%AB%E3%83%97%E3%82%BB%E3%83%AB50mg100mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2129005F1226": {
       "product_name": "ジソピラミドリン酸塩徐放錠１５０ｍｇ「トーワ」",
@@ -721,7 +721,7 @@
       "state": "discontinuation_announced",
       "source_title": "ジソピラミドリン酸塩徐放錠150mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80283&t=4&f=20241220_%E3%82%B8%E3%82%BD%E3%83%94%E3%83%A9%E3%83%9F%E3%83%89%E3%83%AA%E3%83%B3%E9%85%B8%E5%A1%A9%E5%BE%90%E6%94%BE%E9%8C%A0150mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2129007F1063": {
       "product_name": "シベンゾリンコハク酸塩錠５０ｍｇ「トーワ」",
@@ -729,7 +729,7 @@
       "state": "discontinuation_announced",
       "source_title": "シベンゾリンコハク酸塩錠50mg/100mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80284&t=4&f=20241220_%E3%82%B7%E3%83%99%E3%83%B3%E3%82%BE%E3%83%AA%E3%83%B3%E3%82%B3%E3%83%8F%E3%82%AF%E9%85%B8%E5%A1%A9%E9%8C%A050mg100mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2129007F2060": {
       "product_name": "シベンゾリンコハク酸塩錠１００ｍｇ「トーワ」",
@@ -737,7 +737,7 @@
       "state": "discontinuation_announced",
       "source_title": "シベンゾリンコハク酸塩錠50mg/100mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80284&t=4&f=20241220_%E3%82%B7%E3%83%99%E3%83%B3%E3%82%BE%E3%83%AA%E3%83%B3%E3%82%B3%E3%83%8F%E3%82%AF%E9%85%B8%E5%A1%A9%E9%8C%A050mg100mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2132004F3025": {
       "product_name": "ヒドロクロロチアジドＯＤ錠１２．５ｍｇ「トーワ」",
@@ -745,7 +745,7 @@
       "state": "discontinuation_announced",
       "source_title": "ヒドロクロロチアジドOD錠12.5mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=78321&t=4&f=20240125_%E3%83%92%E3%83%89%E3%83%AD%E3%82%AF%E3%83%AD%E3%83%AD%E3%83%81%E3%82%A2%E3%82%B8%E3%83%89OD%E9%8C%A012.5mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2144002F1210": {
       "product_name": "エナラプリルマレイン酸塩錠２．５ｍｇ「ＪＧ」",
@@ -754,7 +754,7 @@
       "announced_at": "2025-12-05",
       "source_title": "2025/12/05 供給に関するお知らせ エナラプリルマレイン酸塩錠2.5mg/5mg/10mg「JG」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/ENALJ00_CHUUSHI_2512.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2144002F2292": {
       "product_name": "エナラプリルマレイン酸塩錠５ｍｇ「ＪＧ」",
@@ -763,7 +763,7 @@
       "announced_at": "2025-12-05",
       "source_title": "2025/12/05 供給に関するお知らせ エナラプリルマレイン酸塩錠2.5mg/5mg/10mg「JG」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/ENALJ00_CHUUSHI_2512.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2144002F3205": {
       "product_name": "エナラプリルマレイン酸塩錠１０ｍｇ「ＪＧ」",
@@ -772,7 +772,7 @@
       "announced_at": "2025-12-05",
       "source_title": "2025/12/05 供給に関するお知らせ エナラプリルマレイン酸塩錠2.5mg/5mg/10mg「JG」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/ENALJ00_CHUUSHI_2512.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2144003F2238": {
       "product_name": "アラセプリル錠２５ｍｇ「サワイ」",
@@ -781,7 +781,7 @@
       "announced_at": "2024-10-04",
       "source_title": "2024/10/04 発売情報 PDF アラセプリル錠25mg「サワイ」 販売中止のご案内 PDF",
       "source_url": "https://med.sawai.co.jp/file/pr28_120_4.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2144006F1057": {
       "product_name": "リシノプリル錠５ｍｇ「トーワ」",
@@ -789,7 +789,7 @@
       "state": "discontinuation_announced",
       "source_title": "リシノプリル錠5mg/10mg/20mg「トーワ」 販売中止のお知らせ NEW",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82891&t=4&f=20260730_%E3%83%AA%E3%82%B7%E3%83%8E%E3%83%97%E3%83%AA%E3%83%AB%E9%8C%A05mg10mg20mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2144006F2118": {
       "product_name": "リシノプリル錠１０ｍｇ「トーワ」",
@@ -797,7 +797,7 @@
       "state": "discontinuation_announced",
       "source_title": "リシノプリル錠5mg/10mg/20mg「トーワ」 販売中止のお知らせ NEW",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82891&t=4&f=20260730_%E3%83%AA%E3%82%B7%E3%83%8E%E3%83%97%E3%83%AA%E3%83%AB%E9%8C%A05mg10mg20mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2144006F3041": {
       "product_name": "リシノプリル錠２０ｍｇ「トーワ」",
@@ -805,7 +805,7 @@
       "state": "discontinuation_announced",
       "source_title": "リシノプリル錠5mg/10mg/20mg「トーワ」 販売中止のお知らせ NEW",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82891&t=4&f=20260730_%E3%83%AA%E3%82%B7%E3%83%8E%E3%83%97%E3%83%AA%E3%83%AB%E9%8C%A05mg10mg20mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2144008F1056": {
       "product_name": "イミダプリル塩酸塩錠２．５ｍｇ「ＪＧ」",
@@ -814,7 +814,7 @@
       "announced_at": "2026-05-22",
       "source_title": "2026/05/22 供給に関するお知らせ イミダプリル塩酸塩錠2.5mg/10mg「JG」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/IMIDA00_CHUUSHI_2605.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2144008F3059": {
       "product_name": "イミダプリル塩酸塩錠１０ｍｇ「ＪＧ」",
@@ -823,7 +823,7 @@
       "announced_at": "2026-05-22",
       "source_title": "2026/05/22 供給に関するお知らせ イミダプリル塩酸塩錠2.5mg/10mg「JG」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/IMIDA00_CHUUSHI_2605.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2144009F1050": {
       "product_name": "テモカプリル塩酸塩錠１ｍｇ「ＮＰ」",
@@ -832,7 +832,7 @@
       "announced_at": "2024-01-19",
       "source_title": "2024.01.19 テモカプリル塩酸塩錠1mg・2mg・4mg「NP」販売中止品のご案内",
       "source_url": "https://med.nipro.co.jp/servlet/servlet.FileDownload?file=00P5h00000GAer2EAD",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2144009F1107": {
       "product_name": "テモカプリル塩酸塩錠１ｍｇ「サワイ」",
@@ -842,7 +842,7 @@
       "supply_end_expected": "2026-12",
       "source_title": "2026.04 テモカプリル塩酸塩錠1mg・2mg・4mg「サワイ」販売中止のご案内",
       "source_url": "https://med.sawai.co.jp/file/pr28_1235_1.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2144009F2057": {
       "product_name": "テモカプリル塩酸塩錠２ｍｇ「ＮＰ」",
@@ -851,7 +851,7 @@
       "announced_at": "2024-01-19",
       "source_title": "2024.01.19 テモカプリル塩酸塩錠1mg・2mg・4mg「NP」販売中止品のご案内",
       "source_url": "https://med.nipro.co.jp/servlet/servlet.FileDownload?file=00P5h00000GAer2EAD",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2144009F2103": {
       "product_name": "テモカプリル塩酸塩錠２ｍｇ「サワイ」",
@@ -861,7 +861,7 @@
       "supply_end_expected": "2026-12",
       "source_title": "2026.04 テモカプリル塩酸塩錠1mg・2mg・4mg「サワイ」販売中止のご案内",
       "source_url": "https://med.sawai.co.jp/file/pr28_1235_1.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2144009F3100": {
       "product_name": "テモカプリル塩酸塩錠４ｍｇ「サワイ」",
@@ -871,7 +871,7 @@
       "supply_end_expected": "2026-12",
       "source_title": "2026.04 テモカプリル塩酸塩錠1mg・2mg・4mg「サワイ」販売中止のご案内",
       "source_url": "https://med.sawai.co.jp/file/pr28_1235_1.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2149009F1081": {
       "product_name": "ラベタロール塩酸塩錠５０ｍｇ「トーワ」",
@@ -879,7 +879,7 @@
       "state": "discontinuation_announced",
       "source_title": "ラベタロール塩酸塩錠50mg/100mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=78372&t=4&f=20240208_%E3%83%A9%E3%83%99%E3%82%BF%E3%83%AD%E3%83%BC%E3%83%AB%E5%A1%A9%E9%85%B8%E5%A1%A9%E9%8C%A050mg100mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2149009F2070": {
       "product_name": "ラベタロール塩酸塩錠１００ｍｇ「トーワ」",
@@ -887,7 +887,7 @@
       "state": "discontinuation_announced",
       "source_title": "ラベタロール塩酸塩錠50mg/100mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=78372&t=4&f=20240208_%E3%83%A9%E3%83%99%E3%82%BF%E3%83%AD%E3%83%BC%E3%83%AB%E5%A1%A9%E9%85%B8%E5%A1%A9%E9%8C%A050mg100mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2149014M1065": {
       "product_name": "プロプラノロール塩酸塩徐放カプセル６０ｍｇ「サワイ」",
@@ -896,7 +896,7 @@
       "announced_at": "2025-06-26",
       "source_title": "2025/06/26 発売情報 PDF プロプラノロール塩酸塩徐放カプセル60mg「サワイ」 販売中止のご案内 PDF",
       "source_url": "https://med.sawai.co.jp/file/pr28_93_2.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2149031F1094": {
       "product_name": "ベタキソロール塩酸塩錠５ｍｇ「トーワ」",
@@ -904,7 +904,7 @@
       "state": "discontinuation_announced",
       "source_title": "ベタキソロール塩酸塩錠5mg/10mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=77297&t=4&f=20230427_%E3%83%99%E3%82%BF%E3%82%AD%E3%82%BD%E3%83%AD%E3%83%BC%E3%83%AB%E5%A1%A9%E9%85%B8%E5%A1%A9%E9%8C%A05mg10mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2149031F2104": {
       "product_name": "ベタキソロール塩酸塩錠１０ｍｇ「トーワ」",
@@ -912,7 +912,7 @@
       "state": "discontinuation_announced",
       "source_title": "ベタキソロール塩酸塩錠5mg/10mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=77297&t=4&f=20230427_%E3%83%99%E3%82%BF%E3%82%AD%E3%82%BD%E3%83%AD%E3%83%BC%E3%83%AB%E5%A1%A9%E9%85%B8%E5%A1%A9%E9%8C%A05mg10mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2149032F2133": {
       "product_name": "カルベジロール錠２０ｍｇ「ＪＧ」",
@@ -921,7 +921,7 @@
       "announced_at": "2026-07-24",
       "source_title": "2026/07/24 供給に関するお知らせ カルベジロール錠20mg「JG」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/CARVJ20_CHUUSHI_2607.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2149040F1336": {
       "product_name": "カンデサルタン錠２ｍｇ「ニプロ」",
@@ -966,7 +966,7 @@
       "announced_at": "2025-12-16",
       "source_title": "2025/12/16 供給に関するお知らせ バルサルタン錠20mg/40mg/80mg/160mg「JG」 販売中止のご案内（経過措置期間等更新版）を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/VALSA00_CHUUSHI_2504.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2149041F3082": {
       "product_name": "バルサルタン錠８０ｍｇ「ＪＧ」",
@@ -975,7 +975,7 @@
       "announced_at": "2025-12-16",
       "source_title": "2025/12/16 供給に関するお知らせ バルサルタン錠20mg/40mg/80mg/160mg「JG」 販売中止のご案内（経過措置期間等更新版）を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/VALSA00_CHUUSHI_2504.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2149041F4089": {
       "product_name": "バルサルタン錠１６０ｍｇ「ＪＧ」",
@@ -984,7 +984,7 @@
       "announced_at": "2025-12-16",
       "source_title": "2025/12/16 供給に関するお知らせ バルサルタン錠20mg/40mg/80mg/160mg「JG」 販売中止のご案内（経過措置期間等更新版）を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/VALSA00_CHUUSHI_2504.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2149041F5034": {
       "product_name": "バルサルタンＯＤ錠２０ｍｇ「トーワ」",
@@ -1059,7 +1059,7 @@
       "state": "discontinuation_announced",
       "source_title": "イルベサルタンOD錠50mg/100mg/200mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=78317&t=4&f=20240125_%E3%82%A4%E3%83%AB%E3%83%99%E3%82%B5%E3%83%AB%E3%82%BF%E3%83%B3OD%E9%8C%A050mg100mg200mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2149046F5029": {
       "product_name": "イルベサルタンＯＤ錠１００ｍｇ「トーワ」",
@@ -1067,7 +1067,7 @@
       "state": "discontinuation_announced",
       "source_title": "イルベサルタンOD錠50mg/100mg/200mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=78317&t=4&f=20240125_%E3%82%A4%E3%83%AB%E3%83%99%E3%82%B5%E3%83%AB%E3%82%BF%E3%83%B3OD%E9%8C%A050mg100mg200mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2149046F6025": {
       "product_name": "イルベサルタンＯＤ錠２００ｍｇ「トーワ」",
@@ -1075,7 +1075,7 @@
       "state": "discontinuation_announced",
       "source_title": "イルベサルタンOD錠50mg/100mg/200mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=78317&t=4&f=20240125_%E3%82%A4%E3%83%AB%E3%83%99%E3%82%B5%E3%83%AB%E3%82%BF%E3%83%B3OD%E9%8C%A050mg100mg200mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2149114F1064": {
       "product_name": "アムバロ配合錠「ＪＧ」",
@@ -1084,7 +1084,7 @@
       "announced_at": "2026-05-22",
       "source_title": "2026/05/22 供給に関するお知らせ アムバロ配合錠「JG」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/AMVAL_CHUUSHI_2605.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2149114F2060": {
       "product_name": "アムバロ配合ＯＤ錠「トーワ」",
@@ -1092,7 +1092,7 @@
       "state": "discontinuation_announced",
       "source_title": "アムバロ配合OD錠「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80339&t=4&f=20250116_%E3%82%A2%E3%83%A0%E3%83%90%E3%83%AD%E9%85%8D%E5%90%88OD%E9%8C%A0%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2160003F1120": {
       "product_name": "スマトリプタン錠５０ｍｇ「トーワ」",
@@ -1100,7 +1100,7 @@
       "state": "discontinuation_announced",
       "source_title": "スマトリプタン錠50mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80210&t=4&f=20241206_%E3%82%B9%E3%83%9E%E3%83%88%E3%83%AA%E3%83%97%E3%82%BF%E3%83%B3%E9%8C%A050mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B_2.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2160003S1020": {
       "product_name": "スマトリプタン内用液５０ｍｇ「タカタ」",
@@ -1108,7 +1108,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_スマトリプタン内用液50mg「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bbyw-att/Sumatriptan.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2171005F2153": {
       "product_name": "ジラゼプ塩酸塩錠１００ｍｇ「サワイ」",
@@ -1117,7 +1117,7 @@
       "announced_at": "2025-10-02",
       "source_title": "2025/10/02 発売情報 PDF ジラゼプ塩酸塩錠100mg「サワイ」販売中止のご案内 PDF",
       "source_url": "https://med.sawai.co.jp/file/pr28_1218_1.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2171012F1203": {
       "product_name": "トラピジル錠５０ｍｇ「トーワ」",
@@ -1125,7 +1125,7 @@
       "state": "discontinuation_announced",
       "source_title": "トラピジル錠50mg/100mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=77295&t=4&f=20230427_%E3%83%88%E3%83%A9%E3%83%94%E3%82%B8%E3%83%AB%E9%8C%A050mg100mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2171012F2366": {
       "product_name": "トラピジル錠１００ｍｇ「トーワ」",
@@ -1133,7 +1133,7 @@
       "state": "discontinuation_announced",
       "source_title": "トラピジル錠50mg/100mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=77295&t=4&f=20230427_%E3%83%88%E3%83%A9%E3%83%94%E3%82%B8%E3%83%AB%E9%8C%A050mg100mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2171022F1053": {
       "product_name": "アムロジピン錠２．５ｍｇ「ＣＨ」",
@@ -1142,7 +1142,7 @@
       "announced_at": "2026-01-23",
       "source_title": "2026/01/23 供給に関するお知らせ アムロジピン錠2.5mg/5mg/10mg「CH」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/AMLOC00_CHUUSHI_2601.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2171022F5245": {
       "product_name": "アムロジピン錠１０ｍｇ「ＣＨ」",
@@ -1151,7 +1151,7 @@
       "announced_at": "2026-01-23",
       "source_title": "2026/01/23 供給に関するお知らせ アムロジピン錠2.5mg/5mg/10mg「CH」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/AMLOC00_CHUUSHI_2601.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2189010F1241": {
       "product_name": "プラバスタチンＮａ錠５ｍｇ「チョーセイ」",
@@ -1160,7 +1160,7 @@
       "announced_at": "2026-01-23",
       "source_title": "2026/01/23 供給に関するお知らせ プラバスタチンNa錠5mg/10mg「チョーセイ」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/PRAVC00_CHUUSHI_2601.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2189010F2272": {
       "product_name": "プラバスタチンＮａ錠１０ｍｇ「チョーセイ」",
@@ -1169,7 +1169,7 @@
       "announced_at": "2026-01-23",
       "source_title": "2026/01/23 供給に関するお知らせ プラバスタチンNa錠5mg/10mg「チョーセイ」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/PRAVC00_CHUUSHI_2601.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2189017F5036": {
       "product_name": "ロスバスタチン錠１０ｍｇ「トーワ」",
@@ -1193,7 +1193,7 @@
       "state": "discontinuation_announced",
       "source_title": "アメジニウムメチル硫酸塩錠10mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82491&t=4&f=20260428_%E3%82%A2%E3%83%A1%E3%82%B8%E3%83%8B%E3%82%A6%E3%83%A0%E3%83%A1%E3%83%81%E3%83%AB%E7%A1%AB%E9%85%B8%E5%A1%A9%E9%8C%A010mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2190029D2080": {
       "product_name": "炭酸ランタン顆粒分包５００ｍｇ「ＪＧ」",
@@ -1202,7 +1202,7 @@
       "announced_at": "2025-12-17",
       "source_title": "2025/12/17 供給に関するお知らせ 炭酸ランタン顆粒分包250mg/500mg「JG」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/LANTHGR00_CHUUSHI_2512.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2190029F3053": {
       "product_name": "炭酸ランタンＯＤ錠２５０ｍｇ「ＪＧ」",
@@ -1211,7 +1211,7 @@
       "announced_at": "2025-09-19",
       "source_title": "2025/09/19 供給に関するお知らせ 炭酸ランタンOD錠250mg/500mg「JG」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/LANTHOD00_CHUUSHI_2509.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2190029F4050": {
       "product_name": "炭酸ランタンＯＤ錠５００ｍｇ「ＪＧ」",
@@ -1220,7 +1220,7 @@
       "announced_at": "2025-09-19",
       "source_title": "2025/09/19 供給に関するお知らせ 炭酸ランタンOD錠250mg/500mg「JG」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/LANTHOD00_CHUUSHI_2509.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2239001N1160": {
       "product_name": "アンブロキソール塩酸塩徐放カプセル４５ｍｇ「トーワ」",
@@ -1228,7 +1228,7 @@
       "state": "discontinuation_announced",
       "source_title": "アンブロキソール塩酸塩徐放カプセル45mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=81670&t=4&f=20260129_%E3%82%A2%E3%83%B3%E3%83%96%E3%83%AD%E3%82%AD%E3%82%BD%E3%83%BC%E3%83%AB%E5%A1%A9%E9%85%B8%E5%A1%A9%E5%BE%90%E6%94%BE%E3%82%AB%E3%83%97%E3%82%BB%E3%83%AB45mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2252006R2057": {
       "product_name": "フェノテロール臭化水素酸塩ＤＳ小児用０．５％「タカタ」",
@@ -1236,7 +1236,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_フェノテロール臭化水素酸塩DS小児用0.5％「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bpnh-att/Fenoterol.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2259707S1195": {
       "product_name": "ツロブテロールテープ０．５ｍｇ「タカタ」",
@@ -1244,7 +1244,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_ツロブテロールテープ0.5mg,1mg,2mg「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bc4i-att/Tulobuterol.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2259707S2191": {
       "product_name": "ツロブテロールテープ１ｍｇ「タカタ」",
@@ -1252,7 +1252,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_ツロブテロールテープ0.5mg,1mg,2mg「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bc4i-att/Tulobuterol.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2259707S3198": {
       "product_name": "ツロブテロールテープ２ｍｇ「タカタ」",
@@ -1260,7 +1260,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_ツロブテロールテープ0.5mg,1mg,2mg「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bc4i-att/Tulobuterol.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2259800J1030": {
       "product_name": "アニスーマ坐剤",
@@ -1269,7 +1269,7 @@
       "announced_at": "2026-01-23",
       "source_title": "2026/01/23 供給に関するお知らせ アニスーマ坐剤 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/ANYSU_CHUUSHI_2601.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2325001F2242": {
       "product_name": "シメチジン錠４００ｍｇ「サワイ」",
@@ -1278,7 +1278,7 @@
       "announced_at": "2025-01-14",
       "source_title": "2025/01/14 発売情報 PDF シメチジン錠200mg/400mg「サワイ」 販売中止のご案内(第二報) PDF",
       "source_url": "https://med.sawai.co.jp/file/pr28_1266_2.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2325003F1300": {
       "product_name": "ファモチジン錠１０ｍｇ「トーワ」",
@@ -1286,7 +1286,7 @@
       "state": "discontinuation_announced",
       "source_title": "ファモチジン錠10mg/20mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=78322&t=4&f=20240125_%E3%83%95%E3%82%A1%E3%83%A2%E3%83%81%E3%82%B8%E3%83%B3%E9%8C%A010mg20mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2325003F1369": {
       "product_name": "ファモチジン錠１０ｍｇ「ＪＧ」",
@@ -1295,7 +1295,7 @@
       "announced_at": "2025-08-22",
       "source_title": "2025/08/22 供給に関するお知らせ ファモチジン錠10mg/20mg「JG」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/FAMTJ00_CHUUSHI_2508.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2325003F2322": {
       "product_name": "ファモチジン錠２０ｍｇ「トーワ」",
@@ -1303,7 +1303,7 @@
       "state": "discontinuation_announced",
       "source_title": "ファモチジン錠10mg/20mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=78322&t=4&f=20240125_%E3%83%95%E3%82%A1%E3%83%A2%E3%83%81%E3%82%B8%E3%83%B3%E9%8C%A010mg20mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2325003F2381": {
       "product_name": "ファモチジン錠２０ｍｇ「ＪＧ」",
@@ -1312,7 +1312,7 @@
       "announced_at": "2025-08-22",
       "source_title": "2025/08/22 供給に関するお知らせ ファモチジン錠10mg/20mg「JG」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/FAMTJ00_CHUUSHI_2508.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2325004M2075": {
       "product_name": "ロキサチジン酢酸エステル塩酸塩徐放カプセル３７．５ｍｇ「サワイ」",
@@ -1321,7 +1321,7 @@
       "announced_at": "2025-10-02",
       "source_title": "2025/10/02 発売情報 PDF ロキサチジン酢酸エステル塩酸塩徐放カプセル37.5mg「サワイ」販売中止のご案内 PDF",
       "source_url": "https://med.sawai.co.jp/file/pr28_1221_1.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2325401D1108": {
       "product_name": "ファモチジン注射用２０ｍｇ「タカタ」",
@@ -1329,7 +1329,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_ファモチジン注射用10mg,20mg「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bpqa-att/Famotidine.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2325401D2090": {
       "product_name": "ファモチジン注射用１０ｍｇ「タカタ」",
@@ -1337,7 +1337,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_ファモチジン注射用10mg,20mg「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bpqa-att/Famotidine.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2329002F2181": {
       "product_name": "アルジオキサ錠１００ｍｇ「トーワ」",
@@ -1345,7 +1345,7 @@
       "state": "discontinuation_announced",
       "source_title": "アルジオキサ錠100mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80876&t=4&f=20250730_%E3%82%A2%E3%83%AB%E3%82%B8%E3%82%AA%E3%82%AD%E3%82%B5%E9%8C%A0100mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2329021D1071": {
       "product_name": "レバミピド顆粒２０％「タカタ」",
@@ -1353,7 +1353,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_レバミピド顆粒20％「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bqfu-att/Rebamipide.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2329403D1041": {
       "product_name": "オメプラゾール注用２０ｍｇ「ＮＰ」",
@@ -1370,7 +1370,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_ミルラクト細粒50%",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bca4-att/MILLACT.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2344002X1314": {
       "product_name": "酸化マグネシウム「ＪＧ」",
@@ -1379,7 +1379,7 @@
       "announced_at": "2025-12-16",
       "source_title": "2025/12/16 供給に関するお知らせ 酸化マグネシウム「JG」 販売中止のご案内（経過措置期間更新版）を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/MAGOX_CHUUSHI_2504.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2344002X1349": {
       "product_name": "酸化マグネシウム「ＮＰ」原末",
@@ -1388,7 +1388,7 @@
       "announced_at": "2026-07-24",
       "source_title": "2026年7月24日 酸化マグネシウム｢NP｣原末　他社品販売中止に伴う新規ご注文辞退および限定出荷（出荷数割当運用）のお願い",
       "source_url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001FlBrhIAF",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2349101D1245": {
       "product_name": "マーレッジ懸濁用配合ＤＳ",
@@ -1396,7 +1396,7 @@
       "state": "discontinuation_announced",
       "source_title": "マーレッジ懸濁用配合DS 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=77661&t=4&f=20230727_%E3%83%9E%E3%83%BC%E3%83%AC%E3%83%83%E3%82%B8%E6%87%B8%E6%BF%81%E7%94%A8%E9%85%8D%E5%90%88DS_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2391400G4112": {
       "product_name": "グラニセトロン点滴静注バッグ３ｍｇ／５０ｍＬ「タカタ」",
@@ -1404,7 +1404,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_グラニセトロン点滴静注バッグ3mg/50mL「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bpvw-att/Granisetron.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2478002F1096": {
       "product_name": "メドロキシプロゲステロン酢酸エステル錠２．５ｍｇ「トーワ」",
@@ -1412,7 +1412,7 @@
       "state": "discontinuation_announced",
       "source_title": "メドロキシプロゲステロン酢酸エステル錠2.5mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82493&t=4&f=20260428_%E3%83%A1%E3%83%89%E3%83%AD%E3%82%AD%E3%82%B7%E3%83%97%E3%83%AD%E3%82%B2%E3%82%B9%E3%83%86%E3%83%AD%E3%83%B3%E9%85%A2%E9%85%B8%E3%82%A8%E3%82%B9%E3%83%86%E3%83%AB%E9%8C%A02.5mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2499010F2062": {
       "product_name": "ジエノゲストＯＤ錠１ｍｇ「トーワ」",
@@ -1420,7 +1420,7 @@
       "state": "discontinuation_announced",
       "source_title": "ジエノゲストOD錠1mg「トーワ」 販売中止のお知らせ NEW",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82888&t=4&f=20260730_%E3%82%B8%E3%82%A8%E3%83%8E%E3%82%B2%E3%82%B9%E3%83%88OD%E9%8C%A01mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2590010F1139": {
       "product_name": "シロドシン錠２ｍｇ「ニプロ」",
@@ -1447,7 +1447,7 @@
       "announced_at": "2026-04-03",
       "source_title": "2026.04.03 セクタークリーム3％、 セクターゲル3％、 ナボールパップ70㎎、 インサイドパップ70㎎、 ボレースプレー1％、 エクラー軟膏0.3％、 エクラークリーム0.3％、 エクラーローション0.3％、 ハイチオール散32％ 販売中止に関するご案内",
       "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2646729N1043": {
       "product_name": "エクラークリーム０．３％",
@@ -1456,7 +1456,7 @@
       "announced_at": "2026-04-03",
       "source_title": "2026.04.03 セクタークリーム3％、 セクターゲル3％、 ナボールパップ70㎎、 インサイドパップ70㎎、 ボレースプレー1％、 エクラー軟膏0.3％、 エクラークリーム0.3％、 エクラーローション0.3％、 ハイチオール散32％ 販売中止に関するご案内",
       "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2646729Q1031": {
       "product_name": "エクラーローション０．３％",
@@ -1465,7 +1465,7 @@
       "announced_at": "2026-04-03",
       "source_title": "2026.04.03 セクタークリーム3％、 セクターゲル3％、 ナボールパップ70㎎、 インサイドパップ70㎎、 ボレースプレー1％、 エクラー軟膏0.3％、 エクラークリーム0.3％、 エクラーローション0.3％、 ハイチオール散32％ 販売中止に関するご案内",
       "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2649719S1223": {
       "product_name": "インサイドパップ７０ｍｇ",
@@ -1475,7 +1475,7 @@
       "supply_end_expected": "2026-11",
       "source_title": "2026.04.03 インサイドパップ70mg 販売中止に関するご案内",
       "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2649729N1053": {
       "product_name": "セクタークリーム３％",
@@ -1484,7 +1484,7 @@
       "announced_at": "2026-04-03",
       "source_title": "2026.04.03 セクタークリーム3％、 セクターゲル3％、 ナボールパップ70㎎、 インサイドパップ70㎎、 ボレースプレー1％、 エクラー軟膏0.3％、 エクラークリーム0.3％、 エクラーローション0.3％、 ハイチオール散32％ 販売中止に関するご案内",
       "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2649729Q1041": {
       "product_name": "セクターゲル３％",
@@ -1493,7 +1493,7 @@
       "announced_at": "2026-04-03",
       "source_title": "2026.04.03 セクタークリーム3％、 セクターゲル3％、 ナボールパップ70㎎、 インサイドパップ70㎎、 ボレースプレー1％、 エクラー軟膏0.3％、 エクラークリーム0.3％、 エクラーローション0.3％、 ハイチオール散32％ 販売中止に関するご案内",
       "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2649729S2266": {
       "product_name": "ケトプロフェンテープ２０ｍｇ「トーワ」",
@@ -1501,7 +1501,7 @@
       "state": "discontinuation_announced",
       "source_title": "ケトプロフェンテープ20mg/40mg「トーワ」 販売中止のお知らせ NEW",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82887&t=4&f=20260730_%E3%82%B1%E3%83%88%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%B3%E3%83%86%E3%83%BC%E3%83%9720mg40mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2649729S3190": {
       "product_name": "ケトプロフェンテープ４０ｍｇ「トーワ」",
@@ -1509,7 +1509,7 @@
       "state": "discontinuation_announced",
       "source_title": "ケトプロフェンテープ20mg/40mg「トーワ」 販売中止のお知らせ NEW",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82887&t=4&f=20260730_%E3%82%B1%E3%83%88%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%B3%E3%83%86%E3%83%BC%E3%83%9720mg40mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2649731S1348": {
       "product_name": "フェルビナクテープ７０ｍｇ「ＮＰ」",
@@ -1518,7 +1518,7 @@
       "announced_at": "2025-07-01",
       "source_title": "2025年7月1日 フェルビナクテープ35mg／70mg「NP」　取扱い販売中止品のご案内",
       "source_url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uVRgTIAW",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2649731S2077": {
       "product_name": "フェルビナクテープ３５ｍｇ「ＮＰ」",
@@ -1527,7 +1527,7 @@
       "announced_at": "2025-07-01",
       "source_title": "2025年7月1日 フェルビナクテープ35mg／70mg「NP」　取扱い販売中止品のご案内",
       "source_url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uVRgTIAW",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2649734S1104": {
       "product_name": "ジクロフェナクＮａテープ１５ｍｇ「トーワ」",
@@ -1535,7 +1535,7 @@
       "state": "discontinuation_announced",
       "source_title": "ジクロフェナクNaテープ15mg/30mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=81671&t=4&f=20260129_%E3%82%B8%E3%82%AF%E3%83%AD%E3%83%95%E3%82%A7%E3%83%8A%E3%82%AFNa%E3%83%86%E3%83%BC%E3%83%9715mg30mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2649734S1147": {
       "product_name": "ジクロフェナクナトリウムテープ１５ｍｇ「ＮＰ」",
@@ -1552,7 +1552,7 @@
       "state": "discontinuation_announced",
       "source_title": "ジクロフェナクNaテープ15mg/30mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=81671&t=4&f=20260129_%E3%82%B8%E3%82%AF%E3%83%AD%E3%83%95%E3%82%A7%E3%83%8A%E3%82%AFNa%E3%83%86%E3%83%BC%E3%83%9715mg30mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2649734S2143": {
       "product_name": "ジクロフェナクナトリウムテープ３０ｍｇ「ＮＰ」",
@@ -1570,7 +1570,7 @@
       "announced_at": "2026-04-03",
       "source_title": "2026.04.03 セクタークリーム3％、 セクターゲル3％、 ナボールパップ70㎎、 インサイドパップ70㎎、 ボレースプレー1％、 エクラー軟膏0.3％、 エクラークリーム0.3％、 エクラーローション0.3％、 ハイチオール散32％ 販売中止に関するご案内",
       "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2649735S2172": {
       "product_name": "ロキソプロフェンＮａテープ５０ｍｇ「トーワ」",
@@ -1578,7 +1578,7 @@
       "state": "discontinuation_announced",
       "source_title": "ロキソプロフェンNaテープ50mg/100mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80212&t=4&f=20241206_%E3%83%AD%E3%82%AD%E3%82%BD%E3%83%97%E3%83%AD%E3%83%95%E3%82%A7%E3%83%B3Na%E3%83%86%E3%83%BC%E3%83%9750mg100mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B_2.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2659708N1090": {
       "product_name": "ブテナフィン塩酸塩クリーム１％「トーワ」",
@@ -1586,7 +1586,7 @@
       "state": "discontinuation_announced",
       "source_title": "ブテナフィン塩酸塩クリーム1％「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=79999&t=4&f=20241030_%E3%83%96%E3%83%86%E3%83%8A%E3%83%95%E3%82%A3%E3%83%B3%E5%A1%A9%E9%85%B8%E5%A1%A9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%A01%25%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2659708Q1070": {
       "product_name": "ブテナフィン塩酸塩液１％「トーワ」",
@@ -1594,7 +1594,7 @@
       "state": "discontinuation_announced",
       "source_title": "ブテナフィン塩酸塩液1％「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80000&t=4&f=20241030_%E3%83%96%E3%83%86%E3%83%8A%E3%83%95%E3%82%A3%E3%83%B3%E5%A1%A9%E9%85%B8%E5%A1%A9%E6%B6%B21%25%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2659708R1050": {
       "product_name": "ボレースプレー１％",
@@ -1603,7 +1603,7 @@
       "announced_at": "2026-04-03",
       "source_title": "2026.04.03 セクタークリーム3％、 セクターゲル3％、 ナボールパップ70㎎、 インサイドパップ70㎎、 ボレースプレー1％、 エクラー軟膏0.3％、 エクラークリーム0.3％、 エクラーローション0.3％、 ハイチオール散32％ 販売中止に関するご案内",
       "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "2679701Q1055": {
       "product_name": "フロジン外用液５％",
@@ -1612,7 +1612,7 @@
       "announced_at": "2026-01-22",
       "source_title": "2026年1月22日 フロジン外用液5%　他社品販売中止ならびに限定出荷に伴う新規ご注文辞退および限定出荷(出荷数割当運用)のお願い",
       "source_url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uW0xVIAS",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "3136004F2251": {
       "product_name": "メコバラミン錠５００μｇ「ＮＰ」",
@@ -1629,7 +1629,7 @@
       "state": "discontinuation_announced",
       "source_title": "メコバラミン注射液500μg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80363&t=4&f=20250130_%E3%83%A1%E3%82%B3%E3%83%90%E3%83%A9%E3%83%9F%E3%83%B3%E6%B3%A8%E5%B0%84%E6%B6%B2500%CE%BCg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "3160002M2125": {
       "product_name": "メナテトレノンカプセル１５ｍｇ「トーワ」",
@@ -1637,7 +1637,7 @@
       "state": "discontinuation_announced",
       "source_title": "メナテトレノンカプセル15mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80002&t=4&f=20241030_%E3%83%A1%E3%83%8A%E3%83%86%E3%83%88%E3%83%AC%E3%83%8E%E3%83%B3%E3%82%AB%E3%83%97%E3%82%BB%E3%83%AB15mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "3321401A4254": {
       "product_name": "カルバゾクロムスルホン酸Ｎａ静注１００ｍｇ「トーワ」",
@@ -1645,7 +1645,7 @@
       "state": "discontinuation_announced",
       "source_title": "カルバゾクロムスルホン酸Na静注100mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=78319&t=4&f=20240125_%E3%82%AB%E3%83%AB%E3%83%90%E3%82%BE%E3%82%AF%E3%83%AD%E3%83%A0%E3%82%B9%E3%83%AB%E3%83%9B%E3%83%B3%E9%85%B8Na%E9%9D%99%E6%B3%A8100mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "3399002F1338": {
       "product_name": "シロスタゾール錠５０ｍｇ「トーワ」",
@@ -1653,7 +1653,7 @@
       "state": "discontinuation_announced",
       "source_title": "シロスタゾール錠50mg/100mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=77977&t=4&f=20231026_%E3%82%B7%E3%83%AD%E3%82%B9%E3%82%BF%E3%82%BE%E3%83%BC%E3%83%AB%E9%8C%A050mg100mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "3399002F2369": {
       "product_name": "シロスタゾール錠１００ｍｇ「トーワ」",
@@ -1661,7 +1661,7 @@
       "state": "discontinuation_announced",
       "source_title": "シロスタゾール錠50mg/100mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=77977&t=4&f=20231026_%E3%82%B7%E3%83%AD%E3%82%B9%E3%82%BF%E3%82%BE%E3%83%BC%E3%83%AB%E9%8C%A050mg100mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "3399006F1069": {
       "product_name": "サルポグレラート塩酸塩錠５０ｍｇ「ＪＧ」",
@@ -1670,7 +1670,7 @@
       "announced_at": "2025-12-17",
       "source_title": "2025/12/17 供給に関するお知らせ サルポグレラート塩酸塩錠50mg「JG」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/SARPO50_CHUUSHI_2512.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "3399006F1174": {
       "product_name": "サルポグレラート塩酸塩錠５０ｍｇ「ケミファ」",
@@ -1678,7 +1678,7 @@
       "state": "discontinuation_announced",
       "source_title": "販売中止のご案内（サルポグレラート塩酸塩錠50㎎・100㎎「ケミファ」）",
       "source_url": "https://www.nc-medical.com/product_topics/p5ib910000001d8p-att/p5ib910000001d9d.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "3399006F2065": {
       "product_name": "サルポグレラート塩酸塩錠１００ｍｇ「ＪＧ」",
@@ -1687,7 +1687,7 @@
       "announced_at": "2026-05-22",
       "source_title": "2026/05/22 供給に関するお知らせ サルポグレラート塩酸塩錠100mg「JG」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/SARPO100_CHUUSHI_2605.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "3399006F2170": {
       "product_name": "サルポグレラート塩酸塩錠１００ｍｇ「ケミファ」",
@@ -1695,7 +1695,7 @@
       "state": "discontinuation_announced",
       "source_title": "販売中止のご案内（サルポグレラート塩酸塩錠50㎎・100㎎「ケミファ」）",
       "source_url": "https://www.nc-medical.com/product_topics/p5ib910000001d8p-att/p5ib910000001d9d.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "3919502A1449": {
       "product_name": "ヒシファーゲン配合静注",
@@ -1712,7 +1712,7 @@
       "state": "discontinuation_announced",
       "source_title": "グリベンクラミド錠1.25mg/2.5mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=77976&t=4&f=20231026_%E3%82%B0%E3%83%AA%E3%83%99%E3%83%B3%E3%82%AF%E3%83%A9%E3%83%9F%E3%83%89%E9%8C%A01.25mg2.5mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "3961003F2172": {
       "product_name": "グリベンクラミド錠２．５ｍｇ「トーワ」",
@@ -1720,7 +1720,7 @@
       "state": "discontinuation_announced",
       "source_title": "グリベンクラミド錠1.25mg/2.5mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=77976&t=4&f=20231026_%E3%82%B0%E3%83%AA%E3%83%99%E3%83%B3%E3%82%AF%E3%83%A9%E3%83%9F%E3%83%89%E9%8C%A01.25mg2.5mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "3961007F1204": {
       "product_name": "グリクラジド錠４０ｍｇ「サワイ」",
@@ -1729,7 +1729,7 @@
       "announced_at": "2024-10-04",
       "source_title": "2024/10/04 発売情報 PDF グリクラジド錠20mg/40mg「サワイ」 販売中止のご案内 PDF",
       "source_url": "https://med.sawai.co.jp/file/pr28_73_2.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "3961007F1212": {
       "product_name": "グリクラジド錠４０ｍｇ「トーワ」",
@@ -1737,7 +1737,7 @@
       "state": "discontinuation_announced",
       "source_title": "グリクラジド錠20mg/40mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=79862&t=4&f=20241001_%E3%82%B0%E3%83%AA%E3%82%AF%E3%83%A9%E3%82%B8%E3%83%89%E9%8C%A020mg_40mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "3961007F2090": {
       "product_name": "グリクラジド錠２０ｍｇ「サワイ」",
@@ -1746,7 +1746,7 @@
       "announced_at": "2024-10-04",
       "source_title": "2024/10/04 発売情報 PDF グリクラジド錠20mg/40mg「サワイ」 販売中止のご案内 PDF",
       "source_url": "https://med.sawai.co.jp/file/pr28_1398_1.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "3961007F2103": {
       "product_name": "グリクラジド錠２０ｍｇ「トーワ」",
@@ -1754,7 +1754,7 @@
       "state": "discontinuation_announced",
       "source_title": "グリクラジド錠20mg/40mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=79862&t=4&f=20241001_%E3%82%B0%E3%83%AA%E3%82%AF%E3%83%A9%E3%82%B8%E3%83%89%E9%8C%A020mg_40mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "3961008F4100": {
       "product_name": "グリメピリドＯＤ錠１ｍｇ「トーワ」",
@@ -1786,7 +1786,7 @@
       "state": "discontinuation_announced",
       "source_title": "ボグリボース錠0.2mg/0.3mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=78323&t=4&f=20240125_%E3%83%9C%E3%82%B0%E3%83%AA%E3%83%9C%E3%83%BC%E3%82%B9%E9%8C%A00.2mg0.3mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "3969004F2159": {
       "product_name": "ボグリボース錠０．３ｍｇ「トーワ」",
@@ -1794,7 +1794,7 @@
       "state": "discontinuation_announced",
       "source_title": "ボグリボース錠0.2mg/0.3mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=78323&t=4&f=20240125_%E3%83%9C%E3%82%B0%E3%83%AA%E3%83%9C%E3%83%BC%E3%82%B9%E9%8C%A00.2mg0.3mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "3969007F1229": {
       "product_name": "ピオグリタゾン錠１５ｍｇ「ＪＧ」",
@@ -1803,7 +1803,7 @@
       "announced_at": "2025-12-17",
       "source_title": "2025/12/17 供給に関するお知らせ ピオグリタゾン錠15mg「JG」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/PIOGL15_CHUUSHI_2512.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "3969007F1288": {
       "product_name": "ピオグリタゾン錠１５ｍｇ「ケミファ」",
@@ -1811,7 +1811,7 @@
       "state": "discontinuation_announced",
       "source_title": "販売中止のご案内（ピオグリタゾン錠15㎎・30㎎「ケミファ」）",
       "source_url": "https://www.nc-medical.com/product_topics/p5ib910000001d9f-att/p5ib910000001da3.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "3969007F2284": {
       "product_name": "ピオグリタゾン錠３０ｍｇ「ケミファ」",
@@ -1819,7 +1819,7 @@
       "state": "discontinuation_announced",
       "source_title": "販売中止のご案内（ピオグリタゾン錠15㎎・30㎎「ケミファ」）",
       "source_url": "https://www.nc-medical.com/product_topics/p5ib910000001d9f-att/p5ib910000001da3.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "3969007F3035": {
       "product_name": "ピオグリタゾンＯＤ錠１５ｍｇ「ＤＳＥＰ」",
@@ -1828,7 +1828,7 @@
       "announced_at": "2023-04-18",
       "source_title": "2023.04.18 供給関連情報 販売終了製品 ピオグリタゾンOD錠15mg｢DSEP｣PTP500錠 限定出荷解除のお知らせ",
       "source_url": "https://med.daiichisankyo-ep.co.jp/information/files/1714/piood15PTP500kaijyosyuryou.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "3969007F3086": {
       "product_name": "ピオグリタゾンＯＤ錠１５ｍｇ「トーワ」",
@@ -1845,7 +1845,7 @@
       "announced_at": "2023-04-18",
       "source_title": "2023.04.18 供給関連情報 販売終了製品 ピオグリタゾンOD錠30mg｢DSEP｣PTP500錠 限定出荷解除のお知らせ",
       "source_url": "https://med.daiichisankyo-ep.co.jp/information/files/1715/piood30PTP500kaijyosyuryou.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "3969009F4049": {
       "product_name": "ミグリトールＯＤ錠５０ｍｇ「トーワ」",
@@ -1878,7 +1878,7 @@
       "announced_at": "2026-04-03",
       "source_title": "2026.04.03 セクタークリーム3％、 セクターゲル3％、 ナボールパップ70㎎、 インサイドパップ70㎎、 ボレースプレー1％、 エクラー軟膏0.3％、 エクラークリーム0.3％、 エクラーローション0.3％、 ハイチオール散32％ 販売中止に関するご案内",
       "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "3999013F1355": {
       "product_name": "エパルレスタット錠５０ｍｇ「ＮＰ」",
@@ -1895,7 +1895,7 @@
       "state": "discontinuation_announced",
       "source_title": "ヒアルロン酸Na関節注25mgシリンジ「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80362&t=4&f=20250130_%E3%83%92%E3%82%A2%E3%83%AB%E3%83%AD%E3%83%B3%E9%85%B8Na%E9%96%A2%E7%AF%80%E6%B3%A825mg%E3%82%B7%E3%83%AA%E3%83%B3%E3%82%B8%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "4229101M1041": {
       "product_name": "エスエーワン配合カプセルＴ２０",
@@ -1904,7 +1904,7 @@
       "announced_at": "2025-06-26",
       "source_title": "2025/06/26 発売情報 PDF エスエーワン配合カプセルT20/T25 販売中止のご案内 PDF",
       "source_url": "https://med.sawai.co.jp/file/pr28_1477_3.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "4229401D1070": {
       "product_name": "ペメトレキセド点滴静注用５００ｍｇ「ヤクルト」",
@@ -1912,7 +1912,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_ペメトレキセド点滴静注用500mg「ヤクルト」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bqa8-att/Pemetrexed.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "4291009F2116": {
       "product_name": "ビカルタミドＯＤ錠８０ｍｇ「トーワ」",
@@ -1929,7 +1929,7 @@
       "announced_at": "2026-06-26",
       "source_title": "2026/06/26 供給に関するお知らせ ゲフィチニブ錠250mg「JG」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/GEFIT_CHUUSHI_2606.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "4291015F1166": {
       "product_name": "レトロゾール錠２．５ｍｇ「ニプロ」",
@@ -1947,7 +1947,7 @@
       "announced_at": "2026-05-29",
       "source_title": "2026年5月29日 オキサリプラチン点滴静注液200mg「ニプロ」　販売中止品のご案内",
       "source_url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001A7OAbIAN",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "4490013M2050": {
       "product_name": "エメダスチンフマル酸塩徐放カプセル２ｍｇ「トーワ」",
@@ -1955,7 +1955,7 @@
       "state": "discontinuation_announced",
       "source_title": "エメダスチンフマル酸塩徐放カプセル1mg/2mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80878&t=4&f=20250730_%E3%82%A8%E3%83%A1%E3%83%80%E3%82%B9%E3%83%81%E3%83%B3%E3%83%95%E3%83%9E%E3%83%AB%E9%85%B8%E5%A1%A9%E5%BE%90%E6%94%BE%E3%82%AB%E3%83%97%E3%82%BB%E3%83%AB1mg2mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "4490014F1270": {
       "product_name": "エピナスチン塩酸塩錠１０ｍｇ「ＪＧ」",
@@ -1964,7 +1964,7 @@
       "announced_at": "2026-02-20",
       "source_title": "2026/02/20 供給に関するお知らせ エピナスチン塩酸塩錠10mg/20mg「JG」 販売中止のご案内（経過措置期間更新版）を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/EPINJ00_CHUUSHI_2504.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "4490014F2315": {
       "product_name": "エピナスチン塩酸塩錠２０ｍｇ「ＪＧ」",
@@ -1973,7 +1973,7 @@
       "announced_at": "2026-02-20",
       "source_title": "2026/02/20 供給に関するお知らせ エピナスチン塩酸塩錠10mg/20mg「JG」 販売中止のご案内（経過措置期間更新版）を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/EPINJ00_CHUUSHI_2504.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "4490019F1133": {
       "product_name": "エバスチン錠５ｍｇ「トーワ」",
@@ -1981,7 +1981,7 @@
       "state": "discontinuation_announced",
       "source_title": "エバスチン錠5mg/10mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=78318&t=4&f=20240125_%E3%82%A8%E3%83%90%E3%82%B9%E3%83%81%E3%83%B3%E9%8C%A05mg10mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "4490019F2130": {
       "product_name": "エバスチン錠１０ｍｇ「トーワ」",
@@ -1989,7 +1989,7 @@
       "state": "discontinuation_announced",
       "source_title": "エバスチン錠5mg/10mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=78318&t=4&f=20240125_%E3%82%A8%E3%83%90%E3%82%B9%E3%83%81%E3%83%B3%E9%8C%A05mg10mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "4490019F3055": {
       "product_name": "エバスチンＯＤ錠５ｍｇ「ＮＰ」",
@@ -2016,7 +2016,7 @@
       "announced_at": "2026-06-26",
       "source_title": "2026/06/26 供給に関するお知らせ セチリジン塩酸塩錠5mg/10mg「CH」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/CETIR00_CHUUSHI_2606.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "4490020F2043": {
       "product_name": "セチリジン塩酸塩錠１０ｍｇ「ＣＨ」",
@@ -2025,7 +2025,7 @@
       "announced_at": "2026-06-26",
       "source_title": "2026/06/26 供給に関するお知らせ セチリジン塩酸塩錠5mg/10mg「CH」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/CETIR00_CHUUSHI_2606.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "4490026C1056": {
       "product_name": "モンテルカスト細粒４ｍｇ「ＪＧ」",
@@ -2034,7 +2034,7 @@
       "announced_at": "2025-10-24",
       "source_title": "2025/10/24 供給に関するお知らせ モンテルカスト細粒4mg「JG」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/MNTLP_CHUUSHI_2510.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "4490027R1053": {
       "product_name": "ロラタジンＤＳ１％「トーワ」",
@@ -2042,7 +2042,7 @@
       "state": "discontinuation_announced",
       "source_title": "ロラタジンDS1％「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80003&t=4&f=20241030_%E3%83%AD%E3%83%A9%E3%82%BF%E3%82%B8%E3%83%B3DS1%25%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "6119401D2066": {
       "product_name": "テイコプラニン点滴静注用４００ｍｇ「トーワ」",
@@ -2050,7 +2050,7 @@
       "state": "discontinuation_announced",
       "source_title": "テイコプラニン点滴静注用400mg「トーワ」 販売中止のお知らせ NEW",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82890&t=4&f=20260730_%E3%83%86%E3%82%A4%E3%82%B3%E3%83%97%E3%83%A9%E3%83%8B%E3%83%B3%E7%82%B9%E6%BB%B4%E9%9D%99%E6%B3%A8%E7%94%A8400mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "6131403P2031": {
       "product_name": "ピペラシリンナトリウム点滴静注用バッグ２ｇ「ＮＰ」",
@@ -2067,7 +2067,7 @@
       "state": "discontinuation_announced",
       "source_title": "セフジニル細粒小児用10％「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=79998&t=4&f=20241030_%E3%82%BB%E3%83%95%E3%82%B8%E3%83%8B%E3%83%AB%E7%B4%B0%E7%B2%92%E5%B0%8F%E5%85%90%E7%94%A810%25%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "6139500F1113": {
       "product_name": "バクフォーゼ静注用０．５ｇ",
@@ -2075,7 +2075,7 @@
       "state": "discontinuation_announced",
       "source_title": "バクフォーゼ静注用0.5g/1g 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=79420&t=4&f=20240725_%E3%83%90%E3%82%AF%E3%83%95%E3%82%A9%E3%83%BC%E3%82%BC%E9%9D%99%E6%B3%A8%E7%94%A80.5g-1g_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "6149004F1036": {
       "product_name": "アジスロマイシン錠２５０ｍｇ「ＤＳＥＰ」",
@@ -2084,7 +2084,7 @@
       "announced_at": "2025-03-04",
       "source_title": "2025.03.04 販売中止・休止 アジスロマイシン錠250mg｢DSEP｣患者さん用パッケージ入り販売終了のご案内",
       "source_url": "https://med.daiichisankyo-ep.co.jp/information/files/2025/EPAZI1N00901-1.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "6250019F1098": {
       "product_name": "バラシクロビル錠５００ｍｇ「ＪＧ」",
@@ -2093,7 +2093,7 @@
       "announced_at": "2026-07-24",
       "source_title": "2026/07/24 供給に関するお知らせ バラシクロビル錠500mg「JG」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/VALAC_CHUUSHI_2607.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "6250031F1099": {
       "product_name": "ファムシクロビル錠２５０ｍｇ「タカタ」",
@@ -2101,7 +2101,7 @@
       "state": "discontinuation_announced",
       "source_title": "製造販売中止のご案内_ファムシクロビル錠250mg「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bpko-att/Famciclovir.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "6290004M1070": {
       "product_name": "イトラコナゾールカプセル５０ｍｇ「ＳＷ」",
@@ -2110,7 +2110,7 @@
       "announced_at": "2026-01-19",
       "source_title": "2026/01/19 発売情報 PDF イトラコナゾールカプセル50mg「SW」販売中止のご案内 PDF",
       "source_url": "https://med.sawai.co.jp/file/pr28_1011_2.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     },
     "7990103A1029": {
       "product_name": "ピコプレップ配合内用剤",
@@ -2118,7 +2118,7 @@
       "state": "discontinuation_announced",
       "source_title": "販売中止のご案内（ピコプレップ配合内用剤）",
       "source_url": "https://www.nc-medical.com/product_topics/f4bj0h000000e9lq-att/f4bj0h000000e9me.pdf",
-      "verified_at": "2026-08-05"
+      "verified_at": "2026-08-06"
     }
   }
 }
