@@ -767,7 +767,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   .app-cta p{margin:0 auto 32px}
 }
 
-/* ===== 連携アプリ「そなメモ」 ===== */
+/* ===== 暮らしを支える関連アプリ ===== */
 .companion-card{
   position:relative;overflow:hidden;padding:38px 42px;border-radius:28px;
   display:grid;grid-template-columns:148px minmax(0,1fr);gap:38px;align-items:center;
@@ -810,6 +810,24 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 .companion-btn:hover{transform:translateY(-2px);box-shadow:0 16px 30px -12px rgba(8,124,120,.8)}
 .companion-note{font-size:11.5px;color:var(--sub);line-height:1.7}
+.companion-card--lumical{
+  background:linear-gradient(135deg,rgba(85,108,255,.13),rgba(255,181,74,.1));
+  border-color:rgba(99,105,224,.27);
+}
+.companion-card--lumical::before{background:rgba(109,83,255,.16)}
+.companion-card--lumical .companion-icon{
+  box-shadow:0 24px 44px -18px rgba(23,26,102,.65),inset 0 1px 0 rgba(255,255,255,.65);
+}
+.companion-card--lumical .companion-badge{
+  color:#4B48A9;background:rgba(255,255,255,.72);border-color:rgba(87,82,190,.27);
+}
+.companion-card--lumical .sec-eyebrow,
+.companion-card--lumical .companion-points span{color:#5350B6}
+.companion-card--lumical .companion-btn{
+  background:linear-gradient(135deg,#343481,#6A50C7);
+  box-shadow:0 12px 26px -12px rgba(42,37,126,.8);
+}
+.companion-card--lumical .companion-btn:hover{box-shadow:0 16px 30px -12px rgba(42,37,126,.85)}
 @media(max-width:720px){
   .companion-card{grid-template-columns:1fr;text-align:center;padding:32px 22px;gap:24px}
   .companion-icon{width:118px;height:118px;border-radius:27px}
@@ -1289,6 +1307,29 @@ footer a:hover{color:var(--blue)}
   </div>
 </section>
 
+<section id="lumical" class="reveal">
+  <div class="companion-card companion-card--lumical glass">
+    <div class="companion-visual">
+      <img class="companion-icon" src="lumical-icon.png" width="132" height="132" alt="ルミカレのアプリアイコン" loading="lazy" decoding="async">
+      <span class="companion-badge">関連アプリ</span>
+    </div>
+    <div class="companion-copy">
+      <p class="sec-eyebrow">CRYSTAL CALENDAR</p>
+      <h2>家族6人の予定が、ひと目でわかる。</h2>
+      <p class="companion-lede">「ルミカレ」は、4人の息子を育てる6人家族の実体験から生まれた予定管理アプリです。学校行事・通院・仕事・家族の予定を色分けして、見やすくひとつにまとめられます。</p>
+      <ul class="companion-points" aria-label="ルミカレの特徴">
+        <li><span>01 見渡す</span>最大6人の予定名を月表示で確認</li>
+        <li><span>02 取り込む</span>紙の予定表を端末内で読み取り</li>
+        <li><span>03 共有する</span>必要なときだけiCloudで家族共有</li>
+      </ul>
+      <div class="companion-actions">
+        <a class="companion-btn" href="https://apps.apple.com/jp/app/%E3%83%AB%E3%83%9F%E3%82%AB%E3%83%AC-crystal-calendar/id6794411182" target="_blank" rel="noopener">ルミカレをApp Storeで見る</a>
+        <p class="companion-note">広告・アカウント登録なし。iPhone・iPad・Macに対応しています。<br>予定表の画像は端末内で読み取ります。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <div class="modal-backdrop" id="mBack">
@@ -1323,6 +1364,7 @@ footer a:hover{color:var(--blue)}
     <a href="#glossary">用語解説</a>
     <a href="#faq">よくある質問</a>
     <a href="#sonamemo">そなメモ</a>
+    <a href="#lumical">ルミカレ</a>
     <a href="items/index.html">品目別の供給状況</a>
     <a href="privacy.html">プライバシーポリシー</a>
     <a href="mailto:tkiyo1007@gmail.com">サポート</a>
