@@ -767,6 +767,58 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   .app-cta p{margin:0 auto 32px}
 }
 
+/* ===== 連携アプリ「そなメモ」 ===== */
+.companion-card{
+  position:relative;overflow:hidden;padding:38px 42px;border-radius:28px;
+  display:grid;grid-template-columns:148px minmax(0,1fr);gap:38px;align-items:center;
+  background:linear-gradient(135deg,rgba(47,205,190,.14),rgba(79,128,244,.09));
+  border:1px solid rgba(58,176,180,.28);
+}
+.companion-card::before{
+  content:"";position:absolute;width:280px;height:280px;border-radius:50%;
+  left:-120px;top:-140px;background:rgba(85,222,210,.18);filter:blur(2px);pointer-events:none;
+}
+.companion-visual{position:relative;z-index:1;text-align:center}
+.companion-icon{
+  display:block;width:132px;height:132px;margin:0 auto;border-radius:30px;
+  box-shadow:0 24px 44px -18px rgba(9,95,107,.52),inset 0 1px 0 rgba(255,255,255,.65);
+}
+.companion-badge{
+  display:inline-block;margin-top:13px;padding:5px 12px;border-radius:999px;
+  font-size:10.5px;font-weight:900;letter-spacing:.08em;color:#087C78;
+  background:rgba(255,255,255,.72);border:1px solid rgba(22,159,153,.3);
+}
+.companion-copy{position:relative;z-index:1;min-width:0}
+.companion-copy .sec-eyebrow{color:#087C78}
+.companion-copy h2{font-size:clamp(25px,3vw,36px);margin-bottom:12px}
+.companion-lede{font-size:14.5px;color:var(--sub);line-height:1.9;max-width:48em}
+.companion-points{
+  list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;
+  margin:20px 0 22px;padding:0;
+}
+.companion-points li{
+  min-height:68px;padding:13px 14px;border-radius:15px;font-size:12.5px;font-weight:800;line-height:1.55;
+  color:var(--ink);background:rgba(255,255,255,.56);border:1px solid rgba(64,139,165,.2);
+}
+.companion-points span{display:block;margin-bottom:4px;font-size:10px;color:#087C78;letter-spacing:.07em}
+.companion-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.companion-btn{
+  display:inline-flex;align-items:center;justify-content:center;text-decoration:none;
+  padding:13px 22px;border-radius:15px;font-size:13.5px;font-weight:900;color:#fff;
+  background:linear-gradient(135deg,#087C78,#209DA0);box-shadow:0 12px 26px -12px rgba(8,124,120,.75);
+  transition:transform .2s,box-shadow .2s;
+}
+.companion-btn:hover{transform:translateY(-2px);box-shadow:0 16px 30px -12px rgba(8,124,120,.8)}
+.companion-note{font-size:11.5px;color:var(--sub);line-height:1.7}
+@media(max-width:720px){
+  .companion-card{grid-template-columns:1fr;text-align:center;padding:32px 22px;gap:24px}
+  .companion-icon{width:118px;height:118px;border-radius:27px}
+  .companion-lede{margin:0 auto}
+  .companion-points{grid-template-columns:1fr;text-align:left}
+  .companion-points li{min-height:0}
+  .companion-actions{justify-content:center}
+}
+
 /* ===== フッター ===== */
 footer{max-width:1120px;margin:0 auto;padding:48px 24px 60px;text-align:center;color:var(--sub);font-size:12.5px}
 footer .foot-links{display:flex;justify-content:center;gap:22px;margin-bottom:16px;flex-wrap:wrap}
@@ -1214,6 +1266,29 @@ footer a:hover{color:var(--blue)}
   </div>
 </section>
 
+<section id="sonamemo" class="reveal">
+  <div class="companion-card glass">
+    <div class="companion-visual">
+      <img class="companion-icon" src="sonamemo-icon.png" width="132" height="132" alt="そなメモのアプリアイコン" loading="lazy" decoding="async">
+      <span class="companion-badge">連携アプリ</span>
+    </div>
+    <div class="companion-copy">
+      <p class="sec-eyebrow">BE READY, TOGETHER</p>
+      <h2>家族のお薬の備えは、そなメモで。</h2>
+      <p class="companion-lede">「そなメモ」は、家族の常用薬・アレルギー・持病・血液型を1画面にまとめられる、災害時を想定したお薬メモアプリです。登録した薬から医薬品供給ナビを開き、供給状況の確認へスムーズにつなげられます。</p>
+      <ul class="companion-points" aria-label="そなメモの特徴">
+        <li><span>01 まとめる</span>家族みんなのお薬・医療情報を1画面に</li>
+        <li><span>02 備える</span>基本機能はオフラインで利用可能</li>
+        <li><span>03 確認する</span>薬品名だけを供給ナビへ引き継ぎ</li>
+      </ul>
+      <div class="companion-actions">
+        <a class="companion-btn" href="https://apps.apple.com/jp/app/id6796889346" target="_blank" rel="noopener">そなメモをApp Storeで見る</a>
+        <p class="companion-note">家族情報・服用記録・写真は医薬品供給ナビへ共有されません。<br>連携機能は対応バージョンへのアップデート後に利用できます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <div class="modal-backdrop" id="mBack">
@@ -1247,6 +1322,7 @@ footer a:hover{color:var(--blue)}
     <a href="#data">データについて</a>
     <a href="#glossary">用語解説</a>
     <a href="#faq">よくある質問</a>
+    <a href="#sonamemo">そなメモ</a>
     <a href="items/index.html">品目別の供給状況</a>
     <a href="privacy.html">プライバシーポリシー</a>
     <a href="mailto:tkiyo1007@gmail.com">サポート</a>
