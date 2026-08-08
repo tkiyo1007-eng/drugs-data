@@ -10,14 +10,27 @@
  *
  * キャッシュを作り直したいときは CACHE_VERSION を上げる。
  */
-const CACHE_VERSION = "v2";
+const CACHE_VERSION = "v3";
 const SHELL_CACHE = `dsn-shell-${CACHE_VERSION}`;
 const DATA_CACHE = `dsn-data-${CACHE_VERSION}`;
 const ASSET_CACHE = `dsn-asset-${CACHE_VERSION}`;
 const ALL_CACHES = [SHELL_CACHE, DATA_CACHE, ASSET_CACHE];
 
 // オフラインでも最低限開くために先読みするファイル
-const SHELL_FILES = ["./", "./index.html", "./privacy.html", "./manifest.webmanifest", "./icon-192.png"];
+const SHELL_FILES = [
+  "./",
+  "./index.html",
+  "./privacy.html",
+  "./manifest.webmanifest",
+  "./icon-192.png",
+  "./icon-512.png",
+  "./icon-maskable-512.png",
+  "./sonamemo-icon.png",
+  "./lumical-icon.png",
+  "./qr-appstore.svg",
+  "./qr-sonamemo.png",
+  "./qr-lumical.png",
+];
 
 // 供給データ本体（毎日更新されるのでネットワーク優先で扱う）
 const DATA_FILES = [
@@ -78,6 +91,18 @@ function revalidatingFetch(request){
   }
 }
 
+// キャッシュから返したことをページ側へ伝える。単なるHTTP 200のままだと、
+// 最新データと前回値を見分けられず、医薬品情報の鮮度を誤認させてしまう。
+function markCachedFallback(response){
+  const headers = new Headers(response.headers);
+  headers.set("X-DSN-Source", "cache");
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+}
+
 function networkFirst(request, cacheName, {fallbackOnHttpError=false, event=null}={}){
   const cachePromise = caches.open(cacheName);
   const network = cachePromise.then(async cache => {
@@ -114,7 +139,7 @@ function networkFirst(request, cacheName, {fallbackOnHttpError=false, event=null
       ]);
       // タイムアウトしてキャッシュを返したあとも network は動き続け、
       // 応答が返ればキャッシュを更新するので次回は新しい方が出る
-      return res || hit;
+      return res || markCachedFallback(hit);
     }finally{
       clearTimeout(timer);
     }
