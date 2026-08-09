@@ -4854,5 +4854,90 @@
    "pkg": "バラ500錠",
    "until": ""
   }
- ]
+ ],
+ "https://med.sawai.co.jp/file/pr28_1180_2.pdf": [
+  {
+   "pkg": "PTP700錠",
+   "until": "2027年1月"
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP1000錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ500錠",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr28_1259_2.pdf": [
+  {
+   "pkg": "PTP140錠",
+   "until": "2024年1月"
+  },
+  {
+   "pkg": "PTP700錠",
+   "until": "2023年10月"
+  },
+  {
+   "pkg": "PTP1000錠",
+   "until": "2023年12月"
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ500錠",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr28_1260_2.pdf": [
+  {
+   "pkg": "PTP140錠",
+   "until": "2024年7月"
+  },
+  {
+   "pkg": "PTP700錠",
+   "until": "2023年11月"
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP1000錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ500錠",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr28_1235_1.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": "2026年12月"
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr28_1203_1.pdf": []
 }
