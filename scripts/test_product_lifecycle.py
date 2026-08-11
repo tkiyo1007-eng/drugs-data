@@ -3,7 +3,11 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.build_product_lifecycle import PARTIAL_RE, announcement_covers_product
+from scripts.build_product_lifecycle import (
+    PARTIAL_RE,
+    announcement_covers_product,
+    is_product_wide_discontinuation,
+)
 from scripts.fetch_maker_announcements import match_to_csv
 
 
@@ -48,6 +52,18 @@ class ProductLifecycleTests(unittest.TestCase):
 
     def test_partial_package_notice_is_not_product_discontinuation(self):
         self.assertIsNotNone(PARTIAL_RE.search("薬A錠 一部包装販売中止のお知らせ"))
+
+    def test_explicit_package_event_is_not_product_discontinuation(self):
+        self.assertFalse(is_product_wide_discontinuation({
+            "title": "薬A注 販売中止のご案内",
+            "event_type": "package_discontinued",
+        }))
+
+    def test_explicit_product_event_is_product_discontinuation(self):
+        self.assertTrue(is_product_wide_discontinuation({
+            "title": "薬A注 販売中止のご案内",
+            "event_type": "discontinued",
+        }))
 
 
 if __name__ == "__main__":

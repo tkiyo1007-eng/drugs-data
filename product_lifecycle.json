@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-11T00:15:51+09:00",
+  "generated_at": "2026-08-11T12:44:40+09:00",
   "products": {
     "1124007F1143": {
       "product_name": "トリアゾラム錠０．１２５ｍｇ「ＣＨ」",
@@ -110,6 +110,24 @@
       "announced_at": "2025-10-02",
       "source_title": "2025/10/02 発売情報 PDF エトドラク錠100mg「SW」販売中止のご案内 PDF",
       "source_url": "https://med.sawai.co.jp/file/pr28_1321_1.pdf",
+      "verified_at": "2026-08-11"
+    },
+    "1149037F1127": {
+      "product_name": "セレコキシブ錠１００ｍｇ「サンド」",
+      "maker": "サンド",
+      "state": "discontinuation_announced",
+      "announced_at": "2025-12-17",
+      "source_title": "2025.12.17 セレコキシブ錠100mg・200mg「サンド」販売中止のご案内",
+      "source_url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20251217_007.pdf?_gl=1%2A132acro%2A_gcl_au%2AMTIwNzY1OTcyOC4xNzYwNTkyNjY2",
+      "verified_at": "2026-08-11"
+    },
+    "1149037F2123": {
+      "product_name": "セレコキシブ錠２００ｍｇ「サンド」",
+      "maker": "サンド",
+      "state": "discontinuation_announced",
+      "announced_at": "2025-12-17",
+      "source_title": "2025.12.17 セレコキシブ錠100mg・200mg「サンド」販売中止のご案内",
+      "source_url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20251217_007.pdf?_gl=1%2A132acro%2A_gcl_au%2AMTIwNzY1OTcyOC4xNzYwNTkyNjY2",
       "verified_at": "2026-08-11"
     },
     "1149037F2174": {
@@ -1256,12 +1274,30 @@
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80339&t=4&f=20250116_%E3%82%A2%E3%83%A0%E3%83%90%E3%83%AD%E9%85%8D%E5%90%88OD%E9%8C%A0%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
       "verified_at": "2026-08-11"
     },
+    "2149118F1127": {
+      "product_name": "イルアミクス配合錠ＬＤ「サンド」",
+      "maker": "サンド",
+      "state": "discontinuation_announced",
+      "announced_at": "2025-12-17",
+      "source_title": "2025.12.17 イルアミクス配合錠LD「サンド」販売中止のご案内",
+      "source_url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20251217_009.pdf?_gl=1%2A132acro%2A_gcl_au%2AMTIwNzY1OTcyOC4xNzYwNTkyNjY2",
+      "verified_at": "2026-08-11"
+    },
     "2160003F1120": {
       "product_name": "スマトリプタン錠５０ｍｇ「トーワ」",
       "maker": "東和薬品",
       "state": "discontinuation_announced",
       "source_title": "スマトリプタン錠50mg「トーワ」 販売中止のお知らせ",
       "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80210&t=4&f=20241206_%E3%82%B9%E3%83%9E%E3%83%88%E3%83%AA%E3%83%97%E3%82%BF%E3%83%B3%E9%8C%A050mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B_2.pdf",
+      "verified_at": "2026-08-11"
+    },
+    "2160003F1162": {
+      "product_name": "スマトリプタン錠５０ｍｇ「ＳＰＫＫ」",
+      "maker": "サンド",
+      "state": "discontinuation_announced",
+      "announced_at": "2025-12-17",
+      "source_title": "2025.12.17 スマトリプタン錠50mg「SPKK」販売中止のご案内",
+      "source_url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20251217_005.pdf?_gl=1%2A132acro%2A_gcl_au%2AMTIwNzY1OTcyOC4xNzYwNTkyNjY2",
       "verified_at": "2026-08-11"
     },
     "2160003S1020": {
@@ -2191,6 +2227,33 @@
       "source_title": "2025年10月1日 レトロゾール錠2.5mg「ニプロ」　販売中止品のご案内",
       "source_url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uVeaTIAS",
       "verified_at": "2026-08-03"
+    },
+    "4291403A1061": {
+      "product_name": "カルボプラチン点滴静注液５０ｍｇ「サンド」",
+      "maker": "サンド",
+      "state": "discontinuation_announced",
+      "announced_at": "2025-12-17",
+      "source_title": "2025.12.17 カルボプラチン点滴静注液50mg・150mg・450mg「サンド」販売中止のご案内",
+      "source_url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20251217_013.pdf?_gl=1%2A1sfe43t%2A_gcl_au%2AMTIwNzY1OTcyOC4xNzYwNTkyNjY2",
+      "verified_at": "2026-08-11"
+    },
+    "4291403A2068": {
+      "product_name": "カルボプラチン点滴静注液１５０ｍｇ「サンド」",
+      "maker": "サンド",
+      "state": "discontinuation_announced",
+      "announced_at": "2025-12-17",
+      "source_title": "2025.12.17 カルボプラチン点滴静注液50mg・150mg・450mg「サンド」販売中止のご案内",
+      "source_url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20251217_013.pdf?_gl=1%2A1sfe43t%2A_gcl_au%2AMTIwNzY1OTcyOC4xNzYwNTkyNjY2",
+      "verified_at": "2026-08-11"
+    },
+    "4291403A3064": {
+      "product_name": "カルボプラチン点滴静注液４５０ｍｇ「サンド」",
+      "maker": "サンド",
+      "state": "discontinuation_announced",
+      "announced_at": "2025-12-17",
+      "source_title": "2025.12.17 カルボプラチン点滴静注液50mg・150mg・450mg「サンド」販売中止のご案内",
+      "source_url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20251217_013.pdf?_gl=1%2A1sfe43t%2A_gcl_au%2AMTIwNzY1OTcyOC4xNzYwNTkyNjY2",
+      "verified_at": "2026-08-11"
     },
     "4291410A3137": {
       "product_name": "オキサリプラチン点滴静注液２００ｍｇ「ニプロ」",
