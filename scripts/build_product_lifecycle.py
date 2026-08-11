@@ -55,6 +55,16 @@ def announcement_covers_product(product_name: str, title: str) -> bool:
     return bool(core) and core in title_n and strengths.issubset(title_strengths)
 
 
+def is_product_wide_discontinuation(announcement: object) -> bool:
+    """製品全体の販売中止案内だけをライフサイクルへ反映する。"""
+    if not isinstance(announcement, dict):
+        return False
+    title = announcement.get("title") or ""
+    if announcement.get("event_type") == "package_discontinued":
+        return False
+    return bool(END_RE.search(title) and not PARTIAL_RE.search(title))
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--csv", type=Path, required=True)
@@ -84,7 +94,7 @@ def main() -> int:
             title = announcement.get("title") if isinstance(announcement, dict) else ""
             if not isinstance(announcement, dict) or not END_RE.search(title or ""):
                 continue
-            if PARTIAL_RE.search(title or ""):
+            if not is_product_wide_discontinuation(announcement):
                 skipped.append(f"{product_name}: 一部包装のみの案内は製品全体の販売中止にしません")
                 continue
             maker = norm(announcement.get("maker") or "")
