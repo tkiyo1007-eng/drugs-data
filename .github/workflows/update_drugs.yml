@@ -166,6 +166,9 @@ jobs:
             product_lifecycle.next.json --csv drugs_app_ready.csv
           mv product_lifecycle.next.json product_lifecycle.json
 
+      - name: 品目別SEOページを最新データで生成
+        run: python3 scripts/generate_item_pages.py --csv drugs_app_ready.csv --site .
+
       - name: 案内文PDFから包装単位を抽出（新規URLのみ）
         run: python3 scripts/extract_pdf_packages.py maker_announcements.json announcement_packages.json 60
         continue-on-error: true
@@ -184,7 +187,7 @@ jobs:
           git add drugs_app_ready.csv version.json maker_announcements.json manual_announcements.json \
             maker_announcement_events.json maker_collection_health.json unmatched_maker_announcements.json \
             product_lifecycle.json announcement_packages.json packages_cache.json status_changes.json \
-            resolution_stats.json crisis_index.json news.json
+            resolution_stats.json crisis_index.json news.json items sitemap-items.xml
           git diff --cached --quiet && echo "変更なし" && exit 0
           git commit -m "データ自動更新: $(TZ=Asia/Tokyo date +'%Y/%m/%d')"
           git pull --rebase origin main || true

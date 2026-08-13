@@ -1,0 +1,44 @@
+name: 公開データ健全性監視
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/public-data-health.yml'
+      - 'scripts/check_public_data_health.py'
+      - 'scripts/test_public_data_health.py'
+      - 'scripts/validate_supply_data.py'
+      - 'scripts/validate_product_lifecycle.py'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/public-data-health.yml'
+      - 'scripts/check_public_data_health.py'
+      - 'scripts/test_public_data_health.py'
+      - 'scripts/validate_supply_data.py'
+      - 'scripts/validate_product_lifecycle.py'
+  schedule:
+    # 毎朝7:15 JST。公開リポジトリの標準GitHub-hosted runnerで実行する。
+    - cron: '15 22 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-data-health
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: 公開データの取得・鮮度・整合性
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: Run validator unit tests
+        run: python3 -m unittest discover -s scripts -p 'test_public_data_health.py'
+      - name: Validate live remote data
+        run: python3 scripts/check_public_data_health.py --max-age-days 4
