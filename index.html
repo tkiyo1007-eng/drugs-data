@@ -1819,6 +1819,19 @@ function lifecycleAnnouncement(d){
 function isSalesEnding(d){
   return d.s === "ended" || d.delist || !!lifecycleFor(d);
 }
+// 「販売中止・予定」は、厚労省CSVの供給区分だけでなく、薬価削除予定と
+// メーカー公表の販売中止予定もまとめて探すための絞り込み。
+// 現在の厚労省CSVには供給区分そのものが「販売中止」の行が0件でも、
+// これらの補助情報には対象品目があるため、CSVの区分件数だけで隠さない。
+function refreshSalesEndingPill(items=ITEMS){
+  const pill = document.querySelector('.pill[data-f="ended"]');
+  if(!pill) return;
+  const count = items.filter(isSalesEnding).length;
+  pill.textContent = count
+    ? `販売中止・予定 ${count.toLocaleString()}`
+    : "販売中止・予定";
+  pill.style.display = count ? "" : "none";
+}
 function findAnnouncement(d){
   const lifecycle = lifecycleAnnouncement(d);
   if(lifecycle) return lifecycle;
@@ -1932,7 +1945,10 @@ function loadSupplementalData(){
   ]).then(()=>{
     // 自動収集された案内にもカードの「販売中止予定」バッジを反映する。
     // 検索語・絞り込み・表示件数は現在値を保ったまま再描画される。
-    if(LIVE) render();
+    if(LIVE){
+      refreshSalesEndingPill();
+      render();
+    }
     // 読込中に詳細を開いた場合は、届いた案内文・要約・包装情報をその場で反映する
     if(currentDetailName && document.getElementById("mBack").classList.contains("open")){
       const d = findByName(currentDetailName);
@@ -2786,10 +2802,15 @@ document.getElementById("offlineReload").addEventListener("click", ()=>location.
   document.getElementById("chipStop").textContent = counts.stopped.toLocaleString();
   const order=[["ok","通常出荷"],["limited","限定出荷"],["stopped","供給停止"],["ended","販売中止"]];
   const active = order.filter(([k])=>counts[k]>0);
-  // 0件のステータスは絞り込みピルも非表示に
+  // 0件の供給ステータスは絞り込みピルも非表示にする。ただし「販売中止・予定」は
+  // 薬価削除予定・メーカー公表情報も対象なので、別集計で表示を決める。
   for(const [k] of order){
-    if(!counts[k]){ const p=document.querySelector(`.pill[data-f="${k}"]`); if(p) p.style.display="none"; }
+    if(k!=="ended" && !counts[k]){
+      const p=document.querySelector(`.pill[data-f="${k}"]`);
+      if(p) p.style.display="none";
+    }
   }
+  refreshSalesEndingPill(items);
   const pct = k => Math.max(counts[k]/total*100, 1.2); // 少数派も見えるよう最低幅
   document.getElementById("sbar").innerHTML = active.map(([k],i)=>
     `<span style="width:${pct(k)}%;background:${STATUS_GRAD[k]};animation-delay:${.3+i*.15}s"></span>`).join("");
