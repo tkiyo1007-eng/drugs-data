@@ -51,10 +51,23 @@ STATUS_NOTES = {
     "ended":   "メーカーが製造・販売を終了した状態です。今後の出荷再開はないため、代替薬への切り替え検討が必要です。",
 }
 # 詳細表で優先的に上へ並べる列(LPの DETAIL_ORDER と同じ考え方)
-DETAIL_ORDER = ["規格", "供給状況", "理由", "代替候補", "一般名", "製造メーカー",
+DETAIL_ORDER = ["規格", "供給状況", "理由", "解除・解消見込み", "出荷量状況", "代替候補", "一般名", "製造メーカー",
                 "販売メーカー", "薬効分類", "薬価", "経過措置期限",
                 "ステータス更新日", "更新日", "YJコード"]
 SKIP_COLS = {"商品名", "今回更新"}
+SUPPLY_METADATA_RE = re.compile(
+    r"^解除/解消見込み:\s*(.*?)\s*/\s*出荷量状況:\s*(.*)$")
+
+
+def split_supply_metadata(label: str, value: str) -> list[tuple[str, str]]:
+    """CSVの誤解を招く列名を、収録内容に即した表示項目へ分ける。"""
+    if label != "代替候補":
+        return [(label, value)]
+    match = SUPPLY_METADATA_RE.match(value)
+    if not match:
+        return [(label, value)]
+    return [("解除・解消見込み", match.group(1).strip()),
+            ("出荷量状況", match.group(2).strip())]
 
 
 def is_delist(row: dict) -> bool:
@@ -186,7 +199,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys):
             + ("（薬価削除予定）" if delist else "")
             + (f"（厚生労働省データ {updated} 時点、毎日自動更新）。" if updated
                else "（厚生労働省データ、毎日自動更新）。")
-            + "理由・代替候補・同成分の他社品の供給状況もこのページで確認できます。")
+            + "理由・解除見込み・出荷量状況・同成分の他社品の供給状況もこのページで確認できます。")
     url = f"{SITE_ROOT}items/{key}.html"
     lp_link = SITE_ROOT + "#drug=" + quote(name, safe="")
     pmda = "https://www.pmda.go.jp/PmdaSearch/iyakuSearch/?nameWord=" + quote(name, safe="")
@@ -201,7 +214,10 @@ def page_html(row, key, status, jst_today, siblings, generated_keys):
         v = (row.get(col) or "").strip()
         if not v:
             continue
-        detail_rows.append(f'<tr><th scope="row">{esc(col)}</th><td>{esc(v)}</td></tr>')
+        for shown_col, shown_value in split_supply_metadata(col, v):
+            if shown_value:
+                detail_rows.append(
+                    f'<tr><th scope="row">{esc(shown_col)}</th><td>{esc(shown_value)}</td></tr>')
 
     # 同成分(一般名が同じ)の他社品。生成済みページがあれば内部リンク、なければLPの詳細へ
     sib_html = ""
@@ -312,7 +328,7 @@ footer a{{color:var(--sub)}}
 {delist_box}
     <table><tbody>{''.join(detail_rows)}</tbody></table>
     <p class="links">
-      <a href="{lp_link}">Web版で詳細を見る（同成分・同分類の一覧つき）</a>
+      <a href="{lp_link}">Web版で詳細を見る（同成分・同剤形の一覧つき）</a>
       <a href="{pmda}" target="_blank" rel="noopener">PMDAで添付文書を探す</a>
     </p>
   </div>

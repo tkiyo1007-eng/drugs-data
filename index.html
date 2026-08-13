@@ -476,7 +476,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .fav-chg:hover{background:#fff}
 .fav-chg span{flex:none;font-size:11.5px;font-weight:800;color:#A03030}
 .fav-chg.ok span{color:#1B7A4C}
-/* 同成分・同分類の関連品目（モーダル内） */
+/* 同成分・同剤形の関連品目（モーダル内） */
 .rel-title{font-size:13px;font-weight:800;color:var(--ink);margin:16px 0 8px}
 .rel-row{
   display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;
@@ -1691,13 +1691,26 @@ let lastFocus = null;
 // クリックした品目の詳細項目 [ラベル, 値] を組み立てる
 // 実データ時は CSV の全列（空欄を除く）をそのまま表示するので、列が増えても自動で反映される
 // 規格・供給状況など現場で先に確認したい項目を上位に、コード類は下位に並べる
-const DETAIL_ORDER = ["規格","供給状況","理由","代替候補","一般名","製造メーカー","販売メーカー","薬効分類","薬価","経過措置期限","ステータス更新日","更新日","YJコード"];
+const DETAIL_ORDER = ["規格","供給状況","理由","解除・解消見込み","出荷量状況","代替候補","一般名","製造メーカー","販売メーカー","薬効分類","薬価","経過措置期限","ステータス更新日","更新日","YJコード"];
+// 厚労省CSVの「代替候補」列には、実際の代替薬ではなく供給メタデータが
+// 「解除/解消見込み: ... / 出荷量状況: ...」の形で収録されている。
+// その形式だけを正しい項目名に分解し、将来本当の代替候補が入った場合は元の表示を保つ。
+function displayDetailFields(label, value){
+  if(label!=="代替候補") return [[label,value]];
+  const m = value.match(/^解除\/解消見込み:\s*(.*?)\s*\/\s*出荷量状況:\s*(.*)$/);
+  if(!m) return [[label,value]];
+  return [
+    ["解除・解消見込み", m[1].trim()],
+    ["出荷量状況", m[2].trim()],
+  ].filter(([,v])=>v);
+}
 function detailPairs(d){
   let pairs;
   if(d.row && CSV_HEAD){
     pairs = CSV_HEAD
       .map((h,i)=>[h, String(d.row[i]||"").trim()])
       .filter(([h,v])=>v && h!=="商品名" && h!=="今回更新" && !(h==="規格" && !dispSpec(v)))
+      .flatMap(([h,v])=>displayDetailFields(h,v))
       .map(([h,v])=>{
         // 薬価は規格単位あたりの値段なので「１錠＝25.90円」の形で表示する
         if(h!=="薬価") return [h,v];
@@ -2126,7 +2139,7 @@ function openDetail(d, opts={}){
   $mPmda.textContent = "添付文書・IFを探す（PMDA公式検索・品目名入力済み）";
   $mPmda.hidden = false;
   refreshItemLink(d);
-  // 同成分・同分類の関連品目（アプリ版⑤⑩と同等の確認補助）
+  // 同成分・同剤形の関連品目（確認補助）
   const $mRel = document.getElementById("mRelated");
   let relHtml = "";
   // 薬価削除予定（供給状況欄が「通常出荷」等でも近く販売終了見込み）の品目を
@@ -2156,24 +2169,9 @@ function openDetail(d, opts={}){
       .sort((a,b)=>(effSev(a)-effSev(b)) || a.n.localeCompare(b.n,"ja"));
     if(sameG.length) relHtml += relatedBlock(`同成分・同剤形${dWarm ? "（温感タイプ）" : ""}の品目（${sameG.length}件・入手しやすい順）`, sameG.slice(0,6));
   }
-  // 薬効分類はYJコード先頭4桁（細分類）で絞る。厚労省の3桁分類名のままだと
-  // 「副腎ホルモン剤」にアドレナリン等の別系統（細分類違い）まで含まれてしまう
-  const yj4 = (d.yj||"").slice(0,4);
-  if(LIVE && d.cat){
-    const best = new Map(); // 一般名ごとに最も入手しやすい1品目を代表に
-    for(const x of ITEMS){
-      if(x.cat!==d.cat || !x.g || x.g===d.g) continue;
-      if(yj4 && (x.yj||"").slice(0,4)!==yj4) continue;
-      if(isWarmPatch(x)!==dWarm) continue; // 温感品目には温感の同系統のみ（逆も同様）
-      const cur = best.get(x.g);
-      if(!cur || effSev(x) < effSev(cur)) best.set(x.g, x);
-    }
-    const sameC = [...best.values()].sort((a,b)=>(effSev(a)-effSev(b)) || a.g.localeCompare(b.g,"ja"));
-    if(sameC.length) relHtml += relatedBlock(`同じ薬効分類「${d.cat}」の同系統医薬品（${sameC.length}成分）`, sameC.slice(0,6));
-  }
   if(relHtml){
     $mRel.innerHTML = relHtml +
-      `<p class="pkg-note">※ 同成分・同分類の品目を公開データから機械的に列挙した確認補助です。おすすめ順位ではありません。${dWarm ? "この品目は温感タイプのため、温感タイプの品目のみを表示しています。" : ""}適応・規格・剤形の互換性は必ず添付文書と医師・薬剤師の判断でご確認ください。</p>`;
+      `<p class="pkg-note">※ 同成分・同剤形の品目を公開データから機械的に列挙した確認補助です。おすすめ順位ではありません。${dWarm ? "この品目は温感タイプのため、温感タイプの品目のみを表示しています。" : ""}適応・規格・剤形の互換性は必ず添付文書と医師・薬剤師の判断でご確認ください。</p>`;
     $mRel.hidden = false;
   }else{
     $mRel.hidden = true;
