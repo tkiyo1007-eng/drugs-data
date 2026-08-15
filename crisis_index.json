@@ -2,7 +2,7 @@
  "date": "2026/08/15",
  "score": 83,
  "level": "警戒",
- "delta": 0,
+ "delta": null,
  "limited": 969,
  "stopped": 873,
  "total": 16384,
