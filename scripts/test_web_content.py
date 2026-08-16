@@ -30,6 +30,10 @@ class PublishedWebContentTests(unittest.TestCase):
         self.assertIn("#demo{padding-top:28px}", self.html)
         self.assertIn(".pulse-sub,.supply-bar,.legend,.float-chip{display:none}", self.html)
 
+    def test_missing_sales_maker_is_explained_without_guessing(self):
+        self.assertIn("公開データに記載なし（製造メーカーを参照）", self.html)
+        self.assertIn("if(salesMakerIndex >= 0 && !salesMaker && manufacturer)", self.html)
+
 
 if __name__ == "__main__":
     unittest.main()
