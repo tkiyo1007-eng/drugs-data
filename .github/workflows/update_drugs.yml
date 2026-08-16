@@ -164,7 +164,7 @@ jobs:
             --output product_lifecycle.next.json
           python3 scripts/validate_product_lifecycle.py \
             product_lifecycle.next.json --csv drugs_app_ready.csv \
-            --max-missing-announced-rate 0.20
+            --max-missing-announced-rate 0
           mv product_lifecycle.next.json product_lifecycle.json
 
       - name: 品目別SEOページを最新データで生成

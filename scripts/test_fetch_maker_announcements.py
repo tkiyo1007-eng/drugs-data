@@ -52,6 +52,28 @@ class AnnouncementMatchingTests(unittest.TestCase):
             "",
         )
 
+    @mock.patch.object(mod, "fetch")
+    def test_kemifa_listing_date_is_kept(self, fetch_mock):
+        fetch_mock.return_value = (
+            '<tr><th class="date">2026年7月31日<span>発売中止</span></th>'
+            '<td><a href="/product_topics/test.pdf">販売中止のご案内</a></td></tr>'
+        )
+        result = mod.parse_kemifa()
+        self.assertEqual(result[0][1], "2026年7月31日 販売中止のご案内")
+        self.assertEqual(mod.extract_announcement_date(result[0][1]), "2026-07-31")
+
+    @mock.patch("urllib.request.urlopen")
+    def test_takata_listing_date_is_kept(self, urlopen_mock):
+        response = mock.MagicMock()
+        response.__enter__.return_value.read.return_value = (
+            b'<li><span class="date">2026/05/01</span>'
+            b'<a href="/medical/topics/test.pdf">discontinued</a></li>'
+        )
+        urlopen_mock.return_value = response
+        result = mod.parse_takata(1)
+        self.assertEqual(result[0][1], "2026/05/01 discontinued")
+        self.assertEqual(mod.extract_announcement_date(result[0][1]), "2026-05-01")
+
     def test_normal_supply_product_is_matched_to_discontinuation(self):
         name = "テスト錠１ｍｇ「サワイ」"
         path = self.make_csv([self.row(name)])
