@@ -257,6 +257,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys):
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
+<meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="canonical" href="{url}">
 <meta property="og:type" content="article">
 <meta property="og:title" content="{esc(title)}">
@@ -383,6 +384,7 @@ def index_html(entries, jst_today):
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
+<meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="canonical" href="{SITE_ROOT}items/index.html">
 <meta name="apple-itunes-app" content="app-id=6777696446">
 <script type="application/ld+json">{breadcrumb_ld}</script>
