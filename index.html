@@ -571,6 +571,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 .daily-update-btn.secondary{color:var(--blue);background:rgba(255,255,255,.72);border-color:rgba(79,128,244,.32)}
 .daily-update-btn:disabled{opacity:.5;cursor:wait}
+.daily-feed-note{margin:0;font-size:10.5px;color:var(--sub);text-align:center;line-height:1.5}
 .daily-share-status{min-height:1.5em;font-size:10.5px;color:var(--sub);text-align:center}
 @media(max-width:640px){
   .daily-update-card{grid-template-columns:1fr;padding:23px 20px;gap:18px}
@@ -1162,7 +1163,8 @@ footer a:hover{color:var(--blue)}
     <div class="daily-update-actions">
       <button type="button" class="daily-update-btn" id="dailyUpdateView" disabled>変更品目を見る</button>
       <button type="button" class="daily-update-btn secondary" id="dailyUpdateShare" disabled>この一覧を共有</button>
-      <button type="button" class="daily-update-btn secondary" id="dailyUpdateFeed" title="RSS・Atom対応アプリに貼り付けるURLをコピー">RSS購読URLをコピー</button>
+      <button type="button" class="daily-update-btn secondary" id="dailyUpdateFeed" title="更新通知アプリに貼り付けるURLをコピー">更新通知用URLをコピー</button>
+      <p class="daily-feed-note">RSS対応アプリに貼り付けて使います</p>
       <p class="daily-share-status" id="dailyShareStatus" role="status" aria-live="polite"></p>
     </div>
   </div>
@@ -2143,10 +2145,10 @@ $dailyUpdateFeed.addEventListener("click", async ()=>{
   $dailyShareStatus.textContent = "";
   try{
     await navigator.clipboard.writeText(feedUrl);
-    $dailyShareStatus.textContent = "RSS購読URLをコピーしました。RSSアプリに貼り付けてください";
+    $dailyShareStatus.textContent = "更新通知用URLをコピーしました。RSS対応アプリに貼り付けてください";
   }catch(e){
     // 権限や非対応ブラウザでも、URLを表示して手動コピーできるようにする。
-    $dailyShareStatus.textContent = `RSS購読URL: ${feedUrl}`;
+    $dailyShareStatus.textContent = `更新通知用URL: ${feedUrl}`;
   }
 });
 
