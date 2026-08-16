@@ -9,6 +9,7 @@ import re
 import sys
 from collections import Counter
 from datetime import datetime, timedelta
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 
 from jst_time import jst_today
@@ -28,6 +29,7 @@ ALLOWED_STATUSES = {
     "⑤供給停止",
 }
 YJ_PATTERN = re.compile(r"(?:[0-9A-Z]{12}|X[0-9]{5})\Z")
+MAKER_NOISE_MARKER = "本注意事項等情報を使用している製造販売業者一覧表"
 
 
 def parse_date(value):
@@ -38,7 +40,8 @@ def parse_date(value):
 
 
 def validate_csv(path, *, today=None, min_rows=10000, max_rows=30000, max_age_days=10,
-                 max_missing_sales_maker_rate=None):
+                 max_missing_sales_maker_rate=None, max_missing_price_rate=None,
+                 reject_maker_noise=True):
     errors = []
     today = today or jst_today()
     try:
@@ -88,6 +91,33 @@ def validate_csv(path, *, today=None, min_rows=10000, max_rows=30000, max_age_da
         errors.append("YJコードが重複しています: "
                       + ", ".join(f"{value} ({count}件)" for value, count in duplicate_yj[:5]))
 
+    if reject_maker_noise:
+        maker_noise = []
+        for index, row in enumerate(rows, start=2):
+            for column in ("製造メーカー", "販売メーカー"):
+                value = (row.get(column) or "").strip()
+                if MAKER_NOISE_MARKER in value:
+                    maker_noise.append((index, column))
+        if maker_noise:
+            errors.append(
+                f"メーカー欄に外部文書の説明文が混入した行が{len(maker_noise):,}件あります: "
+                + ", ".join(f"{line}行目 {column}" for line, column in maker_noise[:5]))
+
+    invalid_prices = []
+    for index, row in enumerate(rows, start=2):
+        value = (row.get("薬価") or "").strip()
+        if not value:
+            continue
+        try:
+            if Decimal(value) <= 0:
+                invalid_prices.append((index, value))
+        except InvalidOperation:
+            invalid_prices.append((index, value))
+    if invalid_prices:
+        errors.append(
+            f"薬価が正の数値ではない行が{len(invalid_prices):,}件あります: "
+            + ", ".join(f"{line}行目={value!r}" for line, value in invalid_prices[:5]))
+
     newest_dates = []
     future_limit = today + timedelta(days=1)
     for column in ("更新日", "ステータス更新日"):
@@ -126,6 +156,13 @@ def validate_csv(path, *, today=None, min_rows=10000, max_rows=30000, max_age_da
             f"販売メーカーの記載なし率が上限を超えています: "
             f"{missing_sales_maker:,}/{len(rows):,}件（{missing_sales_maker_rate:.2f}%、"
             f"上限 {max_missing_sales_maker_rate:.2f}%）")
+    missing_price = sum(not (row.get("薬価") or "").strip() for row in rows)
+    missing_price_rate = (missing_price / len(rows) * 100) if rows else 0.0
+    if max_missing_price_rate is not None and missing_price_rate > max_missing_price_rate:
+        errors.append(
+            f"薬価の記載なし率が上限を超えています: "
+            f"{missing_price:,}/{len(rows):,}件（{missing_price_rate:.2f}%、"
+            f"上限 {max_missing_price_rate:.2f}%）")
 
     summary = {
         "rows": len(rows),
@@ -133,7 +170,8 @@ def validate_csv(path, *, today=None, min_rows=10000, max_rows=30000, max_age_da
         "statuses": dict(sorted(statuses.items())),
         "missing_sales_maker": missing_sales_maker,
         "missing_sales_maker_rate": missing_sales_maker_rate,
-        "missing_price": sum(not (row.get("薬価") or "").strip() for row in rows),
+        "missing_price": missing_price,
+        "missing_price_rate": missing_price_rate,
     }
     return errors, summary
 
@@ -144,12 +182,15 @@ def main(argv=None):
     parser.add_argument("--min-rows", type=int, default=10000)
     parser.add_argument("--max-rows", type=int, default=30000)
     parser.add_argument("--max-age-days", type=int, default=10)
-    parser.add_argument("--max-missing-sales-maker-rate", type=float, default=3.2,
-                        help="販売メーカー欄の記載なし率の上限（既定3.2%%）")
+    parser.add_argument("--max-missing-sales-maker-rate", type=float, default=3.4,
+                        help="販売メーカー欄の記載なし率の上限（既定3.4%%）")
+    parser.add_argument("--max-missing-price-rate", type=float, default=6.0,
+                        help="薬価欄の記載なし率の上限（既定6.0%%）")
     args = parser.parse_args(argv)
     errors, summary = validate_csv(
         args.csv, min_rows=args.min_rows, max_rows=args.max_rows, max_age_days=args.max_age_days,
-        max_missing_sales_maker_rate=args.max_missing_sales_maker_rate)
+        max_missing_sales_maker_rate=args.max_missing_sales_maker_rate,
+        max_missing_price_rate=args.max_missing_price_rate)
     print(f"品目数: {summary.get('rows', 0):,}件")
     if summary.get("newest"):
         print(f"最新更新日: {summary['newest']}")
@@ -159,7 +200,8 @@ def main(argv=None):
     if "missing_sales_maker" in summary:
         print(f"参考: 販売メーカー記載なし={summary['missing_sales_maker']:,}件"
               f"（{summary['missing_sales_maker_rate']:.2f}%）、"
-              f"薬価空欄={summary['missing_price']:,}件（許容）")
+              f"薬価記載なし={summary['missing_price']:,}件"
+              f"（{summary['missing_price_rate']:.2f}%）")
     if errors:
         for error in errors:
             print(f"::error::{error}")

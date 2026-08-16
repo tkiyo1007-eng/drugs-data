@@ -111,6 +111,9 @@ jobs:
           print(f"✅ 更新完了: 既存更新 {len(seen)}件 / 新規追加 {len(xl)-len(seen)}件 / 総 {len(out)-1}行")
           EOF
 
+      - name: メーカー欄に混入した共通文書の説明を除去
+        run: python3 scripts/sanitize_maker_fields.py drugs_app_ready.csv
+
       - name: 薬価の空欄をマスタから補完（新規追加品目は薬価空欄で入るため）
         run: python3 scripts/fill_prices.py drugs_app_ready.csv yakka_master.csv
 

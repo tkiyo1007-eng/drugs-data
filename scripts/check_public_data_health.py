@@ -143,6 +143,10 @@ def run(today: dt.date, max_age_days: int) -> tuple[list[str], list[str]]:
                 csv_path,
                 today=today,
                 max_age_days=max_age_days,
+                # PRの検査コードは、まだデプロイ前のmainデータを取得する。
+                # 新しい厳格ルールとの一時的不一致はローカルCSV検査で担保し、
+                # ここでは公開中データの取得・鮮度・既存整合性だけを確認する。
+                reject_maker_noise=False,
             )
             errors.extend(f"remote CSV: {error}" for error in csv_errors)
             results.append("drugs_app_ready.csv")
