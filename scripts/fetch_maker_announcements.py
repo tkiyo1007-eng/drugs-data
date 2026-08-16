@@ -114,9 +114,23 @@ def parse_dsep(pages=1):
 def parse_kemifa(pages=1):
     items = []
     html = fetch("https://www.nc-medical.com/product/information/")
-    for m in re.finditer(r'<a[^>]*href="(/product_topics/[^"]+\.pdf)"[^>]*>(.*?)</a>', html, re.S):
-        href, text = m.group(1), re.sub(r"<[^>]+>", " ", m.group(2))
-        items.append((re.sub(r"\s+", " ", text).strip(), "https://www.nc-medical.com" + href))
+    for block in re.findall(r"<tr\b[^>]*>(.*?)</tr>", html, re.S | re.I):
+        link = re.search(
+            r'<a[^>]*href="(/product_topics/[^"]+\.pdf)"[^>]*>(.*?)</a>',
+            block,
+            re.S | re.I,
+        )
+        if not link:
+            continue
+        date = re.search(r'<th[^>]*class="[^"]*date[^"]*"[^>]*>(.*?)</th>', block, re.S | re.I)
+        href, text = link.group(1), re.sub(r"<[^>]+>", " ", link.group(2))
+        title = re.sub(r"\s+", " ", text).strip()
+        if date:
+            date_text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", date.group(1))).strip()
+            date_match = re.search(r"20\d{2}年\d{1,2}月\d{1,2}日", date_text)
+            if date_match:
+                title = f"{date_match.group(0)} {title}"
+        items.append((title, "https://www.nc-medical.com" + href))
     return [("日本ケミファ", t, u) for t, u in items]
 
 
@@ -168,11 +182,20 @@ def parse_takata(pages=2):
                 html = r.read().decode("utf-8", errors="ignore")
         except Exception:
             continue  # 存在しない年は無視
-        for m in re.finditer(r'<a[^>]*href="([^"]+\.pdf)"[^>]*>(.*?)</a>', html, re.S):
-            href = m.group(1)
+        for block in re.findall(r"<li\b[^>]*>(.*?)</li>", html, re.S | re.I):
+            link = re.search(r'<a[^>]*href="([^"]+\.pdf)"[^>]*>(.*?)</a>', block, re.S | re.I)
+            if not link:
+                continue
+            href = link.group(1)
             if href.startswith("/"):
                 href = "https://www.takata-seiyaku.co.jp" + href
-            text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", m.group(2))).strip()
+            text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", link.group(2))).strip()
+            date = re.search(r'<span[^>]*class="[^"]*date[^"]*"[^>]*>(.*?)</span>', block, re.S | re.I)
+            if date:
+                date_text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", date.group(1))).strip()
+                date_match = re.search(r"20\d{2}/\d{1,2}/\d{1,2}", date_text)
+                if date_match:
+                    text = f"{date_match.group(0)} {text}"
             items.append((text, href))
     return [("高田製薬", t, u) for t, u in items]
 
