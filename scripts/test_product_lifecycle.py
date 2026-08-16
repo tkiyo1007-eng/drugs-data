@@ -5,13 +5,57 @@ from pathlib import Path
 
 from scripts.build_product_lifecycle import (
     PARTIAL_RE,
+    announcement_date,
     announcement_covers_product,
+    backfill_announcement_dates,
     is_product_wide_discontinuation,
 )
 from scripts.fetch_maker_announcements import match_to_csv
 
 
 class ProductLifecycleTests(unittest.TestCase):
+    def test_announcement_date_uses_pdf_url_when_title_has_no_date(self):
+        self.assertEqual(
+            announcement_date(
+                "販売中止のお知らせ",
+                "https://example.test/fileloader.php?f=20260730_notice.pdf",
+            ),
+            "2026-07-30",
+        )
+
+    def test_announcement_date_rejects_impossible_date(self):
+        self.assertIsNone(
+            announcement_date("販売中止のお知らせ", "https://example.test/20261340.pdf")
+        )
+
+    def test_announcement_date_does_not_parse_embedded_identifier(self):
+        self.assertIsNone(
+            announcement_date(
+                "販売中止のお知らせ",
+                "https://example.test/documentX20260730Y.pdf",
+            )
+        )
+
+    def test_existing_lifecycle_date_is_backfilled_from_source_url(self):
+        products = {
+            "123456789012": {
+                "source_title": "販売中止のお知らせ",
+                "source_url": "https://example.test/f=20260730_notice.pdf",
+            }
+        }
+        self.assertEqual(backfill_announcement_dates(products), 1)
+        self.assertEqual(products["123456789012"]["announced_at"], "2026-07-30")
+
+    def test_existing_lifecycle_date_is_not_overwritten(self):
+        products = {
+            "123456789012": {
+                "announced_at": "2025-01-01",
+                "source_url": "https://example.test/f=20260730_notice.pdf",
+            }
+        }
+        self.assertEqual(backfill_announcement_dates(products), 0)
+        self.assertEqual(products["123456789012"]["announced_at"], "2025-01-01")
+
     def test_normal_supply_discontinuation_is_collected(self):
         with tempfile.TemporaryDirectory() as directory:
             csv_path = Path(directory) / "drugs.csv"

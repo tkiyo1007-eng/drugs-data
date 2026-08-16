@@ -10,11 +10,13 @@ maker_announcements.json を生成する。
              第一三共エスファ・日本ケミファ・東和薬品・高田製薬・久光製薬・ニプロ
 """
 import csv
+import datetime
 import json
 import os
 import re
 import sys
 import unicodedata
+import urllib.parse
 import urllib.request
 
 from jst_time import jst_today
@@ -456,20 +458,34 @@ def classify_event(title):
     return "other"
 
 
-def extract_announcement_date(title):
+def extract_announcement_date(title, url=""):
+    """案内日をタイトル、次に公式URL内のファイル名から抽出する。
+
+    URLは東和薬品の ``f=20260730_...pdf`` のようにタイトルへ日付が
+    表示されない一次資料を補完するために使う。実在する年月日だけを採用する。
+    """
     t = norm(title)
-    for pattern in (r"(20\d{2})[./年](\d{1,2})[./月](\d{1,2})日?",
-                    r"^(20\d{2})(\d{2})(\d{2})"):
-        m = re.search(pattern, t)
+    decoded_url = urllib.parse.unquote(url or "")
+    candidates = (
+        (t, r"(20\d{2})[./年](\d{1,2})[./月](\d{1,2})日?"),
+        (t, r"^(20\d{2})(\d{2})(\d{2})"),
+        (decoded_url, r"(?:^|[/?&=_.-])(20\d{2})[._-]?(\d{2})[._-]?(\d{2})(?=$|[&_.-])"),
+    )
+    for source, pattern in candidates:
+        m = re.search(pattern, source)
         if m:
-            return f"{int(m.group(1)):04d}-{int(m.group(2)):02d}-{int(m.group(3)):02d}"
+            try:
+                value = datetime.date(*(int(m.group(i)) for i in range(1, 4)))
+            except ValueError:
+                continue
+            return value.isoformat()
     return ""
 
 
 def make_announcement_record(maker, title, url, checked=None):
     record = {"maker": maker, "title": title, "url": url,
               "event_type": classify_event(title)}
-    announced_at = extract_announcement_date(title)
+    announced_at = extract_announcement_date(title, url)
     if announced_at:
         record["announced_at"] = announced_at
     if checked:
@@ -628,7 +644,7 @@ def load_manual_announcements(single_path="manual_announcements.json",
         for group in groups:
             info = dict(group["announcement"])
             info.setdefault("event_type", classify_event(info.get("title", "")))
-            announced_at = extract_announcement_date(info.get("title", ""))
+            announced_at = extract_announcement_date(info.get("title", ""), info.get("url", ""))
             if announced_at:
                 info.setdefault("announced_at", announced_at)
             if info.get("url"):
@@ -679,6 +695,9 @@ def match_to_csv(announcements, csv_path, existing=None, unmatched_out=None):
         if not is_normal_row(row) or has_delist_notice(row) or event_type in {"discontinued", "package_discontinued"}:
             value = dict(value)
             value["event_type"] = event_type
+            announced_at = extract_announcement_date(value.get("title", ""), value.get("url", ""))
+            if announced_at:
+                value.setdefault("announced_at", announced_at)
             result[name] = value
 
     used_urls = set()
@@ -800,7 +819,7 @@ def main():
     for name, info in manual.items():
         info = dict(info)
         info.setdefault("event_type", classify_event(info.get("title", "")))
-        announced_at = extract_announcement_date(info.get("title", ""))
+        announced_at = extract_announcement_date(info.get("title", ""), info.get("url", ""))
         if announced_at:
             info.setdefault("announced_at", announced_at)
         matched[name] = info
