@@ -40,7 +40,8 @@ def parse_date(value):
 
 
 def validate_csv(path, *, today=None, min_rows=10000, max_rows=30000, max_age_days=10,
-                 max_missing_sales_maker_rate=None, max_missing_price_rate=None):
+                 max_missing_sales_maker_rate=None, max_missing_price_rate=None,
+                 reject_maker_noise=True):
     errors = []
     today = today or jst_today()
     try:
@@ -90,16 +91,17 @@ def validate_csv(path, *, today=None, min_rows=10000, max_rows=30000, max_age_da
         errors.append("YJコードが重複しています: "
                       + ", ".join(f"{value} ({count}件)" for value, count in duplicate_yj[:5]))
 
-    maker_noise = []
-    for index, row in enumerate(rows, start=2):
-        for column in ("製造メーカー", "販売メーカー"):
-            value = (row.get(column) or "").strip()
-            if MAKER_NOISE_MARKER in value:
-                maker_noise.append((index, column))
-    if maker_noise:
-        errors.append(
-            f"メーカー欄に外部文書の説明文が混入した行が{len(maker_noise):,}件あります: "
-            + ", ".join(f"{line}行目 {column}" for line, column in maker_noise[:5]))
+    if reject_maker_noise:
+        maker_noise = []
+        for index, row in enumerate(rows, start=2):
+            for column in ("製造メーカー", "販売メーカー"):
+                value = (row.get(column) or "").strip()
+                if MAKER_NOISE_MARKER in value:
+                    maker_noise.append((index, column))
+        if maker_noise:
+            errors.append(
+                f"メーカー欄に外部文書の説明文が混入した行が{len(maker_noise):,}件あります: "
+                + ", ".join(f"{line}行目 {column}" for line, column in maker_noise[:5]))
 
     invalid_prices = []
     for index, row in enumerate(rows, start=2):

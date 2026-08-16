@@ -80,6 +80,15 @@ class ValidateSupplyDataTests(unittest.TestCase):
         self.assertIn("外部文書の説明文", errors)
         self.assertIn("薬価が正の数値ではない", errors)
 
+    def test_remote_compatibility_can_defer_new_maker_noise_rule(self):
+        self.write([self.row(
+            製造メーカー="会社名 本注意事項等情報を使用している製造販売業者一覧表",
+        )])
+        errors, _ = validate_csv(
+            self.path, today=dt.date(2026, 8, 3), min_rows=1, max_rows=10,
+            max_age_days=7, reject_maker_noise=False)
+        self.assertFalse(any("外部文書の説明文" in error for error in errors))
+
     def test_missing_price_rate_can_be_guarded(self):
         self.write([
             self.row(),
