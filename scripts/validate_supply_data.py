@@ -37,7 +37,8 @@ def parse_date(value):
         return None
 
 
-def validate_csv(path, *, today=None, min_rows=10000, max_rows=30000, max_age_days=10):
+def validate_csv(path, *, today=None, min_rows=10000, max_rows=30000, max_age_days=10,
+                 max_missing_sales_maker_rate=None):
     errors = []
     today = today or jst_today()
     try:
@@ -117,11 +118,21 @@ def validate_csv(path, *, today=None, min_rows=10000, max_rows=30000, max_age_da
         errors.append(f"データが古すぎます: 最新更新日 {newest.isoformat()} "
                       f"（基準日 {today.isoformat()}、許容 {max_age_days}日以内）")
 
+    missing_sales_maker = sum(not (row.get("販売メーカー") or "").strip() for row in rows)
+    missing_sales_maker_rate = (missing_sales_maker / len(rows) * 100) if rows else 0.0
+    if (max_missing_sales_maker_rate is not None
+            and missing_sales_maker_rate > max_missing_sales_maker_rate):
+        errors.append(
+            f"販売メーカーの記載なし率が上限を超えています: "
+            f"{missing_sales_maker:,}/{len(rows):,}件（{missing_sales_maker_rate:.2f}%、"
+            f"上限 {max_missing_sales_maker_rate:.2f}%）")
+
     summary = {
         "rows": len(rows),
         "newest": newest.isoformat() if newest else None,
         "statuses": dict(sorted(statuses.items())),
-        "missing_sales_maker": sum(not (row.get("販売メーカー") or "").strip() for row in rows),
+        "missing_sales_maker": missing_sales_maker,
+        "missing_sales_maker_rate": missing_sales_maker_rate,
         "missing_price": sum(not (row.get("薬価") or "").strip() for row in rows),
     }
     return errors, summary
@@ -133,9 +144,12 @@ def main(argv=None):
     parser.add_argument("--min-rows", type=int, default=10000)
     parser.add_argument("--max-rows", type=int, default=30000)
     parser.add_argument("--max-age-days", type=int, default=10)
+    parser.add_argument("--max-missing-sales-maker-rate", type=float, default=3.2,
+                        help="販売メーカー欄の記載なし率の上限（既定3.2%%）")
     args = parser.parse_args(argv)
     errors, summary = validate_csv(
-        args.csv, min_rows=args.min_rows, max_rows=args.max_rows, max_age_days=args.max_age_days)
+        args.csv, min_rows=args.min_rows, max_rows=args.max_rows, max_age_days=args.max_age_days,
+        max_missing_sales_maker_rate=args.max_missing_sales_maker_rate)
     print(f"品目数: {summary.get('rows', 0):,}件")
     if summary.get("newest"):
         print(f"最新更新日: {summary['newest']}")
@@ -143,7 +157,8 @@ def main(argv=None):
         print("供給状況: " + ", ".join(
             f"{name}={count:,}" for name, count in summary["statuses"].items()))
     if "missing_sales_maker" in summary:
-        print(f"参考: 販売メーカー空欄={summary['missing_sales_maker']:,}件、"
+        print(f"参考: 販売メーカー記載なし={summary['missing_sales_maker']:,}件"
+              f"（{summary['missing_sales_maker_rate']:.2f}%）、"
               f"薬価空欄={summary['missing_price']:,}件（許容）")
     if errors:
         for error in errors:

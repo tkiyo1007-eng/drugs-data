@@ -60,6 +60,17 @@ class ValidateSupplyDataTests(unittest.TestCase):
         self.write([self.row(更新日="2026/07/01", ステータス更新日="2026/07/01")])
         self.assertTrue(any("データが古すぎます" in error for error in self.errors()))
 
+    def test_missing_sales_maker_rate_can_be_guarded_without_guessing_values(self):
+        self.write([
+            self.row(),
+            self.row(商品名="別の薬", YJコード="1234567A1235", 販売メーカー="テスト販売"),
+        ])
+        errors, summary = validate_csv(
+            self.path, today=dt.date(2026, 8, 3), min_rows=1, max_rows=10, max_age_days=7,
+            max_missing_sales_maker_rate=40.0)
+        self.assertEqual(50.0, summary["missing_sales_maker_rate"])
+        self.assertTrue(any("記載なし率が上限" in error for error in errors))
+
 
 if __name__ == "__main__":
     unittest.main()

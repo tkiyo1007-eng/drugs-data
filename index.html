@@ -1736,8 +1736,17 @@ function detailPairs(d){
         if(h!=="薬価") return [h,v];
         const spec = String(d.row[CSV_HEAD.indexOf("規格")]||"").trim();
         return [h, (spec ? spec+"＝" : "") + v + "円"];
-      })
-      .sort((a,b)=>{
+      });
+    const salesMakerIndex = CSV_HEAD.indexOf("販売メーカー");
+    const manufacturerIndex = CSV_HEAD.indexOf("製造メーカー");
+    const salesMaker = salesMakerIndex >= 0 ? String(d.row[salesMakerIndex]||"").trim() : "";
+    const manufacturer = manufacturerIndex >= 0 ? String(d.row[manufacturerIndex]||"").trim() : "";
+    // 販売メーカー欄が空の品目に製造メーカーを推測転記しない。
+    // 元データに記載がないことと、一覧・検索では製造メーカーへフォールバックすることを明示する。
+    if(salesMakerIndex >= 0 && !salesMaker && manufacturer){
+      pairs.push(["販売メーカー", "公開データに記載なし（製造メーカーを参照）"]);
+    }
+    pairs.sort((a,b)=>{
         const ia=DETAIL_ORDER.indexOf(a[0]), ib=DETAIL_ORDER.indexOf(b[0]);
         return (ia<0?999:ia)-(ib<0?999:ib);
       });
