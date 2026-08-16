@@ -125,12 +125,12 @@ def page_html(date: str, changes: list[dict], item_keys: set[str]) -> str:
 <meta property="og:image" content="{SITE_ROOT}og_updates.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="今日の供給変更を朝の確認に。医薬品供給ナビ">
+<meta property="og:image:alt" content="今日の供給変更をいつでも確認。医薬品供給ナビ">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{esc(title)}">
 <meta name="twitter:description" content="{esc(description)}">
 <meta name="twitter:image" content="{SITE_ROOT}og_updates.png">
-<meta name="twitter:image:alt" content="今日の供給変更を朝の確認に。医薬品供給ナビ">
+<meta name="twitter:image:alt" content="今日の供給変更をいつでも確認。医薬品供給ナビ">
 <script type="application/ld+json">{structured}</script>
 <style>
 :root{{--blue:#2F63E8;--ink:#14213D;--sub:#5A6B8C;--line:#E1E9F7;--bg:#F4F8FF}}
