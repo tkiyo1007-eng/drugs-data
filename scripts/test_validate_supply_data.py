@@ -71,6 +71,26 @@ class ValidateSupplyDataTests(unittest.TestCase):
         self.assertEqual(50.0, summary["missing_sales_maker_rate"])
         self.assertTrue(any("記載なし率が上限" in error for error in errors))
 
+    def test_maker_document_noise_and_invalid_prices_are_rejected(self):
+        self.write([self.row(
+            製造メーカー="会社名 本注意事項等情報を使用している製造販売業者一覧表",
+            薬価="無料",
+        )])
+        errors = "\n".join(self.errors())
+        self.assertIn("外部文書の説明文", errors)
+        self.assertIn("薬価が正の数値ではない", errors)
+
+    def test_missing_price_rate_can_be_guarded(self):
+        self.write([
+            self.row(),
+            self.row(商品名="別の薬", YJコード="1234567A1235", 薬価="10.5"),
+        ])
+        errors, summary = validate_csv(
+            self.path, today=dt.date(2026, 8, 3), min_rows=1, max_rows=10, max_age_days=7,
+            max_missing_price_rate=40.0)
+        self.assertEqual(50.0, summary["missing_price_rate"])
+        self.assertTrue(any("薬価の記載なし率が上限" in error for error in errors))
+
 
 if __name__ == "__main__":
     unittest.main()
