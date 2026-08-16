@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">
+  <title>医薬品供給ナビ 供給変更フィード</title>
+  <id>https://tkiyo1007-eng.github.io/drugs-data/updates/feed.xml</id>
+  <link rel="self" type="application/atom+xml" href="https://tkiyo1007-eng.github.io/drugs-data/updates/feed.xml"/>
+  <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/index.html"/>
+  <updated>2026-08-15T00:00:00+09:00</updated>
+  <author><name>医薬品供給ナビ</name></author>
+  <subtitle>厚生労働省公表データ上で供給状況が変わった医薬品を日別に配信します。</subtitle>
+  <entry>
+    <title>2026年8月15日の供給変更（3品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-08-15.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-08-15.html"/>
+    <updated>2026-08-15T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ3品目</summary>
+  </entry>
+  <entry>
+    <title>2026年8月13日の供給変更（1品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-08-13.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-08-13.html"/>
+    <updated>2026-08-13T00:00:00+09:00</updated>
+    <summary type="text">供給停止へ1品目</summary>
+  </entry>
+  <entry>
+    <title>2026年8月11日の供給変更（1品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-08-11.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-08-11.html"/>
+    <updated>2026-08-11T00:00:00+09:00</updated>
+    <summary type="text">供給停止へ1品目</summary>
+  </entry>
+  <entry>
+    <title>2026年8月8日の供給変更（74品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-08-08.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-08-08.html"/>
+    <updated>2026-08-08T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ31品目、限定出荷へ39品目、供給停止へ4品目</summary>
+  </entry>
+  <entry>
+    <title>2026年8月6日の供給変更（16品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-08-06.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-08-06.html"/>
+    <updated>2026-08-06T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ4品目、限定出荷へ4品目、供給停止へ8品目</summary>
+  </entry>
+  <entry>
+    <title>2026年8月5日の供給変更（37品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-08-05.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-08-05.html"/>
+    <updated>2026-08-05T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ18品目、限定出荷へ4品目、供給停止へ15品目</summary>
+  </entry>
+  <entry>
+    <title>2026年7月31日の供給変更（7品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-31.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-31.html"/>
+    <updated>2026-07-31T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ2品目、限定出荷へ2品目、供給停止へ3品目</summary>
+  </entry>
+  <entry>
+    <title>2026年7月30日の供給変更（15品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-30.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-30.html"/>
+    <updated>2026-07-30T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ4品目、限定出荷へ7品目、供給停止へ4品目</summary>
+  </entry>
+  <entry>
+    <title>2026年7月28日の供給変更（11品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-28.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-28.html"/>
+    <updated>2026-07-28T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ6品目、限定出荷へ4品目、供給停止へ1品目</summary>
+  </entry>
+  <entry>
+    <title>2026年7月27日の供給変更（10品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-27.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-27.html"/>
+    <updated>2026-07-27T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ1品目、限定出荷へ8品目、供給停止へ1品目</summary>
+  </entry>
+  <entry>
+    <title>2026年7月24日の供給変更（10品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-24.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-24.html"/>
+    <updated>2026-07-24T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ3品目、限定出荷へ2品目、供給停止へ5品目</summary>
+  </entry>
+  <entry>
+    <title>2026年7月23日の供給変更（19品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-23.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-23.html"/>
+    <updated>2026-07-23T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ6品目、限定出荷へ8品目、供給停止へ5品目</summary>
+  </entry>
+  <entry>
+    <title>2026年7月22日の供給変更（7品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-22.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-22.html"/>
+    <updated>2026-07-22T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ3品目、限定出荷へ3品目、供給停止へ1品目</summary>
+  </entry>
+  <entry>
+    <title>2026年7月21日の供給変更（8品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-21.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-21.html"/>
+    <updated>2026-07-21T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ2品目、限定出荷へ3品目、供給停止へ3品目</summary>
+  </entry>
+  <entry>
+    <title>2026年7月16日の供給変更（8品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-16.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-16.html"/>
+    <updated>2026-07-16T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ3品目、限定出荷へ4品目、供給停止へ1品目</summary>
+  </entry>
+  <entry>
+    <title>2026年7月15日の供給変更（5品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-15.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-15.html"/>
+    <updated>2026-07-15T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ1品目、限定出荷へ1品目、供給停止へ3品目</summary>
+  </entry>
+  <entry>
+    <title>2026年7月14日の供給変更（4品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-14.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-14.html"/>
+    <updated>2026-07-14T00:00:00+09:00</updated>
+    <summary type="text">供給停止へ4品目</summary>
+  </entry>
+  <entry>
+    <title>2026年7月13日の供給変更（1品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-13.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-13.html"/>
+    <updated>2026-07-13T00:00:00+09:00</updated>
+    <summary type="text">供給停止へ1品目</summary>
+  </entry>
+  <entry>
+    <title>2026年7月11日の供給変更（1品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-11.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-11.html"/>
+    <updated>2026-07-11T00:00:00+09:00</updated>
+    <summary type="text">限定出荷へ1品目</summary>
+  </entry>
+  <entry>
+    <title>2026年7月10日の供給変更（22品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-10.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-10.html"/>
+    <updated>2026-07-10T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ12品目、限定出荷へ6品目、供給停止へ4品目</summary>
+  </entry>
+  <entry>
+    <title>2026年7月9日の供給変更（78品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-09.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-09.html"/>
+    <updated>2026-07-09T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ33品目、限定出荷へ34品目、供給停止へ11品目</summary>
+  </entry>
+  <entry>
+    <title>2026年7月7日の供給変更（9品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-07.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-07.html"/>
+    <updated>2026-07-07T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ6品目、限定出荷へ1品目、供給停止へ2品目</summary>
+  </entry>
+  <entry>
+    <title>2026年7月4日の供給変更（34品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-04.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-04.html"/>
+    <updated>2026-07-04T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ20品目、限定出荷へ9品目、供給停止へ5品目</summary>
+  </entry>
+  <entry>
+    <title>2026年7月2日の供給変更（22品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-02.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-02.html"/>
+    <updated>2026-07-02T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ8品目、限定出荷へ3品目、供給停止へ11品目</summary>
+  </entry>
+  <entry>
+    <title>2026年7月1日の供給変更（3品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-01.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-07-01.html"/>
+    <updated>2026-07-01T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ1品目、限定出荷へ2品目</summary>
+  </entry>
+  <entry>
+    <title>2026年6月30日の供給変更（8品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-06-30.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-06-30.html"/>
+    <updated>2026-06-30T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ7品目、供給停止へ1品目</summary>
+  </entry>
+  <entry>
+    <title>2026年6月28日の供給変更（56品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-06-28.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-06-28.html"/>
+    <updated>2026-06-28T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ24品目、限定出荷へ23品目、供給停止へ9品目</summary>
+  </entry>
+  <entry>
+    <title>2026年6月26日の供給変更（8品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-06-26.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-06-26.html"/>
+    <updated>2026-06-26T00:00:00+09:00</updated>
+    <summary type="text">限定出荷へ7品目、供給停止へ1品目</summary>
+  </entry>
+  <entry>
+    <title>2026年6月24日の供給変更（8品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-06-24.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-06-24.html"/>
+    <updated>2026-06-24T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ5品目、限定出荷へ3品目</summary>
+  </entry>
+  <entry>
+    <title>2026年6月19日の供給変更（32品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-06-19.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-06-19.html"/>
+    <updated>2026-06-19T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ16品目、限定出荷へ13品目、供給停止へ3品目</summary>
+  </entry>
+  <entry>
+    <title>2026年6月18日の供給変更（8品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-06-18.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-06-18.html"/>
+    <updated>2026-06-18T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ4品目、供給停止へ4品目</summary>
+  </entry>
+  <entry>
+    <title>2026年6月17日の供給変更（6品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-06-17.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-06-17.html"/>
+    <updated>2026-06-17T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ2品目、限定出荷へ4品目</summary>
+  </entry>
+  <entry>
+    <title>2026年6月16日の供給変更（7品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-06-16.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-06-16.html"/>
+    <updated>2026-06-16T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ5品目、限定出荷へ2品目</summary>
+  </entry>
+  <entry>
+    <title>2026年6月15日の供給変更（60品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-06-15.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-06-15.html"/>
+    <updated>2026-06-15T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ18品目、限定出荷へ20品目、供給停止へ22品目</summary>
+  </entry>
+</feed>

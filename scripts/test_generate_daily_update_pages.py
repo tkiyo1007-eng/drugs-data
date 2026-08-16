@@ -1,6 +1,6 @@
 import unittest
 
-from generate_daily_update_pages import page_html, sitemap_xml, status_key
+from generate_daily_update_pages import atom_feed, page_html, sitemap_xml, status_key
 
 
 class DailyUpdatePageTests(unittest.TestCase):
@@ -35,6 +35,19 @@ class DailyUpdatePageTests(unittest.TestCase):
         self.assertIn("updates/2026-08-15.html", output)
         self.assertIn("updates/2026-08-16.html", output)
         self.assertIn("<lastmod>2026-08-16</lastmod>", output)
+
+    def test_atom_feed_exposes_dated_updates_and_discovery_links(self):
+        output = atom_feed({
+            "2026-08-16": [{"to": "①通常出荷"}, {"to": "⑤供給停止"}],
+            "2026-08-15": [{"to": "②限定出荷（自社の事情）"}],
+        })
+        self.assertIn('xmlns="http://www.w3.org/2005/Atom"', output)
+        self.assertIn('rel="self" type="application/atom+xml"', output)
+        self.assertIn("<author><name>医薬品供給ナビ</name></author>", output)
+        self.assertIn("updates/2026-08-16.html", output)
+        self.assertIn("2026年8月16日の供給変更（2品目）", output)
+        self.assertIn("通常出荷へ1品目、供給停止へ1品目", output)
+        self.assertEqual(output.count("<entry>"), 2)
 
 
 if __name__ == "__main__":
