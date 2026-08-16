@@ -42,7 +42,11 @@ def load_csv(path: Path) -> dict[str, dict[str, str]]:
     return {(row.get("YJコード") or "").strip(): row for row in rows}
 
 
-def validate(document: object, csv_rows: dict[str, dict[str, str]]) -> list[str]:
+def validate(
+    document: object,
+    csv_rows: dict[str, dict[str, str]],
+    max_missing_announced_rate: float | None = None,
+) -> list[str]:
     errors: list[str] = []
     if not isinstance(document, dict):
         return ["ルートはオブジェクトである必要があります"]
@@ -104,6 +108,18 @@ def validate(document: object, csv_rows: dict[str, dict[str, str]]) -> list[str]
             elif not any(hostname == host or hostname.endswith("." + host) for host in allowed_hosts):
                 errors.append(f"{prefix}.source_url: {item.get('maker')}の公式ドメインではありません")
 
+    terminal = [item for item in products.values()
+                if isinstance(item, dict) and item.get("state") != "active"]
+    missing_announced = [item for item in terminal if not item.get("announced_at")]
+    if max_missing_announced_rate is not None and terminal:
+        missing_rate = len(missing_announced) / len(terminal)
+        if missing_rate > max_missing_announced_rate:
+            errors.append(
+                "announced_at欠損率が上限を超えています: "
+                f"{len(missing_announced)}/{len(terminal)} ({missing_rate:.1%}) > "
+                f"{max_missing_announced_rate:.1%}"
+            )
+
     return errors
 
 
@@ -111,11 +127,12 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("json", type=Path)
     parser.add_argument("--csv", type=Path, default=Path("DrugSupplyAssist/drugs_app_ready.csv"))
+    parser.add_argument("--max-missing-announced-rate", type=float)
     args = parser.parse_args()
 
     with args.json.open(encoding="utf-8") as handle:
         document = json.load(handle)
-    errors = validate(document, load_csv(args.csv))
+    errors = validate(document, load_csv(args.csv), args.max_missing_announced_rate)
     if errors:
         for error in errors:
             print(f"ERROR: {error}", file=sys.stderr)

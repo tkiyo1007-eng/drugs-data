@@ -5,11 +5,13 @@ from __future__ import annotations
 
 import argparse
 import csv
+import datetime as dt
 import json
 import re
 import sys
 import unicodedata
 from pathlib import Path
+from urllib.parse import unquote
 
 from jst_time import jst_now, jst_today
 
@@ -31,12 +33,42 @@ def exact_announcements(document: object) -> dict[str, dict[str, str]]:
     return exact if isinstance(exact, dict) else {}
 
 
-def announcement_date(title: str) -> str | None:
+def announcement_date(title: str, source_url: str = "") -> str | None:
     match = DATE_RE.search(norm(title))
-    if not match:
-        return None
-    year, month, day = match.group("y"), int(match.group("m")), match.group("d")
-    return f"{year}-{month:02d}" + (f"-{int(day):02d}" if day else "")
+    if match:
+        year, month, day = int(match.group("y")), int(match.group("m")), match.group("d")
+        try:
+            if day:
+                return dt.date(year, month, int(day)).isoformat()
+            dt.date(year, month, 1)
+            return f"{year:04d}-{month:02d}"
+        except ValueError:
+            pass
+    decoded_url = unquote(source_url or "")
+    match = re.search(
+        r"(?:^|[/?&=_.-])(?P<y>20\d{2})[._-]?(?P<m>\d{2})[._-]?"
+        r"(?P<d>\d{2})(?=$|[&_.-])",
+        decoded_url,
+    )
+    if match:
+        try:
+            return dt.date(*(int(match.group(key)) for key in ("y", "m", "d"))).isoformat()
+        except ValueError:
+            pass
+    return None
+
+
+def backfill_announcement_dates(products: dict[str, dict[str, str]]) -> int:
+    """既存データにも安全に抽出できる案内日を補完する。"""
+    count = 0
+    for item in products.values():
+        if item.get("announced_at"):
+            continue
+        value = announcement_date(item.get("source_title", ""), item.get("source_url", ""))
+        if value:
+            item["announced_at"] = value
+            count += 1
+    return count
 
 
 def announcement_covers_product(product_name: str, title: str) -> bool:
@@ -84,6 +116,9 @@ def main() -> int:
         with args.existing.open(encoding="utf-8") as handle:
             previous = json.load(handle)
         products.update(previous.get("products") or {})
+        backfilled = backfill_announcement_dates(products)
+        if backfilled:
+            print(f"既存データの案内日を補完: {backfilled}件", file=sys.stderr)
 
     skipped: list[str] = []
     today = jst_today().isoformat()
@@ -113,15 +148,26 @@ def main() -> int:
             current = products.get(yj_code) or {}
             if current.get("state") == "active":
                 continue  # 明示的に解除された品目は自動処理で再登録しない
+            source_url = announcement.get("url") or ""
+            announced_at = (
+                announcement.get("announced_at")
+                or announcement_date(title or "", source_url)
+                or current.get("announced_at")
+            )
+            verified_candidates = [
+                value for value in (announcement.get("checked"), current.get("verified_at"))
+                if value
+            ]
+            verified_at = max(verified_candidates) if verified_candidates else today
             products[yj_code] = {
                 "product_name": row.get("商品名") or product_name,
                 "maker": announcement.get("maker") or "",
                 "state": "discontinuation_announced",
-                **({"announced_at": announcement_date(title or "")} if announcement_date(title or "") else {}),
+                **({"announced_at": announced_at} if announced_at else {}),
                 **({"supply_end_expected": current["supply_end_expected"]} if current.get("supply_end_expected") else {}),
                 "source_title": title or "",
-                "source_url": announcement.get("url") or "",
-                "verified_at": today,
+                "source_url": source_url,
+                "verified_at": verified_at,
             }
 
     output = {

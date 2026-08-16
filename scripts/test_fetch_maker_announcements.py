@@ -25,6 +25,33 @@ class AnnouncementMatchingTests(unittest.TestCase):
         return {"商品名": name, "一般名": "テスト成分", "製造メーカー": maker,
                 "販売メーカー": maker, "供給状況": status, "代替候補": alt}
 
+    def test_announcement_date_falls_back_to_official_pdf_url(self):
+        self.assertEqual(
+            mod.extract_announcement_date(
+                "テスト錠 販売中止のお知らせ",
+                "https://example.test/fileloader.php?f=20260730_test.pdf",
+            ),
+            "2026-07-30",
+        )
+
+    def test_announcement_date_rejects_invalid_url_date(self):
+        self.assertEqual(
+            mod.extract_announcement_date(
+                "テスト錠 販売中止のお知らせ",
+                "https://example.test/20260231_test.pdf",
+            ),
+            "",
+        )
+
+    def test_announcement_date_does_not_parse_embedded_identifier(self):
+        self.assertEqual(
+            mod.extract_announcement_date(
+                "テスト錠 販売中止のお知らせ",
+                "https://example.test/documentX20260730Y.pdf",
+            ),
+            "",
+        )
+
     def test_normal_supply_product_is_matched_to_discontinuation(self):
         name = "テスト錠１ｍｇ「サワイ」"
         path = self.make_csv([self.row(name)])
