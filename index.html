@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>医薬品供給ナビ — 出荷調整・欠品・販売中止を毎日チェック</title>
 <meta name="description" content="厚生労働省の医薬品供給状況データを毎日自動更新。限定出荷・供給停止・販売中止と、同成分・同剤形の関連品目をスマホでもPCでも確認できます。">
+<meta name="robots" content="index,follow,max-image-preview:large">
 <meta property="og:title" content="医薬品供給ナビ">
 <meta property="og:description" content="出荷調整・欠品・販売中止と、同成分・同剤形の関連品目を毎日チェック。厚労省データを見やすく検索。">
 <meta property="og:type" content="website">
@@ -517,6 +518,23 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   color:var(--blue);background:rgba(79,128,244,.08);border:1px solid rgba(79,128,244,.35);transition:.15s;
 }
 .csv-btn:hover{background:rgba(79,128,244,.16)}
+.watch-tools{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  margin:2px 0 14px;padding:13px 15px;border-radius:15px;
+  color:var(--sub);background:rgba(79,128,244,.055);border:1px solid rgba(79,128,244,.18);
+}
+.watch-copy{font-size:11.5px;line-height:1.65;max-width:48em}
+.watch-copy strong{display:block;color:var(--ink);font-size:12.5px;margin-bottom:2px}
+.watch-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.watch-btn{
+  flex:none;font:inherit;font-size:12px;font-weight:800;padding:8px 14px;border-radius:999px;cursor:pointer;
+  color:#fff;background:linear-gradient(135deg,var(--blue-mid),var(--blue));
+  border:1px solid rgba(47,99,232,.35);box-shadow:0 7px 16px -9px rgba(47,99,232,.75);
+}
+.watch-btn:hover{transform:translateY(-1px)}
+.watch-btn:disabled{opacity:.5;cursor:wait;transform:none}
+.watch-result{width:100%;font-size:11.5px;color:var(--sub)}
+.watch-result.ok{color:#1B7A4C}.watch-result.warn{color:#9F5E11}
 .empty{grid-column:1/-1;text-align:center;padding:40px;color:var(--sub);font-size:14px}
 .empty-icon{width:64px;height:64px;margin:0 auto 16px;color:var(--blue-light);opacity:.9}
 .empty-icon svg{width:100%;height:100%;display:block;animation:emptyFloat 3.2s ease-in-out infinite}
@@ -530,6 +548,35 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .empty-reset:hover{background:#fff;transform:translateY(-1px)}
 .demo-note{margin-top:20px;font-size:12px;color:var(--sub);text-align:center}
 .demo-note a{color:var(--blue);font-weight:700} /* 既定のリンク色だと暗背景で沈むためテーマ色に揃える */
+
+/* 毎日の供給変更を、検索前に把握・共有できる成長導線 */
+.daily-update-card{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;
+  padding:28px 30px;border-radius:24px;
+  background:linear-gradient(135deg,rgba(47,99,232,.12),rgba(95,212,244,.12));
+  border:1px solid rgba(79,128,244,.26);box-shadow:var(--shadow-soft);
+}
+.daily-update-date{font-size:12px;font-weight:900;color:var(--blue);letter-spacing:.06em;margin-bottom:7px}
+.daily-update-card h3{font-size:clamp(19px,2.7vw,27px);line-height:1.45;margin-bottom:8px}
+.daily-update-summary{font-size:13px;color:var(--sub);line-height:1.8}
+.daily-update-stats{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+.daily-update-stat{padding:7px 11px;border-radius:12px;background:rgba(255,255,255,.62);font-size:11.5px;font-weight:800;color:var(--ink)}
+.daily-update-stat strong{font-size:16px;color:var(--blue);margin-right:3px}
+.daily-update-actions{display:flex;flex-direction:column;gap:9px;min-width:168px}
+.daily-update-btn{
+  display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:9px 17px;border-radius:999px;
+  font:inherit;font-size:12.5px;font-weight:900;text-decoration:none;cursor:pointer;
+  color:#fff;background:linear-gradient(135deg,var(--blue-mid),var(--blue));border:1px solid rgba(47,99,232,.3);
+}
+.daily-update-btn.secondary{color:var(--blue);background:rgba(255,255,255,.72);border-color:rgba(79,128,244,.32)}
+.daily-update-btn:disabled{opacity:.5;cursor:wait}
+.daily-share-status{min-height:1.5em;font-size:10.5px;color:var(--sub);text-align:center}
+@media(max-width:640px){
+  .daily-update-card{grid-template-columns:1fr;padding:23px 20px;gap:18px}
+  .daily-update-actions{flex-direction:row;flex-wrap:wrap;min-width:0}
+  .daily-update-btn{flex:1;min-width:130px}
+  .daily-share-status{width:100%}
+}
 .load-more{
   display:block;margin:22px auto 0;cursor:pointer;font-family:inherit;
   font-size:13.5px;font-weight:700;color:var(--blue);
@@ -1069,6 +1116,17 @@ footer a:hover{color:var(--blue)}
       <button type="button" class="pill" data-f="delist" id="pillDelist" aria-pressed="false" style="display:none"></button>
       <button type="button" class="pill" data-f="fav" id="pillFav" aria-pressed="false" style="display:none"></button>
     </div>
+    <div class="watch-tools">
+      <div class="watch-copy">
+        <strong>薬局の採用品目をまとめて監視</strong>
+        「商品名」または「YJコード」列を含むCSVから、お気に入りへ一括登録できます。ファイル内容はこの端末内だけで照合し、外部へ送信しません。
+      </div>
+      <div class="watch-actions">
+        <button type="button" class="watch-btn" id="watchImportBtn" disabled>採用品目CSVを読み込む</button>
+        <input id="watchImportFile" type="file" accept=".csv,text/csv" hidden>
+      </div>
+      <p class="watch-result" id="watchImportResult" role="status" aria-live="polite"></p>
+    </div>
     <div class="result-bar">
       <p class="result-meta" id="meta" role="status" aria-live="polite"></p>
       <button type="button" class="csv-btn" id="csvBtn" hidden>CSV保存</button>
@@ -1084,8 +1142,27 @@ footer a:hover{color:var(--blue)}
     <div class="fav-notice" id="favNotice" hidden></div>
     <div class="drug-list" id="list"></div>
     <button type="button" class="load-more" id="loadMore" hidden></button>
-    <p class="demo-note" id="demoNote">※ デモ用サンプルデータです。実データの検索は iOS アプリ「医薬品供給ナビ」でご利用いただけます。</p>
+    <p class="demo-note" id="demoNote">※ 厚生労働省公表の最新データを読み込んでいます。読み込み完了後、この画面で全品目を検索できます。</p>
     <p class="demo-note">限定出荷・供給停止・販売中止・薬価削除予定の品目には、1品目ごとの詳細ページがあります → <a href="items/index.html">品目別の供給状況ページ一覧</a></p>
+  </div>
+</section>
+
+<section id="daily-update" class="reveal">
+  <p class="sec-eyebrow">DAILY UPDATE</p>
+  <h2>直近の供給変更を、朝の確認に。</h2>
+  <p class="sec-lede">前回データから実際に供給状況が変わった品目だけをまとめています。内容を確認し、そのまま薬局内で共有できます。</p>
+  <div class="daily-update-card" id="dailyUpdateCard" aria-busy="true">
+    <div>
+      <p class="daily-update-date" id="dailyUpdateDate">最新情報を読み込み中</p>
+      <h3 id="dailyUpdateTitle">供給状況の変更を確認しています</h3>
+      <p class="daily-update-summary" id="dailyUpdateSummary">厚生労働省の公開データと前回データの差分を照合しています。</p>
+      <div class="daily-update-stats" id="dailyUpdateStats"></div>
+    </div>
+    <div class="daily-update-actions">
+      <button type="button" class="daily-update-btn" id="dailyUpdateView" disabled>変更品目を見る</button>
+      <button type="button" class="daily-update-btn secondary" id="dailyUpdateShare" disabled>この一覧を共有</button>
+      <p class="daily-share-status" id="dailyShareStatus" role="status" aria-live="polite"></p>
+    </div>
   </div>
 </section>
 
@@ -2005,6 +2082,60 @@ let CHANGES = {};
 let LATEST_CHANGE_DATE = null; // 変化ログ上で最も新しい日（「本日の更新」フィルタ用）
 const SEV = {ok:0, limited:1, stopped:2, ended:3}; // 深刻度（関連品目の並び順用）
 
+/* ===== 直近の供給変更カード ===== */
+const $dailyUpdateCard = document.getElementById("dailyUpdateCard");
+const $dailyUpdateView = document.getElementById("dailyUpdateView");
+const $dailyUpdateShare = document.getElementById("dailyUpdateShare");
+const $dailyShareStatus = document.getElementById("dailyShareStatus");
+let DAILY_SHARE = null;
+function renderDailyUpdate(items){
+  if(!LATEST_CHANGE_DATE){
+    $dailyUpdateCard.setAttribute("aria-busy","false");
+    document.getElementById("dailyUpdateDate").textContent = "変更履歴なし";
+    document.getElementById("dailyUpdateTitle").textContent = "直近の供給変更は確認されていません";
+    document.getElementById("dailyUpdateSummary").textContent = "データ更新後に、前回から状況が変わった品目がここへ表示されます。";
+    return;
+  }
+  const changed = items.filter(x=>CHANGES[x.n] && CHANGES[x.n].date===LATEST_CHANGE_DATE);
+  const counts = {ok:0,limited:0,stopped:0,ended:0};
+  for(const x of changed) counts[mapStatus(CHANGES[x.n].to)]++;
+  const [y,m,d] = LATEST_CHANGE_DATE.replaceAll("/","-").split("-");
+  const dateLabel = `${y}年${Number(m)}月${Number(d)}日`;
+  document.getElementById("dailyUpdateDate").textContent = `${dateLabel}の変更`;
+  document.getElementById("dailyUpdateTitle").textContent = `${changed.length.toLocaleString()}品目の供給状況が変わりました`;
+  document.getElementById("dailyUpdateSummary").textContent = "通常出荷への復帰、限定出荷、供給停止など、前回公表分との差分だけを表示します。";
+  const labels = [["ok","通常出荷へ"],["limited","限定出荷へ"],["stopped","供給停止へ"],["ended","販売中止へ"]];
+  document.getElementById("dailyUpdateStats").innerHTML = labels.filter(([k])=>counts[k]).map(([k,label])=>
+    `<span class="daily-update-stat"><strong class="num">${counts[k].toLocaleString()}</strong>${label}</span>`).join("");
+  DAILY_SHARE = {
+    title: `${dateLabel}の医薬品供給状況の変更｜医薬品供給ナビ`,
+    text: `${dateLabel}は${changed.length.toLocaleString()}品目の供給状況が変わりました。厚生労働省公表データの前回差分です。`,
+    url: new URL(`updates/${LATEST_CHANGE_DATE.replaceAll("/","-")}.html`, location.href).href,
+  };
+  $dailyUpdateCard.setAttribute("aria-busy","false");
+  $dailyUpdateView.disabled = false;
+  $dailyUpdateShare.disabled = false;
+}
+$dailyUpdateView.addEventListener("click", ()=>{
+  if(!LATEST_CHANGE_DATE) return;
+  $q.value = ""; setFilter("changed");
+  document.getElementById("demo").scrollIntoView({behavior:"smooth",block:"start"});
+});
+$dailyUpdateShare.addEventListener("click", async ()=>{
+  if(!DAILY_SHARE) return;
+  $dailyShareStatus.textContent = "";
+  try{
+    if(navigator.share) await navigator.share(DAILY_SHARE);
+    else{
+      await navigator.clipboard.writeText(`${DAILY_SHARE.text}\n${DAILY_SHARE.url}`);
+      $dailyShareStatus.textContent = "共有文とURLをコピーしました";
+    }
+  }catch(e){
+    if(e && e.name === "AbortError") return;
+    $dailyShareStatus.textContent = "共有できませんでした。もう一度お試しください";
+  }
+});
+
 /* ===== 貼付剤の温感/剤形サブタイプ判定（関連品目の混入防止用） =====
    温感タイプはYJコードでは非温感と区別できない（例: ロキソニンテープ50mg=2649735S2024 と
    温感のテープ50mg「タイホウ」=2649735S2237 は先頭9桁まで同一）うえ、「三友」「タイホウ」の
@@ -2064,6 +2195,65 @@ function toggleFav(name){
     document.getElementById("mFav").classList.toggle("on", FAVS.has(name));
 }
 updateFavPill();
+
+/* ===== 採用品目CSVの一括登録 =====
+   ファイルはブラウザ内で読み取り、読み込んだ文字列をfetchや外部APIへ送らない。
+   レセコン等で列名が異なることを想定し、商品名かYJコードのどちらか一方で照合できる。 */
+const $watchImportBtn = document.getElementById("watchImportBtn");
+const $watchImportFile = document.getElementById("watchImportFile");
+const $watchImportResult = document.getElementById("watchImportResult");
+$watchImportBtn.addEventListener("click", ()=> $watchImportFile.click());
+$watchImportFile.addEventListener("change", async ()=>{
+  const file = $watchImportFile.files && $watchImportFile.files[0];
+  if(!file) return;
+  $watchImportResult.className = "watch-result";
+  if(file.size > 5 * 1024 * 1024){
+    $watchImportResult.textContent = "5MBを超えるCSVは読み込めません。採用品目の列だけにして再度お試しください。";
+    $watchImportResult.classList.add("warn");
+    $watchImportFile.value = "";
+    return;
+  }
+  try{
+    const rows = parseCSV((await file.text()).replace(/^\uFEFF/, ""));
+    if(rows.length < 2) throw new Error("CSVにデータ行がありません");
+    if(rows.length > 10001) throw new Error("CSVは見出しを含め10,001行以内にしてください");
+    const headers = rows[0].map(v=>norm(String(v)).replace(/\s+/g,""));
+    const findCol = names => headers.findIndex(h=>names.includes(h));
+    const yjCol = findCol(["yjコード","yjcode","薬価基準収載医薬品コード"]);
+    const nameCol = findCol(["商品名","品名","医薬品名","製品名"]);
+    if(yjCol < 0 && nameCol < 0){
+      throw new Error("「商品名」または「YJコード」列が見つかりません");
+    }
+    const byYj = new Map(ITEMS.filter(x=>x.yj).map(x=>[x.yj.replace(/[^0-9A-Za-z]/g,"").toLowerCase(),x]));
+    const byName = new Map(ITEMS.map(x=>[norm(x.n).replace(/\s+/g,""),x]));
+    let unmatched = 0;
+    const added = new Set();
+    for(const row of rows.slice(1)){
+      const yj = yjCol >= 0 ? String(row[yjCol]||"").replace(/[^0-9A-Za-z]/g,"").toLowerCase() : "";
+      const name = nameCol >= 0 ? norm(String(row[nameCol]||"")).replace(/\s+/g,"") : "";
+      if(!yj && !name) continue;
+      const item = (yj && byYj.get(yj)) || (name && byName.get(name));
+      if(item) added.add(item.n);
+      else unmatched++;
+    }
+    if(!added.size){
+      $watchImportResult.textContent = `照合できる品目がありませんでした（未照合 ${unmatched.toLocaleString()}件）。商品名またはYJコードをご確認ください。`;
+      $watchImportResult.classList.add("warn");
+    }else{
+      for(const name of added) FAVS.add(name);
+      saveFavs(); updateFavPill(); renderFavNotice(); setFilter("fav");
+      $watchImportResult.textContent = `${added.size.toLocaleString()}品目を監視リストへ登録しました` +
+        (unmatched ? `（未照合 ${unmatched.toLocaleString()}件）` : "") + "。CSVの内容は外部へ送信していません。";
+      $watchImportResult.classList.add(unmatched ? "warn" : "ok");
+      document.getElementById("demo").scrollIntoView({behavior:"smooth",block:"start"});
+    }
+  }catch(e){
+    $watchImportResult.textContent = `読み込めませんでした：${e.message || "CSV形式をご確認ください"}`;
+    $watchImportResult.classList.add("warn");
+  }finally{
+    $watchImportFile.value = "";
+  }
+});
 
 // お気に入りのうち直近30日で供給状況が変わったものを検索リストの上に表示
 const $favNotice = document.getElementById("favNotice");
@@ -2711,6 +2901,12 @@ document.getElementById("offlineReload").addEventListener("click", ()=>location.
     // 集計を出せていないことを明示する（固定値を本物のように見せない）
     document.getElementById("pulseSub").textContent =
       "供給状況データを取得できませんでした。時間をおいて再読み込みしてください。";
+    document.getElementById("demoNote").textContent =
+      "※ 実データを取得できなかったため、現在は動作確認用のサンプルを表示しています。医薬品の確認には使用せず、時間をおいて再読み込みしてください。";
+    $dailyUpdateCard.setAttribute("aria-busy","false");
+    document.getElementById("dailyUpdateDate").textContent = "データ取得エラー";
+    document.getElementById("dailyUpdateTitle").textContent = "供給変更を取得できませんでした";
+    document.getElementById("dailyUpdateSummary").textContent = "時間をおいてページを再読み込みしてください。";
     return;
   }
   if(responseUsesCachedData(res)) showCachedDataNotice();
@@ -2769,6 +2965,7 @@ document.getElementById("offlineReload").addEventListener("click", ()=>location.
   });
   CSV_HEAD = head;
   ITEMS = items; LIVE = true;
+  $watchImportBtn.disabled = false;
   visibleCount = PAGE_SIZE;
   loadSupplementalData();
 
@@ -2782,6 +2979,7 @@ document.getElementById("offlineReload").addEventListener("click", ()=>location.
       $pc.style.display = "";
     }
   }
+  renderDailyUpdate(items);
 
   // 「薬価削除予定」ピル: 供給状況欄に関わらず近く販売終了見込みの品目を洗い出す
   const delistCount = items.filter(x=>x.delist).length;
