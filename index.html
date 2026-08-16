@@ -1162,7 +1162,7 @@ footer a:hover{color:var(--blue)}
     <div class="daily-update-actions">
       <button type="button" class="daily-update-btn" id="dailyUpdateView" disabled>変更品目を見る</button>
       <button type="button" class="daily-update-btn secondary" id="dailyUpdateShare" disabled>この一覧を共有</button>
-      <a class="daily-update-btn secondary" id="dailyUpdateFeed" href="updates/feed.xml" type="application/atom+xml" title="RSS・Atom対応アプリで供給変更を購読">更新を購読（RSS）</a>
+      <button type="button" class="daily-update-btn secondary" id="dailyUpdateFeed" title="RSS・Atom対応アプリに貼り付けるURLをコピー">RSS購読URLをコピー</button>
       <p class="daily-share-status" id="dailyShareStatus" role="status" aria-live="polite"></p>
     </div>
   </div>
@@ -2088,6 +2088,7 @@ const SEV = {ok:0, limited:1, stopped:2, ended:3}; // 深刻度（関連品目�
 const $dailyUpdateCard = document.getElementById("dailyUpdateCard");
 const $dailyUpdateView = document.getElementById("dailyUpdateView");
 const $dailyUpdateShare = document.getElementById("dailyUpdateShare");
+const $dailyUpdateFeed = document.getElementById("dailyUpdateFeed");
 const $dailyShareStatus = document.getElementById("dailyShareStatus");
 let DAILY_SHARE = null;
 function renderDailyUpdate(items){
@@ -2135,6 +2136,17 @@ $dailyUpdateShare.addEventListener("click", async ()=>{
   }catch(e){
     if(e && e.name === "AbortError") return;
     $dailyShareStatus.textContent = "共有できませんでした。もう一度お試しください";
+  }
+});
+$dailyUpdateFeed.addEventListener("click", async ()=>{
+  const feedUrl = new URL("updates/feed.xml", location.href).href;
+  $dailyShareStatus.textContent = "";
+  try{
+    await navigator.clipboard.writeText(feedUrl);
+    $dailyShareStatus.textContent = "RSS購読URLをコピーしました。RSSアプリに貼り付けてください";
+  }catch(e){
+    // 権限や非対応ブラウザでも、URLを表示して手動コピーできるようにする。
+    $dailyShareStatus.textContent = `RSS購読URL: ${feedUrl}`;
   }
 });
 
