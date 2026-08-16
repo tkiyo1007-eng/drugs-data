@@ -9,6 +9,7 @@ from collections import Counter, defaultdict
 from datetime import datetime
 from pathlib import Path
 from urllib.parse import quote
+from xml.sax.saxutils import escape as xml_escape
 
 
 SITE_ROOT = "https://tkiyo1007-eng.github.io/drugs-data/"
@@ -118,6 +119,7 @@ def page_html(date: str, changes: list[dict], item_keys: set[str]) -> str:
 <meta name="description" content="{esc(description)}">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="canonical" href="{url}">
+<link rel="alternate" type="application/atom+xml" title="医薬品供給ナビ 供給変更フィード" href="{SITE_ROOT}updates/feed.xml">
 <meta property="og:type" content="article">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(description)}">
@@ -160,7 +162,7 @@ def page_html(date: str, changes: list[dict], item_keys: set[str]) -> str:
 <div class="cta"><h2>採用品目の変化をまとめて確認</h2><p>Web版では、採用品目CSVを端末内だけで読み込み、監視リストへ一括登録できます。</p><a href="../#f=changed">Web版で変更品目を見る</a></div>
 <p class="note">本ページは厚生労働省の公表データをもとに自動生成した非公式情報です。実際の流通状況と異なる場合があります。医薬品の使用・変更は、必ず医師・薬剤師にご相談ください。</p>
 </main>
-<footer>{date_jp}時点｜<a href="../">医薬品供給ナビ</a></footer>
+<footer>{date_jp}時点｜<a href="../">医薬品供給ナビ</a>｜<a href="feed.xml">更新を購読（RSS）</a></footer>
 </div></body></html>
 """
 
@@ -177,8 +179,49 @@ def index_html(groups: dict[str, list[dict]]) -> str:
 <meta name="viewport" content="width=device-width,initial-scale=1"><title>医薬品の供給変更履歴｜医薬品供給ナビ</title>
 <meta name="description" content="厚生労働省公表データ上で供給状況が変わった医療用医薬品を日別に確認できます。">
 <meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="{SITE_ROOT}updates/index.html">
+<link rel="alternate" type="application/atom+xml" title="医薬品供給ナビ 供給変更フィード" href="{SITE_ROOT}updates/feed.xml">
 <style>*{{box-sizing:border-box}}body{{margin:0;background:#F4F8FF;color:#14213D;font-family:"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;line-height:1.7}}main{{max-width:760px;margin:auto;padding:34px 18px}}a{{color:#2F63E8}}h1{{font-size:30px}}p{{color:#5A6B8C}}ul{{list-style:none;padding:0}}li{{display:flex;justify-content:space-between;padding:14px 16px;margin:8px 0;background:#fff;border:1px solid #E1E9F7;border-radius:12px}}li a{{font-weight:700;text-decoration:none}}li span{{color:#5A6B8C;font-size:13px}}</style>
-</head><body><main><a href="../">＋ 医薬品供給ナビ</a><h1>医薬品の供給変更履歴</h1><p>前回公表分から供給状況が変わった品目を日別に掲載しています。</p><ul>{''.join(links)}</ul></main></body></html>"""
+</head><body><main><a href="../">＋ 医薬品供給ナビ</a><h1>医薬品の供給変更履歴</h1><p>前回公表分から供給状況が変わった品目を日別に掲載しています。<a href="feed.xml">更新を購読（RSS）</a></p><ul>{''.join(links)}</ul></main></body></html>"""
+
+
+def atom_feed(groups: dict[str, list[dict]]) -> str:
+    """供給変更をフィードリーダーで継続購読できるAtom 1.0として出力する。"""
+    latest = max(groups)
+    feed_url = f"{SITE_ROOT}updates/feed.xml"
+    entries = []
+    for date in sorted(groups, reverse=True):
+        changes = groups[date]
+        dt = datetime.strptime(date, "%Y-%m-%d")
+        date_jp = f"{dt.year}年{dt.month}月{dt.day}日"
+        counts = Counter(status_key(change["to"]) for change in changes)
+        summary = "、".join(
+            f"{label}へ{counts[key]}品目"
+            for key, label in STATUS_LABELS.items() if counts[key]
+        )
+        url = f"{SITE_ROOT}updates/{date}.html"
+        title = f"{date_jp}の供給変更（{len(changes)}品目）"
+        entries.append(
+            "  <entry>\n"
+            f"    <title>{xml_escape(title)}</title>\n"
+            f"    <id>{url}</id>\n"
+            f"    <link rel=\"alternate\" href=\"{url}\"/>\n"
+            f"    <updated>{date}T00:00:00+09:00</updated>\n"
+            f"    <summary type=\"text\">{xml_escape(summary)}</summary>\n"
+            "  </entry>"
+        )
+    return (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">\n'
+        '  <title>医薬品供給ナビ 供給変更フィード</title>\n'
+        f'  <id>{feed_url}</id>\n'
+        f'  <link rel="self" type="application/atom+xml" href="{feed_url}"/>\n'
+        f'  <link rel="alternate" href="{SITE_ROOT}updates/index.html"/>\n'
+        f'  <updated>{latest}T00:00:00+09:00</updated>\n'
+        '  <author><name>医薬品供給ナビ</name></author>\n'
+        '  <subtitle>厚生労働省公表データ上で供給状況が変わった医薬品を日別に配信します。</subtitle>\n'
+        + "\n".join(entries)
+        + "\n</feed>\n"
+    )
 
 
 def sitemap_xml(dates: list[str]) -> str:
@@ -206,6 +249,7 @@ def main() -> int:
     for date, changes in groups.items():
         (out / f"{date}.html").write_text(page_html(date, changes, item_keys), encoding="utf-8")
     (out / "index.html").write_text(index_html(groups), encoding="utf-8")
+    (out / "feed.xml").write_text(atom_feed(groups), encoding="utf-8")
     (site / "sitemap-updates.xml").write_text(sitemap_xml(list(groups)), encoding="utf-8")
     print(f"供給変更ページ生成: {len(groups)}日分 / {sum(map(len, groups.values()))}件")
     return 0
