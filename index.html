@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>医薬品供給ナビ — 出荷調整・欠品・代替薬を毎日チェック</title>
-<meta name="description" content="厚生労働省の医薬品供給状況データを、毎日自動更新でどこよりも見やすく。限定出荷・供給停止・販売中止をスマホでもPCでも一瞬で確認できる医薬品供給ナビ。">
+<title>医薬品供給ナビ — 出荷調整・欠品・販売中止を毎日チェック</title>
+<meta name="description" content="厚生労働省の医薬品供給状況データを毎日自動更新。限定出荷・供給停止・販売中止と、同成分・同剤形の関連品目をスマホでもPCでも確認できます。">
 <meta property="og:title" content="医薬品供給ナビ">
-<meta property="og:description" content="出荷調整・欠品・代替薬を毎日チェック。厚労省データを最速・最良のUIで。">
+<meta property="og:description" content="出荷調整・欠品・販売中止と、同成分・同剤形の関連品目を毎日チェック。厚労省データを見やすく検索。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tkiyo1007-eng.github.io/drugs-data/">
 <meta property="og:image" content="https://tkiyo1007-eng.github.io/drugs-data/og_image.png">
@@ -15,7 +15,7 @@
 <meta property="og:image:alt" content="医薬品供給ナビの供給状況サマリー">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="医薬品供給ナビ">
-<meta name="twitter:description" content="出荷調整・欠品・代替薬を毎日チェック。厚労省データを最速・最良のUIで。">
+<meta name="twitter:description" content="出荷調整・欠品・販売中止と、同成分・同剤形の関連品目を毎日チェック。厚労省データを見やすく検索。">
 <meta name="twitter:image" content="https://tkiyo1007-eng.github.io/drugs-data/og_image.png">
 <meta name="twitter:image:alt" content="医薬品供給ナビの供給状況サマリー">
 <meta name="apple-itunes-app" content="app-id=6777696446">
@@ -34,7 +34,7 @@
       "name": "医薬品供給ナビ",
       "alternateName": "いやくひんきょうきゅうなび",
       "url": "https://tkiyo1007-eng.github.io/drugs-data/",
-      "description": "厚生労働省の医薬品供給状況データを毎日自動更新。限定出荷・供給停止・販売中止・代替薬をスマホでもPCでも一瞬で確認。",
+      "description": "厚生労働省の医薬品供給状況データを毎日自動更新。限定出荷・供給停止・販売中止と、同成分・同剤形の関連品目をスマホでもPCでも確認。",
       "inLanguage": "ja"
     },
     {
@@ -44,7 +44,7 @@
       "applicationCategory": "MedicalApplication",
       "url": "https://apps.apple.com/jp/app/id6777696446",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
-      "description": "出荷調整・欠品・代替薬を毎日チェックできる無料iOSアプリ。厚労省の医薬品供給状況データ約16,000品目を毎日自動更新。"
+      "description": "出荷調整・欠品・販売中止を毎日チェックできる無料iOSアプリ。厚労省の医薬品供給状況データ約16,000品目を毎日自動更新。"
     },
     {
       "@type": "FAQPage",
@@ -299,6 +299,26 @@ h1 .grad{
 .chip2{bottom:-20px;right:-16px;color:var(--stopped);animation-delay:1.6s}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
 @media(max-width:900px){.chip1{left:0}.chip2{right:0}}
+
+/* スマホでは検索が最初の画面から遠くならないよう、ヒーローを要点だけに圧縮する。
+   App Store導線は固定ナビにもあるため、ヒーロー内はWeb検索を主導線にする。 */
+@media(max-width:640px){
+  nav{top:10px;width:calc(100% - 20px);padding:8px 10px 8px 14px}
+  .brand{font-size:14px}.brand-mark{width:32px;height:32px}
+  .nav-cta{padding:8px 14px;font-size:12.5px}
+  header{padding:82px 20px 20px;gap:14px}
+  .eyebrow{margin-bottom:14px;padding:5px 11px;font-size:11.5px}
+  h1{font-size:32px;margin-bottom:10px}
+  .lede{font-size:14px;line-height:1.7;margin-bottom:16px}
+  header .btn-primary,header .hero-note{display:none}
+  .btn-ghost{padding:11px 18px;font-size:14px}
+  .pulse-card{padding:18px 20px;border-radius:22px}
+  .pulse-total{font-size:36px;margin-top:7px}
+  .pulse-sub,.supply-bar,.legend,.float-chip{display:none}
+  main section{padding:52px 20px}
+  #demo{padding-top:28px}
+  #demo .sec-lede{margin-bottom:24px}
+}
 
 /* ===== セクション共通 ===== */
 section{max-width:1120px;margin:0 auto;padding:76px 24px}
@@ -991,7 +1011,7 @@ footer a:hover{color:var(--blue)}
   <div>
     <span class="eyebrow"><span class="pulse"></span>厚生労働省データ・毎日自動更新</span>
     <h1><span class="nb">医薬品の</span><span class="nb">供給状況が、</span><br><span class="grad">ひと目でわかる。</span></h1>
-    <p class="lede">限定出荷・供給停止・販売中止・代替薬。現場が毎日確認するその情報を、厚労省の公式データからどこよりも速く、どこよりも見やすく。薬剤師・医療従事者のための供給状況チェックツールです。</p>
+    <p class="lede">限定出荷・供給停止・販売中止と、同成分・同剤形の関連品目を、厚労省データから速く、見やすく確認。薬剤師・医療従事者のための供給状況チェックツールです。</p>
     <div class="cta-row">
       <a class="btn-primary" href="https://apps.apple.com/jp/app/%E5%8C%BB%E8%96%AC%E5%93%81%E4%BE%9B%E7%B5%A6%E3%83%8A%E3%83%93/id6777696446" target="_blank" rel="noopener">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.7 12.6c0-3 2.5-4.5 2.6-4.6-1.4-2.1-3.6-2.4-4.4-2.4-1.9-.2-3.6 1.1-4.6 1.1-.9 0-2.4-1.1-4-1-2 0-3.9 1.2-5 3-2.1 3.7-.5 9.1 1.5 12.1 1 1.5 2.2 3.1 3.8 3 1.5-.1 2.1-1 3.9-1s2.4 1 4 1 2.7-1.5 3.7-2.9c1.2-1.7 1.6-3.3 1.7-3.4-.1-.1-3.2-1.3-3.2-4.9zM15.6 3.5c.8-1 1.4-2.4 1.2-3.5-1.2 0-2.7.8-3.5 1.8-.8.9-1.5 2.3-1.3 3.7 1.4.1 2.8-.9 3.6-2z"/></svg>
@@ -1109,7 +1129,7 @@ footer a:hover{color:var(--blue)}
     </div>
     <div class="news-item">
       <div class="news-date num">2026.07.21</div>
-      <div class="news-body"><span class="news-tag">改善</span>詳細画面の「同成分・同剤形の品目」「同じ薬効分類の同系統医薬品」の並び順を改善しました。薬価削除予定の品目が「入手しやすい代替品」として上位に出ないよう調整しています。</div>
+      <div class="news-body"><span class="news-tag">改善</span>詳細画面の関連品目を「同成分・同剤形」に限定しました。薬価削除予定の品目が「入手しやすい品目」として上位に出ないよう調整しています。</div>
     </div>
     <div class="news-item">
       <div class="news-date num">2026.07.20</div>
@@ -1121,11 +1141,11 @@ footer a:hover{color:var(--blue)}
     </div>
     <div class="news-item">
       <div class="news-date num">2026.07.17</div>
-      <div class="news-body"><span class="news-tag">機能追加</span>出荷調整品の詳細に「案内文のポイント（AI要約）」を追加しました。メーカー案内文PDFの要点（停止理由・再開見込み・代替候補）が3行でわかります。<p>あわせて、PMDA新着の回収・安全対策情報をまとめた「医療ニュース」をお知らせ欄に開設。同成分・同分類の関連品目一覧も、剤形・系統まで一致するものに絞り込んで精度を改善しました。</p><p>薬価データも大幅拡充（収載品目の約95%をカバー）。iOSアプリ版v1.5にも同じ機能が搭載されます。</p></div>
+      <div class="news-body"><span class="news-tag">機能追加</span>出荷調整品の詳細に「案内文のポイント（AI要約）」を追加しました。メーカー案内文PDFの要点（停止理由・再開見込み・案内文に記載された候補）が3行でわかります。<p>あわせて、PMDA新着の回収・安全対策情報をまとめた「医療ニュース」をお知らせ欄に開設。同成分・同剤形の関連品目一覧も、剤形・系統まで一致するものに絞り込んで精度を改善しました。</p><p>薬価データも大幅拡充（収載品目の約95%をカバー）。iOSアプリ版v1.5にも同じ機能が搭載されます。</p></div>
     </div>
     <div class="news-item">
       <div class="news-date num">2026.07.12</div>
-      <div class="news-body"><span class="news-tag">機能追加</span>Web版に、iOSアプリ版の新機能をまとめて追加しました。<p>【お気に入り】品目の★を押すとこのブラウザに保存され、供給状況が変わったとき検索結果の上にお知らせが表示されます（定点観測がWebでも可能に）。</p><p>【本日の更新】絞り込みに「本日の更新」が加わり、その日実際に供給状況が変わった品目だけを一覧できます。</p><p>【詳細画面】添付文書を探せるPMDA公式検索へのリンク（品目名入力済み）、出荷再開・解除の見込み、同成分の他社品・同じ薬効分類の医薬品の一覧を追加しました。</p><p>【CSV保存】検索結果をCSVファイルとしてダウンロードできるようになりました（DI業務のリスト作成に）。</p></div>
+      <div class="news-body"><span class="news-tag">機能追加</span>Web版に、iOSアプリ版の新機能をまとめて追加しました。<p>【お気に入り】品目の★を押すとこのブラウザに保存され、供給状況が変わったとき検索結果の上にお知らせが表示されます（定点観測がWebでも可能に）。</p><p>【本日の更新】絞り込みに「本日の更新」が加わり、その日実際に供給状況が変わった品目だけを一覧できます。</p><p>【詳細画面】添付文書を探せるPMDA公式検索へのリンク（品目名入力済み）、出荷再開・解除の見込み、同成分・同剤形の関連品目一覧を追加しました。</p><p>【CSV保存】検索結果をCSVファイルとしてダウンロードできるようになりました（DI業務のリスト作成に）。</p></div>
     </div>
     <div class="news-item">
       <div class="news-date num">2026.07.11</div>
@@ -1137,7 +1157,7 @@ footer a:hover{color:var(--blue)}
     </div>
     <div class="news-item">
       <div class="news-date num">2026.07.08</div>
-      <div class="news-body"><span class="news-tag">機能追加</span>薬品名クリックで詳細情報を表示できるようになりました。規格・薬価・代替候補など、厚生労働省データの全項目を確認できます。<p>あわせて複数キーワードでの絞り込み検索にも対応しました。</p></div>
+      <div class="news-body"><span class="news-tag">機能追加</span>薬品名クリックで詳細情報を表示できるようになりました。規格・薬価・解除／解消見込み・出荷量状況など、厚生労働省データの各項目を確認できます。<p>あわせて複数キーワードでの絞り込み検索にも対応しました。</p></div>
     </div>
     <div class="news-item">
       <div class="news-date num">2026.07.07</div>
@@ -1174,7 +1194,7 @@ footer a:hover{color:var(--blue)}
     <div class="feature glass">
       <div class="f-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
       <h3>現場の声が集まる掲示板</h3>
-      <p>「この代替薬で乗り切っている」──同じ悩みを持つ医療従事者どうしで情報交換できるコミュニティを内蔵しています。</p>
+      <p>「この状況にどう対応しているか」──同じ悩みを持つ医療従事者どうしで情報交換できるコミュニティを内蔵しています。</p>
     </div>
     <div class="feature glass">
       <div class="f-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M12 18h.01"/></svg></div>
@@ -1199,7 +1219,7 @@ footer a:hover{color:var(--blue)}
         <tr><th scope="row">変化のあった品目の時系列表示</th><td class="col-us yes">◎ 前日差分を自動検出</td><td class="no">— 各回のスナップショットのみ</td></tr>
         <tr><th scope="row">お気に入り登録・定点観測</th><td class="col-us yes">◎ 変化があればお知らせ</td><td class="no">—</td></tr>
         <tr><th scope="row">全体像のサマリー可視化</th><td class="col-us yes">◎ 構成比・供給危機指数</td><td class="no">—</td></tr>
-        <tr><th scope="row">品目ごとの関連情報</th><td class="col-us yes">◎ 代替候補・メーカー案内文・同成分の他社品</td><td class="no">— 一部は別資料を要確認</td></tr>
+        <tr><th scope="row">品目ごとの関連情報</th><td class="col-us yes">◎ メーカー案内文・同成分／同剤形の関連品目</td><td class="no">— 一部は別資料を要確認</td></tr>
         <tr><th scope="row">医療従事者コミュニティ</th><td class="col-us yes">◎ 掲示板内蔵（iOSアプリ）</td><td class="no">—</td></tr>
       </tbody>
     </table>
