@@ -18,6 +18,9 @@ class ItemPageMetadataTests(unittest.TestCase):
         output = page_html(row, "1234567F1234", "limited", "2026-08-16", [], {"1234567F1234"})
         self.assertEqual(output.count('rel="canonical"'), 1)
         self.assertIn('content="index,follow,max-image-preview:large"', output)
+        self.assertIn('href="https://tkiyo1007-eng.github.io/drugs-data/#item=1234567F1234"', output)
+        self.assertIn('<script src="../analytics.js"></script>', output)
+        self.assertIn('src="https://gc.zgo.at/count.js"', output)
 
 
 if __name__ == "__main__":

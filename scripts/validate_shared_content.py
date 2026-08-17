@@ -7,6 +7,7 @@ import argparse
 import csv
 import datetime as dt
 import json
+import re
 import sys
 import unicodedata
 from pathlib import Path
@@ -33,6 +34,15 @@ def valid_date(value: object, dotted: bool = False) -> bool:
         return True
     except (TypeError, ValueError):
         return False
+
+
+SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+RESERVED_SLUGS = {"index", "about", "privacy"}
+
+
+def valid_slug(value: object) -> bool:
+    slug = str(value or "")
+    return bool(SLUG_RE.fullmatch(slug)) and slug not in RESERVED_SLUGS
 
 
 def validate(base: Path) -> list[str]:
@@ -76,16 +86,23 @@ def validate(base: Path) -> list[str]:
             errors.append("featured_products.json.products: 1件以上の配列にしてください")
         else:
             seen_labels: set[str] = set()
+            seen_slugs: set[str] = set()
             for index, item in enumerate(products):
                 prefix = f"featured_products.json.products[{index}]"
                 if not isinstance(item, dict):
                     errors.append(f"{prefix}: オブジェクトにしてください")
                     continue
                 label = str(item.get("label") or "").strip()
+                slug = str(item.get("slug") or "").strip()
                 query = norm(item.get("query"))
-                if not label or not query:
-                    errors.append(f"{prefix}: labelとqueryは必須です")
+                if not label or not query or not slug:
+                    errors.append(f"{prefix}: slug、label、queryは必須です")
                     continue
+                if not valid_slug(slug):
+                    errors.append(f"{prefix}.slug: 小文字英数字とハイフンで指定してください")
+                elif slug in seen_slugs:
+                    errors.append(f"{prefix}.slug: 重複しています")
+                seen_slugs.add(slug)
                 if label in seen_labels:
                     errors.append(f"{prefix}.label: 重複しています")
                 seen_labels.add(label)
@@ -104,14 +121,21 @@ def validate(base: Path) -> list[str]:
             errors.append("industry_topics.json.topics: 1件以上の配列にしてください")
         else:
             seen_titles: set[str] = set()
+            seen_slugs: set[str] = set()
             for index, item in enumerate(items):
                 prefix = f"industry_topics.json.topics[{index}]"
                 if not isinstance(item, dict):
                     errors.append(f"{prefix}: オブジェクトにしてください")
                     continue
-                for field in ("date", "tag", "title", "lede"):
+                for field in ("slug", "date", "tag", "title", "lede"):
                     if not str(item.get(field) or "").strip():
                         errors.append(f"{prefix}.{field}: 必須です")
+                slug = str(item.get("slug") or "").strip()
+                if not valid_slug(slug):
+                    errors.append(f"{prefix}.slug: 小文字英数字とハイフンで指定してください")
+                elif slug in seen_slugs:
+                    errors.append(f"{prefix}.slug: 重複しています")
+                seen_slugs.add(slug)
                 if not valid_date(item.get("date"), dotted=True):
                     errors.append(f"{prefix}.date: YYYY.MM.DDで指定してください")
                 if item.get("tone", "info") not in {"info", "warn", "alert"}:

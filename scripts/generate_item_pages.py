@@ -201,7 +201,8 @@ def page_html(row, key, status, jst_today, siblings, generated_keys):
                else "（厚生労働省データ、毎日自動更新）。")
             + "理由・解除見込み・出荷量状況・同成分の他社品の供給状況もこのページで確認できます。")
     url = f"{SITE_ROOT}items/{key}.html"
-    lp_link = SITE_ROOT + "#drug=" + quote(name, safe="")
+    # 商品名は同名品目があるため、LPの詳細リンクも一意な品目キーを使う。
+    lp_link = SITE_ROOT + "#item=" + quote(key, safe="")
     pmda = "https://www.pmda.go.jp/PmdaSearch/iyakuSearch/?nameWord=" + quote(name, safe="")
 
     # 詳細表: 既知の列を定義順に、その他の列は後ろに(空欄と重複情報はスキップ)
@@ -228,7 +229,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys):
             s_status = map_status(s.get("供給状況") or "")
             s_st = STATUSES[s_status]
             href = (f"{s_key}.html" if s_key in generated_keys
-                    else SITE_ROOT + "#drug=" + quote(s["商品名"], safe=""))
+                    else SITE_ROOT + "#item=" + quote(s_key, safe=""))
             lis.append(
                 f'<li><a href="{href}">{esc(s["商品名"])}</a>'
                 f'<span class="tag status-{s_status}">{s_st["label"]}</span>'
@@ -274,6 +275,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys):
 <meta name="twitter:image:alt" content="医薬品供給ナビの供給状況サマリー">
 <meta name="apple-itunes-app" content="app-id=6777696446">
 <script type="application/ld+json">{breadcrumb_ld}</script>
+<script src="../analytics.js"></script>
 <style>
 :root{{--blue:#2F63E8;--ink:#1C2A44;--sub:#5A6B8C;--line:#E3EAF6}}
 *{{margin:0;padding:0;box-sizing:border-box}}
@@ -346,6 +348,7 @@ footer a{{color:var(--sub)}}
     <p>{esc(updated_note)}｜<a href="{SITE_ROOT}">医薬品供給ナビ</a></p>
   </footer>
 </div>
+<script data-goatcounter="https://kt1007.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
 """
@@ -388,6 +391,7 @@ def index_html(entries, jst_today):
 <link rel="canonical" href="{SITE_ROOT}items/index.html">
 <meta name="apple-itunes-app" content="app-id=6777696446">
 <script type="application/ld+json">{breadcrumb_ld}</script>
+<script src="../analytics.js"></script>
 <style>
 *{{margin:0;padding:0;box-sizing:border-box}}
 body{{font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;color:#1C2A44;background:#F6F9FE;line-height:1.7}}
@@ -414,6 +418,7 @@ footer{{font-size:12px;color:#5A6B8C;text-align:center;margin-top:30px}}
   </main>
   <footer>出典: 厚生労働省「医療用医薬品供給状況」｜<a href="{SITE_ROOT}">医薬品供給ナビ</a></footer>
 </div>
+<script data-goatcounter="https://kt1007.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
 """
