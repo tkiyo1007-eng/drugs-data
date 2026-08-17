@@ -88,6 +88,18 @@ def search_rows(rows: list[dict[str, str]], query: object) -> list[dict[str, str
                                           row.get("商品名") or ""))
 
 
+def topic_related_rows(rows: list[dict[str, str]], topic: dict) -> list[dict[str, str]]:
+    """単一または複数の検索語から、ニュースに関係する品目を重複なく返す。"""
+    raw_queries = topic.get("queries")
+    queries = raw_queries if isinstance(raw_queries, list) else [topic.get("query")]
+    related: dict[str, dict[str, str]] = {}
+    for query in queries:
+        for row in search_rows(rows, query):
+            related[item_key(row)] = row
+    return sorted(related.values(), key=lambda row: (
+        -STATUS[map_status(row.get("供給状況"))][3], row.get("商品名") or ""))
+
+
 def normalize_date(value: object) -> str:
     text = str(value or "").strip().replace("/", "-").replace(".", "-")
     return text if re.fullmatch(r"\d{4}-\d{2}-\d{2}", text) else ""
@@ -303,7 +315,7 @@ def main() -> int:
     product_dir.mkdir(exist_ok=True)
     topic_dates: dict[str, str] = {}
     for topic in topics:
-        related = search_rows(rows, topic.get("query"))
+        related = topic_related_rows(rows, topic)
         (topic_dir / f"{topic['slug']}.html").write_text(
             topic_page(topic, related, generated_keys, lifecycle, topics_doc.get("updated_at", "")),
             encoding="utf-8")

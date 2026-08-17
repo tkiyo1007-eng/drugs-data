@@ -150,10 +150,24 @@ def validate(base: Path) -> list[str]:
                 elif not valid_https(source.get("url")):
                     errors.append(f"{prefix}.source.url: HTTPS URLを指定してください")
                 query = norm(item.get("query"))
+                raw_queries = item.get("queries")
+                queries: list[tuple[str, object]] = []
                 if query:
-                    terms = query.split()
+                    queries.append(("query", item.get("query")))
+                if raw_queries is not None:
+                    if not isinstance(raw_queries, list) or not raw_queries or len(raw_queries) > 20:
+                        errors.append(f"{prefix}.queries: 1～20件の配列にしてください")
+                    else:
+                        queries.extend((f"queries[{query_index}]", value)
+                                       for query_index, value in enumerate(raw_queries))
+                for field, value in queries:
+                    normalized = norm(value)
+                    if not normalized:
+                        errors.append(f"{prefix}.{field}: 空の検索語は指定できません")
+                        continue
+                    terms = normalized.split()
                     if not any(all(term in haystack for term in terms) for haystack in search_haystacks):
-                        errors.append(f"{prefix}.query: CSVの品目に一致しません（{item.get('query')}）")
+                        errors.append(f"{prefix}.{field}: CSVの品目に一致しません（{value}）")
 
     return errors
 
