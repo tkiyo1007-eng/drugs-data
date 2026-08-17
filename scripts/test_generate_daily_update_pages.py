@@ -1,6 +1,6 @@
 import unittest
 
-from generate_daily_update_pages import atom_feed, page_html, sitemap_xml, status_key
+from generate_daily_update_pages import atom_feed, index_html, page_html, sitemap_xml, status_key
 
 
 class DailyUpdatePageTests(unittest.TestCase):
@@ -26,8 +26,27 @@ class DailyUpdatePageTests(unittest.TestCase):
         self.assertIn('content="index,follow,max-image-preview:large"', output)
         self.assertIn('type="application/ld+json"', output)
         self.assertIn('../items/1234567F1234.html', output)
+        self.assertIn('<script src="../analytics.js"></script>', output)
+        self.assertIn('src="https://gc.zgo.at/count.js"', output)
         self.assertIn("テスト錠&lt;10mg&gt;", output)
         self.assertNotIn("テスト錠<10mg>", output)
+
+    def test_page_falls_back_to_unique_item_hash_and_index_uses_private_analytics(self):
+        output = page_html(
+            "2026-08-16",
+            [{
+                "date": "2026-08-16",
+                "name": "同名の可能性がある製品",
+                "from": "①通常出荷",
+                "to": "②限定出荷（その他）",
+                "yj": "1234567F5678",
+            }],
+            set(),
+        )
+        self.assertIn('../#item=1234567F5678', output)
+        listing = index_html({"2026-08-16": [{"to": "①通常出荷"}]})
+        self.assertIn('<script src="../analytics.js"></script>', listing)
+        self.assertIn('src="https://gc.zgo.at/count.js"', listing)
 
     def test_sitemap_contains_index_and_dated_pages(self):
         output = sitemap_xml(["2026-08-15", "2026-08-16"])

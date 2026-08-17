@@ -3,6 +3,7 @@
   "updated_at": "2026-08-05",
   "topics": [
     {
+      "slug": "sawai-discontinued-products-20260805",
       "date": "2026.08.05",
       "tag": "販売中止",
       "tone": "alert",
@@ -21,6 +22,7 @@
       }
     },
     {
+      "slug": "astra-zeneca-bms-merger-report-20260803",
       "date": "2026.08.03",
       "tag": "業界再編",
       "tone": "info",
@@ -36,6 +38,7 @@
       }
     },
     {
+      "slug": "mounjaro-price-cut-20260803",
       "date": "2026.08.03",
       "tag": "薬価引下げ",
       "tone": "warn",
@@ -53,6 +56,7 @@
       }
     },
     {
+      "slug": "locoid-transfer-20260723",
       "date": "2026.07.23",
       "tag": "販売移管",
       "tone": "info",
@@ -70,6 +74,7 @@
       }
     },
     {
+      "slug": "efluelda-launch-delay-20260721",
       "date": "2026.07.21",
       "tag": "発売延期",
       "tone": "warn",

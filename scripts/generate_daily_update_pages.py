@@ -93,6 +93,7 @@ def page_html(date: str, changes: list[dict], item_keys: set[str]) -> str:
         key = status_key(change["to"])
         yj = change["yj"]
         href = (f"../items/{yj}.html" if yj and yj in item_keys
+                else "../#item=" + quote(yj, safe="") if yj
                 else "../#drug=" + quote(change["name"], safe=""))
         rows.append(
             f'<li class="change {key}"><a href="{href}">{esc(change["name"])}</a>'
@@ -134,6 +135,7 @@ def page_html(date: str, changes: list[dict], item_keys: set[str]) -> str:
 <meta name="twitter:image" content="{SITE_ROOT}og_updates.png">
 <meta name="twitter:image:alt" content="今日の供給変更をいつでも確認。医薬品供給ナビ">
 <script type="application/ld+json">{structured}</script>
+<script src="../analytics.js"></script>
 <style>
 :root{{--blue:#2F63E8;--ink:#14213D;--sub:#5A6B8C;--line:#E1E9F7;--bg:#F4F8FF}}
 *{{box-sizing:border-box}}body{{margin:0;font-family:"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;color:var(--ink);background:var(--bg);line-height:1.75}}
@@ -163,7 +165,7 @@ def page_html(date: str, changes: list[dict], item_keys: set[str]) -> str:
 <p class="note">本ページは厚生労働省の公表データをもとに自動生成した非公式情報です。実際の流通状況と異なる場合があります。医薬品の使用・変更は、必ず医師・薬剤師にご相談ください。</p>
 </main>
 <footer>{date_jp}時点｜<a href="../">医薬品供給ナビ</a>｜<a href="feed.xml">更新を購読（RSS）</a></footer>
-</div></body></html>
+</div><script data-goatcounter="https://kt1007.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script></body></html>
 """
 
 
@@ -180,8 +182,9 @@ def index_html(groups: dict[str, list[dict]]) -> str:
 <meta name="description" content="厚生労働省公表データ上で供給状況が変わった医療用医薬品を日別に確認できます。">
 <meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="{SITE_ROOT}updates/index.html">
 <link rel="alternate" type="application/atom+xml" title="医薬品供給ナビ 供給変更フィード" href="{SITE_ROOT}updates/feed.xml">
+<script src="../analytics.js"></script>
 <style>*{{box-sizing:border-box}}body{{margin:0;background:#F4F8FF;color:#14213D;font-family:"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;line-height:1.7}}main{{max-width:760px;margin:auto;padding:34px 18px}}a{{color:#2F63E8}}h1{{font-size:30px}}p{{color:#5A6B8C}}ul{{list-style:none;padding:0}}li{{display:flex;justify-content:space-between;padding:14px 16px;margin:8px 0;background:#fff;border:1px solid #E1E9F7;border-radius:12px}}li a{{font-weight:700;text-decoration:none}}li span{{color:#5A6B8C;font-size:13px}}</style>
-</head><body><main><a href="../">＋ 医薬品供給ナビ</a><h1>医薬品の供給変更履歴</h1><p>前回公表分から供給状況が変わった品目を日別に掲載しています。<a href="feed.xml">更新を購読（RSS）</a></p><ul>{''.join(links)}</ul></main></body></html>"""
+</head><body><main><a href="../">＋ 医薬品供給ナビ</a><h1>医薬品の供給変更履歴</h1><p>前回公表分から供給状況が変わった品目を日別に掲載しています。<a href="feed.xml">更新を購読（RSS）</a></p><ul>{''.join(links)}</ul></main><script data-goatcounter="https://kt1007.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script></body></html>"""
 
 
 def atom_feed(groups: dict[str, list[dict]]) -> str:

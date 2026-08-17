@@ -176,6 +176,9 @@ jobs:
       - name: 日別の供給変更ページを生成
         run: python3 scripts/generate_daily_update_pages.py --changes status_changes.json --site .
 
+      - name: 話題のニュース・注目製品ページを生成
+        run: python3 scripts/generate_curated_pages.py --csv drugs_app_ready.csv --site .
+
       - name: 案内文PDFから包装単位を抽出（新規URLのみ）
         run: python3 scripts/extract_pdf_packages.py maker_announcements.json announcement_packages.json 60
         continue-on-error: true
@@ -195,7 +198,7 @@ jobs:
             maker_announcement_events.json maker_collection_health.json unmatched_maker_announcements.json \
             product_lifecycle.json announcement_packages.json packages_cache.json status_changes.json \
             resolution_stats.json crisis_index.json news.json items sitemap-items.xml \
-            updates sitemap-updates.xml
+            updates sitemap-updates.xml topics products sitemap-curated.xml
           git diff --cached --quiet && echo "変更なし" && exit 0
           git commit -m "データ自動更新: $(TZ=Asia/Tokyo date +'%Y/%m/%d')"
           git pull --rebase origin main || true
