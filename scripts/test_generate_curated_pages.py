@@ -6,7 +6,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from generate_curated_pages import search_rows
+from generate_curated_pages import search_rows, topic_related_rows
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -24,6 +24,16 @@ class CuratedPageGenerationTests(unittest.TestCase):
 
         self.assertEqual(2, len(found))
         self.assertEqual("⑤供給停止", found[0]["供給状況"])
+
+    def test_topic_can_group_multiple_product_queries_without_duplicates(self):
+        rows = [
+            {"商品名": "製品A錠10mg", "供給状況": "①通常出荷", "YJコード": "1111111F1111"},
+            {"商品名": "製品B錠20mg", "供給状況": "②限定出荷", "YJコード": "2222222F2222"},
+        ]
+
+        found = topic_related_rows(rows, {"queries": ["製品A", "製品B", "製品A錠"]})
+
+        self.assertEqual(["製品B錠20mg", "製品A錠10mg"], [row["商品名"] for row in found])
 
     def test_generator_creates_safe_crawlable_topic_and_product_pages(self):
         with tempfile.TemporaryDirectory() as directory:
