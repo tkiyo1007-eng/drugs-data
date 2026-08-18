@@ -20,16 +20,34 @@ def _load_json(path):
         return json.load(f)
 
 
-def _validate_date(value, label, errors):
+def _validate_date(value, label, errors, *, allow_month=False):
+    """Validate an ISO calendar date without adding precision the source lacks.
+
+    Manufacturer notices are sometimes published with only a year and month.
+    ``announced_at`` therefore accepts both ``YYYY-MM`` and ``YYYY-MM-DD``;
+    operational timestamps such as ``checked`` remain full dates.
+    """
     if value in (None, ""):
         return
-    try:
-        parsed = datetime.date.fromisoformat(str(value))
-    except ValueError:
-        errors.append(f"{label}がYYYY-MM-DD形式の実在日ではありません: {value}")
+    text = str(value)
+    if allow_month and len(text) == 7:
+        try:
+            parsed_month = datetime.date.fromisoformat(f"{text}-01")
+        except ValueError:
+            errors.append(f"{label}がYYYY-MM形式の実在月ではありません: {value}")
+            return
+        if parsed_month.strftime("%Y-%m") != text:
+            errors.append(f"{label}がYYYY-MM形式ではありません: {value}")
         return
-    if parsed.isoformat() != str(value):
-        errors.append(f"{label}がYYYY-MM-DD形式ではありません: {value}")
+    try:
+        parsed = datetime.date.fromisoformat(text)
+    except ValueError:
+        expected = "YYYY-MMまたはYYYY-MM-DD" if allow_month else "YYYY-MM-DD"
+        errors.append(f"{label}が{expected}形式の実在日ではありません: {value}")
+        return
+    if parsed.isoformat() != text:
+        expected = "YYYY-MMまたはYYYY-MM-DD" if allow_month else "YYYY-MM-DD"
+        errors.append(f"{label}が{expected}形式ではありません: {value}")
 
 
 def validate(csv_path, announcement_path, min_count=1):
@@ -58,7 +76,10 @@ def validate(csv_path, announcement_path, min_count=1):
         event_type = info.get("event_type")
         if event_type is not None and event_type not in ALLOWED_EVENT_TYPES:
             errors.append(f"未知のevent_type: {name} ({event_type})")
-        _validate_date(info.get("announced_at"), f"announced_at: {name}", errors)
+        _validate_date(
+            info.get("announced_at"), f"announced_at: {name}", errors,
+            allow_month=True,
+        )
         _validate_date(info.get("checked"), f"checked: {name}", errors)
     return errors
 
@@ -87,7 +108,11 @@ def validate_history(history_path):
                 errors.append(f"案内履歴URLがHTTPSではありません: {name}")
             if event.get("event_type") not in ALLOWED_EVENT_TYPES:
                 errors.append(f"案内履歴のevent_typeが不正: {name} ({event.get('event_type')})")
-            for field in ("announced_at", "first_seen", "last_checked"):
+            _validate_date(
+                event.get("announced_at"), f"案内履歴のannounced_at: {name}", errors,
+                allow_month=True,
+            )
+            for field in ("first_seen", "last_checked"):
                 _validate_date(event.get(field), f"案内履歴の{field}: {name}", errors)
     return errors
 
@@ -134,7 +159,10 @@ def validate_unmatched(path):
         if key in seen:
             errors.append(f"未マッチ案内のURLが重複しています: {url}")
         seen.add(key)
-        _validate_date(info.get("announced_at"), f"{label}.announced_at", errors)
+        _validate_date(
+            info.get("announced_at"), f"{label}.announced_at", errors,
+            allow_month=True,
+        )
     return errors
 
 
@@ -177,7 +205,10 @@ def validate_manual_groups(csv_path, path):
         event_type = info.get("event_type")
         if event_type is not None and event_type not in ALLOWED_EVENT_TYPES:
             errors.append(f"{label}.announcement.event_typeが不正です: {event_type}")
-        _validate_date(info.get("announced_at"), f"{label}.announcement.announced_at", errors)
+        _validate_date(
+            info.get("announced_at"), f"{label}.announcement.announced_at", errors,
+            allow_month=True,
+        )
         if isinstance(products, list):
             for name in products:
                 key = (name, url)

@@ -99,6 +99,36 @@ class ValidateMakerAnnouncementsTests(unittest.TestCase):
         }})
         self.assertTrue(any("実在日" in e for e in validate(self.csv_path, path, min_count=1)))
 
+    def test_announced_at_accepts_exact_month_precision_from_2026_notices(self):
+        for announced_at in ("2026-05", "2026-07"):
+            with self.subTest(announced_at=announced_at):
+                path = self.write_json({"テスト錠": {
+                    "maker": "テスト製薬", "title": "販売中止のご案内",
+                    "url": "https://example.test/a.pdf", "event_type": "discontinued",
+                    "announced_at": announced_at,
+                }})
+                self.assertEqual(validate(self.csv_path, path, min_count=1), [])
+
+    def test_announced_at_rejects_invalid_or_non_padded_month(self):
+        for announced_at in ("2026-13", "2026-5"):
+            with self.subTest(announced_at=announced_at):
+                path = self.write_json({"テスト錠": {
+                    "maker": "テスト製薬", "title": "販売中止のご案内",
+                    "url": "https://example.test/a.pdf", "event_type": "discontinued",
+                    "announced_at": announced_at,
+                }})
+                self.assertTrue(validate(self.csv_path, path, min_count=1))
+
+    def test_operational_checked_date_still_requires_day_precision(self):
+        path = self.write_json({"テスト錠": {
+            "maker": "テスト製薬", "title": "販売中止のご案内",
+            "url": "https://example.test/a.pdf", "event_type": "discontinued",
+            "announced_at": "2026-05", "checked": "2026-05",
+        }})
+        errors = "\n".join(validate(self.csv_path, path, min_count=1))
+        self.assertIn("checked", errors)
+        self.assertIn("YYYY-MM-DD", errors)
+
     def test_manual_groups_validate_products_and_announcement(self):
         valid = self.write_named_json("manual-groups-valid.json", [{
             "products": ["テスト錠"],
