@@ -162,7 +162,7 @@ body{
 }
 
 /* ===== ナビ ===== */
-nav{
+.site-nav{
   position:fixed;top:14px;left:50%;transform:translateX(-50%);
   width:min(1120px,calc(100% - 32px));z-index:100;
   display:flex;align-items:center;justify-content:space-between;
@@ -197,6 +197,30 @@ nav{
 .nav-cta:hover{transform:translateY(-1px);box-shadow:0 10px 24px -6px rgba(47,99,232,.7)}
 @media(max-width:760px){.nav-links a:not(.nav-cta){display:none}}
 @media(max-width:1080px) and (min-width:761px){.nav-links a:not(.nav-cta):nth-child(n+4){display:none}}
+
+/* スマホの主要4導線。デスクトップではDOMにも場所を取らず、モバイルだけに表示する */
+.mobile-quick-nav{display:none}
+.mobile-quick-link{
+  color:var(--sub);text-decoration:none;font-size:10.5px;font-weight:800;line-height:1;
+  display:flex;min-width:0;min-height:48px;border-radius:14px;align-items:center;justify-content:center;
+  flex-direction:column;gap:4px;transition:color .18s,background .18s,transform .18s;
+}
+.mobile-quick-link svg{width:20px;height:20px;flex:none}
+.mobile-quick-link[aria-current="location"]{color:var(--blue-deep);background:rgba(79,128,244,.13)}
+.mobile-quick-link:active{transform:scale(.96)}
+.mobile-quick-link:focus-visible{outline:3px solid rgba(47,99,232,.48);outline-offset:2px}
+@media(max-width:760px){
+  body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+  .mobile-quick-nav{
+    position:fixed;z-index:180;left:10px;right:10px;
+    bottom:max(8px,env(safe-area-inset-bottom,0px));
+    display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;
+    padding:6px;border-radius:20px;background:rgba(255,255,255,.9);
+    border:1px solid rgba(255,255,255,.92);box-shadow:0 14px 40px -14px rgba(20,39,94,.5);
+    backdrop-filter:blur(24px) saturate(1.45);-webkit-backdrop-filter:blur(24px) saturate(1.45);
+  }
+  #demo,#daily-update,#topics,#watchDashboard{scroll-margin-top:84px}
+}
 
 /* ===== ヒーロー ===== */
 header{
@@ -306,7 +330,7 @@ h1 .grad{
 /* スマホでは検索が最初の画面から遠くならないよう、ヒーローを要点だけに圧縮する。
    App Store導線は固定ナビにもあるため、ヒーロー内はWeb検索を主導線にする。 */
 @media(max-width:640px){
-  nav{top:10px;width:calc(100% - 20px);padding:8px 10px 8px 14px}
+  .site-nav{top:10px;width:calc(100% - 20px);padding:8px 10px 8px 14px}
   .brand{font-size:14px}.brand-mark{width:32px;height:32px}
   .nav-cta{padding:8px 14px;font-size:12.5px}
   header{padding:82px 20px 20px;gap:14px}
@@ -1023,11 +1047,17 @@ footer a:hover{color:var(--blue)}
     border-top:1.6px solid rgba(150,178,240,.28);
     box-shadow:var(--shadow-soft), inset 0 1px 0 rgba(150,178,240,.12);
   }
-  nav{
+  .site-nav{
     background:rgba(16,26,54,.72);
     border:1px solid rgba(126,152,214,.2);
     box-shadow:0 8px 32px -12px rgba(0,0,0,.7);
   }
+  .mobile-quick-nav{
+    background:rgba(16,26,54,.92);border-color:rgba(126,152,214,.24);
+    box-shadow:0 14px 40px -14px rgba(0,0,0,.85);
+  }
+  .mobile-quick-link{color:#AEBBDA}
+  .mobile-quick-link[aria-current="location"]{color:#EAF0FF;background:rgba(109,155,255,.22)}
   .btn-ghost{background:rgba(40,58,108,.6);border-color:rgba(143,180,255,.32);color:var(--ink)}
   .btn-ghost:hover{background:rgba(52,74,134,.75)}
 
@@ -1073,7 +1103,7 @@ footer a:hover{color:var(--blue)}
 <div class="aurora"><div class="blob"></div></div>
 <div class="grain"></div>
 
-<nav>
+<nav class="site-nav" aria-label="サイト内ナビゲーション">
   <a class="brand" href="#top">
     <span class="brand-mark">✚</span>
     医薬品供給ナビ
@@ -1088,6 +1118,25 @@ footer a:hover{color:var(--blue)}
     <a href="#faq">よくある質問</a>
     <a class="nav-cta" href="#app">アプリを入手</a>
   </div>
+</nav>
+
+<nav class="mobile-quick-nav" aria-label="モバイルクイックナビ">
+  <a class="mobile-quick-link" href="#demo" data-quick-target="demo" aria-current="location">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    <span>検索</span>
+  </a>
+  <a class="mobile-quick-link" href="#daily-update" data-quick-target="daily-update">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7v5h-5"/><path d="M4 17v-5h5"/><path d="M6.1 8.2A7 7 0 0 1 19.8 12M4.2 12a7 7 0 0 0 13.7 3.8"/></svg>
+    <span>更新</span>
+  </a>
+  <a class="mobile-quick-link" href="#topics" data-quick-target="topics">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg>
+    <span>ニュース</span>
+  </a>
+  <a class="mobile-quick-link" href="#watchDashboard" data-quick-target="watchDashboard">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-3.8 7-10V5l-7-3-7 3v6c0 6.2 7 10 7 10Z"/><path d="m9 12 2 2 4-5"/></svg>
+    <span>監視</span>
+  </a>
 </nav>
 
 <header id="top">
@@ -1196,6 +1245,7 @@ footer a:hover{color:var(--blue)}
       <button type="button" class="csv-btn" id="csvBtn" hidden>CSV保存</button>
       <label class="page-size">表示件数
         <select id="pageSize">
+          <option value="5" selected>5件</option>
           <option value="15">15件</option>
           <option value="30">30件</option>
           <option value="60">60件</option>
@@ -1319,7 +1369,7 @@ footer a:hover{color:var(--blue)}
     <div class="feature glass">
       <div class="f-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></div>
       <h3>毎日、自動で最新に</h3>
-      <p>厚生労働省の公表データ（平日更新）を毎晩自動取得。朝いちばんに開けば、常にきのう時点の最新供給状況が揃っています。</p>
+      <p>厚生労働省の公表データ（平日更新）を毎晩取得。画面に表示されたデータ日付とともに、取得できた最新の供給状況を確認できます。</p>
     </div>
     <div class="feature glass">
       <div class="f-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
@@ -1374,8 +1424,8 @@ footer a:hover{color:var(--blue)}
 
 <section id="data" class="reveal">
   <p class="sec-eyebrow">DATA PIPELINE</p>
-  <h2>データはすべて、厚生労働省の公表情報です。</h2>
-  <p class="sec-lede">表示するのは加工した憶測ではなく、厚生労働省「医療用医薬品供給状況」の公表データそのもの。取得から表示まで全自動のパイプラインで鮮度を保ちます。</p>
+  <h2>供給区分と補足情報の出典を、分けて表示します。</h2>
+  <p class="sec-lede">現在の供給区分は、厚生労働省「医療用医薬品供給状況」の公表値をもとに表示します。メーカー案内文・PMDAニュース・自動抽出やAI要約は、出典と情報の種類を明示して厚労省データと区別します。</p>
   <div class="flow">
     <div class="flow-step glass">
       <h3>厚労省が公表</h3>
@@ -1383,7 +1433,7 @@ footer a:hover{color:var(--blue)}
     </div>
     <div class="flow-step glass">
       <h3>毎晩、自動取得</h3>
-      <p>公表データを毎晩自動で取得・整形。人手を介さないため、取りこぼしや転記ミスがありません。</p>
+      <p>公表データを毎晩自動で取得・整形し、検証処理を通して公開します。自動処理でも取得漏れや変換誤りの可能性はあるため、データ日付と出典をあわせて表示します。</p>
     </div>
     <div class="flow-step glass">
       <h3>差分を検出</h3>
@@ -1403,8 +1453,8 @@ footer a:hover{color:var(--blue)}
   <div class="glossary-grid">
     <div class="term-card glass">
       <span class="term-tag" style="--sc:var(--ok)">通常出荷</span>
-      <h3>制限なく入手できる状態</h3>
-      <p>特に出荷の制限はなく、通常どおり注文・入荷ができる状態です。</p>
+      <h3>厚労省の公表上、出荷量が通常の区分</h3>
+      <p>厚労省資料で「A.出荷量通常」と報告されている区分です。地域・取引先ごとの在庫や受注可否を保証するものではなく、メーカーから販売中止予定などが別途公表されている場合もあります。</p>
     </div>
     <div class="term-card glass">
       <span class="term-tag" style="--sc:var(--limited)">限定出荷</span>
@@ -1597,6 +1647,48 @@ footer a:hover{color:var(--blue)}
   setTimeout(()=>els.forEach(el=>el.classList.add("on")), 8000);
 })();
 
+/* スマホ下部ナビの現在地。検索内の監視ダッシュボードも独立した主要導線として扱う */
+(function(){
+  const links = [...document.querySelectorAll(".mobile-quick-link")];
+  const targets = links.map(link=>({link,target:document.getElementById(link.dataset.quickTarget)}))
+    .filter(x=>x.target);
+  if(!targets.length) return;
+  let frame = 0;
+  function updateQuickNav(){
+    frame = 0;
+    if(!matchMedia("(max-width: 760px)").matches) return;
+    const focusY = innerHeight * .42;
+    const watch = targets.find(entry=>entry.target.id === "watchDashboard");
+    const watchRect = watch && watch.target.getBoundingClientRect();
+    let current = watchRect && watchRect.top <= focusY && watchRect.bottom >= focusY ? watch : null;
+    let bestAbove = -Infinity, nearest = Infinity;
+    if(!current){
+      for(const entry of targets.filter(entry=>entry !== watch)){
+        const top = entry.target.getBoundingClientRect().top;
+        if(top <= focusY && top > bestAbove){ current = entry; bestAbove = top; }
+        if(bestAbove === -Infinity && Math.abs(top-focusY) < nearest){ current = entry; nearest = Math.abs(top-focusY); }
+      }
+    }
+    for(const entry of targets){
+      if(entry === current) entry.link.setAttribute("aria-current","location");
+      else entry.link.removeAttribute("aria-current");
+    }
+  }
+  function scheduleQuickNav(){
+    if(!frame) frame = requestAnimationFrame(updateQuickNav);
+  }
+  addEventListener("scroll",scheduleQuickNav,{passive:true});
+  addEventListener("resize",scheduleQuickNav,{passive:true});
+  links.forEach(link=>link.addEventListener("click",()=>{
+    links.forEach(other=>other.removeAttribute("aria-current"));
+    link.setAttribute("aria-current","location");
+    // smooth scroll の最初のscrollイベントで出発地点へ戻される場合があるため、
+    // 移動が落ち着いた後にも現在地を再判定する。
+    setTimeout(updateQuickNav,800);
+  }));
+  updateQuickNav();
+})();
+
 /* ===== サンプルデータ ===== */
 const STATUS = {
   ok:      {label:"通常出荷", color:"#2FAE6E"},
@@ -1635,7 +1727,7 @@ const $meta = document.getElementById("meta");
 if(matchMedia("(max-width: 480px)").matches) $q.placeholder = "薬品名・成分名で検索";
 let filter = "all";
 const $pageSize = document.getElementById("pageSize");
-let PAGE_SIZE = 15;
+let PAGE_SIZE = 5;
 let visibleCount = PAGE_SIZE;
 
 // 検索用正規化: NFKC(全角→半角等) + 小文字 + ひらがな→カタカナ
