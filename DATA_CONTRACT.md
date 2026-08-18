@@ -11,6 +11,12 @@ Web版とiOS版は画面構成を揃えるのではなく、供給情報の意�
 | `featured_products.json` | 両版に表示する注目製品と検索語 |
 | `industry_topics.json` | 両版に表示する業界トピック |
 
+メーカー案内と販売ライフサイクルの `announced_at` は、一次資料に日まで記載が
+ある場合は `YYYY-MM-DD`、年月だけの場合は `YYYY-MM` とする。年月しか分からない
+案内に便宜上の1日を補わず、Web・iOSは文字列の精度をそのまま表示する。収集確認日
+`checked`、履歴の `first_seen` / `last_checked`、検証日 `verified_at` は
+`YYYY-MM-DD` とする。
+
 ## 表示上の原則
 
 - 厚労省の現在の供給区分とメーカーの将来の販売予定は別の事実として表示する。
