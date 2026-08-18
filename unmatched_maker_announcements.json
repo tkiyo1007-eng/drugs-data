@@ -771,441 +771,514 @@
  },
  {
   "maker": "日本ケミファ",
-  "title": "取扱い製品の供給状況一覧",
+  "title": "2026年8月7日 取扱い製品の供給状況一覧",
   "url": "https://www.nc-medical.com/product_topics/f4bj0h000000dtwu-att/f4bj0h000000dtxi.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2026-08-07"
  },
  {
   "maker": "日本ケミファ",
-  "title": "出荷調整解除のお知らせ",
+  "title": "2026年7月28日 出荷調整解除のお知らせ",
   "url": "https://www.nc-medical.com/product_topics/p5ib910000002jw8-att/p5ib910000002jww.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2026-07-28"
  },
  {
   "maker": "日本ケミファ",
-  "title": "出荷調整解除のお知らせ",
+  "title": "2026年6月25日 出荷調整解除のお知らせ",
   "url": "https://www.nc-medical.com/product_topics/p5ib910000000w3x-att/p5ib910000000w4l.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2026-06-25"
  },
  {
   "maker": "日本ケミファ",
-  "title": "出荷調整解除のお知らせ",
+  "title": "2026年6月17日 出荷調整解除のお知らせ",
   "url": "https://www.nc-medical.com/product_topics/p5ib910000000i2a-att/p5ib910000000i2y.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2026-06-17"
  },
  {
   "maker": "日本ケミファ",
-  "title": "取扱い製品の一部包装中止のご案内",
+  "title": "2026年4月30日 取扱い製品の一部包装中止のご案内",
   "url": "https://www.nc-medical.com/product_topics/f4bj0h000000je0v-att/f4bj0h000000je1j.pdf",
-  "event_type": "package_discontinued"
+  "event_type": "package_discontinued",
+  "announced_at": "2026-04-30"
  },
  {
   "maker": "日本ケミファ",
-  "title": "変更品出荷（切換後ロット等）未定情報一覧_S-2888",
+  "title": "2026年3月17日 変更品出荷（切換後ロット等）未定情報一覧_S-2888",
   "url": "https://www.nc-medical.com/product_topics/doc/S-2888.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2026-03-17"
  },
  {
   "maker": "日本ケミファ",
-  "title": "出荷調整解除のお知らせ",
+  "title": "2026年3月4日 出荷調整解除のお知らせ",
   "url": "https://www.nc-medical.com/product_topics/f4bj0h000000h7dq-att/f4bj0h000000h7ee.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2026-03-04"
  },
  {
   "maker": "日本ケミファ",
-  "title": "出荷調整解除のお知らせ",
+  "title": "2026年1月27日 出荷調整解除のお知らせ",
   "url": "https://www.nc-medical.com/product_topics/f4bj0h0000004yu5-att/f4bj0h0000004yut.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2026-01-27"
  },
  {
   "maker": "高田製薬",
-  "title": "限定出荷解除に関するお知らせ②",
+  "title": "2026/08/04 限定出荷解除に関するお知らせ②",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bol8-att/KAIJYO2.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2026-08-04"
  },
  {
   "maker": "高田製薬",
-  "title": "限定出荷解除に関するお知らせ①",
+  "title": "2026/08/04 限定出荷解除に関するお知らせ①",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000boie-att/KAIJYO1.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2026-08-04"
  },
  {
   "maker": "高田製薬",
-  "title": "限定出荷解除に関するお知らせ",
+  "title": "2026/07/08 限定出荷解除に関するお知らせ",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000blya-att/KAIJYO.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2026-07-08"
  },
  {
   "maker": "高田製薬",
-  "title": "限定出荷解除に関するお知らせ",
+  "title": "2026/06/25 限定出荷解除に関するお知らせ",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bkz1-att/KAIJYO.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2026-06-25"
  },
  {
   "maker": "高田製薬",
-  "title": "限定出荷解除に関するお知らせ",
+  "title": "2026/05/29 限定出荷解除に関するお知らせ",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bh46-att/KAIJYO.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2026-05-29"
  },
  {
   "maker": "高田製薬",
-  "title": "出荷停止に関するお知らせとお詫び_硝酸イソソルビド注「タカタ」(第２報)",
+  "title": "2026/05/22 出荷停止に関するお知らせとお詫び_硝酸イソソルビド注「タカタ」(第２報)",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bfhc-att/Isosorbide.pdf",
-  "event_type": "stopped"
+  "event_type": "stopped",
+  "announced_at": "2026-05-22"
  },
  {
   "maker": "高田製薬",
-  "title": "限定出荷解除に関するお知らせ",
+  "title": "2026/05/15 限定出荷解除に関するお知らせ",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bdr0-att/KAIJYO.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2026-05-15"
  },
  {
   "maker": "高田製薬",
-  "title": "限定出荷解除に関するお知らせ",
+  "title": "2026/04/28 限定出荷解除に関するお知らせ",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bbex-att/KAIJYO.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2026-04-28"
  },
  {
   "maker": "高田製薬",
-  "title": "供給に関するお知らせとお詫び_モンテルカストOD 錠5mg「タカタ」",
+  "title": "2026/04/01 供給に関するお知らせとお詫び_モンテルカストOD 錠5mg「タカタ」",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000asov-att/Montelukast.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2026-04-01"
  },
  {
   "maker": "高田製薬",
-  "title": "供給に関するお知らせとお詫び_レボセチリジン塩酸塩OD 錠2.5mg「タカタ」",
+  "title": "2026/04/01 供給に関するお知らせとお詫び_レボセチリジン塩酸塩OD 錠2.5mg「タカタ」",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000asj9-att/LevocetirizineOD.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2026-04-01"
  },
  {
   "maker": "高田製薬",
-  "title": "限定出荷解除に関するお知らせ",
+  "title": "2026/03/25 限定出荷解除に関するお知らせ",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000ardf-att/KAIJYO.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2026-03-25"
  },
  {
   "maker": "高田製薬",
-  "title": "限定出荷解除に関するお知らせ_グラニセトロン点滴静注バッグ 3mg/100mL「タカタ」",
+  "title": "2026/03/04 限定出荷解除に関するお知らせ_グラニセトロン点滴静注バッグ 3mg/100mL「タカタ」",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000algo-att/Granisetron.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2026-03-04"
  },
  {
   "maker": "高田製薬",
-  "title": "限定出荷解除に関するお知らせ",
+  "title": "2026/03/04 限定出荷解除に関するお知らせ",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000aldr-att/KAIJYO.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2026-03-04"
  },
  {
   "maker": "高田製薬",
-  "title": "限定出荷解除に関するお知らせ",
+  "title": "2026/01/29 限定出荷解除に関するお知らせ",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000agou-att/KAIJYO.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2026-01-29"
  },
  {
   "maker": "高田製薬",
-  "title": "限定出荷解除に関するお知らせ",
+  "title": "2026/01/13 限定出荷解除に関するお知らせ",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000a8hu-att/KAIJYO.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2026-01-13"
  },
  {
   "maker": "高田製薬",
-  "title": "出荷停止に関するお知らせとお詫び_硝酸イソソルビド注「タカタ」",
+  "title": "2025/12/03 出荷停止に関するお知らせとお詫び_硝酸イソソルビド注「タカタ」",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000a2s3-att/SYOUSANISOSO.pdf",
-  "event_type": "stopped"
+  "event_type": "stopped",
+  "announced_at": "2025-12-03"
  },
  {
   "maker": "高田製薬",
-  "title": "出荷停止に関するお知らせとお詫び_オザグレルNa 点滴静注20/40/80mg「タカタ」",
+  "title": "2025/12/03 出荷停止に関するお知らせとお詫び_オザグレルNa 点滴静注20/40/80mg「タカタ」",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000a2pa-att/OZAGURE.pdf",
-  "event_type": "stopped"
+  "event_type": "stopped",
+  "announced_at": "2025-12-03"
  },
  {
   "maker": "高田製薬",
-  "title": "限定出荷解除に関するお知らせ",
+  "title": "2025/11/26 限定出荷解除に関するお知らせ",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000009zon-att/KAIJYO.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2025-11-26"
  },
  {
   "maker": "高田製薬",
-  "title": "供給状況品目一覧表",
+  "title": "2025/11/14 供給状況品目一覧表",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000009v1v-att/2025.11.14.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2025-11-14"
  },
  {
   "maker": "高田製薬",
-  "title": "供給状況品目一覧表",
+  "title": "2025/11/06 供給状況品目一覧表",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000009ubl-att/2025.11.06.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2025-11-06"
  },
  {
   "maker": "高田製薬",
-  "title": "限定出荷解除に関するお知らせ",
+  "title": "2025/10/21 限定出荷解除に関するお知らせ",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000009s8c-att/GENTEIKAJYO.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2025-10-21"
  },
  {
   "maker": "高田製薬",
-  "title": "供給状況品目一覧表",
+  "title": "2025/10/21 供給状況品目一覧表",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000009s5l-att/2025.10.21.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2025-10-21"
  },
  {
   "maker": "高田製薬",
-  "title": "供給状況品目一覧表",
+  "title": "2025/10/20 供給状況品目一覧表",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000009ryu-att/2025.10.20.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2025-10-20"
  },
  {
   "maker": "高田製薬",
-  "title": "供給状況品目一覧表",
+  "title": "2025/09/24 供給状況品目一覧表",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000009ijp-att/2025.09.24.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2025-09-24"
  },
  {
   "maker": "高田製薬",
-  "title": "供給に関するお知らせとお詫び_オザグレルNa 点滴静注80mg「タカタ」",
+  "title": "2025/09/24 供給に関するお知らせとお詫び_オザグレルNa 点滴静注80mg「タカタ」",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000009igg-att/OZAGGURERU.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2025-09-24"
  },
  {
   "maker": "高田製薬",
-  "title": "限定出荷解除に関するお知らせ",
+  "title": "2025/09/24 限定出荷解除に関するお知らせ",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000009idk-att/GENTEISYUKKAKAIJYO.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2025-09-24"
  },
  {
   "maker": "高田製薬",
-  "title": "供給に関するお知らせとお詫び_ﾈｵｸﾘﾃｨｹｱ製薬株式会社 製造委託製品",
+  "title": "2025/09/10 供給に関するお知らせとお詫び_ﾈｵｸﾘﾃｨｹｱ製薬株式会社 製造委託製品",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000009grd-att/NEOKURITHI.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2025-09-10"
  },
  {
   "maker": "高田製薬",
-  "title": "供給状況品目一覧表",
+  "title": "2025/09/10 供給状況品目一覧表",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000009gok-att/2025.09.10.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2025-09-10"
  },
  {
   "maker": "高田製薬",
-  "title": "供給状況品目一覧表",
+  "title": "2025/08/08 供給状況品目一覧表",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000009fbp-att/2025.08.08.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2025-08-08"
  },
  {
   "maker": "高田製薬",
-  "title": "限定出荷解除に関するお知らせ",
+  "title": "2025/08/08 限定出荷解除に関するお知らせ",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000009ch1-att/GENTEIKAIJYO.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2025-08-08"
  },
  {
   "maker": "高田製薬",
-  "title": "シオゾール注_製造販売中止のご案内",
+  "title": "2025/07/15 シオゾール注_製造販売中止のご案内",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b00000096wg-att/SIOZORU.pdf",
-  "event_type": "discontinued"
+  "event_type": "discontinued",
+  "announced_at": "2025-07-15"
  },
  {
   "maker": "高田製薬",
-  "title": "エバスチン錠_製造販売中止のご案内",
+  "title": "2025/07/15 エバスチン錠_製造販売中止のご案内",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b00000096qj-att/EBASUTIN.pdf",
-  "event_type": "discontinued"
+  "event_type": "discontinued",
+  "announced_at": "2025-07-15"
  },
  {
   "maker": "高田製薬",
-  "title": "供給状況品目一覧表",
+  "title": "2025/07/15 供給状況品目一覧表",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b00000096ck-att/2025.07.15.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2025-07-15"
  },
  {
   "maker": "高田製薬",
-  "title": "フェキソフェナジン塩酸塩錠_自主回収に関するお詫びとご協力のお願い",
+  "title": "2025/06/25 フェキソフェナジン塩酸塩錠_自主回収に関するお詫びとご協力のお願い",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000009566-att/FEKISOFENAJINJ.pdf",
-  "event_type": "other"
+  "event_type": "other",
+  "announced_at": "2025-06-25"
  },
  {
   "maker": "高田製薬",
-  "title": "供給状況品目一覧表",
+  "title": "2025/06/25 供給状況品目一覧表",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000009503-att/2025.06.25.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2025-06-25"
  },
  {
   "maker": "高田製薬",
-  "title": "供給状況品目一覧表",
+  "title": "2025/06/13 供給状況品目一覧表",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b00000093yz-att/2025.0613.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2025-06-13"
  },
  {
   "maker": "高田製薬",
-  "title": "限定出荷解除に関するお知らせ",
+  "title": "2025/06/04 限定出荷解除に関するお知らせ",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008zrq-att/MONTERUKASUTO.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2025-06-04"
  },
  {
   "maker": "高田製薬",
-  "title": "デスモプレシン点鼻スプレー0.01％「ILS」_製造販売中止のご案内",
+  "title": "2025/05/29 デスモプレシン点鼻スプレー0.01％「ILS」_製造販売中止のご案内",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008z5f-att/DESUMOPURESIN.pdf",
-  "event_type": "discontinued"
+  "event_type": "discontinued",
+  "announced_at": "2025-05-29"
  },
  {
   "maker": "高田製薬",
-  "title": "インドメタシンパップ70mg「ハラサワ」_取扱い中止のご案内",
+  "title": "2025/05/29 インドメタシンパップ70mg「ハラサワ」_取扱い中止のご案内",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008xe6-att/INDOMETASIN.pdf",
-  "event_type": "other"
+  "event_type": "other",
+  "announced_at": "2025-05-29"
  },
  {
   "maker": "高田製薬",
-  "title": "限定出荷解除に関するお知らせ",
+  "title": "2025/05/23 限定出荷解除に関するお知らせ",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008yka-att/KAIJYO.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2025-05-23"
  },
  {
   "maker": "高田製薬",
-  "title": "供給状況品目一覧表",
+  "title": "2025/05/23 供給状況品目一覧表",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008yfd-att/2025.05.23.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2025-05-23"
  },
  {
   "maker": "高田製薬",
-  "title": "ボグリボースOD錠製造販売中止のご案内",
+  "title": "2025/05/16 ボグリボースOD錠製造販売中止のご案内",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008zc5-att/BOGURIBOSU.pdf",
-  "event_type": "discontinued"
+  "event_type": "discontinued",
+  "announced_at": "2025-05-16"
  },
  {
   "maker": "高田製薬",
-  "title": "ゲフィチニブ錠製造販売中止のご案内",
+  "title": "2025/05/16 ゲフィチニブ錠製造販売中止のご案内",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008xhd-att/GEFITINIBU.pdf",
-  "event_type": "discontinued"
+  "event_type": "discontinued",
+  "announced_at": "2025-05-16"
  },
  {
   "maker": "高田製薬",
-  "title": "レボフロキサシン点滴静注バッグ製造販売中止のご案内",
+  "title": "2025/05/16 レボフロキサシン点滴静注バッグ製造販売中止のご案内",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008xbg-att/REBOFUROTENTEKI.pdf",
-  "event_type": "discontinued"
+  "event_type": "discontinued",
+  "announced_at": "2025-05-16"
  },
  {
   "maker": "高田製薬",
-  "title": "供給に関するお知らせとお詫び_プランルカストDS",
+  "title": "2025/03/28 供給に関するお知らせとお詫び_プランルカストDS",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008low-att/PURANRUKASUTO.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2025-03-28"
  },
  {
   "maker": "高田製薬",
-  "title": "限定出荷解除に関するお知らせ",
+  "title": "2025/03/28 限定出荷解除に関するお知らせ",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008lly-att/KAIJYO.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2025-03-28"
  },
  {
   "maker": "高田製薬",
-  "title": "出荷停止に関するお知らせ_ピタバスタチン2㎎",
+  "title": "2025/03/28 出荷停止に関するお知らせ_ピタバスタチン2㎎",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008lgc-att/PITAPASUTA.pdf",
-  "event_type": "stopped"
+  "event_type": "stopped",
+  "announced_at": "2025-03-28"
  },
  {
   "maker": "高田製薬",
-  "title": "供給状況品目一覧表",
+  "title": "2025/03/28 供給状況品目一覧表",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008ldj-att/2025.3.28.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2025-03-28"
  },
  {
   "maker": "高田製薬",
-  "title": "供給状況品目一覧表",
+  "title": "2025/03/10 供給状況品目一覧表",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008hzr-att/2025.03.10.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2025-03-10"
  },
  {
   "maker": "高田製薬",
-  "title": "限定出荷解除に関するお知らせ",
+  "title": "2025/03/05 限定出荷解除に関するお知らせ",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008h08-att/ANBUROKISORUHOKA.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2025-03-05"
  },
  {
   "maker": "高田製薬",
-  "title": "供給状況品目一覧表",
+  "title": "2025/03/05 供給状況品目一覧表",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008gxh-att/2025.03.05.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2025-03-05"
  },
  {
   "maker": "高田製薬",
-  "title": "供給状況品目一覧表",
+  "title": "2025/02/26 供給状況品目一覧表",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008g17-att/2025.02.26.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2025-02-26"
  },
  {
   "maker": "高田製薬",
-  "title": "製造販売中止品のご案内",
+  "title": "2025/02/18 製造販売中止品のご案内",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008f61-att/ZORUPIDEMU.pdf",
-  "event_type": "discontinued"
+  "event_type": "discontinued",
+  "announced_at": "2025-02-18"
  },
  {
   "maker": "高田製薬",
-  "title": "製造販売中止品のご案内",
+  "title": "2025/02/18 製造販売中止品のご案内",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008f3b-att/SERUTORARIN.pdf",
-  "event_type": "discontinued"
+  "event_type": "discontinued",
+  "announced_at": "2025-02-18"
  },
  {
   "maker": "高田製薬",
-  "title": "製造販売中止品のご案内",
+  "title": "2025/02/18 製造販売中止品のご案内",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008f0l-att/ENTEKABIRU.pdf",
-  "event_type": "discontinued"
+  "event_type": "discontinued",
+  "announced_at": "2025-02-18"
  },
  {
   "maker": "高田製薬",
-  "title": "製造販売中止品のご案内",
+  "title": "2025/02/18 製造販売中止品のご案内",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008exv-att/ARIPIPURAZORU.pdf",
-  "event_type": "discontinued"
+  "event_type": "discontinued",
+  "announced_at": "2025-02-18"
  },
  {
   "maker": "高田製薬",
-  "title": "製造販売中止品のご案内",
+  "title": "2025/02/18 製造販売中止品のご案内",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008ev5-att/BURONANNSERINN.pdf",
-  "event_type": "discontinued"
+  "event_type": "discontinued",
+  "announced_at": "2025-02-18"
  },
  {
   "maker": "高田製薬",
-  "title": "供給状況品目一覧表",
+  "title": "2025/02/07 供給状況品目一覧表",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008dhp-att/2025.02.07.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2025-02-07"
  },
  {
   "maker": "高田製薬",
-  "title": "限定出荷解除に関するお知らせ",
+  "title": "2025/02/04 限定出荷解除に関するお知らせ",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008d84-att/GENTEISYUKKAKAIJYO.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2025-02-04"
  },
  {
   "maker": "高田製薬",
-  "title": "供給状況品目一覧表",
+  "title": "2025/02/04 供給状況品目一覧表",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008d5d-att/2025.02.04.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2025-02-04"
  },
  {
   "maker": "高田製薬",
-  "title": "限定出荷解除に関するお知らせ",
+  "title": "2025/01/29 限定出荷解除に関するお知らせ",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008bu2-att/SYUKKAKAIJYO.pdf",
-  "event_type": "resumed"
+  "event_type": "resumed",
+  "announced_at": "2025-01-29"
  },
  {
   "maker": "高田製薬",
-  "title": "供給に関するお知らせとお詫び_モンテルカストOD 錠10mg「タカタ」",
+  "title": "2025/01/29 供給に関するお知らせとお詫び_モンテルカストOD 錠10mg「タカタ」",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008bj2-att/MONTERUKASUTOOD.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2025-01-29"
  },
  {
   "maker": "高田製薬",
-  "title": "供給状況品目一覧表",
+  "title": "2025/01/29 供給状況品目一覧表",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008b82-att/2025.01.29.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2025-01-29"
  },
  {
   "maker": "高田製薬",
-  "title": "供給に関するお知らせとお詫び リスペリドン内用液1mg「タカタ」",
+  "title": "2025/01/15 供給に関するお知らせとお詫び リスペリドン内用液1mg「タカタ」",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b00000089yp-att/RISUPERI.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2025-01-15"
  },
  {
   "maker": "高田製薬",
-  "title": "供給状況品目一覧表",
+  "title": "2025/01/07 供給状況品目一覧表",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b00000086fb-att/2025.01.07.pdf",
-  "event_type": "supply"
+  "event_type": "supply",
+  "announced_at": "2025-01-07"
  },
  {
   "maker": "久光製薬",
