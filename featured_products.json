@@ -1,8 +1,9 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-08-17",
+  "updated_at": "2026-08-18",
   "products": [
     { "slug": "insulin-lispro-bs-solostar", "label": "インスリンリスプロＢＳ注ソロスター", "query": "インスリン リスプロBS注ソロスター" },
+    { "slug": "gentacin-ointment", "label": "ゲンタシン軟膏０．１％", "query": "ゲンタシン軟膏" },
     { "slug": "amaluet-1", "label": "アマルエット配合錠１番", "query": "アマルエット配合錠1番" },
     { "slug": "amaluet-2", "label": "アマルエット配合錠２番", "query": "アマルエット配合錠2番" },
     { "slug": "amaluet-3", "label": "アマルエット配合錠３番", "query": "アマルエット配合錠3番" },
