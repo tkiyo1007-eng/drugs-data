@@ -10,7 +10,7 @@
  *
  * キャッシュを作り直したいときは CACHE_VERSION を上げる。
  */
-const CACHE_VERSION = "v4";
+const CACHE_VERSION = "v5";
 const SHELL_CACHE = `dsn-shell-${CACHE_VERSION}`;
 const DATA_CACHE = `dsn-data-${CACHE_VERSION}`;
 const ASSET_CACHE = `dsn-asset-${CACHE_VERSION}`;
@@ -42,7 +42,6 @@ const DATA_FILES = [
   "version.json",
   "status_changes.json",
   "news.json",
-  "crisis_index.json",
   "maker_announcements.json",
   "announcement_summaries.json",
   "announcement_packages.json",
