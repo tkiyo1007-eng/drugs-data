@@ -1,9 +1,24 @@
 import unittest
 
-from generate_item_pages import page_html
+from generate_item_pages import STATUS_NOTES, page_html
 
 
 class ItemPageMetadataTests(unittest.TestCase):
+    def test_sales_ended_note_requires_professional_current_information_check(self):
+        note = STATUS_NOTES["ended"]
+        self.assertIn("メーカー・卸の最新情報", note)
+        self.assertIn("医師・薬剤師等の専門職", note)
+        self.assertNotIn("代替薬への切り替え検討が必要", note)
+        output = page_html({
+            "商品名": "販売中止テスト錠",
+            "製造メーカー": "テスト製薬",
+            "供給状況": "販売中止",
+            "更新日": "2026/08/20",
+            "YJコード": "1234567F1234",
+        }, "1234567F1234", "ended", "2026-08-20", [], {"1234567F1234"})
+        self.assertIn(note, output)
+        self.assertNotIn("代替薬への切り替え検討が必要", output)
+
     def test_item_page_has_one_canonical_and_large_preview_permission(self):
         row = {
             "商品名": "テスト錠10mg",
