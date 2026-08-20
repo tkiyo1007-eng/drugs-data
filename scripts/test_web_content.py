@@ -22,9 +22,22 @@ class PublishedWebContentTests(unittest.TestCase):
                 self.assertNotIn(claim, self.html)
 
     def test_metadata_and_hero_match_the_safe_related_item_scope(self):
-        self.assertIn("出荷調整・欠品・販売中止を毎日チェック", self.html)
+        # LP文言はprivate側の正本から同期されるため、公開側の日次処理を特定の
+        # キャッチコピーへ固定しない。供給区分と安全な関連品目範囲を契約にする。
+        self.assertIn("限定出荷", self.html)
+        self.assertIn("供給停止", self.html)
+        self.assertIn("販売中止", self.html)
         self.assertIn("同成分・同剤形の関連品目", self.html)
         self.assertIn("解除／解消見込み・出荷量状況", self.html)
+
+    def test_official_system_copy_is_safe_after_private_lp_sync(self):
+        if "公式情報との使い分け" not in self.html:
+            self.skipTest("private側の新しいLPはまだ同期前")
+        self.assertIn("限定出荷・供給停止・販売中止を毎日確認", self.html)
+        self.assertIn("医薬品供給ナビ（非公式）", self.html)
+        self.assertNotIn("供給危機指数", self.html)
+        self.assertNotIn("元データとの違い", self.html)
+        self.assertNotIn("Excelファイルのため実用的ではない", self.html)
 
     def test_mobile_search_compaction_is_published(self):
         self.assertIn("#demo{padding-top:28px}", self.html)
