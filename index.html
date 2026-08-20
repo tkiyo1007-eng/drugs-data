@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>医薬品供給ナビ — 出荷調整・欠品・販売中止を毎日チェック</title>
+<title>医薬品供給ナビ — 限定出荷・供給停止・販売中止を毎日確認</title>
 <meta name="description" content="厚生労働省の医薬品供給状況データを毎日自動更新。限定出荷・供給停止・販売中止と、同成分・同剤形の関連品目をスマホでもPCでも確認できます。">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta property="og:title" content="医薬品供給ナビ">
-<meta property="og:description" content="出荷調整・欠品・販売中止と、同成分・同剤形の関連品目を毎日チェック。厚労省データを見やすく検索。">
+<meta property="og:description" content="限定出荷・供給停止・販売中止と、同成分・同剤形の関連品目を毎日確認。厚労省データを見やすく検索。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tkiyo1007-eng.github.io/drugs-data/">
 <meta property="og:image" content="https://tkiyo1007-eng.github.io/drugs-data/og_image.png">
@@ -16,7 +16,7 @@
 <meta property="og:image:alt" content="医薬品供給ナビの供給状況サマリー">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="医薬品供給ナビ">
-<meta name="twitter:description" content="出荷調整・欠品・販売中止と、同成分・同剤形の関連品目を毎日チェック。厚労省データを見やすく検索。">
+<meta name="twitter:description" content="限定出荷・供給停止・販売中止と、同成分・同剤形の関連品目を毎日確認。厚労省データを見やすく検索。">
 <meta name="twitter:image" content="https://tkiyo1007-eng.github.io/drugs-data/og_image.png">
 <meta name="twitter:image:alt" content="医薬品供給ナビの供給状況サマリー">
 <meta name="apple-itunes-app" content="app-id=6777696446">
@@ -46,7 +46,7 @@
       "applicationCategory": "MedicalApplication",
       "url": "https://apps.apple.com/jp/app/id6777696446",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
-      "description": "出荷調整・欠品・販売中止を毎日チェックできる無料iOSアプリ。厚労省の医薬品供給状況データ約16,000品目を毎日自動更新。"
+      "description": "限定出荷・供給停止・販売中止を毎日確認できる無料iOSアプリ。厚労省の医薬品供給状況データ約16,000品目を毎日自動更新。"
     },
     {
       "@type": "FAQPage",
@@ -79,7 +79,7 @@
         {
           "@type": "Question",
           "name": "表示されている情報は100%正確ですか？",
-          "acceptedAnswer": { "@type": "Answer", "text": "厚生労働省の供給区分は意味を変えて上書きせず表示しています。見やすくするための差分集計や、メーカー資料の自動抽出・AI要約は出典情報と区別して表示します。公表と実際の流通状況にタイムラグが生じる場合があるため、採用や代替薬の選定は必ず医師・薬剤師にご確認のうえご判断ください。" }
+          "acceptedAnswer": { "@type": "Answer", "text": "厚生労働省の供給区分は意味を変えて上書きせず表示しています。見やすくするための差分集計や、メーカー資料の自動抽出・AI要約は出典情報と区別して表示します。公表と実際の流通状況にタイムラグが生じる場合があるため、採用・処方・調剤上の判断は必ず医師・薬剤師等の専門職が最新情報を確認したうえで行ってください。" }
         },
         {
           "@type": "Question",
@@ -795,6 +795,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .maker-count.stp{color:#A03030;background:rgba(225,77,77,.12);border:1px solid rgba(225,77,77,.35)}
 .maker-note{font-size:11px;color:var(--sub);margin-top:10px;line-height:1.7}
 .compare-note{font-size:11px;color:var(--sub);margin-top:12px;line-height:1.7;text-align:center}
+.compare-note a{color:var(--blue-deep);font-weight:700}
 @media(max-width:560px){.maker-count.lim,.maker-count.stp{padding:3px 7px;font-size:10.5px}}
 
 /* ===== 特徴グリッド ===== */
@@ -1113,7 +1114,7 @@ footer a:hover{color:var(--blue)}
     <a href="#topics">話題のニュース</a>
     <a href="#news">お知らせ</a>
     <a href="#features">特徴</a>
-    <a href="#compare">元データとの違い</a>
+    <a href="#compare">公式情報との使い分け</a>
     <a href="#glossary">用語解説</a>
     <a href="#faq">よくある質問</a>
     <a class="nav-cta" href="#app">アプリを入手</a>
@@ -1202,6 +1203,9 @@ footer a:hover{color:var(--blue)}
       <button type="button" class="pill" data-f="fav" id="pillFav" aria-pressed="false" style="display:none"></button>
       <button type="button" class="pill" data-f="watchChanged" id="pillWatchChanged" aria-pressed="false" style="display:none"></button>
     </div>
+    <!-- 空検索では監視リストを先に案内する。検索語または絞り込みがある間は、
+         JSでこの2要素を結果の後ろへ移し、視覚順と読み上げ順を一致させる。 -->
+    <template id="watchPriorityHome"></template>
     <section class="watch-dashboard" id="watchDashboard" aria-busy="true" aria-labelledby="watchDashboardTitle">
       <div class="watch-dashboard-head">
         <div>
@@ -1256,6 +1260,7 @@ footer a:hover{color:var(--blue)}
     <div class="fav-notice" id="favNotice" hidden></div>
     <div class="drug-list" id="list"></div>
     <button type="button" class="load-more" id="loadMore" hidden></button>
+    <template id="watchPriorityResults"></template>
     <p class="demo-note" id="demoNote">※ 厚生労働省公表の最新データを読み込んでいます。読み込み完了後、この画面で全品目を検索できます。</p>
     <p class="demo-note">限定出荷・供給停止・販売中止・薬価削除予定の品目には、1品目ごとの詳細ページがあります → <a href="items/index.html">品目別の供給状況ページ一覧</a></p>
   </div>
@@ -1384,7 +1389,7 @@ footer a:hover{color:var(--blue)}
     <div class="feature glass">
       <div class="f-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.2 15.9A10 10 0 1 1 8.1 2.8"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg></div>
       <h3>全体像はドーナツ図で</h3>
-      <p>市場全体のステータス構成比をサマリー表示。「いまどのくらい逼迫しているのか」を数字とビジュアルで俯瞰できます。</p>
+      <p>供給区分ごとの品目数と構成比をサマリー表示。公表データ全体の内訳を数字とビジュアルで確認できます。</p>
     </div>
     <div class="feature glass">
       <div class="f-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
@@ -1400,26 +1405,23 @@ footer a:hover{color:var(--blue)}
 </section>
 
 <section id="compare" class="reveal">
-  <p class="sec-eyebrow">WHAT WE ADD</p>
-  <h2>「確認できる」から「確認したくなる」へ。</h2>
-  <p class="sec-lede">厚生労働省が公表しているデータそのものは、Excelファイルとして提供されています。医薬品供給ナビは、そこに「毎日使い続けるための体験」を足しました。</p>
+  <p class="sec-eyebrow">HOW TO USE</p>
+  <h2>公式情報と組み合わせて、ご利用ください。</h2>
+  <p class="sec-lede">厚生労働省の公式システムでも、供給状況の検索・履歴・お気に入り・メール通知などを利用できます。医薬品供給ナビは、公表データを見やすく確認・共有するための非公式ツールです。</p>
   <div class="compare glass">
     <table>
       <thead>
-        <tr><th scope="col">できること</th><th scope="col" class="col-us">医薬品供給ナビ</th><th scope="col">厚労省の公表データ（元データ）</th></tr>
+        <tr><th scope="col">利用場面</th><th scope="col">厚生労働省の公式システム</th><th scope="col" class="col-us">医薬品供給ナビ（非公式）</th></tr>
       </thead>
       <tbody>
-        <tr><th scope="row">供給ステータスの検索</th><td class="col-us yes">◎ 商品名・成分名・メーカー名で即時絞り込み</td><td class="yes">○ Excelの絞り込み機能で可能</td></tr>
-        <tr><th scope="row">スマホでの閲覧</th><td class="col-us yes">◎ スマホ最適化UI・iOSアプリ</td><td class="no">△ Excelファイルのため実用的ではない</td></tr>
-        <tr><th scope="row">変化のあった品目の時系列表示</th><td class="col-us yes">◎ 前日差分を自動検出</td><td class="no">— 各回のスナップショットのみ</td></tr>
-        <tr><th scope="row">お気に入り登録・定点観測</th><td class="col-us yes">◎ 変化があればお知らせ</td><td class="no">—</td></tr>
-        <tr><th scope="row">全体像のサマリー可視化</th><td class="col-us yes">◎ 構成比・供給危機指数</td><td class="no">—</td></tr>
-        <tr><th scope="row">品目ごとの関連情報</th><td class="col-us yes">◎ メーカー案内文・同成分／同剤形の関連品目</td><td class="no">— 一部は別資料を要確認</td></tr>
-        <tr><th scope="row">医療従事者コミュニティ</th><td class="col-us yes">◎ 掲示板内蔵（iOSアプリ）</td><td class="no">—</td></tr>
+        <tr><th scope="row">公表情報の確認</th><td>供給状況の検索・履歴・類似品などを公式情報として確認</td><td class="col-us">同じ公表データを、データ日付と出典を示して検索・表示</td></tr>
+        <tr><th scope="row">継続的な確認</th><td>お気に入りとメール通知を利用</td><td class="col-us">ブラウザやiOS端末内に監視品目を保存し、前回差分を確認</td></tr>
+        <tr><th scope="row">共有・持ち運び</th><td>検索結果や履歴を公式画面で確認</td><td class="col-us">品目ページ、変更一覧、CSVをWeb・iOSから共有</td></tr>
+        <tr><th scope="row">補足情報</th><td>公式システム内の類似品・関連情報を確認</td><td class="col-us">メーカー案内文、PMDA情報、同成分・同剤形の関連品目を出典別に表示</td></tr>
       </tbody>
     </table>
   </div>
-  <p class="compare-note">※ 比較対象は厚生労働省が公表している元データ（Excel）です。他の供給情報サービスとの優劣を示すものではありません。</p>
+  <p class="compare-note">※ 医薬品供給ナビは厚生労働省の公式サービスではありません。重要な判断では、<a href="https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list" target="_blank" rel="noopener">厚生労働省の公式システム</a>および卸・メーカーの最新情報もご確認ください。</p>
 </section>
 
 <section id="data" class="reveal">
@@ -1441,7 +1443,7 @@ footer a:hover{color:var(--blue)}
     </div>
     <div class="flow-step glass">
       <h3>翌朝、手元に</h3>
-      <p>アプリを開くだけで最新版に。忙しい始業前でも、供給状況の確認は数十秒で完了します。</p>
+      <p>iOSアプリでは、お気に入りや採用品の変化を端末内で確認できます。表示されたデータ日付と出典もあわせてご確認ください。</p>
     </div>
   </div>
 </section>
@@ -1469,7 +1471,7 @@ footer a:hover{color:var(--blue)}
     <div class="term-card glass">
       <span class="term-tag" style="--sc:var(--ended)">販売中止</span>
       <h3>製造・販売が終了した状態</h3>
-      <p>メーカーが製造・販売を終了した状態です。今後の出荷再開はないため、代替薬への切り替え検討が必要です。</p>
+      <p>メーカーが製造・販売を終了した状態です。今後の対応は、メーカー・卸の最新情報を確認し、医師・薬剤師等の専門職でご判断ください。</p>
     </div>
   </div>
 </section>
@@ -1501,7 +1503,7 @@ footer a:hover{color:var(--blue)}
     </details>
     <details class="faq-item">
       <summary>表示されている情報は100%正確ですか？</summary>
-      <p>厚生労働省の供給区分は意味を変えて上書きせず表示しています。見やすくするための差分集計や、メーカー資料の自動抽出・AI要約は出典情報と区別して表示します。ただし公表と実際の流通状況にタイムラグが生じる場合があるため、採用や代替薬の選定は必ず医師・薬剤師にご確認のうえご判断ください。</p>
+      <p>厚生労働省の供給区分は意味を変えて上書きせず表示しています。見やすくするための差分集計や、メーカー資料の自動抽出・AI要約は出典情報と区別して表示します。ただし公表と実際の流通状況にタイムラグが生じる場合があるため、採用・処方・調剤上の判断は必ず医師・薬剤師等の専門職が最新情報を確認したうえで行ってください。</p>
     </details>
     <details class="faq-item">
       <summary>「通常出荷」なのに実際は製造中止になっている品目があるのはなぜですか？</summary>
@@ -1770,7 +1772,80 @@ let SHOWN = [];
 let LAST_HITS = []; // 現在の絞り込み結果（CSVダウンロード用）
 const $loadMore = document.getElementById("loadMore");
 const $csvBtn = document.getElementById("csvBtn");
-function render(){
+const $watchDashboard = document.getElementById("watchDashboard");
+const $watchTools = document.querySelector(".watch-tools");
+const $watchPriorityHome = document.getElementById("watchPriorityHome");
+const $watchPriorityResults = document.getElementById("watchPriorityResults");
+
+// 空検索では監視リストを主要機能として先に案内し、検索語や絞り込みがある間は
+// 結果を直後に表示する。CSSのorderでは読み上げ順が変わらないため、DOM自体を移す。
+function syncSearchPriority(){
+  const resultsFirst = Boolean($q.value.trim()) || filter !== "all";
+  const anchor = resultsFirst ? $watchPriorityResults : $watchPriorityHome;
+  if(!anchor || !$watchDashboard || !$watchTools) return;
+  // すでに正しい位置ならDOMを触らない。再挿入すると、監視領域内のボタンを
+  // キーボードやVoiceOverで操作している利用者のフォーカスが失われる。
+  if(anchor.nextElementSibling === $watchDashboard
+      && $watchDashboard.nextElementSibling === $watchTools) return;
+  const parent = anchor.parentNode;
+  parent.insertBefore($watchDashboard, anchor.nextSibling);
+  parent.insertBefore($watchTools, $watchDashboard.nextSibling);
+}
+function focusSearchResultSummary(){
+  $meta.setAttribute("tabindex", "-1");
+  $meta.focus({preventScroll:true});
+}
+function isOrdinaryPageAnchor(hash = location.hash){
+  if(!hash || hash.startsWith("#item=") || hash.startsWith("#drug=")) return false;
+  const params = new URLSearchParams(hash.slice(1));
+  return !params.has("q") && !params.has("f");
+}
+let pendingPageAnchor = isOrdinaryPageAnchor() ? location.hash : "";
+let pageAnchorRestoreTimers = [];
+let pageAnchorRestoreToken = 0;
+function cancelPendingPageAnchorRestore(clearPending = true){
+  pageAnchorRestoreToken++;
+  pageAnchorRestoreTimers.forEach(clearTimeout);
+  pageAnchorRestoreTimers = [];
+  if(clearPending) pendingPageAnchor = "";
+}
+function restorePendingPageAnchor(){
+  if(!pendingPageAnchor || location.hash !== pendingPageAnchor) return;
+  const hash = pendingPageAnchor;
+  let id;
+  try{ id = decodeURIComponent(hash.slice(1)); }catch(e){ id = hash.slice(1); }
+  const target = document.getElementById(id);
+  if(!target) return;
+  // CSV・ニュース・補助データが非同期に入り、アンカーより上の高さが数回変わる。
+  // 短時間だけ同じアンカーへ追従し、直リンク先が画面外へ押し出されるのを防ぐ。
+  // 利用者がスクロールや操作を始めた場合は、下のイベントで直ちに中止する。
+  cancelPendingPageAnchorRestore(false);
+  const token = pageAnchorRestoreToken;
+  const delays = [0, 250, 750, 1500, 3000];
+  pageAnchorRestoreTimers = delays.map((delay, index)=>setTimeout(()=>{
+    if(token !== pageAnchorRestoreToken || location.hash !== hash || pendingPageAnchor !== hash) return;
+    target.scrollIntoView({behavior:"instant",block:"start"});
+    if(index === delays.length - 1){
+      pageAnchorRestoreTimers = [];
+      // 回線が遅く3秒後もCSV読込中なら、アンカーを保持したまま待つ。
+      // 実データのrender()で再度追従し、読込完了後にだけ役目を終える。
+      if(LIVE) pendingPageAnchor = "";
+    }
+  }, delay));
+}
+for(const eventName of ["pointerdown", "wheel", "touchstart"]){
+  window.addEventListener(eventName, ()=>cancelPendingPageAnchorRestore(), {passive:true});
+}
+window.addEventListener("keydown", e=>{
+  if(["ArrowUp","ArrowDown","PageUp","PageDown","Home","End"," "].includes(e.key)){
+    cancelPendingPageAnchorRestore();
+  }
+});
+// #faq等を直リンクで開いた初期描画や、そこにいる間のデータ再読込ではアンカーを守る。
+// 入力・絞り込みの明示操作は呼び出し側から true を渡して検索URLへ切り替える。
+function render(shouldSyncHash = !isOrdinaryPageAnchor()){
+  if(shouldSyncHash) cancelPendingPageAnchorRestore();
+  syncSearchPriority();
   // スペース区切りの複数キーワードはAND検索にする（NFKCで全角スペースも半角化済み）
   //
   // YJコード（薬価基準収載医薬品コード）でも引けるようにする。レセコンや薬歴から
@@ -1798,6 +1873,8 @@ function render(){
   const shown = hits.slice(0, visibleCount);
   SHOWN = shown;
   LAST_HITS = hits;
+  $meta.removeAttribute("aria-busy");
+  $list.removeAttribute("aria-busy");
   $csvBtn.hidden = !LIVE || !hits.length;
   const src = LIVE ? `全 ${ITEMS.length.toLocaleString()} 品目中` : `サンプル ${ITEMS.length} 品目中`;
   $meta.innerHTML = `<strong class="num">${hits.length.toLocaleString()}</strong> 件ヒット（${src}）`;
@@ -1813,7 +1890,8 @@ function render(){
       : `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="24" width="30" height="14" rx="7" transform="rotate(-18 29 31)"/><path d="M18 27l18 8" transform="rotate(-18 29 31)"/><circle cx="46" cy="46" r="8"/><path d="M52 52l6 6"/></svg>`;
     $list.innerHTML = `<div class="empty"><div class="empty-icon">${icon}</div>${msg}${canReset ? `<br><button type="button" class="empty-reset" id="emptyReset">検索条件をクリア</button>` : ""}</div>`;
     $loadMore.hidden = true;
-    syncHashSoon(); // 0件でも検索語をURLに残す（リロード・共有で同じ状態を再現できる）
+    if(shouldSyncHash) syncHashSoon(); // 0件でも検索語をURLに残す（リロード・共有で同じ状態を再現できる）
+    else restorePendingPageAnchor();
     return;
   }
   $list.innerHTML = shown.map((d,i)=>{
@@ -1864,7 +1942,8 @@ function render(){
   }else{
     $loadMore.hidden = true;
   }
-  syncHashSoon();
+  if(shouldSyncHash) syncHashSoon();
+  else restorePendingPageAnchor();
 }
 
 // 検索語と絞り込みをURLハッシュに保持（リロード・共有で同じ検索結果を再現できる）
@@ -1881,6 +1960,7 @@ function syncHash(){
 // Safari は history.replaceState を 30秒あたり100回でスロットルし、超えると例外を投げる。
 // 打鍵ごとに render()→syncHash() が走ると長い品目名の入力で到達し得るため、URL更新は必ず遅延させる。
 let hashTimer = null;
+let pageAnchorGeneration = 0;
 function syncHashSoon(){
   clearTimeout(hashTimer);
   hashTimer = setTimeout(syncHash, 400);
@@ -1911,6 +1991,20 @@ function applyHashState(){
 // もう走らない。自前のURL更新は replaceState（syncHash）と pushState（品目詳細）で
 // どちらも hashchange を発火させないので、ここで自分の更新を拾い直す心配はない
 window.addEventListener("hashchange", ()=>{
+  // FAQなど通常のページ内リンクへ移動した場合は、直前の検索描画が予約した
+  // URL更新でアンカーを上書きしない。
+  if(isOrdinaryPageAnchor()){
+    pageAnchorGeneration++;
+    clearTimeout(hashTimer);
+    // 読込完了後の通常ナビはブラウザ標準のアンカー移動だけで十分。追従を続けると、
+    // その直後に利用者が別の場所へ移動した際に元のアンカーへ戻してしまう。
+    if(LIVE){
+      cancelPendingPageAnchorRestore();
+    }else{
+      pendingPageAnchor = location.hash;
+      restorePendingPageAnchor();
+    }
+  }
   if(location.hash.startsWith("#item=") || location.hash.startsWith("#drug=")) return;
   const p = new URLSearchParams(location.hash.slice(1));
   if(!p.has("q") && !p.has("f")) return; // #demo などページ内リンクは無視する
@@ -1922,6 +2016,17 @@ window.addEventListener("hashchange", ()=>{
 // 入力が落ち着いてから描画する（IME変換中の中間文字列で無駄に描画しない効果もある）
 let searchTimer = null;
 let lastTrackedSearchKey = "";
+function showPendingSearchState(){
+  // 380msの入力待ち中に、前の検索語の品目を新しい検索結果のように見せない。
+  SHOWN = [];
+  LAST_HITS = [];
+  $csvBtn.hidden = true;
+  $loadMore.hidden = true;
+  $meta.setAttribute("aria-busy", "true");
+  $list.setAttribute("aria-busy", "true");
+  $meta.textContent = "検索しています…";
+  $list.replaceChildren();
+}
 function trackCurrentSearch(){
   const key = norm($q.value.trim());
   if(!LIVE || !key || key === lastTrackedSearchKey) return;
@@ -1930,8 +2035,17 @@ function trackCurrentSearch(){
   else dsnTrack("search-zero");
 }
 $q.addEventListener("input", ()=>{
+  cancelPendingPageAnchorRestore();
   clearTimeout(searchTimer);
-  searchTimer = setTimeout(()=>{ visibleCount = PAGE_SIZE; render(); trackCurrentSearch(); }, 380);
+  syncSearchPriority();
+  showPendingSearchState();
+  const scheduledAtPageAnchorGeneration = pageAnchorGeneration;
+  searchTimer = setTimeout(()=>{
+    visibleCount = PAGE_SIZE;
+    // 入力待ちの間にFAQ等へ移動した場合、結果は更新してもそのアンカーをURLから消さない。
+    render(scheduledAtPageAnchorGeneration === pageAnchorGeneration);
+    trackCurrentSearch();
+  }, 380);
 });
 $loadMore.addEventListener("click", ()=>{ visibleCount += PAGE_SIZE; render(); });
 $pageSize.addEventListener("change", ()=>{ PAGE_SIZE = +$pageSize.value; visibleCount = PAGE_SIZE; render(); });
@@ -2406,7 +2520,7 @@ function setFilter(f){
   filter = f;
   setActivePill(f);
   visibleCount = PAGE_SIZE;
-  render();
+  render(true);
 }
 // 「★ お気に入り」ピル: 登録が1件以上あるときだけ表示（件数付き）
 function updateFavPill(){
@@ -2510,6 +2624,7 @@ async function importWatchFile(file){
       $watchDashboardStatus.textContent = $watchImportResult.textContent;
       $watchDashboardStatus.classList.add((unmatched || ambiguous) ? "warn" : "ok");
       dsnTrack("watchlist-import-success");
+      focusSearchResultSummary();
       document.getElementById("demo").scrollIntoView({behavior:"smooth",block:"start"});
     }
   }catch(e){
@@ -2620,6 +2735,8 @@ function markWatchChangesChecked(){
   if(filter === "watchChanged") setFilter(FAVS.size ? "fav" : "all"); else render();
   $watchDashboardStatus.textContent = "現在の変更を確認済みにしました";
   $watchDashboardStatus.className = "watch-dashboard-status ok";
+  $watchDashboardStatus.setAttribute("tabindex", "-1");
+  $watchDashboardStatus.focus({preventScroll:true});
   dsnTrack("watchlist-mark-checked");
 }
 function buildWatchChangeText(){
@@ -2690,6 +2807,9 @@ function downloadWatchlistCsv(){
 }
 document.getElementById("watchUnreadBtn").addEventListener("click",()=>{
   setFilter("watchChanged");
+  // ダッシュボードを結果の後ろへ移す操作なので、失われたボタン位置ではなく
+  // 新しい結果件数へ明示的にフォーカスを移して読み上げを継続する。
+  focusSearchResultSummary();
   document.getElementById("demo").scrollIntoView({behavior:"smooth",block:"start"});
   dsnTrack("watchlist-dashboard-open");
 });
@@ -3056,10 +3176,7 @@ document.getElementById("mRelated").addEventListener("click", e=>{
 document.getElementById("pills").addEventListener("click", e=>{
   const btn = e.target.closest(".pill");
   if(!btn) return;
-  filter = btn.dataset.f;
-  setActivePill(filter);
-  visibleCount = PAGE_SIZE;
-  render();
+  setFilter(btn.dataset.f);
 });
 
 /* ===== 最近問い合わせが多い製品（タップで検索欄に反映） ===== */
