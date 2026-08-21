@@ -1,5 +1,29 @@
 [
  {
+  "date": "2026/08/21",
+  "title": "10月の簡易相談実施予定を掲載しました（医療機器等）",
+  "url": "https://www.pmda.go.jp/review-services/f2f-pre/consultations/0015.html",
+  "tag": "承認審査"
+ },
+ {
+  "date": "2026/08/21",
+  "title": "「副作用が疑われる症例報告に関する情報」に2026年4月分の情報を追加しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/adr-info/suspected-adr/0005.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/08/21",
+  "title": "「2025年度医療機器相談の受付状況」を掲載しました",
+  "url": "https://www.pmda.go.jp/safety/consultation-for-patients/on-devices/state/0001.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/08/21",
+  "title": "「2025年度くすり相談の受付状況」を掲載しました",
+  "url": "https://www.pmda.go.jp/safety/consultation-for-patients/on-drugs/state/0001.html",
+  "tag": "安全対策"
+ },
+ {
   "date": "2026/08/20",
   "title": "外国製造業者認定・登録番号を掲載しました",
   "url": "https://www.pmda.go.jp/review-services/drug-reviews/foreign-mfr/0003.html",
@@ -33,30 +57,6 @@
   "date": "2026/08/13",
   "title": "2026年度 新再生医療等製品の承認品目一覧（2026年7月承認分まで）を掲載しました",
   "url": "https://www.pmda.go.jp/review-services/drug-reviews/review-information/ctp/0018.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/08/13",
-  "title": "IRB登録情報を更新しました",
-  "url": "https://www.pmda.go.jp/review-services/trials/0008.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/08/12",
-  "title": "クラスI回収 該当回収品目　新鮮凍結血漿-LR「日赤」240、照射濃厚血小板-LRBS「日赤」",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html",
-  "tag": "回収"
- },
- {
-  "date": "2026/08/12",
-  "title": "医薬品・医療機器等安全性情報 No.431（厚生労働省発行）を掲載しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/safety-info/0166.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/08/05",
-  "title": "保険適用される公知申請品目に関する情報を更新しました",
-  "url": "https://www.pmda.go.jp/review-services/drug-reviews/review-information/p-drugs/0017.html",
   "tag": "承認審査"
  }
 ]

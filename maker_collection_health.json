@@ -1,5 +1,5 @@
 {
- "checked": "2026-08-20",
+ "checked": "2026-08-21",
  "sources": [
   {
    "source": "parse_sawai",
@@ -22,7 +22,7 @@
   {
    "source": "parse_nihon_generic",
    "ok": true,
-   "count": 88,
+   "count": 89,
    "error": ""
   },
   {
@@ -40,7 +40,7 @@
   {
    "source": "parse_kemifa",
    "ok": true,
-   "count": 64,
+   "count": 65,
    "error": ""
   },
   {
@@ -68,5 +68,5 @@
    "error": ""
   }
  ],
- "total": 2400
+ "total": 2402
 }
