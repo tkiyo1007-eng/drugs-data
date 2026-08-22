@@ -44,6 +44,13 @@ class RemoteDataHealthTests(unittest.TestCase):
         )
         self.assertTrue(any("必須項目" in error for error in errors))
 
+    def test_supply_discrepancies_requires_schema_version(self) -> None:
+        errors = validate_supporting_document(
+            "supply_discrepancies.json",
+            {"schema_version": 2, "products": {}, "counts": {}},
+        )
+        self.assertTrue(any("schema_version" in error for error in errors))
+
 
 if __name__ == "__main__":
     unittest.main()

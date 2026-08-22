@@ -25,6 +25,11 @@ jobs:
         run: python3 scripts/validate_supply_data.py --csv drugs_app_ready.csv
       - name: 現行メーカー案内データ品質検査
         run: python3 scripts/validate_maker_announcements.py --min-count 300
+      - name: 供給情報差異データ品質検査
+        run: |
+          python3 scripts/validate_supply_discrepancies.py
+          python3 scripts/build_supply_discrepancies.py
+          git diff --exit-code -- supply_discrepancies.json
       - name: Web・iOS共通設定の検査
         run: python3 scripts/validate_shared_content.py
       - name: 話題のニュース・注目製品ページの再生成確認

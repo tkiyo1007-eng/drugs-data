@@ -152,6 +152,11 @@ jobs:
       - name: 前回の補足情報を最新CSVへ整合
         run: python3 scripts/reconcile_optional_data.py --min-count 300
 
+      - name: 厚労省区分とメーカー案内の差異を判定
+        run: |
+          python3 scripts/build_supply_discrepancies.py
+          python3 scripts/validate_supply_discrepancies.py
+
       - name: Web・iOS共通設定の検査
         run: python3 scripts/validate_shared_content.py
 
@@ -174,7 +179,7 @@ jobs:
             crisis_index.json items sitemap-items.xml updates sitemap-updates.xml \
             topics products sitemap-curated.xml maker_announcements.json \
             maker_announcement_events.json maker_collection_health.json \
-            unmatched_maker_announcements.json product_lifecycle.json
+            unmatched_maker_announcements.json product_lifecycle.json supply_discrepancies.json
           git diff --cached --quiet && echo "コアデータ変更なし" && exit 0
           git commit -m "厚労省供給データ自動更新: $(TZ=Asia/Tokyo date +'%Y/%m/%d')"
           for push_attempt in 1 2 3 4 5; do
@@ -206,6 +211,12 @@ jobs:
             --max-missing-announced-rate 0
           mv product_lifecycle.next.json product_lifecycle.json
 
+      - name: 最新メーカー案内で供給情報差異を再判定
+        if: steps.maker_refresh.outputs.updated == 'true'
+        run: |
+          python3 scripts/build_supply_discrepancies.py
+          python3 scripts/validate_supply_discrepancies.py
+
       - name: メーカー補足情報を含めて話題のページを再生成
         if: steps.maker_refresh.outputs.updated == 'true'
         run: python3 scripts/generate_curated_pages.py --csv drugs_app_ready.csv --site .
@@ -227,7 +238,7 @@ jobs:
           git add maker_announcements.json manual_announcements.json \
             maker_announcement_events.json maker_collection_health.json unmatched_maker_announcements.json \
             product_lifecycle.json announcement_packages.json packages_cache.json news.json \
-            topics products sitemap-curated.xml
+            supply_discrepancies.json topics products sitemap-curated.xml
           git diff --cached --quiet && echo "メーカー補足情報変更なし" && exit 0
           git commit -m "メーカー補足情報自動更新: $(TZ=Asia/Tokyo date +'%Y/%m/%d')"
           for push_attempt in 1 2 3 4 5; do

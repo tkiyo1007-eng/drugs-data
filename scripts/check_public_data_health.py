@@ -18,6 +18,7 @@ from pathlib import Path
 
 from validate_supply_data import validate_csv as validate_drug_csv
 from validate_product_lifecycle import load_csv, validate as validate_lifecycle
+from validate_supply_discrepancies import load_csv as load_discrepancy_csv, validate as validate_discrepancies
 
 
 BASE_URL = "https://raw.githubusercontent.com/tkiyo1007-eng/drugs-data/main/"
@@ -25,6 +26,7 @@ MAX_JSON_BYTES = 20 * 1024 * 1024
 MAX_CSV_BYTES = 30 * 1024 * 1024
 SUPPORTING_FILES: dict[str, type] = {
     "maker_announcements.json": dict,
+    "maker_announcement_events.json": dict,
     "announcement_packages.json": dict,
     "announcement_summaries.json": dict,
     "news.json": list,
@@ -36,6 +38,7 @@ SUPPORTING_FILES: dict[str, type] = {
     "featured_products.json": dict,
     "industry_topics.json": dict,
     "crisis_index.json": dict,
+    "supply_discrepancies.json": dict,
 }
 NOTE_DATE_RE = re.compile(r"(\d{4})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日")
 
@@ -82,7 +85,7 @@ def validate_supporting_document(name: str, document: object) -> list[str]:
     if not isinstance(document, expected_type):
         return [f"{name}: ルートは{expected_type.__name__}である必要があります"]
     errors: list[str] = []
-    if name in {"product_lifecycle.json", "featured_products.json", "industry_topics.json"}:
+    if name in {"product_lifecycle.json", "featured_products.json", "industry_topics.json", "supply_discrepancies.json"}:
         if document.get("schema_version") != 1:  # type: ignore[union-attr]
             errors.append(f"{name}: schema_version は1である必要があります")
     required_keys = {
@@ -168,6 +171,19 @@ def run(today: dt.date, max_age_days: int) -> tuple[list[str], list[str]]:
             errors.extend(
                 f"product_lifecycle.json: {error}"
                 for error in validate_lifecycle(lifecycle, load_csv(csv_path))
+            )
+        discrepancies = documents.get("supply_discrepancies.json")
+        announcements = documents.get("maker_announcements.json")
+        announcement_events = documents.get("maker_announcement_events.json")
+        if discrepancies is not None and csv_path.exists():
+            errors.extend(
+                f"supply_discrepancies.json: {error}"
+                for error in validate_discrepancies(
+                    discrepancies,
+                    load_discrepancy_csv(csv_path),
+                    announcements if isinstance(announcements, dict) else None,
+                    announcement_events if isinstance(announcement_events, dict) else None,
+                )
             )
     return errors, results
 

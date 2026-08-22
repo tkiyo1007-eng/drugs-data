@@ -16,6 +16,7 @@
 | `maker_links.json` | Web・iOS共通のメーカー公式供給情報ページ |
 | `featured_products.json` | Web・iOS共通の注目製品と検索語 |
 | `industry_topics.json` | Web・iOS共通の業界トピック |
+| `supply_discrepancies.json` | 厚労省区分と、それより新しいメーカー公式案内の差異 |
 
 代表案内と履歴の `event_type` は次のいずれか。
 
@@ -40,10 +41,11 @@
 2. メーカー欄に混入した医療用ガス共通文書の説明を除去（実在会社名は保持）
 3. CSVの列・件数・必須値・供給区分・YJコード・日付・鮮度を検査
 4. 前回のメーカー補足・ライフサイクルから新CSVに存在しない参照を除き、再検証
-5. CSVから生成する品目別・日別・注目製品ページを更新し、検証済み厚労省コアを先にpush
-6. メーカー公式サイトから案内を一時領域へ収集
-7. メーカー名・正規化商品名・規格を照合し、一時領域の4 JSONをまとめて検証
-8. 検証成功時だけ代表案内、履歴、未マッチ一覧、収集状態を置換して追加push
+5. 前回検証済みのメーカー案内と最新CSVから供給情報差異を再判定する
+6. CSVから生成する品目別・日別・注目製品ページを更新し、検証済み厚労省コアを先にpush
+7. メーカー公式サイトから案内を一時領域へ収集
+8. メーカー名・正規化商品名・規格を照合し、一時領域の4 JSONをまとめて検証
+9. 検証成功時だけ代表案内、履歴、未マッチ一覧、収集状態を置換し、差異も再判定して追加push
 
 メーカー補足情報は厚労省コアとは独立した任意の更新である。取得元の一時障害、
 HTML変更、または品質検査の失敗時は、前回の完全な検証済み4 JSONを維持し、すでに
@@ -84,6 +86,7 @@ GitHub ActionsはUTCで動くが、公開データの確認日・生成日・日
 python3 -m unittest discover -s scripts -p 'test_*.py'
 python3 scripts/validate_supply_data.py --csv drugs_app_ready.csv
 python3 scripts/validate_maker_announcements.py --min-count 300
+python3 scripts/validate_supply_discrepancies.py
 python3 scripts/validate_shared_content.py
 ```
 
