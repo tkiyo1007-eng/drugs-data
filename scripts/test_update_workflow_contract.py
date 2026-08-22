@@ -57,9 +57,21 @@ class UpdateWorkflowContractTests(unittest.TestCase):
             "status_changes.json",
             "items sitemap-items.xml",
             "updates sitemap-updates.xml",
+            "supply_discrepancies.json",
         ):
             with self.subTest(artifact=artifact):
                 self.assertIn(artifact, core_step)
+
+    def test_discrepancies_are_built_before_both_publications(self):
+        first_build = self.workflow.index("厚労省区分とメーカー案内の差異を判定")
+        core_publish = self.workflow.index("検証済み厚労省コアデータと対応ページを先に公開")
+        refresh = self.workflow.index("メーカー補足情報を一時領域で取得・検証")
+        second_build = self.workflow.index("最新メーカー案内で供給情報差異を再判定")
+        enrichment_publish = self.workflow.index("検証済みメーカー補足情報を追加公開")
+        self.assertLess(first_build, core_publish)
+        self.assertLess(refresh, second_build)
+        self.assertLess(second_build, enrichment_publish)
+        self.assertEqual(self.workflow.count("scripts/validate_supply_discrepancies.py"), 2)
 
 
 if __name__ == "__main__":
