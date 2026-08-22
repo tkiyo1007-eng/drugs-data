@@ -241,6 +241,7 @@ class AnnouncementMatchingTests(unittest.TestCase):
         with group_file:
             json.dump([{
                 "products": ["テスト錠１ｍｇ", "テスト錠２ｍｇ"],
+                "target_products_verified": True,
                 "announcement": {"maker": "テスト製薬", "title": "販売中止", "url": "group"},
             }], group_file, ensure_ascii=False)
         with single_file:
@@ -251,9 +252,22 @@ class AnnouncementMatchingTests(unittest.TestCase):
         result, resolved_urls, group_events = mod.load_manual_announcements(
             single_file.name, group_file.name)
         self.assertEqual(result["テスト錠１ｍｇ"]["url"], "group")
+        self.assertIs(result["テスト錠１ｍｇ"]["target_products_verified"], True)
         self.assertEqual(result["テスト錠２ｍｇ"]["url"], "single")
         self.assertEqual(resolved_urls, {"group", "single"})
         self.assertEqual(group_events[0]["テスト錠２ｍｇ"]["url"], "group")
+
+    def test_manual_group_is_not_verified_without_explicit_opt_in(self):
+        group_file = tempfile.NamedTemporaryFile("w", encoding="utf-8", delete=False)
+        self.addCleanup(lambda: os.path.exists(group_file.name) and os.unlink(group_file.name))
+        with group_file:
+            json.dump([{
+                "products": ["テスト錠"],
+                "announcement": {"maker": "テスト製薬", "title": "販売中止", "url": "group"},
+            }], group_file, ensure_ascii=False)
+        result, _, _ = mod.load_manual_announcements(
+            os.path.join(os.path.dirname(group_file.name), "missing.json"), group_file.name)
+        self.assertNotIn("target_products_verified", result["テスト錠"])
 
     def test_manual_groups_keep_history_and_choose_newest_terminal_notice(self):
         group_file = tempfile.NamedTemporaryFile("w", encoding="utf-8", delete=False)

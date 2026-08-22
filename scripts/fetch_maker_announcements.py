@@ -666,6 +666,11 @@ def load_manual_announcements(single_path="manual_announcements.json",
             groups = json.load(f)
         for group in groups:
             info = dict(group["announcement"])
+            # 公式資料の本文・表で対象品目を再確認したグループ
+            # だけを強い信頼境界とする。既存グループを一括で確認済みに
+            # 格上げすると、未再監査の品目までライフサイクルに反映される。
+            if group.get("target_products_verified") is True:
+                info["target_products_verified"] = True
             info.setdefault("event_type", classify_event(info.get("title", "")))
             announced_at = extract_announcement_date(info.get("title", ""), info.get("url", ""))
             if announced_at:

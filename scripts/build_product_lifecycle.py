@@ -33,6 +33,27 @@ def exact_announcements(document: object) -> dict[str, dict[str, str]]:
     return exact if isinstance(exact, dict) else {}
 
 
+def verified_group_announcements(document: object) -> dict[str, dict[str, object]]:
+    """公式資料の本文・表で対象品目を再確認済みのグループだけを展開する。"""
+    if not isinstance(document, list):
+        return {}
+    result: dict[str, dict[str, object]] = {}
+    for group in document:
+        if not isinstance(group, dict) or group.get("target_products_verified") is not True:
+            continue
+        products = group.get("products")
+        announcement = group.get("announcement")
+        if not isinstance(products, list) or not isinstance(announcement, dict):
+            continue
+        for product_name in products:
+            if not isinstance(product_name, str) or not product_name.strip():
+                continue
+            info = dict(announcement)
+            info["target_products_verified"] = True
+            result[product_name] = info
+    return result
+
+
 def announcement_date(title: str, source_url: str = "") -> str | None:
     match = DATE_RE.search(norm(title))
     if match:
@@ -80,11 +101,36 @@ def announcement_covers_product(product_name: str, title: str) -> bool:
     maker_suffix = maker_match.group(0) if maker_match else ""
     body = name_n[: maker_match.start()] if maker_match else name_n
     strengths = {(m.group("number"), m.group("unit").lower()) for m in STRENGTH_RE.finditer(body)}
-    if not maker_suffix or not strengths or maker_suffix not in title_n:
+    if not maker_suffix or maker_suffix not in title_n:
+        return False
+    # 「1番/2番/3番/4番」のように規格番号を一つの公式案内に並べる
+    # 配合剤に対応する。メーカー括弧と製品本体の完全な「N番」の
+    # 両方を必須にし、1番を10番などに誤照合しないようにする。
+    if not strengths:
+        numbered = re.fullmatch(r"(?P<core>.+?)(?P<number>\d+)番", body)
+        if numbered:
+            number = re.escape(numbered.group("number"))
+            return (
+                numbered.group("core") in title_n
+                and re.search(rf"(?<!\d){number}\s*番(?!\d)", title_n) is not None
+            )
         return False
     core = STRENGTH_RE.sub("", body).strip()
     title_strengths = {(m.group("number"), m.group("unit").lower()) for m in STRENGTH_RE.finditer(title_n)}
     return bool(core) and core in title_n and strengths.issubset(title_strengths)
+
+
+def announcement_targets_product(product_name: str, announcement: object) -> bool:
+    """販売中止案内が当該品目を対象とすることを確認する。
+
+    手動グループは公式資料の本文・表で対象品目を確認済み。
+    自動収集データは従来どおりタイトルで厳格照合する。
+    """
+    if not isinstance(announcement, dict):
+        return False
+    if announcement.get("target_products_verified") is True:
+        return True
+    return announcement_covers_product(product_name, announcement.get("title") or "")
 
 
 def is_product_wide_discontinuation(announcement: object) -> bool:
@@ -101,6 +147,10 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--csv", type=Path, required=True)
     parser.add_argument("--announcements", type=Path, nargs="+", required=True)
+    parser.add_argument(
+        "--manual-groups", type=Path, default=Path("manual_announcement_groups.json"),
+        help="本文・表で対象を確認済みの手動グループ",
+    )
     parser.add_argument("--existing", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
@@ -122,9 +172,14 @@ def main() -> int:
 
     skipped: list[str] = []
     today = jst_today().isoformat()
+    announcement_sets: list[dict[str, dict[str, object]]] = []
     for path in args.announcements:
         with path.open(encoding="utf-8") as handle:
-            announcements = exact_announcements(json.load(handle))
+            announcement_sets.append(exact_announcements(json.load(handle)))
+    if args.manual_groups and args.manual_groups.exists():
+        with args.manual_groups.open(encoding="utf-8") as handle:
+            announcement_sets.append(verified_group_announcements(json.load(handle)))
+    for announcements in announcement_sets:
         for product_name, announcement in announcements.items():
             title = announcement.get("title") if isinstance(announcement, dict) else ""
             if not isinstance(announcement, dict) or not END_RE.search(title or ""):
@@ -140,7 +195,7 @@ def main() -> int:
             if len(candidates) != 1:
                 skipped.append(f"{product_name}: 商品名＋メーカーでYJコードを一意に決定できません（{len(candidates)}件）")
                 continue
-            if not announcement_covers_product(product_name, title or ""):
+            if not announcement_targets_product(product_name, announcement):
                 skipped.append(f"{product_name}: 案内タイトルで対象規格を確認できません")
                 continue
             row = candidates[0]

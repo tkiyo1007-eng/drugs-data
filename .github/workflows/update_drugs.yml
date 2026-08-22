@@ -204,6 +204,7 @@ jobs:
           python3 scripts/build_product_lifecycle.py \
             --csv drugs_app_ready.csv \
             --announcements maker_announcements.json manual_announcements.json \
+            --manual-groups manual_announcement_groups.json \
             --existing product_lifecycle.json \
             --output product_lifecycle.next.json
           python3 scripts/validate_product_lifecycle.py \

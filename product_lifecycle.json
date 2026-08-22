@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-21T23:52:50+09:00",
+  "generated_at": "2026-08-22T17:55:38+09:00",
   "products": {
     "1124007F1143": {
       "product_name": "トリアゾラム錠０．１２５ｍｇ「ＣＨ」",
@@ -1534,6 +1534,150 @@
       "source_title": "2025/09/19 供給に関するお知らせ 炭酸ランタンOD錠250mg/500mg「JG」 販売中止のご案内を掲載いたしました",
       "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/LANTHOD00_CHUUSHI_2509.pdf",
       "verified_at": "2026-08-15"
+    },
+    "2190101F1063": {
+      "product_name": "アマルエット配合錠１番「ＴＣＫ」",
+      "maker": "辰巳化学",
+      "state": "discontinuation_announced",
+      "announced_at": "2026-03-16",
+      "source_title": "2026.03.16 アマルエット配合錠1番/2番/3番/4番「TCK」販売中止のお知らせ",
+      "source_url": "https://www.tatsumi-kagaku.com/file/information/file/1099_1.pdf",
+      "verified_at": "2026-08-22"
+    },
+    "2190101F1080": {
+      "product_name": "アマルエット配合錠１番「サワイ」",
+      "maker": "沢井製薬",
+      "state": "discontinuation_announced",
+      "announced_at": "2026-08-07",
+      "source_title": "2026/08/07 発売情報 PDF NEW アマルエット配合錠1番/2番/3番/4番「サワイ」販売中止のご案内 PDF NEW",
+      "source_url": "https://med.sawai.co.jp/file/pr28_1756_1.pdf",
+      "verified_at": "2026-08-15"
+    },
+    "2190101F1098": {
+      "product_name": "アマルエット配合錠１番「サンド」",
+      "maker": "サンド",
+      "state": "discontinuation_announced",
+      "announced_at": "2026-03-27",
+      "source_title": "2026.03.27 アマルエット配合錠1番/2番/3番/4番「サンド」販売中止のご案内",
+      "source_url": "https://www.sandoz.jp/products/amaluet-1/",
+      "verified_at": "2026-08-22"
+    },
+    "2190101F1128": {
+      "product_name": "アマルエット配合錠１番「ニプロ」",
+      "maker": "ニプロ",
+      "state": "discontinuation_announced",
+      "announced_at": "2025-10-01",
+      "source_title": "2025年10月1日 アマルエット配合錠1番／2番／3番／4番「ニプロ」　販売中止品のご案内",
+      "source_url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uW7KfIAK",
+      "verified_at": "2026-08-21"
+    },
+    "2190102F1068": {
+      "product_name": "アマルエット配合錠２番「ＴＣＫ」",
+      "maker": "辰巳化学",
+      "state": "discontinuation_announced",
+      "announced_at": "2026-03-16",
+      "source_title": "2026.03.16 アマルエット配合錠1番/2番/3番/4番「TCK」販売中止のお知らせ",
+      "source_url": "https://www.tatsumi-kagaku.com/file/information/file/1099_1.pdf",
+      "verified_at": "2026-08-22"
+    },
+    "2190102F1084": {
+      "product_name": "アマルエット配合錠２番「サワイ」",
+      "maker": "沢井製薬",
+      "state": "discontinuation_announced",
+      "announced_at": "2026-08-07",
+      "source_title": "2026/08/07 発売情報 PDF NEW アマルエット配合錠1番/2番/3番/4番「サワイ」販売中止のご案内 PDF NEW",
+      "source_url": "https://med.sawai.co.jp/file/pr28_1756_1.pdf",
+      "verified_at": "2026-08-15"
+    },
+    "2190102F1092": {
+      "product_name": "アマルエット配合錠２番「サンド」",
+      "maker": "サンド",
+      "state": "discontinuation_announced",
+      "announced_at": "2026-03-27",
+      "source_title": "2026.03.27 アマルエット配合錠1番/2番/3番/4番「サンド」販売中止のご案内",
+      "source_url": "https://www.sandoz.jp/products/amaluet-2/",
+      "verified_at": "2026-08-22"
+    },
+    "2190102F1122": {
+      "product_name": "アマルエット配合錠２番「ニプロ」",
+      "maker": "ニプロ",
+      "state": "discontinuation_announced",
+      "announced_at": "2025-10-01",
+      "source_title": "2025年10月1日 アマルエット配合錠1番／2番／3番／4番「ニプロ」　販売中止品のご案内",
+      "source_url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uW7KfIAK",
+      "verified_at": "2026-08-21"
+    },
+    "2190103F1062": {
+      "product_name": "アマルエット配合錠３番「ＴＣＫ」",
+      "maker": "辰巳化学",
+      "state": "discontinuation_announced",
+      "announced_at": "2026-03-16",
+      "source_title": "2026.03.16 アマルエット配合錠1番/2番/3番/4番「TCK」販売中止のお知らせ",
+      "source_url": "https://www.tatsumi-kagaku.com/file/information/file/1099_1.pdf",
+      "verified_at": "2026-08-22"
+    },
+    "2190103F1089": {
+      "product_name": "アマルエット配合錠３番「サワイ」",
+      "maker": "沢井製薬",
+      "state": "discontinuation_announced",
+      "announced_at": "2026-08-07",
+      "source_title": "2026/08/07 発売情報 PDF NEW アマルエット配合錠1番/2番/3番/4番「サワイ」販売中止のご案内 PDF NEW",
+      "source_url": "https://med.sawai.co.jp/file/pr28_1756_1.pdf",
+      "verified_at": "2026-08-15"
+    },
+    "2190103F1097": {
+      "product_name": "アマルエット配合錠３番「サンド」",
+      "maker": "サンド",
+      "state": "discontinuation_announced",
+      "announced_at": "2026-03-27",
+      "source_title": "2026.03.27 アマルエット配合錠1番/2番/3番/4番「サンド」販売中止のご案内",
+      "source_url": "https://www.sandoz.jp/products/amaluet-3/",
+      "verified_at": "2026-08-22"
+    },
+    "2190103F1127": {
+      "product_name": "アマルエット配合錠３番「ニプロ」",
+      "maker": "ニプロ",
+      "state": "discontinuation_announced",
+      "announced_at": "2025-10-01",
+      "source_title": "2025年10月1日 アマルエット配合錠1番／2番／3番／4番「ニプロ」　販売中止品のご案内",
+      "source_url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uW7KfIAK",
+      "verified_at": "2026-08-21"
+    },
+    "2190104F1067": {
+      "product_name": "アマルエット配合錠４番「ＴＣＫ」",
+      "maker": "辰巳化学",
+      "state": "discontinuation_announced",
+      "announced_at": "2026-03-16",
+      "source_title": "2026.03.16 アマルエット配合錠1番/2番/3番/4番「TCK」販売中止のお知らせ",
+      "source_url": "https://www.tatsumi-kagaku.com/file/information/file/1099_1.pdf",
+      "verified_at": "2026-08-22"
+    },
+    "2190104F1083": {
+      "product_name": "アマルエット配合錠４番「サワイ」",
+      "maker": "沢井製薬",
+      "state": "discontinuation_announced",
+      "announced_at": "2026-08-07",
+      "source_title": "2026/08/07 発売情報 PDF NEW アマルエット配合錠1番/2番/3番/4番「サワイ」販売中止のご案内 PDF NEW",
+      "source_url": "https://med.sawai.co.jp/file/pr28_1756_1.pdf",
+      "verified_at": "2026-08-15"
+    },
+    "2190104F1091": {
+      "product_name": "アマルエット配合錠４番「サンド」",
+      "maker": "サンド",
+      "state": "discontinuation_announced",
+      "announced_at": "2026-03-27",
+      "source_title": "2026.03.27 アマルエット配合錠1番/2番/3番/4番「サンド」販売中止のご案内",
+      "source_url": "https://www.sandoz.jp/products/amaluet-4/",
+      "verified_at": "2026-08-22"
+    },
+    "2190104F1121": {
+      "product_name": "アマルエット配合錠４番「ニプロ」",
+      "maker": "ニプロ",
+      "state": "discontinuation_announced",
+      "announced_at": "2025-10-01",
+      "source_title": "2025年10月1日 アマルエット配合錠1番／2番／3番／4番「ニプロ」　販売中止品のご案内",
+      "source_url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uW7KfIAK",
+      "verified_at": "2026-08-21"
     },
     "2239001N1160": {
       "product_name": "アンブロキソール塩酸塩徐放カプセル４５ｍｇ「トーワ」",
