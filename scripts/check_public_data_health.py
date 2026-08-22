@@ -124,7 +124,11 @@ def fetch(url: str, maximum_bytes: int) -> bytes:
     return data
 
 
-def run(today: dt.date, max_age_days: int) -> tuple[list[str], list[str]]:
+def run(
+    today: dt.date,
+    max_age_days: int,
+    allow_missing_supply_discrepancies: bool = False,
+) -> tuple[list[str], list[str]]:
     errors: list[str] = []
     results: list[str] = []
     with tempfile.TemporaryDirectory(prefix="drug-supply-remote-health-") as directory:
@@ -164,6 +168,16 @@ def run(today: dt.date, max_age_days: int) -> tuple[list[str], list[str]]:
                 errors.extend(validate_supporting_document(name, document))
                 results.append(name)
             except (OSError, ValueError, RuntimeError, urllib.error.URLError) as error:
+                # 初回導入PRでは、検査コードが先に動き、main上の新ファイルは
+                # まだ404になる。PR時だけこの1ファイルの404を許容し、形式不正や
+                # 導入後のpush・定期監視では従来どおり失敗させる。
+                if (
+                    allow_missing_supply_discrepancies
+                    and name == "supply_discrepancies.json"
+                    and isinstance(error, urllib.error.HTTPError)
+                    and error.code == 404
+                ):
+                    continue
                 errors.append(f"{name}を取得・解析できません: {error}")
 
         lifecycle = documents.get("product_lifecycle.json")
@@ -204,8 +218,13 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--max-age-days", type=int, default=4)
     parser.add_argument("--today", type=dt.date.fromisoformat, default=dt.date.today())
+    parser.add_argument("--allow-missing-supply-discrepancies", action="store_true")
     args = parser.parse_args()
-    errors, results = run(args.today, args.max_age_days)
+    errors, results = run(
+        args.today,
+        args.max_age_days,
+        allow_missing_supply_discrepancies=args.allow_missing_supply_discrepancies,
+    )
     write_summary(errors, results)
     if errors:
         for error in errors:

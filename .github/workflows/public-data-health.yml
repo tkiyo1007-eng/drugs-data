@@ -8,6 +8,7 @@ on:
       - 'scripts/test_public_data_health.py'
       - 'scripts/validate_supply_data.py'
       - 'scripts/validate_product_lifecycle.py'
+      - 'scripts/validate_supply_discrepancies.py'
   push:
     branches: [main]
     paths:
@@ -16,6 +17,7 @@ on:
       - 'scripts/test_public_data_health.py'
       - 'scripts/validate_supply_data.py'
       - 'scripts/validate_product_lifecycle.py'
+      - 'scripts/validate_supply_discrepancies.py'
   schedule:
     # 毎朝7:15 JST。公開リポジトリの標準GitHub-hosted runnerで実行する。
     - cron: '15 22 * * *'
@@ -41,4 +43,4 @@ jobs:
       - name: Run validator unit tests
         run: python3 -m unittest discover -s scripts -p 'test_public_data_health.py'
       - name: Validate live remote data
-        run: python3 scripts/check_public_data_health.py --max-age-days 4
+        run: python3 scripts/check_public_data_health.py --max-age-days 4 ${{ github.event_name == 'pull_request' && '--allow-missing-supply-discrepancies' || '' }}
