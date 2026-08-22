@@ -83,8 +83,8 @@
         },
         {
           "@type": "Question",
-          "name": "「通常出荷」なのに実際は製造中止になっている品目があるのはなぜですか？",
-          "acceptedAnswer": { "@type": "Answer", "text": "本サービスが利用している厚生労働省「医療用医薬品供給状況」データは、限定出荷・供給停止といった一時的な出荷調整を追跡するための資料であり、製造中止（販売中止）の把握を主目的とした資料ではありません。そのため、メーカーが製造を終了していても、この資料上は最後に確認された「通常出荷」のまま長期間更新されずに残ってしまうことがあります。厚労省データに「薬価削除予定」の区分が含まれる品目については「薬価削除予定」バッジを表示していますが、それ以外の品目については各詳細に表示される「情報の鮮度（最終確認からの経過日数）」を目安に、経過が長い場合は卸・メーカーへの確認もあわせてご検討ください。" }
+          "name": "「通常出荷」なのにメーカーでは限定出荷・供給停止となっている品目があるのはなぜですか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "厚生労働省の公表値とメーカー公式案内では、更新時期や対象包装の範囲が異なることがあります。医薬品供給ナビは厚労省区分を上書きせず、メーカー公式案内の方が新しく、メーカー・製品規格まで一致した場合に「情報差異あり」と併記します。規格を特定できない案内は検索結果へ強い警告を出さず、詳細画面で原文確認を促します。実際の受注可否は卸・メーカーにもご確認ください。" }
         }
       ]
     }
@@ -385,6 +385,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .pill[data-f="ended"].active{background:linear-gradient(135deg,#A5876C,var(--ended));box-shadow:0 6px 16px -6px rgba(138,106,82,.6)}
 .pill[data-f="ok"].active{background:linear-gradient(135deg,#4BC98B,var(--ok));box-shadow:0 6px 16px -6px rgba(47,174,110,.6)}
 .pill[data-f="fav"].active{color:#5C4300;background:linear-gradient(135deg,#FFD966,#F5B301);box-shadow:0 6px 16px -6px rgba(245,179,1,.55)}
+.pill[data-f="watchDiscrepancy"].active{color:#4B3400;background:linear-gradient(135deg,#FFE08A,#E5A900);box-shadow:0 6px 16px -6px rgba(229,169,0,.55)}
 .pill[data-f="delist"].active{background:linear-gradient(135deg,#E8912F,#B0500E);box-shadow:0 6px 16px -6px rgba(176,80,14,.55)}
 .result-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;margin-bottom:14px}
 .result-meta{font-size:12.5px;color:var(--sub)}
@@ -447,6 +448,10 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   color:#7B3F28;background:rgba(138,106,82,.15);border:1px solid rgba(138,106,82,.42);
   white-space:nowrap;
 }
+.discrepancy-badge{
+  font-size:10.5px;font-weight:900;padding:4px 10px;border-radius:999px;
+  color:#5B4100;background:#FFF0B8;border:1px solid #D69B00;white-space:nowrap;
+}
 .change-badge{
   font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:999px;white-space:nowrap;
 }
@@ -473,6 +478,15 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .sum-box ul{margin:0;padding-left:18px}
 .sum-box li{font-size:13px;line-height:1.75;color:var(--ink)}
 .sum-note{font-size:10.5px;color:var(--sub);margin-top:8px;line-height:1.7}
+.discrepancy-panel{
+  margin:14px 0;padding:15px 17px;border-radius:15px;
+  color:#4B3600;background:#FFF4C9;border:1.5px solid #D69B00;
+}
+.discrepancy-panel[hidden]{display:none}
+.discrepancy-title{font-size:13px;font-weight:900;margin-bottom:7px}
+.discrepancy-panel p{font-size:12.5px;line-height:1.75;margin:3px 0}
+.discrepancy-panel .discrepancy-note{font-size:11px;color:#6B5315;margin-top:7px}
+.discrepancy-panel a{display:inline-block;margin-top:8px;color:#684B00;font-size:12px;font-weight:900}
 /* お気に入り（★）: カード右上とモーダル。localStorage保存 */
 .drug-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
 .drug-head .drug-name{margin-bottom:6px;flex:1}
@@ -573,11 +587,12 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .watch-dashboard h3{font-size:clamp(18px,2.6vw,24px);line-height:1.45;margin:0}
 .watch-dashboard-lede{font-size:12px;line-height:1.75;color:var(--sub);max-width:48em;margin-top:5px}
 .watch-dashboard-check{font-size:11.5px;color:var(--sub);white-space:nowrap;padding-top:4px}
-.watch-dashboard-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:18px}
+.watch-dashboard-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:18px}
 .watch-stat{padding:13px 14px;border-radius:15px;background:rgba(255,255,255,.7);border:1px solid rgba(90,107,148,.12)}
 .watch-stat span{display:block;font-size:10.5px;color:var(--sub);font-weight:700;margin-bottom:3px}
 .watch-stat strong{font-size:21px;color:var(--ink)}
 .watch-stat.warn strong{color:#A03030}.watch-stat.ok strong{color:#1B7A4C}
+.watch-stat.discrepancy strong{color:#8A6200}
 .watch-dashboard-actions{display:flex;gap:8px;flex-wrap:wrap}
 .watch-dashboard-actions .watch-btn.secondary{color:var(--blue);background:rgba(255,255,255,.78);box-shadow:none}
 .watch-dashboard-actions .watch-btn:disabled{opacity:.45;cursor:not-allowed}
@@ -1068,6 +1083,7 @@ footer a:hover{color:var(--blue)}
   .pill{background:rgba(38,55,102,.7);border:1px solid rgba(126,152,214,.18);color:var(--ink)}
   .pill.active{color:#0B1226}
   .pill[data-f="delist"].active{color:#fff}
+  .pill[data-f="watchDiscrepancy"].active{color:#251A00}
   .page-size select{background:rgba(38,55,102,.7);border-color:rgba(126,152,214,.25);color:var(--ink)}
   .drug-card{
     background:var(--card-strong);
@@ -1078,6 +1094,11 @@ footer a:hover{color:var(--blue)}
   /* --sc はカードごとのインライン変数で、ライトテーマ用の色が入る。
      暗背景では白を25%混ぜて明度を上げ、全ステータスで WCAG AA を満たす */
   .status-tag,.term-tag,.rel-status{color:color-mix(in srgb,var(--sc) 75%,white)}
+  .discrepancy-badge{color:#FFE8A3;background:rgba(214,155,0,.17);border-color:#E5B539}
+  .discrepancy-panel{color:#FFE9A8;background:rgba(214,155,0,.14);border-color:#E5B539}
+  .discrepancy-panel .discrepancy-note{color:#DCC98E}
+  .discrepancy-panel a{color:#FFD978}
+  .watch-stat.discrepancy strong{color:#FFD978}
 
   /* モーダル */
   .modal{
@@ -1202,6 +1223,7 @@ footer a:hover{color:var(--blue)}
       <button type="button" class="pill" data-f="delist" id="pillDelist" aria-pressed="false" style="display:none"></button>
       <button type="button" class="pill" data-f="fav" id="pillFav" aria-pressed="false" style="display:none"></button>
       <button type="button" class="pill" data-f="watchChanged" id="pillWatchChanged" aria-pressed="false" style="display:none"></button>
+      <button type="button" class="pill" data-f="watchDiscrepancy" id="pillWatchDiscrepancy" aria-pressed="false" style="display:none"></button>
     </div>
     <!-- 空検索では監視リストを先に案内する。検索語または絞り込みがある間は、
          JSでこの2要素を結果の後ろへ移し、視覚順と読み上げ順を一致させる。 -->
@@ -1221,9 +1243,11 @@ footer a:hover{color:var(--blue)}
         <div class="watch-stat"><span>未確認の変更</span><strong class="num" id="watchUnreadCount">0</strong></div>
         <div class="watch-stat warn"><span>悪化</span><strong class="num" id="watchWorseCount">0</strong></div>
         <div class="watch-stat ok"><span>改善</span><strong class="num" id="watchBetterCount">0</strong></div>
+        <div class="watch-stat discrepancy"><span>情報差異</span><strong class="num" id="watchDiscrepancyCount">0</strong></div>
       </div>
       <div class="watch-dashboard-actions">
         <button type="button" class="watch-btn" id="watchUnreadBtn" disabled>未確認の変更を見る</button>
+        <button type="button" class="watch-btn" id="watchDiscrepancyBtn" disabled>情報差異を見る</button>
         <button type="button" class="watch-btn secondary" id="watchCheckedBtn" disabled>確認済みにする</button>
         <button type="button" class="watch-btn secondary" id="watchShareBtn" disabled>変更を共有</button>
         <button type="button" class="watch-btn secondary" id="watchCopyBtn" disabled>文章をコピー</button>
@@ -1439,7 +1463,7 @@ footer a:hover{color:var(--blue)}
     </div>
     <div class="flow-step glass">
       <h3>差分を検出</h3>
-      <p>前日からステータスが変わった品目を検出し、「最近更新」として変化にフォーカスした形で整理します。</p>
+      <p>前日からの供給区分の変化に加え、厚労省公表値より新しいメーカー公式案内を照合します。メーカー・製品規格まで一致した差異だけを検索結果へ表示します。</p>
     </div>
     <div class="flow-step glass">
       <h3>翌朝、手元に</h3>
@@ -1506,8 +1530,8 @@ footer a:hover{color:var(--blue)}
       <p>厚生労働省の供給区分は意味を変えて上書きせず表示しています。見やすくするための差分集計や、メーカー資料の自動抽出・AI要約は出典情報と区別して表示します。ただし公表と実際の流通状況にタイムラグが生じる場合があるため、採用・処方・調剤上の判断は必ず医師・薬剤師等の専門職が最新情報を確認したうえで行ってください。</p>
     </details>
     <details class="faq-item">
-      <summary>「通常出荷」なのに実際は製造中止になっている品目があるのはなぜですか？</summary>
-      <p>本サービスが利用している厚生労働省「医療用医薬品供給状況」データは、限定出荷・供給停止といった一時的な出荷調整を追跡するための資料であり、製造中止（販売中止）の把握を主目的とした資料ではありません。そのため、メーカーが製造を終了していても、この資料上は最後に確認された「通常出荷」のまま長期間更新されずに残ってしまうことがあります。厚労省データに「薬価削除予定」の区分が含まれる品目については「薬価削除予定」バッジを表示していますが、それ以外の品目については各詳細に表示される「情報の鮮度（最終確認からの経過日数）」を目安に、経過が長い場合は卸・メーカーへの確認もあわせてご検討ください。</p>
+      <summary>「通常出荷」なのにメーカーでは限定出荷・供給停止となっている品目があるのはなぜですか？</summary>
+      <p>厚生労働省の公表値とメーカー公式案内では、更新時期や対象包装の範囲が異なることがあります。医薬品供給ナビは厚労省区分を上書きせず、メーカー公式案内の方が新しく、メーカー・製品規格まで一致した場合に「情報差異あり」と併記します。規格を特定できない案内は検索結果へ強い警告を出さず、詳細画面で原文確認を促します。実際の受注可否は卸・メーカーにもご確認ください。</p>
     </details>
   </div>
 </section>
@@ -1605,6 +1629,7 @@ footer a:hover{color:var(--blue)}
     <a class="maker-link" id="mMakerLink" href="#" target="_blank" rel="noopener" hidden></a>
     <a class="maker-link" id="mPmdaLink" href="#" target="_blank" rel="noopener" hidden></a>
     <a class="maker-link" id="mItemLink" href="#" hidden></a>
+    <div class="discrepancy-panel" id="mDiscrepancy" role="note" hidden></div>
     <div class="sum-box" id="mSummary" hidden></div>
     <div class="pkg-box" id="mPkgs" hidden></div>
     <dl class="detail-grid" id="mGrid"></dl>
@@ -1861,6 +1886,8 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
       if(!c || c.date !== LATEST_CHANGE_DATE) return false;
     }else if(filter==="watchChanged"){
       if(!WATCH_UNREAD_KEYS.has(itemKey(d))) return false;
+    }else if(filter==="watchDiscrepancy"){
+      if(!WATCH_DISCREPANCY_KEYS.has(itemKey(d))) return false;
     }else if(filter==="fav"){
       if(!isFav(d)) return false;
     }else if(filter==="delist"){
@@ -1906,6 +1933,11 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
       ? `<span class="discontinued-badge">販売中止予定</span>`
       : (isPackageDiscontinuationAnnouncement(announcement)
         ? `<span class="discontinued-badge">一部包装中止</span>` : "");
+    // 厚労省区分は変更せず、日付・メーカー・製品規格まで一致した新しい
+    // メーカー公式案内が異なる状態を示す場合だけ、独立した黄色バッジを付ける。
+    const discrepancyBadge = discrepancyFor(d)
+      ? `<span class="discrepancy-badge" title="厚労省公表区分と、より新しいメーカー公式案内に差異があります">情報差異あり</span>`
+      : "";
     // 直近30日以内に供給状況が実際に変わった品目は「旧→新」バッジで変化を明示
     const ch = LIVE ? latestChangeFor(d) : null;
     const chDays = ch ? daysAgo(ch.date) : null;
@@ -1930,7 +1962,7 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
       </div>
       <div class="drug-maker">${esc(d.m)}${spec}</div>
       <div class="drug-foot">
-        <span class="drug-tags"><span class="status-tag">${st.label}</span>${changeBadge}${delistBadge}${discontinuedBadge}</span>
+        <span class="drug-tags"><span class="status-tag">${st.label}</span>${discrepancyBadge}${changeBadge}${delistBadge}${discontinuedBadge}</span>
         <span class="drug-date num">更新 ${d.d}${ago}</span>
       </div>
     </article>`;
@@ -1948,7 +1980,7 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
 
 // 検索語と絞り込みをURLハッシュに保持（リロード・共有で同じ検索結果を再現できる）
 // #item= / #drug=（品目詳細の直リンク）が開いているときは上書きしない
-const HASH_FILTERS = ["ok","limited","stopped","ended","changed","delist","fav","watchChanged"];
+const HASH_FILTERS = ["ok","limited","stopped","ended","changed","delist","fav","watchChanged","watchDiscrepancy"];
 function syncHash(){
   if(location.hash.startsWith("#item=") || location.hash.startsWith("#drug=")) return;
   const p = new URLSearchParams();
@@ -1972,6 +2004,7 @@ function resolveFilter(f){
   if(!f || !HASH_FILTERS.includes(f)) return "all";
   if(f === "fav" && !FAVS.size) return "all";
   if(f === "watchChanged" && !WATCH_UNREAD_KEYS.size) return FAVS.size ? "fav" : "all";
+  if(f === "watchDiscrepancy" && !WATCH_DISCREPANCY_KEYS.size) return FAVS.size ? "fav" : "all";
   return f;
 }
 function applyHashState(){
@@ -2226,6 +2259,28 @@ function lifecycleAnnouncement(d){
 function isSalesEnding(d){
   return d.s === "ended" || d.delist || !!lifecycleFor(d);
 }
+
+// YJコード単位の「厚労省公表区分と、より新しいメーカー公式案内の差異」。
+// high はメーカー・製品規格・公表日の一致をデータ生成時に検証済み。
+// review は規格等が曖昧なため、検索一覧や監視件数には出さず詳細だけで原文確認を促す。
+let SUPPLY_DISCREPANCIES = {};
+function discrepancyFor(d, includeReview=false){
+  const key = normalizeYj(d && d.yj);
+  const item = key && SUPPLY_DISCREPANCIES[key];
+  if(!item || norm(item.product_name) !== norm(d.n)) return null;
+  if(item.confidence === "high") return item;
+  return includeReview && item.confidence === "review" ? item : null;
+}
+function discrepancyAnnouncement(d){
+  const item = discrepancyFor(d, true);
+  const info = item && item.manufacturer;
+  if(!info || !info.url) return null;
+  return {
+    url:info.url, title:info.title, maker:info.maker,
+    event_type:info.status === "limited" ? "limited" : info.status === "stopped" ? "stopped" : "resumed",
+    announced_at:info.announced_at,
+  };
+}
 // 「販売中止・予定」は、厚労省CSVの供給区分だけでなく、薬価削除予定と
 // メーカー公表の販売中止予定もまとめて探すための絞り込み。
 // 現在の厚労省CSVには供給区分そのものが「販売中止」の行が0件でも、
@@ -2325,6 +2380,12 @@ function loadSupplementalData(){
       .then(res => res && res.json()).then(data => {
         if(data && data.schema_version===1 && data.products) PRODUCT_LIFECYCLES = data.products;
       }).catch(()=>{}),
+    fetchFirst(["supply_discrepancies.json", "https://tkiyo1007-eng.github.io/drugs-data/supply_discrepancies.json"])
+      .then(res => res && res.json()).then(data => {
+        if(data && data.schema_version===1 && data.products && typeof data.products === "object"){
+          SUPPLY_DISCREPANCIES = data.products;
+        }
+      }).catch(()=>{}),
     fetchFirst(["maker_announcements.json", "https://tkiyo1007-eng.github.io/drugs-data/maker_announcements.json"])
       .then(res => res && res.json()).then(data => {
         if(data) ANNOUNCEMENTS = {...data, ...MANUAL_ANNOUNCEMENTS};
@@ -2354,6 +2415,8 @@ function loadSupplementalData(){
     // 検索語・絞り込み・表示件数は現在値を保ったまま再描画される。
     if(LIVE){
       refreshSalesEndingPill();
+      renderWatchDashboard();
+      renderFavNotice();
       render();
     }
     // 読込中に詳細を開いた場合は、届いた案内文・要約・包装情報をその場で反映する
@@ -2650,6 +2713,7 @@ try{
 }catch(e){}
 let WATCH_UNREAD = [];
 let WATCH_UNREAD_KEYS = new Set();
+let WATCH_DISCREPANCY_KEYS = new Set();
 function saveWatchState(){
   try{ localStorage.setItem("drugSupplyNaviWatchStateV1", JSON.stringify(WATCH_STATE)); }catch(e){}
 }
@@ -2695,16 +2759,22 @@ function renderWatchDashboard(){
   if(!dashboard) return;
   WATCH_UNREAD = getWatchChangesSinceLastCheck();
   WATCH_UNREAD_KEYS = new Set(WATCH_UNREAD.map(change=>change.key));
+  WATCH_DISCREPANCY_KEYS = new Set(
+    LIVE ? ITEMS.filter(item=>isFav(item) && discrepancyFor(item)).map(item=>itemKey(item)) : []
+  );
   const worse = WATCH_UNREAD.filter(change=>classifyWatchChange(change)==="worse").length;
   const better = WATCH_UNREAD.filter(change=>classifyWatchChange(change)==="better").length;
   document.getElementById("watchCount").textContent = FAVS.size.toLocaleString();
   document.getElementById("watchUnreadCount").textContent = WATCH_UNREAD.length.toLocaleString();
   document.getElementById("watchWorseCount").textContent = worse.toLocaleString();
   document.getElementById("watchBetterCount").textContent = better.toLocaleString();
+  document.getElementById("watchDiscrepancyCount").textContent = WATCH_DISCREPANCY_KEYS.size.toLocaleString();
   document.getElementById("watchLastChecked").textContent = `最終確認：${formatCheckedAt(WATCH_STATE.lastCheckedAt)}`;
   document.getElementById("watchFirstNote").hidden = !!WATCH_STATE.lastCheckedChangeDate || !FAVS.size;
   const hasItems = LIVE && FAVS.size > 0, hasUnread = WATCH_UNREAD.length > 0;
+  const hasDiscrepancy = WATCH_DISCREPANCY_KEYS.size > 0;
   document.getElementById("watchUnreadBtn").disabled = !hasUnread;
+  document.getElementById("watchDiscrepancyBtn").disabled = !hasDiscrepancy;
   document.getElementById("watchCheckedBtn").disabled = !hasUnread;
   document.getElementById("watchShareBtn").disabled = !hasUnread;
   document.getElementById("watchCopyBtn").disabled = !hasUnread;
@@ -2712,14 +2782,29 @@ function renderWatchDashboard(){
   document.getElementById("watchRestoreBtn").disabled = !LIVE;
   document.getElementById("watchDashboardLede").textContent = !FAVS.size
     ? "採用品目や確認したい製品を、この端末だけで管理できます。★またはCSVで登録してください。"
-    : hasUnread
-      ? `前回の確認後に${WATCH_UNREAD.length.toLocaleString()}品目が変わりました。内容を確認してから「確認済みにする」を押してください。`
+    : hasUnread || hasDiscrepancy
+      ? [
+          hasUnread ? `前回の確認後に${WATCH_UNREAD.length.toLocaleString()}品目が変わりました。` : "",
+          hasDiscrepancy ? `${WATCH_DISCREPANCY_KEYS.size.toLocaleString()}品目で、厚労省区分とより新しいメーカー公式案内に差異があります。` : "",
+          hasUnread ? "内容を確認してから「確認済みにする」を押してください。" : "",
+        ].filter(Boolean).join("")
       : "前回の確認後に新しい供給区分の変更はありません。監視リストはこの端末内だけに保存されています。";
   const pill = document.getElementById("pillWatchChanged");
   if(hasUnread){ pill.textContent = `未確認の変更 ${WATCH_UNREAD.length}`; pill.style.display = ""; }
   else{
     pill.style.display = "none";
     if(filter === "watchChanged"){
+      filter = FAVS.size ? "fav" : "all";
+      setActivePill(filter);
+    }
+  }
+  const discrepancyPill = document.getElementById("pillWatchDiscrepancy");
+  if(hasDiscrepancy){
+    discrepancyPill.textContent = `情報差異 ${WATCH_DISCREPANCY_KEYS.size}`;
+    discrepancyPill.style.display = "";
+  }else{
+    discrepancyPill.style.display = "none";
+    if(filter === "watchDiscrepancy"){
       filter = FAVS.size ? "fav" : "all";
       setActivePill(filter);
     }
@@ -2813,6 +2898,12 @@ document.getElementById("watchUnreadBtn").addEventListener("click",()=>{
   document.getElementById("demo").scrollIntoView({behavior:"smooth",block:"start"});
   dsnTrack("watchlist-dashboard-open");
 });
+document.getElementById("watchDiscrepancyBtn").addEventListener("click",()=>{
+  setFilter("watchDiscrepancy");
+  focusSearchResultSummary();
+  document.getElementById("demo").scrollIntoView({behavior:"smooth",block:"start"});
+  dsnTrack("watchlist-dashboard-open");
+});
 document.getElementById("watchCheckedBtn").addEventListener("click",markWatchChangesChecked);
 document.getElementById("watchShareBtn").addEventListener("click",shareWatchChanges);
 document.getElementById("watchCopyBtn").addEventListener("click",async()=>{
@@ -2885,6 +2976,32 @@ function openDetail(d, opts={}){
   document.getElementById("mFav").classList.toggle("on", isFav(d));
   document.getElementById("mGrid").innerHTML = detailPairs(d)
     .map(([h,v])=>`<dt>${esc(h)}</dt><dd>${esc(v)}</dd>`).join("");
+  const discrepancy = discrepancyFor(d, true);
+  const $mDiscrepancy = document.getElementById("mDiscrepancy");
+  if(discrepancy){
+    const official = discrepancy.official || {};
+    const manufacturer = discrepancy.manufacturer || {};
+    const high = discrepancy.confidence === "high";
+    const scopeNote = manufacturer.scope === "package"
+      ? "包装単位を含む案内です。製品全体が同じ状態とは限らないため、対象包装を原文でご確認ください。"
+      : manufacturer.scope === "ambiguous"
+        ? "関連製品の案内ですが、本品の規格が対象か機械判定できません。検索一覧には警告を出さず、詳細だけでお知らせしています。"
+        : "";
+    const sourceLink = /^https:\/\//.test(manufacturer.url || "")
+      ? `<a href="${esc(manufacturer.url)}" target="_blank" rel="noopener">メーカー公式案内の原文を確認</a>`
+      : "";
+    $mDiscrepancy.innerHTML = `
+      <div class="discrepancy-title">${high ? "情報差異あり" : "メーカー案内あり・対象規格を原文確認"}</div>
+      <p><strong>厚労省公表：</strong>${esc(official.label || "—")}（${esc(official.updated_at || "更新日不明")}）</p>
+      <p><strong>メーカー公式：</strong>${esc(manufacturer.label || "—")}（${esc(manufacturer.announced_at || "公表日不明")}）</p>
+      ${scopeNote ? `<p class="discrepancy-note">${esc(scopeNote)}</p>` : ""}
+      <p class="discrepancy-note">厚労省区分は上書きせず、別の出典として併記しています。実際の受注可否は卸・メーカーにもご確認ください。</p>
+      ${sourceLink}`;
+    $mDiscrepancy.hidden = false;
+  }else{
+    $mDiscrepancy.hidden = true;
+    $mDiscrepancy.innerHTML = "";
+  }
   // 温感タイプの貼付剤は商品名に「温感」の表記がない品目があるため明示
   // （非温感品と取り違えて代替すると温感刺激の苦情・皮膚トラブルにつながる）
   if(isWarmPatch(d))
@@ -2965,7 +3082,7 @@ function openDetail(d, opts={}){
   }
   // 個別のメーカー案内は「通常出荷」でも必要。現在の出荷と将来の販売中止は
   // 両立するため、供給区分だけで案内検索を止めない。
-  const announcement = findAnnouncement(d);
+  const announcement = findAnnouncement(d) || discrepancyAnnouncement(d);
   const needsMakerLink = d.s !== "ok" || d.delist || !!announcement;
   // 検索対象は製造メーカー・販売メーカーの欄だけに限る。
   // 行全体を連結して探すと、代替候補欄に載った他社品（「〜錠「ニプロ」」など）や
@@ -3038,6 +3155,8 @@ function openDetail(d, opts={}){
 
   document.getElementById("mNote").textContent = d.delist
     ? "※ 厚生労働省の公表データ上、出荷量区分が「薬価削除予定」となっている品目です。供給状況欄の表示に関わらず、近く販売終了となる見込みがあります。採用の見直しをご検討ください。"
+    : discrepancy
+      ? "※ 供給区分は厚生労働省の公表値です。黄色の欄は、より新しいメーカー公式案内を別情報として示しています。"
     : LIVE
       ? "※ 厚生労働省「医療用医薬品供給状況」の公表データを表示しています。実際の流通状況と異なる場合があります。"
       : "※ デモ用サンプルデータです。";
