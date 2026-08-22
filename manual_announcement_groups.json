@@ -345,5 +345,21 @@
    "event_type": "resumed",
    "announced_at": "2026-07-08"
   }
+ },
+ {
+  "products": [
+   "アマルエット配合錠１番「ＴＣＫ」",
+   "アマルエット配合錠２番「ＴＣＫ」",
+   "アマルエット配合錠３番「ＴＣＫ」",
+   "アマルエット配合錠４番「ＴＣＫ」"
+  ],
+  "target_products_verified": true,
+  "announcement": {
+   "maker": "辰巳化学",
+   "title": "2026.03.16 アマルエット配合錠1番/2番/3番/4番「TCK」販売中止のお知らせ",
+   "url": "https://www.tatsumi-kagaku.com/file/information/file/1099_1.pdf",
+   "event_type": "discontinued",
+   "announced_at": "2026-03-16"
+  }
  }
 ]

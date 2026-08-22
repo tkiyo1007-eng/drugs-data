@@ -192,6 +192,9 @@ def validate_manual_groups(csv_path, path):
                     continue
                 if name not in product_names:
                     errors.append(f"{label}: CSVに存在しない品目: {name}")
+        verified = group.get("target_products_verified")
+        if verified is not None and verified is not True:
+            errors.append(f"{label}.target_products_verifiedはtrueのみ指定できます")
         info = group.get("announcement")
         if not isinstance(info, dict):
             errors.append(f"{label}.announcementがオブジェクトではありません")

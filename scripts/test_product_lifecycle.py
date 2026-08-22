@@ -1,4 +1,5 @@
 import csv
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -7,13 +8,41 @@ from scripts.build_product_lifecycle import (
     PARTIAL_RE,
     announcement_date,
     announcement_covers_product,
+    announcement_targets_product,
     backfill_announcement_dates,
     is_product_wide_discontinuation,
+    verified_group_announcements,
 )
 from scripts.fetch_maker_announcements import match_to_csv
 
 
 class ProductLifecycleTests(unittest.TestCase):
+    def test_amaluet_tracks_manufacturer_discontinuation_while_in_supply_csv(self):
+        """対象品がCSVにある間だけ、メーカーの販売中止情報を追跡する。"""
+        root = Path(__file__).resolve().parents[1]
+        with (root / "drugs_app_ready.csv").open(encoding="utf-8-sig", newline="") as handle:
+            rows = {row["YJコード"]: row for row in csv.DictReader(handle)}
+        lifecycle = json.loads(
+            (root / "product_lifecycle.json").read_text(encoding="utf-8")
+        )["products"]
+        expected = {
+            "2190101F1098": "サンド", "2190102F1092": "サンド",
+            "2190103F1097": "サンド", "2190104F1091": "サンド",
+            "2190101F1063": "辰巳化学", "2190102F1068": "辰巳化学",
+            "2190103F1062": "辰巳化学", "2190104F1067": "辰巳化学",
+        }
+        for yj_code, maker in expected.items():
+            with self.subTest(yj_code=yj_code):
+                # 厚労省一覧から販売終了品が削除された後は、reconcile処理に
+                # 合わせてライフサイクル側にも残さない。正常な将来更新を
+                # 固定YJの存在チェックで止めないための条件分岐。
+                if yj_code not in rows:
+                    self.assertNotIn(yj_code, lifecycle)
+                    continue
+                self.assertEqual(lifecycle[yj_code]["state"], "discontinuation_announced")
+                self.assertEqual(lifecycle[yj_code]["maker"], maker)
+                self.assertTrue(lifecycle[yj_code]["source_url"].startswith("https://"))
+
     def test_announcement_date_uses_pdf_url_when_title_has_no_date(self):
         self.assertEqual(
             announcement_date(
@@ -93,6 +122,50 @@ class ProductLifecycleTests(unittest.TestCase):
                 "薬A錠2.5mg/5mg/10mg「A」 販売中止のお知らせ",
             )
         )
+
+    def test_grouped_numbered_formulation_is_accepted(self):
+        self.assertTrue(
+            announcement_covers_product(
+                "アマルエット配合錠２番「ＴＣＫ」",
+                "アマルエット配合錠1番/2番/3番/4番「TCK」 販売中止のお知らせ",
+            )
+        )
+
+    def test_grouped_numbered_formulation_rejects_missing_number(self):
+        self.assertFalse(
+            announcement_covers_product(
+                "アマルエット配合錠４番「ＴＣＫ」",
+                "アマルエット配合錠1番/2番/3番「TCK」 販売中止のお知らせ",
+            )
+        )
+
+    def test_verified_manual_group_target_accepts_generic_title(self):
+        self.assertTrue(announcement_targets_product(
+            "薬Ａ錠５ｍｇ「Ａ」",
+            {"title": "販売中止品目のご案内", "target_products_verified": True},
+        ))
+
+    def test_only_explicitly_verified_group_is_expanded(self):
+        document = [
+            {
+                "products": ["薬Ａ錠", "薬Ｂ錠"],
+                "target_products_verified": True,
+                "announcement": {"maker": "Ａ製薬", "title": "販売中止", "url": "https://example.test/a"},
+            },
+            {
+                "products": ["薬Ｃ錠"],
+                "announcement": {"maker": "Ａ製薬", "title": "販売中止", "url": "https://example.test/c"},
+            },
+        ]
+        expanded = verified_group_announcements(document)
+        self.assertEqual(set(expanded), {"薬Ａ錠", "薬Ｂ錠"})
+        self.assertTrue(expanded["薬Ａ錠"]["target_products_verified"])
+
+    def test_unverified_generic_title_is_rejected(self):
+        self.assertFalse(announcement_targets_product(
+            "薬Ａ錠５ｍｇ「Ａ」",
+            {"title": "販売中止品目のご案内"},
+        ))
 
     def test_partial_package_notice_is_not_product_discontinuation(self):
         self.assertIsNotNone(PARTIAL_RE.search("薬A錠 一部包装販売中止のお知らせ"))

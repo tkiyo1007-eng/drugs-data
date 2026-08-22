@@ -29,6 +29,7 @@ OFFICIAL_HOSTS = {
     "高田製薬": {"takata-seiyaku.co.jp"},
     "ニプロ": {"nipro.co.jp"},
     "サンド": {"sandoz.com", "sandoz.jp"},
+    "辰巳化学": {"tatsumi-kagaku.com"},
 }
 
 
