@@ -4,6 +4,7 @@ import datetime as dt
 import json
 import unittest
 import urllib.error
+from pathlib import Path
 from unittest import mock
 
 from check_public_data_health import (
@@ -18,6 +19,18 @@ from check_public_data_health import (
 
 
 class RemoteDataHealthTests(unittest.TestCase):
+    def test_post_merge_health_check_waits_for_pages_deployment(self) -> None:
+        workflow = (
+            Path(__file__).resolve().parents[1]
+            / ".github"
+            / "workflows"
+            / "public-data-health.yml"
+        ).read_text(encoding="utf-8")
+        self.assertIn("workflow_run:", workflow)
+        self.assertIn("workflows: ['Deploy GitHub Pages']", workflow)
+        self.assertIn("github.event.workflow_run.conclusion == 'success'", workflow)
+        self.assertNotIn("\n  push:\n", workflow)
+
     def test_manual_target_registry_is_downloaded_for_discrepancy_validation(self) -> None:
         self.assertIs(SUPPORTING_FILES["manual_announcement_groups.json"], list)
 

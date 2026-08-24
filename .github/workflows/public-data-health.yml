@@ -16,22 +16,11 @@ on:
       - 'manual_announcement_groups.json'
       - 'product_lifecycle.json'
       - 'supply_discrepancies.json'
-  push:
+  # main更新時はPages公開が完了してから検証し、新旧ファイルの混在取得を防ぐ。
+  workflow_run:
+    workflows: ['Deploy GitHub Pages']
+    types: [completed]
     branches: [main]
-    paths:
-      - '.github/workflows/public-data-health.yml'
-      - 'scripts/check_public_data_health.py'
-      - 'scripts/test_public_data_health.py'
-      - 'scripts/validate_supply_data.py'
-      - 'scripts/validate_product_lifecycle.py'
-      - 'scripts/validate_supply_discrepancies.py'
-      - 'drugs_app_ready.csv'
-      - 'version.json'
-      - 'maker_announcements.json'
-      - 'maker_announcement_events.json'
-      - 'manual_announcement_groups.json'
-      - 'product_lifecycle.json'
-      - 'supply_discrepancies.json'
   schedule:
     # 毎朝7:15 JST。公開リポジトリの標準GitHub-hosted runnerで実行する。
     - cron: '15 22 * * *'
@@ -47,6 +36,7 @@ concurrency:
 jobs:
   verify:
     name: 公開データの取得・鮮度・整合性
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
