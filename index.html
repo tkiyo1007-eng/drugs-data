@@ -2266,7 +2266,7 @@ function lifecycleMakerTokens(value){
 }
 function lifecycleMakerMatches(maker, makerText){
   const makerName = normalizeLifecycleMaker(maker);
-  if(!makerName) return true;
+  if(!makerName) return false;
   const rowMakers = new Set(lifecycleMakerTokens(makerText));
   return [makerName, ...(LIFECYCLE_MAKER_ALIASES[makerName] || [])]
     .some(candidate=>rowMakers.has(candidate));
@@ -2282,7 +2282,7 @@ function lifecycleFor(d){
         const i=CSV_HEAD.indexOf(c); return i>=0 ? d.row[i]||"" : "";
       }).join(" ")
     : d.m;
-  if(item.maker && !lifecycleMakerMatches(item.maker, makerText)) return null;
+  if(!lifecycleMakerMatches(item.maker, makerText)) return null;
   return item;
 }
 function lifecycleAnnouncement(d){
@@ -2480,12 +2480,19 @@ function loadSupplementalData(){
 let CHANGE_EVENTS = [];
 let CHANGES_BY_YJ = new Map();
 let CHANGES_BY_NAME = {};
+function statusChangeMatchesCurrentItem(item, change){
+  return Boolean(item && change && mapStatus(String(change.to ?? "")) === item.s);
+}
 function latestChangeFor(item){
   const yj = normalizeYj(item && item.yj);
-  if(yj) return CHANGES_BY_YJ.get(yj) || null;
+  if(yj){
+    const change = CHANGES_BY_YJ.get(yj) || null;
+    return statusChangeMatchesCurrentItem(item, change) ? change : null;
+  }
   // YJコードがない旧データだけ商品名へフォールバックする。同名品目は誤照合しない。
   if(!item || ITEMS.filter(candidate=>candidate.n===item.n).length!==1) return null;
-  return CHANGES_BY_NAME[item.n] || null;
+  const change = CHANGES_BY_NAME[item.n] || null;
+  return statusChangeMatchesCurrentItem(item, change) ? change : null;
 }
 let LATEST_CHANGE_DATE = null; // 変化ログ上で最も新しい日（「本日の更新」フィルタ用）
 const SEV = {ok:0, limited:1, stopped:2, ended:3}; // 深刻度（関連品目の並び順用）
@@ -3755,23 +3762,28 @@ document.getElementById("offlineReload").addEventListener("click", ()=>location.
   const items=[];
   const counts={ok:0,limited:0,stopped:0,ended:0};
   for(const r of rows){
-    if(!r[iName]) continue;
+    const name = (r[iName]||"").trim();
+    if(!name) continue;
     const s = mapStatus(r[iSt]||"");
     counts[s]++;
-    const maker = r[iMk2] || r[iMk1] || "";
+    const manufacturer = iMk1>=0 ? (r[iMk1]||"").trim() : "";
+    const salesMaker = iMk2>=0 ? (r[iMk2]||"").trim() : "";
+    const genericName = iGen>=0 ? (r[iGen]||"").trim() : "";
+    const maker = salesMaker || manufacturer;
     // 厚労省Excelの「出荷量状況」区分に「薬価削除予定」が含まれる品目は、
     // 供給状況欄が「通常出荷」のままでも近く販売終了となる見込みがあるため別途フラグ化。
     // 経過措置期限が設定済み＝薬価基準からの削除が決定済みなので同様に扱う（アプリ版と同じ判定）
     const delist = (iAlt>=0 && (r[iAlt]||"").includes("薬価削除予定"))
                 || (iKeika>=0 && !!(r[iKeika]||"").trim());
     items.push({
-      n:r[iName], m:maker, s, d:(r[iDate]||"").replaceAll("/","-"), delist,
+      n:name, m:maker, s, d:(r[iDate]||"").replaceAll("/","-"), delist,
       spec: iSpec>=0 ? (r[iSpec]||"").trim() : "",
       price: iPrice>=0 ? (r[iPrice]||"").trim() : "",
-      g:(r[iGen]||"").trim(),                       // 一般名（同成分の他社品の検索用）
+      g:genericName,                                 // 一般名（同成分の他社品の検索用）
       cat: iCat>=0 ? (r[iCat]||"").trim() : "",     // 薬効分類（類似薬の検索用）
       yj: iYJ>=0 ? (r[iYJ]||"").trim() : "",        // YJコード（剤形・細分類の判定用）
-      q:norm(r[iName]+(r[iGen]||"")+maker),
+      // iOS版と同じ4項目を空白で区切り、製造・販売メーカーの片方を失わない。
+      q:norm([name,salesMaker,manufacturer,genericName].join(" ")),
       row:r, // 詳細モーダル用に元の行を保持
     });
   }
