@@ -43,6 +43,20 @@ class PublishedWebContentTests(unittest.TestCase):
         self.assertIn("#demo{padding-top:28px}", self.html)
         self.assertIn(".pulse-sub,.supply-bar,.legend,.float-chip{display:none}", self.html)
 
+    def test_dosage_search_uses_the_same_numeric_boundary_as_ios(self):
+        self.assertIn("const DOSAGE_SEARCH_UNITS = [", self.html)
+        self.assertIn("function isDosageSearchTerm(term){", self.html)
+        self.assertIn("Number.isNaN(Number(numeric[0]))", self.html)
+        self.assertIn(
+            "function searchIndexMatchesTerm(searchIndex, term, dosage = isDosageSearchTerm(term)){",
+            self.html,
+        )
+        self.assertIn('Array.from(searchIndex.slice(0, index)).pop() || ""', self.html)
+        self.assertIn('if(!previous || !/[\\p{Number}.,]/u.test(previous)) return true;', self.html)
+        self.assertIn("dosage:isDosageSearchTerm(t)", self.html)
+        self.assertIn("searchIndexMatchesTerm(d.q, x.t, x.dosage)", self.html)
+        self.assertNotIn("terms.every(x => d.q.includes(x.t)", self.html)
+
     def test_missing_sales_maker_is_explained_without_guessing(self):
         self.assertIn("公開データに記載なし（製造メーカーを参照）", self.html)
         self.assertIn("if(salesMakerIndex >= 0 && !salesMaker && manufacturer)", self.html)
