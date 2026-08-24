@@ -57,6 +57,25 @@ class PublishedWebContentTests(unittest.TestCase):
         self.assertIn("searchIndexMatchesTerm(d.q, x.t, x.dosage)", self.html)
         self.assertNotIn("terms.every(x => d.q.includes(x.t)", self.html)
 
+    def test_search_index_keeps_both_manufacturer_fields_like_ios(self):
+        self.assertIn('const manufacturer = iMk1>=0 ? (r[iMk1]||"").trim() : "";', self.html)
+        self.assertIn('const salesMaker = iMk2>=0 ? (r[iMk2]||"").trim() : "";', self.html)
+        self.assertIn('q:norm([name,salesMaker,manufacturer,genericName].join(" "))', self.html)
+        self.assertNotIn('q:norm(r[iName]+(r[iGen]||"")+maker)', self.html)
+
+    def test_change_history_must_match_the_current_status_like_ios(self):
+        self.assertIn("function statusChangeMatchesCurrentItem(item, change){", self.html)
+        self.assertIn('mapStatus(String(change.to ?? "")) === item.s', self.html)
+        self.assertIn("statusChangeMatchesCurrentItem(item, change) ? change : null", self.html)
+
+    def test_lifecycle_maker_matching_rejects_empty_and_uses_verified_alias(self):
+        self.assertIn("function lifecycleMakerMatches(maker, makerText){", self.html)
+        self.assertIn("if(!makerName) return false;", self.html)
+        self.assertIn("if(!lifecycleMakerMatches(item.maker, makerText)) return null;", self.html)
+        self.assertNotIn("if(item.maker && !lifecycleMakerMatches", self.html)
+        self.assertIn('"日本ジェネリック": ["長生堂製薬"]', self.html)
+        self.assertNotIn("norm(makerText).includes(norm(item.maker))", self.html)
+
     def test_missing_sales_maker_is_explained_without_guessing(self):
         self.assertIn("公開データに記載なし（製造メーカーを参照）", self.html)
         self.assertIn("if(salesMakerIndex >= 0 && !salesMaker && manufacturer)", self.html)
