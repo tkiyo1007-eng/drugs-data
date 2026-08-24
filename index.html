@@ -2345,6 +2345,8 @@ let ANNOUNCEMENTS = {...MANUAL_ANNOUNCEMENTS};
 // 詳細を開いたときに初めて取得する。約2,100件のキーで30KB弱あり、ページを開いた
 // だけの人には不要。読み込みの遅い回線では本体のCSV(約1MB)と帯域を奪い合うため、
 // 必要になるまで取りに行かない
+const PUBLIC_SITE_ROOT = "https://tkiyo1007-eng.github.io/drugs-data/";
+const FORMAL_ITEM_YJ = /^[0-9][0-9A-Z]{11}$/;
 let ITEM_PAGES = new Set();
 let itemPagesLoading = null;
 function loadItemPages(){
@@ -3289,15 +3291,26 @@ $list.addEventListener("click", e=>{
   const card = e.target.closest(".drug-card");
   if(card) openDetail(SHOWN[+card.dataset.i]);
 });
-// 品目詳細の直リンク（#item=YJコード）を共有シート or クリップボードで共有
+// 生成済みの正式YJコードは、品目固有のタイトル・説明を持つ静的ページで共有する。
+// キー一覧が未読込・取得失敗・未生成・内部IDなら、従来の #item= へ即時fallbackする。
+// 共有クリック内では通信を待たず、navigator.shareのユーザー操作権を保つ。
+function detailShareURL(item){
+  const yj = String(item && item.yj || "").trim();
+  if(FORMAL_ITEM_YJ.test(yj) && ITEM_PAGES.has(yj)){
+    const url = new URL(`items/${encodeURIComponent(yj)}.html`, PUBLIC_SITE_ROOT);
+    url.searchParams.set("src", "share");
+    return url;
+  }
+  const url = new URL(location.origin + location.pathname);
+  url.searchParams.set("src", "share");
+  url.hash = "item=" + encodeURIComponent(itemKey(item));
+  return url;
+}
 document.getElementById("mShare").addEventListener("click", async e=>{
   if(!currentDetailName) return;
   const btn = e.currentTarget;
-  const shareUrl = new URL(location.origin + location.pathname);
-  shareUrl.searchParams.set("src", "share");
   const currentItem = findByKey(currentDetailKey);
-  shareUrl.hash = "item=" + encodeURIComponent(itemKey(currentItem));
-  const url = shareUrl.href;
+  const url = detailShareURL(currentItem).href;
   if(navigator.share){
     try{
       await navigator.share({title:`${currentDetailName} の供給状況 — 医薬品供給ナビ`, url});

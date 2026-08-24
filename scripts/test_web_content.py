@@ -47,6 +47,27 @@ class PublishedWebContentTests(unittest.TestCase):
         self.assertIn("公開データに記載なし（製造メーカーを参照）", self.html)
         self.assertIn("if(salesMakerIndex >= 0 && !salesMaker && manufacturer)", self.html)
 
+    def test_detail_share_prefers_only_confirmed_formal_item_pages(self):
+        self.assertIn(
+            'const PUBLIC_SITE_ROOT = "https://tkiyo1007-eng.github.io/drugs-data/";',
+            self.html,
+        )
+        self.assertIn("const FORMAL_ITEM_YJ = /^[0-9][0-9A-Z]{11}$/;", self.html)
+        self.assertIn("FORMAL_ITEM_YJ.test(yj) && ITEM_PAGES.has(yj)", self.html)
+        self.assertIn(
+            'new URL(`items/${encodeURIComponent(yj)}.html`, PUBLIC_SITE_ROOT)',
+            self.html,
+        )
+        self.assertIn('url.hash = "item=" + encodeURIComponent(itemKey(item));', self.html)
+        self.assertIn("const url = detailShareURL(currentItem).href;", self.html)
+        share_handler = self.html.split(
+            'document.getElementById("mShare").addEventListener', 1
+        )[1].split("});", 1)[0]
+        before_native_share = share_handler.split("await navigator.share", 1)[0]
+        self.assertNotIn("await ", before_native_share)
+        self.assertNotIn("loadItemPages", share_handler)
+        self.assertNotIn("fetch(", share_handler)
+
 
 if __name__ == "__main__":
     unittest.main()
