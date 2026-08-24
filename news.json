@@ -1,5 +1,29 @@
 [
  {
+  "date": "2026/08/24",
+  "title": "クラスI回収 該当回収品目　照射赤血球液-LR「日赤」",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html",
+  "tag": "回収"
+ },
+ {
+  "date": "2026/08/24",
+  "title": "添付文書改訂相談に基づく添付文書改訂（医薬品）を掲載しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/revision-based-on-the-consultation/0001.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/08/24",
+  "title": "医薬品の最適使用推進ガイドラインを掲載しました",
+  "url": "https://www.pmda.go.jp/review-services/drug-reviews/review-information/p-drugs/0028.html",
+  "tag": "承認審査"
+ },
+ {
+  "date": "2026/08/24",
+  "title": "オレンジレターNo.28を掲載しました。",
+  "url": "https://www.pmda.go.jp/review-services/gmp-qms-gctp/gmp/0011.html",
+  "tag": "承認審査"
+ },
+ {
   "date": "2026/08/21",
   "title": "10月の簡易相談実施予定を掲載しました（医療機器等）",
   "url": "https://www.pmda.go.jp/review-services/f2f-pre/consultations/0015.html",
@@ -30,33 +54,9 @@
   "tag": "承認審査"
  },
  {
-  "date": "2026/08/19",
-  "title": "添付文書改訂相談に基づく添付文書改訂（医薬品）を掲載しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/revision-based-on-the-consultation/0001.html",
-  "tag": "安全対策"
- },
- {
   "date": "2026/08/18",
   "title": "再生医療等製品の最適使用推進ガイドラインを掲載しました",
   "url": "https://www.pmda.go.jp/review-services/drug-reviews/review-information/ctp/0011.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/08/17",
-  "title": "使用上の注意の改訂指示通知（医薬品）2026年08月17日付（厚生労働省より発出）を掲載しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/revision-of-precautions/0375.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/08/17",
-  "title": "［MID-NET］MID-NETの利活用状況を更新しました",
-  "url": "https://www.pmda.go.jp/safety/mid-net/0010.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/08/13",
-  "title": "2026年度 新再生医療等製品の承認品目一覧（2026年7月承認分まで）を掲載しました",
-  "url": "https://www.pmda.go.jp/review-services/drug-reviews/review-information/ctp/0018.html",
   "tag": "承認審査"
  }
 ]
