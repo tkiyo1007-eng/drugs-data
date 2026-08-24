@@ -32,6 +32,8 @@ from urllib.parse import quote
 
 SITE_ROOT = "https://tkiyo1007-eng.github.io/drugs-data/"
 APP_STORE = "https://apps.apple.com/jp/app/%E5%8C%BB%E8%96%AC%E5%93%81%E4%BE%9B%E7%B5%A6%E3%83%8A%E3%83%93/id6777696446"
+APP_ID = "6777696446"
+FORMAL_YJ_RE = re.compile(r"^[0-9][0-9A-Z]{11}$")
 
 # LP(index.html)の mapStatus / STATUS と同じ判定・配色
 # color は淡い bg の上に載る文字色。淡色地の上では元のステータス色のままだと
@@ -167,6 +169,18 @@ def item_key(row: dict) -> str:
     return "x" + hashlib.sha1(seed).hexdigest()[:12]
 
 
+def smart_app_banner_content(row: dict) -> str:
+    """品目ページから、正式YJコードに限って同じ品目のアプリ検索へ渡す。"""
+    content = f"app-id={APP_ID}"
+    yj = (row.get("YJコード") or "").strip()
+    # X+5桁の内部IDはiOSのYJコード検索対象ではない。結果0件へ遷移させず、
+    # 従来どおりアプリの通常入口を開く。
+    if not FORMAL_YJ_RE.fullmatch(yj):
+        return content
+    app_url = "drugsupplynavi://search?q=" + quote(yj, safe="")
+    return f"{content}, app-argument={app_url}"
+
+
 def load_csv(path: Path):
     text = path.read_text(encoding="utf-8-sig")
     rows = list(csv.DictReader(text.splitlines()))
@@ -204,6 +218,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys):
     # 商品名は同名品目があるため、LPの詳細リンクも一意な品目キーを使う。
     lp_link = SITE_ROOT + "#item=" + quote(key, safe="")
     pmda = "https://www.pmda.go.jp/PmdaSearch/iyakuSearch/?nameWord=" + quote(name, safe="")
+    smart_app_banner = esc(smart_app_banner_content(row))
 
     # 詳細表: 既知の列を定義順に、その他の列は後ろに(空欄と重複情報はスキップ)
     detail_rows = []
@@ -273,7 +288,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys):
 <meta name="twitter:description" content="{esc(desc)}">
 <meta name="twitter:image" content="{SITE_ROOT}og_image.png">
 <meta name="twitter:image:alt" content="医薬品供給ナビの供給状況サマリー">
-<meta name="apple-itunes-app" content="app-id=6777696446">
+<meta name="apple-itunes-app" content="{smart_app_banner}">
 <script type="application/ld+json">{breadcrumb_ld}</script>
 <script src="../analytics.js"></script>
 <style>

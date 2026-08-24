@@ -1,6 +1,6 @@
 import unittest
 
-from generate_item_pages import STATUS_NOTES, page_html
+from generate_item_pages import STATUS_NOTES, index_html, page_html
 
 
 class ItemPageMetadataTests(unittest.TestCase):
@@ -34,8 +34,40 @@ class ItemPageMetadataTests(unittest.TestCase):
         self.assertEqual(output.count('rel="canonical"'), 1)
         self.assertIn('content="index,follow,max-image-preview:large"', output)
         self.assertIn('href="https://tkiyo1007-eng.github.io/drugs-data/#item=1234567F1234"', output)
+        self.assertIn(
+            '<meta name="apple-itunes-app" content="app-id=6777696446, '
+            'app-argument=drugsupplynavi://search?q=1234567F1234">',
+            output,
+        )
         self.assertIn('<script src="../analytics.js"></script>', output)
         self.assertIn('src="https://gc.zgo.at/count.js"', output)
+
+    def test_item_page_does_not_deep_link_non_formal_identifiers(self):
+        for identifier in ("X00001", "", "1234567f1234", "1234567F123<"):
+            with self.subTest(identifier=identifier):
+                row = {
+                    "商品名": "テスト医療用ガス",
+                    "製造メーカー": "テスト製薬",
+                    "供給状況": "供給停止",
+                    "YJコード": identifier,
+                }
+                output = page_html(
+                    row, "safe-page-key", "stopped", "2026-08-16", [],
+                    {"safe-page-key"},
+                )
+                self.assertIn(
+                    '<meta name="apple-itunes-app" content="app-id=6777696446">',
+                    output,
+                )
+                self.assertNotIn("app-argument=", output)
+
+    def test_item_index_keeps_the_context_free_banner(self):
+        output = index_html([], "2026-08-16")
+        self.assertIn(
+            '<meta name="apple-itunes-app" content="app-id=6777696446">',
+            output,
+        )
+        self.assertNotIn("app-argument=", output)
 
 
 if __name__ == "__main__":
