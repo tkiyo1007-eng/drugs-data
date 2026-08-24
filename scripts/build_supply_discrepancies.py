@@ -16,6 +16,7 @@ import unicodedata
 from pathlib import Path
 
 from fetch_maker_announcements import base_name_and_specs, maker_matches_row
+from verified_targets import verified_target_registry
 
 
 TRANSIENT_STATES = {
@@ -105,7 +106,10 @@ def manufacturer_state(event_type: str, title: str, official_state: str) -> tupl
     return None
 
 
-def make_entry(row: dict[str, str], announcement: dict[str, object]) -> dict[str, object] | None:
+def make_entry(
+    row: dict[str, str], announcement: dict[str, object],
+    verified_target: dict[str, str] | None = None,
+) -> dict[str, object] | None:
     event_type = str(announcement.get("event_type") or "")
     official = OFFICIAL_STATES.get((row.get("供給状況") or "").strip())
     transient = manufacturer_state(event_type, str(announcement.get("title") or ""), official[0]) if official else None
@@ -120,14 +124,28 @@ def make_entry(row: dict[str, str], announcement: dict[str, object]) -> dict[str
     maker_match = maker_matches_row(str(announcement.get("maker") or ""), row)
     exact_title = exact_product_in_title(product_name, title)
     family_title = exact_title or related_product_family_in_title(product_name, title)
-    if not family_title:
+    if not maker_match or (not family_title and verified_target is None):
         return None
 
-    confidence = "high" if maker_match and exact_title else "review"
-    scope = announcement_scope(product_name, title) if exact_title else "ambiguous"
+    scope = (
+        verified_target.get("scope") if verified_target is not None
+        else announcement_scope(product_name, title) if exact_title
+        else "ambiguous"
+    )
+    verified_product = verified_target is not None and scope == "product"
+    confidence = "high" if scope == "product" and (exact_title or verified_product) else "review"
     if confidence == "high":
-        reason = "メーカー・製品規格・公表日の一致を確認"
+        reason = (
+            "メーカー公式資料の対象表で製品全体・公表日の一致を確認"
+            if verified_product else "メーカー・製品規格・公表日の一致を確認"
+        )
         badge = "情報差異あり"
+    elif scope == "package":
+        reason = "包装単位のメーカー案内です。製品全体の供給区分は原文で確認してください"
+        badge = "メーカー案内あり・原文確認"
+    elif scope == "seller_route":
+        reason = "販売会社・取扱い経路に関する案内です。製品全体の供給区分は原文で確認してください"
+        badge = "メーカー案内あり・原文確認"
     else:
         reason = "関連製品の案内ですが、本品の対象規格を機械判定できません"
         badge = "メーカー案内あり・原文確認"
@@ -157,6 +175,10 @@ def make_entry(row: dict[str, str], announcement: dict[str, object]) -> dict[str
             "maker_match": maker_match,
             "exact_product_in_title": exact_title,
             "manufacturer_notice_is_newer": True,
+            "verified_target_source": (
+                verified_target.get("source") if verified_target is not None else ""
+            ),
+            "verified_target_scope": scope if verified_target is not None else "",
         },
     }
 
@@ -197,8 +219,10 @@ def latest_transient_announcement(
 
 def build(rows: list[dict[str, str]], announcements: dict[str, dict[str, object]],
           version: dict[str, object] | None = None,
-          events: dict[str, list[dict[str, object]]] | None = None) -> dict[str, object]:
+          events: dict[str, list[dict[str, object]]] | None = None,
+          manual_groups: object | None = None) -> dict[str, object]:
     products: dict[str, dict[str, object]] = {}
+    verified_targets = verified_target_registry(rows, manual_groups or [])
     announcements_by_name = {norm(name): value for name, value in announcements.items()}
     events_by_name = {norm(name): value for name, value in (events or {}).items()}
     for row in rows:
@@ -211,7 +235,10 @@ def build(rows: list[dict[str, str]], announcements: dict[str, dict[str, object]
         )
         if not yj or announcement is None:
             continue
-        entry = make_entry(row, announcement)
+        entry = make_entry(
+            row, announcement,
+            verified_targets.get((yj, str(announcement.get("url") or "").strip())),
+        )
         if entry is not None:
             products[yj] = entry
 
@@ -251,6 +278,7 @@ def main() -> int:
     parser.add_argument("--announcements", default="maker_announcements.json")
     parser.add_argument("--events", default="maker_announcement_events.json")
     parser.add_argument("--version", default="version.json")
+    parser.add_argument("--manual-groups", default="manual_announcement_groups.json")
     parser.add_argument("--output", default="supply_discrepancies.json")
     args = parser.parse_args()
     rows = load_rows(Path(args.csv))
@@ -259,7 +287,12 @@ def main() -> int:
     events = json.loads(events_path.read_text(encoding="utf-8")) if events_path.exists() else {}
     version_path = Path(args.version)
     version = json.loads(version_path.read_text(encoding="utf-8")) if version_path.exists() else {}
-    document = build(rows, announcements, version, events)
+    manual_groups_path = Path(args.manual_groups)
+    manual_groups = (
+        json.loads(manual_groups_path.read_text(encoding="utf-8"))
+        if manual_groups_path.exists() else []
+    )
+    document = build(rows, announcements, version, events, manual_groups)
     Path(args.output).write_text(
         json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )

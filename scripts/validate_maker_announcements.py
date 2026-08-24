@@ -7,12 +7,15 @@ import json
 import os
 import sys
 
+from maker_identity import maker_is_listed_in_row
+
 
 ALLOWED_EVENT_TYPES = {
-    "discontinued", "package_discontinued", "resumed", "stopped",
+    "discontinued", "package_discontinued", "handling_discontinued", "resumed", "stopped",
     "limited", "supply", "other",
 }
 REQUIRED_FIELDS = ("maker", "title", "url")
+ALLOWED_TARGET_SCOPES = {"product", "package", "seller_route"}
 
 
 def _load_json(path):
@@ -171,7 +174,14 @@ def validate_manual_groups(csv_path, path):
     if not os.path.exists(path):
         return []
     with open(csv_path, encoding="utf-8-sig") as f:
-        product_names = {r.get("商品名", "") for r in csv.DictReader(f)}
+        rows = list(csv.DictReader(f))
+    product_names = {r.get("商品名", "") for r in rows}
+    rows_by_name = {}
+    rows_by_yj = {}
+    for row in rows:
+        rows_by_name.setdefault(row.get("商品名", ""), []).append(row)
+        if row.get("YJコード"):
+            rows_by_yj[row["YJコード"]] = row
     data = _load_json(path)
     if not isinstance(data, list):
         return ["手動グループ案内のルートが配列ではありません"]
@@ -182,19 +192,66 @@ def validate_manual_groups(csv_path, path):
         if not isinstance(group, dict):
             errors.append(f"{label}がオブジェクトではありません")
             continue
-        products = group.get("products")
-        if not isinstance(products, list) or not products:
-            errors.append(f"{label}.productsが空または配列ではありません")
-        else:
+        products = group.get("products") or []
+        lifecycle_targets = group.get("lifecycle_targets") or []
+        if not isinstance(products, list):
+            errors.append(f"{label}.productsが配列ではありません")
+            products = []
+        if not isinstance(lifecycle_targets, list):
+            errors.append(f"{label}.lifecycle_targetsが配列ではありません")
+            lifecycle_targets = []
+        if not products and not lifecycle_targets:
+            errors.append(f"{label}: productsまたはlifecycle_targetsを1件以上指定してください")
+        if products:
+            if len(products) != len(set(products)):
+                errors.append(f"{label}.productsに重複があります")
             for name in products:
                 if not isinstance(name, str) or not name.strip():
                     errors.append(f"{label}.productsに空または文字列以外の品目があります")
                     continue
                 if name not in product_names:
                     errors.append(f"{label}: CSVに存在しない品目: {name}")
+        lifecycle_yj_codes = set()
+        for target_index, target in enumerate(lifecycle_targets):
+            target_label = f"{label}.lifecycle_targets[{target_index}]"
+            if not isinstance(target, dict):
+                errors.append(f"{target_label}がオブジェクトではありません")
+                continue
+            yj_code = str(target.get("yj_code") or "").strip()
+            product_name = str(target.get("product_name") or "").strip()
+            if not yj_code or not product_name:
+                errors.append(f"{target_label}: yj_codeとproduct_nameは必須です")
+                continue
+            if yj_code in lifecycle_yj_codes:
+                errors.append(f"{label}.lifecycle_targetsのYJコードが重複しています: {yj_code}")
+            lifecycle_yj_codes.add(yj_code)
+            row = rows_by_yj.get(yj_code)
+            if row is None:
+                errors.append(f"{target_label}: CSVに存在しないYJコードです: {yj_code}")
+            elif row.get("商品名") != product_name:
+                errors.append(f"{target_label}: YJコードと商品名がCSVで一致しません")
         verified = group.get("target_products_verified")
         if verified is not None and verified is not True:
             errors.append(f"{label}.target_products_verifiedはtrueのみ指定できます")
+        target_scope = group.get("target_scope")
+        if target_scope is not None and target_scope not in ALLOWED_TARGET_SCOPES:
+            errors.append(f"{label}.target_scopeが不正です: {target_scope}")
+        expected_count = group.get("expected_target_count")
+        target_count = len(products) + len(lifecycle_targets)
+        if expected_count is not None and (
+            not isinstance(expected_count, int) or isinstance(expected_count, bool)
+            or expected_count <= 0 or expected_count != target_count
+        ):
+            errors.append(
+                f"{label}.expected_target_countは対象件数{target_count}と一致する正の整数にしてください"
+            )
+        if verified is True:
+            if target_scope not in ALLOWED_TARGET_SCOPES:
+                errors.append(f"{label}: 確認済みグループにはtarget_scopeが必須です")
+            if expected_count != target_count:
+                errors.append(f"{label}: 確認済みグループには正しいexpected_target_countが必須です")
+        if lifecycle_targets and (verified is not True or target_scope != "product"):
+            errors.append(f"{label}: lifecycle_targetsは製品全体を確認済みのグループだけ指定できます")
         info = group.get("announcement")
         if not isinstance(info, dict):
             errors.append(f"{label}.announcementがオブジェクトではありません")
@@ -212,12 +269,26 @@ def validate_manual_groups(csv_path, path):
             info.get("announced_at"), f"{label}.announcement.announced_at", errors,
             allow_month=True,
         )
-        if isinstance(products, list):
-            for name in products:
-                key = (name, url)
-                if key in seen_product_urls:
-                    errors.append(f"手動グループ案内の品目とURLが重複しています: {name} ({url})")
-                seen_product_urls.add(key)
+        maker = info.get("maker")
+        for name in products:
+            if (isinstance(name, str) and name in rows_by_name
+                    and not any(maker_is_listed_in_row(maker, row) for row in rows_by_name[name])):
+                errors.append(f"{label}: メーカーと対象品目が一致しません: {name}")
+            key = (name, url)
+            if key in seen_product_urls:
+                errors.append(f"手動グループ案内の品目とURLが重複しています: {name} ({url})")
+            seen_product_urls.add(key)
+        for target in lifecycle_targets:
+            if not isinstance(target, dict):
+                continue
+            yj_code = str(target.get("yj_code") or "").strip()
+            row = rows_by_yj.get(yj_code)
+            if row is not None and not maker_is_listed_in_row(maker, row):
+                errors.append(f"{label}: メーカーとlifecycle_targetsが一致しません: {yj_code}")
+            key = (yj_code, url)
+            if key in seen_product_urls:
+                errors.append(f"手動グループ案内のYJコードとURLが重複しています: {yj_code} ({url})")
+            seen_product_urls.add(key)
     return errors
 
 

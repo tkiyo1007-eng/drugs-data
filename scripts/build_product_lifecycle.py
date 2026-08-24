@@ -13,13 +13,28 @@ import unicodedata
 from pathlib import Path
 from urllib.parse import unquote
 
+from fetch_maker_announcements import classify_event
 from jst_time import jst_now, jst_today
+from maker_identity import maker_is_listed_in_row
 
 
-END_RE = re.compile(r"販売中止|販売終了|製造中止|製造販売中止")
-PARTIAL_RE = re.compile(r"一部包装")
+END_RE = re.compile(r"販売中止|販売終了|製造中止|製造販売中止|取[り]?扱い(?:販売)?中止")
+PARTIAL_RE = re.compile(r"一部包装|患者(?:さん)?用パッケージ")
+NON_TARGET_END_RE = re.compile(
+    r"他社(?:品|製品).*販売中止.*(?:影響|伴)"
+    r"|販売終了製品.*(?:限定出荷|出荷調整)(?:の)?解除"
+)
 DATE_RE = re.compile(r"(?P<y>20\d{2})[./年](?P<m>\d{1,2})(?:[./月](?P<d>\d{1,2}))?")
 STRENGTH_RE = re.compile(r"(?<![\d.])(?P<number>\d+(?:\.\d+)?)\s*(?P<unit>mg|g|μg|mcg|%|mL|L)", re.I)
+PRUNE_EXISTING_ONLY = {
+    "2344002X1349",  # 酸化マグネシウム「NP」原末（他製品中止に伴う限定出荷）
+    "2679701Q1055",  # フロジン外用液5%（他製品中止に伴う限定出荷）
+    "6149004F1036",  # アジスロマイシン「DSEP」（患者用包装のみ）
+    "3969007F3035",  # ピオグリタゾンOD15mg「DSEP」（PTP500解除案内）
+    "3969007F4031",  # ピオグリタゾンOD30mg「DSEP」（PTP500解除案内）
+    "2190406A1128",  # アルプロスタジル5μg「F」（ケミファ取扱終了、富士は継続）
+    "2190406A2124",  # アルプロスタジル10μg「F」（同上）
+}
 
 
 def norm(value: str) -> str:
@@ -39,18 +54,63 @@ def verified_group_announcements(document: object) -> dict[str, dict[str, object
         return {}
     result: dict[str, dict[str, object]] = {}
     for group in document:
-        if not isinstance(group, dict) or group.get("target_products_verified") is not True:
+        if (not isinstance(group, dict)
+                or group.get("target_products_verified") is not True
+                or group.get("target_scope") != "product"):
             continue
-        products = group.get("products")
+        products = group.get("products") or []
+        lifecycle_targets = group.get("lifecycle_targets") or []
         announcement = group.get("announcement")
-        if not isinstance(products, list) or not isinstance(announcement, dict):
+        if not isinstance(products, list) or not isinstance(lifecycle_targets, list) or not isinstance(announcement, dict):
+            continue
+        if announcement.get("event_type") != "discontinued":
+            continue
+        if group.get("expected_target_count") != len(products) + len(lifecycle_targets):
             continue
         for product_name in products:
             if not isinstance(product_name, str) or not product_name.strip():
                 continue
             info = dict(announcement)
             info["target_products_verified"] = True
+            info["target_scope"] = "product"
             result[product_name] = info
+        for target in lifecycle_targets:
+            if not isinstance(target, dict):
+                continue
+            product_name = target.get("product_name")
+            yj_code = target.get("yj_code")
+            if not isinstance(product_name, str) or not product_name.strip() or not isinstance(yj_code, str):
+                continue
+            info = dict(announcement)
+            info["target_products_verified"] = True
+            info["target_scope"] = "product"
+            info["verified_yj_code"] = yj_code.strip()
+            result[product_name] = info
+    return result
+
+
+def verified_group_scopes(document: object) -> dict[tuple[str, str], str]:
+    """手動確認済み品目の範囲を、未補正の生案内にも適用する。"""
+    if not isinstance(document, list):
+        return {}
+    result: dict[tuple[str, str], str] = {}
+    for group in document:
+        if not isinstance(group, dict) or group.get("target_products_verified") is not True:
+            continue
+        products = group.get("products") or []
+        lifecycle_targets = group.get("lifecycle_targets") or []
+        announcement = group.get("announcement")
+        if (not isinstance(products, list) or not isinstance(lifecycle_targets, list)
+                or not isinstance(announcement, dict)
+                or group.get("expected_target_count") != len(products) + len(lifecycle_targets)):
+            continue
+        scope = group.get("target_scope")
+        url = str(announcement.get("url") or "")
+        if scope not in {"product", "package", "seller_route"} or not url:
+            continue
+        for product_name in products:
+            if isinstance(product_name, str) and product_name.strip():
+                result[(norm(product_name), url)] = scope
     return result
 
 
@@ -95,6 +155,8 @@ def backfill_announcement_dates(products: dict[str, dict[str, str]]) -> int:
 def announcement_covers_product(product_name: str, title: str) -> bool:
     """案内タイトルが対象規格そのものを含むか。2.5mg中の5mgを誤一致させない。"""
     name_n, title_n = norm(product_name), norm(title)
+    if announcement_identifies_product_as_new_release(product_name, title):
+        return False
     if name_n in title_n:
         return True
     maker_match = re.search(r"「[^」]+」\s*$", name_n)
@@ -120,6 +182,17 @@ def announcement_covers_product(product_name: str, title: str) -> bool:
     return bool(core) and core in title_n and strengths.issubset(title_strengths)
 
 
+def announcement_identifies_product_as_new_release(product_name: str, title: str) -> bool:
+    """同一タイトル内で、販売中止ではなく後継の新発売側にある品目を除外する。"""
+    name_n, title_n = norm(product_name), norm(title)
+    index = title_n.find(name_n)
+    if index < 0:
+        return False
+    before = title_n[:index]
+    after = title_n[index + len(name_n): index + len(name_n) + 64]
+    return bool(END_RE.search(before) and re.search(r"新発売|発売開始|販売開始", after))
+
+
 def announcement_targets_product(product_name: str, announcement: object) -> bool:
     """販売中止案内が当該品目を対象とすることを確認する。
 
@@ -128,7 +201,8 @@ def announcement_targets_product(product_name: str, announcement: object) -> boo
     """
     if not isinstance(announcement, dict):
         return False
-    if announcement.get("target_products_verified") is True:
+    if (announcement.get("target_products_verified") is True
+            and announcement.get("target_scope") == "product"):
         return True
     return announcement_covers_product(product_name, announcement.get("title") or "")
 
@@ -138,9 +212,27 @@ def is_product_wide_discontinuation(announcement: object) -> bool:
     if not isinstance(announcement, dict):
         return False
     title = announcement.get("title") or ""
-    if announcement.get("event_type") == "package_discontinued":
+    if announcement.get("event_type") != "discontinued":
         return False
-    return bool(END_RE.search(title) and not PARTIAL_RE.search(title))
+    if announcement.get("target_scope") not in (None, "product"):
+        return False
+    return bool(END_RE.search(title) and not PARTIAL_RE.search(title)
+                and not NON_TARGET_END_RE.search(title))
+
+
+def existing_record_needs_reverification(item: object) -> bool:
+    """旧分類で強く登録した包装・取扱い中止を、そのまま持ち越さない。"""
+    if not isinstance(item, dict):
+        return True
+    title = str(item.get("source_title") or "")
+    return (
+        classify_event(title) != "discontinued"
+        or PARTIAL_RE.search(title) is not None
+        or NON_TARGET_END_RE.search(title) is not None
+        or announcement_identifies_product_as_new_release(
+            str(item.get("product_name") or ""), title,
+        )
+    )
 
 
 def main() -> int:
@@ -158,14 +250,27 @@ def main() -> int:
     with args.csv.open(encoding="utf-8-sig", newline="") as handle:
         rows = list(csv.DictReader(handle))
     by_name: dict[str, list[dict[str, str]]] = {}
+    by_yj: dict[str, dict[str, str]] = {}
     for row in rows:
         by_name.setdefault(norm(row.get("商品名") or ""), []).append(row)
+        yj_code = (row.get("YJコード") or "").strip()
+        if yj_code:
+            by_yj[yj_code] = row
 
     products: dict[str, dict[str, str]] = {}
     if args.existing and args.existing.exists():
         with args.existing.open(encoding="utf-8") as handle:
             previous = json.load(handle)
         products.update(previous.get("products") or {})
+        # 分類ルールを強化する前のJSONには、販売会社だけの取扱い中止や
+        # 一部包装の終了が製品全体の販売中止として残っている場合がある。
+        # いったん除外し、本文・対象表を確認済みのproduct-scope手動群だけを
+        # 後段で再登録する。
+        for yj_code, item in list(products.items()):
+            if existing_record_needs_reverification(item):
+                products.pop(yj_code, None)
+        for yj_code in PRUNE_EXISTING_ONLY:
+            products.pop(yj_code, None)
         backfilled = backfill_announcement_dates(products)
         if backfilled:
             print(f"既存データの案内日を補完: {backfilled}件", file=sys.stderr)
@@ -173,25 +278,39 @@ def main() -> int:
     skipped: list[str] = []
     today = jst_today().isoformat()
     announcement_sets: list[dict[str, dict[str, object]]] = []
+    manual_scopes: dict[tuple[str, str], str] = {}
     for path in args.announcements:
         with path.open(encoding="utf-8") as handle:
             announcement_sets.append(exact_announcements(json.load(handle)))
     if args.manual_groups and args.manual_groups.exists():
         with args.manual_groups.open(encoding="utf-8") as handle:
-            announcement_sets.append(verified_group_announcements(json.load(handle)))
+            manual_groups = json.load(handle)
+        manual_scopes = verified_group_scopes(manual_groups)
+        announcement_sets.append(verified_group_announcements(manual_groups))
     for announcements in announcement_sets:
         for product_name, announcement in announcements.items():
             title = announcement.get("title") if isinstance(announcement, dict) else ""
+            source_url = announcement.get("url") if isinstance(announcement, dict) else ""
+            if manual_scopes.get((norm(product_name), str(source_url or ""))) in {"package", "seller_route"}:
+                continue
             if not isinstance(announcement, dict) or not END_RE.search(title or ""):
                 continue
             if not is_product_wide_discontinuation(announcement):
                 skipped.append(f"{product_name}: 一部包装のみの案内は製品全体の販売中止にしません")
                 continue
             maker = norm(announcement.get("maker") or "")
-            candidates = [
-                row for row in by_name.get(norm(product_name), [])
-                if maker in {norm(row.get("製造メーカー") or ""), norm(row.get("販売メーカー") or "")}
-            ]
+            verified_yj_code = str(announcement.get("verified_yj_code") or "").strip()
+            if verified_yj_code:
+                row = by_yj.get(verified_yj_code)
+                candidates = [row] if row is not None and (
+                    norm(row.get("商品名") or "") == norm(product_name)
+                    and maker_is_listed_in_row(maker, row)
+                ) else []
+            else:
+                candidates = [
+                    row for row in by_name.get(norm(product_name), [])
+                    if maker_is_listed_in_row(maker, row)
+                ]
             if len(candidates) != 1:
                 skipped.append(f"{product_name}: 商品名＋メーカーでYJコードを一意に決定できません（{len(candidates)}件）")
                 continue

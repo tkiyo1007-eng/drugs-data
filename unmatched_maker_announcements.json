@@ -199,7 +199,7 @@
   "maker": "第一三共エスファ",
   "title": "2023.05.16 供給関連情報 販売終了製品 エダラボン点滴静注30mg｢DSEP｣(20mL)10管 限定出荷解除のお知らせ",
   "url": "https://med.daiichisankyo-ep.co.jp/information/files/1734/eda30.20ml10.kaijyosyuryou.pdf",
-  "event_type": "discontinued",
+  "event_type": "resumed",
   "announced_at": "2023-05-16"
  },
  {
@@ -227,21 +227,21 @@
   "maker": "第一三共エスファ",
   "title": "2023.04.18 供給関連情報 販売終了製品 ファモチジンOD錠20mg｢YD｣PTP100錠 限定出荷解除のお知らせ",
   "url": "https://med.daiichisankyo-ep.co.jp/information/files/1718/famod20PTP100kaijyosyuryou.pdf",
-  "event_type": "discontinued",
+  "event_type": "resumed",
   "announced_at": "2023-04-18"
  },
  {
   "maker": "第一三共エスファ",
   "title": "2023.04.18 供給関連情報 販売終了製品 ファモチジン0D錠10mg｢YD｣PTP100錠 限定出荷解除のお知らせ",
   "url": "https://med.daiichisankyo-ep.co.jp/information/files/1717/famod10PTP100kaijyosyuryou.pdf",
-  "event_type": "discontinued",
+  "event_type": "resumed",
   "announced_at": "2023-04-18"
  },
  {
   "maker": "第一三共エスファ",
   "title": "2023.04.18 供給関連情報 販売終了製品 ファモチジン錠10mg｢YD｣PTP100錠 限定出荷解除のお知らせ",
   "url": "https://med.daiichisankyo-ep.co.jp/information/files/1716/fam10PTP100kaijyosyuryo.pdf",
-  "event_type": "discontinued",
+  "event_type": "resumed",
   "announced_at": "2023-04-18"
  },
  {
@@ -827,13 +827,6 @@
  },
  {
   "maker": "高田製薬",
-  "title": "2026/08/04 限定出荷解除に関するお知らせ②",
-  "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bol8-att/KAIJYO2.pdf",
-  "event_type": "resumed",
-  "announced_at": "2026-08-04"
- },
- {
-  "maker": "高田製薬",
   "title": "2026/08/04 限定出荷解除に関するお知らせ①",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000boie-att/KAIJYO1.pdf",
   "event_type": "resumed",
@@ -1095,7 +1088,7 @@
   "maker": "高田製薬",
   "title": "2025/05/29 インドメタシンパップ70mg「ハラサワ」_取扱い中止のご案内",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000008xe6-att/INDOMETASIN.pdf",
-  "event_type": "other",
+  "event_type": "handling_discontinued",
   "announced_at": "2025-05-29"
  },
  {

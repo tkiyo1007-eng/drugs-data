@@ -34,6 +34,7 @@ SUPPORTING_FILES: dict[str, type] = {
     "resolution_stats.json": dict,
     "maker_links.json": list,
     "manual_announcements.json": dict,
+    "manual_announcement_groups.json": list,
     "product_lifecycle.json": dict,
     "featured_products.json": dict,
     "industry_topics.json": dict,
@@ -107,6 +108,24 @@ def validate_supporting_document(name: str, document: object) -> list[str]:
     return errors
 
 
+def validate_discrepancy_bundle(
+    document: object,
+    rows: dict[str, dict[str, str]],
+    documents: dict[str, object],
+) -> list[str]:
+    """公開差異JSONを、作成時と同じ案内履歴・確認済み対象表で検証する。"""
+    announcements = documents.get("maker_announcements.json")
+    announcement_events = documents.get("maker_announcement_events.json")
+    manual_groups = documents.get("manual_announcement_groups.json")
+    return validate_discrepancies(
+        document,
+        rows,
+        announcements if isinstance(announcements, dict) else None,
+        announcement_events if isinstance(announcement_events, dict) else None,
+        manual_groups if isinstance(manual_groups, list) else None,
+    )
+
+
 def fetch(url: str, maximum_bytes: int) -> bytes:
     separator = "&" if "?" in url else "?"
     request = urllib.request.Request(
@@ -128,6 +147,7 @@ def run(
     today: dt.date,
     max_age_days: int,
     allow_missing_supply_discrepancies: bool = False,
+    allow_stale_supply_discrepancies: bool = False,
 ) -> tuple[list[str], list[str]]:
     errors: list[str] = []
     results: list[str] = []
@@ -187,18 +207,20 @@ def run(
                 for error in validate_lifecycle(lifecycle, load_csv(csv_path))
             )
         discrepancies = documents.get("supply_discrepancies.json")
-        announcements = documents.get("maker_announcements.json")
-        announcement_events = documents.get("maker_announcement_events.json")
         if discrepancies is not None and csv_path.exists():
-            errors.extend(
-                f"supply_discrepancies.json: {error}"
-                for error in validate_discrepancies(
-                    discrepancies,
-                    load_discrepancy_csv(csv_path),
-                    announcements if isinstance(announcements, dict) else None,
-                    announcement_events if isinstance(announcement_events, dict) else None,
-                )
+            discrepancy_errors = validate_discrepancy_bundle(
+                discrepancies,
+                load_discrepancy_csv(csv_path),
+                documents,
             )
+            # PRでは検査コードが先に厳格化され、公開mainの生成JSONはまだ旧版。
+            # ローカルvalidate.ymlでPR内データを厳格検証し、公開監視はマージ後の
+            # push・scheduleで新データに対して必ず厳格化する。
+            if not allow_stale_supply_discrepancies:
+                errors.extend(
+                    f"supply_discrepancies.json: {error}"
+                    for error in discrepancy_errors
+                )
     return errors, results
 
 
@@ -219,11 +241,13 @@ def main() -> int:
     parser.add_argument("--max-age-days", type=int, default=4)
     parser.add_argument("--today", type=dt.date.fromisoformat, default=dt.date.today())
     parser.add_argument("--allow-missing-supply-discrepancies", action="store_true")
+    parser.add_argument("--allow-stale-supply-discrepancies", action="store_true")
     args = parser.parse_args()
     errors, results = run(
         args.today,
         args.max_age_days,
         allow_missing_supply_discrepancies=args.allow_missing_supply_discrepancies,
+        allow_stale_supply_discrepancies=args.allow_stale_supply_discrepancies,
     )
     write_summary(errors, results)
     if errors:

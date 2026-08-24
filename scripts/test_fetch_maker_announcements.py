@@ -130,6 +130,11 @@ class AnnouncementMatchingTests(unittest.TestCase):
         self.assertEqual(mod.classify_event("一部包装販売中止のご案内"), "package_discontinued")
         self.assertEqual(mod.classify_event("包装容量販売終了のご案内"), "package_discontinued")
         self.assertEqual(mod.classify_event("患者さん用パッケージ入り販売終了"), "package_discontinued")
+        self.assertEqual(mod.classify_event("取り扱い中止のご案内"), "handling_discontinued")
+        self.assertEqual(
+            mod.classify_event("販売終了製品 ピオグリタゾンOD錠 PTP500錠 限定出荷解除"),
+            "resumed",
+        )
         self.assertEqual(mod.classify_event("製品販売中止のご案内"), "discontinued")
 
     def test_full_discontinuation_wins_and_secondary_notice_is_resolved(self):
@@ -242,6 +247,8 @@ class AnnouncementMatchingTests(unittest.TestCase):
             json.dump([{
                 "products": ["テスト錠１ｍｇ", "テスト錠２ｍｇ"],
                 "target_products_verified": True,
+                "target_scope": "product",
+                "expected_target_count": 2,
                 "announcement": {"maker": "テスト製薬", "title": "販売中止", "url": "group"},
             }], group_file, ensure_ascii=False)
         with single_file:
@@ -263,6 +270,7 @@ class AnnouncementMatchingTests(unittest.TestCase):
         with group_file:
             json.dump([{
                 "products": ["テスト錠"],
+                "expected_target_count": 1,
                 "announcement": {"maker": "テスト製薬", "title": "販売中止", "url": "group"},
             }], group_file, ensure_ascii=False)
         result, _, _ = mod.load_manual_announcements(
@@ -275,10 +283,12 @@ class AnnouncementMatchingTests(unittest.TestCase):
         with group_file:
             json.dump([{
                 "products": ["テスト錠"],
+                "expected_target_count": 1,
                 "announcement": {"maker": "テスト製薬", "title": "2024.01.01 販売中止",
                                  "url": "old", "event_type": "discontinued"},
             }, {
                 "products": ["テスト錠"],
+                "expected_target_count": 1,
                 "announcement": {"maker": "テスト製薬", "title": "2026.01.01 経過措置の販売終了",
                                  "url": "new", "event_type": "discontinued"},
             }], group_file, ensure_ascii=False)

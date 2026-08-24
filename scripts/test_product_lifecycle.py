@@ -8,15 +8,42 @@ from scripts.build_product_lifecycle import (
     PARTIAL_RE,
     announcement_date,
     announcement_covers_product,
+    announcement_identifies_product_as_new_release,
     announcement_targets_product,
     backfill_announcement_dates,
+    existing_record_needs_reverification,
     is_product_wide_discontinuation,
     verified_group_announcements,
+    verified_group_scopes,
 )
 from scripts.fetch_maker_announcements import match_to_csv
 
 
 class ProductLifecycleTests(unittest.TestCase):
+    def test_known_package_and_seller_route_false_positives_are_absent(self):
+        root = Path(__file__).resolve().parents[1]
+        lifecycle = json.loads(
+            (root / "product_lifecycle.json").read_text(encoding="utf-8")
+        )["products"]
+        false_positives = {
+            "2344002X1349", "2679701Q1055", "6149004F1036",
+            "3969007F3035", "3969007F4031", "2190406A1128", "2190406A2124",
+            "1124020F2056", "1124020F4059", "1319710Q2108",
+            "2649731S1275", "3231001X1108", "2171017F2156",
+        }
+        self.assertTrue(false_positives.isdisjoint(lifecycle))
+
+    def test_verified_product_wide_handling_titles_are_readded_safely(self):
+        root = Path(__file__).resolve().parents[1]
+        lifecycle = json.loads(
+            (root / "product_lifecycle.json").read_text(encoding="utf-8")
+        )["products"]
+        for yj_code in {"2614700X1441", "2649731S1348", "2649731S2077"}:
+            with self.subTest(yj_code=yj_code):
+                self.assertEqual(
+                    lifecycle[yj_code]["state"], "discontinuation_announced"
+                )
+
     def test_amaluet_tracks_manufacturer_discontinuation_while_in_supply_csv(self):
         """対象品がCSVにある間だけ、メーカーの販売中止情報を追跡する。"""
         root = Path(__file__).resolve().parents[1]
@@ -139,10 +166,24 @@ class ProductLifecycleTests(unittest.TestCase):
             )
         )
 
+    def test_product_named_as_new_release_is_not_the_discontinued_target(self):
+        title = (
+            "シルビノール錠5mg販売中止及び"
+            "ニコランジル錠5mg「サワイ」新発売に関するお知らせ"
+        )
+        product = "ニコランジル錠５ｍｇ「サワイ」"
+        self.assertTrue(announcement_identifies_product_as_new_release(product, title))
+        self.assertFalse(announcement_covers_product(product, title))
+        self.assertTrue(existing_record_needs_reverification({
+            "product_name": product,
+            "source_title": title,
+        }))
+
     def test_verified_manual_group_target_accepts_generic_title(self):
         self.assertTrue(announcement_targets_product(
             "薬Ａ錠５ｍｇ「Ａ」",
-            {"title": "販売中止品目のご案内", "target_products_verified": True},
+            {"title": "販売中止品目のご案内", "target_products_verified": True,
+             "target_scope": "product"},
         ))
 
     def test_only_explicitly_verified_group_is_expanded(self):
@@ -150,7 +191,12 @@ class ProductLifecycleTests(unittest.TestCase):
             {
                 "products": ["薬Ａ錠", "薬Ｂ錠"],
                 "target_products_verified": True,
-                "announcement": {"maker": "Ａ製薬", "title": "販売中止", "url": "https://example.test/a"},
+                "target_scope": "product",
+                "expected_target_count": 2,
+                "announcement": {
+                    "maker": "Ａ製薬", "title": "販売中止",
+                    "url": "https://example.test/a", "event_type": "discontinued",
+                },
             },
             {
                 "products": ["薬Ｃ錠"],
@@ -160,6 +206,48 @@ class ProductLifecycleTests(unittest.TestCase):
         expanded = verified_group_announcements(document)
         self.assertEqual(set(expanded), {"薬Ａ錠", "薬Ｂ錠"})
         self.assertTrue(expanded["薬Ａ錠"]["target_products_verified"])
+
+    def test_verified_supply_group_does_not_replace_lifecycle_group(self):
+        document = [
+            {
+                "products": ["薬Ａ錠"],
+                "target_products_verified": True,
+                "target_scope": "product",
+                "expected_target_count": 1,
+                "announcement": {
+                    "maker": "Ａ製薬", "title": "薬A錠 販売中止",
+                    "url": "https://example.test/end", "event_type": "discontinued",
+                },
+            },
+            {
+                "products": ["薬Ａ錠"],
+                "target_products_verified": True,
+                "target_scope": "product",
+                "expected_target_count": 1,
+                "announcement": {
+                    "maker": "Ａ製薬", "title": "薬A錠 限定出荷",
+                    "url": "https://example.test/supply", "event_type": "limited",
+                },
+            },
+        ]
+        expanded = verified_group_announcements(document)
+        self.assertEqual(expanded["薬Ａ錠"]["event_type"], "discontinued")
+
+    def test_verified_seller_route_scope_blocks_raw_product_wide_inference(self):
+        groups = [{
+            "products": ["薬Ａ錠"],
+            "target_products_verified": True,
+            "target_scope": "seller_route",
+            "expected_target_count": 1,
+            "announcement": {
+                "maker": "Ａ製薬", "title": "販売中止", "url": "https://example.test/a",
+            },
+        }]
+        self.assertEqual(
+            verified_group_scopes(groups)[("薬A錠", "https://example.test/a")],
+            "seller_route",
+        )
+        self.assertEqual(verified_group_announcements(groups), {})
 
     def test_unverified_generic_title_is_rejected(self):
         self.assertFalse(announcement_targets_product(
@@ -180,6 +268,16 @@ class ProductLifecycleTests(unittest.TestCase):
         self.assertTrue(is_product_wide_discontinuation({
             "title": "薬A注 販売中止のご案内",
             "event_type": "discontinued",
+        }))
+
+    def test_legacy_handling_only_record_is_not_carried_forward(self):
+        self.assertTrue(existing_record_needs_reverification({
+            "source_title": "薬A錠 取り扱い中止のご案内",
+        }))
+
+    def test_legacy_product_discontinuation_can_be_carried_forward(self):
+        self.assertFalse(existing_record_needs_reverification({
+            "source_title": "薬A錠 製造販売中止のご案内",
         }))
 
 
