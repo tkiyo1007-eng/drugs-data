@@ -1762,6 +1762,31 @@ function norm(s){
   return s.normalize("NFKC").toLowerCase()
     .replace(/[ぁ-ゖ]/g, c=>String.fromCharCode(c.charCodeAt(0)+0x60));
 }
+const DOSAGE_SEARCH_UNITS = [
+  "mg", "mcg", "μg", "ug", "kg", "g", "ml", "iu", "meq", "mmol", "%",
+  "単位", "マイクログラム", "ミリグラム", "グラム", "ミリリットル"
+];
+function isDosageSearchTerm(term){
+  if(!/^[0-9]/.test(term)) return false;
+  const numeric = term.match(/^[0-9]+(?:\.[0-9]*)?/);
+  if(!numeric || Number.isNaN(Number(numeric[0]))) return false;
+  const suffix = term.slice(numeric[0].length);
+  return DOSAGE_SEARCH_UNITS.some(unit=>suffix.startsWith(unit));
+}
+// iOS版と同じく、5mgが15mgや2.5mgの末尾へ誤一致しないようにする。
+// 直前の数字は両版ともUnicodeのNumber一般カテゴリで判定する。
+// 薬品名・メーカー名・YJコードなど、用量以外は従来どおり部分一致を保つ。
+function searchIndexMatchesTerm(searchIndex, term, dosage = isDosageSearchTerm(term)){
+  if(!term) return true;
+  if(!dosage) return searchIndex.includes(term);
+  let index = searchIndex.indexOf(term);
+  while(index >= 0){
+    const previous = index === 0 ? "" : Array.from(searchIndex.slice(0, index)).pop() || "";
+    if(!previous || !/[\p{Number}.,]/u.test(previous)) return true;
+    index = searchIndex.indexOf(term, index + 1);
+  }
+  return false;
+}
 // 外部JSON（news.json 等）に null や数値が混ざっても描画全体が例外で止まらないよう文字列化してから処理する
 function esc(s){return String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
 // 規格（薬価基準の規格単位）の表示用整形。
@@ -1878,7 +1903,7 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
   // ただし常に照合すると「200」で検索したときにYJコードの一部に当たった無関係な
   // 品目が混ざるので、コードとして書かれた語（数字始まりの7文字以上）のときだけ見る
   const terms = norm($q.value.trim()).split(/\s+/).filter(Boolean)
-    .map(t => ({t, code: /^[0-9][0-9a-z]{6,}$/.test(t)}));
+    .map(t => ({t, dosage:isDosageSearchTerm(t), code:/^[0-9][0-9a-z]{6,}$/.test(t)}));
   const hits = ITEMS.filter(d=>{
     if(filter==="changed"){
       // 「本日の更新」: 最新の変化日に供給状況が実際に変わった品目だけ
@@ -1895,7 +1920,8 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
     }else if(filter==="ended"){
       if(!isSalesEnding(d)) return false;
     }else if(filter!=="all" && d.s!==filter) return false;
-    return terms.every(x => d.q.includes(x.t) || (x.code && d.yj && d.yj.toLowerCase().includes(x.t)));
+    return terms.every(x => searchIndexMatchesTerm(d.q, x.t, x.dosage)
+      || (x.code && d.yj && d.yj.toLowerCase().includes(x.t)));
   });
   const shown = hits.slice(0, visibleCount);
   SHOWN = shown;
