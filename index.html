@@ -1928,11 +1928,9 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
     const delistBadge = d.delist ? `<span class="delist-badge">薬価削除予定</span>` : "";
     // 厚労省の現在の供給区分と、メーカーが公表した将来の販売中止は両立し得る。
     // 「通常出荷」を上書きせず、別のバッジで販売中止予定を明示する。
-    const announcement = findAnnouncement(d);
-    const discontinuedBadge = d.s !== "ended" && isDiscontinuationAnnouncement(announcement)
-      ? `<span class="discontinued-badge">販売中止予定</span>`
-      : (isPackageDiscontinuationAnnouncement(announcement)
-        ? `<span class="discontinued-badge">一部包装中止</span>` : "");
+    const lifecycleNotice = lifecycleAnnouncement(d);
+    const discontinuedBadge = d.s !== "ended" && lifecycleNotice
+      ? `<span class="discontinued-badge">販売中止予定</span>` : "";
     // 厚労省区分は変更せず、日付・メーカー・製品規格まで一致した新しい
     // メーカー公式案内が異なる状態を示す場合だけ、独立した黄色バッジを付ける。
     const discrepancyBadge = discrepancyFor(d)
@@ -2230,6 +2228,23 @@ const DEFAULT_MANUAL_ANNOUNCEMENT_PATTERNS = [
 ];
 let MANUAL_ANNOUNCEMENT_PATTERNS = DEFAULT_MANUAL_ANNOUNCEMENT_PATTERNS;
 let PRODUCT_LIFECYCLES = {};
+const LIFECYCLE_MAKER_ALIASES = {
+  // 日本ジェネリックの公式案内には、製造販売元の長生堂製薬品も掲載される。
+  "日本ジェネリック": ["長生堂製薬"],
+};
+function normalizeLifecycleMaker(value){
+  return String(value ?? "").normalize("NFKC").trim();
+}
+function lifecycleMakerTokens(value){
+  return normalizeLifecycleMaker(value).split(/[・／\/,、;；\s]+/).filter(Boolean);
+}
+function lifecycleMakerMatches(maker, makerText){
+  const makerName = normalizeLifecycleMaker(maker);
+  if(!makerName) return true;
+  const rowMakers = new Set(lifecycleMakerTokens(makerText));
+  return [makerName, ...(LIFECYCLE_MAKER_ALIASES[makerName] || [])]
+    .some(candidate=>rowMakers.has(candidate));
+}
 function lifecycleFor(d){
   if(!d || !d.yj) return null;
   const item = PRODUCT_LIFECYCLES[d.yj];
@@ -2241,7 +2256,7 @@ function lifecycleFor(d){
         const i=CSV_HEAD.indexOf(c); return i>=0 ? d.row[i]||"" : "";
       }).join(" ")
     : d.m;
-  if(item.maker && !norm(makerText).includes(norm(item.maker))) return null;
+  if(item.maker && !lifecycleMakerMatches(item.maker, makerText)) return null;
   return item;
 }
 function lifecycleAnnouncement(d){
@@ -2268,8 +2283,10 @@ function discrepancyFor(d, includeReview=false){
   const key = normalizeYj(d && d.yj);
   const item = key && SUPPLY_DISCREPANCIES[key];
   if(!item || norm(item.product_name) !== norm(d.n)) return null;
-  if(item.confidence === "high") return item;
-  return includeReview && item.confidence === "review" ? item : null;
+  const productScopedHigh = item.confidence === "high"
+    && item.manufacturer && item.manufacturer.scope === "product";
+  if(productScopedHigh) return item;
+  return includeReview && ["review", "high"].includes(item.confidence) ? item : null;
 }
 function discrepancyAnnouncement(d){
   const item = discrepancyFor(d, true);
@@ -2313,6 +2330,9 @@ function isPackageDiscontinuationAnnouncement(announcement){
   if(!announcement) return false;
   if(announcement.event_type) return announcement.event_type === "package_discontinued";
   return /一部包装.*(?:販売|発売)中止|包装中止/.test(announcement.title);
+}
+function isHandlingDiscontinuationAnnouncement(announcement){
+  return !!announcement && announcement.event_type === "handling_discontinued";
 }
 
 // 品目名→メーカー公式の個別案内文(PDF)。取得できたものだけ登録される
@@ -2981,11 +3001,13 @@ function openDetail(d, opts={}){
   if(discrepancy){
     const official = discrepancy.official || {};
     const manufacturer = discrepancy.manufacturer || {};
-    const high = discrepancy.confidence === "high";
+    const high = discrepancy.confidence === "high" && manufacturer.scope === "product";
     const scopeNote = manufacturer.scope === "package"
       ? "包装単位を含む案内です。製品全体が同じ状態とは限らないため、対象包装を原文でご確認ください。"
       : manufacturer.scope === "ambiguous"
         ? "関連製品の案内ですが、本品の規格が対象か機械判定できません。検索一覧には警告を出さず、詳細だけでお知らせしています。"
+        : manufacturer.scope === "seller_route"
+          ? "販売会社・取扱い経路に関する案内です。製品全体の供給状況とは限らないため、原文をご確認ください。"
         : "";
     const sourceLink = /^https:\/\//.test(manufacturer.url || "")
       ? `<a href="${esc(manufacturer.url)}" target="_blank" rel="noopener">メーカー公式案内の原文を確認</a>`
@@ -3082,6 +3104,7 @@ function openDetail(d, opts={}){
   }
   // 個別のメーカー案内は「通常出荷」でも必要。現在の出荷と将来の販売中止は
   // 両立するため、供給区分だけで案内検索を止めない。
+  const lifecycleNotice = lifecycleAnnouncement(d);
   const announcement = findAnnouncement(d) || discrepancyAnnouncement(d);
   const needsMakerLink = d.s !== "ok" || d.delist || !!announcement;
   // 検索対象は製造メーカー・販売メーカーの欄だけに限る。
@@ -3097,13 +3120,24 @@ function openDetail(d, opts={}){
   // 2025-12に販売中止案内・2026-05出荷終了）。供給状況欄は公表データのまま変えず、
   // 案内文の存在を詳細の先頭で補足する（タイトルは「一部包装のみ」等の限定条件を
   // 落とさないよう原文のまま引用）
-  if(d.s !== "ended" && isDiscontinuationAnnouncement(announcement)){
+  if(d.s !== "ended" && lifecycleNotice){
     document.getElementById("mGrid").insertAdjacentHTML("afterbegin",
       `<dt>メーカー案内</dt><dd>「${esc(cleanAnnouncementTitle(announcement.title))}」が公表されています（下の案内文リンク参照）。供給状況欄は現在の出荷区分、メーカー案内は今後の販売予定を示すため、「通常出荷」と「販売中止予定」が同時に表示される場合があります。</dd>`);
   }
   if(isPackageDiscontinuationAnnouncement(announcement)){
     document.getElementById("mGrid").insertAdjacentHTML("afterbegin",
       `<dt>メーカー案内</dt><dd>「${esc(cleanAnnouncementTitle(announcement.title))}」が公表されています（下の案内文リンク参照）。製品全体ではなく一部の包装単位に関する案内です。対象包装は必ず原文でご確認ください。</dd>`);
+  }
+  if(!lifecycleNotice && isHandlingDiscontinuationAnnouncement(announcement)){
+    const handlingNote = announcement.target_scope === "package"
+      ? "特定包装または販売会社の取扱いに関する案内です。製品全体の販売中止とは限りません。"
+      : "販売会社・取扱い経路に関する案内です。製造販売元からの供給が継続する場合があります。";
+    document.getElementById("mGrid").insertAdjacentHTML("afterbegin",
+      `<dt>取扱いに関する案内</dt><dd>「${esc(cleanAnnouncementTitle(announcement.title))}」が公表されています。${handlingNote}対象範囲は下のメーカー原文でご確認ください。</dd>`);
+  }
+  if(!lifecycleNotice && isDiscontinuationAnnouncement(announcement)){
+    document.getElementById("mGrid").insertAdjacentHTML("afterbegin",
+      `<dt>メーカー関連案内</dt><dd>「${esc(cleanAnnouncementTitle(announcement.title))}」が公表されています。対象製品・規格・包装を自動判定できないため、販売中止とは断定せず原文確認用として掲載しています。</dd>`);
   }
   // 出荷再開の案内も同様: 供給状況欄は公表データのまま変えず、案内済みであることを補足する
   if(announcement && d.s !== "ok" && /出荷再開|供給再開|出荷調整解除/.test(announcement.title)){
@@ -3114,7 +3148,8 @@ function openDetail(d, opts={}){
   const $mMakerLink = document.getElementById("mMakerLink");
   if(announcement){
     $mMakerLink.href = announcement.url;
-    $mMakerLink.textContent = `${cleanAnnouncementTitle(announcement.title)}（${announcement.maker} PDF）`;
+    const sourceKind = /\.pdf(?:$|[?#])/i.test(announcement.url || "") ? "PDF" : "公式ページ";
+    $mMakerLink.textContent = `${cleanAnnouncementTitle(announcement.title)}（${announcement.maker} ${sourceKind}）`;
     $mMakerLink.hidden = false;
   }else if(mLink){
     $mMakerLink.href = mLink.url;
