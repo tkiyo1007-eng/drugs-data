@@ -1,17 +1,297 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-23",
+  "generated_at": "2026-08-24",
   "source": {
     "mhlw_version": 202608232336,
     "mhlw_note": "2026年08月23日厚労省データ反映",
-    "manufacturer_checked_through": "2026-08-23"
+    "manufacturer_checked_through": "2026-08-24"
   },
   "counts": {
-    "high": 4,
-    "review": 3,
-    "total": 7
+    "high": 17,
+    "review": 5,
+    "total": 22
   },
   "products": {
+    "1149032F2171": {
+      "product_name": "エトドラク錠２００ｍｇ「ＳＷ」",
+      "maker": "沢井製薬",
+      "official": {
+        "status": "ok",
+        "label": "通常出荷",
+        "updated_at": "2026-04-16"
+      },
+      "manufacturer": {
+        "status": "limited",
+        "label": "限定出荷",
+        "announced_at": "2026-08-17",
+        "maker": "沢井製薬",
+        "title": "2026年8月17日 エトドラク錠200mg「SW」限定出荷のご案内",
+        "url": "https://med.sawai.co.jp/file/pr27_266_2.pdf",
+        "scope": "product"
+      },
+      "confidence": "high",
+      "reason": "メーカー公式資料の対象表で製品全体・公表日の一致を確認",
+      "badge": "情報差異あり",
+      "evidence": {
+        "maker_match": true,
+        "exact_product_in_title": true,
+        "manufacturer_notice_is_newer": true,
+        "verified_target_source": "manual_group",
+        "verified_target_scope": "product"
+      }
+    },
+    "1179039F1150": {
+      "product_name": "フルボキサミンマレイン酸塩錠２５ｍｇ「タカタ」",
+      "maker": "高田製薬",
+      "official": {
+        "status": "stopped",
+        "label": "供給停止",
+        "updated_at": "2026-02-02"
+      },
+      "manufacturer": {
+        "status": "ok",
+        "label": "限定出荷解除・通常出荷",
+        "announced_at": "2026-08-04",
+        "maker": "高田製薬",
+        "title": "2026/08/04 限定出荷解除に関するお知らせ②",
+        "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bol8-att/KAIJYO2.pdf",
+        "scope": "product"
+      },
+      "confidence": "high",
+      "reason": "メーカー公式資料の対象表で製品全体・公表日の一致を確認",
+      "badge": "情報差異あり",
+      "evidence": {
+        "maker_match": true,
+        "exact_product_in_title": false,
+        "manufacturer_notice_is_newer": true,
+        "verified_target_source": "manual_group",
+        "verified_target_scope": "product"
+      }
+    },
+    "1179039F2156": {
+      "product_name": "フルボキサミンマレイン酸塩錠５０ｍｇ「タカタ」",
+      "maker": "高田製薬",
+      "official": {
+        "status": "stopped",
+        "label": "供給停止",
+        "updated_at": "2026-02-02"
+      },
+      "manufacturer": {
+        "status": "ok",
+        "label": "限定出荷解除・通常出荷",
+        "announced_at": "2026-08-04",
+        "maker": "高田製薬",
+        "title": "2026/08/04 限定出荷解除に関するお知らせ②",
+        "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bol8-att/KAIJYO2.pdf",
+        "scope": "product"
+      },
+      "confidence": "high",
+      "reason": "メーカー公式資料の対象表で製品全体・公表日の一致を確認",
+      "badge": "情報差異あり",
+      "evidence": {
+        "maker_match": true,
+        "exact_product_in_title": false,
+        "manufacturer_notice_is_newer": true,
+        "verified_target_source": "manual_group",
+        "verified_target_scope": "product"
+      }
+    },
+    "1179039F3152": {
+      "product_name": "フルボキサミンマレイン酸塩錠７５ｍｇ「タカタ」",
+      "maker": "高田製薬",
+      "official": {
+        "status": "limited",
+        "label": "限定出荷（自社の事情）",
+        "updated_at": "2026-02-02"
+      },
+      "manufacturer": {
+        "status": "ok",
+        "label": "限定出荷解除・通常出荷",
+        "announced_at": "2026-08-04",
+        "maker": "高田製薬",
+        "title": "2026/08/04 限定出荷解除に関するお知らせ②",
+        "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bol8-att/KAIJYO2.pdf",
+        "scope": "product"
+      },
+      "confidence": "high",
+      "reason": "メーカー公式資料の対象表で製品全体・公表日の一致を確認",
+      "badge": "情報差異あり",
+      "evidence": {
+        "maker_match": true,
+        "exact_product_in_title": false,
+        "manufacturer_notice_is_newer": true,
+        "verified_target_source": "manual_group",
+        "verified_target_scope": "product"
+      }
+    },
+    "2149027F2183": {
+      "product_name": "マニジピン塩酸塩錠１０ｍｇ「サワイ」",
+      "maker": "沢井製薬",
+      "official": {
+        "status": "ok",
+        "label": "通常出荷",
+        "updated_at": "2024-03-11"
+      },
+      "manufacturer": {
+        "status": "limited",
+        "label": "限定出荷",
+        "announced_at": "2026-08-17",
+        "maker": "沢井製薬",
+        "title": "2026年8月17日 マニジピン塩酸塩錠10mg/20mg「サワイ」限定出荷のご案内",
+        "url": "https://med.sawai.co.jp/file/pr27_1020_2.pdf",
+        "scope": "product"
+      },
+      "confidence": "high",
+      "reason": "メーカー公式資料の対象表で製品全体・公表日の一致を確認",
+      "badge": "情報差異あり",
+      "evidence": {
+        "maker_match": true,
+        "exact_product_in_title": false,
+        "manufacturer_notice_is_newer": true,
+        "verified_target_source": "manual_group",
+        "verified_target_scope": "product"
+      }
+    },
+    "2149027F3180": {
+      "product_name": "マニジピン塩酸塩錠２０ｍｇ「サワイ」",
+      "maker": "沢井製薬",
+      "official": {
+        "status": "ok",
+        "label": "通常出荷",
+        "updated_at": "2024-03-11"
+      },
+      "manufacturer": {
+        "status": "limited",
+        "label": "限定出荷",
+        "announced_at": "2026-08-17",
+        "maker": "沢井製薬",
+        "title": "2026年8月17日 マニジピン塩酸塩錠10mg/20mg「サワイ」限定出荷のご案内",
+        "url": "https://med.sawai.co.jp/file/pr27_1020_2.pdf",
+        "scope": "product"
+      },
+      "confidence": "high",
+      "reason": "メーカー公式資料の対象表で製品全体・公表日の一致を確認",
+      "badge": "情報差異あり",
+      "evidence": {
+        "maker_match": true,
+        "exact_product_in_title": false,
+        "manufacturer_notice_is_newer": true,
+        "verified_target_source": "manual_group",
+        "verified_target_scope": "product"
+      }
+    },
+    "2149112F1073": {
+      "product_name": "バルヒディオ配合錠ＭＤ「サワイ」",
+      "maker": "沢井製薬",
+      "official": {
+        "status": "ok",
+        "label": "通常出荷",
+        "updated_at": "2026-05-14"
+      },
+      "manufacturer": {
+        "status": "limited",
+        "label": "限定出荷",
+        "announced_at": "2026-08-17",
+        "maker": "沢井製薬",
+        "title": "2026年8月17日 バルヒディオ配合錠MD「サワイ」限定出荷（販売中止予定品）のご案内",
+        "url": "https://med.sawai.co.jp/pdf/announce/announce20.pdf",
+        "scope": "product"
+      },
+      "confidence": "high",
+      "reason": "メーカー公式資料の対象表で製品全体・公表日の一致を確認",
+      "badge": "情報差異あり",
+      "evidence": {
+        "maker_match": true,
+        "exact_product_in_title": true,
+        "manufacturer_notice_is_newer": true,
+        "verified_target_source": "manual_group",
+        "verified_target_scope": "product"
+      }
+    },
+    "2171005F1335": {
+      "product_name": "ジラゼプ塩酸塩錠５０ｍｇ「サワイ」",
+      "maker": "沢井製薬",
+      "official": {
+        "status": "ok",
+        "label": "通常出荷",
+        "updated_at": "2024-03-11"
+      },
+      "manufacturer": {
+        "status": "limited",
+        "label": "限定出荷",
+        "announced_at": "2026-08-17",
+        "maker": "沢井製薬",
+        "title": "2026年8月17日 ジラゼプ塩酸塩錠50mg「サワイ」限定出荷のご案内",
+        "url": "https://med.sawai.co.jp/file/pr27_129_2.pdf",
+        "scope": "product"
+      },
+      "confidence": "high",
+      "reason": "メーカー公式資料の対象表で製品全体・公表日の一致を確認",
+      "badge": "情報差異あり",
+      "evidence": {
+        "maker_match": true,
+        "exact_product_in_title": true,
+        "manufacturer_notice_is_newer": true,
+        "verified_target_source": "manual_group",
+        "verified_target_scope": "product"
+      }
+    },
+    "2325401D2090": {
+      "product_name": "ファモチジン注射用１０ｍｇ「タカタ」",
+      "maker": "高田製薬",
+      "official": {
+        "status": "limited",
+        "label": "限定出荷（自社の事情）",
+        "updated_at": "2026-01-15"
+      },
+      "manufacturer": {
+        "status": "ok",
+        "label": "限定出荷解除・通常出荷",
+        "announced_at": "2026-08-04",
+        "maker": "高田製薬",
+        "title": "2026/08/04 限定出荷解除に関するお知らせ②",
+        "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bol8-att/KAIJYO2.pdf",
+        "scope": "product"
+      },
+      "confidence": "high",
+      "reason": "メーカー公式資料の対象表で製品全体・公表日の一致を確認",
+      "badge": "情報差異あり",
+      "evidence": {
+        "maker_match": true,
+        "exact_product_in_title": false,
+        "manufacturer_notice_is_newer": true,
+        "verified_target_source": "manual_group",
+        "verified_target_scope": "product"
+      }
+    },
+    "2329021D1071": {
+      "product_name": "レバミピド顆粒２０％「タカタ」",
+      "maker": "高田製薬",
+      "official": {
+        "status": "stopped",
+        "label": "供給停止",
+        "updated_at": "2026-03-05"
+      },
+      "manufacturer": {
+        "status": "ok",
+        "label": "限定出荷解除・通常出荷",
+        "announced_at": "2026-08-04",
+        "maker": "高田製薬",
+        "title": "2026/08/04 限定出荷解除に関するお知らせ②",
+        "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bol8-att/KAIJYO2.pdf",
+        "scope": "product"
+      },
+      "confidence": "high",
+      "reason": "メーカー公式資料の対象表で製品全体・公表日の一致を確認",
+      "badge": "情報差異あり",
+      "evidence": {
+        "maker_match": true,
+        "exact_product_in_title": false,
+        "manufacturer_notice_is_newer": true,
+        "verified_target_source": "manual_group",
+        "verified_target_scope": "product"
+      }
+    },
     "2329028F1147": {
       "product_name": "ラベプラゾールＮａ塩錠１０ｍｇ「オーハラ」",
       "maker": "エッセンシャルファーマ・共創未来ファーマ・第一三共エスファ・大原薬品工業",
@@ -29,13 +309,15 @@
         "url": "https://med.daiichisankyo-ep.co.jp/information/files/2208/gentei_20260519_E1_G.pdf",
         "scope": "package"
       },
-      "confidence": "high",
-      "reason": "メーカー・製品規格・公表日の一致を確認",
-      "badge": "情報差異あり",
+      "confidence": "review",
+      "reason": "包装単位のメーカー案内です。製品全体の供給区分は原文で確認してください",
+      "badge": "メーカー案内あり・原文確認",
       "evidence": {
         "maker_match": true,
         "exact_product_in_title": true,
-        "manufacturer_notice_is_newer": true
+        "manufacturer_notice_is_newer": true,
+        "verified_target_source": "",
+        "verified_target_scope": ""
       }
     },
     "2329028F2143": {
@@ -55,13 +337,15 @@
         "url": "https://med.daiichisankyo-ep.co.jp/information/files/2220/gentei_20260612_E1_G.pdf",
         "scope": "package"
       },
-      "confidence": "high",
-      "reason": "メーカー・製品規格・公表日の一致を確認",
-      "badge": "情報差異あり",
+      "confidence": "review",
+      "reason": "包装単位のメーカー案内です。製品全体の供給区分は原文で確認してください",
+      "badge": "メーカー案内あり・原文確認",
       "evidence": {
         "maker_match": true,
         "exact_product_in_title": true,
-        "manufacturer_notice_is_newer": true
+        "manufacturer_notice_is_newer": true,
+        "verified_target_source": "",
+        "verified_target_scope": ""
       }
     },
     "2329028F3123": {
@@ -87,7 +371,9 @@
       "evidence": {
         "maker_match": true,
         "exact_product_in_title": false,
-        "manufacturer_notice_is_newer": true
+        "manufacturer_notice_is_newer": true,
+        "verified_target_source": "",
+        "verified_target_scope": ""
       }
     },
     "2344002X1349": {
@@ -113,7 +399,37 @@
       "evidence": {
         "maker_match": true,
         "exact_product_in_title": true,
-        "manufacturer_notice_is_newer": true
+        "manufacturer_notice_is_newer": true,
+        "verified_target_source": "",
+        "verified_target_scope": ""
+      }
+    },
+    "2391400G4112": {
+      "product_name": "グラニセトロン点滴静注バッグ３ｍｇ／５０ｍＬ「タカタ」",
+      "maker": "高田製薬",
+      "official": {
+        "status": "limited",
+        "label": "限定出荷（自社の事情）",
+        "updated_at": "2025-09-11"
+      },
+      "manufacturer": {
+        "status": "ok",
+        "label": "限定出荷解除・通常出荷",
+        "announced_at": "2026-08-04",
+        "maker": "高田製薬",
+        "title": "2026/08/04 限定出荷解除に関するお知らせ②",
+        "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bol8-att/KAIJYO2.pdf",
+        "scope": "product"
+      },
+      "confidence": "high",
+      "reason": "メーカー公式資料の対象表で製品全体・公表日の一致を確認",
+      "badge": "情報差異あり",
+      "evidence": {
+        "maker_match": true,
+        "exact_product_in_title": false,
+        "manufacturer_notice_is_newer": true,
+        "verified_target_source": "manual_group",
+        "verified_target_scope": "product"
       }
     },
     "3311402G4026": {
@@ -139,7 +455,93 @@
       "evidence": {
         "maker_match": true,
         "exact_product_in_title": true,
-        "manufacturer_notice_is_newer": true
+        "manufacturer_notice_is_newer": true,
+        "verified_target_source": "",
+        "verified_target_scope": ""
+      }
+    },
+    "3399002F1265": {
+      "product_name": "シロスタゾール錠５０ｍｇ「サワイ」",
+      "maker": "沢井製薬",
+      "official": {
+        "status": "ok",
+        "label": "通常出荷",
+        "updated_at": "2026-05-14"
+      },
+      "manufacturer": {
+        "status": "limited",
+        "label": "限定出荷",
+        "announced_at": "2026-08-17",
+        "maker": "沢井製薬",
+        "title": "2026年8月17日 シロスタゾール錠50mg/100mg「サワイ」限定出荷のご案内",
+        "url": "https://med.sawai.co.jp/file/pr27_194_2.pdf",
+        "scope": "product"
+      },
+      "confidence": "high",
+      "reason": "メーカー公式資料の対象表で製品全体・公表日の一致を確認",
+      "badge": "情報差異あり",
+      "evidence": {
+        "maker_match": true,
+        "exact_product_in_title": false,
+        "manufacturer_notice_is_newer": true,
+        "verified_target_source": "manual_group",
+        "verified_target_scope": "product"
+      }
+    },
+    "3399002F2288": {
+      "product_name": "シロスタゾール錠１００ｍｇ「サワイ」",
+      "maker": "沢井製薬",
+      "official": {
+        "status": "ok",
+        "label": "通常出荷",
+        "updated_at": "2026-05-14"
+      },
+      "manufacturer": {
+        "status": "limited",
+        "label": "限定出荷",
+        "announced_at": "2026-08-17",
+        "maker": "沢井製薬",
+        "title": "2026年8月17日 シロスタゾール錠50mg/100mg「サワイ」限定出荷のご案内",
+        "url": "https://med.sawai.co.jp/file/pr27_194_2.pdf",
+        "scope": "product"
+      },
+      "confidence": "high",
+      "reason": "メーカー公式資料の対象表で製品全体・公表日の一致を確認",
+      "badge": "情報差異あり",
+      "evidence": {
+        "maker_match": true,
+        "exact_product_in_title": false,
+        "manufacturer_notice_is_newer": true,
+        "verified_target_source": "manual_group",
+        "verified_target_scope": "product"
+      }
+    },
+    "6132013F2034": {
+      "product_name": "セフジニル錠１００ｍｇ「サワイ」",
+      "maker": "沢井製薬",
+      "official": {
+        "status": "limited",
+        "label": "限定出荷（自社の事情）",
+        "updated_at": "2026-04-10"
+      },
+      "manufacturer": {
+        "status": "ok",
+        "label": "限定出荷解除・通常出荷",
+        "announced_at": "2026-07-08",
+        "maker": "沢井製薬",
+        "title": "2026/07/08 一部製品 限定出荷解除のお知らせ",
+        "url": "https://med.sawai.co.jp/file/pr27_1216_1.pdf",
+        "scope": "product"
+      },
+      "confidence": "high",
+      "reason": "メーカー公式資料の対象表で製品全体・公表日の一致を確認",
+      "badge": "情報差異あり",
+      "evidence": {
+        "maker_match": true,
+        "exact_product_in_title": false,
+        "manufacturer_notice_is_newer": true,
+        "verified_target_source": "manual_group",
+        "verified_target_scope": "product"
       }
     },
     "6179001F1031": {
@@ -165,7 +567,9 @@
       "evidence": {
         "maker_match": true,
         "exact_product_in_title": false,
-        "manufacturer_notice_is_newer": true
+        "manufacturer_notice_is_newer": true,
+        "verified_target_source": "",
+        "verified_target_scope": ""
       }
     },
     "6179001F2038": {
@@ -191,7 +595,37 @@
       "evidence": {
         "maker_match": true,
         "exact_product_in_title": false,
-        "manufacturer_notice_is_newer": true
+        "manufacturer_notice_is_newer": true,
+        "verified_target_source": "",
+        "verified_target_scope": ""
+      }
+    },
+    "6250031F1099": {
+      "product_name": "ファムシクロビル錠２５０ｍｇ「タカタ」",
+      "maker": "高田製薬",
+      "official": {
+        "status": "stopped",
+        "label": "供給停止",
+        "updated_at": "2026-03-05"
+      },
+      "manufacturer": {
+        "status": "ok",
+        "label": "限定出荷解除・通常出荷",
+        "announced_at": "2026-08-04",
+        "maker": "高田製薬",
+        "title": "2026/08/04 限定出荷解除に関するお知らせ②",
+        "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bol8-att/KAIJYO2.pdf",
+        "scope": "product"
+      },
+      "confidence": "high",
+      "reason": "メーカー公式資料の対象表で製品全体・公表日の一致を確認",
+      "badge": "情報差異あり",
+      "evidence": {
+        "maker_match": true,
+        "exact_product_in_title": false,
+        "manufacturer_notice_is_newer": true,
+        "verified_target_source": "manual_group",
+        "verified_target_scope": "product"
       }
     }
   }

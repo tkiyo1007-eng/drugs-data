@@ -8,14 +8,32 @@ from unittest import mock
 
 from check_public_data_health import (
     BASE_URL,
+    SUPPORTING_FILES,
     run,
     parse_note_date,
+    validate_discrepancy_bundle,
     validate_supporting_document,
     validate_version,
 )
 
 
 class RemoteDataHealthTests(unittest.TestCase):
+    def test_manual_target_registry_is_downloaded_for_discrepancy_validation(self) -> None:
+        self.assertIs(SUPPORTING_FILES["manual_announcement_groups.json"], list)
+
+    def test_discrepancy_validation_receives_manual_target_registry(self) -> None:
+        manual_groups = [{"target_scope": "product"}]
+        documents = {
+            "maker_announcements.json": {},
+            "maker_announcement_events.json": {},
+            "manual_announcement_groups.json": manual_groups,
+        }
+        with mock.patch(
+            "check_public_data_health.validate_discrepancies", return_value=[]
+        ) as validator:
+            self.assertEqual(validate_discrepancy_bundle({}, {}, documents), [])
+        self.assertIs(validator.call_args.args[4], manual_groups)
+
     def test_version_accepts_recent_matching_snapshot(self) -> None:
         document = {
             "version": 202608082347,

@@ -27,6 +27,7 @@ from validate_maker_announcements import (
     validate_unmatched,
 )
 from validate_product_lifecycle import validate as validate_lifecycle
+from maker_identity import maker_is_listed_in_row
 
 
 LIFECYCLE_FILE = "product_lifecycle.json"
@@ -90,11 +91,7 @@ def reconcile(base: Path, *, min_count: int = 300) -> tuple[int, int]:
             row = rows_by_yj.get(yj_code)
             if row is None or _norm(item.get("product_name")) != _norm(row.get("商品名")):
                 return False
-            maker = _norm(item.get("maker"))
-            return maker in {
-                _norm(row.get("製造メーカー")),
-                _norm(row.get("販売メーカー")),
-            }
+            return maker_is_listed_in_row(item.get("maker"), row)
 
         filtered_products = {
             yj_code: item for yj_code, item in products.items() if compatible(yj_code, item)

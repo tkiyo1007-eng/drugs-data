@@ -9,12 +9,14 @@ import json
 import re
 from pathlib import Path
 
+from verified_targets import verified_target_registry
+
 
 YJ_RE = re.compile(r"(?:[0-9A-Z]{12}|X[0-9]{5})\Z")
 DATE_RE = re.compile(r"\d{4}-\d{2}(?:-\d{2})?\Z")
 ALLOWED_STATES = {"ok", "limited", "stopped", "resumed"}
 ALLOWED_CONFIDENCE = {"high", "review"}
-ALLOWED_SCOPE = {"product", "package", "ambiguous"}
+ALLOWED_SCOPE = {"product", "package", "seller_route", "ambiguous"}
 
 
 def load_csv(path: Path) -> dict[str, dict[str, str]]:
@@ -24,7 +26,8 @@ def load_csv(path: Path) -> dict[str, dict[str, str]]:
 
 def validate(document: object, rows: dict[str, dict[str, str]],
              announcements: dict[str, object] | None = None,
-             events: dict[str, object] | None = None) -> list[str]:
+             events: dict[str, object] | None = None,
+             manual_groups: object | None = None) -> list[str]:
     if not isinstance(document, dict):
         return ["ルートはオブジェクトである必要があります"]
     errors: list[str] = []
@@ -54,6 +57,7 @@ def validate(document: object, rows: dict[str, dict[str, str]],
                 str(value.get("url")) for value in history
                 if isinstance(value, dict) and value.get("url")
             )
+    verified_targets = verified_target_registry(list(rows.values()), manual_groups or [])
     for yj, entry in products.items():
         prefix = f"products.{yj}"
         if not YJ_RE.fullmatch(str(yj)) or yj not in rows:
@@ -89,12 +93,25 @@ def validate(document: object, rows: dict[str, dict[str, str]],
             errors.append(f"{prefix}: URLがメーカー案内データにありません")
         if not isinstance(evidence, dict) or evidence.get("manufacturer_notice_is_newer") is not True:
             errors.append(f"{prefix}: 新しい案内である根拠がありません")
+        registry_target = verified_targets.get((yj, url))
+        claims_verified = isinstance(evidence, dict) and evidence.get("verified_target_source") == "manual_group"
+        if claims_verified and (
+            registry_target is None
+            or evidence.get("verified_target_scope") != registry_target.get("scope")
+            or manufacturer.get("scope") != registry_target.get("scope")
+        ):
+            errors.append(f"{prefix}: 確認済み手動対象の根拠が登録内容と一致しません")
         if confidence == "high" and (
             not isinstance(evidence, dict)
             or evidence.get("maker_match") is not True
-            or evidence.get("exact_product_in_title") is not True
+            or manufacturer.get("scope") != "product"
+            or not (
+                evidence.get("exact_product_in_title") is True
+                or (claims_verified and registry_target is not None
+                    and registry_target.get("scope") == "product")
+            )
         ):
-            errors.append(f"{prefix}: high はメーカー・製品規格の完全一致が必要です")
+            errors.append(f"{prefix}: high は製品全体について公式タイトルまたは確認済み対象表との一致が必要です")
         if isinstance(official, dict) and official.get("status") == manufacturer.get("status"):
             errors.append(f"{prefix}: 同じ状態を差異として登録しています")
     return errors
@@ -106,12 +123,20 @@ def main() -> int:
     parser.add_argument("--csv", default="drugs_app_ready.csv")
     parser.add_argument("--announcements", default="maker_announcements.json")
     parser.add_argument("--events", default="maker_announcement_events.json")
+    parser.add_argument("--manual-groups", default="manual_announcement_groups.json")
     args = parser.parse_args()
     document = json.loads(Path(args.path).read_text(encoding="utf-8"))
     announcements = json.loads(Path(args.announcements).read_text(encoding="utf-8"))
     events_path = Path(args.events)
     events = json.loads(events_path.read_text(encoding="utf-8")) if events_path.exists() else {}
-    errors = validate(document, load_csv(Path(args.csv)), announcements, events)
+    manual_groups_path = Path(args.manual_groups)
+    manual_groups = (
+        json.loads(manual_groups_path.read_text(encoding="utf-8"))
+        if manual_groups_path.exists() else []
+    )
+    errors = validate(
+        document, load_csv(Path(args.csv)), announcements, events, manual_groups,
+    )
     if errors:
         for error in errors:
             print(f"ERROR: {error}")

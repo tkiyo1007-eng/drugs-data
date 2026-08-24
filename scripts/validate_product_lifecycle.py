@@ -13,6 +13,8 @@ import unicodedata
 from pathlib import Path
 from urllib.parse import urlparse
 
+from maker_identity import maker_is_listed_in_row
+
 
 YJ_RE = re.compile(r"^[0-9A-Z]{12}$")
 DATE_RE = re.compile(r"^\d{4}-\d{2}(?:-\d{2})?$")
@@ -25,6 +27,7 @@ OFFICIAL_HOSTS = {
     "日本ジェネリック": {"nihon-generic.co.jp"},
     "日本ケミファ": {"nc-medical.com"},
     "東和薬品": {"towayakuhin.co.jp"},
+    "丸石製薬": {"maruishi-pharm.co.jp"},
     "沢井製薬": {"sawai.co.jp"},
     "高田製薬": {"takata-seiyaku.co.jp"},
     "ニプロ": {"nipro.co.jp"},
@@ -86,8 +89,7 @@ def validate(
                 f"（CSV: {row.get('商品名') or ''}）"
             )
         maker = norm(item.get("maker") or "")
-        makers = {norm(row.get("製造メーカー") or ""), norm(row.get("販売メーカー") or "")}
-        if maker not in makers:
+        if not maker_is_listed_in_row(maker, row):
             errors.append(f"{prefix}.maker: CSVの製造・販売メーカーと一致しません")
 
         for field in ("announced_at", "supply_end_expected", "verified_at"):

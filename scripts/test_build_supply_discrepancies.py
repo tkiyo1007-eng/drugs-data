@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import json
 import unittest
+from pathlib import Path
 
 from build_supply_discrepancies import build, make_entry
 
@@ -22,6 +24,37 @@ def announcement(title="2026年8月10日 テスト錠10mg「ABC」 限定出荷�
 
 
 class SupplyDiscrepancyBuilderTests(unittest.TestCase):
+    def test_published_high_confidence_rows_are_product_scope(self):
+        root = Path(__file__).resolve().parents[1]
+        document = json.loads(
+            (root / "supply_discrepancies.json").read_text(encoding="utf-8")
+        )
+        high = {
+            yj_code: item for yj_code, item in document["products"].items()
+            if item.get("confidence") == "high"
+        }
+        self.assertTrue(high)
+        self.assertTrue(all(
+            item.get("manufacturer", {}).get("scope") == "product"
+            for item in high.values()
+        ))
+
+    def test_audited_sawai_differences_are_published_as_high_confidence(self):
+        root = Path(__file__).resolve().parents[1]
+        document = json.loads(
+            (root / "supply_discrepancies.json").read_text(encoding="utf-8")
+        )
+        expected = {
+            "1149032F2171", "2171005F1335", "3399002F1265",
+            "3399002F2288", "2149027F2183", "2149027F3180",
+            "2149112F1073", "6132013F2034",
+        }
+        for yj_code in expected:
+            with self.subTest(yj_code=yj_code):
+                self.assertEqual(
+                    document["products"][yj_code]["confidence"], "high"
+                )
+
     def test_newer_exact_manufacturer_notice_is_high_confidence(self):
         entry = make_entry(row(), announcement())
         self.assertEqual(entry["confidence"], "high")
@@ -44,15 +77,36 @@ class SupplyDiscrepancyBuilderTests(unittest.TestCase):
         self.assertEqual(entry["confidence"], "review")
         self.assertEqual(entry["manufacturer"]["scope"], "ambiguous")
 
-    def test_maker_mismatch_is_review_only(self):
-        entry = make_entry(row(), announcement(maker="別会社"))
-        self.assertEqual(entry["confidence"], "review")
+    def test_maker_mismatch_is_rejected(self):
+        self.assertIsNone(make_entry(row(), announcement(maker="別会社")))
 
     def test_package_word_after_product_is_recorded(self):
         entry = make_entry(
             row(),
             announcement(title="2026年8月10日 テスト錠10mg「ABC」 PTP100錠 限定出荷のお知らせ"),
         )
+        self.assertEqual(entry["manufacturer"]["scope"], "package")
+        self.assertEqual(entry["confidence"], "review")
+
+    def test_verified_product_table_can_confirm_generic_group_title(self):
+        entry = make_entry(
+            row(status="⑤供給停止"),
+            announcement(
+                title="2026年8月10日 一部製品 限定出荷解除のお知らせ",
+                event_type="resumed",
+            ),
+            {"scope": "product", "source": "manual_group"},
+        )
+        self.assertEqual(entry["confidence"], "high")
+        self.assertEqual(entry["manufacturer"]["scope"], "product")
+        self.assertEqual(entry["evidence"]["verified_target_source"], "manual_group")
+
+    def test_verified_package_target_remains_review_only(self):
+        entry = make_entry(
+            row(), announcement(),
+            {"scope": "package", "source": "manual_group"},
+        )
+        self.assertEqual(entry["confidence"], "review")
         self.assertEqual(entry["manufacturer"]["scope"], "package")
 
     def test_resumption_conflicts_with_older_official_stop(self):

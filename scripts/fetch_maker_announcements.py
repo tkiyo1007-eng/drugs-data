@@ -20,6 +20,7 @@ import urllib.parse
 import urllib.request
 
 from jst_time import jst_today
+from maker_identity import maker_is_listed_in_row
 
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
 
@@ -463,11 +464,19 @@ def classify_event(title):
     一部包装の中止を製品全体の中止と分けることを優先する。
     """
     t = norm(title)
+    # 「販売終了製品」と書かれていても、案内そのものが特定包装の
+    # 限定出荷解除を知らせる文書なら、販売中止の根拠にはしない。
+    if re.search(r"販売終了製品.*(?:限定出荷|出荷調整)(?:の)?解除", t):
+        return "resumed"
     if re.search(
             r"(?:一部)?包装(?:容量)?(?:における|の)?(?:販売|発売)?(?:中止|終了)"
             r"|患者(?:さん)?用パッケージ(?:入り)?.*(?:販売|発売)(?:中止|終了)", t):
         return "package_discontinued"
-    if (re.search(r"販売中止|販売終了|製造中止|取り扱い中止|取扱い販売中止", t)
+    # 取扱い終了は販売会社・流通経路だけが変わり、製品自体は別会社から
+    # 継続する場合があるため、製品全体の販売中止とは分離する。
+    if re.search(r"取[り]?扱い(?:販売)?(?:中止|終了)|取扱(?:販売)?(?:中止|終了)", t):
+        return "handling_discontinued"
+    if (re.search(r"販売中止|販売終了|製造中止|製造販売中止", t)
             and not re.search(r"他社(?:品|製品).*販売中止.*(?:影響|伴)", t)):
         return "discontinued"
     if re.search(r"出荷再開|供給再開|限定出荷解除|出荷調整解除|供給停止解除", t):
@@ -516,21 +525,8 @@ def make_announcement_record(maker, title, url, checked=None):
     return record
 
 
-MAKER_ALIASES = {
-    "沢井製薬": ("沢井製薬",), "日医工": ("日医工",),
-    # 日本ジェネリックの案内には、製造販売元の長生堂製薬品も掲載される。
-    "日本ジェネリック": ("日本ジェネリック", "長生堂製薬"),
-    "キョーリンリメディオ": ("キョーリンリメディオ",),
-    "第一三共エスファ": ("第一三共エスファ",),
-    "日本ケミファ": ("日本ケミファ",), "東和薬品": ("東和薬品",),
-    "高田製薬": ("高田製薬",), "久光製薬": ("久光製薬",),
-    "ニプロ": ("ニプロ",),
-}
-
-
 def maker_matches_row(maker, row):
-    maker_text = norm((row.get("販売メーカー") or "") + " " + (row.get("製造メーカー") or ""))
-    return any(alias in maker_text for alias in MAKER_ALIASES.get(maker, (maker,)))
+    return maker_is_listed_in_row(maker, row)
 
 
 def is_normal_row(row):
@@ -618,6 +614,7 @@ def terminal_family_title_matches(core, title_n):
 EVENT_PRIORITY = {
     "discontinued": 3,
     "package_discontinued": 2,
+    "handling_discontinued": 2,
     "stopped": 1,
     "limited": 1,
     "resumed": 1,
@@ -671,14 +668,17 @@ def load_manual_announcements(single_path="manual_announcements.json",
             # 格上げすると、未再監査の品目までライフサイクルに反映される。
             if group.get("target_products_verified") is True:
                 info["target_products_verified"] = True
+                info["target_scope"] = group.get("target_scope")
             info.setdefault("event_type", classify_event(info.get("title", "")))
             announced_at = extract_announcement_date(info.get("title", ""), info.get("url", ""))
             if announced_at:
                 info.setdefault("announced_at", announced_at)
-            if info.get("url"):
+            expected = group.get("expected_target_count")
+            target_count = len(group.get("products") or []) + len(group.get("lifecycle_targets") or [])
+            if info.get("url") and isinstance(expected, int) and expected == target_count:
                 resolved_urls.add(info["url"])
             event_group = {}
-            for name in group["products"]:
+            for name in group.get("products") or []:
                 event_group[name] = dict(info)
                 current = manual.get(name)
                 if current is None or announcement_rank(info) > announcement_rank(current):
@@ -720,7 +720,8 @@ def match_to_csv(announcements, csv_path, existing=None, unmatched_out=None):
         # 分類規則の改善を既存生成データにも反映し、過去の誤分類を固定化しない。
         # 手動登録の明示event_typeはこの後のオーバーレイで再適用される。
         event_type = classify_event(value.get("title", ""))
-        if not is_normal_row(row) or has_delist_notice(row) or event_type in {"discontinued", "package_discontinued"}:
+        if (not is_normal_row(row) or has_delist_notice(row)
+                or event_type in {"discontinued", "package_discontinued", "handling_discontinued"}):
             value = dict(value)
             value["event_type"] = event_type
             announced_at = extract_announcement_date(value.get("title", ""), value.get("url", ""))

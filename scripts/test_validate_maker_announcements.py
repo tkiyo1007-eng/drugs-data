@@ -20,9 +20,14 @@ class ValidateMakerAnnouncementsTests(unittest.TestCase):
         self.addCleanup(self.tmp.cleanup)
         self.csv_path = os.path.join(self.tmp.name, "drugs.csv")
         with open(self.csv_path, "w", encoding="utf-8-sig", newline="") as f:
-            w = csv.DictWriter(f, fieldnames=["商品名"])
+            w = csv.DictWriter(
+                f, fieldnames=["商品名", "YJコード", "製造メーカー", "販売メーカー"],
+            )
             w.writeheader()
-            w.writerow({"商品名": "テスト錠"})
+            w.writerow({
+                "商品名": "テスト錠", "YJコード": "123456789012",
+                "製造メーカー": "テスト製薬", "販売メーカー": "テスト製薬",
+            })
 
     def write_json(self, data):
         path = os.path.join(self.tmp.name, "announcements.json")
@@ -149,6 +154,19 @@ class ValidateMakerAnnouncementsTests(unittest.TestCase):
         self.assertIn("重複", errors)
         self.assertIn("HTTPS", errors)
         self.assertIn("makerが空", errors)
+
+    def test_verified_manual_group_requires_scope_and_complete_target_count(self):
+        path = self.write_named_json("manual-groups-verified-invalid.json", [{
+            "products": ["テスト錠"],
+            "target_products_verified": True,
+            "announcement": {
+                "maker": "テスト製薬", "title": "販売中止のご案内",
+                "url": "https://example.test/a.pdf", "event_type": "discontinued",
+            },
+        }])
+        errors = "\n".join(validate_manual_groups(self.csv_path, path))
+        self.assertIn("target_scope", errors)
+        self.assertIn("expected_target_count", errors)
 
 
 if __name__ == "__main__":
