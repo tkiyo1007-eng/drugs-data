@@ -5072,5 +5072,15 @@
    "pkg": "袋300mL",
    "until": ""
   }
+ ],
+ "https://med.sawai.co.jp/file/pr28_1774_3.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": "2026年8月"
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
  ]
 }

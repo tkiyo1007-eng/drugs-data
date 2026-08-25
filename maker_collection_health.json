@@ -1,5 +1,5 @@
 {
- "checked": "2026-08-24",
+ "checked": "2026-08-26",
  "sources": [
   {
    "source": "parse_sawai",
@@ -34,13 +34,13 @@
   {
    "source": "parse_dsep",
    "ok": true,
-   "count": 1287,
+   "count": 1289,
    "error": ""
   },
   {
    "source": "parse_kemifa",
    "ok": true,
-   "count": 65,
+   "count": 67,
    "error": ""
   },
   {
@@ -52,13 +52,13 @@
   {
    "source": "parse_takata",
    "ok": true,
-   "count": 254,
+   "count": 270,
    "error": ""
   },
   {
    "source": "parse_hisamitsu",
    "ok": true,
-   "count": 60,
+   "count": 61,
    "error": ""
   },
   {
@@ -68,5 +68,5 @@
    "error": ""
   }
  ],
- "total": 2403
+ "total": 2424
 }
