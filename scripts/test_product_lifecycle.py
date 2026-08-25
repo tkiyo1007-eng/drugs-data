@@ -11,8 +11,10 @@ from scripts.build_product_lifecycle import (
     announcement_identifies_product_as_new_release,
     announcement_targets_product,
     backfill_announcement_dates,
+    event_last_checked_by_url,
     existing_record_needs_reverification,
     is_product_wide_discontinuation,
+    lifecycle_verified_at,
     verified_group_announcements,
     verified_group_scopes,
 )
@@ -111,6 +113,40 @@ class ProductLifecycleTests(unittest.TestCase):
         }
         self.assertEqual(backfill_announcement_dates(products), 0)
         self.assertEqual(products["123456789012"]["announced_at"], "2025-01-01")
+
+    def test_event_history_last_checked_refreshes_the_same_notice_verification(self):
+        source_url = "https://example.test/notice.pdf"
+        checks = event_last_checked_by_url({
+            "テスト錠": [
+                {"url": source_url, "last_checked": "2026-08-20"},
+                {"url": source_url, "last_checked": "2026-08-25"},
+                {"url": source_url, "last_checked": "2026-99-99"},
+                {"url": "https://example.test/other.pdf", "last_checked": "2026-08-26"},
+            ],
+        })
+        self.assertEqual(checks[source_url], "2026-08-25")
+        self.assertEqual(
+            lifecycle_verified_at(
+                {"checked": "2026-08-21"},
+                {"verified_at": "2026-08-22"},
+                checks,
+                source_url,
+                "2026-08-26",
+            ),
+            "2026-08-25",
+        )
+
+    def test_event_history_for_another_url_does_not_refresh_lifecycle(self):
+        self.assertEqual(
+            lifecycle_verified_at(
+                {},
+                {"verified_at": "2026-08-22"},
+                {"https://example.test/other.pdf": "2026-08-26"},
+                "https://example.test/notice.pdf",
+                "2026-08-26",
+            ),
+            "2026-08-22",
+        )
 
     def test_normal_supply_discontinuation_is_collected(self):
         with tempfile.TemporaryDirectory() as directory:

@@ -204,6 +204,7 @@ jobs:
           python3 scripts/build_product_lifecycle.py \
             --csv drugs_app_ready.csv \
             --announcements maker_announcements.json manual_announcements.json \
+            --events maker_announcement_events.json \
             --manual-groups manual_announcement_groups.json \
             --existing product_lifecycle.json \
             --output product_lifecycle.next.json
@@ -217,6 +218,10 @@ jobs:
         run: |
           python3 scripts/build_supply_discrepancies.py
           python3 scripts/validate_supply_discrepancies.py
+
+      - name: メーカー補足情報を含めて品目別SEOページを再生成
+        if: steps.maker_refresh.outputs.updated == 'true'
+        run: python3 scripts/generate_item_pages.py --csv drugs_app_ready.csv --site .
 
       - name: メーカー補足情報を含めて話題のページを再生成
         if: steps.maker_refresh.outputs.updated == 'true'
@@ -239,7 +244,7 @@ jobs:
           git add maker_announcements.json manual_announcements.json \
             maker_announcement_events.json maker_collection_health.json unmatched_maker_announcements.json \
             product_lifecycle.json announcement_packages.json packages_cache.json news.json \
-            supply_discrepancies.json topics products sitemap-curated.xml
+            supply_discrepancies.json items sitemap-items.xml topics products sitemap-curated.xml
           git diff --cached --quiet && echo "メーカー補足情報変更なし" && exit 0
           git commit -m "メーカー補足情報自動更新: $(TZ=Asia/Tokyo date +'%Y/%m/%d')"
           for push_attempt in 1 2 3 4 5; do

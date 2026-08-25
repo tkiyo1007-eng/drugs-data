@@ -9,6 +9,8 @@ import json
 import re
 from pathlib import Path
 
+from build_supply_discrepancies import OFFICIAL_STATES, official_date
+from fetch_maker_announcements import maker_matches_row
 from verified_targets import verified_target_registry
 
 
@@ -77,6 +79,22 @@ def validate(document: object, rows: dict[str, dict[str, str]],
         evidence = entry.get("evidence")
         if not isinstance(official, dict) or official.get("status") not in ALLOWED_STATES:
             errors.append(f"{prefix}: official が不正です")
+        else:
+            expected_official = OFFICIAL_STATES.get((row.get("供給状況") or "").strip())
+            if expected_official is None:
+                errors.append(f"{prefix}: CSVの供給状況を公式状態へ変換できません")
+            else:
+                expected_status, expected_label = expected_official
+                expected_date = official_date(row)
+                expected_date_text = expected_date.isoformat() if expected_date else ""
+                if official.get("status") != expected_status:
+                    errors.append(f"{prefix}: official.status がCSVの供給状況と一致しません")
+                if official.get("label") != expected_label:
+                    errors.append(f"{prefix}: official.label がCSVの供給状況と一致しません")
+                if official.get("updated_at") != expected_date_text:
+                    errors.append(
+                        f"{prefix}: official.updated_at がCSVの更新日・ステータス更新日と一致しません"
+                    )
         if not isinstance(manufacturer, dict):
             errors.append(f"{prefix}: manufacturer が不正です")
             continue
@@ -86,6 +104,8 @@ def validate(document: object, rows: dict[str, dict[str, str]],
             errors.append(f"{prefix}: manufacturer.scope が不正です")
         if not DATE_RE.fullmatch(str(manufacturer.get("announced_at") or "")):
             errors.append(f"{prefix}: announced_at が不正です")
+        if not maker_matches_row(str(manufacturer.get("maker") or ""), row):
+            errors.append(f"{prefix}: manufacturer.maker がCSVの製造・販売メーカーと一致しません")
         url = str(manufacturer.get("url") or "")
         if not url.startswith("https://"):
             errors.append(f"{prefix}: メーカーURLはHTTPS必須です")

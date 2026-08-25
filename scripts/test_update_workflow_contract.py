@@ -36,6 +36,7 @@ class UpdateWorkflowContractTests(unittest.TestCase):
         self.assertGreaterEqual(self.workflow.count(condition), 3)
         for step in (
             "販売中止案内をYJコード別ライフサイクルへ変換",
+            "メーカー補足情報を含めて品目別SEOページを再生成",
             "メーカー補足情報を含めて話題のページを再生成",
             "案内文PDFから包装単位を抽出",
         ):
@@ -67,11 +68,25 @@ class UpdateWorkflowContractTests(unittest.TestCase):
         core_publish = self.workflow.index("検証済み厚労省コアデータと対応ページを先に公開")
         refresh = self.workflow.index("メーカー補足情報を一時領域で取得・検証")
         second_build = self.workflow.index("最新メーカー案内で供給情報差異を再判定")
+        refreshed_item_pages = self.workflow.index("メーカー補足情報を含めて品目別SEOページを再生成")
         enrichment_publish = self.workflow.index("検証済みメーカー補足情報を追加公開")
         self.assertLess(first_build, core_publish)
         self.assertLess(refresh, second_build)
+        self.assertLess(second_build, refreshed_item_pages)
+        self.assertLess(refreshed_item_pages, enrichment_publish)
         self.assertLess(second_build, enrichment_publish)
         self.assertEqual(self.workflow.count("scripts/validate_supply_discrepancies.py"), 2)
+
+    def test_refreshed_item_pages_are_in_the_enrichment_commit(self):
+        start = self.workflow.index("検証済みメーカー補足情報を追加公開")
+        enrichment_step = self.workflow[start:]
+        self.assertIn("items sitemap-items.xml", enrichment_step)
+
+    def test_lifecycle_build_uses_the_refreshed_announcement_history(self):
+        start = self.workflow.index("販売中止案内をYJコード別ライフサイクルへ変換")
+        end = self.workflow.index("最新メーカー案内で供給情報差異を再判定")
+        lifecycle_step = self.workflow[start:end]
+        self.assertIn("--events maker_announcement_events.json", lifecycle_step)
 
 
 if __name__ == "__main__":
