@@ -70,7 +70,8 @@ class PublishedWebContentTests(unittest.TestCase):
 
     def test_lifecycle_maker_matching_rejects_empty_and_uses_verified_alias(self):
         self.assertIn("function lifecycleMakerMatches(maker, makerText){", self.html)
-        self.assertIn("if(!makerName) return false;", self.html)
+        self.assertIn("if(!sourceMakers.size) return false;", self.html)
+        self.assertIn("new Set(lifecycleMakerTokens(makerText))", self.html)
         self.assertIn("if(!lifecycleMakerMatches(item.maker, makerText)) return null;", self.html)
         self.assertNotIn("if(item.maker && !lifecycleMakerMatches", self.html)
         self.assertIn('"日本ジェネリック": ["長生堂製薬"]', self.html)
