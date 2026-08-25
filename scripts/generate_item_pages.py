@@ -8,7 +8,7 @@
 生成対象:
   - 供給に問題がある品目(限定出荷・供給停止・販売中止)と薬価削除予定の品目
   - 過去に生成済みでCSVにまだ存在する品目(通常出荷に戻ってもURLを404にしないため
-    最新状態で再生成し続ける。CSVから消えた品目のページは最終状態のまま残す)
+    最新状態で再生成し続ける。CSVから消えた品目の旧ページは誤表示防止のため削除)
 
 出力:
   items/<キー>.html   品目ページ(キーはYJコード。無い品目は商品名+規格のハッシュ)
@@ -26,7 +26,8 @@ import html
 import json
 import re
 import sys
-from datetime import datetime, timezone, timedelta
+import unicodedata
+from datetime import date, datetime, timezone, timedelta
 from pathlib import Path
 from urllib.parse import quote
 
@@ -47,10 +48,10 @@ STATUSES = {
     "ended":   {"label": "販売中止", "color": "#7A5E49", "bg": "#F2EBE4"},  # 4.87:1 (旧#8A6A52 は4.17:1)
 }
 STATUS_NOTES = {
-    "ok":      "メーカーが通常どおり出荷している状態です。",
-    "limited": "需要の急増や増産対応などにより、メーカーが出荷数量・販売先を制限している状態です。入手しづらくなる場合があります。",
-    "stopped": "メーカーが出荷を一時的に停止している状態です。出荷再開の見込みはメーカーの案内をご確認ください。",
-    "ended":   "メーカーが製造・販売を終了した状態です。今後の対応は、メーカー・卸の最新情報を確認し、医師・薬剤師等の専門職でご判断ください。",
+    "ok":      "厚生労働省公表データ上、通常出荷として収録されています。メーカー案内や実際の流通状況と異なる場合があります。",
+    "limited": "厚生労働省公表データ上、限定出荷として収録されています。実際の受注可否は卸・メーカーにご確認ください。",
+    "stopped": "厚生労働省公表データ上、供給停止として収録されています。出荷再開の見込みはメーカーの案内もご確認ください。",
+    "ended":   "厚生労働省公表データ上、販売中止として収録されています。今後の対応はメーカー・卸の最新情報も確認し、医師・薬剤師等の専門職でご判断ください。",
 }
 # 詳細表で優先的に上へ並べる列(LPの DETAIL_ORDER と同じ考え方)
 DETAIL_ORDER = ["規格", "供給状況", "理由", "解除・解消見込み", "出荷量状況", "代替候補", "一般名", "製造メーカー",
@@ -88,7 +89,7 @@ def is_delist(row: dict) -> bool:
 # --- 関連品目（同成分の他社品）の絞り込み。LP(index.html)と同じ判定にすること ---
 # 一般名の一致だけで並べると、注射剤に対して軟膏・貼付剤など投与経路の違う品目まで
 # 「他社品」として並んでしまう（例: ケナコルト-A注に対するレダコート軟膏）。
-# 関連品目を確認する人が直接たどり着くページなので、LPと同じ精度で絞り込む。
+# 同成分・同剤形の関連品目を確認する人が直接たどり着くページなので、LPと同じ精度で絞り込む。
 SEV = {"ok": 0, "limited": 1, "stopped": 2, "ended": 3}
 
 # 温感タイプはYJコードでは非温感と区別できず（先頭9桁まで同一）、商品名にも
@@ -119,13 +120,13 @@ def patch_kind(row: dict) -> str:
 
 
 def eff_sev(row: dict) -> int:
-    """並び順用の実効深刻度。薬価削除予定は「入手しやすい」側に置かない。"""
+    """厚労省公表区分の並び順用。薬価削除予定は通常出荷より後ろに置く。"""
     base = SEV[map_status(row.get("供給状況") or "")]
     return max(SEV["ended"], base) if is_delist(row) else base
 
 
 def pick_siblings(row: dict, candidates: list) -> list:
-    """同成分・同剤形の他社品を、入手しやすい順に返す。"""
+    """同成分・同剤形の他社品を、厚労省公表区分の順に返す。"""
     yj8 = re.sub(r"[^0-9A-Za-z]", "", row.get("YJコード", "") or "")[:8]
     warm = is_warm_patch(row)
     kind = patch_kind(row)
@@ -187,7 +188,226 @@ def load_csv(path: Path):
     return [r for r in rows if (r.get("商品名") or "").strip()]
 
 
-def page_html(row, key, status, jst_today, siblings, generated_keys):
+def load_required_json(path: Path, label: str) -> dict:
+    """安全表示に必要なJSONを読み、欠落・破損時は公開生成を止める。"""
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        raise ValueError(f"{label}を読み込めません: {path}") from exc
+    if not isinstance(value, dict):
+        raise ValueError(f"{label}のルートがオブジェクトではありません: {path}")
+    return value
+
+
+def validated_product_map(document: dict, label: str) -> dict:
+    products = document.get("products")
+    if document.get("schema_version") != 1 or not isinstance(products, dict):
+        raise ValueError(f"{label}のschema_versionまたはproductsが不正です")
+    return products
+
+
+def version_date(version: dict) -> str:
+    """version.jsonからデータセット全体の基準日をYYYY-MM-DDで返す。"""
+    text = f'{version.get("note", "")} {version.get("version", "")}'
+    match = (re.search(r"(\d{4})年(\d{1,2})月(\d{1,2})日", text)
+             or re.search(r"(\d{4})-(\d{1,2})-(\d{1,2})", text)
+             or re.search(r"\b(\d{4})(\d{2})(\d{2})\d*\b", text))
+    if not match:
+        return ""
+    return f"{match.group(1)}-{int(match.group(2)):02d}-{int(match.group(3)):02d}"
+
+
+def normalized_text(value: str) -> str:
+    return re.sub(r"\s+", "", unicodedata.normalize("NFKC", str(value or ""))).casefold()
+
+
+SUPPLEMENTAL_MAKER_ALIASES = {
+    # 日本ジェネリックの公式案内には、製造販売元の長生堂製薬品も掲載される。
+    "日本ジェネリック": {"長生堂製薬"},
+}
+
+
+def maker_tokens(value: str) -> set:
+    normalized = unicodedata.normalize("NFKC", str(value or "")).strip()
+    return {token for token in re.split(r"[・／/,、;；\s]+", normalized) if token}
+
+
+def supplemental_maker(item: dict) -> str:
+    manufacturer = item.get("manufacturer")
+    return str(item.get("maker") or (manufacturer.get("maker") if isinstance(manufacturer, dict) else "") or "")
+
+
+def row_maker_matches(row: dict, maker: str) -> bool:
+    source_makers = maker_tokens(maker)
+    for source_maker in list(source_makers):
+        source_makers.update(SUPPLEMENTAL_MAKER_ALIASES.get(source_maker, set()))
+    row_makers = maker_tokens(row.get("販売メーカー")) | maker_tokens(row.get("製造メーカー"))
+    return bool(source_makers and row_makers and source_makers.intersection(row_makers))
+
+
+def supplemental_matches(row: dict, item: dict = None) -> bool:
+    """YJキーに加え商品名・メーカーも一致した補足情報だけを表示する。"""
+    if not item or normalized_text(item.get("product_name")) != normalized_text(row.get("商品名")):
+        return False
+    return row_maker_matches(row, supplemental_maker(item))
+
+
+def discrepancy_matches(row: dict, item: dict = None) -> bool:
+    if (not item
+            or normalized_text(item.get("product_name")) != normalized_text(row.get("商品名"))):
+        return False
+    official = item.get("official")
+    manufacturer = item.get("manufacturer")
+    if (not isinstance(official, dict) or not isinstance(manufacturer, dict)
+            or not row_maker_matches(row, manufacturer.get("maker"))):
+        return False
+    expected_status = map_status(row.get("供給状況") or "")
+    expected_label = STATUSES[expected_status]["label"]
+    expected_date = official_row_date(row)
+    official_date = iso_publication_date(official.get("updated_at"))
+    label = str(official.get("label") or "")
+    label_matches = label == expected_label or (
+        expected_status == "limited" and label.startswith("限定出荷"))
+    return (official.get("status") == expected_status
+            and label_matches
+            and bool(expected_date and official_date == expected_date))
+
+
+def should_generate(row: dict, key: str, existing: set[str],
+                    lifecycle_products: dict, discrepancy_products: dict) -> bool:
+    return (map_status(row.get("供給状況") or "") != "ok"
+            or is_delist(row)
+            or supplemental_matches(row, lifecycle_products.get(key))
+            or discrepancy_matches(row, discrepancy_products.get(key))
+            or key in existing)
+
+
+def lifecycle_verification_is_recent(lifecycle: dict, reference_date: str) -> bool:
+    verified = iso_publication_date((lifecycle or {}).get("verified_at"))
+    reference = iso_publication_date(reference_date)
+    if not verified or not reference:
+        return False
+    age = (date.fromisoformat(reference) - date.fromisoformat(verified)).days
+    return 0 <= age < 7
+
+
+def supplemental_labels(row: dict, lifecycle=None, discrepancy=None,
+                        reference_date="", trusted=True) -> list:
+    """検索・共有・一覧にも出す、検証済みメーカー補足ラベルを返す。"""
+    labels = []
+    if supplemental_matches(row, lifecycle):
+        lifecycle_current = trusted and lifecycle_verification_is_recent(
+            lifecycle, reference_date)
+        labels.append("メーカー：販売中止予定" if lifecycle_current
+                      else "メーカー：販売中止案内あり（要原文確認）")
+    if discrepancy_matches(row, discrepancy):
+        manufacturer = discrepancy.get("manufacturer") or {}
+        high = (trusted and discrepancy.get("confidence") == "high"
+                and manufacturer.get("scope") == "product")
+        label = (manufacturer.get("label") or "").strip()
+        labels.append(f"メーカー：{label}" if high and label
+                      else "メーカー案内あり（要原文確認）")
+    return list(dict.fromkeys(labels))
+
+
+def iso_publication_date(value: str) -> str:
+    match = re.search(r"(\d{4})[年/.-](\d{1,2})[月/.-](\d{1,2})日?", str(value or ""))
+    if not match:
+        return ""
+    return f"{match.group(1)}-{int(match.group(2)):02d}-{int(match.group(3)):02d}"
+
+
+def official_row_date(row: dict) -> str:
+    """厚労省の品目行で確認できる最新日を返す。
+
+    供給差異builderと同じく、一般更新日とステータス更新日の新しい方を使う。
+    """
+    dates = [iso_publication_date(row.get(field))
+             for field in ("更新日", "ステータス更新日")]
+    valid = [value for value in dates if value]
+    return max(valid) if valid else ""
+
+
+def latest_publication_date(row: dict, lifecycle=None, discrepancy=None) -> str:
+    """品目行または検証済みメーカー案内のうち、最も新しい公表日を返す。"""
+    dates = [official_row_date(row)]
+    if supplemental_matches(row, lifecycle):
+        dates.append(iso_publication_date(lifecycle.get("announced_at")))
+    if discrepancy_matches(row, discrepancy):
+        dates.append(iso_publication_date((discrepancy.get("manufacturer") or {}).get("announced_at")))
+    valid = [date for date in dates if date]
+    return max(valid) if valid else ""
+
+
+def supplemental_context(health: dict, discrepancy_document: dict,
+                         dataset_date: str) -> dict:
+    """メーカー補足の確認状態を返す。
+
+    補足元の一時障害や確認日の古さで厚労省CSVの更新まで止めない。補足の
+    断定表示だけを止め、静的ページは公式区分を最新に保ったまま生成する。
+    JSON自体の欠落・破損はload_required_json側で引き続き生成失敗にする。
+    """
+    sources = health.get("sources")
+    checked = iso_publication_date(health.get("checked"))
+    source = discrepancy_document.get("source")
+    warnings = []
+    if (not isinstance(sources, list) or not sources
+            or any(not isinstance(item, dict) or item.get("ok") is not True
+                   for item in sources)):
+        warnings.append("メーカー収集元の健全性確認が完了していません")
+    if not checked:
+        warnings.append("メーカー補足情報の確認日を取得できません")
+    if not isinstance(source, dict):
+        warnings.append("供給差異データの参照情報を取得できません")
+        source = {}
+    mhlw_date = version_date({
+        "note": source.get("mhlw_note", ""),
+        "version": source.get("mhlw_version", ""),
+    })
+    manufacturer_date = iso_publication_date(source.get("manufacturer_checked_through"))
+    if mhlw_date != dataset_date:
+        warnings.append("供給差異データの厚労省参照日が公開データ基準日と一致しません")
+    if not checked or manufacturer_date != checked:
+        warnings.append("供給差異データとメーカー収集健全性の確認日が一致しません")
+    if checked:
+        age = (date.fromisoformat(dataset_date) - date.fromisoformat(checked)).days
+        if age < 0 or age >= 7:
+            warnings.append("メーカー補足情報の確認日が7日以上前です")
+    return {
+        "checked": checked,
+        "trusted": not warnings,
+        "warning": "。".join(dict.fromkeys(warnings)),
+    }
+
+
+def reconcile_existing_pages(out: Path, current_keys: set) -> tuple:
+    """CSVから消えた旧ページを削除し、古い供給区分を現行情報に見せない。"""
+    existing = {path.stem for path in out.glob("*.html") if path.stem != "index"}
+    stale = existing - current_keys
+    for key in sorted(stale):
+        (out / f"{key}.html").unlink()
+    return existing - stale, stale
+
+
+def page_title(name: str, status_label: str, supplements: list) -> str:
+    """検索結果で意味を保ちつつ、HTMLの推奨70文字以内へ収める。"""
+    suffix = "｜医薬品供給ナビ"
+    candidates = [
+        (f"{name}の供給状況｜厚労省：{status_label}"
+         + ("｜メーカー補足あり" if supplements else "") + suffix),
+        f"{name}の供給状況｜{status_label}{suffix}",
+        f"{name}｜供給状況{suffix}",
+    ]
+    for candidate in candidates:
+        if len(candidate) <= 70:
+            return candidate
+    tail = f"…｜供給状況{suffix}"
+    return name[:max(1, 70 - len(tail))] + tail
+
+
+def page_html(row, key, status, jst_today, siblings, generated_keys,
+              lifecycle=None, discrepancy=None, dataset_date="", supplemental_checked_date="",
+              supplemental_trusted=True, supplemental_warning=""):
     name = row["商品名"].strip()
     maker = (row.get("販売メーカー") or row.get("製造メーカー") or "").strip()
     gen = (row.get("一般名") or "").strip()
@@ -202,23 +422,74 @@ def page_html(row, key, status, jst_today, siblings, generated_keys):
                   '<strong>薬価削除予定</strong>（経過措置期限の設定を含む）となっています。'
                   '供給状況欄の表示に関わらず、近く販売終了となる見込みがあります。'
                   '採用の見直しをご検討ください。</div>' if delist else "")
+    lifecycle_match = lifecycle if supplemental_matches(row, lifecycle) else None
+    discrepancy_match = discrepancy if discrepancy_matches(row, discrepancy) else None
+    supplements = supplemental_labels(
+        row, lifecycle_match, discrepancy_match, supplemental_checked_date,
+        supplemental_trusted)
+    lifecycle_current = bool(supplemental_trusted and lifecycle_match
+                             and lifecycle_verification_is_recent(
+                                 lifecycle_match, supplemental_checked_date))
+    supplemental_tags = "".join(
+        f'<span class="tag supplemental">{esc(label)}</span>' for label in supplements)
+    supplemental_checked = ""
+    if supplements:
+        supplemental_checked = (f'<p class="supp-checked">メーカー補足情報の確認日：'
+                                f'{esc(supplemental_checked_date or "確認できません")}</p>')
+        if supplemental_warning:
+            supplemental_checked += (f'<p class="supp-warning" role="status">'
+                                     f'補足情報の確認注意：{esc(supplemental_warning)}。'
+                                     'メーカー原文を再確認してください。</p>')
     # ページ内に「生成日」を書かない。書くと供給状況が何も変わっていない日でも
     # 全ページのHTMLが差し替わり、drugs-data に毎日2,000件規模の無意味なコミットが
     # 積まれてしまう（履歴から「実際に何が変わったか」が読めなくなる）
-    as_of = f"（厚生労働省データ {updated} 時点）" if updated else ""
-    updated_note = (f"厚生労働省データ {updated} 時点" if updated
-                    else "出典: 厚生労働省「医療用医薬品供給状況」")
-    title = f"{name}の供給状況：{st['label']}｜医薬品供給ナビ"
-    desc = (f"{name}（{maker}）の現在の供給状況は「{st['label']}」"
+    # 全体基準日はversion.jsonからブラウザで取得する。HTMLへ日付を埋め込むと、
+    # 品目自体が変わらない日も全ページが差分になり、履歴と配信量が膨らむため。
+    dataset_context = ('<p class="dataset-context">サイト全体の公開データ基準日：'
+                       '<span class="dataset-date" aria-live="polite">確認中</span>。'
+                       'これはこの静的ページの生成日ではありません。'
+                       'この品目行の最終変更日は下表の「更新日／ステータス更新日」をご確認ください。</p>')
+    title = page_title(name, st["label"], supplements)
+    desc = (f"{name}（{maker}）の厚生労働省公表データ上の供給区分は「{st['label']}」"
             + ("（薬価削除予定）" if delist else "")
-            + (f"（厚生労働省データ {updated} 時点、毎日自動更新）。" if updated
-               else "（厚生労働省データ、毎日自動更新）。")
-            + "理由・解除見込み・出荷量状況・同成分の他社品の供給状況もこのページで確認できます。")
+            + (f"。メーカー公式補足は「{'／'.join(supplements)}」" if supplements else "")
+            + "。サイト全体の最新基準日はページ上で別途表示します。"
+            + "理由・解除見込み・出荷量状況・同成分の他社品は、公表されている場合に確認できます。")
     url = f"{SITE_ROOT}items/{key}.html"
     # 商品名は同名品目があるため、LPの詳細リンクも一意な品目キーを使う。
     lp_link = SITE_ROOT + "#item=" + quote(key, safe="")
     pmda = "https://www.pmda.go.jp/PmdaSearch/iyakuSearch/?nameWord=" + quote(name, safe="")
     smart_app_banner = esc(smart_app_banner_content(row))
+
+    lifecycle_box = ""
+    if lifecycle_match:
+        lifecycle_url = lifecycle_match.get("source_url") or ""
+        lifecycle_link = (f'<a href="{esc(lifecycle_url)}" target="_blank" rel="noopener">'
+                          'メーカー公式案内の原文を確認</a>'
+                          if lifecycle_url.startswith("https://") else "")
+        lifecycle_box = f'''<div class="supp supp-life">
+      <strong>メーカー公式：{"販売中止予定" if lifecycle_current else "販売中止案内あり（要原文確認）"}</strong>
+      <p>{esc(lifecycle_match.get("source_title") or "販売中止の案内")}'''
+        if lifecycle_match.get("announced_at"):
+            lifecycle_box += f'（公表 {esc(lifecycle_match.get("announced_at"))}）'
+        verified_at = esc(lifecycle_match.get("verified_at") or "確認日不明")
+        lifecycle_box += (f'''</p><p>案内の最終確認日：{verified_at}。{"確認日が7日以上前のため、現在の扱いは必ず原文で再確認してください。" if not lifecycle_current else "厚労省の現在の供給区分と、メーカーの今後の販売予定は別の情報として併記しています。"}</p>{lifecycle_link}</div>''')
+
+    discrepancy_box = ""
+    if discrepancy_match:
+        official = discrepancy_match.get("official") or {}
+        manufacturer = discrepancy_match.get("manufacturer") or {}
+        high = (supplemental_trusted and discrepancy_match.get("confidence") == "high"
+                and manufacturer.get("scope") == "product")
+        source_url = manufacturer.get("url") or ""
+        source_link = (f'<a href="{esc(source_url)}" target="_blank" rel="noopener">'
+                       'メーカー公式案内の原文を確認</a>'
+                       if source_url.startswith("https://") else "")
+        discrepancy_box = f'''<div class="supp supp-diff">
+      <strong>{"情報差異あり" if high else "メーカー案内あり・対象規格を原文確認"}</strong>
+      <p>厚労省公表：{esc(official.get("label") or "—")}（{esc(official.get("updated_at") or "更新日不明")}）<br>
+      {"メーカー公式" if supplemental_trusted else "収録済みメーカー案内（要原文確認）"}：{esc(manufacturer.get("label") or "—")}（{esc(manufacturer.get("announced_at") or "公表日不明")}）</p>
+      <p>厚労省区分は上書きせず、より新しいメーカー案内を併記しています。実際の受注可否は卸・メーカーにもご確認ください。</p>{source_link}</div>'''
 
     # 詳細表: 既知の列を定義順に、その他の列は後ろに(空欄と重複情報はスキップ)
     detail_rows = []
@@ -254,7 +525,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys):
         sib_html = f"""
 <section>
   <h2>同成分・同剤形（{esc(gen)}）の他社品の供給状況</h2>
-  <p class="sib-note">入手しやすい順に表示しています。{esc(warm_note)}適応・規格・剤形の互換性は必ず添付文書と医師・薬剤師の判断でご確認ください。</p>
+  <p class="sib-note">厚生労働省公表区分上の通常出荷を先に表示しています。代替適否や実在庫を示す順位ではありません。{esc(warm_note)}適応・規格・剤形の互換性は必ず添付文書と医師・薬剤師の判断でご確認ください。</p>
   <ul class="sib">{''.join(lis)}</ul>
 </section>"""
 
@@ -310,7 +581,19 @@ h1{{font-size:22px;line-height:1.45;margin-bottom:6px}}
 .status-stopped{{color:#B03434;background:#FBE7E7}}
 .status-ended{{color:#7A5E49;background:#F2EBE4}}
 .tag.delist{{color:#7A5E49;background:#F2EBE4}}      /* 5.04:1 */
+.tag.supplemental{{color:#6B4310;background:#FFF3D8;border:1px solid #E4B662}}
 .delist-box{{color:#7A5E49;background:#F7F1EA;border:1px solid #E3D5C6}} /* 5.31:1 */
+.supp{{border-radius:12px;padding:14px 16px;font-size:13px;margin:0 0 14px;line-height:1.7}}
+.supp strong{{display:block;margin-bottom:4px}}
+.supp p{{margin:3px 0}}
+.supp a{{display:inline-block;margin-top:5px;color:inherit;font-weight:700}}
+.supp-life{{color:#6B4310;background:#FFF3D8;border:1px solid #E4B662}}
+.supp-diff{{color:#5B4100;background:#FFF0B8;border:1px solid #D69B00}}
+.supp-checked{{color:#704700;font-size:12px;font-weight:700;margin:0 0 10px}}
+.supp-warning{{color:#8A3B12;background:#FFF4E8;border:1px solid #F1C69E;border-radius:8px;padding:8px 10px;font-size:12px;font-weight:700;margin:0 0 12px}}
+.dataset-context{{color:var(--sub);font-size:12px;line-height:1.7;margin:-8px 0 14px}}
+.dataset-warning{{color:#704700;background:#FFF3CF;border:1px solid #E4B662;border-radius:10px;padding:9px 12px;font-size:12px;margin:0 0 14px}}
+.dataset-warning[hidden]{{display:none}}
 table{{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:8px}}
 th,td{{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}}
 th{{white-space:nowrap;color:var(--sub);font-weight:600;width:8.5em}}
@@ -322,6 +605,8 @@ h2{{font-size:16.5px;margin-bottom:12px}}
 .sib .mk{{display:block;font-size:12px;color:var(--sub);margin-top:2px}}
 .sib-note{{font-size:12px;color:var(--sub);margin-bottom:10px;line-height:1.7}}
 .links a{{display:inline-block;margin:4px 12px 4px 0;color:var(--blue);font-size:14px}}
+.share{{min-height:44px;border:1px solid #B9C9EA;border-radius:999px;background:#fff;color:var(--blue);font:inherit;font-weight:700;padding:8px 16px;cursor:pointer}}
+.share-status{{font-size:12px;color:var(--sub);min-height:1.6em;margin-top:5px}}
 .cta{{margin-top:30px;background:linear-gradient(135deg,#2F63E8,#4F80F4);border-radius:16px;padding:24px 22px;color:#fff}}
 .cta h2{{color:#fff}}
 .cta p{{font-size:14px;opacity:.92;margin-bottom:14px}}
@@ -338,55 +623,122 @@ footer a{{color:var(--sub)}}
   <nav class="crumb"><a href="{SITE_ROOT}">トップ</a> › <a href="index.html">品目別の供給状況</a> › {esc(name)}</nav>
   <main>
   <div class="card">
-    <h1>{esc(name)}<span class="tag status-{status}">{st['label']}</span>{delist_tag}</h1>
+    <h1>{esc(name)}<span class="tag status-{status}">厚労省：{st['label']}</span>{supplemental_tags}{delist_tag}</h1>
     <p class="maker">{esc(maker)}{('｜' + esc(spec)) if spec else ''}</p>
     <div class="stbox status-{status}">
-      現在の供給状況は「<strong>{st['label']}</strong>」です{esc(as_of)}。{STATUS_NOTES[status]}
+      厚生労働省公表データ上の供給区分は「<strong>{st['label']}</strong>」です。{STATUS_NOTES[status]}
     </div>
+    {dataset_context}
+    <p class="dataset-warning" id="datasetWarning" role="status" hidden></p>
 {delist_box}
+{supplemental_checked}
+{lifecycle_box}
+{discrepancy_box}
     <table><tbody>{''.join(detail_rows)}</tbody></table>
     <p class="links">
-      <a href="{lp_link}">Web版で詳細を見る（同成分・同剤形の一覧つき）</a>
+      <a href="{lp_link}" data-dsn-event="item-web-open">Web版でこの品目を開く（同成分・同剤形の一覧つき）</a>
       <a href="{pmda}" target="_blank" rel="noopener">PMDAで添付文書を探す</a>
     </p>
+    <button class="share" id="shareButton" type="button">この品目ページを共有</button>
+    <p class="share-status" id="shareStatus" role="status" aria-live="polite"></p>
   </div>
 {sib_html}
   <div class="cta">
     <h2>供給状況の変化を、毎日自動でチェック。</h2>
     <p>医薬品供給ナビは厚労省の医薬品供給状況データ約16,000品目を毎日自動更新。お気に入り登録した品目が「限定出荷」や「出荷再開」に変わるとすぐ分かります。無料です。</p>
-    <a href="{APP_STORE}">App Storeで入手</a>
-    <a class="ghost" href="{SITE_ROOT}">Web版を使ってみる</a>
+    <a href="{APP_STORE}" data-dsn-event="item-app-store-open">App Storeで入手</a>
+    <a class="ghost" href="{lp_link}" data-dsn-event="item-web-open">Web版でこの品目を開く</a>
+    <p>開いた品目は、★を押すとこのブラウザの監視リストへ保存できます。</p>
   </div>
   </main>
   <footer>
     <p class="note">本ページは厚生労働省「医療用医薬品供給状況」の公表データをもとに毎日自動生成される非公式の情報であり、厚生労働省および各製薬企業とは関係ありません。公表と実際の流通状況にタイムラグが生じる場合があります。医薬品の使用・変更は必ず医師・薬剤師にご相談ください。</p>
-    <p>{esc(updated_note)}｜<a href="{SITE_ROOT}">医薬品供給ナビ</a></p>
+    <p>サイト全体の公開データ基準日 <span class="dataset-date" aria-live="polite">確認中</span>｜<a href="{SITE_ROOT}">医薬品供給ナビ</a></p>
   </footer>
 </div>
+<script>
+(function(){{
+  const button = document.getElementById("shareButton");
+  const status = document.getElementById("shareStatus");
+  if(button) button.addEventListener("click", async function(){{
+    const url = new URL(location.href);
+    url.searchParams.set("src", "share");
+    try{{
+      if(navigator.share) await navigator.share({{title:document.title, url:url.href}});
+      else await navigator.clipboard.writeText(url.href);
+      status.textContent = navigator.share ? "共有しました。" : "共有用リンクをコピーしました。";
+      if(window.dsnTrack) window.dsnTrack("item-share-success");
+    }}catch(error){{
+      if(error && error.name !== "AbortError") status.textContent = "共有できませんでした。URL欄からリンクをコピーしてください。";
+    }}
+  }});
+  const datasetWarning = document.getElementById("datasetWarning");
+  fetch("../version.json", {{cache:"no-cache"}})
+    .then(function(response){{
+      if(!response.ok) throw new Error("version");
+      const cached = response.headers.get("X-DSN-Source") === "cache";
+      return response.json().then(function(version){{ return {{version:version,cached:cached}}; }});
+    }})
+    .then(function(result){{
+      const version = result.version;
+      const text = String(version.note || "") + " " + String(version.version || "");
+      const match = text.match(/(\d{{4}})年(\d{{1,2}})月(\d{{1,2}})日/) || text.match(/\\b(\d{{4}})(\d{{2}})(\d{{2}})\d*\\b/);
+      const date = match ? match[1] + "-" + String(match[2]).padStart(2,"0") + "-" + String(match[3]).padStart(2,"0") : "確認できません";
+      const label = date + (result.cached ? "（前回取得）" : "");
+      document.querySelectorAll(".dataset-date").forEach(function(node){{ node.textContent = label; }});
+      if(result.cached){{
+        datasetWarning.textContent = "オフライン等のため、前回取得したデータ基準日を表示しています。接続後に再読み込みしてください。";
+        datasetWarning.hidden = false;
+      }}else if(date !== "確認できません"){{
+        const ageDays = Math.floor((Date.now() - Date.parse(date + "T00:00:00+09:00")) / 86400000);
+        if(ageDays < 0 || ageDays >= 7){{
+          datasetWarning.textContent = "公開データ基準日が7日以上更新されていません。重要な判断では厚生労働省公式とメーカー案内もご確認ください。";
+          datasetWarning.hidden = false;
+        }}
+      }}
+    }})
+    .catch(function(){{
+      document.querySelectorAll(".dataset-date").forEach(function(node){{ node.textContent = "確認できません"; }});
+      datasetWarning.textContent = "全体データ基準日を確認できません。重要な判断では厚生労働省公式とメーカー案内もご確認ください。";
+      datasetWarning.hidden = false;
+    }});
+}})();
+</script>
 <script data-goatcounter="https://kt1007.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
 """
 
 
-def index_html(entries, jst_today):
+def index_html(entries, dataset_date):
     """items/index.html — ステータス別の全ページ一覧(クローラーの巡回起点)。"""
     sections = []
-    order = ["limited", "stopped", "ended", "ok"]
-    heads = {"limited": "限定出荷の品目", "stopped": "供給停止の品目",
-             "ended": "販売中止の品目", "ok": "通常出荷に戻った品目"}
+    order = ["supplemental", "limited", "stopped", "ended", "ok"]
+    heads = {
+        "supplemental": "メーカー公式の補足情報がある品目",
+        "limited": "厚労省公表区分が限定出荷の品目",
+        "stopped": "厚労省公表区分が供給停止の品目",
+        "ended": "厚労省公表区分が販売中止の品目",
+        "ok": "厚労省公表区分が通常出荷の品目",
+    }
     for stk in order:
-        group = sorted([e for e in entries if e["status"] == stk], key=lambda e: e["name"])
+        group = sorted([
+            e for e in entries
+            if (stk == "supplemental" and e.get("supplements"))
+            or (stk != "supplemental" and e["status"] == stk)
+        ], key=lambda e: e["name"])
         if not group:
             continue
         lis = "".join(
             f'<li><a href="{e["key"]}.html">{esc(e["name"])}</a>'
-            f'<span class="mk">{esc(e["maker"])}</span></li>' for e in group)
+            f'<span class="mk">{esc(e["maker"])}｜厚労省：{esc(STATUSES[e["status"]]["label"])}'
+            f'{("／" + esc("／".join(e.get("supplements", [])))) if e.get("supplements") else ""}</span></li>'
+            for e in group)
         sections.append(
             f'<section><h2>{heads[stk]}（{len(group):,}品目）</h2><ul>{lis}</ul></section>')
     title = "品目別の供給状況一覧｜医薬品供給ナビ"
-    desc = ("限定出荷・供給停止・販売中止となっている医療用医薬品の一覧。"
-            "厚生労働省の医薬品供給状況データをもとに毎日自動更新しています。")
+    desc = ("厚生労働省公表の供給区分と、検証済みメーカー公式案内を分けて確認できる医療用医薬品一覧。"
+            "供給停止・限定出荷・販売中止予定などを毎日自動更新しています。")
     # 個別ページ側と同じ階層を示す。item のURLは canonical と揃えること
     breadcrumb_ld = json.dumps({
         "@context": "https://schema.org", "@type": "BreadcrumbList",
@@ -428,7 +780,7 @@ footer{{font-size:12px;color:#5A6B8C;text-align:center;margin-top:30px}}
   <header class="site"><a href="{SITE_ROOT}">💊 医薬品供給ナビ</a></header>
   <main>
     <h1>品目別の供給状況一覧</h1>
-    <p class="lede">{esc(desc)}（{jst_today} 時点）</p>
+    <p class="lede">{esc(desc)}（全体データ基準日 {esc(dataset_date or "確認できません")}）</p>
     {''.join(sections)}
   </main>
   <footer>出典: 厚生労働省「医療用医薬品供給状況」｜<a href="{SITE_ROOT}">医薬品供給ナビ</a></footer>
@@ -471,6 +823,25 @@ def main():
     rows = load_csv(Path(args.csv))
     print(f"CSV: {len(rows):,}行")
 
+    try:
+        lifecycle_doc = load_required_json(site / "product_lifecycle.json", "販売中止補足データ")
+        discrepancy_doc = load_required_json(site / "supply_discrepancies.json", "供給差異データ")
+        version_doc = load_required_json(site / "version.json", "データ基準日")
+        health_doc = load_required_json(site / "maker_collection_health.json", "メーカー収集健全性")
+        lifecycle_products = validated_product_map(lifecycle_doc, "販売中止補足データ")
+        discrepancy_products = validated_product_map(discrepancy_doc, "供給差異データ")
+        dataset_date = version_date(version_doc)
+        if not dataset_date:
+            raise ValueError("version.jsonからデータ基準日を確認できません")
+        supplemental_state = supplemental_context(
+            health_doc, discrepancy_doc, dataset_date)
+    except ValueError as exc:
+        print(f"::error::{exc}", file=sys.stderr)
+        return 1
+    if not supplemental_state["trusted"]:
+        print(f'::warning::メーカー補足を要原文確認表示へ降格します: '
+              f'{supplemental_state["warning"]}', file=sys.stderr)
+
     by_key = {}
     for r in rows:
         by_key.setdefault(item_key(r), r)  # キー重複は先勝ち(YJコード重複はまれ)
@@ -482,12 +853,14 @@ def main():
         if g:
             by_gen.setdefault(g, []).append(r)
 
-    # 生成対象 = 供給に問題がある品目 + 薬価削除予定 + 既存ページでCSVに残っている品目
-    existing = {p.stem for p in out.glob("*.html") if p.stem != "index"}
+    # 生成対象 = 供給に問題がある品目 + 薬価削除予定 + メーカー補足情報 +
+    # 既存ページでCSVに残っている品目。厚労省区分が通常出荷でも、
+    # 販売中止予定やより新しいメーカー限定出荷がある品目は静的ページを作る。
+    existing, removed_stale = reconcile_existing_pages(out, set(by_key))
     targets = {}
     for k, r in by_key.items():
         s = map_status(r.get("供給状況") or "")
-        if s != "ok" or is_delist(r) or k in existing:
+        if should_generate(r, k, existing, lifecycle_products, discrepancy_products):
             targets[k] = (r, s)
     if len(targets) > args.max_pages:
         print(f"::warning::対象{len(targets):,}件が上限{args.max_pages:,}を超えたため、"
@@ -501,13 +874,28 @@ def main():
         g = (r.get("一般名") or "").strip()
         sibs = pick_siblings(r, by_gen.get(g, []))
         (out / f"{k}.html").write_text(
-            page_html(r, k, s, jst_today, sibs, generated_keys), encoding="utf-8")
+            page_html(
+                r, k, s, jst_today, sibs, generated_keys,
+                lifecycle=lifecycle_products.get(k),
+                discrepancy=discrepancy_products.get(k),
+                dataset_date=dataset_date,
+                supplemental_checked_date=supplemental_state["checked"],
+                supplemental_trusted=supplemental_state["trusted"],
+                supplemental_warning=supplemental_state["warning"],
+            ), encoding="utf-8")
+        lifecycle = lifecycle_products.get(k)
+        discrepancy = discrepancy_products.get(k)
         entries.append({"key": k, "name": r["商品名"].strip(), "status": s,
-                        "maker": (r.get("販売メーカー") or r.get("製造メーカー") or "").strip()})
+                        "maker": (r.get("販売メーカー") or r.get("製造メーカー") or "").strip(),
+                        "supplements": supplemental_labels(
+                            r, lifecycle, discrepancy, supplemental_state["checked"],
+                            supplemental_state["trusted"])})
 
-    (out / "index.html").write_text(index_html(entries, jst_today), encoding="utf-8")
-    key_dates = {k: (r.get("更新日") or "").replace("/", "-").strip()
-                 for k, (r, _) in targets.items()}
+    (out / "index.html").write_text(index_html(entries, dataset_date), encoding="utf-8")
+    key_dates = {
+        k: latest_publication_date(r, lifecycle_products.get(k), discrepancy_products.get(k))
+        for k, (r, _) in targets.items()
+    }
     (site / "sitemap-items.xml").write_text(sitemap_xml(key_dates, jst_today), encoding="utf-8")
 
     # 生成済みページのキー一覧。LPの詳細モーダルはこれを読み、実在するページにだけ
@@ -521,6 +909,8 @@ def main():
     for e in entries:
         counts[e["status"]] = counts.get(e["status"], 0) + 1
     print(f"生成: {len(entries):,}ページ + index.html + sitemap-items.xml")
+    if removed_stale:
+        print(f"削除: 現行CSVに存在しない旧ページ {len(removed_stale):,}件")
     print("内訳:", ", ".join(f"{STATUSES[k]['label']} {v:,}" for k, v in sorted(counts.items())))
     return 0
 

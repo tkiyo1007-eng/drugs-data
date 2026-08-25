@@ -152,6 +152,49 @@ def backfill_announcement_dates(products: dict[str, dict[str, str]]) -> int:
     return count
 
 
+def _valid_lifecycle_date(value: object) -> str:
+    """Return a canonical YYYY-MM[-DD] value, or an empty string."""
+    text = str(value or "").strip()
+    if not re.fullmatch(r"\d{4}-\d{2}(?:-\d{2})?", text):
+        return ""
+    try:
+        dt.date.fromisoformat(text if len(text) == 10 else f"{text}-01")
+    except ValueError:
+        return ""
+    return text
+
+
+def event_last_checked_by_url(document: object) -> dict[str, str]:
+    """Collect the newest valid history check date for each exact source URL."""
+    if not isinstance(document, dict):
+        return {}
+    result: dict[str, str] = {}
+    for events in document.values():
+        if not isinstance(events, list):
+            continue
+        for event in events:
+            if not isinstance(event, dict):
+                continue
+            source_url = str(event.get("url") or "").strip()
+            checked = _valid_lifecycle_date(event.get("last_checked"))
+            if source_url and checked and checked > result.get(source_url, ""):
+                result[source_url] = checked
+    return result
+
+
+def lifecycle_verified_at(announcement: dict[str, object], current: dict[str, str],
+                          event_checks: dict[str, str], source_url: str,
+                          today: str) -> str:
+    """Use the newest direct or history-backed verification for this exact notice."""
+    candidates = [
+        _valid_lifecycle_date(announcement.get("checked")),
+        _valid_lifecycle_date(event_checks.get(source_url)),
+        _valid_lifecycle_date(current.get("verified_at")),
+    ]
+    valid = [value for value in candidates if value]
+    return max(valid) if valid else today
+
+
 def announcement_covers_product(product_name: str, title: str) -> bool:
     """案内タイトルが対象規格そのものを含むか。2.5mg中の5mgを誤一致させない。"""
     name_n, title_n = norm(product_name), norm(title)
@@ -243,6 +286,10 @@ def main() -> int:
         "--manual-groups", type=Path, default=Path("manual_announcement_groups.json"),
         help="本文・表で対象を確認済みの手動グループ",
     )
+    parser.add_argument(
+        "--events", type=Path,
+        help="メーカー案内履歴。同一URLの最新last_checkedを確認日に反映する",
+    )
     parser.add_argument("--existing", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
@@ -274,6 +321,11 @@ def main() -> int:
         backfilled = backfill_announcement_dates(products)
         if backfilled:
             print(f"既存データの案内日を補完: {backfilled}件", file=sys.stderr)
+
+    event_checks: dict[str, str] = {}
+    if args.events:
+        with args.events.open(encoding="utf-8") as handle:
+            event_checks = event_last_checked_by_url(json.load(handle))
 
     skipped: list[str] = []
     today = jst_today().isoformat()
@@ -328,11 +380,9 @@ def main() -> int:
                 or announcement_date(title or "", source_url)
                 or current.get("announced_at")
             )
-            verified_candidates = [
-                value for value in (announcement.get("checked"), current.get("verified_at"))
-                if value
-            ]
-            verified_at = max(verified_candidates) if verified_candidates else today
+            verified_at = lifecycle_verified_at(
+                announcement, current, event_checks, source_url, today,
+            )
             products[yj_code] = {
                 "product_name": row.get("商品名") or product_name,
                 "maker": announcement.get("maker") or "",
