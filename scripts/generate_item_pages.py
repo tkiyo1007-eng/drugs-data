@@ -389,6 +389,22 @@ def reconcile_existing_pages(out: Path, current_keys: set) -> tuple:
     return existing - stale, stale
 
 
+def page_title(name: str, status_label: str, supplements: list) -> str:
+    """検索結果で意味を保ちつつ、HTMLの推奨70文字以内へ収める。"""
+    suffix = "｜医薬品供給ナビ"
+    candidates = [
+        (f"{name}の供給状況｜厚労省：{status_label}"
+         + ("｜メーカー補足あり" if supplements else "") + suffix),
+        f"{name}の供給状況｜{status_label}{suffix}",
+        f"{name}｜供給状況{suffix}",
+    ]
+    for candidate in candidates:
+        if len(candidate) <= 70:
+            return candidate
+    tail = f"…｜供給状況{suffix}"
+    return name[:max(1, 70 - len(tail))] + tail
+
+
 def page_html(row, key, status, jst_today, siblings, generated_keys,
               lifecycle=None, discrepancy=None, dataset_date="", supplemental_checked_date="",
               supplemental_trusted=True, supplemental_warning=""):
@@ -433,8 +449,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
                        '<span class="dataset-date" aria-live="polite">確認中</span>。'
                        'これはこの静的ページの生成日ではありません。'
                        'この品目行の最終変更日は下表の「更新日／ステータス更新日」をご確認ください。</p>')
-    title_context = "／".join([f"厚労省：{st['label']}", *supplements])
-    title = f"{name}の供給状況｜{title_context}｜医薬品供給ナビ"
+    title = page_title(name, st["label"], supplements)
     desc = (f"{name}（{maker}）の厚生労働省公表データ上の供給区分は「{st['label']}」"
             + ("（薬価削除予定）" if delist else "")
             + (f"。メーカー公式補足は「{'／'.join(supplements)}」" if supplements else "")

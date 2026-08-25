@@ -9,6 +9,7 @@ from generate_item_pages import (
     latest_publication_date,
     official_row_date,
     page_html,
+    page_title,
     reconcile_existing_pages,
     should_generate,
     supplemental_context,
@@ -227,6 +228,20 @@ class ItemPageMetadataTests(unittest.TestCase):
             "manufacturer_checked_through": "2026-08-26",
         }}, "2026-08-26")
         self.assertEqual(state, {"checked": "2026-08-26", "trusted": True, "warning": ""})
+
+    def test_seo_title_keeps_meaning_without_exceeding_seventy_characters(self):
+        name = "フルボキサミンマレイン酸塩錠２５ｍｇ「タカタ」"
+        title = page_title(
+            name, "供給停止", ["メーカー：販売中止予定", "メーカー：限定出荷解除・通常出荷"],
+        )
+        self.assertLessEqual(len(title), 70)
+        self.assertIn(name, title)
+        self.assertIn("供給停止", title)
+        self.assertIn("医薬品供給ナビ", title)
+
+        very_long = page_title("長" * 100, "限定出荷", ["メーカー：補足あり"])
+        self.assertLessEqual(len(very_long), 70)
+        self.assertTrue(very_long.endswith("｜供給状況｜医薬品供給ナビ"))
 
     def test_pages_missing_from_current_csv_are_removed(self):
         with TemporaryDirectory() as directory:
