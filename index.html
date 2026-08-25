@@ -198,6 +198,9 @@ body{
 @media(max-width:760px){.nav-links a:not(.nav-cta){display:none}}
 @media(max-width:1080px) and (min-width:761px){.nav-links a:not(.nav-cta):nth-child(n+4){display:none}}
 
+/* 固定ナビに見出しが隠れないよう、すべてのページ内リンク先に共通の余白を確保する */
+section[id]{scroll-margin-top:90px}
+
 /* スマホの主要4導線。デスクトップではDOMにも場所を取らず、モバイルだけに表示する */
 .mobile-quick-nav{display:none}
 .mobile-quick-link{
@@ -219,7 +222,6 @@ body{
     border:1px solid rgba(255,255,255,.92);box-shadow:0 14px 40px -14px rgba(20,39,94,.5);
     backdrop-filter:blur(24px) saturate(1.45);-webkit-backdrop-filter:blur(24px) saturate(1.45);
   }
-  #demo,#daily-update,#topics,#watchDashboard{scroll-margin-top:84px}
 }
 
 /* ===== ヒーロー ===== */
@@ -290,6 +292,8 @@ h1 .grad{
   border:1px solid rgba(180,112,0,.28);border-radius:14px;background:#FFF7DF;
   color:#704700;font-size:13px;line-height:1.65;box-shadow:0 8px 24px -18px rgba(112,71,0,.5);
 }
+.data-freshness-notice.stale{border-color:rgba(180,112,0,.38);background:#FFF3CF}
+.data-freshness-notice a{color:inherit;font-weight:900;text-underline-offset:2px}
 .data-freshness-notice[hidden]{display:none}
 .data-freshness-notice svg{flex:none;margin-top:2px}
 .data-freshness-notice span{flex:1}
@@ -491,7 +495,8 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .drug-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
 .drug-head .drug-name{margin-bottom:6px;flex:1}
 .fav-btn{
-  flex:none;background:none;border:none;cursor:pointer;padding:0 2px;
+  flex:none;width:44px;height:44px;margin:-8px -8px -8px 0;background:none;border:none;
+  cursor:pointer;padding:0;display:grid;place-items:center;
   font-size:19px;line-height:1.3;color:#C9D4EA;transition:.15s;
 }
 .fav-btn:hover{transform:scale(1.15)}
@@ -509,7 +514,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 @media(prefers-reduced-motion:reduce){.spark-burst{display:none}}
 .modal-fav{
-  position:absolute;top:14px;right:60px;width:36px;height:36px;border-radius:50%;
+  width:44px;height:44px;border-radius:50%;
   border:1px solid rgba(90,107,148,.2);background:rgba(255,255,255,.8);
   color:#C9D4EA;font-size:19px;line-height:1;cursor:pointer;
   display:grid;place-items:center;transition:.2s;
@@ -517,7 +522,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .modal-fav:hover{background:#fff;transform:scale(1.1)}
 .modal-fav.on{color:#F5B301}
 .modal-share{
-  position:absolute;top:14px;right:106px;width:36px;height:36px;border-radius:50%;
+  width:44px;height:44px;border-radius:50%;
   border:1px solid rgba(90,107,148,.2);background:rgba(255,255,255,.8);
   color:var(--sub);cursor:pointer;
   display:grid;place-items:center;transition:.2s;
@@ -617,6 +622,26 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   background:rgba(255,255,255,.7);transition:.2s;
 }
 .empty-reset:hover{background:#fff;transform:translateY(-1px)}
+.search-help{margin:8px 4px 0;font-size:11.5px;color:var(--sub);line-height:1.65}
+.data-load-error{
+  margin:14px 0 4px;padding:16px 17px;border-radius:16px;
+  border:1.5px solid rgba(176,48,48,.38);background:#FFF0F0;color:#762525;
+  font-size:13px;line-height:1.75;
+}
+.data-load-error[hidden]{display:none}
+.data-load-error strong{display:block;font-size:14px;margin-bottom:3px}
+.data-load-error-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:11px}
+.data-load-error a,.data-load-error button{
+  min-height:44px;display:inline-flex;align-items:center;justify-content:center;
+  border-radius:999px;padding:8px 15px;font:inherit;font-weight:800;text-decoration:none;cursor:pointer;
+}
+.data-load-error button{border:1px solid rgba(118,37,37,.28);background:#fff;color:#762525}
+.data-load-error a{border:1px solid rgba(47,99,232,.3);background:var(--blue);color:#fff}
+.data-as-of{font-size:11.5px;color:var(--sub);line-height:1.6;margin:2px 0 8px}
+.data-loading{
+  grid-column:1/-1;padding:34px 18px;text-align:center;color:var(--sub);font-size:13.5px;
+  border:1px dashed rgba(90,107,148,.24);border-radius:16px;background:rgba(255,255,255,.36);
+}
 .demo-note{margin-top:20px;font-size:12px;color:var(--sub);text-align:center}
 .demo-note a{color:var(--blue);font-weight:700} /* 既定のリンク色だと暗背景で沈むためテーマ色に揃える */
 
@@ -675,18 +700,21 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   box-shadow:0 40px 90px -24px rgba(14,27,61,.5),inset 0 1px 0 #fff;
   animation:modalIn .32s cubic-bezier(.2,.8,.2,1) both;
 }
+.modal-controls{display:flex;justify-content:flex-end;gap:8px;margin:-10px -10px 8px 0}
+.modal-controls .modal-share{order:1}.modal-controls .modal-fav{order:2}.modal-controls .modal-close{order:3}
 @keyframes modalIn{from{opacity:0;transform:translateY(22px) scale(.97)}}
 .modal-close{
-  position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;
+  width:44px;height:44px;border-radius:50%;
   border:1px solid rgba(90,107,148,.2);background:rgba(255,255,255,.8);
   color:var(--sub);font-size:19px;line-height:1;cursor:pointer;
   display:grid;place-items:center;transition:.2s;
 }
 .modal-close:hover{background:#fff;color:var(--ink);transform:rotate(90deg)}
-.modal .status-tag{display:inline-block;margin-bottom:12px}
-.modal .delist-badge{display:inline-block;margin:0 0 12px 8px}
+.modal-badges{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.modal .status-tag{display:inline-block}
+.modal .delist-badge{display:inline-block;margin:0}
 .modal .delist-badge[hidden]{display:none}
-.modal h3{font-size:19px;font-weight:800;line-height:1.5;margin-bottom:4px;padding-right:34px}
+.modal h3{font-size:19px;font-weight:800;line-height:1.5;margin-bottom:4px}
 .modal-maker{font-size:13px;color:var(--sub);margin-bottom:18px}
 .detail-grid{
   display:grid;grid-template-columns:minmax(88px,auto) 1fr;gap:0;
@@ -1179,6 +1207,10 @@ footer a:hover{color:var(--blue)}
       <span>オフライン等のため、前回取得した供給データを表示しています。表示中の日付を確認し、接続後に再読み込みしてください。</span>
       <button class="data-freshness-reload" id="offlineReload" type="button">再読み込み</button>
     </div>
+    <div class="data-freshness-notice stale" id="staleNotice" role="status" aria-live="polite" hidden>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.7 2.2 17.5A2 2 0 0 0 3.9 20h16.2a2 2 0 0 0 1.7-2.5L13.7 3.7a2 2 0 0 0-3.4 0Z"/></svg>
+      <span id="staleNoticeText"></span>
+    </div>
   </div>
 
   <div class="hero-visual">
@@ -1211,8 +1243,23 @@ footer a:hover{color:var(--blue)}
   <div class="demo-shell glass">
     <div class="search-box">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-      <input id="q" type="search" placeholder="薬品名・成分名・メーカー名・YJコードで検索" aria-label="薬品名・成分名・メーカー名・YJコードで検索" autocomplete="off">
+      <input id="q" type="search" placeholder="薬品名・成分名・メーカー名・YJコードで検索" aria-label="薬品名・成分名・メーカー名・YJコードで検索" aria-describedby="searchHelp" autocomplete="off">
     </div>
+    <p class="search-help" id="searchHelp">メーカー名・YJコードにも対応。複数語は空白で区切ると、すべてを含む品目に絞り込みます。</p>
+    <div class="data-load-error" id="dataLoadError" role="alert" hidden>
+      <strong>供給状況データを表示できません</strong>
+      <span id="dataLoadErrorText">誤った情報を表示しないため、検索結果を停止しています。</span>
+      <div class="data-load-error-actions">
+        <button type="button" id="dataLoadReload">再読み込み</button>
+        <a href="https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list" target="_blank" rel="noopener">厚生労働省の公式システムで確認</a>
+      </div>
+    </div>
+    <p class="data-as-of" id="dataAsOf" role="status" aria-live="polite">データ基準日を確認中です。</p>
+    <div class="data-freshness-notice" id="supplementalNotice" role="status" aria-live="polite" hidden>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.7 2.2 17.5A2 2 0 0 0 3.9 20h16.2a2 2 0 0 0 1.7-2.5L13.7 3.7a2 2 0 0 0-3.4 0Z"/></svg>
+      <span id="supplementalNoticeText"></span>
+    </div>
+    <p class="data-as-of" id="supplementalAsOf" role="status" aria-live="polite">メーカー公式案内の補足情報を確認中です。</p>
     <div class="pills" id="pills" role="group" aria-label="供給状況で絞り込む">
       <button type="button" class="pill active" data-f="all" aria-pressed="true">すべて</button>
       <button type="button" class="pill" data-f="ok" aria-pressed="false">通常出荷</button>
@@ -1617,13 +1664,17 @@ footer a:hover{color:var(--blue)}
 
 <div class="modal-backdrop" id="mBack">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
-    <button type="button" class="modal-close" id="mClose" aria-label="閉じる">✕</button>
-    <button type="button" class="modal-fav" id="mFav" aria-label="お気に入りに登録/解除">★</button>
-    <button type="button" class="modal-share" id="mShare" aria-label="この品目へのリンクを共有" title="リンクを共有">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>
-    </button>
-    <span class="status-tag" id="mTag"></span>
-    <span class="delist-badge" id="mDelist" hidden>薬価削除予定</span>
+    <div class="modal-controls" role="group" aria-label="品目詳細の操作">
+      <button type="button" class="modal-close" id="mClose" aria-label="閉じる">✕</button>
+      <button type="button" class="modal-fav" id="mFav" aria-label="お気に入りに登録" aria-pressed="false">★</button>
+      <button type="button" class="modal-share" id="mShare" aria-label="この品目へのリンクを共有" title="リンクを共有">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>
+      </button>
+    </div>
+    <div class="modal-badges">
+      <span class="status-tag" id="mTag"></span>
+      <span class="delist-badge" id="mDelist" hidden>薬価削除予定</span>
+    </div>
     <h3 id="mTitle">品目詳細</h3>
     <p class="modal-maker" id="mMaker"></p>
     <a class="maker-link" id="mMakerLink" href="#" target="_blank" rel="noopener" hidden></a>
@@ -1680,10 +1731,18 @@ footer a:hover{color:var(--blue)}
   const targets = links.map(link=>({link,target:document.getElementById(link.dataset.quickTarget)}))
     .filter(x=>x.target);
   if(!targets.length) return;
-  let frame = 0;
+  let frame = 0, pendingTarget = null, pendingUntil = 0;
   function updateQuickNav(){
     frame = 0;
     if(!matchMedia("(max-width: 760px)").matches) return;
+    if(pendingTarget && performance.now() < pendingUntil){
+      for(const entry of targets){
+        if(entry === pendingTarget) entry.link.setAttribute("aria-current","location");
+        else entry.link.removeAttribute("aria-current");
+      }
+      return;
+    }
+    pendingTarget = null;
     const focusY = innerHeight * .42;
     const watch = targets.find(entry=>entry.target.id === "watchDashboard");
     const watchRect = watch && watch.target.getBoundingClientRect();
@@ -1707,46 +1766,25 @@ footer a:hover{color:var(--blue)}
   addEventListener("scroll",scheduleQuickNav,{passive:true});
   addEventListener("resize",scheduleQuickNav,{passive:true});
   links.forEach(link=>link.addEventListener("click",()=>{
+    pendingTarget = targets.find(entry=>entry.link === link) || null;
+    pendingUntil = performance.now() + 1800;
     links.forEach(other=>other.removeAttribute("aria-current"));
     link.setAttribute("aria-current","location");
-    // smooth scroll の最初のscrollイベントで出発地点へ戻される場合があるため、
-    // 移動が落ち着いた後にも現在地を再判定する。
-    setTimeout(updateQuickNav,800);
+    // smooth scroll 中の最初のscrollイベントで出発地点へ戻さず、移動先を維持する。
+    // 移動が落ち着いた後は実際のスクロール位置から再判定する。
+    setTimeout(()=>{ pendingTarget = null; updateQuickNav(); },1800);
   }));
   updateQuickNav();
 })();
 
-/* ===== サンプルデータ ===== */
+/* ===== 供給状況の表示定義 ===== */
 const STATUS = {
   ok:      {label:"通常出荷", color:"#2FAE6E"},
   limited: {label:"限定出荷", color:"#E8912F"},
   stopped: {label:"供給停止", color:"#E14D4D"},
   ended:   {label:"販売中止", color:"#8A6A52"},
 };
-const DRUGS = [
-  {n:"アセトアミノフェン錠200mg「サンプル」", g:"アセトアミノフェン", m:"サンプル製薬", s:"limited", d:"2026-07-03", kw:"あせとあみのふぇん 解熱鎮痛"},
-  {n:"アモキシシリンカプセル250mg「デモ」", g:"アモキシシリン水和物", m:"デモファーマ", s:"limited", d:"2026-07-02", kw:"あもきししりん 抗生物質 ペニシリン"},
-  {n:"セフカペンピボキシル塩酸塩錠100mg", g:"セフカペンピボキシル塩酸塩水和物", m:"テスト薬品工業", s:"stopped", d:"2026-07-01", kw:"せふかぺん 抗生物質 セフェム"},
-  {n:"ロキソプロフェンNa錠60mg「サンプル」", g:"ロキソプロフェンナトリウム水和物", m:"サンプル製薬", s:"ok", d:"2026-06-28", kw:"ろきそぷろふぇん 解熱鎮痛 NSAIDs"},
-  {n:"レバミピド錠100mg「デモ」", g:"レバミピド", m:"デモファーマ", s:"ok", d:"2026-06-30", kw:"ればみぴど 胃薬 粘膜保護"},
-  {n:"クラリスロマイシン錠200mg", g:"クラリスロマイシン", m:"ホヅミ製薬", s:"limited", d:"2026-07-04", kw:"くらりすろまいしん 抗生物質 マクロライド"},
-  {n:"ツロブテロールテープ2mg", g:"ツロブテロール", m:"テスト薬品工業", s:"limited", d:"2026-07-03", kw:"つろぶてろーる 気管支拡張 貼付"},
-  {n:"カルボシステイン錠500mg「サンプル」", g:"L-カルボシステイン", m:"サンプル製薬", s:"ok", d:"2026-06-25", kw:"かるぼしすていん 去痰"},
-  {n:"デキストロメトルファン錠15mg", g:"デキストロメトルファン臭化水素酸塩水和物", m:"ホヅミ製薬", s:"stopped", d:"2026-06-29", kw:"できすとろめとるふぁん 鎮咳"},
-  {n:"モンテルカスト錠10mg「デモ」", g:"モンテルカストナトリウム", m:"デモファーマ", s:"ok", d:"2026-06-27", kw:"もんてるかすと 喘息 抗アレルギー"},
-  {n:"バルプロ酸Na徐放錠200mg", g:"バルプロ酸ナトリウム", m:"テスト薬品工業", s:"limited", d:"2026-07-02", kw:"ばるぷろさん 抗てんかん"},
-  {n:"ファモチジン錠20mg「サンプル」", g:"ファモチジン", m:"サンプル製薬", s:"ok", d:"2026-06-26", kw:"ふぁもちじん 胃薬 H2ブロッカー"},
-  {n:"メコバラミン錠500μg", g:"メコバラミン", m:"ホヅミ製薬", s:"ended", d:"2026-06-20", kw:"めこばらみん ビタミンB12"},
-  {n:"アンブロキソール塩酸塩錠15mg", g:"アンブロキソール塩酸塩", m:"デモファーマ", s:"ok", d:"2026-06-30", kw:"あんぶろきそーる 去痰"},
-  {n:"オセルタミビルカプセル75mg「デモ」", g:"オセルタミビルリン酸塩", m:"テスト薬品工業", s:"ok", d:"2026-07-01", kw:"おせるたみびる インフルエンザ 抗ウイルス"},
-  {n:"リマプロストアルファデクス錠5μg", g:"リマプロスト アルファデクス", m:"ホヅミ製薬", s:"stopped", d:"2026-06-24", kw:"りまぷろすと 血流改善"},
-  {n:"エペリゾン塩酸塩錠50mg「サンプル」", g:"エペリゾン塩酸塩", m:"サンプル製薬", s:"limited", d:"2026-07-04", kw:"えぺりぞん 筋弛緩"},
-  {n:"トラネキサム酸錠250mg", g:"トラネキサム酸", m:"デモファーマ", s:"ok", d:"2026-06-29", kw:"とらねきさむさん 止血 抗炎症"},
-  {n:"ベタメタゾン・d-クロルフェニラミン配合錠", g:"ベタメタゾン・d-クロルフェニラミンマレイン酸塩", m:"テスト薬品工業", s:"ended", d:"2026-06-18", kw:"べためたぞん セレスタミン様 抗アレルギー"},
-  {n:"イトプリド塩酸塩錠50mg「デモ」", g:"イトプリド塩酸塩", m:"デモファーマ", s:"limited", d:"2026-07-01", kw:"いとぷりど 消化管運動"},
-];
-
-/* ===== 検索（サンプル→実データに差し替え） ===== */
+/* ===== 検索（実データを検証できた後だけ有効化） ===== */
 const $q = document.getElementById("q");
 const $list = document.getElementById("list");
 const $meta = document.getElementById("meta");
@@ -1814,9 +1852,18 @@ function daysAgo(dstr){
   return Math.max(0, Math.round(jstDayNumber(Date.now()) - data));
 }
 
-// 表示中データ。初期値=サンプル、実CSV読込後に差し替わる
-let ITEMS = DRUGS.map(d=>({...d, q:norm(d.n+d.m+d.kw)}));
+// 実データの取得・列構成・件数を検証できるまで品目は一切表示しない。
+// 医薬品情報に本物らしいサンプルが混ざる方が、空状態より危険なため。
+let ITEMS = [];
 let LIVE = false;
+let DATA_STATE = "loading";
+
+function setDataControlsEnabled(enabled){
+  $q.disabled = !enabled;
+  document.querySelectorAll("#pills button").forEach(button=>{ button.disabled = !enabled; });
+  $pageSize.disabled = !enabled;
+  if(!enabled) $watchImportBtn.disabled = true;
+}
 
 let SHOWN = [];
 let LAST_HITS = []; // 現在の絞り込み結果（CSVダウンロード用）
@@ -1896,6 +1943,22 @@ window.addEventListener("keydown", e=>{
 function render(shouldSyncHash = !isOrdinaryPageAnchor()){
   if(shouldSyncHash) cancelPendingPageAnchorRestore();
   syncSearchPriority();
+  if(DATA_STATE !== "ready"){
+    SHOWN = [];
+    LAST_HITS = [];
+    $csvBtn.hidden = true;
+    $loadMore.hidden = true;
+    $meta.removeAttribute("aria-busy");
+    $list.removeAttribute("aria-busy");
+    if(DATA_STATE === "loading"){
+      $meta.textContent = "供給状況データを読み込んでいます…";
+      $list.innerHTML = '<div class="data-loading">読み込み完了後に検索できます。検証前の品目は表示していません。</div>';
+    }else{
+      $meta.textContent = "供給状況データを利用できません";
+      $list.replaceChildren();
+    }
+    return;
+  }
   // スペース区切りの複数キーワードはAND検索にする（NFKCで全角スペースも半角化済み）
   //
   // YJコード（薬価基準収載医薬品コード）でも引けるようにする。レセコンや薬歴から
@@ -1956,7 +2019,9 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
     // 「通常出荷」を上書きせず、別のバッジで販売中止予定を明示する。
     const lifecycleNotice = lifecycleAnnouncement(d);
     const discontinuedBadge = d.s !== "ended" && lifecycleNotice
-      ? `<span class="discontinued-badge">販売中止予定</span>` : "";
+      ? `<span class="discontinued-badge">${lifecycleNotice.verificationRecent
+          ? "販売中止予定"
+          : "販売中止案内あり（要原文確認）"}</span>` : "";
     // 厚労省区分は変更せず、日付・メーカー・製品規格まで一致した新しい
     // メーカー公式案内が異なる状態を示す場合だけ、独立した黄色バッジを付ける。
     const discrepancyBadge = discrepancyFor(d)
@@ -1979,15 +2044,17 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
     // カードをボタン化すると操作要素の入れ子になり支援技術での操作が壊れる。
     // 品目名を本物の <button> にしてキーボード操作をそこに集約し、
     // マウス利用者向けにはカード全体のクリックをJS側で拾う
+    const favorite = isFav(d);
+    const favoriteAction = favorite ? "お気に入りから解除" : "お気に入りに登録";
     return `<article class="drug-card" data-i="${i}" style="--sc:${st.color};animation-delay:${Math.min(i*35,350)}ms">
       <div class="drug-head">
         <div class="drug-name"><button type="button" class="drug-open" aria-haspopup="dialog">${esc(d.n)}</button></div>
-        <button type="button" class="fav-btn${isFav(d)?" on":""}" data-key="${esc(itemKey(d))}" aria-label="お気に入りに登録/解除" aria-pressed="${isFav(d)}">★</button>
+        <button type="button" class="fav-btn${favorite?" on":""}" data-key="${esc(itemKey(d))}" aria-label="${esc(d.n)}を${favoriteAction}" aria-pressed="${favorite}">★</button>
       </div>
       <div class="drug-maker">${esc(d.m)}${spec}</div>
       <div class="drug-foot">
         <span class="drug-tags"><span class="status-tag">${st.label}</span>${discrepancyBadge}${changeBadge}${delistBadge}${discontinuedBadge}</span>
-        <span class="drug-date num">更新 ${d.d}${ago}</span>
+        <span class="drug-date num">公表行更新 ${d.d}${ago}</span>
       </div>
     </article>`;
   }).join("");
@@ -2181,7 +2248,8 @@ function detailPairs(d){
     ].filter(([,v])=>v);
   }
   const days = daysAgo(d.d);
-  if(days!=null) pairs.push(["情報の鮮度", `最終確認から${days.toLocaleString()}日経過`]);
+  if(DATASET_DATE) pairs.push(["全体データ基準日", DATASET_DATE]);
+  if(days!=null) pairs.push(["公表行の最終変更", `${d.d}（${days.toLocaleString()}日前）`]);
   return pairs;
 }
 
@@ -2265,11 +2333,43 @@ function lifecycleMakerTokens(value){
   return normalizeLifecycleMaker(value).split(/[・／\/,、;；\s]+/).filter(Boolean);
 }
 function lifecycleMakerMatches(maker, makerText){
-  const makerName = normalizeLifecycleMaker(maker);
-  if(!makerName) return false;
+  const sourceMakers = new Set(lifecycleMakerTokens(maker));
+  if(!sourceMakers.size) return false;
+  for(const sourceMaker of [...sourceMakers]){
+    for(const alias of LIFECYCLE_MAKER_ALIASES[sourceMaker] || []) sourceMakers.add(alias);
+  }
   const rowMakers = new Set(lifecycleMakerTokens(makerText));
-  return [makerName, ...(LIFECYCLE_MAKER_ALIASES[makerName] || [])]
-    .some(candidate=>rowMakers.has(candidate));
+  return [...sourceMakers].some(candidate=>rowMakers.has(candidate));
+}
+function itemMakerText(d){
+  return d && d.row && CSV_HEAD
+    ? ["販売メーカー", "製造メーカー"].map(c=>{
+        const i=CSV_HEAD.indexOf(c); return i>=0 ? d.row[i]||"" : "";
+      }).join(" ")
+    : d && d.m || "";
+}
+function publicationDayNumber(value){
+  const match = String(value || "").normalize("NFKC").replaceAll("/", "-")
+    .match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  if(!match) return null;
+  const year=+match[1], month=+match[2], day=+match[3];
+  const stamp = Date.UTC(year, month-1, day);
+  const parsed = new Date(stamp);
+  if(parsed.getUTCFullYear()!==year || parsed.getUTCMonth()!==month-1 || parsed.getUTCDate()!==day) return null;
+  return stamp / 86400000;
+}
+function normalizedPublicationDate(value){
+  const dayNumber = publicationDayNumber(value);
+  if(dayNumber == null) return "";
+  return new Date(dayNumber * 86400000).toISOString().slice(0,10);
+}
+function lifecycleVerificationIsRecent(item){
+  if(!supplementalReady()) return false;
+  const verified = publicationDayNumber(item && item.verified_at);
+  const reference = publicationDayNumber(DATASET_DATE);
+  if(verified == null) return false;
+  const age = (reference == null ? jstDayNumber(Date.now()) : reference) - verified;
+  return age >= 0 && age < STALE_DATA_DAYS;
 }
 function lifecycleFor(d){
   if(!d || !d.yj) return null;
@@ -2277,11 +2377,7 @@ function lifecycleFor(d){
   if(!item || !["discontinuation_announced", "discontinued"].includes(item.state)) return null;
   // iOS版と同じく、YJ一致だけでなく商品名・メーカーも照合する。
   if(norm(item.product_name) !== norm(d.n)) return null;
-  const makerText = d.row && CSV_HEAD
-    ? ["販売メーカー", "製造メーカー"].map(c=>{
-        const i=CSV_HEAD.indexOf(c); return i>=0 ? d.row[i]||"" : "";
-      }).join(" ")
-    : d.m;
+  const makerText = itemMakerText(d);
   if(!lifecycleMakerMatches(item.maker, makerText)) return null;
   return item;
 }
@@ -2295,6 +2391,8 @@ function lifecycleAnnouncement(d){
     event_type:"discontinued",
     announced_at:item.announced_at,
     lifecycle_state:item.state,
+    verificationRecent:lifecycleVerificationIsRecent(item),
+    verified_at:item.verified_at,
   };
 }
 function isSalesEnding(d){
@@ -2305,12 +2403,74 @@ function isSalesEnding(d){
 // high はメーカー・製品規格・公表日の一致をデータ生成時に検証済み。
 // review は規格等が曖昧なため、検索一覧や監視件数には出さず詳細だけで原文確認を促す。
 let SUPPLY_DISCREPANCIES = {};
+const SUPPLEMENTAL_STATE = {lifecycle:"loading", discrepancies:"loading", health:"loading"};
+let SUPPLEMENTAL_CHECKED_THROUGH = "";
+let SUPPLEMENTAL_MHLW_DATE = "";
+function supplementalReady(){
+  const checkedAge = daysAgo(SUPPLEMENTAL_CHECKED_THROUGH);
+  return Object.values(SUPPLEMENTAL_STATE).every(state=>state === "loaded")
+    && Boolean(DATASET_DATE && SUPPLEMENTAL_MHLW_DATE && DATASET_DATE === SUPPLEMENTAL_MHLW_DATE)
+    && checkedAge != null && checkedAge < STALE_DATA_DAYS;
+}
+function updateSupplementalStatus(){
+  const notice = document.getElementById("supplementalNotice");
+  const noticeText = document.getElementById("supplementalNoticeText");
+  const asOf = document.getElementById("supplementalAsOf");
+  const states = Object.values(SUPPLEMENTAL_STATE);
+  const incomplete = states.some(state=>state !== "loaded");
+  const dateMismatch = Boolean(DATASET_DATE && SUPPLEMENTAL_MHLW_DATE && DATASET_DATE !== SUPPLEMENTAL_MHLW_DATE);
+  const checkedAge = daysAgo(SUPPLEMENTAL_CHECKED_THROUGH);
+  const checkedStale = checkedAge == null || checkedAge >= STALE_DATA_DAYS;
+  if(states.some(state=>state === "loading")){
+    asOf.textContent = "メーカー公式案内の補足情報を確認中です。";
+    notice.hidden = true;
+  }else if(incomplete || dateMismatch || checkedStale || !DATASET_DATE || !SUPPLEMENTAL_MHLW_DATE){
+    asOf.textContent = "メーカー補足情報：確認不完全";
+    noticeText.innerHTML = dateMismatch || !DATASET_DATE || !SUPPLEMENTAL_MHLW_DATE
+      ? `厚労省区分とメーカー補足情報の参照日が一致していません。「情報差異なし」とは判断せず、<a href="${OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener">厚生労働省公式</a>とメーカー案内をご確認ください。`
+      : checkedStale
+        ? `メーカー公式案内の確認日が古い、または確認日を取得できません。厚労省の供給区分は表示できますが、「情報差異0件」とは判定しません。`
+        : `メーカー公式案内の補足情報を一部取得できないか、前回キャッシュを使用しています。厚労省の供給区分は表示できますが、「情報差異0件」とは判定しません。`;
+    notice.hidden = false;
+  }else{
+    asOf.textContent = `メーカー補足情報：${SUPPLEMENTAL_CHECKED_THROUGH || "取得済み"}確認　※選定したメーカー・公表案内が対象で、表示がないことは差異なしを保証しません。`;
+    notice.hidden = true;
+    noticeText.textContent = "";
+  }
+  if(LIVE){
+    renderWatchDashboard();
+    renderFavNotice();
+    render();
+  }
+}
+function itemOfficialUpdatedAt(d){
+  const rowDates = [d && d.d];
+  if(d && d.row && CSV_HEAD){
+    for(const column of ["更新日", "ステータス更新日"]){
+      const index = CSV_HEAD.indexOf(column);
+      if(index >= 0) rowDates.push(d.row[index]);
+    }
+  }
+  const validRowDates = rowDates.map(normalizedPublicationDate).filter(Boolean).sort();
+  return validRowDates[validRowDates.length-1] || "";
+}
 function discrepancyFor(d, includeReview=false){
   const key = normalizeYj(d && d.yj);
   const item = key && SUPPLY_DISCREPANCIES[key];
   if(!item || norm(item.product_name) !== norm(d.n)) return null;
-  const productScopedHigh = item.confidence === "high"
-    && item.manufacturer && item.manufacturer.scope === "product";
+  const official = item.official || {};
+  const manufacturer = item.manufacturer || {};
+  const expectedLabel = STATUS[d.s] && STATUS[d.s].label;
+  const officialLabel = String(official.label || "").normalize("NFKC").trim();
+  const labelMatches = d.s === "limited"
+    ? officialLabel.startsWith(expectedLabel)
+    : officialLabel === expectedLabel;
+  const officialDate = normalizedPublicationDate(official.updated_at);
+  const expectedDate = itemOfficialUpdatedAt(d);
+  if(official.status !== d.s || !labelMatches || !officialDate || officialDate !== expectedDate) return null;
+  if(!lifecycleMakerMatches(manufacturer.maker, itemMakerText(d))) return null;
+  const productScopedHigh = supplementalReady() && item.confidence === "high"
+    && manufacturer.scope === "product";
   if(productScopedHigh) return item;
   return includeReview && ["review", "high"].includes(item.confidence) ? item : null;
 }
@@ -2337,10 +2497,23 @@ function refreshSalesEndingPill(items=ITEMS){
     : "販売中止・予定";
   pill.style.display = count ? "" : "none";
 }
+// 旧形式の案内・包装・要約JSONは商品名がキー。同名の別YJ・別規格へ
+// 誤って紐づく方が危険なため、CSV内で名称が一意のときだけ互換表示する。
+function itemNameIsUnique(d){
+  if(!d) return false;
+  const nameKey = norm(d.n);
+  return ITEMS.filter(item=>norm(item.n)===nameKey).length === 1;
+}
+function legacySupplementalFor(map, d){
+  if(!map || !itemNameIsUnique(d)) return null;
+  return map[d.n] || null;
+}
 function findAnnouncement(d){
   const lifecycle = lifecycleAnnouncement(d);
   if(lifecycle) return lifecycle;
-  if(ANNOUNCEMENTS[d.n]) return ANNOUNCEMENTS[d.n];
+  const exact = legacySupplementalFor(ANNOUNCEMENTS, d);
+  if(exact) return exact;
+  if(!itemNameIsUnique(d)) return null;
   const hit = MANUAL_ANNOUNCEMENT_PATTERNS.find(([re])=>re.test(d.n));
   return hit ? hit[1] : null;
 }
@@ -2425,15 +2598,34 @@ function loadSupplementalData(){
         ANNOUNCEMENTS = {...ANNOUNCEMENTS, ...MANUAL_ANNOUNCEMENTS};
       }).catch(()=>{}),
     fetchFirst(["product_lifecycle.json", "https://tkiyo1007-eng.github.io/drugs-data/product_lifecycle.json"])
-      .then(res => res && res.json()).then(data => {
-        if(data && data.schema_version===1 && data.products) PRODUCT_LIFECYCLES = data.products;
-      }).catch(()=>{}),
-    fetchFirst(["supply_discrepancies.json", "https://tkiyo1007-eng.github.io/drugs-data/supply_discrepancies.json"])
-      .then(res => res && res.json()).then(data => {
-        if(data && data.schema_version===1 && data.products && typeof data.products === "object"){
-          SUPPLY_DISCREPANCIES = data.products;
+      .then(res => { if(!res) throw new Error("missing lifecycle"); const cached=responseUsesCachedData(res); return res.json().then(data=>({data,cached})); }).then(({data,cached}) => {
+        if(!data || data.schema_version!==1 || !data.products || typeof data.products!=="object"){
+          throw new Error("invalid lifecycle");
         }
-      }).catch(()=>{}),
+        PRODUCT_LIFECYCLES = data.products;
+        SUPPLEMENTAL_STATE.lifecycle = cached ? "stale" : "loaded";
+      }).catch(()=>{ SUPPLEMENTAL_STATE.lifecycle = "failed"; }).finally(updateSupplementalStatus),
+    fetchFirst(["supply_discrepancies.json", "https://tkiyo1007-eng.github.io/drugs-data/supply_discrepancies.json"])
+      .then(res => { if(!res) throw new Error("missing discrepancies"); const cached=responseUsesCachedData(res); return res.json().then(data=>({data,cached})); }).then(({data,cached}) => {
+        if(!data || data.schema_version!==1 || !data.products || typeof data.products!=="object"){
+          throw new Error("invalid discrepancies");
+        }
+        SUPPLY_DISCREPANCIES = data.products;
+        SUPPLEMENTAL_CHECKED_THROUGH = String(data.source && data.source.manufacturer_checked_through || data.generated_at || "");
+        const sourceText = String(data.source && data.source.mhlw_note || "");
+        const sourceMatch = sourceText.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);
+        SUPPLEMENTAL_MHLW_DATE = sourceMatch
+          ? `${sourceMatch[1]}-${String(sourceMatch[2]).padStart(2,"0")}-${String(sourceMatch[3]).padStart(2,"0")}` : "";
+        SUPPLEMENTAL_STATE.discrepancies = cached ? "stale" : "loaded";
+      }).catch(()=>{ SUPPLEMENTAL_STATE.discrepancies = "failed"; }).finally(updateSupplementalStatus),
+    fetchFirst(["maker_collection_health.json", "https://tkiyo1007-eng.github.io/drugs-data/maker_collection_health.json"])
+      .then(res => { if(!res) throw new Error("missing health"); const cached=responseUsesCachedData(res); return res.json().then(data=>({data,cached})); }).then(({data,cached}) => {
+        if(!data || !Array.isArray(data.sources) || !data.sources.length || data.sources.some(source=>source.ok !== true)){
+          throw new Error("incomplete health");
+        }
+        SUPPLEMENTAL_CHECKED_THROUGH = String(data.checked || SUPPLEMENTAL_CHECKED_THROUGH || "");
+        SUPPLEMENTAL_STATE.health = cached ? "stale" : "loaded";
+      }).catch(()=>{ SUPPLEMENTAL_STATE.health = "failed"; }).finally(updateSupplementalStatus),
     fetchFirst(["maker_announcements.json", "https://tkiyo1007-eng.github.io/drugs-data/maker_announcements.json"])
       .then(res => res && res.json()).then(data => {
         if(data) ANNOUNCEMENTS = {...data, ...MANUAL_ANNOUNCEMENTS};
@@ -2662,8 +2854,16 @@ function toggleFav(item){
   renderFavNotice();
   syncInstallButtons();
   render();
-  if(currentDetailKey === itemKey(item))
-    document.getElementById("mFav").classList.toggle("on", isFav(item));
+  if(currentDetailKey === itemKey(item)) syncModalFavorite(item);
+}
+function syncModalFavorite(item){
+  const button = document.getElementById("mFav");
+  const favorite = !!item && isFav(item);
+  button.classList.toggle("on", favorite);
+  button.setAttribute("aria-pressed", String(favorite));
+  button.setAttribute("aria-label", item
+    ? `${item.n}を${favorite ? "お気に入りから解除" : "お気に入りに登録"}`
+    : "お気に入りに登録");
 }
 updateFavPill();
 
@@ -2812,6 +3012,7 @@ function formatCheckedAt(value){
 function renderWatchDashboard(){
   const dashboard = document.getElementById("watchDashboard");
   if(!dashboard) return;
+  const supplementalConfirmed = supplementalReady();
   WATCH_UNREAD = getWatchChangesSinceLastCheck();
   WATCH_UNREAD_KEYS = new Set(WATCH_UNREAD.map(change=>change.key));
   WATCH_DISCREPANCY_KEYS = new Set(
@@ -2823,11 +3024,12 @@ function renderWatchDashboard(){
   document.getElementById("watchUnreadCount").textContent = WATCH_UNREAD.length.toLocaleString();
   document.getElementById("watchWorseCount").textContent = worse.toLocaleString();
   document.getElementById("watchBetterCount").textContent = better.toLocaleString();
-  document.getElementById("watchDiscrepancyCount").textContent = WATCH_DISCREPANCY_KEYS.size.toLocaleString();
+  document.getElementById("watchDiscrepancyCount").textContent = supplementalConfirmed
+    ? WATCH_DISCREPANCY_KEYS.size.toLocaleString() : "—";
   document.getElementById("watchLastChecked").textContent = `最終確認：${formatCheckedAt(WATCH_STATE.lastCheckedAt)}`;
   document.getElementById("watchFirstNote").hidden = !!WATCH_STATE.lastCheckedChangeDate || !FAVS.size;
   const hasItems = LIVE && FAVS.size > 0, hasUnread = WATCH_UNREAD.length > 0;
-  const hasDiscrepancy = WATCH_DISCREPANCY_KEYS.size > 0;
+  const hasDiscrepancy = supplementalConfirmed && WATCH_DISCREPANCY_KEYS.size > 0;
   document.getElementById("watchUnreadBtn").disabled = !hasUnread;
   document.getElementById("watchDiscrepancyBtn").disabled = !hasDiscrepancy;
   document.getElementById("watchCheckedBtn").disabled = !hasUnread;
@@ -2835,7 +3037,9 @@ function renderWatchDashboard(){
   document.getElementById("watchCopyBtn").disabled = !hasUnread;
   document.getElementById("watchExportBtn").disabled = !hasItems;
   document.getElementById("watchRestoreBtn").disabled = !LIVE;
-  document.getElementById("watchDashboardLede").textContent = !FAVS.size
+  document.getElementById("watchDashboardLede").textContent = !supplementalConfirmed && LIVE
+    ? "厚労省の供給区分は表示中です。メーカー補足情報は確認中または取得不完全のため、情報差異の件数は判定していません。"
+    : !FAVS.size
     ? "採用品目や確認したい製品を、この端末だけで管理できます。★またはCSVで登録してください。"
     : hasUnread || hasDiscrepancy
       ? [
@@ -2864,7 +3068,7 @@ function renderWatchDashboard(){
       setActivePill(filter);
     }
   }
-  dashboard.setAttribute("aria-busy", String(!LIVE));
+  dashboard.setAttribute("aria-busy", String(!LIVE || !supplementalConfirmed));
 }
 
 function markWatchChangesChecked(){
@@ -3028,7 +3232,7 @@ function openDetail(d, opts={}){
   document.getElementById("mMaker").textContent = d.m;
   currentDetailName = d.n;
   currentDetailKey = itemKey(d);
-  document.getElementById("mFav").classList.toggle("on", isFav(d));
+  syncModalFavorite(d);
   document.getElementById("mGrid").innerHTML = detailPairs(d)
     .map(([h,v])=>`<dt>${esc(h)}</dt><dd>${esc(v)}</dd>`).join("");
   const discrepancy = discrepancyFor(d, true);
@@ -3036,7 +3240,9 @@ function openDetail(d, opts={}){
   if(discrepancy){
     const official = discrepancy.official || {};
     const manufacturer = discrepancy.manufacturer || {};
-    const high = discrepancy.confidence === "high" && manufacturer.scope === "product";
+    const supplementalConfirmed = supplementalReady();
+    const high = supplementalConfirmed && discrepancy.confidence === "high"
+      && manufacturer.scope === "product";
     const scopeNote = manufacturer.scope === "package"
       ? "包装単位を含む案内です。製品全体が同じ状態とは限らないため、対象包装を原文でご確認ください。"
       : manufacturer.scope === "ambiguous"
@@ -3050,8 +3256,9 @@ function openDetail(d, opts={}){
     $mDiscrepancy.innerHTML = `
       <div class="discrepancy-title">${high ? "情報差異あり" : "メーカー案内あり・対象規格を原文確認"}</div>
       <p><strong>厚労省公表：</strong>${esc(official.label || "—")}（${esc(official.updated_at || "更新日不明")}）</p>
-      <p><strong>メーカー公式：</strong>${esc(manufacturer.label || "—")}（${esc(manufacturer.announced_at || "公表日不明")}）</p>
+      <p><strong>${supplementalConfirmed ? "メーカー公式" : "収録済みメーカー案内（要原文確認）"}：</strong>${esc(manufacturer.label || "—")}（${esc(manufacturer.announced_at || "公表日不明")}）</p>
       ${scopeNote ? `<p class="discrepancy-note">${esc(scopeNote)}</p>` : ""}
+      ${supplementalConfirmed ? "" : `<p class="discrepancy-note">メーカー補足情報の確認が完了していないか、確認日が古いため、現在の状態とは断定せず原文確認用として表示しています。</p>`}
       <p class="discrepancy-note">厚労省区分は上書きせず、別の出典として併記しています。実際の受注可否は卸・メーカーにもご確認ください。</p>
       ${sourceLink}`;
     $mDiscrepancy.hidden = false;
@@ -3070,7 +3277,7 @@ function openDetail(d, opts={}){
     const pm = altRaw.match(/解除\/解消見込み:\s*([アイウ])/);
     const prospect = pm ? ({"ア":"あり（メーカー回答）","イ":"なし（メーカー回答）","ウ":"未定（メーカー回答）"})[pm[1]] : null;
     // 「2026年7月」等を年月の数値で並べる（文字列順だと11月が7月より先に来てしまう）
-    const untils = [...new Set(((PACKAGES[d.n])||[]).map(p=>p.until).filter(Boolean))]
+    const untils = [...new Set(((legacySupplementalFor(PACKAGES,d))||[]).map(p=>p.until).filter(Boolean))]
       .sort((a,b)=>{
         const ka=a.match(/\d+/g)||[], kb=b.match(/\d+/g)||[];
         return (+ka[0]||9999)-(+kb[0]||9999) || (+ka[1]||99)-(+kb[1]||99);
@@ -3127,11 +3334,11 @@ function openDetail(d, opts={}){
         && isWarmPatch(x)===dWarm
         && (!dKind || !patchKind(x) || patchKind(x)===dKind))
       .sort((a,b)=>(effSev(a)-effSev(b)) || a.n.localeCompare(b.n,"ja"));
-    if(sameG.length) relHtml += relatedBlock(`同成分・同剤形${dWarm ? "（温感タイプ）" : ""}の品目（${sameG.length}件・入手しやすい順）`, sameG.slice(0,6));
+    if(sameG.length) relHtml += relatedBlock(`同成分・同剤形${dWarm ? "（温感タイプ）" : ""}の確認候補（${sameG.length}件・厚労省公表区分順）`, sameG.slice(0,6));
   }
   if(relHtml){
     $mRel.innerHTML = relHtml +
-      `<p class="pkg-note">※ 同成分・同剤形の品目を公開データから機械的に列挙した確認補助です。おすすめ順位ではありません。${dWarm ? "この品目は温感タイプのため、温感タイプの品目のみを表示しています。" : ""}適応・規格・剤形の互換性は必ず添付文書と医師・薬剤師の判断でご確認ください。</p>`;
+      `<p class="pkg-note">※ 同成分・同剤形の品目を公開データから機械的に列挙し、厚労省公表区分上の通常出荷を先に表示した確認補助です。代替適否や実在庫を示す順位ではありません。${dWarm ? "この品目は温感タイプのため、温感タイプの品目のみを表示しています。" : ""}適応・規格・剤形の互換性は必ず添付文書と医師・薬剤師の判断でご確認ください。</p>`;
     $mRel.hidden = false;
   }else{
     $mRel.hidden = true;
@@ -3156,8 +3363,11 @@ function openDetail(d, opts={}){
   // 案内文の存在を詳細の先頭で補足する（タイトルは「一部包装のみ」等の限定条件を
   // 落とさないよう原文のまま引用）
   if(d.s !== "ended" && lifecycleNotice){
+    const lifecycleDetail = lifecycleNotice.verificationRecent
+      ? `「${esc(cleanAnnouncementTitle(announcement.title))}」が公表されています（下の案内文リンク参照）。供給状況欄は現在の出荷区分、メーカー案内は今後の販売予定を示すため、「通常出荷」と「販売中止予定」が同時に表示される場合があります。`
+      : `「${esc(cleanAnnouncementTitle(announcement.title))}」の登録がありますが、確認日${lifecycleNotice.verified_at ? `（${esc(lifecycleNotice.verified_at)}）` : ""}から7日以上経過しているか、確認日を取得できません。販売中止予定とは断定せず、下のメーカー原文で対象・現況をご確認ください。`;
     document.getElementById("mGrid").insertAdjacentHTML("afterbegin",
-      `<dt>メーカー案内</dt><dd>「${esc(cleanAnnouncementTitle(announcement.title))}」が公表されています（下の案内文リンク参照）。供給状況欄は現在の出荷区分、メーカー案内は今後の販売予定を示すため、「通常出荷」と「販売中止予定」が同時に表示される場合があります。</dd>`);
+      `<dt>メーカー案内</dt><dd>${lifecycleDetail}</dd>`);
   }
   if(isPackageDiscontinuationAnnouncement(announcement)){
     document.getElementById("mGrid").insertAdjacentHTML("afterbegin",
@@ -3197,7 +3407,7 @@ function openDetail(d, opts={}){
   }
   // 案内文PDFから自動抽出した包装単位（案内文リンクがある品目のみ表示）
   const $mPkgs = document.getElementById("mPkgs");
-  const pkgs = (announcement && PACKAGES[d.n]) || null;
+  const pkgs = announcement ? legacySupplementalFor(PACKAGES,d) : null;
   if(pkgs && pkgs.length){
     $mPkgs.innerHTML =
       `<div class="pkg-title">案内文に記載されている包装単位（自動抽出）</div>
@@ -3211,7 +3421,7 @@ function openDetail(d, opts={}){
   }
   // 案内文PDFのAI要約（案内文リンクがある品目のみ）
   const $mSum = document.getElementById("mSummary");
-  const summary = (announcement && SUMMARIES[d.n]) || null;
+  const summary = announcement ? legacySupplementalFor(SUMMARIES,d) : null;
   if(summary && summary.lines && summary.lines.length){
     $mSum.innerHTML =
       `<div class="sum-title">案内文のポイント（AI要約）</div>
@@ -3598,6 +3808,7 @@ document.getElementById("makerList").addEventListener("click", e=>{
   document.getElementById("demo").scrollIntoView({behavior:"smooth", block:"start"});
 });
 
+setDataControlsEnabled(false);
 applyHashState();
 render();
 tryOpenFromHash();
@@ -3667,6 +3878,7 @@ function countUp(total){
 /* ===== 実データ読み込み（drugs_app_ready.csv / version.json） ===== */
 const CSV_SOURCES = ["drugs_app_ready.csv", "https://tkiyo1007-eng.github.io/drugs-data/drugs_app_ready.csv"];
 let CSV_HEAD = null; // 実CSVのヘッダー（詳細モーダルで全列を表示するために保持）
+let DATASET_DATE = ""; // version.jsonの全体基準日（品目行の更新日と区別）
 const VER_SOURCES = ["version.json", "https://tkiyo1007-eng.github.io/drugs-data/version.json"];
 const STATUS_GRAD = {
   ok:"linear-gradient(90deg,#3CC383,#2FAE6E)",
@@ -3676,10 +3888,21 @@ const STATUS_GRAD = {
 };
 const STATUS_DOT = {ok:"#3CC383", limited:"#F2A94F", stopped:"#F06B6B", ended:"#B08E73"};
 
+function mapPublishedStatus(s){
+  const value = String(s || "").normalize("NFKC").trim();
+  if(value === "1通常出荷" || value === "通常出荷") return "ok";
+  if(/^([234])限定出荷(?:\(.+\))?$/.test(value) || /^限定出荷(?:\(.+\))?$/.test(value)) return "limited";
+  if(value === "5供給停止" || value === "供給停止") return "stopped";
+  if(value === "販売中止") return "ended";
+  return null;
+}
 function mapStatus(s){
-  if(s.includes("停止")) return "stopped";
-  if(s.includes("限定")) return "limited";
-  if(s.includes("中止")) return "ended";
+  const published = mapPublishedStatus(s);
+  if(published) return published;
+  const value = String(s || "");
+  if(value.includes("停止")) return "stopped";
+  if(value.includes("限定")) return "limited";
+  if(value.includes("中止")) return "ended";
   return "ok";
 }
 
@@ -3719,7 +3942,7 @@ function parseCSV(text){
 
 async function fetchFirst(urls){
   for(const u of urls){
-    try{ const r=await fetch(u); if(r.ok) return r; }catch(e){}
+    try{ const r=await fetch(u,{cache:"no-cache"}); if(r.ok) return r; }catch(e){}
   }
   return null;
 }
@@ -3733,50 +3956,100 @@ function showCachedDataNotice(){
   document.getElementById("offlineNotice").hidden = false;
 }
 document.getElementById("offlineReload").addEventListener("click", ()=>location.reload());
+document.getElementById("dataLoadReload").addEventListener("click", ()=>location.reload());
 
-(async function loadRealData(){
-  const res = await fetchFirst(CSV_SOURCES);
-  if(!res){
-    dsnTrack("data-load-failed");
-    // 取得失敗。ヒーローの数値はプレースホルダーのまま据え置き、
-    // 集計を出せていないことを明示する（固定値を本物のように見せない）
-    document.getElementById("pulseSub").textContent =
-      "供給状況データを取得できませんでした。時間をおいて再読み込みしてください。";
-    document.getElementById("demoNote").textContent =
-      "※ 実データを取得できなかったため、現在は動作確認用のサンプルを表示しています。医薬品の確認には使用せず、時間をおいて再読み込みしてください。";
-    $dailyUpdateCard.setAttribute("aria-busy","false");
-    document.getElementById("dailyUpdateDate").textContent = "データ取得エラー";
-    document.getElementById("dailyUpdateTitle").textContent = "供給変更を取得できませんでした";
-    document.getElementById("dailyUpdateSummary").textContent = "時間をおいてページを再読み込みしてください。";
+const OFFICIAL_SUPPLY_URL = "https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list";
+const STALE_DATA_DAYS = 7;
+let dataLoadFailureTracked = false;
+function setDatasetDate(date){
+  DATASET_DATE = date || "";
+  const asOf = document.getElementById("dataAsOf");
+  const notice = document.getElementById("staleNotice");
+  const noticeText = document.getElementById("staleNoticeText");
+  if(!date){
+    asOf.textContent = "データ基準日を取得できません。";
+    noticeText.innerHTML = `表示中データの基準日を確認できません。重要な判断では、<a href="${OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener">厚生労働省の公式システム</a>もご確認ください。`;
+    notice.hidden = false;
+    if(!Object.values(SUPPLEMENTAL_STATE).includes("loading")) updateSupplementalStatus();
     return;
   }
+  const age = daysAgo(date);
+  const display = date.replaceAll("-", ".");
+  asOf.textContent = `全体データ基準日 ${display}　※各カードの日付は「その品目行の最終変更日」です。`;
+  document.getElementById("today").textContent = `${display} 時点`;
+  if(age != null && age >= STALE_DATA_DAYS){
+    noticeText.innerHTML = `全体データ基準日から<strong>${age.toLocaleString()}日</strong>経過しています。更新処理が遅れている可能性があるため、<a href="${OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener">厚生労働省の公式システム</a>もご確認ください。`;
+    notice.hidden = false;
+  }else{
+    notice.hidden = true;
+    noticeText.textContent = "";
+  }
+  if(!Object.values(SUPPLEMENTAL_STATE).includes("loading")) updateSupplementalStatus();
+}
+
+function failDataLoad(message){
+  DATA_STATE = "error";
+  LIVE = false;
+  ITEMS = [];
+  CSV_HEAD = null;
+  setDataControlsEnabled(false);
+  if(!dataLoadFailureTracked){ dsnTrack("data-load-failed"); dataLoadFailureTracked = true; }
+  document.getElementById("dataLoadErrorText").textContent =
+    `${message} 誤った情報を表示しないため、検索結果は空にしています。`;
+  document.getElementById("dataLoadError").hidden = false;
+  document.getElementById("dataAsOf").textContent = "データ基準日を確認できません。";
+  document.getElementById("pulseSub").textContent =
+    "供給状況データを取得できませんでした。時間をおいて再読み込みしてください。";
+  document.getElementById("demoNote").textContent =
+    "※ データを検証できない間は、サンプルを含む品目情報を表示しません。";
+  $dailyUpdateCard.setAttribute("aria-busy","false");
+  document.getElementById("dailyUpdateDate").textContent = "データ取得エラー";
+  document.getElementById("dailyUpdateTitle").textContent = "供給変更を取得できませんでした";
+  document.getElementById("dailyUpdateSummary").textContent = "時間をおいてページを再読み込みしてください。";
+  $watchDashboard.setAttribute("aria-busy", "false");
+  render(false);
+}
+
+(async function loadRealData(){
+ try{
+  const res = await fetchFirst(CSV_SOURCES);
+  if(!res) return failDataLoad("公開データを取得できませんでした。");
   if(responseUsesCachedData(res)) showCachedDataNotice();
   const rows = parseCSV((await res.text()).replace(/^﻿/,""));
   const head = rows.shift();
+  if(!Array.isArray(head)) return failDataLoad("公開データの列構成を確認できませんでした。");
   const col = name => head.indexOf(name);
   const iName=col("商品名"), iGen=col("一般名"), iMk1=col("製造メーカー"),
-        iMk2=col("販売メーカー"), iSt=col("供給状況"), iDate=col("更新日"), iAlt=col("代替候補"), iSpec=col("規格"), iPrice=col("薬価"),
+        iMk2=col("販売メーカー"), iSt=col("供給状況"), iDate=col("更新日"),
+        iStatusDate=col("ステータス更新日"), iAlt=col("代替候補"), iSpec=col("規格"), iPrice=col("薬価"),
         iCat=col("薬効分類"), iYJ=col("YJコード"), iKeika=col("経過措置期限");
-  if(iName<0 || iSt<0) return;
+  if(iName<0 || iSt<0) return failDataLoad("公開データの必須列を確認できませんでした。");
 
   const items=[];
   const counts={ok:0,limited:0,stopped:0,ended:0};
   for(const r of rows){
     const name = (r[iName]||"").trim();
     if(!name) continue;
-    const s = mapStatus(r[iSt]||"");
+    const rawStatus = r[iSt] || "";
+    const s = mapPublishedStatus(rawStatus);
+    if(!s) return failDataLoad(`公開データに未対応の供給区分「${String(rawStatus).trim() || "空欄"}」が含まれています。`);
     counts[s]++;
     const manufacturer = iMk1>=0 ? (r[iMk1]||"").trim() : "";
     const salesMaker = iMk2>=0 ? (r[iMk2]||"").trim() : "";
     const genericName = iGen>=0 ? (r[iGen]||"").trim() : "";
     const maker = salesMaker || manufacturer;
+    const publicationDates = [iDate, iStatusDate]
+      .filter(index=>index>=0)
+      .map(index=>normalizedPublicationDate(r[index]))
+      .filter(Boolean).sort();
+    const publicationDate = publicationDates[publicationDates.length-1] || "";
     // 厚労省Excelの「出荷量状況」区分に「薬価削除予定」が含まれる品目は、
     // 供給状況欄が「通常出荷」のままでも近く販売終了となる見込みがあるため別途フラグ化。
     // 経過措置期限が設定済み＝薬価基準からの削除が決定済みなので同様に扱う（アプリ版と同じ判定）
     const delist = (iAlt>=0 && (r[iAlt]||"").includes("薬価削除予定"))
                 || (iKeika>=0 && !!(r[iKeika]||"").trim());
     items.push({
-      n:name, m:maker, s, d:(r[iDate]||"").replaceAll("/","-"), delist,
+      n:name, m:maker, s, d:publicationDate, delist,
       spec: iSpec>=0 ? (r[iSpec]||"").trim() : "",
       price: iPrice>=0 ? (r[iPrice]||"").trim() : "",
       g:genericName,                                 // 一般名（同成分の他社品の検索用）
@@ -3787,7 +4060,7 @@ document.getElementById("offlineReload").addEventListener("click", ()=>location.
       row:r, // 詳細モーダル用に元の行を保持
     });
   }
-  if(items.length < 100){ dsnTrack("data-load-failed"); return; } // 異常データなら差し替えない
+  if(items.length < 100) return failDataLoad("公開データの品目数が通常より大幅に少ないため、読み込みを中止しました。");
 
   // 供給状況の変化ログを読み込む（新しい順に並んでいるので最初の1件=最新の変化）
   try{
@@ -3813,7 +4086,11 @@ document.getElementById("offlineReload").addEventListener("click", ()=>location.
     return b.d.localeCompare(a.d);
   });
   CSV_HEAD = head;
-  ITEMS = items; LIVE = true;
+  ITEMS = items;
+  LIVE = true;
+  DATA_STATE = "ready";
+  setDataControlsEnabled(true);
+  document.getElementById("dataLoadError").hidden = true;
   migrateLegacyFavorites(items);
   $watchImportBtn.disabled = false;
   visibleCount = PAGE_SIZE;
@@ -3902,10 +4179,17 @@ document.getElementById("offlineReload").addEventListener("click", ()=>location.
     if(responseUsesCachedData(vres)) showCachedDataNotice();
     try{
       const v = await vres.json();
-      const m = (v.note||"").match(/(\d{4})年(\d{2})月(\d{2})日/);
-      if(m) document.getElementById("today").textContent = `${m[1]}.${m[2]}.${m[3]} 時点`;
-    }catch(e){}
+      const text = `${v.note||""} ${v.version||""}`;
+      const m = text.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/) || text.match(/(\d{4})-(\d{1,2})-(\d{1,2})/);
+      if(m) setDatasetDate(`${m[1]}-${String(m[2]).padStart(2,"0")}-${String(m[3]).padStart(2,"0")}`);
+      else setDatasetDate("");
+    }catch(e){ setDatasetDate(""); }
+  }else{
+    setDatasetDate("");
   }
+ }catch(e){
+   failDataLoad("公開データの読み込み中にエラーが発生しました。");
+ }
 })();
 
 /* ===== PWA: Service Worker 登録 =====

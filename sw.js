@@ -6,25 +6,35 @@
  * 方針:
  *   - HTMLナビゲーション: ネットワーク優先 → 失敗したらキャッシュ（LPの更新は即反映される）
  *   - 供給データ(CSV/JSON): ネットワーク優先 → 失敗したらキャッシュ（オフライン時のみ前回値）
- *   - 静的アセット(アイコン・Webフォント): キャッシュ優先（内容が変わらないもの）
+ *   - manifest: ネットワーク優先（アプリ名・アイコン定義の変更を即反映）
+ *   - アイコン・QR: 現在値を即表示しつつ背景再検証
  *
  * キャッシュを作り直したいときは CACHE_VERSION を上げる。
  */
-const CACHE_VERSION = "v6";
+const CACHE_VERSION = "v7";
 const SHELL_CACHE = `dsn-shell-${CACHE_VERSION}`;
 const DATA_CACHE = `dsn-data-${CACHE_VERSION}`;
 const ASSET_CACHE = `dsn-asset-${CACHE_VERSION}`;
 const ALL_CACHES = [SHELL_CACHE, DATA_CACHE, ASSET_CACHE];
 
-// オフラインでも最低限開くために先読みするファイル
-const SHELL_FILES = [
+// オフラインの入り口に必要なファイル。1つでも取得できなければ
+// 新しいWorkerをactivateせず、正常な旧キャッシュを維持する。
+const REQUIRED_SHELL_FILES = [
   "./",
   "./index.html",
   "./analytics.js",
+];
+
+// 補助ページは取得できたものだけ予約する。これらの一時的な失敗で
+// 検索画面そのものの更新を妨げない。
+const OPTIONAL_SHELL_FILES = [
   "./about.html",
   "./privacy.html",
   "./topics/index.html",
   "./products/index.html",
+];
+
+const ASSET_FILES = [
   "./manifest.webmanifest",
   "./icon-192.png",
   "./icon-512.png",
@@ -48,6 +58,7 @@ const DATA_FILES = [
   "resolution_stats.json",
   "maker_links.json",
   "manual_announcements.json",
+  "maker_collection_health.json",
   "product_lifecycle.json",
   "supply_discrepancies.json",
   "featured_products.json",
@@ -55,23 +66,56 @@ const DATA_FILES = [
   "items/keys.json",
 ];
 
+async function migratePreviousDataCache(){
+  const cacheNames = await caches.keys();
+  const previousDataCaches = cacheNames
+    .filter(name => name.startsWith("dsn-data-") && name !== DATA_CACHE)
+    .reverse(); // CacheStorage.keys()は作成順。直近版を先に移す。
+  if(!previousDataCaches.length) return;
+
+  const target = await caches.open(DATA_CACHE);
+  for(const cacheName of previousDataCaches){
+    const source = await caches.open(cacheName);
+    for(const request of await source.keys()){
+      if(await target.match(request)) continue;
+      const response = await source.match(request);
+      if(response) await target.put(request, response);
+    }
+  }
+}
+
 self.addEventListener("install", event => {
-  event.waitUntil(
-    // 1ファイルでも取れないと addAll 全体が失敗するため個別に入れる
-    caches.open(SHELL_CACHE)
-      .then(c => Promise.all(SHELL_FILES.map(f => c.add(f).catch(() => {}))))
-      .then(() => self.skipWaiting())
-  );
+  event.waitUntil((async () => {
+    const shell = await caches.open(SHELL_CACHE);
+    // addAllはバッチ全体を原子的に追加する。catchしないことで、
+    // 必須シェルが欠けた新Workerが旧Workerを置き換えるのを防ぐ。
+    await shell.addAll(REQUIRED_SHELL_FILES);
+
+    const assets = await caches.open(ASSET_CACHE);
+    await Promise.all([
+      ...OPTIONAL_SHELL_FILES.map(file => shell.add(file).catch(() => {})),
+      ...ASSET_FILES.map(file => assets.add(file).catch(() => {})),
+    ]);
+
+    // 更新直後に圏外に入っても前回の供給データを使えるよう、
+    // activateが旧cacheを消す前に新DATA_CACHEへ移す。
+    await migratePreviousDataCache();
+    await self.skipWaiting();
+  })());
 });
 
 self.addEventListener("activate", event => {
-  event.waitUntil(
-    caches.keys()
-      .then(keys => Promise.all(
-        keys.filter(k => k.startsWith("dsn-") && !ALL_CACHES.includes(k))
-            .map(k => caches.delete(k))))
-      .then(() => self.clients.claim())
-  );
+  event.waitUntil((async () => {
+    // install中の移行後に旧Workerの進行中fetchが保存を完了する
+    // レースに備え、旧cacheを消す直前にもう一度取り込む。
+    await migratePreviousDataCache();
+    const keys = await caches.keys();
+    await Promise.all(
+      keys.filter(key => key.startsWith("dsn-") && !ALL_CACHES.includes(key))
+        .map(key => caches.delete(key))
+    );
+    await self.clients.claim();
+  })());
 });
 
 // ネットワークが「切れる」のではなく「応答しない」場合の待ち時間の上限。
@@ -160,6 +204,23 @@ async function cacheFirst(request, cacheName){
   return res;
 }
 
+// 画像はキャッシュを即座に返し、同時に背景で再検証する。
+// 同じURLのアイコンやQRを差し替えても、次回表示で新しくなる。
+function staleWhileRevalidate(request, cacheName, event){
+  const cachePromise = caches.open(cacheName);
+  const refresh = cachePromise.then(cache => revalidatingFetch(request).then(async res => {
+    if(res && res.ok) await cache.put(request, res.clone());
+    return res;
+  }));
+  // 初回waitUntilはfetchイベントの同期処理中に登録する必要がある。
+  // cacheをawaitした後に呼ぶと、ブラウザによってはInvalidStateErrorになる。
+  if(event) event.waitUntil(refresh.then(()=>{}, ()=>{}));
+  return cachePromise.then(async cache => {
+    const hit = await cache.match(request);
+    return hit || refresh;
+  });
+}
+
 self.addEventListener("fetch", event => {
   const req = event.request;
   if(req.method !== "GET") return;
@@ -189,9 +250,15 @@ self.addEventListener("fetch", event => {
     return;
   }
 
-  // アイコン・画像・マニフェスト
-  if(/\.(png|svg|webmanifest|ico)$/.test(url.pathname)){
-    event.respondWith(cacheFirst(req, ASSET_CACHE).catch(() => fetch(req)));
+  // マニフェストは定義変更を即反映。失敗時だけ前回値を使う。
+  if(url.pathname.endsWith(".webmanifest")){
+    event.respondWith(networkFirst(req, ASSET_CACHE, {fallbackOnHttpError:true, event}));
+    return;
+  }
+
+  // アイコン・画像・QRは即表示+背景再検証。
+  if(/\.(png|svg|ico)$/.test(url.pathname)){
+    event.respondWith(staleWhileRevalidate(req, ASSET_CACHE, event).catch(() => fetch(req)));
     return;
   }
 });

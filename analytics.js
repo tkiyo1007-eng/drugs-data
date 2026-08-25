@@ -4,6 +4,7 @@
   const dnt = navigator.doNotTrack === "1" || window.doNotTrack === "1";
   const pageKind = function(){
     const path = location.pathname;
+    if(path.endsWith("/items/") || path.endsWith("/items/index.html")) return {path:"/drugs-data/items/", title:"品目別一覧"};
     if(/\/items\/[^/]+\.html$/.test(path)) return {path:"/drugs-data/items/_item", title:"品目別ページ"};
     if(/\/updates\/\d{4}-\d{2}-\d{2}\.html$/.test(path)) return {path:"/drugs-data/updates/_daily", title:"供給変更ページ"};
     if(/\/topics\/[^/]+\.html$/.test(path)) return {path:"/drugs-data/topics/_topic", title:"話題のニュース"};
@@ -31,6 +32,7 @@
     "watchlist-backup-export", "watchlist-dashboard-open",
     "watchlist-mark-checked", "watchlist-share-success",
     "pwa-install-accepted", "pwa-installed", "app-store-open",
+    "item-web-open", "item-share-success", "item-app-store-open",
   ]);
   const queue = [];
   window.dsnTrack = function(name){
@@ -50,5 +52,9 @@
     }
   }
   window.addEventListener("load", function(){ setTimeout(flush, 0); });
+  document.addEventListener("click", function(event){
+    const target = event.target && event.target.closest ? event.target.closest("[data-dsn-event]") : null;
+    if(target && target.dataset) window.dsnTrack(target.dataset.dsnEvent);
+  });
   if(new URLSearchParams(location.search).get("src") === "share") window.dsnTrack("share-arrival");
 })();
