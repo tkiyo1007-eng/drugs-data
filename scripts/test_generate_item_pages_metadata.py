@@ -58,6 +58,7 @@ class ItemPageMetadataTests(unittest.TestCase):
         self.assertIn('src="https://gc.zgo.at/count.js"', output)
         self.assertIn('data-dsn-event="item-web-open"', output)
         self.assertIn('data-dsn-event="item-app-store-open"', output)
+        self.assertIn('data-dsn-event="official-source-open">PMDAで添付文書を探す', output)
         self.assertIn('window.dsnTrack("item-share-success")', output)
         self.assertIn('url.searchParams.set("src", "share")', output)
 
@@ -117,6 +118,7 @@ class ItemPageMetadataTests(unittest.TestCase):
         self.assertIn("メーカー公式：販売中止予定", output)
         self.assertIn("情報差異あり", output)
         self.assertIn("メーカー公式：限定出荷（2026-08-17）", output)
+        self.assertEqual(3, output.count('data-dsn-event="official-source-open"'))
         self.assertIn("メーカー：販売中止予定／メーカー：限定出荷", output)
         self.assertIn("サイト全体の公開データ基準日", output)
         self.assertIn('fetch("../version.json"', output)
@@ -125,6 +127,37 @@ class ItemPageMetadataTests(unittest.TestCase):
         self.assertNotIn("全体データ基準日 2026-08-26", output)
         self.assertNotIn("\x08", output)
         self.assertNotIn("メーカーが通常どおり出荷", output)
+
+    def test_related_same_ingredient_link_uses_only_the_fixed_event_name(self):
+        row = {
+            "商品名": "テスト錠10mg",
+            "一般名": "テスト成分",
+            "製造メーカー": "テスト製薬",
+            "供給状況": "限定出荷",
+            "YJコード": "1234567F1234",
+        }
+        sibling = {
+            "商品名": "同成分錠10mg「他社」",
+            "一般名": "テスト成分",
+            "製造メーカー": "他社製薬",
+            "供給状況": "通常出荷",
+            "YJコード": "1234567F5678",
+        }
+
+        output = page_html(
+            row,
+            "1234567F1234",
+            "limited",
+            "2026-08-28",
+            [sibling],
+            {"1234567F1234", "1234567F5678"},
+        )
+
+        self.assertIn(
+            'href="1234567F5678.html" data-dsn-event="related-item-open"',
+            output,
+        )
+        self.assertNotIn("1234567F5678-related-item-open", output)
 
     def test_verified_supplemental_item_is_generated_even_when_official_status_is_normal(self):
         row = {
@@ -271,6 +304,7 @@ class ItemPageMetadataTests(unittest.TestCase):
             output,
         )
         self.assertNotIn("app-argument=", output)
+        self.assertIn('../guides/how-to-check-drug-supply.html', output)
 
 
 if __name__ == "__main__":

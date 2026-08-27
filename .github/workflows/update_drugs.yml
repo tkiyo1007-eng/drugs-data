@@ -177,7 +177,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add drugs_app_ready.csv version.json status_changes.json resolution_stats.json \
             crisis_index.json items sitemap-items.xml updates sitemap-updates.xml \
-            topics products sitemap-curated.xml maker_announcements.json \
+            topics products guides sitemap-curated.xml maker_announcements.json \
             maker_announcement_events.json maker_collection_health.json \
             unmatched_maker_announcements.json product_lifecycle.json supply_discrepancies.json
           git diff --cached --quiet && echo "コアデータ変更なし" && exit 0
@@ -244,7 +244,7 @@ jobs:
           git add maker_announcements.json manual_announcements.json \
             maker_announcement_events.json maker_collection_health.json unmatched_maker_announcements.json \
             product_lifecycle.json announcement_packages.json packages_cache.json news.json \
-            supply_discrepancies.json items sitemap-items.xml topics products sitemap-curated.xml
+            supply_discrepancies.json items sitemap-items.xml topics products guides sitemap-curated.xml
           git diff --cached --quiet && echo "メーカー補足情報変更なし" && exit 0
           git commit -m "メーカー補足情報自動更新: $(TZ=Asia/Tokyo date +'%Y/%m/%d')"
           for push_attempt in 1 2 3 4 5; do

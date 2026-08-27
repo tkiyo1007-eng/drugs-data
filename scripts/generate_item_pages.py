@@ -464,7 +464,8 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
     lifecycle_box = ""
     if lifecycle_match:
         lifecycle_url = lifecycle_match.get("source_url") or ""
-        lifecycle_link = (f'<a href="{esc(lifecycle_url)}" target="_blank" rel="noopener">'
+        lifecycle_link = (f'<a href="{esc(lifecycle_url)}" target="_blank" rel="noopener" '
+                          'data-dsn-event="official-source-open">'
                           'メーカー公式案内の原文を確認</a>'
                           if lifecycle_url.startswith("https://") else "")
         lifecycle_box = f'''<div class="supp supp-life">
@@ -482,7 +483,8 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
         high = (supplemental_trusted and discrepancy_match.get("confidence") == "high"
                 and manufacturer.get("scope") == "product")
         source_url = manufacturer.get("url") or ""
-        source_link = (f'<a href="{esc(source_url)}" target="_blank" rel="noopener">'
+        source_link = (f'<a href="{esc(source_url)}" target="_blank" rel="noopener" '
+                       'data-dsn-event="official-source-open">'
                        'メーカー公式案内の原文を確認</a>'
                        if source_url.startswith("https://") else "")
         discrepancy_box = f'''<div class="supp supp-diff">
@@ -517,7 +519,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
             href = (f"{s_key}.html" if s_key in generated_keys
                     else SITE_ROOT + "#item=" + quote(s_key, safe=""))
             lis.append(
-                f'<li><a href="{href}">{esc(s["商品名"])}</a>'
+                f'<li><a href="{href}" data-dsn-event="related-item-open">{esc(s["商品名"])}</a>'
                 f'<span class="tag status-{s_status}">{s_st["label"]}</span>'
                 f'<span class="mk">{esc((s.get("販売メーカー") or s.get("製造メーカー") or "").strip())}</span></li>')
         warm_note = ("この品目は温感タイプのため、温感タイプの品目のみを表示しています。"
@@ -637,7 +639,7 @@ footer a{{color:var(--sub)}}
     <table><tbody>{''.join(detail_rows)}</tbody></table>
     <p class="links">
       <a href="{lp_link}" data-dsn-event="item-web-open">Web版でこの品目を開く（同成分・同剤形の一覧つき）</a>
-      <a href="{pmda}" target="_blank" rel="noopener">PMDAで添付文書を探す</a>
+      <a href="{pmda}" target="_blank" rel="noopener" data-dsn-event="official-source-open">PMDAで添付文書を探す</a>
     </p>
     <button class="share" id="shareButton" type="button">この品目ページを共有</button>
     <p class="share-status" id="shareStatus" role="status" aria-live="polite"></p>
@@ -765,6 +767,7 @@ body{{font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo
 .wrap{{max-width:860px;margin:0 auto;padding:24px 18px 56px}}
 h1{{font-size:22px;margin:14px 0 6px}}
 .lede{{font-size:14px;color:#5A6B8C;margin-bottom:26px}}
+.guide{{font-size:13px;margin:-16px 0 26px}}.guide a{{color:#2F63E8;font-weight:700}}
 .site a{{color:#2F63E8;text-decoration:none;font-weight:700;font-size:15px}}
 section{{margin-bottom:30px}}
 h2{{font-size:16px;margin-bottom:10px}}
@@ -781,6 +784,7 @@ footer{{font-size:12px;color:#5A6B8C;text-align:center;margin-top:30px}}
   <main>
     <h1>品目別の供給状況一覧</h1>
     <p class="lede">{esc(desc)}（全体データ基準日 {esc(dataset_date or "確認できません")}）</p>
+    <p class="guide"><a href="../guides/how-to-check-drug-supply.html">出荷調整の理由・代替検討・PMDA情報の確認手順</a></p>
     {''.join(sections)}
   </main>
   <footer>出典: 厚生労働省「医療用医薬品供給状況」｜<a href="{SITE_ROOT}">医薬品供給ナビ</a></footer>

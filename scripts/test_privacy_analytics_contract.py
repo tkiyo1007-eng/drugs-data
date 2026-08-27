@@ -19,6 +19,7 @@ class PrivacyAnalyticsContractTests(unittest.TestCase):
             "/drugs-data/updates/_daily",
             "/drugs-data/topics/_topic",
             "/drugs-data/products/_product",
+            "/drugs-data/guides/_guide",
         ]
         for path in expected_paths:
             with self.subTest(path=path):
@@ -34,11 +35,26 @@ class PrivacyAnalyticsContractTests(unittest.TestCase):
         events = re.findall(r'"([a-z0-9-]+)"', match.group(1))
         self.assertGreaterEqual(len(events), 10)
         self.assertEqual(len(events), len(set(events)))
+        required = {
+            "search-cta-open",
+            "official-source-open",
+            "related-item-open",
+            "topic-to-search",
+            "static-page-share-success",
+        }
+        self.assertTrue(required.issubset(events))
         self.assertRegex(self.analytics, r'count\(\{path:"event:"\+name, title:name, event:true\}\)')
         self.assertNotIn("localStorage", self.analytics)
         self.assertNotIn("sessionStorage", self.analytics)
         self.assertNotIn("document.cookie", self.analytics)
         self.assertNotRegex(self.analytics, r'get\(["\'](?:q|query|yj|drug|item|filename)["\']\)')
+
+    def test_static_share_handler_uses_a_fixed_event_and_strips_fragments(self):
+        self.assertIn('[data-dsn-share-page]', self.analytics)
+        self.assertIn('url.hash = ""', self.analytics)
+        self.assertIn('url.searchParams.set("src", "share")', self.analytics)
+        self.assertIn('window.dsnTrack("static-page-share-success")', self.analytics)
+        self.assertIn('error.name === "AbortError"', self.analytics)
 
     def test_privacy_discloses_local_processing_and_measurement_boundaries(self):
         required = [

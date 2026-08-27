@@ -13,6 +13,7 @@ from xml.sax.saxutils import escape as xml_escape
 
 
 SITE_ROOT = "https://tkiyo1007-eng.github.io/drugs-data/"
+GUIDE_PATH = "guides/how-to-check-drug-supply.html"
 STATUS_LABELS = {
     "ok": "通常出荷",
     "limited": "限定出荷",
@@ -50,6 +51,13 @@ def status_label(value: object) -> str:
 
 def item_key(value: object) -> str:
     return re.sub(r"[^0-9A-Za-z]", "", str(value or ""))
+
+
+def share_control(label: str) -> str:
+    """analytics.js の共通ハンドラで動く、検索語を送らない共有UI。"""
+    return (f'<div class="page-share"><button type="button" data-dsn-share-page>'
+            f'{esc(label)}</button><p class="page-share-status" role="status" '
+            'aria-live="polite"></p></div>')
 
 
 def load_changes(path: Path) -> dict[str, list[dict]]:
@@ -96,7 +104,7 @@ def page_html(date: str, changes: list[dict], item_keys: set[str]) -> str:
                 else "../#item=" + quote(yj, safe="") if yj
                 else "../#drug=" + quote(change["name"], safe=""))
         rows.append(
-            f'<li class="change {key}"><a href="{href}">{esc(change["name"])}</a>'
+            f'<li class="change {key}"><a href="{href}" data-dsn-event="related-item-open">{esc(change["name"])}</a>'
             f'<span class="transition">{esc(status_label(change["from"]))} → '
             f'<strong>{esc(status_label(change["to"]))}</strong></span></li>'
         )
@@ -149,6 +157,7 @@ def page_html(date: str, changes: list[dict], item_keys: set[str]) -> str:
 .change a{{color:var(--ink);font-weight:700;text-decoration:none}}.change a:hover{{color:var(--blue);text-decoration:underline}}
 .transition{{flex:none;font-size:11.5px;color:var(--sub);text-align:right}}.cta{{margin:34px 0;padding:24px;border-radius:18px;background:linear-gradient(135deg,#1E44B8,#48A7E8);color:#fff}}
 .cta h2{{font-size:19px;margin:0 0 6px}}.cta p{{font-size:13px;margin:0 0 14px;opacity:.92}}.cta a{{display:inline-block;background:#fff;color:var(--blue);padding:9px 18px;border-radius:999px;text-decoration:none;font-weight:800}}
+.page-share{{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:18px 0}}.page-share button{{min-height:44px;padding:9px 18px;border:1px solid #B9C9EA;border-radius:999px;background:#fff;color:var(--blue);font:inherit;font-weight:800;cursor:pointer}}.page-share button:focus-visible{{outline:3px solid rgba(47,99,232,.35);outline-offset:2px}}.page-share-status{{min-height:1.7em;margin:0;font-size:12px;color:var(--sub)}}
 .note,footer{{font-size:11.5px;color:var(--sub)}}footer{{text-align:center;margin-top:34px}}
 @media(max-width:580px){{.change{{display:block}}.transition{{display:block;text-align:left;margin-top:6px}}}}
 </style>
@@ -159,12 +168,13 @@ def page_html(date: str, changes: list[dict], item_keys: set[str]) -> str:
 <main>
 <h1>{date_jp}に供給状況が変わった医薬品</h1>
 <p class="lede">厚生労働省「医療用医薬品供給状況」の前回公表分との差分です。新規収載だけではなく、供給区分が実際に変わった品目を掲載しています。</p>
+{share_control("この日の供給変更を共有")}
 <div class="stats">{chips}</div>
 <ul>{''.join(rows)}</ul>
-<div class="cta"><h2>採用品目の変化をまとめて確認</h2><p>Web版では、採用品目CSVを端末内だけで読み込み、監視リストへ一括登録できます。</p><a href="../#f=changed">Web版で変更品目を見る</a></div>
+<div class="cta"><h2>採用品目の変化をまとめて確認</h2><p>Web版では、採用品目CSVを端末内だけで読み込み、監視リストへ一括登録できます。</p><a href="../#f=changed" data-dsn-event="search-cta-open">Web版で変更品目を見る</a></div>
 <p class="note">本ページは厚生労働省の公表データをもとに自動生成した非公式情報です。実際の流通状況と異なる場合があります。医薬品の使用・変更は、必ず医師・薬剤師にご相談ください。</p>
 </main>
-<footer>{date_jp}時点｜<a href="../">医薬品供給ナビ</a>｜<a href="feed.xml">更新を購読（RSS）</a></footer>
+<footer>{date_jp}時点｜<a href="../{GUIDE_PATH}">供給情報の確認ガイド</a>｜<a href="../">医薬品供給ナビ</a>｜<a href="feed.xml">更新を購読（RSS）</a></footer>
 </div><script data-goatcounter="https://kt1007.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script></body></html>
 """
 
@@ -183,8 +193,8 @@ def index_html(groups: dict[str, list[dict]]) -> str:
 <meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="{SITE_ROOT}updates/index.html">
 <link rel="alternate" type="application/atom+xml" title="医薬品供給ナビ 供給変更フィード" href="{SITE_ROOT}updates/feed.xml">
 <script src="../analytics.js"></script>
-<style>*{{box-sizing:border-box}}body{{margin:0;background:#F4F8FF;color:#14213D;font-family:"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;line-height:1.7}}main{{max-width:760px;margin:auto;padding:34px 18px}}a{{color:#2F63E8}}h1{{font-size:30px}}p{{color:#5A6B8C}}ul{{list-style:none;padding:0}}li{{display:flex;justify-content:space-between;padding:14px 16px;margin:8px 0;background:#fff;border:1px solid #E1E9F7;border-radius:12px}}li a{{font-weight:700;text-decoration:none}}li span{{color:#5A6B8C;font-size:13px}}</style>
-</head><body><main><a href="../">＋ 医薬品供給ナビ</a><h1>医薬品の供給変更履歴</h1><p>前回公表分から供給状況が変わった品目を日別に掲載しています。<a href="feed.xml">更新を購読（RSS）</a></p><ul>{''.join(links)}</ul></main><script data-goatcounter="https://kt1007.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script></body></html>"""
+<style>*{{box-sizing:border-box}}body{{margin:0;background:#F4F8FF;color:#14213D;font-family:"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;line-height:1.7}}main{{max-width:760px;margin:auto;padding:34px 18px}}a{{color:#2F63E8}}h1{{font-size:30px}}p{{color:#5A6B8C}}ul{{list-style:none;padding:0}}li{{display:flex;justify-content:space-between;padding:14px 16px;margin:8px 0;background:#fff;border:1px solid #E1E9F7;border-radius:12px}}li a{{font-weight:700;text-decoration:none}}li span{{color:#5A6B8C;font-size:13px}}.page-share{{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:18px 0}}.page-share button{{min-height:44px;padding:9px 18px;border:1px solid #B9C9EA;border-radius:999px;background:#fff;color:#2F63E8;font:inherit;font-weight:800;cursor:pointer}}.page-share button:focus-visible{{outline:3px solid rgba(47,99,232,.35);outline-offset:2px}}.page-share-status{{min-height:1.7em;margin:0;font-size:12px;color:#5A6B8C}}</style>
+</head><body><main><a href="../">＋ 医薬品供給ナビ</a><h1>医薬品の供給変更履歴</h1><p>前回公表分から供給状況が変わった品目を日別に掲載しています。<a href="feed.xml">更新を購読（RSS）</a></p>{share_control("この供給変更履歴を共有")}<p><a href="../{GUIDE_PATH}">出荷調整情報の確認手順</a></p><ul>{''.join(links)}</ul></main><script data-goatcounter="https://kt1007.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script></body></html>"""
 
 
 def atom_feed(groups: dict[str, list[dict]]) -> str:
