@@ -29,7 +29,7 @@
   const allowed = new Set([
     "search-success", "search-zero", "detail-open", "detail-share-success", "share-arrival",
     "data-load-failed", "daily-share-success", "feed-url-copy",
-    "watchlist-activated", "watchlist-import-success", "watchlist-import-failed",
+    "watchlist-first-add", "watchlist-activated", "watchlist-import-success", "watchlist-import-failed",
     "watchlist-backup-export", "watchlist-dashboard-open",
     "watchlist-mark-checked", "watchlist-share-success",
     "pwa-install-accepted", "pwa-installed", "app-store-open",

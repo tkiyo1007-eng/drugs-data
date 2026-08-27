@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 公開URLの種類ごとに分けた4つのsitemapを1件で送信する親index。 -->
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://tkiyo1007-eng.github.io/drugs-data/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://tkiyo1007-eng.github.io/drugs-data/sitemap-items.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://tkiyo1007-eng.github.io/drugs-data/sitemap-updates.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://tkiyo1007-eng.github.io/drugs-data/sitemap-curated.xml</loc>
+  </sitemap>
+</sitemapindex>
