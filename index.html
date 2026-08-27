@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>医薬品供給ナビ — 限定出荷・供給停止・販売中止を毎日確認</title>
-<meta name="description" content="厚生労働省の医薬品供給状況データを毎日自動更新。限定出荷・供給停止・販売中止と、同成分・同剤形の関連品目をスマホでもPCでも確認できます。">
+<title>医薬品供給ナビ｜出荷調整・限定出荷・供給停止を検索</title>
+<meta name="description" content="厚生労働省の医薬品供給状況データを毎日自動更新。出荷調整・限定出荷・供給停止・販売中止を、薬品名・成分名・メーカー名・YJコードから無料で検索できます。">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta property="og:title" content="医薬品供給ナビ">
-<meta property="og:description" content="限定出荷・供給停止・販売中止と、同成分・同剤形の関連品目を毎日確認。厚労省データを見やすく検索。">
+<meta property="og:description" content="出荷調整・限定出荷・供給停止・販売中止を毎日更新。薬品名・成分名・メーカー名・YJコードから無料で検索できます。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tkiyo1007-eng.github.io/drugs-data/">
 <meta property="og:image" content="https://tkiyo1007-eng.github.io/drugs-data/og_image.png">
@@ -16,7 +16,7 @@
 <meta property="og:image:alt" content="医薬品供給ナビの供給状況サマリー">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="医薬品供給ナビ">
-<meta name="twitter:description" content="限定出荷・供給停止・販売中止と、同成分・同剤形の関連品目を毎日確認。厚労省データを見やすく検索。">
+<meta name="twitter:description" content="出荷調整・限定出荷・供給停止・販売中止を毎日更新。薬品名・成分名・メーカー名・YJコードから無料で検索できます。">
 <meta name="twitter:image" content="https://tkiyo1007-eng.github.io/drugs-data/og_image.png">
 <meta name="twitter:image:alt" content="医薬品供給ナビの供給状況サマリー">
 <meta name="apple-itunes-app" content="app-id=6777696446">
@@ -36,7 +36,7 @@
       "name": "医薬品供給ナビ",
       "alternateName": "いやくひんきょうきゅうなび",
       "url": "https://tkiyo1007-eng.github.io/drugs-data/",
-      "description": "厚生労働省の医薬品供給状況データを毎日自動更新。限定出荷・供給停止・販売中止と、同成分・同剤形の関連品目をスマホでもPCでも確認。",
+      "description": "厚生労働省の医薬品供給状況データを毎日自動更新。出荷調整・限定出荷・供給停止・販売中止を、薬品名・成分名・メーカー名・YJコードから無料で検索できます。",
       "inLanguage": "ja"
     },
     {
@@ -331,24 +331,23 @@ h1 .grad{
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
 @media(max-width:900px){.chip1{left:0}.chip2{right:0}}
 
-/* スマホでは検索が最初の画面から遠くならないよう、ヒーローを要点だけに圧縮する。
-   App Store導線は固定ナビにもあるため、ヒーロー内はWeb検索を主導線にする。 */
+/* スマホでは検索を最初の画面内へ近づけるため、ヒーローを要点だけに圧縮する。
+   集計値は検索結果内でも確認できるため、初回画面では検索開始を優先する。 */
 @media(max-width:640px){
   .site-nav{top:10px;width:calc(100% - 20px);padding:8px 10px 8px 14px}
   .brand{font-size:14px}.brand-mark{width:32px;height:32px}
   .nav-cta{padding:8px 14px;font-size:12.5px}
-  header{padding:82px 20px 20px;gap:14px}
+  header{padding:82px 20px 10px;gap:0}
   .eyebrow{margin-bottom:14px;padding:5px 11px;font-size:11.5px}
   h1{font-size:32px;margin-bottom:10px}
   .lede{font-size:14px;line-height:1.7;margin-bottom:16px}
-  header .btn-primary,header .hero-note{display:none}
-  .btn-ghost{padding:11px 18px;font-size:14px}
-  .pulse-card{padding:18px 20px;border-radius:22px}
-  .pulse-total{font-size:36px;margin-top:7px}
-  .pulse-sub,.supply-bar,.legend,.float-chip{display:none}
+  header .hero-app-link{display:none}
+  header .btn-primary{padding:12px 20px;font-size:14px}
+  header .hero-note{margin-top:10px;font-size:11.5px}
+  header .hero-visual{display:none}
   main section{padding:52px 20px}
-  #demo{padding-top:28px}
-  #demo .sec-lede{margin-bottom:24px}
+  #demo{padding-top:20px}
+  #demo .sec-lede{margin-bottom:20px}
 }
 
 /* ===== セクション共通 ===== */
@@ -955,92 +954,13 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   .app-cta p{margin:0 auto 32px}
 }
 
-/* ===== 暮らしを支える関連アプリ ===== */
-.companion-card{
-  position:relative;overflow:hidden;padding:38px 42px;border-radius:28px;
-  display:grid;grid-template-columns:148px minmax(0,1fr);gap:38px;align-items:center;
-  background:linear-gradient(135deg,rgba(47,205,190,.14),rgba(79,128,244,.09));
-  border:1px solid rgba(58,176,180,.28);
-}
-.companion-card::before{
-  content:"";position:absolute;width:280px;height:280px;border-radius:50%;
-  left:-120px;top:-140px;background:rgba(85,222,210,.18);filter:blur(2px);pointer-events:none;
-}
-.companion-visual{position:relative;z-index:1;text-align:center}
-.companion-icon{
-  display:block;width:132px;height:132px;margin:0 auto;border-radius:30px;
-  box-shadow:0 24px 44px -18px rgba(9,95,107,.52),inset 0 1px 0 rgba(255,255,255,.65);
-}
-.companion-badge{
-  display:inline-block;margin-top:13px;padding:5px 12px;border-radius:999px;
-  font-size:10.5px;font-weight:900;letter-spacing:.08em;color:#087C78;
-  background:rgba(255,255,255,.72);border:1px solid rgba(22,159,153,.3);
-}
-.companion-qr{
-  display:block;width:148px;margin:18px auto 0;text-decoration:none;color:var(--sub);
-  font-size:10.5px;font-weight:800;line-height:1.5;
-}
-.companion-qr img{
-  display:block;width:148px;height:148px;border-radius:16px;background:#fff;
-  box-shadow:0 14px 28px -15px rgba(10,37,75,.48);image-rendering:pixelated;
-  transition:transform .2s,box-shadow .2s;
-}
-.companion-qr:hover img{transform:translateY(-2px);box-shadow:0 18px 32px -15px rgba(10,37,75,.58)}
-.companion-qr span{display:block;margin-top:7px}
-.companion-copy{position:relative;z-index:1;min-width:0}
-.companion-copy .sec-eyebrow{color:#087C78}
-.companion-copy h2{font-size:clamp(25px,3vw,36px);margin-bottom:12px}
-.companion-lede{font-size:14.5px;color:var(--sub);line-height:1.9;max-width:48em}
-.companion-points{
-  list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;
-  margin:20px 0 22px;padding:0;
-}
-.companion-points li{
-  min-height:68px;padding:13px 14px;border-radius:15px;font-size:12.5px;font-weight:800;line-height:1.55;
-  color:var(--ink);background:rgba(255,255,255,.56);border:1px solid rgba(64,139,165,.2);
-}
-.companion-points span{display:block;margin-bottom:4px;font-size:10px;color:#087C78;letter-spacing:.07em}
-.companion-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.companion-btn{
-  display:inline-flex;align-items:center;justify-content:center;text-decoration:none;
-  padding:13px 22px;border-radius:15px;font-size:13.5px;font-weight:900;color:#fff;
-  background:linear-gradient(135deg,#087C78,#209DA0);box-shadow:0 12px 26px -12px rgba(8,124,120,.75);
-  transition:transform .2s,box-shadow .2s;
-}
-.companion-btn:hover{transform:translateY(-2px);box-shadow:0 16px 30px -12px rgba(8,124,120,.8)}
-.companion-note{font-size:11.5px;color:var(--sub);line-height:1.7}
-.companion-card--lumical{
-  background:linear-gradient(135deg,rgba(85,108,255,.13),rgba(255,181,74,.1));
-  border-color:rgba(99,105,224,.27);
-}
-.companion-card--lumical::before{background:rgba(109,83,255,.16)}
-.companion-card--lumical .companion-icon{
-  box-shadow:0 24px 44px -18px rgba(23,26,102,.65),inset 0 1px 0 rgba(255,255,255,.65);
-}
-.companion-card--lumical .companion-badge{
-  color:#4B48A9;background:rgba(255,255,255,.72);border-color:rgba(87,82,190,.27);
-}
-.companion-card--lumical .sec-eyebrow,
-.companion-card--lumical .companion-points span{color:#5350B6}
-.companion-card--lumical .companion-btn{
-  background:linear-gradient(135deg,#343481,#6A50C7);
-  box-shadow:0 12px 26px -12px rgba(42,37,126,.8);
-}
-.companion-card--lumical .companion-btn:hover{box-shadow:0 16px 30px -12px rgba(42,37,126,.85)}
-@media(max-width:720px){
-  .companion-card{grid-template-columns:1fr;text-align:center;padding:32px 22px;gap:24px}
-  .companion-icon{width:118px;height:118px;border-radius:27px}
-  .companion-lede{margin:0 auto}
-  .companion-points{grid-template-columns:1fr;text-align:left}
-  .companion-points li{min-height:0}
-  .companion-actions{justify-content:center}
-}
-
 /* ===== フッター ===== */
 footer{max-width:1120px;margin:0 auto;padding:48px 24px 60px;text-align:center;color:var(--sub);font-size:12.5px}
 footer .foot-links{display:flex;justify-content:center;gap:22px;margin-bottom:16px;flex-wrap:wrap}
 footer a{color:var(--sub);text-decoration:none;font-weight:700}
 footer a:hover{color:var(--blue)}
+.footer-secondary-apps{margin:0 auto 16px;font-size:11.5px;color:var(--sub)}
+.footer-secondary-apps a{font-weight:600;text-decoration:underline;text-underline-offset:3px}
 /* 医療上の免責文なので薄くしない。opacity:.85 だとコントラストが 3.6:1 まで落ちていた
    （不透明なら 4.8:1 で AA を満たす） */
 .disclaimer{max-width:46em;margin:0 auto 14px;line-height:1.9}
@@ -1159,14 +1079,15 @@ footer a:hover{color:var(--blue)}
     医薬品供給ナビ
   </a>
   <div class="nav-links">
-    <a href="#demo">薬を検索</a>
+    <a href="#daily-update">最新の変更</a>
     <a href="#topics">話題のニュース</a>
     <a href="#news">お知らせ</a>
     <a href="#features">特徴</a>
     <a href="#compare">公式情報との使い分け</a>
     <a href="#glossary">用語解説</a>
     <a href="#faq">よくある質問</a>
-    <a class="nav-cta" href="#app">アプリを入手</a>
+    <a href="#app">アプリ版</a>
+    <a class="nav-cta" href="#demo" data-focus-search data-dsn-event="search-cta-open">薬を検索</a>
   </div>
 </nav>
 
@@ -1193,15 +1114,15 @@ footer a:hover{color:var(--blue)}
   <div>
     <span class="eyebrow"><span class="pulse"></span>厚生労働省データ・毎日自動更新</span>
     <h1><span class="nb">医薬品の</span><span class="nb">供給状況が、</span><br><span class="grad">ひと目でわかる。</span></h1>
-    <p class="lede">限定出荷・供給停止・販売中止と、同成分・同剤形の関連品目を、厚労省データから速く、見やすく確認。薬剤師・医療従事者をはじめ、医薬品の供給情報を確認したい方のためのチェックツールです。</p>
+    <p class="lede">出荷調整・限定出荷・供給停止・販売中止と、同成分・同剤形の関連品目を、厚労省データから速く、見やすく確認。薬品名・成分名・メーカー名・YJコードから無料で検索できるチェックツールです。</p>
     <div class="cta-row">
-      <a class="btn-primary" href="https://apps.apple.com/jp/app/%E5%8C%BB%E8%96%AC%E5%93%81%E4%BE%9B%E7%B5%A6%E3%83%8A%E3%83%93/id6777696446" target="_blank" rel="noopener">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.7 12.6c0-3 2.5-4.5 2.6-4.6-1.4-2.1-3.6-2.4-4.4-2.4-1.9-.2-3.6 1.1-4.6 1.1-.9 0-2.4-1.1-4-1-2 0-3.9 1.2-5 3-2.1 3.7-.5 9.1 1.5 12.1 1 1.5 2.2 3.1 3.8 3 1.5-.1 2.1-1 3.9-1s2.4 1 4 1 2.7-1.5 3.7-2.9c1.2-1.7 1.6-3.3 1.7-3.4-.1-.1-3.2-1.3-3.2-4.9zM15.6 3.5c.8-1 1.4-2.4 1.2-3.5-1.2 0-2.7.8-3.5 1.8-.8.9-1.5 2.3-1.3 3.7 1.4.1 2.8-.9 3.6-2z"/></svg>
-        App Store でダウンロード
+      <a class="btn-primary" href="#demo" data-focus-search data-dsn-event="search-cta-open">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+        供給状況を検索する
       </a>
-      <a class="btn-ghost" href="#demo">Webで検索する →</a>
+      <a class="btn-ghost hero-app-link" href="#app">iOSアプリ版を見る</a>
     </div>
-    <p class="hero-note">App Store で配信中 ・ 無料でご利用いただけます</p>
+    <p class="hero-note">会員登録不要・Web版も無料で利用できます</p>
     <div class="data-freshness-notice" id="offlineNotice" role="status" aria-live="polite" hidden>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.7 2.2 17.5A2 2 0 0 0 3.9 20h16.2a2 2 0 0 0 1.7-2.5L13.7 3.7a2 2 0 0 0-3.4 0Z"/></svg>
       <span>オフライン等のため、前回取得した供給データを表示しています。表示中の日付を確認し、接続後に再読み込みしてください。</span>
@@ -1251,7 +1172,7 @@ footer a:hover{color:var(--blue)}
       <span id="dataLoadErrorText">誤った情報を表示しないため、検索結果を停止しています。</span>
       <div class="data-load-error-actions">
         <button type="button" id="dataLoadReload">再読み込み</button>
-        <a href="https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list" target="_blank" rel="noopener">厚生労働省の公式システムで確認</a>
+        <a href="https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システムで確認</a>
       </div>
     </div>
     <p class="data-as-of" id="dataAsOf" role="status" aria-live="polite">データ基準日を確認中です。</p>
@@ -1492,7 +1413,7 @@ footer a:hover{color:var(--blue)}
       </tbody>
     </table>
   </div>
-  <p class="compare-note">※ 医薬品供給ナビは厚生労働省の公式サービスではありません。重要な判断では、<a href="https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list" target="_blank" rel="noopener">厚生労働省の公式システム</a>および卸・メーカーの最新情報もご確認ください。</p>
+  <p class="compare-note">※ 医薬品供給ナビは厚生労働省の公式サービスではありません。重要な判断では、<a href="https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システム</a>および卸・メーカーの最新情報もご確認ください。</p>
 </section>
 
 <section id="data" class="reveal">
@@ -1606,60 +1527,6 @@ footer a:hover{color:var(--blue)}
   </div>
 </section>
 
-<section id="sonamemo" class="reveal">
-  <div class="companion-card glass">
-    <div class="companion-visual">
-      <img class="companion-icon" src="sonamemo-icon.png" width="132" height="132" alt="そなメモのアプリアイコン" loading="lazy" decoding="async">
-      <span class="companion-badge">連携アプリ</span>
-      <a class="companion-qr" href="https://apps.apple.com/jp/app/id6796889346" target="_blank" rel="noopener" aria-label="QRコードから、そなメモのApp Storeページを開く">
-        <img src="qr-sonamemo.png" width="148" height="148" alt="" loading="lazy" decoding="async">
-        <span>スマホで読み取る</span>
-      </a>
-    </div>
-    <div class="companion-copy">
-      <p class="sec-eyebrow">BE READY, TOGETHER</p>
-      <h2>家族のお薬の備えは、そなメモで。</h2>
-      <p class="companion-lede">「そなメモ」は、家族の常用薬・アレルギー・持病・血液型を1画面にまとめられる、災害時を想定したお薬メモアプリです。登録した薬から医薬品供給ナビを開き、供給状況の確認へスムーズにつなげられます。</p>
-      <ul class="companion-points" aria-label="そなメモの特徴">
-        <li><span>01 まとめる</span>家族みんなのお薬・医療情報を1画面に</li>
-        <li><span>02 備える</span>基本機能はオフラインで利用可能</li>
-        <li><span>03 確認する</span>薬品名だけを供給ナビへ引き継ぎ</li>
-      </ul>
-      <div class="companion-actions">
-        <a class="companion-btn" href="https://apps.apple.com/jp/app/id6796889346" target="_blank" rel="noopener">そなメモをApp Storeで見る</a>
-        <p class="companion-note">家族情報・服用記録・写真は医薬品供給ナビへ共有されません。<br>連携機能は対応バージョンへのアップデート後に利用できます。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="lumical" class="reveal">
-  <div class="companion-card companion-card--lumical glass">
-    <div class="companion-visual">
-      <img class="companion-icon" src="lumical-icon.png" width="132" height="132" alt="ルミカレのアプリアイコン" loading="lazy" decoding="async">
-      <span class="companion-badge">関連アプリ</span>
-      <a class="companion-qr" href="https://apps.apple.com/jp/app/id6794411182" target="_blank" rel="noopener" aria-label="QRコードから、ルミカレのApp Storeページを開く">
-        <img src="qr-lumical.png" width="148" height="148" alt="" loading="lazy" decoding="async">
-        <span>スマホで読み取る</span>
-      </a>
-    </div>
-    <div class="companion-copy">
-      <p class="sec-eyebrow">CRYSTAL CALENDAR</p>
-      <h2>家族6人の予定が、ひと目でわかる。</h2>
-      <p class="companion-lede">「ルミカレ」は、4人の息子を育てる6人家族の実体験から生まれた予定管理アプリです。学校行事・通院・仕事・家族の予定を色分けして、見やすくひとつにまとめられます。</p>
-      <ul class="companion-points" aria-label="ルミカレの特徴">
-        <li><span>01 見渡す</span>最大6人の予定名を月表示で確認</li>
-        <li><span>02 取り込む</span>紙の予定表を端末内で読み取り</li>
-        <li><span>03 共有する</span>必要なときだけiCloudで家族共有</li>
-      </ul>
-      <div class="companion-actions">
-        <a class="companion-btn" href="https://apps.apple.com/jp/app/%E3%83%AB%E3%83%9F%E3%82%AB%E3%83%AC-crystal-calendar/id6794411182" target="_blank" rel="noopener">ルミカレをApp Storeで見る</a>
-        <p class="companion-note">広告・アカウント登録なし。iPhone・iPad・Macに対応しています。<br>予定表の画像は端末内で読み取ります。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 </main>
 
 <div class="modal-backdrop" id="mBack">
@@ -1677,8 +1544,8 @@ footer a:hover{color:var(--blue)}
     </div>
     <h3 id="mTitle">品目詳細</h3>
     <p class="modal-maker" id="mMaker"></p>
-    <a class="maker-link" id="mMakerLink" href="#" target="_blank" rel="noopener" hidden></a>
-    <a class="maker-link" id="mPmdaLink" href="#" target="_blank" rel="noopener" hidden></a>
+    <a class="maker-link" id="mMakerLink" href="#" target="_blank" rel="noopener" data-dsn-event="official-source-open" hidden></a>
+    <a class="maker-link" id="mPmdaLink" href="#" target="_blank" rel="noopener" data-dsn-event="official-source-open" hidden></a>
     <a class="maker-link" id="mItemLink" href="#" hidden></a>
     <div class="discrepancy-panel" id="mDiscrepancy" role="note" hidden></div>
     <div class="sum-box" id="mSummary" hidden></div>
@@ -1698,8 +1565,8 @@ footer a:hover{color:var(--blue)}
     <a href="#data">データについて</a>
     <a href="#glossary">用語解説</a>
     <a href="#faq">よくある質問</a>
-    <a href="#sonamemo">そなメモ</a>
-    <a href="#lumical">ルミカレ</a>
+    <a href="updates/index.html">供給変更の履歴</a>
+    <a href="guides/how-to-check-drug-supply.html">出荷調整情報の確認ガイド</a>
     <a href="items/index.html">品目別の供給状況</a>
     <a href="topics/index.html">話題のニュース一覧</a>
     <a href="products/index.html">注目製品一覧</a>
@@ -1707,6 +1574,10 @@ footer a:hover{color:var(--blue)}
     <a href="privacy.html">プライバシーポリシー</a>
     <a href="mailto:tkiyo1007@gmail.com">サポート</a>
   </div>
+  <p class="footer-secondary-apps">運営者のその他のアプリ：
+    <a href="https://apps.apple.com/jp/app/id6796889346" target="_blank" rel="noopener">そなメモ</a>・
+    <a href="https://apps.apple.com/jp/app/id6794411182" target="_blank" rel="noopener">ルミカレ</a>
+  </p>
   <p class="disclaimer">本サービスは厚生労働省が公表する「医療用医薬品供給状況」データをもとに情報を提供する非公式のツールであり、厚生労働省および各製薬企業とは関係ありません。表示内容は公表時点の情報であり、実際の流通状況と異なる場合があります。医薬品の使用・変更は必ず医師・薬剤師にご相談ください。</p>
   <p>© 2026 KT — 医薬品供給ナビ</p>
 </footer>
@@ -1857,12 +1728,26 @@ function daysAgo(dstr){
 let ITEMS = [];
 let LIVE = false;
 let DATA_STATE = "loading";
+let pendingPrimarySearchFocus = false;
+
+function focusPrimarySearchInput(){
+  if($q.disabled){
+    pendingPrimarySearchFocus = true;
+    return;
+  }
+  pendingPrimarySearchFocus = false;
+  try{ $q.focus({preventScroll:true}); }
+  catch(e){ $q.focus(); }
+}
 
 function setDataControlsEnabled(enabled){
   $q.disabled = !enabled;
   document.querySelectorAll("#pills button").forEach(button=>{ button.disabled = !enabled; });
   $pageSize.disabled = !enabled;
   if(!enabled) $watchImportBtn.disabled = true;
+  if(enabled && pendingPrimarySearchFocus){
+    requestAnimationFrame(()=>requestAnimationFrame(focusPrimarySearchInput));
+  }
 }
 
 let SHOWN = [];
@@ -2171,6 +2056,13 @@ $q.addEventListener("input", ()=>{
     trackCurrentSearch();
   }, 380);
 });
+document.querySelectorAll("[data-focus-search]").forEach(link=>{
+  link.addEventListener("click", ()=>{
+    pendingPrimarySearchFocus = true;
+    // アンカーのsmooth scrollを先に開始し、入力欄へフォーカスしても途中位置へ戻さない。
+    setTimeout(focusPrimarySearchInput, 450);
+  });
+});
 $loadMore.addEventListener("click", ()=>{ visibleCount += PAGE_SIZE; render(); });
 $pageSize.addEventListener("change", ()=>{ PAGE_SIZE = +$pageSize.value; visibleCount = PAGE_SIZE; render(); });
 
@@ -2427,7 +2319,7 @@ function updateSupplementalStatus(){
   }else if(incomplete || dateMismatch || checkedStale || !DATASET_DATE || !SUPPLEMENTAL_MHLW_DATE){
     asOf.textContent = "メーカー補足情報：確認不完全";
     noticeText.innerHTML = dateMismatch || !DATASET_DATE || !SUPPLEMENTAL_MHLW_DATE
-      ? `厚労省区分とメーカー補足情報の参照日が一致していません。「情報差異なし」とは判断せず、<a href="${OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener">厚生労働省公式</a>とメーカー案内をご確認ください。`
+      ? `厚労省区分とメーカー補足情報の参照日が一致していません。「情報差異なし」とは判断せず、<a href="${OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省公式</a>とメーカー案内をご確認ください。`
       : checkedStale
         ? `メーカー公式案内の確認日が古い、または確認日を取得できません。厚労省の供給区分は表示できますが、「情報差異0件」とは判定しません。`
         : `メーカー公式案内の補足情報を一部取得できないか、前回キャッシュを使用しています。厚労省の供給区分は表示できますが、「情報差異0件」とは判定しません。`;
@@ -3251,7 +3143,7 @@ function openDetail(d, opts={}){
           ? "販売会社・取扱い経路に関する案内です。製品全体の供給状況とは限らないため、原文をご確認ください。"
         : "";
     const sourceLink = /^https:\/\//.test(manufacturer.url || "")
-      ? `<a href="${esc(manufacturer.url)}" target="_blank" rel="noopener">メーカー公式案内の原文を確認</a>`
+      ? `<a href="${esc(manufacturer.url)}" target="_blank" rel="noopener" data-dsn-event="official-source-open">メーカー公式案内の原文を確認</a>`
       : "";
     $mDiscrepancy.innerHTML = `
       <div class="discrepancy-title">${high ? "情報差異あり" : "メーカー案内あり・対象規格を原文確認"}</div>
@@ -3578,7 +3470,10 @@ document.getElementById("mFav").addEventListener("click", e=>{
 });
 document.getElementById("mRelated").addEventListener("click", e=>{
   const row = e.target.closest(".rel-row");
-  if(row){ const found = findByKey(row.dataset.key); if(found) openDetail(found); }
+  if(row){
+    const found = findByKey(row.dataset.key);
+    if(found){ dsnTrack("related-item-open"); openDetail(found); }
+  }
 });
 // キーボード操作は品目名の <button>（.drug-open）が標準で処理するため、
 // 独自の keydown ハンドラは不要（残すと Enter で openDetail が二重に走り履歴が余分に積まれる）
@@ -3784,7 +3679,7 @@ function renderTopics(list){
       <div class="topic-actions">
         ${t.slug ? `<a class="topic-read" href="topics/${encodeURIComponent(t.slug)}.html">記事を読む</a>` : ""}
         ${t.q ? `<button type="button" class="topic-search" data-q="${esc(t.q)}">関連品目の供給状況を見る</button>` : ""}
-        ${(t.source && t.source.url) ? `<a class="topic-src" href="${esc(t.source.url)}" target="_blank" rel="noopener">出典：${esc(t.source.name)}</a>` : ""}
+        ${(t.source && t.source.url) ? `<a class="topic-src" href="${esc(t.source.url)}" target="_blank" rel="noopener" data-dsn-event="official-source-open">出典：${esc(t.source.name)}</a>` : ""}
       </div>
     </article>`).join("");
 }
@@ -3792,6 +3687,7 @@ renderTopics(TOPICS);
 $topicList.addEventListener("click", e=>{
   const btn = e.target.closest(".topic-search");
   if(!btn) return;
+  dsnTrack("topic-to-search");
   $q.value = btn.dataset.q;
   setFilter("all");
   trackCurrentSearch();
@@ -3821,7 +3717,7 @@ fetchFirst(["news.json", "https://tkiyo1007-eng.github.io/drugs-data/news.json"]
       `<div class="mednews-item">
          <span class="mednews-date num">${esc(n.date)}</span>
          <span class="mednews-tag${n.tag==="回収" ? " recall" : ""}">${esc(n.tag)}</span>
-         <a href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.title)}</a>
+         <a href="${esc(n.url)}" target="_blank" rel="noopener" data-dsn-event="official-source-open">${esc(n.title)}</a>
        </div>`).join("");
     document.getElementById("medNews").hidden = false;
   }).catch(()=>{});
@@ -3968,7 +3864,7 @@ function setDatasetDate(date){
   const noticeText = document.getElementById("staleNoticeText");
   if(!date){
     asOf.textContent = "データ基準日を取得できません。";
-    noticeText.innerHTML = `表示中データの基準日を確認できません。重要な判断では、<a href="${OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener">厚生労働省の公式システム</a>もご確認ください。`;
+    noticeText.innerHTML = `表示中データの基準日を確認できません。重要な判断では、<a href="${OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システム</a>もご確認ください。`;
     notice.hidden = false;
     if(!Object.values(SUPPLEMENTAL_STATE).includes("loading")) updateSupplementalStatus();
     return;
@@ -3978,7 +3874,7 @@ function setDatasetDate(date){
   asOf.textContent = `全体データ基準日 ${display}　※各カードの日付は「その品目行の最終変更日」です。`;
   document.getElementById("today").textContent = `${display} 時点`;
   if(age != null && age >= STALE_DATA_DAYS){
-    noticeText.innerHTML = `全体データ基準日から<strong>${age.toLocaleString()}日</strong>経過しています。更新処理が遅れている可能性があるため、<a href="${OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener">厚生労働省の公式システム</a>もご確認ください。`;
+    noticeText.innerHTML = `全体データ基準日から<strong>${age.toLocaleString()}日</strong>経過しています。更新処理が遅れている可能性があるため、<a href="${OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システム</a>もご確認ください。`;
     notice.hidden = false;
   }else{
     notice.hidden = true;
@@ -4241,7 +4137,7 @@ if($install) $install.addEventListener("click", promptInstallApp);
 if($watchInstall) $watchInstall.addEventListener("click", promptInstallApp);
 window.addEventListener("appinstalled", ()=>{ deferredPrompt = null; syncInstallButtons(); dsnTrack("pwa-installed"); });
 
-document.querySelectorAll('a[href*="apps.apple.com"]').forEach(link=>{
+document.querySelectorAll('a[href*="apps.apple.com"][href*="id6777696446"]').forEach(link=>{
   link.addEventListener("click", ()=>dsnTrack("app-store-open"));
 });
 
