@@ -28,6 +28,10 @@ class DailyUpdatePageTests(unittest.TestCase):
         self.assertIn('../items/1234567F1234.html', output)
         self.assertIn('<script src="../analytics.js"></script>', output)
         self.assertIn('src="https://gc.zgo.at/count.js"', output)
+        self.assertIn('data-dsn-share-page', output)
+        self.assertIn('data-dsn-event="related-item-open"', output)
+        self.assertIn('data-dsn-event="search-cta-open"', output)
+        self.assertIn('../guides/how-to-check-drug-supply.html', output)
         self.assertIn("テスト錠&lt;10mg&gt;", output)
         self.assertNotIn("テスト錠<10mg>", output)
 
@@ -47,6 +51,8 @@ class DailyUpdatePageTests(unittest.TestCase):
         listing = index_html({"2026-08-16": [{"to": "①通常出荷"}]})
         self.assertIn('<script src="../analytics.js"></script>', listing)
         self.assertIn('src="https://gc.zgo.at/count.js"', listing)
+        self.assertIn('data-dsn-share-page', listing)
+        self.assertIn('../guides/how-to-check-drug-supply.html', listing)
 
     def test_sitemap_contains_index_and_dated_pages(self):
         output = sitemap_xml(["2026-08-15", "2026-08-16"])

@@ -9,6 +9,7 @@
     if(/\/updates\/\d{4}-\d{2}-\d{2}\.html$/.test(path)) return {path:"/drugs-data/updates/_daily", title:"供給変更ページ"};
     if(/\/topics\/[^/]+\.html$/.test(path)) return {path:"/drugs-data/topics/_topic", title:"話題のニュース"};
     if(/\/products\/[^/]+\.html$/.test(path)) return {path:"/drugs-data/products/_product", title:"注目製品ページ"};
+    if(/\/guides\/[^/]+\.html$/.test(path)) return {path:"/drugs-data/guides/_guide", title:"供給情報の確認ガイド"};
     return {path:path || "/drugs-data/", title:document.title || "医薬品供給ナビ"};
   };
   const referrerOrigin = function(){
@@ -33,6 +34,8 @@
     "watchlist-mark-checked", "watchlist-share-success",
     "pwa-install-accepted", "pwa-installed", "app-store-open",
     "item-web-open", "item-share-success", "item-app-store-open",
+    "search-cta-open", "official-source-open", "related-item-open", "topic-to-search",
+    "static-page-share-success",
   ]);
   const queue = [];
   window.dsnTrack = function(name){
@@ -55,6 +58,29 @@
   document.addEventListener("click", function(event){
     const target = event.target && event.target.closest ? event.target.closest("[data-dsn-event]") : null;
     if(target && target.dataset) window.dsnTrack(target.dataset.dsnEvent);
+  });
+  document.addEventListener("click", async function(event){
+    const button = event.target && event.target.closest
+      ? event.target.closest("[data-dsn-share-page]") : null;
+    if(!button) return;
+    const container = button.closest(".page-share");
+    const status = container ? container.querySelector(".page-share-status") : null;
+    const url = new URL(location.href);
+    url.hash = "";
+    url.searchParams.set("src", "share");
+    try{
+      if(navigator.share){
+        await navigator.share({title:document.title, url:url.href});
+        if(status) status.textContent = "共有しました。";
+      }else{
+        await navigator.clipboard.writeText(url.href);
+        if(status) status.textContent = "共有用リンクをコピーしました。";
+      }
+      window.dsnTrack("static-page-share-success");
+    }catch(error){
+      if(error && error.name === "AbortError") return;
+      if(status) status.textContent = "共有できませんでした。URL欄からリンクをコピーしてください。";
+    }
   });
   if(new URLSearchParams(location.search).get("src") === "share") window.dsnTrack("share-arrival");
 })();

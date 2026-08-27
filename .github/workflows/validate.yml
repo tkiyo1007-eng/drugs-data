@@ -37,7 +37,7 @@ jobs:
           git diff --exit-code -- supply_discrepancies.json
       - name: Web・iOS共通設定の検査
         run: python3 scripts/validate_shared_content.py
-      - name: 話題のニュース・注目製品ページの再生成確認
+      - name: 話題・注目製品・供給確認ガイドの再生成確認
         run: |
           python3 scripts/generate_curated_pages.py --csv drugs_app_ready.csv --site .
-          git diff --exit-code -- topics products sitemap-curated.xml
+          git diff --exit-code -- topics products guides sitemap-curated.xml

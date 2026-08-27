@@ -36,3 +36,18 @@ Web版とiOS版は画面構成を揃えるのではなく、供給情報の意�
 ## 更新と検証
 
 `scripts/validate_shared_content.py` が共有設定の型、HTTPS URL、日付、重複、検索語がCSVの実在品目に一致することを検証する。Pull Request、mainへのpush、日次更新のすべてで実行する。
+
+## 検索向け静的ページ
+
+- `scripts/generate_curated_pages.py` は `industry_topics.json` と `featured_products.json` から `topics/` と `products/` を生成し、公式情報の使い分けを説明する恒久ガイド `guides/how-to-check-drug-supply.html` も生成する。
+- 出荷調整の現在区分、理由、品目行の更新日は `drugs_app_ready.csv` の公表値から生成し、記載のない原因を推測しない。現在区分を見出しやtitleで言い切る場合は、日次生成時のCSV値に必ず追従させる。
+- 「同成分・同剤形」は代替薬の推薦ではなく確認候補である。適応症、規格・用量、投与経路、製剤特性、患者の状態、実在庫を確認し、医師・薬剤師等の専門職が判断するよう明記する。
+- PMDAの添付文書等検索、PMDAの医薬品回収情報、厚生労働省の供給状況システムは役割を分けて案内する。
+- 実需要が確認できた集合ページは、類似する薄いページの量産を避ける。例えば `products/caduet.html` は1〜4番の現在区分と更新日を規格別に比較し、番号別ページは番号指定検索用に維持する。
+
+## サイトマップと匿名計測
+
+- `robots.txt` はトップレベル、品目、日別更新、キュレーションの4つのsitemapを宣言する。URLは複数のsitemapに重複させず、各HTMLのcanonicalと完全一致させる。`lastmod` は実際に反映した公表日またはテンプレート改訂日に限る。
+- GitHub Pagesのprojectサイトでは `robots.txt` がホスト直下ではなく `/drugs-data/robots.txt` にあるため、Googleによるrobots.txt経由のsitemap自動発見は保証されない。運用では4つのsitemap URLをGoogle Search Consoleへ個別に送信し、取得成功と登録URL数を確認する。
+- 共有成功、公式情報を開く操作、関連品目を開く操作、Web検索への導線は `analytics.js` の許可済み固定イベント名だけで集計する。医薬品名、検索語、YJコード、URLをイベント名やペイロードに含めない。
+- Webリポジトリと公開データリポジトリの `analytics.js` は完全一致させ、片方だけのイベント追加を許可しない。
