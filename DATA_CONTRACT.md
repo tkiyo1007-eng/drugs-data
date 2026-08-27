@@ -11,6 +11,7 @@ Web版とiOS版は画面構成を揃えるのではなく、供給情報の意�
 | `manual_announcements.json` | 自動収集を補うメーカー公式案内 |
 | `featured_products.json` | 両版に表示する注目製品と検索語 |
 | `industry_topics.json` | 両版に表示する業界トピック |
+| `status_changes.json` | 直近90日分の実スナップショット間の供給区分変更 |
 
 メーカー案内と販売ライフサイクルの `announced_at` は、一次資料に日まで記載が
 ある場合は `YYYY-MM-DD`、年月だけの場合は `YYYY-MM` とする。年月しか分からない
@@ -40,6 +41,9 @@ Web版とiOS版は画面構成を揃えるのではなく、供給情報の意�
 ## 検索向け静的ページ
 
 - `scripts/generate_curated_pages.py` は `industry_topics.json` と `featured_products.json` から `topics/` と `products/` を生成し、公式情報の使い分けを説明する恒久ガイド `guides/how-to-check-drug-supply.html` も生成する。
+- `scripts/generate_item_pages.py` は品目ページに加え、限定出荷、供給停止、販売中止・メーカー補足、直近30日に通常出荷へ戻った品目の状態別ハブを `items/` に生成する。ハブは `sitemap-items.xml` に含め、各品目から該当ハブへ戻れるようにする。
+- CSV全体で同一商品名の品目が複数ある場合だけ、生成対象外の通常出荷品も含めて規格、メーカー、YJコードの順でtitle・H1・一覧・関連品目リンクを固有化する。URLとcanonicalは従来の品目キーを維持する。
+- 通常出荷への回復は `status_changes.json` と現行CSVの正式12桁YJコード・商品名が完全一致し、直近30日以内に限定出荷または供給停止から通常出荷へ変わり、現在も通常出荷である場合だけ表示する。`X+5桁` の内部IDを持つ変更履歴は日次生成で受理するが、誤結合防止のため回復ハブには採用しない。原因や回復時期を推測しない。
 - 出荷調整の現在区分、理由、品目行の更新日は `drugs_app_ready.csv` の公表値から生成し、記載のない原因を推測しない。現在区分を見出しやtitleで言い切る場合は、日次生成時のCSV値に必ず追従させる。
 - 「同成分・同剤形」は代替薬の推薦ではなく確認候補である。適応症、規格・用量、投与経路、製剤特性、患者の状態、実在庫を確認し、医師・薬剤師等の専門職が判断するよう明記する。
 - PMDAの添付文書等検索、PMDAの医薬品回収情報、厚生労働省の供給状況システムは役割を分けて案内する。
@@ -48,6 +52,7 @@ Web版とiOS版は画面構成を揃えるのではなく、供給情報の意�
 ## サイトマップと匿名計測
 
 - `robots.txt` はトップレベル、品目、日別更新、キュレーションの4つのsitemapを宣言する。URLは複数のsitemapに重複させず、各HTMLのcanonicalと完全一致させる。`lastmod` は実際に反映した公表日またはテンプレート改訂日に限る。
-- GitHub Pagesのprojectサイトでは `robots.txt` がホスト直下ではなく `/drugs-data/robots.txt` にあるため、Googleによるrobots.txt経由のsitemap自動発見は保証されない。運用では4つのsitemap URLをGoogle Search Consoleへ個別に送信し、取得成功と登録URL数を確認する。
+- GitHub Pagesのprojectサイトでは `robots.txt` がホスト直下ではなく `/drugs-data/robots.txt` にあるため、Googleによるrobots.txt経由のsitemap自動発見は保証されない。運用では4グループを束ねる `sitemap-index.xml` をGoogle Search Consoleへ送信し、取得成功と登録URL数を確認する。
 - 共有成功、公式情報を開く操作、関連品目を開く操作、Web検索への導線は `analytics.js` の許可済み固定イベント名だけで集計する。医薬品名、検索語、YJコード、URLをイベント名やペイロードに含めない。
 - Webリポジトリと公開データリポジトリの `analytics.js` は完全一致させ、片方だけのイベント追加を許可しない。
+- 状態別ハブは品目ページへ匿名化せず、`/drugs-data/items/limited` 等の固定カテゴリで計測する。個別品目は従来どおり `/drugs-data/items/_item` に集約する。

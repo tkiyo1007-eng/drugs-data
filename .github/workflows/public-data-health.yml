@@ -53,3 +53,106 @@ jobs:
         run: >-
           python3 scripts/check_public_data_health.py --max-age-days 4
           ${{ github.event_name == 'pull_request' && '--allow-missing-supply-discrepancies --allow-stale-supply-discrepancies' || '' }}
+      - name: Validate published item hubs and sitemap
+        if: github.event_name != 'pull_request'
+        run: |
+          python3 - <<'PY'
+          import re
+          import time
+          import urllib.request
+          import xml.etree.ElementTree as ET
+          from html.parser import HTMLParser
+
+          SITE_ROOT = "https://tkiyo1007-eng.github.io/drugs-data/"
+          HUB_URLS = [
+              SITE_ROOT + "items/limited.html",
+              SITE_ROOT + "items/stopped.html",
+              SITE_ROOT + "items/supplemental.html",
+              SITE_ROOT + "items/resumed.html",
+          ]
+          MAX_BYTES = 2 * 1024 * 1024
+
+
+          def fetch(url):
+              separator = "&" if "?" in url else "?"
+              request = urllib.request.Request(
+                  f"{url}{separator}health_check={time.time_ns()}",
+                  headers={"User-Agent": "DrugSupplyNavi-public-page-health/1.0"},
+              )
+              with urllib.request.urlopen(request, timeout=30) as response:
+                  if response.status != 200:
+                      raise RuntimeError(f"HTTP {response.status}: {url}")
+                  body = response.read(MAX_BYTES + 1)
+              if not body:
+                  raise RuntimeError(f"応答が空です: {url}")
+              if len(body) > MAX_BYTES:
+                  raise RuntimeError(f"応答が{MAX_BYTES}バイトを超えています: {url}")
+              return body
+
+
+          class PageSignals(HTMLParser):
+              def __init__(self):
+                  super().__init__(convert_charrefs=True)
+                  self.canonicals = []
+                  self.robots = []
+
+              def handle_starttag(self, tag, attributes):
+                  attrs = {key.lower(): value or "" for key, value in attributes}
+                  if tag.lower() == "link" and "canonical" in attrs.get("rel", "").lower().split():
+                      self.canonicals.append(attrs.get("href", ""))
+                  if tag.lower() == "meta" and attrs.get("name", "").lower() == "robots":
+                      self.robots.append(attrs.get("content", ""))
+
+
+          def validate_live_pages():
+              errors = []
+              try:
+                  sitemap = ET.fromstring(fetch(SITE_ROOT + "sitemap-items.xml"))
+                  namespace = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
+                  locations = [
+                      (node.text or "").strip()
+                      for node in sitemap.findall(f"{namespace}url/{namespace}loc")
+                  ]
+                  for url in HUB_URLS:
+                      count = locations.count(url)
+                      if count != 1:
+                          errors.append(f"sitemap-items.xml内の件数が{count}件です: {url}")
+              except Exception as error:
+                  errors.append(f"sitemap-items.xmlを検証できません: {error}")
+
+              for url in HUB_URLS:
+                  try:
+                      parser = PageSignals()
+                      parser.feed(fetch(url).decode("utf-8"))
+                      if parser.canonicals != [url]:
+                          errors.append(
+                              f"canonicalが自己URLと一致しません: {url} -> {parser.canonicals}"
+                          )
+                      directives = set()
+                      for value in parser.robots:
+                          directives.update(
+                              token for token in re.split(r"[\s,]+", value.lower()) if token
+                          )
+                      if not {"index", "follow"}.issubset(directives):
+                          errors.append(f"robotsにindex,followがありません: {url} -> {parser.robots}")
+                      if {"noindex", "nofollow"}.intersection(directives):
+                          errors.append(f"robotsに拒否指定があります: {url} -> {parser.robots}")
+                  except Exception as error:
+                      errors.append(f"公開ハブを検証できません: {url}: {error}")
+              return errors
+
+
+          last_errors = []
+          for attempt in range(1, 7):
+              last_errors = validate_live_pages()
+              if not last_errors:
+                  print("公開済み4ハブ・sitemap・canonical・robots: OK")
+                  break
+              if attempt < 6:
+                  print(f"::notice::公開反映待ちのため再試行します ({attempt}/6): " + " | ".join(last_errors))
+                  time.sleep(10)
+          else:
+              for error in last_errors:
+                  print(f"::error::{error}")
+              raise SystemExit(1)
+          PY

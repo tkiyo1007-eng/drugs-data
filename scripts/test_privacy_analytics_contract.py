@@ -15,6 +15,10 @@ class PrivacyAnalyticsContractTests(unittest.TestCase):
 
     def test_analytics_collapses_sensitive_page_urls_to_page_kinds(self):
         expected_paths = [
+            "/drugs-data/items/limited",
+            "/drugs-data/items/stopped",
+            "/drugs-data/items/supplemental",
+            "/drugs-data/items/resumed",
             "/drugs-data/items/_item",
             "/drugs-data/updates/_daily",
             "/drugs-data/topics/_topic",
@@ -24,6 +28,10 @@ class PrivacyAnalyticsContractTests(unittest.TestCase):
         for path in expected_paths:
             with self.subTest(path=path):
                 self.assertIn(path, self.analytics)
+        self.assertLess(
+            self.analytics.index('/drugs-data/items/limited'),
+            self.analytics.index('/drugs-data/items/_item'),
+        )
         self.assertIn("new URL(document.referrer).origin", self.analytics)
         self.assertIn("no_events: true", self.analytics)
         self.assertIn("no_onload: dnt", self.analytics)

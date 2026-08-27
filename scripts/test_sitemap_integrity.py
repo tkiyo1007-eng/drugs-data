@@ -2,6 +2,7 @@ import re
 import unittest
 import xml.etree.ElementTree as ET
 from datetime import date
+from html import unescape
 from pathlib import Path
 from urllib.parse import urlsplit
 
@@ -16,6 +17,7 @@ SITEMAPS = {
 }
 SITEMAP_INDEX = "sitemap-index.xml"
 XML_NAMESPACE = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+ITEM_HUBS = {"limited", "stopped", "supplemental", "resumed"}
 
 
 def sitemap_entries(path: Path) -> list[tuple[str, str]]:
@@ -87,6 +89,26 @@ class SitemapIntegrityTests(unittest.TestCase):
                 )
                 self.assertEqual([location], canonicals)
 
+    def test_fixed_item_hubs_exist_once_with_self_canonicals(self):
+        item_locations = [
+            location for location, _ in self.entries_by_sitemap["sitemap-items.xml"]
+        ]
+        for slug in ITEM_HUBS:
+            location = f"{SITE_ROOT}items/{slug}.html"
+            page = ROOT / "items" / f"{slug}.html"
+            with self.subTest(slug=slug):
+                self.assertTrue(page.is_file(), f"固定ハブがありません: {page}")
+                self.assertEqual(1, item_locations.count(location))
+                content = page.read_text(encoding="utf-8")
+                self.assertEqual(
+                    [location],
+                    re.findall(
+                        r'<link\s+rel=["\']canonical["\']\s+href=["\']([^"\']+)["\']',
+                        content,
+                        re.IGNORECASE,
+                    ),
+                )
+
     def test_lastmod_values_are_iso_dates_when_present(self):
         for sitemap_name, location, lastmod in self.all_entries:
             if not lastmod:
@@ -115,6 +137,33 @@ class SitemapIntegrityTests(unittest.TestCase):
         expected = {ROOT / "index.html", ROOT / "privacy.html", ROOT / "about.html"}
         listed = {local_path(location) for location, _ in self.entries_by_sitemap["sitemap.xml"]}
         self.assertEqual(expected, listed)
+
+    def test_all_generated_item_titles_are_unique_and_at_most_seventy_characters(self):
+        titles = {}
+        for page in sorted((ROOT / "items").glob("*.html")):
+            content = page.read_text(encoding="utf-8")
+            matches = re.findall(r"<title>(.*?)</title>", content, re.DOTALL | re.IGNORECASE)
+            self.assertEqual(1, len(matches), f"titleが1件ではありません: {page}")
+            title = unescape(matches[0]).strip()
+            self.assertLessEqual(len(title), 70, f"titleが70文字を超えています: {page}")
+            self.assertNotIn(title, titles, f"titleが重複しています: {titles.get(title)} / {page}")
+            titles[title] = page
+
+    def test_all_product_page_h1_names_are_unique(self):
+        reserved = {"index", "limited", "stopped", "supplemental", "resumed"}
+        headings = {}
+        for page in sorted((ROOT / "items").glob("*.html")):
+            if page.stem in reserved:
+                continue
+            content = page.read_text(encoding="utf-8")
+            matches = re.findall(r'<h1>([^<]+)<span class="tag ', content)
+            self.assertEqual(1, len(matches), f"品目H1を取得できません: {page}")
+            heading = unescape(matches[0]).strip()
+            self.assertNotIn(
+                heading, headings,
+                f"品目H1が重複しています: {headings.get(heading)} / {page}",
+            )
+            headings[heading] = page
 
 
 if __name__ == "__main__":

@@ -3,15 +3,24 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from generate_item_pages import (
+    ITEM_HUB_SLUGS,
     STATUS_NOTES,
+    build_item_identities,
     discrepancy_matches,
+    hub_html,
     index_html,
+    item_hub_slugs,
+    item_page_lastmod,
     latest_publication_date,
+    latest_changes_by_key,
+    load_status_changes,
     official_row_date,
     page_html,
     page_title,
+    recent_recovery_keys,
     reconcile_existing_pages,
     should_generate,
+    sitemap_xml,
     supplemental_context,
     validated_product_map,
     version_date,
@@ -58,7 +67,10 @@ class ItemPageMetadataTests(unittest.TestCase):
         self.assertIn('src="https://gc.zgo.at/count.js"', output)
         self.assertIn('data-dsn-event="item-web-open"', output)
         self.assertIn('data-dsn-event="item-app-store-open"', output)
+        self.assertIn('厚生労働省の公式システムで品目名・YJコードを再確認', output)
         self.assertIn('data-dsn-event="official-source-open">PMDAで添付文書を探す', output)
+        self.assertIn('../about.html">運営情報・編集方針', output)
+        self.assertIn('../privacy.html">プライバシー', output)
         self.assertIn('window.dsnTrack("item-share-success")', output)
         self.assertIn('url.searchParams.set("src", "share")', output)
 
@@ -118,7 +130,7 @@ class ItemPageMetadataTests(unittest.TestCase):
         self.assertIn("メーカー公式：販売中止予定", output)
         self.assertIn("情報差異あり", output)
         self.assertIn("メーカー公式：限定出荷（2026-08-17）", output)
-        self.assertEqual(3, output.count('data-dsn-event="official-source-open"'))
+        self.assertEqual(4, output.count('data-dsn-event="official-source-open"'))
         self.assertIn("メーカー：販売中止予定／メーカー：限定出荷", output)
         self.assertIn("サイト全体の公開データ基準日", output)
         self.assertIn('fetch("../version.json"', output)
@@ -196,6 +208,14 @@ class ItemPageMetadataTests(unittest.TestCase):
                              "scope": "product", "announced_at": "2026-08-17"},
         }
         self.assertEqual(latest_publication_date(row, lifecycle, discrepancy), "2026-08-17")
+
+    def test_sitemap_lastmod_uses_fixed_template_revision_without_advancing_daily(self):
+        old_row = {"商品名": "対象錠", "更新日": "2024/03/11"}
+        self.assertEqual(item_page_lastmod(old_row), "2026-08-28")
+        future_notice = {"product_name": "対象錠", "maker": "対象製薬",
+                         "announced_at": "2026-09-01"}
+        old_row["製造メーカー"] = "対象製薬"
+        self.assertEqual(item_page_lastmod(old_row, future_notice), "2026-09-01")
 
     def test_discrepancy_must_match_current_official_row_and_manufacturer(self):
         row = {
@@ -276,26 +296,166 @@ class ItemPageMetadataTests(unittest.TestCase):
         self.assertLessEqual(len(very_long), 70)
         self.assertTrue(very_long.endswith("｜供給状況｜医薬品供給ナビ"))
 
+        qualified = page_title("長" * 100, "限定出荷", [], "10mg1錠")
+        self.assertLessEqual(len(qualified), 70)
+        self.assertIn("10mg1錠", qualified)
+
+        long_a = page_title("長" * 100, "限定出荷", [], "規格" * 40 + "A")
+        long_b = page_title("長" * 100, "限定出荷", [], "規格" * 40 + "B")
+        self.assertLessEqual(len(long_a), 70)
+        self.assertLessEqual(len(long_b), 70)
+        self.assertNotEqual(long_a, long_b)
+
+    def test_duplicate_names_get_unique_spec_or_maker_identity(self):
+        targets = {
+            "1111111A1111": ({"商品名": "同名注", "規格": "1mL", "製造メーカー": "A社"}, "limited"),
+            "1111111A1112": ({"商品名": "同名注", "規格": "2mL", "製造メーカー": "A社"}, "limited"),
+            "1111111A1113": ({"商品名": "単独錠", "規格": "10mg", "製造メーカー": "B社"}, "stopped"),
+            "1111111A1114": ({"商品名": "完全同名注", "規格": "1mL", "製造メーカー": "A社"}, "limited"),
+            "1111111A1115": ({"商品名": "完全同名注", "規格": "1mL", "製造メーカー": "A社"}, "limited"),
+        }
+        identities = build_item_identities(targets)
+        self.assertEqual("同名注（1mL）", identities["1111111A1111"]["display_name"])
+        self.assertEqual("同名注（2mL）", identities["1111111A1112"]["display_name"])
+        self.assertEqual("単独錠", identities["1111111A1113"]["display_name"])
+        self.assertNotEqual(identities["1111111A1114"]["display_name"],
+                            identities["1111111A1115"]["display_name"])
+        self.assertIn("YJ 1111111A1114", identities["1111111A1114"]["display_name"])
+
+        output = page_html(
+            {"商品名": "同名注", "規格": "1mL", "製造メーカー": "A社",
+             "供給状況": "限定出荷", "YJコード": "1111111A1111"},
+            "1111111A1111", "limited", "2026-08-26", [], {"1111111A1111"},
+            title_qualifier="1mL", hub_slugs=["limited"],
+        )
+        self.assertIn("<h1>同名注（1mL）", output)
+        self.assertIn('<a href="limited.html">限定出荷の一覧</a>', output)
+
+    def test_generated_item_is_qualified_when_same_name_exists_outside_targets(self):
+        targets = {
+            "1111111A1111": (
+                {"商品名": "同名錠", "規格": "10mg", "製造メーカー": "A社"},
+                "stopped",
+            ),
+        }
+        catalog = {
+            "1111111A1111": targets["1111111A1111"][0],
+            "1111111A1112": {
+                "商品名": "同名錠", "規格": "10mg", "製造メーカー": "A社",
+            },
+        }
+        identities = build_item_identities(targets, catalog)
+        self.assertEqual(
+            "同名錠（10mg／A社／YJ 1111111A1111）",
+            identities["1111111A1111"]["display_name"],
+        )
+        self.assertEqual(
+            "同名錠（10mg／A社／YJ 1111111A1112）",
+            identities["1111111A1112"]["display_name"],
+        )
+
     def test_pages_missing_from_current_csv_are_removed(self):
         with TemporaryDirectory() as directory:
             out = Path(directory)
             (out / "keep.html").write_text("keep", encoding="utf-8")
             (out / "stale.html").write_text("stale", encoding="utf-8")
             (out / "index.html").write_text("index", encoding="utf-8")
+            for slug in ITEM_HUB_SLUGS:
+                (out / f"{slug}.html").write_text("hub", encoding="utf-8")
             existing, removed = reconcile_existing_pages(out, {"keep"})
             self.assertEqual(existing, {"keep"})
             self.assertEqual(removed, {"stale"})
             self.assertFalse((out / "stale.html").exists())
             self.assertTrue((out / "index.html").exists())
+            for slug in ITEM_HUB_SLUGS:
+                self.assertTrue((out / f"{slug}.html").exists())
 
-    def test_item_index_keeps_supplemental_items_in_official_status_section_too(self):
+    def test_item_index_links_each_item_once_and_routes_supplements_to_hub(self):
         output = index_html([{
             "key": "1234567F1234", "name": "対象錠", "maker": "対象製薬", "status": "ok",
-            "supplements": ["メーカー：限定出荷"],
+            "supplements": ["メーカー：限定出荷"], "hubs": ["supplemental"],
         }], "2026-08-26")
-        self.assertIn("メーカー公式の補足情報がある品目", output)
+        self.assertIn('href="supplemental.html"', output)
+        self.assertIn("販売中止・メーカー補足", output)
         self.assertIn("厚労省公表区分が通常出荷の品目", output)
-        self.assertEqual(output.count('href="1234567F1234.html"'), 2)
+        self.assertEqual(output.count('href="1234567F1234.html"'), 1)
+
+    def test_recent_recovery_requires_exact_identity_current_normal_and_latest_change(self):
+        by_key = {
+            "1234567F1234": {"商品名": "回復錠", "YJコード": "1234567F1234",
+                              "供給状況": "①通常出荷"},
+            "1234567F5678": {"商品名": "再停止錠", "YJコード": "1234567F5678",
+                              "供給状況": "⑤供給停止"},
+        }
+        events = [
+            {"date": "2026/08/25", "yj": "1234567F1234", "name": "回復錠",
+             "from": "③限定出荷（他社品の影響）", "to": "①通常出荷"},
+            {"date": "2026/08/24", "yj": "1234567F5678", "name": "再停止錠",
+             "from": "③限定出荷（他社品の影響）", "to": "①通常出荷"},
+            {"date": "2026/08/26", "yj": "1234567F5678", "name": "再停止錠",
+             "from": "①通常出荷", "to": "⑤供給停止"},
+            {"date": "2026/08/25", "yj": "1234567F1234", "name": "別名錠",
+             "from": "③限定出荷（他社品の影響）", "to": "①通常出荷"},
+        ]
+        latest = latest_changes_by_key(events, by_key)
+        recovered = recent_recovery_keys(latest, by_key, "2026-08-26")
+        self.assertEqual({"1234567F1234"}, recovered)
+        self.assertTrue(should_generate(
+            by_key["1234567F1234"], "1234567F1234", set(), {}, {}, recovered))
+
+    def test_status_change_loader_rejects_unknown_status(self):
+        with TemporaryDirectory() as directory:
+            path = Path(directory) / "status_changes.json"
+            path.write_text(
+                '[{"date":"2026/08/26","yj":"1234567F1234","name":"対象錠",'
+                '"from":"不明","to":"①通常出荷"}]', encoding="utf-8")
+            with self.assertRaises(ValueError):
+                load_status_changes(path)
+            path.write_text(
+                '[{"date":"2026/99/99","yj":"1234567F1234","name":"対象錠",'
+                '"from":"③限定出荷（他社品の影響）","to":"①通常出荷"}]',
+                encoding="utf-8")
+            with self.assertRaises(ValueError):
+                load_status_changes(path)
+
+    def test_internal_id_change_is_valid_history_but_never_a_recovery_hub_item(self):
+        with TemporaryDirectory() as directory:
+            path = Path(directory) / "status_changes.json"
+            path.write_text(
+                '[{"date":"2026/08/26","yj":"X00001","name":"医療用ガス",'
+                '"from":"⑤供給停止","to":"①通常出荷"}]', encoding="utf-8")
+            events = load_status_changes(path)
+        by_key = {
+            "X00001": {"商品名": "医療用ガス", "YJコード": "X00001",
+                        "供給状況": "①通常出荷"},
+        }
+        self.assertEqual({}, latest_changes_by_key(events, by_key))
+        self.assertEqual(set(), recent_recovery_keys({}, by_key, "2026-08-26"))
+
+    def test_hub_page_and_sitemap_have_canonical_context_and_unique_urls(self):
+        entry = {
+            "key": "1234567F1234", "name": "対象錠", "display_name": "対象錠",
+            "maker": "対象製薬", "status": "limited", "updated": "2026-08-25",
+            "supplements": [], "hubs": ["limited"],
+        }
+        output = hub_html("limited", [entry], "2026-08-26")
+        self.assertEqual(output.count('rel="canonical"'), 1)
+        self.assertIn('href="https://tkiyo1007-eng.github.io/drugs-data/items/limited.html"', output)
+        self.assertIn('href="1234567F1234.html"', output)
+        self.assertIn("実際の受注可否や在庫を示す一覧ではありません", output)
+        self.assertIn("厚生労働省の公式システム", output)
+
+        sitemap = sitemap_xml({"1234567F1234": "2026-08-25"}, "2026-08-26", ITEM_HUB_SLUGS)
+        for slug in ITEM_HUB_SLUGS:
+            self.assertEqual(sitemap.count(f"items/{slug}.html"), 1)
+
+    def test_hub_membership_uses_current_status_supplements_and_verified_recovery(self):
+        entry = {"status": "ok", "delist": False, "supplements": [],
+                 "recent_recovery": True}
+        self.assertEqual(["resumed"], item_hub_slugs(entry, "2026-08-26"))
+        entry.update({"status": "limited", "supplements": ["メーカー案内あり"]})
+        self.assertEqual(["limited", "supplemental"],
+                         item_hub_slugs(entry, "2026-08-26"))
 
     def test_item_index_keeps_the_context_free_banner(self):
         output = index_html([], "2026-08-16")
