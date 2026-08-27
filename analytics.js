@@ -5,6 +5,10 @@
   const pageKind = function(){
     const path = location.pathname;
     if(path.endsWith("/items/") || path.endsWith("/items/index.html")) return {path:"/drugs-data/items/", title:"品目別一覧"};
+    if(path.endsWith("/items/limited.html")) return {path:"/drugs-data/items/limited", title:"限定出荷一覧"};
+    if(path.endsWith("/items/stopped.html")) return {path:"/drugs-data/items/stopped", title:"供給停止一覧"};
+    if(path.endsWith("/items/supplemental.html")) return {path:"/drugs-data/items/supplemental", title:"販売中止・メーカー補足一覧"};
+    if(path.endsWith("/items/resumed.html")) return {path:"/drugs-data/items/resumed", title:"通常出荷へ回復した品目一覧"};
     if(/\/items\/[^/]+\.html$/.test(path)) return {path:"/drugs-data/items/_item", title:"品目別ページ"};
     if(/\/updates\/\d{4}-\d{2}-\d{2}\.html$/.test(path)) return {path:"/drugs-data/updates/_daily", title:"供給変更ページ"};
     if(/\/topics\/[^/]+\.html$/.test(path)) return {path:"/drugs-data/topics/_topic", title:"話題のニュース"};

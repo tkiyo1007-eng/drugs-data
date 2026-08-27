@@ -66,6 +66,8 @@ h2{font-size:16.5px;margin-bottom:12px}
 .sib .mk{display:block;font-size:12px;color:var(--sub);margin-top:2px}
 .sib-note{font-size:12px;color:var(--sub);margin-bottom:10px;line-height:1.7}
 .links a{display:inline-block;margin:4px 12px 4px 0;color:var(--blue);font-size:14px}
+.hub-links{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0}
+.hub-links a{display:inline-block;color:var(--blue);background:#EEF3FF;border-radius:999px;padding:6px 12px;font-size:12.5px;font-weight:700;text-decoration:none}
 .share{min-height:44px;border:1px solid #B9C9EA;border-radius:999px;background:#fff;color:var(--blue);font:inherit;font-weight:700;padding:8px 16px;cursor:pointer}
 .share-status{font-size:12px;color:var(--sub);min-height:1.6em;margin-top:5px}
 .cta{margin-top:30px;background:linear-gradient(135deg,#2F63E8,#4F80F4);border-radius:16px;padding:24px 22px;color:#fff}
@@ -81,7 +83,7 @@ footer a{color:var(--sub)}
 <body>
 <div class="wrap">
   <header class="site"><a href="https://tkiyo1007-eng.github.io/drugs-data/">💊 医薬品供給ナビ</a></header>
-  <nav class="crumb"><a href="https://tkiyo1007-eng.github.io/drugs-data/">トップ</a> › <a href="index.html">品目別の供給状況</a> › セフジニル細粒小児用１０％「トーワ」</nav>
+  <nav class="crumb" aria-label="パンくず"><a href="https://tkiyo1007-eng.github.io/drugs-data/">トップ</a> › <a href="index.html">品目別の供給状況</a> › セフジニル細粒小児用１０％「トーワ」</nav>
   <main>
   <div class="card">
     <h1>セフジニル細粒小児用１０％「トーワ」<span class="tag status-stopped">厚労省：供給停止</span><span class="tag supplemental">メーカー：販売中止予定</span><span class="tag delist">薬価削除予定</span></h1>
@@ -100,8 +102,10 @@ footer a{color:var(--sub)}
     <table><tbody><tr><th scope="row">規格</th><td>１００ｍｇ１ｇ</td></tr><tr><th scope="row">供給状況</th><td>⑤供給停止</td></tr><tr><th scope="row">理由</th><td>６．薬価削除</td></tr><tr><th scope="row">解除・解消見込み</th><td>エ. －</td></tr><tr><th scope="row">出荷量状況</th><td>D．薬価削除予定</td></tr><tr><th scope="row">一般名</th><td>セフジニル</td></tr><tr><th scope="row">製造メーカー</th><td>東和薬品</td></tr><tr><th scope="row">販売メーカー</th><td>東和薬品</td></tr><tr><th scope="row">薬効分類</th><td>主としてグラム陽性・陰性菌に作用するもの</td></tr><tr><th scope="row">薬価</th><td>44.8</td></tr><tr><th scope="row">経過措置期限</th><td>R9.3.31まで</td></tr><tr><th scope="row">更新日</th><td>2024/12/05</td></tr><tr><th scope="row">YJコード</th><td>6132013C1163</td></tr></tbody></table>
     <p class="links">
       <a href="https://tkiyo1007-eng.github.io/drugs-data/#item=6132013C1163" data-dsn-event="item-web-open">Web版でこの品目を開く（同成分・同剤形の一覧つき）</a>
+      <a href="https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システムで品目名・YJコードを再確認</a>
       <a href="https://www.pmda.go.jp/PmdaSearch/iyakuSearch/?nameWord=%E3%82%BB%E3%83%95%E3%82%B8%E3%83%8B%E3%83%AB%E7%B4%B0%E7%B2%92%E5%B0%8F%E5%85%90%E7%94%A8%EF%BC%91%EF%BC%90%EF%BC%85%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D" target="_blank" rel="noopener" data-dsn-event="official-source-open">PMDAで添付文書を探す</a>
     </p>
+<nav class="hub-links" aria-label="この品目の状態別一覧"><a href="stopped.html">供給停止の一覧</a><a href="supplemental.html">販売中止・メーカー補足の一覧</a></nav>
     <button class="share" id="shareButton" type="button">この品目ページを共有</button>
     <p class="share-status" id="shareStatus" role="status" aria-live="polite"></p>
   </div>
@@ -113,7 +117,7 @@ footer a{color:var(--sub)}
 </section>
   <div class="cta">
     <h2>供給状況の変化を、毎日自動でチェック。</h2>
-    <p>医薬品供給ナビは厚労省の医薬品供給状況データ約16,000品目を毎日自動更新。お気に入り登録した品目が「限定出荷」や「出荷再開」に変わるとすぐ分かります。無料です。</p>
+    <p>医薬品供給ナビは厚労省の医薬品供給状況データ約16,000品目を毎日自動更新。監視リストに登録した品目が「限定出荷」や「出荷再開」に変わるとすぐ分かります。無料です。</p>
     <a href="https://apps.apple.com/jp/app/%E5%8C%BB%E8%96%AC%E5%93%81%E4%BE%9B%E7%B5%A6%E3%83%8A%E3%83%93/id6777696446" data-dsn-event="item-app-store-open">App Storeで入手</a>
     <a class="ghost" href="https://tkiyo1007-eng.github.io/drugs-data/#item=6132013C1163" data-dsn-event="item-web-open">Web版でこの品目を開く</a>
     <p>開いた品目は、★を押すとこのブラウザの監視リストへ保存できます。</p>
@@ -122,6 +126,7 @@ footer a{color:var(--sub)}
   <footer>
     <p class="note">本ページは厚生労働省「医療用医薬品供給状況」の公表データをもとに毎日自動生成される非公式の情報であり、厚生労働省および各製薬企業とは関係ありません。公表と実際の流通状況にタイムラグが生じる場合があります。医薬品の使用・変更は必ず医師・薬剤師にご相談ください。</p>
     <p>サイト全体の公開データ基準日 <span class="dataset-date" aria-live="polite">確認中</span>｜<a href="https://tkiyo1007-eng.github.io/drugs-data/">医薬品供給ナビ</a></p>
+    <p><a href="../guides/how-to-check-drug-supply.html">データの見方・確認手順</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></p>
   </footer>
 </div>
 <script>

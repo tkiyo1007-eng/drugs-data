@@ -66,6 +66,8 @@ h2{font-size:16.5px;margin-bottom:12px}
 .sib .mk{display:block;font-size:12px;color:var(--sub);margin-top:2px}
 .sib-note{font-size:12px;color:var(--sub);margin-bottom:10px;line-height:1.7}
 .links a{display:inline-block;margin:4px 12px 4px 0;color:var(--blue);font-size:14px}
+.hub-links{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0}
+.hub-links a{display:inline-block;color:var(--blue);background:#EEF3FF;border-radius:999px;padding:6px 12px;font-size:12.5px;font-weight:700;text-decoration:none}
 .share{min-height:44px;border:1px solid #B9C9EA;border-radius:999px;background:#fff;color:var(--blue);font:inherit;font-weight:700;padding:8px 16px;cursor:pointer}
 .share-status{font-size:12px;color:var(--sub);min-height:1.6em;margin-top:5px}
 .cta{margin-top:30px;background:linear-gradient(135deg,#2F63E8,#4F80F4);border-radius:16px;padding:24px 22px;color:#fff}
@@ -81,7 +83,7 @@ footer a{color:var(--sub)}
 <body>
 <div class="wrap">
   <header class="site"><a href="https://tkiyo1007-eng.github.io/drugs-data/">💊 医薬品供給ナビ</a></header>
-  <nav class="crumb"><a href="https://tkiyo1007-eng.github.io/drugs-data/">トップ</a> › <a href="index.html">品目別の供給状況</a> › メマンチン塩酸塩ＯＤ錠２０ｍｇ「ケミファ」</nav>
+  <nav class="crumb" aria-label="パンくず"><a href="https://tkiyo1007-eng.github.io/drugs-data/">トップ</a> › <a href="index.html">品目別の供給状況</a> › メマンチン塩酸塩ＯＤ錠２０ｍｇ「ケミファ」</nav>
   <main>
   <div class="card">
     <h1>メマンチン塩酸塩ＯＤ錠２０ｍｇ「ケミファ」<span class="tag status-ok">厚労省：通常出荷</span></h1>
@@ -98,8 +100,10 @@ footer a{color:var(--sub)}
     <table><tbody><tr><th scope="row">規格</th><td>２０ｍｇ１錠</td></tr><tr><th scope="row">供給状況</th><td>①通常出荷</td></tr><tr><th scope="row">理由</th><td>７．－</td></tr><tr><th scope="row">解除・解消見込み</th><td>エ. －</td></tr><tr><th scope="row">出荷量状況</th><td>A．出荷量通常</td></tr><tr><th scope="row">一般名</th><td>メマンチン塩酸塩</td></tr><tr><th scope="row">製造メーカー</th><td>日本ケミファ</td></tr><tr><th scope="row">販売メーカー</th><td>日本ケミファ・日本薬品工業</td></tr><tr><th scope="row">薬効分類</th><td>その他の中枢神経系用薬</td></tr><tr><th scope="row">薬価</th><td>40.5</td></tr><tr><th scope="row">ステータス更新日</th><td>2026/07/28</td></tr><tr><th scope="row">更新日</th><td>2026/07/28</td></tr><tr><th scope="row">YJコード</th><td>1190018F6149</td></tr></tbody></table>
     <p class="links">
       <a href="https://tkiyo1007-eng.github.io/drugs-data/#item=1190018F6149" data-dsn-event="item-web-open">Web版でこの品目を開く（同成分・同剤形の一覧つき）</a>
+      <a href="https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システムで品目名・YJコードを再確認</a>
       <a href="https://www.pmda.go.jp/PmdaSearch/iyakuSearch/?nameWord=%E3%83%A1%E3%83%9E%E3%83%B3%E3%83%81%E3%83%B3%E5%A1%A9%E9%85%B8%E5%A1%A9%EF%BC%AF%EF%BC%A4%E9%8C%A0%EF%BC%92%EF%BC%90%EF%BD%8D%EF%BD%87%E3%80%8C%E3%82%B1%E3%83%9F%E3%83%95%E3%82%A1%E3%80%8D" target="_blank" rel="noopener" data-dsn-event="official-source-open">PMDAで添付文書を探す</a>
     </p>
+<nav class="hub-links" aria-label="この品目の状態別一覧"><a href="resumed.html">通常出荷へ回復の一覧</a></nav>
     <button class="share" id="shareButton" type="button">この品目ページを共有</button>
     <p class="share-status" id="shareStatus" role="status" aria-live="polite"></p>
   </div>
@@ -111,7 +115,7 @@ footer a{color:var(--sub)}
 </section>
   <div class="cta">
     <h2>供給状況の変化を、毎日自動でチェック。</h2>
-    <p>医薬品供給ナビは厚労省の医薬品供給状況データ約16,000品目を毎日自動更新。お気に入り登録した品目が「限定出荷」や「出荷再開」に変わるとすぐ分かります。無料です。</p>
+    <p>医薬品供給ナビは厚労省の医薬品供給状況データ約16,000品目を毎日自動更新。監視リストに登録した品目が「限定出荷」や「出荷再開」に変わるとすぐ分かります。無料です。</p>
     <a href="https://apps.apple.com/jp/app/%E5%8C%BB%E8%96%AC%E5%93%81%E4%BE%9B%E7%B5%A6%E3%83%8A%E3%83%93/id6777696446" data-dsn-event="item-app-store-open">App Storeで入手</a>
     <a class="ghost" href="https://tkiyo1007-eng.github.io/drugs-data/#item=1190018F6149" data-dsn-event="item-web-open">Web版でこの品目を開く</a>
     <p>開いた品目は、★を押すとこのブラウザの監視リストへ保存できます。</p>
@@ -120,6 +124,7 @@ footer a{color:var(--sub)}
   <footer>
     <p class="note">本ページは厚生労働省「医療用医薬品供給状況」の公表データをもとに毎日自動生成される非公式の情報であり、厚生労働省および各製薬企業とは関係ありません。公表と実際の流通状況にタイムラグが生じる場合があります。医薬品の使用・変更は必ず医師・薬剤師にご相談ください。</p>
     <p>サイト全体の公開データ基準日 <span class="dataset-date" aria-live="polite">確認中</span>｜<a href="https://tkiyo1007-eng.github.io/drugs-data/">医薬品供給ナビ</a></p>
+    <p><a href="../guides/how-to-check-drug-supply.html">データの見方・確認手順</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></p>
   </footer>
 </div>
 <script>

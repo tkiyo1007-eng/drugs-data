@@ -171,6 +171,9 @@ jobs:
       - name: 話題のニュース・注目製品ページをコアデータで再生成
         run: python3 scripts/generate_curated_pages.py --csv drugs_app_ready.csv --site .
 
+      - name: 生成済み公開ページとサイトマップの整合性検査
+        run: python3 -m unittest discover -s scripts -p 'test_sitemap_integrity.py'
+
       - name: 検証済み厚労省コアデータと対応ページを先に公開
         run: |
           git config user.name "github-actions[bot]"
@@ -226,6 +229,10 @@ jobs:
       - name: メーカー補足情報を含めて話題のページを再生成
         if: steps.maker_refresh.outputs.updated == 'true'
         run: python3 scripts/generate_curated_pages.py --csv drugs_app_ready.csv --site .
+
+      - name: メーカー補足再生成後の公開ページ整合性検査
+        if: steps.maker_refresh.outputs.updated == 'true'
+        run: python3 -m unittest discover -s scripts -p 'test_sitemap_integrity.py'
 
       - name: 案内文PDFから包装単位を抽出（新規URLのみ）
         if: steps.maker_refresh.outputs.updated == 'true'
