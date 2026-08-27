@@ -19,9 +19,82 @@ from scripts.build_product_lifecycle import (
     verified_group_scopes,
 )
 from scripts.fetch_maker_announcements import match_to_csv
+from scripts.validate_product_lifecycle import validate
 
 
 class ProductLifecycleTests(unittest.TestCase):
+    def test_verified_tatsumi_and_maruishi_hosts_are_accepted(self):
+        cases = (
+            ("2190101F1063", "辰巳化学", "https://www.tatsumi-kagaku.com/notice.pdf"),
+            ("2614700X1441", "丸石製薬", "https://www.maruishi-pharm.co.jp/notice.pdf"),
+        )
+        for yj_code, maker, source_url in cases:
+            with self.subTest(maker=maker):
+                document, rows = self._lifecycle_fixture(yj_code, maker, source_url)
+                self.assertEqual(validate(document, rows), [])
+
+    def test_alias_and_delimited_seller_match_through_validator(self):
+        cases = (
+            (
+                "1141007C1148",
+                "日本ジェネリック",
+                "https://www.nihon-generic.co.jp/notice.pdf",
+                "長生堂製薬",
+                "長生堂製薬",
+            ),
+            (
+                "2260700F1145",
+                "日本ケミファ",
+                "https://www.nc-medical.com/notice.pdf",
+                "東亜薬品",
+                "日本ケミファ・沢井製薬",
+            ),
+        )
+        for yj_code, maker, source_url, manufacturer, seller in cases:
+            with self.subTest(maker=maker):
+                document, rows = self._lifecycle_fixture(
+                    yj_code,
+                    maker,
+                    source_url,
+                    manufacturer,
+                    seller,
+                )
+                self.assertEqual(validate(document, rows), [])
+
+    def test_similar_but_unofficial_host_is_rejected(self):
+        document, rows = self._lifecycle_fixture(
+            "2190101F1063",
+            "辰巳化学",
+            "https://evil-tatsumi-kagaku.com/notice.pdf",
+        )
+        self.assertTrue(any("公式ドメインではありません" in error for error in validate(document, rows)))
+
+    @staticmethod
+    def _lifecycle_fixture(yj_code, maker, source_url, manufacturer="", seller=""):
+        product_name = "テスト錠１ｍｇ"
+        document = {
+            "schema_version": 1,
+            "generated_at": "2026-08-28T09:00:00+09:00",
+            "products": {
+                yj_code: {
+                    "product_name": product_name,
+                    "maker": maker,
+                    "state": "discontinuation_announced",
+                    "source_title": "販売中止のお知らせ",
+                    "source_url": source_url,
+                    "verified_at": "2026-08-28",
+                }
+            },
+        }
+        rows = {
+            yj_code: {
+                "商品名": product_name,
+                "製造メーカー": manufacturer or maker,
+                "販売メーカー": seller or maker,
+            }
+        }
+        return document, rows
+
     def test_known_package_and_seller_route_false_positives_are_absent(self):
         root = Path(__file__).resolve().parents[1]
         lifecycle = json.loads(
