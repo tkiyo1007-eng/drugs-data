@@ -69,12 +69,12 @@
         {
           "@type": "Question",
           "name": "Web版とiOSアプリ版で機能に違いはありますか？",
-          "acceptedAnswer": { "@type": "Answer", "text": "検索・供給ステータスの確認・お気に入り登録による定点観測（ブラウザ保存）・CSV保存はWeb版でもご利用いただけます。お気に入りの変化のプッシュ通知と医療従事者向け掲示板はiOSアプリ限定の機能です。" }
+          "acceptedAnswer": { "@type": "Answer", "text": "検索・供給ステータスの確認・監視リスト登録による定点観測（ブラウザ保存）・CSV保存はWeb版でもご利用いただけます。Web版の監視リストは再訪時に変化を確認する機能で、プッシュ通知と医療従事者向け掲示板はiOSアプリ限定です。" }
         },
         {
           "@type": "Question",
           "name": "Android版のアプリはありますか？",
-          "acceptedAnswer": { "@type": "Answer", "text": "現在ネイティブアプリはiOS版のみですが、このWeb版はホーム画面に追加してアプリと同じように使えます（Chromeのメニューから「アプリをインストール」または「ホーム画面に追加」）。追加すると全画面で起動し、電波の届かない場所でも直前に取得したデータを表示できます。検索・お気に入り・CSV保存はWeb版でもすべてご利用いただけます。" }
+          "acceptedAnswer": { "@type": "Answer", "text": "現在ネイティブアプリはiOS版のみですが、このWeb版はホーム画面に追加してアプリと同じように使えます（Chromeのメニューから「アプリをインストール」または「ホーム画面に追加」）。追加すると全画面で起動し、電波の届かない場所でも直前に取得したデータを表示できます。検索・監視リスト・CSV保存はWeb版でもすべてご利用いただけます。" }
         },
         {
           "@type": "Question",
@@ -490,16 +490,17 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .discrepancy-panel p{font-size:12.5px;line-height:1.75;margin:3px 0}
 .discrepancy-panel .discrepancy-note{font-size:11px;color:#6B5315;margin-top:7px}
 .discrepancy-panel a{display:inline-block;margin-top:8px;color:#684B00;font-size:12px;font-weight:900}
-/* お気に入り（★）: カード右上とモーダル。localStorage保存 */
+/* 監視リスト（★）: カード右上とモーダル。localStorage保存 */
 .drug-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
-.drug-head .drug-name{margin-bottom:6px;flex:1}
+.drug-head .drug-name{margin-bottom:6px;flex:1;min-width:0}
 .fav-btn{
-  flex:none;width:44px;height:44px;margin:-8px -8px -8px 0;background:none;border:none;
-  cursor:pointer;padding:0;display:grid;place-items:center;
-  font-size:19px;line-height:1.3;color:#C9D4EA;transition:.15s;
+  flex:none;min-width:44px;height:44px;margin:-8px -8px 0 0;padding:0 12px;
+  display:inline-flex;align-items:center;justify-content:center;gap:5px;white-space:nowrap;
+  border:1px solid rgba(47,99,232,.24);border-radius:999px;background:rgba(47,99,232,.07);
+  cursor:pointer;font:inherit;font-size:12px;font-weight:900;line-height:1.3;color:var(--blue);transition:.15s;
 }
-.fav-btn:hover{transform:scale(1.15)}
-.fav-btn.on{color:#F5B301}
+.fav-btn:hover{transform:translateY(-1px);background:rgba(47,99,232,.13)}
+.fav-btn.on{color:#715300;background:rgba(245,179,1,.14);border-color:rgba(183,128,0,.35)}
 /* お気に入り登録時の光の粒アニメーション（fav-btn/modal-favの★を押した瞬間だけ発生） */
 .spark-burst{position:fixed;z-index:300;pointer-events:none;width:0;height:0}
 .spark-burst span{
@@ -528,6 +529,26 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 .modal-share:hover{background:#fff;color:var(--blue);transform:scale(1.1)}
 .modal-share.done{color:var(--ok)}
+/* 1件目の監視登録時だけ、次回訪問でのメリットをその場で伝える */
+.watch-first-add{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:15px 16px;margin-bottom:14px;border-radius:16px;
+  color:var(--ink);background:rgba(47,174,110,.1);border:1px solid rgba(47,174,110,.34);
+}
+.watch-first-add[hidden]{display:none}
+.watch-first-add-message{font-size:12.5px;line-height:1.7}
+.watch-first-add-message strong{display:block;font-size:13.5px;color:#176B43}
+.watch-first-add-actions{display:flex;align-items:center;gap:8px;flex:none}
+.watch-first-add button{
+  min-height:44px;padding:8px 13px;border-radius:999px;border:1px solid rgba(47,99,232,.28);
+  background:var(--blue);color:#fff;font:inherit;font-size:11.5px;font-weight:900;cursor:pointer;
+}
+.watch-first-add .secondary{background:transparent;color:var(--sub);border-color:rgba(90,107,148,.24)}
+@media(max-width:640px){
+  .watch-first-add{align-items:stretch;flex-direction:column}
+  .watch-first-add-actions{width:100%}
+  .watch-first-add button:first-child{flex:1}
+}
 /* お気に入りの変化通知（検索リストの上） */
 .fav-notice{padding:14px 16px;border-radius:16px;margin-bottom:14px;
   border:1px solid rgba(232,145,47,.3);background:rgba(255,250,240,.75)}
@@ -567,6 +588,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   margin:2px 0 14px;padding:13px 15px;border-radius:15px;
   color:var(--sub);background:rgba(79,128,244,.055);border:1px solid rgba(79,128,244,.18);
 }
+.watch-tools[hidden]{display:none}
 .watch-copy{font-size:11.5px;line-height:1.65;max-width:48em}
 .watch-copy strong{display:block;color:var(--ink);font-size:12.5px;margin-bottom:2px}
 .watch-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
@@ -591,6 +613,16 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .watch-dashboard h3{font-size:clamp(18px,2.6vw,24px);line-height:1.45;margin:0}
 .watch-dashboard-lede{font-size:12px;line-height:1.75;color:var(--sub);max-width:48em;margin-top:5px}
 .watch-dashboard-check{font-size:11.5px;color:var(--sub);white-space:nowrap;padding-top:4px}
+.watch-empty-start{
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+  margin-bottom:18px;padding:15px 16px;border-radius:16px;
+  background:rgba(255,255,255,.58);border:1px solid rgba(79,128,244,.2);
+}
+.watch-empty-start[hidden],.watch-dashboard-grid[hidden],.watch-dashboard-actions[hidden]{display:none}
+.watch-empty-start p{font-size:12px;line-height:1.7;color:var(--sub)}
+.watch-empty-start strong{display:block;font-size:13px;color:var(--ink)}
+.watch-empty-start-actions{display:flex;gap:8px;flex-wrap:wrap;flex:none}
+.watch-empty-start .watch-btn.secondary{color:var(--blue);background:rgba(255,255,255,.78);box-shadow:none}
 .watch-dashboard-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:18px}
 .watch-stat{padding:13px 14px;border-radius:15px;background:rgba(255,255,255,.7);border:1px solid rgba(90,107,148,.12)}
 .watch-stat span{display:block;font-size:10.5px;color:var(--sub);font-weight:700;margin-bottom:3px}
@@ -607,6 +639,9 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   .watch-dashboard{padding:20px 17px}
   .watch-dashboard-head{display:block}
   .watch-dashboard-check{white-space:normal;margin-top:8px}
+  .watch-empty-start{align-items:stretch;flex-direction:column}
+  .watch-empty-start-actions{width:100%}
+  .watch-empty-start-actions .watch-btn{flex:1;min-height:44px}
   .watch-dashboard-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .watch-dashboard-actions .watch-btn{flex:1;min-width:135px}
 }
@@ -1047,6 +1082,13 @@ footer a:hover{color:var(--blue)}
   .discrepancy-panel .discrepancy-note{color:#DCC98E}
   .discrepancy-panel a{color:#FFD978}
   .watch-stat.discrepancy strong{color:#FFD978}
+  .fav-btn{background:rgba(109,155,255,.12);border-color:rgba(143,180,255,.3)}
+  .fav-btn.on{color:#FFD764;background:rgba(245,179,1,.14);border-color:rgba(245,179,1,.35)}
+  .watch-first-add{background:rgba(79,208,140,.1);border-color:rgba(79,208,140,.36)}
+  .watch-first-add-message strong{color:#78E1AA}
+  .watch-first-add .secondary{color:#B8C4E0;border-color:rgba(126,152,214,.28)}
+  .watch-empty-start{background:rgba(38,55,102,.48);border-color:rgba(126,152,214,.22)}
+  .watch-empty-start .watch-btn.secondary{color:#BFD0F5;background:rgba(38,55,102,.72)}
 
   /* モーダル */
   .modal{
@@ -1206,14 +1248,21 @@ footer a:hover{color:var(--blue)}
         </div>
         <p class="watch-dashboard-check" id="watchLastChecked">最終確認：未設定</p>
       </div>
-      <div class="watch-dashboard-grid" role="group" aria-label="監視リストの集計">
+      <div class="watch-empty-start" id="watchEmptyStart" hidden>
+        <p><strong>まず、1品目を監視してみましょう</strong>次回アクセス時に、登録した品目の変化をまとめて確認できます。</p>
+        <div class="watch-empty-start-actions">
+          <button type="button" class="watch-btn" id="watchEmptySearch" data-dsn-event="search-cta-open">薬を検索して1品目追加</button>
+          <button type="button" class="watch-btn secondary" id="watchEmptyImport" disabled>CSVからまとめて追加</button>
+        </div>
+      </div>
+      <div class="watch-dashboard-grid" id="watchDashboardGrid" role="group" aria-label="監視リストの集計" hidden>
         <div class="watch-stat"><span>監視中</span><strong class="num" id="watchCount">0</strong></div>
         <div class="watch-stat"><span>未確認の変更</span><strong class="num" id="watchUnreadCount">0</strong></div>
         <div class="watch-stat warn"><span>悪化</span><strong class="num" id="watchWorseCount">0</strong></div>
         <div class="watch-stat ok"><span>改善</span><strong class="num" id="watchBetterCount">0</strong></div>
         <div class="watch-stat discrepancy"><span>情報差異</span><strong class="num" id="watchDiscrepancyCount">0</strong></div>
       </div>
-      <div class="watch-dashboard-actions">
+      <div class="watch-dashboard-actions" id="watchDashboardActions" hidden>
         <button type="button" class="watch-btn" id="watchUnreadBtn" disabled>未確認の変更を見る</button>
         <button type="button" class="watch-btn" id="watchDiscrepancyBtn" disabled>情報差異を見る</button>
         <button type="button" class="watch-btn secondary" id="watchCheckedBtn" disabled>確認済みにする</button>
@@ -1225,7 +1274,7 @@ footer a:hover{color:var(--blue)}
       </div>
       <p class="watch-dashboard-status" id="watchDashboardStatus" role="status" aria-live="polite"></p>
     </section>
-    <div class="watch-tools">
+    <div class="watch-tools" hidden>
       <div class="watch-copy">
         <strong>採用品目・確認したい製品をまとめて監視</strong>
         「商品名」または「YJコード」列を含むCSVから、監視リストへ一括登録できます。ファイル内容はこの端末内だけで照合し、外部へ送信しません。
@@ -1248,6 +1297,16 @@ footer a:hover{color:var(--blue)}
           <option value="99999">全件</option>
         </select>
       </label>
+    </div>
+    <div class="watch-first-add" id="watchFirstAdd" hidden>
+      <p class="watch-first-add-message" id="watchFirstAddMessage" role="status" aria-live="polite" aria-atomic="true">
+        <strong>監視リストに追加しました</strong>
+        次回アクセス時、この品目の変化をまとめて確認できます。
+      </p>
+      <div class="watch-first-add-actions">
+        <button type="button" id="watchFirstAddOpen">監視リストを見る</button>
+        <button type="button" class="secondary" id="watchFirstAddClose">閉じる</button>
+      </div>
     </div>
     <div class="fav-notice" id="favNotice" hidden></div>
     <div class="drug-list" id="list"></div>
@@ -1375,7 +1434,7 @@ footer a:hover{color:var(--blue)}
     </div>
     <div class="feature glass">
       <div class="f-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
-      <h3>お気に入りで毎日チェック</h3>
+      <h3>監視リストで毎日チェック</h3>
       <p>気になる医薬品を登録しておけば、状況の変化をまとめて確認。採用品目の監視リストとして毎日の業務に組み込めます。</p>
     </div>
     <div class="feature glass">
@@ -1487,11 +1546,11 @@ footer a:hover{color:var(--blue)}
     </details>
     <details class="faq-item">
       <summary>Web版とiOSアプリ版で機能に違いはありますか？</summary>
-      <p>検索・供給ステータスの確認・お気に入り登録による定点観測（ブラウザ保存）・CSV保存はWeb版でもご利用いただけます。お気に入りの変化のプッシュ通知と医療従事者向け掲示板はiOSアプリ限定の機能です。</p>
+      <p>検索・供給ステータスの確認・監視リスト登録による定点観測（ブラウザ保存）・CSV保存はWeb版でもご利用いただけます。Web版の監視リストは再訪時に変化を確認する機能で、プッシュ通知と医療従事者向け掲示板はiOSアプリ限定です。</p>
     </details>
     <details class="faq-item">
       <summary>Android版のアプリはありますか？</summary>
-      <p>現在ネイティブアプリは iOS 版のみですが、この Web 版はホーム画面に追加してアプリと同じように使えます（Chrome のメニューから「アプリをインストール」または「ホーム画面に追加」）。追加すると全画面で起動し、電波の届かない場所でも直前に取得したデータを表示できます。検索・お気に入り・CSV保存は Web 版でもすべてご利用いただけます。</p>
+      <p>現在ネイティブアプリは iOS 版のみですが、この Web 版はホーム画面に追加してアプリと同じように使えます（Chrome のメニューから「アプリをインストール」または「ホーム画面に追加」）。追加すると全画面で起動し、電波の届かない場所でも直前に取得したデータを表示できます。検索・監視リスト・CSV保存は Web 版でもすべてご利用いただけます。</p>
     </details>
     <details class="faq-item">
       <summary>表示されている情報は100%正確ですか？</summary>
@@ -1533,7 +1592,7 @@ footer a:hover{color:var(--blue)}
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
     <div class="modal-controls" role="group" aria-label="品目詳細の操作">
       <button type="button" class="modal-close" id="mClose" aria-label="閉じる">✕</button>
-      <button type="button" class="modal-fav" id="mFav" aria-label="お気に入りに登録" aria-pressed="false">★</button>
+      <button type="button" class="modal-fav" id="mFav" aria-label="監視リストに追加" aria-pressed="false">★</button>
       <button type="button" class="modal-share" id="mShare" aria-label="この品目へのリンクを共有" title="リンクを共有">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>
       </button>
@@ -1739,12 +1798,19 @@ function focusPrimarySearchInput(){
   try{ $q.focus({preventScroll:true}); }
   catch(e){ $q.focus(); }
 }
+document.getElementById("watchEmptySearch").addEventListener("click", ()=>{
+  setFilter("all");
+  document.getElementById("demo").scrollIntoView({behavior:"smooth", block:"start"});
+  focusPrimarySearchInput();
+});
 
 function setDataControlsEnabled(enabled){
   $q.disabled = !enabled;
   document.querySelectorAll("#pills button").forEach(button=>{ button.disabled = !enabled; });
   $pageSize.disabled = !enabled;
   if(!enabled) $watchImportBtn.disabled = true;
+  const emptyImport = document.getElementById("watchEmptyImport");
+  if(emptyImport) emptyImport.disabled = !enabled;
   if(enabled && pendingPrimarySearchFocus){
     requestAnimationFrame(()=>requestAnimationFrame(focusPrimarySearchInput));
   }
@@ -1882,8 +1948,8 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
   if(!hits.length){
     const isFavEmpty = filter==="fav" && !FAVS.size;
     const msg = isFavEmpty
-      ? `お気に入りはまだ登録されていません。<br>品目カードの ★ を押すとこのブラウザに保存され、ここに一覧表示されます。`
-      : `該当する品目が見つかりませんでした。<br>キーワードや絞り込みを変えてお試しください。`;
+      ? `監視リストはまだ登録されていません。<br>品目カードの「★ 監視に追加」を押すとこのブラウザに保存され、ここに一覧表示されます。`
+      : `該当する品目が見つかりませんでした。<br>品名の一部に短くするか、メーカー名・YJコードでお試しください。`;
     const canReset = filter!=="all" || $q.value.trim();
     // 空状態のイラスト: お気に入り0件は★、検索0件はカプセル+虫眼鏡（線画・currentColorでテーマ追従）
     const icon = isFavEmpty
@@ -1930,11 +1996,12 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
     // 品目名を本物の <button> にしてキーボード操作をそこに集約し、
     // マウス利用者向けにはカード全体のクリックをJS側で拾う
     const favorite = isFav(d);
-    const favoriteAction = favorite ? "お気に入りから解除" : "お気に入りに登録";
+    const favoriteAction = favorite ? "監視リストから解除" : "監視リストに追加";
+    const favoriteLabel = favorite ? "★ 監視中" : "★ 監視に追加";
     return `<article class="drug-card" data-i="${i}" style="--sc:${st.color};animation-delay:${Math.min(i*35,350)}ms">
       <div class="drug-head">
         <div class="drug-name"><button type="button" class="drug-open" aria-haspopup="dialog">${esc(d.n)}</button></div>
-        <button type="button" class="fav-btn${favorite?" on":""}" data-key="${esc(itemKey(d))}" aria-label="${esc(d.n)}を${favoriteAction}" aria-pressed="${favorite}">★</button>
+        <button type="button" class="fav-btn${favorite?" on":""}" data-key="${esc(itemKey(d))}" aria-label="${esc(d.n)}を${favoriteAction}" aria-pressed="${favorite}">${favoriteLabel}</button>
       </div>
       <div class="drug-maker">${esc(d.m)}${spec}</div>
       <div class="drug-foot">
@@ -2707,6 +2774,29 @@ function maybeTrackWatchActivation(beforeSize){
     }catch(e){}
   }
 }
+const $watchFirstAdd = document.getElementById("watchFirstAdd");
+const $watchFirstAddOpen = document.getElementById("watchFirstAddOpen");
+const $watchFirstAddClose = document.getElementById("watchFirstAddClose");
+let watchFirstAddShown = false;
+function maybeShowWatchFirstAdd(beforeSize, added){
+  if(!added || beforeSize !== 0 || FAVS.size !== 1 || !$watchFirstAdd) return;
+  let alreadySeen = watchFirstAddShown;
+  try{ alreadySeen = alreadySeen || localStorage.getItem("watchFirstAddSeenV1") === "1"; }catch(e){}
+  if(alreadySeen) return;
+  watchFirstAddShown = true;
+  try{ localStorage.setItem("watchFirstAddSeenV1", "1"); }catch(e){}
+  $watchFirstAdd.hidden = false;
+  dsnTrack("watchlist-first-add");
+}
+$watchFirstAddOpen.addEventListener("click", ()=>{
+  $watchFirstAdd.hidden = true;
+  const title = document.getElementById("watchDashboardTitle");
+  $watchDashboard.scrollIntoView({behavior:"smooth", block:"start"});
+  title.setAttribute("tabindex", "-1");
+  title.focus({preventScroll:true});
+  dsnTrack("watchlist-dashboard-open");
+});
+$watchFirstAddClose.addEventListener("click", ()=>{ $watchFirstAdd.hidden = true; });
 let currentDetailName = null;
 let currentDetailKey = null;
 // 絞り込みピルの選択状態。見た目(.active)だけでなく aria-pressed も必ず同時に更新する
@@ -2724,11 +2814,11 @@ function setFilter(f){
   visibleCount = PAGE_SIZE;
   render(true);
 }
-// 「★ お気に入り」ピル: 登録が1件以上あるときだけ表示（件数付き）
+// 「★ 監視中」ピル: 登録が1件以上あるときだけ表示（件数付き）
 function updateFavPill(){
   const $pf = document.getElementById("pillFav");
   if(FAVS.size){
-    $pf.textContent = `★ お気に入り ${FAVS.size}`;
+    $pf.textContent = `★ 監視中 ${FAVS.size}`;
     $pf.style.display = "";
   }else{
     $pf.style.display = "none";
@@ -2738,9 +2828,11 @@ function updateFavPill(){
 function toggleFav(item){
   if(!item) return;
   const key = itemKey(item), beforeSize = FAVS.size;
-  FAVS.has(key) ? FAVS.delete(key) : FAVS.add(key);
+  const added = !FAVS.has(key);
+  added ? FAVS.add(key) : FAVS.delete(key);
   saveFavs();
   maybeTrackWatchActivation(beforeSize);
+  maybeShowWatchFirstAdd(beforeSize, added);
   updateFavPill();
   renderWatchDashboard();
   renderFavNotice();
@@ -2754,8 +2846,8 @@ function syncModalFavorite(item){
   button.classList.toggle("on", favorite);
   button.setAttribute("aria-pressed", String(favorite));
   button.setAttribute("aria-label", item
-    ? `${item.n}を${favorite ? "お気に入りから解除" : "お気に入りに登録"}`
-    : "お気に入りに登録");
+    ? `${item.n}を${favorite ? "監視リストから解除" : "監視リストに追加"}`
+    : "監視リストに追加");
 }
 updateFavPill();
 
@@ -2767,8 +2859,10 @@ const $watchImportFile = document.getElementById("watchImportFile");
 const $watchImportResult = document.getElementById("watchImportResult");
 const $watchDashboardStatus = document.getElementById("watchDashboardStatus");
 const $watchRestoreBtn = document.getElementById("watchRestoreBtn");
+const $watchEmptyImport = document.getElementById("watchEmptyImport");
 $watchImportBtn.addEventListener("click", ()=> $watchImportFile.click());
 if($watchRestoreBtn) $watchRestoreBtn.addEventListener("click", ()=> $watchImportFile.click());
+if($watchEmptyImport) $watchEmptyImport.addEventListener("click", ()=> $watchImportFile.click());
 
 async function importWatchFile(file){
   $watchImportResult.className = "watch-result";
@@ -2912,6 +3006,11 @@ function renderWatchDashboard(){
   );
   const worse = WATCH_UNREAD.filter(change=>classifyWatchChange(change)==="worse").length;
   const better = WATCH_UNREAD.filter(change=>classifyWatchChange(change)==="better").length;
+  const empty = FAVS.size === 0;
+  document.getElementById("watchEmptyStart").hidden = !empty;
+  document.getElementById("watchDashboardGrid").hidden = empty;
+  document.getElementById("watchDashboardActions").hidden = empty;
+  $watchTools.hidden = empty;
   document.getElementById("watchCount").textContent = FAVS.size.toLocaleString();
   document.getElementById("watchUnreadCount").textContent = WATCH_UNREAD.length.toLocaleString();
   document.getElementById("watchWorseCount").textContent = worse.toLocaleString();
@@ -4045,7 +4144,7 @@ function failDataLoad(message){
   renderFavNotice();
   tryOpenFromHash();
   document.getElementById("demoNote").textContent =
-    "※ 厚生労働省公表の実データを表示しています。★でお気に入り登録もできます（このブラウザに保存）。通知や掲示板は iOS アプリでご利用いただけます。";
+    "※ 厚生労働省公表の実データを表示しています。「★ 監視に追加」で、次回アクセス時に変化をまとめて確認できます（このブラウザに保存）。通知や掲示板は iOS アプリでご利用いただけます。";
 
   // ヒーローを実数値に更新
   const total = items.length;
