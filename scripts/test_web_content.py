@@ -40,8 +40,9 @@ class PublishedWebContentTests(unittest.TestCase):
         self.assertNotIn("Excelファイルのため実用的ではない", self.html)
 
     def test_mobile_search_compaction_is_published(self):
-        self.assertIn("#demo{padding-top:28px}", self.html)
-        self.assertIn(".pulse-sub,.supply-bar,.legend,.float-chip{display:none}", self.html)
+        self.assertIn("#demo{padding-top:20px}", self.html)
+        self.assertIn("header .hero-visual{display:none}", self.html)
+        self.assertIn('href="#demo" data-focus-search', self.html)
 
     def test_dosage_search_uses_the_same_numeric_boundary_as_ios(self):
         self.assertIn("const DOSAGE_SEARCH_UNITS = [", self.html)
