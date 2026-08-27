@@ -4,9 +4,16 @@
   <id>https://tkiyo1007-eng.github.io/drugs-data/updates/feed.xml</id>
   <link rel="self" type="application/atom+xml" href="https://tkiyo1007-eng.github.io/drugs-data/updates/feed.xml"/>
   <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/index.html"/>
-  <updated>2026-08-26T00:00:00+09:00</updated>
+  <updated>2026-08-28T00:00:00+09:00</updated>
   <author><name>医薬品供給ナビ</name></author>
   <subtitle>厚生労働省公表データ上で供給状況が変わった医薬品を日別に配信します。</subtitle>
+  <entry>
+    <title>2026年8月28日の供給変更（25品目）</title>
+    <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-08-28.html</id>
+    <link rel="alternate" href="https://tkiyo1007-eng.github.io/drugs-data/updates/2026-08-28.html"/>
+    <updated>2026-08-28T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ2品目、限定出荷へ3品目、供給停止へ20品目</summary>
+  </entry>
   <entry>
     <title>2026年8月26日の供給変更（22品目）</title>
     <id>https://tkiyo1007-eng.github.io/drugs-data/updates/2026-08-26.html</id>
