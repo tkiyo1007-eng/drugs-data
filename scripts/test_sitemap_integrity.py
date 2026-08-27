@@ -14,6 +14,7 @@ SITEMAPS = {
     "sitemap-updates.xml",
     "sitemap-curated.xml",
 }
+SITEMAP_INDEX = "sitemap-index.xml"
 XML_NAMESPACE = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
 
 
@@ -25,6 +26,14 @@ def sitemap_entries(path: Path) -> list[tuple[str, str]]:
         lastmod = (node.findtext("sm:lastmod", default="", namespaces=XML_NAMESPACE)).strip()
         entries.append((location, lastmod))
     return entries
+
+
+def sitemap_index_locations(path: Path) -> list[str]:
+    root = ET.parse(path).getroot()
+    return [
+        (node.findtext("sm:loc", default="", namespaces=XML_NAMESPACE)).strip()
+        for node in root.findall("sm:sitemap", XML_NAMESPACE)
+    ]
 
 
 def local_path(location: str) -> Path:
@@ -43,13 +52,21 @@ class SitemapIntegrityTests(unittest.TestCase):
             for name, entries in cls.entries_by_sitemap.items()
             for location, lastmod in entries
         ]
+        cls.index_locations = sitemap_index_locations(ROOT / SITEMAP_INDEX)
 
-    def test_robots_declares_each_sitemap_group_exactly_once(self):
+    def test_robots_declares_only_the_parent_sitemap_index(self):
         robots = (ROOT / "robots.txt").read_text(encoding="utf-8")
         declared = re.findall(r"^Sitemap:\s*(\S+)\s*$", robots, re.MULTILINE)
+        self.assertEqual([SITE_ROOT + SITEMAP_INDEX], declared)
+
+    def test_parent_index_lists_each_sitemap_group_exactly_once(self):
         expected = {SITE_ROOT + name for name in SITEMAPS}
-        self.assertEqual(expected, set(declared))
-        self.assertEqual(len(declared), len(set(declared)))
+        self.assertEqual(expected, set(self.index_locations))
+        self.assertEqual(len(self.index_locations), len(set(self.index_locations)))
+        for location in self.index_locations:
+            with self.subTest(location=location):
+                name = location.removeprefix(SITE_ROOT)
+                self.assertTrue((ROOT / name).is_file())
 
     def test_sitemap_locations_are_unique_existing_canonical_pages(self):
         locations = [location for _, location, _ in self.all_entries]

@@ -22,8 +22,8 @@
       "url": "./#f=limited"
     },
     {
-      "name": "お気に入りを見る",
-      "short_name": "お気に入り",
+      "name": "監視リストを見る",
+      "short_name": "監視リスト",
       "url": "./#f=fav"
     }
   ]
