@@ -114,6 +114,72 @@ def split_supply_metadata(label: str, value: str) -> list[tuple[str, str]]:
             ("出荷量状況", match.group(2).strip())]
 
 
+def ld_json(value: object) -> str:
+    """HTMLのscript要素を閉じられない形でJSON-LDを埋め込む。"""
+    return (json.dumps(value, ensure_ascii=False, separators=(",", ":"))
+            .replace("&", "\\u0026").replace("<", "\\u003c").replace(">", "\\u003e"))
+
+
+def supply_metadata_values(row: dict) -> dict[str, str]:
+    """供給CSVの直接列と、旧互換の複合列から公表値を取り出す。"""
+    values = {}
+    for field in ("解除・解消見込み", "出荷量状況"):
+        value = str(row.get(field) or "").strip()
+        if value:
+            values[field] = value
+    legacy = str(row.get("代替候補") or "").strip()
+    if legacy:
+        for field, value in split_supply_metadata("代替候補", legacy):
+            if field in {"解除・解消見込み", "出荷量状況"} and value:
+                values.setdefault(field, value)
+    return values
+
+
+def official_status_meaning(row: dict, status: str) -> str:
+    """厚労省が公開している出荷対応区分の意味を、推測せず短く示す。"""
+    raw = str(row.get("供給状況") or "")
+    if status == "ok":
+        return "全ての受注に対応でき、十分な在庫量が確保できている区分です。"
+    if status == "limited":
+        if "自社の事情" in raw:
+            return "自社の事情により、全ての受注に対応できない区分です。"
+        if "他社品の影響" in raw:
+            return "他社品の影響等により、全ての受注に対応できない区分です。"
+        return "その他の理由により、全ての受注に対応できない区分です。"
+    if status == "stopped":
+        return "市場への供給を停止している区分です。"
+    return "販売中止として収録されている品目です。"
+
+
+def quick_answers_html(row: dict, status: str, display_name: str) -> str:
+    """検索者の「なぜ・解除見込み」に、公表値だけで答える要点欄。"""
+    raw_status = str(row.get("供給状況") or STATUSES[status]["label"]).strip()
+    reason = str(row.get("理由") or "").strip() or "記載なし"
+    metadata = supply_metadata_values(row)
+    release = metadata.get("解除・解消見込み", "記載なし")
+    shipment = metadata.get("出荷量状況", "記載なし")
+    updated = official_row_date(row) or "確認できません"
+    if status == "limited":
+        question = f"{display_name}はなぜ限定出荷（出荷調整）？"
+    elif status == "stopped":
+        question = f"{display_name}はなぜ供給停止？"
+    elif status == "ended":
+        question = f"{display_name}の販売中止・供給状況は？"
+    else:
+        question = f"{display_name}は現在、通常出荷？"
+    reason_part = (f'、理由欄は「<strong>{esc(reason)}</strong>」'
+                   if status != "ok" else "")
+    return f'''<section class="quick-answers" aria-labelledby="quickAnswerTitle">
+      <h2 id="quickAnswerTitle">公表情報の要点</h2>
+      <dl>
+        <div><dt>{esc(question)}</dt><dd>厚生労働省公表データの出荷対応は「<strong>{esc(raw_status)}</strong>」{reason_part}です。{esc(official_status_meaning(row, status))}公表されていない個別事情は推測していません。</dd></div>
+        <div><dt>解除・解消見込みの公表区分は？</dt><dd>公表欄の記載は「<strong>{esc(release)}</strong>」です。この欄は見込みの有無を示す区分です。具体的な時期は厚生労働省の公式システムとメーカー案内の原文もご確認ください。</dd></div>
+        <div><dt>公表上の出荷量は？</dt><dd>出荷量状況の記載は「<strong>{esc(shipment)}</strong>」です。実際の在庫や受注可否は卸・メーカーにもご確認ください。</dd></div>
+        <div><dt>この品目情報はいつ更新？</dt><dd>品目行で確認できる最新日は「<strong>{esc(updated)}</strong>」です。サイト全体の基準日は下に別表示します。</dd></div>
+      </dl>
+    </section>'''
+
+
 def is_delist(row: dict) -> bool:
     """薬価削除予定(近く販売終了となる見込み)か。
 
@@ -167,7 +233,7 @@ def eff_sev(row: dict) -> int:
 
 
 def pick_siblings(row: dict, candidates: list) -> list:
-    """同成分・同剤形の他社品を、厚労省公表区分の順に返す。"""
+    """同成分・同剤形の他社品を、同規格・厚労省公表区分の順に返す。"""
     yj8 = re.sub(r"[^0-9A-Za-z]", "", row.get("YJコード", "") or "")[:8]
     warm = is_warm_patch(row)
     kind = patch_kind(row)
@@ -184,7 +250,10 @@ def pick_siblings(row: dict, candidates: list) -> list:
         if kind and x_kind and x_kind != kind:
             continue                       # テープとパップを混ぜない
         out.append(x)
-    out.sort(key=lambda x: (eff_sev(x), x.get("商品名") or ""))
+    target_spec = normalized_text(row.get("規格"))
+    out.sort(key=lambda x: (
+        0 if target_spec and normalized_text(x.get("規格")) == target_spec else 1,
+        eff_sev(x), x.get("商品名") or ""))
     return out
 
 
@@ -671,7 +740,11 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
             + ("（薬価削除予定）" if delist else "")
             + (f"。メーカー公式補足は「{'／'.join(supplements)}」" if supplements else "")
             + "。サイト全体の最新基準日はページ上で別途表示します。"
-            + "理由・解除見込み・出荷量状況・同成分の他社品は、公表されている場合に確認できます。")
+            + "理由・解除見込みの公表区分・出荷量状況・同成分・同剤形のほかの品目は、公表されている場合に確認できます。")
+    public_metadata = supply_metadata_values(row)
+    if status in {"limited", "stopped", "ended"}:
+        desc += (f"公表理由は「{(row.get('理由') or '記載なし').strip()}」、"
+                 f"解除・解消見込みは「{public_metadata.get('解除・解消見込み', '記載なし')}」です。")
     url = f"{SITE_ROOT}items/{key}.html"
     # 商品名は同名品目があるため、LPの詳細リンクも一意な品目キーを使う。
     lp_link = SITE_ROOT + "#item=" + quote(key, safe="")
@@ -733,7 +806,8 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
                     f'<tr><th scope="row">{esc(shown_col)}</th><td>{esc(shown_value)}</td></tr>')
 
     # 同成分(一般名が同じ)の他社品。生成済みページがあれば内部リンク、なければLPの詳細へ
-    sib_html = ""
+    related_heading = (f"同成分・同剤形（{esc(gen)}）のほかの品目の供給状況"
+                       if gen else "同成分・同剤形のほかの品目の供給状況")
     if siblings:
         lis = []
         for s in siblings[:12]:
@@ -746,23 +820,36 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
                 f'<li><a href="{href}" data-dsn-event="related-item-open">'
                 f'{esc((display_names or {}).get(s_key, s["商品名"]))}</a>'
                 f'<span class="tag status-{s_status}">{s_st["label"]}</span>'
-                f'<span class="mk">{esc((s.get("販売メーカー") or s.get("製造メーカー") or "").strip())}</span></li>')
+                f'<span class="mk">{esc("｜".join(filter(None, [(s.get("規格") or "").strip(), (s.get("販売メーカー") or s.get("製造メーカー") or "").strip()])))}</span></li>')
         warm_note = ("この品目は温感タイプのため、温感タイプの品目のみを表示しています。"
                      if is_warm_patch(row) else "")
         sib_html = f"""
 <section>
-  <h2>同成分・同剤形（{esc(gen)}）の他社品の供給状況</h2>
-  <p class="sib-note">厚生労働省公表区分上の通常出荷を先に表示しています。代替適否や実在庫を示す順位ではありません。{esc(warm_note)}適応・規格・剤形の互換性は必ず添付文書と医師・薬剤師の判断でご確認ください。</p>
+  <h2>{related_heading}</h2>
+  <p class="sib-note">同じ規格を優先し、その中で現在の厚生労働省公表区分と薬価削除予定を考慮して表示しています。代替適否や実在庫を示す順位ではありません。{esc(warm_note)}適応・規格・剤形の互換性は必ず添付文書と医師・薬剤師の判断でご確認ください。</p>
   <ul class="sib">{''.join(lis)}</ul>
 </section>"""
+    else:
+        sib_html = f"""
+<section>
+  <h2>{related_heading}</h2>
+  <p class="sib-note">現在の公開データから、同成分・同剤形の確認候補は見つかりませんでした。候補がないことは、代替品が存在しないことや実在庫がないことを意味しません。メーカー・卸の最新情報もご確認ください。</p>
+</section>"""
 
-    breadcrumb_ld = json.dumps({
+    breadcrumb_ld = ld_json({
         "@context": "https://schema.org", "@type": "BreadcrumbList",
         "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": "医薬品供給ナビ", "item": SITE_ROOT},
             {"@type": "ListItem", "position": 2, "name": "品目別の供給状況", "item": SITE_ROOT + "items/index.html"},
             {"@type": "ListItem", "position": 3, "name": display_name, "item": url},
-        ]}, ensure_ascii=False)
+        ]})
+    webpage_ld = ld_json({
+        "@context": "https://schema.org", "@type": "WebPage",
+        "name": title, "description": desc, "url": url, "inLanguage": "ja",
+        "dateModified": item_page_lastmod(row, lifecycle_match, discrepancy_match),
+        "isPartOf": {"@type": "WebSite", "name": "医薬品供給ナビ", "url": SITE_ROOT},
+    })
+    quick_answers = quick_answers_html(row, status, display_name)
 
     return f"""<!DOCTYPE html>
 <html lang="ja">
@@ -788,6 +875,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
 <meta name="twitter:image:alt" content="医薬品供給ナビの供給状況サマリー">
 <meta name="apple-itunes-app" content="{smart_app_banner}">
 <script type="application/ld+json">{breadcrumb_ld}</script>
+<script type="application/ld+json">{webpage_ld}</script>
 <script src="../analytics.js"></script>
 <style>
 :root{{--blue:#2F63E8;--ink:#1C2A44;--sub:#5A6B8C;--line:#E3EAF6}}
@@ -821,6 +909,18 @@ h1{{font-size:22px;line-height:1.45;margin-bottom:6px}}
 .dataset-context{{color:var(--sub);font-size:12px;line-height:1.7;margin:-8px 0 14px}}
 .dataset-warning{{color:#704700;background:#FFF3CF;border:1px solid #E4B662;border-radius:10px;padding:9px 12px;font-size:12px;margin:0 0 14px}}
 .dataset-warning[hidden]{{display:none}}
+.quick-answers{{margin:18px 0 16px;background:#F8FAFF;border:1px solid #CFDBF2;border-radius:14px;padding:16px}}
+.quick-answers h2{{margin:0 0 10px;font-size:17px}}
+.quick-answers dl>div{{padding:10px 0;border-top:1px solid var(--line)}}
+.quick-answers dl>div:first-child{{border-top:0;padding-top:0}}
+.quick-answers dt{{font-weight:800;font-size:14px;margin-bottom:3px}}
+.quick-answers dd{{font-size:13px;color:var(--sub)}}
+.watch-card{{margin:16px 0;padding:15px;border-radius:14px;background:#EEF3FF;border:1px solid #C8D6F3}}
+.watch-button{{min-height:46px;border:0;border-radius:999px;background:var(--blue);color:#fff;font:inherit;font-size:14px;font-weight:800;padding:10px 18px;cursor:pointer}}
+.watch-button.on{{color:#624900;background:#FFD966}}
+.watch-note,.watch-status{{font-size:12px;color:var(--sub);line-height:1.65;margin-top:7px}}
+.watch-status{{min-height:1.65em;font-weight:700}}
+.watch-card a{{color:var(--blue);font-weight:700}}
 table{{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:8px}}
 th,td{{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}}
 th{{white-space:nowrap;color:var(--sub);font-weight:600;width:8.5em}}
@@ -857,6 +957,13 @@ footer a{{color:var(--sub)}}
     <div class="stbox status-{status}">
       厚生労働省公表データ上の供給区分は「<strong>{st['label']}</strong>」です。{STATUS_NOTES[status]}
     </div>
+    <div class="watch-card">
+      <button class="watch-button" id="watchButton" type="button" aria-pressed="false">☆ この品目を監視リストに追加</button>
+      <p class="watch-note">このブラウザ内だけに保存し、次回Web版を開いたときに変化を確認できます。Web版から通知は届きません（プッシュ通知はiOSアプリのみ）。</p>
+      <p class="watch-status" id="watchStatus" role="status" aria-live="polite"></p>
+      <a href="{SITE_ROOT}#f=fav">監視リストを見る</a>
+    </div>
+    {quick_answers}
     {dataset_context}
     <p class="dataset-warning" id="datasetWarning" role="status" hidden></p>
 {delist_box}
@@ -865,7 +972,7 @@ footer a{{color:var(--sub)}}
 {discrepancy_box}
     <table><tbody>{''.join(detail_rows)}</tbody></table>
     <p class="links">
-      <a href="{lp_link}" data-dsn-event="item-web-open">Web版でこの品目を開く（同成分・同剤形の一覧つき）</a>
+      <a href="{lp_link}" data-dsn-event="item-web-open">Web版でこの品目を開く{'（同成分・同剤形の一覧つき）' if siblings else ''}</a>
       <a href="{OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システムで品目名・YJコードを再確認</a>
       <a href="{pmda}" target="_blank" rel="noopener" data-dsn-event="official-source-open">PMDAで添付文書を探す</a>
     </p>
@@ -876,7 +983,7 @@ footer a{{color:var(--sub)}}
 {sib_html}
   <div class="cta">
     <h2>供給状況の変化を、毎日自動でチェック。</h2>
-    <p>医薬品供給ナビは厚労省の医薬品供給状況データ約16,000品目を毎日自動更新。監視リストに登録した品目が「限定出荷」や「出荷再開」に変わるとすぐ分かります。無料です。</p>
+    <p>医薬品供給ナビは厚労省の医薬品供給状況データ約16,000品目を毎日自動更新。Web版は次回アクセス時に監視品目の変化をまとめて確認でき、iOSアプリはプッシュ通知にも対応しています。無料です。</p>
     <a href="{APP_STORE}" data-dsn-event="item-app-store-open">App Storeで入手</a>
     <a class="ghost" href="{lp_link}" data-dsn-event="item-web-open">Web版でこの品目を開く</a>
     <p>開いた品目は、★を押すとこのブラウザの監視リストへ保存できます。</p>
@@ -890,6 +997,47 @@ footer a{{color:var(--sub)}}
 </div>
 <script>
 (function(){{
+  const watchButton = document.getElementById("watchButton");
+  const watchStatus = document.getElementById("watchStatus");
+  const watchKey = {json.dumps(key, ensure_ascii=True)};
+  function readWatchKeys(){{
+    try{{
+      const saved = JSON.parse(localStorage.getItem("favDrugKeysV2") || "[]");
+      if(Array.isArray(saved)) return new Set(saved.map(String));
+    }}catch(error){{}}
+    return new Set();
+  }}
+  let watchKeys = readWatchKeys();
+  function syncWatchButton(){{
+    if(!watchButton) return;
+    const watching = watchKeys.has(watchKey);
+    watchButton.classList.toggle("on", watching);
+    watchButton.setAttribute("aria-pressed", String(watching));
+    watchButton.textContent = watching ? "★ 監視中（解除する）" : "☆ この品目を監視リストに追加";
+  }}
+  syncWatchButton();
+  if(watchButton) watchButton.addEventListener("click", function(){{
+    watchKeys = readWatchKeys();
+    const adding = !watchKeys.has(watchKey);
+    adding ? watchKeys.add(watchKey) : watchKeys.delete(watchKey);
+    try{{
+      localStorage.setItem("favDrugKeysV2", JSON.stringify(Array.from(watchKeys)));
+      watchStatus.textContent = adding
+        ? "監視リストに追加しました。次回Web版を開いたときに変化を確認できます。"
+        : "監視リストから解除しました。";
+      if(adding && window.dsnTrack) window.dsnTrack("item-watchlist-add");
+      syncWatchButton();
+    }}catch(error){{
+      if(adding) watchKeys.delete(watchKey); else watchKeys.add(watchKey);
+      watchStatus.textContent = "このブラウザには保存できませんでした。設定をご確認ください。";
+      syncWatchButton();
+    }}
+  }});
+  addEventListener("storage", function(event){{
+    if(event.key !== "favDrugKeysV2") return;
+    watchKeys = readWatchKeys();
+    syncWatchButton();
+  }});
   const button = document.getElementById("shareButton");
   const status = document.getElementById("shareStatus");
   if(button) button.addEventListener("click", async function(){{
@@ -972,13 +1120,13 @@ def index_html(entries, dataset_date):
     desc = ("厚生労働省公表の供給区分と、検証済みメーカー公式案内を分けて確認できる医療用医薬品一覧。"
             "供給停止・限定出荷・販売中止予定などを毎日自動更新しています。")
     # 個別ページ側と同じ階層を示す。item のURLは canonical と揃えること
-    breadcrumb_ld = json.dumps({
+    breadcrumb_ld = ld_json({
         "@context": "https://schema.org", "@type": "BreadcrumbList",
         "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": "医薬品供給ナビ", "item": SITE_ROOT},
             {"@type": "ListItem", "position": 2, "name": "品目別の供給状況",
              "item": SITE_ROOT + "items/index.html"},
-        ]}, ensure_ascii=False)
+        ]})
     return f"""<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -1064,7 +1212,7 @@ def hub_html(slug, entries, dataset_date):
             f'<a href="{other_slug}.html"{current}>'
             f'{esc(other["label"])}（{count:,}）</a>')
     other_hubs = "".join(other_hub_links)
-    structured = json.dumps({
+    structured = ld_json({
         "@context": "https://schema.org",
         "@graph": [
             {
@@ -1083,7 +1231,7 @@ def hub_html(slug, entries, dataset_date):
                 "description": config["description"], "dateModified": dataset_date,
             },
         ],
-    }, ensure_ascii=False)
+    })
     return f"""<!DOCTYPE html>
 <html lang="ja">
 <head>

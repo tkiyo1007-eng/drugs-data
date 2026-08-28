@@ -162,6 +162,7 @@ class CuratedPageGenerationTests(unittest.TestCase):
             "商品名": "ルリコンクリーム1%",
             "供給状況": "③限定出荷（他社品の影響）",
             "理由": "１．需要増",
+            "代替候補": "解除/解消見込み: ウ. 未定 / 出荷量状況: B．出荷量減少",
             "更新日": "2026/02/10",
             "YJコード": "2655712N1020",
         }]
@@ -171,6 +172,7 @@ class CuratedPageGenerationTests(unittest.TestCase):
 
         self.assertIn("厚労省公表の供給区分：③限定出荷（他社品の影響）", output)
         self.assertIn("公表上の理由：１．需要増", output)
+        self.assertIn("解除・解消見込み：ウ. 未定", output)
         self.assertIn("この品目行の更新日：2026-02-10", output)
         self.assertIn("表示されていない原因を推測で補いません", output)
         self.assertIn("代替薬の推薦ではありません", output)
@@ -179,6 +181,7 @@ class CuratedPageGenerationTests(unittest.TestCase):
         self.assertIn("限定出荷", title)
         self.assertLessEqual(len(title), 70)
         self.assertIn("代替適否や実在庫は示しません", description)
+        self.assertIn("解除・解消見込み「ウ. 未定」", description)
 
     def test_lulicon_recovery_does_not_leave_a_limited_shipment_claim(self):
         product = {

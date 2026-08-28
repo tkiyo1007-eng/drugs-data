@@ -28,6 +28,26 @@ ALLOWED_STATUSES = {
     "④限定出荷（その他）",
     "⑤供給停止",
 }
+ALLOWED_REASONS = {
+    "１．需要増",
+    "２．原材料調達上の問題",
+    "３．製造トラブル（製造委託を含む）",
+    "４．品質トラブル（製造委託を含む）",
+    "５．行政処分（製造委託を含む）",
+    "６．薬価削除",
+    "７．－",
+    "８．その他の理由",
+}
+ALLOWED_RELEASE_OUTLOOKS = {"ア. あり", "イ. なし", "ウ. 未定", "エ. －"}
+ALLOWED_SHIPMENT_VOLUMES = {
+    "Aプラス．出荷量増加",
+    "A．出荷量通常",
+    "B．出荷量減少",
+    "C．出荷停止",
+    "D．薬価削除予定",
+}
+SUPPLY_METADATA_PATTERN = re.compile(
+    r"解除/解消見込み:\s*(.*?)\s*/\s*出荷量状況:\s*(.*)\Z")
 YJ_PATTERN = re.compile(r"(?:[0-9A-Z]{12}|X[0-9]{5})\Z")
 MAKER_NOISE_MARKER = "本注意事項等情報を使用している製造販売業者一覧表"
 
@@ -74,6 +94,41 @@ def validate_csv(path, *, today=None, min_rows=10000, max_rows=30000, max_age_da
     if unknown:
         errors.append("未対応の供給状況があります: "
                       + ", ".join(f"{status} ({statuses[status]:,}件)" for status in unknown))
+
+    reasons = Counter((row.get("理由") or "").strip() for row in rows)
+    unknown_reasons = sorted(reason for reason in reasons if reason not in ALLOWED_REASONS)
+    if unknown_reasons:
+        errors.append("未対応または空の理由区分があります: "
+                      + ", ".join(f"{reason or '空欄'} ({reasons[reason]:,}件)"
+                                  for reason in unknown_reasons))
+
+    malformed_metadata = []
+    release_outlooks = Counter()
+    shipment_volumes = Counter()
+    for index, row in enumerate(rows, start=2):
+        value = (row.get("代替候補") or "").strip()
+        match = SUPPLY_METADATA_PATTERN.fullmatch(value)
+        if not match:
+            malformed_metadata.append((index, value))
+            continue
+        release_outlooks[match.group(1).strip()] += 1
+        shipment_volumes[match.group(2).strip()] += 1
+    if malformed_metadata:
+        errors.append(
+            f"解除見込み・出荷量の複合形式が不正な行が{len(malformed_metadata):,}件あります: "
+            + ", ".join(f"{line}行目={value!r}" for line, value in malformed_metadata[:5]))
+    unknown_release = sorted(value for value in release_outlooks
+                             if value not in ALLOWED_RELEASE_OUTLOOKS)
+    if unknown_release:
+        errors.append("未対応の解除・解消見込み区分があります: "
+                      + ", ".join(f"{value} ({release_outlooks[value]:,}件)"
+                                  for value in unknown_release))
+    unknown_volume = sorted(value for value in shipment_volumes
+                            if value not in ALLOWED_SHIPMENT_VOLUMES)
+    if unknown_volume:
+        errors.append("未対応の出荷量状況区分があります: "
+                      + ", ".join(f"{value} ({shipment_volumes[value]:,}件)"
+                                  for value in unknown_volume))
 
     yj_values = []
     bad_yj = []

@@ -50,6 +50,7 @@ class PrivacyAnalyticsContractTests(unittest.TestCase):
             "topic-to-search",
             "static-page-share-success",
             "watchlist-first-add",
+            "item-watchlist-add",
         }
         self.assertTrue(required.issubset(events))
         self.assertRegex(self.analytics, r'count\(\{path:"event:"\+name, title:name, event:true\}\)')

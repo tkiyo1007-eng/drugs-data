@@ -1,3 +1,5 @@
+import json
+import re
 import unittest
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -17,10 +19,12 @@ from generate_item_pages import (
     official_row_date,
     page_html,
     page_title,
+    pick_siblings,
     recent_recovery_keys,
     reconcile_existing_pages,
     should_generate,
     sitemap_xml,
+    supply_metadata_values,
     supplemental_context,
     validated_product_map,
     version_date,
@@ -28,6 +32,103 @@ from generate_item_pages import (
 
 
 class ItemPageMetadataTests(unittest.TestCase):
+    def test_item_page_answers_reason_release_and_shipment_without_inference(self):
+        row = {
+            "商品名": "テスト錠10mg",
+            "一般名": "テスト成分",
+            "製造メーカー": "テスト製薬",
+            "供給状況": "③限定出荷（他社品の影響）",
+            "理由": "１．需要増",
+            "代替候補": "解除/解消見込み: ウ. 未定 / 出荷量状況: B．出荷量減少",
+            "更新日": "2026/08/20",
+            "YJコード": "1234567F1234",
+        }
+        self.assertEqual({
+            "解除・解消見込み": "ウ. 未定",
+            "出荷量状況": "B．出荷量減少",
+        }, supply_metadata_values(row))
+
+        output = page_html(
+            row, "1234567F1234", "limited", "2026-08-28", [],
+            {"1234567F1234"},
+        )
+
+        self.assertIn("テスト錠10mgはなぜ限定出荷（出荷調整）？", output)
+        self.assertIn("理由欄は「<strong>１．需要増</strong>」", output)
+        self.assertIn("公表欄の記載は「<strong>ウ. 未定</strong>」", output)
+        self.assertIn("出荷量状況の記載は「<strong>B．出荷量減少</strong>」", output)
+        self.assertIn("公表されていない個別事情は推測していません", output)
+        self.assertLess(output.index('class="quick-answers"'), output.index("<table>"))
+        self.assertIn('id="watchButton"', output)
+        self.assertLess(output.index('id="watchButton"'), output.index("<table>"))
+        self.assertLess(output.index('id="watchButton"'), output.index('class="quick-answers"'))
+        self.assertIn('localStorage.setItem("favDrugKeysV2"', output)
+        self.assertIn('watchKeys = readWatchKeys();', output)
+        self.assertIn('addEventListener("storage"', output)
+        self.assertIn('window.dsnTrack("item-watchlist-add")', output)
+        self.assertIn('"@type":"WebPage"', output)
+        self.assertIn("解除・解消見込みの公表区分は？", output)
+        self.assertIn("厚生労働省の公式システムとメーカー案内の原文", output)
+        description = output.split('<meta name="description" content="', 1)[1].split('">', 1)[0]
+        self.assertIn("公表理由は「１．需要増」", description)
+        self.assertIn("解除・解消見込みは「ウ. 未定」", description)
+
+    def test_related_items_prioritize_same_spec_before_status(self):
+        row = {
+            "商品名": "対象錠20mg", "一般名": "対象成分", "規格": "20mg1錠",
+            "供給状況": "②限定出荷（自社の事情）", "YJコード": "1234567F1000",
+        }
+        candidates = [row,
+            {"商品名": "別社錠10mg", "規格": "10mg1錠", "供給状況": "①通常出荷", "YJコード": "1234567F1001"},
+            {"商品名": "別社B錠20mg", "規格": "20mg1錠", "供給状況": "②限定出荷（自社の事情）", "YJコード": "1234567F1002"},
+            {"商品名": "別社A錠20mg", "規格": "20mg1錠", "供給状況": "①通常出荷", "YJコード": "1234567F1003"},
+        ]
+
+        ordered = pick_siblings(row, candidates)
+
+        self.assertEqual(
+            ["別社A錠20mg", "別社B錠20mg", "別社錠10mg"],
+            [item["商品名"] for item in ordered],
+        )
+        output = page_html(
+            row, "1234567F1000", "limited", "2026-08-28", ordered,
+            {"1234567F1000", "1234567F1001", "1234567F1002", "1234567F1003"},
+        )
+        self.assertIn('<span class="mk">20mg1錠</span>', output)
+        self.assertIn("同じ規格を優先し、その中で現在の厚生労働省公表区分と薬価削除予定", output)
+        self.assertIn("ほかの品目の供給状況", output)
+
+    def test_item_page_explicitly_explains_when_no_related_candidates_exist(self):
+        row = {
+            "商品名": "単独品目", "一般名": "単独成分", "規格": "10mg1錠",
+            "供給状況": "供給停止", "YJコード": "1234567F1000",
+        }
+        output = page_html(
+            row, "1234567F1000", "stopped", "2026-08-28", [],
+            {"1234567F1000"},
+        )
+        self.assertIn("確認候補は見つかりませんでした", output)
+        self.assertIn("候補がないことは、代替品が存在しないこと", output)
+        self.assertIn('>Web版でこの品目を開く</a>', output)
+        self.assertNotIn("同成分・同剤形の一覧つき", output)
+
+    def test_json_ld_escapes_script_closing_sequences(self):
+        row = {
+            "商品名": "安全性テスト錠", "一般名": "安全性成分",
+            "製造メーカー": "テスト製薬", "供給状況": "限定出荷",
+            "理由": "</script><script>alert(1)</script>",
+            "YJコード": "1234567F1234",
+        }
+        output = page_html(
+            row, "1234567F1234", "limited", "2026-08-28", [],
+            {"1234567F1234"},
+        )
+        self.assertNotIn("</script><script>alert(1)", output.lower())
+        self.assertIn("\\u003c/script\\u003e", output)
+        documents = [json.loads(value) for value in re.findall(
+            r'<script type="application/ld\+json">(.*?)</script>', output, re.S)]
+        self.assertTrue(any(document.get("@type") == "WebPage" for document in documents))
+
     def test_sales_ended_note_requires_professional_current_information_check(self):
         note = STATUS_NOTES["ended"]
         self.assertIn("メーカー・卸の最新情報", note)

@@ -514,13 +514,13 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 @media(prefers-reduced-motion:reduce){.spark-burst{display:none}}
 .modal-fav{
-  width:44px;height:44px;border-radius:50%;
-  border:1px solid rgba(90,107,148,.2);background:rgba(255,255,255,.8);
-  color:#C9D4EA;font-size:19px;line-height:1;cursor:pointer;
-  display:grid;place-items:center;transition:.2s;
+  min-width:44px;height:44px;border-radius:999px;padding:0 12px;
+  border:1px solid rgba(90,107,148,.2);background:#fff;
+  color:var(--sub);font-size:12px;font-weight:900;line-height:1;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;transition:.2s;
 }
 .modal-fav:hover{background:#fff;transform:scale(1.1)}
-.modal-fav.on{color:#F5B301}
+.modal-fav.on{color:#624900}
 .modal-share{
   width:44px;height:44px;border-radius:50%;
   border:1px solid rgba(90,107,148,.2);background:rgba(255,255,255,.8);
@@ -571,6 +571,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   text-align:left;transition:.15s;
 }
 .rel-row:hover{background:rgba(79,128,244,.12)}
+.rel-spec{display:block;margin-top:2px;font-size:11px;font-weight:600;color:var(--sub)}
 .rel-status{
   flex:none;font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px;
   color:color-mix(in srgb,var(--sc) 67%,black);
@@ -1097,7 +1098,10 @@ footer a:hover{color:var(--blue)}
     border-top:1.6px solid rgba(150,178,240,.3);
     box-shadow:0 40px 90px -24px rgba(0,0,0,.8),inset 0 1px 0 rgba(150,178,240,.14);
   }
-  .modal-close,.modal-fav,.modal-share{background:rgba(45,63,114,.8);border-color:rgba(126,152,214,.22)}
+  .modal-close,.modal-fav,.modal-share{background:#2D3F72;border-color:rgba(126,152,214,.22)}
+  .modal-fav{color:#C5D2F0}
+  .modal-fav:hover{background:#3C5496}
+  .modal-fav.on{color:#FFE08A}
   .modal-close:hover{background:rgba(60,84,150,.9)}
   .detail-grid,.detail-grid dt,.detail-grid dd{border-color:rgba(126,152,214,.18)}
 
@@ -1592,7 +1596,7 @@ footer a:hover{color:var(--blue)}
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
     <div class="modal-controls" role="group" aria-label="品目詳細の操作">
       <button type="button" class="modal-close" id="mClose" aria-label="閉じる">✕</button>
-      <button type="button" class="modal-fav" id="mFav" aria-label="監視リストに追加" aria-pressed="false">★</button>
+      <button type="button" class="modal-fav" id="mFav" aria-label="監視リストに追加" aria-pressed="false">☆ 監視に追加</button>
       <button type="button" class="modal-share" id="mShare" aria-label="この品目へのリンクを共有" title="リンクを共有">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>
       </button>
@@ -2739,9 +2743,15 @@ const patchKind = x =>
    旧版の商品名ベース favDrugs は初回だけ移行し、ロールバック互換のため併記を続ける。 */
 const normalizeYj = value => String(value || "").replace(/[^0-9A-Za-z]/g, "").toUpperCase();
 function itemKey(item){ return normalizeYj(item && item.yj) || `name:${item ? item.n : ""}`; }
-let FAVS = new Set();
+function readStoredFavoriteKeys(){
+  try{
+    const saved = JSON.parse(localStorage.getItem("favDrugKeysV2")||"[]");
+    if(Array.isArray(saved)) return new Set(saved.map(String));
+  }catch(e){}
+  return new Set();
+}
+let FAVS = readStoredFavoriteKeys();
 let LEGACY_FAV_NAMES = new Set();
-try{ FAVS = new Set(JSON.parse(localStorage.getItem("favDrugKeysV2")||"[]")); }catch(e){}
 try{ LEGACY_FAV_NAMES = new Set(JSON.parse(localStorage.getItem("favDrugs")||"[]")); }catch(e){}
 function isFav(item){ return !!item && FAVS.has(itemKey(item)); }
 function findByKey(key){ return ITEMS.find(item=>itemKey(item)===key); }
@@ -2827,6 +2837,8 @@ function updateFavPill(){
 }
 function toggleFav(item){
   if(!item) return;
+  // 別タブで追加・解除された直後でも、その最新状態を上書きしない。
+  FAVS = readStoredFavoriteKeys();
   const key = itemKey(item), beforeSize = FAVS.size;
   const added = !FAVS.has(key);
   added ? FAVS.add(key) : FAVS.delete(key);
@@ -2840,6 +2852,19 @@ function toggleFav(item){
   render();
   if(currentDetailKey === itemKey(item)) syncModalFavorite(item);
 }
+addEventListener("storage", event=>{
+  if(event.key !== "favDrugKeysV2") return;
+  FAVS = readStoredFavoriteKeys();
+  updateFavPill();
+  renderWatchDashboard();
+  renderFavNotice();
+  syncInstallButtons();
+  render();
+  if(currentDetailKey){
+    const currentItem = findByKey(currentDetailKey);
+    if(currentItem) syncModalFavorite(currentItem);
+  }
+});
 function syncModalFavorite(item){
   const button = document.getElementById("mFav");
   const favorite = !!item && isFav(item);
@@ -2848,6 +2873,7 @@ function syncModalFavorite(item){
   button.setAttribute("aria-label", item
     ? `${item.n}を${favorite ? "監視リストから解除" : "監視リストに追加"}`
     : "監視リストに追加");
+  button.textContent = favorite ? "★ 監視中" : "☆ 監視に追加";
 }
 updateFavPill();
 
@@ -3306,7 +3332,7 @@ function openDetail(d, opts={}){
   const relatedBlock = (title, list) =>
     `<div class="rel-title">${esc(title)}</div>` + list.map(x=>
       `<button type="button" class="rel-row" data-key="${esc(itemKey(x))}">
-         <span>${esc(x.n)}${isWarmPatch(x) && !x.n.includes("温") ? "（温感タイプ）" : ""}</span>
+         <span>${esc(x.n)}${isWarmPatch(x) && !x.n.includes("温") ? "（温感タイプ）" : ""}${x.spec ? `<span class="rel-spec">${esc(x.spec)}</span>` : ""}</span>
          <span style="display:flex;align-items:center;gap:4px;flex:none">
            <span class="rel-status" style="--sc:${STATUS[x.s].color}">${STATUS[x.s].label}</span>
            ${x.delist && x.s!=="ended" ? `<span class="delist-badge">薬価削除予定</span>` : ""}
@@ -3320,16 +3346,21 @@ function openDetail(d, opts={}){
   const yj8 = (d.yj||"").slice(0,8);
   const dWarm = isWarmPatch(d), dKind = patchKind(d);
   if(LIVE && d.g){
+    const targetSpec = norm(d.spec || "");
     const sameG = ITEMS.filter(x=>x.g===d.g && x.n!==d.n
         && (!yj8 || (x.yj||"").slice(0,8)===yj8)
         && isWarmPatch(x)===dWarm
         && (!dKind || !patchKind(x) || patchKind(x)===dKind))
-      .sort((a,b)=>(effSev(a)-effSev(b)) || a.n.localeCompare(b.n,"ja"));
-    if(sameG.length) relHtml += relatedBlock(`同成分・同剤形${dWarm ? "（温感タイプ）" : ""}の確認候補（${sameG.length}件・厚労省公表区分順）`, sameG.slice(0,6));
+      .sort((a,b)=>{
+        const aSpec = targetSpec && norm(a.spec || "")===targetSpec ? 0 : 1;
+        const bSpec = targetSpec && norm(b.spec || "")===targetSpec ? 0 : 1;
+        return (aSpec-bSpec) || (effSev(a)-effSev(b)) || a.n.localeCompare(b.n,"ja");
+      });
+    if(sameG.length) relHtml += relatedBlock(`同成分・同剤形${dWarm ? "（温感タイプ）" : ""}の確認候補（${sameG.length}件・同規格優先）`, sameG.slice(0,6));
   }
   if(relHtml){
     $mRel.innerHTML = relHtml +
-      `<p class="pkg-note">※ 同成分・同剤形の品目を公開データから機械的に列挙し、厚労省公表区分上の通常出荷を先に表示した確認補助です。代替適否や実在庫を示す順位ではありません。${dWarm ? "この品目は温感タイプのため、温感タイプの品目のみを表示しています。" : ""}適応・規格・剤形の互換性は必ず添付文書と医師・薬剤師の判断でご確認ください。</p>`;
+      `<p class="pkg-note">※ 同成分・同剤形の品目を公開データから機械的に列挙し、同じ規格を優先したうえで、現在の厚労省公表区分と薬価削除予定を考慮した確認補助です。代替適否や実在庫を示す順位ではありません。${dWarm ? "この品目は温感タイプのため、温感タイプの品目のみを表示しています。" : ""}適応・規格・剤形の互換性は必ず添付文書と医師・薬剤師の判断でご確認ください。</p>`;
     $mRel.hidden = false;
   }else{
     $mRel.hidden = true;

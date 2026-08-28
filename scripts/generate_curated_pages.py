@@ -25,6 +25,8 @@ STATUS = {
     "stopped": ("供給停止", "#B03434", "#FBE7E7", 2),
     "ended": ("販売中止", "#7A5E49", "#F2EBE4", 3),
 }
+SUPPLY_METADATA_RE = re.compile(
+    r"^解除/解消見込み:\s*(.*?)\s*/\s*出荷量状況:\s*(.*)$")
 
 # Search Consoleで実際に表示された検索意図だけを、既存の注目製品ページで補う。
 # 文面は原因や代替適否を推測せず、CSVの公表値と公式確認手順へ誘導する。
@@ -37,8 +39,8 @@ PRODUCT_SEARCH_INTENTS = {
     },
     "zictor-tape-75mg": {
         "heading": "ジクトルテープの代替を検討する前に",
-        "intro": ("現在の供給区分と公表上の理由を確認したうえで、品目詳細の"
-                  "『同成分・同剤形』を確認候補として参照してください。"),
+        "intro": ("現在の供給区分・理由・解除見込みを確認してください。品目詳細に"
+                  "『同成分・同剤形』が表示される場合も、代替適否や実在庫を示すものではありません。"),
         "alternative": True,
     },
     "caduet": {
@@ -69,6 +71,21 @@ def ld_json(value: object) -> str:
 
 def norm(value: object) -> str:
     return unicodedata.normalize("NFKC", str(value or "")).lower().strip()
+
+
+def supply_metadata_values(row: dict[str, str]) -> dict[str, str]:
+    """供給CSVの直接列と、旧互換の複合列から公表値を取り出す。"""
+    values = {}
+    for field in ("解除・解消見込み", "出荷量状況"):
+        value = str(row.get(field) or "").strip()
+        if value:
+            values[field] = value
+    legacy = str(row.get("代替候補") or "").strip()
+    match = SUPPLY_METADATA_RE.match(legacy)
+    if match:
+        values.setdefault("解除・解消見込み", match.group(1).strip())
+        values.setdefault("出荷量状況", match.group(2).strip())
+    return values
 
 
 def map_status(value: object) -> str:
@@ -244,18 +261,20 @@ def product_seo_metadata(product: dict, rows: list[dict[str, str]], suffix: str)
     slug, label = product["slug"], product["label"]
     if slug == "lulicon-cream":
         current = STATUS[map_status(rows[0].get("供給状況"))][0]
+        release = supply_metadata_values(rows[0]).get("解除・解消見込み", "記載なし")
         if current in {"限定出荷", "供給停止", "販売中止"}:
             title = f"{label}はなぜ{current}？公表理由と供給状況｜医薬品供給ナビ"
         else:
             title = f"{label}の現在の供給状況と公表理由｜医薬品供給ナビ"
-        description = (f"{label}の現在の供給区分、公表上の理由、品目行の更新日を確認できます。"
+        description = (f"{label}の現在の供給区分、公表上の理由、解除・解消見込み「{release}」、品目行の更新日を確認できます。"
                        "同成分・同剤形は確認候補として掲載し、代替適否や実在庫は示しません。")
         return title, description
     if slug == "zictor-tape-75mg":
+        release = supply_metadata_values(rows[0]).get("解除・解消見込み", "記載なし")
         return (
             f"{label}の出荷調整・供給状況｜代替検討前の確認事項｜医薬品供給ナビ",
-            (f"{label}の現在の供給区分と公表上の理由を確認。代替を検討する際は、"
-             "同成分・同剤形を確認候補として用い、適応・規格・実在庫を専門職と確認してください。"),
+            (f"{label}の現在の供給区分、公表上の理由、解除・解消見込み「{release}」を確認。"
+             "候補表示がある場合も、適応・規格・実在庫を専門職と確認してください。"),
         )
     if slug == "caduet":
         return (
@@ -288,6 +307,7 @@ def product_intent_html(product: dict, rows: list[dict[str, str]],
         if norm(reason) in {"", "-", "－", "7.-", "7.－"}:
             reason = "記載なし"
         updated = normalize_date(row.get("更新日")) or "確認できません"
+        release = supply_metadata_values(row).get("解除・解消見込み", "記載なし")
         href = product_row_link(product, row, generated_keys)
         evidence.append(
             f'<div class="evidence-item"><strong><a href="{href}" '
@@ -295,6 +315,7 @@ def product_intent_html(product: dict, rows: list[dict[str, str]],
             f'{esc(row.get("商品名"))}</a></strong>'
             f'<span>厚労省公表の供給区分：{esc(row.get("供給状況") or "確認できません")}</span>'
             f'<span>公表上の理由：{esc(reason)}</span>'
+            f'<span>解除・解消見込み：{esc(release)}</span>'
             f'<span>この品目行の更新日：{esc(updated)}</span></div>'
         )
     alternative = ""
@@ -443,7 +464,7 @@ def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[
 {share_control("この供給状況を共有")}</section>
 <h2>該当品目</h2><div class="products">{product_rows_html(rows, generated_keys, lifecycle, product)}</div>
 {product_intent_html(product, rows, generated_keys)}
-<div class="cta"><strong>Web版で絞り込んで確認</strong><p>同成分・同剤形の関連品目やメーカー案内も確認できます。</p><a href="{query_link}" data-dsn-event="search-cta-open">この製品を検索する</a></div>
+<div class="cta"><strong>Web版で絞り込んで確認</strong><p>公表理由やメーカー案内を確認できます。同成分・同剤形の確認候補がある場合はあわせて表示します。</p><a href="{query_link}" data-dsn-event="search-cta-open">この製品を検索する</a></div>
 </main><footer><p>厚生労働省公表データをもとにした非公式情報です。実際の流通状況は卸・メーカーにもご確認ください。</p><a href="../guides/{GUIDE_SLUG}.html">供給情報の確認ガイド</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
 {analytics_footer()}</body></html>"""
     return body, lastmod
