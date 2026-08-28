@@ -19,6 +19,7 @@ class PrivacyAnalyticsContractTests(unittest.TestCase):
             "/drugs-data/items/stopped",
             "/drugs-data/items/supplemental",
             "/drugs-data/items/resumed",
+            "/drugs-data/items/recent-restrictions",
             "/drugs-data/items/_item",
             "/drugs-data/updates/_daily",
             "/drugs-data/topics/_topic",
@@ -45,6 +46,7 @@ class PrivacyAnalyticsContractTests(unittest.TestCase):
         self.assertEqual(len(events), len(set(events)))
         required = {
             "search-cta-open",
+            "search-results-share-success",
             "official-source-open",
             "related-item-open",
             "topic-to-search",
@@ -58,6 +60,36 @@ class PrivacyAnalyticsContractTests(unittest.TestCase):
         self.assertNotIn("sessionStorage", self.analytics)
         self.assertNotIn("document.cookie", self.analytics)
         self.assertNotRegex(self.analytics, r'get\(["\'](?:q|query|yj|drug|item|filename)["\']\)')
+
+    def test_search_share_analytics_excludes_query_and_result_count(self):
+        index = (ROOT / "index.html").read_text(encoding="utf-8")
+        handler = index.split(
+            '$searchShareBtn.addEventListener("click", async()=>{', 1
+        )[1].split("/* ===== 薬品詳細モーダル ===== */", 1)[0]
+        self.assertEqual(
+            re.findall(r"dsnTrack\(([^)]*)\)", handler),
+            ['"search-results-share-success"'],
+        )
+        tracker = self.analytics.split(
+            "window.dsnTrack = function(name){", 1
+        )[1].split("function flush(){", 1)[0]
+        self.assertIn(
+            'window.goatcounter.count({path:"event:"+name, title:name, event:true});',
+            tracker,
+        )
+        for forbidden in (
+            "$q", "LAST_HITS", "WATCH_UNREAD", "watchReturnCount",
+            "location.hash", "dataset.query", "dataset.count",
+        ):
+            with self.subTest(forbidden=forbidden):
+                self.assertNotIn(forbidden, self.analytics)
+        self.assertEqual(
+            re.findall(
+                r'URLSearchParams\(location\.search\)\.get\("([^"]+)"\)',
+                self.analytics,
+            ),
+            ["src"],
+        )
 
     def test_static_share_handler_uses_a_fixed_event_and_strips_fragments(self):
         self.assertIn('[data-dsn-share-page]', self.analytics)

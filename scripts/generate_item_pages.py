@@ -17,7 +17,8 @@
   sitemap-items.xml   品目ページのサイトマップ(robots.txt から参照される)
 
 使い方:
-  python3 scripts/generate_item_pages.py --csv drugs_app_ready.csv --site .
+  Web正本: python3 tools/generate_item_pages.py --csv drugs_app_ready.csv --site /tmp/drugs-data
+  公開側:   python3 scripts/generate_item_pages.py --csv drugs_app_ready.csv --site .
 """
 
 import argparse
@@ -61,9 +62,9 @@ STATUS_NOTES = {
 }
 ITEM_HUBS = {
     "limited": {
-        "label": "限定出荷",
-        "h1": "限定出荷の医薬品一覧",
-        "description": ("厚生労働省公表データ上で限定出荷となっている医療用医薬品を、"
+        "label": "限定出荷（出荷調整）",
+        "h1": "限定出荷（出荷調整）の医薬品一覧",
+        "description": ("厚生労働省公表データ上で限定出荷（一般に出荷調整とも呼ばれる状態）となっている医療用医薬品を、"
                         "商品名・規格・メーカー・更新日とともに確認できます。"),
         "intro": ("厚生労働省公表データ上の供給区分が「限定出荷」の品目を掲載しています。"
                   "実際の受注可否や在庫を示す一覧ではありません。"),
@@ -91,6 +92,14 @@ ITEM_HUBS = {
                         "通常出荷へ戻った医療用医薬品を確認できます。"),
         "intro": ("直近30日以内の公表区分変更で、限定出荷・供給停止から「通常出荷」へ戻り、"
                   "現在も通常出荷の品目を掲載しています。流通在庫への反映には時間差があります。"),
+    },
+    "recent-restrictions": {
+        "label": "最近の限定出荷・供給停止",
+        "h1": "最近、限定出荷・供給停止になった医薬品一覧",
+        "description": ("直近30日以内に厚生労働省公表データ上で限定出荷または供給停止へ変更され、"
+                        "現在もその区分にある医療用医薬品を確認できます。"),
+        "intro": ("公表データ上で新たに確認された区分変更を掲載しています。"
+                  "実際の制限開始日、受注可否、流通在庫を示す一覧ではありません。"),
     },
 }
 ITEM_HUB_SLUGS = frozenset(ITEM_HUBS)
@@ -650,6 +659,24 @@ def recent_recovery_keys(latest_changes: dict, by_key: dict,
     return recovered
 
 
+def recent_restriction_keys(latest_changes: dict, by_key: dict,
+                            dataset_date: str, days: int = 30) -> set:
+    """直近に限定出荷・供給停止へ変わり、現在も同じ公表区分にある品目。"""
+    reference = date.fromisoformat(dataset_date)
+    restricted = set()
+    for key, change in latest_changes.items():
+        change_date = date.fromisoformat(change["iso_date"])
+        age = (reference - change_date).days
+        changed_to = strict_status(change.get("to"))
+        current = strict_status((by_key.get(key) or {}).get("供給状況"))
+        if (0 <= age <= days
+                and changed_to in {"limited", "stopped"}
+                and current == changed_to
+                and strict_status(change.get("from")) != changed_to):
+            restricted.add(key)
+    return restricted
+
+
 def item_hub_slugs(entry: dict, dataset_date: str) -> list:
     """現在区分と検証済み履歴だけから、品目が属する状態別ハブを返す。"""
     slugs = []
@@ -663,6 +690,9 @@ def item_hub_slugs(entry: dict, dataset_date: str) -> list:
 
     if entry.get("status") == "ok" and entry.get("recent_recovery"):
         slugs.append("resumed")
+    if (entry.get("status") in {"limited", "stopped"}
+            and entry.get("recent_restriction")):
+        slugs.append("recent-restrictions")
     return slugs
 
 
@@ -670,11 +700,13 @@ def page_title(name: str, status_label: str, supplements: list,
                qualifier: str = "") -> str:
     """検索結果で意味を保ちつつ、HTMLの推奨70文字以内へ収める。"""
     suffix = "｜医薬品供給ナビ"
+    search_status_label = ("限定出荷（出荷調整）"
+                           if status_label == "限定出荷" else status_label)
     qualified_name = f"{name}（{qualifier}）" if qualifier else name
     candidates = [
-        (f"{qualified_name}の供給状況｜厚労省：{status_label}"
+        (f"{qualified_name}の供給状況｜厚労省：{search_status_label}"
          + ("｜メーカー補足あり" if supplements else "") + suffix),
-        f"{qualified_name}の供給状況｜{status_label}{suffix}",
+        f"{qualified_name}の供給状況｜{search_status_label}{suffix}",
         f"{qualified_name}｜供給状況{suffix}",
     ]
     for candidate in candidates:
@@ -921,6 +953,14 @@ h1{{font-size:22px;line-height:1.45;margin-bottom:6px}}
 .watch-note,.watch-status{{font-size:12px;color:var(--sub);line-height:1.65;margin-top:7px}}
 .watch-status{{min-height:1.65em;font-weight:700}}
 .watch-card a{{color:var(--blue);font-weight:700}}
+.item-search{{margin:18px 0;padding:16px;border-radius:14px;background:#F8FAFF;border:1px solid #CFDBF2}}
+.item-search h2{{margin:0 0 5px;font-size:17px}}
+.item-search label{{display:block;font-size:12px;font-weight:700;color:var(--sub);margin-bottom:8px}}
+.item-search-row{{display:flex;gap:8px}}
+.item-search input{{min-width:0;flex:1;min-height:46px;border:1px solid #B9C9EA;border-radius:12px;padding:9px 12px;font:inherit;font-size:14px;color:var(--ink);background:#fff}}
+.item-search button{{min-height:46px;border:0;border-radius:12px;padding:9px 18px;background:var(--blue);color:#fff;font:inherit;font-size:14px;font-weight:800;cursor:pointer}}
+.item-search-note{{font-size:11.5px;color:var(--sub);line-height:1.65;margin-top:7px}}
+@media(max-width:520px){{.item-search-row{{display:grid}}.item-search button{{width:100%}}}}
 table{{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:8px}}
 th,td{{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}}
 th{{white-space:nowrap;color:var(--sub);font-weight:600;width:8.5em}}
@@ -964,6 +1004,15 @@ footer a{{color:var(--sub)}}
       <a href="{SITE_ROOT}#f=fav">監視リストを見る</a>
     </div>
     {quick_answers}
+    <form class="item-search" id="itemSearchForm" role="search">
+      <h2>別の薬も検索</h2>
+      <label for="itemSearchInput">薬品名・成分名・メーカー名・YJコード</label>
+      <div class="item-search-row">
+        <input id="itemSearchInput" type="search" required maxlength="100" autocomplete="off" aria-describedby="itemSearchNote">
+        <button type="submit">供給状況を検索</button>
+      </div>
+      <p class="item-search-note" id="itemSearchNote">検索語はURLの#以降に保持し、アクセス解析には送りません。</p>
+    </form>
     {dataset_context}
     <p class="dataset-warning" id="datasetWarning" role="status" hidden></p>
 {delist_box}
@@ -1037,6 +1086,24 @@ footer a{{color:var(--sub)}}
     if(event.key !== "favDrugKeysV2") return;
     watchKeys = readWatchKeys();
     syncWatchButton();
+  }});
+  const itemSearchForm = document.getElementById("itemSearchForm");
+  const itemSearchInput = document.getElementById("itemSearchInput");
+  if(itemSearchInput) itemSearchInput.addEventListener("input", function(){{
+    itemSearchInput.setCustomValidity("");
+  }});
+  if(itemSearchForm) itemSearchForm.addEventListener("submit", function(event){{
+    event.preventDefault();
+    const query = itemSearchInput ? itemSearchInput.value.trim() : "";
+    if(!query){{
+      if(itemSearchInput){{
+        itemSearchInput.setCustomValidity("検索する薬品名などを入力してください。");
+        itemSearchInput.reportValidity();
+      }}
+      return;
+    }}
+    if(window.dsnTrack) window.dsnTrack("search-cta-open");
+    location.href = {json.dumps(SITE_ROOT)} + "#q=" + encodeURIComponent(query);
   }});
   const button = document.getElementById("shareButton");
   const status = document.getElementById("shareStatus");
@@ -1181,7 +1248,7 @@ def hub_html(slug, entries, dataset_date):
     """検索者とクローラーの両方に文脈を示す状態別の静的一覧。"""
     config = ITEM_HUBS[slug]
     group = [entry for entry in entries if slug in entry.get("hubs", [])]
-    if slug == "resumed":
+    if slug in {"resumed", "recent-restrictions"}:
         group.sort(key=lambda entry: (
             (entry.get("latest_change") or {}).get("iso_date", ""),
             entry.get("display_name", entry["name"]),
@@ -1195,6 +1262,9 @@ def hub_html(slug, entries, dataset_date):
         change_note = ""
         if slug == "resumed" and change.get("iso_date"):
             change_note = f'｜通常出荷へ変更 {esc(change["iso_date"])}'
+        elif slug == "recent-restrictions" and change.get("iso_date"):
+            change_note = (f'｜{esc(STATUSES[entry["status"]]["label"])}へ変更 '
+                           f'{esc(change["iso_date"])}')
         update_note = f'｜品目行更新 {esc(entry["updated"])}' if entry.get("updated") else ""
         items.append(
             f'<li><a href="{entry["key"]}.html">'
@@ -1352,6 +1422,8 @@ def main():
         by_key.setdefault(item_key(r), r)  # キー重複は先勝ち(YJコード重複はまれ)
     latest_changes = latest_changes_by_key(status_events, by_key)
     recovery_keys = recent_recovery_keys(latest_changes, by_key, dataset_date)
+    restriction_keys = recent_restriction_keys(
+        latest_changes, by_key, dataset_date)
 
     # 同成分リンク用: 一般名→行のインデックス
     by_gen = {}
@@ -1399,6 +1471,7 @@ def main():
                 supplemental_state["trusted"]),
             "latest_change": latest_changes.get(k),
             "recent_recovery": k in recovery_keys,
+            "recent_restriction": k in restriction_keys,
         }
         entry["hubs"] = item_hub_slugs(entry, dataset_date)
         entries.append(entry)

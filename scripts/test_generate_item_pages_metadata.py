@@ -21,6 +21,7 @@ from generate_item_pages import (
     page_title,
     pick_siblings,
     recent_recovery_keys,
+    recent_restriction_keys,
     reconcile_existing_pages,
     should_generate,
     sitemap_xml,
@@ -72,6 +73,31 @@ class ItemPageMetadataTests(unittest.TestCase):
         description = output.split('<meta name="description" content="', 1)[1].split('">', 1)[0]
         self.assertIn("公表理由は「１．需要増」", description)
         self.assertIn("解除・解消見込みは「ウ. 未定」", description)
+
+    def test_item_page_search_form_routes_encoded_query_to_web_search(self):
+        row = {
+            "商品名": "テスト錠10mg",
+            "一般名": "テスト成分",
+            "製造メーカー": "テスト製薬",
+            "供給状況": "限定出荷",
+            "YJコード": "1234567F1234",
+        }
+        output = page_html(
+            row, "1234567F1234", "limited", "2026-08-28", [],
+            {"1234567F1234"},
+        )
+
+        self.assertIn('<form class="item-search" id="itemSearchForm" role="search">', output)
+        self.assertIn('label for="itemSearchInput">薬品名・成分名・メーカー名・YJコード', output)
+        self.assertIn('id="itemSearchInput" type="search" required maxlength="100"', output)
+        self.assertIn("検索語はURLの#以降に保持し、アクセス解析には送りません", output)
+        self.assertIn('const query = itemSearchInput ? itemSearchInput.value.trim() : "";', output)
+        self.assertIn('window.dsnTrack("search-cta-open")', output)
+        self.assertIn(
+            'location.href = "https://tkiyo1007-eng.github.io/drugs-data/" + '
+            '"#q=" + encodeURIComponent(query);',
+            output,
+        )
 
     def test_related_items_prioritize_same_spec_before_status(self):
         row = {
@@ -393,6 +419,10 @@ class ItemPageMetadataTests(unittest.TestCase):
         self.assertIn("供給停止", title)
         self.assertIn("医薬品供給ナビ", title)
 
+        limited = page_title("テスト錠10mg", "限定出荷", [])
+        self.assertIn("限定出荷（出荷調整）", limited)
+        self.assertLessEqual(len(limited), 70)
+
         very_long = page_title("長" * 100, "限定出荷", ["メーカー：補足あり"])
         self.assertLessEqual(len(very_long), 70)
         self.assertTrue(very_long.endswith("｜供給状況｜医薬品供給ナビ"))
@@ -430,7 +460,10 @@ class ItemPageMetadataTests(unittest.TestCase):
             title_qualifier="1mL", hub_slugs=["limited"],
         )
         self.assertIn("<h1>同名注（1mL）", output)
-        self.assertIn('<a href="limited.html">限定出荷の一覧</a>', output)
+        self.assertIn(
+            '<a href="limited.html">限定出荷（出荷調整）の一覧</a>',
+            output,
+        )
 
     def test_generated_item_is_qualified_when_same_name_exists_outside_targets(self):
         targets = {
@@ -504,6 +537,36 @@ class ItemPageMetadataTests(unittest.TestCase):
         self.assertTrue(should_generate(
             by_key["1234567F1234"], "1234567F1234", set(), {}, {}, recovered))
 
+    def test_recent_restrictions_include_boundary_and_require_current_status_match(self):
+        by_key = {
+            "boundary": {"供給状況": "②限定出荷（自社の事情）"},
+            "today": {"供給状況": "⑤供給停止"},
+            "too-old": {"供給状況": "②限定出荷（自社の事情）"},
+            "future": {"供給状況": "⑤供給停止"},
+            "changed-again": {"供給状況": "⑤供給停止"},
+            "same-category": {"供給状況": "③限定出荷（他社品の影響）"},
+        }
+        latest = {
+            "boundary": {"iso_date": "2026-07-27", "from": "①通常出荷",
+                         "to": "②限定出荷（自社の事情）"},
+            "today": {"iso_date": "2026-08-26", "from": "①通常出荷",
+                      "to": "⑤供給停止"},
+            "too-old": {"iso_date": "2026-07-26", "from": "①通常出荷",
+                        "to": "②限定出荷（自社の事情）"},
+            "future": {"iso_date": "2026-08-27", "from": "①通常出荷",
+                       "to": "⑤供給停止"},
+            "changed-again": {"iso_date": "2026-08-25", "from": "①通常出荷",
+                              "to": "②限定出荷（自社の事情）"},
+            "same-category": {"iso_date": "2026-08-25",
+                              "from": "②限定出荷（自社の事情）",
+                              "to": "③限定出荷（他社品の影響）"},
+        }
+
+        restricted = recent_restriction_keys(
+            latest, by_key, "2026-08-26", days=30)
+
+        self.assertEqual({"boundary", "today"}, restricted)
+
     def test_status_change_loader_rejects_unknown_status(self):
         with TemporaryDirectory() as directory:
             path = Path(directory) / "status_changes.json"
@@ -550,12 +613,34 @@ class ItemPageMetadataTests(unittest.TestCase):
         for slug in ITEM_HUB_SLUGS:
             self.assertEqual(sitemap.count(f"items/{slug}.html"), 1)
 
+    def test_recent_restrictions_hub_explains_scope_and_lists_change_date(self):
+        entries = [{
+            "key": "1234567F1234", "name": "対象錠", "display_name": "対象錠",
+            "maker": "対象製薬", "status": "limited", "updated": "2026-08-25",
+            "supplements": [], "hubs": ["limited", "recent-restrictions"],
+            "latest_change": {"iso_date": "2026-08-24"},
+        }]
+
+        output = hub_html("recent-restrictions", entries, "2026-08-26")
+
+        self.assertIn("<title>最近、限定出荷・供給停止になった医薬品一覧", output)
+        self.assertIn("<h1>最近、限定出荷・供給停止になった医薬品一覧</h1>", output)
+        self.assertIn("recent-restrictions.html", output)
+        self.assertIn("実際の制限開始日、受注可否、流通在庫を示す一覧ではありません", output)
+        self.assertIn("限定出荷へ変更 2026-08-24", output)
+        self.assertIn('href="1234567F1234.html"', output)
+
+        limited = hub_html("limited", entries, "2026-08-26")
+        self.assertIn("<title>限定出荷（出荷調整）の医薬品一覧", limited)
+        self.assertIn("<h1>限定出荷（出荷調整）の医薬品一覧</h1>", limited)
+
     def test_hub_membership_uses_current_status_supplements_and_verified_recovery(self):
         entry = {"status": "ok", "delist": False, "supplements": [],
                  "recent_recovery": True}
         self.assertEqual(["resumed"], item_hub_slugs(entry, "2026-08-26"))
-        entry.update({"status": "limited", "supplements": ["メーカー案内あり"]})
-        self.assertEqual(["limited", "supplemental"],
+        entry.update({"status": "limited", "supplements": ["メーカー案内あり"],
+                      "recent_restriction": True})
+        self.assertEqual(["limited", "supplemental", "recent-restrictions"],
                          item_hub_slugs(entry, "2026-08-26"))
 
     def test_item_index_keeps_the_context_free_banner(self):
