@@ -17,7 +17,9 @@ SITEMAPS = {
 }
 SITEMAP_INDEX = "sitemap-index.xml"
 XML_NAMESPACE = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
-ITEM_HUBS = {"limited", "stopped", "supplemental", "resumed"}
+ITEM_HUBS = {
+    "limited", "stopped", "supplemental", "resumed", "recent-restrictions",
+}
 
 
 def sitemap_entries(path: Path) -> list[tuple[str, str]]:
@@ -90,6 +92,7 @@ class SitemapIntegrityTests(unittest.TestCase):
                 self.assertEqual([location], canonicals)
 
     def test_fixed_item_hubs_exist_once_with_self_canonicals(self):
+        self.assertEqual(5, len(ITEM_HUBS))
         item_locations = [
             location for location, _ in self.entries_by_sitemap["sitemap-items.xml"]
         ]
@@ -150,7 +153,7 @@ class SitemapIntegrityTests(unittest.TestCase):
             titles[title] = page
 
     def test_all_product_page_h1_names_are_unique(self):
-        reserved = {"index", "limited", "stopped", "supplemental", "resumed"}
+        reserved = {"index"} | ITEM_HUBS
         headings = {}
         for page in sorted((ROOT / "items").glob("*.html")):
             if page.stem in reserved:

@@ -204,11 +204,18 @@ section[id]{scroll-margin-top:90px}
 /* スマホの主要4導線。デスクトップではDOMにも場所を取らず、モバイルだけに表示する */
 .mobile-quick-nav{display:none}
 .mobile-quick-link{
+  position:relative;
   color:var(--sub);text-decoration:none;font-size:10.5px;font-weight:800;line-height:1;
   display:flex;min-width:0;min-height:48px;border-radius:14px;align-items:center;justify-content:center;
   flex-direction:column;gap:4px;transition:color .18s,background .18s,transform .18s;
 }
 .mobile-quick-link svg{width:20px;height:20px;flex:none}
+.mobile-quick-badge{
+  position:absolute;top:2px;left:calc(50% + 7px);min-width:18px;height:18px;padding:0 5px;
+  display:inline-flex;align-items:center;justify-content:center;border-radius:999px;
+  color:#fff;background:#B03434;border:2px solid #fff;font-size:9px;font-weight:900;line-height:1;
+}
+.mobile-quick-badge[hidden]{display:none}
 .mobile-quick-link[aria-current="location"]{color:var(--blue-deep);background:rgba(79,128,244,.13)}
 .mobile-quick-link:active{transform:scale(.96)}
 .mobile-quick-link:focus-visible{outline:3px solid rgba(47,99,232,.48);outline-offset:2px}
@@ -269,6 +276,14 @@ h1 .grad{
 }
 .btn-ghost:hover{background:rgba(255,255,255,.9);transform:translateY(-2px)}
 .hero-note{font-size:12px;color:var(--sub);margin-top:16px}
+.watch-return{
+  min-height:44px;margin-top:12px;padding:9px 15px;border-radius:14px;
+  display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(176,48,48,.32);
+  color:#762525;background:#FFF0F0;font:inherit;font-size:12.5px;font-weight:800;cursor:pointer;
+}
+.watch-return[hidden]{display:none}
+.watch-return strong{font-size:15px}
+.watch-return:hover{background:#FFE5E5}
 
 /* ヒーロー右: Supply Pulse カード */
 .hero-visual{position:relative}
@@ -392,6 +407,8 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .pill[data-f="delist"].active{background:linear-gradient(135deg,#E8912F,#B0500E);box-shadow:0 6px 16px -6px rgba(176,80,14,.55)}
 .result-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;margin-bottom:14px}
 .result-meta{font-size:12.5px;color:var(--sub)}
+.result-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-left:auto}
+.search-share-status{width:100%;min-height:1.5em;font-size:11px;color:var(--sub);text-align:right}
 .page-size{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--sub);font-weight:700;white-space:nowrap}
 .page-size select{
   font-family:inherit;font-size:12.5px;font-weight:700;color:var(--ink);
@@ -1058,8 +1075,11 @@ footer a:hover{color:var(--blue)}
   }
   .mobile-quick-link{color:#AEBBDA}
   .mobile-quick-link[aria-current="location"]{color:#EAF0FF;background:rgba(109,155,255,.22)}
+  .mobile-quick-badge{border-color:#263766;background:#FF7A7A;color:#1B0E12}
   .btn-ghost{background:rgba(40,58,108,.6);border-color:rgba(143,180,255,.32);color:var(--ink)}
   .btn-ghost:hover{background:rgba(52,74,134,.75)}
+  .watch-return{color:#FFD4D4;background:#482737;border-color:rgba(255,122,122,.48)}
+  .watch-return:hover{background:#593044}
 
   /* 検索まわり */
   .search-box{background:rgba(18,29,60,.85);border-color:rgba(143,180,255,.25);box-shadow:inset 0 2px 6px rgba(0,0,0,.35)}
@@ -1150,9 +1170,10 @@ footer a:hover{color:var(--blue)}
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg>
     <span>ニュース</span>
   </a>
-  <a class="mobile-quick-link" href="#watchDashboard" data-quick-target="watchDashboard">
+  <a class="mobile-quick-link" id="mobileWatchLink" href="#watchDashboard" data-quick-target="watchDashboard" aria-label="監視">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-3.8 7-10V5l-7-3-7 3v6c0 6.2 7 10 7 10Z"/><path d="m9 12 2 2 4-5"/></svg>
     <span>監視</span>
+    <span class="mobile-quick-badge" id="mobileWatchBadge" aria-hidden="true" hidden></span>
   </a>
 </nav>
 
@@ -1169,6 +1190,9 @@ footer a:hover{color:var(--blue)}
       <a class="btn-ghost hero-app-link" href="#app">iOSアプリ版を見る</a>
     </div>
     <p class="hero-note">会員登録不要・Web版も無料で利用できます</p>
+    <button class="watch-return" id="watchReturn" type="button" hidden>
+      <span>監視品目に未確認の変更</span><strong class="num" id="watchReturnCount">0件</strong><span>変更を見る</span>
+    </button>
     <div class="data-freshness-notice" id="offlineNotice" role="status" aria-live="polite" hidden>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.7 2.2 17.5A2 2 0 0 0 3.9 20h16.2a2 2 0 0 0 1.7-2.5L13.7 3.7a2 2 0 0 0-3.4 0Z"/></svg>
       <span>オフライン等のため、前回取得した供給データを表示しています。表示中の日付を確認し、接続後に再読み込みしてください。</span>
@@ -1291,16 +1315,20 @@ footer a:hover{color:var(--blue)}
     </div>
     <div class="result-bar">
       <p class="result-meta" id="meta" role="status" aria-live="polite"></p>
-      <button type="button" class="csv-btn" id="csvBtn" hidden>CSV保存</button>
-      <label class="page-size">表示件数
-        <select id="pageSize">
-          <option value="5" selected>5件</option>
-          <option value="15">15件</option>
-          <option value="30">30件</option>
-          <option value="60">60件</option>
-          <option value="99999">全件</option>
-        </select>
-      </label>
+      <div class="result-actions">
+        <button type="button" class="csv-btn" id="searchShareBtn" hidden>検索結果を共有</button>
+        <button type="button" class="csv-btn" id="csvBtn" hidden>CSV保存</button>
+        <label class="page-size">表示件数
+          <select id="pageSize">
+            <option value="5" selected>5件</option>
+            <option value="15">15件</option>
+            <option value="30">30件</option>
+            <option value="60">60件</option>
+            <option value="99999">全件</option>
+          </select>
+        </label>
+      </div>
+      <p class="search-share-status" id="searchShareStatus" role="status" aria-live="polite"></p>
     </div>
     <div class="watch-first-add" id="watchFirstAdd" hidden>
       <p class="watch-first-add-message" id="watchFirstAddMessage" role="status" aria-live="polite" aria-atomic="true">
@@ -1336,6 +1364,7 @@ footer a:hover{color:var(--blue)}
       <button type="button" class="daily-update-btn" id="dailyUpdateView" disabled>変更品目を見る</button>
       <button type="button" class="daily-update-btn secondary" id="dailyUpdateShare" disabled>この一覧を共有</button>
       <button type="button" class="daily-update-btn secondary" id="dailyUpdateFeed" title="更新通知アプリに貼り付けるURLをコピー">更新通知用URLをコピー</button>
+      <a class="daily-update-btn secondary" href="items/recent-restrictions.html">最近の限定出荷・供給停止</a>
       <p class="daily-feed-note">RSS対応アプリに貼り付けて使います</p>
       <p class="daily-share-status" id="dailyShareStatus" role="status" aria-live="polite"></p>
     </div>
@@ -1824,6 +1853,8 @@ let SHOWN = [];
 let LAST_HITS = []; // 現在の絞り込み結果（CSVダウンロード用）
 const $loadMore = document.getElementById("loadMore");
 const $csvBtn = document.getElementById("csvBtn");
+const $searchShareBtn = document.getElementById("searchShareBtn");
+const $searchShareStatus = document.getElementById("searchShareStatus");
 const $watchDashboard = document.getElementById("watchDashboard");
 const $watchTools = document.querySelector(".watch-tools");
 const $watchPriorityHome = document.getElementById("watchPriorityHome");
@@ -1902,6 +1933,8 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
     SHOWN = [];
     LAST_HITS = [];
     $csvBtn.hidden = true;
+    $searchShareBtn.hidden = true;
+    $searchShareStatus.textContent = "";
     $loadMore.hidden = true;
     $meta.removeAttribute("aria-busy");
     $list.removeAttribute("aria-busy");
@@ -1944,9 +1977,12 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
   const shown = hits.slice(0, visibleCount);
   SHOWN = shown;
   LAST_HITS = hits;
+  $searchShareStatus.textContent = "";
   $meta.removeAttribute("aria-busy");
   $list.removeAttribute("aria-busy");
   $csvBtn.hidden = !LIVE || !hits.length;
+  $searchShareBtn.hidden = (!LIVE || !hits.length
+    || (!$q.value.trim() && filter === "all"));
   const src = LIVE ? `全 ${ITEMS.length.toLocaleString()} 品目中` : `サンプル ${ITEMS.length} 品目中`;
   $meta.innerHTML = `<strong class="num">${hits.length.toLocaleString()}</strong> 件ヒット（${src}）`;
   if(!hits.length){
@@ -2101,6 +2137,8 @@ function showPendingSearchState(){
   SHOWN = [];
   LAST_HITS = [];
   $csvBtn.hidden = true;
+  $searchShareBtn.hidden = true;
+  $searchShareStatus.textContent = "";
   $loadMore.hidden = true;
   $meta.setAttribute("aria-busy", "true");
   $list.setAttribute("aria-busy", "true");
@@ -2153,6 +2191,33 @@ $csvBtn.addEventListener("click", ()=>{
   // click 直後に同期で revoke すると、ブラウザがBlobを読み終える前にURLが無効になり
   // ダウンロードが中断され得る（仕様上そうなる余地がある）。解放は次のタイミングに回す
   setTimeout(()=>URL.revokeObjectURL(a.href), 10000);
+});
+
+// 検索語・絞り込みはURLフラグメントにだけ保持し、サーバーや解析イベントへ送らない。
+// 共有を明示的に選んだときだけ、その状態を受け取り側へ渡す。
+$searchShareBtn.addEventListener("click", async()=>{
+  if(!LIVE || !LAST_HITS.length) return;
+  clearTimeout(hashTimer);
+  syncHash();
+  const url = new URL(location.href);
+  url.searchParams.set("src", "share");
+  try{
+    if(navigator.share){
+      await navigator.share({
+        title:"医薬品供給ナビ｜検索結果",
+        text:`供給状況の検索結果（${LAST_HITS.length.toLocaleString()}件）`,
+        url:url.href,
+      });
+      $searchShareStatus.textContent = "検索結果を共有しました。";
+    }else{
+      await navigator.clipboard.writeText(url.href);
+      $searchShareStatus.textContent = "検索語と絞り込みを含む共有用リンクをコピーしました。";
+    }
+    dsnTrack("search-results-share-success");
+  }catch(error){
+    if(error && error.name === "AbortError") return;
+    $searchShareStatus.textContent = "共有できませんでした。URL欄からリンクをコピーしてください。";
+  }
 });
 
 /* ===== 薬品詳細モーダル ===== */
@@ -3046,6 +3111,17 @@ function renderWatchDashboard(){
   document.getElementById("watchLastChecked").textContent = `最終確認：${formatCheckedAt(WATCH_STATE.lastCheckedAt)}`;
   document.getElementById("watchFirstNote").hidden = !!WATCH_STATE.lastCheckedChangeDate || !FAVS.size;
   const hasItems = LIVE && FAVS.size > 0, hasUnread = WATCH_UNREAD.length > 0;
+  const watchReturn = document.getElementById("watchReturn");
+  const watchReturnCount = document.getElementById("watchReturnCount");
+  const mobileWatchLink = document.getElementById("mobileWatchLink");
+  const mobileWatchBadge = document.getElementById("mobileWatchBadge");
+  watchReturn.hidden = !hasUnread;
+  watchReturnCount.textContent = `${WATCH_UNREAD.length.toLocaleString()}件`;
+  mobileWatchBadge.hidden = !hasUnread;
+  mobileWatchBadge.textContent = WATCH_UNREAD.length > 99 ? "99+" : String(WATCH_UNREAD.length);
+  mobileWatchLink.setAttribute("aria-label", hasUnread
+    ? `監視、未確認の変更${WATCH_UNREAD.length.toLocaleString()}件`
+    : "監視");
   const hasDiscrepancy = supplementalConfirmed && WATCH_DISCREPANCY_KEYS.size > 0;
   document.getElementById("watchUnreadBtn").disabled = !hasUnread;
   document.getElementById("watchDiscrepancyBtn").disabled = !hasDiscrepancy;
@@ -3166,14 +3242,17 @@ function downloadWatchlistCsv(){
   $watchDashboardStatus.className = "watch-dashboard-status ok";
   dsnTrack("watchlist-backup-export");
 }
-document.getElementById("watchUnreadBtn").addEventListener("click",()=>{
+function openWatchUnreadChanges(){
+  if(!WATCH_UNREAD.length) return;
   setFilter("watchChanged");
   // ダッシュボードを結果の後ろへ移す操作なので、失われたボタン位置ではなく
   // 新しい結果件数へ明示的にフォーカスを移して読み上げを継続する。
   focusSearchResultSummary();
   document.getElementById("demo").scrollIntoView({behavior:"smooth",block:"start"});
   dsnTrack("watchlist-dashboard-open");
-});
+}
+document.getElementById("watchUnreadBtn").addEventListener("click",openWatchUnreadChanges);
+document.getElementById("watchReturn").addEventListener("click",openWatchUnreadChanges);
 document.getElementById("watchDiscrepancyBtn").addEventListener("click",()=>{
   setFilter("watchDiscrepancy");
   focusSearchResultSummary();

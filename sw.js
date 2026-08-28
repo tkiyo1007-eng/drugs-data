@@ -11,7 +11,7 @@
  *
  * キャッシュを作り直したいときは CACHE_VERSION を上げる。
  */
-const CACHE_VERSION = "v7";
+const CACHE_VERSION = "v8";
 const SHELL_CACHE = `dsn-shell-${CACHE_VERSION}`;
 const DATA_CACHE = `dsn-data-${CACHE_VERSION}`;
 const ASSET_CACHE = `dsn-asset-${CACHE_VERSION}`;

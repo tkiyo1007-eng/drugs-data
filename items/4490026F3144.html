@@ -68,6 +68,14 @@ h1{font-size:22px;line-height:1.45;margin-bottom:6px}
 .watch-note,.watch-status{font-size:12px;color:var(--sub);line-height:1.65;margin-top:7px}
 .watch-status{min-height:1.65em;font-weight:700}
 .watch-card a{color:var(--blue);font-weight:700}
+.item-search{margin:18px 0;padding:16px;border-radius:14px;background:#F8FAFF;border:1px solid #CFDBF2}
+.item-search h2{margin:0 0 5px;font-size:17px}
+.item-search label{display:block;font-size:12px;font-weight:700;color:var(--sub);margin-bottom:8px}
+.item-search-row{display:flex;gap:8px}
+.item-search input{min-width:0;flex:1;min-height:46px;border:1px solid #B9C9EA;border-radius:12px;padding:9px 12px;font:inherit;font-size:14px;color:var(--ink);background:#fff}
+.item-search button{min-height:46px;border:0;border-radius:12px;padding:9px 18px;background:var(--blue);color:#fff;font:inherit;font-size:14px;font-weight:800;cursor:pointer}
+.item-search-note{font-size:11.5px;color:var(--sub);line-height:1.65;margin-top:7px}
+@media(max-width:520px){.item-search-row{display:grid}.item-search button{width:100%}}
 table{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:8px}
 th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
 th{white-space:nowrap;color:var(--sub);font-weight:600;width:8.5em}
@@ -119,6 +127,15 @@ footer a{color:var(--sub)}
         <div><dt>この品目情報はいつ更新？</dt><dd>品目行で確認できる最新日は「<strong>2023-12-01</strong>」です。サイト全体の基準日は下に別表示します。</dd></div>
       </dl>
     </section>
+    <form class="item-search" id="itemSearchForm" role="search">
+      <h2>別の薬も検索</h2>
+      <label for="itemSearchInput">薬品名・成分名・メーカー名・YJコード</label>
+      <div class="item-search-row">
+        <input id="itemSearchInput" type="search" required maxlength="100" autocomplete="off" aria-describedby="itemSearchNote">
+        <button type="submit">供給状況を検索</button>
+      </div>
+      <p class="item-search-note" id="itemSearchNote">検索語はURLの#以降に保持し、アクセス解析には送りません。</p>
+    </form>
     <p class="dataset-context">サイト全体の公開データ基準日：<span class="dataset-date" aria-live="polite">確認中</span>。これはこの静的ページの生成日ではありません。この品目行の最終変更日は下表の「更新日／ステータス更新日」をご確認ください。</p>
     <p class="dataset-warning" id="datasetWarning" role="status" hidden></p>
 
@@ -197,6 +214,24 @@ footer a{color:var(--sub)}
     if(event.key !== "favDrugKeysV2") return;
     watchKeys = readWatchKeys();
     syncWatchButton();
+  });
+  const itemSearchForm = document.getElementById("itemSearchForm");
+  const itemSearchInput = document.getElementById("itemSearchInput");
+  if(itemSearchInput) itemSearchInput.addEventListener("input", function(){
+    itemSearchInput.setCustomValidity("");
+  });
+  if(itemSearchForm) itemSearchForm.addEventListener("submit", function(event){
+    event.preventDefault();
+    const query = itemSearchInput ? itemSearchInput.value.trim() : "";
+    if(!query){
+      if(itemSearchInput){
+        itemSearchInput.setCustomValidity("検索する薬品名などを入力してください。");
+        itemSearchInput.reportValidity();
+      }
+      return;
+    }
+    if(window.dsnTrack) window.dsnTrack("search-cta-open");
+    location.href = "https://tkiyo1007-eng.github.io/drugs-data/" + "#q=" + encodeURIComponent(query);
   });
   const button = document.getElementById("shareButton");
   const status = document.getElementById("shareStatus");
