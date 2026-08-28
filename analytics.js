@@ -37,7 +37,7 @@
     "watchlist-backup-export", "watchlist-dashboard-open",
     "watchlist-mark-checked", "watchlist-share-success",
     "pwa-install-accepted", "pwa-installed", "app-store-open",
-    "item-web-open", "item-share-success", "item-app-store-open",
+    "item-web-open", "item-share-success", "item-app-store-open", "item-watchlist-add",
     "search-cta-open", "official-source-open", "related-item-open", "topic-to-search",
     "static-page-share-success",
   ]);

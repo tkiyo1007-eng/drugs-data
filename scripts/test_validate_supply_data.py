@@ -18,6 +18,8 @@ class ValidateSupplyDataTests(unittest.TestCase):
         row.update({
             "商品名": "テスト錠", "一般名": "テスト成分", "製造メーカー": "テスト製薬",
             "販売メーカー": "", "供給状況": next(iter(ALLOWED_STATUSES)),
+            "理由": "７．－",
+            "代替候補": "解除/解消見込み: エ. － / 出荷量状況: A．出荷量通常",
             "更新日": "2026/08/01", "ステータス更新日": "2026/08/01",
             "YJコード": "1234567A1234", "薬価": "",
         })
@@ -49,6 +51,23 @@ class ValidateSupplyDataTests(unittest.TestCase):
         self.assertIn("未対応", errors)
         self.assertIn("YJコード形式", errors)
         self.assertIn("YJコードが重複", errors)
+
+    def test_unknown_publication_codes_and_shifted_metadata_are_rejected(self):
+        self.write([
+            self.row(
+                理由="９．未知",
+                代替候補="解除/解消見込み: オ. 未知 / 出荷量状況: E．未知",
+            ),
+            self.row(
+                商品名="列ずれテスト錠", YJコード="1234567A1235",
+                代替候補="A．出荷量通常",
+            ),
+        ])
+        errors = "\n".join(self.errors())
+        self.assertIn("未対応または空の理由区分", errors)
+        self.assertIn("未対応の解除・解消見込み区分", errors)
+        self.assertIn("未対応の出荷量状況区分", errors)
+        self.assertIn("複合形式が不正", errors)
 
     def test_invalid_and_future_dates_are_rejected(self):
         self.write([self.row(更新日="2026-07-01", ステータス更新日="2026/08/10")])
