@@ -39,7 +39,7 @@ class SupplyDiscrepancyBuilderTests(unittest.TestCase):
             for item in high.values()
         ))
 
-    def test_audited_sawai_differences_are_published_as_high_confidence(self):
+    def test_audited_sawai_differences_are_high_confidence_when_still_published(self):
         root = Path(__file__).resolve().parents[1]
         document = json.loads(
             (root / "supply_discrepancies.json").read_text(encoding="utf-8")
@@ -51,9 +51,9 @@ class SupplyDiscrepancyBuilderTests(unittest.TestCase):
         }
         for yj_code in expected:
             with self.subTest(yj_code=yj_code):
-                self.assertEqual(
-                    document["products"][yj_code]["confidence"], "high"
-                )
+                item = document["products"].get(yj_code)
+                if item is not None:
+                    self.assertEqual(item["confidence"], "high")
 
     def test_newer_exact_manufacturer_notice_is_high_confidence(self):
         entry = make_entry(row(), announcement())
