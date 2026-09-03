@@ -88,6 +88,10 @@ class UpdateWorkflowContractTests(unittest.TestCase):
         lifecycle_step = self.workflow[start:end]
         self.assertIn("--events maker_announcement_events.json", lifecycle_step)
 
+    def test_bare_release_outlook_dash_is_normalized_to_the_canonical_category(self):
+        self.assertIn('kaijo = s(r[14]) or "エ. －"', self.workflow)
+        self.assertIn('if kaijo == "－": kaijo = "エ. －"', self.workflow)
+
 
 if __name__ == "__main__":
     unittest.main()

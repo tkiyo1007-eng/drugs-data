@@ -79,7 +79,8 @@ jobs:
           xl = {}
           for r in data:
               yj = s(r[4])
-              kaijo = s(r[14]) or "－"; ryo = s(r[16]) or "－"
+              kaijo = s(r[14]) or "エ. －"; ryo = s(r[16]) or "－"
+              if kaijo == "－": kaijo = "エ. －"
               xl[yj] = dict(
                   jokyo=s(r[11]), riyu=s(r[13]),
                   daitai=f"解除/解消見込み: {kaijo} / 出荷量状況: {ryo}",
