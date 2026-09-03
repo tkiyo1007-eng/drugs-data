@@ -5082,5 +5082,25 @@
    "pkg": "PTP100錠",
    "until": ""
   }
+ ],
+ "https://med.sawai.co.jp/file/pr27_4802_6.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  }
+ ],
+ "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uW77lIAC": [
+  {
+   "pkg": "袋1000mL",
+   "until": ""
+  },
+  {
+   "pkg": "袋500mL",
+   "until": ""
+  }
  ]
 }
