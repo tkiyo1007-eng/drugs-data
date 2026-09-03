@@ -1,5 +1,47 @@
 [
  {
+  "date": "2026/09/04",
+  "title": "外国製造業者認定・登録番号を掲載しました",
+  "url": "https://www.pmda.go.jp/review-services/drug-reviews/foreign-mfr/0003.html",
+  "tag": "承認審査"
+ },
+ {
+  "date": "2026/09/03",
+  "title": "「医療事故の再発防止に向けた提言第22号の公表について」を掲載しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/medical-safety-info/0005.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/09/02",
+  "title": "クラスI回収 該当回収品目　新鮮凍結血漿-LR「日赤」240",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html",
+  "tag": "回収"
+ },
+ {
+  "date": "2026/09/01",
+  "title": "10月簡易相談予定表を掲載しました【医薬品等】",
+  "url": "https://www.pmda.go.jp/review-services/f2f-pre/consultations/0005.html",
+  "tag": "承認審査"
+ },
+ {
+  "date": "2026/08/31",
+  "title": "プログラム医療機器審査部が実施する対面助言の調整可能な時期を更新しました",
+  "url": "https://www.pmda.go.jp/review-services/drug-reviews/about-reviews/devices/0048.html",
+  "tag": "承認審査"
+ },
+ {
+  "date": "2026/08/31",
+  "title": "人道的見地から実施される治験の情報（医薬品、機器・再生）を更新しました",
+  "url": "https://www.pmda.go.jp/review-services/trials/0016.html",
+  "tag": "承認審査"
+ },
+ {
+  "date": "2026/08/31",
+  "title": "GMPラウンドテーブル会議（地方開催：滋賀）の開催報告を掲載しました",
+  "url": "https://www.pmda.go.jp/review-services/gmp-qms-gctp/gmp/0023.html",
+  "tag": "承認審査"
+ },
+ {
   "date": "2026/08/28",
   "title": "使用上の注意の改訂指示通知（医薬品）2026年8月28日付（厚生労働省より発出）を掲載しました",
   "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/revision-of-precautions/0375.html",
@@ -16,47 +58,5 @@
   "title": "［MID-NET］利活用者向け基本情報（NCDAデータ版）を更新しました",
   "url": "https://www.pmda.go.jp/safety/mid-net/0008.html",
   "tag": "安全対策"
- },
- {
-  "date": "2026/08/25",
-  "title": "「不具合が疑われる症例報告に関する情報（コンビネーション製品）」に2026年4月分の情報を追加しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/adr-info/malfunctions-combination-drugs/0001.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/08/25",
-  "title": "「不具合が疑われる症例報告に関する情報（医療機器）」に2026年4月分の情報を追加しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/devices/0090.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/08/25",
-  "title": "MIHARI Project  PMDAが実施している調査の一覧（No.24, 52）を更新しました",
-  "url": "https://www.pmda.go.jp/safety/surveillance-analysis/0045.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/08/25",
-  "title": "「医薬品に関する評価中のリスク等の情報について」を掲載しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/risk-communications/0001.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/08/25",
-  "title": "「不具合が疑われる症例報告に関する情報（再生医療等製品）」に2026年4月分の情報を追加しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/ctp/0006.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/08/25",
-  "title": "新医薬品の承認品目一覧（2026年8月24日承認分まで）を掲載しました",
-  "url": "https://www.pmda.go.jp/review-services/drug-reviews/review-information/p-drugs/0040.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/08/24",
-  "title": "クラスI回収 該当回収品目　照射赤血球液-LR「日赤」",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html",
-  "tag": "回収"
  }
 ]
