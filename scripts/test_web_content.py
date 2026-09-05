@@ -52,12 +52,14 @@ class PublishedWebContentTests(unittest.TestCase):
                 self.assertIn(f'id="{element_id}"', self.html)
         self.assertIn('id="mobileWatchBadge" aria-hidden="true" hidden', self.html)
         self.assertIn(".watch-return{\n  min-height:44px", self.html)
-        self.assertIn("watchReturn.hidden = !hasUnread;", self.html)
+        # 履歴未確認・キャッシュ時の件数を、最新の未確認件数として強調しない。
+        self.assertIn("const historyConfirmed = historyCanConfirm();", self.html)
+        self.assertIn("watchReturn.hidden = !hasUnread || !historyConfirmed;", self.html)
         self.assertIn(
             'watchReturnCount.textContent = `${WATCH_UNREAD.length.toLocaleString()}件`;',
             self.html,
         )
-        self.assertIn("mobileWatchBadge.hidden = !hasUnread;", self.html)
+        self.assertIn("mobileWatchBadge.hidden = !hasUnread || !historyConfirmed;", self.html)
         self.assertIn(
             'mobileWatchBadge.textContent = WATCH_UNREAD.length > 99 ? "99+" : '
             'String(WATCH_UNREAD.length);',
@@ -66,6 +68,17 @@ class PublishedWebContentTests(unittest.TestCase):
         self.assertIn(
             '? `監視、未確認の変更${WATCH_UNREAD.length.toLocaleString()}件`',
             self.html,
+        )
+        self.assertIn('!historyConfirmed ? "監視、最新の変更件数は未確認"', self.html)
+        confirm_guard = self.html.split("function historyCanConfirm(){", 1)[1].split("}", 1)[0]
+        self.assertIn(
+            'return LIVE && HISTORY_STATE.phase === "ready" && HISTORY_STATE.source === "network";',
+            confirm_guard,
+        )
+        mark_checked = self.html.split("function markWatchChangesChecked(){", 1)[1].split("}", 1)[0]
+        self.assertIn(
+            "if(!historyCanConfirm() || !WATCH_UNREAD.length || !LATEST_CHANGE_DATE) return;",
+            mark_checked,
         )
         open_handler = self.html.split(
             "function openWatchUnreadChanges(){", 1
@@ -144,8 +157,14 @@ class PublishedWebContentTests(unittest.TestCase):
 
     def test_change_history_must_match_the_current_status_like_ios(self):
         self.assertIn("function statusChangeMatchesCurrentItem(item, change){", self.html)
-        self.assertIn('mapStatus(String(change.to ?? "")) === item.s', self.html)
+        self.assertIn("mapPublishedStatus(change.to) === item.s", self.html)
         self.assertIn("statusChangeMatchesCurrentItem(item, change) ? change : null", self.html)
+        # 未知区分を通常出荷へ読み替える緩いmapperへ戻さない。
+        published_status = self.html.split("function mapPublishedStatus(s){", 1)[1].split(
+            "function mapStatus(s){", 1
+        )[0]
+        self.assertIn("return null;", published_status)
+        self.assertTrue(published_status.rstrip().endswith("return null;\n}"))
 
     def test_lifecycle_maker_matching_rejects_empty_and_uses_verified_alias(self):
         self.assertIn("function lifecycleMakerMatches(maker, makerText){", self.html)
