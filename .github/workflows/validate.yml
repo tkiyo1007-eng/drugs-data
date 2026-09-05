@@ -5,6 +5,17 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  workflow_call:
+    inputs:
+      ref:
+        description: 検証する公開対象の完全なcommit SHA
+        required: true
+        type: string
+      core_release:
+        description: 定刻・手動公開で既存の任意メーカー更新境界を維持する
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -14,17 +25,38 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+        with:
+          ref: ${{ inputs.ref || github.sha }}
       - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
       - name: Python構文検査
         run: python3 -m py_compile scripts/*.py
       - name: 回帰テスト
+        if: ${{ !inputs.core_release }}
         run: python3 -m unittest discover -s scripts -p 'test_*.py'
+      - name: コア公開境界の回帰テスト
+        if: inputs.core_release
+        run: python3 scripts/check_core_release.py --run-regressions
       - name: 現行供給CSV品質検査
         run: python3 scripts/validate_supply_data.py --csv drugs_app_ready.csv
+      - name: 変更履歴の型・日付・供給区分検査
+        run: |
+          python3 - <<'PY'
+          import json
+          import sys
+          sys.path.insert(0, 'scripts')
+          from check_public_data_health import validate_supporting_document
+          errors = validate_supporting_document('status_changes.json', json.load(open('status_changes.json')))
+          if errors:
+              raise SystemExit('\n'.join(errors))
+          PY
       - name: 現行メーカー案内データ品質検査
+        if: ${{ !inputs.core_release }}
         run: python3 scripts/validate_maker_announcements.py --min-count 300
+      - name: 整合済み保持メーカー情報のコア公開検査
+        if: inputs.core_release
+        run: python3 scripts/check_core_release.py --min-count 300
       - name: 販売中止・包装変更データ品質検査
         run: >-
           python3 scripts/validate_product_lifecycle.py product_lifecycle.json

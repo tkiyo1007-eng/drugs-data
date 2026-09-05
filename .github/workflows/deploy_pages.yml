@@ -1,7 +1,9 @@
 name: Deploy GitHub Pages
 
 on:
-  push:
+  workflow_run:
+    workflows: ['Validate data pipeline']
+    types: [completed]
     branches: [main]
   schedule:
     # データ自動更新(update_drugs.yml, 23:10 JST)の後にページを再デプロイ
@@ -10,24 +12,87 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
 
 jobs:
-  deploy:
+  target:
+    if: >-
+      (github.event_name == 'workflow_run' &&
+       github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.head_branch == 'main' &&
+       github.event.workflow_run.head_repository.full_name == github.repository &&
+       (github.event.workflow_run.event == 'push' || github.event.workflow_run.event == 'workflow_dispatch')) ||
+      (github.event_name != 'workflow_run' && github.ref == 'refs/heads/main')
     runs-on: ubuntu-latest
+    outputs:
+      sha: ${{ steps.target.outputs.sha }}
+    steps:
+      - id: target
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const {data: branch} = await github.rest.repos.getBranch({...context.repo, branch: 'main'});
+            const current = branch.commit.sha;
+            // schedule/manualもWorkflow定義と同じSHAに固定し、開始後のmainへ追従しない。
+            const validated = context.payload.workflow_run?.head_sha || context.sha;
+            if (validated && validated !== current) {
+              core.notice('検証後にmainが進んだため、古い対象の公開をスキップします');
+              return;
+            }
+            core.setOutput('sha', current);
+  # bot tokenのpushは別Workflowを起動しない。日次schedule/manualは同じ検査を
+  # 固定SHAで1回実施し、通常のmain検証成功イベントでは二重実行しない。
+  validate:
+    needs: target
+    if: needs.target.outputs.sha != '' && github.event_name != 'workflow_run'
+    uses: ./.github/workflows/validate.yml
+    with:
+      ref: ${{ needs.target.outputs.sha }}
+      core_release: true
+  deploy:
+    needs: [target, validate]
+    if: >-
+      always() && needs.target.result == 'success' && needs.target.outputs.sha != '' &&
+      ((github.event_name == 'workflow_run' && needs.validate.result == 'skipped') ||
+       needs.validate.result == 'success')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: true
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v5
+        with:
+          ref: ${{ needs.target.outputs.sha }}
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: 検証したartifactの配信整合性表を作成
+        env:
+          SOURCE_COMMIT: ${{ needs.target.outputs.sha }}
+        run: >-
+          python3 scripts/public_data_manifest.py --site .
+          --commit "$SOURCE_COMMIT" --output public-data-manifest.json
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
         with:
           path: .
+      - name: 公開直前にmainの一致を再確認
+        id: current
+        uses: actions/github-script@v8
+        env:
+          SOURCE_COMMIT: ${{ needs.target.outputs.sha }}
+        with:
+          script: |
+            const {data: branch} = await github.rest.repos.getBranch({...context.repo, branch: 'main'});
+            const current = branch.commit.sha === process.env.SOURCE_COMMIT;
+            core.setOutput('matches', String(current));
+            if (!current) core.notice('検証中にmainが進んだため、古いartifactを公開しません');
       - id: deployment
+        if: steps.current.outputs.matches == 'true'
         uses: actions/deploy-pages@v5

@@ -6,6 +6,8 @@ on:
       - '.github/workflows/public-data-health.yml'
       - 'scripts/check_public_data_health.py'
       - 'scripts/test_public_data_health.py'
+      - 'scripts/public_data_manifest.py'
+      - 'scripts/test_public_data_manifest.py'
       - 'scripts/maker_identity.py'
       - 'scripts/test_maker_identity.py'
       - 'scripts/validate_supply_data.py'
@@ -19,6 +21,9 @@ on:
       - 'manual_announcement_groups.json'
       - 'product_lifecycle.json'
       - 'supply_discrepancies.json'
+      - 'status_changes.json'
+      - 'maker_collection_health.json'
+      - 'items/keys.json'
   # main更新時はPages公開が完了してから検証し、新旧ファイルの混在取得を防ぐ。
   workflow_run:
     workflows: ['Deploy GitHub Pages']
@@ -52,7 +57,7 @@ jobs:
       - name: Validate live remote data
         run: >-
           python3 scripts/check_public_data_health.py --max-age-days 4
-          ${{ github.event_name == 'pull_request' && '--allow-missing-supply-discrepancies --allow-stale-supply-discrepancies' || '' }}
+          ${{ github.event_name == 'pull_request' && '--allow-missing-supply-discrepancies --allow-stale-supply-discrepancies --skip-pages' || '' }}
       - name: Validate published item hubs and sitemap
         if: github.event_name != 'pull_request'
         run: |
@@ -62,6 +67,7 @@ jobs:
           import urllib.request
           import xml.etree.ElementTree as ET
           from html.parser import HTMLParser
+          from urllib.parse import unquote, urlsplit
 
           SITE_ROOT = "https://tkiyo1007-eng.github.io/drugs-data/"
           HUB_URLS = [
@@ -69,7 +75,10 @@ jobs:
               SITE_ROOT + "items/stopped.html",
               SITE_ROOT + "items/supplemental.html",
               SITE_ROOT + "items/resumed.html",
+              SITE_ROOT + "items/recent-restrictions.html",
           ]
+          SITEMAPS = ("sitemap.xml", "sitemap-items.xml", "sitemap-updates.xml", "sitemap-curated.xml")
+          NAMESPACE = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
           MAX_BYTES = 2 * 1024 * 1024
 
 
@@ -82,6 +91,9 @@ jobs:
               with urllib.request.urlopen(request, timeout=30) as response:
                   if response.status != 200:
                       raise RuntimeError(f"HTTP {response.status}: {url}")
+                  actual, expected = urlsplit(response.geturl()), urlsplit(url)
+                  if (actual.scheme, actual.netloc, actual.path) != (expected.scheme, expected.netloc, expected.path):
+                      raise RuntimeError(f"想定外のURLへ転送されました: {url}")
                   body = response.read(MAX_BYTES + 1)
               if not body:
                   raise RuntimeError(f"応答が空です: {url}")
@@ -104,21 +116,55 @@ jobs:
                       self.robots.append(attrs.get("content", ""))
 
 
+          def sitemap_locations(body, *, index=False):
+              root = ET.fromstring(body)
+              root_tag, entry_tag = ("sitemapindex", "sitemap") if index else ("urlset", "url")
+              if root.tag != NAMESPACE + root_tag or not len(root):
+                  raise ValueError(f"空または形式不正の{root_tag}です")
+              locations = []
+              for entry in root:
+                  nodes = entry.findall(NAMESPACE + "loc")
+                  if entry.tag != NAMESPACE + entry_tag or len(nodes) != 1 or len(nodes[0]):
+                      raise ValueError("各エントリーにはlocが1件必要です")
+                  location = (nodes[0].text or "").strip()
+                  parsed = urlsplit(location)
+                  decoded_path = unquote(parsed.path)
+                  if (not location.startswith(SITE_ROOT) or parsed.query or parsed.fragment
+                          or any(char.isspace() for char in location) or "\\" in decoded_path
+                          or "//" in decoded_path or any(part in (".", "..") for part in decoded_path.split("/"))):
+                      raise ValueError(f"公開URLの範囲または形式が不正です: {location}")
+                  locations.append(location)
+              if len(locations) != len(set(locations)):
+                  raise ValueError("サイトマップ内に重複URLがあります")
+              return locations
+
+
           def validate_live_pages():
               errors = []
               try:
-                  sitemap = ET.fromstring(fetch(SITE_ROOT + "sitemap-items.xml"))
-                  namespace = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
-                  locations = [
-                      (node.text or "").strip()
-                      for node in sitemap.findall(f"{namespace}url/{namespace}loc")
-                  ]
-                  for url in HUB_URLS:
-                      count = locations.count(url)
-                      if count != 1:
-                          errors.append(f"sitemap-items.xml内の件数が{count}件です: {url}")
+                  children = sitemap_locations(fetch(SITE_ROOT + "sitemap-index.xml"), index=True)
+                  if set(children) != {SITE_ROOT + name for name in SITEMAPS}:
+                      errors.append("sitemap-index.xmlの子サイトマップが既定の4件と一致しません")
               except Exception as error:
-                  errors.append(f"sitemap-items.xmlを検証できません: {error}")
+                  errors.append(f"sitemap-index.xmlを検証できません: {error}")
+
+              all_locations = set()
+              # 親XMLの任意URLをたどらず、公開契約の4子だけを取得する。
+              for name in SITEMAPS:
+                  try:
+                      locations = sitemap_locations(fetch(SITE_ROOT + name))
+                      if all_locations.intersection(locations):
+                          errors.append(f"子サイトマップ間でURLが重複しています: {name}")
+                      all_locations.update(locations)
+                      if name == "sitemap.xml" and set(locations) != {
+                              SITE_ROOT, SITE_ROOT + "about.html", SITE_ROOT + "privacy.html"}:
+                          errors.append("sitemap.xmlの主要3ページが一致しません")
+                      if name == "sitemap-items.xml":
+                          for url in HUB_URLS:
+                              if url not in locations:
+                                  errors.append(f"sitemap-items.xmlにハブがありません: {url}")
+                  except Exception as error:
+                      errors.append(f"{name}を検証できません: {error}")
 
               for url in HUB_URLS:
                   try:
@@ -146,7 +192,7 @@ jobs:
           for attempt in range(1, 7):
               last_errors = validate_live_pages()
               if not last_errors:
-                  print("公開済み4ハブ・sitemap・canonical・robots: OK")
+                  print("公開済み5ハブ・親と4子sitemap・canonical・robots: OK")
                   break
               if attempt < 6:
                   print(f"::notice::公開反映待ちのため再試行します ({attempt}/6): " + " | ".join(last_errors))
