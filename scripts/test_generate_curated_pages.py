@@ -5,6 +5,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from urllib.parse import quote
 
 from generate_curated_pages import (
     GUIDE_SLUG,
@@ -21,6 +22,19 @@ GENERATOR = ROOT / "scripts" / "generate_curated_pages.py"
 
 
 class CuratedPageGenerationTests(unittest.TestCase):
+    def test_product_entry_reuses_encoded_search_and_official_links_before_details(self):
+        product = {"slug": "entry-test", "label": "確認製品", "query": '製品A & "テスト"'}
+        page, _ = product_page(product, [], set(), {})
+        entry = page.split('<nav class="product-entry"', 1)[1].split('</nav>', 1)[0]
+        self.assertIn('href="../#q=' + quote(product['query'], safe='') + '"', entry)
+        self.assertIn('data-dsn-event="search-cta-open"', entry)
+        self.assertIn('href="https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list" target="_blank" rel="noopener"', entry)
+        self.assertIn('href="../items/limited.html">限定出荷の品目一覧</a>', entry)
+        self.assertNotIn('関連品目', entry)
+        self.assertLess(page.index('<nav class="product-entry"'), page.index('<h2>該当品目</h2>'))
+        self.assertIn('rel="canonical" href="https://tkiyo1007-eng.github.io/drugs-data/products/entry-test.html"', page)
+        self.assertIn('<nav class="crumb" aria-label="パンくず">', page)
+
     def test_search_normalizes_width_and_orders_more_severe_status_first(self):
         rows = [
             {"商品名": "テスト配合錠１番", "供給状況": "①通常出荷"},

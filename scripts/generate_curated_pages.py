@@ -19,6 +19,7 @@ PMDA_SEARCH_URL = "https://www.pmda.go.jp/PmdaSearch/iyakuSearch/"
 PMDA_RECALL_URL = "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html"
 GUIDE_SLUG = "how-to-check-drug-supply"
 TEMPLATE_UPDATED_AT = "2026-08-28"
+PRODUCT_TEMPLATE_UPDATED_AT = "2026-09-06"
 STATUS = {
     "ok": ("通常出荷", "#227D4F", "#E7F6EE", 0),
     "limited": ("限定出荷", "#9F5E11", "#FCF0DF", 1),
@@ -193,6 +194,10 @@ STYLE = """
 .cta{margin-top:28px;padding:22px;border-radius:16px;background:linear-gradient(135deg,#2F63E8,#4F80F4);color:#fff}.cta a{display:inline-block;background:#fff;border-radius:999px;padding:9px 18px;text-decoration:none;font-weight:800;margin-top:8px}.list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}.list a{display:block;background:#fff;border:1px solid var(--line);border-radius:13px;padding:14px;text-decoration:none;font-weight:750}.list small{display:block;color:var(--sub);font-weight:500;margin-top:4px}
 .note,footer{font-size:12px;color:var(--sub)}footer{text-align:center;margin-top:36px}footer a{color:var(--sub)}
 @media(max-width:640px){.hero,.card{padding:21px 18px}.product{grid-template-columns:1fr}.tag{margin:5px 5px 0 0}}
+"""
+
+PRODUCT_ENTRY_STYLE = """
+.product-entry{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:18px}.product-entry a{display:inline-flex;align-items:center;min-height:44px;font-size:14px;font-weight:700;text-underline-offset:3px}.product-entry a:first-child{padding:8px 16px;border-radius:12px;background:#1B3FA0;color:#fff;text-decoration:none}.product-entry a:focus-visible{outline:3px solid #2F63E8;outline-offset:3px}
 """
 
 
@@ -456,11 +461,16 @@ def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[
             if slug == "caduet" else
             f"該当する{len(rows)}品目を、現在の供給区分とメーカーごとにまとめています。")
     body = f"""<!DOCTYPE html><html lang="ja"><head>
-{common_head(title, description, canonical, 'website', [collection, breadcrumb])}<style>{STYLE}</style></head><body>
+{common_head(title, description, canonical, 'website', [collection, breadcrumb])}<style>{STYLE}{PRODUCT_ENTRY_STYLE}</style></head><body>
 <div class="wrap"><header class="site"><a href="../">💊 医薬品供給ナビ</a></header>
-<nav class="crumb"><a href="../">トップ</a> › <a href="index.html">注目製品</a> › {esc(label)}</nav><main>
+<nav class="crumb" aria-label="パンくず"><a href="../">トップ</a> › <a href="index.html">注目製品</a> › {esc(label)}</nav><main>
 <section class="hero"><p class="eyebrow">CURRENT SUPPLY STATUS</p><h1>{esc(label)}の{suffix}</h1>
 <p class="lede">{lede}</p><div class="summary">{summary}</div>
+<nav class="product-entry" aria-label="この製品の供給情報を確認">
+<a href="{esc(query_link)}" data-dsn-event="search-cta-open">この製品をWeb版で検索</a>
+<a href="{MHLW_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚労省の原典で確認</a>
+<a href="../items/limited.html">限定出荷の品目一覧</a>
+</nav>
 {share_control("この供給状況を共有")}</section>
 <h2>該当品目</h2><div class="products">{product_rows_html(rows, generated_keys, lifecycle, product)}</div>
 {product_intent_html(product, rows, generated_keys)}
@@ -552,7 +562,7 @@ def main() -> int:
         page, lastmod = product_page(product, matched, generated_keys, lifecycle)
         (product_dir / f"{product['slug']}.html").write_text(page, encoding="utf-8")
         curated_date = normalize_date(products_doc.get("updated_at"))
-        product_dates[product["slug"]] = max(lastmod, curated_date, TEMPLATE_UPDATED_AT)
+        product_dates[product["slug"]] = max(lastmod, curated_date, TEMPLATE_UPDATED_AT, PRODUCT_TEMPLATE_UPDATED_AT)
     guide_updated = max(
         normalize_date(topics_doc.get("updated_at")),
         normalize_date(products_doc.get("updated_at")),
@@ -565,7 +575,7 @@ def main() -> int:
             normalize_date(topics_doc.get("updated_at")), TEMPLATE_UPDATED_AT)), encoding="utf-8")
     (product_dir / "index.html").write_text(
         list_page("products", products, max(
-            normalize_date(products_doc.get("updated_at")), TEMPLATE_UPDATED_AT)), encoding="utf-8")
+            normalize_date(products_doc.get("updated_at")), TEMPLATE_UPDATED_AT, PRODUCT_TEMPLATE_UPDATED_AT)), encoding="utf-8")
     (site / "sitemap-curated.xml").write_text(
         sitemap(topic_dates, product_dates, {GUIDE_SLUG: guide_updated}), encoding="utf-8")
     print(f"生成: ニュース{len(topics)}件、注目製品{len(products)}件、恒久ガイド1件")

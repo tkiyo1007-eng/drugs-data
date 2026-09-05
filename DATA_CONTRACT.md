@@ -62,7 +62,7 @@ Web版とiOS版は画面構成を揃えるのではなく、供給情報の意�
 
 ## サイトマップと匿名計測
 
-- `robots.txt` はトップレベル、品目、日別更新、キュレーションの4つのsitemapを宣言する。URLは複数のsitemapに重複させず、各HTMLのcanonicalと完全一致させる。`lastmod` は実際に反映した公表日またはテンプレート改訂日に限る。
+- `robots.txt` は、トップレベル、品目、日別更新、キュレーションの4つのsitemapを束ねる親 `sitemap-index.xml` のみを宣言する。URLは複数のsitemapに重複させず、各HTMLのcanonicalと完全一致させる。`lastmod` は実際に反映した公表日またはテンプレート改訂日に限る。
 - GitHub Pagesのprojectサイトでは `robots.txt` がホスト直下ではなく `/drugs-data/robots.txt` にあるため、Googleによるrobots.txt経由のsitemap自動発見は保証されない。運用では4グループを束ねる `sitemap-index.xml` をGoogle Search Consoleへ送信し、取得成功と登録URL数を確認する。
 - 共有成功、公式情報を開く操作、関連品目を開く操作、Web検索への導線は `analytics.js` の許可済み固定イベント名だけで集計する。医薬品名、検索語、YJコード、URLをイベント名やペイロードに含めない。
 - Webリポジトリと公開データリポジトリの `analytics.js` は完全一致させ、片方だけのイベント追加を許可しない。
