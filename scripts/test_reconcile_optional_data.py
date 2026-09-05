@@ -4,7 +4,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from reconcile_optional_data import reconcile
+from reconcile_optional_data import reconcile, validate_retained_bundle
+from validate_maker_announcements import validate_manual_groups
 
 
 class ReconcileOptionalDataTests(unittest.TestCase):
@@ -84,10 +85,18 @@ class ReconcileOptionalDataTests(unittest.TestCase):
         self.assertEqual(removed_announcements, 2)
         self.assertEqual(removed_lifecycle, 1)
         self.assertEqual(set(self.read_json("maker_announcements.json")), {"継続錠"})
+
         self.assertEqual(set(self.read_json("maker_announcement_events.json")), {"継続錠"})
         lifecycle_products = self.read_json("product_lifecycle.json")["products"]
         self.assertEqual(set(lifecycle_products), {"123456789012"})
         self.assertEqual(lifecycle_products["123456789012"]["announced_at"], "2026-05")
+
+    def test_core_release_rejects_corrupt_retained_data_instead_of_repairing_it(self):
+        reconcile(self.base, min_count=1)
+        self.write_json("maker_announcements.json", {})
+        before = (self.base / "maker_announcements.json").read_bytes()
+        self.assertTrue(validate_retained_bundle(self.base, min_count=1))
+        self.assertEqual((self.base / "maker_announcements.json").read_bytes(), before)
 
     def test_incompatible_name_or_maker_is_pruned_from_lifecycle(self):
         lifecycle = self.read_json("product_lifecycle.json")
@@ -110,6 +119,28 @@ class ReconcileOptionalDataTests(unittest.TestCase):
         self.assertEqual(removed_announcements, 2)
         self.assertEqual(removed_lifecycle, 1)
         self.assertEqual(set(self.read_json("maker_announcements.json")), {"継続錠"})
+        # 同じ状態を定刻公開のゲートも読み取りだけで受理する。一方、通常CIや
+        # 任意メーカー更新で使う手動登録の厳格検査は引き続きこの古い対象を拒否する。
+        before = {path.name: path.read_bytes() for path in self.base.iterdir() if path.is_file()}
+        self.assertEqual(validate_retained_bundle(self.base, min_count=1), [])
+        self.assertTrue(validate_manual_groups(
+            str(self.base / "drugs_app_ready.csv"), str(self.base / "manual_announcement_groups.json")))
+        self.assertEqual(validate_manual_groups(
+            str(self.base / "drugs_app_ready.csv"), str(self.base / "manual_announcement_groups.json"),
+            allow_removed_targets=True), [])
+        self.assertEqual(before, {path.name: path.read_bytes() for path in self.base.iterdir() if path.is_file()})
+
+    def test_core_manual_exception_does_not_allow_bad_notice_url(self):
+        self.write_json("manual_announcement_groups.json", [{
+            "products": ["削除済み錠"],
+            "announcement": {"maker": "沢井製薬", "title": "販売中止案内",
+                             "url": "http://example.test/removed.pdf", "event_type": "discontinued"},
+        }])
+        errors = validate_manual_groups(str(self.base / "drugs_app_ready.csv"),
+                                        str(self.base / "manual_announcement_groups.json"),
+                                        allow_removed_targets=True)
+        self.assertTrue(any("HTTPS" in error for error in errors))
+        self.assertFalse(any("CSVに存在しない" in error for error in errors))
 
 
 if __name__ == "__main__":

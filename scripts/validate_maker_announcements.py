@@ -169,7 +169,7 @@ def validate_unmatched(path):
     return errors
 
 
-def validate_manual_groups(csv_path, path):
+def validate_manual_groups(csv_path, path, *, allow_removed_targets=False):
     """複数品目向け手動登録の構造とCSV参照を検査する。"""
     if not os.path.exists(path):
         return []
@@ -209,7 +209,7 @@ def validate_manual_groups(csv_path, path):
                 if not isinstance(name, str) or not name.strip():
                     errors.append(f"{label}.productsに空または文字列以外の品目があります")
                     continue
-                if name not in product_names:
+                if name not in product_names and not allow_removed_targets:
                     errors.append(f"{label}: CSVに存在しない品目: {name}")
         lifecycle_yj_codes = set()
         for target_index, target in enumerate(lifecycle_targets):
@@ -227,7 +227,8 @@ def validate_manual_groups(csv_path, path):
             lifecycle_yj_codes.add(yj_code)
             row = rows_by_yj.get(yj_code)
             if row is None:
-                errors.append(f"{target_label}: CSVに存在しないYJコードです: {yj_code}")
+                if not allow_removed_targets:
+                    errors.append(f"{target_label}: CSVに存在しないYJコードです: {yj_code}")
             elif row.get("商品名") != product_name:
                 errors.append(f"{target_label}: YJコードと商品名がCSVで一致しません")
         verified = group.get("target_products_verified")

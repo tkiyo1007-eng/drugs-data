@@ -47,6 +47,29 @@ def _write_json(
     )
 
 
+def validate_retained_bundle(
+    base: Path, *, csv_path: Path | None = None, min_count: int = 300,
+) -> list[str]:
+    """既存core境界の保持データ検査。元データやmanual登録は変更しない。
+
+    手動登録元の古い対象は任意メーカー更新側で厳格検査する。ここでは表示に使う
+    保持4 JSONとlifecycleが最新CSVへ整合済みであることを要求する。
+    """
+    csv_path = csv_path or base / "drugs_app_ready.csv"
+    with csv_path.open(encoding="utf-8-sig", newline="") as handle:
+        rows_by_yj = {(row.get("YJコード") or "").strip(): row for row in csv.DictReader(handle)}
+    lifecycle = json.loads((base / LIFECYCLE_FILE).read_text(encoding="utf-8"))
+    errors = validate_announcements(str(csv_path), str(base / "maker_announcements.json"),
+                                    min_count=min_count)
+    errors.extend(validate_history(str(base / "maker_announcement_events.json")))
+    errors.extend(validate_current_history(str(base / "maker_announcements.json"),
+                                           str(base / "maker_announcement_events.json")))
+    errors.extend(validate_unmatched(str(base / "unmatched_maker_announcements.json")))
+    errors.extend(validate_health(str(base / "maker_collection_health.json")))
+    errors.extend(validate_lifecycle(lifecycle, rows_by_yj, 0))
+    return errors
+
+
 def reconcile(base: Path, *, min_count: int = 300) -> tuple[int, int]:
     """Prune stale optional records, validate the set, then publish it.
 
@@ -100,19 +123,7 @@ def reconcile(base: Path, *, min_count: int = 300) -> tuple[int, int]:
         lifecycle["products"] = filtered_products
         _write_json(stage / LIFECYCLE_FILE, lifecycle, indent=2, trailing_newline=True)
 
-        errors = validate_announcements(
-            str(base / "drugs_app_ready.csv"),
-            str(stage / "maker_announcements.json"),
-            min_count=min_count,
-        )
-        errors.extend(validate_history(str(stage / "maker_announcement_events.json")))
-        errors.extend(validate_current_history(
-            str(stage / "maker_announcements.json"),
-            str(stage / "maker_announcement_events.json"),
-        ))
-        errors.extend(validate_unmatched(str(stage / "unmatched_maker_announcements.json")))
-        errors.extend(validate_health(str(stage / "maker_collection_health.json")))
-        errors.extend(validate_lifecycle(lifecycle, rows_by_yj, 0))
+        errors = validate_retained_bundle(stage, csv_path=base / "drugs_app_ready.csv", min_count=min_count)
         if errors:
             raise ValueError("前回の補足情報を最新CSVへ整合できません: " + " / ".join(errors[:10]))
 

@@ -14,33 +14,20 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from validate_supply_data import validate_csv as validate_drug_csv
+from validate_supply_data import ALLOWED_STATUSES, YJ_PATTERN, validate_csv as validate_drug_csv
 from validate_product_lifecycle import load_csv, validate as validate_lifecycle
 from validate_supply_discrepancies import load_csv as load_discrepancy_csv, validate as validate_discrepancies
+from public_data_manifest import JSON_FILES, MANIFEST_NAME, PUBLIC_FILES, fingerprint, validate_manifest
 
 
 BASE_URL = "https://raw.githubusercontent.com/tkiyo1007-eng/drugs-data/main/"
+PAGES_URL = "https://tkiyo1007-eng.github.io/drugs-data/"
 MAX_JSON_BYTES = 20 * 1024 * 1024
 MAX_CSV_BYTES = 30 * 1024 * 1024
-SUPPORTING_FILES: dict[str, type] = {
-    "maker_announcements.json": dict,
-    "maker_announcement_events.json": dict,
-    "announcement_packages.json": dict,
-    "announcement_summaries.json": dict,
-    "news.json": list,
-    "status_changes.json": list,
-    "resolution_stats.json": dict,
-    "maker_links.json": list,
-    "manual_announcements.json": dict,
-    "manual_announcement_groups.json": list,
-    "product_lifecycle.json": dict,
-    "featured_products.json": dict,
-    "industry_topics.json": dict,
-    "crisis_index.json": dict,
-    "supply_discrepancies.json": dict,
-}
+SUPPORTING_FILES = JSON_FILES
 NOTE_DATE_RE = re.compile(r"(\d{4})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日")
 
 
@@ -61,7 +48,7 @@ def validate_version(document: object, today: dt.date, max_age_days: int) -> lis
         return ["version.json: ルートがオブジェクトではありません"]
     errors: list[str] = []
     version = document.get("version")
-    if not isinstance(version, int) or version <= 0:
+    if type(version) is not int or version <= 0:
         errors.append("version.json: version は正の整数である必要があります")
     csv_url = document.get("csv_url")
     parsed_url = urllib.parse.urlparse(csv_url if isinstance(csv_url, str) else "")
@@ -101,10 +88,44 @@ def validate_supporting_document(name: str, document: object) -> list[str]:
                 errors.append(f"{name}: {key} がありません")
     if name == "status_changes.json" and isinstance(document, list):
         for index, item in enumerate(document):
-            if not isinstance(item, dict) or not all(item.get(key) for key in ("date", "yj", "name", "from", "to")):
+            label = f"{name}: {index + 1}件目"
+            if not isinstance(item, dict) or not all(
+                isinstance(item.get(key), str) and item[key].strip()
+                for key in ("date", "yj", "name", "from", "to")
+            ):
                 errors.append(f"{name}: {index + 1}件目に必須項目がありません")
-                if len(errors) >= 20:
-                    break
+            else:
+                try:
+                    parsed = dt.datetime.strptime(item["date"], "%Y/%m/%d").date()
+                    if parsed.strftime("%Y/%m/%d") != item["date"]:
+                        raise ValueError("非正規日付")
+                except ValueError:
+                    errors.append(f"{label}の日付が実在するYYYY/MM/DDではありません")
+                if not YJ_PATTERN.fullmatch(item["yj"]):
+                    errors.append(f"{label}の品目IDが不正です")
+                if item["from"] not in ALLOWED_STATUSES or item["to"] not in ALLOWED_STATUSES:
+                    errors.append(f"{label}の供給区分が不正です")
+            if len(errors) >= 20:
+                break
+    if name == "items/keys.json":
+        if (not document or not all(isinstance(key, str) and re.fullmatch(r"[A-Za-z0-9_-]+", key) for key in document)
+                or len(set(document)) != len(document)):
+            errors.append(f"{name}: 品目キーの型・重複・形式が不正です")
+    if name == "maker_collection_health.json":
+        sources = document.get("sources")
+        try:
+            checked = document.get("checked")
+            if not isinstance(checked, str) or dt.date.fromisoformat(checked).isoformat() != checked:
+                raise ValueError("日付不正")
+        except ValueError:
+            errors.append(f"{name}: checkedが実在する日付ではありません")
+        if not isinstance(sources, list) or not sources or any(
+            not isinstance(source, dict) or not isinstance(source.get("source"), str)
+            or not source["source"].strip() or type(source.get("ok")) is not bool
+            or type(source.get("count")) is not int or source["count"] < 0
+            or not isinstance(source.get("error"), str) for source in sources
+        ):
+            errors.append(f"{name}: sourcesの形式が不正です")
     return errors
 
 
@@ -143,11 +164,97 @@ def fetch(url: str, maximum_bytes: int) -> bytes:
     return data
 
 
+def check_pages(
+    today: dt.date, max_age_days: int, *, attempts: int = 6, retry_delay: float = 10,
+) -> tuple[list[str], list[str]]:
+    """Webが読むPagesを直接検査。移動するraw/mainではなく公開artifactと照合する。
+
+    通常は各本文を1回だけ取得する。切替中は整合性表を再取得し、不一致・失敗した
+    ファイルだけを再取得する。整合性表が変わった場合も既取得本文は再利用する。
+    """
+    bodies: dict[str, bytes] = {}
+    last_errors: list[str] = []
+    manifest: dict = {}
+    for attempt in range(max(1, attempts)):
+        last_errors = []
+        try:
+            candidate = json.loads(fetch(PAGES_URL + MANIFEST_NAME, 64 * 1024))
+            last_errors.extend(validate_manifest(candidate))
+            if last_errors:
+                raise ValueError("; ".join(last_errors))
+            manifest = candidate
+            pending = [name for name in PUBLIC_FILES
+                       if name not in bodies or fingerprint(bodies[name]) != manifest["files"][name]]
+
+            def download(name: str) -> tuple[str, bytes | None, str | None]:
+                try:
+                    limit = MAX_CSV_BYTES if name.endswith(".csv") else MAX_JSON_BYTES
+                    return name, fetch(PAGES_URL + name, limit), None
+                except (OSError, ValueError, RuntimeError, urllib.error.URLError) as error:
+                    return name, None, f"Pages {name}を取得できません: {error}"
+
+            with ThreadPoolExecutor(max_workers=4) as executor:
+                for name, body, error in executor.map(download, pending):
+                    if error:
+                        last_errors.append(error)
+                    elif body is not None:
+                        bodies[name] = body
+            for name in PUBLIC_FILES:
+                if name in bodies and fingerprint(bodies[name]) != manifest["files"][name]:
+                    last_errors.append(f"Pages {name}: 公開artifactとのサイズ・SHA256不一致")
+            # この読み直しは小さい整合性表のみ。取得中に公開が切り替わった場合を検出する。
+            after = json.loads(fetch(PAGES_URL + MANIFEST_NAME, 64 * 1024))
+            if after != manifest:
+                last_errors.append("Pages: 検査中に公開artifactが切り替わりました")
+        except (OSError, ValueError, RuntimeError, urllib.error.URLError) as error:
+            last_errors = [f"Pages {MANIFEST_NAME}を取得・解析できません: {error}"]
+        if not last_errors:
+            break
+        if attempt + 1 < max(1, attempts):
+            time.sleep(retry_delay)
+    if last_errors:
+        return last_errors, []
+
+    errors: list[str] = []
+    documents: dict[str, object] = {}
+    results = [f"Pages/{MANIFEST_NAME} (commit {manifest['source_commit'][:12]})"]
+    for name in ("version.json", *SUPPORTING_FILES):
+        try:
+            document = json.loads(bodies[name])
+            documents[name] = document
+            validation = (validate_version(document, today, max_age_days) if name == "version.json"
+                          else validate_supporting_document(name, document))
+            errors.extend(f"Pages {error}" for error in validation)
+            results.append(f"Pages/{name}")
+        except (ValueError, TypeError) as error:
+            errors.append(f"Pages {name}を解析できません: {error}")
+    with tempfile.TemporaryDirectory(prefix="drug-supply-pages-health-") as directory:
+        csv_path = Path(directory) / "drugs_app_ready.csv"
+        # version.csv_urlがrawを指していても、ここでは必ずPages自身のCSVを検査する。
+        csv_path.write_bytes(bodies["drugs_app_ready.csv"])
+        csv_errors, _ = validate_drug_csv(csv_path, today=today, max_age_days=max_age_days,
+                                        reject_maker_noise=False)
+        errors.extend(f"Pages CSV: {error}" for error in csv_errors)
+        results.append("Pages/drugs_app_ready.csv")
+        if not csv_errors:
+            lifecycle = documents.get("product_lifecycle.json")
+            if isinstance(lifecycle, dict):
+                errors.extend(f"Pages product_lifecycle.json: {error}"
+                              for error in validate_lifecycle(lifecycle, load_csv(csv_path)))
+            discrepancies = documents.get("supply_discrepancies.json")
+            if isinstance(discrepancies, dict):
+                errors.extend(f"Pages supply_discrepancies.json: {error}"
+                              for error in validate_discrepancy_bundle(
+                                  discrepancies, load_discrepancy_csv(csv_path), documents))
+    return errors, results
+
+
 def run(
     today: dt.date,
     max_age_days: int,
     allow_missing_supply_discrepancies: bool = False,
     allow_stale_supply_discrepancies: bool = False,
+    include_pages: bool = True,
 ) -> tuple[list[str], list[str]]:
     errors: list[str] = []
     results: list[str] = []
@@ -160,6 +267,8 @@ def run(
         except (OSError, ValueError, RuntimeError, urllib.error.URLError) as error:
             return [f"version.jsonを取得・解析できません: {error}"], results
 
+        if not isinstance(version, dict):
+            return errors, results
         csv_url = version.get("csv_url")
         if not isinstance(csv_url, str):
             return errors + ["version.json: csv_urlを利用できません"], results
@@ -221,6 +330,10 @@ def run(
                     f"supply_discrepancies.json: {error}"
                     for error in discrepancy_errors
                 )
+    if include_pages:
+        pages_errors, pages_results = check_pages(today, max_age_days)
+        errors.extend(pages_errors)
+        results.extend(pages_results)
     return errors, results
 
 
@@ -242,12 +355,15 @@ def main() -> int:
     parser.add_argument("--today", type=dt.date.fromisoformat, default=dt.date.today())
     parser.add_argument("--allow-missing-supply-discrepancies", action="store_true")
     parser.add_argument("--allow-stale-supply-discrepancies", action="store_true")
+    parser.add_argument("--skip-pages", action="store_true",
+                        help="未公開PRコードのraw検査用。通常運用では指定しない")
     args = parser.parse_args()
     errors, results = run(
         args.today,
         args.max_age_days,
         allow_missing_supply_discrepancies=args.allow_missing_supply_discrepancies,
         allow_stale_supply_discrepancies=args.allow_stale_supply_discrepancies,
+        include_pages=not args.skip_pages,
     )
     write_summary(errors, results)
     if errors:
