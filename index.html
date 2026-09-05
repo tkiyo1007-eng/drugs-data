@@ -371,6 +371,30 @@ section{max-width:1120px;margin:0 auto;padding:76px 24px}
 h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-bottom:14px}
 .sec-lede{color:var(--sub);font-size:15.5px;max-width:42em;margin-bottom:44px}
 
+/* 入力欄は複製せず、PC・タブレットの導入部分を短くして検索を先に見せる。 */
+@media(min-width:641px){
+  header{padding:112px 24px 24px;gap:32px;align-items:start}
+  header .eyebrow{margin-bottom:10px}
+  header h1{font-size:34px;margin-bottom:12px}
+  header .lede{font-size:15px;line-height:1.7;margin-bottom:12px}
+  header .cta-row{display:none}
+  header .hero-note{margin-top:8px;font-size:13px}
+  #demo{padding-top:16px}
+  #demo>.sec-eyebrow{display:none}
+  #demo>h2{font-size:26px;margin-bottom:8px}
+  #demo>.sec-lede{margin-bottom:20px;max-width:none}
+  #demo .demo-shell{padding:24px}
+}
+@media(min-width:641px) and (max-width:900px){
+  header .hero-visual{display:none}
+}
+.supply-directory{margin:24px 0 0;padding-top:20px;border-top:1px solid rgba(79,128,244,.25)}
+.supply-directory h3{font-size:16px;margin-bottom:10px}
+.supply-directory-links{display:flex;flex-wrap:wrap;gap:8px 18px}
+.supply-directory a{display:inline-flex;align-items:center;min-height:44px;font-size:14px;
+  color:var(--blue-deep);font-weight:700;text-underline-offset:3px}
+.supply-directory a:focus-visible{outline:3px solid var(--blue-mid);outline-offset:3px}
+
 /* ===== ライブ検索デモ ===== */
 .demo-shell{padding:32px;border-radius:28px}
 @media(max-width:640px){.demo-shell{padding:20px}}
@@ -384,7 +408,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .search-box:focus-within{border-color:var(--blue-mid);box-shadow:0 0 0 4px rgba(79,128,244,.18)}
 .search-box svg{flex:none;color:var(--blue-mid)}
 .search-box input{
-  flex:1;border:none;outline:none;background:transparent;
+  flex:1;min-width:0;border:none;outline:none;background:transparent;
   font-size:16px;font-family:inherit;color:var(--ink);
 }
 .search-box input::placeholder{color:#9AA8CB}
@@ -717,7 +741,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   color:#fff;background:linear-gradient(135deg,var(--blue-mid),var(--blue));border:1px solid rgba(47,99,232,.3);
 }
 .daily-update-btn.secondary{color:var(--blue);background:rgba(255,255,255,.72);border-color:rgba(79,128,244,.32)}
-.daily-update-btn:disabled{opacity:.5;cursor:wait}
+.daily-update-btn:disabled,.daily-update-btn[aria-disabled="true"]{opacity:.5;cursor:wait}
 .daily-feed-note{margin:0;font-size:10.5px;color:var(--sub);text-align:center;line-height:1.5}
 .daily-share-status{min-height:1.5em;font-size:10.5px;color:var(--sub);text-align:center}
 @media(max-width:640px){
@@ -1181,7 +1205,7 @@ footer a:hover{color:var(--blue)}
   <div>
     <span class="eyebrow"><span class="pulse"></span>厚生労働省データ・毎日自動更新</span>
     <h1><span class="nb">医薬品の</span><span class="nb">供給状況が、</span><br><span class="grad">ひと目でわかる。</span></h1>
-    <p class="lede">出荷調整・限定出荷・供給停止・販売中止と、同成分・同剤形の関連品目を、厚労省データから速く、見やすく確認。薬品名・成分名・メーカー名・YJコードから無料で検索できるチェックツールです。</p>
+    <p class="lede">薬品名・成分名・メーカー名・YJコードから無料で検索。厚労省の供給区分と、メーカーの販売中止などの補足情報を分けて確認できます。</p>
     <div class="cta-row">
       <a class="btn-primary" href="#demo" data-focus-search data-dsn-event="search-cta-open">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
@@ -1228,8 +1252,8 @@ footer a:hover{color:var(--blue)}
 
 <section id="demo" class="reveal">
   <p class="sec-eyebrow">LIVE SEARCH</p>
-  <h2>知りたい薬が、すぐに見つかる。</h2>
-  <p class="sec-lede">薬品名・成分名・メーカー名から瞬時に検索。厚生労働省の公表データ全品目を、アプリを入れなくてもこのままWeb上で確認できます。</p>
+  <h2>医薬品の供給状況を検索</h2>
+  <p class="sec-lede">出荷調整・限定出荷・供給停止を確認。検索結果から原典と同成分・同剤形の関連品目へ進めます。</p>
 
   <div class="demo-shell glass">
     <div class="search-box">
@@ -1346,6 +1370,17 @@ footer a:hover{color:var(--blue)}
     <template id="watchPriorityResults"></template>
     <p class="demo-note" id="demoNote">※ 厚生労働省公表の最新データを読み込んでいます。読み込み完了後、この画面で全品目を検索できます。</p>
     <p class="demo-note">限定出荷・供給停止・販売中止・薬価削除予定の品目には、1品目ごとの詳細ページがあります → <a href="items/index.html">品目別の供給状況ページ一覧</a></p>
+    <nav class="supply-directory" aria-label="供給情報の一覧と確認ガイド">
+      <h3>一覧・確認ガイドから探す</h3>
+      <div class="supply-directory-links">
+        <a href="items/limited.html">限定出荷（出荷調整）</a>
+        <a href="items/stopped.html">供給停止</a>
+        <a href="items/recent-restrictions.html">最近の限定出荷・供給停止</a>
+        <a href="items/resumed.html">通常出荷への変更</a>
+        <a href="items/supplemental.html">販売中止・メーカー補足</a>
+        <a href="guides/how-to-check-drug-supply.html">出荷調整の理由・見通しの確認方法</a>
+      </div>
+    </nav>
   </div>
 </section>
 
@@ -1357,12 +1392,13 @@ footer a:hover{color:var(--blue)}
     <div>
       <p class="daily-update-date" id="dailyUpdateDate">最新情報を読み込み中</p>
       <h3 id="dailyUpdateTitle">供給状況の変更を確認しています</h3>
-      <p class="daily-update-summary" id="dailyUpdateSummary">厚生労働省の公開データと前回データの差分を照合しています。</p>
+      <p class="daily-update-summary" id="dailyUpdateSummary" role="status" aria-live="polite">厚生労働省の公開データと前回データの差分を照合しています。</p>
       <div class="daily-update-stats" id="dailyUpdateStats"></div>
     </div>
     <div class="daily-update-actions">
       <button type="button" class="daily-update-btn" id="dailyUpdateView" disabled>変更品目を見る</button>
       <button type="button" class="daily-update-btn secondary" id="dailyUpdateShare" disabled>この一覧を共有</button>
+      <button type="button" class="daily-update-btn secondary" id="historyRetry" aria-disabled="true">変更履歴を再取得</button>
       <button type="button" class="daily-update-btn secondary" id="dailyUpdateFeed" title="更新通知アプリに貼り付けるURLをコピー">更新通知用URLをコピー</button>
       <a class="daily-update-btn secondary" href="items/recent-restrictions.html">最近の限定出荷・供給停止</a>
       <p class="daily-feed-note">RSS対応アプリに貼り付けて使います</p>
@@ -1642,6 +1678,7 @@ footer a:hover{color:var(--blue)}
     <div class="discrepancy-panel" id="mDiscrepancy" role="note" hidden></div>
     <div class="sum-box" id="mSummary" hidden></div>
     <div class="pkg-box" id="mPkgs" hidden></div>
+    <p class="modal-note" id="mHistoryNote" role="status" aria-live="polite" aria-atomic="true"></p>
     <dl class="detail-grid" id="mGrid"></dl>
     <div id="mRelated" hidden></div>
     <p class="modal-note" id="mNote"></p>
@@ -1675,6 +1712,8 @@ footer a:hover{color:var(--blue)}
 </footer>
 
 <script>
+// 解析スクリプトの遮断・オフライン取得失敗は、検索や詳細操作の失敗理由にしない。
+if(typeof window.dsnTrack !== "function") window.dsnTrack = ()=>false;
 /* ===== スクロール出現（最優先で登録: 後続のJSエラーでも非表示のまま残らないように） ===== */
 (function(){
   const els = document.querySelectorAll(".reveal");
@@ -1947,6 +1986,18 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
     }
     return;
   }
+  // 履歴が不明な状態を検索0件と混同しない。検索条件・共有URLはそのまま保つ。
+  if((filter === "changed" || filter === "watchChanged") && !historyHasSnapshot()){
+    SHOWN = []; LAST_HITS = [];
+    $csvBtn.hidden = true; $searchShareBtn.hidden = true; $loadMore.hidden = true;
+    $searchShareStatus.textContent = "";
+    $meta.textContent = HISTORY_STATE.phase === "loading" ? "変更履歴を確認しています…" : "変更履歴を確認できません";
+    $meta.setAttribute("aria-busy", String(HISTORY_STATE.phase === "loading"));
+    $list.setAttribute("aria-busy", String(HISTORY_STATE.phase === "loading"));
+    $list.innerHTML = '<div class="data-loading">変更履歴による絞り込みは、履歴を確認できてから表示します。「すべて」や供給区分での検索は利用できます。</div>';
+    if(shouldSyncHash) syncHashSoon();
+    return;
+  }
   // スペース区切りの複数キーワードはAND検索にする（NFKCで全角スペースも半角化済み）
   //
   // YJコード（薬価基準収載医薬品コード）でも引けるようにする。レセコンや薬歴から
@@ -2018,15 +2069,7 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
     const discrepancyBadge = discrepancyFor(d)
       ? `<span class="discrepancy-badge" title="厚労省公表区分と、より新しいメーカー公式案内に差異があります">情報差異あり</span>`
       : "";
-    // 直近30日以内に供給状況が実際に変わった品目は「旧→新」バッジで変化を明示
-    const ch = LIVE ? latestChangeFor(d) : null;
-    const chDays = ch ? daysAgo(ch.date) : null;
-    let changeBadge = "";
-    if(ch && chDays!=null && chDays <= 30){
-      const fromL = STATUS[mapStatus(ch.from)].label, toL = STATUS[mapStatus(ch.to)].label;
-      const txt = fromL===toL ? `${toL}（区分変更）` : `${fromL}→${toL}`; // 例: 限定出荷（他社品の影響）→（自社の事情）
-      changeBadge = `<span class="change-badge ${mapStatus(ch.to)==='ok' ? 'to-ok' : 'to-warn'}">${txt} ${esc(ch.date.slice(5))}</span>`;
-    }
+    const changeBadge = historyBadgeHtml(d);
     const specText = d.price
       ? (d.spec ? `${d.spec}＝${d.price}円` : `薬価${d.price}円`)
       : dispSpec(d.spec);
@@ -2086,7 +2129,7 @@ function syncHashSoon(){
 function resolveFilter(f){
   if(!f || !HASH_FILTERS.includes(f)) return "all";
   if(f === "fav" && !FAVS.size) return "all";
-  if(f === "watchChanged" && !WATCH_UNREAD_KEYS.size) return FAVS.size ? "fav" : "all";
+  // 未取得・取得失敗・正常0件でも、利用者が選んだ監視条件を勝手に解除しない。
   if(f === "watchDiscrepancy" && !WATCH_DISCREPANCY_KEYS.size) return FAVS.size ? "fav" : "all";
   return f;
 }
@@ -2160,6 +2203,7 @@ $q.addEventListener("input", ()=>{
   const scheduledAtPageAnchorGeneration = pageAnchorGeneration;
   searchTimer = setTimeout(()=>{
     visibleCount = PAGE_SIZE;
+    applyPendingHistoryOrder();
     // 入力待ちの間にFAQ等へ移動した場合、結果は更新してもそのアンカーをURLから消さない。
     render(scheduledAtPageAnchorGeneration === pageAnchorGeneration);
     trackCurrentSearch();
@@ -2699,9 +2743,112 @@ function loadSupplementalData(){
 // YJコード→直近の供給状況の変化。商品名は同名品目があるため照合キーにしない。
 let CHANGE_EVENTS = [];
 let CHANGES_BY_YJ = new Map();
-let CHANGES_BY_NAME = {};
+let CHANGES_BY_NAME = Object.create(null);
+// 取得状態と表示元は別軸。取得時刻や最新イベント日では元情報の鮮度を保証しない。
+let HISTORY_STATE = {phase:"loading", source:null, hasSnapshot:false};
+let historyGeneration = 0;
+let historyOrderPending = false;
+let historyController = null;
+let historySearchComposing = false;
+let historyViewPending = false;
+function historyHasSnapshot(){ return HISTORY_STATE.hasSnapshot; }
+function historyCanConfirm(){
+  return LIVE && HISTORY_STATE.phase === "ready" && HISTORY_STATE.source === "network";
+}
+function historyDateKey(value){
+  if(typeof value !== "string") return "";
+  const m = /^(\d{4})([/-])(\d{2})\2(\d{2})$/.exec(value);
+  if(!m || Number(m[1]) < 1900) return "";
+  const date = new Date(Date.UTC(Number(m[1]), Number(m[3])-1, Number(m[4])));
+  if(date.getUTCFullYear() !== Number(m[1]) || date.getUTCMonth()+1 !== Number(m[3]) || date.getUTCDate() !== Number(m[4])) return "";
+  return `${m[1]}/${m[3]}/${m[4]}`;
+}
+function validateStatusHistory(raw){
+  if(!Array.isArray(raw)) throw new TypeError("履歴は配列である必要があります");
+  const events = raw.map(event=>{
+    if(!event || typeof event !== "object" || Array.isArray(event)) throw new TypeError("履歴要素が不正です");
+    if(!["date","yj","name","from","to"].every(key=>typeof event[key] === "string" && event[key].trim())) throw new TypeError("履歴の必須項目が不正です");
+    const date = historyDateKey(event.date);
+    const yj = event.yj.trim();
+    if(!date || !/^(?:[0-9][0-9A-Z]{11}|X[0-9]{5})$/.test(yj)
+      || !mapPublishedStatus(event.from) || !mapPublishedStatus(event.to)) throw new TypeError("履歴の日付・品目ID・供給区分が不正です");
+    return Object.freeze({date,yj,name:event.name.trim(),from:event.from.trim(),to:event.to.trim()});
+  }).sort((a,b)=>b.date.localeCompare(a.date));
+  const byYj = new Map(), byName = Object.create(null);
+  for(const event of events){
+    if(!byYj.has(event.yj)) byYj.set(event.yj,event);
+    if(!byName[event.name]) byName[event.name] = event;
+  }
+  return {events:Object.freeze(events),byYj,byName,latestDate:events[0]?.date || null};
+}
+function commitStatusHistory(snapshot, source){
+  // 全ての検証・索引構築が終わった時点でだけ、画面の参照値を同期的に差し替える。
+  CHANGE_EVENTS = snapshot.events;
+  CHANGES_BY_YJ = snapshot.byYj;
+  CHANGES_BY_NAME = snapshot.byName;
+  LATEST_CHANGE_DATE = snapshot.latestDate;
+  HISTORY_STATE = {phase:"ready",source,hasSnapshot:true};
+  historyOrderPending = true;
+}
+function applyPendingHistoryOrder(){
+  // 履歴到着時には並べ替えない。次の明示検索・絞り込みだけで従来の優先順へ。
+  if(!LIVE || !historyOrderPending || !historyHasSnapshot() || historySearchComposing) return;
+  ITEMS.sort((a,b)=>{
+    const ca = latestChangeFor(a), cb = latestChangeFor(b);
+    if(ca && cb) return cb.date.localeCompare(ca.date) || b.d.localeCompare(a.d);
+    if(ca) return -1;
+    if(cb) return 1;
+    return b.d.localeCompare(a.d);
+  });
+  historyOrderPending = false;
+}
+async function requestStatusHistory(signal){
+  const sources = [...new Set(["status_changes.json", "https://tkiyo1007-eng.github.io/drugs-data/status_changes.json"]
+    .map(url=>new URL(url,location.href).href))];
+  for(const url of sources){
+    if(signal.aborted) throw new Error("履歴取得期限を超えました");
+    let response;
+    try{ response = await fetch(url,{cache:"no-cache",signal}); }
+    catch(error){ if(signal.aborted) throw error; continue; }
+    if(!response.ok) continue;
+    // HTTP成功の不正JSONは、別配信元の内容で覆い隠さず形式不正として扱う。
+    let body;
+    try{ body = await response.text(); }
+    catch(error){ throw new Error("変更履歴の本文を取得できませんでした"); }
+    let value;
+    try{ value = JSON.parse(body); }
+    catch(error){ throw new TypeError("変更履歴のJSONが不正です"); }
+    return {snapshot:validateStatusHistory(value),source:responseUsesCachedData(response) ? "cache" : "network"};
+  }
+  throw new Error("変更履歴を取得できませんでした");
+}
+async function loadStatusHistory(){
+  if(!LIVE) return;
+  const generation = ++historyGeneration;
+  if(historyController) historyController.abort();
+  const controller = new AbortController();
+  historyController = controller;
+  HISTORY_STATE = {phase:"loading",source:historyHasSnapshot() ? "retained" : null,hasSnapshot:historyHasSnapshot()};
+  refreshHistoryViews();
+  let timer;
+  try{
+    // Abortに応答しない本文やSWでも画面側は期限内に復帰する。期限は全試行合計。
+    const deadline = new Promise((_,reject)=>{
+      timer = setTimeout(()=>{ controller.abort(); reject(new Error("履歴取得期限を超えました")); },10000);
+    });
+    const result = await Promise.race([requestStatusHistory(controller.signal),deadline]);
+    if(generation !== historyGeneration || !LIVE) return;
+    commitStatusHistory(result.snapshot,result.source);
+  }catch(error){
+    if(generation !== historyGeneration || !LIVE) return;
+    HISTORY_STATE = {phase:error instanceof TypeError ? "invalid" : "failed",source:historyHasSnapshot() ? "retained" : null,hasSnapshot:historyHasSnapshot()};
+  }finally{
+    clearTimeout(timer);
+    if(generation === historyGeneration){ historyController = null; if(LIVE) refreshHistoryViews(); }
+  }
+}
 function statusChangeMatchesCurrentItem(item, change){
-  return Boolean(item && change && mapStatus(String(change.to ?? "")) === item.s);
+  return Boolean(item && change && mapPublishedStatus(change.to) === item.s);
 }
 function latestChangeFor(item){
   const yj = normalizeYj(item && item.yj);
@@ -2716,6 +2863,15 @@ function latestChangeFor(item){
 }
 let LATEST_CHANGE_DATE = null; // 変化ログ上で最も新しい日（「本日の更新」フィルタ用）
 const SEV = {ok:0, limited:1, stopped:2, ended:3}; // 深刻度（関連品目の並び順用）
+function historyBadgeHtml(item){
+  const change = LIVE && historyHasSnapshot() ? latestChangeFor(item) : null;
+  const age = change ? daysAgo(change.date) : null;
+  if(!change || age == null || age > 30) return "";
+  const from = STATUS[mapPublishedStatus(change.from)].label, to = STATUS[mapPublishedStatus(change.to)].label;
+  const text = from === to ? `${to}（区分変更）` : `${from}→${to}`;
+  const cached = historyCanConfirm() ? "" : "前回取得分・";
+  return `<span class="change-badge ${mapPublishedStatus(change.to)==='ok' ? 'to-ok' : 'to-warn'}">${cached}${text} ${esc(change.date.slice(5))}</span>`;
+}
 
 /* ===== 直近の供給変更カード ===== */
 const $dailyUpdateCard = document.getElementById("dailyUpdateCard");
@@ -2724,12 +2880,37 @@ const $dailyUpdateShare = document.getElementById("dailyUpdateShare");
 const $dailyUpdateFeed = document.getElementById("dailyUpdateFeed");
 const $dailyShareStatus = document.getElementById("dailyShareStatus");
 let DAILY_SHARE = null;
+function historyStatusMessage(){
+  const phase = HISTORY_STATE.phase;
+  const retained = historyHasSnapshot() && (phase !== "ready" || HISTORY_STATE.source !== "network");
+  const source = retained ? "前回取得した変更履歴を表示しています。最新の履歴を確認できていません。" : "";
+  const message = phase === "loading" ? "変更履歴を確認しています。供給状況の検索は利用できます。"
+    : phase === "invalid" ? "変更履歴の内容を確認できませんでした。供給状況の検索は利用できます。"
+    : phase === "failed" ? "変更履歴を取得できませんでした。供給状況の検索は利用できます。"
+    : "";
+  return message + source + (!historyHasSnapshot() && phase !== "ready" ? "未確認の変更件数は判定していません。" : "");
+}
 function renderDailyUpdate(items){
+  DAILY_SHARE = null;
+  $dailyUpdateView.disabled = true;
+  $dailyUpdateShare.disabled = true;
+  // 無効期間もDOMフォーカスを維持する。再試行の多重実行はクリック側で抑止する。
+  document.getElementById("historyRetry").setAttribute("aria-disabled",String(!LIVE || HISTORY_STATE.phase === "loading"));
+  $dailyUpdateCard.setAttribute("aria-busy",String(HISTORY_STATE.phase === "loading"));
+  document.getElementById("dailyUpdateStats").replaceChildren();
+  const stateMessage = historyStatusMessage();
+  if(!historyHasSnapshot()){
+    document.getElementById("dailyUpdateDate").textContent = HISTORY_STATE.phase === "loading" ? "変更履歴を読み込み中" : "変更履歴は未確認";
+    document.getElementById("dailyUpdateTitle").textContent = HISTORY_STATE.phase === "loading" ? "供給状況の変更を確認しています" : "変更履歴を確認できません";
+    document.getElementById("dailyUpdateSummary").textContent = stateMessage;
+    return;
+  }
+  const cacheLabel = HISTORY_STATE.source !== "network" || HISTORY_STATE.phase !== "ready" ? "前回取得分・" : "";
+  const freshnessNote = "履歴の最新記録日は、全体データ基準日や履歴全体の確認済み日とは異なります。";
   if(!LATEST_CHANGE_DATE){
-    $dailyUpdateCard.setAttribute("aria-busy","false");
-    document.getElementById("dailyUpdateDate").textContent = "変更履歴なし";
-    document.getElementById("dailyUpdateTitle").textContent = "直近の供給変更は確認されていません";
-    document.getElementById("dailyUpdateSummary").textContent = "データ更新後に、前回から状況が変わった品目がここへ表示されます。";
+    document.getElementById("dailyUpdateDate").textContent = `${cacheLabel}変更記録0件`;
+    document.getElementById("dailyUpdateTitle").textContent = "取得した変更履歴には、供給区分の変更記録はありません";
+    document.getElementById("dailyUpdateSummary").textContent = stateMessage + "現在も変更がないことを保証するものではありません。履歴全体の確認済み日は取得できません。";
     return;
   }
   const changed = items.filter(x=>{ const change=latestChangeFor(x); return change && change.date===LATEST_CHANGE_DATE; });
@@ -2737,21 +2918,103 @@ function renderDailyUpdate(items){
   for(const x of changed) counts[mapStatus(latestChangeFor(x).to)]++;
   const [y,m,d] = LATEST_CHANGE_DATE.replaceAll("/","-").split("-");
   const dateLabel = `${y}年${Number(m)}月${Number(d)}日`;
-  document.getElementById("dailyUpdateDate").textContent = `${dateLabel}の変更`;
-  document.getElementById("dailyUpdateTitle").textContent = `${changed.length.toLocaleString()}品目の供給状況が変わりました`;
-  document.getElementById("dailyUpdateSummary").textContent = "通常出荷への復帰、限定出荷、供給停止など、前回公表分との差分だけを表示します。";
+  document.getElementById("dailyUpdateDate").textContent = `${cacheLabel}履歴の最新記録 ${dateLabel}`;
+  document.getElementById("dailyUpdateTitle").textContent = changed.length
+    ? `${changed.length.toLocaleString()}品目の供給状況の変更記録があります`
+    : "最新記録日に、現在の供給区分と一致する変更記録はありません";
+  document.getElementById("dailyUpdateSummary").textContent = stateMessage + "厚生労働省公表データの前回差分です。" + freshnessNote;
   const labels = [["ok","通常出荷へ"],["limited","限定出荷へ"],["stopped","供給停止へ"],["ended","販売中止へ"]];
   document.getElementById("dailyUpdateStats").innerHTML = labels.filter(([k])=>counts[k]).map(([k,label])=>
     `<span class="daily-update-stat"><strong class="num">${counts[k].toLocaleString()}</strong>${label}</span>`).join("");
   DAILY_SHARE = {
     title: `${dateLabel}の医薬品供給状況の変更｜医薬品供給ナビ`,
-    text: `${dateLabel}は${changed.length.toLocaleString()}品目の供給状況が変わりました。厚生労働省公表データの前回差分です。`,
+    text: `${dateLabel}の履歴に${changed.length.toLocaleString()}品目の供給状況の変更記録があります。厚生労働省公表データの前回差分です。`,
     url: new URL(`updates/${LATEST_CHANGE_DATE.replaceAll("/","-")}.html?src=share`, location.href).href,
   };
-  $dailyUpdateCard.setAttribute("aria-busy","false");
-  $dailyUpdateView.disabled = false;
-  $dailyUpdateShare.disabled = false;
+  $dailyUpdateView.disabled = !changed.length;
+  $dailyUpdateShare.disabled = !changed.length || !historyCanConfirm();
+  if($dailyUpdateShare.disabled) DAILY_SHARE = null;
 }
+function canRestoreHistoryFocus(element){
+  if(!element?.isConnected || element.disabled || element.closest("[hidden], [inert]") || !element.getClientRects().length) return false;
+  const visibility = getComputedStyle(element).visibility;
+  return visibility !== "hidden" && visibility !== "collapse";
+}
+function historyFocusFallback(previous){
+  const id = previous?.closest("#daily-update") ? "dailyUpdateSummary"
+    : previous?.closest("#watchDashboard, #watchReturn, #favNotice") ? "watchDashboardLede" : "meta";
+  const target = document.getElementById(id);
+  target.setAttribute("tabindex","-1");
+  return target;
+}
+function refreshHistoryViews(){
+  if(!LIVE) return;
+  if(historySearchComposing){ historyViewPending = true; return; }
+  historyViewPending = false;
+  // 履歴到着時は既存カードの順序・DOMを保つ。履歴依存条件だけ現在値で更新する。
+  const active = document.activeElement;
+  const activeCard = active?.closest(".drug-card");
+  const activeKey = activeCard?.querySelector(".fav-btn")?.dataset.key;
+  const activeClass = active?.classList.contains("fav-btn") ? ".fav-btn" : ".drug-open";
+  const y = window.scrollY, x = window.scrollX;
+  // ページ先頭・無フォーカス時は、画面外のカードの移動に合わせてページを動かさない。
+  const anchor = active && active !== document.body ? active : y > 0 ? $list.querySelector(".drug-card") : null;
+  const top = anchor?.getBoundingClientRect().top;
+  renderDailyUpdate(ITEMS);
+  renderWatchDashboard();
+  if(currentDetailKey && document.getElementById("mBack").classList.contains("open")){
+    updateDetailHistoryNote(findByKey(currentDetailKey));
+  }
+  // Notice内部にフォーカス中の時は、次の明示操作の描画まで置換しない。
+  if(!$favNotice.contains(active)) renderFavNotice();
+  const pill = document.getElementById("pillChanged");
+  const count = historyHasSnapshot() ? ITEMS.filter(item=>latestChangeFor(item)?.date === LATEST_CHANGE_DATE).length : 0;
+  pill.textContent = historyHasSnapshot() ? `直近の変更記録 ${count}` : "変更履歴 未確認";
+  pill.style.display = count || filter === "changed" ? "" : "none";
+  if(filter === "changed" || filter === "watchChanged") render(false);
+  else{
+    for(const card of $list.querySelectorAll(".drug-card")){
+      const item = SHOWN[Number(card.dataset.i)];
+      if(!item) continue;
+      card.querySelector(".change-badge")?.remove();
+      card.querySelector(".drug-tags")?.insertAdjacentHTML("beforeend",historyBadgeHtml(item));
+    }
+  }
+  let focusTarget = active;
+  if(activeKey && !active.isConnected){
+    focusTarget = [...$list.querySelectorAll(".drug-card")]
+      .find(card=>card.querySelector(".fav-btn")?.dataset.key === activeKey)?.querySelector(activeClass);
+    if(!focusTarget){
+      // 履歴条件から品目が外れた場合もbodyへフォーカスを落とさず結果状態を知らせる。
+      $meta.setAttribute("tabindex","-1");
+      focusTarget = $meta;
+    }
+  }
+  // 正常0件への更新等で操作不能になったボタンへfocus()してもbodyから戻らない。
+  // 同じ領域の状態文へ案内し、再取得ボタン(aria-disabledのみ)や入力欄はそのまま守る。
+  const focusFallback = active && active !== document.body && !canRestoreHistoryFocus(focusTarget);
+  if(focusFallback) focusTarget = historyFocusFallback(active);
+  if(focusTarget?.isConnected && document.activeElement !== focusTarget) focusTarget.focus({preventScroll:true});
+  const stable = focusFallback ? null : anchor?.isConnected ? anchor : focusTarget !== $meta ? focusTarget : null;
+  const offset = stable?.isConnected && top != null ? stable.getBoundingClientRect().top - top : 0;
+  const activeModal = active?.closest("#mBack .modal");
+  if(activeModal){
+    // 詳細内のアンカーは背景ページでなく、そのスクロール領域内で位置を補償する。
+    activeModal.scrollTop += offset;
+    window.scrollTo({left:x,top:y,behavior:"instant"});
+  }else{
+    window.scrollTo({left:x,top:y+offset,behavior:"instant"});
+  }
+}
+$q.addEventListener("compositionstart",()=>{ historySearchComposing = true; });
+$q.addEventListener("compositionend",()=>{
+  historySearchComposing = false;
+  if(historyViewPending) refreshHistoryViews();
+});
+document.getElementById("historyRetry").addEventListener("click",()=>{
+  if(!LIVE || HISTORY_STATE.phase === "loading") return;
+  void loadStatusHistory();
+});
 $dailyUpdateView.addEventListener("click", ()=>{
   if(!LATEST_CHANGE_DATE) return;
   $q.value = ""; setFilter("changed");
@@ -2883,10 +3146,11 @@ function setActivePill(f){
     p.setAttribute("aria-pressed", String(on));
   });
 }
-function setFilter(f){
+function setFilter(f, {historyOrder=true} = {}){
   filter = f;
   setActivePill(f);
   visibleCount = PAGE_SIZE;
+  if(historyOrder) applyPendingHistoryOrder();
   render(true);
 }
 // 「★ 監視中」ピル: 登録が1件以上あるときだけ表示（件数付き）
@@ -2897,7 +3161,7 @@ function updateFavPill(){
     $pf.style.display = "";
   }else{
     $pf.style.display = "none";
-    if(filter === "fav") setFilter("all");
+    if(filter === "fav") setFilter("all", {historyOrder:false});
   }
 }
 function toggleFav(item){
@@ -3056,8 +3320,8 @@ function changeEventKey(event){
   return matches.length===1 ? itemKey(matches[0]) : "";
 }
 function getWatchChangesSinceLastCheck(){
-  if(!LIVE || !FAVS.size) return [];
-  const checkpoint = WATCH_STATE.lastCheckedChangeDate || "";
+  if(!LIVE || !FAVS.size || !historyHasSnapshot()) return [];
+  const checkpoint = historyDateKey(WATCH_STATE.lastCheckedChangeDate) || "";
   const relevant = CHANGE_EVENTS
     .filter(event=>{
       const key = changeEventKey(event);
@@ -3090,6 +3354,8 @@ function renderWatchDashboard(){
   const dashboard = document.getElementById("watchDashboard");
   if(!dashboard) return;
   const supplementalConfirmed = supplementalReady();
+  const historyConfirmed = historyCanConfirm();
+  const historyAvailable = historyHasSnapshot();
   WATCH_UNREAD = getWatchChangesSinceLastCheck();
   WATCH_UNREAD_KEYS = new Set(WATCH_UNREAD.map(change=>change.key));
   WATCH_DISCREPANCY_KEYS = new Set(
@@ -3103,9 +3369,20 @@ function renderWatchDashboard(){
   document.getElementById("watchDashboardActions").hidden = empty;
   $watchTools.hidden = empty;
   document.getElementById("watchCount").textContent = FAVS.size.toLocaleString();
-  document.getElementById("watchUnreadCount").textContent = WATCH_UNREAD.length.toLocaleString();
-  document.getElementById("watchWorseCount").textContent = worse.toLocaleString();
-  document.getElementById("watchBetterCount").textContent = better.toLocaleString();
+  const historyCount = (id,count)=>{
+    const element = document.getElementById(id);
+    if(!historyAvailable){ element.textContent = "—"; return; }
+    if(historyConfirmed){ element.textContent = count.toLocaleString(); return; }
+    // 「前回取得分」は件数の大きな文字と分離し、既存の小見出しサイズで表示する。
+    // 固定ラベルと数値だけをDOMに追加し、textContent/読み上げでは表示元も保持する。
+    const source = document.createElement("span");
+    source.className = "watch-count-source";
+    source.textContent = "前回取得分 ";
+    element.replaceChildren(source,document.createTextNode(count.toLocaleString()));
+  };
+  historyCount("watchUnreadCount",WATCH_UNREAD.length);
+  historyCount("watchWorseCount",worse);
+  historyCount("watchBetterCount",better);
   document.getElementById("watchDiscrepancyCount").textContent = supplementalConfirmed
     ? WATCH_DISCREPANCY_KEYS.size.toLocaleString() : "—";
   document.getElementById("watchLastChecked").textContent = `最終確認：${formatCheckedAt(WATCH_STATE.lastCheckedAt)}`;
@@ -3115,22 +3392,24 @@ function renderWatchDashboard(){
   const watchReturnCount = document.getElementById("watchReturnCount");
   const mobileWatchLink = document.getElementById("mobileWatchLink");
   const mobileWatchBadge = document.getElementById("mobileWatchBadge");
-  watchReturn.hidden = !hasUnread;
+  watchReturn.hidden = !hasUnread || !historyConfirmed;
   watchReturnCount.textContent = `${WATCH_UNREAD.length.toLocaleString()}件`;
-  mobileWatchBadge.hidden = !hasUnread;
+  mobileWatchBadge.hidden = !hasUnread || !historyConfirmed;
   mobileWatchBadge.textContent = WATCH_UNREAD.length > 99 ? "99+" : String(WATCH_UNREAD.length);
-  mobileWatchLink.setAttribute("aria-label", hasUnread
+  mobileWatchLink.setAttribute("aria-label", !historyConfirmed ? "監視、最新の変更件数は未確認" : hasUnread
     ? `監視、未確認の変更${WATCH_UNREAD.length.toLocaleString()}件`
     : "監視");
   const hasDiscrepancy = supplementalConfirmed && WATCH_DISCREPANCY_KEYS.size > 0;
   document.getElementById("watchUnreadBtn").disabled = !hasUnread;
   document.getElementById("watchDiscrepancyBtn").disabled = !hasDiscrepancy;
-  document.getElementById("watchCheckedBtn").disabled = !hasUnread;
-  document.getElementById("watchShareBtn").disabled = !hasUnread;
-  document.getElementById("watchCopyBtn").disabled = !hasUnread;
+  document.getElementById("watchCheckedBtn").disabled = !hasUnread || !historyConfirmed;
+  document.getElementById("watchShareBtn").disabled = !hasUnread || !historyConfirmed;
+  document.getElementById("watchCopyBtn").disabled = !hasUnread || !historyConfirmed;
   document.getElementById("watchExportBtn").disabled = !hasItems;
   document.getElementById("watchRestoreBtn").disabled = !LIVE;
-  document.getElementById("watchDashboardLede").textContent = !supplementalConfirmed && LIVE
+  document.getElementById("watchDashboardLede").textContent = !historyConfirmed && LIVE
+    ? historyStatusMessage() + "保存済みの監視リストと確認済み状態は変更していません。"
+    : !supplementalConfirmed && LIVE
     ? "厚労省の供給区分は表示中です。メーカー補足情報は確認中または取得不完全のため、情報差異の件数は判定していません。"
     : !FAVS.size
     ? "採用品目や確認したい製品を、この端末だけで管理できます。★またはCSVで登録してください。"
@@ -3140,15 +3419,12 @@ function renderWatchDashboard(){
           hasDiscrepancy ? `${WATCH_DISCREPANCY_KEYS.size.toLocaleString()}品目で、厚労省区分とより新しいメーカー公式案内に差異があります。` : "",
           hasUnread ? "内容を確認してから「確認済みにする」を押してください。" : "",
         ].filter(Boolean).join("")
-      : "前回の確認後に新しい供給区分の変更はありません。監視リストはこの端末内だけに保存されています。";
+      : "取得した履歴では、前回の確認後の供給区分の変更記録はありません。履歴全体の確認済み日は取得できません。監視リストはこの端末内だけに保存されています。";
   const pill = document.getElementById("pillWatchChanged");
-  if(hasUnread){ pill.textContent = `未確認の変更 ${WATCH_UNREAD.length}`; pill.style.display = ""; }
+  if(hasUnread){ pill.textContent = `${historyConfirmed ? "未確認の変更" : "前回取得分の変更"} ${WATCH_UNREAD.length}`; pill.style.display = ""; }
   else{
-    pill.style.display = "none";
-    if(filter === "watchChanged"){
-      filter = FAVS.size ? "fav" : "all";
-      setActivePill(filter);
-    }
+    pill.textContent = historyAvailable ? "未確認の変更 0" : "変更履歴 未確認";
+    pill.style.display = filter === "watchChanged" ? "" : "none";
   }
   const discrepancyPill = document.getElementById("pillWatchDiscrepancy");
   if(hasDiscrepancy){
@@ -3161,11 +3437,14 @@ function renderWatchDashboard(){
       setActivePill(filter);
     }
   }
-  dashboard.setAttribute("aria-busy", String(!LIVE || !supplementalConfirmed));
+  dashboard.setAttribute("aria-busy", String(!LIVE || !supplementalConfirmed || HISTORY_STATE.phase === "loading"));
 }
 
 function markWatchChangesChecked(){
-  WATCH_STATE.lastCheckedChangeDate = LATEST_CHANGE_DATE || WATCH_STATE.lastCheckedChangeDate;
+  if(!historyCanConfirm() || !WATCH_UNREAD.length || !LATEST_CHANGE_DATE) return;
+  const checkpoint = historyDateKey(WATCH_STATE.lastCheckedChangeDate);
+  if(checkpoint && LATEST_CHANGE_DATE < checkpoint) return;
+  WATCH_STATE.lastCheckedChangeDate = LATEST_CHANGE_DATE;
   WATCH_STATE.lastCheckedAt = new Date().toISOString();
   saveWatchState();
   renderWatchDashboard(); renderFavNotice();
@@ -3177,7 +3456,7 @@ function markWatchChangesChecked(){
   dsnTrack("watchlist-mark-checked");
 }
 function buildWatchChangeText(){
-  if(!WATCH_UNREAD.length) return "";
+  if(!historyCanConfirm() || !WATCH_UNREAD.length) return "";
   const groups = [["worse","悪化"],["better","改善"],["other","その他の変更"]];
   const lines = ["医薬品供給ナビ｜監視品目の変更",`前回確認後に${WATCH_UNREAD.length}品目が変わりました。`,""];
   let shown = 0;
@@ -3273,7 +3552,7 @@ function renderFavNotice(){
   if(!LIVE || !FAVS.size){ $favNotice.hidden = true; return; }
   if(!WATCH_UNREAD.length){ $favNotice.hidden = true; return; }
   $favNotice.innerHTML =
-    `<div class="fav-notice-title">⭐ 未確認の監視品目（${WATCH_UNREAD.length}件）</div>` +
+    `<div class="fav-notice-title">⭐ ${historyCanConfirm() ? "未確認の監視品目" : "前回取得分の監視品目（最新の履歴は未確認）"}（${WATCH_UNREAD.length}件）</div>` +
     WATCH_UNREAD.map(change=>{
       const toOk = mapStatus(change.to) === "ok";
       return `<button type="button" class="fav-chg${toOk?" ok":""}" data-key="${esc(change.key)}">
@@ -3316,6 +3595,34 @@ function refreshItemLink(d){
   }
 }
 
+function detailHistoryMessage(item){
+  const stateMessage = historyStatusMessage();
+  if(!historyHasSnapshot()) return stateMessage + "この品目の変更履歴は未確認です。現在の供給区分は表示中のCSVに基づきます。";
+  const change = latestChangeFor(item);
+  const prefix = HISTORY_STATE.phase === "ready" && HISTORY_STATE.source === "network" ? "" : "前回取得分・";
+  const record = change
+    ? `${prefix}直近の状況変化：${change.from} → ${change.to}（記録日 ${change.date}）。`
+    : `${prefix}取得した履歴には、この品目の現在の供給区分と一致する変更記録はありません。過去に変更がなかったことを示すものではありません。`;
+  return stateMessage + record + "厚労省公表データの差分（独自集計）です。記録日は、全体データ基準日や履歴全体の確認済み日とは異なります。";
+}
+function updateDetailHistoryNote(item){
+  if(!item) return;
+  const note = document.getElementById("mHistoryNote");
+  const modal = document.querySelector("#mBack .modal");
+  const scrollTop = modal.scrollTop;
+  const anchor = modal.contains(document.activeElement) ? document.activeElement : null;
+  const anchorTop = anchor?.getBoundingClientRect().top;
+  const message = detailHistoryMessage(item);
+  if(note.textContent !== message) note.textContent = message;
+  note.setAttribute("aria-busy",String(HISTORY_STATE.phase === "loading"));
+  // 履歴だけ遅れて届いても、詳細全体やフォーカス中の操作要素を作り直さない。
+  if(anchor?.isConnected){
+    const offset = anchor.getBoundingClientRect().top - anchorTop;
+    modal.scrollTop += offset;
+  }else{
+    modal.scrollTop = scrollTop;
+  }
+}
 function openDetail(d, opts={}){
   if(!d) return;
   if(opts.track !== false) dsnTrack("detail-open");
@@ -3390,12 +3697,7 @@ function openDetail(d, opts={}){
       document.getElementById("mGrid").insertAdjacentHTML("afterbegin",
         `<dt>出荷再開・解除の見込み</dt><dd>${esc(parts.join(" ／ "))}</dd>`);
   }
-  // 実際に供給状況が変わった記録があれば先頭に表示（スナップショット差分由来）
-  const chg = latestChangeFor(d);
-  if(chg){
-    document.getElementById("mGrid").insertAdjacentHTML("afterbegin",
-      `<dt>直近の状況変化</dt><dd>${esc(chg.from)} → ${esc(chg.to)}（${esc(chg.date)}）</dd>`);
-  }
+  updateDetailHistoryNote(d);
   // PMDAの添付文書検索を品目名入力済みで開く（?nameWord= は検索欄への事前入力。アプリ版⑨と同等）
   const $mPmda = document.getElementById("mPmdaLink");
   $mPmda.href = "https://www.pmda.go.jp/PmdaSearch/iyakuSearch/?nameWord=" + encodeURIComponent(d.n);
@@ -4015,17 +4317,17 @@ function mapStatus(s){
 // 約1MB・16,000行を1文字ずつ舐めると低速端末で体感できるほど遅くなるため、
 // 特殊文字（" , CR LF）までを slice でまとめて切り出す。挙動は1文字ずつ版と同一
 // （ランダム入力30万件で出力一致を確認済み）。
-function parseCSV(text){
-  const rows=[]; let row=[], cell="", inQ=false, i=0;
+function parseCSV(text, strict=false){
+  const rows=[]; let row=[], cell="", inQ=false, closedQuote=false, i=0;
   const n=text.length;
   while(i<n){
     if(inQ){
       // 引用符の中: 次の " までは中身をそのまま取り込む（"" はエスケープされた引用符）
       const j=text.indexOf('"', i);
-      if(j<0){ cell+=text.slice(i); i=n; break; }
+      if(j<0){ if(strict) throw new Error("CSVの引用符が閉じられていません。"); cell+=text.slice(i); i=n; break; }
       cell+=text.slice(i,j);
       if(text[j+1]==='"'){ cell+='"'; i=j+2; }
-      else { inQ=false; i=j+1; }
+      else { inQ=false; closedQuote=true; i=j+1; }
       continue;
     }
     let j=i;
@@ -4034,16 +4336,85 @@ function parseCSV(text){
       if(c===34||c===44||c===10||c===13) break; // " , LF CR
       j++;
     }
-    if(j>i){ cell+=text.slice(i,j); i=j; if(i>=n) break; }
+    if(j>i){
+      if(strict && closedQuote) throw new Error("CSVの引用符の後に区切り以外の文字があります。");
+      cell+=text.slice(i,j); i=j; if(i>=n) break;
+    }
     const ch=text[i];
-    if(ch==='"'){ inQ=true; i++; }
-    else if(ch===","){ row.push(cell); cell=""; i++; }
-    else if(ch==="\n"){ row.push(cell); rows.push(row); row=[]; cell=""; i++; }
+    if(ch==='"'){
+      if(strict && (cell!=="" || closedQuote)) throw new Error("CSVの引用符の位置が不正です。");
+      inQ=true; i++;
+    }
+    else if(ch===","){ row.push(cell); cell=""; closedQuote=false; i++; }
+    else if(ch==="\n" || (strict && ch==="\r")){
+      row.push(cell); rows.push(row); row=[]; cell=""; closedQuote=false;
+      i += ch==="\r" && text[i+1]==="\n" ? 2 : 1;
+    }
     else i++; // CR は捨てる
   }
   if(cell!=="" || row.length){ row.push(cell); rows.push(row); }
   return rows;
 }
+
+// ===== Public CSV contract: pure validation (also exercised by unit tests) =====
+// DATA_CONTRACT.md / scripts/validate_supply_data.py と同じ公開スキーマ。
+// 端末時計による鮮度の拒否はしない。古い取得済みCSVは既存の基準日・cache注意で区別する。
+const SUPPLY_REQUIRED_COLUMNS = [
+  "商品名", "一般名", "製造メーカー", "販売メーカー", "供給状況", "理由", "代替候補",
+  "更新日", "今回更新", "YJコード", "薬効分類", "規格", "薬価", "経過措置期限", "ステータス更新日",
+];
+const SUPPLY_NON_EMPTY_COLUMNS = ["商品名", "一般名", "製造メーカー", "供給状況", "更新日", "YJコード", "薬効分類"];
+const SUPPLY_ALLOWED_STATUSES = new Set(["①通常出荷", "②限定出荷（自社の事情）", "③限定出荷（他社品の影響）", "④限定出荷（その他）", "⑤供給停止"]);
+const SUPPLY_ALLOWED_REASONS = new Set(["１．需要増", "２．原材料調達上の問題", "３．製造トラブル（製造委託を含む）", "４．品質トラブル（製造委託を含む）", "５．行政処分（製造委託を含む）", "６．薬価削除", "７．－", "８．その他の理由"]);
+const SUPPLY_ALLOWED_OUTLOOKS = new Set(["ア. あり", "イ. なし", "ウ. 未定", "エ. －"]);
+const SUPPLY_ALLOWED_VOLUMES = new Set(["Aプラス．出荷量増加", "A．出荷量通常", "B．出荷量減少", "C．出荷停止", "D．薬価削除予定"]);
+function validSupplyDate(value){
+  const match = /^(\d{4})\/(\d{1,2})\/(\d{1,2})$/.exec(value);
+  if(!match) return false;
+  const [,y,m,d] = match.map(Number);
+  const date = new Date(Date.UTC(y,m-1,d));
+  return date.getUTCFullYear()===y && date.getUTCMonth()===m-1 && date.getUTCDate()===d;
+}
+function validateSupplyCSVRows(head, rows){
+  if(!Array.isArray(head) || head.some(x=>typeof x!=="string") || new Set(head).size!==head.length)
+    return "公開データの列構成に不正または重複があります。";
+  if(SUPPLY_REQUIRED_COLUMNS.some(name=>!head.includes(name)))
+    return "公開データの必須列を確認できませんでした。";
+  if(!Array.isArray(rows) || rows.length<10000 || rows.length>30000)
+    return "公開データの品目数が許容範囲（10,000〜30,000件）外のため、読み込みを中止しました。";
+  const columns = Object.fromEntries(SUPPLY_REQUIRED_COLUMNS.map(name=>[name,head.indexOf(name)]));
+  const identifiers = new Set();
+  for(const row of rows){
+    if(!Array.isArray(row) || row.length!==head.length || row.some(x=>typeof x!=="string"))
+      return "公開データに列数の一致しない行があります。";
+    const value = name=>row[columns[name]].trim();
+    if(SUPPLY_NON_EMPTY_COLUMNS.some(name=>!value(name)))
+      return "公開データの必須項目に空欄があります。";
+    if(!SUPPLY_ALLOWED_STATUSES.has(value("供給状況")))
+      return "公開データに未対応の供給区分が含まれています。";
+    const yj = value("YJコード");
+    if(!/^(?:[0-9A-Z]{12}|X[0-9]{5})$/.test(yj) || identifiers.has(yj))
+      return "公開データのYJコードに不正または重複があります。";
+    identifiers.add(yj);
+    if(!SUPPLY_ALLOWED_REASONS.has(value("理由")))
+      return "公開データの理由区分を確認できませんでした。";
+    const metadata = /^解除\/解消見込み:\s*(.*?)\s*\/\s*出荷量状況:\s*(.*)$/.exec(value("代替候補"));
+    if(!metadata || !SUPPLY_ALLOWED_OUTLOOKS.has(metadata[1].trim()) || !SUPPLY_ALLOWED_VOLUMES.has(metadata[2].trim()))
+      return "公開データの解除見込み・出荷量区分を確認できませんでした。";
+    for(const name of ["更新日", "ステータス更新日"]){
+      if(value(name) && !validSupplyDate(value(name))) return "公開データの日付形式を確認できませんでした。";
+    }
+    for(const name of ["製造メーカー", "販売メーカー"]){
+      if(value(name).includes("本注意事項等情報を使用している製造販売業者一覧表"))
+        return "公開データのメーカー欄を確認できませんでした。";
+    }
+    const price = value("薬価");
+    if(price && (!/^[+]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/i.test(price) || !Number.isFinite(Number(price)) || Number(price)<=0))
+      return "公開データの薬価形式を確認できませんでした。";
+  }
+  return null;
+}
+// ===== End public CSV contract =====
 
 async function fetchFirst(urls){
   for(const u of urls){
@@ -4120,9 +4491,12 @@ function failDataLoad(message){
   const res = await fetchFirst(CSV_SOURCES);
   if(!res) return failDataLoad("公開データを取得できませんでした。");
   if(responseUsesCachedData(res)) showCachedDataNotice();
-  const rows = parseCSV((await res.text()).replace(/^﻿/,""));
+  const rows = parseCSV((await res.text()).replace(/^﻿/,""), true)
+    .filter(row=>!(row.length===1 && row[0]===""));
   const head = rows.shift();
   if(!Array.isArray(head)) return failDataLoad("公開データの列構成を確認できませんでした。");
+  const csvValidationError = validateSupplyCSVRows(head, rows);
+  if(csvValidationError) return failDataLoad(csvValidationError);
   const col = name => head.indexOf(name);
   const iName=col("商品名"), iGen=col("一般名"), iMk1=col("製造メーカー"),
         iMk2=col("販売メーカー"), iSt=col("供給状況"), iDate=col("更新日"),
@@ -4165,31 +4539,11 @@ function failDataLoad(message){
       row:r, // 詳細モーダル用に元の行を保持
     });
   }
-  if(items.length < 100) return failDataLoad("公開データの品目数が通常より大幅に少ないため、読み込みを中止しました。");
+  if(items.length !== rows.length) return failDataLoad("公開データの品目数を確認できませんでした。");
 
-  // 供給状況の変化ログを読み込む（新しい順に並んでいるので最初の1件=最新の変化）
-  try{
-    const cres = await fetchFirst(["status_changes.json", "https://tkiyo1007-eng.github.io/drugs-data/status_changes.json"]);
-    if(cres){
-      CHANGE_EVENTS = await cres.json();
-      for(const e of CHANGE_EVENTS){
-        const key = normalizeYj(e.yj);
-        if(key && !CHANGES_BY_YJ.has(key)) CHANGES_BY_YJ.set(key,e);
-        if(e.name && !CHANGES_BY_NAME[e.name]) CHANGES_BY_NAME[e.name] = e;
-      }
-    }
-  }catch(e){}
-
-  // 並び順: 「供給状況が実際に変わった品目」を変化が新しい順に先頭へ。
-  // 厚労省の更新日は新発売収載や連絡先変更でも動くため、それだけで並べると
-  // 通常出荷の新製品が上位を占めてしまう（スナップショット差分ログで解決）
-  items.sort((a,b)=>{
-    const ca = latestChangeFor(a), cb = latestChangeFor(b);
-    if(ca && cb) return cb.date.localeCompare(ca.date) || b.d.localeCompare(a.d);
-    if(ca) return -1;
-    if(cb) return 1;
-    return b.d.localeCompare(a.d);
-  });
+  // 履歴の成否・待機時間とは独立に、検証済みCSVから検索を開始する。
+  // 到着後の履歴で検索中の品目を並べ替えず、次の明示検索まで初期順を維持する。
+  items.sort((a,b)=>b.d.localeCompare(a.d));
   CSV_HEAD = head;
   ITEMS = items;
   LIVE = true;
@@ -4201,16 +4555,6 @@ function failDataLoad(message){
   visibleCount = PAGE_SIZE;
   loadSupplementalData();
 
-  // 「本日の更新」ピル: 変化ログの最新日に実際に供給状況が変わった品目だけを絞り込む
-  LATEST_CHANGE_DATE = CHANGE_EVENTS.reduce((m,c)=>c.date>m?c.date:m, "") || null;
-  if(LATEST_CHANGE_DATE){
-    const count = items.filter(x=>{ const change=latestChangeFor(x); return change && change.date===LATEST_CHANGE_DATE; }).length;
-    if(count){
-      const $pc = document.getElementById("pillChanged");
-      $pc.textContent = (daysAgo(LATEST_CHANGE_DATE)===0 ? "本日の更新" : `直近の更新(${LATEST_CHANGE_DATE.slice(5)})`) + ` ${count}`;
-      $pc.style.display = "";
-    }
-  }
   renderDailyUpdate(items);
 
   // 「薬価削除予定」ピル: 供給状況欄に関わらず近く販売終了見込みの品目を洗い出す
@@ -4253,6 +4597,8 @@ function failDataLoad(message){
   trackCurrentSearch();
   renderFavNotice();
   tryOpenFromHash();
+  // 補助情報の例外を外側のCSV失敗処理へ伝播させない。
+  void loadStatusHistory();
   document.getElementById("demoNote").textContent =
     "※ 厚生労働省公表の実データを表示しています。「★ 監視に追加」で、次回アクセス時に変化をまとめて確認できます（このブラウザに保存）。通知や掲示板は iOS アプリでご利用いただけます。";
 

@@ -11,7 +11,7 @@
  *
  * キャッシュを作り直したいときは CACHE_VERSION を上げる。
  */
-const CACHE_VERSION = "v8";
+const CACHE_VERSION = "v9";
 const SHELL_CACHE = `dsn-shell-${CACHE_VERSION}`;
 const DATA_CACHE = `dsn-data-${CACHE_VERSION}`;
 const ASSET_CACHE = `dsn-asset-${CACHE_VERSION}`;
@@ -79,6 +79,8 @@ async function migratePreviousDataCache(){
     for(const request of await source.keys()){
       if(await target.match(request)) continue;
       const response = await source.match(request);
+      // 旧版がHTTP 200の不正な履歴を保存していた場合は引き継がない。
+      if(response && !await responseCanBeCached(request, response)) continue;
       if(response) await target.put(request, response);
     }
   }
@@ -151,14 +153,45 @@ function markCachedFallback(response){
   });
 }
 
+// ページの履歴検証と同じ契約。HTTP成功だけでは正常な履歴とは限らない。
+// 不正な本文はページ側で「形式不正」と案内し、前回の正常なキャッシュは維持する。
+async function responseCanBeCached(request, response){
+  if(!new URL(request.url || request, self.location.href).pathname.endsWith("/status_changes.json")) return true;
+  try{
+    const events = await response.clone().json();
+    if(!Array.isArray(events)) return false;
+    const validStatus = value => {
+      value = value.normalize("NFKC").trim();
+      return value === "1通常出荷" || value === "通常出荷"
+        || /^([234])限定出荷(?:\(.+\))?$/.test(value) || /^限定出荷(?:\(.+\))?$/.test(value)
+        || value === "5供給停止" || value === "供給停止" || value === "販売中止";
+    };
+    return events.every(event=>{
+      if(!event || typeof event !== "object" || Array.isArray(event)
+        || !["date","yj","name","from","to"].every(key=>typeof event[key] === "string" && event[key].trim())) return false;
+      const parts = /^(\d{4})([/-])(\d{2})\2(\d{2})$/.exec(event.date);
+      if(!parts || Number(parts[1]) < 1900) return false;
+      const date = new Date(Date.UTC(Number(parts[1]), Number(parts[3])-1, Number(parts[4])));
+      return date.getUTCFullYear() === Number(parts[1]) && date.getUTCMonth()+1 === Number(parts[3]) && date.getUTCDate() === Number(parts[4])
+        && /^(?:[0-9][0-9A-Z]{11}|X[0-9]{5})$/.test(event.yj.trim())
+        && validStatus(event.from) && validStatus(event.to);
+    });
+  }catch(error){
+    return false;
+  }
+}
+
 function networkFirst(request, cacheName, {fallbackOnHttpError=false, event=null}={}){
-  const cachePromise = caches.open(cacheName);
+  // キャッシュ利用不可・容量不足は正常なネットワーク応答まで失わせない。
+  const cachePromise = caches.open(cacheName).catch(() => null);
   const network = cachePromise.then(async cache => {
     const res = await revalidatingFetch(request);
     if(res && res.ok){
       // 保存完了まで追跡する。put()を待たずにレスポンスだけ返すと、Service Workerが
       // 停止されて次回オフライン時のキャッシュが残っていないことがある
-      await cache.put(request, res.clone());
+      if(cache && await responseCanBeCached(request, res)){
+        try{ await cache.put(request, res.clone()); }catch(error){}
+      }
       return res;
     }
     // CSV/JSONは一時的な5xxや配信エラーでも前回値を使えるようにする。
@@ -172,7 +205,7 @@ function networkFirst(request, cacheName, {fallbackOnHttpError=false, event=null
 
   return (async ()=>{
     const cache = await cachePromise;
-    const hit = await cache.match(request);
+    const hit = cache ? await cache.match(request).catch(() => null) : null;
     if(!hit){
       const res = await network; // キャッシュが無ければネットワークを待つしかない
       if(res) return res;
@@ -241,6 +274,13 @@ self.addEventListener("fetch", event => {
     event.respondWith(
       networkFirst(req, SHELL_CACHE, {event}).catch(() => caches.match("./index.html"))
     );
+    return;
+  }
+
+  // 必須シェルとして保存したJSも実際にオフライン配信する。
+  // 解析用関数を呼ぶ詳細表示・監視操作を、HTTPキャッシュの有無に依存させない。
+  if(url.pathname === new URL("./analytics.js", self.location.href).pathname){
+    event.respondWith(networkFirst(req, SHELL_CACHE, {fallbackOnHttpError:true, event}));
     return;
   }
 
