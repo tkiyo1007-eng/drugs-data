@@ -1,5 +1,17 @@
 [
  {
+  "date": "2026/09/07",
+  "title": "クラスI回収 該当回収品目　新鮮凍結血漿-LR「日赤」480",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html",
+  "tag": "回収"
+ },
+ {
+  "date": "2026/09/07",
+  "title": "「サリドマイド製剤、レナリドミド製剤及びポマリドミド製剤の使用に当たっての安全管理手順の改訂について（周知依頼）」を掲載しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/0002.html",
+  "tag": "安全対策"
+ },
+ {
   "date": "2026/09/04",
   "title": "外国製造業者認定・登録番号を掲載しました",
   "url": "https://www.pmda.go.jp/review-services/drug-reviews/foreign-mfr/0003.html",
@@ -10,12 +22,6 @@
   "title": "「医療事故の再発防止に向けた提言第22号の公表について」を掲載しました",
   "url": "https://www.pmda.go.jp/safety/info-services/medical-safety-info/0005.html",
   "tag": "安全対策"
- },
- {
-  "date": "2026/09/02",
-  "title": "クラスI回収 該当回収品目　新鮮凍結血漿-LR「日赤」240",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html",
-  "tag": "回収"
  },
  {
   "date": "2026/09/01",
@@ -52,11 +58,5 @@
   "title": "医薬品の適応判定を目的として承認されたコンパニオン診断薬等（2026年8月24日版）を掲載しました",
   "url": "https://www.pmda.go.jp/review-services/drug-reviews/review-information/cd/0001.html",
   "tag": "承認審査"
- },
- {
-  "date": "2026/08/28",
-  "title": "［MID-NET］利活用者向け基本情報（NCDAデータ版）を更新しました",
-  "url": "https://www.pmda.go.jp/safety/mid-net/0008.html",
-  "tag": "安全対策"
  }
 ]

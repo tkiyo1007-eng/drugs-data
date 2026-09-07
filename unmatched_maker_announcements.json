@@ -771,6 +771,13 @@
  },
  {
   "maker": "日本ケミファ",
+  "title": "2026年9月7日 変更品出荷（切換後ロット等）未定情報一覧_S-2888",
+  "url": "https://www.nc-medical.com/product_topics/fm4d3f0000018bl9-att/S-2888.pdf",
+  "event_type": "supply",
+  "announced_at": "2026-09-07"
+ },
+ {
+  "maker": "日本ケミファ",
   "title": "2026年8月26日 取扱い製品の供給状況一覧",
   "url": "https://www.nc-medical.com/product_topics/f4bj0h000000dtwu-att/f4bj0h000000dtxi.pdf",
   "event_type": "supply",
@@ -810,13 +817,6 @@
   "url": "https://www.nc-medical.com/product_topics/f4bj0h000000je0v-att/f4bj0h000000je1j.pdf",
   "event_type": "package_discontinued",
   "announced_at": "2026-04-30"
- },
- {
-  "maker": "日本ケミファ",
-  "title": "2026年3月17日 変更品出荷（切換後ロット等）未定情報一覧_S-2888",
-  "url": "https://www.nc-medical.com/product_topics/doc/S-2888.pdf",
-  "event_type": "supply",
-  "announced_at": "2026-03-17"
  },
  {
   "maker": "日本ケミファ",

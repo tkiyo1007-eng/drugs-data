@@ -1,5 +1,5 @@
 {
- "checked": "2026-09-07",
+ "checked": "2026-09-08",
  "sources": [
   {
    "source": "parse_sawai",
@@ -10,7 +10,7 @@
   {
    "source": "parse_nichiiko",
    "ok": true,
-   "count": 9,
+   "count": 8,
    "error": ""
   },
   {
@@ -40,7 +40,7 @@
   {
    "source": "parse_kemifa",
    "ok": true,
-   "count": 69,
+   "count": 70,
    "error": ""
   },
   {
@@ -58,7 +58,7 @@
   {
    "source": "parse_hisamitsu",
    "ok": true,
-   "count": 62,
+   "count": 63,
    "error": ""
   },
   {
@@ -68,5 +68,5 @@
    "error": ""
   }
  ],
- "total": 2429
+ "total": 2430
 }
