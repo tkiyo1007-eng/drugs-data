@@ -1,5 +1,23 @@
 [
  {
+  "date": "2026/09/10",
+  "title": "「アトモキセチン錠 ニトロソアミン化合物の管理について」を掲載しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/0371.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/09/10",
+  "title": "医薬品事前評価相談の2026年度受付方法を掲載しました",
+  "url": "https://www.pmda.go.jp/review-services/f2f-pre/consultations/0025.html",
+  "tag": "承認審査"
+ },
+ {
+  "date": "2026/09/10",
+  "title": "再生医療等製品事前評価相談の2026年度受付方法を掲載しました",
+  "url": "https://www.pmda.go.jp/review-services/f2f-pre/consultations/0024.html",
+  "tag": "承認審査"
+ },
+ {
   "date": "2026/09/07",
   "title": "クラスI回収 該当回収品目　新鮮凍結血漿-LR「日赤」480",
   "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html",
@@ -39,24 +57,6 @@
   "date": "2026/08/31",
   "title": "人道的見地から実施される治験の情報（医薬品、機器・再生）を更新しました",
   "url": "https://www.pmda.go.jp/review-services/trials/0016.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/08/31",
-  "title": "GMPラウンドテーブル会議（地方開催：滋賀）の開催報告を掲載しました",
-  "url": "https://www.pmda.go.jp/review-services/gmp-qms-gctp/gmp/0023.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/08/28",
-  "title": "使用上の注意の改訂指示通知（医薬品）2026年8月28日付（厚生労働省より発出）を掲載しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/revision-of-precautions/0375.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/08/28",
-  "title": "医薬品の適応判定を目的として承認されたコンパニオン診断薬等（2026年8月24日版）を掲載しました",
-  "url": "https://www.pmda.go.jp/review-services/drug-reviews/review-information/cd/0001.html",
   "tag": "承認審査"
  }
 ]
