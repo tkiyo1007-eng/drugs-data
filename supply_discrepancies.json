@@ -2,156 +2,16 @@
   "schema_version": 1,
   "generated_at": "2026-09-10",
   "source": {
-    "mhlw_version": 202609100248,
-    "mhlw_note": "2026年09月10日厚労省データ反映",
+    "mhlw_version": 202609110240,
+    "mhlw_note": "2026年09月11日厚労省データ反映",
     "manufacturer_checked_through": "2026-09-10"
   },
   "counts": {
-    "high": 10,
+    "high": 3,
     "review": 5,
-    "total": 15
+    "total": 8
   },
   "products": {
-    "1179039F1150": {
-      "product_name": "フルボキサミンマレイン酸塩錠２５ｍｇ「タカタ」",
-      "maker": "高田製薬",
-      "official": {
-        "status": "stopped",
-        "label": "供給停止",
-        "updated_at": "2026-02-02"
-      },
-      "manufacturer": {
-        "status": "ok",
-        "label": "限定出荷解除・通常出荷",
-        "announced_at": "2026-08-04",
-        "maker": "高田製薬",
-        "title": "2026/08/04 限定出荷解除に関するお知らせ②",
-        "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bol8-att/KAIJYO2.pdf",
-        "scope": "product"
-      },
-      "confidence": "high",
-      "reason": "メーカー公式資料の対象表で製品全体・公表日の一致を確認",
-      "badge": "情報差異あり",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": false,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "manual_group",
-        "verified_target_scope": "product"
-      }
-    },
-    "1179039F2156": {
-      "product_name": "フルボキサミンマレイン酸塩錠５０ｍｇ「タカタ」",
-      "maker": "高田製薬",
-      "official": {
-        "status": "stopped",
-        "label": "供給停止",
-        "updated_at": "2026-02-02"
-      },
-      "manufacturer": {
-        "status": "ok",
-        "label": "限定出荷解除・通常出荷",
-        "announced_at": "2026-08-04",
-        "maker": "高田製薬",
-        "title": "2026/08/04 限定出荷解除に関するお知らせ②",
-        "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bol8-att/KAIJYO2.pdf",
-        "scope": "product"
-      },
-      "confidence": "high",
-      "reason": "メーカー公式資料の対象表で製品全体・公表日の一致を確認",
-      "badge": "情報差異あり",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": false,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "manual_group",
-        "verified_target_scope": "product"
-      }
-    },
-    "1179039F3152": {
-      "product_name": "フルボキサミンマレイン酸塩錠７５ｍｇ「タカタ」",
-      "maker": "高田製薬",
-      "official": {
-        "status": "limited",
-        "label": "限定出荷（自社の事情）",
-        "updated_at": "2026-02-02"
-      },
-      "manufacturer": {
-        "status": "ok",
-        "label": "限定出荷解除・通常出荷",
-        "announced_at": "2026-08-04",
-        "maker": "高田製薬",
-        "title": "2026/08/04 限定出荷解除に関するお知らせ②",
-        "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bol8-att/KAIJYO2.pdf",
-        "scope": "product"
-      },
-      "confidence": "high",
-      "reason": "メーカー公式資料の対象表で製品全体・公表日の一致を確認",
-      "badge": "情報差異あり",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": false,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "manual_group",
-        "verified_target_scope": "product"
-      }
-    },
-    "2325401D2090": {
-      "product_name": "ファモチジン注射用１０ｍｇ「タカタ」",
-      "maker": "高田製薬",
-      "official": {
-        "status": "limited",
-        "label": "限定出荷（自社の事情）",
-        "updated_at": "2026-01-15"
-      },
-      "manufacturer": {
-        "status": "ok",
-        "label": "限定出荷解除・通常出荷",
-        "announced_at": "2026-08-04",
-        "maker": "高田製薬",
-        "title": "2026/08/04 限定出荷解除に関するお知らせ②",
-        "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bol8-att/KAIJYO2.pdf",
-        "scope": "product"
-      },
-      "confidence": "high",
-      "reason": "メーカー公式資料の対象表で製品全体・公表日の一致を確認",
-      "badge": "情報差異あり",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": false,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "manual_group",
-        "verified_target_scope": "product"
-      }
-    },
-    "2329021D1071": {
-      "product_name": "レバミピド顆粒２０％「タカタ」",
-      "maker": "高田製薬",
-      "official": {
-        "status": "stopped",
-        "label": "供給停止",
-        "updated_at": "2026-03-05"
-      },
-      "manufacturer": {
-        "status": "ok",
-        "label": "限定出荷解除・通常出荷",
-        "announced_at": "2026-08-04",
-        "maker": "高田製薬",
-        "title": "2026/08/04 限定出荷解除に関するお知らせ②",
-        "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bol8-att/KAIJYO2.pdf",
-        "scope": "product"
-      },
-      "confidence": "high",
-      "reason": "メーカー公式資料の対象表で製品全体・公表日の一致を確認",
-      "badge": "情報差異あり",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": false,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "manual_group",
-        "verified_target_scope": "product"
-      }
-    },
     "2329028F1147": {
       "product_name": "ラベプラゾールＮａ塩錠１０ｍｇ「オーハラ」",
       "maker": "エッセンシャルファーマ・共創未来ファーマ・第一三共エスファ・大原薬品工業",
@@ -264,34 +124,6 @@
         "verified_target_scope": ""
       }
     },
-    "2391400G4112": {
-      "product_name": "グラニセトロン点滴静注バッグ３ｍｇ／５０ｍＬ「タカタ」",
-      "maker": "高田製薬",
-      "official": {
-        "status": "limited",
-        "label": "限定出荷（自社の事情）",
-        "updated_at": "2025-09-11"
-      },
-      "manufacturer": {
-        "status": "ok",
-        "label": "限定出荷解除・通常出荷",
-        "announced_at": "2026-08-04",
-        "maker": "高田製薬",
-        "title": "2026/08/04 限定出荷解除に関するお知らせ②",
-        "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bol8-att/KAIJYO2.pdf",
-        "scope": "product"
-      },
-      "confidence": "high",
-      "reason": "メーカー公式資料の対象表で製品全体・公表日の一致を確認",
-      "badge": "情報差異あり",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": false,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "manual_group",
-        "verified_target_scope": "product"
-      }
-    },
     "3311402G4026": {
       "product_name": "生食溶解液キットＨ",
       "maker": "光製薬・ニプロ",
@@ -402,34 +234,6 @@
         "manufacturer_notice_is_newer": true,
         "verified_target_source": "",
         "verified_target_scope": ""
-      }
-    },
-    "6250031F1099": {
-      "product_name": "ファムシクロビル錠２５０ｍｇ「タカタ」",
-      "maker": "高田製薬",
-      "official": {
-        "status": "stopped",
-        "label": "供給停止",
-        "updated_at": "2026-03-05"
-      },
-      "manufacturer": {
-        "status": "ok",
-        "label": "限定出荷解除・通常出荷",
-        "announced_at": "2026-08-04",
-        "maker": "高田製薬",
-        "title": "2026/08/04 限定出荷解除に関するお知らせ②",
-        "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bol8-att/KAIJYO2.pdf",
-        "scope": "product"
-      },
-      "confidence": "high",
-      "reason": "メーカー公式資料の対象表で製品全体・公表日の一致を確認",
-      "badge": "情報差異あり",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": false,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "manual_group",
-        "verified_target_scope": "product"
       }
     }
   }
