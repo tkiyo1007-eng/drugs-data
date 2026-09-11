@@ -1,7 +1,101 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-08-27",
+  "updated_at": "2026-09-11",
   "topics": [
+    {
+      "slug": "lulicon-alternatives-20260911",
+      "date": "2026.09.11",
+      "tag": "代替候補",
+      "tone": "warn",
+      "title": "ルリコンクリーム・軟膏の代替候補を4つのポイントで確認",
+      "lede": "同じ成分か、軟膏を続けるか、別成分のクリームへ替えるかで整理しました。病名・患部の状態に合う薬を医師・薬剤師が検討するための情報です。別成分への変更は処方医に確認してください。",
+      "points": [
+        "同じ成分・同じ剤形：ルリコナゾールクリーム1％／軟膏1％「イワキ」。1日1回ですが、後発品も限定出荷です。",
+        "軟膏を続ける：アスタット軟膏1％、ラノコナゾール軟膏1％「イワキ」、アトラント軟膏1％。いずれも1日1回・限定出荷で、成分が変わります。",
+        "別成分のクリーム：ケトコナゾールクリーム2％「イワキ」は9月1日から通常出荷。白癬・皮膚カンジダ症・癜風には1日1回です。",
+        "塗る回数を確認：エンペシドクリーム1％は通常出荷ですが、1日2〜3回です。供給情報は2026年9月11日確認。通常出荷でも卸・薬局の在庫確認が必要です。"
+      ],
+      "notes": [
+        "上の4点は効き目の順位ではありません。供給状況は厚労省の2026年9月10日版とメーカー案内で確認した時点の情報です。下の「現在の供給状況」とあわせて確認してください。",
+        "病名を確認：上記の候補には足・体・股の白癬、皮膚カンジダ症の指間びらん症・間擦疹、癜風の適応があります。具体的な病型と添付文書の適応を照合してください。メンタックスにはカンジダ症、ゼフナートにはカンジダ症・癜風の適応がありません。",
+        "剤形を確認：刺激や亀裂への配慮で軟膏が選ばれていた場合は、その理由を確認してからクリームへ変更します。軟膏でも著しいびらん面（強いただれ）に使えるとは限りません。",
+        "同成分の後発品への変更は、処方箋の指示と変更調剤の要件に沿って判断します。効き目が不十分な場合やかぶれが出た場合は、単なる供給不足の代替とは分けて診断・治療内容を再評価します。"
+      ],
+      "query": "ルリコン",
+      "queries": [
+        "ルリコンクリーム",
+        "ルリコン軟膏",
+        "ルリコナゾールクリーム イワキ",
+        "ルリコナゾール軟膏 イワキ",
+        "アスタット軟膏",
+        "ラノコナゾール軟膏 イワキ",
+        "アトラント軟膏",
+        "ケトコナゾールクリーム イワキ",
+        "エンペシドクリーム"
+      ],
+      "source": {
+        "name": "厚生労働省｜医療用医薬品供給状況（2026年9月10日現在）",
+        "url": "https://www.mhlw.go.jp/content/10800000/260910iyakuhinkyoukyu.xlsx"
+      },
+      "sources": [
+        {
+          "name": "岩城製薬｜ケトコナゾールクリーム2％「イワキ」限定出荷解除の案内",
+          "url": "https://www.iwakiseiyaku.co.jp/dcms_media/other/kzcosirase20260901.pdf"
+        },
+        {
+          "name": "PMDA｜ルリコン 電子添文",
+          "url": "https://www.pmda.go.jp/PmdaSearch/iyakuDetail/480866_2655712M1025_2_05"
+        },
+        {
+          "name": "PMDA｜ルリコナゾール「イワキ」電子添文",
+          "url": "https://www.pmda.go.jp/PmdaSearch/iyakuDetail/ResultDataSetPDF/130202_2655712M1033_1_03"
+        },
+        {
+          "name": "PMDA｜アスタット 電子添文",
+          "url": "https://www.pmda.go.jp/PmdaSearch/iyakuDetail/ResultDataSetPDF/730155_2655710M1034_1_07"
+        },
+        {
+          "name": "PMDA｜ラノコナゾール「イワキ」電子添文",
+          "url": "https://www.pmda.go.jp/PmdaSearch/iyakuDetail/ResultDataSetPDF/130202_2655710M1042_1_06"
+        },
+        {
+          "name": "久光製薬｜アトラント軟膏 電子添文",
+          "url": "https://www.hisamitsu-pharm.jp/product/data/atolanto_t.pdf"
+        },
+        {
+          "name": "PMDA｜ケトコナゾール「イワキ」電子添文",
+          "url": "https://www.pmda.go.jp/PmdaSearch/iyakuDetail/ResultDataSetPDF/130202_2655709N1096_1_04"
+        },
+        {
+          "name": "PMDA｜エンペシド 電子添文（1日2〜3回）",
+          "url": "https://www.pmda.go.jp/PmdaSearch/iyakuDetail/ResultDataSetPDF/630004_2655700N1176_1_08"
+        },
+        {
+          "name": "PMDA｜メンタックス 電子添文",
+          "url": "https://www.pmda.go.jp/PmdaSearch/iyakuDetail/200022_2659708N1082_1_04"
+        },
+        {
+          "name": "PMDA｜ゼフナート 電子添文",
+          "url": "https://www.pmda.go.jp/PmdaSearch/iyakuDetail/ResultDataSetPDF/380101_2659712N1020_1_09"
+        },
+        {
+          "name": "マルホ｜水虫薬の剤形の違い",
+          "url": "https://www.maruho.co.jp/kanja/mizumushi/qa/01.html"
+        },
+        {
+          "name": "日本皮膚科学会・日本医真菌学会｜皮膚真菌症診療ガイドライン2025",
+          "url": "https://www.dermatol.or.jp/dermatol/wp-content/uploads/2013/08/19e2ae577a696f81acf51fdcc0173e2c.pdf"
+        },
+        {
+          "name": "厚生労働省｜薬剤師法",
+          "url": "https://www.mhlw.go.jp/web/t_doc?dataId=81001000"
+        },
+        {
+          "name": "厚生労働省｜処方箋の交付に関する説明資料",
+          "url": "https://www.mhlw.go.jp/content/001521412.pdf"
+        }
+      ]
+    },
     {
       "slug": "chuikyo-drug-price-hearing-20260826",
       "date": "2026.08.26",

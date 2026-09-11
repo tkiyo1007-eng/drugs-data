@@ -149,6 +149,17 @@ def validate(base: Path) -> list[str]:
                     errors.append(f"{prefix}.source.name: 必須です")
                 elif not valid_https(source.get("url")):
                     errors.append(f"{prefix}.source.url: HTTPS URLを指定してください")
+                notes = item.get("notes", [])
+                if not isinstance(notes, list) or any(not isinstance(note, str) or not note.strip() for note in notes):
+                    errors.append(f"{prefix}.notes: 空でない文字列の配列にしてください")
+                sources = item.get("sources", [])
+                if not isinstance(sources, list):
+                    errors.append(f"{prefix}.sources: 出典の配列にしてください")
+                else:
+                    for source_index, extra in enumerate(sources):
+                        if (not isinstance(extra, dict) or not str(extra.get("name") or "").strip()
+                                or not valid_https(extra.get("url"))):
+                            errors.append(f"{prefix}.sources[{source_index}]: 出典名とHTTPS URLを指定してください")
                 query = norm(item.get("query"))
                 raw_queries = item.get("queries")
                 queries: list[tuple[str, object]] = []

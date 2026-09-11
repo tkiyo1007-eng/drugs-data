@@ -332,6 +332,9 @@ def product_intent_html(product: dict, rows: list[dict[str, str]],
             '医師・薬剤師等の専門職が判断してください。</p>'
         )
     comparison = ""
+    if product["slug"] == "lulicon-cream":
+        comparison = ('<p><a href="../topics/lulicon-alternatives-20260911.html">'
+                      'ルリコンクリーム・軟膏の代替候補と変更時の注意を見る</a></p>')
     if product["slug"].startswith("caduet-"):
         comparison = ('<p><a href="caduet.html" data-dsn-event="related-item-open">'
                       'カデュエット配合錠1〜4番の規格別比較を見る</a></p>')
@@ -411,6 +414,16 @@ def topic_page(topic: dict, related: list[dict[str, str]], generated_keys: set[s
         {"@type": "ListItem", "position": 3, "name": topic["title"], "item": canonical}]}
     points = "".join(f"<li>{esc(point)}</li>" for point in topic.get("points") or [])
     source = topic["source"]
+    notes = "".join(f'<p>{esc(note)}</p>' for note in topic.get("notes") or [])
+    extra_sources = "".join(
+        f'<p class="source">出典：<a href="{esc(item["url"])}" target="_blank" '
+        f'rel="noopener" data-dsn-event="official-source-open">{esc(item["name"])}</a></p>'
+        for item in topic.get("sources") or []
+    )
+    source_details = (f'<details><summary>出典を確認</summary>{extra_sources}</details>'
+                      if extra_sources else "")
+    supplement = (f'<section class="intent"><h2>変更前の確認事項</h2>'
+                  f'{notes}{source_details}</section>') if notes or extra_sources else ""
     related_html = ""
     if related:
         related_html = (f'<h2>関連品目の現在の供給状況（{len(related)}品目）</h2>'
@@ -424,6 +437,7 @@ def topic_page(topic: dict, related: list[dict[str, str]], generated_keys: set[s
 <p class="lede">{esc(topic['lede'])}</p>{f'<ul class="points">{points}</ul>' if points else ''}
 <p class="source">出典：<a href="{esc(source['url'])}" target="_blank" rel="noopener" data-dsn-event="official-source-open">{esc(source['name'])}</a></p>
 {share_control("この記事を共有")}</article>
+{supplement}
 {related_html}
 <div class="cta"><strong>最新の供給状況を検索</strong><p>医薬品名・メーカー名・YJコードから、厚生労働省公表データを確認できます。</p><a href="../" data-dsn-event="topic-to-search">Web版で検索する</a></div>
 </main><footer><p>ニュースは一次情報または信頼できる報道をもとに編集しています。必ず出典原文をご確認ください。</p><a href="../guides/{GUIDE_SLUG}.html">供給情報の確認ガイド</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
@@ -563,6 +577,8 @@ def main() -> int:
         (product_dir / f"{product['slug']}.html").write_text(page, encoding="utf-8")
         curated_date = normalize_date(products_doc.get("updated_at"))
         product_dates[product["slug"]] = max(lastmod, curated_date, TEMPLATE_UPDATED_AT, PRODUCT_TEMPLATE_UPDATED_AT)
+        if product["slug"] == "lulicon-cream":
+            product_dates[product["slug"]] = max(product_dates[product["slug"]], "2026-09-11")
     guide_updated = max(
         normalize_date(topics_doc.get("updated_at")),
         normalize_date(products_doc.get("updated_at")),

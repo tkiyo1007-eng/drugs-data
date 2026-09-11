@@ -91,6 +91,8 @@ class CuratedPageGenerationTests(unittest.TestCase):
                     "title": "テスト<script>alert(1)</script>",
                     "lede": "供給情報を安全に表示します。",
                     "points": ["要点 <確認>"],
+                    "notes": ["変更前に <確認>"],
+                    "sources": [{"name": "電子添文 <原文>", "url": "https://example.test/label?a=1&b=2"}],
                     "query": "テスト配合錠1番",
                     "source": {
                         "name": "公式情報",
@@ -135,6 +137,10 @@ class CuratedPageGenerationTests(unittest.TestCase):
             self.assertIn('"@type":"Article"', topic)
             self.assertIn("テスト&lt;script&gt;alert(1)&lt;/script&gt;", topic)
             self.assertNotIn("<script>alert(1)</script>", topic)
+            self.assertIn("変更前に &lt;確認&gt;", topic)
+            self.assertIn("電子添文 &lt;原文&gt;", topic)
+            self.assertIn('href="https://example.test/label?a=1&amp;b=2" target="_blank" rel="noopener"', topic)
+            self.assertIn('<summary>出典を確認</summary>', topic)
             self.assertIn("../items/1234567F1234.html", topic)
             self.assertIn('src="../analytics.js"', topic)
             self.assertIn("https://gc.zgo.at/count.js", topic)
@@ -191,6 +197,7 @@ class CuratedPageGenerationTests(unittest.TestCase):
         self.assertIn("表示されていない原因を推測で補いません", output)
         self.assertIn("代替薬の推薦ではありません", output)
         self.assertIn("同成分・同剤形", output)
+        self.assertIn('href="../topics/lulicon-alternatives-20260911.html"', output)
         self.assertIn('data-dsn-event="official-source-open"', output)
         self.assertIn("限定出荷", title)
         self.assertLessEqual(len(title), 70)
