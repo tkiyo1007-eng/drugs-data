@@ -802,6 +802,14 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .modal .delist-badge[hidden]{display:none}
 .modal h3{font-size:19px;font-weight:800;line-height:1.5;margin-bottom:4px}
 .modal-maker{font-size:13px;color:var(--sub);margin-bottom:18px}
+.alternatives-box{margin:0 0 20px;padding:16px 18px;border:1px solid rgba(79,128,244,.3);border-radius:16px;background:rgba(79,128,244,.07);color:var(--ink)}
+.alternatives-box h4{font-size:15px;font-weight:800;line-height:1.5;margin:0 0 8px}
+.alternatives-box .alternatives-date{font-size:12px;color:var(--sub);line-height:1.6;margin-bottom:10px}
+.alternatives-box ul{margin:0;padding-left:1.2em;font-size:14px;line-height:1.7}
+.alternatives-box li+li{margin-top:10px}
+.alternatives-box li strong{display:block;font-weight:800}
+.alternatives-box .alternatives-note{font-size:12.5px;line-height:1.7;color:var(--sub);margin-top:12px}
+.alternatives-box a{display:inline-block;margin-top:8px;padding:6px 0;font-size:13px;font-weight:800;line-height:1.6;color:var(--blue);text-underline-offset:3px}
 .detail-grid{
   display:grid;grid-template-columns:minmax(88px,auto) 1fr;gap:0;
   border-top:1px solid rgba(90,107,148,.14);font-size:13.5px;
@@ -1785,6 +1793,18 @@ footer a:hover{color:var(--blue)}
     </div>
     <h3 id="mTitle">品目詳細</h3>
     <p class="modal-maker" id="mMaker"></p>
+    <section class="alternatives-box" id="mAlternatives" aria-labelledby="mAlternativesTitle" hidden>
+      <h4 id="mAlternativesTitle">代替候補の4つのポイント</h4>
+      <p class="alternatives-date">供給情報：2026年9月11日確認（厚労省9月10日版・メーカー案内）</p>
+      <ul>
+        <li><strong>同じ成分・同じ剤形</strong><span id="mSameIngredientAlternative"></span>。1日1回。こちらも限定出荷です。</li>
+        <li><strong>軟膏を続ける</strong>アスタット軟膏1％、ラノコナゾール軟膏1％「イワキ」、アトラント軟膏1％。いずれも1日1回・限定出荷で、成分が変わります。</li>
+        <li><strong>別成分のクリーム</strong>ケトコナゾールクリーム2％「イワキ」は9月1日から通常出荷。白癬・皮膚カンジダ症・癜風には1日1回です。</li>
+        <li><strong>塗る回数に注意</strong>エンペシドクリーム1％は通常出荷ですが、<b>1日2〜3回</b>です。</li>
+      </ul>
+      <p class="alternatives-note">効き目の順位ではありません。適応・患部の状態を確認し、別成分への変更は処方医に確認してください。通常出荷でも卸・薬局の在庫確認が必要です。</p>
+      <a href="topics/lulicon-alternatives-20260911.html">適応・注意点と出典を詳しく見る</a>
+    </section>
     <a class="maker-link" id="mMakerLink" href="#" target="_blank" rel="noopener" data-dsn-event="official-source-open" hidden></a>
     <a class="maker-link" id="mPmdaLink" href="#" target="_blank" rel="noopener" data-dsn-event="official-source-open" hidden></a>
     <a class="maker-link" id="mItemLink" href="#" hidden></a>
@@ -3750,8 +3770,18 @@ function renderSupplyReference(d){
   const title=document.createElement('h4');title.textContent='メーカー案内（過去資料・現在の供給区分とは別情報）';
   const notice=document.createElement('p');notice.textContent='この資料は最新の案内・在庫・受注可否を保証しません。現在の状況は原典・取引先で確認してください。';
   target.append(title,source.querySelector('.supply-reference-copy').cloneNode(true),notice,source.querySelector('.topic-src').cloneNode(true));
-  const alternatives=source.querySelector('.supply-alternatives');
-  if(alternatives) target.append(alternatives.cloneNode(true));
+}
+function renderLuliconAlternatives(d){
+  const target=document.getElementById('mAlternatives');
+  const same=document.getElementById('mSameIngredientAlternative');
+  const ref=supplyReferenceId(d);
+  target.hidden=!ref;
+  same.textContent='';
+  if(!ref) return;
+  const form=d.yj[7]==='M' ? '軟膏' : 'クリーム';
+  same.textContent=ref==='luliconSupplyReference'
+    ? `ルリコナゾール${form}1％「イワキ」（後発品）`
+    : `ルリコン${form}1％（先発品）`;
 }
 function openDetail(d, opts={}){
   if(!d) return;
@@ -3763,6 +3793,7 @@ function openDetail(d, opts={}){
   document.getElementById("mDelist").hidden = !d.delist;
   document.getElementById("mTitle").textContent = d.n;
   document.getElementById("mMaker").textContent = d.m;
+  renderLuliconAlternatives(d);
   renderSupplyReference(d);
   currentDetailName = d.n;
   currentDetailKey = itemKey(d);
