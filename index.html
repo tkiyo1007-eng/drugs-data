@@ -802,6 +802,9 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .modal .delist-badge[hidden]{display:none}
 .modal h3{font-size:19px;font-weight:800;line-height:1.5;margin-bottom:4px}
 .modal-maker{font-size:13px;color:var(--sub);margin-bottom:18px}
+.zictor-reference-options{margin:16px 0;padding:12px;border:1px solid rgba(79,128,244,.3);border-radius:12px}
+.zictor-reference-options summary{min-height:44px;cursor:pointer;font-size:14px;font-weight:700;line-height:1.7;padding:8px 0}
+.zictor-reference-options summary:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 .alternatives-box{margin:0 0 20px;padding:16px 18px;border:1px solid rgba(79,128,244,.3);border-radius:16px;background:rgba(79,128,244,.07);color:var(--ink)}
 .alternatives-box h4{font-size:15px;font-weight:800;line-height:1.5;margin:0 0 8px}
 .alternatives-box .alternatives-date{font-size:12px;color:var(--sub);line-height:1.6;margin-bottom:10px}
@@ -1452,11 +1455,42 @@ footer a:hover{color:var(--blue)}
     <a href="#medNews">PMDA掲載情報を見る</a>
   </div>
   <div class="topic-list" id="topicList"></div>
-  <div id="supplyReferenceNotes">
-    <h3>ルリコン・ルリコナゾールのメーカー案内</h3>
+  <p class="topic-note"><a href="topics/index.html">過去記事を含むニュース一覧を見る</a></p>
+  <p class="topic-note">供給区分の変化は「直近の供給変更」で自動集計しています。ここに新しい解説記事がなくても、供給状況に変更がないとは限りません。</p>
+  <p class="topic-note">※ 出典をもとに編集した記事です。掲載後の訂正や状況の変化は、原典をご確認ください。過去記事への移動は、回収の終了や供給の回復を意味しません。</p>
+</section>
+
+  <!-- 品目詳細へ複製する資料。ニュース欄には掲載しない。 -->
+  <div id="supplyReferenceNotes" hidden>
+    <h3>注目製品のメーカー案内</h3>
     <p class="news-status">過去の公式文書を確認するための参考資料です。下記の日付時点の案内であり、現在の供給区分を上書きするものではありません。最新の案内・在庫・受注可否はメーカーや取引先へご確認ください。</p>
     <div class="topic-list">
-      <article class="topic-card glass" id="luliconSupplyReference">
+      <article class="topic-card glass" id="zictorSupplyReference" data-reference-date="2026年7月16日公表">
+        <h4 class="topic-title">ジクトルテープ75mg：限定出荷の継続・解除見込みは未定</h4>
+        <div class="supply-reference-copy">
+          <p class="topic-lede">メーカー案内の要点（当サイト編集）。久光製薬の公式一覧での公表日：2026年7月16日／第三報の文書表記：2026年7月。原典確認日：2026年9月11日。確認日はメーカーの更新日や供給データの基準日ではありません。</p>
+          <ul class="topic-points">
+            <li><strong>継続の理由：</strong>需要増加を受けて限定出荷を開始。第三報では出荷量を増やす一方、解除直後の全受注に対応する在庫を確保できない恐れがあるため、限定出荷を続けると案内しています。</li>
+            <li><strong>解除見込み：未定（第三報時点）。</strong>限定出荷期間は2026年4月30日～未定です。4月の案内の「6月15日まで」は過去の予定で、その後の「7月31日まで」の予定も第三報で変更されています。現在の解除予定日として扱わないでください。</li>
+            <li><strong>第三報の対象包装：</strong>70枚（1枚／1袋×70袋）、70枚（7枚／1袋×10袋）。この案内から、他の包装の発注可否は判断できません。</li>
+            <li><strong>出荷量と供給区分は別です。</strong>第三報は「出荷量増加」「限定出荷（自社の事情）」の案内です。増産・出荷量の増加は、通常出荷への復帰や在庫・受注可否の保証ではありません。</li>
+          </ul>
+          <details class="zictor-reference-options">
+            <summary>同成分・別剤形の参考候補（処方変更・適応確認が必要）</summary>
+            <p class="topic-lede">以下は当サイトの参考情報で、メーカーによる切替推奨ではありません。そのまま置き換えられる製品という意味ではありません。</p>
+            <ul class="topic-points">
+              <li><strong>内服薬：</strong>ボルタレン錠25mg、ジクロフェナクNa錠25mg各社。</li>
+              <li><strong>坐剤：</strong>ボルタレンサポ25mg・50mg、ジクロフェナクNa坐剤各社。</li>
+            </ul>
+            <p class="topic-lede">ジクトルは全身作用型の経皮吸収製剤です。一般的な湿布を同等代替品として扱わず、がん疼痛を含む使用目的・適応・用量・患者状態を確認したうえで、処方医が変更を判断してください。自己判断で切替・併用しないでください。</p>
+            <p class="topic-lede"><strong>参考候補品の最新電子添文と現在の出荷状況は、この掲載内容では未確認です。</strong>同成分でも適応・用法用量が一致するとは限りません。掲載は代替可能・入手可能との判断を示すものではありません。</p>
+            <a href="https://www.pmda.go.jp/PmdaSearch/rdDetail/iyaku/1147700S1028_1?user=1" target="_blank" rel="noopener" data-dsn-event="official-source-open">ジクトルテープ75mgの電子添文等をPMDAで確認</a>
+          </details>
+          <p class="topic-lede"><a href="https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260428_2.pdf" target="_blank" rel="noopener" data-dsn-event="official-source-open">過去の4月案内（PDF・解除予定は変更済み）</a> ／ <a href="https://www.hisamitsu-pharm.jp/product/whatsnew/" target="_blank" rel="noopener" data-dsn-event="official-source-open">久光製薬の最新のお知らせを確認</a></p>
+        </div>
+        <div class="topic-actions"><a class="topic-read" href="#q=1147700S1028">ジクトルの供給状況を検索</a><a class="topic-src" href="https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260716_2.pdf" target="_blank" rel="noopener" data-dsn-event="official-source-open">出典：久光製薬 第三報（2026年7月16日公表・PDF）</a></div>
+      </article>
+      <article class="topic-card glass" id="luliconSupplyReference" data-reference-date="2026年2月">
         <h4 class="topic-title">ルリコンクリーム1％：包装ごとの限定出荷案内</h4>
         <div class="supply-reference-copy">
           <p class="topic-lede">サンファーマの案内：2026年2月（日付の記載なし）。他社製品の影響で需要が増えたため、2月10日出荷分から限定出荷を開始するとしています。</p>
@@ -1465,7 +1499,7 @@ footer a:hover{color:var(--blue)}
         <div class="topic-actions"><a class="topic-read" href="#q=2655712N1020">クリームの供給状況を検索</a><a class="topic-src" href="https://jp.sunpharma.com/null/7c78bc1dd11ca2b94eef5f2dbe7d0d922d5b1642.pdf" target="_blank" rel="noopener" data-dsn-event="official-source-open">出典：サンファーマ公式案内（PDF）</a></div>
         <p class="supply-alternatives"><a class="topic-read" href="topics/lulicon-alternatives-20260911.html">医療者向け：代替候補と変更時の注意</a></p>
       </article>
-      <article class="topic-card glass" id="luliconazoleSupplyReference">
+      <article class="topic-card glass" id="luliconazoleSupplyReference" data-reference-date="2026年7月">
         <h4 class="topic-title">ルリコナゾール「イワキ」：限定出荷での再開</h4>
         <div class="supply-reference-copy">
           <p class="topic-lede">岩城製薬の案内：2026年7月（日付の記載なし）。7月17日から一時出荷停止を解除し、限定出荷として順次供給を再開するとしています。通常出荷への復帰ではありません。</p>
@@ -1476,10 +1510,6 @@ footer a:hover{color:var(--blue)}
       </article>
     </div>
   </div>
-  <p class="topic-note"><a href="topics/index.html">過去記事を含むニュース一覧を見る</a></p>
-  <p class="topic-note">供給区分の変化は「直近の供給変更」で自動集計しています。ここに新しい解説記事がなくても、供給状況に変更がないとは限りません。</p>
-  <p class="topic-note">※ 出典をもとに編集した記事です。掲載後の訂正や状況の変化は、原典をご確認ください。過去記事への移動は、回収の終了や供給の回復を意味しません。</p>
-</section>
 
 <section id="trending" class="reveal">
   <p class="sec-eyebrow">TRENDING</p>
@@ -3753,6 +3783,7 @@ function updateDetailHistoryNote(item){
 function supplyReferenceId(d){
   const normalize = value => String(value || '').normalize('NFKC').replace(/\s/g,'');
   const refs = {
+    '1147700S1028':['ジクトルテープ75mg','久光製薬','zictorSupplyReference'],
     '2655712N1020':['ルリコンクリーム1%','サンファーマ','luliconSupplyReference'],
     '2655712M1025':['ルリコン軟膏1%','サンファーマ','luliconSupplyReference'],
     '2655712N1039':['ルリコナゾールクリーム1%「イワキ」','岩城製薬','luliconazoleSupplyReference'],
@@ -3775,9 +3806,10 @@ function renderLuliconAlternatives(d){
   const target=document.getElementById('mAlternatives');
   const same=document.getElementById('mSameIngredientAlternative');
   const ref=supplyReferenceId(d);
-  target.hidden=!ref;
+  const isLulicon = ref === 'luliconSupplyReference' || ref === 'luliconazoleSupplyReference';
+  target.hidden=!isLulicon;
   same.textContent='';
-  if(!ref) return;
+  if(!isLulicon) return;
   const form=d.yj[7]==='M' ? '軟膏' : 'クリーム';
   same.textContent=ref==='luliconSupplyReference'
     ? `ルリコナゾール${form}1％「イワキ」（後発品）`
@@ -3966,7 +3998,8 @@ function openDetail(d, opts={}){
   }else if(referenceLink){
     // 取得済みの品目別案内は優先したまま、ない場合のみ確認済みの過去資料へ案内する。
     $mMakerLink.href = referenceLink.href;
-    $mMakerLink.textContent = `${d.m}のメーカー案内文（${referenceId === 'luliconSupplyReference' ? '2026年2月' : '2026年7月'}の過去資料・PDF）`;
+    const referenceDate = document.getElementById(referenceId)?.dataset.referenceDate || '日付不明';
+    $mMakerLink.textContent = `${d.m}のメーカー案内文（${referenceDate}の過去資料・PDF）`;
     $mMakerLink.hidden = false;
   }else if(mLink){
     $mMakerLink.href = mLink.url;
@@ -4399,6 +4432,9 @@ function validateNewsContent(raw,kind){
 function newsDateWindow(items,now=Date.now()){
   const today = jstDayNumber(now), recent=[], older=[], future=[];
   for(const item of items){
+    // 品目詳細へ集約した記事だけをトップのニュース対象外にする。
+    // 製品名による一括除外は行わず、今後の回収・安全性情報は隠さない。
+    if(item.slug === 'lulicon-alternatives-20260911') continue;
     const key = newsDateKey(item.date);
     if(!key) continue;
     const age = today - Date.parse(key)/86400000;
