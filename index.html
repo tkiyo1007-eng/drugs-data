@@ -1455,6 +1455,7 @@ footer a:hover{color:var(--blue)}
           <ul class="topic-points"><li>2026年2月の案内で限定出荷の対象とされたクリーム1％の包装：10g×10本、10g×20本、10g×50本。</li><li>クリーム1％の30g×10本も、通常発注できる包装としては案内していません。過去の文書だけで現在の発注可否を判断せず、最新のメーカー・卸情報をご確認ください。</li><li>軟膏1％の10g×10本、10g×20本は、同じ文書で限定出荷の対象です。文書中の「出荷量通常」は出荷量の区分であり、通常発注できるという意味ではありません。</li></ul>
         </div>
         <div class="topic-actions"><a class="topic-read" href="#q=2655712N1020">クリームの供給状況を検索</a><a class="topic-src" href="https://jp.sunpharma.com/null/7c78bc1dd11ca2b94eef5f2dbe7d0d922d5b1642.pdf" target="_blank" rel="noopener" data-dsn-event="official-source-open">出典：サンファーマ公式案内（PDF）</a></div>
+        <p class="supply-alternatives"><a class="topic-read" href="topics/lulicon-alternatives-20260911.html">医療者向け：代替候補と変更時の注意</a></p>
       </article>
       <article class="topic-card glass" id="luliconazoleSupplyReference">
         <h4 class="topic-title">ルリコナゾール「イワキ」：限定出荷での再開</h4>
@@ -1463,6 +1464,7 @@ footer a:hover{color:var(--blue)}
           <ul class="topic-points"><li>対象：ルリコナゾールクリーム1％「イワキ」、ルリコナゾール軟膏1％「イワキ」。いずれも10g×10。</li><li>十分な供給量には達しておらず、当面は数量制限を継続。出荷量減少・自社の事情による限定出荷と記載されています。</li><li>限定出荷の解除時期は、改めて案内するとしています。この文書で解除日は確定していません。</li></ul>
         </div>
         <div class="topic-actions"><a class="topic-read" href="#q=2655712N1039">クリームの供給状況を検索</a><a class="topic-src" href="https://www.iwakiseiyaku.co.jp/dcms_media/other/luoosirase20260717.pdf" target="_blank" rel="noopener" data-dsn-event="official-source-open">出典：岩城製薬公式案内（PDF）</a></div>
+        <p class="supply-alternatives"><a class="topic-read" href="topics/lulicon-alternatives-20260911.html">医療者向け：代替候補と変更時の注意</a></p>
       </article>
     </div>
   </div>
@@ -3748,6 +3750,8 @@ function renderSupplyReference(d){
   const title=document.createElement('h4');title.textContent='メーカー案内（過去資料・現在の供給区分とは別情報）';
   const notice=document.createElement('p');notice.textContent='この資料は最新の案内・在庫・受注可否を保証しません。現在の状況は原典・取引先で確認してください。';
   target.append(title,source.querySelector('.supply-reference-copy').cloneNode(true),notice,source.querySelector('.topic-src').cloneNode(true));
+  const alternatives=source.querySelector('.supply-alternatives');
+  if(alternatives) target.append(alternatives.cloneNode(true));
 }
 function openDetail(d, opts={}){
   if(!d) return;
