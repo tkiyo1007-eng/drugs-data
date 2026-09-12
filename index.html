@@ -4627,11 +4627,22 @@ let TRENDING = [
   {slug:"celecox-tablets",label:"セレコックス錠",q:"セレコックス錠"},
 ];
 function renderTrending(){
+  // 単一品目は既存の詳細へ直行。複数メーカー・規格は選択せず検索結果へ。
+  // products/ の既存URLは削除せず、ここからの通常操作だけをWeb本体へ揃える。
+  const details = {
+    'juvela-ointment':'2649805M1026',
+    'zictor-tape-75mg':'1147700S1028',
+    'lulicon-cream':'2655712N1020',
+    'meno-aid-combi-patch':'2482800S1026',
+    'insulin-lispro-bs-solostar':'2492422G1023',
+    'predonine-soluble-10mg':'2456405D1027',
+    'predonine-soluble-20mg':'2456405D2023',
+  };
   // Webの注目一覧だけから除外。共通データ・通常検索・既存の詳細URLは維持する。
   const hidden = new Set(["caduet", "caduet-1", "caduet-2", "caduet-3", "caduet-4",
     "gentacin-ointment", "mounjaro-injection", "loxoprofen-sodium-tape", "celecox-tablets"]);
   document.getElementById("trendingList").innerHTML = TRENDING.filter(t=>!hidden.has(t.slug)).map(t=>
-    `<a class="trending-chip" href="products/${encodeURIComponent(t.slug)}.html">${esc(t.label)}</a>`).join("")
+    `<a class="trending-chip" href="${details[t.slug] ? '#item='+details[t.slug] : '#q='+encodeURIComponent(t.q)}">${esc(t.label)}</a>`).join("")
     + `<a class="trending-chip" href="#q=${encodeURIComponent('テラムロ')}">テラムロ配合錠</a>`;
 }
 renderTrending();
