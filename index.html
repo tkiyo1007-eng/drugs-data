@@ -223,12 +223,13 @@ section[id]{scroll-margin-top:90px}
   body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
   .mobile-quick-nav{
     position:fixed;z-index:180;left:10px;right:10px;
-    bottom:max(8px,env(safe-area-inset-bottom,0px));
+    bottom:calc(var(--quick-nav-viewport-inset,0px) + max(8px,env(safe-area-inset-bottom,0px)));
     display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;
     padding:6px;border-radius:20px;background:rgba(255,255,255,.9);
     border:1px solid rgba(255,255,255,.92);box-shadow:0 14px 40px -14px rgba(20,39,94,.5);
     backdrop-filter:blur(24px) saturate(1.45);-webkit-backdrop-filter:blur(24px) saturate(1.45);
   }
+  .mobile-quick-nav[data-keyboard-open]{display:none}
 }
 
 /* ===== ヒーロー ===== */
@@ -1602,6 +1603,29 @@ footer a:hover{color:var(--blue)}
         </div>
         <a class="topic-src" href="https://medical.eisai.jp/products/ea/ea_o" target="_blank" rel="noopener">エーザイ製品ページ：2026年2月3日の告知掲載を確認（本文未確認）</a>
       </article>
+      <article id="norspanSupplyReference" hidden data-reference-title="ノルスパンテープ：供給停止予定と処方変更の参考情報">
+        <h4>ノルスパンテープ5mg・10mg・20mg</h4>
+        <div class="supply-reference-copy">
+          <p class="topic-lede">メーカー文書：2026年9月4日付（日本ペインクリニック学会が9月8日掲載）。当サイト原典確認日：2026年9月12日。以下は文書時点の予定で、厚労省由来の現在の供給区分とは別情報です。</p>
+          <ul class="topic-points">
+            <li><strong>停止理由：</strong>世界的な供給調整で日本への割当が計画を下回り、輸入量と国内在庫が減少。安全在庫を確保しにくい状況に、輸入手続きの遅れも重なったためと説明されています。</li>
+            <li><strong>供給停止予定：2026年9月24日～10月30日（受注日ベース）。</strong>限定出荷期間は9月4日～9月18日の予定です。9月19日～23日の受注対応は文書に明記されていません。10月30日までの停止予定は、翌日からの通常出荷・入荷を保証しません。</li>
+            <li><strong>対象：</strong>5mg・10mg・20mgの各1枚×2包装。実際の卸在庫・受注可否はメーカーや取引先へ確認してください。</li>
+          </ul>
+          <details class="zictor-reference-options">
+            <summary>別成分の参考候補（主治医による処方変更・適応確認が必要）</summary>
+            <p class="topic-lede">同一成分・同一剤形の別製品は、今回確認した供給データ内では確認できていません。以下は当サイトの参考情報で、メーカーが特定の薬剤への変更を推奨したものではありません。</p>
+            <ul class="topic-points">
+              <li><strong>トラマドール製剤（単剤／アセトアミノフェン配合剤）：</strong>慢性疼痛に適応のある製品が相談候補です。ノルスパンと成分・剤形が異なり、単純な置換はできません。配合剤では他剤とのアセトアミノフェン重複にも注意が必要です。</li>
+              <li><strong>フェンタニル貼付剤：</strong>慢性疼痛の適応や切替条件を満たす症例に限り、主治医が検討する選択肢です。製品ごとに適応・承認条件が異なり、同じ貼付剤でも同等代替ではありません。例えばフェントスの慢性疼痛への使用は、他のオピオイド鎮痛剤から切り替える場合に限られます。</li>
+            </ul>
+            <p class="topic-lede"><strong>他のオピオイドへの変更時の注意：</strong>ノルスパンの電子添文7.6.2には、本剤剥離後24時間以上の間隔をあける旨があります。また、切替直後に他のオピオイドの鎮痛効果が十分得られない場合があります。24時間経過だけで安全に切替できるという意味ではありません。自己判断で剥離・中止・切替・併用せず、開始時期と用量は主治医に確認してください。</p>
+            <p class="topic-lede">参考候補の現在の供給状況・在庫は未確認です。全製品の最新電子添文を網羅した確認ではありません。処方変更前に適応・禁忌・併用薬・患者状態と最新の電子添文を製品ごとに確認してください。</p>
+            <p class="topic-lede"><a href="https://www.info.pmda.go.jp/go/pdf/770098_1149704S1020_1_11" target="_blank" rel="noopener">ノルスパン電子添文（2023年10月改訂・7.6.2）</a> ／ <a href="https://www.pmda.go.jp/PmdaSearch/rdDetail/iyaku/1149038F1024_1?user=1" target="_blank" rel="noopener">トラマールOD錠の電子添文等（PMDA）</a> ／ <a href="https://www.pmda.go.jp/PmdaSearch/rdDetail/iyaku/8219701S1025_1?user=1" target="_blank" rel="noopener">フェントスの電子添文等（PMDA）</a> ／ <a href="https://www.jspc.gr.jp/Contents/public/pdf/guide08_11.pdf" target="_blank" rel="noopener">学会ガイドライン：各薬剤の適応の参考（発行時点）</a></p>
+          </details>
+        </div>
+        <a class="topic-src" href="https://www.jspc.gr.jp/pdf/20260908_01.pdf" target="_blank" rel="noopener">メーカー原文（2026年9月4日付・学会公式サイト掲載PDF）</a>
+      </article>
       <article class="topic-card glass" id="zictorSupplyReference" data-reference-date="2026年7月16日公表">
         <h4 class="topic-title">ジクトルテープ75mg：限定出荷の継続・解除見込みは未定</h4>
         <div class="supply-reference-copy">
@@ -2031,6 +2055,32 @@ if(typeof window.dsnTrack !== "function") window.dsnTrack = ()=>false;
   els.forEach(el=>io.observe(el));
   // 保険: 何かの理由で発火しなかった要素も8秒後には表示する
   setTimeout(()=>els.forEach(el=>el.classList.add("on")), 8000);
+})();
+
+/* iOSのブラウザUI・キーボードで変わる可視領域に下部ナビを追従させる。 */
+(function(){
+  const nav = document.querySelector('.mobile-quick-nav');
+  const viewport = window.visualViewport;
+  if(!nav || !viewport) return; // 非対応ブラウザは通常のCSS固定位置を使う。
+  let frame = 0;
+  function update(){
+    frame = 0;
+    const active = document.activeElement;
+    const editing = !!active && (active.matches('input:not([type="checkbox"]):not([type="radio"]), textarea') || active.isContentEditable);
+    const unzoomed = Math.abs(viewport.scale - 1) < .05;
+    const inset = window.innerHeight - viewport.height - viewport.offsetTop;
+    // ピンチズームはキーボードと見なさず、通常の固定位置を維持する。
+    nav.toggleAttribute('data-keyboard-open', unzoomed && editing && window.innerHeight - viewport.height > 120);
+    nav.style.setProperty('--quick-nav-viewport-inset', `${unzoomed ? inset : 0}px`);
+  }
+  function schedule(){ if(!frame) frame = requestAnimationFrame(update); }
+  viewport.addEventListener('resize', schedule);
+  viewport.addEventListener('scroll', schedule);
+  window.addEventListener('resize', schedule);
+  window.addEventListener('pageshow', schedule);
+  document.addEventListener('focusin', schedule);
+  document.addEventListener('focusout', schedule);
+  update();
 })();
 
 /* スマホ下部ナビの現在地。検索内の監視ダッシュボードも独立した主要導線として扱う */
@@ -3959,6 +4009,9 @@ function supplyReferenceId(d){
     '2190104F1091':['アマルエット配合錠4番「サンド」','サンド','amaluetSandozReference'],
     '2649805M1026':['ユベラ軟膏','エーザイ','juvelaSupplyReference'],
     '1147700S1028':['ジクトルテープ75mg','久光製薬','zictorSupplyReference'],
+    '1149704S1020':['ノルスパンテープ5mg','ムンディファーマ','norspanSupplyReference'],
+    '1149704S2027':['ノルスパンテープ10mg','ムンディファーマ','norspanSupplyReference'],
+    '1149704S3023':['ノルスパンテープ20mg','ムンディファーマ','norspanSupplyReference'],
     '2655712N1020':['ルリコンクリーム1%','サンファーマ','luliconSupplyReference'],
     '2655712M1025':['ルリコン軟膏1%','サンファーマ','luliconSupplyReference'],
     '2655712N1039':['ルリコナゾールクリーム1%「イワキ」','岩城製薬','luliconazoleSupplyReference'],
@@ -4408,7 +4461,10 @@ let TRENDING = [
   {slug:"celecox-tablets",label:"セレコックス錠",q:"セレコックス錠"},
 ];
 function renderTrending(){
-  document.getElementById("trendingList").innerHTML = TRENDING.map(t=>
+  // Webの注目一覧だけから除外。共通データ・通常検索・既存の詳細URLは維持する。
+  const hidden = new Set(["caduet", "caduet-1", "caduet-2", "caduet-3", "caduet-4",
+    "gentacin-ointment", "mounjaro-injection", "loxoprofen-sodium-tape", "celecox-tablets"]);
+  document.getElementById("trendingList").innerHTML = TRENDING.filter(t=>!hidden.has(t.slug)).map(t=>
     `<a class="trending-chip" href="products/${encodeURIComponent(t.slug)}.html">${esc(t.label)}</a>`).join("");
 }
 renderTrending();
