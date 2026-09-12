@@ -1467,6 +1467,28 @@ footer a:hover{color:var(--blue)}
     <h3>注目製品のメーカー案内</h3>
     <p class="news-status">過去の公式文書を確認するための参考資料です。下記の日付時点の案内であり、現在の供給区分を上書きするものではありません。最新の案内・在庫・受注可否はメーカーや取引先へご確認ください。</p>
     <div class="topic-list">
+      <article class="topic-card glass" id="juvelaSupplyReference" data-reference-title="ユベラ軟膏：供給情報・包装別登録・別成分の参考候補" data-reference-link-label="エーザイ製品ページ（告知の掲載あり・本文未確認）">
+        <h4 class="topic-title">ユベラ軟膏の出荷調整と参考候補</h4>
+        <div class="supply-reference-copy">
+          <p class="topic-lede">情報の照合日：2026年9月12日（当サイト編集）。以下の登録日・記事日付は、照合日や現在の供給データ基準日とは別です。メーカー告知PDF本文は今回取得できていません。</p>
+          <ul class="topic-points">
+            <li><strong>出荷調整の理由：</strong>当サイト配信の厚労省由来データには「原材料調達上の問題」「出荷量減少」「限定出荷（自社の事情）」とあります。原材料の具体名や詳しい事情は未確認です。<a href="https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list" target="_blank" rel="noopener">厚労省の原典を確認</a></li>
+            <li><strong>包装別の登録情報（DSJP）：</strong>2026年2月3日付で56g×5本は供給停止、500g瓶は限定出荷と登録されています。これはメーカーPDF本文の確認結果ではなく、現在の在庫や発注可否を保証しません。<a href="https://drugshortage.jp/list-unit.php?unit=2649805M1026" target="_blank" rel="noopener">DSJPの包装別登録を確認（二次情報）</a></li>
+            <li><strong>供給再開の見通し：</strong>厚労省データを扱うSCUELの2026年8月17日付記事には「2026年9月」の解消見込みが掲載されています。ただし、今回その具体的な月をメーカー本文・厚労省原典で再確認できていません。通常出荷への復帰を確認した情報ではなく、9月中の再開を保証するものでもありません。<a href="https://scueldata.me/ph/weekly/2026-08-17/" target="_blank" rel="noopener">見込みの掲載元を確認（二次情報・過去記事）</a></li>
+          </ul>
+          <details class="zictor-reference-options">
+            <summary>使用目的別・別成分の参考候補（処方変更の確認が必要）</summary>
+            <p class="topic-lede">同成分・同配合の後発品は今回の確認範囲では確認できていません。「後発品が存在しない」との断定ではありません。以下は当サイトの参考情報であり、メーカーの切替推奨ではありません。</p>
+            <ul class="topic-points">
+              <li><strong>しもやけ（凍瘡）：</strong>ヒルドイドソフト軟膏0.3％／ヘパリン類似物質油性クリーム0.3％。ユベラ軟膏とは成分が異なります。ヒルドイドの電子添文では凍瘡の適応を確認しましたが、後発品各社の最新電子添文は未確認です。出血性血液疾患などの禁忌にも注意し、製品ごとに確認してください。<a href="https://www.pmda.go.jp/PmdaSearch/rdDetail/iyaku/3339950M1137_1?user=1" target="_blank" rel="noopener">ヒルドイドの電子添文等（PMDA）</a></li>
+              <li><strong>角化性皮膚疾患（尋常性魚鱗癬・毛孔性苔癬・単純性粃糠疹）：</strong>ザーネ軟膏0.5％。ビタミンA油の製剤で、ユベラ軟膏と同配合ではありません。<strong>しもやけ（凍瘡）の適応はありません。</strong>一般的な「ざらつき」すべてに適応があるわけではありません。<a href="https://www.pmda.go.jp/PmdaSearch/rdDetail/iyaku/2649724M1039_3?user=1" target="_blank" rel="noopener">ザーネの電子添文等（PMDA）</a></li>
+            </ul>
+            <p class="topic-lede">一律に置き換えられる薬ではありません。処方変更は医師・薬剤師に確認し、候補薬の適応・禁忌・患者状態と最新の供給状況を確認してください。<strong>候補薬の現在の供給状況・在庫は、この参考欄では未確認です。</strong>自己判断で切り替えないでください。</p>
+            <a href="https://www.pmda.go.jp/PmdaSearch/rdDetail/iyaku/2649805M1026_3?user=1" target="_blank" rel="noopener">ユベラ軟膏の電子添文等（PMDA）</a>
+          </details>
+        </div>
+        <a class="topic-src" href="https://medical.eisai.jp/products/ea/ea_o" target="_blank" rel="noopener">エーザイ製品ページ：2026年2月3日の告知掲載を確認（本文未確認）</a>
+      </article>
       <article class="topic-card glass" id="zictorSupplyReference" data-reference-date="2026年7月16日公表">
         <h4 class="topic-title">ジクトルテープ75mg：限定出荷の継続・解除見込みは未定</h4>
         <div class="supply-reference-copy">
@@ -1830,6 +1852,7 @@ footer a:hover{color:var(--blue)}
     </div>
     <h3 id="mTitle">品目詳細</h3>
     <p class="modal-maker" id="mMaker"></p>
+    <div class="modal-note" id="mSupplyReference" hidden></div>
     <section class="alternatives-box" id="mAlternatives" aria-labelledby="mAlternativesTitle" hidden>
       <h4 id="mAlternativesTitle">代替候補の4つのポイント</h4>
       <p class="alternatives-date">供給情報：2026年9月11日確認（厚労省9月10日版・メーカー案内）</p>
@@ -1849,7 +1872,6 @@ footer a:hover{color:var(--blue)}
     <div class="sum-box" id="mSummary" hidden></div>
     <div class="pkg-box" id="mPkgs" hidden></div>
     <p class="modal-note" id="mHistoryNote" role="status" aria-live="polite" aria-atomic="true"></p>
-    <div class="modal-note" id="mSupplyReference" hidden></div>
     <dl class="detail-grid" id="mGrid"></dl>
     <div id="mRelated" hidden></div>
     <p class="modal-note" id="mNote"></p>
@@ -3790,6 +3812,7 @@ function updateDetailHistoryNote(item){
 function supplyReferenceId(d){
   const normalize = value => String(value || '').normalize('NFKC').replace(/\s/g,'');
   const refs = {
+    '2649805M1026':['ユベラ軟膏','エーザイ','juvelaSupplyReference'],
     '1147700S1028':['ジクトルテープ75mg','久光製薬','zictorSupplyReference'],
     '2655712N1020':['ルリコンクリーム1%','サンファーマ','luliconSupplyReference'],
     '2655712M1025':['ルリコン軟膏1%','サンファーマ','luliconSupplyReference'],
@@ -3805,9 +3828,10 @@ function renderSupplyReference(d){
   const id=supplyReferenceId(d), source=id && document.getElementById(id);
   target.hidden=!source;
   if(!source) return;
-  const title=document.createElement('h4');title.textContent='メーカー案内（過去資料・現在の供給区分とは別情報）';
+  const title=document.createElement('h4');title.textContent=source.dataset.referenceTitle || 'メーカー案内（過去資料・現在の供給区分とは別情報）';
   const notice=document.createElement('p');notice.textContent='この資料は最新の案内・在庫・受注可否を保証しません。現在の状況は原典・取引先で確認してください。';
   target.append(title,source.querySelector('.supply-reference-copy').cloneNode(true),notice,source.querySelector('.topic-src').cloneNode(true));
+  target.querySelectorAll('details').forEach(details => { details.open = true; });
 }
 function renderLuliconAlternatives(d){
   const target=document.getElementById('mAlternatives');
@@ -4006,7 +4030,8 @@ function openDetail(d, opts={}){
     // 取得済みの品目別案内は優先したまま、ない場合のみ確認済みの過去資料へ案内する。
     $mMakerLink.href = referenceLink.href;
     const referenceDate = document.getElementById(referenceId)?.dataset.referenceDate || '日付不明';
-    $mMakerLink.textContent = `${d.m}のメーカー案内文（${referenceDate}の過去資料・PDF）`;
+    $mMakerLink.textContent = document.getElementById(referenceId)?.dataset.referenceLinkLabel
+      || `${d.m}のメーカー案内文（${referenceDate}の過去資料・PDF）`;
     $mMakerLink.hidden = false;
   }else if(mLink){
     $mMakerLink.href = mLink.url;
