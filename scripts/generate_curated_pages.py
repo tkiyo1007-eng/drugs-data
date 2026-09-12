@@ -20,6 +20,11 @@ PMDA_RECALL_URL = "https://www.pmda.go.jp/safety/info-services/drugs/calling-att
 GUIDE_SLUG = "how-to-check-drug-supply"
 TEMPLATE_UPDATED_AT = "2026-08-28"
 PRODUCT_TEMPLATE_UPDATED_AT = "2026-09-06"
+# Web一覧のみの編集指定。共通JSONと詳細ページの生成対象は変更しない。
+WEB_HIDDEN_FEATURED_SLUGS = {
+    "caduet", "caduet-1", "caduet-2", "caduet-3", "caduet-4",
+    "gentacin-ointment", "mounjaro-injection", "loxoprofen-sodium-tape", "celecox-tablets",
+}
 STATUS = {
     "ok": ("通常出荷", "#227D4F", "#E7F6EE", 0),
     "limited": ("限定出荷", "#9F5E11", "#FCF0DF", 1),
@@ -502,6 +507,8 @@ def list_page(kind: str, records: list[dict], updated_at: str) -> str:
     canonical = f"{SITE_ROOT}{kind}/index.html"
     links = []
     for record in records:
+        if not topic and record["slug"] in WEB_HIDDEN_FEATURED_SLUGS:
+            continue
         label = record["title"] if topic else record["label"]
         meta = (f"{record['date']}｜{record['tag']}" if topic else "メーカー別の供給状況を確認")
         links.append(f'<a href="{esc(record["slug"])}.html">{esc(label)}<small>{esc(meta)}</small></a>')

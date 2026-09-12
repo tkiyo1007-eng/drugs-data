@@ -9,6 +9,8 @@ from urllib.parse import quote
 
 from generate_curated_pages import (
     GUIDE_SLUG,
+    WEB_HIDDEN_FEATURED_SLUGS,
+    list_page,
     product_intent_html,
     product_page,
     product_seo_metadata,
@@ -22,6 +24,22 @@ GENERATOR = ROOT / "scripts" / "generate_curated_pages.py"
 
 
 class CuratedPageGenerationTests(unittest.TestCase):
+    def test_web_list_hides_requested_products_without_removing_detail_pages(self):
+        document = json.loads((ROOT / "featured_products.json").read_text())
+        records = document["products"]
+        before = json.dumps(records)
+        page = list_page("products", records, "2026-09-12")
+        for record in records:
+            link = f'href="{record["slug"]}.html"'
+            if record["slug"] in WEB_HIDDEN_FEATURED_SLUGS:
+                self.assertNotIn(link, page)
+                detail, _ = product_page(record, [], set(), {})
+                self.assertIn(f'products/{record["slug"]}.html', detail)
+            else:
+                self.assertIn(link, page)
+        self.assertEqual(before, json.dumps(records))
+        self.assertEqual(9, len(WEB_HIDDEN_FEATURED_SLUGS))
+
     def test_product_entry_reuses_encoded_search_and_official_links_before_details(self):
         product = {"slug": "entry-test", "label": "確認製品", "query": '製品A & "テスト"'}
         page, _ = product_page(product, [], set(), {})
@@ -280,7 +298,10 @@ class CuratedPageGenerationTests(unittest.TestCase):
             for slug in slugs:
                 with self.subTest(kind=kind, slug=slug):
                     page = (ROOT / kind / f"{slug}.html").read_text(encoding="utf-8")
-                    self.assertIn(f'{slug}.html', index)
+                    if kind == "products" and slug in WEB_HIDDEN_FEATURED_SLUGS:
+                        self.assertNotIn(f'{slug}.html', index)
+                    else:
+                        self.assertIn(f'{slug}.html', index)
                     self.assertIn(f"{kind}/{slug}.html", sitemap)
                     self.assertIn('rel="canonical"', page)
                     self.assertIn('type="application/ld+json"', page)
