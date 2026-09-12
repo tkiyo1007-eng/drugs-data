@@ -805,6 +805,10 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .zictor-reference-options{margin:16px 0;padding:12px;border:1px solid rgba(79,128,244,.3);border-radius:12px}
 .zictor-reference-options summary{min-height:44px;cursor:pointer;font-size:14px;font-weight:700;line-height:1.7;padding:8px 0}
 .zictor-reference-options summary:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.amaluet-options{margin-top:18px;padding-top:14px;border-top:1px solid var(--blue-mid)}
+.amaluet-dose-table{width:100%;border-collapse:collapse;table-layout:fixed;margin:12px 0;font-size:13px}
+.amaluet-dose-table th,.amaluet-dose-table td{padding:8px 4px;border:1px solid var(--blue-mid);overflow-wrap:anywhere;text-align:center}
+.amaluet-dose-table caption{text-align:left;margin-bottom:8px;font-weight:700}
 .alternatives-box{margin:0 0 20px;padding:16px 18px;border:1px solid rgba(79,128,244,.3);border-radius:16px;background:rgba(79,128,244,.07);color:var(--ink)}
 .alternatives-box h4{font-size:15px;font-weight:800;line-height:1.5;margin:0 0 8px}
 .alternatives-box .alternatives-date{font-size:12px;color:var(--sub);line-height:1.6;margin-bottom:10px}
@@ -1465,6 +1469,115 @@ footer a:hover{color:var(--blue)}
   <!-- 品目詳細へ複製する資料。ニュース欄には掲載しない。 -->
   <div id="supplyReferenceNotes" hidden>
     <h3>注目製品のメーカー案内</h3>
+    <template id="amaluetOptions">
+      <section class="amaluet-options">
+        <h4>単剤2剤の参考候補（処方医への確認が必要）</h4>
+        <p>沢井製薬の2026年8月案内にはアムロジピン錠2.5mg・5mgとアトルバスタチン錠5mg・10mgが候補として挙げられています。下表は電子添文の配合量を当サイトが対応表にしたもので、切替処方や用法を指示するものではありません。</p>
+        <table class="amaluet-dose-table">
+          <caption>配合錠1錠中の成分量の対応</caption>
+          <thead><tr><th scope="col">番号</th><th scope="col">アムロジピン</th><th scope="col">アトルバスタチン</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">1番</th><td>2.5mg</td><td>5mg</td></tr>
+            <tr><th scope="row">2番</th><td>2.5mg</td><td>10mg</td></tr>
+            <tr><th scope="row">3番</th><td>5mg</td><td>5mg</td></tr>
+            <tr><th scope="row">4番</th><td>5mg</td><td>10mg</td></tr>
+          </tbody>
+        </table>
+        <p><strong>自己判断で変更せず、処方医が適応・用量・禁忌・併用薬を確認してください。旧配合剤と単剤の重複服用に注意が必要です。</strong>同量の成分でも、一律に置換可能と保証するものではありません。</p>
+        <p>日医工のアムロジピン錠2.5mg・5mg、アトルバスタチン錠5mg・10mgは9月10日のメーカー一覧で通常出荷を確認しました。これは一覧時点の情報で、現在の卸在庫・新規受注可否を保証しません。各単剤の最新電子添文は個別に確認してください。</p>
+        <p><a href="https://med.sawai.co.jp/file/pr28_1755_1.pdf" target="_blank" rel="noopener">沢井製薬の候補品案内</a> ／ <a href="https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=51687&amp;t=0" target="_blank" rel="noopener">配合量の電子添文（2026年4月版を確認）</a> ／ <a href="https://www.nichiiko.co.jp/medicine/significant/pdf_index.php" target="_blank" rel="noopener">日医工の供給一覧</a></p>
+      </section>
+    </template>
+      <article class="topic-card glass" id="amaluetTowa12Reference" data-reference-family="amaluet" data-reference-title="アマルエット「トーワ1・2番」：供給・販売中止の参考情報" data-reference-link-label="メーカー資料（2026年7月案内・9月4日一覧）">
+        <h4 class="topic-title">アマルエット「トーワ1・2番」</h4>
+        <div class="supply-reference-copy">
+          <p class="topic-lede">当サイト照合日：2026年9月12日。資料：2026年7月案内・9月4日一覧。以下は資料時点の編集説明であり、現在の供給区分を上書きしません。</p>
+          <p class="topic-lede">9月4日のメーカー一覧では1・2番は供給停止です。7月の個別案内は、承認規格を満たす製品を製造できず安定供給が難しいためと説明し、再開時期は未定としています。3・4番の限定出荷とは理由が異なります。</p>
+          <p><a href="https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82657&amp;t=4" target="_blank" rel="noopener">1番の個別案内（7月更新）</a> ／ <a href="https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82817&amp;t=4" target="_blank" rel="noopener">2番の個別案内（7月）</a></p>
+          <p class="topic-lede"><strong>販売中止の案内と、現在すべて供給停止であることは別です。</strong>画面の供給区分は厚労省由来データ、こちらは資料時点の補足です。実際の卸在庫・新規受注可否はメーカーや取引先へ確認してください。</p>
+        </div>
+        <a class="topic-src" href="https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80558&amp;t=6" target="_blank" rel="noopener">メーカーの原典を確認</a>
+      </article>
+      <article class="topic-card glass" id="amaluetTowa34Reference" data-reference-family="amaluet" data-reference-title="アマルエット「トーワ3・4番」：供給・販売中止の参考情報" data-reference-link-label="メーカー資料（2026年9月4日一覧）">
+        <h4 class="topic-title">アマルエット「トーワ3・4番」</h4>
+        <div class="supply-reference-copy">
+          <p class="topic-lede">当サイト照合日：2026年9月12日。資料：2026年9月4日一覧。以下は資料時点の編集説明であり、現在の供給区分を上書きしません。</p>
+          <p class="topic-lede">9月4日のメーカー一覧では3・4番は他社品の影響による限定出荷です。1・2番の製造上の問題を、3・4番の理由として扱うものではありません。</p>
+
+          <p class="topic-lede"><strong>販売中止の案内と、現在すべて供給停止であることは別です。</strong>画面の供給区分は厚労省由来データ、こちらは資料時点の補足です。実際の卸在庫・新規受注可否はメーカーや取引先へ確認してください。</p>
+        </div>
+        <a class="topic-src" href="https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80558&amp;t=6" target="_blank" rel="noopener">メーカーの原典を確認</a>
+      </article>
+      <article class="topic-card glass" id="amaluetNichiikoReference" data-reference-family="amaluet" data-reference-title="アマルエット「日医工」：供給・販売中止の参考情報" data-reference-link-label="メーカー資料（2026年9月10日一覧）">
+        <h4 class="topic-title">アマルエット「日医工」</h4>
+        <div class="supply-reference-copy">
+          <p class="topic-lede">当サイト照合日：2026年9月12日。資料：2026年9月10日一覧。以下は資料時点の編集説明であり、現在の供給区分を上書きしません。</p>
+          <p class="topic-lede">1〜4番は他社品の影響による限定出荷です。「出荷量通常」は製造販売業者の出荷量の区分であり、数量制限のない通常出荷という意味ではありません。</p>
+
+          <p class="topic-lede"><strong>販売中止の案内と、現在すべて供給停止であることは別です。</strong>画面の供給区分は厚労省由来データ、こちらは資料時点の補足です。実際の卸在庫・新規受注可否はメーカーや取引先へ確認してください。</p>
+        </div>
+        <a class="topic-src" href="https://www.nichiiko.co.jp/medicine/significant/pdf_index.php" target="_blank" rel="noopener">メーカーの原典を確認</a>
+      </article>
+      <article class="topic-card glass" id="amaluetSawaiReference" data-reference-family="amaluet" data-reference-title="アマルエット「サワイ」：供給・販売中止の参考情報" data-reference-link-label="メーカー資料（2026年9月8日一覧・8月販売中止案内）">
+        <h4 class="topic-title">アマルエット「サワイ」</h4>
+        <div class="supply-reference-copy">
+          <p class="topic-lede">当サイト照合日：2026年9月12日。資料：2026年9月8日一覧・8月販売中止案内。以下は資料時点の編集説明であり、現在の供給区分を上書きしません。</p>
+          <p class="topic-lede">1〜4番は他社品の影響による限定出荷で、販売中止の予定も案内されています。販売中止の理由は安定供給・生産効率向上に向けた製品構成の見直しです。8月の案内の在庫消尽見込みは2027年4月ですが、その時期まで発注できる保証ではありません。</p>
+          <p><a href="https://med.sawai.co.jp/file/pr115_1755_1.pdf" target="_blank" rel="noopener">メーカー供給一覧（9月8日版を確認）</a></p>
+          <p class="topic-lede"><strong>販売中止の案内と、現在すべて供給停止であることは別です。</strong>画面の供給区分は厚労省由来データ、こちらは資料時点の補足です。実際の卸在庫・新規受注可否はメーカーや取引先へ確認してください。</p>
+        </div>
+        <a class="topic-src" href="https://med.sawai.co.jp/file/pr28_1755_1.pdf" target="_blank" rel="noopener">メーカーの原典を確認</a>
+      </article>
+      <article class="topic-card glass" id="amaluetNiproReference" data-reference-family="amaluet" data-reference-title="アマルエット「ニプロ」：供給・販売中止の参考情報" data-reference-link-label="メーカー資料（2025年10月販売中止案内）">
+        <h4 class="topic-title">アマルエット「ニプロ」</h4>
+        <div class="supply-reference-copy">
+          <p class="topic-lede">当サイト照合日：2026年9月12日。資料：2025年10月販売中止案内。以下は資料時点の編集説明であり、現在の供給区分を上書きしません。</p>
+          <p class="topic-lede">1〜4番の販売中止を案内しています。理由は諸般の事情とされ、当時の在庫消尽予測は2026年12月です。現在のメーカー規格・包装別出荷一覧は今回未確認です。この予測を現在の出荷可能・在庫ありの意味に読まないでください。</p>
+
+          <p class="topic-lede"><strong>販売中止の案内と、現在すべて供給停止であることは別です。</strong>画面の供給区分は厚労省由来データ、こちらは資料時点の補足です。実際の卸在庫・新規受注可否はメーカーや取引先へ確認してください。</p>
+        </div>
+        <a class="topic-src" href="https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uW72vIAC" target="_blank" rel="noopener">メーカーの原典を確認</a>
+      </article>
+      <article class="topic-card glass" id="amaluetChemifaReference" data-reference-family="amaluet" data-reference-title="アマルエット「ケミファ」：供給・販売中止の参考情報" data-reference-link-label="メーカー資料（2025年10月案内（10月31日掲載））">
+        <h4 class="topic-title">アマルエット「ケミファ」</h4>
+        <div class="supply-reference-copy">
+          <p class="topic-lede">当サイト照合日：2026年9月12日。資料：2025年10月案内（10月31日掲載）。以下は資料時点の編集説明であり、現在の供給区分を上書きしません。</p>
+          <p class="topic-lede">1〜4番をメーカー在庫終了に伴い取扱い中止とする案内です。詳しい理由は記載されていません。当時の在庫終了時期は1・3番が2026年3月、2番が4月、4番が5月で、流通状況により変動する旨があります。予定を過ぎたことだけで終了実績を断定しません。最新のメーカー出荷区分・終了実績は今回未確認です。</p>
+
+          <p class="topic-lede"><strong>販売中止の案内と、現在すべて供給停止であることは別です。</strong>画面の供給区分は厚労省由来データ、こちらは資料時点の補足です。実際の卸在庫・新規受注可否はメーカーや取引先へ確認してください。</p>
+        </div>
+        <a class="topic-src" href="https://www.nc-medical.com/product_topics/f4bj0h0000008qv6-att/f4bj0h0000008qvu.pdf" target="_blank" rel="noopener">メーカーの原典を確認</a>
+      </article>
+      <article class="topic-card glass" id="amaluetDsepReference" data-reference-family="amaluet" data-reference-title="アマルエット「DSEP」：供給・販売中止の参考情報" data-reference-link-label="メーカー資料（販売終了一覧を2026年9月12日照合）">
+        <h4 class="topic-title">アマルエット「DSEP」</h4>
+        <div class="supply-reference-copy">
+          <p class="topic-lede">当サイト照合日：2026年9月12日。資料：販売終了一覧を2026年9月12日照合。以下は資料時点の編集説明であり、現在の供給区分を上書きしません。</p>
+          <p class="topic-lede">1〜4番は販売終了対象です。公式一覧の販売終了日は、1番100錠が2026年6月15日、4番100錠が8月28日です。2番、3番100錠・500錠、4番500錠は2026年3月末（予定）の表記が残っており、これらの終了実績は今回未確認です。規格・包装をまとめて全品終了とは扱いません。</p>
+
+          <p class="topic-lede"><strong>販売中止の案内と、現在すべて供給停止であることは別です。</strong>画面の供給区分は厚労省由来データ、こちらは資料時点の補足です。実際の卸在庫・新規受注可否はメーカーや取引先へ確認してください。</p>
+        </div>
+        <a class="topic-src" href="https://med.daiichisankyo-ep.co.jp/products/end_product_list.php?certification=1" target="_blank" rel="noopener">メーカーの原典を確認</a>
+      </article>
+      <article class="topic-card glass" id="amaluetTckReference" data-reference-family="amaluet" data-reference-title="アマルエット「TCK」：供給・販売中止の参考情報" data-reference-link-label="メーカー資料（2026年3月案内（3月16日掲載））">
+        <h4 class="topic-title">アマルエット「TCK」</h4>
+        <div class="supply-reference-copy">
+          <p class="topic-lede">当サイト照合日：2026年9月12日。資料：2026年3月案内（3月16日掲載）。以下は資料時点の編集説明であり、現在の供給区分を上書きしません。</p>
+          <p class="topic-lede">メーカーの諸事情による1〜4番の販売中止を案内しています。当時の在庫消尽時期は1番が2026年7月、2番が12月、3・4番が8月です。現在の出荷可否や終了実績を確認した情報ではありません。古い案内に記載された他社候補が現在も供給可能とは限りません。</p>
+
+          <p class="topic-lede"><strong>販売中止の案内と、現在すべて供給停止であることは別です。</strong>画面の供給区分は厚労省由来データ、こちらは資料時点の補足です。実際の卸在庫・新規受注可否はメーカーや取引先へ確認してください。</p>
+        </div>
+        <a class="topic-src" href="https://www.tatsumi-kagaku.com/file/information/file/1099_1.pdf" target="_blank" rel="noopener">メーカーの原典を確認</a>
+      </article>
+      <article class="topic-card glass" id="amaluetSandozReference" data-reference-family="amaluet" data-reference-title="アマルエット「サンド」：供給・販売中止の参考情報" data-reference-link-label="DSJP登録（二次情報・メーカー原文未確認）" data-reference-secondary="true">
+        <h4 class="topic-title">アマルエット「サンド」</h4>
+        <div class="supply-reference-copy">
+          <p class="topic-lede">当サイト照合日：2026年9月12日。資料：2026年9月12日照合・メーカー原文未確認。以下は資料時点の編集説明であり、現在の供給区分を上書きしません。</p>
+          <p class="topic-lede"><strong>1〜4番：販売中止の案内あり（DSJP登録）。</strong>2026年3月27日付の販売中止案内が登録されています。出典はDSJP（二次情報）です。メーカー原文・規格や包装ごとの販売終了実績は今回未確認であり、全包装がすでに供給停止したことや、現在の受注可否を示すものではありません。</p>
+
+          <p class="topic-lede"><strong>販売中止の案内と、現在すべて供給停止であることは別です。</strong>画面の供給区分は厚労省由来データ、こちらは資料時点の補足です。実際の卸在庫・新規受注可否はメーカーや取引先へ確認してください。</p>
+        </div>
+        <a class="topic-src" href="https://drugshortage.jp/updatehistory.php?date=2026-03-28" target="_blank" rel="noopener">DSJPの登録を確認（二次情報）</a>
+      </article>
     <p class="news-status">過去の公式文書を確認するための参考資料です。下記の日付時点の案内であり、現在の供給区分を上書きするものではありません。最新の案内・在庫・受注可否はメーカーや取引先へご確認ください。</p>
     <div class="topic-list">
       <article class="topic-card glass" id="juvelaSupplyReference" data-reference-title="ユベラ軟膏：供給情報・包装別登録・別成分の参考候補" data-reference-link-label="エーザイ製品ページ（告知の掲載あり・本文未確認）">
@@ -3812,6 +3925,38 @@ function updateDetailHistoryNote(item){
 function supplyReferenceId(d){
   const normalize = value => String(value || '').normalize('NFKC').replace(/\s/g,'');
   const refs = {
+    '2190101F1101':['アマルエット配合錠1番「トーワ」','東和薬品','amaluetTowa12Reference'],
+    '2190102F1106':['アマルエット配合錠2番「トーワ」','東和薬品','amaluetTowa12Reference'],
+    '2190103F1100':['アマルエット配合錠3番「トーワ」','東和薬品','amaluetTowa34Reference'],
+    '2190104F1105':['アマルエット配合錠4番「トーワ」','東和薬品','amaluetTowa34Reference'],
+    '2190101F1110':['アマルエット配合錠1番「日医工」','日医工','amaluetNichiikoReference'],
+    '2190102F1114':['アマルエット配合錠2番「日医工」','日医工','amaluetNichiikoReference'],
+    '2190103F1119':['アマルエット配合錠3番「日医工」','日医工','amaluetNichiikoReference'],
+    '2190104F1113':['アマルエット配合錠4番「日医工」','日医工','amaluetNichiikoReference'],
+    '2190101F1080':['アマルエット配合錠1番「サワイ」','沢井製薬','amaluetSawaiReference'],
+    '2190102F1084':['アマルエット配合錠2番「サワイ」','沢井製薬','amaluetSawaiReference'],
+    '2190103F1089':['アマルエット配合錠3番「サワイ」','沢井製薬','amaluetSawaiReference'],
+    '2190104F1083':['アマルエット配合錠4番「サワイ」','沢井製薬','amaluetSawaiReference'],
+    '2190101F1128':['アマルエット配合錠1番「ニプロ」','ニプロ','amaluetNiproReference'],
+    '2190102F1122':['アマルエット配合錠2番「ニプロ」','ニプロ','amaluetNiproReference'],
+    '2190103F1127':['アマルエット配合錠3番「ニプロ」','ニプロ','amaluetNiproReference'],
+    '2190104F1121':['アマルエット配合錠4番「ニプロ」','ニプロ','amaluetNiproReference'],
+    '2190101F1071':['アマルエット配合錠1番「ケミファ」','日本ケミファ','amaluetChemifaReference'],
+    '2190102F1076':['アマルエット配合錠2番「ケミファ」','日本ケミファ','amaluetChemifaReference'],
+    '2190103F1070':['アマルエット配合錠3番「ケミファ」','日本ケミファ','amaluetChemifaReference'],
+    '2190104F1075':['アマルエット配合錠4番「ケミファ」','日本ケミファ','amaluetChemifaReference'],
+    '2190101F1039':['アマルエット配合錠1番「DSEP」','第一三共エスファ','amaluetDsepReference'],
+    '2190102F1033':['アマルエット配合錠2番「DSEP」','第一三共エスファ','amaluetDsepReference'],
+    '2190103F1038':['アマルエット配合錠3番「DSEP」','第一三共エスファ','amaluetDsepReference'],
+    '2190104F1032':['アマルエット配合錠4番「DSEP」','第一三共エスファ','amaluetDsepReference'],
+    '2190101F1063':['アマルエット配合錠1番「TCK」','辰巳化学','amaluetTckReference'],
+    '2190102F1068':['アマルエット配合錠2番「TCK」','辰巳化学','amaluetTckReference'],
+    '2190103F1062':['アマルエット配合錠3番「TCK」','辰巳化学','amaluetTckReference'],
+    '2190104F1067':['アマルエット配合錠4番「TCK」','辰巳化学','amaluetTckReference'],
+    '2190101F1098':['アマルエット配合錠1番「サンド」','サンド','amaluetSandozReference'],
+    '2190102F1092':['アマルエット配合錠2番「サンド」','サンド','amaluetSandozReference'],
+    '2190103F1097':['アマルエット配合錠3番「サンド」','サンド','amaluetSandozReference'],
+    '2190104F1091':['アマルエット配合錠4番「サンド」','サンド','amaluetSandozReference'],
     '2649805M1026':['ユベラ軟膏','エーザイ','juvelaSupplyReference'],
     '1147700S1028':['ジクトルテープ75mg','久光製薬','zictorSupplyReference'],
     '2655712N1020':['ルリコンクリーム1%','サンファーマ','luliconSupplyReference'],
@@ -3830,7 +3975,11 @@ function renderSupplyReference(d){
   if(!source) return;
   const title=document.createElement('h4');title.textContent=source.dataset.referenceTitle || 'メーカー案内（過去資料・現在の供給区分とは別情報）';
   const notice=document.createElement('p');notice.textContent='この資料は最新の案内・在庫・受注可否を保証しません。現在の状況は原典・取引先で確認してください。';
-  target.append(title,source.querySelector('.supply-reference-copy').cloneNode(true),notice,source.querySelector('.topic-src').cloneNode(true));
+  target.append(title,source.querySelector('.supply-reference-copy').cloneNode(true));
+  if(source.dataset.referenceFamily === 'amaluet'){
+    target.append(document.getElementById('amaluetOptions').content.cloneNode(true));
+  }
+  target.append(notice,source.querySelector('.topic-src').cloneNode(true));
   target.querySelectorAll('details').forEach(details => { details.open = true; });
 }
 function renderLuliconAlternatives(d){
@@ -4020,7 +4169,8 @@ function openDetail(d, opts={}){
   const mLink = needsMakerLink ? findMakerLink(makerRowText) : null;
   const $mMakerLink = document.getElementById("mMakerLink");
   const referenceId = supplyReferenceId(d);
-  const referenceLink = referenceId && document.querySelector(`#${referenceId} .topic-src`);
+  const referenceLink = referenceId && document.getElementById(referenceId)?.dataset.referenceSecondary !== 'true'
+    && document.querySelector(`#${referenceId} .topic-src`);
   if(announcement){
     $mMakerLink.href = announcement.url;
     const sourceKind = /\.pdf(?:$|[?#])/i.test(announcement.url || "") ? "PDF" : "公式ページ";
