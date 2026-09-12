@@ -39,6 +39,9 @@ class CuratedPageGenerationTests(unittest.TestCase):
                 self.assertIn(link, page)
         self.assertEqual(before, json.dumps(records))
         self.assertEqual(9, len(WEB_HIDDEN_FEATURED_SLUGS))
+        self.assertEqual(1, page.count('テラムロ配合錠'))
+        self.assertIn('href="../#q=' + quote('テラムロ', safe='') + '"', page)
+        self.assertNotIn('テラムロ配合錠', list_page('topics', [], '2026-09-12'))
 
     def test_product_entry_reuses_encoded_search_and_official_links_before_details(self):
         product = {"slug": "entry-test", "label": "確認製品", "query": '製品A & "テスト"'}

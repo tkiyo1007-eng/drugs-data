@@ -512,6 +512,10 @@ def list_page(kind: str, records: list[dict], updated_at: str) -> str:
         label = record["title"] if topic else record["label"]
         meta = (f"{record['date']}｜{record['tag']}" if topic else "メーカー別の供給状況を確認")
         links.append(f'<a href="{esc(record["slug"])}.html">{esc(label)}<small>{esc(meta)}</small></a>')
+    if not topic:
+        # Webのみの検索導線。共有キュレーション・iOSの一覧は変更しない。
+        links.append(f'<a href="../#q={quote("テラムロ", safe="")}">テラムロ配合錠<small>メーカー別の供給状況を確認</small></a>')
+        updated_at = max(updated_at, "2026-09-12")
     breadcrumb = {"@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "医薬品供給ナビ", "item": SITE_ROOT},
         {"@type": "ListItem", "position": 2, "name": heading, "item": canonical}]}
