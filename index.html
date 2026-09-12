@@ -4465,7 +4465,8 @@ function renderTrending(){
   const hidden = new Set(["caduet", "caduet-1", "caduet-2", "caduet-3", "caduet-4",
     "gentacin-ointment", "mounjaro-injection", "loxoprofen-sodium-tape", "celecox-tablets"]);
   document.getElementById("trendingList").innerHTML = TRENDING.filter(t=>!hidden.has(t.slug)).map(t=>
-    `<a class="trending-chip" href="products/${encodeURIComponent(t.slug)}.html">${esc(t.label)}</a>`).join("");
+    `<a class="trending-chip" href="products/${encodeURIComponent(t.slug)}.html">${esc(t.label)}</a>`).join("")
+    + `<a class="trending-chip" href="#q=${encodeURIComponent('テラムロ')}">テラムロ配合錠</a>`;
 }
 renderTrending();
 
