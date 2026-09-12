@@ -431,7 +431,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .pill[data-f="watchDiscrepancy"].active{color:#4B3400;background:linear-gradient(135deg,#FFE08A,#E5A900);box-shadow:0 6px 16px -6px rgba(229,169,0,.55)}
 .pill[data-f="delist"].active{background:linear-gradient(135deg,#E8912F,#B0500E);box-shadow:0 6px 16px -6px rgba(176,80,14,.55)}
 .result-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;margin-bottom:14px}
-.result-meta{font-size:12.5px;color:var(--sub)}
+.result-meta{font-size:12.5px;color:var(--sub);scroll-margin-top:100px}
 .result-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-left:auto}
 .search-share-status{width:100%;min-height:1.5em;font-size:11px;color:var(--sub);text-align:right}
 .page-size{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--sub);font-weight:700;white-space:nowrap}
@@ -4646,6 +4646,22 @@ function renderTrending(){
     + `<a class="trending-chip" href="#q=${encodeURIComponent('テラムロ')}">テラムロ配合錠</a>`;
 }
 renderTrending();
+document.getElementById("trendingList").addEventListener("click", e=>{
+  const link = e.target.closest('a[href^="#q="]');
+  // 別タブ操作と単一品目の詳細リンクはブラウザ標準の動作を維持する。
+  if(!link || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  e.preventDefault();
+  const hash = link.getAttribute("href");
+  cancelPendingPageAnchorRestore();
+  clearTimeout(searchTimer);
+  clearTimeout(hashTimer);
+  if(location.hash !== hash) history.pushState(null, "", hash);
+  $q.value = new URLSearchParams(hash.slice(1)).get("q") || "";
+  setFilter("all");
+  // 同じhashの再クリックでも結果を表示位置へ戻す。入力欄を焦点にせずキーボードを開かない。
+  $meta.scrollIntoView({behavior:"instant", block:"start"});
+  focusSearchResultSummary();
+});
 
 /* ===== 話題のニュース（TOPICS） =====
    現場で話題になっている製品ニュースの手動キュレーション。自動収集はしない
