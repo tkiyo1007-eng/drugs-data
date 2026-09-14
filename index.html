@@ -123,6 +123,8 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
+/* 下部タブの標準アンカー移動だけ、長距離のスクロール演出を省く。 */
+html.quick-nav-jump{scroll-behavior:auto}
 body{
   font-family:'Noto Sans JP',-apple-system,BlinkMacSystemFont,sans-serif;
   color:var(--ink);
@@ -2251,7 +2253,12 @@ if(typeof window.dsnTrack !== "function") window.dsnTrack = ()=>false;
   }
   addEventListener("scroll",scheduleQuickNav,{passive:true});
   addEventListener("resize",scheduleQuickNav,{passive:true});
-  links.forEach(link=>link.addEventListener("click",()=>{
+  links.forEach(link=>link.addEventListener("click",event=>{
+    if(event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    // 標準のリンク動作を残し、URL・戻る履歴・同じタブの再選択を維持する。
+    const root = document.documentElement;
+    root.classList.add("quick-nav-jump");
+    setTimeout(()=>root.classList.remove("quick-nav-jump"),0);
     pendingTarget = targets.find(entry=>entry.link === link) || null;
     pendingUntil = performance.now() + 1800;
     links.forEach(other=>other.removeAttribute("aria-current"));
