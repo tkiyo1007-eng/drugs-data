@@ -727,6 +727,10 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .data-load-error button{border:1px solid rgba(118,37,37,.28);background:#fff;color:#762525}
 .data-load-error a{border:1px solid rgba(47,99,232,.3);background:var(--blue);color:#fff}
 .data-as-of{font-size:11.5px;color:var(--sub);line-height:1.6;margin:2px 0 8px}
+.update-info{margin:0 0 12px;color:var(--sub);font-size:13px;line-height:1.7}
+.update-info summary{cursor:pointer;min-height:44px;padding:10px 0;font-weight:700}
+.update-info summary:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.update-info p{margin:4px 0 10px}
 .data-loading{
   grid-column:1/-1;padding:34px 18px;text-align:center;color:var(--sub);font-size:13.5px;
   border:1px dashed rgba(90,107,148,.24);border-radius:16px;background:rgba(255,255,255,.36);
@@ -1325,6 +1329,12 @@ footer a:hover{color:var(--blue)}
       <span id="supplementalNoticeText"></span>
     </div>
     <p class="data-as-of" id="supplementalAsOf" role="status" aria-live="polite">メーカー公式案内の補足情報を確認中です。</p>
+    <details class="update-info" id="updateInfo">
+      <summary>更新情報の見方</summary>
+      <p>全体データ基準日：表示中の供給データの基準日です。※各カードの日付は「その品目行の最終変更日」です。</p>
+      <p>メーカー補足の確認日：当サイトが選定したメーカー・公表案内の確認日です。メーカーの発表日ではなく、補足の表示がないことは「差異なし」を保証しません。</p>
+      <p>この画面での取得日時は、公開ファイルを読み込んだ時刻です。情報提供元の更新日時や、最新情報であることを示すものではありません。</p>
+    </details>
     <div class="pills" id="pills" role="group" aria-label="供給状況で絞り込む">
       <button type="button" class="pill active" data-f="all" aria-pressed="true">すべて</button>
       <button type="button" class="pill" data-f="ok" aria-pressed="false">通常出荷</button>
@@ -2996,7 +3006,7 @@ function updateSupplementalStatus(){
         : `メーカー公式案内の補足情報を一部取得できないか、前回キャッシュを使用しています。厚労省の供給区分は表示できますが、「情報差異0件」とは判定しません。`;
     notice.hidden = false;
   }else{
-    asOf.textContent = `メーカー補足情報：${SUPPLEMENTAL_CHECKED_THROUGH || "取得済み"}確認　※選定したメーカー・公表案内が対象で、表示がないことは差異なしを保証しません。`;
+    asOf.textContent = `メーカー補足：${SUPPLEMENTAL_CHECKED_THROUGH}確認（対象の案内のみ）`;
     notice.hidden = true;
     noticeText.textContent = "";
   }
@@ -5283,7 +5293,7 @@ function setDatasetDate(date){
   }
   const age = daysAgo(date);
   const display = date.replaceAll("-", ".");
-  asOf.textContent = `全体データ基準日 ${display}　※各カードの日付は「その品目行の最終変更日」です。`;
+  asOf.textContent = `全体データ基準日 ${display}`;
   document.getElementById("today").textContent = `${display} 時点`;
   if(age != null && age >= STALE_DATA_DAYS){
     noticeText.innerHTML = `全体データ基準日から<strong>${age.toLocaleString()}日</strong>経過しています。更新処理が遅れている可能性があるため、<a href="${OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システム</a>もご確認ください。`;
