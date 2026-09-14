@@ -1214,8 +1214,8 @@ footer a:hover{color:var(--blue)}
   </a>
   <div class="nav-links">
     <a href="#daily-update">最新の変更</a>
-    <a href="#topics">話題のニュース</a>
-    <a href="#news">お知らせ</a>
+    <a href="#topics">医薬品ニュース</a>
+    <a href="#news">サイトの更新情報</a>
     <a href="#features">特徴</a>
     <a href="#compare">公式情報との使い分け</a>
     <a href="#glossary">用語解説</a>
@@ -1252,7 +1252,7 @@ footer a:hover{color:var(--blue)}
 <header id="top">
   <div>
     <span class="eyebrow"><span class="pulse"></span>厚生労働省データ・毎日自動更新</span>
-    <h1><span class="nb">医薬品の</span><span class="nb">供給状況が、</span><br><span class="grad">ひと目でわかる。</span></h1>
+    <h1><span class="nb">医薬品の</span><br><span class="grad">供給状況を調べる</span></h1>
     <p class="lede">薬品名・成分名・メーカー名・YJコードから無料で検索。厚労省の供給区分と、メーカーの販売中止などの補足情報を分けて確認できます。</p>
     <div class="cta-row">
       <a class="btn-primary" href="#demo" data-focus-search data-dsn-event="search-cta-open">
@@ -1434,7 +1434,7 @@ footer a:hover{color:var(--blue)}
 
 <section id="daily-update" class="reveal">
   <p class="sec-eyebrow">DAILY UPDATE</p>
-  <h2>直近の供給変更を、いつでも確認。</h2>
+  <h2>最近の供給状況の変更</h2>
   <p class="sec-lede">前回データから実際に供給状況が変わった品目だけをまとめています。内容を確認し、そのまま薬局内で共有できます。</p>
   <div class="daily-update-card" id="dailyUpdateCard" aria-busy="true">
     <div>
@@ -1457,7 +1457,8 @@ footer a:hover{color:var(--blue)}
 
 <section id="topics" class="reveal">
   <p class="sec-eyebrow">TOPICS</p>
-  <h2>医薬品のニュース・解説。</h2>
+  <h2>医薬品ニュース</h2>
+  <h3>ニュース・解説記事</h3>
   <p class="sec-lede">ここは手動で編集する解説記事です。当日を含む直近30日の記事を表示し、それ以前の記事は過去記事一覧で確認できます。最新の供給状況は検索と原典でご確認ください。</p>
   <p class="news-status" id="topicStatus" role="status" aria-live="polite" aria-atomic="true">公開済みの編集記事を読み込んでいます。</p>
   <div class="news-status-actions">
@@ -1469,6 +1470,21 @@ footer a:hover{color:var(--blue)}
   <p class="topic-note"><a href="topics/index.html">過去記事を含むニュース一覧を見る</a></p>
   <p class="topic-note">供給区分の変化は「直近の供給変更」で自動集計しています。ここに新しい解説記事がなくても、供給状況に変更がないとは限りません。</p>
   <p class="topic-note">※ 出典をもとに編集した記事です。掲載後の訂正や状況の変化は、原典をご確認ください。過去記事への移動は、回収の終了や供給の回復を意味しません。</p>
+  <div class="mednews" id="medNews">
+    <h3>PMDA掲載情報（直近30日）</h3>
+    <p class="news-status" id="medNewsStatus" role="status" aria-live="polite" aria-atomic="true">公開済みのPMDA掲載情報を読み込んでいます。</p>
+    <div class="news-status-actions">
+      <button type="button" class="news-retry" id="medNewsRetry">PMDA掲載情報を再取得</button>
+      <a href="https://www.pmda.go.jp/" target="_blank" rel="noopener" data-dsn-event="official-source-open">PMDA公式サイトを確認</a>
+    </div>
+    <div class="mednews-list glass" id="medNewsList"></div>
+    <details class="news-archive" id="medNewsArchive" hidden>
+      <summary>取得したデータ内の過去の掲載情報</summary>
+      <p class="news-status">掲載日が30日以上前の情報です。回収や安全対策の終了を意味しません。対応状況は原典をご確認ください。</p>
+      <div class="mednews-list glass" id="medNewsArchiveList"></div>
+    </details>
+    <p class="news-status">出典：医薬品医療機器総合機構（PMDA）新着情報。既存の更新処理で取得・選定された情報の一部です。取得日時は当サイトの公開ファイルを読み込んだ時刻であり、原典の最終確認日時ではありません。新着・回収情報を網羅するものではありません。</p>
+  </div>
 </section>
 
   <!-- 品目詳細へ複製する資料。ニュース欄には掲載しない。 -->
@@ -1798,7 +1814,7 @@ footer a:hover{color:var(--blue)}
 
 <section id="trending" class="reveal">
   <p class="sec-eyebrow">TRENDING</p>
-  <h2>最近、お問い合わせの多い製品。</h2>
+  <h2>最近お問い合わせの多い製品</h2>
   <p class="sec-lede">お問い合わせが増えている製品をまとめました。製品ごとのページでメーカー別の供給状況を比較できます。</p>
   <div class="trending-list glass" id="trendingList"></div>
   <p class="topic-note"><a href="products/index.html">注目製品の一覧を見る</a></p>
@@ -1806,33 +1822,21 @@ footer a:hover{color:var(--blue)}
 
 <section id="makers" class="reveal" hidden>
   <p class="sec-eyebrow">MAKERS</p>
-  <h2>メーカー別の供給状況。</h2>
+  <h2>メーカー別の供給状況</h2>
   <p class="sec-lede">限定出荷・供給停止の品目が多い順のランキングです。メーカー名をタップすると、上の検索でそのメーカーの品目に絞り込めます。</p>
   <div class="maker-list glass" id="makerList"></div>
-  <p class="maker-note">※ 厚生労働省データの販売メーカー欄をもとに機械的に集計しています。収載品目数が多いメーカーほど件数も多くなる傾向があるため、件数のみでメーカーの供給体制を評価するものではありません。</p>
+  <p class="maker-note">※ 読み込んだ厚生労働省データの販売メーカー欄（記載がない場合は製造メーカー欄）ごとの集計です。メーカー案内の補足情報は件数に反映していません。複数社が記載された欄は分割せず、記載どおりの単位で集計しています。収載品目数が多いメーカーほど件数も多くなる傾向があるため、件数のみでメーカーの供給体制を評価するものではありません。</p>
 </section>
 
 <section id="news" class="reveal">
-  <p class="sec-eyebrow">NEWS</p>
-  <h2>お知らせ。</h2>
-  <p class="sec-lede">医薬品供給ナビはまだ生まれたばかりのサービスです。データ・機能ともに、これからも継続して更新していきます。</p>
-  <div class="mednews" id="medNews">
-    <h3>PMDA掲載情報（直近30日）</h3>
-    <p class="news-status" id="medNewsStatus" role="status" aria-live="polite" aria-atomic="true">公開済みのPMDA掲載情報を読み込んでいます。</p>
-    <div class="news-status-actions">
-      <button type="button" class="news-retry" id="medNewsRetry">PMDA掲載情報を再取得</button>
-      <a href="https://www.pmda.go.jp/" target="_blank" rel="noopener" data-dsn-event="official-source-open">PMDA公式サイトを確認</a>
-    </div>
-    <div class="mednews-list glass" id="medNewsList"></div>
-    <details class="news-archive" id="medNewsArchive" hidden>
-      <summary>取得したデータ内の過去の掲載情報</summary>
-      <p class="news-status">掲載日が30日以上前の情報です。回収や安全対策の終了を意味しません。対応状況は原典をご確認ください。</p>
-      <div class="mednews-list glass" id="medNewsArchiveList"></div>
-    </details>
-    <p class="news-status">出典：医薬品医療機器総合機構（PMDA）新着情報。既存の更新処理で取得・選定された情報の一部です。取得日時は当サイトの公開ファイルを読み込んだ時刻であり、原典の最終確認日時ではありません。新着・回収情報を網羅するものではありません。</p>
-  </div>
-  <h3 class="news-subhead">医薬品供給ナビからのお知らせ</h3>
+  <p class="sec-eyebrow">SITE UPDATES</p>
+  <h2>サイトの更新情報</h2>
+  <p class="sec-lede">医薬品供給ナビの機能追加・修正・掲載情報の更新履歴です。公開内容を確認して手動で追記しています。</p>
   <div class="news-list glass">
+    <div class="news-item">
+      <div class="news-date num">2026.09.14</div>
+      <div class="news-body"><span class="news-tag">情報更新</span>メーカーの公式案内を確認し、12品目の案内を追加、アミトリプチリン塩酸塩錠10mg「サワイ」の案内を更新しました。<p>対象はゴリムマブBS「F」、クロベタゾールローション・マキサカルシトール軟膏「イワキ」、オルメサルタン「ケミファ」、エソメプラゾール「日新」、タイケルブ、エゼチミブ・イルアミクス・アレンドロン酸「サワイ」の対象規格です。メーカー案内と厚労省データは区別して表示し、厚労省の供給区分は変更していません。</p></div>
+    </div>
     <div class="news-item">
       <div class="news-date num">2026.07.25</div>
       <div class="news-body"><span class="news-tag">新機能</span>「いま話題のニュース」を新設しました。販売移管・発売延期など、現場で話題になっている製品ニュースを要点だけまとめて掲載します。関連品目はボタン一つで上の検索に送れるので、供給状況をその場で確認できます。<p>初回は、ロコイド軟膏0.1%・クリーム0.1%の鳥居薬品からチェプラファームへの製造販売承認承継（取引特約店の変更が必要な施設あり）と、高用量インフルエンザHAワクチン「エフルエルダ筋注」の発売延期・2026/27シーズンの定期接種見送りの2件を掲載しています。</p></div>
@@ -1878,37 +1882,37 @@ footer a:hover{color:var(--blue)}
 
 <section id="features" class="reveal">
   <p class="sec-eyebrow">FEATURES</p>
-  <h2>供給不安の時代の、新しいスタンダード。</h2>
+  <h2>医薬品供給ナビの主な機能</h2>
   <p class="sec-lede">医薬品供給ナビは、日々の確認作業が少しでも楽になるよう、機能を選び抜いて作りました。</p>
   <div class="features">
     <div class="feature glass">
       <div class="f-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></div>
-      <h3>毎日、自動で最新に</h3>
+      <h3>供給データの自動更新</h3>
       <p>厚生労働省の公表データ（平日更新）を毎晩取得。画面に表示されたデータ日付とともに、取得できた最新の供給状況を確認できます。</p>
     </div>
     <div class="feature glass">
       <div class="f-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-      <h3>変化を時系列で追える</h3>
+      <h3>供給状況の変更履歴</h3>
       <p>「最近更新された品目」を時系列で表示。限定出荷への切り替わり、出荷再開──動きのあった薬から順にチェックできます。</p>
     </div>
     <div class="feature glass">
       <div class="f-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
-      <h3>監視リストで毎日チェック</h3>
+      <h3>監視リスト</h3>
       <p>気になる医薬品を登録しておけば、状況の変化をまとめて確認。採用品目の監視リストとして毎日の業務に組み込めます。</p>
     </div>
     <div class="feature glass">
       <div class="f-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.2 15.9A10 10 0 1 1 8.1 2.8"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg></div>
-      <h3>全体像はドーナツ図で</h3>
+      <h3>供給区分ごとの集計</h3>
       <p>供給区分ごとの品目数と構成比をサマリー表示。公表データ全体の内訳を数字とビジュアルで確認できます。</p>
     </div>
     <div class="feature glass">
       <div class="f-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-      <h3>現場の声が集まる掲示板</h3>
+      <h3>情報交換の掲示板</h3>
       <p>「この状況にどう対応しているか」──同じ悩みを持つ医療従事者どうしで情報交換できるコミュニティを内蔵しています。</p>
     </div>
     <div class="feature glass">
       <div class="f-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M12 18h.01"/></svg></div>
-      <h3>スマホひとつで完結</h3>
+      <h3>スマートフォンでの利用</h3>
       <p>調剤台でも、卸との電話中でも。スマホに最適化された UI で、PC を開かずにその場で確認が終わります。</p>
     </div>
   </div>
@@ -1916,7 +1920,7 @@ footer a:hover{color:var(--blue)}
 
 <section id="compare" class="reveal">
   <p class="sec-eyebrow">HOW TO USE</p>
-  <h2>公式情報と組み合わせて、ご利用ください。</h2>
+  <h2>公式情報との使い分け</h2>
   <p class="sec-lede">厚生労働省の公式システムでも、供給状況の検索・履歴・お気に入り・メール通知などを利用できます。医薬品供給ナビは、公表データを見やすく確認・共有するための非公式ツールです。</p>
   <div class="compare glass">
     <table>
@@ -1936,23 +1940,23 @@ footer a:hover{color:var(--blue)}
 
 <section id="data" class="reveal">
   <p class="sec-eyebrow">DATA PIPELINE</p>
-  <h2>供給区分と補足情報の出典を、分けて表示します。</h2>
+  <h2>データの出典と更新の流れ</h2>
   <p class="sec-lede">現在の供給区分は、厚生労働省「医療用医薬品供給状況」の公表値をもとに表示します。メーカー案内文・PMDAニュース・自動抽出やAI要約は、出典と情報の種類を明示して厚労省データと区別します。</p>
   <div class="flow">
     <div class="flow-step glass">
-      <h3>厚労省が公表</h3>
+      <h3>厚生労働省による公表</h3>
       <p>各メーカーからの報告をもとに、厚生労働省が医療用医薬品の供給状況を平日ごとに公表します。</p>
     </div>
     <div class="flow-step glass">
-      <h3>毎晩、自動取得</h3>
+      <h3>公表データの取得・検証</h3>
       <p>公表データを毎晩自動で取得・整形し、検証処理を通して公開します。自動処理でも取得漏れや変換誤りの可能性はあるため、データ日付と出典をあわせて表示します。</p>
     </div>
     <div class="flow-step glass">
-      <h3>差分を検出</h3>
+      <h3>供給区分の変更・メーカー案内の照合</h3>
       <p>前日からの供給区分の変化に加え、厚労省公表値より新しいメーカー公式案内を照合します。メーカー・製品規格まで一致した差異だけを検索結果へ表示します。</p>
     </div>
     <div class="flow-step glass">
-      <h3>翌朝、手元に</h3>
+      <h3>アプリで変更を確認</h3>
       <p>iOSアプリでは、お気に入りや採用品の変化を端末内で確認できます。表示されたデータ日付と出典もあわせてご確認ください。</p>
     </div>
   </div>
@@ -1960,7 +1964,7 @@ footer a:hover{color:var(--blue)}
 
 <section id="glossary" class="reveal">
   <p class="sec-eyebrow">GLOSSARY</p>
-  <h2>供給ステータスの見方。</h2>
+  <h2>供給区分の見方</h2>
   <p class="sec-lede">厚生労働省の報告内容を、医薬品供給ナビでは4つの状態に整理して表示しています。この見方を押さえておくと、検索結果がぐっと読み取りやすくなります。</p>
   <div class="glossary-grid">
     <div class="term-card glass">
@@ -1988,7 +1992,7 @@ footer a:hover{color:var(--blue)}
 
 <section id="faq" class="reveal">
   <p class="sec-eyebrow">FAQ</p>
-  <h2>よくあるご質問。</h2>
+  <h2>よくあるご質問</h2>
   <p class="sec-lede">導入前によくいただくご質問をまとめました。解決しない場合はサポートまでお気軽にお問い合わせください。</p>
   <div class="faq-list glass">
     <details class="faq-item">
@@ -2024,7 +2028,7 @@ footer a:hover{color:var(--blue)}
 
 <section id="app" class="reveal">
   <p class="sec-eyebrow">OUR APPS</p>
-  <h2>仕事にも、暮らしにも。5つのアプリ。</h2>
+  <h2>アプリの紹介</h2>
   <p class="sec-lede">医薬品供給ナビの運営者が開発しているアプリをご紹介します。供給状況の確認から、家族の備え、予定、毎日の小さな楽しみまで。</p>
   <article class="app-cta" data-app-id="6777696446">
     <div class="app-cta-text">
@@ -2143,8 +2147,8 @@ footer a:hover{color:var(--blue)}
   <div class="foot-links">
     <a href="#top">トップ</a>
     <a href="#demo">薬を検索</a>
-    <a href="#topics">話題のニュース</a>
-    <a href="#news">お知らせ</a>
+    <a href="#topics">医薬品ニュース</a>
+    <a href="#news">サイトの更新情報</a>
     <a href="#data">データについて</a>
     <a href="#glossary">用語解説</a>
     <a href="#faq">よくある質問</a>
@@ -5072,7 +5076,7 @@ const NEWS_VISIBLE = 4;
     older.forEach(el => el.classList.toggle("news-hidden", !open));
     // 折りたたみ中は4件目が最後の行になるので、区切り線を消す
     items[NEWS_VISIBLE - 1].classList.toggle("news-tail", !open);
-    btn.textContent = open ? "過去のお知らせを閉じる" : `過去のお知らせを見る（他 ${older.length} 件）`;
+    btn.textContent = open ? "過去の更新情報を閉じる" : `過去の更新情報を見る（他 ${older.length} 件）`;
     btn.setAttribute("aria-expanded", String(open));
   };
   btn.addEventListener("click", ()=>{
