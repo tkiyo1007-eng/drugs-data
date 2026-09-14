@@ -1,4 +1,108 @@
 {
+  "アミトリプチリン塩酸塩錠１０ｍｇ「サワイ」": {
+    "maker": "沢井製薬",
+    "title": "2026年9月14日 製品の供給状況一覧：アミトリプチリン塩酸塩錠10mg「サワイ」は供給停止",
+    "url": "https://med.sawai.co.jp/file/pr115_1773_1.pdf",
+    "event_type": "stopped",
+    "announced_at": "2026-09-14",
+    "checked": "2026-09-14"
+  },
+ "オルメサルタン錠１０ｍｇ「ケミファ」": {
+  "maker": "日本薬品工業",
+  "title": "2026年9月 オルメサルタン錠10mg「ケミファ」100錠（日本薬品工業販売品）限定出荷解除のお知らせ",
+  "url": "https://www.npi-inc.co.jp/medical/info/file/1259",
+  "event_type": "resumed",
+  "announced_at": "2026-09",
+  "checked": "2026-09-14"
+ },
+ "オルメサルタン錠２０ｍｇ「ケミファ」": {
+  "maker": "日本薬品工業",
+  "title": "2026年9月 オルメサルタン錠20mg「ケミファ」100錠（日本薬品工業販売品）限定出荷解除のお知らせ",
+  "url": "https://www.npi-inc.co.jp/medical/info/file/1259",
+  "event_type": "resumed",
+  "announced_at": "2026-09",
+  "checked": "2026-09-14"
+ },
+ "エソメプラゾールカプセル１０ｍｇ「日新」": {
+  "maker": "日新製薬",
+  "title": "2026年9月 エソメプラゾールカプセル10mg「日新」PTP140カプセル包装 販売中止のご案内",
+  "url": "https://www.yg-nissin.co.jp/products/PDF/4768_6478_z1.pdf",
+  "event_type": "package_discontinued",
+  "announced_at": "2026-09",
+  "checked": "2026-09-14"
+ },
+ "エソメプラゾールカプセル２０ｍｇ「日新」": {
+  "maker": "日新製薬",
+  "title": "2026年9月 エソメプラゾールカプセル20mg「日新」PTP140カプセル包装 販売中止のご案内",
+  "url": "https://www.yg-nissin.co.jp/products/PDF/4768_6478_z1.pdf",
+  "event_type": "package_discontinued",
+  "announced_at": "2026-09",
+  "checked": "2026-09-14"
+ },
+ "タイケルブ錠２５０ｍｇ": {
+  "maker": "ノバルティスファーマ",
+  "title": "2026年9月 タイケルブ錠250mg 供給に関するお詫び（在庫消尽後に一時停止予定）",
+  "url": "https://www.pro.novartis.com/jp-ja/sites/pro_novartis_com_jp/files/2026-09/ot_tyk_202609.pdf",
+  "event_type": "supply",
+  "announced_at": "2026-09",
+  "checked": "2026-09-14"
+ },
+ "エゼチミブ錠１０ｍｇ「サワイ」": {
+  "maker": "沢井製薬",
+  "title": "2026年9月 エゼチミブ錠10mg「サワイ」供給に関するお詫びとお願い（限定出荷）",
+  "url": "https://med.sawai.co.jp/file/pr27_4684_1.pdf",
+  "event_type": "limited",
+  "announced_at": "2026-09",
+  "checked": "2026-09-14"
+ },
+ "イルアミクス配合錠ＬＤ「サワイ」": {
+  "maker": "沢井製薬",
+  "title": "2026年9月 イルアミクス配合錠LD「サワイ」供給に関するお詫びとお願い（限定出荷・在庫消尽後に一時停止予定）",
+  "url": "https://med.sawai.co.jp/file/pr27_4618_2.pdf",
+  "event_type": "limited",
+  "announced_at": "2026-09",
+  "checked": "2026-09-14"
+ },
+ "イルアミクス配合錠ＨＤ「サワイ」": {
+  "maker": "沢井製薬",
+  "title": "2026年9月 イルアミクス配合錠HD「サワイ」供給に関するお詫びとお願い（限定出荷・在庫消尽後に一時停止予定）",
+  "url": "https://med.sawai.co.jp/file/pr27_4618_2.pdf",
+  "event_type": "limited",
+  "announced_at": "2026-09",
+  "checked": "2026-09-14"
+ },
+ "アレンドロン酸錠３５ｍｇ「サワイ」": {
+  "maker": "沢井製薬",
+  "title": "2026年9月 アレンドロン酸錠35mg「サワイ」供給に関するお詫びとお願い（限定出荷・在庫消尽後に一時停止予定）",
+  "url": "https://med.sawai.co.jp/file/pr27_1503_2.pdf",
+  "event_type": "limited",
+  "announced_at": "2026-09",
+  "checked": "2026-09-14"
+ },
+ "クロベタゾールプロピオン酸エステルローション０．０５％「イワキ」": {
+  "maker": "岩城製薬",
+  "title": "2026年5月 クロベタゾールプロピオン酸エステルローション0.05％「イワキ」一部包装規格販売中止のご案内（10g×50）",
+  "url": "https://www.iwakiseiyaku.co.jp/dcms_media/other/cbplosirase20260527.pdf",
+  "event_type": "package_discontinued",
+  "announced_at": "2026-05",
+  "checked": "2026-09-14"
+ },
+ "マキサカルシトール軟膏２５μｇ／ｇ「イワキ」": {
+  "maker": "岩城製薬",
+  "title": "2026年9月 マキサカルシトール軟膏25μg／g「イワキ」10g×10 出荷停止のお詫びとお知らせ",
+  "url": "https://www.iwakiseiyaku.co.jp/dcms_media/other/mcoosirase20260904.pdf",
+  "event_type": "stopped",
+  "announced_at": "2026-09",
+  "checked": "2026-09-14"
+ },
+ "ゴリムマブＢＳ皮下注５０ｍｇシリンジ「Ｆ」": {
+  "maker": "富士製薬工業",
+  "title": "2026年9月 ゴリムマブBS皮下注50mgシリンジ「F」限定出荷に関するご案内（第2版）",
+  "url": "https://www.fuji-pharma.jp/docs/430/resource_430_3966.pdf",
+  "event_type": "limited",
+  "announced_at": "2026-09",
+  "checked": "2026-09-14"
+ },
  "ミルリノン注２２．５ｍｇバッグ「タカタ」": {
   "maker": "高田製薬",
   "title": "2026年5月 ミルリノン注22.5mgバッグ「タカタ」製造販売中止のご案内",
