@@ -75,6 +75,28 @@ class ValidateSupplyDataTests(unittest.TestCase):
         self.assertIn("更新日の日付形式", errors)
         self.assertIn("ステータス更新日が未来日", errors)
 
+    def test_source_missing_volume_is_retained_with_a_strict_rate_guard(self):
+        rows = [self.row(YJコード=f"1234567A{i:04d}") for i in range(1000)]
+        rows[0]['代替候補'] = '解除/解消見込み: エ. － / 出荷量状況: －'
+        self.write(rows)
+        errors, summary = validate_csv(self.path, today=dt.date(2026, 8, 3),
+                                       min_rows=1, max_rows=2000)
+        self.assertEqual(errors, [])
+        self.assertEqual(summary['missing_shipment_volume'], 1)
+        self.assertEqual(summary['missing_shipment_volume_rate'], 0.1)
+        self.assertIn('出荷量状況: －', self.path.read_text())
+        rows[1]['代替候補'] = rows[0]['代替候補']
+        self.write(rows)
+        errors, _ = validate_csv(self.path, today=dt.date(2026, 8, 3),
+                                 min_rows=1, max_rows=2000)
+        self.assertTrue(any('出荷量状況の記載なし率' in e for e in errors))
+
+    def test_unknown_or_empty_volume_does_not_become_a_missing_marker(self):
+        for value in ('', '-', '不明', 'E．未知'):
+            with self.subTest(value=value):
+                self.write([self.row(代替候補=f'解除/解消見込み: エ. － / 出荷量状況: {value}')])
+                self.assertTrue(any('未対応の出荷量状況区分' in e for e in self.errors()))
+
     def test_stale_data_is_rejected(self):
         self.write([self.row(更新日="2026/07/01", ステータス更新日="2026/07/01")])
         self.assertTrue(any("データが古すぎます" in error for error in self.errors()))

@@ -1,9 +1,38 @@
 import unittest
+import json
+import tempfile
+from pathlib import Path
+from unittest.mock import patch
 
-from generate_daily_update_pages import atom_feed, index_html, page_html, sitemap_xml, status_key
+from generate_daily_update_pages import atom_feed, index_html, main, page_html, sitemap_xml, status_key
 
 
 class DailyUpdatePageTests(unittest.TestCase):
+    def test_expired_history_keeps_existing_urls_without_republishing_old_news(self):
+        with tempfile.TemporaryDirectory() as directory:
+            site = Path(directory)
+            out = site / 'updates'
+            out.mkdir()
+            old = out / '2026-06-15.html'
+            old.write_text('preserved historical page', encoding='utf-8')
+            (out / '2026-02-30.html').write_text('invalid date', encoding='utf-8')
+            (out / 'notes.html').write_text('not a dated page', encoding='utf-8')
+            changes = site / 'changes.json'
+            changes.write_text(json.dumps([{'date': '2026/09/15', 'name': 'テスト錠',
+                'yj': '1234567F1234', 'from': '①通常出荷', 'to': '⑤供給停止'}]), encoding='utf-8')
+            with patch('sys.argv', ['generate', '--changes', str(changes), '--site', str(site)]):
+                self.assertEqual(main(), 0)
+                first = (site / 'sitemap-updates.xml').read_text()
+                self.assertEqual(main(), 0)
+            self.assertEqual(old.read_text(), 'preserved historical page')
+            self.assertEqual(first, (site / 'sitemap-updates.xml').read_text())
+            self.assertEqual(first.count('updates/2026-06-15.html'), 1)
+            self.assertEqual(first.count('updates/2026-09-15.html'), 1)
+            self.assertNotIn('2026-02-30', first)
+            self.assertNotIn('notes.html', first)
+            for filename in ('index.html', 'feed.xml'):
+                self.assertNotIn('2026-06-15', (out / filename).read_text())
+
     def test_status_mapping_matches_web_categories(self):
         self.assertEqual(status_key("①通常出荷"), "ok")
         self.assertEqual(status_key("②限定出荷（自社の事情）"), "limited")

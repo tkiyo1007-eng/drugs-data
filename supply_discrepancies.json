@@ -2,14 +2,14 @@
   "schema_version": 1,
   "generated_at": "2026-09-15",
   "source": {
-    "mhlw_version": 202609110240,
-    "mhlw_note": "2026年09月11日厚労省データ反映",
+    "mhlw_version": 202609152237,
+    "mhlw_note": "2026年09月15日厚労省データ反映",
     "manufacturer_checked_through": "2026-09-15"
   },
   "counts": {
-    "high": 8,
+    "high": 3,
     "review": 5,
-    "total": 13
+    "total": 8
   },
   "products": {
     "1179002F1122": {
@@ -27,90 +27,6 @@
         "maker": "沢井製薬",
         "title": "2026年9月14日 製品の供給状況一覧：アミトリプチリン塩酸塩錠10mg「サワイ」は供給停止",
         "url": "https://med.sawai.co.jp/file/pr115_1773_1.pdf",
-        "scope": "product"
-      },
-      "confidence": "high",
-      "reason": "メーカー・製品規格・公表日の一致を確認",
-      "badge": "情報差異あり",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": true,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "",
-        "verified_target_scope": ""
-      }
-    },
-    "2149118F1119": {
-      "product_name": "イルアミクス配合錠ＬＤ「サワイ」",
-      "maker": "沢井製薬",
-      "official": {
-        "status": "ok",
-        "label": "通常出荷",
-        "updated_at": "2026-04-16"
-      },
-      "manufacturer": {
-        "status": "limited",
-        "label": "限定出荷",
-        "announced_at": "2026-09",
-        "maker": "沢井製薬",
-        "title": "2026年9月 イルアミクス配合錠LD「サワイ」供給に関するお詫びとお願い（限定出荷・在庫消尽後に一時停止予定）",
-        "url": "https://med.sawai.co.jp/file/pr27_4618_2.pdf",
-        "scope": "product"
-      },
-      "confidence": "high",
-      "reason": "メーカー・製品規格・公表日の一致を確認",
-      "badge": "情報差異あり",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": true,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "",
-        "verified_target_scope": ""
-      }
-    },
-    "2149118F2115": {
-      "product_name": "イルアミクス配合錠ＨＤ「サワイ」",
-      "maker": "沢井製薬",
-      "official": {
-        "status": "ok",
-        "label": "通常出荷",
-        "updated_at": "2026-04-16"
-      },
-      "manufacturer": {
-        "status": "limited",
-        "label": "限定出荷",
-        "announced_at": "2026-09",
-        "maker": "沢井製薬",
-        "title": "2026年9月 イルアミクス配合錠HD「サワイ」供給に関するお詫びとお願い（限定出荷・在庫消尽後に一時停止予定）",
-        "url": "https://med.sawai.co.jp/file/pr27_4618_2.pdf",
-        "scope": "product"
-      },
-      "confidence": "high",
-      "reason": "メーカー・製品規格・公表日の一致を確認",
-      "badge": "情報差異あり",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": true,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "",
-        "verified_target_scope": ""
-      }
-    },
-    "2189018F1132": {
-      "product_name": "エゼチミブ錠１０ｍｇ「サワイ」",
-      "maker": "沢井製薬",
-      "official": {
-        "status": "ok",
-        "label": "通常出荷",
-        "updated_at": "2024-03-11"
-      },
-      "manufacturer": {
-        "status": "limited",
-        "label": "限定出荷",
-        "announced_at": "2026-09",
-        "maker": "沢井製薬",
-        "title": "2026年9月 エゼチミブ錠10mg「サワイ」供給に関するお詫びとお願い（限定出荷）",
-        "url": "https://med.sawai.co.jp/file/pr27_4684_1.pdf",
         "scope": "product"
       },
       "confidence": "high",
@@ -223,62 +139,6 @@
         "maker": "ニプロ",
         "title": "2026年7月24日 酸化マグネシウム｢NP｣原末　他社品販売中止に伴う新規ご注文辞退および限定出荷（出荷数割当運用）のお願い",
         "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001FlBrhIAF",
-        "scope": "product"
-      },
-      "confidence": "high",
-      "reason": "メーカー・製品規格・公表日の一致を確認",
-      "badge": "情報差異あり",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": true,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "",
-        "verified_target_scope": ""
-      }
-    },
-    "3311402G4026": {
-      "product_name": "生食溶解液キットＨ",
-      "maker": "光製薬・ニプロ",
-      "official": {
-        "status": "limited",
-        "label": "限定出荷（他社品の影響）",
-        "updated_at": "2026-08-03"
-      },
-      "manufacturer": {
-        "status": "ok",
-        "label": "限定出荷解除・通常出荷",
-        "announced_at": "2026-08-04",
-        "maker": "ニプロ",
-        "title": "2026年8月4日 アンブロキソール塩酸塩徐放OD錠45mg｢ニプロ｣･ヘパリン類似物質油性クリーム0.3%｢ニプロ｣･生食溶解液キットH(100mL)　限定出荷解除のご案内",
-        "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001HPKhCIAX",
-        "scope": "product"
-      },
-      "confidence": "high",
-      "reason": "メーカー・製品規格・公表日の一致を確認",
-      "badge": "情報差異あり",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": true,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "",
-        "verified_target_scope": ""
-      }
-    },
-    "3999018F2141": {
-      "product_name": "アレンドロン酸錠３５ｍｇ「サワイ」",
-      "maker": "沢井製薬",
-      "official": {
-        "status": "ok",
-        "label": "通常出荷",
-        "updated_at": "2024-03-11"
-      },
-      "manufacturer": {
-        "status": "limited",
-        "label": "限定出荷",
-        "announced_at": "2026-09",
-        "maker": "沢井製薬",
-        "title": "2026年9月 アレンドロン酸錠35mg「サワイ」供給に関するお詫びとお願い（限定出荷・在庫消尽後に一時停止予定）",
-        "url": "https://med.sawai.co.jp/file/pr27_1503_2.pdf",
         "scope": "product"
       },
       "confidence": "high",
