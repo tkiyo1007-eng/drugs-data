@@ -46,6 +46,10 @@ ALLOWED_SHIPMENT_VOLUMES = {
     "C．出荷停止",
     "D．薬価削除予定",
 }
+# 厚労省原本の⑰空欄は既存取込処理が「－」として保持する。
+# 通常出荷等の区分ではない。列ずれ・一括欠損を通さないため率も検査する。
+MISSING_SHIPMENT_VOLUME = "－"
+MAX_MISSING_SHIPMENT_VOLUME_RATE = 0.1
 SUPPLY_METADATA_PATTERN = re.compile(
     r"解除/解消見込み:\s*(.*?)\s*/\s*出荷量状況:\s*(.*)\Z")
 YJ_PATTERN = re.compile(r"(?:[0-9A-Z]{12}|X[0-9]{5})\Z")
@@ -124,11 +128,20 @@ def validate_csv(path, *, today=None, min_rows=10000, max_rows=30000, max_age_da
                       + ", ".join(f"{value} ({release_outlooks[value]:,}件)"
                                   for value in unknown_release))
     unknown_volume = sorted(value for value in shipment_volumes
-                            if value not in ALLOWED_SHIPMENT_VOLUMES)
+                            if value not in ALLOWED_SHIPMENT_VOLUMES
+                            and value != MISSING_SHIPMENT_VOLUME)
     if unknown_volume:
         errors.append("未対応の出荷量状況区分があります: "
                       + ", ".join(f"{value} ({shipment_volumes[value]:,}件)"
                                   for value in unknown_volume))
+
+    missing_volume = shipment_volumes[MISSING_SHIPMENT_VOLUME]
+    missing_volume_rate = missing_volume / len(rows) * 100 if rows else 0.0
+    if missing_volume_rate > MAX_MISSING_SHIPMENT_VOLUME_RATE:
+        errors.append(
+            f"出荷量状況の記載なし率が上限を超えています: "
+            f"{missing_volume:,}/{len(rows):,}件（{missing_volume_rate:.3f}%、"
+            f"上限 {MAX_MISSING_SHIPMENT_VOLUME_RATE:.1f}%）")
 
     yj_values = []
     bad_yj = []
@@ -227,6 +240,8 @@ def validate_csv(path, *, today=None, min_rows=10000, max_rows=30000, max_age_da
         "missing_sales_maker_rate": missing_sales_maker_rate,
         "missing_price": missing_price,
         "missing_price_rate": missing_price_rate,
+        "missing_shipment_volume": missing_volume,
+        "missing_shipment_volume_rate": missing_volume_rate,
     }
     return errors, summary
 
@@ -257,6 +272,9 @@ def main(argv=None):
               f"（{summary['missing_sales_maker_rate']:.2f}%）、"
               f"薬価記載なし={summary['missing_price']:,}件"
               f"（{summary['missing_price_rate']:.2f}%）")
+    if summary.get("missing_shipment_volume"):
+        print(f"参考: 出荷量状況の原典記載なし={summary['missing_shipment_volume']:,}件"
+              f"（{summary['missing_shipment_volume_rate']:.3f}%）。通常出荷の意味ではありません")
     if errors:
         for error in errors:
             print(f"::error::{error}")
