@@ -263,7 +263,13 @@ def main() -> int:
         (out / f"{date}.html").write_text(page_html(date, changes, item_keys), encoding="utf-8")
     (out / "index.html").write_text(index_html(groups), encoding="utf-8")
     (out / "feed.xml").write_text(atom_feed(groups), encoding="utf-8")
-    (site / "sitemap-updates.xml").write_text(sitemap_xml(list(groups)), encoding="utf-8")
+    # 履歴の保持期限を過ぎた既存ページも公開URLとして残す。
+    # 新着一覧・フィードは現在の履歴だけに限定し、過去記事を再配信しない。
+    published_dates = set(groups)
+    for page in out.glob("*.html"):
+        if page.is_file() and re.fullmatch(r"\d{4}-\d{2}-\d{2}", page.stem) and normalize_date(page.stem) == page.stem:
+            published_dates.add(page.stem)
+    (site / "sitemap-updates.xml").write_text(sitemap_xml(sorted(published_dates)), encoding="utf-8")
     print(f"供給変更ページ生成: {len(groups)}日分 / {sum(map(len, groups.values()))}件")
     return 0
 
