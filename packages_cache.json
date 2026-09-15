@@ -5103,5 +5103,94 @@
    "until": ""
   }
  ],
- "https://www.nichiiko.co.jp/medicine/files/20260907cI1.pdf": []
+ "https://www.nichiiko.co.jp/medicine/files/20260907cI1.pdf": [],
+ "https://www.yg-nissin.co.jp/products/PDF/4768_6478_z1.pdf": [
+  {
+   "pkg": "PTP140カプセル",
+   "until": ""
+  }
+ ],
+ "https://www.pro.novartis.com/jp-ja/sites/pro_novartis_com_jp/files/2026-09/ot_tyk_202609.pdf": [],
+ "https://med.sawai.co.jp/file/pr27_4684_1.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr27_4618_2.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": "2026年10月"
+  },
+  {
+   "pkg": "バラ100錠",
+   "until": "2027年1月"
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": "2026年11月"
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": "2026年12月"
+  },
+  {
+   "pkg": "バラ100錠",
+   "until": "2026年12月"
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr27_1503_2.pdf": [
+  {
+   "pkg": "PTP20錠",
+   "until": "2026年10月"
+  },
+  {
+   "pkg": "PTP40錠",
+   "until": "2026年10月"
+  },
+  {
+   "pkg": "PTP20錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP40錠",
+   "until": ""
+  }
+ ],
+ "https://www.iwakiseiyaku.co.jp/dcms_media/other/cbplosirase20260527.pdf": [],
+ "https://www.iwakiseiyaku.co.jp/dcms_media/other/mcoosirase20260904.pdf": [],
+ "https://www.fuji-pharma.jp/docs/430/resource_430_3966.pdf": [],
+ "https://medical.nihon-generic.co.jp/uploadfiles/medicine/CAMOJ_CHUUSHI_2609.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP1000錠",
+   "until": ""
+  }
+ ],
+ "https://med.daiichisankyo-ep.co.jp/information/files/2269/RAB_10_PTP100PTP500B100_20_PTP100_LET_2.5_PTP100_E1_K.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ100錠",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr115_1773_1.pdf": []
 }
