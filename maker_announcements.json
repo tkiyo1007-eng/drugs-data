@@ -1,4 +1,68 @@
 {
+  "ドプスＯＤ錠１００ｍｇ": {
+    "maker": "住友ファーマ",
+    "title": "2026年9月 ドプスOD錠100mg バラ500錠 一部包装販売中止のご案内",
+    "url": "https://sumitomo-pharma.jp/hubfs/product/package_notification/2026/dops100_chushi_20260915.pdf",
+    "event_type": "package_discontinued",
+    "announced_at": "2026-09",
+    "checked": "2026-09-15"
+  },
+  "ドプスＯＤ錠２００ｍｇ": {
+    "maker": "住友ファーマ",
+    "title": "2026年9月 ドプスOD錠200mg 販売中止予定のご案内",
+    "url": "https://sumitomo-pharma.jp/hubfs/product/package_notification/2026/dops200_chushi_20260915.pdf",
+    "event_type": "discontinued",
+    "announced_at": "2026-09",
+    "checked": "2026-09-15"
+  },
+  "タガメット注射液２００ｍｇ": {
+    "maker": "住友ファーマ",
+    "title": "2026年9月 タガメット注射液200mg 販売中止予定のご案内",
+    "url": "https://sumitomo-pharma.jp/hubfs/product/package_notification/2026/tagamet_inj_chushi_20260915.pdf",
+    "event_type": "discontinued",
+    "announced_at": "2026-09",
+    "checked": "2026-09-15"
+  },
+  "ルーラン錠１６ｍｇ": {
+    "maker": "住友ファーマ",
+    "title": "2026年9月 ルーラン錠16mg 販売中止予定のご案内",
+    "url": "https://sumitomo-pharma.jp/hubfs/product/package_notification/2026/Lullan_chushi_20260915.pdf",
+    "event_type": "discontinued",
+    "announced_at": "2026-09",
+    "checked": "2026-09-15"
+  },
+  "ミリプラ動注用７０ｍｇ": {
+    "maker": "住友ファーマ",
+    "title": "2026年9月 ミリプラ動注用70mg 販売中止予定のご案内",
+    "url": "https://sumitomo-pharma.jp/hubfs/product/package_notification/2026/miripla_miripla_sv_chushi_20260915.pdf",
+    "event_type": "discontinued",
+    "announced_at": "2026-09",
+    "checked": "2026-09-15"
+  },
+  "ミリプラ用懸濁用液４ｍＬ": {
+    "maker": "住友ファーマ",
+    "title": "2026年9月 ミリプラ用懸濁用液4mL 販売中止予定のご案内",
+    "url": "https://sumitomo-pharma.jp/hubfs/product/package_notification/2026/miripla_miripla_sv_chushi_20260915.pdf",
+    "event_type": "discontinued",
+    "announced_at": "2026-09",
+    "checked": "2026-09-15"
+  },
+  "モメタゾンフランカルボン酸エステルローション０．１％「イワキ」": {
+    "maker": "岩城製薬",
+    "title": "2026年9月 モメタゾンフランカルボン酸エステルローション0.1％「イワキ」10g×10 出荷停止のお詫びとお知らせ",
+    "url": "https://www.iwakiseiyaku.co.jp/dcms_media/other/fmlosirase20260915.pdf",
+    "event_type": "stopped",
+    "announced_at": "2026-09",
+    "checked": "2026-09-15"
+  },
+  "イワコールラブ消毒液０．２％": {
+    "maker": "岩城製薬",
+    "title": "2026年9月 イワコールラブ消毒液0.2％ 1L 販売中止のご案内",
+    "url": "https://www.iwakiseiyaku.co.jp/dcms_media/other/iwrosirase20260915.pdf",
+    "event_type": "discontinued",
+    "announced_at": "2026-09",
+    "checked": "2026-09-15"
+  },
  "エソメプラゾールカプセル１０ｍｇ「日新」": {
   "maker": "日新製薬",
   "title": "2026年9月 エソメプラゾールカプセル10mg「日新」PTP140カプセル包装 販売中止のご案内",
