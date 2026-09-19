@@ -2,14 +2,14 @@
   "schema_version": 1,
   "generated_at": "2026-09-15",
   "source": {
-    "mhlw_version": 202609160309,
-    "mhlw_note": "2026年09月16日厚労省データ反映",
+    "mhlw_version": 202609200215,
+    "mhlw_note": "2026年09月20日厚労省データ反映",
     "manufacturer_checked_through": "2026-09-15"
   },
   "counts": {
     "high": 3,
-    "review": 8,
-    "total": 11
+    "review": 5,
+    "total": 8
   },
   "products": {
     "1179002F1122": {
@@ -32,62 +32,6 @@
       "confidence": "high",
       "reason": "メーカー・製品規格・公表日の一致を確認",
       "badge": "情報差異あり",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": true,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "",
-        "verified_target_scope": ""
-      }
-    },
-    "2149041F3058": {
-      "product_name": "バルサルタン錠８０ｍｇ「ＤＳＥＰ」",
-      "maker": "第一三共エスファ",
-      "official": {
-        "status": "ok",
-        "label": "通常出荷",
-        "updated_at": "2025-06-18"
-      },
-      "manufacturer": {
-        "status": "limited",
-        "label": "限定出荷",
-        "announced_at": "2026-09-15",
-        "maker": "第一三共エスファ",
-        "title": "2026.09.15 供給関連情報 バルサルタン錠80mg「DSEP」PTP100錠、PTP140錠、バラ500錠、バルサルタン錠160mg「DSEP」PTP100錠 限定出荷及び新規ご採用辞退に関するお知らせ",
-        "url": "https://med.daiichisankyo-ep.co.jp/information/files/2268/gentei_20260915_E1_G.pdf",
-        "scope": "package"
-      },
-      "confidence": "review",
-      "reason": "包装単位のメーカー案内です。製品全体の供給区分は原文で確認してください",
-      "badge": "メーカー案内あり・原文確認",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": true,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "",
-        "verified_target_scope": ""
-      }
-    },
-    "2149041F4054": {
-      "product_name": "バルサルタン錠１６０ｍｇ「ＤＳＥＰ」",
-      "maker": "第一三共エスファ",
-      "official": {
-        "status": "ok",
-        "label": "通常出荷",
-        "updated_at": "2025-06-18"
-      },
-      "manufacturer": {
-        "status": "limited",
-        "label": "限定出荷",
-        "announced_at": "2026-09-15",
-        "maker": "第一三共エスファ",
-        "title": "2026.09.15 供給関連情報 バルサルタン錠80mg「DSEP」PTP100錠、PTP140錠、バラ500錠、バルサルタン錠160mg「DSEP」PTP100錠 限定出荷及び新規ご採用辞退に関するお知らせ",
-        "url": "https://med.daiichisankyo-ep.co.jp/information/files/2268/gentei_20260915_E1_G.pdf",
-        "scope": "package"
-      },
-      "confidence": "review",
-      "reason": "包装単位のメーカー案内です。製品全体の供給区分は原文で確認してください",
-      "badge": "メーカー案内あり・原文確認",
       "evidence": {
         "maker_match": true,
         "exact_product_in_title": true,
@@ -200,34 +144,6 @@
       "confidence": "high",
       "reason": "メーカー・製品規格・公表日の一致を確認",
       "badge": "情報差異あり",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": true,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "",
-        "verified_target_scope": ""
-      }
-    },
-    "4291015F1034": {
-      "product_name": "レトロゾール錠２．５ｍｇ「ＤＳＥＰ」",
-      "maker": "第一三共エスファ",
-      "official": {
-        "status": "limited",
-        "label": "限定出荷（他社品の影響）",
-        "updated_at": "2026-07-06"
-      },
-      "manufacturer": {
-        "status": "ok",
-        "label": "限定出荷解除・通常出荷",
-        "announced_at": "2026-09-15",
-        "maker": "第一三共エスファ",
-        "title": "2026.09.15 供給関連情報 ラベプラゾールNa錠 10mg「オーハラ」PTP100錠、PTP500錠、バラ100錠、ラベプラゾールNa錠 20mg「オーハラ」PTP100錠、レトロゾール錠 2.5mg「DSEP」PTP100錠 限定出荷解除のお知らせ",
-        "url": "https://med.daiichisankyo-ep.co.jp/information/files/2269/RAB_10_PTP100PTP500B100_20_PTP100_LET_2.5_PTP100_E1_K.pdf",
-        "scope": "ambiguous"
-      },
-      "confidence": "review",
-      "reason": "関連製品の案内ですが、本品の対象規格を機械判定できません",
-      "badge": "メーカー案内あり・原文確認",
       "evidence": {
         "maker_match": true,
         "exact_product_in_title": true,

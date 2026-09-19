@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/index.html</loc><lastmod>2026-09-16</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/limited.html</loc><lastmod>2026-09-16</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/recent-restrictions.html</loc><lastmod>2026-09-16</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/resumed.html</loc><lastmod>2026-09-16</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/stopped.html</loc><lastmod>2026-09-16</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/supplemental.html</loc><lastmod>2026-09-16</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/index.html</loc><lastmod>2026-09-20</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/limited.html</loc><lastmod>2026-09-20</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/recent-restrictions.html</loc><lastmod>2026-09-20</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/resumed.html</loc><lastmod>2026-09-20</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/stopped.html</loc><lastmod>2026-09-20</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/supplemental.html</loc><lastmod>2026-09-20</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1115400X1027.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1115400X2023.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1115403D3043.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
@@ -14,7 +14,7 @@
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1124003F2265.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1124003F2303.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1124003F3156.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1124003F3172.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1124003F3172.html</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1124007F1097.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1124007F1143.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1124017F2224.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
@@ -75,7 +75,7 @@
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1145700J2300.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1145700J3390.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1147002F1625.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1147002F1641.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1147002F1641.html</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1147002N1123.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1147700S1028.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1149001F2214.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
@@ -414,6 +414,7 @@
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1249009F1406.html</loc><lastmod>2026-09-03</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1249009F1422.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1249009F1430.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1249009F1465.html</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1249010D1025.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1249010F1310.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1249351B1052.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
@@ -447,7 +448,7 @@
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1319720Q2071.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1319720Q3116.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1319720Q3167.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1319720Q3183.html</loc><lastmod>2026-09-04</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1319720Q3183.html</loc><lastmod>2026-09-16</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1319720Q3191.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1319720Q3221.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/1319720Q7235.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
@@ -691,10 +692,10 @@
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149041F1080.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149041F1276.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149041F2086.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149041F3058.html</loc><lastmod>2026-09-15</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149041F3058.html</loc><lastmod>2026-09-16</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149041F3082.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149041F3228.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149041F4054.html</loc><lastmod>2026-09-15</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149041F4054.html</loc><lastmod>2026-09-16</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149041F4089.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149041F4224.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149041F4283.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
@@ -793,7 +794,7 @@
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149113F2074.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149114F1056.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149114F1064.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149114F1099.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149114F1099.html</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149114F1218.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149114F1234.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149114F2060.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
@@ -814,14 +815,20 @@
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149117F2080.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149117F2099.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149117F2110.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149118F1046.html</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149118F1062.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149118F1119.html</loc><lastmod>2026-09-15</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149118F1127.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149118F1194.html</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149118F2042.html</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149118F2069.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149118F2115.html</loc><lastmod>2026-09-15</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149118F2190.html</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149121F1030.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149121F1048.html</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149121F1099.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149121F2036.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149121F2044.html</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149121F2095.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149121F3024.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2149121F3032.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
@@ -869,7 +876,7 @@
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2171022F2050.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2171022F3030.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2171022F3099.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2171022F4095.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2171022F4095.html</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2171022F5024.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2171022F5199.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2171022F5245.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
@@ -994,12 +1001,13 @@
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2190501A5080.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2190501A5099.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2190501A6117.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2223001F2099.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2221003B2083.html</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2223001F2099.html</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2229001R1033.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2229101F1051.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2229114F2039.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2231001Q1109.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2233002F1336.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2233002F1336.html</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2233002F2154.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2233002F2162.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2233002R2045.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
@@ -1167,7 +1175,7 @@
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2391400G4112.html</loc><lastmod>2026-09-10</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2391400G5062.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2391401A1050.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2399004F1200.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2399004F1200.html</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2399004F1251.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2399004F1260.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2399005F1191.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
@@ -1289,7 +1297,7 @@
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2499011M1108.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2499011M1124.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2499011M1132.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2499011M1140.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2499011M1140.html</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2499401A2050.html</loc><lastmod>2026-09-09</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2499401A2093.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2499401A3081.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
@@ -1446,7 +1454,7 @@
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2649735S2172.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2649735S2237.html</loc><lastmod>2026-09-14</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2649735S3179.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2649735S3233.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2649735S3233.html</loc><lastmod>2026-09-17</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2649735S3268.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2649735S4035.html</loc><lastmod>2026-09-07</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/2649804X1192.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
@@ -1555,10 +1563,13 @@
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3112001M3324.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3112001M3383.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3112401A1050.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3112401A1077.html</loc><lastmod>2026-09-16</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3112401A1093.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3112401A2057.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3112401A2073.html</loc><lastmod>2026-09-16</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3112401A2090.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3112401A3053.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3112401A3070.html</loc><lastmod>2026-09-16</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3112401A3096.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3112401G1029.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3112401G1037.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
@@ -1566,7 +1577,7 @@
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3112401G2033.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3112401G3021.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3112401G3030.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3121400A1101.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3121400A1101.html</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3121400A2248.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3121400A2299.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3121400A3120.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
@@ -1601,12 +1612,12 @@
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3134003F3143.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3134003F3330.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3134400A1061.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3134400A3056.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3134400A3056.html</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3134402A1176.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3134402A2180.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3136004F2251.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3136004F2260.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3136401A1184.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3136401A1184.html</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3136401A1192.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3136403A1230.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3136403G1038.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
@@ -1627,6 +1638,7 @@
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3150002F2065.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3160002M2125.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3172400A1046.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3179106F1039.html</loc><lastmod>2026-09-17</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3179107F1041.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3179108B1036.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3179109M1074.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
@@ -1668,6 +1680,7 @@
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3311401A1038.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3311401A1089.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3311401A1097.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3311401A8091.html</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3311401A9039.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3311401H1036.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3311401H2105.html</loc><lastmod>2026-09-01</lastmod><changefreq>daily</changefreq></url>
@@ -1707,6 +1720,7 @@
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3319534A4194.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3319534A6138.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3319535A5071.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3319537A1091.html</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3319550A3057.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3319550A5076.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3319550A5106.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
@@ -1749,7 +1763,7 @@
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3334403G2022.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3334403G4025.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3339003R1020.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3339003R2027.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3339003R2027.html</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3339950M1153.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3339950N1094.html</loc><lastmod>2026-09-10</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3339950N1108.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
@@ -1932,9 +1946,9 @@
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3999451G2029.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3999451G2037.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3999451G3025.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3999451G3033.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3999451G3033.html</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3999451G4021.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3999451G4030.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3999451G4030.html</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3999477G1027.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/3999478A1029.html</loc><lastmod>2026-09-02</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/4211002F1044.html</loc><lastmod>2026-09-09</lastmod><changefreq>daily</changefreq></url>
@@ -1972,7 +1986,7 @@
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/4291011F1133.html</loc><lastmod>2026-08-31</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/4291011F2040.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/4291013F1043.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/4291015F1034.html</loc><lastmod>2026-09-15</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/4291015F1034.html</loc><lastmod>2026-09-16</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/4291015F1123.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/4291015F1140.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/4291015F1166.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
@@ -2489,6 +2503,8 @@
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/7122704X1293.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/7131001X1453.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/7131400A1025.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/7131400A5098.html</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/7131400A6078.html</loc><lastmod>2026-09-18</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/7139700X1047.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/7149003X1333.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://tkiyo1007-eng.github.io/drugs-data/items/7190700X1023.html</loc><lastmod>2026-08-28</lastmod><changefreq>daily</changefreq></url>
