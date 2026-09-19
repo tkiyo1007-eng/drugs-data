@@ -5226,6 +5226,7 @@ function validateSupplyCSVRows(head, rows){
     return "公開データの品目数が許容範囲（10,000〜30,000件）外のため、読み込みを中止しました。";
   const columns = Object.fromEntries(SUPPLY_REQUIRED_COLUMNS.map(name=>[name,head.indexOf(name)]));
   const identifiers = new Set();
+  let missingVolume = 0;
   for(const row of rows){
     if(!Array.isArray(row) || row.length!==head.length || row.some(x=>typeof x!=="string"))
       return "公開データに列数の一致しない行があります。";
@@ -5241,8 +5242,11 @@ function validateSupplyCSVRows(head, rows){
     if(!SUPPLY_ALLOWED_REASONS.has(value("理由")))
       return "公開データの理由区分を確認できませんでした。";
     const metadata = /^解除\/解消見込み:\s*(.*?)\s*\/\s*出荷量状況:\s*(.*)$/.exec(value("代替候補"));
-    if(!metadata || !SUPPLY_ALLOWED_OUTLOOKS.has(metadata[1].trim()) || !SUPPLY_ALLOWED_VOLUMES.has(metadata[2].trim()))
+    if(!metadata || !SUPPLY_ALLOWED_OUTLOOKS.has(metadata[1].trim()) || (!SUPPLY_ALLOWED_VOLUMES.has(metadata[2].trim()) && metadata[2].trim() !== "－"))
       return "公開データの解除見込み・出荷量区分を確認できませんでした。";
+    // データ側と同じ欠損率0.1%上限。原典記載なしを通常出荷へ補完しない。
+    if(metadata[2].trim() === "－" && ++missingVolume / rows.length * 100 > 0.1)
+      return "公開データの出荷量記載なしが許容範囲を超えています。";
     for(const name of ["更新日", "ステータス更新日"]){
       if(value(name) && !validSupplyDate(value(name))) return "公開データの日付形式を確認できませんでした。";
     }
