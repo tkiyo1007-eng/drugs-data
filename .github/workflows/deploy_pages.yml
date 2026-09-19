@@ -2,12 +2,9 @@ name: Deploy GitHub Pages
 
 on:
   workflow_run:
-    workflows: ['Validate data pipeline']
+    workflows: ['Validate data pipeline', '毎日データ更新']
     types: [completed]
     branches: [main]
-  schedule:
-    # データ自動更新(update_drugs.yml, 23:10 JST)の後にページを再デプロイ
-    - cron: "50 14 * * *"  # 23:50 JST
   workflow_dispatch:
 
 permissions:
@@ -17,10 +14,14 @@ jobs:
   target:
     if: >-
       (github.event_name == 'workflow_run' &&
-       github.event.workflow_run.conclusion == 'success' &&
        github.event.workflow_run.head_branch == 'main' &&
        github.event.workflow_run.head_repository.full_name == github.repository &&
-       (github.event.workflow_run.event == 'push' || github.event.workflow_run.event == 'workflow_dispatch')) ||
+       ((github.event.workflow_run.name == 'Validate data pipeline' &&
+         github.event.workflow_run.conclusion == 'success' &&
+         (github.event.workflow_run.event == 'push' || github.event.workflow_run.event == 'workflow_dispatch')) ||
+        (github.event.workflow_run.name == '毎日データ更新' &&
+         (github.event.workflow_run.conclusion == 'success' || github.event.workflow_run.conclusion == 'failure') &&
+         (github.event.workflow_run.event == 'schedule' || github.event.workflow_run.event == 'workflow_dispatch')))) ||
       (github.event_name != 'workflow_run' && github.ref == 'refs/heads/main')
     runs-on: ubuntu-latest
     outputs:
@@ -32,18 +33,23 @@ jobs:
           script: |
             const {data: branch} = await github.rest.repos.getBranch({...context.repo, branch: 'main'});
             const current = branch.commit.sha;
-            // schedule/manualもWorkflow定義と同じSHAに固定し、開始後のmainへ追従しない。
-            const validated = context.payload.workflow_run?.head_sha || context.sha;
-            if (validated && validated !== current) {
+            // 日次更新はメーカー補足の後段が失敗しても、検証済みの厚労省コア
+            // データを先にmainへcommitする。その完了イベントでは、現在のmainを
+            // このWorkflow内で改めて検証してから公開する。
+            const dailyUpdate = context.payload.workflow_run?.name === '毎日データ更新';
+            const validated = dailyUpdate ? current : (context.payload.workflow_run?.head_sha || context.sha);
+            if (!dailyUpdate && validated && validated !== current) {
               core.notice('検証後にmainが進んだため、古い対象の公開をスキップします');
               return;
             }
             core.setOutput('sha', current);
-  # bot tokenのpushは別Workflowを起動しない。日次schedule/manualは同じ検査を
-  # 固定SHAで1回実施し、通常のmain検証成功イベントでは二重実行しない。
+  # bot tokenのpushは別Workflowを起動しない。日次更新完了後は現在のmainを
+  # core release検査し、通常のmain検証成功イベントでは二重実行しない。
   validate:
     needs: target
-    if: needs.target.outputs.sha != '' && github.event_name != 'workflow_run'
+    if: >-
+      needs.target.outputs.sha != '' &&
+      (github.event_name != 'workflow_run' || github.event.workflow_run.name == '毎日データ更新')
     uses: ./.github/workflows/validate.yml
     with:
       ref: ${{ needs.target.outputs.sha }}
