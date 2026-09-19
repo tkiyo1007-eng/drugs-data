@@ -33,6 +33,16 @@ class ProductLifecycleTests(unittest.TestCase):
                 document, rows = self._lifecycle_fixture(yj_code, maker, source_url)
                 self.assertEqual(validate(document, rows), [])
 
+    def test_verified_sumitomo_and_iwaki_hosts_are_accepted(self):
+        cases = (
+            ("1169006F2023", "住友ファーマ", "https://sumitomo-pharma.jp/notice.pdf"),
+            ("261970BQ1140", "岩城製薬", "https://www.iwakiseiyaku.co.jp/notice.pdf"),
+        )
+        for yj_code, maker, source_url in cases:
+            with self.subTest(maker=maker):
+                document, rows = self._lifecycle_fixture(yj_code, maker, source_url)
+                self.assertEqual(validate(document, rows), [])
+
     def test_alias_and_delimited_seller_match_through_validator(self):
         cases = (
             (

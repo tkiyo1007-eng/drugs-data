@@ -16,7 +16,7 @@ class DeployWorkflowContractTests(unittest.TestCase):
 
     def test_push_publication_requires_successful_main_validation_not_pr_or_fork(self):
         self.assertNotIn("\n  push:\n", self.deploy)
-        for condition in ("workflows: ['Validate data pipeline']",
+        for condition in ("workflows: ['Validate data pipeline', '毎日データ更新']",
                           "github.event.workflow_run.conclusion == 'success'",
                           "github.event.workflow_run.head_branch == 'main'",
                           "github.event.workflow_run.head_repository.full_name == github.repository",
@@ -24,8 +24,11 @@ class DeployWorkflowContractTests(unittest.TestCase):
                           "github.event.workflow_run.event == 'workflow_dispatch'"):
             self.assertIn(condition, self.deploy)
 
-    def test_bot_daily_push_still_has_scheduled_validated_publication(self):
-        self.assertIn('cron: "50 14 * * *"', self.deploy)
+    def test_bot_daily_update_starts_validated_publication_without_waiting_for_clock(self):
+        self.assertIn("github.event.workflow_run.name == '毎日データ更新'", self.deploy)
+        self.assertIn("github.event.workflow_run.event == 'schedule'", self.deploy)
+        self.assertIn("github.event.workflow_run.conclusion == 'failure'", self.deploy)
+        self.assertNotIn("\n  schedule:\n", self.deploy)
         self.assertIn("workflow_dispatch:", self.deploy)
         self.assertIn("github.ref == 'refs/heads/main'", self.deploy)
         self.assertIn("uses: ./.github/workflows/validate.yml", self.deploy)
@@ -47,8 +50,8 @@ class DeployWorkflowContractTests(unittest.TestCase):
             self.assertNotIn("if:", section)
         self.assertIn("if: ${{ !inputs.core_release }}\n        run: python3 scripts/validate_maker_announcements.py", self.validate)
 
-    def test_success_event_does_not_repeat_the_full_validation(self):
-        self.assertIn("if: needs.target.outputs.sha != '' && github.event_name != 'workflow_run'", self.deploy)
+    def test_success_event_does_not_repeat_the_full_validation_but_daily_update_does(self):
+        self.assertIn("github.event.workflow_run.name == '毎日データ更新'", self.deploy)
         self.assertIn("github.event_name == 'workflow_run' && needs.validate.result == 'skipped'", self.deploy)
 
     def test_stale_sha_is_rejected_before_checkout_and_again_before_publication(self):
@@ -81,6 +84,7 @@ class DeployWorkflowContractTests(unittest.TestCase):
             for (const test of [
               {script: 0, latest: 'a', validated: 'a'},
               {script: 0, latest: 'b', validated: 'a'},
+              {script: 0, latest: 'b', validated: 'a', daily: true},
               {script: 0, latest: 'b'},
               {script: 0, latest: 'b', scheduledSha: 'a'},
               {script: 1, latest: 'a', source: 'a'},
@@ -90,7 +94,10 @@ class DeployWorkflowContractTests(unittest.TestCase):
               const github = {rest: {repos: {getBranch: async () => ({data: {commit: {sha: test.latest}}})}}};
               const context = {repo: {owner: 'owner', repo: 'repo'}, payload: {},
                                sha: test.scheduledSha || test.latest};
-              if (test.validated) context.payload.workflow_run = {head_sha: test.validated};
+              if (test.validated) context.payload.workflow_run = {
+                head_sha: test.validated,
+                name: test.daily ? '毎日データ更新' : 'Validate data pipeline',
+              };
               const core = {notice: () => {}, setOutput: (key, value) => {output[key] = value;}};
               await new AsyncFunction('github', 'context', 'core', 'process', scripts[test.script])(
                 github, context, core, {env: {SOURCE_COMMIT: test.source}});
@@ -102,7 +109,7 @@ class DeployWorkflowContractTests(unittest.TestCase):
         result = subprocess.run([shutil.which("node"), "-e", harness], input=json.dumps(scripts),
                                 capture_output=True, text=True, check=True, timeout=15)
         self.assertEqual(json.loads(result.stdout), [
-            {"sha": "a"}, {}, {"sha": "b"}, {}, {"matches": "true"}, {"matches": "false"},
+            {"sha": "a"}, {}, {"sha": "b"}, {"sha": "b"}, {}, {"matches": "true"}, {"matches": "false"},
         ])
 
 

@@ -33,6 +33,8 @@ OFFICIAL_HOSTS = {
     "ニプロ": {"nipro.co.jp"},
     "サンド": {"sandoz.com", "sandoz.jp"},
     "辰巳化学": {"tatsumi-kagaku.com"},
+    "住友ファーマ": {"sumitomo-pharma.jp"},
+    "岩城製薬": {"iwakiseiyaku.co.jp"},
 }
 
 
