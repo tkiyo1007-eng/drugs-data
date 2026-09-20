@@ -253,6 +253,7 @@ def run(
     today: dt.date,
     max_age_days: int,
     allow_missing_supply_discrepancies: bool = False,
+    allow_missing_industry_headlines: bool = False,
     allow_stale_supply_discrepancies: bool = False,
     include_pages: bool = True,
 ) -> tuple[list[str], list[str]]:
@@ -307,6 +308,13 @@ def run(
                     and error.code == 404
                 ):
                     continue
+                if (
+                    allow_missing_industry_headlines
+                    and name == "industry_headlines.json"
+                    and isinstance(error, urllib.error.HTTPError)
+                    and error.code == 404
+                ):
+                    continue
                 errors.append(f"{name}を取得・解析できません: {error}")
 
         lifecycle = documents.get("product_lifecycle.json")
@@ -354,6 +362,7 @@ def main() -> int:
     parser.add_argument("--max-age-days", type=int, default=4)
     parser.add_argument("--today", type=dt.date.fromisoformat, default=dt.date.today())
     parser.add_argument("--allow-missing-supply-discrepancies", action="store_true")
+    parser.add_argument("--allow-missing-industry-headlines", action="store_true")
     parser.add_argument("--allow-stale-supply-discrepancies", action="store_true")
     parser.add_argument("--skip-pages", action="store_true",
                         help="未公開PRコードのraw検査用。通常運用では指定しない")
@@ -362,6 +371,7 @@ def main() -> int:
         args.today,
         args.max_age_days,
         allow_missing_supply_discrepancies=args.allow_missing_supply_discrepancies,
+        allow_missing_industry_headlines=args.allow_missing_industry_headlines,
         allow_stale_supply_discrepancies=args.allow_stale_supply_discrepancies,
         include_pages=not args.skip_pages,
     )

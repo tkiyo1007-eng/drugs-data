@@ -262,6 +262,32 @@ class RemoteDataHealthTests(unittest.TestCase):
             )
         self.assertFalse(any("supply_discrepancies.jsonを取得" in error for error in errors))
 
+    def test_first_pr_may_skip_only_missing_industry_headlines_file(self) -> None:
+        version = {
+            "version": 202608212350,
+            "csv_url": BASE_URL + "drugs_app_ready.csv",
+            "note": "2026年08月21日厚労省データ反映",
+        }
+
+        def fake_fetch(url: str, _maximum_bytes: int) -> bytes:
+            clean_url = url.split("?", 1)[0]
+            if clean_url.endswith("version.json"):
+                return json.dumps(version).encode()
+            if clean_url.endswith("industry_headlines.json"):
+                raise urllib.error.HTTPError(clean_url, 404, "Not Found", {}, None)
+            if clean_url.endswith("drugs_app_ready.csv"):
+                raise RuntimeError("stop after optional-file behavior is exercised")
+            return b"{}"
+
+        with mock.patch("check_public_data_health.fetch", side_effect=fake_fetch):
+            errors, _ = run(
+                dt.date(2026, 8, 22),
+                4,
+                allow_missing_industry_headlines=True,
+                include_pages=False,
+            )
+        self.assertFalse(any("industry_headlines.jsonを取得" in error for error in errors))
+
     def test_status_history_rejects_wrong_types_dates_ids_and_statuses(self) -> None:
         valid = {"date": "2026/09/05", "yj": "2189101F1020", "name": "薬A",
                  "from": "①通常出荷", "to": "⑤供給停止"}
