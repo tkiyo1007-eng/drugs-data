@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "source_name": "薬事日報",
+  "source_url": "https://www.yakuji.co.jp/",
+  "status": "ok",
+  "checked_at": "2026-09-20T02:42:38+09:00",
+  "last_success_at": "2026-09-20T02:42:38+09:00",
+  "items": [
+    {
+      "title": "【厚労省】「レケンビ」に皮下注登場‐新薬など49品目承認",
+      "url": "https://www.yakuji.co.jp/entry139644.html",
+      "date": "2026-09-18",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【第一三共】肺癌一次治療で有意な改善‐ADC「エンハーツ」第III相",
+      "url": "https://www.yakuji.co.jp/entry139642.html",
+      "date": "2026-09-18",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【政府検討会】医療データ利用で制度案‐死亡情報の利活用可能に",
+      "url": "https://www.yakuji.co.jp/entry139639.html",
+      "date": "2026-09-18",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "現行価格調整凍結すべき‐製薬3団体、費用対評価改革で提言",
+      "url": "https://www.yakuji.co.jp/entry139637.html",
+      "date": "2026-09-18",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【医療保険部会】別途負担対象外の基準示す‐OTC類似薬取りまとめ案",
+      "url": "https://www.yakuji.co.jp/entry139635.html",
+      "date": "2026-09-18",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【厚労省】リアルタイム治験を試行へ‐FDA参考に日本も追随",
+      "url": "https://www.yakuji.co.jp/entry139634.html",
+      "date": "2026-09-18",
+      "tag": "業界ニュース"
+    }
+  ]
+}

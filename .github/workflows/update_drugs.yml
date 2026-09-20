@@ -49,6 +49,10 @@ jobs:
       - name: 前日CSVを退避（供給状況の変化ログ用）
         run: cp drugs_app_ready.csv /tmp/prev_drugs.csv
 
+      - name: Web用の薬事日報見出しを取得（本文は保存しない）
+        run: python3 scripts/fetch_headlines.py industry_headlines.json
+        continue-on-error: true
+
       - name: 供給状況だけ更新（既存CSVの薬価・メーカーは保持）
         run: |
           python3 - <<'EOF'
@@ -179,7 +183,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add drugs_app_ready.csv version.json status_changes.json resolution_stats.json \
+          git add drugs_app_ready.csv version.json status_changes.json resolution_stats.json industry_headlines.json \
             crisis_index.json items sitemap-items.xml updates sitemap-updates.xml \
             topics products guides sitemap-curated.xml maker_announcements.json \
             maker_announcement_events.json maker_collection_health.json \

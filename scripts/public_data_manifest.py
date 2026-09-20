@@ -15,6 +15,7 @@ JSON_FILES: dict[str, type] = {
     "announcement_packages.json": dict,
     "announcement_summaries.json": dict,
     "news.json": list,
+    "industry_headlines.json": dict,
     "status_changes.json": list,
     "resolution_stats.json": dict,
     "maker_links.json": list,
