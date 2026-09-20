@@ -1470,33 +1470,32 @@ footer a:hover{color:var(--blue)}
 <section id="topics" class="reveal">
   <p class="sec-eyebrow">TOPICS</p>
   <h2>医薬品ニュース</h2>
+  <div class="mednews" id="medNews">
+    <h3>薬事日報の新着見出し</h3>
+    <p class="sec-lede">業界ニュースの見出しを自動取得しています。本文はリンク先の薬事日報でご確認ください。供給区分はニュースから変更せず、検索とメーカー原典で確認できます。</p>
+    <p class="news-status" id="medNewsStatus" role="status" aria-live="polite" aria-atomic="true">新着見出しを読み込んでいます。</p>
+    <div class="news-status-actions">
+      <button type="button" class="news-retry" id="medNewsRetry">新着見出しを再取得</button>
+      <a href="https://www.yakuji.co.jp/" target="_blank" rel="noopener">薬事日報で最新記事を見る</a>
+    </div>
+    <div class="mednews-list glass" id="medNewsList"></div>
+    <details class="news-archive" id="medNewsArchive" hidden>
+      <summary>取得データ内の過去の見出し</summary>
+      <div class="mednews-list glass" id="medNewsArchiveList"></div>
+    </details>
+  </div>
   <h3>ニュース・解説記事</h3>
   <p class="sec-lede">ここは手動で編集する解説記事です。当日を含む直近30日の記事を表示し、それ以前の記事は過去記事一覧で確認できます。最新の供給状況は検索と原典でご確認ください。</p>
   <p class="news-status" id="topicStatus" role="status" aria-live="polite" aria-atomic="true">公開済みの編集記事を読み込んでいます。</p>
   <div class="news-status-actions">
     <button type="button" class="news-retry" id="topicSupplyChanges">直近の供給変更を確認</button>
     <button type="button" class="news-retry" id="topicRetry">編集記事を再取得</button>
-    <a href="#medNews">PMDA掲載情報を見る</a>
+    <a href="#medNews">新着見出しを見る</a>
   </div>
   <div class="topic-list" id="topicList"></div>
   <p class="topic-note"><a href="topics/index.html">過去記事を含むニュース一覧を見る</a></p>
   <p class="topic-note">供給区分の変化は「直近の供給変更」で自動集計しています。ここに新しい解説記事がなくても、供給状況に変更がないとは限りません。</p>
   <p class="topic-note">※ 出典をもとに編集した記事です。掲載後の訂正や状況の変化は、原典をご確認ください。過去記事への移動は、回収の終了や供給の回復を意味しません。</p>
-  <div class="mednews" id="medNews">
-    <h3>PMDA掲載情報（直近30日）</h3>
-    <p class="news-status" id="medNewsStatus" role="status" aria-live="polite" aria-atomic="true">公開済みのPMDA掲載情報を読み込んでいます。</p>
-    <div class="news-status-actions">
-      <button type="button" class="news-retry" id="medNewsRetry">PMDA掲載情報を再取得</button>
-      <a href="https://www.pmda.go.jp/" target="_blank" rel="noopener" data-dsn-event="official-source-open">PMDA公式サイトを確認</a>
-    </div>
-    <div class="mednews-list glass" id="medNewsList"></div>
-    <details class="news-archive" id="medNewsArchive" hidden>
-      <summary>取得したデータ内の過去の掲載情報</summary>
-      <p class="news-status">掲載日が30日以上前の情報です。回収や安全対策の終了を意味しません。対応状況は原典をご確認ください。</p>
-      <div class="mednews-list glass" id="medNewsArchiveList"></div>
-    </details>
-    <p class="news-status">出典：医薬品医療機器総合機構（PMDA）新着情報。既存の更新処理で取得・選定された情報の一部です。取得日時は当サイトの公開ファイルを読み込んだ時刻であり、原典の最終確認日時ではありません。新着・回収情報を網羅するものではありません。</p>
-  </div>
 </section>
 
   <!-- 品目詳細へ複製する資料。ニュース欄には掲載しない。 -->
@@ -4927,6 +4926,7 @@ const NEWS_WINDOW_DAYS = 30; // JSTの当日を含む30日。30日前は過去�
 const NEWS_STATE = {
   topics:{phase:"idle",source:"embedded",snapshot:{items:TOPICS,updatedAt:null},receivedAt:null,generation:0,controller:null},
   pmda:{phase:"idle",source:null,snapshot:null,receivedAt:null,generation:0,controller:null},
+  headlines:{phase:"idle",source:null,snapshot:null,receivedAt:null,generation:0,controller:null},
 };
 let newsStarted = false;
 function newsDateKey(value){
@@ -4946,6 +4946,18 @@ function safeNewsUrl(value, pmdaOnly=false){
   }catch(error){ return false; }
 }
 function validateNewsContent(raw,kind){
+  if(kind === "headlines"){
+    if(!raw || raw.schema_version !== 1 || raw.source_name !== "薬事日報" || raw.source_url !== "https://www.yakuji.co.jp/"
+      || !["ok","failed"].includes(raw.status) || !Number.isFinite(Date.parse(raw.checked_at))
+      || (raw.last_success_at !== null && !Number.isFinite(Date.parse(raw.last_success_at))) || !Array.isArray(raw.items)) throw new TypeError("見出しデータの形式が不正です");
+    const items = raw.items.map(item=>{
+      if(!item || typeof item.title !== "string" || !item.title.trim() || item.title.length > 500 || !newsDateKey(item.date)
+        || typeof item.url !== "string" || !/^https:\/\/www\.yakuji\.co\.jp\/entry\d+\.html$/.test(item.url)) throw new TypeError("見出し・日付・出典が不正です");
+      return Object.freeze({title:item.title,date:item.date,url:item.url,tag:"業界ニュース"});
+    });
+    if(raw.status === "ok" && !raw.last_success_at) throw new TypeError("収集成功日時が不明です");
+    return {items:Object.freeze(items),updatedAt:null,collectionStatus:raw.status,checkedAt:raw.checked_at,lastSuccessAt:raw.last_success_at};
+  }
   const text = value => typeof value === "string" && value.trim().length > 0;
   if(kind !== "topics" && kind !== "pmda") throw new TypeError("ニュース種別が不正です");
   if(kind === "topics" && (!raw || raw.schema_version !== 1 || !newsDateKey(raw.updated_at))) throw new TypeError("編集記事の形式が不正です");
@@ -4983,7 +4995,7 @@ function newsDateWindow(items,now=Date.now()){
   return {recent,older,future};
 }
 function newsStatusMessage(state,kind,now=Date.now()){
-  const label = kind === "topics" ? "編集記事" : "PMDA掲載情報";
+  const label = kind === "topics" ? "編集記事" : kind === "headlines" ? "薬事日報の見出し" : "PMDA掲載情報";
   let message = state.phase === "idle" ? `検索データの読み込み後に、公開済みの${label}を取得します。`
     : state.phase === "loading" ? `公開済みの${label}を取得しています。`
     : state.phase === "deferred" ? "新しく取得した記事の表示は、この欄の操作後に更新します。現在は前の表示内容です。"
@@ -4995,9 +5007,15 @@ function newsStatusMessage(state,kind,now=Date.now()){
   else if(state.snapshot && state.phase !== "ready") message += state.source === "cache"
     ? " 前回取得分（キャッシュ）の記事を保持しています。" : " 前回取得した記事を保持しています。";
   if(state.snapshot){
+    if(kind === "headlines"){
+      if(state.snapshot.collectionStatus === "failed") message += " 情報元からの収集に失敗しています。新着の有無は確認できていません。前回成功分がある場合のみ表示しています。";
+      const success = state.snapshot.lastSuccessAt;
+      message += success ? ` 情報元の最終収集成功日時：${success}（記事の発表日時とは異なります）。` : " 情報元の収集成功日時は不明です。";
+      if(success && now-Date.parse(success) > 48*60*60*1000) message += " 収集から48時間以上経過しています。最新記事は薬事日報でご確認ください。";
+    }
     const window = newsDateWindow(state.snapshot.items,now);
     if(!window.recent.length){
-      message += state.phase === "ready" && state.source === "network"
+      message += state.phase === "ready" && state.source === "network" && state.snapshot.collectionStatus !== "failed"
         ? " 取得したデータには直近30日の掲載対象の記事はありません。"
         : " 保持しているデータには直近30日の掲載対象の記事はありません。";
     }
@@ -5014,7 +5032,7 @@ function newsStatusMessage(state,kind,now=Date.now()){
   return message;
 }
 async function requestNewsContent(kind,signal){
-  const file = kind === "topics" ? "industry_topics.json" : "news.json";
+  const file = kind === "topics" ? "industry_topics.json" : kind === "headlines" ? "industry_headlines.json" : "news.json";
   const urls = [...new Set([file,`https://tkiyo1007-eng.github.io/drugs-data/${file}`].map(url=>new URL(url,location.href).href))];
   for(const url of urls){
     if(signal.aborted) throw new Error("記事取得期限を超えました");
@@ -5058,7 +5076,7 @@ function startNewsContent(){
   if(newsStarted) return;
   newsStarted = true;
   void loadNewsContent("topics");
-  void loadNewsContent("pmda");
+  void loadNewsContent("headlines");
 }
 /* ===== ニュース表示の取得状態・日付判定ここまで ===== */
 function renderTopics(list){
@@ -5085,12 +5103,19 @@ function renderPmdaNews(list){
     <a href="${esc(n.url)}" target="_blank" rel="noopener" data-dsn-event="official-source-open">${esc(n.title)}</a>
   </div>`).join("");
 }
+function renderHeadlines(list){
+  return list.map(n=>`<div class="mednews-item">
+    <span class="mednews-date num">発表日：${esc(n.date)}</span>
+    <a href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.title)}</a>
+    <span>出典：<a href="https://www.yakuji.co.jp/" target="_blank" rel="noopener">薬事日報</a></span>
+  </div>`).join("");
+}
 function refreshNewsViews(kind){
   const state = NEWS_STATE[kind];
   const status = document.getElementById(kind === "topics" ? "topicStatus" : "medNewsStatus");
   const retry = document.getElementById(kind === "topics" ? "topicRetry" : "medNewsRetry");
   const list = document.getElementById(kind === "topics" ? "topicList" : "medNewsList");
-  const archive = kind === "pmda" ? document.getElementById("medNewsArchive") : null;
+  const archive = kind !== "topics" ? document.getElementById("medNewsArchive") : null;
   retry.setAttribute("aria-disabled",String(state.phase === "loading"));
   list.setAttribute("aria-busy",String(state.phase === "loading"));
   // 読んでいるリンク・ボタンを遅着データや日付変更で置き換えない。移動後に反映。
@@ -5110,12 +5135,13 @@ function refreshNewsViews(kind){
   state.displayed = {snapshot:state.snapshot,source:state.source,receivedAt:state.receivedAt};
   if(kind === "topics") renderTopics(selection.recent);
   else{
-    list.innerHTML = renderPmdaNews(selection.recent.slice(0,8));
+    const render = kind === "headlines" ? renderHeadlines : renderPmdaNews;
+    list.innerHTML = render(selection.recent.slice(0,8));
     archive.hidden = !selection.older.length;
-    document.getElementById("medNewsArchiveList").innerHTML = renderPmdaNews(selection.older);
+    document.getElementById("medNewsArchiveList").innerHTML = render(selection.older);
   }
 }
-for(const [kind,retryId,listId] of [["topics","topicRetry","topicList"],["pmda","medNewsRetry","medNews"]]){
+for(const [kind,retryId,listId] of [["topics","topicRetry","topicList"],["headlines","medNewsRetry","medNews"]]){
   document.getElementById(retryId).addEventListener("click",()=>{
     if(NEWS_STATE[kind].phase !== "loading") void loadNewsContent(kind);
   });
@@ -5130,7 +5156,7 @@ function refreshNewsDateWindow(){
   const day = jstDayNumber(Date.now());
   if(day === newsViewDay) return;
   newsViewDay = day;
-  refreshNewsViews("topics");refreshNewsViews("pmda");
+  refreshNewsViews("topics");refreshNewsViews("headlines");
 }
 document.addEventListener("visibilitychange",()=>{if(!document.hidden) refreshNewsDateWindow();});
 window.addEventListener("pageshow",refreshNewsDateWindow);

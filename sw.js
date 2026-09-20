@@ -52,6 +52,7 @@ const DATA_FILES = [
   "version.json",
   "status_changes.json",
   "news.json",
+  "industry_headlines.json",
   "maker_announcements.json",
   "announcement_summaries.json",
   "announcement_packages.json",
