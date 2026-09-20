@@ -5192,5 +5192,46 @@
    "until": ""
   }
  ],
- "https://med.sawai.co.jp/file/pr115_1773_1.pdf": []
+ "https://med.sawai.co.jp/file/pr115_1773_1.pdf": [],
+ "https://sumitomo-pharma.jp/hubfs/product/package_notification/2026/dops100_chushi_20260915.pdf": [
+  {
+   "pkg": "バラ500錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
+ ],
+ "https://sumitomo-pharma.jp/hubfs/product/package_notification/2026/dops200_chushi_20260915.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
+ ],
+ "https://sumitomo-pharma.jp/hubfs/product/package_notification/2026/tagamet_inj_chushi_20260915.pdf": [],
+ "https://sumitomo-pharma.jp/hubfs/product/package_notification/2026/Lullan_chushi_20260915.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": "2027年7月"
+  }
+ ],
+ "https://sumitomo-pharma.jp/hubfs/product/package_notification/2026/miripla_miripla_sv_chushi_20260915.pdf": [],
+ "https://www.iwakiseiyaku.co.jp/dcms_media/other/iwrosirase20260915.pdf": [],
+ "https://www.nichiiko.co.jp/medicine/files/20260916cI1.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ500錠",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/files/20260916cI4.pdf": [],
+ "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260916.pdf": []
 }

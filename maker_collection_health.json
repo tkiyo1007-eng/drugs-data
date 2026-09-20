@@ -1,5 +1,5 @@
 {
- "checked": "2026-09-15",
+ "checked": "2026-09-21",
  "sources": [
   {
    "source": "parse_sawai",
@@ -16,7 +16,7 @@
   {
    "source": "parse_nichiiko_excel",
    "ok": true,
-   "count": 499,
+   "count": 502,
    "error": ""
   },
   {
@@ -34,13 +34,13 @@
   {
    "source": "parse_dsep",
    "ok": true,
-   "count": 1295,
+   "count": 1281,
    "error": ""
   },
   {
    "source": "parse_kemifa",
    "ok": true,
-   "count": 74,
+   "count": 75,
    "error": ""
   },
   {
@@ -52,13 +52,13 @@
   {
    "source": "parse_takata",
    "ok": true,
-   "count": 272,
+   "count": 274,
    "error": ""
   },
   {
    "source": "parse_hisamitsu",
    "ok": true,
-   "count": 65,
+   "count": 66,
    "error": ""
   },
   {
@@ -68,5 +68,5 @@
    "error": ""
   }
  ],
- "total": 2444
+ "total": 2437
 }
