@@ -166,6 +166,7 @@ def fetch(url: str, maximum_bytes: int) -> bytes:
 
 def check_pages(
     today: dt.date, max_age_days: int, *, attempts: int = 6, retry_delay: float = 10,
+    csv_max_age_business_days: int | None = None,
 ) -> tuple[list[str], list[str]]:
     """Webが読むPagesを直接検査。移動するraw/mainではなく公開artifactと照合する。
 
@@ -233,7 +234,8 @@ def check_pages(
         # version.csv_urlがrawを指していても、ここでは必ずPages自身のCSVを検査する。
         csv_path.write_bytes(bodies["drugs_app_ready.csv"])
         csv_errors, _ = validate_drug_csv(csv_path, today=today, max_age_days=max_age_days,
-                                        reject_maker_noise=False)
+                                        reject_maker_noise=False,
+                                        max_age_business_days=csv_max_age_business_days)
         errors.extend(f"Pages CSV: {error}" for error in csv_errors)
         results.append("Pages/drugs_app_ready.csv")
         if not csv_errors:
@@ -256,6 +258,7 @@ def run(
     allow_missing_industry_headlines: bool = False,
     allow_stale_supply_discrepancies: bool = False,
     include_pages: bool = True,
+    csv_max_age_business_days: int | None = None,
 ) -> tuple[list[str], list[str]]:
     errors: list[str] = []
     results: list[str] = []
@@ -280,6 +283,7 @@ def run(
                 csv_path,
                 today=today,
                 max_age_days=max_age_days,
+                max_age_business_days=csv_max_age_business_days,
                 # PRの検査コードは、まだデプロイ前のmainデータを取得する。
                 # 新しい厳格ルールとの一時的不一致はローカルCSV検査で担保し、
                 # ここでは公開中データの取得・鮮度・既存整合性だけを確認する。
@@ -339,7 +343,8 @@ def run(
                     for error in discrepancy_errors
                 )
     if include_pages:
-        pages_errors, pages_results = check_pages(today, max_age_days)
+        pages_errors, pages_results = check_pages(
+            today, max_age_days, csv_max_age_business_days=csv_max_age_business_days)
         errors.extend(pages_errors)
         results.extend(pages_results)
     return errors, results
@@ -359,7 +364,11 @@ def write_summary(errors: list[str], results: list[str]) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--max-age-days", type=int, default=4)
+    parser.add_argument("--max-age-days", type=int, default=4,
+                        help="version.json（毎日実行の日付）の許容暦日数")
+    parser.add_argument("--csv-max-age-business-days", type=int, default=None,
+                        help="CSV最新行更新日の許容営業日数（土日祝・年末年始を除く）。"
+                             "未指定時は --max-age-days の暦日で判定")
     parser.add_argument("--today", type=dt.date.fromisoformat, default=dt.date.today())
     parser.add_argument("--allow-missing-supply-discrepancies", action="store_true")
     parser.add_argument("--allow-missing-industry-headlines", action="store_true")
@@ -374,6 +383,7 @@ def main() -> int:
         allow_missing_industry_headlines=args.allow_missing_industry_headlines,
         allow_stale_supply_discrepancies=args.allow_stale_supply_discrepancies,
         include_pages=not args.skip_pages,
+        csv_max_age_business_days=args.csv_max_age_business_days,
     )
     write_summary(errors, results)
     if errors:

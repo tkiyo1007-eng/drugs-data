@@ -101,6 +101,30 @@ class ValidateSupplyDataTests(unittest.TestCase):
         self.write([self.row(更新日="2026/07/01", ステータス更新日="2026/07/01")])
         self.assertTrue(any("データが古すぎます" in error for error in self.errors()))
 
+    def business_day_errors(self, newest, today, limit=3):
+        self.write([self.row(更新日=newest, ステータス更新日=newest)])
+        return validate_csv(self.path, today=today, min_rows=1, max_rows=10, max_age_days=4,
+                            max_age_business_days=limit)[0]
+
+    def test_business_day_freshness_ignores_holiday_closures(self):
+        # 2026年9月19〜23日は土日・敬老の日・国民の休日・秋分の日。
+        self.assertEqual(self.business_day_errors("2026/09/18", dt.date(2026, 9, 24)), [])
+        self.assertTrue(any("データが古すぎます" in error for error in
+                            self.errors_calendar("2026/09/18", dt.date(2026, 9, 24))))
+
+    def test_business_day_freshness_still_rejects_stalled_updates(self):
+        errors = self.business_day_errors("2026/09/07", dt.date(2026, 9, 11))
+        self.assertTrue(any("経過 4営業日" in error and "許容 3営業日" in error for error in errors))
+        self.assertEqual(self.business_day_errors("2026/09/07", dt.date(2026, 9, 10)), [])
+
+    def test_business_day_freshness_outside_supported_years_fails_closed(self):
+        errors = self.business_day_errors("2099/12/28", dt.date(2100, 1, 5))
+        self.assertTrue(any("営業日で判定できません" in error for error in errors))
+
+    def errors_calendar(self, newest, today):
+        self.write([self.row(更新日=newest, ステータス更新日=newest)])
+        return validate_csv(self.path, today=today, min_rows=1, max_rows=10, max_age_days=4)[0]
+
     def test_missing_sales_maker_rate_can_be_guarded_without_guessing_values(self):
         self.write([
             self.row(),
