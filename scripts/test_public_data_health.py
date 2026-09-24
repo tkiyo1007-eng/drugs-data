@@ -393,6 +393,19 @@ class PagesDataHealthTests(unittest.TestCase):
         self.assertTrue(any(error.startswith("Pages CSV:") and "データが古すぎます" in error
                             for error in errors))
 
+    def test_pages_csv_can_use_business_day_freshness(self):
+        today = self.csv_newest + dt.timedelta(days=30)
+        with mock.patch("check_public_data_health.fetch", side_effect=self.fetch):
+            errors, _ = check_pages(today, 4, retry_delay=0, csv_max_age_business_days=3)
+        self.assertTrue(any(error.startswith("Pages CSV:") and "許容 3営業日" in error
+                            for error in errors))
+
+    def test_monitor_workflow_judges_csv_rows_by_business_days(self):
+        root = Path(__file__).resolve().parents[1]
+        workflow = (root / ".github/workflows/public-data-health.yml").read_text(encoding="utf-8")
+        self.assertIn("check_public_data_health.py --max-age-days 4 --csv-max-age-business-days 3",
+                      workflow)
+
     def test_manifest_absence_does_not_silently_fall_back_to_raw(self):
         with mock.patch("check_public_data_health.fetch", side_effect=urllib.error.HTTPError(
                 PAGES_URL + MANIFEST_NAME, 404, "Not Found", {}, None)) as request:

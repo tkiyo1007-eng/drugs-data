@@ -12,6 +12,7 @@ from datetime import datetime, timedelta
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
 
+from jp_business_days import business_days_between
 from jst_time import jst_today
 
 
@@ -65,7 +66,7 @@ def parse_date(value):
 
 def validate_csv(path, *, today=None, min_rows=10000, max_rows=30000, max_age_days=10,
                  max_missing_sales_maker_rate=None, max_missing_price_rate=None,
-                 reject_maker_noise=True):
+                 reject_maker_noise=True, max_age_business_days=None):
     errors = []
     today = today or jst_today()
     try:
@@ -212,6 +213,17 @@ def validate_csv(path, *, today=None, min_rows=10000, max_rows=30000, max_age_da
     newest = max(newest_dates) if newest_dates else None
     if newest is None:
         errors.append("有効な更新日が1件もありません")
+    elif max_age_business_days is not None:
+        # 厚労省は開庁日にのみ行を更新するため、土日祝・年末年始を数えない。
+        try:
+            elapsed = business_days_between(newest, today)
+        except ValueError as error:
+            errors.append(f"更新日の鮮度を営業日で判定できません: {error}")
+        else:
+            if elapsed > max_age_business_days:
+                errors.append(f"データが古すぎます: 最新更新日 {newest.isoformat()} "
+                              f"（基準日 {today.isoformat()}、経過 {elapsed}営業日、"
+                              f"許容 {max_age_business_days}営業日以内）")
     elif newest < today - timedelta(days=max_age_days):
         errors.append(f"データが古すぎます: 最新更新日 {newest.isoformat()} "
                       f"（基準日 {today.isoformat()}、許容 {max_age_days}日以内）")
