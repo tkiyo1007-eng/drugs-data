@@ -3,6 +3,7 @@ from __future__ import annotations
 import datetime as dt
 import ast
 import contextlib
+import csv
 import io
 import json
 import textwrap
@@ -23,6 +24,7 @@ from check_public_data_health import (
     validate_version,
 )
 from public_data_manifest import MANIFEST_NAME, PUBLIC_FILES, fingerprint
+from validate_supply_data import parse_date
 
 
 class PublishedDiscoveryHealthTests(unittest.TestCase):
@@ -308,7 +310,13 @@ class PagesDataHealthTests(unittest.TestCase):
     def setUpClass(cls):
         root = Path(__file__).resolve().parents[1]
         cls.source_bodies = {name: (root / name).read_bytes() for name in PUBLIC_FILES}
-        cls.today = parse_note_date(json.loads(cls.source_bodies["version.json"])["note"])
+        # 実データの鮮度はここでは検査しない（公開監視・品質検査が担う）。
+        # 連休等でCSVの最新行更新日がversion日付より遅れても、取得・照合ロジックの
+        # 試験が落ちて日次更新の前段で止まらないよう、両方が新鮮に見える日を基準にする。
+        cls.version_date = parse_note_date(json.loads(cls.source_bodies["version.json"])["note"])
+        rows = csv.DictReader(io.StringIO(cls.source_bodies["drugs_app_ready.csv"].decode("utf-8-sig")))
+        cls.csv_newest = max(filter(None, (parse_date((row.get("更新日") or "").strip()) for row in rows)))
+        cls.today = min(cls.version_date, cls.csv_newest)
 
     def setUp(self):
         self.bodies = dict(self.source_bodies)
@@ -377,6 +385,13 @@ class PagesDataHealthTests(unittest.TestCase):
         with mock.patch("check_public_data_health.fetch", side_effect=self.fetch):
             errors, _ = check_pages(self.today + dt.timedelta(days=30), 4, retry_delay=0)
         self.assertTrue(any("version.json" in error and "許容4日" in error for error in errors))
+
+    def test_stale_csv_rows_are_detected_by_row_update_date(self):
+        today = self.csv_newest + dt.timedelta(days=5)
+        with mock.patch("check_public_data_health.fetch", side_effect=self.fetch):
+            errors, _ = check_pages(today, 4, retry_delay=0)
+        self.assertTrue(any(error.startswith("Pages CSV:") and "データが古すぎます" in error
+                            for error in errors))
 
     def test_manifest_absence_does_not_silently_fall_back_to_raw(self):
         with mock.patch("check_public_data_health.fetch", side_effect=urllib.error.HTTPError(
