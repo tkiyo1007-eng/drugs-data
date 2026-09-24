@@ -100,6 +100,19 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap"></noscript>
 <script src="analytics.js"></script>
+<script>
+// 10月（日本時間）だけの季節デザイン。見た目の飾りのみで、データ・検索・保存形式には関与しない。
+// 描画前にクラスを付けて切替時のちらつきを防ぐ。?season=halloween で期間外の確認、?season=off で無効化。
+(function(){
+  try{
+    var season = new URLSearchParams(location.search).get("season");
+    var jstMonth = new Date(Date.now() + 9 * 3600 * 1000).getUTCMonth();
+    if(season === "halloween" || (season !== "off" && jstMonth === 9)){
+      document.documentElement.classList.add("season-halloween");
+    }
+  }catch(e){}
+})();
+</script>
 <style>
 :root{
   --blue-deep:#1B3FA0;
@@ -1207,6 +1220,48 @@ footer a:hover{color:var(--blue)}
   .topic-tag.alert{color:#FFB3B3}
   .topic-points li{border-color:rgba(126,152,214,.16)}
 }
+
+/* ===== 季節デザイン：ハロウィン（10月のみ） =====
+   青いガラスの基調は変えず、背景の光・ヒーロー見出し・飾りだけに紫と橙を足す。
+   橙は「限定出荷」の色と紛れるため、検索結果・詳細・集計など供給区分を示す領域には使わない。 */
+.season-deco,.season-note{display:none}
+.season-halloween header > div{position:relative}
+.season-halloween .aurora{background:linear-gradient(160deg,#F4F1FF 0%,#EDEBFD 45%,#E4EAFE 100%)}
+.season-halloween .aurora::before{background:radial-gradient(circle,#A48BF5 0%,transparent 65%)}
+.season-halloween .aurora::after{background:radial-gradient(circle,#FFB26B 0%,transparent 65%);opacity:.3}
+.season-halloween h1 .grad{background-image:linear-gradient(120deg,#4E2AA8,var(--blue) 52%,#B34E0C)}
+.season-halloween header .btn-primary,
+.season-halloween .nav-cta{background:linear-gradient(135deg,#7652DB,var(--blue) 58%,var(--blue-deep))}
+.season-halloween .season-note{
+  display:inline-flex;align-items:center;gap:6px;margin-top:10px;
+  font-size:12px;font-weight:700;color:#5B3A9E;
+}
+.season-halloween .season-note svg{flex:none}
+.season-halloween .season-deco{
+  /* 見出し1行目「医薬品の」の右の空きに、見出しと同じ文字サイズ基準で置く（画面幅で重ならない） */
+  /* right:0 と max-width で列幅内に収め、320px幅でも横スクロールを出さない */
+  display:block;position:absolute;top:57px;left:4.5em;right:0;max-width:5.1em;height:1.28em;
+  font-size:clamp(34px,4.6vw,54px);pointer-events:none;color:#3D2A66;
+}
+.season-deco svg{position:absolute;overflow:visible}
+.season-deco .bat1{left:0;top:.42em;width:.8em;height:.35em}
+.season-deco .bat2{left:.95em;top:.04em;width:.55em;height:.24em}
+.season-deco .bat3{left:1.62em;top:.55em;width:.4em;height:.18em}
+.season-deco .pumpkin{right:.1em;top:.12em;width:1.02em;height:.9em}
+.season-deco .bat{animation:batFloat 6s ease-in-out infinite}
+.season-deco .bat2{animation-delay:-2s}
+.season-deco .bat3{animation-delay:-4s}
+@keyframes batFloat{50%{transform:translateY(-6px) rotate(-4deg)}}
+@media (prefers-color-scheme: dark){
+  .season-halloween .aurora{background:linear-gradient(160deg,#120F2B 0%,#0D0F26 45%,#0B1128 100%)}
+  .season-halloween .aurora::before{opacity:.26}
+  .season-halloween .aurora::after{opacity:.16}
+  .season-halloween h1 .grad{background-image:linear-gradient(120deg,#C3ADFF,#8FB4FF 52%,#FFB877)}
+  .season-halloween header .btn-primary,
+  .season-halloween .nav-cta{background:linear-gradient(135deg,#6A4BD0,#3F6FE0 58%,#2A4FB8)}
+  .season-halloween .season-note{color:#CDBBFF}
+  .season-halloween .season-deco{color:#B9A6F2}
+}
 </style>
 </head>
 <body>
@@ -1257,6 +1312,18 @@ footer a:hover{color:var(--blue)}
 
 <header id="top">
   <div>
+    <div class="season-deco" aria-hidden="true">
+      <svg class="bat bat1" viewBox="0 0 64 28" width="44" height="19"><path fill="currentColor" d="M32 9c-2-3-3-4-3-6 0 0-2 1-2 4-4-5-11-7-18-5 4 2 6 5 6 9-4-3-9-3-15 0 5 1 8 4 9 8 5-4 11-5 17-2 2 1 4 4 6 7 2-3 4-6 6-7 6-3 12-2 17 2 1-4 4-7 9-8-6-3-11-3-15 0 0-4 2-7 6-9-7-2-14 0-18 5 0-3-2-4-2-4 0 2-1 3-3 6Z"/></svg>
+      <svg class="bat bat2" viewBox="0 0 64 28" width="30" height="13"><path fill="currentColor" d="M32 9c-2-3-3-4-3-6 0 0-2 1-2 4-4-5-11-7-18-5 4 2 6 5 6 9-4-3-9-3-15 0 5 1 8 4 9 8 5-4 11-5 17-2 2 1 4 4 6 7 2-3 4-6 6-7 6-3 12-2 17 2 1-4 4-7 9-8-6-3-11-3-15 0 0-4 2-7 6-9-7-2-14 0-18 5 0-3-2-4-2-4 0 2-1 3-3 6Z"/></svg>
+      <svg class="bat bat3" viewBox="0 0 64 28" width="22" height="10"><path fill="currentColor" d="M32 9c-2-3-3-4-3-6 0 0-2 1-2 4-4-5-11-7-18-5 4 2 6 5 6 9-4-3-9-3-15 0 5 1 8 4 9 8 5-4 11-5 17-2 2 1 4 4 6 7 2-3 4-6 6-7 6-3 12-2 17 2 1-4 4-7 9-8-6-3-11-3-15 0 0-4 2-7 6-9-7-2-14 0-18 5 0-3-2-4-2-4 0 2-1 3-3 6Z"/></svg>
+      <svg class="pumpkin" viewBox="0 0 64 56" width="58" height="51">
+        <path d="M31 10c0-5 2-8 6-9l2 3c-3 1-4 3-4 6Z" fill="#3E7A3A"/>
+        <ellipse cx="20" cy="33" rx="16" ry="20" fill="#E07A1F"/>
+        <ellipse cx="44" cy="33" rx="16" ry="20" fill="#E07A1F"/>
+        <ellipse cx="32" cy="33" rx="14" ry="21" fill="#F59A3A"/>
+        <path d="M21 27l6 5h-9Zm22 0l-6 5h9ZM20 40c6 5 18 5 24 0-3 7-21 7-24 0Z" fill="#3A1F0A"/>
+      </svg>
+    </div>
     <span class="eyebrow"><span class="pulse"></span>厚生労働省データ・毎日自動更新</span>
     <h1><span class="nb">医薬品の</span><br><span class="grad">供給状況を調べる</span></h1>
     <p class="lede">薬品名・成分名・メーカー名・YJコードから無料で検索。厚労省の供給区分と、メーカーの販売中止などの補足情報を分けて確認できます。</p>
@@ -1268,6 +1335,7 @@ footer a:hover{color:var(--blue)}
       <a class="btn-ghost hero-app-link" href="#app">iOSアプリ版を見る</a>
     </div>
     <p class="hero-note">会員登録不要・Web版も無料で利用できます</p>
+    <p class="season-note"><svg width="14" height="14" viewBox="0 0 64 56" aria-hidden="true"><ellipse cx="32" cy="33" rx="30" ry="21" fill="#E07A1F"/><path d="M31 10c0-5 2-8 6-9l2 3c-3 1-4 3-4 6Z" fill="#3E7A3A"/></svg>10月限定のハロウィンデザインです</p>
     <button class="watch-return" id="watchReturn" type="button" hidden>
       <span>監視品目に未確認の変更</span><strong class="num" id="watchReturnCount">0件</strong><span>変更を見る</span>
     </button>
