@@ -105,7 +105,9 @@ Pull Requestとmainへのpushでは `.github/workflows/validate.yml` が同じ�
 最新mainとの一致を確認する。古い検証結果・遅れて完了した実行は公開しない。
 
 日次更新の `GITHUB_TOKEN` によるpushは通常のpush Workflowを起動しないため、
-既存の23:50 JSTの定刻公開とmainからの手動公開は維持する。この2経路では、最新mainの
+`毎日データ更新` の完了イベント（成功・失敗とも。メーカー補足の後段が失敗しても
+コアは先にcommit済みのため）とmainからの明示的な手動公開を別の入口とする。定刻の
+公開scheduleは持たない（`scripts/test_deploy_workflow_contract.py` が検査）。この2経路では、最新mainの
 SHAを先に固定して既存 `validate.yml` を `core_release` モードで再利用し、同じ対象の
 コア公開検証成功後だけ公開する。CSV・変更履歴・lifecycle・差異・共有設定・ページ検査は
 必須のままとし、保持4 JSONの検査は日次整合処理と同じ `validate_retained_bundle` を
@@ -114,22 +116,22 @@ SHAを先に固定して既存 `validate.yml` を `core_release` モードで再
 品目との名称やメーカー不一致は公開を止める。回帰テストも通常の全件から登録元の全対象一致検査1件だけを
 任意更新側へ委ね、それ以外の失敗は公開を止める。通常PR/main CIと任意メーカー更新の
 手動登録の厳格検査は緩和しない。`core_release` は通常CIで既定falseの再利用入力である。
-通常の検証成功イベント経路では検証を二重実行しない。定刻・手動経路には従来なかった
-検証時間が追加されるが、新しい定期実行、新しいsecret、トークン権限は追加しない。
-定刻検証中にbotがmainを更新すると、その公開は安全側へスキップする。botのpushが
-後続Workflowを起動しない場合、次の定刻公開または明示的な手動公開まで反映が遅れる。
+通常の検証成功イベント経路では検証を二重実行しない。日次更新完了・手動経路では
+公開前の検証時間が追加されるが、新しい定期実行、新しいsecret、トークン権限は追加しない。
+この経路の検証中にbotがmainを更新すると、その公開は安全側へスキップする。botのpushが
+後続Workflowを起動しない場合、次の日次更新完了または明示的な手動公開まで反映が遅れる。
 公開直前チェック後の極短時間にmainが進む可能性は残るため、Pages公開ジョブは同一groupで
 古い実行を取り消す既存方針も維持する。
 
 `scripts/public_data_manifest.py` は検証済み公開artifactへだけ
-`public-data-manifest.json` を作る。CSV、version、主要JSON17本のサイズとSHA256、
+`public-data-manifest.json` を作る。CSV、version、主要JSON18本（計20ファイル、一覧は `JSON_FILES`）のサイズとSHA256、
 対象commitを記録するが、リポジトリのデータ内容やJSON形式は変更しない。
 これは配信物の同一性を確認する表であり、医薬品情報の確認日・鮮度の証明ではない。
 
 ## 公開後の直接取得検査
 
-`scripts/check_public_data_health.py` はraw側19ファイルに加え、Webが実際に読む
-GitHub Pages側のCSV・version・主要JSON17本を直接取得する。`version.csv_url` がrawを
+`scripts/check_public_data_health.py` はraw側20ファイルに加え、Webが実際に読む
+GitHub Pages側のCSV・version・主要JSON18本を直接取得する。`version.csv_url` がrawを
 指していてもPages検査をrawへ代替しない。両側でCSVの品質・鮮度、JSON構造、
 ライフサイクル・供給差異の参照整合性を検査する。変更履歴は必須文字列、実在日付、
 品目ID、供給区分まで検査する。収集健全性と品目キーも監視対象に含む。
