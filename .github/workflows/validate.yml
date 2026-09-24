@@ -40,6 +40,8 @@ jobs:
         run: python3 scripts/check_core_release.py --run-regressions
       - name: 現行供給CSV品質検査
         run: python3 scripts/validate_supply_data.py --csv drugs_app_ready.csv
+      - name: 公開中のWebがCSVを読み込めるか検査
+        run: python3 scripts/check_web_client_csv.py --html index.html --csv drugs_app_ready.csv
       - name: 変更履歴の型・日付・供給区分検査
         run: |
           python3 - <<'PY'
