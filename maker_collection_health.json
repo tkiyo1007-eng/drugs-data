@@ -1,5 +1,5 @@
 {
- "checked": "2026-09-23",
+ "checked": "2026-09-25",
  "sources": [
   {
    "source": "parse_sawai",
@@ -22,7 +22,7 @@
   {
    "source": "parse_nihon_generic",
    "ok": true,
-   "count": 90,
+   "count": 89,
    "error": ""
   },
   {
@@ -68,5 +68,5 @@
    "error": ""
   }
  ],
- "total": 2437
+ "total": 2436
 }

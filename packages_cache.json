@@ -5233,5 +5233,19 @@
   }
  ],
  "https://www.nichiiko.co.jp/medicine/files/20260916cI4.pdf": [],
- "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260916.pdf": []
+ "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260916.pdf": [],
+ "https://med.sawai.co.jp/file/pr27_4615_2.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ200錠",
+   "until": ""
+  }
+ ]
 }

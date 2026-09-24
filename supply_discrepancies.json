@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-23",
+  "generated_at": "2026-09-25",
   "source": {
     "mhlw_version": 202609250324,
     "mhlw_note": "2026年09月25日厚労省データ反映",
-    "manufacturer_checked_through": "2026-09-23"
+    "manufacturer_checked_through": "2026-09-25"
   },
   "counts": {
-    "high": 3,
+    "high": 4,
     "review": 5,
-    "total": 8
+    "total": 9
   },
   "products": {
     "1179002F1122": {
@@ -27,6 +27,34 @@
         "maker": "沢井製薬",
         "title": "2026年9月14日 製品の供給状況一覧：アミトリプチリン塩酸塩錠10mg「サワイ」は供給停止",
         "url": "https://med.sawai.co.jp/file/pr115_1773_1.pdf",
+        "scope": "product"
+      },
+      "confidence": "high",
+      "reason": "メーカー・製品規格・公表日の一致を確認",
+      "badge": "情報差異あり",
+      "evidence": {
+        "maker_match": true,
+        "exact_product_in_title": true,
+        "manufacturer_notice_is_newer": true,
+        "verified_target_source": "",
+        "verified_target_scope": ""
+      }
+    },
+    "2189017F3149": {
+      "product_name": "ロスバスタチンＯＤ錠２．５ｍｇ「サワイ」",
+      "maker": "沢井製薬",
+      "official": {
+        "status": "stopped",
+        "label": "供給停止",
+        "updated_at": "2026-06-10"
+      },
+      "manufacturer": {
+        "status": "limited",
+        "label": "限定出荷で出荷再開",
+        "announced_at": "2026-09-24",
+        "maker": "沢井製薬",
+        "title": "2026/09/24 供給関連 PDF NEW ロスバスタチンOD錠2.5mg「サワイ」限定出荷による出荷再開のご案内 PDF NEW",
+        "url": "https://med.sawai.co.jp/file/pr27_4615_2.pdf",
         "scope": "product"
       },
       "confidence": "high",
