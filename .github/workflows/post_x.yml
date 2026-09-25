@@ -45,17 +45,20 @@ jobs:
         id: plan
         run: |
           python3 scripts/x_daily_post.py build --out "$RUNNER_TEMP/x_post.json"
-          echo "action=$(python3 -c "import json,sys;print(json.load(open(sys.argv[1]))['action'])" "$RUNNER_TEMP/x_post.json")" >> "$GITHUB_OUTPUT"
+          echo "action=$(python3 -c "import json,sys;print('post' if any(p['action']=='post' for p in json.load(open(sys.argv[1]))['posts']) else 'skip')" "$RUNNER_TEMP/x_post.json")" >> "$GITHUB_OUTPUT"
       - name: リンク先の日別ページが公開済みか確認
         if: steps.plan.outputs.action == 'post'
         run: |
-          url=$(python3 -c "import json,sys;print(json.load(open(sys.argv[1]))['url'])" "$RUNNER_TEMP/x_post.json")
-          for attempt in 1 2 3 4 5 6; do
-            if curl -fsS -o /dev/null "$url"; then echo "公開を確認: $url"; exit 0; fi
-            sleep 20
-          done
-          echo "::error::日別ページが公開されていないため投稿しません: $url"
-          exit 1
+          python3 -c "import json,sys;[print(p['url']) for p in json.load(open(sys.argv[1]))['posts'] if p['action']=='post']" "$RUNNER_TEMP/x_post.json" > "$RUNNER_TEMP/x_urls.txt"
+          while read -r url; do
+            ok=false
+            for attempt in 1 2 3 4 5 6; do
+              if curl -fsS -o /dev/null "$url"; then ok=true; break; fi
+              sleep 20
+            done
+            if [ "$ok" != true ]; then echo "::error::リンク先が公開されていないため投稿しません: $url"; exit 1; fi
+            echo "公開を確認: $url"
+          done < "$RUNNER_TEMP/x_urls.txt"
       - name: 実投稿するか判定
         id: mode
         env:
@@ -74,12 +77,16 @@ jobs:
             echo "## X自動投稿"
             if [ "$ACTION" = "post" ]; then
               if [ "$live" = "true" ]; then echo "モード: 本投稿"; else echo "モード: 試運転（投稿しません）"; fi
-              echo; echo '```'
-              python3 -c "import json,sys;print(json.load(open(sys.argv[1]))['text'])" "$PLAN"
-              echo '```'
-            else
-              python3 -c "import json,sys;print('投稿なし:', json.load(open(sys.argv[1]))['reason'])" "$PLAN"
             fi
+            python3 - "$PLAN" <<'PY'
+          import json, sys
+          for post in json.load(open(sys.argv[1]))["posts"]:
+              print(f"\n### {post.get('kind')}")
+              if post["action"] == "post":
+                  print("```\n" + post["text"] + "\n```")
+              else:
+                  print("投稿なし: " + post.get("reason", ""))
+          PY
           } >> "$GITHUB_STEP_SUMMARY"
       - name: Xへ投稿
         if: steps.mode.outputs.live == 'true'

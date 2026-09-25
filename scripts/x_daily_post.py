@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""供給状況の変更をXへ1日1回投稿する（日別ページへの案内のみ）。
+"""供給状況の変更をXへ投稿する（日別・週次まとめ・月次レポートの案内のみ）。
+
+- 日別：最新の変更日を1回（従来どおり）
+- 週次：前週（月〜日、日本時間）に変更記録があれば、月〜水曜の実行で1回
+- 月次：reports/YYYY-MM.json が作成されてから7日以内に1回
 
 - 投稿するのは status_changes.json に変更記録がある日だけ。記録がない日・取得に
   失敗した日は投稿しない（「変更なし」「供給問題なし」と誤認させないため）。
@@ -42,6 +46,7 @@ X_URL_LENGTH = 23  # t.co短縮後の長さ
 POST_ENDPOINT = "https://api.x.com/2/tweets"
 CREDENTIAL_ENV = ("X_API_KEY", "X_API_SECRET", "X_ACCESS_TOKEN", "X_ACCESS_TOKEN_SECRET")
 HASHTAGS = "#医薬品供給 #限定出荷"
+HASHTAGS_WEEKLY = "#医薬品供給 #薬剤師"
 URL_PATTERN = re.compile(r"https?://\S+")
 
 
@@ -99,7 +104,7 @@ def build_plan(changes: list, log: dict, today: dt.date) -> dict:
         return {"action": "skip", "reason": f"変更日 {latest} が実行日より未来です"}
     if (today - latest_date).days > MAX_AGE_DAYS:
         return {"action": "skip", "reason": f"最新の変更日 {latest} が{MAX_AGE_DAYS}日より前です"}
-    if latest in {item.get("date") for item in log["posted"] if isinstance(item, dict)}:
+    if latest in posted_keys(log):
         return {"action": "skip", "reason": f"{latest} は投稿済みです"}
 
     entries = [entry for entry in changes if entry.get("date") == latest]
@@ -130,7 +135,99 @@ def build_plan(changes: list, log: dict, today: dt.date) -> dict:
     length = weighted_length(text)
     if length > MAX_WEIGHTED_LENGTH:
         return {"action": "skip", "reason": f"文字数が上限を超えます（{length}）"}
-    return {"action": "post", "date": latest, "url": url, "text": text, "weighted_length": length}
+    return {"action": "post", "kind": "daily", "key": latest, "date": latest, "url": url,
+            "text": text, "weighted_length": length}
+
+
+def posted_keys(log: dict) -> set[str]:
+    return {str(item.get("key") or item.get("date")) for item in log["posted"] if isinstance(item, dict)}
+
+
+def count_transitions(entries: list) -> Counter | None:
+    counts = Counter()
+    for entry in entries:
+        before, after = category(str(entry.get("from", ""))), category(str(entry.get("to", "")))
+        if before is None or after is None:
+            return None
+        if after == "limited" and before != "limited":
+            counts["limited"] += 1
+        elif after == "stopped" and before != "stopped":
+            counts["stopped"] += 1
+        elif after == "ok":
+            counts["ok"] += 1
+        else:
+            counts["other"] += 1
+    return counts
+
+
+def finalize(plan: dict) -> dict:
+    length = weighted_length(plan["text"])
+    if length > MAX_WEIGHTED_LENGTH:
+        return {"action": "skip", "kind": plan["kind"], "reason": f"文字数が上限を超えます（{length}）"}
+    return {**plan, "action": "post", "weighted_length": length}
+
+
+def build_weekly_plan(changes: list, log: dict, today: dt.date) -> dict:
+    if today.weekday() > 2:
+        return {"action": "skip", "kind": "weekly", "reason": "週次まとめは月〜水曜の実行だけ投稿します"}
+    start = today - dt.timedelta(days=today.weekday() + 7)
+    end = start + dt.timedelta(days=6)
+    key = f"weekly:{start.isoformat()}"
+    if key in posted_keys(log):
+        return {"action": "skip", "kind": "weekly", "reason": f"{start}の週は投稿済みです"}
+    entries = []
+    for entry in changes if isinstance(changes, list) else []:
+        try:
+            day = dt.datetime.strptime(str(entry.get("date")), "%Y/%m/%d").date()
+        except ValueError:
+            continue
+        if start <= day <= end:
+            entries.append(entry)
+    if not entries:
+        return {"action": "skip", "kind": "weekly", "reason": f"{start}〜{end}の変更記録がないため投稿しません"}
+    counts = count_transitions(entries)
+    if counts is None:
+        return {"action": "skip", "kind": "weekly", "reason": "未対応の供給区分を含むため投稿しません"}
+    days = len({entry["date"] for entry in entries})
+    detail = "・".join(f"{label}{counts[key_]}" for key_, label in (
+        ("limited", "限定出荷へ"), ("stopped", "供給停止へ"), ("ok", "通常出荷へ"), ("other", "その他")) if counts[key_])
+    url = f"{SITE_URL}updates/index.html"
+    text = "\n".join((
+        f"【先週のまとめ】{start.month}/{start.day}〜{end.month}/{end.day}の医薬品供給状況（厚労省公表データ）",
+        f"区分が変わった医薬品：{len(entries)}品目（{days}日分の更新）",
+        detail,
+        "日別の一覧▶ " + url,
+        HASHTAGS_WEEKLY,
+    ))
+    return finalize({"kind": "weekly", "key": key, "url": url, "text": text})
+
+
+def build_monthly_plan(reports_dir: Path, log: dict, today: dt.date) -> dict:
+    paths = sorted(reports_dir.glob("*.json")) if reports_dir.is_dir() else []
+    if not paths:
+        return {"action": "skip", "kind": "monthly", "reason": "月次レポートがまだありません"}
+    report = json.loads(paths[-1].read_text(encoding="utf-8"))
+    month, snapshot = report.get("month"), report.get("snapshot_date")
+    try:
+        snapshot_date = dt.date.fromisoformat(str(snapshot))
+    except ValueError:
+        return {"action": "skip", "kind": "monthly", "reason": "レポートの作成日が不正です"}
+    key = f"monthly:{month}"
+    if key in posted_keys(log):
+        return {"action": "skip", "kind": "monthly", "reason": f"{month}のレポートは告知済みです"}
+    if not 0 <= (today - snapshot_date).days <= 7:
+        return {"action": "skip", "kind": "monthly", "reason": f"{month}のレポート作成から7日を超えています"}
+    changes = report.get("changes") or {}
+    year, number = str(month).split("-")
+    top = "、".join(item["name"] for item in (report.get("top_new_restriction_categories") or [])[:2])
+    url = f"{SITE_URL}reports/{month}.html"
+    lines = [f"【医薬品供給レポート {year}年{int(number)}月】",
+             f"区分が変わった医薬品：{changes.get('items', 0)}品目"
+             f"（限定出荷へ{changes.get('to_limited', 0)}・供給停止へ{changes.get('to_stopped', 0)}・通常出荷へ{changes.get('to_ok', 0)}）"]
+    if top:
+        lines.append(f"新たな制限が多かった分類：{top}")
+    lines += ["薬効分類別の動向・公表区分の件数▶ " + url, HASHTAGS_WEEKLY]
+    return finalize({"kind": "monthly", "key": key, "url": url, "text": "\n".join(lines)})
 
 
 def oauth1_header(method: str, url: str, credentials: dict) -> str:
@@ -176,35 +273,50 @@ def main(argv: list[str] | None = None) -> int:
     build.add_argument("--changes", type=Path, default=Path("status_changes.json"))
     build.add_argument("--out", type=Path, required=True)
     build.add_argument("--today", type=dt.date.fromisoformat, default=None)
+    build.add_argument("--reports", type=Path, default=Path("reports"))
     post = sub.add_parser("post")
     post.add_argument("--plan", type=Path, required=True)
+    post.add_argument("--log", type=Path, default=None)
     args = parser.parse_args(argv)
 
     if args.command == "build":
         changes = json.loads(args.changes.read_text(encoding="utf-8"))
-        plan = build_plan(changes, load_log(), args.today or jst_today())
+        log, today = load_log(), args.today or jst_today()
+        posts = [build_plan(changes, log, today), build_weekly_plan(changes, log, today),
+                 build_monthly_plan(args.reports, log, today)]
+        posts[0].setdefault("kind", "daily")
+        plan = {"posts": posts}
         args.out.write_text(json.dumps(plan, ensure_ascii=False, indent=2), encoding="utf-8")
         print(json.dumps(plan, ensure_ascii=False, indent=2))
         return 0
 
     plan = json.loads(args.plan.read_text(encoding="utf-8"))
-    if plan.get("action") != "post":
-        print(f"投稿しません: {plan.get('reason')}")
+    posts = [item for item in plan.get("posts", []) if item.get("action") == "post"]
+    for item in plan.get("posts", []):
+        if item.get("action") != "post":
+            print(f"投稿しません（{item.get('kind')}）: {item.get('reason')}")
+    if not posts:
         return 0
     missing = [name for name in CREDENTIAL_ENV if not os.environ.get(name)]
     if missing:
         print(f"❌ 認証情報が未設定です: {', '.join(missing)}", file=sys.stderr)
         return 1
-    log = load_log()
-    if plan["date"] in {item.get("date") for item in log["posted"]}:
-        print(f"{plan['date']} は投稿済みのため中止します")
-        return 0
-    post_id = post_to_x(plan["text"], {name: os.environ[name] for name in CREDENTIAL_ENV})
-    log["posted"].insert(0, {"date": plan["date"], "post_id": post_id,
-                             "posted_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")})
-    log["posted"] = log["posted"][:120]
-    LOG_PATH.write_text(json.dumps(log, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"✅ 投稿しました: {plan['date']}（ID {post_id}）")
+    credentials = {name: os.environ[name] for name in CREDENTIAL_ENV}
+    for item in posts:
+        log = load_log()
+        if item["key"] in posted_keys(log):
+            print(f"{item['key']} は投稿済みのため中止します")
+            continue
+        post_id = post_to_x(item["text"], credentials)
+        record = {"key": item["key"], "kind": item["kind"], "post_id": post_id,
+                  "posted_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")}
+        if item["kind"] == "daily":
+            record["date"] = item["date"]
+        log["posted"].insert(0, record)
+        log["posted"] = log["posted"][:200]
+        # 1件ごとに保存し、途中で失敗しても成功分を二重投稿しない
+        (args.log or LOG_PATH).write_text(json.dumps(log, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        print(f"✅ 投稿しました: {item['key']}（ID {post_id}）")
     return 0
 
 
