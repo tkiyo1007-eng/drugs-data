@@ -146,7 +146,7 @@ class CuratedPageGenerationTests(unittest.TestCase):
                 text=True,
             )
 
-            self.assertIn("ニュース1件、注目製品1件、恒久ガイド1件", completed.stdout)
+            self.assertIn("ニュース1件、注目製品1件、恒久ガイド2件", completed.stdout)
             topic = (site / "topics" / "test-release-20260817.html").read_text(encoding="utf-8")
             product = (site / "products" / "test-combination-1.html").read_text(encoding="utf-8")
             topic_index = (site / "topics" / "index.html").read_text(encoding="utf-8")
