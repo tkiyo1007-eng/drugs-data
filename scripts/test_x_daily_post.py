@@ -61,6 +61,47 @@ class BuildPlanTests(unittest.TestCase):
         self.assertEqual(1 + 1 + 23 + 1 + 1, xp.weighted_length("a https://example.com/very/long/path b"))
 
 
+class WeeklyMonthlyPlanTests(unittest.TestCase):
+    def setUp(self):
+        self.changes = [change("2026/09/15", "①通常出荷", "②限定出荷（自社の事情）", "A"),
+                        change("2026/09/20", "①通常出荷", "⑤供給停止", "B"),
+                        change("2026/09/21", "④限定出荷（その他）", "①通常出荷", "C")]
+        self.monday = dt.date(2026, 9, 21)
+
+    def test_weekly_summarizes_previous_monday_to_sunday_once(self):
+        plan = xp.build_weekly_plan(self.changes, {"posted": []}, self.monday)
+        self.assertEqual("post", plan["action"])
+        self.assertEqual("weekly:2026-09-14", plan["key"])
+        self.assertIn("【先週のまとめ】9/14〜9/20", plan["text"])
+        self.assertIn("区分が変わった医薬品：2品目（2日分の更新）", plan["text"])
+        self.assertIn("限定出荷へ1・供給停止へ1", plan["text"])
+        done = xp.build_weekly_plan(self.changes, {"posted": [{"key": "weekly:2026-09-14"}]}, self.monday)
+        self.assertEqual("skip", done["action"])
+
+    def test_weekly_skips_late_days_and_empty_weeks(self):
+        self.assertEqual("skip", xp.build_weekly_plan(self.changes, {"posted": []}, dt.date(2026, 9, 24))["action"])
+        empty = xp.build_weekly_plan(self.changes, {"posted": []}, dt.date(2026, 10, 5))
+        self.assertIn("変更記録がないため投稿しません", empty["reason"])
+
+    def test_monthly_announces_new_report_within_seven_days_once(self):
+        with tempfile.TemporaryDirectory() as directory:
+            reports = Path(directory)
+            (reports / "2026-09.json").write_text(json.dumps({
+                "month": "2026-09", "snapshot_date": "2026-10-01",
+                "changes": {"items": 148, "to_limited": 68, "to_stopped": 25, "to_ok": 44},
+                "top_new_restriction_categories": [{"name": "血圧降下剤"}, {"name": "解熱鎮痛消炎剤"}],
+            }, ensure_ascii=False), encoding="utf-8")
+            plan = xp.build_monthly_plan(reports, {"posted": []}, dt.date(2026, 10, 1))
+            self.assertEqual("post", plan["action"])
+            self.assertIn("【医薬品供給レポート 2026年9月】", plan["text"])
+            self.assertIn("reports/2026-09.html", plan["text"])
+            self.assertIn("血圧降下剤、解熱鎮痛消炎剤", plan["text"])
+            self.assertEqual("skip", xp.build_monthly_plan(reports, {"posted": [{"key": "monthly:2026-09"}]},
+                                                           dt.date(2026, 10, 2))["action"])
+            self.assertEqual("skip", xp.build_monthly_plan(reports, {"posted": []}, dt.date(2026, 10, 9))["action"])
+        self.assertEqual("skip", xp.build_monthly_plan(Path("/nonexistent"), {"posted": []}, dt.date(2026, 10, 1))["action"])
+
+
 class PostCommandTests(unittest.TestCase):
     def setUp(self):
         self.tempdir = tempfile.TemporaryDirectory()
@@ -71,29 +112,34 @@ class PostCommandTests(unittest.TestCase):
         patcher.start()
         self.addCleanup(patcher.stop)
 
-    def write_plan(self, **plan):
-        self.plan_path.write_text(json.dumps(plan, ensure_ascii=False), encoding="utf-8")
+    def write_plan(self, *plans):
+        self.plan_path.write_text(json.dumps({"posts": list(plans)}, ensure_ascii=False), encoding="utf-8")
+
+    def daily(self, **extra):
+        return {"action": "post", "kind": "daily", "key": "2026/09/20", "date": "2026/09/20",
+                "text": "t", "url": "u", **extra}
 
     def test_missing_credentials_fail_without_posting(self):
-        self.write_plan(action="post", date="2026/09/20", text="t", url="u")
+        self.write_plan(self.daily())
         with mock.patch.dict("os.environ", {}, clear=True), mock.patch.object(xp, "post_to_x") as post:
             self.assertEqual(1, xp.main(["post", "--plan", str(self.plan_path)]))
         post.assert_not_called()
 
     def test_posts_once_and_records_date(self):
-        self.write_plan(action="post", date="2026/09/20", text="t", url="u")
+        self.write_plan(self.daily(), {"action": "post", "kind": "weekly", "key": "weekly:2026-09-14",
+                                       "text": "w", "url": "u"})
         env = {name: "v" for name in xp.CREDENTIAL_ENV}
         with mock.patch.dict("os.environ", env, clear=True), \
                 mock.patch.object(xp, "post_to_x", return_value="123") as post:
             self.assertEqual(0, xp.main(["post", "--plan", str(self.plan_path)]))
             self.assertEqual(0, xp.main(["post", "--plan", str(self.plan_path)]))
-        post.assert_called_once()
+        self.assertEqual(2, post.call_count)  # 2回目の実行では日別・週次とも投稿済み
         log = json.loads(self.log_path.read_text(encoding="utf-8"))
-        self.assertEqual(["2026/09/20"], [item["date"] for item in log["posted"]])
+        self.assertEqual({"2026/09/20", "weekly:2026-09-14"}, {item["key"] for item in log["posted"]})
         self.assertNotIn("v", json.dumps(log).replace("posted", ""))
 
     def test_skip_plan_does_not_require_credentials(self):
-        self.write_plan(action="skip", reason="変更履歴が空")
+        self.write_plan({"action": "skip", "kind": "daily", "reason": "変更履歴が空"})
         with mock.patch.dict("os.environ", {}, clear=True):
             self.assertEqual(0, xp.main(["post", "--plan", str(self.plan_path)]))
 
