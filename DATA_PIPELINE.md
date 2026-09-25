@@ -154,3 +154,23 @@ main反映後の監視はPages公開成功後、定期監視は従来の時刻�
 まだ旧版を公開しているため `--skip-pages` を指定し、Pages検査はローカルの模擬応答テストで
 確認する。最初の反映前の本番には整合性表がないため、新監視を旧本番へ手動実行した際の
 404を本番障害と混同しない。反映後の通常監視では整合性表の欠損も失敗とする。
+
+## X自動投稿（供給状況の変更）
+
+`.github/workflows/post_x.yml` は `Deploy GitHub Pages` の成功後に動き、
+`scripts/x_daily_post.py` が `status_changes.json` の最新変更日を1回だけ投稿する。
+
+- 投稿するのは変更記録がある日だけ。記録がない日・取得失敗の日は投稿せず、
+  「変更なし」「供給問題なし」とは書かない。件数は厚労省公表データ上の区分変更の集計で、
+  代替薬の推奨・在庫の断定は書かない。詳細は日別ページ `updates/YYYY-MM-DD.html` へ案内する。
+- リンク先の日別ページがPagesで公開済みであることを確認してから投稿する。
+- 同じ日付は二度投稿しない（`x_post_log.json` に投稿日とIDだけを記録）。実行日から
+  3日を超える変更日は投稿しないため、初回有効化時に過去分をまとめて流さない。
+- 初期状態は試運転で、文面をActionsのSummaryに出すだけ。実投稿には次の両方が必要。
+  1. Settings → Secrets and variables → Actions → Secrets に
+     `X_API_KEY` / `X_API_SECRET` / `X_ACCESS_TOKEN` / `X_ACCESS_TOKEN_SECRET`
+     （X Developer Portalのアプリ権限を Read and Write にしてから発行したもの）
+  2. 同じ画面の Variables に `X_POSTING_ENABLED` = `true`
+- 停止したいときは `X_POSTING_ENABLED` を削除するか `true` 以外にする。
+- 手動実行（workflow_dispatch）は既定で試運転。X APIは従量課金のため、Developer Portalで
+  利用上限額を設定しておく。
