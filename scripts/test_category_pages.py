@@ -73,6 +73,12 @@ class CategoryPageTests(unittest.TestCase):
             Path(directory, "version.json").write_text('{"note":"2026年10月01日厚労省データ反映"}', encoding="utf-8")
             self.assertEqual(10, dataset_month(Path(directory)))
 
+    def test_item_pages_link_only_to_generated_category_pages(self):
+        from generate_item_pages import category_pages
+        rows = load_rows(ROOT / "drugs_app_ready.csv")
+        self.assertEqual(set(category_groups(rows)), set(category_pages(rows).values()))
+        self.assertEqual(category_groups(self.rows).keys(), set(category_pages(self.rows).values()))
+
     def test_committed_pages_match_committed_data(self):
         groups = category_groups(load_rows(ROOT / "drugs_app_ready.csv"))
         committed = {path.stem for path in (ROOT / "categories").glob("*.html")} - {"index"}

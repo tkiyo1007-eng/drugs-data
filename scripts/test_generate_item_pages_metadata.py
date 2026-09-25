@@ -338,11 +338,11 @@ class ItemPageMetadataTests(unittest.TestCase):
 
     def test_sitemap_lastmod_uses_fixed_template_revision_without_advancing_daily(self):
         old_row = {"商品名": "対象錠", "更新日": "2024/03/11"}
-        self.assertEqual(item_page_lastmod(old_row), "2026-08-28")
+        self.assertEqual(item_page_lastmod(old_row), "2026-09-26")
         future_notice = {"product_name": "対象錠", "maker": "対象製薬",
-                         "announced_at": "2026-09-01"}
+                         "announced_at": "2026-09-30"}
         old_row["製造メーカー"] = "対象製薬"
-        self.assertEqual(item_page_lastmod(old_row, future_notice), "2026-09-01")
+        self.assertEqual(item_page_lastmod(old_row, future_notice), "2026-09-30")
 
     def test_discrepancy_must_match_current_official_row_and_manufacturer(self):
         row = {
