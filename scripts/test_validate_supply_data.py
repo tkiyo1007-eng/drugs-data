@@ -1,5 +1,7 @@
 import csv
 import datetime as dt
+import sys
+from unittest import mock
 import tempfile
 import unittest
 from pathlib import Path
@@ -135,6 +137,20 @@ class ValidateSupplyDataTests(unittest.TestCase):
             max_missing_sales_maker_rate=40.0)
         self.assertEqual(50.0, summary["missing_sales_maker_rate"])
         self.assertTrue(any("記載なし率が上限" in error for error in errors))
+
+    def test_default_sales_maker_limit_tolerates_one_new_blank_but_stops_bulk_loss(self):
+        # 2026-09-26: 販売元記載のない新規1品目で 558/16,403件=3.4018% となり、旧上限3.4%で停止した。
+        import validate_supply_data as vsd
+        rows = [self.row(商品名=f"薬{i}", YJコード=f"1234567{i:05d}", 薬価="10",
+                         販売メーカー="" if i < 558 else "販売元") for i in range(16403)]
+        self.write(rows)
+        with mock.patch.object(sys, "argv", ["x"]):
+            self.assertEqual(0, vsd.main(["--csv", str(self.path), "--min-rows", "1", "--max-rows", "30000",
+                                          "--max-age-days", "100000"]))
+        rows = [dict(row, 販売メーカー="") for row in rows[:800]] + rows[800:]
+        self.write(rows)
+        self.assertNotEqual(0, vsd.main(["--csv", str(self.path), "--min-rows", "1", "--max-rows", "30000",
+                                         "--max-age-days", "100000"]))
 
     def test_maker_document_noise_and_invalid_prices_are_rejected(self):
         self.write([self.row(

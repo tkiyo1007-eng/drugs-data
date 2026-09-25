@@ -264,8 +264,10 @@ def main(argv=None):
     parser.add_argument("--min-rows", type=int, default=10000)
     parser.add_argument("--max-rows", type=int, default=30000)
     parser.add_argument("--max-age-days", type=int, default=10)
-    parser.add_argument("--max-missing-sales-maker-rate", type=float, default=3.4,
-                        help="販売メーカー欄の記載なし率の上限（既定3.4%%）")
+    # 列ずれ等の大量欠落を止めるための上限。現状値（約3.4%）ちょうどに置くと、販売元記載の
+    # ない正常な新規品目1件で更新全体が止まる（2026-09-26: 558/16,403件=3.4018%で停止）ため余裕を持たせる。
+    parser.add_argument("--max-missing-sales-maker-rate", type=float, default=4.0,
+                        help="販売メーカー欄の記載なし率の上限（既定4.0%%）")
     parser.add_argument("--max-missing-price-rate", type=float, default=6.0,
                         help="薬価欄の記載なし率の上限（既定6.0%%）")
     args = parser.parse_args(argv)
