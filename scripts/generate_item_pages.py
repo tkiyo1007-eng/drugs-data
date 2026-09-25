@@ -39,7 +39,10 @@ APP_ID = "6777696446"
 OFFICIAL_SUPPLY_URL = "https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list"
 # 全品目へ一次情報・状態別ハブ・運営方針の導線を追加した実質的な改訂日。
 # 日次生成日ではなく固定値にし、内容が変わらない日にlastmodを進めない。
-ITEM_PAGE_TEMPLATE_LASTMOD = "2026-08-28"
+ITEM_PAGE_TEMPLATE_LASTMOD = "2026-09-26"  # 薬効分類別ページへの導線を追加
+# drugs-data の generate_curated_pages.py（CATEGORY_MIN_ROWS）と同じ基準。
+# 分類ページが生成される分類だけにリンクし、404を出さない。
+CATEGORY_MIN_ROWS = 3
 FORMAL_YJ_RE = re.compile(r"^[0-9][0-9A-Z]{11}$")
 INTERNAL_ITEM_ID_RE = re.compile(r"^X[0-9]{5}$")
 
@@ -721,10 +724,24 @@ def page_title(name: str, status_label: str, supplements: list,
     return name[:max(1, 70 - len(tail))] + tail
 
 
+def category_pages(rows: list) -> dict:
+    """薬効分類名→YJ先頭3桁。drugs-data の薬効分類別ページがある分類だけを返す。"""
+    name_to_code, counts = {}, {}
+    for row in rows:
+        code, name = (row.get("YJコード") or "")[:3], (row.get("薬効分類") or "").strip()
+        if code.isdigit() and name:
+            name_to_code.setdefault(name, code)
+    for row in rows:
+        name = (row.get("薬効分類") or "").strip()
+        if name in name_to_code:
+            counts[name] = counts.get(name, 0) + 1
+    return {name: code for name, code in name_to_code.items() if counts.get(name, 0) >= CATEGORY_MIN_ROWS}
+
+
 def page_html(row, key, status, jst_today, siblings, generated_keys,
               lifecycle=None, discrepancy=None, dataset_date="", supplemental_checked_date="",
               supplemental_trusted=True, supplemental_warning="", title_qualifier="",
-              hub_slugs=(), display_names=None):
+              hub_slugs=(), display_names=None, category_codes=None):
     name = row["商品名"].strip()
     display_name = f"{name}（{title_qualifier}）" if title_qualifier else name
     maker = (row.get("販売メーカー") or row.get("製造メーカー") or "").strip()
@@ -867,6 +884,14 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
   <h2>{related_heading}</h2>
   <p class="sib-note">現在の公開データから、同成分・同剤形の確認候補は見つかりませんでした。候補がないことは、代替品が存在しないことや実在庫がないことを意味しません。メーカー・卸の最新情報もご確認ください。</p>
 </section>"""
+    category_name = (row.get("薬効分類") or "").strip()
+    category_code = (category_codes or {}).get(category_name)
+    category_html = (f"""
+<section>
+  <h2>同じ薬効分類（{esc(category_name)}）の供給状況</h2>
+  <p class="sib-note">薬効分類が同じでも、適応・用量・投与経路・製剤特性は品目ごとに異なります。代替の候補を示すものではありません。</p>
+  <p><a href="../categories/{esc(category_code)}.html" data-dsn-event="related-item-open">{esc(category_name)}の限定出荷・供給停止の一覧を見る</a></p>
+</section>""" if category_code else "")
 
     breadcrumb_ld = ld_json({
         "@context": "https://schema.org", "@type": "BreadcrumbList",
@@ -1030,6 +1055,7 @@ footer a{{color:var(--sub)}}
     <p class="share-status" id="shareStatus" role="status" aria-live="polite"></p>
   </div>
 {sib_html}
+{category_html}
   <div class="cta">
     <h2>供給状況の変化を、毎日自動でチェック。</h2>
     <p>医薬品供給ナビは厚労省の医薬品供給状況データ約16,000品目を毎日自動更新。Web版は次回アクセス時に監視品目の変化をまとめて確認でき、iOSアプリはプッシュ通知にも対応しています。無料です。</p>
@@ -1425,6 +1451,8 @@ def main():
     restriction_keys = recent_restriction_keys(
         latest_changes, by_key, dataset_date)
 
+    category_codes = category_pages(rows)
+
     # 同成分リンク用: 一般名→行のインデックス
     by_gen = {}
     for r in rows:
@@ -1493,6 +1521,7 @@ def main():
                 title_qualifier=identities[k]["title_qualifier"],
                 hub_slugs=entry["hubs"],
                 display_names=display_names,
+                category_codes=category_codes,
             ), encoding="utf-8")
 
     (out / "index.html").write_text(index_html(entries, dataset_date), encoding="utf-8")
