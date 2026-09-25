@@ -125,7 +125,7 @@ class SitemapIntegrityTests(unittest.TestCase):
             "sitemap-updates.xml": set((ROOT / "updates").glob("*.html")),
             "sitemap-curated.xml": set().union(*(
                 set((ROOT / directory).glob("*.html"))
-                for directory in ("topics", "products", "guides")
+                for directory in ("topics", "products", "guides", "categories")
             )),
         }
         for sitemap_name, expected_paths in expected_by_sitemap.items():

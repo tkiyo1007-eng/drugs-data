@@ -13,6 +13,8 @@ import unicodedata
 from pathlib import Path
 from urllib.parse import quote
 
+from jst_time import jst_today
+
 SITE_ROOT = "https://tkiyo1007-eng.github.io/drugs-data/"
 MHLW_SUPPLY_URL = "https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list"
 PMDA_SEARCH_URL = "https://www.pmda.go.jp/PmdaSearch/iyakuSearch/"
@@ -20,6 +22,17 @@ PMDA_RECALL_URL = "https://www.pmda.go.jp/safety/info-services/drugs/calling-att
 GUIDE_SLUG = "how-to-check-drug-supply"
 TEMPLATE_UPDATED_AT = "2026-08-28"
 PRODUCT_TEMPLATE_UPDATED_AT = "2026-09-06"
+CATEGORY_TEMPLATE_UPDATED_AT = "2026-09-25"
+CATEGORY_MIN_ROWS = 3
+# 季節ごとに検索が増えやすい薬効分類（YJコード先頭3桁）。供給状況の予測ではなく入口の並び順だけに使う。
+SEASONAL_CATEGORIES = {
+    "autumn_winter": {"months": {10, 11, 12, 1, 2, 3},
+                      "label": "感染症シーズンに確認が増える分類",
+                      "codes": ("222", "223", "224", "114", "625", "613", "225", "441")},
+    "spring_summer": {"months": {4, 5, 6, 7, 8, 9},
+                      "label": "花粉・夏季に確認が増える分類",
+                      "codes": ("449", "441", "131", "132", "114", "264")},
+}
 # Web一覧のみの編集指定。共通JSONと詳細ページの生成対象は変更しない。
 WEB_HIDDEN_FEATURED_SLUGS = {
     "caduet", "caduet-1", "caduet-2", "caduet-3", "caduet-4",
@@ -445,7 +458,7 @@ def topic_page(topic: dict, related: list[dict[str, str]], generated_keys: set[s
 {supplement}
 {related_html}
 <div class="cta"><strong>最新の供給状況を検索</strong><p>医薬品名・メーカー名・YJコードから、厚生労働省公表データを確認できます。</p><a href="../" data-dsn-event="topic-to-search">Web版で検索する</a></div>
-</main><footer><p>ニュースは一次情報または信頼できる報道をもとに編集しています。必ず出典原文をご確認ください。</p><a href="../guides/{GUIDE_SLUG}.html">供給情報の確認ガイド</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
+</main><footer><p>ニュースは一次情報または信頼できる報道をもとに編集しています。必ず出典原文をご確認ください。</p><a href="../guides/{GUIDE_SLUG}.html">供給情報の確認ガイド</a>｜<a href="../categories/index.html">薬効分類別の供給状況</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
 {analytics_footer()}</body></html>"""
 
 
@@ -494,7 +507,7 @@ def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[
 <h2>該当品目</h2><div class="products">{product_rows_html(rows, generated_keys, lifecycle, product)}</div>
 {product_intent_html(product, rows, generated_keys)}
 <div class="cta"><strong>Web版で絞り込んで確認</strong><p>公表理由やメーカー案内を確認できます。同成分・同剤形の確認候補がある場合はあわせて表示します。</p><a href="{query_link}" data-dsn-event="search-cta-open">この製品を検索する</a></div>
-</main><footer><p>厚生労働省公表データをもとにした非公式情報です。実際の流通状況は卸・メーカーにもご確認ください。</p><a href="../guides/{GUIDE_SLUG}.html">供給情報の確認ガイド</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
+</main><footer><p>厚生労働省公表データをもとにした非公式情報です。実際の流通状況は卸・メーカーにもご確認ください。</p><a href="../guides/{GUIDE_SLUG}.html">供給情報の確認ガイド</a>｜<a href="../categories/index.html">薬効分類別の供給状況</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
 {analytics_footer()}</body></html>"""
     return body, lastmod
 
@@ -525,18 +538,169 @@ def list_page(kind: str, records: list[dict], updated_at: str) -> str:
 <div class="wrap"><header class="site"><a href="../">💊 医薬品供給ナビ</a></header><nav class="crumb"><a href="../">トップ</a> › {heading}</nav>
 <main><section class="hero"><p class="eyebrow">CURATED</p><h1>{heading}</h1><p class="lede">{description}</p><p class="note">最終更新：{esc(updated_at)}</p>
 {share_control("この一覧を共有")}</section>
-<h2>一覧</h2><div class="list">{''.join(links)}</div></main><footer><a href="../guides/{GUIDE_SLUG}.html">供給情報の確認ガイド</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
+<h2>一覧</h2><div class="list">{''.join(links)}</div></main><footer><a href="../guides/{GUIDE_SLUG}.html">供給情報の確認ガイド</a>｜<a href="../categories/index.html">薬効分類別の供給状況</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
+{analytics_footer()}</body></html>"""
+
+
+CATEGORY_STYLE = """
+.normal-list{margin:10px 0 0;padding:0;list-style:none;display:grid;gap:4px}.normal-list li{font-size:13px;padding:6px 2px;border-bottom:1px solid var(--line)}.normal-list li span{color:var(--sub);font-size:12px}
+details.normal{margin-top:18px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 16px}details.normal summary{cursor:pointer;font-weight:800;min-height:32px}
+.cat-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:13.5px}.cat-table th,.cat-table td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left}.cat-table td.num,.cat-table th.num{text-align:right;white-space:nowrap}.cat-table a{font-weight:750}
+"""
+
+
+def dataset_month(site: Path) -> int:
+    try:
+        note = load_json(site / "version.json").get("note", "")
+        match = re.search(r"(\d{4})年(\d{1,2})月", str(note))
+        if match:
+            return int(match.group(2))
+    except (OSError, ValueError):
+        pass
+    return jst_today().month
+
+
+def category_code(row: dict[str, str]) -> str:
+    code = (row.get("YJコード") or "")[:3]
+    return code if code.isdigit() else ""
+
+
+def category_groups(rows: list[dict[str, str]]) -> dict[str, dict]:
+    """薬効分類名とYJ先頭3桁の対応でまとめる。X始まりの内部IDは分類名から番号を引く。"""
+    name_to_code: dict[str, str] = {}
+    for row in rows:
+        code, name = category_code(row), (row.get("薬効分類") or "").strip()
+        if code and name:
+            if name_to_code.setdefault(name, code) != code:
+                raise ValueError(f"薬効分類「{name}」に複数の分類番号があります")
+    groups: dict[str, dict] = {}
+    for row in rows:
+        name = (row.get("薬効分類") or "").strip()
+        code = name_to_code.get(name)
+        if code:
+            groups.setdefault(code, {"code": code, "name": name, "rows": []})["rows"].append(row)
+    return {code: group for code, group in groups.items() if len(group["rows"]) >= CATEGORY_MIN_ROWS}
+
+
+def category_counts(rows: list[dict[str, str]]) -> dict[str, int]:
+    counts = {key: 0 for key in STATUS}
+    for row in rows:
+        counts[map_status(row.get("供給状況"))] += 1
+    return counts
+
+
+def seasonal_codes(month: int) -> tuple[str, tuple[str, ...]]:
+    for season in SEASONAL_CATEGORIES.values():
+        if month in season["months"]:
+            return season["label"], season["codes"]
+    return "", ()
+
+
+def category_page(group: dict, generated_keys: set[str], lifecycle: dict[str, dict]) -> tuple[str, str]:
+    code, name, rows = group["code"], group["name"], group["rows"]
+    canonical = f"{SITE_ROOT}categories/{code}.html"
+    counts = category_counts(rows)
+    restricted = sorted((row for row in rows if map_status(row.get("供給状況")) in ("limited", "stopped")),
+                        key=lambda row: (-STATUS[map_status(row.get("供給状況"))][3],
+                                         -int(normalize_date(row.get("更新日")).replace("-", "") or 0),
+                                         row.get("商品名") or ""))
+    normal = sorted((row for row in rows if map_status(row.get("供給状況")) not in ("limited", "stopped")),
+                    key=lambda row: row.get("商品名") or "")
+    # 表示はデータの日付だけ。テンプレート改訂日はサイトマップのlastmodにだけ使う。
+    newest_row = max((normalize_date(row.get("更新日")) for row in rows), default="")
+    lastmod = max(newest_row, CATEGORY_TEMPLATE_UPDATED_AT)
+    title = f"{name}の供給状況（限定出荷・供給停止）｜医薬品供給ナビ"
+    description = (f"厚生労働省公表データで「{name}」に分類される医療用医薬品{len(rows)}品目の現在の供給区分。"
+                   f"限定出荷{counts['limited']}品目・供給停止{counts['stopped']}品目を、規格・メーカー・更新日とともに確認できます。")
+    summary = "".join(f'<span class="chip" style="color:{STATUS[key][1]};background:{STATUS[key][2]}">{STATUS[key][0]} {count}</span>'
+                      for key, count in counts.items() if count)
+    item_list = {"@type": "ItemList", "name": f"{name}（限定出荷・供給停止）", "numberOfItems": len(restricted),
+                 "itemListElement": [{"@type": "ListItem", "position": index, "name": row.get("商品名"),
+                                      "url": absolute_product_row_url(row_link(row, generated_keys))}
+                                     for index, row in enumerate(restricted[:100], 1)]}
+    collection = {"@type": "CollectionPage", "name": title, "description": description,
+                  "url": canonical, "dateModified": lastmod, "mainEntity": item_list}
+    breadcrumb = {"@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "医薬品供給ナビ", "item": SITE_ROOT},
+        {"@type": "ListItem", "position": 2, "name": "薬効分類別の供給状況", "item": SITE_ROOT + "categories/index.html"},
+        {"@type": "ListItem", "position": 3, "name": name, "item": canonical}]}
+    restricted_html = (f'<div class="products">{product_rows_html(restricted, generated_keys, lifecycle)}</div>'
+                       if restricted else '<p class="note">現在、この分類で限定出荷・供給停止と公表されている品目はありません（厚生労働省公表データの現在区分）。</p>')
+    normal_items = "".join(
+        f'<li><a href="{row_link(row, generated_keys)}" data-dsn-event="related-item-open">{esc(row.get("商品名"))}</a> '
+        f'<span>{esc((row.get("規格") or "").strip())}｜{esc((row.get("販売メーカー") or row.get("製造メーカー") or "").strip())}</span></li>'
+        for row in normal)
+    normal_html = (f'<details class="normal"><summary>通常出荷などの品目（{len(normal)}品目）を表示</summary>'
+                   f'<ul class="normal-list">{normal_items}</ul></details>') if normal else ""
+    body = f"""<!DOCTYPE html><html lang="ja"><head>
+{common_head(title, description, canonical, 'website', [collection, breadcrumb])}<style>{STYLE}{CATEGORY_STYLE}</style></head><body>
+<div class="wrap"><header class="site"><a href="../">💊 医薬品供給ナビ</a></header>
+<nav class="crumb" aria-label="パンくず"><a href="../">トップ</a> › <a href="index.html">薬効分類別の供給状況</a> › {esc(name)}</nav><main>
+<section class="hero"><p class="eyebrow">薬効分類 {esc(code)}</p><h1>{esc(name)}の供給状況</h1>
+<p class="lede">厚生労働省公表データで「{esc(name)}」に分類される{len(rows)}品目の現在の供給区分です。限定出荷・供給停止の品目を先に、公表されている品目行の更新日が新しい順に並べています。</p>
+<div class="summary">{summary}</div>
+<p class="safety">同じ薬効分類でも、適応・用量・投与経路・製剤特性は品目ごとに異なります。この一覧は代替薬の推薦ではなく、実在庫や入手可否も示しません。</p>
+{share_control("この分類の供給状況を共有")}</section>
+<h2>限定出荷・供給停止の品目（{len(restricted)}品目）</h2>
+{restricted_html}
+{normal_html}
+<div class="cta"><strong>品目名で詳しく確認</strong><p>公表理由・解除見込み・メーカー案内はWeb版の品目詳細で確認できます。</p><a href="../" data-dsn-event="search-cta-open">Web版で検索する</a></div>
+<p class="note">分類は厚生労働省公表データの「薬効分類」欄とYJコード先頭3桁によるものです。品目行の最新更新日：{esc(newest_row or "不明")}。原典は<a href="{MHLW_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システム</a>でご確認ください。</p>
+</main><footer><p>厚生労働省公表データをもとにした非公式情報です。実際の流通状況は卸・メーカーにもご確認ください。</p><a href="../guides/{GUIDE_SLUG}.html">供給情報の確認ガイド</a>｜<a href="index.html">薬効分類別の供給状況</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
+{analytics_footer()}</body></html>"""
+    return body, lastmod
+
+
+def category_index_page(groups: dict[str, dict], newest_row: str, month: int) -> str:
+    canonical = f"{SITE_ROOT}categories/index.html"
+    title = "薬効分類別の医薬品供給状況（限定出荷・供給停止の件数）｜医薬品供給ナビ"
+    description = ("厚生労働省公表データの薬効分類ごとに、限定出荷・供給停止の品目数と一覧を確認できます。"
+                   "鎮咳剤・去たん剤・解熱鎮痛消炎剤・抗ウイルス剤など分類単位で供給状況を把握できます。")
+    ordered = sorted(groups.values(), key=lambda g: (
+        -(category_counts(g["rows"])["limited"] + category_counts(g["rows"])["stopped"]), g["code"]))
+
+    def table(items: list[dict]) -> str:
+        body_rows = []
+        for group in items:
+            counts = category_counts(group["rows"])
+            body_rows.append(f'<tr><td><a href="{esc(group["code"])}.html">{esc(group["name"])}</a></td>'
+                             f'<td class="num">{counts["limited"]}</td><td class="num">{counts["stopped"]}</td>'
+                             f'<td class="num">{len(group["rows"])}</td></tr>')
+        return ('<table class="cat-table"><thead><tr><th scope="col">薬効分類</th><th scope="col" class="num">限定出荷</th>'
+                '<th scope="col" class="num">供給停止</th><th scope="col" class="num">全品目</th></tr></thead>'
+                f'<tbody>{"".join(body_rows)}</tbody></table>')
+
+    label, codes = seasonal_codes(month)
+    seasonal = [groups[code] for code in codes if code in groups]
+    seasonal_html = (f'<h2>{esc(label)}</h2><p class="note">時期により検索が増えやすい分類を先に並べています。供給状況の予測ではありません。</p>{table(seasonal)}'
+                     if seasonal else "")
+    breadcrumb = {"@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "医薬品供給ナビ", "item": SITE_ROOT},
+        {"@type": "ListItem", "position": 2, "name": "薬効分類別の供給状況", "item": canonical}]}
+    return f"""<!DOCTYPE html><html lang="ja"><head>
+{common_head(title, description, canonical, 'website', [breadcrumb])}<style>{STYLE}{CATEGORY_STYLE}</style></head><body>
+<div class="wrap"><header class="site"><a href="../">💊 医薬品供給ナビ</a></header><nav class="crumb"><a href="../">トップ</a> › 薬効分類別の供給状況</nav>
+<main><section class="hero"><p class="eyebrow">BY THERAPEUTIC CATEGORY</p><h1>薬効分類別の医薬品供給状況</h1><p class="lede">{description}</p><p class="note">品目行の最新更新日：{esc(newest_row or "不明")}（{len(groups)}分類。{CATEGORY_MIN_ROWS}品目以上の分類を掲載）</p>
+{share_control("この一覧を共有")}</section>
+{seasonal_html}
+<h2>すべての薬効分類（限定出荷・供給停止の多い順）</h2>{table(ordered)}
+<p class="note">分類は厚生労働省公表データの「薬効分類」欄によるものです。件数は現在の公表区分の集計で、実在庫や入手可否を示すものではありません。</p>
+</main><footer><a href="../guides/{GUIDE_SLUG}.html">供給情報の確認ガイド</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
 {analytics_footer()}</body></html>"""
 
 
 def sitemap(topic_dates: dict[str, str], product_dates: dict[str, str],
-            guide_dates: dict[str, str] | None = None) -> str:
+            guide_dates: dict[str, str] | None = None,
+            category_dates: dict[str, str] | None = None) -> str:
     topic_latest = max(topic_dates.values(), default="")
     product_latest = max(product_dates.values(), default="")
     entries = [("topics/index.html", topic_latest), ("products/index.html", product_latest)]
     entries += [(f"topics/{slug}.html", date) for slug, date in topic_dates.items()]
     entries += [(f"products/{slug}.html", date) for slug, date in product_dates.items()]
     entries += [(f"guides/{slug}.html", date) for slug, date in (guide_dates or {}).items()]
+    if category_dates:
+        entries.append(("categories/index.html", max(category_dates.values())))
+        entries += [(f"categories/{code}.html", date) for code, date in sorted(category_dates.items())]
     body = "".join(f"  <url><loc>{SITE_ROOT}{esc(path)}</loc>{f'<lastmod>{esc(date)}</lastmod>' if date else ''}</url>\n"
                    for path, date in entries)
     return ('<?xml version="1.0" encoding="UTF-8"?>\n'
@@ -548,7 +712,8 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--csv", default="drugs_app_ready.csv")
     parser.add_argument("--site", default=".")
-    parser.add_argument("--max-pages", type=int, default=200)
+    parser.add_argument("--max-pages", type=int, default=400)
+    parser.add_argument("--month", type=int, default=None, help="季節の並び順の確認用（既定はversion.jsonのデータ月）")
     args = parser.parse_args()
     site = Path(args.site)
     rows = load_rows(Path(args.csv))
@@ -556,7 +721,8 @@ def main() -> int:
     products_doc = load_json(site / "featured_products.json")
     topics = topics_doc.get("topics") or []
     products = products_doc.get("products") or []
-    if len(topics) + len(products) + 1 > args.max_pages:
+    groups = category_groups(rows)
+    if len(topics) + len(products) + len(groups) + 2 > args.max_pages:
         raise ValueError("生成対象が安全上限を超えています")
     generated_keys: set[str] = set()
     keys_path = site / "items" / "keys.json"
@@ -603,9 +769,25 @@ def main() -> int:
     (product_dir / "index.html").write_text(
         list_page("products", products, max(
             normalize_date(products_doc.get("updated_at")), TEMPLATE_UPDATED_AT, PRODUCT_TEMPLATE_UPDATED_AT)), encoding="utf-8")
+    category_dir = site / "categories"
+    category_dir.mkdir(exist_ok=True)
+    category_dates: dict[str, str] = {}
+    for code, group in groups.items():
+        page, lastmod = category_page(group, generated_keys, lifecycle)
+        (category_dir / f"{code}.html").write_text(page, encoding="utf-8")
+        category_dates[code] = lastmod
+    for stale in category_dir.glob("*.html"):
+        if stale.stem != "index" and stale.stem not in groups:
+            stale.unlink()  # 3品目未満になった分類はサイトマップと同時に外す
+    # 実行日ではなくデータ（version.json）の日付で季節を決め、同じデータから同じHTMLを再生成できるようにする。
+    month = args.month or dataset_month(site)
+    (category_dir / "index.html").write_text(
+        category_index_page(groups, max((normalize_date(row.get("更新日")) for group in groups.values()
+                                         for row in group["rows"]), default=""), month),
+        encoding="utf-8")
     (site / "sitemap-curated.xml").write_text(
-        sitemap(topic_dates, product_dates, {GUIDE_SLUG: guide_updated}), encoding="utf-8")
-    print(f"生成: ニュース{len(topics)}件、注目製品{len(products)}件、恒久ガイド1件")
+        sitemap(topic_dates, product_dates, {GUIDE_SLUG: guide_updated}, category_dates), encoding="utf-8")
+    print(f"生成: ニュース{len(topics)}件、注目製品{len(products)}件、恒久ガイド1件、薬効分類{len(groups)}件")
     return 0
 
 
