@@ -174,3 +174,17 @@ main反映後の監視はPages公開成功後、定期監視は従来の時刻�
 - 停止したいときは `X_POSTING_ENABLED` を削除するか `true` 以外にする。
 - 手動実行（workflow_dispatch）は既定で試運転。X APIは従量課金のため、Developer Portalで
   利用上限額を設定しておく。
+
+## 医薬品供給レポート（月次）
+
+`scripts/create_monthly_report.py` は、日次更新でデータ日付（version.json）が新しい月に
+入った最初の実行時に、前月の数値を `reports/YYYY-MM.json` に固定する。以後は上書きしない。
+`generate_curated_pages.py` がこのJSONから `reports/YYYY-MM.html` と一覧を描画し、
+`sitemap-curated.xml` に載せる。
+
+- 月内の区分変更は `status_changes.json`（直近90日）から集計し、保持期間が対象月を
+  覆わない場合は作成しない。2026年9月より前の月へは遡らない。
+- 公表区分の件数・供給危機指数・解除までの日数は作成時点（データ日付）の値として
+  日付付きで記録し、「月末時点」とは表記しない。解除日数は保持期間内に開始と解除が
+  そろった品目だけの参考値で、長期の制限を含まない旨を明記する。
+- ページに出典表記の例を載せ、医療メディア等が引用しやすくする。

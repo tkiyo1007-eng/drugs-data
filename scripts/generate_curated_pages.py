@@ -23,6 +23,7 @@ GUIDE_SLUG = "how-to-check-drug-supply"
 TEMPLATE_UPDATED_AT = "2026-08-28"
 PRODUCT_TEMPLATE_UPDATED_AT = "2026-09-06"
 CATEGORY_TEMPLATE_UPDATED_AT = "2026-09-25"
+REPORT_TEMPLATE_UPDATED_AT = "2026-09-25"
 CATEGORY_MIN_ROWS = 3
 # 季節ごとに検索が増えやすい薬効分類（YJコード先頭3桁）。供給状況の予測ではなく入口の並び順だけに使う。
 SEASONAL_CATEGORIES = {
@@ -689,9 +690,125 @@ def category_index_page(groups: dict[str, dict], newest_row: str, month: int) ->
 {analytics_footer()}</body></html>"""
 
 
+REPORT_STYLE = """
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:16px 0}.kpi{background:#F2F6FE;border-radius:14px;padding:14px 16px}.kpi strong{display:block;font-size:26px;line-height:1.2}.kpi span{font-size:12px;color:var(--sub)}
+.bars{display:grid;gap:8px;margin-top:12px}.bar{display:grid;grid-template-columns:8.5em minmax(0,1fr) 4.5em;gap:10px;align-items:center;font-size:13px}.bar i{display:block;height:12px;border-radius:6px;background:#9BB9FA}.bar b{text-align:right}
+.cite{background:#fff;border:1px dashed #B9C9EA;border-radius:12px;padding:12px 14px;font-size:12.5px;word-break:break-all}
+"""
+
+
+def month_label(month: str) -> str:
+    year, number = month.split("-")
+    return f"{year}年{int(number)}月"
+
+
+def load_reports(site: Path) -> list[dict]:
+    reports = []
+    for path in sorted((site / "reports").glob("*.json")):
+        report = json.loads(path.read_text(encoding="utf-8"))
+        if report.get("schema_version") != 1 or report.get("month") != path.stem:
+            raise ValueError(f"{path.name}: レポートの形式が不正です")
+        reports.append(report)
+    return sorted(reports, key=lambda report: report["month"], reverse=True)
+
+
+def report_page(report: dict) -> str:
+    month, label = report["month"], month_label(report["month"])
+    canonical = f"{SITE_ROOT}reports/{month}.html"
+    changes, snap = report["changes"], report["snapshot_status"]
+    snapshot_date = report["snapshot_date"]
+    title = f"医薬品供給レポート {label}｜限定出荷・供給停止の動向｜医薬品供給ナビ"
+    description = (f"{label}に厚生労働省公表データ上で供給区分が変わった医療用医薬品は{changes['items']}品目"
+                   f"（限定出荷へ{changes['to_limited']}・供給停止へ{changes['to_stopped']}・通常出荷へ{changes['to_ok']}）。"
+                   "薬効分類別の動向と公表区分の件数を集計しています。")
+    prev = report.get("previous_month")
+    rows = [("限定出荷へ", "to_limited"), ("供給停止へ", "to_stopped"), ("通常出荷へ", "to_ok"), ("その他の区分変更", "other")]
+    peak = max([changes[key] for _, key in rows] + [1])
+    bars = "".join(f'<div class="bar"><span>{name}</span><i style="width:{changes[key] / peak * 100:.1f}%"></i><b>{changes[key]}品目</b></div>'
+                   for name, key in rows)
+    compare = ""
+    if prev:
+        compare = ('<table class="cat-table"><thead><tr><th scope="col">区分変更</th>'
+                   f'<th scope="col" class="num">{esc(month_label(prev["month"]))}</th><th scope="col" class="num">{esc(label)}</th></tr></thead><tbody>'
+                   + "".join(f'<tr><td>{name}</td><td class="num">{prev[key]}</td><td class="num">{changes[key]}</td></tr>' for name, key in rows)
+                   + f'<tr><td>合計</td><td class="num">{prev["items"]}</td><td class="num">{changes["items"]}</td></tr></tbody></table>')
+    categories = report.get("top_new_restriction_categories") or []
+    def category_cell(item: dict) -> str:
+        if item.get("code"):
+            return f'<a href="../categories/{esc(item["code"])}.html">{esc(item["name"])}</a>'
+        return esc(item["name"])
+
+    category_rows = "".join(f'<tr><td>{category_cell(item)}</td><td class="num">{item["count"]}</td></tr>'
+                            for item in categories)
+    category_html = (f'<table class="cat-table"><thead><tr><th scope="col">薬効分類</th><th scope="col" class="num">通常出荷から制限へ</th></tr></thead><tbody>{category_rows}</tbody></table>'
+                     if categories else '<p class="note">この月に通常出荷から限定出荷・供給停止へ変わった記録はありません（変更履歴の集計）。</p>')
+    share = lambda value: f"{value / snap['total'] * 100:.1f}%" if snap["total"] else "—"
+    crisis, resolution = report.get("crisis_index") or {}, report.get("resolution") or {}
+    res_rows = "".join(
+        f'<tr><td>{name}</td><td class="num">{esc((resolution.get(key) or {}).get("count", "—"))}</td>'
+        f'<td class="num">{esc((resolution.get(key) or {}).get("medianDays", "—"))}日</td><td class="num">{esc((resolution.get(key) or {}).get("avgDays", "—"))}日</td></tr>'
+        for name, key in (("限定出荷", "limited"), ("供給停止", "stopped")))
+    citation = f"出典：医薬品供給ナビ「医薬品供給レポート（{label}）」（厚生労働省「医療用医薬品供給状況」公表データを集計） {canonical}"
+    article = {"@type": "Article", "headline": f"医薬品供給レポート（{label}）", "description": description,
+               "datePublished": snapshot_date, "dateModified": snapshot_date, "inLanguage": "ja",
+               "mainEntityOfPage": canonical,
+               "author": {"@type": "Organization", "name": "医薬品供給ナビ運営者"},
+               "publisher": {"@type": "Organization", "name": "医薬品供給ナビ"}}
+    breadcrumb = {"@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "医薬品供給ナビ", "item": SITE_ROOT},
+        {"@type": "ListItem", "position": 2, "name": "医薬品供給レポート", "item": SITE_ROOT + "reports/index.html"},
+        {"@type": "ListItem", "position": 3, "name": label, "item": canonical}]}
+    top3 = "、".join(f"{item['name']}（{item['count']}）" for item in categories[:3]) or "記録なし"
+    return f"""<!DOCTYPE html><html lang="ja"><head>
+{common_head(title, description, canonical, 'article', [article, breadcrumb])}<style>{STYLE}{CATEGORY_STYLE}{REPORT_STYLE}</style></head><body>
+<div class="wrap"><header class="site"><a href="../">💊 医薬品供給ナビ</a></header>
+<nav class="crumb" aria-label="パンくず"><a href="../">トップ</a> › <a href="index.html">医薬品供給レポート</a> › {esc(label)}</nav><main>
+<article class="hero"><p class="eyebrow">MONTHLY SUPPLY REPORT</p><h1>医薬品供給レポート（{esc(label)}）</h1>
+<p class="lede">{esc(description)}</p>
+<ul class="points"><li>{esc(label)}に供給区分が変わった品目：{changes['items']}品目（{changes['days_with_changes']}日分の更新）{f"、前月は{prev['items']}品目" if prev else ""}</li>
+<li>通常出荷から制限へ変わった品目が多い薬効分類：{esc(top3)}</li>
+<li>{esc(snapshot_date)}時点の公表区分：限定出荷{snap['limited']}品目（{share(snap['limited'])}）・供給停止{snap['stopped']}品目（{share(snap['stopped'])}）／全{snap['total']}品目</li></ul>
+{share_control("このレポートを共有")}</article>
+<h2>{esc(label)}の区分変更の内訳</h2><div class="card"><div class="bars">{bars}</div></div>
+{f'<h2>前月との比較</h2>{compare}' if compare else ''}
+<h2>通常出荷から限定出荷・供給停止へ変わった品目が多い薬効分類</h2>{category_html}
+<h2>{esc(snapshot_date)}時点の公表区分</h2>
+<div class="kpis"><div class="kpi"><strong>{snap['total']:,}</strong><span>全品目</span></div><div class="kpi"><strong>{snap['limited']:,}</strong><span>限定出荷（{share(snap['limited'])}）</span></div><div class="kpi"><strong>{snap['stopped']:,}</strong><span>供給停止（{share(snap['stopped'])}）</span></div><div class="kpi"><strong>{esc(crisis.get('score', '—'))}</strong><span>供給危機指数（{esc(crisis.get('level', '—'))}・{esc(crisis.get('date', ''))}）</span></div></div>
+<p class="note">供給危機指数は（限定出荷×0.5＋供給停止×1.0）÷全品目×1000（上限100）で算出した医薬品供給ナビ独自の目安で、公的な指標ではありません。</p>
+<h2>制限から通常出荷に戻るまでの日数（参考値）</h2>
+<table class="cat-table"><thead><tr><th scope="col">制限の区分</th><th scope="col" class="num">件数</th><th scope="col" class="num">中央値</th><th scope="col" class="num">平均</th></tr></thead><tbody>{res_rows}</tbody></table>
+<p class="note">{esc(resolution.get('updated_at', ''))}時点の集計。変更履歴の保持期間（直近90日）内に制限の開始と解除の両方が記録された品目だけが対象で、長期間続く制限は含まれないため短めに出ます。</p>
+<h2>データの定義と引用</h2>
+<p class="note">区分変更は日次更新で前回データとの差分として検出したもので、同じ品目が月内に複数回変わった場合はそれぞれ数えます。日付は変更を検出した日（日本時間）で、厚生労働省の公表日・メーカーの発表日とは異なる場合があります。数値は{esc(snapshot_date)}に固定し、以後更新しません。実在庫や入手可否を示すものではありません。</p>
+<p class="cite">{esc(citation)}</p>
+<p><a href="../updates/index.html">日別の供給変更ページ</a>｜<a href="../categories/index.html">薬効分類別の供給状況</a></p>
+</main><footer><p>厚生労働省公表データをもとにした非公式の集計です。</p><a href="../guides/{GUIDE_SLUG}.html">供給情報の確認ガイド</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
+{analytics_footer()}</body></html>"""
+
+
+def report_index_page(reports: list[dict]) -> str:
+    canonical = f"{SITE_ROOT}reports/index.html"
+    title = "医薬品供給レポート（月次）｜限定出荷・供給停止の動向｜医薬品供給ナビ"
+    description = "厚生労働省公表データをもとに、医療用医薬品の供給区分の変化・薬効分類別の動向を毎月集計したレポートの一覧です。"
+    links = "".join(f'<a href="{esc(report["month"])}.html">{esc(month_label(report["month"]))}のレポート'
+                    f'<small>区分変更 {report["changes"]["items"]}品目｜{esc(report["snapshot_date"])}時点で固定</small></a>'
+                    for report in reports)
+    breadcrumb = {"@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "医薬品供給ナビ", "item": SITE_ROOT},
+        {"@type": "ListItem", "position": 2, "name": "医薬品供給レポート", "item": canonical}]}
+    return f"""<!DOCTYPE html><html lang="ja"><head>
+{common_head(title, description, canonical, 'website', [breadcrumb])}<style>{STYLE}</style></head><body>
+<div class="wrap"><header class="site"><a href="../">💊 医薬品供給ナビ</a></header><nav class="crumb"><a href="../">トップ</a> › 医薬品供給レポート</nav>
+<main><section class="hero"><p class="eyebrow">MONTHLY SUPPLY REPORT</p><h1>医薬品供給レポート（月次）</h1><p class="lede">{description}</p>
+{share_control("レポート一覧を共有")}</section><h2>レポート一覧</h2><div class="list">{links}</div></main>
+<footer><a href="../guides/{GUIDE_SLUG}.html">供給情報の確認ガイド</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
+{analytics_footer()}</body></html>"""
+
+
 def sitemap(topic_dates: dict[str, str], product_dates: dict[str, str],
             guide_dates: dict[str, str] | None = None,
-            category_dates: dict[str, str] | None = None) -> str:
+            category_dates: dict[str, str] | None = None,
+            report_dates: dict[str, str] | None = None) -> str:
     topic_latest = max(topic_dates.values(), default="")
     product_latest = max(product_dates.values(), default="")
     entries = [("topics/index.html", topic_latest), ("products/index.html", product_latest)]
@@ -701,6 +818,9 @@ def sitemap(topic_dates: dict[str, str], product_dates: dict[str, str],
     if category_dates:
         entries.append(("categories/index.html", max(category_dates.values())))
         entries += [(f"categories/{code}.html", date) for code, date in sorted(category_dates.items())]
+    if report_dates:
+        entries.append(("reports/index.html", max(report_dates.values())))
+        entries += [(f"reports/{month}.html", date) for month, date in sorted(report_dates.items())]
     body = "".join(f"  <url><loc>{SITE_ROOT}{esc(path)}</loc>{f'<lastmod>{esc(date)}</lastmod>' if date else ''}</url>\n"
                    for path, date in entries)
     return ('<?xml version="1.0" encoding="UTF-8"?>\n'
@@ -785,8 +905,16 @@ def main() -> int:
         category_index_page(groups, max((normalize_date(row.get("更新日")) for group in groups.values()
                                          for row in group["rows"]), default=""), month),
         encoding="utf-8")
+    reports = load_reports(site) if (site / "reports").is_dir() else []
+    report_dates: dict[str, str] = {}
+    for report in reports:
+        (site / "reports" / f"{report['month']}.html").write_text(report_page(report), encoding="utf-8")
+        report_dates[report["month"]] = max(report["snapshot_date"], REPORT_TEMPLATE_UPDATED_AT)
+    if reports:
+        (site / "reports" / "index.html").write_text(report_index_page(reports), encoding="utf-8")
     (site / "sitemap-curated.xml").write_text(
-        sitemap(topic_dates, product_dates, {GUIDE_SLUG: guide_updated}, category_dates), encoding="utf-8")
+        sitemap(topic_dates, product_dates, {GUIDE_SLUG: guide_updated}, category_dates, report_dates),
+        encoding="utf-8")
     print(f"生成: ニュース{len(topics)}件、注目製品{len(products)}件、恒久ガイド1件、薬効分類{len(groups)}件")
     return 0
 
