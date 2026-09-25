@@ -3,31 +3,49 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-09-25T03:24:14+09:00",
-  "last_success_at": "2026-09-25T03:24:14+09:00",
+  "checked_at": "2026-09-26T08:55:51+09:00",
+  "last_success_at": "2026-09-26T08:55:51+09:00",
   "items": [
+    {
+      "title": "【米レボリューション】各国で申請準備進める‐膵臓癌薬ダラクソンラシブ",
+      "url": "https://www.yakuji.co.jp/entry139759.html",
+      "date": "2026-09-25",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【兵庫県薬事審議会】地域連携薬局返納目立つ‐薬剤師要件満たせず",
+      "url": "https://www.yakuji.co.jp/entry139755.html",
+      "date": "2026-09-25",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【厚労省 西平総務課長】今年度に薬剤師需給推計‐地方の病薬不足に対応",
+      "url": "https://www.yakuji.co.jp/entry139752.html",
+      "date": "2026-09-25",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【行政評価監視委員会】タブネオス死亡例検証を‐ブルーレター発出時期で",
+      "url": "https://www.yakuji.co.jp/entry139750.html",
+      "date": "2026-09-25",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【東京地裁】零売裁判、原告が全面敗訴‐処方箋なし販売は「医行為」",
+      "url": "https://www.yakuji.co.jp/entry139747.html",
+      "date": "2026-09-25",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【日薬 岩月会長】薬剤師評価制度創設に意欲‐研修・実践履歴を可視化",
+      "url": "https://www.yakuji.co.jp/entry139743.html",
+      "date": "2026-09-25",
+      "tag": "業界ニュース"
+    },
     {
       "title": "【大塚製薬】患者の困りごとに焦点‐精神疾患の新薬開発で",
       "url": "https://www.yakuji.co.jp/entry139641.html",
       "date": "2026-09-24",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【カケハシ】薬局利用目的、薬受取が最多‐多様な機能認知で役割発揮",
-      "url": "https://www.yakuji.co.jp/entry139640.html",
-      "date": "2026-09-24",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【第一三共】肺癌一次治療で有意な改善‐ADC「エンハーツ」第III相",
-      "url": "https://www.yakuji.co.jp/entry139642.html",
-      "date": "2026-09-18",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【厚労省】リアルタイム治験を試行へ‐FDA参考に日本も追随",
-      "url": "https://www.yakuji.co.jp/entry139634.html",
-      "date": "2026-09-18",
       "tag": "業界ニュース"
     }
   ]
