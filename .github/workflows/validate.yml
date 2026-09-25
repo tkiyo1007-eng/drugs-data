@@ -75,5 +75,5 @@ jobs:
         run: |
           python3 scripts/generate_curated_pages.py --csv drugs_app_ready.csv --site .
           # 新規ファイル（未追跡）も検出するため git diff ではなく status を使う
-          changes=$(git status --porcelain -- topics products guides categories sitemap-curated.xml)
+          changes=$(git status --porcelain -- topics products guides categories reports sitemap-curated.xml)
           if [ -n "$changes" ]; then echo "$changes"; exit 1; fi
