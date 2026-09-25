@@ -20,6 +20,8 @@ MHLW_SUPPLY_URL = "https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list"
 PMDA_SEARCH_URL = "https://www.pmda.go.jp/PmdaSearch/iyakuSearch/"
 PMDA_RECALL_URL = "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html"
 GUIDE_SLUG = "how-to-check-drug-supply"
+WATCH_GUIDE_SLUG = "monitor-adopted-drugs"
+WATCH_GUIDE_UPDATED_AT = "2026-09-26"
 TEMPLATE_UPDATED_AT = "2026-08-28"
 PRODUCT_TEMPLATE_UPDATED_AT = "2026-09-06"
 CATEGORY_TEMPLATE_UPDATED_AT = "2026-09-25"
@@ -410,8 +412,55 @@ def guide_page(updated_at: str) -> str:
 <section class="intent"><h2>5. 商品名・規格を特定してから確認</h2>
 <p>配合剤や複数規格は、同じブランド名でも成分量が異なります。商品名だけで一括判断せず、YJコードや規格まで確認してください。</p>
 <p><a href="../#q={quote("カデュエット配合錠", safe="")}" data-dsn-event="search-cta-open">カデュエット配合錠の全規格をWeb版で確認</a></p></section>
+<p><a href="{WATCH_GUIDE_SLUG}.html">採用薬の供給状況をCSVでまとめて確認する方法</a></p>
 <p class="note">本ガイドは情報源の使い分けを説明するもので、処方・調剤・代替選定その他の医療上の判断を行うものではありません。実際の入手可否は卸・メーカーにもご確認ください。</p>
 </main><footer>最終更新：{esc(updated_at)}｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
+{analytics_footer()}</body></html>'''
+
+
+def watch_guide_page() -> str:
+    """採用品目CSVでの一括監視の使い方。Web版の実装（index.html）の文言・仕様に合わせる。"""
+    canonical = f"{SITE_ROOT}guides/{WATCH_GUIDE_SLUG}.html"
+    title = "採用薬の供給状況をまとめて確認する方法（CSVで一括監視）｜医薬品供給ナビ"
+    description = ("薬局・病院の採用品目をCSVで読み込み、限定出荷・供給停止への変化を毎日まとめて確認する方法。"
+                   "登録不要・無料で、ファイルは端末内だけで照合します。")
+    article = {
+        "@type": "Article", "headline": title, "description": description,
+        "datePublished": WATCH_GUIDE_UPDATED_AT, "dateModified": WATCH_GUIDE_UPDATED_AT,
+        "inLanguage": "ja", "mainEntityOfPage": canonical,
+        "author": {"@type": "Organization", "name": "医薬品供給ナビ運営者"},
+        "publisher": {"@type": "Organization", "name": "医薬品供給ナビ"},
+    }
+    breadcrumb = {"@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "医薬品供給ナビ", "item": SITE_ROOT},
+        {"@type": "ListItem", "position": 2, "name": "採用薬の一括監視ガイド", "item": canonical},
+    ]}
+    return f'''<!DOCTYPE html><html lang="ja"><head>
+{common_head(title, description, canonical, "article", [article, breadcrumb])}<style>{STYLE}{CATEGORY_STYLE}</style></head><body>
+<div class="wrap"><header class="site"><a href="../">💊 医薬品供給ナビ</a></header>
+<nav class="crumb"><a href="../">トップ</a> › 採用薬の一括監視ガイド</nav><main>
+<article class="hero"><p class="eyebrow">HOW TO USE</p><h1>採用薬の供給状況をまとめて確認する方法</h1>
+<p class="lede">採用品目をCSVで一度読み込めば、次回からは限定出荷・供給停止への変化を「監視」画面でまとめて確認できます。登録不要・無料です。</p>
+<ul class="points"><li>CSVは端末内だけで照合し、外部へ送信しません</li><li>監視リストはこのブラウザ内に保存されます（アカウントは不要）</li><li>変化は厚生労働省公表データの日次の差分です</li></ul>
+{share_control("このガイドを共有")}</article>
+<section class="intent"><h2>1. 採用品目のCSVを用意する</h2>
+<p>「商品名」または「YJコード」の列があるCSVを用意します。見出しは「商品名・品名・医薬品名・製品名」「YJコード・薬価基準収載医薬品コード」のいずれかで認識します。同じ商品名の品目が複数ある場合はYJコードで区別するため、YJコード列があると確実です。</p>
+<table class="cat-table"><thead><tr><th scope="col">YJコード</th><th scope="col">商品名</th></tr></thead>
+<tbody><tr><td>（12桁のコード）</td><td>〇〇錠10mg「△△」</td></tr><tr><td>（12桁のコード）</td><td>□□カプセル5mg</td></tr></tbody></table>
+<p class="note">1ファイル5MB・データ10,000行までです。ほかの列があってもかまいません。</p></section>
+<section class="intent"><h2>2. Web版の「監視」でCSVを読み込む</h2>
+<p><a href="../#watchDashboard" data-dsn-event="search-cta-open">Web版の監視画面</a>で「CSVからまとめて追加」（登録済みの場合は「CSVから追加・復元」）を押し、ファイルを選びます。照合できた件数、照合できなかった件数、YJコードが必要な同名品目の件数が表示されます。</p></section>
+<section class="intent"><h2>3. 次回からは変化だけを確認する</h2>
+<p>監視画面に「未確認の変更」「悪化」「改善」「情報差異」の件数が出ます。「未確認の変更を見る」で対象品目を確認し、確認が済んだら「確認済みにする」を押します。</p>
+<p class="safety">「悪化」「改善」は厚生労働省公表の供給区分の変化で、実在庫や入手可否を示すものではありません。代替の検討は、適応・用量・剤形などを確認し、医師・薬剤師が判断してください。</p></section>
+<section class="intent"><h2>4. 院内・薬局内で共有する</h2>
+<p>「変更を共有」または「文章をコピー」で、変化した品目の一覧をチャットや連絡票に貼り付けられます。</p></section>
+<section class="intent"><h2>5. 監視リストを保存・別の端末へ移す</h2>
+<p>「監視リストを保存」でYJコード・商品名・メーカー・供給状況・更新日のCSVを保存できます。ブラウザのデータを消すと監視リストも消えるため、定期的な保存をおすすめします。保存したCSVは、別の端末やブラウザで「CSVから追加・復元」に読み込めば元に戻せます。</p>
+<p>スマートフォンでは「ホーム画面に追加」で、アプリのように開けます（対応するブラウザの場合）。</p></section>
+<div class="cta"><strong>採用品目の監視を始める</strong><p>CSVがなくても、検索結果の★から1品目ずつ追加できます。</p><a href="../#watchDashboard" data-dsn-event="search-cta-open">Web版の監視画面を開く</a></div>
+<p class="note">本ガイドはWeb版の使い方の説明で、処方・調剤・代替選定その他の医療上の判断を行うものではありません。</p>
+</main><footer>最終更新：{WATCH_GUIDE_UPDATED_AT}｜<a href="{GUIDE_SLUG}.html">供給情報の確認ガイド</a>｜<a href="../categories/index.html">薬効分類別の供給状況</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
 {analytics_footer()}</body></html>'''
 
 
@@ -883,6 +932,7 @@ def main() -> int:
     )
     (guide_dir / f"{GUIDE_SLUG}.html").write_text(
         guide_page(guide_updated), encoding="utf-8")
+    (guide_dir / f"{WATCH_GUIDE_SLUG}.html").write_text(watch_guide_page(), encoding="utf-8")
     (topic_dir / "index.html").write_text(
         list_page("topics", topics, max(
             normalize_date(topics_doc.get("updated_at")), TEMPLATE_UPDATED_AT)), encoding="utf-8")
@@ -913,9 +963,11 @@ def main() -> int:
     if reports:
         (site / "reports" / "index.html").write_text(report_index_page(reports), encoding="utf-8")
     (site / "sitemap-curated.xml").write_text(
-        sitemap(topic_dates, product_dates, {GUIDE_SLUG: guide_updated}, category_dates, report_dates),
+        sitemap(topic_dates, product_dates,
+                {GUIDE_SLUG: guide_updated, WATCH_GUIDE_SLUG: WATCH_GUIDE_UPDATED_AT},
+                category_dates, report_dates),
         encoding="utf-8")
-    print(f"生成: ニュース{len(topics)}件、注目製品{len(products)}件、恒久ガイド1件、薬効分類{len(groups)}件")
+    print(f"生成: ニュース{len(topics)}件、注目製品{len(products)}件、恒久ガイド2件、薬効分類{len(groups)}件")
     return 0
 
 

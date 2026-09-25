@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>採用薬の供給状況をまとめて確認する方法（CSVで一括監視）｜医薬品供給ナビ</title>
+<meta name="description" content="薬局・病院の採用品目をCSVで読み込み、限定出荷・供給停止への変化を毎日まとめて確認する方法。登録不要・無料で、ファイルは端末内だけで照合します。">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://tkiyo1007-eng.github.io/drugs-data/guides/monitor-adopted-drugs.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="採用薬の供給状況をまとめて確認する方法（CSVで一括監視）｜医薬品供給ナビ">
+<meta property="og:description" content="薬局・病院の採用品目をCSVで読み込み、限定出荷・供給停止への変化を毎日まとめて確認する方法。登録不要・無料で、ファイルは端末内だけで照合します。">
+<meta property="og:url" content="https://tkiyo1007-eng.github.io/drugs-data/guides/monitor-adopted-drugs.html">
+<meta property="og:image" content="https://tkiyo1007-eng.github.io/drugs-data/og_image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="採用薬の供給状況をまとめて確認する方法（CSVで一括監視）｜医薬品供給ナビ">
+<meta name="twitter:description" content="薬局・病院の採用品目をCSVで読み込み、限定出荷・供給停止への変化を毎日まとめて確認する方法。登録不要・無料で、ファイルは端末内だけで照合します。">
+<meta name="twitter:image" content="https://tkiyo1007-eng.github.io/drugs-data/og_image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"採用薬の供給状況をまとめて確認する方法（CSVで一括監視）｜医薬品供給ナビ","description":"薬局・病院の採用品目をCSVで読み込み、限定出荷・供給停止への変化を毎日まとめて確認する方法。登録不要・無料で、ファイルは端末内だけで照合します。","datePublished":"2026-09-26","dateModified":"2026-09-26","inLanguage":"ja","mainEntityOfPage":"https://tkiyo1007-eng.github.io/drugs-data/guides/monitor-adopted-drugs.html","author":{"@type":"Organization","name":"医薬品供給ナビ運営者"},"publisher":{"@type":"Organization","name":"医薬品供給ナビ"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"医薬品供給ナビ","item":"https://tkiyo1007-eng.github.io/drugs-data/"},{"@type":"ListItem","position":2,"name":"採用薬の一括監視ガイド","item":"https://tkiyo1007-eng.github.io/drugs-data/guides/monitor-adopted-drugs.html"}]}]}</script>
+<script src="../analytics.js"></script><style>
+:root{--blue:#2F63E8;--ink:#14213D;--sub:#5A6B8C;--line:#E3EAF6}
+*{box-sizing:border-box}body{margin:0;font-family:"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;color:var(--ink);background:#F6F9FE;line-height:1.75}
+.wrap{max-width:900px;margin:auto;padding:22px 18px 60px}.site a,.crumb a,a{color:var(--blue)}.site{font-weight:800;margin-bottom:14px}.crumb{font-size:12px;color:var(--sub);margin-bottom:18px}
+.hero,.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 24px;box-shadow:0 10px 32px rgba(47,99,232,.06)}
+.eyebrow{font-size:11px;font-weight:900;letter-spacing:.08em;color:var(--blue)}h1{font-size:clamp(23px,4vw,34px);line-height:1.45;margin:7px 0 12px}h2{font-size:19px;margin:34px 0 12px}.lede{font-size:15px;color:var(--sub)}
+.points{margin:18px 0 0;padding:16px 20px 16px 38px;background:#F2F6FE;border-radius:14px}.points li+li{margin-top:6px}.source{margin-top:18px;font-size:13px}.source a{font-weight:700}
+.summary{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.chip,.tag{display:inline-block;padding:5px 11px;border-radius:999px;font-size:12px;font-weight:800}.tag{margin-left:7px}
+.products{display:grid;gap:9px}.product{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(120px,.8fr) auto;gap:12px;align-items:center;padding:13px 15px;background:#fff;border:1px solid var(--line);border-radius:13px}.product a{font-weight:750;text-decoration:none}.meta{font-size:12px;color:var(--sub)}
+.intent{margin-top:28px;padding:22px;border-radius:16px;background:#FFF;border:1px solid var(--line)}.intent h2{margin:0 0 9px}.intent h3{font-size:15px;margin:20px 0 8px}.evidence{display:grid;gap:9px;margin-top:14px}.evidence-item{padding:13px 15px;border-radius:12px;background:#F6F9FE;border:1px solid var(--line)}.evidence-item strong{display:block}.evidence-item span{display:block;font-size:12.5px;color:var(--sub);margin-top:3px}.safety{padding:12px 14px;border-radius:12px;background:#FFF4E8;border:1px solid #F1C69E;color:#69360E;font-size:12.5px}.official-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}.official-links a{font-weight:700}
+.page-share{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:20px 0}.page-share button{min-height:44px;padding:9px 18px;border:1px solid #B9C9EA;border-radius:999px;background:#fff;color:var(--blue);font:inherit;font-weight:800;cursor:pointer}.page-share button:focus-visible{outline:3px solid rgba(47,99,232,.35);outline-offset:2px}.page-share-status{margin:0;min-height:1.7em;font-size:12px;color:var(--sub)}
+.cta{margin-top:28px;padding:22px;border-radius:16px;background:linear-gradient(135deg,#2F63E8,#4F80F4);color:#fff}.cta a{display:inline-block;background:#fff;border-radius:999px;padding:9px 18px;text-decoration:none;font-weight:800;margin-top:8px}.list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}.list a{display:block;background:#fff;border:1px solid var(--line);border-radius:13px;padding:14px;text-decoration:none;font-weight:750}.list small{display:block;color:var(--sub);font-weight:500;margin-top:4px}
+.note,footer{font-size:12px;color:var(--sub)}footer{text-align:center;margin-top:36px}footer a{color:var(--sub)}
+@media(max-width:640px){.hero,.card{padding:21px 18px}.product{grid-template-columns:1fr}.tag{margin:5px 5px 0 0}}
+
+.normal-list{margin:10px 0 0;padding:0;list-style:none;display:grid;gap:4px}.normal-list li{font-size:13px;padding:6px 2px;border-bottom:1px solid var(--line)}.normal-list li span{color:var(--sub);font-size:12px}
+details.normal{margin-top:18px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 16px}details.normal summary{cursor:pointer;font-weight:800;min-height:32px}
+.cat-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:13.5px}.cat-table th,.cat-table td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left}.cat-table td.num,.cat-table th.num{text-align:right;white-space:nowrap}.cat-table a{font-weight:750}
+</style></head><body>
+<div class="wrap"><header class="site"><a href="../">💊 医薬品供給ナビ</a></header>
+<nav class="crumb"><a href="../">トップ</a> › 採用薬の一括監視ガイド</nav><main>
+<article class="hero"><p class="eyebrow">HOW TO USE</p><h1>採用薬の供給状況をまとめて確認する方法</h1>
+<p class="lede">採用品目をCSVで一度読み込めば、次回からは限定出荷・供給停止への変化を「監視」画面でまとめて確認できます。登録不要・無料です。</p>
+<ul class="points"><li>CSVは端末内だけで照合し、外部へ送信しません</li><li>監視リストはこのブラウザ内に保存されます（アカウントは不要）</li><li>変化は厚生労働省公表データの日次の差分です</li></ul>
+<div class="page-share"><button type="button" data-dsn-share-page>このガイドを共有</button><p class="page-share-status" role="status" aria-live="polite"></p></div></article>
+<section class="intent"><h2>1. 採用品目のCSVを用意する</h2>
+<p>「商品名」または「YJコード」の列があるCSVを用意します。見出しは「商品名・品名・医薬品名・製品名」「YJコード・薬価基準収載医薬品コード」のいずれかで認識します。同じ商品名の品目が複数ある場合はYJコードで区別するため、YJコード列があると確実です。</p>
+<table class="cat-table"><thead><tr><th scope="col">YJコード</th><th scope="col">商品名</th></tr></thead>
+<tbody><tr><td>（12桁のコード）</td><td>〇〇錠10mg「△△」</td></tr><tr><td>（12桁のコード）</td><td>□□カプセル5mg</td></tr></tbody></table>
+<p class="note">1ファイル5MB・データ10,000行までです。ほかの列があってもかまいません。</p></section>
+<section class="intent"><h2>2. Web版の「監視」でCSVを読み込む</h2>
+<p><a href="../#watchDashboard" data-dsn-event="search-cta-open">Web版の監視画面</a>で「CSVからまとめて追加」（登録済みの場合は「CSVから追加・復元」）を押し、ファイルを選びます。照合できた件数、照合できなかった件数、YJコードが必要な同名品目の件数が表示されます。</p></section>
+<section class="intent"><h2>3. 次回からは変化だけを確認する</h2>
+<p>監視画面に「未確認の変更」「悪化」「改善」「情報差異」の件数が出ます。「未確認の変更を見る」で対象品目を確認し、確認が済んだら「確認済みにする」を押します。</p>
+<p class="safety">「悪化」「改善」は厚生労働省公表の供給区分の変化で、実在庫や入手可否を示すものではありません。代替の検討は、適応・用量・剤形などを確認し、医師・薬剤師が判断してください。</p></section>
+<section class="intent"><h2>4. 院内・薬局内で共有する</h2>
+<p>「変更を共有」または「文章をコピー」で、変化した品目の一覧をチャットや連絡票に貼り付けられます。</p></section>
+<section class="intent"><h2>5. 監視リストを保存・別の端末へ移す</h2>
+<p>「監視リストを保存」でYJコード・商品名・メーカー・供給状況・更新日のCSVを保存できます。ブラウザのデータを消すと監視リストも消えるため、定期的な保存をおすすめします。保存したCSVは、別の端末やブラウザで「CSVから追加・復元」に読み込めば元に戻せます。</p>
+<p>スマートフォンでは「ホーム画面に追加」で、アプリのように開けます（対応するブラウザの場合）。</p></section>
+<div class="cta"><strong>採用品目の監視を始める</strong><p>CSVがなくても、検索結果の★から1品目ずつ追加できます。</p><a href="../#watchDashboard" data-dsn-event="search-cta-open">Web版の監視画面を開く</a></div>
+<p class="note">本ガイドはWeb版の使い方の説明で、処方・調剤・代替選定その他の医療上の判断を行うものではありません。</p>
+</main><footer>最終更新：2026-09-26｜<a href="how-to-check-drug-supply.html">供給情報の確認ガイド</a>｜<a href="../categories/index.html">薬効分類別の供給状況</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
+<script data-goatcounter="https://kt1007.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script></body></html>
