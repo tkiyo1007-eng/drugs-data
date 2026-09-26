@@ -15,7 +15,11 @@
     if(/\/topics\/[^/]+\.html$/.test(path)) return {path:"/drugs-data/topics/_topic", title:"話題のニュース"};
     if(/\/products\/[^/]+\.html$/.test(path)) return {path:"/drugs-data/products/_product", title:"注目製品ページ"};
     if(/\/guides\/[^/]+\.html$/.test(path)) return {path:"/drugs-data/guides/_guide", title:"供給情報の確認ガイド"};
-    return {path:path || "/drugs-data/", title:document.title || "医薬品供給ナビ"};
+    // 独自ドメイン（kyokyu-navi.jp）ではサイトがドメイン直下になる。旧URL（/drugs-data/…）の
+    // 集計と連続させるため、記録するパスは従来どおり /drugs-data を先頭に付ける。
+    if(path.indexOf("/drugs-data") === 0) return {path:path, title:document.title || "医薬品供給ナビ"};
+    const legacy = path === "/" || path === "/index.html" ? "/drugs-data" : "/drugs-data" + path;
+    return {path:legacy, title:document.title || "医薬品供給ナビ"};
   };
   const referrerOrigin = function(){
     if(!document.referrer) return "";

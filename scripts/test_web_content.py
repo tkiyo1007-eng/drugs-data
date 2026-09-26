@@ -181,7 +181,7 @@ class PublishedWebContentTests(unittest.TestCase):
 
     def test_detail_share_prefers_only_confirmed_formal_item_pages(self):
         self.assertIn(
-            'const PUBLIC_SITE_ROOT = "https://tkiyo1007-eng.github.io/drugs-data/";',
+            'const PUBLIC_SITE_ROOT = "https://kyokyu-navi.jp/";',
             self.html,
         )
         self.assertIn("const FORMAL_ITEM_YJ = /^[0-9][0-9A-Z]{11}$/;", self.html)

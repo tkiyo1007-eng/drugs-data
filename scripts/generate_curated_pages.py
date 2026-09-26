@@ -15,7 +15,7 @@ from urllib.parse import quote
 
 from jst_time import jst_today
 
-SITE_ROOT = "https://tkiyo1007-eng.github.io/drugs-data/"
+SITE_ROOT = "https://kyokyu-navi.jp/"
 MHLW_SUPPLY_URL = "https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list"
 PMDA_SEARCH_URL = "https://www.pmda.go.jp/PmdaSearch/iyakuSearch/"
 PMDA_RECALL_URL = "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html"

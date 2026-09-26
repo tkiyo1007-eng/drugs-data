@@ -38,7 +38,7 @@ from pathlib import Path
 
 from jst_time import jst_today
 
-SITE_URL = "https://tkiyo1007-eng.github.io/drugs-data/"
+SITE_URL = "https://kyokyu-navi.jp/"
 LOG_PATH = Path("x_post_log.json")
 MAX_AGE_DAYS = 3
 MAX_WEIGHTED_LENGTH = 280

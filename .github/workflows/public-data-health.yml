@@ -69,7 +69,7 @@ jobs:
           from html.parser import HTMLParser
           from urllib.parse import unquote, urlsplit
 
-          SITE_ROOT = "https://tkiyo1007-eng.github.io/drugs-data/"
+          SITE_ROOT = "https://kyokyu-navi.jp/"
           HUB_URLS = [
               SITE_ROOT + "items/limited.html",
               SITE_ROOT + "items/stopped.html",
