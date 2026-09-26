@@ -143,6 +143,47 @@ class PostCommandTests(unittest.TestCase):
         with mock.patch.dict("os.environ", {}, clear=True):
             self.assertEqual(0, xp.main(["post", "--plan", str(self.plan_path)]))
 
+    def test_credentials_are_stripped_of_pasted_whitespace(self):
+        env = {name: f"  v-{name}\n" for name in xp.CREDENTIAL_ENV}
+        with mock.patch.dict("os.environ", env, clear=True):
+            credentials, missing = xp.load_credentials()
+        self.assertEqual([], missing)
+        self.assertEqual("v-X_API_KEY", credentials["X_API_KEY"])
+        with mock.patch.dict("os.environ", {"X_API_KEY": "  "}, clear=True):
+            _, missing = xp.load_credentials()
+        self.assertIn("X_API_KEY", missing)
+
+    def test_whoami_reports_username_or_auth_failure_without_posting(self):
+        env = {name: "v" for name in xp.CREDENTIAL_ENV}
+        with mock.patch.dict("os.environ", env, clear=True), \
+                mock.patch.object(xp, "whoami", return_value="DrugSupplyNavi") as who, \
+                mock.patch.object(xp, "post_to_x") as post:
+            self.assertEqual(0, xp.main(["whoami"]))
+        who.assert_called_once()
+        post.assert_not_called()
+        with mock.patch.dict("os.environ", env, clear=True), \
+                mock.patch.object(xp, "whoami", side_effect=RuntimeError("Xの認証に失敗しました（HTTP 401）")):
+            self.assertEqual(1, xp.main(["whoami"]))
+
+    def test_oauth_signature_matches_official_example(self):
+        # X/Twitter公式ドキュメント「Creating a signature」の例題（本文パラメータを含む）
+        import base64, hashlib, hmac, urllib.parse
+        quote = lambda v: urllib.parse.quote(str(v), safe="~")
+        params = {"status": "Hello Ladies + Gentlemen, a signed OAuth request!", "include_entities": "true",
+                  "oauth_consumer_key": "xvz1evFS4wEEPTGEFPHBog",
+                  "oauth_nonce": "kYjzVBB8Y0ZFabxSWbWovY3uYSQ2pTgmZeNu2VS4cg",
+                  "oauth_signature_method": "HMAC-SHA1", "oauth_timestamp": "1318622958",
+                  "oauth_token": "370773112-GmHxMAgYyLbNEtIKZeRNFsMKPR9EyMZeS9weJAEb", "oauth_version": "1.0"}
+        base = "&".join(("POST", quote("https://api.twitter.com/1.1/statuses/update.json"),
+                         quote("&".join(f"{quote(k)}={quote(v)}" for k, v in sorted(params.items())))))
+        key = f"{quote('kAcSOqF21Fu85e7zjz7ZN2U4ZRhfV3WpwPAoE3Z7kBw')}&{quote('LswwdoUaIvS8ltyTt5jkRh4J50vUPVVHtR2YPi5kE')}"
+        self.assertEqual("hCtSmYh+iHYCEqBWrE7C7hYmtUk=",
+                         base64.b64encode(hmac.new(key.encode(), base.encode(), hashlib.sha1).digest()).decode())
+        # 同じ手順（ソート・RFC3986エンコード・署名鍵）で実装していることを確認
+        source = Path(xp.__file__).read_text(encoding="utf-8")
+        self.assertIn('urllib.parse.quote(str(value), safe="~")', source)
+        self.assertIn("for k, v in sorted(params.items())", source)
+
     def test_oauth_header_is_signed_without_leaking_secrets(self):
         creds = {"X_API_KEY": "ck", "X_API_SECRET": "cs-secret", "X_ACCESS_TOKEN": "at",
                  "X_ACCESS_TOKEN_SECRET": "ats-secret"}
@@ -167,11 +208,15 @@ class WorkflowContractTests(unittest.TestCase):
         self.assertNotIn("schedule:", self.workflow)
         self.assertNotIn("pull_request", self.workflow)
 
-    def test_secrets_are_scoped_to_the_posting_step(self):
+    def test_secrets_are_scoped_to_posting_and_manual_auth_check(self):
         post_step = self.workflow.split("- name: Xへ投稿", 1)[1].split("- name:", 1)[0]
-        self.assertEqual(4, self.workflow.count("secrets."))
+        auth_step = self.workflow.split("- name: X認証の確認", 1)[1].split("- name:", 1)[0]
+        self.assertEqual(8, self.workflow.count("secrets."))
         self.assertEqual(4, post_step.count("secrets."))
+        self.assertEqual(4, auth_step.count("secrets."))
         self.assertIn("if: steps.mode.outputs.live == 'true'", post_step)
+        self.assertIn("if: github.event_name == 'workflow_dispatch'", auth_step)
+        self.assertIn("x_daily_post.py whoami", auth_step)
 
     def test_links_are_checked_before_posting(self):
         self.assertLess(self.workflow.index("リンク先の日別ページが公開済みか確認"),
