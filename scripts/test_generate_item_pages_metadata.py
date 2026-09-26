@@ -94,7 +94,7 @@ class ItemPageMetadataTests(unittest.TestCase):
         self.assertIn('const query = itemSearchInput ? itemSearchInput.value.trim() : "";', output)
         self.assertIn('window.dsnTrack("search-cta-open")', output)
         self.assertIn(
-            'location.href = "https://tkiyo1007-eng.github.io/drugs-data/" + '
+            'location.href = "https://kyokyu-navi.jp/" + '
             '"#q=" + encodeURIComponent(query);',
             output,
         )
@@ -184,7 +184,7 @@ class ItemPageMetadataTests(unittest.TestCase):
         output = page_html(row, "1234567F1234", "limited", "2026-08-16", [], {"1234567F1234"})
         self.assertEqual(output.count('rel="canonical"'), 1)
         self.assertIn('content="index,follow,max-image-preview:large"', output)
-        self.assertIn('href="https://tkiyo1007-eng.github.io/drugs-data/#item=1234567F1234"', output)
+        self.assertIn('href="https://kyokyu-navi.jp/#item=1234567F1234"', output)
         self.assertIn(
             '<meta name="apple-itunes-app" content="app-id=6777696446, '
             'app-argument=drugsupplynavi://search?q=1234567F1234">',
@@ -604,7 +604,7 @@ class ItemPageMetadataTests(unittest.TestCase):
         }
         output = hub_html("limited", [entry], "2026-08-26")
         self.assertEqual(output.count('rel="canonical"'), 1)
-        self.assertIn('href="https://tkiyo1007-eng.github.io/drugs-data/items/limited.html"', output)
+        self.assertIn('href="https://kyokyu-navi.jp/items/limited.html"', output)
         self.assertIn('href="1234567F1234.html"', output)
         self.assertIn("実際の受注可否や在庫を示す一覧ではありません", output)
         self.assertIn("厚生労働省の公式システム", output)

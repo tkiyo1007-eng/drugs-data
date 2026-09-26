@@ -33,7 +33,7 @@ from datetime import date, datetime, timezone, timedelta
 from pathlib import Path
 from urllib.parse import quote
 
-SITE_ROOT = "https://tkiyo1007-eng.github.io/drugs-data/"
+SITE_ROOT = "https://kyokyu-navi.jp/"
 APP_STORE = "https://apps.apple.com/jp/app/%E5%8C%BB%E8%96%AC%E5%93%81%E4%BE%9B%E7%B5%A6%E3%83%8A%E3%83%93/id6777696446"
 APP_ID = "6777696446"
 OFFICIAL_SUPPLY_URL = "https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list"

@@ -53,7 +53,7 @@ class CuratedPageGenerationTests(unittest.TestCase):
         self.assertIn('href="../items/limited.html">限定出荷の品目一覧</a>', entry)
         self.assertNotIn('関連品目', entry)
         self.assertLess(page.index('<nav class="product-entry"'), page.index('<h2>該当品目</h2>'))
-        self.assertIn('rel="canonical" href="https://tkiyo1007-eng.github.io/drugs-data/products/entry-test.html"', page)
+        self.assertIn('rel="canonical" href="https://kyokyu-navi.jp/products/entry-test.html"', page)
         self.assertIn('<nav class="crumb" aria-label="パンくず">', page)
 
     def test_search_normalizes_width_and_orders_more_severe_status_first(self):
@@ -154,7 +154,7 @@ class CuratedPageGenerationTests(unittest.TestCase):
             guide = (site / "guides" / f"{GUIDE_SLUG}.html").read_text(encoding="utf-8")
             sitemap = (site / "sitemap-curated.xml").read_text(encoding="utf-8")
 
-            self.assertIn('rel="canonical" href="https://tkiyo1007-eng.github.io/drugs-data/topics/test-release-20260817.html"', topic)
+            self.assertIn('rel="canonical" href="https://kyokyu-navi.jp/topics/test-release-20260817.html"', topic)
             self.assertIn('"@type":"Article"', topic)
             self.assertIn("テスト&lt;script&gt;alert(1)&lt;/script&gt;", topic)
             self.assertNotIn("<script>alert(1)</script>", topic)
@@ -281,7 +281,7 @@ class CuratedPageGenerationTests(unittest.TestCase):
                 page,
             )
             self.assertIn(
-                f'"url":"https://tkiyo1007-eng.github.io/drugs-data/products/caduet-{number}.html"',
+                f'"url":"https://kyokyu-navi.jp/products/caduet-{number}.html"',
                 page,
             )
 

@@ -49,7 +49,7 @@ class CategoryPageTests(unittest.TestCase):
         self.assertIn("代替薬の推薦ではなく", page)
         for forbidden in ("おすすめ", "代わりに", "在庫あり", "問題なし"):
             self.assertNotIn(forbidden, page)
-        self.assertIn('href="https://tkiyo1007-eng.github.io/drugs-data/categories/223.html"', page)
+        self.assertIn('href="https://kyokyu-navi.jp/categories/223.html"', page)
         self.assertEqual("2026-09-25", lastmod)  # サイトマップ用はテンプレート改訂日を含む
         self.assertIn("品目行の最新更新日：2026-09-18", page)  # 表示はデータの日付だけ
         self.assertNotIn("品目行の最新更新日：2026-09-25", page)

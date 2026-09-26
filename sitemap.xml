@@ -5,18 +5,18 @@
      privacy.html と about.html は drugs-data 側で管理しているため lastmod を付けない。 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://tkiyo1007-eng.github.io/drugs-data/</loc>
-    <lastmod>2026-09-26</lastmod>
+    <loc>https://kyokyu-navi.jp/</loc>
+    <lastmod>2026-07-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://tkiyo1007-eng.github.io/drugs-data/privacy.html</loc>
+    <loc>https://kyokyu-navi.jp/privacy.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://tkiyo1007-eng.github.io/drugs-data/about.html</loc>
+    <loc>https://kyokyu-navi.jp/about.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

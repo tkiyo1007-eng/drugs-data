@@ -61,7 +61,7 @@ def collect(path, fetch, now):
 
 
 def fetch():
-    req = urllib.request.Request(FEED, headers={'User-Agent': 'DrugSupplyNavi/1.0 (+https://tkiyo1007-eng.github.io/drugs-data/)'})
+    req = urllib.request.Request(FEED, headers={'User-Agent': 'DrugSupplyNavi/1.0 (+https://kyokyu-navi.jp/)'})
     with urllib.request.urlopen(req, timeout=30) as response:
         if response.geturl() != FEED:
             raise ValueError('unexpected redirect')

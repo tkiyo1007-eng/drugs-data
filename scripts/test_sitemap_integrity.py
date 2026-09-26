@@ -8,7 +8,7 @@ from urllib.parse import urlsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SITE_ROOT = "https://tkiyo1007-eng.github.io/drugs-data/"
+SITE_ROOT = "https://kyokyu-navi.jp/"
 SITEMAPS = {
     "sitemap.xml",
     "sitemap-items.xml",

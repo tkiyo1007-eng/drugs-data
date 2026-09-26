@@ -12,7 +12,7 @@ from urllib.parse import quote
 from xml.sax.saxutils import escape as xml_escape
 
 
-SITE_ROOT = "https://tkiyo1007-eng.github.io/drugs-data/"
+SITE_ROOT = "https://kyokyu-navi.jp/"
 GUIDE_PATH = "guides/how-to-check-drug-supply.html"
 STATUS_LABELS = {
     "ok": "通常出荷",

@@ -9,20 +9,20 @@
 <meta property="og:title" content="医薬品供給ナビ">
 <meta property="og:description" content="出荷調整・限定出荷・供給停止・販売中止を毎日更新。薬品名・成分名・メーカー名・YJコードから無料で検索できます。">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://tkiyo1007-eng.github.io/drugs-data/">
-<meta property="og:image" content="https://tkiyo1007-eng.github.io/drugs-data/og_image.png">
+<meta property="og:url" content="https://kyokyu-navi.jp/">
+<meta property="og:image" content="https://kyokyu-navi.jp/og_image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="医薬品供給ナビの供給状況サマリー">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="医薬品供給ナビ">
 <meta name="twitter:description" content="出荷調整・限定出荷・供給停止・販売中止を毎日更新。薬品名・成分名・メーカー名・YJコードから無料で検索できます。">
-<meta name="twitter:image" content="https://tkiyo1007-eng.github.io/drugs-data/og_image.png">
+<meta name="twitter:image" content="https://kyokyu-navi.jp/og_image.png">
 <meta name="twitter:image:alt" content="医薬品供給ナビの供給状況サマリー">
 <meta name="apple-itunes-app" content="app-id=6777696446">
 <meta name="google-site-verification" content="BCISo-785N0fmuhOBKHvUEU5hk8hRCVHrWVVAXCq1oo">
-<link rel="canonical" href="https://tkiyo1007-eng.github.io/drugs-data/">
-<link rel="alternate" type="application/atom+xml" title="医薬品供給ナビ 供給変更フィード" href="https://tkiyo1007-eng.github.io/drugs-data/updates/feed.xml">
+<link rel="canonical" href="https://kyokyu-navi.jp/">
+<link rel="alternate" type="application/atom+xml" title="医薬品供給ナビ 供給変更フィード" href="https://kyokyu-navi.jp/updates/feed.xml">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="theme-color" content="#EEF3FE" media="(prefers-color-scheme: light)">
@@ -35,7 +35,7 @@
       "@type": "WebSite",
       "name": "医薬品供給ナビ",
       "alternateName": "いやくひんきょうきゅうなび",
-      "url": "https://tkiyo1007-eng.github.io/drugs-data/",
+      "url": "https://kyokyu-navi.jp/",
       "description": "厚生労働省の医薬品供給状況データを毎日自動更新。出荷調整・限定出荷・供給停止・販売中止を、薬品名・成分名・メーカー名・YJコードから無料で検索できます。",
       "inLanguage": "ja"
     },
@@ -3267,13 +3267,13 @@ let ANNOUNCEMENTS = {...MANUAL_ANNOUNCEMENTS};
 // 詳細を開いたときに初めて取得する。約2,100件のキーで30KB弱あり、ページを開いた
 // だけの人には不要。読み込みの遅い回線では本体のCSV(約1MB)と帯域を奪い合うため、
 // 必要になるまで取りに行かない
-const PUBLIC_SITE_ROOT = "https://tkiyo1007-eng.github.io/drugs-data/";
+const PUBLIC_SITE_ROOT = "https://kyokyu-navi.jp/";
 const FORMAL_ITEM_YJ = /^[0-9][0-9A-Z]{11}$/;
 let ITEM_PAGES = new Set();
 let itemPagesLoading = null;
 function loadItemPages(){
   if(itemPagesLoading) return itemPagesLoading;
-  itemPagesLoading = fetchFirst(["items/keys.json", "https://tkiyo1007-eng.github.io/drugs-data/items/keys.json"])
+  itemPagesLoading = fetchFirst(["items/keys.json", "https://kyokyu-navi.jp/items/keys.json"])
     .then(res => res && res.json())
     .then(keys => {
       if(!Array.isArray(keys) || !keys.length) return;
@@ -3304,11 +3304,11 @@ let supplementalDataLoading = null;
 function loadSupplementalData(){
   if(supplementalDataLoading) return supplementalDataLoading;
   supplementalDataLoading = Promise.all([
-    fetchFirst(["maker_links.json", "https://tkiyo1007-eng.github.io/drugs-data/maker_links.json"])
+    fetchFirst(["maker_links.json", "https://kyokyu-navi.jp/maker_links.json"])
       .then(res => res && res.json()).then(data => {
         if(Array.isArray(data) && data.length) MAKER_LINKS = data;
       }).catch(()=>{}),
-    fetchFirst(["manual_announcements.json", "https://tkiyo1007-eng.github.io/drugs-data/manual_announcements.json"])
+    fetchFirst(["manual_announcements.json", "https://kyokyu-navi.jp/manual_announcements.json"])
       .then(res => res && res.json()).then(data => {
         if(!data || typeof data !== "object") return;
         MANUAL_ANNOUNCEMENTS = data.exact && typeof data.exact === "object" ? data.exact : data;
@@ -3320,7 +3320,7 @@ function loadSupplementalData(){
         }
         ANNOUNCEMENTS = {...ANNOUNCEMENTS, ...MANUAL_ANNOUNCEMENTS};
       }).catch(()=>{}),
-    fetchFirst(["product_lifecycle.json", "https://tkiyo1007-eng.github.io/drugs-data/product_lifecycle.json"])
+    fetchFirst(["product_lifecycle.json", "https://kyokyu-navi.jp/product_lifecycle.json"])
       .then(res => { if(!res) throw new Error("missing lifecycle"); const cached=responseUsesCachedData(res); return res.json().then(data=>({data,cached})); }).then(({data,cached}) => {
         if(!data || data.schema_version!==1 || !data.products || typeof data.products!=="object"){
           throw new Error("invalid lifecycle");
@@ -3328,7 +3328,7 @@ function loadSupplementalData(){
         PRODUCT_LIFECYCLES = data.products;
         SUPPLEMENTAL_STATE.lifecycle = cached ? "stale" : "loaded";
       }).catch(()=>{ SUPPLEMENTAL_STATE.lifecycle = "failed"; }).finally(updateSupplementalStatus),
-    fetchFirst(["supply_discrepancies.json", "https://tkiyo1007-eng.github.io/drugs-data/supply_discrepancies.json"])
+    fetchFirst(["supply_discrepancies.json", "https://kyokyu-navi.jp/supply_discrepancies.json"])
       .then(res => { if(!res) throw new Error("missing discrepancies"); const cached=responseUsesCachedData(res); return res.json().then(data=>({data,cached})); }).then(({data,cached}) => {
         if(!data || data.schema_version!==1 || !data.products || typeof data.products!=="object"){
           throw new Error("invalid discrepancies");
@@ -3341,7 +3341,7 @@ function loadSupplementalData(){
           ? `${sourceMatch[1]}-${String(sourceMatch[2]).padStart(2,"0")}-${String(sourceMatch[3]).padStart(2,"0")}` : "";
         SUPPLEMENTAL_STATE.discrepancies = cached ? "stale" : "loaded";
       }).catch(()=>{ SUPPLEMENTAL_STATE.discrepancies = "failed"; }).finally(updateSupplementalStatus),
-    fetchFirst(["maker_collection_health.json", "https://tkiyo1007-eng.github.io/drugs-data/maker_collection_health.json"])
+    fetchFirst(["maker_collection_health.json", "https://kyokyu-navi.jp/maker_collection_health.json"])
       .then(res => { if(!res) throw new Error("missing health"); const cached=responseUsesCachedData(res); return res.json().then(data=>({data,cached})); }).then(({data,cached}) => {
         if(!data || !Array.isArray(data.sources) || !data.sources.length || data.sources.some(source=>source.ok !== true)){
           throw new Error("incomplete health");
@@ -3349,17 +3349,17 @@ function loadSupplementalData(){
         SUPPLEMENTAL_CHECKED_THROUGH = String(data.checked || SUPPLEMENTAL_CHECKED_THROUGH || "");
         SUPPLEMENTAL_STATE.health = cached ? "stale" : "loaded";
       }).catch(()=>{ SUPPLEMENTAL_STATE.health = "failed"; }).finally(updateSupplementalStatus),
-    fetchFirst(["maker_announcements.json", "https://tkiyo1007-eng.github.io/drugs-data/maker_announcements.json"])
+    fetchFirst(["maker_announcements.json", "https://kyokyu-navi.jp/maker_announcements.json"])
       .then(res => res && res.json()).then(data => {
         if(data) ANNOUNCEMENTS = {...data, ...MANUAL_ANNOUNCEMENTS};
       }).catch(()=>{}),
-    fetchFirst(["announcement_summaries.json", "https://tkiyo1007-eng.github.io/drugs-data/announcement_summaries.json"])
+    fetchFirst(["announcement_summaries.json", "https://kyokyu-navi.jp/announcement_summaries.json"])
       .then(res => res && res.json()).then(data => { if(data) SUMMARIES = data; }).catch(()=>{}),
-    fetchFirst(["announcement_packages.json", "https://tkiyo1007-eng.github.io/drugs-data/announcement_packages.json"])
+    fetchFirst(["announcement_packages.json", "https://kyokyu-navi.jp/announcement_packages.json"])
       .then(res => res && res.json()).then(data => { if(data) PACKAGES = data; }).catch(()=>{}),
-    fetchFirst(["resolution_stats.json", "https://tkiyo1007-eng.github.io/drugs-data/resolution_stats.json"])
+    fetchFirst(["resolution_stats.json", "https://kyokyu-navi.jp/resolution_stats.json"])
       .then(res => res && res.json()).then(data => { if(data) RESOLUTION_STATS = data; }).catch(()=>{}),
-    fetchFirst(["featured_products.json", "https://tkiyo1007-eng.github.io/drugs-data/featured_products.json"])
+    fetchFirst(["featured_products.json", "https://kyokyu-navi.jp/featured_products.json"])
       .then(res => res && res.json()).then(data => {
         if(data && data.schema_version===1 && Array.isArray(data.products)){
           TRENDING = data.products.map(item=>({slug:item.slug,label:item.label, q:item.query}));
@@ -3447,7 +3447,7 @@ function applyPendingHistoryOrder(){
   historyOrderPending = false;
 }
 async function requestStatusHistory(signal){
-  const sources = [...new Set(["status_changes.json", "https://tkiyo1007-eng.github.io/drugs-data/status_changes.json"]
+  const sources = [...new Set(["status_changes.json", "https://kyokyu-navi.jp/status_changes.json"]
     .map(url=>new URL(url,location.href).href))];
   for(const url of sources){
     if(signal.aborted) throw new Error("履歴取得期限を超えました");
@@ -5129,7 +5129,7 @@ function newsStatusMessage(state,kind,now=Date.now()){
 }
 async function requestNewsContent(kind,signal){
   const file = kind === "topics" ? "industry_topics.json" : kind === "headlines" ? "industry_headlines.json" : "news.json";
-  const urls = [...new Set([file,`https://tkiyo1007-eng.github.io/drugs-data/${file}`].map(url=>new URL(url,location.href).href))];
+  const urls = [...new Set([file,`https://kyokyu-navi.jp/${file}`].map(url=>new URL(url,location.href).href))];
   for(const url of urls){
     if(signal.aborted) throw new Error("記事取得期限を超えました");
     let response;
@@ -5332,10 +5332,10 @@ function countUp(total){
 // 日付は version.json から得られたときにだけ表示する
 
 /* ===== 実データ読み込み（drugs_app_ready.csv / version.json） ===== */
-const CSV_SOURCES = ["drugs_app_ready.csv", "https://tkiyo1007-eng.github.io/drugs-data/drugs_app_ready.csv"];
+const CSV_SOURCES = ["drugs_app_ready.csv", "https://kyokyu-navi.jp/drugs_app_ready.csv"];
 let CSV_HEAD = null; // 実CSVのヘッダー（詳細モーダルで全列を表示するために保持）
 let DATASET_DATE = ""; // version.jsonの全体基準日（品目行の更新日と区別）
-const VER_SOURCES = ["version.json", "https://tkiyo1007-eng.github.io/drugs-data/version.json"];
+const VER_SOURCES = ["version.json", "https://kyokyu-navi.jp/version.json"];
 const STATUS_GRAD = {
   ok:"linear-gradient(90deg,#3CC383,#2FAE6E)",
   limited:"linear-gradient(90deg,#F2A94F,#E8912F)",

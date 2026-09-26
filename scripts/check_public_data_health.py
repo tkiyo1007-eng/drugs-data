@@ -25,7 +25,7 @@ from public_data_manifest import JSON_FILES, MANIFEST_NAME, PUBLIC_FILES, finger
 
 
 BASE_URL = "https://raw.githubusercontent.com/tkiyo1007-eng/drugs-data/main/"
-PAGES_URL = "https://tkiyo1007-eng.github.io/drugs-data/"
+PAGES_URL = "https://kyokyu-navi.jp/"
 MAX_JSON_BYTES = 20 * 1024 * 1024
 MAX_CSV_BYTES = 30 * 1024 * 1024
 MHLW_SUPPLY_PAGE = "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html"
