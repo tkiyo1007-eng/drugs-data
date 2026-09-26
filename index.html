@@ -2762,7 +2762,8 @@ let hashTimer = null;
 let pageAnchorGeneration = 0;
 function syncHashSoon(){
   clearTimeout(hashTimer);
-  hashTimer = setTimeout(syncHash, 400);
+  // 予約中かどうかを openDetail() が判定できるよう、実行・取消時は null に戻す
+  hashTimer = setTimeout(()=>{ hashTimer = null; syncHash(); }, 400);
 }
 // 「★お気に入り」ピルは登録が1件以上あるときだけ表示している。
 // お気に入りが空のまま #f=fav で開くと、押されているピルが画面上に無いのに
@@ -2796,6 +2797,7 @@ window.addEventListener("hashchange", ()=>{
   if(isOrdinaryPageAnchor()){
     pageAnchorGeneration++;
     clearTimeout(hashTimer);
+    hashTimer = null;
     // 読込完了後の通常ナビはブラウザ標準のアンカー移動だけで十分。追従を続けると、
     // その直後に利用者が別の場所へ移動した際に元のアンカーへ戻してしまう。
     if(LIVE){
@@ -2883,6 +2885,7 @@ $csvBtn.addEventListener("click", ()=>{
 $searchShareBtn.addEventListener("click", async()=>{
   if(!LIVE || !LAST_HITS.length) return;
   clearTimeout(hashTimer);
+  hashTimer = null;
   syncHash();
   const url = new URL(location.href);
   url.searchParams.set("src", "share");
@@ -4628,8 +4631,13 @@ function openDetail(d, opts={}){
     // モーダルが何度も再表示される。開いている間の切り替えは同じ履歴項目を置換する
     if(wasOpen && (location.hash.startsWith("#item=") || location.hash.startsWith("#drug=")))
       history.replaceState({item:itemKey(d), modal:true}, "", route);
-    else
+    else{
+      // 検索直後（URL更新の400ms遅延中）に開くと、遅延分は #item= の間に捨てられ、閉じて戻った
+      // 履歴に以前の検索語が残り、hashchange がその語を検索欄へ書き戻していた。開く前に反映する。
+      // 予約中のときだけ反映し、#faq などページ内リンク上で開いた場合のURLは変えない。
+      if(hashTimer !== null){ clearTimeout(hashTimer); hashTimer = null; syncHash(); }
       history.pushState({item:itemKey(d), modal:true}, "", route);
+    }
   }
   if(!wasOpen) lastFocus = document.activeElement;
   $mBack.classList.add("open");
@@ -4830,6 +4838,7 @@ document.getElementById("trendingList").addEventListener("click", e=>{
   cancelPendingPageAnchorRestore();
   clearTimeout(searchTimer);
   clearTimeout(hashTimer);
+  hashTimer = null;
   if(location.hash !== hash) history.pushState(null, "", hash);
   $q.value = new URLSearchParams(hash.slice(1)).get("q") || "";
   setFilter("all");
