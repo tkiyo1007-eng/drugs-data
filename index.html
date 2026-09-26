@@ -503,6 +503,11 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   color:#B0500E;background:rgba(232,145,47,.16);border:1px solid rgba(232,145,47,.4);
   white-space:nowrap;
 }
+/* 通常出荷のまま厚労省の「出荷量状況」が減少・停止の品目。供給区分とは別情報なので点線で区別する */
+.volume-badge{
+  font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:999px;
+  color:#7A4E12;background:#FFF6E5;border:1px dashed #C98A2E;white-space:nowrap;
+}
 .discontinued-badge{
   font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:999px;
   color:#7B3F28;background:rgba(138,106,82,.15);border:1px solid rgba(138,106,82,.42);
@@ -1186,6 +1191,7 @@ footer a:hover{color:var(--blue)}
      暗背景では白を25%混ぜて明度を上げ、全ステータスで WCAG AA を満たす */
   .status-tag,.term-tag,.rel-status{color:color-mix(in srgb,var(--sc) 75%,white)}
   .discrepancy-badge{color:#FFE8A3;background:rgba(214,155,0,.17);border-color:#E5B539}
+  .volume-badge{color:#FFD9A0;background:rgba(214,155,0,.1);border-color:#C98A2E}
   .discrepancy-panel{color:#FFE9A8;background:rgba(214,155,0,.14);border-color:#E5B539}
   .discrepancy-panel .discrepancy-note{color:#DCC98E}
   .discrepancy-panel a{color:#FFD978}
@@ -2711,6 +2717,7 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
       ? `<span class="discrepancy-badge" title="厚労省公表区分と、より新しいメーカー公式案内に差異があります">情報差異あり</span>`
       : "";
     const changeBadge = historyBadgeHtml(d);
+    const volumeBadge = shipmentVolumeBadgeHtml(d);
     const specText = d.price
       ? (d.spec ? `${d.spec}＝${d.price}円` : `薬価${d.price}円`)
       : dispSpec(d.spec);
@@ -2729,7 +2736,7 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
       </div>
       <div class="drug-maker">${esc(d.m)}${spec}</div>
       <div class="drug-foot">
-        <span class="drug-tags"><span class="status-tag">${st.label}</span>${discrepancyBadge}${changeBadge}${delistBadge}${discontinuedBadge}</span>
+        <span class="drug-tags"><span class="status-tag">${st.label}</span>${discrepancyBadge}${changeBadge}${volumeBadge}${delistBadge}${discontinuedBadge}</span>
         <span class="drug-date num">公表行更新 ${d.d}${ago}</span>
       </div>
     </article>`;
@@ -3486,6 +3493,16 @@ async function loadStatusHistory(){
 }
 function statusChangeMatchesCurrentItem(item, change){
   return Boolean(item && change && mapPublishedStatus(change.to) === item.s);
+}
+// 厚労省の「出荷量状況」が減少・停止なのに供給区分は通常出荷の品目だけに付ける。
+// 限定出荷・供給停止は区分自体が状況を示すため重ねない。区分は変更せず公表値だけを示す。
+function shipmentVolumeBadgeHtml(item){
+  if(item.s !== "ok") return "";
+  const volume = String(item.v || "").normalize("NFKC");
+  const label = volume.startsWith("B.") ? "出荷量減少" : volume.startsWith("C.") ? "出荷量：停止" : "";
+  return label
+    ? `<span class="volume-badge" title="厚生労働省公表の出荷量状況（${esc(item.v)}）。供給区分は通常出荷です">${label}</span>`
+    : "";
 }
 function latestChangeFor(item){
   const yj = normalizeYj(item && item.yj);
@@ -5562,13 +5579,15 @@ function failDataLoad(message){
     const publicationDate = publicationDates[publicationDates.length-1] || "";
     // 供給区分が最後に変わった日（厚労省「ステータス更新日」）。出荷量状況だけの更新と区別する。
     const statusDate = iStatusDate>=0 ? normalizedPublicationDate(r[iStatusDate]) : "";
+    const volumeMatch = iAlt>=0 ? /出荷量状況:\s*(.*)$/.exec(r[iAlt]||"") : null;
+    const shipmentVolume = volumeMatch ? volumeMatch[1].trim() : "";
     // 厚労省Excelの「出荷量状況」区分に「薬価削除予定」が含まれる品目は、
     // 供給状況欄が「通常出荷」のままでも近く販売終了となる見込みがあるため別途フラグ化。
     // 経過措置期限が設定済み＝薬価基準からの削除が決定済みなので同様に扱う（アプリ版と同じ判定）
     const delist = (iAlt>=0 && (r[iAlt]||"").includes("薬価削除予定"))
                 || (iKeika>=0 && !!(r[iKeika]||"").trim());
     items.push({
-      n:name, m:maker, s, d:publicationDate, sd:statusDate || "", delist,
+      n:name, m:maker, s, d:publicationDate, sd:statusDate || "", v:shipmentVolume, delist,
       spec: iSpec>=0 ? (r[iSpec]||"").trim() : "",
       price: iPrice>=0 ? (r[iPrice]||"").trim() : "",
       g:genericName,                                 // 一般名（同成分の他社品の検索用）
