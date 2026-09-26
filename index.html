@@ -1228,21 +1228,37 @@ footer a:hover{color:var(--blue)}
 }
 
 /* ===== 季節デザイン：ハロウィン（10月のみ） =====
-   青いガラスの基調は変えず、背景の光・ヒーロー見出し・飾りだけに紫と橙を足す。
-   橙は「限定出荷」の色と紛れるため、検索結果・詳細・集計など供給区分を示す領域には使わない。 */
-.season-deco,.season-note{display:none}
-.season-halloween header > div{position:relative}
-.season-halloween .aurora{background:linear-gradient(160deg,#F4F1FF 0%,#EDEBFD 45%,#E4EAFE 100%)}
-.season-halloween .aurora::before{background:radial-gradient(circle,#A48BF5 0%,transparent 65%)}
-.season-halloween .aurora::after{background:radial-gradient(circle,#FFB26B 0%,transparent 65%);opacity:.3}
-.season-halloween h1 .grad{background-image:linear-gradient(120deg,#4E2AA8,var(--blue) 52%,#B34E0C)}
+   青いガラスの基調は変えず、ヒーローの背景（夜空・月・星・蜘蛛の巣）と見出し・飾りに紫と琥珀色を足す。
+   橙は「限定出荷」の色と紛れるため、検索結果・詳細・集計など供給区分を示す領域には使わない。
+   動きは prefers-reduced-motion の既存規則で停止する。飾りはすべて aria-hidden。 */
+.season-deco,.season-note,.season-sky{display:none}
+.season-halloween header > div{position:relative;z-index:1}
+.season-halloween .aurora{background:linear-gradient(170deg,#E9E3FF 0%,#EEEAFE 28%,#EEF1FE 60%,#E6ECFE 100%)}
+.season-halloween .aurora::before{background:radial-gradient(circle,#9C83F2 0%,transparent 65%);opacity:.5}
+.season-halloween .aurora::after{background:radial-gradient(circle,#FFB26B 0%,transparent 65%);opacity:.32}
+.season-halloween h1 .grad{background-image:linear-gradient(120deg,#4E2AA8,var(--blue) 50%,#B34E0C)}
 .season-halloween header .btn-primary,
 .season-halloween .nav-cta{background:linear-gradient(135deg,#7652DB,var(--blue) 58%,var(--blue-deep))}
+.season-halloween .sec-eyebrow{color:#6B45C9}
+.season-halloween .brand-mark{background:linear-gradient(150deg,#8D6BF0,var(--blue) 70%);box-shadow:inset 0 1.5px 1px rgba(255,255,255,.6),0 6px 14px -4px rgba(118,82,219,.6)}
 .season-halloween .season-note{
   display:inline-flex;align-items:center;gap:6px;margin-top:10px;
   font-size:12px;font-weight:700;color:#5B3A9E;
 }
 .season-halloween .season-note svg{flex:none}
+/* 夜空の層：ヘッダー内に閉じ込め、はみ出しは切り取る（横スクロールを出さない） */
+.season-halloween .season-sky{
+  display:block;position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;
+}
+/* PCは右側の集計カードに隠れないよう、見出しとカードの間の上部に置く */
+.season-sky .sky-moon{position:absolute;top:100px;left:44%;width:88px;height:88px;
+  filter:drop-shadow(0 0 22px rgba(255,214,120,.55)) drop-shadow(0 0 60px rgba(255,200,90,.25));opacity:.9}
+.season-sky .sky-stars{position:absolute;top:70px;left:2%;right:2%;width:96%;height:220px;color:#7B5CD6;opacity:.55}
+.season-sky .sky-web{position:absolute;top:64px;left:0;width:118px;height:118px;color:#6B5A9A;opacity:.22}
+.sky-stars .tw1{animation:twinkle 3.2s ease-in-out infinite}
+.sky-stars .tw2{animation:twinkle 4.4s ease-in-out infinite -1.3s}
+.sky-stars .tw3{animation:twinkle 5.6s ease-in-out infinite -2.6s}
+@keyframes twinkle{50%{opacity:.25}}
 .season-halloween .season-deco{
   /* 見出し1行目「医薬品の」の右の空きに、見出しと同じ文字サイズ基準で置く（画面幅で重ならない） */
   /* right:0 と max-width で列幅内に収め、320px幅でも横スクロールを出さない */
@@ -1253,20 +1269,54 @@ footer a:hover{color:var(--blue)}
 .season-deco .bat1{left:0;top:.42em;width:.8em;height:.35em}
 .season-deco .bat2{left:.95em;top:.04em;width:.55em;height:.24em}
 .season-deco .bat3{left:1.62em;top:.55em;width:.4em;height:.18em}
-.season-deco .pumpkin{right:.1em;top:.12em;width:1.02em;height:.9em}
-.season-deco .bat{animation:batFloat 6s ease-in-out infinite}
-.season-deco .bat2{animation-delay:-2s}
-.season-deco .bat3{animation-delay:-4s}
-@keyframes batFloat{50%{transform:translateY(-6px) rotate(-4deg)}}
+.season-deco .pumpkin{right:.1em;top:.12em;width:1.02em;height:.9em;
+  filter:drop-shadow(0 4px 10px rgba(238,132,36,.35));animation:pumpkinGlow 3.8s ease-in-out infinite}
+.season-deco .bat{transform-origin:50% 60%;animation:batFlight 7s ease-in-out infinite}
+.season-deco .bat2{animation-delay:-2.3s;animation-duration:8.5s}
+.season-deco .bat3{animation-delay:-4.6s;animation-duration:6.2s}
+@keyframes batFlight{
+  0%,100%{transform:translate(0,0) scaleY(1)}
+  20%{transform:translate(3px,-5px) scaleY(.7)}
+  40%{transform:translate(6px,-2px) scaleY(1)}
+  60%{transform:translate(2px,-7px) scaleY(.75)}
+  80%{transform:translate(-2px,-3px) scaleY(1)}
+}
+@keyframes pumpkinGlow{50%{filter:drop-shadow(0 4px 16px rgba(255,170,60,.6))}}
+.season-sky .sky-bunting{position:absolute;top:88px;left:4%;width:92%;height:44px;color:#8E7BC8;opacity:.9;
+  transform-origin:50% 0;animation:buntingSway 6s ease-in-out infinite}
+@keyframes buntingSway{50%{transform:rotate(.5deg) translateY(2px)}}
+.season-sky .sky-ghost{position:absolute;top:360px;left:40%;width:58px;height:68px;
+  filter:drop-shadow(0 8px 16px rgba(80,60,160,.25));animation:ghostFloat 5.5s ease-in-out infinite}
+@keyframes ghostFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+.season-sky .sky-bat{position:absolute;color:#3D2A66;opacity:.8;transform-origin:50% 60%;animation:batFlight 7.5s ease-in-out infinite}
+.season-sky .sb1{top:150px;left:30%;width:38px;height:17px}
+.season-sky .sb2{top:118px;left:62%;width:26px;height:12px;animation-delay:-3s}
+.season-sky .sb3{top:420px;left:88%;width:32px;height:14px;animation-delay:-5s}
+@media(max-width:900px){
+  .season-sky .sky-moon{top:76px;left:auto;right:14px;width:64px;height:64px}
+  .season-sky .sky-stars{top:64px;height:150px}
+  .season-sky .sky-web{top:58px;width:84px;height:84px}
+  .season-sky .sky-bunting{top:66px;left:2%;width:96%;height:28px}
+  .season-sky .sky-ghost{top:300px;left:auto;right:22px;width:44px;height:52px}
+  .season-sky .sb1{top:150px;left:auto;right:96px;width:28px;height:13px}
+  .season-sky .sb2{top:118px;left:auto;right:118px;width:20px;height:9px}
+  .season-sky .sb3{display:none}
+}
 @media (prefers-color-scheme: dark){
-  .season-halloween .aurora{background:linear-gradient(160deg,#120F2B 0%,#0D0F26 45%,#0B1128 100%)}
-  .season-halloween .aurora::before{opacity:.26}
+  .season-halloween .aurora{background:linear-gradient(170deg,#1A1238 0%,#130F2E 30%,#0D1026 62%,#0B1128 100%)}
+  .season-halloween .aurora::before{opacity:.3}
   .season-halloween .aurora::after{opacity:.16}
-  .season-halloween h1 .grad{background-image:linear-gradient(120deg,#C3ADFF,#8FB4FF 52%,#FFB877)}
+  .season-halloween h1 .grad{background-image:linear-gradient(120deg,#C3ADFF,#8FB4FF 50%,#FFB877)}
   .season-halloween header .btn-primary,
   .season-halloween .nav-cta{background:linear-gradient(135deg,#6A4BD0,#3F6FE0 58%,#2A4FB8)}
+  .season-halloween .sec-eyebrow{color:#C9B6FF}
   .season-halloween .season-note{color:#CDBBFF}
   .season-halloween .season-deco{color:#B9A6F2}
+  .season-sky .sky-stars{color:#E9DEFF;opacity:.8}
+  .season-sky .sky-web{color:#B8A8E8;opacity:.18}
+  .season-sky .sky-moon{opacity:1}
+  .season-sky .sky-bat{color:#B9A6F2}
+  .season-sky .sky-bunting{color:#6E5BA8}
 }
 </style>
 </head>
@@ -1317,17 +1367,30 @@ footer a:hover{color:var(--blue)}
 </nav>
 
 <header id="top">
+  <div class="season-sky" aria-hidden="true">
+    <svg class="sky-moon" viewBox="0 0 100 100"><defs><radialGradient id="moonFill" cx="40%" cy="38%" r="70%"><stop offset="0" stop-color="#FFF6D6"/><stop offset="1" stop-color="#F3D48A"/></radialGradient></defs><path d="M62 8a44 44 0 1 0 30 70A38 38 0 0 1 62 8Z" fill="url(#moonFill)"/></svg>
+    <svg class="sky-stars" viewBox="0 0 400 160"><g fill="currentColor"><circle class="tw1" cx="22" cy="30" r="1.6"/><circle class="tw2" cx="88" cy="12" r="1.1"/><circle class="tw3" cx="150" cy="44" r="1.4"/><circle class="tw1" cx="214" cy="18" r="1"/><circle class="tw2" cx="262" cy="62" r="1.5"/><circle class="tw3" cx="318" cy="26" r="1.2"/><circle class="tw1" cx="372" cy="54" r="1.6"/><circle class="tw2" cx="120" cy="96" r="1"/><circle class="tw3" cx="342" cy="112" r="1.1"/><path class="tw2" d="M190 86l2 5 5 2-5 2-2 5-2-5-5-2 5-2Z"/><path class="tw1" d="M300 140l1.6 4 4 1.6-4 1.6-1.6 4-1.6-4-4-1.6 4-1.6Z"/></g></svg>
+    <svg class="sky-bunting" viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0 8Q300 34 600 14T1200 10" fill="none" stroke="currentColor" stroke-width="1.5"/><g class="flags"><path d="M40 12l18 1-8 24Z" fill="#7652DB"/><path d="M110 18l18 1-8 24Z" fill="#E8A13A"/><path d="M180 22l18 1-8 24Z" fill="#3F6FE0"/><path d="M250 24l18 0-8 24Z" fill="#7652DB"/><path d="M320 25l18 0-9 24Z" fill="#E8A13A"/><path d="M390 24l18-1-8 24Z" fill="#3F6FE0"/><path d="M460 21l18-1-8 24Z" fill="#7652DB"/><path d="M530 17l18-1-8 24Z" fill="#E8A13A"/><path d="M640 14l18 1-8 24Z" fill="#3F6FE0"/><path d="M710 17l18 1-8 24Z" fill="#7652DB"/><path d="M780 19l18 0-8 24Z" fill="#E8A13A"/><path d="M850 19l18 0-8 24Z" fill="#3F6FE0"/><path d="M920 17l18-1-8 24Z" fill="#7652DB"/><path d="M990 14l18-1-8 24Z" fill="#E8A13A"/><path d="M1060 12l18-1-8 24Z" fill="#3F6FE0"/><path d="M1130 10l18 0-8 24Z" fill="#7652DB"/></g></svg>
+    <svg class="sky-ghost" viewBox="0 0 60 70"><path d="M30 4C16 4 8 15 8 29v33l7-6 7 6 8-6 8 6 7-6 7 6V29C52 15 44 4 30 4Z" fill="#FFFFFF" fill-opacity=".92"/><ellipse cx="23" cy="28" rx="3.2" ry="4.2" fill="#2B2350"/><ellipse cx="37" cy="28" rx="3.2" ry="4.2" fill="#2B2350"/><ellipse cx="30" cy="38" rx="3.4" ry="2.6" fill="#2B2350"/><ellipse cx="18" cy="35" rx="3" ry="1.8" fill="#FFB2C8" fill-opacity=".8"/><ellipse cx="42" cy="35" rx="3" ry="1.8" fill="#FFB2C8" fill-opacity=".8"/></svg>
+    <svg class="sky-bat sb1" viewBox="0 0 64 28"><path fill="currentColor" d="M32 9c-2-3-3-4-3-6 0 0-2 1-2 4-4-5-11-7-18-5 4 2 6 5 6 9-4-3-9-3-15 0 5 1 8 4 9 8 5-4 11-5 17-2 2 1 4 4 6 7 2-3 4-6 6-7 6-3 12-2 17 2 1-4 4-7 9-8-6-3-11-3-15 0 0-4 2-7 6-9-7-2-14 0-18 5 0-3-2-4-2-4 0 2-1 3-3 6Z"/></svg>
+    <svg class="sky-bat sb2" viewBox="0 0 64 28"><path fill="currentColor" d="M32 9c-2-3-3-4-3-6 0 0-2 1-2 4-4-5-11-7-18-5 4 2 6 5 6 9-4-3-9-3-15 0 5 1 8 4 9 8 5-4 11-5 17-2 2 1 4 4 6 7 2-3 4-6 6-7 6-3 12-2 17 2 1-4 4-7 9-8-6-3-11-3-15 0 0-4 2-7 6-9-7-2-14 0-18 5 0-3-2-4-2-4 0 2-1 3-3 6Z"/></svg>
+    <svg class="sky-bat sb3" viewBox="0 0 64 28"><path fill="currentColor" d="M32 9c-2-3-3-4-3-6 0 0-2 1-2 4-4-5-11-7-18-5 4 2 6 5 6 9-4-3-9-3-15 0 5 1 8 4 9 8 5-4 11-5 17-2 2 1 4 4 6 7 2-3 4-6 6-7 6-3 12-2 17 2 1-4 4-7 9-8-6-3-11-3-15 0 0-4 2-7 6-9-7-2-14 0-18 5 0-3-2-4-2-4 0 2-1 3-3 6Z"/></svg>
+    <svg class="sky-web" viewBox="0 0 120 120"><g fill="none" stroke="currentColor" stroke-width="1"><path d="M0 0L120 120M0 0L60 120M0 0L120 60M0 0L0 120M0 0L120 0"/><path d="M0 24Q14 14 24 0M0 48Q30 32 48 0M0 76Q46 50 76 0M0 104Q62 70 104 0"/></g><path d="M86 86v22" stroke="currentColor" stroke-width="1"/><circle cx="86" cy="111" r="3.2" fill="currentColor"/></svg>
+  </div>
   <div>
     <div class="season-deco" aria-hidden="true">
       <svg class="bat bat1" viewBox="0 0 64 28" width="44" height="19"><path fill="currentColor" d="M32 9c-2-3-3-4-3-6 0 0-2 1-2 4-4-5-11-7-18-5 4 2 6 5 6 9-4-3-9-3-15 0 5 1 8 4 9 8 5-4 11-5 17-2 2 1 4 4 6 7 2-3 4-6 6-7 6-3 12-2 17 2 1-4 4-7 9-8-6-3-11-3-15 0 0-4 2-7 6-9-7-2-14 0-18 5 0-3-2-4-2-4 0 2-1 3-3 6Z"/></svg>
       <svg class="bat bat2" viewBox="0 0 64 28" width="30" height="13"><path fill="currentColor" d="M32 9c-2-3-3-4-3-6 0 0-2 1-2 4-4-5-11-7-18-5 4 2 6 5 6 9-4-3-9-3-15 0 5 1 8 4 9 8 5-4 11-5 17-2 2 1 4 4 6 7 2-3 4-6 6-7 6-3 12-2 17 2 1-4 4-7 9-8-6-3-11-3-15 0 0-4 2-7 6-9-7-2-14 0-18 5 0-3-2-4-2-4 0 2-1 3-3 6Z"/></svg>
       <svg class="bat bat3" viewBox="0 0 64 28" width="22" height="10"><path fill="currentColor" d="M32 9c-2-3-3-4-3-6 0 0-2 1-2 4-4-5-11-7-18-5 4 2 6 5 6 9-4-3-9-3-15 0 5 1 8 4 9 8 5-4 11-5 17-2 2 1 4 4 6 7 2-3 4-6 6-7 6-3 12-2 17 2 1-4 4-7 9-8-6-3-11-3-15 0 0-4 2-7 6-9-7-2-14 0-18 5 0-3-2-4-2-4 0 2-1 3-3 6Z"/></svg>
       <svg class="pumpkin" viewBox="0 0 64 56" width="58" height="51">
-        <path d="M31 10c0-5 2-8 6-9l2 3c-3 1-4 3-4 6Z" fill="#3E7A3A"/>
-        <ellipse cx="20" cy="33" rx="16" ry="20" fill="#E07A1F"/>
-        <ellipse cx="44" cy="33" rx="16" ry="20" fill="#E07A1F"/>
-        <ellipse cx="32" cy="33" rx="14" ry="21" fill="#F59A3A"/>
-        <path d="M21 27l6 5h-9Zm22 0l-6 5h9ZM20 40c6 5 18 5 24 0-3 7-21 7-24 0Z" fill="#3A1F0A"/>
+        <defs><radialGradient id="pumpkinBody" cx="42%" cy="35%" r="75%"><stop offset="0" stop-color="#FFB45C"/><stop offset=".6" stop-color="#EE8424"/><stop offset="1" stop-color="#B8520F"/></radialGradient><radialGradient id="pumpkinLight" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#FFF2A8"/><stop offset="1" stop-color="#FFB030"/></radialGradient></defs>
+        <path d="M31 11c-.5-5 1.5-8.5 6-10l2.5 3.2c-3.2 1-4.4 3.3-4.3 6.8Z" fill="#4E7A36"/>
+        <path d="M36 9c4-3 9-3 12 0-4 0-8 1-12 3Z" fill="#6A9A45"/>
+        <ellipse cx="18.5" cy="33" rx="15.5" ry="19.5" fill="url(#pumpkinBody)"/>
+        <ellipse cx="45.5" cy="33" rx="15.5" ry="19.5" fill="url(#pumpkinBody)"/>
+        <ellipse cx="32" cy="33" rx="14.5" ry="21" fill="url(#pumpkinBody)"/>
+        <path d="M24 16c-3 6-3 28 0 34M40 16c3 6 3 28 0 34" stroke="#B8520F" stroke-opacity=".45" stroke-width="1.4" fill="none"/>
+        <path d="M20.5 26.5l6.5 5.5h-9.5ZM43.5 26.5l-6.5 5.5h9.5ZM19 39c4 2 8 3 13 3s9-1 13-3c-1.5 6-7 9.5-13 9.5S20.5 45 19 39Zm8 1.5v3h3v-2.6Zm7 .4v2.6h3v-3Z" fill="url(#pumpkinLight)"/>
       </svg>
     </div>
     <span class="eyebrow"><span class="pulse"></span>厚生労働省データ・毎日自動更新</span>
@@ -1341,7 +1404,7 @@ footer a:hover{color:var(--blue)}
       <a class="btn-ghost hero-app-link" href="#app">iOSアプリ版を見る</a>
     </div>
     <p class="hero-note">会員登録不要・Web版も無料で利用できます</p>
-    <p class="season-note"><svg width="14" height="14" viewBox="0 0 64 56" aria-hidden="true"><ellipse cx="32" cy="33" rx="30" ry="21" fill="#E07A1F"/><path d="M31 10c0-5 2-8 6-9l2 3c-3 1-4 3-4 6Z" fill="#3E7A3A"/></svg>10月限定のハロウィンデザインです</p>
+    <p class="season-note"><svg width="14" height="14" viewBox="0 0 64 56" aria-hidden="true"><ellipse cx="32" cy="33" rx="30" ry="21" fill="#E07A1F"/><path d="M31 10c0-5 2-8 6-9l2 3c-3 1-4 3-4 6Z" fill="#3E7A3A"/></svg><svg width="15" height="15" viewBox="0 0 64 64" aria-hidden="true"><path d="M34 4 20 44h28Z" fill="#4E2AA8"/><path d="M34 4c4 6 9 9 16 10-6 2-11 1-16-4Z" fill="#4E2AA8"/><ellipse cx="32" cy="46" rx="28" ry="7" fill="#3A2180"/><rect x="21" y="36" width="24" height="5" rx="1" fill="#E8A13A"/></svg>10月限定のハロウィンデザインです</p>
     <button class="watch-return" id="watchReturn" type="button" hidden>
       <span>監視品目に未確認の変更</span><strong class="num" id="watchReturnCount">0件</strong><span>変更を見る</span>
     </button>
