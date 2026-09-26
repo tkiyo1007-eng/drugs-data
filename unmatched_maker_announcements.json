@@ -2,7 +2,7 @@
  {
   "maker": "沢井製薬",
   "title": "2026/09/08 供給関連 PDF 一部製品 限定出荷解除のお知らせ PDF",
-  "url": "https://med.sawai.co.jp/file/pr27_4754_2.pdf",
+  "url": "https://med.sawai.co.jp/file/pr27_1191_1.pdf",
   "event_type": "resumed",
   "announced_at": "2026-09-08"
  },
@@ -784,24 +784,24 @@
  },
  {
   "maker": "日本ケミファ",
+  "title": "2026年9月25日 変更品出荷（切換後ロット等）未定情報一覧_S-2888",
+  "url": "https://www.nc-medical.com/product_topics/doc/S-2888.pdf",
+  "event_type": "supply",
+  "announced_at": "2026-09-25"
+ },
+ {
+  "maker": "日本ケミファ",
+  "title": "2026年9月25日 取扱い製品の供給状況一覧",
+  "url": "https://www.nc-medical.com/product_topics/f4bj0h000000dtwu-att/f4bj0h000000dtxi.pdf",
+  "event_type": "supply",
+  "announced_at": "2026-09-25"
+ },
+ {
+  "maker": "日本ケミファ",
   "title": "2026年9月15日 製品供給に関するお知らせ",
   "url": "https://www.nc-medical.com/product_topics/p5ib9100000060hz-att/p5ib9100000060in.pdf",
   "event_type": "supply",
   "announced_at": "2026-09-15"
- },
- {
-  "maker": "日本ケミファ",
-  "title": "2026年9月15日 取扱い製品の供給状況一覧",
-  "url": "https://www.nc-medical.com/product_topics/f4bj0h000000dtwu-att/f4bj0h000000dtxi.pdf",
-  "event_type": "supply",
-  "announced_at": "2026-09-15"
- },
- {
-  "maker": "日本ケミファ",
-  "title": "2026年9月7日 変更品出荷（切換後ロット等）未定情報一覧_S-2888",
-  "url": "https://www.nc-medical.com/product_topics/fm4d3f0000018bl9-att/S-2888.pdf",
-  "event_type": "supply",
-  "announced_at": "2026-09-07"
  },
  {
   "maker": "日本ケミファ",
@@ -851,6 +851,13 @@
   "url": "https://www.nc-medical.com/product_topics/f4bj0h0000004yu5-att/f4bj0h0000004yut.pdf",
   "event_type": "resumed",
   "announced_at": "2026-01-27"
+ },
+ {
+  "maker": "高田製薬",
+  "title": "2026/09/25 限定出荷解除に関するお知らせ",
+  "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000cac6-att/KAIJYO.pdf",
+  "event_type": "resumed",
+  "announced_at": "2026-09-25"
  },
  {
   "maker": "高田製薬",

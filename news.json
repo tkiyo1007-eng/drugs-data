@@ -1,5 +1,29 @@
 [
  {
+  "date": "2026/09/25",
+  "title": "「不具合が疑われる症例報告に関する情報（コンビネーション製品）」に2026年5月分の情報を追加しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/adr-info/malfunctions-combination-drugs/0001.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/09/25",
+  "title": "「不具合が疑われる症例報告に関する情報（医療機器）」に2026年5月分の情報を追加しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/devices/0090.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/09/25",
+  "title": "「不具合が疑われる症例報告に関する情報（再生医療等製品）」に2026年5月分の情報を追加しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/ctp/0006.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/09/25",
+  "title": "[イベント]「2026年度マスターファイル講習会」の案内を掲載しました",
+  "url": "https://www.pmda.go.jp/review-services/symposia/0208.html",
+  "tag": "承認審査"
+ },
+ {
   "date": "2026/09/24",
   "title": "［MID-NET］MID-NETの利活用に関する有識者会議の情報を更新しました",
   "url": "https://www.pmda.go.jp/safety/mid-net/0011.html",
@@ -33,30 +57,6 @@
   "date": "2026/09/18",
   "title": "生成AIを活用したプログラム医療機器(Draft)に関する審査ポイントの意見募集を開始しました。",
   "url": "https://www.pmda.go.jp/review-services/drug-reviews/about-reviews/devices/0058.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/09/18",
-  "title": "プログラム医療機器のページを更新（手引書の改定、講習会動画・資料の公開、対面助言調整可能時期の更新）しました。",
-  "url": "https://www.pmda.go.jp/review-services/drug-reviews/about-reviews/devices/0048.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/09/17",
-  "title": "添付文書改訂相談に基づく添付文書改訂（医薬品）を掲載しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/revision-based-on-the-consultation/0001.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/09/17",
-  "title": "新医薬品の承認品目一覧（2026年9月16日承認分まで）を掲載しました",
-  "url": "https://www.pmda.go.jp/review-services/drug-reviews/review-information/p-drugs/0040.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/09/17",
-  "title": "医薬品の適応判定を目的として承認されたコンパニオン診断薬等（2026年9月11日版）を掲載しました",
-  "url": "https://www.pmda.go.jp/review-services/drug-reviews/review-information/cd/0001.html",
   "tag": "承認審査"
  }
 ]
