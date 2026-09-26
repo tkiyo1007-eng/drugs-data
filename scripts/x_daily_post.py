@@ -44,6 +44,7 @@ MAX_AGE_DAYS = 3
 MAX_WEIGHTED_LENGTH = 280
 X_URL_LENGTH = 23  # t.co短縮後の長さ
 POST_ENDPOINT = "https://api.x.com/2/tweets"
+ME_ENDPOINT = "https://api.x.com/2/users/me"
 CREDENTIAL_ENV = ("X_API_KEY", "X_API_SECRET", "X_ACCESS_TOKEN", "X_ACCESS_TOKEN_SECRET")
 HASHTAGS = "#医薬品供給 #限定出荷"
 HASHTAGS_WEEKLY = "#医薬品供給 #薬剤師"
@@ -266,6 +267,29 @@ def post_to_x(text: str, credentials: dict) -> str:
     return str(post_id)
 
 
+def load_credentials() -> tuple[dict, list[str]]:
+    """Secretsを読み、貼り付け時に紛れ込みやすい前後の空白・改行を取り除く。"""
+    credentials = {name: (os.environ.get(name) or "").strip() for name in CREDENTIAL_ENV}
+    return credentials, [name for name, value in credentials.items() if not value]
+
+
+def whoami(credentials: dict) -> str:
+    """投稿せずに認証だけ確認し、認証されたアカウントのユーザー名を返す。"""
+    request = urllib.request.Request(ME_ENDPOINT, method="GET", headers={
+        "Authorization": oauth1_header("GET", ME_ENDPOINT, credentials),
+    })
+    try:
+        with urllib.request.urlopen(request, timeout=30) as response:
+            data = json.loads(response.read())
+    except urllib.error.HTTPError as error:
+        detail = error.read()[:300].decode("utf-8", "replace")
+        raise RuntimeError(f"Xの認証に失敗しました（HTTP {error.code}）: {detail}") from None
+    username = (data.get("data") or {}).get("username")
+    if not username:
+        raise RuntimeError("Xの応答にユーザー名がありません")
+    return str(username)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     sub = parser.add_subparsers(dest="command", required=True)
@@ -274,10 +298,25 @@ def main(argv: list[str] | None = None) -> int:
     build.add_argument("--out", type=Path, required=True)
     build.add_argument("--today", type=dt.date.fromisoformat, default=None)
     build.add_argument("--reports", type=Path, default=Path("reports"))
+    sub.add_parser("whoami")
     post = sub.add_parser("post")
     post.add_argument("--plan", type=Path, required=True)
     post.add_argument("--log", type=Path, default=None)
     args = parser.parse_args(argv)
+
+    if args.command == "whoami":
+        credentials, missing = load_credentials()
+        if missing:
+            print(f"❌ 認証情報が未設定です: {', '.join(missing)}", file=sys.stderr)
+            return 1
+        try:
+            print(f"✅ 認証成功: @{whoami(credentials)} として投稿できます（書き込み権限は投稿時に確認）")
+        except RuntimeError as error:
+            print(f"❌ {error}", file=sys.stderr)
+            print("   コンシューマーキーとアクセストークンが同じアプリの最新の組か、前後に空白がないかを確認してください。",
+                  file=sys.stderr)
+            return 1
+        return 0
 
     if args.command == "build":
         changes = json.loads(args.changes.read_text(encoding="utf-8"))
@@ -297,11 +336,10 @@ def main(argv: list[str] | None = None) -> int:
             print(f"投稿しません（{item.get('kind')}）: {item.get('reason')}")
     if not posts:
         return 0
-    missing = [name for name in CREDENTIAL_ENV if not os.environ.get(name)]
+    credentials, missing = load_credentials()
     if missing:
         print(f"❌ 認証情報が未設定です: {', '.join(missing)}", file=sys.stderr)
         return 1
-    credentials = {name: os.environ[name] for name in CREDENTIAL_ENV}
     for item in posts:
         log = load_log()
         if item["key"] in posted_keys(log):
