@@ -17,6 +17,7 @@ import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
+from jst_time import jst_today
 from validate_supply_data import ALLOWED_STATUSES, YJ_PATTERN, validate_csv as validate_drug_csv
 from validate_product_lifecycle import load_csv, validate as validate_lifecycle
 from validate_supply_discrepancies import load_csv as load_discrepancy_csv, validate as validate_discrepancies
@@ -27,6 +28,9 @@ BASE_URL = "https://raw.githubusercontent.com/tkiyo1007-eng/drugs-data/main/"
 PAGES_URL = "https://tkiyo1007-eng.github.io/drugs-data/"
 MAX_JSON_BYTES = 20 * 1024 * 1024
 MAX_CSV_BYTES = 30 * 1024 * 1024
+MHLW_SUPPLY_PAGE = "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html"
+MHLW_FILE_RE = re.compile(r'href="([^"]*?(\d{6})iyakuhinkyoukyu\.xlsx)"')
+MHLW_SOURCE_NAME = "mhlw_source.json"
 SUPPORTING_FILES = JSON_FILES
 NOTE_DATE_RE = re.compile(r"(\d{4})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日")
 
@@ -162,6 +166,47 @@ def fetch(url: str, maximum_bytes: int) -> bytes:
     if len(data) > maximum_bytes:
         raise RuntimeError(f"応答が上限{maximum_bytes}バイトを超えています")
     return data
+
+
+def mhlw_file_date(stamp: str) -> dt.date | None:
+    """厚労省Excelのファイル名先頭6桁（YYMMDD）を日付にする。"""
+    try:
+        return dt.date(2000 + int(stamp[:2]), int(stamp[2:4]), int(stamp[4:6]))
+    except ValueError:
+        return None
+
+
+def check_mhlw_ingest(today: dt.date) -> tuple[list[str], list[str], list[str]]:
+    """厚労省が公開した最新Excelが、日次更新で取り込まれているかを確認する。
+
+    2026-09-26、9/25版を取得した日次更新が品質検査で止まり、鮮度監視（営業日）は
+    通過したため誰も気付かなかった。取り込んだファイルは日次更新が mhlw_source.json に
+    記録し、コア公開と同じcommitに含める。前日以前に公開されたファイルが未反映なら異常。
+    厚労省ページに接続できない・ファイル名の形式が変わった場合は警告に留める（誤報防止）。
+    """
+    errors: list[str] = []
+    warnings: list[str] = []
+    try:
+        page = fetch(MHLW_SUPPLY_PAGE, 5 * 1024 * 1024).decode("utf-8", "replace")
+    except (OSError, ValueError, RuntimeError, urllib.error.URLError) as error:
+        return [], [f"厚労省の供給状況ページを確認できません（取り込み確認を省略）: {error}"], []
+    stamps = [(mhlw_file_date(match.group(2)), match.group(1)) for match in MHLW_FILE_RE.finditer(page)]
+    stamps = [(date, href) for date, href in stamps if date]
+    if not stamps:
+        return [], ["厚労省ページのExcelファイル名から日付を判定できません（形式変更の可能性。取り込み確認を省略）"], []
+    latest_date, latest_href = max(stamps)
+    try:
+        source = json.loads(fetch(BASE_URL + MHLW_SOURCE_NAME, 64 * 1024))
+        ingested = dt.date.fromisoformat(str(source.get("excel_date")))
+    except (OSError, ValueError, RuntimeError, urllib.error.URLError, AttributeError) as error:
+        return [f"{MHLW_SOURCE_NAME}: 取り込み済みの厚労省ファイルを確認できません: {error}"], warnings, []
+    result = f"厚労省最新Excel {latest_date.isoformat()} / 取り込み済み {ingested.isoformat()}"
+    if latest_date > ingested and latest_date <= today - dt.timedelta(days=1):
+        errors.append(f"厚労省が{latest_date.isoformat()}版（{latest_href.rsplit('/', 1)[-1]}）を公開していますが、"
+                      f"サイトは{ingested.isoformat()}版のままです。日次更新の失敗を確認してください")
+    elif latest_date > ingested:
+        warnings.append(f"厚労省の{latest_date.isoformat()}版はまだ取り込まれていません（公開から1日未満のため待機）")
+    return errors, warnings, [result]
 
 
 def check_pages(
@@ -347,6 +392,13 @@ def run(
             today, max_age_days, csv_max_age_business_days=csv_max_age_business_days)
         errors.extend(pages_errors)
         results.extend(pages_results)
+        # 監視は日本時間7:15（UTC前日）に動くため、厚労省ファイルとの比較は日本時間で行う。
+        mhlw_errors, mhlw_warnings, mhlw_results = check_mhlw_ingest(jst_today())
+        errors.extend(mhlw_errors)
+        results.extend(mhlw_results)
+        for warning in mhlw_warnings:
+            print(f"::warning::{warning}")
+            results.append(f"警告: {warning}")
     return errors, results
 
 
