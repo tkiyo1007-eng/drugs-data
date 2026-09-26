@@ -5560,13 +5560,15 @@ function failDataLoad(message){
       .map(index=>normalizedPublicationDate(r[index]))
       .filter(Boolean).sort();
     const publicationDate = publicationDates[publicationDates.length-1] || "";
+    // 供給区分が最後に変わった日（厚労省「ステータス更新日」）。出荷量状況だけの更新と区別する。
+    const statusDate = iStatusDate>=0 ? normalizedPublicationDate(r[iStatusDate]) : "";
     // 厚労省Excelの「出荷量状況」区分に「薬価削除予定」が含まれる品目は、
     // 供給状況欄が「通常出荷」のままでも近く販売終了となる見込みがあるため別途フラグ化。
     // 経過措置期限が設定済み＝薬価基準からの削除が決定済みなので同様に扱う（アプリ版と同じ判定）
     const delist = (iAlt>=0 && (r[iAlt]||"").includes("薬価削除予定"))
                 || (iKeika>=0 && !!(r[iKeika]||"").trim());
     items.push({
-      n:name, m:maker, s, d:publicationDate, delist,
+      n:name, m:maker, s, d:publicationDate, sd:statusDate || "", delist,
       spec: iSpec>=0 ? (r[iSpec]||"").trim() : "",
       price: iPrice>=0 ? (r[iPrice]||"").trim() : "",
       g:genericName,                                 // 一般名（同成分の他社品の検索用）
@@ -5581,7 +5583,9 @@ function failDataLoad(message){
 
   // 履歴の成否・待機時間とは独立に、検証済みCSVから検索を開始する。
   // 到着後の履歴で検索中の品目を並べ替えず、次の明示検索まで初期順を維持する。
-  items.sort((a,b)=>b.d.localeCompare(a.d));
+  // 初回は供給区分の変更日（ステータス更新日）が新しい順、同日・記載なしは公表行更新日順。
+  // 出荷量状況だけが一斉に更新された週に、区分の変わっていない品目が先頭を占めないようにする。
+  items.sort((a,b)=>b.sd.localeCompare(a.sd) || b.d.localeCompare(a.d));
   CSV_HEAD = head;
   ITEMS = items;
   LIVE = true;
