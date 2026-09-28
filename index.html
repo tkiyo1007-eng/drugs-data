@@ -508,6 +508,11 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:999px;
   color:#7A4E12;background:#FFF6E5;border:1px dashed #C98A2E;white-space:nowrap;
 }
+.maker-supply-badge{
+  font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:999px;
+  color:#9A4A0A;background:#FFF1E2;border:1px dashed #E8912F;white-space:nowrap;
+}
+.maker-supply-badge.stopped{color:#A12F2F;background:#FDEBEB;border-color:#E14D4D}
 .discontinued-badge{
   font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:999px;
   color:#7B3F28;background:rgba(138,106,82,.15);border:1px solid rgba(138,106,82,.42);
@@ -1192,6 +1197,8 @@ footer a:hover{color:var(--blue)}
   .status-tag,.term-tag,.rel-status{color:color-mix(in srgb,var(--sc) 75%,white)}
   .discrepancy-badge{color:#FFE8A3;background:rgba(214,155,0,.17);border-color:#E5B539}
   .volume-badge{color:#FFD9A0;background:rgba(214,155,0,.1);border-color:#C98A2E}
+  .maker-supply-badge{color:#FFC98A;background:rgba(232,145,47,.12);border-color:#E8912F}
+  .maker-supply-badge.stopped{color:#FFB0B0;background:rgba(225,77,77,.14);border-color:#FF7A7A}
   .discrepancy-panel{color:#FFE9A8;background:rgba(214,155,0,.14);border-color:#E5B539}
   .discrepancy-panel .discrepancy-note{color:#DCC98E}
   .discrepancy-panel a{color:#FFD978}
@@ -2779,6 +2786,8 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
     const discrepancyBadge = discrepancyFor(d)
       ? `<span class="discrepancy-badge" title="厚労省公表区分と、より新しいメーカー公式案内に差異があります">情報差異あり</span>`
       : "";
+    // 差異バッジが付く品目は同じ案内を指すため重ねない
+    const makerSupplyBadge = discrepancyBadge ? "" : makerSupplyBadgeHtml(d);
     const changeBadge = historyBadgeHtml(d);
     const volumeBadge = shipmentVolumeBadgeHtml(d);
     const specText = d.price
@@ -2799,7 +2808,7 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
       </div>
       <div class="drug-maker">${esc(d.m)}${spec}</div>
       <div class="drug-foot">
-        <span class="drug-tags"><span class="status-tag">${st.label}</span>${discrepancyBadge}${changeBadge}${volumeBadge}${delistBadge}${discontinuedBadge}</span>
+        <span class="drug-tags"><span class="status-tag">${st.label}</span>${discrepancyBadge}${makerSupplyBadge}${changeBadge}${volumeBadge}${delistBadge}${discontinuedBadge}</span>
         <span class="drug-date num">公表行更新 ${d.d}${ago}</span>
       </div>
     </article>`;
@@ -3566,6 +3575,24 @@ function shipmentVolumeBadgeHtml(item){
   return label
     ? `<span class="volume-badge" title="厚生労働省公表の出荷量状況（${esc(item.v)}）。供給区分は通常出荷です">${label}</span>`
     : "";
+}
+// 厚労省の区分が通常出荷のまま、メーカー公式案内が限定出荷・出荷停止を示す品目に付ける。
+// 厚労省データへ反映される前の新しい案内を知らせる目的なので、公表から一定期間内に限る。
+// 区分は変更せず、点線でメーカー補足であることを示す。
+const MAKER_SUPPLY_BADGE_DAYS = 60;
+function makerSupplyBadgeHtml(item){
+  if(item.s !== "ok") return "";
+  const announcement = legacySupplementalFor(ANNOUNCEMENTS, item);
+  if(!announcement || !["limited", "stopped"].includes(announcement.event_type)) return "";
+  const m = String(announcement.announced_at || "").match(/^(\d{4})-(\d{2})(?:-(\d{2}))?$/);
+  if(!m) return "";
+  // 月までの公表日は月末として扱い、月内の案内を早く外さない
+  const day = m[3] || String(new Date(Date.UTC(+m[1], +m[2], 0)).getUTCDate());
+  const age = daysAgo(`${m[1]}-${m[2]}-${day}`);
+  if(age == null || age > MAKER_SUPPLY_BADGE_DAYS) return "";
+  const stopped = announcement.event_type === "stopped";
+  const label = stopped ? "メーカー案内：出荷停止" : "メーカー案内：限定出荷";
+  return `<span class="maker-supply-badge${stopped ? " stopped" : ""}" title="メーカー公式案内（${esc(announcement.announced_at)}公表）。厚生労働省の供給区分は通常出荷です">${label}</span>`;
 }
 function latestChangeFor(item){
   const yj = normalizeYj(item && item.yj);
