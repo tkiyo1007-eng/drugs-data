@@ -340,5 +340,21 @@
   "url": "https://www.sandoz.jp/products/amaluet-4/",
   "event_type": "discontinued",
   "announced_at": "2026-03-27"
+ },
+ "モビコール配合内用剤ＬＤ": {
+  "maker": "EAファーマ",
+  "title": "モビコール配合内用剤LD/HDの供給に関するお知らせ",
+  "url": "https://www.eapharma.co.jp/hubfs/medical/news/2026/MVC-info.pdf",
+  "event_type": "limited",
+  "announced_at": "2026-09",
+  "checked": "2026-09-29"
+ },
+ "モビコール配合内用剤ＨＤ": {
+  "maker": "EAファーマ",
+  "title": "モビコール配合内用剤LD/HDの供給に関するお知らせ",
+  "url": "https://www.eapharma.co.jp/hubfs/medical/news/2026/MVC-info.pdf",
+  "event_type": "limited",
+  "announced_at": "2026-09",
+  "checked": "2026-09-29"
  }
 }
