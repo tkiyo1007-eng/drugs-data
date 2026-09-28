@@ -2,14 +2,14 @@
   "schema_version": 1,
   "generated_at": "2026-09-28",
   "source": {
-    "mhlw_version": 202609280319,
-    "mhlw_note": "2026年09月28日厚労省データ反映",
+    "mhlw_version": 202609290531,
+    "mhlw_note": "2026年09月29日厚労省データ反映",
     "manufacturer_checked_through": "2026-09-28"
   },
   "counts": {
-    "high": 5,
+    "high": 3,
     "review": 5,
-    "total": 10
+    "total": 8
   },
   "products": {
     "1179002F1122": {
@@ -27,34 +27,6 @@
         "maker": "沢井製薬",
         "title": "2026年9月14日 製品の供給状況一覧：アミトリプチリン塩酸塩錠10mg「サワイ」は供給停止",
         "url": "https://med.sawai.co.jp/file/pr115_1773_1.pdf",
-        "scope": "product"
-      },
-      "confidence": "high",
-      "reason": "メーカー・製品規格・公表日の一致を確認",
-      "badge": "情報差異あり",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": true,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "",
-        "verified_target_scope": ""
-      }
-    },
-    "2189017F3149": {
-      "product_name": "ロスバスタチンＯＤ錠２．５ｍｇ「サワイ」",
-      "maker": "沢井製薬",
-      "official": {
-        "status": "stopped",
-        "label": "供給停止",
-        "updated_at": "2026-06-10"
-      },
-      "manufacturer": {
-        "status": "limited",
-        "label": "限定出荷で出荷再開",
-        "announced_at": "2026-09-24",
-        "maker": "沢井製薬",
-        "title": "2026/09/24 供給関連 PDF NEW ロスバスタチンOD錠2.5mg「サワイ」限定出荷による出荷再開のご案内 PDF NEW",
-        "url": "https://med.sawai.co.jp/file/pr27_4615_2.pdf",
         "scope": "product"
       },
       "confidence": "high",
@@ -167,34 +139,6 @@
         "maker": "ニプロ",
         "title": "2026年7月24日 酸化マグネシウム｢NP｣原末　他社品販売中止に伴う新規ご注文辞退および限定出荷（出荷数割当運用）のお願い",
         "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001FlBrhIAF",
-        "scope": "product"
-      },
-      "confidence": "high",
-      "reason": "メーカー・製品規格・公表日の一致を確認",
-      "badge": "情報差異あり",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": true,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "",
-        "verified_target_scope": ""
-      }
-    },
-    "2699709M1060": {
-      "product_name": "タクロリムス軟膏０．１％「タカタ」",
-      "maker": "高田製薬",
-      "official": {
-        "status": "limited",
-        "label": "限定出荷（自社の事情）",
-        "updated_at": "2026-06-11"
-      },
-      "manufacturer": {
-        "status": "stopped",
-        "label": "供給停止",
-        "announced_at": "2026-09-25",
-        "maker": "高田製薬",
-        "title": "2026/09/25 出荷停止に関するお知らせとお詫び_タクロリムス軟膏0.1%「タカタ」",
-        "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000caez-att/Tacrolimus.pdf",
         "scope": "product"
       },
       "confidence": "high",
