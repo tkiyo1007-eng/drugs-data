@@ -17,7 +17,7 @@ import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from jst_time import jst_today
+from jst_time import JST, jst_now, jst_today
 from validate_supply_data import ALLOWED_STATUSES, YJ_PATTERN, validate_csv as validate_drug_csv
 from validate_product_lifecycle import load_csv, validate as validate_lifecycle
 from validate_supply_discrepancies import load_csv as load_discrepancy_csv, validate as validate_discrepancies
@@ -176,12 +176,25 @@ def mhlw_file_date(stamp: str) -> dt.date | None:
         return None
 
 
-def check_mhlw_ingest(today: dt.date) -> tuple[list[str], list[str], list[str]]:
+# 日次更新は日本時間23時10分の予約だが、GitHub Actionsの遅延で実際は翌2〜4時頃に動く。
+# 厚労省ファイルの日付の翌日6時までは取り込み待ちとし、7時15分の定時監視で失敗を検知する。
+MHLW_INGEST_DEADLINE_HOUR = 6
+
+
+def mhlw_ingest_deadline(file_date: dt.date) -> dt.datetime:
+    """厚労省ファイルが日次更新で取り込まれているべき日本時間の期限。"""
+    return dt.datetime.combine(file_date + dt.timedelta(days=1),
+                               dt.time(MHLW_INGEST_DEADLINE_HOUR), tzinfo=JST)
+
+
+def check_mhlw_ingest(now: dt.datetime) -> tuple[list[str], list[str], list[str]]:
     """厚労省が公開した最新Excelが、日次更新で取り込まれているかを確認する。
 
     2026-09-26、9/25版を取得した日次更新が品質検査で止まり、鮮度監視（営業日）は
     通過したため誰も気付かなかった。取り込んだファイルは日次更新が mhlw_source.json に
-    記録し、コア公開と同じcommitに含める。前日以前に公開されたファイルが未反映なら異常。
+    記録し、コア公開と同じcommitに含める。ファイル日付の翌日6時（日本時間）を過ぎても
+    未反映なら異常。2026-09-29、日次更新前の深夜1時に動いた公開後監視が9/28版を
+    「1日遅れ」と誤検知したため、暦日ではなく日次更新の実行時刻を基準にしている。
     厚労省ページに接続できない・ファイル名の形式が変わった場合は警告に留める（誤報防止）。
     """
     errors: list[str] = []
@@ -201,11 +214,13 @@ def check_mhlw_ingest(today: dt.date) -> tuple[list[str], list[str], list[str]]:
     except (OSError, ValueError, RuntimeError, urllib.error.URLError, AttributeError) as error:
         return [f"{MHLW_SOURCE_NAME}: 取り込み済みの厚労省ファイルを確認できません: {error}"], warnings, []
     result = f"厚労省最新Excel {latest_date.isoformat()} / 取り込み済み {ingested.isoformat()}"
-    if latest_date > ingested and latest_date <= today - dt.timedelta(days=1):
+    deadline = mhlw_ingest_deadline(latest_date)
+    if latest_date > ingested and now >= deadline:
         errors.append(f"厚労省が{latest_date.isoformat()}版（{latest_href.rsplit('/', 1)[-1]}）を公開していますが、"
                       f"サイトは{ingested.isoformat()}版のままです。日次更新の失敗を確認してください")
     elif latest_date > ingested:
-        warnings.append(f"厚労省の{latest_date.isoformat()}版はまだ取り込まれていません（公開から1日未満のため待機）")
+        warnings.append(f"厚労省の{latest_date.isoformat()}版はまだ取り込まれていません"
+                        f"（日次更新の実行待ち。{deadline.strftime('%m/%d %H:%M')}まで待機）")
     return errors, warnings, [result]
 
 
@@ -392,8 +407,8 @@ def run(
             today, max_age_days, csv_max_age_business_days=csv_max_age_business_days)
         errors.extend(pages_errors)
         results.extend(pages_results)
-        # 監視は日本時間7:15（UTC前日）に動くため、厚労省ファイルとの比較は日本時間で行う。
-        mhlw_errors, mhlw_warnings, mhlw_results = check_mhlw_ingest(jst_today())
+        # 監視は日本時間7:15（UTC前日）や公開直後に動くため、厚労省ファイルとの比較は日本時間で行う。
+        mhlw_errors, mhlw_warnings, mhlw_results = check_mhlw_ingest(jst_now())
         errors.extend(mhlw_errors)
         results.extend(mhlw_results)
         for warning in mhlw_warnings:

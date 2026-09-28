@@ -6,13 +6,15 @@ from pathlib import Path
 from unittest import mock
 
 import check_public_data_health as health
+from jst_time import JST
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGE = '<a href="/content/10800000/{}iyakuhinkyoukyu.xlsx">供給状況</a>'
 
 
 class MhlwIngestCheckTests(unittest.TestCase):
-    def run_check(self, page_stamps, ingested="2026-09-18", today=dt.date(2026, 9, 26), page_error=None, source=None):
+    def run_check(self, page_stamps, ingested="2026-09-18", now=dt.datetime(2026, 9, 26, 7, 15, tzinfo=JST),
+                  page_error=None, source=None):
         def fake_fetch(url, _limit):
             if url == health.MHLW_SUPPLY_PAGE:
                 if page_error:
@@ -24,7 +26,7 @@ class MhlwIngestCheckTests(unittest.TestCase):
                 return json.dumps({"excel_date": ingested}).encode()
             raise AssertionError(url)
         with mock.patch.object(health, "fetch", side_effect=fake_fetch):
-            return health.check_mhlw_ingest(today)
+            return health.check_mhlw_ingest(now)
 
     def test_detects_published_file_not_ingested_after_a_day(self):
         errors, warnings, _ = self.run_check(["260918", "260925"])
@@ -33,9 +35,25 @@ class MhlwIngestCheckTests(unittest.TestCase):
         self.assertIn("2026-09-18版のまま", errors[0])
 
     def test_same_day_publication_only_warns(self):
-        errors, warnings, _ = self.run_check(["260925"], today=dt.date(2026, 9, 25))
+        errors, warnings, _ = self.run_check(["260925"], now=dt.datetime(2026, 9, 25, 18, 0, tzinfo=JST))
         self.assertEqual([], errors)
         self.assertTrue(any("待機" in warning for warning in warnings))
+
+    def test_waits_for_delayed_daily_update_after_midnight(self):
+        # 2026-09-29 1:07、日次更新（23:10予約・実行は3時頃）より前の公開後監視が誤検知した
+        errors, warnings, _ = self.run_check(
+            ["260925", "260928"], ingested="2026-09-25", now=dt.datetime(2026, 9, 29, 1, 7, tzinfo=JST))
+        self.assertEqual([], errors)
+        self.assertTrue(any("日次更新の実行待ち" in warning for warning in warnings))
+        errors, _, _ = self.run_check(
+            ["260925", "260928"], ingested="2026-09-25", now=dt.datetime(2026, 9, 29, 5, 59, tzinfo=JST))
+        self.assertEqual([], errors)
+
+    def test_scheduled_morning_monitor_detects_failed_daily_update(self):
+        errors, _, _ = self.run_check(
+            ["260925", "260928"], ingested="2026-09-25", now=dt.datetime(2026, 9, 29, 7, 15, tzinfo=JST))
+        self.assertEqual(1, len(errors))
+        self.assertIn("2026-09-28版", errors[0])
 
     def test_ingested_latest_is_healthy(self):
         errors, warnings, results = self.run_check(["260925"], ingested="2026-09-25")
