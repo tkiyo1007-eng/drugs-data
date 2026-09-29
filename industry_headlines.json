@@ -3,55 +3,37 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-09-29T05:31:56+09:00",
-  "last_success_at": "2026-09-29T05:31:56+09:00",
+  "checked_at": "2026-09-30T02:42:39+09:00",
+  "last_success_at": "2026-09-30T02:42:39+09:00",
   "items": [
     {
-      "title": "【ロート製薬】CDMO業務を受託‐再生医療等製品第II相",
-      "url": "https://www.yakuji.co.jp/entry139809.html",
-      "date": "2026-09-28",
+      "title": "【アステラス製薬】膵腺癌、肺癌で第III相試験‐KRAS標的薬剤で",
+      "url": "https://www.yakuji.co.jp/entry139805.html",
+      "date": "2026-09-29",
       "tag": "業界ニュース"
     },
     {
-      "title": "【第2次高市改造内閣】厚労副大臣に浦野氏、藤原氏‐医療担当政務官は長谷川氏",
-      "url": "https://www.yakuji.co.jp/entry139799.html",
-      "date": "2026-09-28",
+      "title": "【ドラッグストアー・カミヤなど】薬局に健康支援ツール導入‐豊橋市のマッチングで協働",
+      "url": "https://www.yakuji.co.jp/entry139803.html",
+      "date": "2026-09-29",
       "tag": "業界ニュース"
     },
     {
-      "title": "【厚労省 中井審議官】治験支援薬局は新たな流れ‐薬剤師政策「育薬から創薬」",
-      "url": "https://www.yakuji.co.jp/entry139797.html",
-      "date": "2026-09-28",
+      "title": "【くすり未来塾】MFN価格是正策が必要‐外国価格調整見直しを",
+      "url": "https://www.yakuji.co.jp/entry139802.html",
+      "date": "2026-09-29",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【薬卸連】26年版医薬品卸経営概況‐利益率微減、厳しさ続く",
+      "url": "https://www.yakuji.co.jp/entry139800.html",
+      "date": "2026-09-29",
       "tag": "業界ニュース"
     },
     {
       "title": "【PMDA】ワーニングレター初適用‐笠野興産がGMP不適合",
       "url": "https://www.yakuji.co.jp/entry139796.html",
       "date": "2026-09-28",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【東邦HD】製薬・卸間決済を短縮化‐最短30日で支払い",
-      "url": "https://www.yakuji.co.jp/entry139760.html",
-      "date": "2026-09-28",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【ツムラ／養命酒製造】健康づくりで協定締結提案‐長野県駒ヶ根市を訪問",
-      "url": "https://www.yakuji.co.jp/entry139757.html",
-      "date": "2026-09-28",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【米レボリューション】各国で申請準備進める‐膵臓癌薬ダラクソンラシブ",
-      "url": "https://www.yakuji.co.jp/entry139759.html",
-      "date": "2026-09-25",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【日薬 岩月会長】薬剤師評価制度創設に意欲‐研修・実践履歴を可視化",
-      "url": "https://www.yakuji.co.jp/entry139743.html",
-      "date": "2026-09-25",
       "tag": "業界ニュース"
     }
   ]
