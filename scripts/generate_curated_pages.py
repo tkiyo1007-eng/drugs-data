@@ -162,10 +162,17 @@ def search_rows(rows: list[dict[str, str]], query: object) -> list[dict[str, str
                                           row.get("商品名") or ""))
 
 
-def topic_related_rows(rows: list[dict[str, str]], topic: dict) -> list[dict[str, str]]:
-    """単一または複数の検索語から、ニュースに関係する品目を重複なく返す。"""
-    raw_queries = topic.get("queries")
-    queries = raw_queries if isinstance(raw_queries, list) else [topic.get("query")]
+def topic_related_rows(rows: list[dict[str, str]], topic: dict,
+                       field: str = "queries") -> list[dict[str, str]]:
+    """単一または複数の検索語から、ニュースに関係する品目を重複なく返す。
+
+    field="target_queries" のときは記事の対象品目（例: 供給制限を受けた製品自体）を返す。
+    """
+    raw_queries = topic.get(field)
+    if field == "target_queries":
+        queries = raw_queries if isinstance(raw_queries, list) else []
+    else:
+        queries = raw_queries if isinstance(raw_queries, list) else [topic.get("query")]
     related: dict[str, dict[str, str]] = {}
     for query in queries:
         for row in search_rows(rows, query):
@@ -465,7 +472,8 @@ def watch_guide_page() -> str:
 
 
 def topic_page(topic: dict, related: list[dict[str, str]], generated_keys: set[str],
-               lifecycle: dict[str, dict], updated_at: str) -> str:
+               lifecycle: dict[str, dict], updated_at: str,
+               targets: list[dict[str, str]] | None = None) -> str:
     slug = topic["slug"]
     canonical = f"{SITE_ROOT}topics/{slug}.html"
     title = f"{topic['title']}｜医薬品供給ナビ"
@@ -493,10 +501,22 @@ def topic_page(topic: dict, related: list[dict[str, str]], generated_keys: set[s
     supplement = (f'<section class="intent"><h2>変更前の確認事項</h2>'
                   f'{notes}{source_details}</section>') if notes or extra_sources else ""
     related_html = ""
+    # 記事の対象品目（例: 供給制限を受けた製品）と、代替候補などの関連品目を分けて示す。
+    # 対象品目を「関連品目」に混ぜると、製品自体が自分の関連品として見えてしまうため。
+    targets = targets or []
+    target_keys = {item_key(row) for row in targets}
+    related = [row for row in related if item_key(row) not in target_keys]
+    if targets:
+        related_html += (f'<h2>対象品目の現在の供給状況（{len(targets)}品目）</h2>'
+                         '<p class="note">厚生労働省公表データの現在区分です。ニュース本文の将来予定とは別にご確認ください。</p>'
+                         f'<div class="products">{product_rows_html(targets, generated_keys, lifecycle)}</div>')
     if related:
-        related_html = (f'<h2>関連品目の現在の供給状況（{len(related)}品目）</h2>'
-                        '<p class="note">厚生労働省公表データの現在区分です。ニュース本文の将来予定とは別にご確認ください。</p>'
-                        f'<div class="products">{product_rows_html(related, generated_keys, lifecycle)}</div>')
+        label = str(topic.get("related_label") or "関連品目").strip()
+        note = ('厚生労働省公表データの現在区分です。代替の可否や優先順位を示すものではありません。'
+                if targets else '厚生労働省公表データの現在区分です。ニュース本文の将来予定とは別にご確認ください。')
+        related_html += (f'<h2>{esc(label)}の現在の供給状況（{len(related)}品目）</h2>'
+                         f'<p class="note">{note}</p>'
+                         f'<div class="products">{product_rows_html(related, generated_keys, lifecycle)}</div>')
     return f"""<!DOCTYPE html><html lang="ja"><head>
 {common_head(title, description, canonical, 'article', [article, breadcrumb])}<style>{STYLE}</style></head><body>
 <div class="wrap"><header class="site"><a href="../">💊 医薬品供給ナビ</a></header>
@@ -909,8 +929,9 @@ def main() -> int:
     topic_dates: dict[str, str] = {}
     for topic in topics:
         related = topic_related_rows(rows, topic)
+        targets = topic_related_rows(rows, topic, "target_queries")
         (topic_dir / f"{topic['slug']}.html").write_text(
-            topic_page(topic, related, generated_keys, lifecycle, topics_doc.get("updated_at", "")),
+            topic_page(topic, related, generated_keys, lifecycle, topics_doc.get("updated_at", ""), targets),
             encoding="utf-8")
         topic_dates[topic["slug"]] = max(
             normalize_date(topic.get("date")), TEMPLATE_UPDATED_AT)

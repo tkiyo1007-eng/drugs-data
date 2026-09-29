@@ -79,7 +79,11 @@
           "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html"
         }
       ],
-      "pinned_until": "2026-12-31"
+      "pinned_until": "2026-12-31",
+      "target_queries": [
+        "モビコール"
+      ],
+      "related_label": "代替候補"
     },
     {
       "slug": "movicol-ld-hd-supply-restriction-20260929",
@@ -126,7 +130,11 @@
           "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html"
         }
       ],
-      "pinned_until": "2026-12-31"
+      "pinned_until": "2026-12-31",
+      "target_queries": [
+        "モビコール"
+      ],
+      "related_label": "メーカー案内の代替品"
     },
     {
       "slug": "lulicon-alternatives-20260911",
