@@ -28,6 +28,21 @@ class SharedContentValidationTests(unittest.TestCase):
         self.assertTrue(any(".sources[0]" in error for error in errors))
         self.assertTrue(any(".notes" in error for error in errors))
 
+    def test_pinned_until_must_be_a_date_on_or_after_the_article(self):
+        # Web版の「注目の供給情報」の掲載期限。形式不正や記事日付より前の期限は拒否する
+        base = Path(__file__).resolve().parents[1]
+        read_json = MODULE.read_json
+        for bad in ("2026/12/31", "2000-01-01"):
+            def invalid_pin(path, bad=bad):
+                document = read_json(path)
+                if path.name == "industry_topics.json":
+                    document["topics"][0]["pinned_until"] = bad
+                return document
+
+            with self.subTest(bad=bad), patch.object(MODULE, "read_json", side_effect=invalid_pin):
+                errors = MODULE.validate(base)
+                self.assertTrue(any(".pinned_until" in error for error in errors))
+
     def test_repository_shared_content_is_valid(self):
         base = Path(__file__).resolve().parents[1]
         self.assertEqual([], MODULE.validate(base))

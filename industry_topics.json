@@ -78,7 +78,8 @@
           "name": "厚生労働省｜医療用医薬品供給状況報告（最新版の供給状況一覧）",
           "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html"
         }
-      ]
+      ],
+      "pinned_until": "2026-12-31"
     },
     {
       "slug": "movicol-ld-hd-supply-restriction-20260929",
@@ -124,7 +125,8 @@
           "name": "厚生労働省｜医療用医薬品供給状況報告（最新版の供給状況一覧）",
           "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html"
         }
-      ]
+      ],
+      "pinned_until": "2026-12-31"
     },
     {
       "slug": "lulicon-alternatives-20260911",
