@@ -177,6 +177,16 @@ def validate(base: Path) -> list[str]:
                     else:
                         queries.extend((f"queries[{query_index}]", value)
                                        for query_index, value in enumerate(raw_queries))
+                raw_targets = item.get("target_queries")
+                if raw_targets is not None:
+                    if not isinstance(raw_targets, list) or not raw_targets or len(raw_targets) > 20:
+                        errors.append(f"{prefix}.target_queries: 1～20件の配列にしてください")
+                    else:
+                        queries.extend((f"target_queries[{query_index}]", value)
+                                       for query_index, value in enumerate(raw_targets))
+                label = item.get("related_label")
+                if label is not None and (not isinstance(label, str) or not label.strip() or len(label) > 20):
+                    errors.append(f"{prefix}.related_label: 20文字以内の文字列にしてください")
                 for field, value in queries:
                     normalized = norm(value)
                     if not normalized:
