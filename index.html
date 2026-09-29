@@ -912,6 +912,15 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 .news-more:hover{background:rgba(79,128,244,.18);transform:translateY(-1px)}
 
+/* ===== 注目の供給情報（industry_topics.json の pinned_until 付き記事） ===== */
+.pinned-alerts{margin:14px 0 4px;padding:12px 18px;border-radius:14px;
+  background:rgba(225,77,77,.05);border:1px solid rgba(225,77,77,.22);border-left:4px solid var(--stopped)}
+.pinned-eyebrow{font-size:11px;font-weight:900;letter-spacing:.14em;color:var(--stopped);margin-bottom:8px}
+.pinned-item{display:flex;align-items:center;gap:8px 12px;flex-wrap:wrap;padding:8px 0}
+.pinned-item + .pinned-item{border-top:1px solid rgba(79,128,244,.14)}
+.pinned-title{flex:1 1 320px;font-size:13.5px;font-weight:800;color:var(--ink);line-height:1.6;text-decoration:none}
+.pinned-title:hover{text-decoration:underline}
+.pinned-search{font-size:12px;font-weight:800;color:var(--blue);white-space:nowrap}
 /* ===== 話題のニュース ===== */
 .topic-list{display:grid;gap:16px}
 .topic-card{padding:24px 28px}
@@ -1231,6 +1240,8 @@ footer a:hover{color:var(--blue)}
   .faq-item,.news-item,.mednews-item,.maker-row{border-color:rgba(126,152,214,.16)}
   .trending-chip{background:rgba(38,55,102,.7);border-color:rgba(126,152,214,.2);color:var(--ink)}
   .topic-tag.alert{color:#FFB3B3}
+  .pinned-item + .pinned-item{border-top-color:rgba(126,152,214,.16)}
+  .pinned-alerts{background:rgba(255,122,122,.07);border-color:rgba(255,122,122,.25);border-left-color:var(--stopped)}
   .topic-points li{border-color:rgba(126,152,214,.16)}
 }
 
@@ -1459,6 +1470,7 @@ footer a:hover{color:var(--blue)}
       <input id="q" type="search" placeholder="薬品名・成分名・メーカー名・YJコードで検索" aria-label="薬品名・成分名・メーカー名・YJコードで検索" aria-describedby="searchHelp" autocomplete="off">
     </div>
     <p class="search-help" id="searchHelp">メーカー名・YJコードにも対応。複数語は空白で区切ると、すべてを含む品目に絞り込みます。</p>
+    <aside class="pinned-alerts" id="pinnedAlerts" aria-labelledby="pinnedAlertsTitle" hidden></aside>
     <div class="data-load-error" id="dataLoadError" role="alert" hidden>
       <strong>供給状況データを表示できません</strong>
       <span id="dataLoadErrorText">誤った情報を表示しないため、検索結果を停止しています。</span>
@@ -5264,6 +5276,34 @@ function startNewsContent(){
   void loadNewsContent("topics");
   void loadNewsContent("headlines");
 }
+// 編集記事のうち pinned_until（YYYY-MM-DD・日本時間の暦日で当日まで）が付いた記事を
+// 検索欄の上に出す。大きな供給ニュースを、ニュース欄まで下がらずに見つけられるようにする。
+// ニュースの取得・検証（validateNewsContent）を経た記事だけを使い、供給データの読込とは独立させる。
+// 取得できない・期限切れ・形式不正のときは何も表示しない（検索の妨げにしない）。
+function renderPinnedAlerts(box, items){
+  if(!box || !Array.isArray(items)) return;
+  const today = jstDayNumber(Date.now());
+  const day = value => {
+    const m = String(value || "").match(/^(\d{4})[-.](\d{2})[-.](\d{2})$/);
+    return m ? Date.UTC(+m[1], +m[2] - 1, +m[3]) / 86400000 : null;
+  };
+  const pinned = items.filter(topic => {
+    if(!topic || !/^[a-z0-9-]+$/.test(String(topic.slug || ""))) return false;
+    const until = day(topic.pinned_until), published = day(topic.date);
+    return until != null && published != null && published <= today && today <= until;
+  }).slice(0, 3);
+  if(!pinned.length){ box.hidden = true; box.innerHTML = ""; return; }
+  box.innerHTML = `<p class="pinned-eyebrow" id="pinnedAlertsTitle">注目の供給情報</p>` + pinned.map(topic => {
+    const tone = topic.tone === "alert" ? " alert" : topic.tone === "warn" ? " warn" : "";
+    const query = String(topic.query || "").trim();
+    return `<div class="pinned-item">
+      <span class="topic-tag${tone}">${esc(topic.tag)}</span>
+      <a class="pinned-title" href="topics/${esc(topic.slug)}.html">${esc(topic.title)}</a>
+      ${query ? `<a class="pinned-search" href="#q=${esc(encodeURIComponent(query))}">供給状況を検索</a>` : ""}
+    </div>`;
+  }).join("");
+  box.hidden = false;
+}
 /* ===== ニュース表示の取得状態・日付判定ここまで ===== */
 function renderTopics(list){
   $topicList.innerHTML = list.slice(0, 4).map(t=>`
@@ -5298,6 +5338,8 @@ function renderHeadlines(list){
 }
 function refreshNewsViews(kind){
   const state = NEWS_STATE[kind];
+  // 検証済みの編集記事から、検索欄の上の「注目の供給情報」を作る（ニュース欄の操作中でも更新してよい）
+  if(kind === "topics") renderPinnedAlerts(document.getElementById("pinnedAlerts"), state.snapshot?.items || []);
   const status = document.getElementById(kind === "topics" ? "topicStatus" : "medNewsStatus");
   const retry = document.getElementById(kind === "topics" ? "topicRetry" : "medNewsRetry");
   const list = document.getElementById(kind === "topics" ? "topicList" : "medNewsList");
