@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "month": "2026-09",
+  "snapshot_date": "2026-10-01",
+  "changes": {
+    "items": 173,
+    "days_with_changes": 11,
+    "to_limited": 78,
+    "to_stopped": 32,
+    "to_ok": 52,
+    "other": 11
+  },
+  "previous_month": {
+    "month": "2026-08",
+    "items": 220,
+    "to_limited": 69,
+    "to_stopped": 66,
+    "to_ok": 84,
+    "other": 1
+  },
+  "top_new_restriction_categories": [
+    {
+      "name": "血圧降下剤",
+      "code": "214",
+      "count": 19
+    },
+    {
+      "name": "鎮痛，鎮痒，収斂，消炎剤",
+      "code": "264",
+      "count": 10
+    },
+    {
+      "name": "高脂血症用剤",
+      "code": "218",
+      "count": 6
+    },
+    {
+      "name": "解熱鎮痛消炎剤",
+      "code": "114",
+      "count": 5
+    },
+    {
+      "name": "他に分類されない代謝性医薬品",
+      "code": "399",
+      "count": 4
+    },
+    {
+      "name": "その他の外皮用薬",
+      "code": "269",
+      "count": 3
+    },
+    {
+      "name": "その他の泌尿生殖器官及び肛門用薬",
+      "code": "259",
+      "count": 3
+    },
+    {
+      "name": "ビタミンＡ及びＤ剤",
+      "code": "311",
+      "count": 3
+    },
+    {
+      "name": "その他のホルモン剤（抗ホルモン剤を含む。）",
+      "code": "249",
+      "count": 2
+    },
+    {
+      "name": "その他の血液・体液用薬",
+      "code": "339",
+      "count": 2
+    }
+  ],
+  "snapshot_status": {
+    "total": 16403,
+    "ok": 14468,
+    "limited": 976,
+    "stopped": 959
+  },
+  "crisis_index": {
+    "date": "2026-10-01",
+    "score": 88,
+    "level": "厳重警戒"
+  },
+  "resolution": {
+    "updated_at": "2026-10-01",
+    "limited": {
+      "count": 21,
+      "medianDays": 9,
+      "avgDays": 17.5
+    },
+    "stopped": {
+      "count": 11,
+      "medianDays": 5,
+      "avgDays": 10.1
+    }
+  }
+}

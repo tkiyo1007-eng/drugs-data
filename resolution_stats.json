@@ -1,13 +1,13 @@
 {
- "updatedAt": "2026/09/30",
+ "updatedAt": "2026/10/01",
  "limited": {
-  "count": 24,
-  "medianDays": 7,
-  "avgDays": 16.2
+  "count": 21,
+  "medianDays": 9,
+  "avgDays": 17.5
  },
  "stopped": {
-  "count": 22,
-  "medianDays": 7,
-  "avgDays": 8.5
+  "count": 11,
+  "medianDays": 5,
+  "avgDays": 10.1
  }
 }

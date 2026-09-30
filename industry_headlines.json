@@ -3,13 +3,31 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-09-30T04:23:11+09:00",
-  "last_success_at": "2026-09-30T04:23:11+09:00",
+  "checked_at": "2026-10-01T04:14:39+09:00",
+  "last_success_at": "2026-10-01T04:14:39+09:00",
   "items": [
     {
-      "title": "【アステラス製薬】膵腺癌、肺癌で第III相試験‐KRAS標的薬剤で",
-      "url": "https://www.yakuji.co.jp/entry139805.html",
-      "date": "2026-09-29",
+      "title": "【製薬協調査】小児薬7割が同時開発‐欧米追随から早期参画に",
+      "url": "https://www.yakuji.co.jp/entry139909.html",
+      "date": "2026-09-30",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【PMDA】審査専門員を停職3日‐USBメモリ紛失で",
+      "url": "https://www.yakuji.co.jp/entry139907.html",
+      "date": "2026-09-30",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【徳洲会】姫路獨協大の運営継承へ‐薬学部募集再開が焦点に",
+      "url": "https://www.yakuji.co.jp/entry139904.html",
+      "date": "2026-09-30",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【蛭田氏ら研究班】品質保証人材の育成課題‐製造経験なしで登用多く",
+      "url": "https://www.yakuji.co.jp/entry139901.html",
+      "date": "2026-09-30",
       "tag": "業界ニュース"
     },
     {
@@ -19,21 +37,9 @@
       "tag": "業界ニュース"
     },
     {
-      "title": "【くすり未来塾】MFN価格是正策が必要‐外国価格調整見直しを",
-      "url": "https://www.yakuji.co.jp/entry139802.html",
-      "date": "2026-09-29",
-      "tag": "業界ニュース"
-    },
-    {
       "title": "【薬卸連】26年版医薬品卸経営概況‐利益率微減、厳しさ続く",
       "url": "https://www.yakuji.co.jp/entry139800.html",
       "date": "2026-09-29",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【PMDA】ワーニングレター初適用‐笠野興産がGMP不適合",
-      "url": "https://www.yakuji.co.jp/entry139796.html",
-      "date": "2026-09-28",
       "tag": "業界ニュース"
     }
   ]

@@ -1,16 +1,12 @@
 {
- "date": "2026/09/30",
- "score": 87,
+ "date": "2026/10/01",
+ "score": 88,
  "level": "厳重警戒",
- "delta": null,
- "limited": 983,
- "stopped": 931,
+ "delta": 1,
+ "limited": 976,
+ "stopped": 959,
  "total": 16403,
  "history": [
-  {
-   "date": "2026/08/21",
-   "score": 83
-  },
   {
    "date": "2026/08/22",
    "score": 83
@@ -126,6 +122,10 @@
   {
    "date": "2026/09/30",
    "score": 87
+  },
+  {
+   "date": "2026/10/01",
+   "score": 88
   }
  ]
 }
