@@ -1,5 +1,5 @@
 {
- "checked": "2026-09-30",
+ "checked": "2026-10-01",
  "sources": [
   {
    "source": "parse_sawai",
@@ -16,7 +16,7 @@
   {
    "source": "parse_nichiiko_excel",
    "ok": true,
-   "count": 502,
+   "count": 506,
    "error": ""
   },
   {
@@ -40,7 +40,7 @@
   {
    "source": "parse_kemifa",
    "ok": true,
-   "count": 77,
+   "count": 78,
    "error": ""
   },
   {
@@ -68,5 +68,5 @@
    "error": ""
   }
  ],
- "total": 2442
+ "total": 2447
 }

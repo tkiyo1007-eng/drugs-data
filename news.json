@@ -1,5 +1,17 @@
 [
  {
+  "date": "2026/09/30",
+  "title": "人道的見地から実施される治験の情報（医薬品、機器・再生）を更新しました",
+  "url": "https://www.pmda.go.jp/review-services/trials/0016.html",
+  "tag": "承認審査"
+ },
+ {
+  "date": "2026/09/30",
+  "title": "「令和8年度 小児用医療機器の承認申請支援事業の実施について」を掲載しました",
+  "url": "https://www.pmda.go.jp/review-services/drug-reviews/about-reviews/devices/0046.html",
+  "tag": "承認審査"
+ },
+ {
   "date": "2026/09/29",
   "title": "医薬品・医療機器等安全性情報 No.432（厚生労働省発行）を掲載しました",
   "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/safety-info/0166.html",
@@ -46,17 +58,5 @@
   "title": "[イベント]「2026年度マスターファイル講習会」の案内を掲載しました",
   "url": "https://www.pmda.go.jp/review-services/symposia/0208.html",
   "tag": "承認審査"
- },
- {
-  "date": "2026/09/24",
-  "title": "［MID-NET］MID-NETの利活用に関する有識者会議の情報を更新しました",
-  "url": "https://www.pmda.go.jp/safety/mid-net/0011.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/09/24",
-  "title": "［MID-NET］MID-NETの利活用状況を更新しました",
-  "url": "https://www.pmda.go.jp/safety/mid-net/0010.html",
-  "tag": "安全対策"
  }
 ]
