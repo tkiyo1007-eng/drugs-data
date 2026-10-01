@@ -168,8 +168,8 @@
         "エンペシドクリーム"
       ],
       "source": {
-        "name": "厚生労働省｜医療用医薬品供給状況（2026年9月10日現在）",
-        "url": "https://www.mhlw.go.jp/content/10800000/260910iyakuhinkyoukyu.xlsx"
+        "name": "厚生労働省｜医療用医薬品供給状況報告（最新版の供給状況一覧。記事の確認時点は2026年9月10日版）",
+        "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html"
       },
       "sources": [
         {
@@ -225,8 +225,8 @@
           "url": "https://www.mhlw.go.jp/web/t_doc?dataId=81001000"
         },
         {
-          "name": "厚生労働省｜処方箋の交付に関する説明資料",
-          "url": "https://www.mhlw.go.jp/content/001521412.pdf"
+          "name": "厚生労働省｜保険診療の理解のために【医科】（令和8年度）p.17 処方箋の「変更不可」欄・後発医薬品への変更調剤",
+          "url": "https://www.mhlw.go.jp/content/001713152.pdf"
         }
       ]
     },
