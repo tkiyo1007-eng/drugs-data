@@ -1,5 +1,23 @@
 [
  {
+  "date": "2026/10/01",
+  "title": "医薬品の最適使用推進ガイドラインを掲載しました",
+  "url": "https://www.pmda.go.jp/review-services/drug-reviews/review-information/p-drugs/0028.html",
+  "tag": "承認審査"
+ },
+ {
+  "date": "2026/10/01",
+  "title": "11月の簡易相談実施予定を掲載しました（医療機器等）",
+  "url": "https://www.pmda.go.jp/review-services/f2f-pre/consultations/0015.html",
+  "tag": "承認審査"
+ },
+ {
+  "date": "2026/10/01",
+  "title": "11月簡易相談予定表を掲載しました【医薬品等】",
+  "url": "https://www.pmda.go.jp/review-services/f2f-pre/consultations/0005.html",
+  "tag": "承認審査"
+ },
+ {
   "date": "2026/09/30",
   "title": "人道的見地から実施される治験の情報（医薬品、機器・再生）を更新しました",
   "url": "https://www.pmda.go.jp/review-services/trials/0016.html",
@@ -40,23 +58,5 @@
   "title": "「不具合が疑われる症例報告に関する情報（コンビネーション製品）」に2026年5月分の情報を追加しました",
   "url": "https://www.pmda.go.jp/safety/info-services/drugs/adr-info/malfunctions-combination-drugs/0001.html",
   "tag": "安全対策"
- },
- {
-  "date": "2026/09/25",
-  "title": "「不具合が疑われる症例報告に関する情報（医療機器）」に2026年5月分の情報を追加しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/devices/0090.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/09/25",
-  "title": "「不具合が疑われる症例報告に関する情報（再生医療等製品）」に2026年5月分の情報を追加しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/ctp/0006.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/09/25",
-  "title": "[イベント]「2026年度マスターファイル講習会」の案内を掲載しました",
-  "url": "https://www.pmda.go.jp/review-services/symposia/0208.html",
-  "tag": "承認審査"
  }
 ]
