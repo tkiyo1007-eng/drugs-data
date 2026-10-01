@@ -3,9 +3,33 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-10-01T04:14:39+09:00",
-  "last_success_at": "2026-10-01T04:14:39+09:00",
+  "checked_at": "2026-10-02T04:30:27+09:00",
+  "last_success_at": "2026-10-02T04:30:27+09:00",
   "items": [
+    {
+      "title": "【EAファーマ】指摘事項受け出荷調整‐便秘症薬「モビコール」",
+      "url": "https://www.yakuji.co.jp/entry139916.html",
+      "date": "2026-10-01",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "MR主人公のドラマ放映‐主演・向井理さんインタビュー",
+      "url": "https://www.yakuji.co.jp/entry139912.html",
+      "date": "2026-10-01",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【健保連】トップは「利便性の高さ」‐薬局・薬剤師への期待",
+      "url": "https://www.yakuji.co.jp/entry139911.html",
+      "date": "2026-10-01",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【PMDA】AI活用の考え方公表へ‐審査報告書作成視野に",
+      "url": "https://www.yakuji.co.jp/entry139906.html",
+      "date": "2026-10-01",
+      "tag": "業界ニュース"
+    },
     {
       "title": "【製薬協調査】小児薬7割が同時開発‐欧米追随から早期参画に",
       "url": "https://www.yakuji.co.jp/entry139909.html",
@@ -13,33 +37,9 @@
       "tag": "業界ニュース"
     },
     {
-      "title": "【PMDA】審査専門員を停職3日‐USBメモリ紛失で",
-      "url": "https://www.yakuji.co.jp/entry139907.html",
-      "date": "2026-09-30",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【徳洲会】姫路獨協大の運営継承へ‐薬学部募集再開が焦点に",
-      "url": "https://www.yakuji.co.jp/entry139904.html",
-      "date": "2026-09-30",
-      "tag": "業界ニュース"
-    },
-    {
       "title": "【蛭田氏ら研究班】品質保証人材の育成課題‐製造経験なしで登用多く",
       "url": "https://www.yakuji.co.jp/entry139901.html",
       "date": "2026-09-30",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【ドラッグストアー・カミヤなど】薬局に健康支援ツール導入‐豊橋市のマッチングで協働",
-      "url": "https://www.yakuji.co.jp/entry139803.html",
-      "date": "2026-09-29",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【薬卸連】26年版医薬品卸経営概況‐利益率微減、厳しさ続く",
-      "url": "https://www.yakuji.co.jp/entry139800.html",
-      "date": "2026-09-29",
       "tag": "業界ニュース"
     }
   ]
