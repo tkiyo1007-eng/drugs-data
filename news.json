@@ -1,5 +1,29 @@
 [
  {
+  "date": "2026/10/02",
+  "title": "「医療事故情報収集等事業第86回報告書の公表について」を掲載しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/medical-safety-info/0005.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/10/02",
+  "title": "使用上の注意の改訂指示通知（医薬品）2026年10月2日付（厚生労働省より発出）を掲載しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/revision-of-precautions/0375.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/10/02",
+  "title": "令和7年度治験エコシステム導入推進事業で作成された様式を公表しました",
+  "url": "https://www.pmda.go.jp/review-services/inspections/drugs/0013.html",
+  "tag": "承認審査"
+ },
+ {
+  "date": "2026/10/02",
+  "title": "2025年度GMP/GCTP Annual Reportの英訳版及び日本語改訂版を掲載しました。",
+  "url": "https://www.pmda.go.jp/review-services/gmp-qms-gctp/gmp/0011.html",
+  "tag": "承認審査"
+ },
+ {
   "date": "2026/10/01",
   "title": "医薬品の最適使用推進ガイドラインを掲載しました",
   "url": "https://www.pmda.go.jp/review-services/drug-reviews/review-information/p-drugs/0028.html",
@@ -33,30 +57,6 @@
   "date": "2026/09/29",
   "title": "医薬品・医療機器等安全性情報 No.432（厚生労働省発行）を掲載しました",
   "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/safety-info/0166.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/09/29",
-  "title": "使用上の注意の改訂指示通知（医薬品）2026年9月29日付（厚生労働省より発出）を掲載しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/revision-of-precautions/0375.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/09/29",
-  "title": "「医薬品に関する評価中のリスク等の情報について」を掲載しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/risk-communications/0001.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/09/29",
-  "title": "オレンジレターNo.29を掲載しました。",
-  "url": "https://www.pmda.go.jp/review-services/gmp-qms-gctp/gmp/0011.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/09/25",
-  "title": "「不具合が疑われる症例報告に関する情報（コンビネーション製品）」に2026年5月分の情報を追加しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/adr-info/malfunctions-combination-drugs/0001.html",
   "tag": "安全対策"
  }
 ]

@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-02",
+  "generated_at": "2026-10-03",
   "source": {
     "mhlw_version": 202610030415,
     "mhlw_note": "2026年10月03日厚労省データ反映",
-    "manufacturer_checked_through": "2026-10-02"
+    "manufacturer_checked_through": "2026-10-03"
   },
   "counts": {
     "high": 3,
-    "review": 5,
-    "total": 8
+    "review": 6,
+    "total": 9
   },
   "products": {
     "1179002F1122": {
@@ -63,6 +63,34 @@
       "evidence": {
         "maker_match": true,
         "exact_product_in_title": true,
+        "manufacturer_notice_is_newer": true,
+        "verified_target_source": "",
+        "verified_target_scope": ""
+      }
+    },
+    "2329028F1309": {
+      "product_name": "ラベプラゾールＮａ錠１０ｍｇ「ニプロ」",
+      "maker": "ニプロ",
+      "official": {
+        "status": "limited",
+        "label": "限定出荷（他社品の影響）",
+        "updated_at": "2026-04-16"
+      },
+      "manufacturer": {
+        "status": "ok",
+        "label": "限定出荷解除・通常出荷",
+        "announced_at": "2026-10-02",
+        "maker": "ニプロ",
+        "title": "2026年10月2日 ラベプラゾールNa錠5mg｢ニプロ｣　限定出荷解除のご案内",
+        "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001P2dXrIAJ",
+        "scope": "ambiguous"
+      },
+      "confidence": "review",
+      "reason": "関連製品の案内ですが、本品の対象規格を機械判定できません",
+      "badge": "メーカー案内あり・原文確認",
+      "evidence": {
+        "maker_match": true,
+        "exact_product_in_title": false,
         "manufacturer_notice_is_newer": true,
         "verified_target_source": "",
         "verified_target_scope": ""
