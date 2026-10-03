@@ -1,0 +1,67 @@
+name: IndexNow通知（新しいページをBing等へ）
+
+# Pages公開の成功後に、sitemap の lastmod が直近のURLだけを IndexNow へ通知する。
+# 実送信は リポジトリ変数 INDEXNOW_ENABLED=true のときだけ。それ以外は対象URLを表示する試運転。
+on:
+  workflow_run:
+    workflows: ['Deploy GitHub Pages']
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 試運転（送信しない）
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: indexnow
+  cancel-in-progress: false
+
+jobs:
+  notify:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.head_branch == 'main' &&
+       github.event.workflow_run.head_repository.full_name == github.repository)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: 鍵ファイルが公開されているか確認
+        run: |
+          key=$(ls | grep -E '^[0-9a-f]{32}\.txt$' | head -1 | sed 's/\.txt$//')
+          test -n "$key"
+          for attempt in 1 2 3 4 5 6; do
+            if [ "$(curl -fsS "https://kyokyu-navi.jp/${key}.txt" || true)" = "$key" ]; then echo "鍵ファイルを確認"; exit 0; fi
+            sleep 20
+          done
+          echo "::error::IndexNow の鍵ファイルが公開URLで確認できないため送信しません"
+          exit 1
+      - name: 送信するか判定
+        id: mode
+        env:
+          ENABLED: ${{ vars.INDEXNOW_ENABLED }}
+          EVENT: ${{ github.event_name }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          live=false
+          if [ "$ENABLED" = "true" ]; then
+            if [ "$EVENT" != "workflow_dispatch" ] || [ "$DRY_RUN" = "false" ]; then live=true; fi
+          fi
+          echo "live=$live" >> "$GITHUB_OUTPUT"
+      - name: 対象URLの確認（試運転）
+        if: steps.mode.outputs.live != 'true'
+        run: python3 scripts/indexnow_submit.py | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: IndexNowへ送信
+        if: steps.mode.outputs.live == 'true'
+        run: python3 scripts/indexnow_submit.py --submit | tee -a "$GITHUB_STEP_SUMMARY"
