@@ -1,6 +1,7 @@
 """成分（一般名）別ページの検査。"""
 import unittest
 from pathlib import Path
+from html.parser import HTMLParser
 
 import generate_curated_pages as MOD
 
@@ -13,6 +14,35 @@ def row(name, generic, status="①通常出荷", yj="2171022F1000", cat="血管�
 
 
 class IngredientPageTests(unittest.TestCase):
+    def test_ingredient_download_links_use_the_official_app_without_search_data(self):
+        rows = [row(f"テスト錠{i}", "成分<テスト>") for i in range(3)]
+        groups = MOD.ingredient_groups(rows)
+        page, _ = MOD.ingredient_page(next(iter(groups.values())), set(), {}, {})
+        index = MOD.ingredient_index_page(groups, "2026-10-01")
+
+        class Links(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.stores = []
+                self.banners = []
+
+            def handle_starttag(self, tag, attrs):
+                attr = dict(attrs)
+                if tag == "a" and "apps.apple.com" in attr.get("href", ""):
+                    self.stores.append(attr)
+                if tag == "meta" and attr.get("name") == "apple-itunes-app":
+                    self.banners.append(attr.get("content"))
+
+        for output in (page, index):
+            parsed = Links()
+            parsed.feed(output)
+            self.assertEqual(parsed.banners, ["app-id=6777696446"])
+            self.assertEqual(len(parsed.stores), 1)
+            self.assertEqual(parsed.stores[0]["href"], "https://apps.apple.com/jp/app/id6777696446")
+            self.assertEqual(parsed.stores[0]["data-dsn-event"], "app-store-open")
+        self.assertIn("通知の許可が必要", page)
+        self.assertIn("代替薬の推薦ではなく", page)
+
     def test_only_substantial_ingredients_get_pages(self):
         rows = [row("A錠1", "成分A"), row("A錠2", "成分A"), row("A錠3", "成分A"),          # 3品目 → 掲載
                 row("B錠1", "成分B", yj="1111111F1"), row("B錠2", "成分B", status="②限定出荷（自社の事情）", yj="1111111F2"),  # 2品目＋制限 → 掲載
