@@ -36,7 +36,7 @@
   });
 
   const allowed = new Set([
-    "search-success", "search-zero", "search-results-share-success", "detail-open", "detail-share-success", "share-arrival",
+    "search-success", "search-relaxed", "search-zero", "search-results-share-success", "detail-open", "detail-share-success", "share-arrival",
     "data-load-failed", "daily-share-success", "feed-url-copy",
     "watchlist-first-add", "watchlist-activated", "watchlist-import-success", "watchlist-import-failed",
     "watchlist-backup-export", "watchlist-dashboard-open",

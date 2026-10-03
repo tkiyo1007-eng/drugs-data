@@ -735,6 +735,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 .empty-reset:hover{background:#fff;transform:translateY(-1px)}
 .search-help{margin:8px 4px 0;font-size:11.5px;color:var(--sub);line-height:1.65}
+.search-relaxed-note{display:block;margin-top:4px;font-size:11.5px;color:var(--sub);line-height:1.6}
 .data-load-error{
   margin:14px 0 4px;padding:16px 17px;border-radius:16px;
   border:1.5px solid rgba(176,48,48,.38);background:#FFF0F0;color:#762525;
@@ -2525,6 +2526,7 @@ let filter = "all";
 const $pageSize = document.getElementById("pageSize");
 let PAGE_SIZE = 5;
 let visibleCount = PAGE_SIZE;
+let RELAXED_SEARCH = false; // 直近の描画が表記ゆれ救済の結果か（計測用。検索語は送らない）
 
 // 検索用正規化: NFKC(全角→半角等) + 小文字 + ひらがな→カタカナ
 function norm(s){
@@ -2555,6 +2557,74 @@ function searchIndexMatchesTerm(searchIndex, term, dosage = isDosageSearchTerm(t
     index = searchIndex.indexOf(term, index + 1);
   }
   return false;
+}
+// ===== 表記ゆれ救済（通常の検索が0件のときだけ使う） =====
+// 「ロキソニン60」「アムロジピン5mg」のような名称＋用量、「ロキソプロフェンナトリウム錠」の
+// ような一般名＋剤形、「酸化Mg」のような塩の略記、「咳止め」のような一般的な呼び方は、
+// 通常の部分一致では1件も当たらない。通常の検索結果がある語の挙動は変えず、0件のときだけ
+// 語を分けて再検索し、その旨を画面に明示する。
+const RELAXED_FORM_WORDS = ["ドライシロップ","シロップ","カプセル","od錠","錠","細粒","顆粒","内用液","散","テープ","パップ","軟膏","クリーム","ローション","点眼液","注射液"];
+const RELAXED_SALTS = [["na","ナトリウム"],["k","カリウム"],["ca","カルシウム"],["mg","マグネシウム"]];
+// 一般的な呼び方 → 厚労省公表データの薬効分類名（完全一致で照合。部分一致だと「下剤」が「血圧降下剤」に当たる）
+const RELAXED_CATEGORY_WORDS = [
+  {words:["咳止め","せき止め","鎮咳薬"], cats:["鎮咳剤","鎮咳去たん剤"]},
+  {words:["去痰薬","去たん薬","去痰剤","痰切り","たん切り"], cats:["去たん剤","鎮咳去たん剤"]},
+  {words:["抗生剤","抗生物質","抗菌薬","抗菌剤"], label:"抗生物質（主としてグラム陽性・陰性菌に作用するものなど）・合成抗菌剤", cats:["主としてグラム陽性菌に作用するもの","主としてグラム陰性菌に作用するもの","主としてグラム陽性・陰性菌に作用するもの","主としてグラム陽性菌，マイコプラズマに作用するもの","主としてグラム陽性・陰性菌，リケッチア，クラミジアに作用するもの","その他の抗生物質製剤（複合抗生物質製剤を含む。）","合成抗菌剤"]},
+  {words:["解熱剤","解熱鎮痛剤","痛み止め","鎮痛剤"], cats:["解熱鎮痛消炎剤"]},
+  {words:["湿布","シップ","貼り薬"], cats:["鎮痛，鎮痒，収斂，消炎剤"], name:/パップ|テープ|ハップ/},
+  {words:["胃薬"], cats:["消化性潰瘍用剤","健胃消化剤"]},
+  {words:["下剤","便秘薬"], cats:["下剤，浣腸剤"]},
+  {words:["整腸剤","下痢止め"], cats:["止しゃ剤，整腸剤"]},
+  {words:["睡眠薬","睡眠導入剤","眠剤","安定剤"], cats:["催眠鎮静剤，抗不安剤"]},
+  {words:["降圧剤","降圧薬"], cats:["血圧降下剤"]},
+  {words:["抗アレルギー薬","アレルギー薬"], cats:["その他のアレルギー用薬","抗ヒスタミン剤"]},
+  {words:["抗ウイルス薬"], cats:["抗ウイルス剤"]},
+  {words:["糖尿病薬"], cats:["糖尿病用剤"]},
+].map(entry=>({...entry, words:new Set(entry.words.map(norm))}));
+function relaxedTermAlternatives(term){
+  const alts = new Set([term]);
+  for(const [abbr, full] of RELAXED_SALTS){
+    // カタカナ・漢字の直後の略記だけを置き換える（「5mg」の用量表記は対象外）
+    const abbrRe = new RegExp(`([\\p{Script=Katakana}\\p{Script=Han}ー])${abbr}(?![a-z])`, "gu");
+    if(abbrRe.test(term)) alts.add(term.replace(abbrRe, `$1${full}`));
+    if(term.includes(full)) alts.add(term.split(full).join(abbr));
+  }
+  if(/^(?:l|d|dl)-/.test(term)) alts.add(term.replace(/^(?:l|d|dl)-/, ""));
+  return [...alts];
+}
+function splitRelaxedTerm(term){
+  const parts = [];
+  let head = term;
+  // 末尾の用量（数字＋単位）を切り離す: アムロジピン5mg → アムロジピン / 5mg
+  const dose = head.match(/^(.*[^0-9.])([0-9]+(?:\.[0-9]+)?(?:mg|mcg|μg|ug|g|ml|%|単位)?)$/);
+  if(dose && Array.from(dose[1]).length >= 2){ head = dose[1]; parts.unshift(dose[2]); }
+  // 末尾の剤形を切り離す: ロキソプロフェンナトリウム錠 → ロキソプロフェンナトリウム / 錠
+  const form = RELAXED_FORM_WORDS.find(word=>head.endsWith(word) && Array.from(head).length - Array.from(word).length >= 2);
+  if(form){ parts.unshift(form); head = head.slice(0, head.length - form.length); }
+  parts.unshift(head);
+  return parts;
+}
+// 戻り値: {terms:[{t, test(d)}], categoryLabels:[]}。通常検索と同じ語にしかならない場合は null
+function relaxedSearchPlan(rawTerms){
+  let changed = false;
+  const terms = [], categoryLabels = [];
+  for(const raw of rawTerms){
+    const category = RELAXED_CATEGORY_WORDS.find(entry=>entry.words.has(raw));
+    if(category){
+      changed = true;
+      categoryLabels.push(category.label || category.cats.join("・"));
+      terms.push({t:raw, test:d=>category.cats.includes(d.cat) && (!category.name || category.name.test(d.n.normalize("NFKC")))});
+      continue;
+    }
+    const parts = splitRelaxedTerm(raw);
+    for(const part of parts){
+      const alts = relaxedTermAlternatives(part);
+      if(parts.length > 1 || alts.length > 1) changed = true;
+      const dosage = isDosageSearchTerm(part);
+      terms.push({t:part, test:d=>alts.some(alt=>searchIndexMatchesTerm(d.q, alt, dosage))});
+    }
+  }
+  return changed ? {terms, categoryLabels} : null;
 }
 // 外部JSON（news.json 等）に null や数値が混ざっても描画全体が例外で止まらないよう文字列化してから処理する
 function esc(s){return String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
@@ -2735,7 +2805,7 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
   // 品目が混ざるので、コードとして書かれた語（数字始まりの7文字以上）のときだけ見る
   const terms = norm($q.value.trim()).split(/\s+/).filter(Boolean)
     .map(t => ({t, dosage:isDosageSearchTerm(t), code:/^[0-9][0-9a-z]{6,}$/.test(t)}));
-  const hits = ITEMS.filter(d=>{
+  const passesFilter = d=>{
     if(filter==="changed"){
       // 「本日の更新」: 最新の変化日に供給状況が実際に変わった品目だけ
       const c = latestChangeFor(d);
@@ -2751,9 +2821,30 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
     }else if(filter==="ended"){
       if(!isSalesEnding(d)) return false;
     }else if(filter!=="all" && d.s!==filter) return false;
-    return terms.every(x => searchIndexMatchesTerm(d.q, x.t, x.dosage)
-      || (x.code && d.yj && d.yj.toLowerCase().includes(x.t)));
-  });
+    return true;
+  };
+  const strictMatch = d => terms.every(x => searchIndexMatchesTerm(d.q, x.t, x.dosage)
+    || (x.code && d.yj && d.yj.toLowerCase().includes(x.t)));
+  let hits = ITEMS.filter(d=>passesFilter(d) && strictMatch(d));
+  // 通常の検索が0件のときだけ、表記ゆれを考慮して再検索する（結果がある語の挙動は変えない）
+  let relaxed = null;
+  RELAXED_SEARCH = false;
+  if(!hits.length && terms.length && !terms.some(x=>x.code)){
+    const plan = relaxedSearchPlan(terms.map(x=>x.t));
+    if(plan){
+      const relaxedHits = ITEMS.filter(d=>passesFilter(d) && plan.terms.every(x=>x.test(d)));
+      if(relaxedHits.length){ hits = relaxedHits; relaxed = plan; RELAXED_SEARCH = true; }
+    }
+  }
+  // 絞り込み中に0件なら、全区分での件数を案内する（品目自体は存在する場合が多い）
+  let allFilterCount = 0;
+  if(!hits.length && filter !== "all" && terms.length){
+    allFilterCount = ITEMS.filter(strictMatch).length;
+    if(!allFilterCount){
+      const plan = relaxedSearchPlan(terms.map(x=>x.t));
+      if(plan) allFilterCount = ITEMS.filter(d=>plan.terms.every(x=>x.test(d))).length;
+    }
+  }
   const shown = hits.slice(0, visibleCount);
   SHOWN = shown;
   LAST_HITS = hits;
@@ -2764,7 +2855,10 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
   $searchShareBtn.hidden = (!LIVE || !hits.length
     || (!$q.value.trim() && filter === "all"));
   const src = LIVE ? `全 ${ITEMS.length.toLocaleString()} 品目中` : `サンプル ${ITEMS.length} 品目中`;
-  $meta.innerHTML = `<strong class="num">${hits.length.toLocaleString()}</strong> 件ヒット（${src}）`;
+  $meta.innerHTML = `<strong class="num">${hits.length.toLocaleString()}</strong> 件ヒット（${src}）`
+    + (relaxed ? `<span class="search-relaxed-note">「${esc($q.value.trim())}」に一致する品目がないため、${relaxed.categoryLabels.length
+      ? `薬効分類「${esc(relaxed.categoryLabels.join("／"))}」として`
+      : "用量・剤形の区切りや塩の略記（Na・Mgなど）の表記ゆれを考慮して"}検索した結果です。</span>` : "");
   if(!hits.length){
     const isFavEmpty = filter==="fav" && !FAVS.size;
     const msg = isFavEmpty
@@ -2775,7 +2869,9 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
     const icon = isFavEmpty
       ? `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 12l5.9 12 13.2 1.9-9.6 9.3 2.3 13.1L32 42l-11.8 6.3 2.3-13.1-9.6-9.3 13.2-1.9z"/></svg>`
       : `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="24" width="30" height="14" rx="7" transform="rotate(-18 29 31)"/><path d="M18 27l18 8" transform="rotate(-18 29 31)"/><circle cx="46" cy="46" r="8"/><path d="M52 52l6 6"/></svg>`;
-    $list.innerHTML = `<div class="empty"><div class="empty-icon">${icon}</div>${msg}${canReset ? `<br><button type="button" class="empty-reset" id="emptyReset">検索条件をクリア</button>` : ""}</div>`;
+    const allFilterButton = allFilterCount
+      ? `<br><button type="button" class="empty-reset" id="emptyAllFilters">絞り込みを外して表示（${allFilterCount.toLocaleString()}件）</button>` : "";
+    $list.innerHTML = `<div class="empty"><div class="empty-icon">${icon}</div>${msg}${allFilterButton}${canReset ? `<br><button type="button" class="empty-reset" id="emptyReset">検索条件をクリア</button>` : ""}</div>`;
     $loadMore.hidden = true;
     if(shouldSyncHash) syncHashSoon(); // 0件でも検索語をURLに残す（リロード・共有で同じ状態を再現できる）
     else restorePendingPageAnchor();
@@ -2926,7 +3022,8 @@ function trackCurrentSearch(){
   const key = norm($q.value.trim());
   if(!LIVE || !key || key === lastTrackedSearchKey) return;
   lastTrackedSearchKey = key;
-  if(LAST_HITS.length) dsnTrack("search-success");
+  if(LAST_HITS.length && RELAXED_SEARCH) dsnTrack("search-relaxed");
+  else if(LAST_HITS.length) dsnTrack("search-success");
   else dsnTrack("search-zero");
 }
 $q.addEventListener("input", ()=>{
@@ -4830,6 +4927,7 @@ function sparkAt(el){
 }
 $list.addEventListener("click", e=>{
   if(e.target.id === "emptyReset"){ $q.value = ""; setFilter("all"); return; }
+  if(e.target.id === "emptyAllFilters"){ setFilter("all"); return; }
   const fav = e.target.closest(".fav-btn");
   if(fav){
     e.stopPropagation();
