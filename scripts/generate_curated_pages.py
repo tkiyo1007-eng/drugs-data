@@ -16,6 +16,8 @@ from urllib.parse import quote
 from jst_time import jst_today
 
 SITE_ROOT = "https://kyokyu-navi.jp/"
+APP_ID = "6777696446"
+APP_STORE = f"https://apps.apple.com/jp/app/id{APP_ID}"
 MHLW_SUPPLY_URL = "https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list"
 PMDA_SEARCH_URL = "https://www.pmda.go.jp/PmdaSearch/iyakuSearch/"
 PMDA_RECALL_URL = "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html"
@@ -707,7 +709,7 @@ def ingredient_page(group: dict, generated_keys: set[str], lifecycle: dict[str, 
     category_links = "／".join(f'<a href="../categories/{esc(code)}.html">{esc(cat)}</a>' for code, cat in categories)
     search_href = "../#q=" + quote(name, safe="")
     body = f"""<!DOCTYPE html><html lang="ja"><head>
-{common_head(title, description, canonical, 'website', [collection, breadcrumb])}<style>{STYLE}{CATEGORY_STYLE}</style></head><body>
+{common_head(title, description, canonical, 'website', [collection, breadcrumb])}<meta name="apple-itunes-app" content="app-id={APP_ID}"><style>{STYLE}{CATEGORY_STYLE}</style></head><body>
 <div class="wrap"><header class="site"><a href="../">💊 医薬品供給ナビ</a></header>
 <nav class="crumb" aria-label="パンくず"><a href="../">トップ</a> › <a href="index.html">成分別の供給状況</a> › {esc(name)}</nav><main>
 <section class="hero"><p class="eyebrow">成分（一般名）</p><h1>{esc(name)}の供給状況</h1>
@@ -718,7 +720,8 @@ def ingredient_page(group: dict, generated_keys: set[str], lifecycle: dict[str, 
 <h2>限定出荷・供給停止の品目（{len(restricted)}品目）</h2>
 {restricted_html}
 {others_html}
-<div class="cta"><strong>品目の詳細を確認</strong><p>公表理由・解除見込み・メーカー案内はWeb版の品目詳細で確認できます。</p><a href="{esc(search_href)}" data-dsn-event="search-cta-open">「{esc(name)}」をWeb版で検索する</a></div>
+<div class="cta"><strong>品目の詳細を確認</strong><p>公表理由・解除見込み・メーカー案内はWeb版の品目詳細で確認できます。</p><a href="{esc(search_href)}" data-dsn-event="search-cta-open">「{esc(name)}」をWeb版で検索する</a>
+<p>繰り返し確認する品目は、iPhone版に登録して供給状況の変化を通知で確認できます（通知の許可が必要です）。</p><a href="{APP_STORE}" data-dsn-event="app-store-open">iPhone版を無料で入手</a></div>
 <p class="note">{f'薬効分類：{category_links}。' if category_links else ''}一般名は厚生労働省公表データの「成分名」欄の表記です。品目行の最新更新日：{esc(newest_row or "不明")}。原典は<a href="{MHLW_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システム</a>でご確認ください。</p>
 </main><footer><p>厚生労働省公表データをもとにした非公式情報です。実際の流通状況は卸・メーカーにもご確認ください。</p><a href="../guides/{GUIDE_SLUG}.html">供給情報の確認ガイド</a>｜<a href="index.html">成分別の供給状況</a>｜<a href="../categories/index.html">薬効分類別の供給状況</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
 {analytics_footer()}</body></html>"""
@@ -751,10 +754,10 @@ def ingredient_index_page(groups: dict[str, dict], newest_row: str) -> str:
         {"@type": "ListItem", "position": 1, "name": "医薬品供給ナビ", "item": SITE_ROOT},
         {"@type": "ListItem", "position": 2, "name": "成分別の供給状況", "item": canonical}]}
     return f"""<!DOCTYPE html><html lang="ja"><head>
-{common_head(title, description, canonical, 'website', [breadcrumb])}<style>{STYLE}{CATEGORY_STYLE}</style></head><body>
+{common_head(title, description, canonical, 'website', [breadcrumb])}<meta name="apple-itunes-app" content="app-id={APP_ID}"><style>{STYLE}{CATEGORY_STYLE}</style></head><body>
 <div class="wrap"><header class="site"><a href="../">💊 医薬品供給ナビ</a></header><nav class="crumb"><a href="../">トップ</a> › 成分別の供給状況</nav>
 <main><section class="hero"><p class="eyebrow">BY INGREDIENT</p><h1>成分別の医薬品供給状況</h1><p class="lede">{description}</p><p class="note">品目行の最新更新日：{esc(newest_row or "不明")}（{len(groups)}成分。{INGREDIENT_MIN_ROWS}品目以上、または限定出荷・供給停止を含む{INGREDIENT_MIN_ROWS_WITH_RESTRICTION}品目以上の成分を掲載）</p>
-{share_control("この一覧を共有")}</section>
+{share_control("この一覧を共有")}<p class="note">iPhoneでも品目名や成分名から検索できます。<a href="{APP_STORE}" data-dsn-event="app-store-open">iPhone版を無料で入手</a></p></section>
 <h2>限定出荷・供給停止のある成分（{len(with_restriction)}成分・多い順）</h2>{table}
 {others_html}
 <p class="note">一般名は厚生労働省公表データの表記です。件数は現在の公表区分の集計で、実在庫や入手可否を示すものではありません。</p>
