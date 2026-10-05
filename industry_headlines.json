@@ -3,24 +3,24 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-10-05T03:08:17+09:00",
-  "last_success_at": "2026-10-05T03:08:17+09:00",
+  "checked_at": "2026-10-06T06:28:30+09:00",
+  "last_success_at": "2026-10-06T06:28:30+09:00",
   "items": [
+    {
+      "title": "【ダイト／Meiji Seika ファルマ／日本政策投資銀行】後発品新社、枠組み固まる‐少品種大量生産モデル工場も",
+      "url": "https://www.yakuji.co.jp/entry140001.html",
+      "date": "2026-10-05",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【安全対策調査会】禁忌対象を乳児に限定‐プロトピック添文改訂",
+      "url": "https://www.yakuji.co.jp/entry139998.html",
+      "date": "2026-10-05",
+      "tag": "業界ニュース"
+    },
     {
       "title": "【医療機能評価機構】ヒヤリハット6年ぶり増加‐薬剤師の専門性発揮で",
       "url": "https://www.yakuji.co.jp/entry139997.html",
-      "date": "2026-10-02",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【費用対評価部会】費用増加品を価格調整‐年内実施、業界は懸念",
-      "url": "https://www.yakuji.co.jp/entry139995.html",
-      "date": "2026-10-02",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【PMDA】無菌試験で不適合事例発生‐外部ベンダー任せに警鐘",
-      "url": "https://www.yakuji.co.jp/entry139994.html",
       "date": "2026-10-02",
       "tag": "業界ニュース"
     },

@@ -4,9 +4,16 @@
   <id>https://kyokyu-navi.jp/updates/feed.xml</id>
   <link rel="self" type="application/atom+xml" href="https://kyokyu-navi.jp/updates/feed.xml"/>
   <link rel="alternate" href="https://kyokyu-navi.jp/updates/index.html"/>
-  <updated>2026-10-03T00:00:00+09:00</updated>
+  <updated>2026-10-06T00:00:00+09:00</updated>
   <author><name>医薬品供給ナビ</name></author>
   <subtitle>厚生労働省公表データ上で供給状況が変わった医薬品を日別に配信します。</subtitle>
+  <entry>
+    <title>2026年10月6日の供給変更（15品目）</title>
+    <id>https://kyokyu-navi.jp/updates/2026-10-06.html</id>
+    <link rel="alternate" href="https://kyokyu-navi.jp/updates/2026-10-06.html"/>
+    <updated>2026-10-06T00:00:00+09:00</updated>
+    <summary type="text">通常出荷へ7品目、限定出荷へ4品目、供給停止へ4品目</summary>
+  </entry>
   <entry>
     <title>2026年10月3日の供給変更（11品目）</title>
     <id>https://kyokyu-navi.jp/updates/2026-10-03.html</id>
@@ -300,12 +307,5 @@
     <link rel="alternate" href="https://kyokyu-navi.jp/updates/2026-07-09.html"/>
     <updated>2026-07-09T00:00:00+09:00</updated>
     <summary type="text">通常出荷へ33品目、限定出荷へ34品目、供給停止へ11品目</summary>
-  </entry>
-  <entry>
-    <title>2026年7月7日の供給変更（9品目）</title>
-    <id>https://kyokyu-navi.jp/updates/2026-07-07.html</id>
-    <link rel="alternate" href="https://kyokyu-navi.jp/updates/2026-07-07.html"/>
-    <updated>2026-07-07T00:00:00+09:00</updated>
-    <summary type="text">通常出荷へ6品目、限定出荷へ1品目、供給停止へ2品目</summary>
   </entry>
 </feed>
