@@ -224,6 +224,20 @@ class RemoteDataHealthTests(unittest.TestCase):
         self.assertTrue(any("schema_version" in error for error in errors))
         self.assertTrue(any("updated_at" in error for error in errors))
 
+    def test_resolution_stats_allows_omitted_small_sample_sections(self) -> None:
+        # build_resolution_stats.py はサンプル5件未満の区分を出力しない（2026-10-06に stopped が欠けた）。
+        stat = {"count": 13, "medianDays": 32, "avgDays": 36.7}
+        self.assertEqual([], validate_supporting_document(
+            "resolution_stats.json", {"updatedAt": "2026/10/06", "limited": stat}))
+        self.assertEqual([], validate_supporting_document(
+            "resolution_stats.json", {"updatedAt": "2026/10/06"}))
+        self.assertTrue(validate_supporting_document(
+            "resolution_stats.json", {"limited": stat}))
+        broken = validate_supporting_document(
+            "resolution_stats.json",
+            {"updatedAt": "2026/10/06", "stopped": {"count": "6", "medianDays": 4}})
+        self.assertTrue(any("stopped" in error for error in broken))
+
     def test_status_changes_require_identity_and_transition(self) -> None:
         errors = validate_supporting_document(
             "status_changes.json",

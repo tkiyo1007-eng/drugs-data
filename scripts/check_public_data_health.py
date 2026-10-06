@@ -84,12 +84,23 @@ def validate_supporting_document(name: str, document: object) -> list[str]:
         "featured_products.json": ("updated_at", "products"),
         "industry_topics.json": ("updated_at", "topics"),
         "crisis_index.json": ("date", "score", "level", "limited", "stopped", "total"),
-        "resolution_stats.json": ("updatedAt", "limited", "stopped"),
+        # limited/stopped は build_resolution_stats.py がサンプル5件未満の区分を出力しない仕様のため任意。
+        "resolution_stats.json": ("updatedAt",),
     }.get(name, ())
     if isinstance(document, dict):
         for key in required_keys:
             if key not in document:
                 errors.append(f"{name}: {key} がありません")
+    if name == "resolution_stats.json" and isinstance(document, dict):
+        for key in ("limited", "stopped"):
+            stat = document.get(key)
+            if stat is None:
+                continue
+            if not (isinstance(stat, dict)
+                    and all(isinstance(stat.get(field), int) and not isinstance(stat.get(field), bool)
+                            for field in ("count", "medianDays"))
+                    and isinstance(stat.get("avgDays"), (int, float)) and not isinstance(stat.get("avgDays"), bool)):
+                errors.append(f"{name}: {key} は count・medianDays（整数）と avgDays（数値）が必要です")
     if name == "status_changes.json" and isinstance(document, list):
         for index, item in enumerate(document):
             label = f"{name}: {index + 1}件目"
