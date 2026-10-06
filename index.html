@@ -533,6 +533,9 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .mednews-list{padding:6px 18px;border-radius:16px}
 .mednews-item{display:grid;grid-template-columns:max-content max-content minmax(0,1fr);gap:8px 12px;align-items:baseline;padding:11px 0;border-bottom:1px solid rgba(90,107,148,.12)}
 .mednews-item:last-child{border-bottom:none}
+/* 薬事日報の見出しは「日付・見出し・出典」の順。見出しを可変幅の列に置き、長い見出しでも横にはみ出さない */
+.mednews-item.headline{grid-template-columns:max-content minmax(0,1fr) max-content}
+.mednews-item.headline a{overflow-wrap:anywhere}
 .mednews-date{flex:none;font-size:11.5px;color:var(--sub)}
 .mednews-tag{flex:none;font-size:10.5px;font-weight:800;padding:3px 9px;border-radius:999px;
   color:var(--blue);background:rgba(79,128,244,.1);border:1px solid rgba(79,128,244,.3)}
@@ -549,7 +552,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .news-archive{margin:14px 0}
 .news-archive summary{font-size:.875rem;color:var(--blue);cursor:pointer;min-height:44px;padding:10px 0}
 .news-archive[hidden]{display:none}
-@media(max-width:640px){.mednews-item{grid-template-columns:auto 1fr}.mednews-item a{grid-column:1/-1;overflow-wrap:anywhere}.mednews-tag{justify-self:start}}
+@media(max-width:640px){.mednews-item,.mednews-item.headline{grid-template-columns:auto 1fr}.mednews-item a{grid-column:1/-1;overflow-wrap:anywhere}.mednews-tag{justify-self:start}}
 .news-subhead{font-size:15px;font-weight:800;margin:26px 0 10px}
 /* 案内文のAI要約（モーダル内） */
 .sum-box{margin-top:12px;padding:13px 16px;border-radius:14px;background:rgba(79,128,244,.06);border:1px solid rgba(79,128,244,.22)}
@@ -1596,6 +1599,7 @@ footer a:hover{color:var(--blue)}
         <a href="items/resumed.html">通常出荷への変更</a>
         <a href="items/supplemental.html">販売中止・メーカー補足</a>
         <a href="categories/index.html">薬効分類別（咳止め・去痰薬など）</a>
+        <a href="ingredients/index.html">成分（一般名）別</a>
         <a href="guides/how-to-check-drug-supply.html">出荷調整の理由・見通しの確認方法</a>
         <a href="guides/monitor-adopted-drugs.html">採用薬をCSVでまとめて監視する方法</a>
       </div>
@@ -5428,7 +5432,7 @@ function renderPmdaNews(list){
   </div>`).join("");
 }
 function renderHeadlines(list){
-  return list.map(n=>`<div class="mednews-item">
+  return list.map(n=>`<div class="mednews-item headline">
     <span class="mednews-date num">発表日：${esc(n.date)}</span>
     <a href="${esc(n.url)}" target="_blank" rel="noopener">${esc(n.title)}</a>
     <span>出典：<a href="https://www.yakuji.co.jp/" target="_blank" rel="noopener">薬事日報</a></span>
