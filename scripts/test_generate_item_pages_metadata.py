@@ -11,6 +11,7 @@ from generate_item_pages import (
     discrepancy_matches,
     hub_html,
     index_html,
+    ingredient_pages,
     item_hub_slugs,
     item_page_lastmod,
     latest_publication_date,
@@ -338,11 +339,11 @@ class ItemPageMetadataTests(unittest.TestCase):
 
     def test_sitemap_lastmod_uses_fixed_template_revision_without_advancing_daily(self):
         old_row = {"商品名": "対象錠", "更新日": "2024/03/11"}
-        self.assertEqual(item_page_lastmod(old_row), "2026-09-26")
+        self.assertEqual(item_page_lastmod(old_row), "2026-10-06")
         future_notice = {"product_name": "対象錠", "maker": "対象製薬",
-                         "announced_at": "2026-09-30"}
+                         "announced_at": "2026-10-09"}
         old_row["製造メーカー"] = "対象製薬"
-        self.assertEqual(item_page_lastmod(old_row, future_notice), "2026-09-30")
+        self.assertEqual(item_page_lastmod(old_row, future_notice), "2026-10-09")
 
     def test_discrepancy_must_match_current_official_row_and_manufacturer(self):
         row = {
@@ -651,6 +652,44 @@ class ItemPageMetadataTests(unittest.TestCase):
         )
         self.assertNotIn("app-argument=", output)
         self.assertIn('../guides/how-to-check-drug-supply.html', output)
+
+
+    def test_item_page_links_to_ingredient_page_only_when_generated(self):
+        row = {"商品名": "テスト錠10mg", "一般名": "テスト成分", "製造メーカー": "テスト製薬",
+               "供給状況": "③限定出荷（他社品の影響）", "更新日": "2026/08/20", "YJコード": "1234567F1234"}
+        linked = page_html(row, "1234567F1234", "limited", "2026-08-28", [], {"1234567F1234"},
+                           ingredient_slugs={"テスト成分": "1234567"})
+        self.assertIn('<a href="../ingredients/1234567.html" data-dsn-event="related-item-open">'
+                      'テスト成分の全品目の供給状況を見る</a>', linked)
+        self.assertIn("代替の候補を示すものではありません", linked)
+        unlinked = page_html(row, "1234567F1234", "limited", "2026-08-28", [], {"1234567F1234"},
+                             ingredient_slugs={"別成分": "7654321"})
+        self.assertNotIn("../ingredients/", unlinked)
+
+    def test_ingredient_slugs_match_curated_ingredient_pages(self):
+        try:
+            from generate_curated_pages import ingredient_groups
+        except ImportError:  # Web版リポジトリには成分ページ生成器がない
+            self.skipTest("generate_curated_pages.py がありません")
+        rows = [
+            {"一般名": "A成分", "YJコード": "1111111F1011", "供給状況": "③限定出荷"},
+            {"一般名": "A成分", "YJコード": "1111111F2011", "供給状況": "④通常出荷"},
+            {"一般名": "B成分", "YJコード": "1111111F3011", "供給状況": "④通常出荷"},
+            {"一般名": "B成分", "YJコード": "1111111F4011", "供給状況": "④通常出荷"},
+            {"一般名": "B成分", "YJコード": "1111111F5011", "供給状況": "④通常出荷"},
+            {"一般名": "C成分", "YJコード": "2222222F1011", "供給状況": "④通常出荷"},
+            {"一般名": "C成分", "YJコード": "2222222F2011", "供給状況": "④通常出荷"},
+            {"一般名": "D成分", "YJコード": "", "供給状況": "①供給停止"},
+            {"一般名": "D成分", "YJコード": "", "供給状況": "①供給停止"},
+        ]
+        csv_path = Path(__file__).resolve().parents[1] / "drugs_app_ready.csv"
+        if csv_path.exists():
+            import csv
+            with csv_path.open(encoding="utf-8-sig", newline="") as f:
+                rows += list(csv.DictReader(f))
+        expected = {group["name"]: slug for slug, group in ingredient_groups(rows).items()}
+        self.assertEqual(expected, ingredient_pages(rows))
+        self.assertNotIn("C成分", ingredient_pages(rows))
 
 
 if __name__ == "__main__":

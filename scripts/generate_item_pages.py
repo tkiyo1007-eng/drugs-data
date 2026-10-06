@@ -39,10 +39,14 @@ APP_ID = "6777696446"
 OFFICIAL_SUPPLY_URL = "https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list"
 # 全品目へ一次情報・状態別ハブ・運営方針の導線を追加した実質的な改訂日。
 # 日次生成日ではなく固定値にし、内容が変わらない日にlastmodを進めない。
-ITEM_PAGE_TEMPLATE_LASTMOD = "2026-09-26"  # 薬効分類別ページへの導線を追加
+ITEM_PAGE_TEMPLATE_LASTMOD = "2026-10-06"  # 成分別ページへの導線を追加
 # drugs-data の generate_curated_pages.py（CATEGORY_MIN_ROWS）と同じ基準。
 # 分類ページが生成される分類だけにリンクし、404を出さない。
 CATEGORY_MIN_ROWS = 3
+# drugs-data の generate_curated_pages.py（INGREDIENT_MIN_ROWS 等・ingredient_groups）と同じ基準・slug。
+# 成分ページが生成される一般名だけにリンクし、404を出さない。
+INGREDIENT_MIN_ROWS = 3
+INGREDIENT_MIN_ROWS_WITH_RESTRICTION = 2
 FORMAL_YJ_RE = re.compile(r"^[0-9][0-9A-Z]{11}$")
 INTERNAL_ITEM_ID_RE = re.compile(r"^X[0-9]{5}$")
 
@@ -738,10 +742,34 @@ def category_pages(rows: list) -> dict:
     return {name: code for name, code in name_to_code.items() if counts.get(name, 0) >= CATEGORY_MIN_ROWS}
 
 
+def ingredient_pages(rows: list) -> dict:
+    """一般名→成分別ページのslug。drugs-data の ingredient_groups と同じ条件・同じslugを返す。"""
+    by_name = {}
+    for row in rows:
+        name = (row.get("一般名") or "").strip()
+        if name:
+            by_name.setdefault(name, []).append(row)
+    slugs, used = {}, set()
+    for name in sorted(by_name):
+        group_rows = by_name[name]
+        restricted = sum(map_status(row.get("供給状況") or "") in ("limited", "stopped") for row in group_rows)
+        if not (len(group_rows) >= INGREDIENT_MIN_ROWS
+                or (restricted and len(group_rows) >= INGREDIENT_MIN_ROWS_WITH_RESTRICTION)):
+            continue
+        codes = sorted((row.get("YJコード") or "").strip()[:7].lower() for row in group_rows
+                       if re.fullmatch(r"[0-9a-z]{7}", (row.get("YJコード") or "").strip()[:7].lower()))
+        base = codes[0] if codes else "x" + hashlib.sha1(name.encode("utf-8")).hexdigest()[:6]
+        slug = base if base not in used else f"{base}-{hashlib.sha1(name.encode('utf-8')).hexdigest()[:6]}"
+        used.add(slug)
+        slugs[name] = slug
+    return slugs
+
+
 def page_html(row, key, status, jst_today, siblings, generated_keys,
               lifecycle=None, discrepancy=None, dataset_date="", supplemental_checked_date="",
               supplemental_trusted=True, supplemental_warning="", title_qualifier="",
-              hub_slugs=(), display_names=None, category_codes=None):
+              hub_slugs=(), display_names=None, category_codes=None,
+              ingredient_slugs=None):
     name = row["商品名"].strip()
     display_name = f"{name}（{title_qualifier}）" if title_qualifier else name
     maker = (row.get("販売メーカー") or row.get("製造メーカー") or "").strip()
@@ -884,6 +912,13 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
   <h2>{related_heading}</h2>
   <p class="sib-note">現在の公開データから、同成分・同剤形の確認候補は見つかりませんでした。候補がないことは、代替品が存在しないことや実在庫がないことを意味しません。メーカー・卸の最新情報もご確認ください。</p>
 </section>"""
+    ingredient_slug = (ingredient_slugs or {}).get(gen)
+    ingredient_html = (f"""
+<section>
+  <h2>成分（{esc(gen)}）の供給状況</h2>
+  <p class="sib-note">同じ一般名の全規格・全剤形の品目について、厚生労働省公表データの現在の供給区分を一覧にしています。規格・剤形・適応は品目ごとに異なり、代替の候補を示すものではありません。</p>
+  <p><a href="../ingredients/{esc(ingredient_slug)}.html" data-dsn-event="related-item-open">{esc(gen)}の全品目の供給状況を見る</a></p>
+</section>""" if ingredient_slug else "")
     category_name = (row.get("薬効分類") or "").strip()
     category_code = (category_codes or {}).get(category_name)
     category_html = (f"""
@@ -1055,6 +1090,7 @@ footer a{{color:var(--sub)}}
     <p class="share-status" id="shareStatus" role="status" aria-live="polite"></p>
   </div>
 {sib_html}
+{ingredient_html}
 {category_html}
   <div class="cta">
     <h2>供給状況の変化を、毎日自動でチェック。</h2>
@@ -1452,6 +1488,7 @@ def main():
         latest_changes, by_key, dataset_date)
 
     category_codes = category_pages(rows)
+    ingredient_slugs = ingredient_pages(rows)
 
     # 同成分リンク用: 一般名→行のインデックス
     by_gen = {}
@@ -1522,6 +1559,7 @@ def main():
                 hub_slugs=entry["hubs"],
                 display_names=display_names,
                 category_codes=category_codes,
+                ingredient_slugs=ingredient_slugs,
             ), encoding="utf-8")
 
     (out / "index.html").write_text(index_html(entries, dataset_date), encoding="utf-8")
