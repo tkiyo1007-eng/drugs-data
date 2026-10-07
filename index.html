@@ -1036,6 +1036,8 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 .term-card h3{font-size:16px;font-weight:800;margin-bottom:8px;line-height:1.5}
 .term-card p{font-size:13.5px;color:var(--sub)}
+#glossary .topic-note p{color:var(--ink)}
+#glossary .topic-note a{color:var(--blue-deep)}
 
 /* ===== よくあるご質問 ===== */
 .faq-list{padding:8px 28px}
@@ -2214,8 +2216,8 @@ footer a:hover{color:var(--blue)}
   <div class="glossary-grid">
     <div class="term-card glass">
       <span class="term-tag" style="--sc:var(--ok)">通常出荷</span>
-      <h3>厚労省の公表上、出荷量が通常の区分</h3>
-      <p>厚労省資料で「A.出荷量通常」と報告されている区分です。地域・取引先ごとの在庫や受注可否を保証するものではなく、メーカーから販売中止予定などが別途公表されている場合もあります。</p>
+      <h3>受注に対応でき、十分な在庫がある区分</h3>
+      <p>厚労省の「出荷対応」で「①通常出荷」と報告されている区分です。全ての受注に対応でき、十分な在庫量が確保できている状況を指します。地域・取引先ごとの在庫や受注可否を保証するものではありません。メーカーの販売中止予定などは別情報です。</p>
     </div>
     <div class="term-card glass">
       <span class="term-tag" style="--sc:var(--limited)">限定出荷</span>
@@ -2232,6 +2234,9 @@ footer a:hover{color:var(--blue)}
       <h3>製造・販売が終了した状態</h3>
       <p>メーカーが製造・販売を終了した状態です。今後の対応は、メーカー・卸の最新情報を確認し、医師・薬剤師等の専門職でご判断ください。</p>
     </div>
+  </div>
+  <div class="term-card glass topic-note">
+    <p>「出荷対応」と「出荷量」は別の区分です。「A．出荷量通常」は、比較対象期間の出荷量または市場予測による予定出荷量の概ね90%以上110%未満を指します。出荷量が通常でも、出荷対応が限定出荷の場合があります。<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の用語定義</a></p>
   </div>
 </section>
 
