@@ -1,5 +1,23 @@
 [
  {
+  "date": "2026/10/08",
+  "title": "クラスI回収 該当回収品目　新鮮凍結血漿-LR「日赤」240",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html",
+  "tag": "回収"
+ },
+ {
+  "date": "2026/10/08",
+  "title": "使用上の注意の改訂指示通知（医薬品）2026年10月8日付（厚生労働省より発出）を掲載しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/revision-of-precautions/0375.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/10/08",
+  "title": "「治験計画等の届出に関するFAQ」を更新しました",
+  "url": "https://www.pmda.go.jp/review-services/trials/0022.html",
+  "tag": "承認審査"
+ },
+ {
   "date": "2026/10/07",
   "title": "未承認薬データベースを更新しました",
   "url": "https://www.pmda.go.jp/review-services/drug-reviews/review-information/p-drugs/0013.html",
@@ -16,12 +34,6 @@
   "title": "[イベント]Early Consideration「少数例臨床試験に関する留意事項」説明会の資料を掲載しました",
   "url": "https://www.pmda.go.jp/review-services/symposia/0207.html",
   "tag": "承認審査"
- },
- {
-  "date": "2026/10/05",
-  "title": "クラスI回収 該当回収品目　新鮮凍結血漿-LR「日赤」480",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html",
-  "tag": "回収"
  },
  {
   "date": "2026/10/05",
@@ -46,17 +58,5 @@
   "title": "「医療事故情報収集等事業第86回報告書の公表について」を掲載しました",
   "url": "https://www.pmda.go.jp/safety/info-services/medical-safety-info/0005.html",
   "tag": "安全対策"
- },
- {
-  "date": "2026/10/02",
-  "title": "使用上の注意の改訂指示通知（医薬品）2026年10月2日付（厚生労働省より発出）を掲載しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/revision-of-precautions/0375.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/10/02",
-  "title": "令和7年度治験エコシステム導入推進事業で作成された様式を公表しました",
-  "url": "https://www.pmda.go.jp/review-services/inspections/drugs/0013.html",
-  "tag": "承認審査"
  }
 ]
