@@ -875,6 +875,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   font-size:12.5px;font-weight:700;color:var(--blue);transition:.2s;
 }
 .maker-link:hover{background:rgba(79,128,244,.14)}
+#mDataProvenance .maker-link{color:var(--blue-deep)}
 .maker-link::after{content:"↗";font-size:14px;flex:none}
 #mItemLink::after{content:"→"} /* 同一サイト内リンクなので外部リンク記号は使わない */
 .maker-link[hidden]{display:none}
@@ -2368,6 +2369,15 @@ footer a:hover{color:var(--blue)}
     <h3 id="mTitle">品目詳細</h3>
     <p class="modal-maker" id="mMaker"></p>
     <div class="modal-note" id="mSupplyReference" hidden></div>
+    <div class="modal-note" id="mDataProvenance" role="group" aria-labelledby="mDataProvenanceTitle">
+      <h4 id="mDataProvenanceTitle">供給区分の出典・日付</h4>
+      <p id="mDatasetDate">全体データ基準日：確認できません</p>
+      <p id="mItemDate">公表行更新日：確認できません</p>
+      <p>データ・品目に記録された日付です。端末での取得・確認日時ではありません。</p>
+      <a class="maker-link" id="mOfficialSupplySource" href="https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省で検索（一般検索画面）</a>
+      <p>公式の一般検索画面で、品目名またはYJコードを入力して確認します。</p>
+      <a class="maker-link" id="mSupplyDefinition" href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html" target="_blank" rel="noopener" data-dsn-event="official-source-open">供給区分・出荷量の定義（厚生労働省）</a>
+    </div>
     <section class="alternatives-box" id="mAlternatives" aria-labelledby="mAlternativesTitle" hidden>
       <h4 id="mAlternativesTitle">代替候補の4つのポイント</h4>
       <p class="alternatives-date">供給情報：2026年9月11日確認（厚労省9月10日版・メーカー案内）</p>
@@ -4615,6 +4625,14 @@ function renderLuliconAlternatives(d){
     ? `ルリコナゾール${form}1％「イワキ」（後発品）`
     : `ルリコン${form}1％（先発品）`;
 }
+function updateDetailDataProvenance(d){
+  const selected = d || ITEMS.find(item => itemKey(item) === currentDetailKey);
+  if(!selected) return;
+  const datasetDate = String(DATASET_DATE || "").trim().replaceAll("-", "/") || "確認できません";
+  const itemDate = String(selected.d || "").trim().replaceAll("-", "/") || "確認できません";
+  document.getElementById("mDatasetDate").textContent = `全体データ基準日：${datasetDate}`;
+  document.getElementById("mItemDate").textContent = `公表行更新日：${itemDate}`;
+}
 function openDetail(d, opts={}){
   if(!d) return;
   if(opts.track !== false) dsnTrack("detail-open");
@@ -4629,6 +4647,7 @@ function openDetail(d, opts={}){
   renderSupplyReference(d);
   currentDetailName = d.n;
   currentDetailKey = itemKey(d);
+  updateDetailDataProvenance(d);
   syncModalFavorite(d);
   document.getElementById("mGrid").innerHTML = detailPairs(d)
     .map(([h,v])=>`<dt>${esc(h)}</dt><dd>${esc(v)}</dd>`).join("");
@@ -5731,6 +5750,7 @@ const STALE_DATA_DAYS = 7;
 let dataLoadFailureTracked = false;
 function setDatasetDate(date){
   DATASET_DATE = date || "";
+  updateDetailDataProvenance();
   const asOf = document.getElementById("dataAsOf");
   const notice = document.getElementById("staleNotice");
   const noticeText = document.getElementById("staleNoticeText");
