@@ -3,43 +3,31 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-10-09T04:55:01+09:00",
-  "last_success_at": "2026-10-09T04:55:01+09:00",
+  "checked_at": "2026-10-10T04:31:19+09:00",
+  "last_success_at": "2026-10-10T04:31:19+09:00",
   "items": [
     {
-      "title": "【扶桑薬品】岡山第二工場が着工へ‐28年12月の製造開始目指す",
-      "url": "https://www.yakuji.co.jp/entry140170.html",
-      "date": "2026-10-08",
+      "title": "【厚労省】加算係数ゼロは5品目に‐14日に11成分14品目収載",
+      "url": "https://www.yakuji.co.jp/entry140295.html",
+      "date": "2026-10-09",
       "tag": "業界ニュース"
     },
     {
-      "title": "【大木ヘルスケアHD】韓国人蔘公社と業務提携‐共同開発商品販売など協業",
-      "url": "https://www.yakuji.co.jp/entry140169.html",
-      "date": "2026-10-08",
+      "title": "【大阪府薬】零売巡り新区分を提言‐薬剤師の対面評価前提",
+      "url": "https://www.yakuji.co.jp/entry140287.html",
+      "date": "2026-10-09",
       "tag": "業界ニュース"
     },
     {
-      "title": "【内閣府専門部会】放射性医薬品薬剤師を育成‐新たな行動計画策定へ",
-      "url": "https://www.yakuji.co.jp/entry140167.html",
-      "date": "2026-10-08",
+      "title": "【薬価専門部会】新薬は「乖離率1倍以上に」‐中間年改定で日薬委員主張",
+      "url": "https://www.yakuji.co.jp/entry140285.html",
+      "date": "2026-10-09",
       "tag": "業界ニュース"
     },
     {
-      "title": "【日薬】指定第2類移行に「反対」‐ロキソプロフェンで意見",
-      "url": "https://www.yakuji.co.jp/entry140164.html",
-      "date": "2026-10-08",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【都薬】実務実習質向上で証明書‐「宣言薬局制度」来年施行",
-      "url": "https://www.yakuji.co.jp/entry140162.html",
-      "date": "2026-10-07",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "単科薬大の将来見据え決断‐岐阜薬大 原学長、大学統合「改革で生き残る」",
-      "url": "https://www.yakuji.co.jp/entry140158.html",
-      "date": "2026-10-07",
+      "title": "【日病薬】キャリアマップを策定へ‐薬剤師が描く将来像支援",
+      "url": "https://www.yakuji.co.jp/entry140282.html",
+      "date": "2026-10-09",
       "tag": "業界ニュース"
     }
   ]
