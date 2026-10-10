@@ -19,9 +19,11 @@ SITE_ROOT = "https://kyokyu-navi.jp/"
 APP_ID = "6777696446"
 APP_STORE = f"https://apps.apple.com/jp/app/id{APP_ID}"
 MHLW_SUPPLY_URL = "https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list"
+MHLW_SUPPLY_GUIDANCE_URL = "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html"
 PMDA_SEARCH_URL = "https://www.pmda.go.jp/PmdaSearch/iyakuSearch/"
 PMDA_RECALL_URL = "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html"
 GUIDE_SLUG = "how-to-check-drug-supply"
+GUIDE_UPDATED_AT = "2026-10-10"
 WATCH_GUIDE_SLUG = "monitor-adopted-drugs"
 WATCH_GUIDE_UPDATED_AT = "2026-09-26"
 TEMPLATE_UPDATED_AT = "2026-08-28"
@@ -389,15 +391,15 @@ def product_intent_html(product: dict, rows: list[dict[str, str]],
 </section>'''
 
 
-def guide_page(updated_at: str) -> str:
+def guide_page() -> str:
     """供給情報の出典と代替検討の境界を説明する、1本だけの恒久ガイド。"""
     canonical = f"{SITE_ROOT}guides/{GUIDE_SLUG}.html"
     title = "医薬品の出荷調整・限定出荷を公式情報で確認する方法｜医薬品供給ナビ"
-    description = ("医薬品の出荷調整・限定出荷について、厚生労働省の供給状況、メーカー公式案内、"
-                   "PMDA情報の役割と、代替検討前に確認する項目を整理します。")
+    description = ("医薬品の出荷調整の意味、限定出荷・供給停止の違い、理由や解除見込みの確認方法を整理します。"
+                   "厚生労働省・メーカー・PMDAの役割を分け、医薬品一覧や成分別ページから確認できます。")
     article = {
         "@type": "Article", "headline": title, "description": description,
-        "datePublished": TEMPLATE_UPDATED_AT, "dateModified": updated_at,
+        "datePublished": TEMPLATE_UPDATED_AT, "dateModified": GUIDE_UPDATED_AT,
         "inLanguage": "ja", "mainEntityOfPage": canonical,
         "author": {"@type": "Organization", "name": "医薬品供給ナビ運営者"},
         "publisher": {"@type": "Organization", "name": "医薬品供給ナビ"},
@@ -409,10 +411,26 @@ def guide_page(updated_at: str) -> str:
     return f'''<!DOCTYPE html><html lang="ja"><head>
 {common_head(title, description, canonical, "article", [article, breadcrumb])}<style>{STYLE}</style></head><body>
 <div class="wrap"><header class="site"><a href="../">💊 医薬品供給ナビ</a></header>
-<nav class="crumb"><a href="../">トップ</a> › 供給情報の確認ガイド</nav><main>
+<nav class="crumb" aria-label="パンくず"><a href="../">トップ</a> › 供給情報の確認ガイド</nav><main>
 <article class="hero"><p class="eyebrow">EVERGREEN GUIDE</p><h1>医薬品の出荷調整・限定出荷を公式情報で確認する方法</h1>
-<p class="lede">「なぜ出荷調整なのか」「代替をどう探すか」「PMDAで確認できるか」を、出典の役割を分けて整理します。</p>
+<p class="lede">出荷調整の意味、現在の供給状況、理由や解除見込みを、出典の役割を分けて確認します。</p>
 {share_control("この確認ガイドを共有")}</article>
+<section class="intent"><h2>出荷調整とは</h2>
+<p>医薬品の出荷調整に関する情報は、薬ごとの「出荷対応」の区分で確認できます。厚生労働省の公表では、全ての受注に対応できない「限定出荷」と、供給を停止している「供給停止」を分けて扱います。</p>
+<h3>限定出荷と供給停止の違い</h3>
+<p>厚生労働省の区分では、限定出荷は自社の事情・他社品の影響・その他の理由により、全ての受注には対応できない状態です。供給停止は、供給を停止している状態です。どちらも実際の流通在庫や施設ごとの入手可否を示すものではありません。</p>
+<p class="source">区分の出典：<a href="{MHLW_SUPPLY_GUIDANCE_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の医薬品供給状況に関する情報</a></p>
+<h3>いつまで続くかを確認するには</h3>
+<p>品目ごとに厚生労働省の「解除・解消見込み」欄と、メーカー公式案内の対象包装・更新日を確認します。見込みの有無の区分だけから具体的な日付を決めず、「未定」や記載のない再開時期を推測で補いません。出荷再開の案内があっても、各施設への入荷時期や実在庫は卸・メーカーにも確認してください。</p>
+<p class="source">現在の公表内容：<a href="{MHLW_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システムで品目名・YJコードを確認</a></p></section>
+<nav class="intent" aria-labelledby="guidePathsTitle"><h2 id="guidePathsTitle">目的に合う確認先を選ぶ</h2>
+<div class="list">
+<a href="../items/limited.html">出荷調整（限定出荷）の医薬品一覧<small>厚生労働省公表データで限定出荷の品目を確認</small></a>
+<a href="../items/stopped.html">供給停止の医薬品一覧<small>限定出荷と分けて供給停止の品目を確認</small></a>
+<a href="../items/recent-restrictions.html">最近の限定出荷・供給停止への変更<small>直近30日以内の公表区分変更を確認</small></a>
+<a href="../ingredients/index.html">成分（一般名）別の供給状況<small>同じ成分の品目を規格・メーカー別に確認</small></a>
+<a href="../#demo" data-dsn-event="search-cta-open">薬品名・成分名・メーカー名・YJコードから検索<small>Web版で対象品目を探し、理由やメーカー案内を確認</small></a>
+</div></nav>
 <section class="intent"><h2>1. 現在の供給区分は厚生労働省データで確認</h2>
 <p>厚生労働省「医療用医薬品供給状況」では、通常出荷・限定出荷・供給停止などの現在区分、理由、更新日を品目単位で確認します。医薬品供給ナビもこの公表値を意味を変えずに表示します。</p>
 <div class="official-links"><a href="{MHLW_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システムを開く</a></div></section>
@@ -432,7 +450,7 @@ def guide_page(updated_at: str) -> str:
 <p><a href="../#q={quote("カデュエット配合錠", safe="")}" data-dsn-event="search-cta-open">カデュエット配合錠の全規格をWeb版で確認</a></p></section>
 <p><a href="{WATCH_GUIDE_SLUG}.html">採用薬の供給状況をCSVでまとめて確認する方法</a></p>
 <p class="note">本ガイドは情報源の使い分けを説明するもので、処方・調剤・代替選定その他の医療上の判断を行うものではありません。実際の入手可否は卸・メーカーにもご確認ください。</p>
-</main><footer>最終更新：{esc(updated_at)}｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
+</main><footer>最終更新：{GUIDE_UPDATED_AT}｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
 {analytics_footer()}</body></html>'''
 
 
@@ -1111,13 +1129,8 @@ def main() -> int:
         product_dates[product["slug"]] = max(lastmod, curated_date, TEMPLATE_UPDATED_AT, PRODUCT_TEMPLATE_UPDATED_AT)
         if product["slug"] == "lulicon-cream":
             product_dates[product["slug"]] = max(product_dates[product["slug"]], "2026-09-11")
-    guide_updated = max(
-        normalize_date(topics_doc.get("updated_at")),
-        normalize_date(products_doc.get("updated_at")),
-        TEMPLATE_UPDATED_AT,
-    )
     (guide_dir / f"{GUIDE_SLUG}.html").write_text(
-        guide_page(guide_updated), encoding="utf-8")
+        guide_page(), encoding="utf-8")
     (guide_dir / f"{WATCH_GUIDE_SLUG}.html").write_text(watch_guide_page(), encoding="utf-8")
     (topic_dir / "index.html").write_text(
         list_page("topics", topics, max(
@@ -1165,7 +1178,7 @@ def main() -> int:
         (site / "reports" / "index.html").write_text(report_index_page(reports), encoding="utf-8")
     (site / "sitemap-curated.xml").write_text(
         sitemap(topic_dates, product_dates,
-                {GUIDE_SLUG: guide_updated, WATCH_GUIDE_SLUG: WATCH_GUIDE_UPDATED_AT},
+                {GUIDE_SLUG: GUIDE_UPDATED_AT, WATCH_GUIDE_SLUG: WATCH_GUIDE_UPDATED_AT},
                 category_dates, report_dates, ingredient_dates),
         encoding="utf-8")
     print(f"生成: ニュース{len(topics)}件、注目製品{len(products)}件、恒久ガイド2件、薬効分類{len(groups)}件、成分{len(ingredients)}件")
