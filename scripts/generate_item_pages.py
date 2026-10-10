@@ -40,6 +40,8 @@ OFFICIAL_SUPPLY_URL = "https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-l
 # 全品目へ一次情報・状態別ハブ・運営方針の導線を追加した実質的な改訂日。
 # 日次生成日ではなく固定値にし、内容が変わらない日にlastmodを進めない。
 ITEM_PAGE_TEMPLATE_LASTMOD = "2026-10-06"  # 成分別ページへの導線を追加
+# ページ内検索を追加した2一覧だけの実質的な改訂日。個別品目のlastmodは進めない。
+HUB_FILTER_TEMPLATE_LASTMOD = {"limited": "2026-10-11", "stopped": "2026-10-11"}
 # drugs-data の generate_curated_pages.py（CATEGORY_MIN_ROWS）と同じ基準。
 # 分類ページが生成される分類だけにリンクし、404を出さない。
 CATEGORY_MIN_ROWS = 3
@@ -1306,6 +1308,73 @@ footer{{font-size:12px;color:#5A6B8C;text-align:center;margin-top:30px}}
 """
 
 
+HUB_FILTER_STYLE = """
+.hub-filter{background:rgba(255,255,255,.88);border:1px solid #CFDBF2;border-radius:16px;padding:18px;margin:0 0 22px;box-shadow:0 8px 24px rgba(47,99,232,.05)}
+.hub-filter label{display:block;font-size:15px;font-weight:700;margin-bottom:6px}
+.filter-hint,.filter-count{font-size:12.5px;color:#5A6B8C}
+.filter-controls{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+.filter-controls input{flex:1 1 230px;min-width:0;min-height:44px;padding:10px 12px;border:1px solid #B6C8EB;border-radius:10px;font:inherit;background:#fff;color:#1C2A44}
+.filter-controls button{min-height:44px;padding:10px 16px;border:1px solid #B6C8EB;border-radius:10px;font:inherit;font-weight:700;color:#2F63E8;background:#fff;cursor:pointer}
+.filter-controls button:disabled{color:#5A6B8C;cursor:default}
+.filter-controls input:focus-visible,.filter-controls button:focus-visible{outline:3px solid #2F63E8;outline-offset:2px}
+.filter-empty{margin-top:10px;font-size:13px;color:#5A6B8C}
+#hubItems li[hidden]{display:none}
+"""
+
+HUB_FILTER_SCRIPT = r"""<script>
+(function(){
+  "use strict";
+  const panel = document.getElementById("hubFilter");
+  const list = document.getElementById("hubItems");
+  const input = document.getElementById("hubFilterInput");
+  const clear = document.getElementById("hubFilterClear");
+  const count = document.getElementById("hubFilterCount");
+  const empty = document.getElementById("hubFilterEmpty");
+  if(!panel || !list || !input || !clear || !count || !empty) return;
+  function showAll(){
+    Array.from(list.querySelectorAll("li")).forEach(function(row){ row.hidden = false; });
+    panel.hidden = true;
+    empty.hidden = true;
+  }
+  function normalize(value){
+    return String(value || "").normalize("NFKC").toLowerCase()
+      .replace(/[ぁ-ゖ]/g, function(c){ return String.fromCharCode(c.charCodeAt(0) + 0x60); });
+  }
+  try{
+    const entries = Array.from(list.querySelectorAll("li")).map(function(row){
+      return {row:row, text:normalize(row.getAttribute("data-search") || row.textContent)};
+    });
+    function applyFilter(){
+      const terms = normalize(input.value).trim().split(/\s+/).filter(Boolean);
+      const matches = entries.map(function(entry){
+        return terms.every(function(term){ return entry.text.includes(term); });
+      });
+      let shown = 0;
+      entries.forEach(function(entry, index){
+        entry.row.hidden = !matches[index];
+        if(matches[index]) shown += 1;
+      });
+      count.textContent = shown.toLocaleString("ja-JP") + " / "
+        + entries.length.toLocaleString("ja-JP") + "品目を表示";
+      empty.hidden = shown !== 0;
+      clear.disabled = input.value.length === 0;
+    }
+    function safelyApplyFilter(){
+      try{ applyFilter(); }catch(error){ showAll(); }
+    }
+    input.addEventListener("input", safelyApplyFilter);
+    clear.addEventListener("click", function(){
+      input.value = "";
+      safelyApplyFilter();
+      input.focus();
+    });
+    applyFilter();
+    panel.hidden = false;
+  }catch(error){ showAll(); }
+})();
+</script>"""
+
+
 def hub_html(slug, entries, dataset_date):
     """検索者とクローラーの両方に文脈を示す状態別の静的一覧。"""
     config = ITEM_HUBS[slug]
@@ -1318,6 +1387,7 @@ def hub_html(slug, entries, dataset_date):
     else:
         group.sort(key=lambda entry: entry.get("display_name", entry["name"]))
 
+    searchable = slug in HUB_FILTER_TEMPLATE_LASTMOD
     items = []
     for entry in group:
         change = entry.get("latest_change") or {}
@@ -1328,8 +1398,14 @@ def hub_html(slug, entries, dataset_date):
             change_note = (f'｜{esc(STATUSES[entry["status"]]["label"])}へ変更 '
                            f'{esc(change["iso_date"])}')
         update_note = f'｜品目行更新 {esc(entry["updated"])}' if entry.get("updated") else ""
+        search_attr = ""
+        if searchable:
+            search_text = " ".join(dict.fromkeys(
+                str(entry.get(field) or "") for field in (
+                    "key", "name", "display_name", "ingredient", "spec", "maker", "manufacturer")))
+            search_attr = f' data-search="{esc(search_text)}"'
         items.append(
-            f'<li><a href="{entry["key"]}.html">'
+            f'<li{search_attr}><a href="{entry["key"]}.html">'
             f'{esc(entry.get("display_name", entry["name"]))}</a>'
             f'<span>{esc(entry["maker"])}｜現在の厚労省区分：'
             f'{esc(STATUSES[entry["status"]]["label"])}{change_note}{update_note}</span></li>')
@@ -1360,10 +1436,25 @@ def hub_html(slug, entries, dataset_date):
             },
             {
                 "@type": "CollectionPage", "name": config["h1"], "url": url,
-                "description": config["description"], "dateModified": dataset_date,
+                "description": config["description"],
+                "dateModified": max(dataset_date, HUB_FILTER_TEMPLATE_LASTMOD.get(slug, "")),
             },
         ],
     })
+    filter_markup = ""
+    if searchable:
+        filter_markup = f'''
+    <section class="hub-filter" id="hubFilter" hidden aria-label="この一覧内の検索">
+      <label for="hubFilterInput">この一覧内を検索</label>
+      <p class="filter-hint" id="hubFilterHint">薬品名・成分名・メーカー・YJコードで絞り込めます。空白で区切ると、すべての語を含む品目を表示します。</p>
+      <div class="filter-controls">
+        <input id="hubFilterInput" type="search" placeholder="例：薬品名 メーカー" autocomplete="off" aria-describedby="hubFilterHint" aria-controls="hubItems">
+        <button id="hubFilterClear" type="button" disabled>クリア</button>
+      </div>
+      <p class="filter-count" id="hubFilterCount" role="status" aria-live="polite" aria-atomic="true">{len(group):,} / {len(group):,}品目を表示</p>
+      <p class="filter-empty" id="hubFilterEmpty" hidden>この一覧内に該当する品目なし。すべての医薬品の検索結果ではありません。検索語を変えるか、クリアしてご確認ください。</p>
+    </section>'''
+    list_id = ' id="hubItems"' if searchable else ""
     return f"""<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -1403,7 +1494,7 @@ li a{{text-decoration:none;font-weight:700}}
 li span{{display:block;color:#5A6B8C;font-size:11.5px;margin-top:2px}}
 .official{{font-size:13px;margin:22px 0}}
 footer{{font-size:12px;color:#5A6B8C;text-align:center;margin-top:34px}}
-footer a{{color:#5A6B8C}}
+footer a{{color:#5A6B8C}}{HUB_FILTER_STYLE if searchable else ""}
 </style>
 </head>
 <body>
@@ -1420,12 +1511,12 @@ footer a{{color:#5A6B8C}}
       <a href="../categories/index.html">薬効分類別に確認</a>
       <a href="../guides/how-to-check-drug-supply.html">出荷調整の意味・確認方法</a>
     </nav>
-    <nav class="hub-nav" aria-label="状態別の品目一覧">{other_hubs}</nav>
-    <ul>{''.join(items)}</ul>
+    <nav class="hub-nav" aria-label="状態別の品目一覧">{other_hubs}</nav>{filter_markup}
+    <ul{list_id}>{''.join(items)}</ul>
     <p class="official"><a href="{OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システムで品目名・YJコードを再確認</a></p>
   </main>
   <footer><a href="index.html">品目別一覧</a>｜<a href="../guides/how-to-check-drug-supply.html">データの見方・確認手順</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer>
-</div>
+</div>{chr(10) + HUB_FILTER_SCRIPT if searchable else ""}
 <script data-goatcounter="https://kt1007.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
@@ -1441,8 +1532,9 @@ def sitemap_xml(key_dates, jst_today, hub_slugs=()):
     body = (f"  <url><loc>{SITE_ROOT}items/index.html</loc><lastmod>{jst_today}</lastmod>"
             f"<changefreq>daily</changefreq></url>\n")
     for slug in sorted(hub_slugs):
+        hub_lastmod = max(jst_today, HUB_FILTER_TEMPLATE_LASTMOD.get(slug, ""))
         body += (f"  <url><loc>{SITE_ROOT}items/{slug}.html</loc>"
-                 f"<lastmod>{jst_today}</lastmod><changefreq>daily</changefreq></url>\n")
+                 f"<lastmod>{hub_lastmod}</lastmod><changefreq>daily</changefreq></url>\n")
     for k in sorted(key_dates):
         body += (f"  <url><loc>{SITE_ROOT}items/{k}.html</loc>"
                  f"<lastmod>{key_dates[k] or jst_today}</lastmod>"
@@ -1537,6 +1629,9 @@ def main():
             "display_name": identities[k]["display_name"],
             "status": s,
             "maker": (r.get("販売メーカー") or r.get("製造メーカー") or "").strip(),
+            "manufacturer": (r.get("製造メーカー") or "").strip(),
+            "ingredient": (r.get("一般名") or "").strip(),
+            "spec": (r.get("規格") or "").strip(),
             "updated": official_row_date(r),
             "delist": is_delist(r),
             "supplements": supplemental_labels(
