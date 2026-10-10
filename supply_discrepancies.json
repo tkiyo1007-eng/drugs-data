@@ -2,8 +2,8 @@
   "schema_version": 1,
   "generated_at": "2026-10-08",
   "source": {
-    "mhlw_version": 202610100431,
-    "mhlw_note": "2026年10月10日厚労省データ反映",
+    "mhlw_version": 202610110331,
+    "mhlw_note": "2026年10月11日厚労省データ反映",
     "manufacturer_checked_through": "2026-10-08"
   },
   "counts": {
