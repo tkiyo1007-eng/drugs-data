@@ -1,15 +1,20 @@
 import csv
 import json
+import re
 import subprocess
 import sys
 import tempfile
 import unittest
+import xml.etree.ElementTree as ET
+from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import quote
 
 from generate_curated_pages import (
     GUIDE_SLUG,
+    GUIDE_UPDATED_AT,
     WEB_HIDDEN_FEATURED_SLUGS,
+    guide_page,
     list_page,
     product_intent_html,
     product_page,
@@ -23,7 +28,75 @@ ROOT = Path(__file__).resolve().parents[1]
 GENERATOR = ROOT / "scripts" / "generate_curated_pages.py"
 
 
+class PageLinks(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.hrefs = set()
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "a":
+            self.hrefs.add(dict(attrs).get("href"))
+
+
 class CuratedPageGenerationTests(unittest.TestCase):
+    def test_guide_has_static_purpose_links_and_published_status_boundaries(self):
+        page = guide_page()
+        links = PageLinks()
+        links.feed(page)
+        for href in (
+            "../items/limited.html", "../items/stopped.html",
+            "../items/recent-restrictions.html", "../ingredients/index.html", "../#demo",
+            "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html",
+            "https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list",
+        ):
+            with self.subTest(href=href):
+                self.assertIn(href, links.hrefs)
+        self.assertLess(page.index('id="guidePathsTitle"'), page.index("1. 現在の供給区分"))
+        self.assertIn('<nav class="crumb" aria-label="パンくず">', page)
+        self.assertIn("出荷調整とは", page)
+        self.assertIn("薬ごとの「出荷対応」の区分で確認できます", page)
+        self.assertIn("限定出荷と供給停止の違い", page)
+        self.assertIn("全ての受注には対応できない", page)
+        self.assertIn("供給を停止している状態", page)
+        self.assertIn("記載のない再開時期を推測で補いません", page)
+        self.assertIn("実際の流通在庫や施設ごとの入手可否を示すものではありません", page)
+        self.assertIn("代替薬の推薦ではありません", page)
+        self.assertIn("PMDAと供給情報の役割は異なる", page)
+        self.assertIn('rel="canonical" href="https://kyokyu-navi.jp/guides/how-to-check-drug-supply.html"', page)
+
+    def test_guide_revision_date_is_independent_of_news_and_product_dates(self):
+        namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+        pages = []
+        with tempfile.TemporaryDirectory() as directory:
+            site = Path(directory)
+            csv_path = site / "drugs.csv"
+            csv_path.write_text("商品名,供給状況\n試験薬,①通常出荷\n", encoding="utf-8")
+            for source_date in ("2026-09-30", "2026-10-12"):
+                for filename, field in (("industry_topics.json", "topics"), ("featured_products.json", "products")):
+                    (site / filename).write_text(json.dumps({
+                        "updated_at": source_date, field: [],
+                    }), encoding="utf-8")
+                subprocess.run(
+                    [sys.executable, "-B", str(GENERATOR), "--csv", str(csv_path), "--site", str(site), "--month", "10"],
+                    check=True, capture_output=True, text=True,
+                )
+                page = (site / "guides" / f"{GUIDE_SLUG}.html").read_text(encoding="utf-8")
+                pages.append(page)
+                structured = json.loads(re.search(
+                    r'<script type="application/ld\+json">(.*?)</script>', page, re.S,
+                ).group(1))
+                article = next(entry for entry in structured["@graph"] if entry["@type"] == "Article")
+                self.assertEqual("2026-08-28", article["datePublished"])
+                self.assertEqual(GUIDE_UPDATED_AT, article["dateModified"])
+                self.assertIn(f"最終更新：{GUIDE_UPDATED_AT}", page)
+                sitemap = ET.fromstring((site / "sitemap-curated.xml").read_text(encoding="utf-8"))
+                dates = {entry.findtext("s:loc", namespaces=namespace):
+                         entry.findtext("s:lastmod", namespaces=namespace)
+                         for entry in sitemap.findall("s:url", namespace)}
+                self.assertEqual(GUIDE_UPDATED_AT, dates[f"https://kyokyu-navi.jp/guides/{GUIDE_SLUG}.html"])
+                self.assertEqual("2026-09-26", dates["https://kyokyu-navi.jp/guides/monitor-adopted-drugs.html"])
+        self.assertEqual(pages[0], pages[1], "ニュース・製品情報の日付だけではガイドを改訂扱いにしない")
+
     def test_web_list_hides_requested_products_without_removing_detail_pages(self):
         document = json.loads((ROOT / "featured_products.json").read_text())
         records = document["products"]

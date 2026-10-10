@@ -1386,12 +1386,14 @@ def hub_html(slug, entries, dataset_date):
 *{{margin:0;padding:0;box-sizing:border-box}}
 body{{font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;color:#1C2A44;background:#F6F9FE;line-height:1.7}}
 .wrap{{max-width:900px;margin:0 auto;padding:24px 18px 56px}}
-.site a,.crumb a,.hub-nav a,li a,.official a{{color:#2F63E8}}
+.site a,.crumb a,.hub-nav a,.entry-nav a,li a,.official a{{color:#2F63E8}}
 .site a{{text-decoration:none;font-weight:700;font-size:15px}}
 .crumb{{font-size:12px;color:#5A6B8C;margin:16px 0}}
 h1{{font-size:24px;line-height:1.45;margin-bottom:8px}}
 .lede{{font-size:14px;color:#5A6B8C}}
 .notice{{background:#FFF9E8;border:1px solid #E8CE84;border-radius:12px;padding:13px 15px;font-size:13px;margin:18px 0}}
+.entry-nav{{display:flex;flex-wrap:wrap;gap:8px 18px;margin:18px 0;font-size:13px}}
+.entry-nav a{{display:inline-flex;align-items:center;min-height:44px;text-underline-offset:3px}}
 .hub-nav{{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 28px}}
 .hub-nav a{{background:#fff;border:1px solid #CFDBF2;border-radius:999px;padding:7px 12px;text-decoration:none;font-size:12.5px;font-weight:700}}
 .hub-nav a[aria-current="page"]{{background:#2F63E8;color:#fff;border-color:#2F63E8}}
@@ -1412,6 +1414,12 @@ footer a{{color:#5A6B8C}}
     <h1>{esc(config["h1"])}</h1>
     <p class="lede">{esc(config["description"])}（{len(group):,}品目／全体データ基準日 {esc(dataset_date or "確認できません")}）</p>
     <p class="notice">{esc(config["intro"])} 医薬品の使用・変更は、公式情報を確認したうえで医師・薬剤師等の専門職が判断してください。</p>
+    <nav class="entry-nav" aria-label="医薬品の探し方と確認方法">
+      <a href="../#demo" data-dsn-event="search-cta-open">薬品名・メーカー名で検索</a>
+      <a href="../ingredients/index.html">成分別に確認</a>
+      <a href="../categories/index.html">薬効分類別に確認</a>
+      <a href="../guides/how-to-check-drug-supply.html">出荷調整の意味・確認方法</a>
+    </nav>
     <nav class="hub-nav" aria-label="状態別の品目一覧">{other_hubs}</nav>
     <ul>{''.join(items)}</ul>
     <p class="official"><a href="{OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システムで品目名・YJコードを再確認</a></p>
