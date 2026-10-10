@@ -738,6 +738,9 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 .empty-reset:hover{background:#fff;transform:translateY(-1px)}
 .search-help{margin:8px 4px 0;font-size:11.5px;color:var(--sub);line-height:1.65}
+.supply-entry-links{display:flex;flex-wrap:wrap;gap:4px 18px;margin:10px 4px 4px}
+.supply-entry-links a{display:inline-flex;align-items:center;min-height:44px;font-size:13px;color:var(--blue);text-underline-offset:3px}
+.supply-entry-links a:focus-visible{outline:3px solid var(--blue-mid);outline-offset:3px;border-radius:4px}
 .search-relaxed-note{display:block;margin-top:4px;font-size:11.5px;color:var(--sub);line-height:1.6}
 .data-load-error{
   margin:14px 0 4px;padding:16px 17px;border-radius:16px;
@@ -1477,6 +1480,11 @@ footer a:hover{color:var(--blue)}
       <input id="q" type="search" placeholder="薬品名・成分名・メーカー名・YJコードで検索" aria-label="薬品名・成分名・メーカー名・YJコードで検索" aria-describedby="searchHelp" autocomplete="off">
     </div>
     <p class="search-help" id="searchHelp">メーカー名・YJコードにも対応。複数語は空白で区切ると、すべてを含む品目に絞り込みます。</p>
+    <nav class="supply-entry-links" aria-label="出荷調整の一覧と調べ方">
+      <a href="items/limited.html">出荷調整（限定出荷）の一覧</a>
+      <a href="items/stopped.html">供給停止の一覧</a>
+      <a href="guides/how-to-check-drug-supply.html">出荷調整とは・確認方法</a>
+    </nav>
     <aside class="pinned-alerts" id="pinnedAlerts" aria-labelledby="pinnedAlertsTitle" hidden></aside>
     <div class="data-load-error" id="dataLoadError" role="alert" hidden>
       <strong>供給状況データを表示できません</strong>
