@@ -189,7 +189,7 @@ body{
   box-shadow:0 8px 32px -12px rgba(31,63,160,.28);
   transition:box-shadow .3s;
 }
-.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:16px;letter-spacing:.02em;text-decoration:none;color:var(--ink)}
+.brand{display:flex;align-items:center;gap:10px;flex-shrink:0;white-space:nowrap;font-weight:900;font-size:16px;letter-spacing:.02em;text-decoration:none;color:var(--ink)}
 .brand-mark{
   width:34px;height:34px;border-radius:10px;flex:none;
   background:linear-gradient(150deg,var(--cyan),var(--blue) 70%);
@@ -199,7 +199,7 @@ body{
 .nav-links{display:flex;gap:4px;align-items:center}
 .nav-links a{
   text-decoration:none;color:var(--sub);font-size:13.5px;font-weight:700;
-  padding:8px 14px;border-radius:999px;transition:.2s;
+  padding:8px 10px;border-radius:999px;white-space:nowrap;transition:.2s;
 }
 .nav-links a:hover{color:var(--blue);background:rgba(79,128,244,.1)}
 .nav-cta{
@@ -211,7 +211,7 @@ body{
 }
 .nav-cta:hover{transform:translateY(-1px);box-shadow:0 10px 24px -6px rgba(47,99,232,.7)}
 @media(max-width:760px){.nav-links a:not(.nav-cta){display:none}}
-@media(max-width:1080px) and (min-width:761px){.nav-links a:not(.nav-cta):nth-child(n+4):not([href="#app"]){display:none}}
+@media(max-width:1200px) and (min-width:761px){.nav-links a:not(.nav-cta):nth-child(n+4):not([href="#app"]){display:none}}
 
 /* 固定ナビに見出しが隠れないよう、すべてのページ内リンク先に共通の余白を確保する */
 section[id]{scroll-margin-top:90px}
@@ -1138,6 +1138,7 @@ footer a:hover{color:var(--blue)}
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
 .reveal.on{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
   *,*::before,*::after{animation:none !important;transition:none !important}
   .reveal{opacity:1;transform:none}
 }
@@ -1596,6 +1597,7 @@ footer a:hover{color:var(--blue)}
       </div>
     </div>
     <div class="fav-notice" id="favNotice" hidden></div>
+    <p class="data-load-error" id="storageSaveError" role="alert" hidden></p>
     <div class="drug-list" id="list"></div>
     <button type="button" class="load-more" id="loadMore" hidden></button>
     <template id="watchPriorityResults"></template>
@@ -2362,7 +2364,7 @@ footer a:hover{color:var(--blue)}
 </main>
 
 <div class="modal-backdrop" id="mBack">
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle" tabindex="-1">
     <div class="modal-controls" role="group" aria-label="品目詳細の操作">
       <button type="button" class="modal-close" id="mClose" aria-label="閉じる">✕</button>
       <button type="button" class="modal-fav" id="mFav" aria-label="監視リストに追加" aria-pressed="false">☆ 監視に追加</button>
@@ -2374,6 +2376,7 @@ footer a:hover{color:var(--blue)}
       <span class="status-tag" id="mTag"></span>
       <span class="delist-badge" id="mDelist" hidden>薬価削除予定</span>
     </div>
+    <p class="data-load-error" id="mStorageSaveError" role="alert" hidden></p>
     <h3 id="mTitle">品目詳細</h3>
     <p class="modal-maker" id="mMaker"></p>
     <div class="modal-note" id="mSupplyReference" hidden></div>
@@ -2440,6 +2443,9 @@ footer a:hover{color:var(--blue)}
 <script>
 // 解析スクリプトの遮断・オフライン取得失敗は、検索や詳細操作の失敗理由にしない。
 if(typeof window.dsnTrack !== "function") window.dsnTrack = ()=>false;
+function pageScrollBehavior(){
+  return matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth";
+}
 /* ===== スクロール出現（最優先で登録: 後続のJSエラーでも非表示のまま残らないように） ===== */
 (function(){
   const els = document.querySelectorAll(".reveal");
@@ -2698,7 +2704,7 @@ function focusPrimarySearchInput(){
 }
 document.getElementById("watchEmptySearch").addEventListener("click", ()=>{
   setFilter("all");
-  document.getElementById("demo").scrollIntoView({behavior:"smooth", block:"start"});
+  document.getElementById("demo").scrollIntoView({behavior:pageScrollBehavior(), block:"start"});
   focusPrimarySearchInput();
 });
 
@@ -3024,9 +3030,16 @@ window.addEventListener("hashchange", ()=>{
   if(location.hash.startsWith("#item=") || location.hash.startsWith("#drug=")) return;
   const p = new URLSearchParams(location.hash.slice(1));
   if(!p.has("q") && !p.has("f")) return; // #demo などページ内リンクは無視する
+  // 詳細を閉じたpopstateで戻した焦点を、続くhashchangeの再描画でも引き継ぐ。
+  const resultFocus = captureSearchResultFocus(document.activeElement);
   $q.value = p.get("q") || "";
   visibleCount = PAGE_SIZE;
   setFilter(resolveFilter(p.get("f")));
+  if(resultFocus){
+    const target = searchResultFocusTarget(resultFocus);
+    if(canRestoreHistoryFocus(target)) target.focus({preventScroll:true});
+    else focusSearchResultSummary();
+  }
 });
 // 16,000品目のフィルタとカード再構築を打鍵ごとに走らせると低速端末で入力が詰まるため、
 // 入力が落ち着いてから描画する（IME変換中の中間文字列で無駄に描画しない効果もある）
@@ -3127,6 +3140,7 @@ $searchShareBtn.addEventListener("click", async()=>{
 const $mBack = document.getElementById("mBack");
 const $mClose = document.getElementById("mClose");
 let lastFocus = null;
+let lastFocusResult = null;
 
 // クリックした品目の詳細項目 [ラベル, 値] を組み立てる
 // 実データ時は CSV の全列（空欄を除く）をそのまま表示するので、列が増えても自動で反映される
@@ -3586,7 +3600,7 @@ function loadSupplementalData(){
     // 読込中に詳細を開いた場合は、届いた案内文・要約・包装情報をその場で反映する
     if(currentDetailKey && document.getElementById("mBack").classList.contains("open")){
       const d = findByKey(currentDetailKey);
-      if(d) openDetail(d, {route:false, track:false});
+      if(d) refreshOpenDetail(d);
     }
   });
   return supplementalDataLoading;
@@ -3898,7 +3912,7 @@ document.getElementById("historyRetry").addEventListener("click",()=>{
 $dailyUpdateView.addEventListener("click", ()=>{
   if(!LATEST_CHANGE_DATE) return;
   $q.value = ""; setFilter("changed");
-  document.getElementById("demo").scrollIntoView({behavior:"smooth",block:"start"});
+  document.getElementById("demo").scrollIntoView({behavior:pageScrollBehavior(),block:"start"});
 });
 $dailyUpdateShare.addEventListener("click", async ()=>{
   if(!DAILY_SHARE) return;
@@ -3963,24 +3977,60 @@ let LEGACY_FAV_NAMES = new Set();
 try{ LEGACY_FAV_NAMES = new Set(JSON.parse(localStorage.getItem("favDrugs")||"[]")); }catch(e){}
 function isFav(item){ return !!item && FAVS.has(itemKey(item)); }
 function findByKey(key){ return ITEMS.find(item=>itemKey(item)===key); }
+let storageSaveErrorKind = "";
+function showStorageSaveError(kind, message){
+  storageSaveErrorKind = kind;
+  for(const id of ["storageSaveError", "mStorageSaveError"]){
+    const notice = document.getElementById(id);
+    notice.textContent = message;
+    notice.hidden = false;
+  }
+}
+function clearStorageSaveError(kind){
+  if(storageSaveErrorKind !== kind) return;
+  storageSaveErrorKind = "";
+  const message = document.getElementById("storageSaveError").textContent;
+  for(const id of ["watchImportResult", "watchDashboardStatus"]){
+    const status = document.getElementById(id);
+    if(status.textContent === message){ status.textContent = ""; status.classList.remove("warn"); }
+  }
+  for(const id of ["storageSaveError", "mStorageSaveError"]){
+    const notice = document.getElementById(id);
+    notice.hidden = true;
+    notice.textContent = "";
+  }
+}
+const FAVORITES_SAVE_ERROR = "監視リストを保存できませんでした。追加・解除は反映していません。ブラウザの保存設定や空き容量を確認して、もう一度お試しください。";
 function saveFavs(){
+  // V2が正本。旧版互換の書き込みだけ失敗しても、保存済みのV2を戻さない。
+  try{ localStorage.setItem("favDrugKeysV2", JSON.stringify([...FAVS])); }
+  catch(e){ return false; }
   try{
-    localStorage.setItem("favDrugKeysV2", JSON.stringify([...FAVS]));
     const legacyNames = [...new Set(ITEMS.filter(isFav).map(item=>item.n))];
     localStorage.setItem("favDrugs", JSON.stringify(legacyNames));
   }catch(e){}
+  return true;
 }
 function migrateLegacyFavorites(items){
-  let changed = false;
+  const before = new Set(FAVS);
+  let changed = false, pendingMigration = false;
   try{
     if(localStorage.getItem("favDrugKeysV2Migrated") !== "1"){
+      pendingMigration = true;
       for(const item of items){
         if(LEGACY_FAV_NAMES.has(item.n) && !FAVS.has(itemKey(item))){ FAVS.add(itemKey(item)); changed = true; }
       }
-      localStorage.setItem("favDrugKeysV2Migrated", "1");
     }
   }catch(e){}
-  if(changed) saveFavs();
+  if(changed && !saveFavs()){
+    FAVS = before;
+    showStorageSaveError("favorites", FAVORITES_SAVE_ERROR);
+    return;
+  }
+  if(changed) clearStorageSaveError("favorites");
+  if(pendingMigration){
+    try{ localStorage.setItem("favDrugKeysV2Migrated", "1"); }catch(e){}
+  }
 }
 function maybeTrackWatchActivation(beforeSize){
   if(beforeSize < 3 && FAVS.size >= 3){
@@ -4009,7 +4059,7 @@ function maybeShowWatchFirstAdd(beforeSize, added){
 $watchFirstAddOpen.addEventListener("click", ()=>{
   $watchFirstAdd.hidden = true;
   const title = document.getElementById("watchDashboardTitle");
-  $watchDashboard.scrollIntoView({behavior:"smooth", block:"start"});
+  $watchDashboard.scrollIntoView({behavior:pageScrollBehavior(), block:"start"});
   title.setAttribute("tabindex", "-1");
   title.focus({preventScroll:true});
   dsnTrack("watchlist-dashboard-open");
@@ -4044,14 +4094,32 @@ function updateFavPill(){
     if(filter === "fav") setFilter("all", {historyOrder:false});
   }
 }
+function captureSearchResultFocus(element){
+  if(!element || !$list.contains(element)) return null;
+  const card = element.closest(".drug-card"), favorite = card?.querySelector(".fav-btn");
+  if(!favorite || (!element.classList.contains("fav-btn") && !element.classList.contains("drug-open"))) return null;
+  return {key:favorite.dataset.key, control:element.classList.contains("fav-btn") ? "favorite" : "detail"};
+}
+function searchResultFocusTarget(saved){
+  if(!saved) return null;
+  const favorite = [...$list.querySelectorAll(".fav-btn")].find(button=>button.dataset.key === saved.key);
+  return saved.control === "favorite" ? favorite : favorite?.closest(".drug-card")?.querySelector(".drug-open");
+}
 function toggleFav(item){
   if(!item) return;
+  const resultFocus = captureSearchResultFocus(document.activeElement);
   // 別タブで追加・解除された直後でも、その最新状態を上書きしない。
   FAVS = readStoredFavoriteKeys();
   const key = itemKey(item), beforeSize = FAVS.size;
+  const before = new Set(FAVS);
   const added = !FAVS.has(key);
   added ? FAVS.add(key) : FAVS.delete(key);
-  saveFavs();
+  if(!saveFavs()){
+    FAVS = before;
+    showStorageSaveError("favorites", FAVORITES_SAVE_ERROR);
+    return false;
+  }
+  clearStorageSaveError("favorites");
   maybeTrackWatchActivation(beforeSize);
   maybeShowWatchFirstAdd(beforeSize, added);
   updateFavPill();
@@ -4060,6 +4128,12 @@ function toggleFav(item){
   syncInstallButtons();
   render();
   if(currentDetailKey === itemKey(item)) syncModalFavorite(item);
+  if(resultFocus){
+    const target = searchResultFocusTarget(resultFocus);
+    if(canRestoreHistoryFocus(target)) target.focus({preventScroll:true});
+    else focusSearchResultSummary();
+  }
+  return true;
 }
 addEventListener("storage", event=>{
   if(event.key !== "favDrugKeysV2") return;
@@ -4151,10 +4225,24 @@ async function importWatchFile(file){
       dsnTrack("watchlist-import-failed");
     }else{
       const beforeSize = FAVS.size;
+      const before = new Set(FAVS);
       for(const key of foundKeys) FAVS.add(key);
       const newlyAdded = FAVS.size - beforeSize;
+      if(!saveFavs()){
+        FAVS = before;
+        showStorageSaveError("favorites", FAVORITES_SAVE_ERROR);
+        $watchImportResult.textContent = FAVORITES_SAVE_ERROR;
+        $watchImportResult.classList.add("warn");
+        $watchDashboardStatus.textContent = FAVORITES_SAVE_ERROR;
+        $watchDashboardStatus.classList.add("warn");
+        dsnTrack("watchlist-import-failed");
+        return;
+      }
+      clearStorageSaveError("favorites");
+      const wasActivated = WATCH_STATE.activated;
       WATCH_STATE.activated = true;
-      saveWatchState(); saveFavs(); maybeTrackWatchActivation(beforeSize);
+      if(!saveWatchState()) WATCH_STATE.activated = wasActivated;
+      maybeTrackWatchActivation(beforeSize);
       updateFavPill(); renderWatchDashboard(); renderFavNotice(); syncInstallButtons(); setFilter("fav");
       $watchImportResult.textContent = `${matched.toLocaleString()}行を照合し、${newlyAdded.toLocaleString()}品目を新たに監視リストへ追加しました` +
         ((unmatched || ambiguous) ? `（未照合 ${unmatched.toLocaleString()}件、YJコードが必要な同名品目 ${ambiguous.toLocaleString()}件）` : "") +
@@ -4164,7 +4252,7 @@ async function importWatchFile(file){
       $watchDashboardStatus.classList.add((unmatched || ambiguous) ? "warn" : "ok");
       dsnTrack("watchlist-import-success");
       focusSearchResultSummary();
-      document.getElementById("demo").scrollIntoView({behavior:"smooth",block:"start"});
+      document.getElementById("demo").scrollIntoView({behavior:pageScrollBehavior(),block:"start"});
     }
   }catch(e){
     $watchImportResult.textContent = `読み込めませんでした：${e.message || "CSV形式をご確認ください"}`;
@@ -4191,7 +4279,8 @@ let WATCH_UNREAD = [];
 let WATCH_UNREAD_KEYS = new Set();
 let WATCH_DISCREPANCY_KEYS = new Set();
 function saveWatchState(){
-  try{ localStorage.setItem("drugSupplyNaviWatchStateV1", JSON.stringify(WATCH_STATE)); }catch(e){}
+  try{ localStorage.setItem("drugSupplyNaviWatchStateV1", JSON.stringify(WATCH_STATE)); return true; }
+  catch(e){ return false; }
 }
 function changeEventKey(event){
   const yj = normalizeYj(event && event.yj);
@@ -4324,9 +4413,18 @@ function markWatchChangesChecked(){
   if(!historyCanConfirm() || !WATCH_UNREAD.length || !LATEST_CHANGE_DATE) return;
   const checkpoint = historyDateKey(WATCH_STATE.lastCheckedChangeDate);
   if(checkpoint && LATEST_CHANGE_DATE < checkpoint) return;
+  const before = {...WATCH_STATE};
   WATCH_STATE.lastCheckedChangeDate = LATEST_CHANGE_DATE;
   WATCH_STATE.lastCheckedAt = new Date().toISOString();
-  saveWatchState();
+  if(!saveWatchState()){
+    WATCH_STATE = before;
+    const message = "確認済み状態を保存できませんでした。未確認の変更を残しています。ブラウザの保存設定や空き容量を確認して、もう一度お試しください。";
+    showStorageSaveError("checkpoint", message);
+    $watchDashboardStatus.textContent = message;
+    $watchDashboardStatus.className = "watch-dashboard-status warn";
+    return false;
+  }
+  clearStorageSaveError("checkpoint");
   renderWatchDashboard(); renderFavNotice();
   if(filter === "watchChanged") setFilter(FAVS.size ? "fav" : "all"); else render();
   $watchDashboardStatus.textContent = "現在の変更を確認済みにしました";
@@ -4407,7 +4505,7 @@ function openWatchUnreadChanges(){
   // ダッシュボードを結果の後ろへ移す操作なので、失われたボタン位置ではなく
   // 新しい結果件数へ明示的にフォーカスを移して読み上げを継続する。
   focusSearchResultSummary();
-  document.getElementById("demo").scrollIntoView({behavior:"smooth",block:"start"});
+  document.getElementById("demo").scrollIntoView({behavior:pageScrollBehavior(),block:"start"});
   dsnTrack("watchlist-dashboard-open");
 }
 document.getElementById("watchUnreadBtn").addEventListener("click",openWatchUnreadChanges);
@@ -4415,7 +4513,7 @@ document.getElementById("watchReturn").addEventListener("click",openWatchUnreadC
 document.getElementById("watchDiscrepancyBtn").addEventListener("click",()=>{
   setFilter("watchDiscrepancy");
   focusSearchResultSummary();
-  document.getElementById("demo").scrollIntoView({behavior:"smooth",block:"start"});
+  document.getElementById("demo").scrollIntoView({behavior:pageScrollBehavior(),block:"start"});
   dsnTrack("watchlist-dashboard-open");
 });
 document.getElementById("watchCheckedBtn").addEventListener("click",markWatchChangesChecked);
@@ -4640,6 +4738,33 @@ function updateDetailDataProvenance(d){
   const itemDate = String(selected.d || "").trim().replaceAll("-", "/") || "確認できません";
   document.getElementById("mDatasetDate").textContent = `全体データ基準日：${datasetDate}`;
   document.getElementById("mItemDate").textContent = `公表行更新日：${itemDate}`;
+}
+function refreshOpenDetail(d){
+  const modal = $mBack.querySelector(".modal");
+  const detailsOpen = [...modal.querySelectorAll("details")].map(details=>details.open);
+  const active = modal.contains(document.activeElement) ? document.activeElement : null;
+  const saved = active && {element:active, id:active.id, scope:active.closest("[id]")?.id,
+    href:active.getAttribute("href"), key:active.getAttribute("data-key"),
+    tag:active.tagName, text:active.textContent.trim(), top:active.getBoundingClientRect().top};
+  const scrollTop = modal.scrollTop;
+  openDetail(d, {route:false, track:false, preserveView:true});
+  modal.querySelectorAll("details").forEach((details,index)=>{
+    if(index < detailsOpen.length) details.open = detailsOpen[index];
+  });
+  modal.scrollTop = scrollTop;
+  if(!saved) return;
+  let target = canRestoreHistoryFocus(saved.element) ? saved.element : saved.id && document.getElementById(saved.id);
+  if(!canRestoreHistoryFocus(target)){
+    const scope = saved.scope && document.getElementById(saved.scope);
+    target = [...(scope || modal).querySelectorAll("a, button, summary, input, select, [tabindex]")].find(element=>
+      element.tagName === saved.tag && canRestoreHistoryFocus(element)
+        && (saved.key ? element.getAttribute("data-key") === saved.key
+          : saved.href ? element.getAttribute("href") === saved.href : element.textContent.trim() === saved.text));
+  }
+  if(canRestoreHistoryFocus(target)){
+    target.focus({preventScroll:true});
+    modal.scrollTop += target.getBoundingClientRect().top - saved.top;
+  }else modal.focus({preventScroll:true});
 }
 function openDetail(d, opts={}){
   if(!d) return;
@@ -4891,11 +5016,16 @@ function openDetail(d, opts={}){
       history.pushState({item:itemKey(d), modal:true}, "", route);
     }
   }
-  if(!wasOpen) lastFocus = document.activeElement;
+  if(!wasOpen){
+    lastFocus = document.activeElement;
+    lastFocusResult = captureSearchResultFocus(lastFocus);
+  }
   $mBack.classList.add("open");
   document.body.style.overflow = "hidden";
-  $mBack.querySelector(".modal").scrollTop = 0;
-  $mClose.focus();
+  if(!opts.preserveView){
+    $mBack.querySelector(".modal").scrollTop = 0;
+    $mClose.focus();
+  }
 }
 function closeDetail(opts={}){
   if(opts.route !== false && (location.hash.startsWith("#item=") || location.hash.startsWith("#drug="))){
@@ -4912,7 +5042,11 @@ function closeDetail(opts={}){
   document.body.style.overflow = "";
   currentDetailName = null;
   currentDetailKey = null;
-  if(lastFocus && lastFocus.isConnected) lastFocus.focus();
+  const returnFocus = lastFocus !== document.body && canRestoreHistoryFocus(lastFocus)
+    ? lastFocus : searchResultFocusTarget(lastFocusResult);
+  if(canRestoreHistoryFocus(returnFocus)) returnFocus.focus({preventScroll:true});
+  else if(canRestoreHistoryFocus($q)) $q.focus({preventScroll:true});
+  else focusSearchResultSummary();
 }
 window.addEventListener("popstate", ()=>{
   const found = detailItemFromHash();
@@ -4969,8 +5103,7 @@ $list.addEventListener("click", e=>{
     e.stopPropagation();
     const item = findByKey(fav.dataset.key);
     const turningOn = item && !isFav(item);
-    toggleFav(item);
-    if(turningOn) sparkAt(fav);
+    if(toggleFav(item) && turningOn) sparkAt(fav);
     return;
   }
   const card = e.target.closest(".drug-card");
@@ -5015,8 +5148,7 @@ document.getElementById("mFav").addEventListener("click", e=>{
   if(!currentDetailName) return;
   const item = findByKey(currentDetailKey);
   const turningOn = item && !isFav(item);
-  toggleFav(item);
-  if(turningOn) sparkAt(e.currentTarget);
+  if(toggleFav(item) && turningOn) sparkAt(e.currentTarget);
 });
 document.getElementById("mRelated").addEventListener("click", e=>{
   const row = e.target.closest(".rel-row");
@@ -5530,7 +5662,7 @@ $topicList.addEventListener("click", e=>{
   $q.value = btn.dataset.q;
   setFilter("all");
   trackCurrentSearch();
-  document.getElementById("demo").scrollIntoView({behavior:"smooth", block:"start"});
+  document.getElementById("demo").scrollIntoView({behavior:pageScrollBehavior(), block:"start"});
 });
 
 /* ===== メーカー別ランキング（タップでそのメーカーの品目に絞り込み） ===== */
@@ -5540,7 +5672,7 @@ document.getElementById("makerList").addEventListener("click", e=>{
   $q.value = row.dataset.maker;
   setFilter("all");
   trackCurrentSearch();
-  document.getElementById("demo").scrollIntoView({behavior:"smooth", block:"start"});
+  document.getElementById("demo").scrollIntoView({behavior:pageScrollBehavior(), block:"start"});
 });
 
 setDataControlsEnabled(false);
@@ -5572,7 +5704,7 @@ const NEWS_VISIBLE = 4;
   btn.addEventListener("click", ()=>{
     open = !open;
     apply();
-    if(!open) document.getElementById("news").scrollIntoView({behavior:"smooth", block:"start"});
+    if(!open) document.getElementById("news").scrollIntoView({behavior:pageScrollBehavior(), block:"start"});
   });
   list.after(btn);
   apply();
@@ -5735,9 +5867,27 @@ function validateSupplyCSVRows(head, rows){
 }
 // ===== End public CSV contract =====
 
+const PUBLIC_FETCH_TIMEOUT_MS = 30000;
 async function fetchFirst(urls){
-  for(const u of urls){
-    try{ const r=await fetch(u,{cache:"no-cache"}); if(r.ok) return r; }catch(e){}
+  // 相対URLと同じ公開URLを重ねて待たず、応答本文の完了まで期限を適用する。
+  const candidates = [...new Set(urls.map(url=>new URL(url, location.href).href))];
+  for(const url of candidates){
+    const controller = new AbortController();
+    let timer;
+    try{
+      const attempt = (async()=>{
+        const response = await fetch(url, {cache:"no-cache", signal:controller.signal});
+        if(!response.ok) return null;
+        const ready = response.clone();
+        await response.arrayBuffer();
+        return ready;
+      })();
+      const deadline = new Promise(resolve=>{
+        timer = setTimeout(()=>{ controller.abort(); resolve(null); }, PUBLIC_FETCH_TIMEOUT_MS);
+      });
+      const response = await Promise.race([attempt.catch(()=>null), deadline]);
+      if(response) return response;
+    }catch(e){}finally{ clearTimeout(timer); }
   }
   return null;
 }
