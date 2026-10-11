@@ -1616,7 +1616,7 @@ footer a:hover{color:var(--blue)}
         <a href="items/stopped.html">供給停止</a>
         <a href="items/recent-restrictions.html">最近の限定出荷・供給停止</a>
         <a href="items/resumed.html">通常出荷への変更</a>
-        <a href="items/supplemental.html">販売中止・メーカー補足</a>
+        <a href="items/supplemental.html">販売中止・薬価削除予定・メーカー補足</a>
         <a href="categories/index.html">薬効分類別（咳止め・去痰薬など）</a>
         <a href="ingredients/index.html">成分（一般名）別</a>
         <a href="guides/how-to-check-drug-supply.html">出荷調整の理由・見通しの確認方法</a>
@@ -2239,7 +2239,7 @@ footer a:hover{color:var(--blue)}
 <section id="glossary" class="reveal">
   <p class="sec-eyebrow">GLOSSARY</p>
   <h2>供給区分の見方</h2>
-  <p class="sec-lede">厚生労働省の報告内容を、医薬品供給ナビでは4つの状態に整理して表示しています。この見方を押さえておくと、検索結果がぐっと読み取りやすくなります。</p>
+  <p class="sec-lede">厚生労働省の「出荷対応」と、メーカーの販売中止案内は別の情報です。現在の出荷区分と、案内の対象・予定時期を分けて確認してください。</p>
   <div class="glossary-grid">
     <div class="term-card glass">
       <span class="term-tag" style="--sc:var(--ok)">通常出荷</span>
@@ -2248,22 +2248,23 @@ footer a:hover{color:var(--blue)}
     </div>
     <div class="term-card glass">
       <span class="term-tag" style="--sc:var(--limited)">限定出荷</span>
-      <h3>数量や販売先が制限された状態</h3>
-      <p>需要の急増や増産対応などにより、メーカーが出荷数量・販売先を制限している状態です。入手しづらくなる場合があります。</p>
+      <h3>全ての受注に対応できない区分</h3>
+      <p>厚労省の「出荷対応」で、自社の事情・他社品の影響・その他の理由により、全ての受注に対応できないと報告されている区分です。理由や対象包装は公表情報・メーカー案内を確認し、実際の在庫や受注可否は卸・メーカーにご確認ください。</p>
     </div>
     <div class="term-card glass">
       <span class="term-tag" style="--sc:var(--stopped)">供給停止</span>
-      <h3>一時的に出荷できない状態</h3>
-      <p>原薬調達や製造工程の問題などにより、一時的に出荷ができなくなっている状態です。再開時期は品目により異なります。</p>
+      <h3>供給を停止している区分</h3>
+      <p>厚労省の「出荷対応」で「⑤供給停止」と報告されている区分です。再開の有無や時期はこの区分だけでは分かりません。メーカー案内を確認し、製造・販売の終了や薬価削除とは分けて扱います。</p>
     </div>
     <div class="term-card glass">
-      <span class="term-tag" style="--sc:var(--ended)">販売中止</span>
-      <h3>製造・販売が終了した状態</h3>
-      <p>メーカーが製造・販売を終了した状態です。今後の対応は、メーカー・卸の最新情報を確認し、医師・薬剤師等の専門職でご判断ください。</p>
+      <span class="term-tag" style="--sc:var(--ended)">販売中止の案内</span>
+      <h3>販売終了に関する案内（予定を含む）</h3>
+      <p>メーカーが販売終了を案内した情報です。予定か実施済みか、対象規格・包装、終了時期・条件を原文で確認してください。現在の出荷対応、製造の終了、薬価削除とは別の情報です。</p>
     </div>
   </div>
   <div class="term-card glass topic-note">
     <p>「出荷対応」と「出荷量」は別の区分です。「A．出荷量通常」は、比較対象期間の出荷量または市場予測による予定出荷量の概ね90%以上110%未満を指します。出荷量が通常でも、出荷対応が限定出荷の場合があります。<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の用語定義</a></p>
+    <p>販売・製造の終了時期と、薬価削除予定・経過措置期限は別の情報です。<a href="guides/how-to-check-discontinuation-and-delisting.html">販売中止・製造中止・薬価削除の確認方法</a>で、原典を分けて確認する手順を説明しています。</p>
   </div>
 </section>
 
@@ -5091,7 +5092,8 @@ function closeDetail(opts={}){
 window.addEventListener("popstate", ()=>{
   const found = detailItemFromHash();
   if(found) openDetail(found, {route:false});
-  else{
+  else if($mBack.classList.contains("open")){
+    // 通常アンカーの履歴移動では、検索欄へ焦点を戻さない。
     closeDetail({route:false});
   }
 });
