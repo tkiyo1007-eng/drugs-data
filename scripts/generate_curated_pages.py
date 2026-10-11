@@ -24,10 +24,10 @@ MHLW_PRICE_LIST_URL = "https://www.mhlw.go.jp/topics/2026/04/tp20260401-01.html"
 PMDA_SEARCH_URL = "https://www.pmda.go.jp/PmdaSearch/iyakuSearch/"
 PMDA_RECALL_URL = "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html"
 GUIDE_SLUG = "how-to-check-drug-supply"
-GUIDE_UPDATED_AT = "2026-10-11"
+GUIDE_UPDATED_AT = "2026-10-12"
 DISCONTINUATION_GUIDE_SLUG = "how-to-check-discontinuation-and-delisting"
 DISCONTINUATION_GUIDE_PUBLISHED_AT = "2026-10-11"
-DISCONTINUATION_GUIDE_UPDATED_AT = "2026-10-11"
+DISCONTINUATION_GUIDE_UPDATED_AT = "2026-10-12"
 WATCH_GUIDE_SLUG = "monitor-adopted-drugs"
 WATCH_GUIDE_UPDATED_AT = "2026-09-26"
 TEMPLATE_UPDATED_AT = "2026-08-28"
@@ -419,12 +419,12 @@ def guide_page() -> str:
 <article class="hero"><p class="eyebrow">EVERGREEN GUIDE</p><h1>医薬品の出荷調整・限定出荷を公式情報で確認する方法</h1>
 <p class="lede">出荷調整の意味、現在の供給状況、理由や解除見込みを、出典の役割を分けて確認します。</p>
 {share_control("この確認ガイドを共有")}</article>
-<section class="intent"><h2>出荷調整とは</h2>
+<section class="intent" id="supply-status"><h2>出荷調整とは</h2>
 <p>医薬品の出荷調整に関する情報は、薬ごとの「出荷対応」の区分で確認できます。厚生労働省の公表では、全ての受注に対応できない「限定出荷」と、供給を停止している「供給停止」を分けて扱います。</p>
 <h3>限定出荷と供給停止の違い</h3>
 <p>厚生労働省の区分では、限定出荷は自社の事情・他社品の影響・その他の理由により、全ての受注には対応できない状態です。供給停止は、供給を停止している状態です。どちらも実際の流通在庫や施設ごとの入手可否を示すものではありません。</p>
 <p class="source">区分の出典：<a href="{MHLW_SUPPLY_GUIDANCE_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の医薬品供給状況に関する情報</a></p>
-<h3>いつまで続くかを確認するには</h3>
+<h3 id="resumption">いつまで続くかを確認するには</h3>
 <p>品目ごとに厚生労働省の「解除・解消見込み」欄と、メーカー公式案内の対象包装・更新日を確認します。見込みの有無の区分だけから具体的な日付を決めず、「未定」や記載のない再開時期を推測で補いません。出荷再開の案内があっても、各施設への入荷時期や実在庫は卸・メーカーにも確認してください。</p>
 <p class="source">現在の公表内容：<a href="{MHLW_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システムで品目名・YJコードを確認</a></p></section>
 <nav class="intent" aria-labelledby="guidePathsTitle"><h2 id="guidePathsTitle">目的に合う確認先を選ぶ</h2>
@@ -439,7 +439,7 @@ def guide_page() -> str:
 <section class="intent"><h2>1. 現在の供給区分は厚生労働省データで確認</h2>
 <p>厚生労働省「医療用医薬品供給状況」では、通常出荷・限定出荷・供給停止などの現在区分、理由、更新日を品目単位で確認します。医薬品供給ナビもこの公表値を意味を変えずに表示します。</p>
 <div class="official-links"><a href="{MHLW_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システムを開く</a></div></section>
-<section class="intent"><h2>2. 「なぜ」は理由欄とメーカー原文を分けて確認</h2>
+<section class="intent" id="reasons"><h2>2. 「なぜ」は理由欄とメーカー原文を分けて確認</h2>
 <p>公表データの理由欄は「需要増」「製造上の問題」などの区分であり、個別事情のすべてを説明するとは限りません。対象包装、開始時期、解除見込みはメーカー公式案内の原文も確認し、記載のない原因を推測しないことが重要です。</p>
 <p><a href="../products/lulicon-cream.html" data-dsn-event="related-item-open">ルリコンクリーム1%の公表理由と供給状況を見る</a></p></section>
 <section class="intent"><h2>3. 「代替」は同成分・同剤形だけで決めない</h2>
@@ -489,6 +489,7 @@ def discontinuation_guide_page() -> str:
 <nav class="intent" aria-labelledby="discontinuationPathsTitle"><h2 id="discontinuationPathsTitle">目的に合う確認先を選ぶ</h2>
 <div class="list">
 <a href="../items/supplemental.html">販売中止の案内・メーカー補足がある医薬品一覧<small>厚生労働省の現在区分と、メーカーの案内を分けて確認</small></a>
+<a href="#manufacturing">製造中止の意味と確認事項<small>販売中止・供給停止とは別に、メーカー原文の対象規格と実施時期を確認</small></a>
 <a href="../items/supplemental.html#delisting">薬価削除予定・経過措置の掲載欄<small>販売・製造の終了日とは別の情報。販売中止の掲載欄にも薬価情報を併記</small></a>
 <a href="../items/limited.html">限定出荷の医薬品一覧<small>販売・製造終了の案内と、現在の出荷対応を混同しない</small></a>
 <a href="{GUIDE_SLUG}.html">出荷調整・限定出荷の確認ガイド<small>理由や解除見込みの確認方法を読む</small></a>
@@ -496,13 +497,13 @@ def discontinuation_guide_page() -> str:
 </div></nav>
 <section class="intent"><h2>用語と確認する情報を分ける</h2>
 <table class="cat-table term-table"><thead><tr><th scope="col">用語</th><th scope="col">原文で確認すること</th></tr></thead><tbody>
-<tr><th scope="row">製造中止</th><td>製造を中止する旨のメーカー案内です。対象品目・規格・実施時期を確認し、販売の継続や流通在庫の消尽とは分けて扱います。</td></tr>
-<tr><th scope="row">製造販売中止</th><td>メーカーの製造販売終了に関する案内です。案内日、終了予定、実施済みの情報、在庫消尽時期を原文で確認します。この表現だけで承認整理や薬価削除済みまで判断しません。</td></tr>
-<tr><th scope="row">販売中止</th><td>販売終了の案内です。予定か実施済みか、対象が製品全体・特定規格・特定包装のどれかを確認します。販売移管や承継の案内は販売中止と分けて読みます。</td></tr>
-<tr><th scope="row">一部包装中止</th><td>案内で指定された包装の終了です。他の包装・規格まで終了したり、同成分の医薬品がすべて中止になったりしたと解釈しません。</td></tr>
-<tr><th scope="row">供給停止</th><td>厚生労働省の「出荷対応」⑤の区分です。この区分だけで製造・販売の終了や薬価削除済みとは判断できません。再開見込みも個別の記載を確認します。</td></tr>
-<tr><th scope="row">薬価削除予定</th><td>厚生労働省の「出荷量」Dの区分です。薬価削除の承認を得て削除に向け対応している状態で、削除済みや削除日を示すものではありません。</td></tr>
-<tr><th scope="row">経過措置期限</th><td>薬価基準資料に記載される、経過措置として保険診療に用いることができる期限です。製品の使用期限、メーカーの最終出荷時期、流通在庫の消尽時期とは別です。</td></tr>
+<tr id="manufacturing"><th scope="row">製造中止</th><td>製造を中止する旨のメーカー案内です。対象品目・規格・実施時期を確認し、販売の継続や流通在庫の消尽とは分けて扱います。</td></tr>
+<tr id="manufacturing-sales"><th scope="row">製造販売中止</th><td>メーカーの製造販売終了に関する案内です。案内日、終了予定、実施済みの情報、在庫消尽時期を原文で確認します。この表現だけで承認整理や薬価削除済みまで判断しません。</td></tr>
+<tr id="sales"><th scope="row">販売中止</th><td>販売終了の案内です。予定か実施済みか、対象が製品全体・特定規格・特定包装のどれかを確認します。販売移管や承継の案内は販売中止と分けて読みます。</td></tr>
+<tr id="packaging"><th scope="row">一部包装中止</th><td>案内で指定された包装の終了です。他の包装・規格まで終了したり、同成分の医薬品がすべて中止になったりしたと解釈しません。</td></tr>
+<tr id="stopped"><th scope="row">供給停止</th><td>厚生労働省の「出荷対応」⑤の区分です。この区分だけで製造・販売の終了や薬価削除済みとは判断できません。再開見込みも個別の記載を確認します。</td></tr>
+<tr id="delisting"><th scope="row">薬価削除予定</th><td>厚生労働省の「出荷量」Dの区分です。薬価削除の承認を得て削除に向け対応している状態で、削除済みや削除日を示すものではありません。</td></tr>
+<tr id="transition"><th scope="row">経過措置期限</th><td>薬価基準資料に記載される、経過措置として保険診療に用いることができる期限です。製品の使用期限、メーカーの最終出荷時期、流通在庫の消尽時期とは別です。</td></tr>
 </tbody></table>
 <p class="source">供給停止・薬価削除予定の区分：<a href="{MHLW_SUPPLY_GUIDANCE_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省「医療用医薬品供給状況報告」の用語説明</a>。経過措置による使用期限：<a href="{MHLW_PRICE_LIST_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">薬価基準収載品目リストの凡例（令和8年10月1日適用）</a>。</p>
 <p class="source">メーカー案内の読み分けの例：<a href="https://medical.kyowakirin.co.jp/druginfo/drgdiscon/index.html" target="_blank" rel="noopener" data-dsn-event="official-source-open">協和キリンの販売中止品（予定）一覧</a>は、一部包装中止・販売移管・製造販売承認の承継を区別しています。<a href="https://www.med.kyorin-rmd.com/news/pdf/2024/250324chushi.pdf" target="_blank" rel="noopener" data-dsn-event="official-source-open">キョーリンリメディオの製造販売中止案内（2025年3月更新）</a>では、流通在庫切れの予想と経過措置の見込みが別に記載されています。過去の案内例は、現在の供給状況の根拠として用いません。</p>
