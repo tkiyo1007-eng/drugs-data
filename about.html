@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>運営情報・編集方針・データの作り方｜医薬品供給ナビ</title>
-<meta name="description" content="医薬品供給ナビの運営者、情報源、更新方法、ニュース編集方針、AI要約、訂正対応について説明します。">
+<meta name="description" content="医薬品供給ナビの運営者、情報源、更新方法、供給区分・メーカー補足・薬価の扱い、原典と日付の確認方針、AI要約、訂正対応を説明します。">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://kyokyu-navi.jp/about.html">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"医薬品供給ナビ 運営情報・編集方針","url":"https://kyokyu-navi.jp/about.html","about":{"@type":"WebSite","name":"医薬品供給ナビ","url":"https://kyokyu-navi.jp/"}}</script>
@@ -24,7 +24,7 @@ footer{text-align:center;color:var(--sub);font-size:12px;margin-top:28px}footer 
 <div class="wrap">
 <header class="site"><a href="./">💊 医薬品供給ナビ</a></header>
 <main>
-<p class="meta">最終更新日：2026年8月17日</p>
+<p class="meta">最終更新日：2026年10月11日</p>
 <h1>運営情報・編集方針・データの作り方</h1>
 <p class="lede">医薬品供給ナビが、どの情報をどのように表示しているかを公開します。</p>
 
@@ -40,8 +40,11 @@ footer{text-align:center;color:var(--sub);font-size:12px;margin-top:28px}footer 
 </ul>
 <p>厚生労働省データは原則として毎日自動確認し、公開データが変わった場合に反映します。各画面にはデータの更新日または確認日を表示します。</p>
 
-<h2>供給区分と販売中止予定の扱い</h2>
+<h2>供給区分・メーカー補足・薬価の扱い</h2>
 <p>厚生労働省の「通常出荷」「限定出荷」「供給停止」等の区分は、その意味を変えて上書きしません。一方、メーカーが将来の販売中止を公表している場合は、現在の供給区分とは別の事実として「販売中止予定」等を併記します。そのため「通常出荷」と「販売中止予定」が同時に表示されることがあります。</p>
+<p>薬価削除予定や経過措置期限は、販売・製造の終了や終了日とは別の情報として表示します。収録した終了予定の時期・条件・対象包装は、原典の出典URLと現在のメーカー案内URLを照合し、一致しない場合は表示に使いません。原文が年月のみの場合は年月のまま示し、日付を補いません。</p>
+<p>メーカー補足は対象の案内を掲載するもので、未掲載であることは、供給問題がないことや販売・製造が継続していることの証明にはなりません。補足データを取得できない場合、確認日が不明・古い場合、厚生労働省データとの参照日が一致しない場合は、確認不完全として示し、「該当なし」「情報差異0件」に置き換えません。</p>
+<p>確認手順：<a href="guides/how-to-check-drug-supply.html">出荷調整・供給情報の確認ガイド</a>｜<a href="guides/how-to-check-discontinuation-and-delisting.html">販売中止・製造中止・薬価削除の確認ガイド</a>｜<a href="items/supplemental.html">終了案内・薬価情報の補足一覧</a></p>
 
 <h2>自動処理とAI要約</h2>
 <p>更新前後の差分、品目の集計、関連品目候補、メーカー案内文からの包装単位抽出などは自動処理を含みます。メーカー案内文の要約にAIを使用する場合は「AI要約」と明示し、原文へのリンクを併記します。自動抽出・要約には誤りが生じる可能性があるため、重要な判断では必ず原文をご確認ください。</p>
