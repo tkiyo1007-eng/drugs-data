@@ -11,9 +11,13 @@ from pathlib import Path
 from urllib.parse import quote
 
 from generate_curated_pages import (
+    DISCONTINUATION_GUIDE_PUBLISHED_AT,
+    DISCONTINUATION_GUIDE_SLUG,
+    DISCONTINUATION_GUIDE_UPDATED_AT,
     GUIDE_SLUG,
     GUIDE_UPDATED_AT,
     WEB_HIDDEN_FEATURED_SLUGS,
+    discontinuation_guide_page,
     guide_page,
     list_page,
     product_intent_html,
@@ -63,10 +67,52 @@ class CuratedPageGenerationTests(unittest.TestCase):
         self.assertIn("代替薬の推薦ではありません", page)
         self.assertIn("PMDAと供給情報の役割は異なる", page)
         self.assertIn('rel="canonical" href="https://kyokyu-navi.jp/guides/how-to-check-drug-supply.html"', page)
+        self.assertIn(f"{DISCONTINUATION_GUIDE_SLUG}.html", links.hrefs)
+
+    def test_discontinuation_guide_separates_statuses_and_links_to_their_sources(self):
+        page = discontinuation_guide_page()
+        links = PageLinks()
+        links.feed(page)
+        for href in (
+            "../items/supplemental.html", "../items/limited.html", "../#demo", "../",
+            "../about.html", f"{GUIDE_SLUG}.html",
+            "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html",
+            "https://www.mhlw.go.jp/topics/2026/04/tp20260401-01.html",
+            "https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list",
+        ):
+            with self.subTest(href=href):
+                self.assertIn(href, links.hrefs)
+        terms = re.findall(r'<th scope="row">(.*?)</th>', page)
+        self.assertEqual([
+            "製造中止", "製造販売中止", "販売中止", "一部包装中止",
+            "供給停止", "薬価削除予定", "経過措置期限",
+        ], terms)
+        self.assertIn("供給停止を製造中止に、薬価削除予定を薬価削除済みに置き換えません", page)
+        self.assertIn("終了日や製造終了実績を推測で補いません", page)
+        self.assertIn("この表現だけで承認整理や薬価削除済みまで判断しません", page)
+        self.assertIn("製品の使用期限、メーカーの最終出荷時期、流通在庫の消尽時期とは別", page)
+        self.assertIn("現在の供給データに品目がないことだけでも", page)
+        self.assertIn("過去の案内例は、現在の供給状況の根拠として用いません", page)
+        self.assertIn("代替薬の推薦ではありません", page)
+        self.assertEqual(1, page.count("<h1>"))
+        canonical = f"https://kyokyu-navi.jp/guides/{DISCONTINUATION_GUIDE_SLUG}.html"
+        self.assertIn(f'rel="canonical" href="{canonical}"', page)
+        self.assertIn('<nav class="crumb" aria-label="パンくず">', page)
+        structured = json.loads(re.search(
+            r'<script type="application/ld\+json">(.*?)</script>', page, re.S,
+        ).group(1))
+        article = next(entry for entry in structured["@graph"] if entry["@type"] == "Article")
+        breadcrumb = next(entry for entry in structured["@graph"] if entry["@type"] == "BreadcrumbList")
+        self.assertEqual(canonical, article["mainEntityOfPage"])
+        self.assertEqual(DISCONTINUATION_GUIDE_PUBLISHED_AT, article["datePublished"])
+        self.assertEqual(DISCONTINUATION_GUIDE_UPDATED_AT, article["dateModified"])
+        self.assertEqual(canonical, breadcrumb["itemListElement"][-1]["item"])
+        self.assertIn(f"編集確認日：{DISCONTINUATION_GUIDE_UPDATED_AT}", page)
 
     def test_guide_revision_date_is_independent_of_news_and_product_dates(self):
         namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
         pages = []
+        discontinuation_pages = []
         with tempfile.TemporaryDirectory() as directory:
             site = Path(directory)
             csv_path = site / "drugs.csv"
@@ -95,7 +141,13 @@ class CuratedPageGenerationTests(unittest.TestCase):
                          for entry in sitemap.findall("s:url", namespace)}
                 self.assertEqual(GUIDE_UPDATED_AT, dates[f"https://kyokyu-navi.jp/guides/{GUIDE_SLUG}.html"])
                 self.assertEqual("2026-09-26", dates["https://kyokyu-navi.jp/guides/monitor-adopted-drugs.html"])
+                discontinuation = (site / "guides" / f"{DISCONTINUATION_GUIDE_SLUG}.html").read_text(encoding="utf-8")
+                discontinuation_pages.append(discontinuation)
+                self.assertEqual(DISCONTINUATION_GUIDE_UPDATED_AT,
+                                 dates[f"https://kyokyu-navi.jp/guides/{DISCONTINUATION_GUIDE_SLUG}.html"])
         self.assertEqual(pages[0], pages[1], "ニュース・製品情報の日付だけではガイドを改訂扱いにしない")
+        self.assertEqual(discontinuation_pages[0], discontinuation_pages[1],
+                         "販売中止ガイドの確認日もニュース・製品の更新日に置き換えない")
 
     def test_web_list_hides_requested_products_without_removing_detail_pages(self):
         document = json.loads((ROOT / "featured_products.json").read_text())
@@ -219,7 +271,7 @@ class CuratedPageGenerationTests(unittest.TestCase):
                 text=True,
             )
 
-            self.assertIn("ニュース1件、注目製品1件、恒久ガイド2件", completed.stdout)
+            self.assertIn("ニュース1件、注目製品1件、恒久ガイド3件", completed.stdout)
             topic = (site / "topics" / "test-release-20260817.html").read_text(encoding="utf-8")
             product = (site / "products" / "test-combination-1.html").read_text(encoding="utf-8")
             topic_index = (site / "topics" / "index.html").read_text(encoding="utf-8")
@@ -264,6 +316,7 @@ class CuratedPageGenerationTests(unittest.TestCase):
             self.assertIn("topics/test-release-20260817.html", sitemap)
             self.assertIn("products/test-combination-1.html", sitemap)
             self.assertIn(f"guides/{GUIDE_SLUG}.html", sitemap)
+            self.assertIn(f"guides/{DISCONTINUATION_GUIDE_SLUG}.html", sitemap)
             self.assertIn("<lastmod>2026-08-28</lastmod>", sitemap)
 
     def test_search_intent_copy_uses_published_fields_without_inferring_a_cause_or_substitute(self):

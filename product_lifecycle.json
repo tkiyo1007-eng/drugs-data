@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-08T05:01:41+09:00",
+  "generated_at": "2026-10-11T15:51:19+09:00",
   "products": {
     "1124007F1143": {
       "product_name": "トリアゾラム錠０．１２５ｍｇ「ＣＨ」",
@@ -34,6 +34,13 @@
       "maker": "沢井製薬",
       "state": "discontinuation_announced",
       "announced_at": "2026-08-07",
+      "supply_end_note": "在庫消尽時期：在庫消尽済み",
+      "supply_end_source_url": "https://med.sawai.co.jp/file/pr28_1197_2.pdf",
+      "supply_end_verified_at": "2026-10-11",
+      "supply_end_packages": [
+        "PTP100錠",
+        "バラ500錠"
+      ],
       "source_title": "2026/08/07 発売情報 PDF NEW クアゼパム錠15mg/20mg「サワイ」販売中止のご案内 PDF NEW",
       "source_url": "https://med.sawai.co.jp/file/pr28_1197_2.pdf",
       "verified_at": "2026-08-16"
@@ -43,6 +50,12 @@
       "maker": "沢井製薬",
       "state": "discontinuation_announced",
       "announced_at": "2026-08-07",
+      "supply_end_note": "在庫消尽時期：在庫消尽済み",
+      "supply_end_source_url": "https://med.sawai.co.jp/file/pr28_1197_2.pdf",
+      "supply_end_verified_at": "2026-10-11",
+      "supply_end_packages": [
+        "PTP100錠"
+      ],
       "source_title": "2026/08/07 発売情報 PDF NEW クアゼパム錠15mg/20mg「サワイ」販売中止のご案内 PDF NEW",
       "source_url": "https://med.sawai.co.jp/file/pr28_1197_2.pdf",
       "verified_at": "2026-08-16"
@@ -1475,6 +1488,12 @@
       "state": "discontinuation_announced",
       "announced_at": "2026-04-01",
       "supply_end_expected": "2026-12",
+      "supply_end_note": "在庫消尽時期：2026年12月（現時点の販売予測数量および在庫数量から算出）",
+      "supply_end_source_url": "https://med.sawai.co.jp/file/pr28_1235_1.pdf",
+      "supply_end_verified_at": "2026-10-11",
+      "supply_end_packages": [
+        "PTP100錠"
+      ],
       "source_title": "2026.04 テモカプリル塩酸塩錠1mg・2mg・4mg「サワイ」販売中止のご案内",
       "source_url": "https://med.sawai.co.jp/file/pr28_1235_1.pdf",
       "verified_at": "2026-10-08"
@@ -1494,6 +1513,12 @@
       "state": "discontinuation_announced",
       "announced_at": "2026-04-01",
       "supply_end_expected": "2026-12",
+      "supply_end_note": "在庫消尽時期：2026年12月（現時点の販売予測数量および在庫数量から算出）",
+      "supply_end_source_url": "https://med.sawai.co.jp/file/pr28_1235_1.pdf",
+      "supply_end_verified_at": "2026-10-11",
+      "supply_end_packages": [
+        "PTP100錠"
+      ],
       "source_title": "2026.04 テモカプリル塩酸塩錠1mg・2mg・4mg「サワイ」販売中止のご案内",
       "source_url": "https://med.sawai.co.jp/file/pr28_1235_1.pdf",
       "verified_at": "2026-10-08"
@@ -1504,6 +1529,12 @@
       "state": "discontinuation_announced",
       "announced_at": "2026-04-01",
       "supply_end_expected": "2026-12",
+      "supply_end_note": "在庫消尽時期：2026年12月（現時点の販売予測数量および在庫数量から算出）",
+      "supply_end_source_url": "https://med.sawai.co.jp/file/pr28_1235_1.pdf",
+      "supply_end_verified_at": "2026-10-11",
+      "supply_end_packages": [
+        "PTP100錠"
+      ],
       "source_title": "2026.04 テモカプリル塩酸塩錠1mg・2mg・4mg「サワイ」販売中止のご案内",
       "source_url": "https://med.sawai.co.jp/file/pr28_1235_1.pdf",
       "verified_at": "2026-10-08"
@@ -2026,6 +2057,13 @@
       "maker": "沢井製薬",
       "state": "discontinuation_announced",
       "announced_at": "2026-06-02",
+      "supply_end_note": "在庫消尽時期：2027年12月（現時点の販売予測数量および在庫数量から算出）",
+      "supply_end_source_url": "https://med.sawai.co.jp/file/pr28_166_3.pdf",
+      "supply_end_verified_at": "2026-10-11",
+      "supply_end_expected": "2027-12",
+      "supply_end_packages": [
+        "PTP100錠"
+      ],
       "source_title": "2026年6月2日 ニトレンジピン錠5mg/10mg「サワイ」販売中止のご案内",
       "source_url": "https://med.sawai.co.jp/file/pr28_166_3.pdf",
       "verified_at": "2026-10-08"
@@ -2035,6 +2073,13 @@
       "maker": "沢井製薬",
       "state": "discontinuation_announced",
       "announced_at": "2026-06-02",
+      "supply_end_note": "在庫消尽時期：2027年12月（現時点の販売予測数量および在庫数量から算出）",
+      "supply_end_source_url": "https://med.sawai.co.jp/file/pr28_166_3.pdf",
+      "supply_end_verified_at": "2026-10-11",
+      "supply_end_expected": "2027-12",
+      "supply_end_packages": [
+        "PTP100錠"
+      ],
       "source_title": "2026年6月2日 ニトレンジピン錠5mg/10mg「サワイ」販売中止のご案内",
       "source_url": "https://med.sawai.co.jp/file/pr28_166_3.pdf",
       "verified_at": "2026-10-08"
@@ -2782,6 +2827,15 @@
       "maker": "久光製薬",
       "state": "discontinuation_announced",
       "announced_at": "2026-04-03",
+      "supply_end_note": "在庫がなくなり次第。最終供給時期：2026年11月（在庫・出荷状況により多少差異が生じる場合あり）",
+      "supply_end_source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
+      "supply_end_verified_at": "2026-10-11",
+      "supply_end_expected": "2026-11",
+      "supply_end_packages": [
+        "50g［5g×10本］",
+        "100g［10g×10本］",
+        "500g（ボトル）"
+      ],
       "source_title": "2026.04.03 セクタークリーム3％、 セクターゲル3％、 ナボールパップ70㎎、 インサイドパップ70㎎、 ボレースプレー1％、 エクラー軟膏0.3％、 エクラークリーム0.3％、 エクラーローション0.3％、 ハイチオール散32％ 販売中止に関するご案内",
       "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
       "verified_at": "2026-10-08"
@@ -2791,6 +2845,14 @@
       "maker": "久光製薬",
       "state": "discontinuation_announced",
       "announced_at": "2026-04-03",
+      "supply_end_note": "在庫がなくなり次第。最終供給時期：2026年11月（在庫・出荷状況により多少差異が生じる場合あり）",
+      "supply_end_source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
+      "supply_end_verified_at": "2026-10-11",
+      "supply_end_expected": "2026-11",
+      "supply_end_packages": [
+        "50g［5g×10本］",
+        "100g［10g×10本］"
+      ],
       "source_title": "2026.04.03 セクタークリーム3％、 セクターゲル3％、 ナボールパップ70㎎、 インサイドパップ70㎎、 ボレースプレー1％、 エクラー軟膏0.3％、 エクラークリーム0.3％、 エクラーローション0.3％、 ハイチオール散32％ 販売中止に関するご案内",
       "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
       "verified_at": "2026-10-08"
@@ -2800,6 +2862,13 @@
       "maker": "久光製薬",
       "state": "discontinuation_announced",
       "announced_at": "2026-04-03",
+      "supply_end_note": "在庫がなくなり次第。最終供給時期：2026年11月（在庫・出荷状況により多少差異が生じる場合あり）",
+      "supply_end_source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
+      "supply_end_verified_at": "2026-10-11",
+      "supply_end_expected": "2026-11",
+      "supply_end_packages": [
+        "100g［10g×10本］"
+      ],
       "source_title": "2026.04.03 セクタークリーム3％、 セクターゲル3％、 ナボールパップ70㎎、 インサイドパップ70㎎、 ボレースプレー1％、 エクラー軟膏0.3％、 エクラークリーム0.3％、 エクラーローション0.3％、 ハイチオール散32％ 販売中止に関するご案内",
       "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
       "verified_at": "2026-10-08"
@@ -2810,6 +2879,13 @@
       "state": "discontinuation_announced",
       "announced_at": "2026-04-03",
       "supply_end_expected": "2026-11",
+      "supply_end_note": "在庫がなくなり次第。最終供給時期：2026年11月（在庫・出荷状況により多少差異が生じる場合あり）",
+      "supply_end_source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
+      "supply_end_verified_at": "2026-10-11",
+      "supply_end_packages": [
+        "280枚［7枚／1袋×40袋］",
+        "560枚［7枚／1袋×80袋］"
+      ],
       "source_title": "2026.04.03 インサイドパップ70mg 販売中止に関するご案内",
       "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
       "verified_at": "2026-10-08"
@@ -2819,6 +2895,13 @@
       "maker": "久光製薬",
       "state": "discontinuation_announced",
       "announced_at": "2026-04-03",
+      "supply_end_note": "在庫がなくなり次第。最終供給時期：2026年11月（在庫・出荷状況により多少差異が生じる場合あり）",
+      "supply_end_source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
+      "supply_end_verified_at": "2026-10-11",
+      "supply_end_expected": "2026-11",
+      "supply_end_packages": [
+        "250g［25g×10本］"
+      ],
       "source_title": "2026.04.03 セクタークリーム3％、 セクターゲル3％、 ナボールパップ70㎎、 インサイドパップ70㎎、 ボレースプレー1％、 エクラー軟膏0.3％、 エクラークリーム0.3％、 エクラーローション0.3％、 ハイチオール散32％ 販売中止に関するご案内",
       "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
       "verified_at": "2026-10-08"
@@ -2828,6 +2911,13 @@
       "maker": "久光製薬",
       "state": "discontinuation_announced",
       "announced_at": "2026-04-03",
+      "supply_end_note": "在庫がなくなり次第。最終供給時期：2026年11月（在庫・出荷状況により多少差異が生じる場合あり）",
+      "supply_end_source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
+      "supply_end_verified_at": "2026-10-11",
+      "supply_end_expected": "2026-11",
+      "supply_end_packages": [
+        "250g［25g×10本］"
+      ],
       "source_title": "2026.04.03 セクタークリーム3％、 セクターゲル3％、 ナボールパップ70㎎、 インサイドパップ70㎎、 ボレースプレー1％、 エクラー軟膏0.3％、 エクラークリーム0.3％、 エクラーローション0.3％、 ハイチオール散32％ 販売中止に関するご案内",
       "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
       "verified_at": "2026-10-08"
@@ -2909,6 +2999,13 @@
       "maker": "久光製薬",
       "state": "discontinuation_announced",
       "announced_at": "2026-04-03",
+      "supply_end_note": "在庫がなくなり次第。最終供給時期：2026年11月（在庫・出荷状況により多少差異が生じる場合あり）",
+      "supply_end_source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
+      "supply_end_verified_at": "2026-10-11",
+      "supply_end_expected": "2026-11",
+      "supply_end_packages": [
+        "70枚［7枚／1袋×10袋］"
+      ],
       "source_title": "2026.04.03 セクタークリーム3％、 セクターゲル3％、 ナボールパップ70㎎、 インサイドパップ70㎎、 ボレースプレー1％、 エクラー軟膏0.3％、 エクラークリーム0.3％、 エクラーローション0.3％、 ハイチオール散32％ 販売中止に関するご案内",
       "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
       "verified_at": "2026-10-08"
@@ -2954,6 +3051,13 @@
       "maker": "久光製薬",
       "state": "discontinuation_announced",
       "announced_at": "2026-04-03",
+      "supply_end_note": "在庫がなくなり次第。最終供給時期：2026年11月（在庫・出荷状況により多少差異が生じる場合あり）",
+      "supply_end_source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
+      "supply_end_verified_at": "2026-10-11",
+      "supply_end_expected": "2026-11",
+      "supply_end_packages": [
+        "100mL［10mL／1本×10本］"
+      ],
       "source_title": "2026.04.03 セクタークリーム3％、 セクターゲル3％、 ナボールパップ70㎎、 インサイドパップ70㎎、 ボレースプレー1％、 エクラー軟膏0.3％、 エクラークリーム0.3％、 エクラーローション0.3％、 ハイチオール散32％ 販売中止に関するご案内",
       "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
       "verified_at": "2026-10-08"
@@ -3386,6 +3490,13 @@
       "maker": "久光製薬",
       "state": "discontinuation_announced",
       "announced_at": "2026-04-03",
+      "supply_end_note": "在庫がなくなり次第。最終供給時期：2026年11月（在庫・出荷状況により多少差異が生じる場合あり）",
+      "supply_end_source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
+      "supply_end_verified_at": "2026-10-11",
+      "supply_end_expected": "2026-11",
+      "supply_end_packages": [
+        "500g（プラスチック容器）"
+      ],
       "source_title": "2026.04.03 セクタークリーム3％、 セクターゲル3％、 ナボールパップ70㎎、 インサイドパップ70㎎、 ボレースプレー1％、 エクラー軟膏0.3％、 エクラークリーム0.3％、 エクラーローション0.3％、 ハイチオール散32％ 販売中止に関するご案内",
       "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
       "verified_at": "2026-10-08"

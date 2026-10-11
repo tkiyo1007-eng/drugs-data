@@ -20,10 +20,14 @@ APP_ID = "6777696446"
 APP_STORE = f"https://apps.apple.com/jp/app/id{APP_ID}"
 MHLW_SUPPLY_URL = "https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list"
 MHLW_SUPPLY_GUIDANCE_URL = "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html"
+MHLW_PRICE_LIST_URL = "https://www.mhlw.go.jp/topics/2026/04/tp20260401-01.html"
 PMDA_SEARCH_URL = "https://www.pmda.go.jp/PmdaSearch/iyakuSearch/"
 PMDA_RECALL_URL = "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html"
 GUIDE_SLUG = "how-to-check-drug-supply"
-GUIDE_UPDATED_AT = "2026-10-10"
+GUIDE_UPDATED_AT = "2026-10-11"
+DISCONTINUATION_GUIDE_SLUG = "how-to-check-discontinuation-and-delisting"
+DISCONTINUATION_GUIDE_PUBLISHED_AT = "2026-10-11"
+DISCONTINUATION_GUIDE_UPDATED_AT = "2026-10-11"
 WATCH_GUIDE_SLUG = "monitor-adopted-drugs"
 WATCH_GUIDE_UPDATED_AT = "2026-09-26"
 TEMPLATE_UPDATED_AT = "2026-08-28"
@@ -428,6 +432,7 @@ def guide_page() -> str:
 <a href="../items/limited.html">出荷調整（限定出荷）の医薬品一覧<small>厚生労働省公表データで限定出荷の品目を確認</small></a>
 <a href="../items/stopped.html">供給停止の医薬品一覧<small>限定出荷と分けて供給停止の品目を確認</small></a>
 <a href="../items/recent-restrictions.html">最近の限定出荷・供給停止への変更<small>直近30日以内の公表区分変更を確認</small></a>
+<a href="{DISCONTINUATION_GUIDE_SLUG}.html">販売中止・製造中止・薬価削除の確認ガイド<small>一部包装中止や経過措置期限を、現在の供給区分と分けて確認</small></a>
 <a href="../ingredients/index.html">成分（一般名）別の供給状況<small>同じ成分の品目を規格・メーカー別に確認</small></a>
 <a href="../#demo" data-dsn-event="search-cta-open">薬品名・成分名・メーカー名・YJコードから検索<small>Web版で対象品目を探し、理由やメーカー案内を確認</small></a>
 </div></nav>
@@ -451,6 +456,81 @@ def guide_page() -> str:
 <p><a href="{WATCH_GUIDE_SLUG}.html">採用薬の供給状況をCSVでまとめて確認する方法</a></p>
 <p class="note">本ガイドは情報源の使い分けを説明するもので、処方・調剤・代替選定その他の医療上の判断を行うものではありません。実際の入手可否は卸・メーカーにもご確認ください。</p>
 </main><footer>最終更新：{GUIDE_UPDATED_AT}｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
+{analytics_footer()}</body></html>'''
+
+
+def discontinuation_guide_page() -> str:
+    """終了に関するメーカー案内と、公表供給区分・薬価の期限を分ける確認ガイド。"""
+    canonical = f"{SITE_ROOT}guides/{DISCONTINUATION_GUIDE_SLUG}.html"
+    title = "医薬品の販売中止・製造中止・薬価削除を確認する方法｜医薬品供給ナビ"
+    description = ("医薬品の販売中止・製造中止・製造販売中止、一部包装中止、供給停止、薬価削除予定の違いを整理します。"
+                   "メーカー原文と厚生労働省資料で対象規格・包装・経過措置期限を確認する手順です。")
+    article = {
+        "@type": "Article", "headline": title, "description": description,
+        "datePublished": DISCONTINUATION_GUIDE_PUBLISHED_AT,
+        "dateModified": DISCONTINUATION_GUIDE_UPDATED_AT,
+        "inLanguage": "ja", "mainEntityOfPage": canonical,
+        "author": {"@type": "Organization", "name": "医薬品供給ナビ運営者"},
+        "publisher": {"@type": "Organization", "name": "医薬品供給ナビ"},
+    }
+    breadcrumb = {"@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "医薬品供給ナビ", "item": SITE_ROOT},
+        {"@type": "ListItem", "position": 2, "name": "販売中止・薬価削除の確認ガイド", "item": canonical},
+    ]}
+    return f'''<!DOCTYPE html><html lang="ja"><head>
+{common_head(title, description, canonical, "article", [article, breadcrumb])}<style>{STYLE}{CATEGORY_STYLE}
+.term-table th:first-child{{white-space:nowrap;width:6em}}.term-table td{{overflow-wrap:anywhere}}</style></head><body>
+<div class="wrap"><header class="site"><a href="../">💊 医薬品供給ナビ</a></header>
+<nav class="crumb" aria-label="パンくず"><a href="../">トップ</a> › 販売中止・薬価削除の確認ガイド</nav><main>
+<article class="hero"><p class="eyebrow">EVERGREEN GUIDE</p><h1>医薬品の販売中止・製造中止・薬価削除を確認する方法</h1>
+<p class="lede">メーカーの終了案内、厚生労働省の現在の供給区分、薬価基準の期限は、別の情報です。商品名・メーカー・規格・包装を特定し、原文と日付を分けて確認します。</p>
+<p class="note">編集確認日：{DISCONTINUATION_GUIDE_UPDATED_AT}。この日付はガイドの説明と出典を確認した日で、個別品目の供給状況や販売終了を確認した日ではありません。</p>
+{share_control("この確認ガイドを共有")}</article>
+<nav class="intent" aria-labelledby="discontinuationPathsTitle"><h2 id="discontinuationPathsTitle">目的に合う確認先を選ぶ</h2>
+<div class="list">
+<a href="../items/supplemental.html">販売中止の案内・メーカー補足がある医薬品一覧<small>厚生労働省の現在区分と、メーカーの案内を分けて確認</small></a>
+<a href="../items/limited.html">限定出荷の医薬品一覧<small>販売・製造終了の案内と、現在の出荷対応を混同しない</small></a>
+<a href="{GUIDE_SLUG}.html">出荷調整・限定出荷の確認ガイド<small>理由や解除見込みの確認方法を読む</small></a>
+<a href="../#demo" data-dsn-event="search-cta-open">薬品名・メーカー名・YJコードから検索<small>対象規格を特定して、詳細の公表値とメーカー案内を確認</small></a>
+</div></nav>
+<section class="intent"><h2>用語と確認する情報を分ける</h2>
+<table class="cat-table term-table"><thead><tr><th scope="col">用語</th><th scope="col">原文で確認すること</th></tr></thead><tbody>
+<tr><th scope="row">製造中止</th><td>製造を中止する旨のメーカー案内です。対象品目・規格・実施時期を確認し、販売の継続や流通在庫の消尽とは分けて扱います。</td></tr>
+<tr><th scope="row">製造販売中止</th><td>メーカーの製造販売終了に関する案内です。案内日、終了予定、実施済みの情報、在庫消尽時期を原文で確認します。この表現だけで承認整理や薬価削除済みまで判断しません。</td></tr>
+<tr><th scope="row">販売中止</th><td>販売終了の案内です。予定か実施済みか、対象が製品全体・特定規格・特定包装のどれかを確認します。販売移管や承継の案内は販売中止と分けて読みます。</td></tr>
+<tr><th scope="row">一部包装中止</th><td>案内で指定された包装の終了です。他の包装・規格まで終了したり、同成分の医薬品がすべて中止になったりしたと解釈しません。</td></tr>
+<tr><th scope="row">供給停止</th><td>厚生労働省の「出荷対応」⑤の区分です。この区分だけで製造・販売の終了や薬価削除済みとは判断できません。再開見込みも個別の記載を確認します。</td></tr>
+<tr><th scope="row">薬価削除予定</th><td>厚生労働省の「出荷量」Dの区分です。薬価削除の承認を得て削除に向け対応している状態で、削除済みや削除日を示すものではありません。</td></tr>
+<tr><th scope="row">経過措置期限</th><td>薬価基準資料に記載される、経過措置として保険診療に用いることができる期限です。製品の使用期限、メーカーの最終出荷時期、流通在庫の消尽時期とは別です。</td></tr>
+</tbody></table>
+<p class="source">供給停止・薬価削除予定の区分：<a href="{MHLW_SUPPLY_GUIDANCE_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省「医療用医薬品供給状況報告」の用語説明</a>。経過措置による使用期限：<a href="{MHLW_PRICE_LIST_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">薬価基準収載品目リストの凡例（令和8年10月1日適用）</a>。</p>
+<p class="source">メーカー案内の読み分けの例：<a href="https://medical.kyowakirin.co.jp/druginfo/drgdiscon/index.html" target="_blank" rel="noopener" data-dsn-event="official-source-open">協和キリンの販売中止品（予定）一覧</a>は、一部包装中止・販売移管・製造販売承認の承継を区別しています。<a href="https://www.med.kyorin-rmd.com/news/pdf/2024/250324chushi.pdf" target="_blank" rel="noopener" data-dsn-event="official-source-open">キョーリンリメディオの製造販売中止案内（2025年3月更新）</a>では、流通在庫切れの予想と経過措置の見込みが別に記載されています。過去の案内例は、現在の供給状況の根拠として用いません。</p>
+</section>
+<section class="intent"><h2>1. 商品名・メーカー・規格・包装を特定する</h2>
+<p>商品名だけでなく、メーカー、含量、剤形、YJコードを確認します。一部包装の案内では、PTP100錠などの包装と商品コードも原文で照合します。成分名やブランド名が同じという理由で、別規格や他社品まで中止扱いにしません。</p>
+</section>
+<section class="intent"><h2>2. メーカーの案内日と終了時期を分けて読む</h2>
+<p>案内の公開日・更新日、対象範囲、終了予定日、在庫消尽見込み、実施済みの記載をそれぞれ確認します。「在庫がなくなり次第」「予定」「未定」はその条件のまま読み、具体的な終了日や製造終了実績を推測で補いません。案内が更新されていないか、メーカー公式の製品情報・お知らせ一覧も確認してください。</p>
+<p>供給ナビの一覧は確認先を探す入口です。メーカー補足の掲載がない場合も、販売・製造が継続している証明にはなりません。原文を取得できない場合は、その内容は未確認として扱います。</p>
+</section>
+<section class="intent"><h2>3. 現在の供給区分を別に確認する</h2>
+<p>販売中止の案内があっても、在庫が残っている間の出荷対応は通常出荷や限定出荷の場合があります。厚生労働省の「出荷対応」「出荷量」、公表行の更新日、メーカーの案内を別々に確認します。供給停止を製造中止に、薬価削除予定を薬価削除済みに置き換えません。</p>
+<p class="source">併記の例：<a href="https://med.sawai.co.jp/pdf/announce/announce20.pdf" target="_blank" rel="noopener" data-dsn-event="official-source-open">沢井製薬の製品供給状況一覧</a>では、出荷量・出荷対応と販売中止などの注記を別に記載しています。対象品目については最新のメーカー案内を確認してください。</p>
+<div class="official-links"><a href="{MHLW_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システムで現在の供給区分を確認</a></div>
+</section>
+<section class="intent"><h2>4. 薬価基準の適用日と経過措置期限を確認する</h2>
+<p>薬価削除予定の表示だけから、削除日や保険診療上の期限を決めません。厚生労働省の薬価基準収載品目リストと告示を、適用日・商品名・コードまで照合し、該当する経過措置による使用期限を確認します。期限の記載がない場合は、未確認としてメーカーや公式窓口に確認してください。</p>
+<p>現在の供給データに品目がないことだけでも、薬価削除済みや製造・販売終了済みとは断定できません。メーカー案内と薬価資料のどちらを確認したか、資料の適用日と確認日を残します。</p>
+<div class="official-links"><a href="{MHLW_PRICE_LIST_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の薬価基準収載品目リスト・経過措置の凡例を確認</a></div>
+<p class="note">参照した薬価資料は令和8年10月1日適用のページです。実際に確認する際は、厚生労働省が公開する最新の適用資料もご確認ください。</p>
+</section>
+<section class="intent"><h2>5. 入手可否や薬の変更は別に確認する</h2>
+<p>公表区分や終了予定は、各施設の実在庫や入荷時期を示すものではありません。対象包装の実際の入手可否は卸・メーカーに確認してください。</p>
+<p class="safety">同成分の別製品が掲載されていても、代替薬の推薦ではありません。薬の中止・変更は、適応、用量、剤形、患者の状態などを確認し、医師・薬剤師等の専門職が判断してください。</p>
+</section>
+<p><a href="{WATCH_GUIDE_SLUG}.html">採用薬の供給状況をCSVでまとめて確認する方法</a></p>
+<p class="note">本ガイドは情報源の使い分けを説明する非公式の確認ガイドです。個別品目の製造・販売終了実績、薬価削除済み、代替の適否を認定するものではありません。</p>
+</main><footer>編集確認日：{DISCONTINUATION_GUIDE_UPDATED_AT}｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../">トップ</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
 {analytics_footer()}</body></html>'''
 
 
@@ -1132,6 +1212,8 @@ def main() -> int:
     (guide_dir / f"{GUIDE_SLUG}.html").write_text(
         guide_page(), encoding="utf-8")
     (guide_dir / f"{WATCH_GUIDE_SLUG}.html").write_text(watch_guide_page(), encoding="utf-8")
+    (guide_dir / f"{DISCONTINUATION_GUIDE_SLUG}.html").write_text(
+        discontinuation_guide_page(), encoding="utf-8")
     (topic_dir / "index.html").write_text(
         list_page("topics", topics, max(
             normalize_date(topics_doc.get("updated_at")), TEMPLATE_UPDATED_AT)), encoding="utf-8")
@@ -1178,10 +1260,11 @@ def main() -> int:
         (site / "reports" / "index.html").write_text(report_index_page(reports), encoding="utf-8")
     (site / "sitemap-curated.xml").write_text(
         sitemap(topic_dates, product_dates,
-                {GUIDE_SLUG: GUIDE_UPDATED_AT, WATCH_GUIDE_SLUG: WATCH_GUIDE_UPDATED_AT},
+                {GUIDE_SLUG: GUIDE_UPDATED_AT, WATCH_GUIDE_SLUG: WATCH_GUIDE_UPDATED_AT,
+                 DISCONTINUATION_GUIDE_SLUG: DISCONTINUATION_GUIDE_UPDATED_AT},
                 category_dates, report_dates, ingredient_dates),
         encoding="utf-8")
-    print(f"生成: ニュース{len(topics)}件、注目製品{len(products)}件、恒久ガイド2件、薬効分類{len(groups)}件、成分{len(ingredients)}件")
+    print(f"生成: ニュース{len(topics)}件、注目製品{len(products)}件、恒久ガイド3件、薬効分類{len(groups)}件、成分{len(ingredients)}件")
     return 0
 
 

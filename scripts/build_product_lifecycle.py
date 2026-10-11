@@ -35,6 +35,10 @@ PRUNE_EXISTING_ONLY = {
     "2190406A1128",  # アルプロスタジル5μg「F」（ケミファ取扱終了、富士は継続）
     "2190406A2124",  # アルプロスタジル10μg「F」（同上）
 }
+SUPPLY_END_FIELDS = (
+    "supply_end_expected", "supply_end_note", "supply_end_packages",
+    "supply_end_source_url", "supply_end_verified_at",
+)
 
 
 def norm(value: str) -> str:
@@ -85,6 +89,12 @@ def verified_group_announcements(document: object) -> dict[str, dict[str, object
             info["target_products_verified"] = True
             info["target_scope"] = "product"
             info["verified_yj_code"] = yj_code.strip()
+            if any(field in target for field in SUPPLY_END_FIELDS):
+                for field in SUPPLY_END_FIELDS:
+                    info.pop(field, None)
+            for field in SUPPLY_END_FIELDS:
+                if field in target:
+                    info[field] = target[field]
             result[product_name] = info
     return result
 
@@ -193,6 +203,62 @@ def lifecycle_verified_at(announcement: dict[str, object], current: dict[str, st
     ]
     valid = [value for value in candidates if value]
     return max(valid) if valid else today
+
+
+def confirmed_supply_end_fields(announcement: dict[str, object],
+                                current: dict[str, object],
+                                source_url: str) -> dict[str, object]:
+    """本文・対象を確認済みの同一原典からだけ終了予定を追加する。
+
+    欠損・取得不能で既存値を消さない。別の案内へ切り替わった場合も、
+    既存の原典ポインターを保ち、表示側が現案内と一致するか判定できるようにする。
+    終了予定の本文確認日は、供給状態や案内全体の確認日を更新しない。
+    """
+    previous = {field: current[field] for field in SUPPLY_END_FIELDS if field in current}
+    # 旧形式の予定値も、別案内へ移る前に元の出典を固定する。
+    # 原文の再確認ではないため、注記や本文確認日は作らない。
+    old_source_url = current.get("source_url")
+    if (previous.get("supply_end_expected") and not previous.get("supply_end_source_url")
+            and old_source_url and old_source_url != source_url):
+        previous["supply_end_source_url"] = old_source_url
+    if not any(field in announcement for field in SUPPLY_END_FIELDS):
+        return previous
+    if (announcement.get("target_products_verified") is not True
+            or announcement.get("target_scope") != "product"):
+        return previous
+    if announcement.get("supply_end_source_url") != source_url:
+        raise ValueError("終了予定の原典URLは対象案内のURLと一致させてください")
+    checked = announcement.get("supply_end_verified_at")
+    if (not isinstance(checked, str) or len(checked) != 10
+            or _valid_lifecycle_date(checked) != checked):
+        raise ValueError("終了予定の本文確認日はYYYY-MM-DDで指定してください")
+    note = announcement.get("supply_end_note")
+    if not isinstance(note, str) or not note.strip():
+        raise ValueError("終了予定の原文条件・表現を収録してください")
+    previous_url = current.get("supply_end_source_url") or current.get("source_url")
+    result = dict(previous) if previous_url == source_url else {}
+    result.update({
+        "supply_end_note": note,
+        "supply_end_source_url": source_url,
+        "supply_end_verified_at": checked,
+    })
+    expected = announcement.get("supply_end_expected")
+    if "supply_end_expected" in announcement:
+        if expected is None:
+            result.pop("supply_end_expected", None)  # 明示した原文再確認による訂正だけで解除する。
+        else:
+            if not isinstance(expected, str) or _valid_lifecycle_date(expected) != expected:
+                raise ValueError("終了予定は実在するYYYY-MMまたはYYYY-MM-DDで指定してください")
+            result["supply_end_expected"] = expected
+    packages = announcement.get("supply_end_packages")
+    if packages is not None:
+        if (not isinstance(packages, list) or not packages
+                or any(not isinstance(value, str) or not value.strip() for value in packages)
+                or len(set(packages)) != len(packages)):
+            raise ValueError("終了予定の対象包装は重複のない文字列配列にしてください")
+        result["supply_end_packages"] = list(packages)
+    # 確認済みの条件だけの別案内には、古い案内の日付を引き継がない。
+    return result
 
 
 def announcement_covers_product(product_name: str, title: str) -> bool:
@@ -388,7 +454,7 @@ def main() -> int:
                 "maker": announcement.get("maker") or "",
                 "state": "discontinuation_announced",
                 **({"announced_at": announced_at} if announced_at else {}),
-                **({"supply_end_expected": current["supply_end_expected"]} if current.get("supply_end_expected") else {}),
+                **confirmed_supply_end_fields(announcement, current, source_url),
                 "source_title": title or "",
                 "source_url": source_url,
                 "verified_at": verified_at,

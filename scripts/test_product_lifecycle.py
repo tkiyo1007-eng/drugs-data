@@ -1,5 +1,8 @@
 import csv
+import copy
 import json
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -11,6 +14,7 @@ from scripts.build_product_lifecycle import (
     announcement_identifies_product_as_new_release,
     announcement_targets_product,
     backfill_announcement_dates,
+    confirmed_supply_end_fields,
     event_last_checked_by_url,
     existing_record_needs_reverification,
     is_product_wide_discontinuation,
@@ -23,6 +27,178 @@ from scripts.validate_product_lifecycle import validate
 
 
 class ProductLifecycleTests(unittest.TestCase):
+    @staticmethod
+    def _end_annotation(expected="2027-03"):
+        annotation = {
+            "target_products_verified": True,
+            "target_scope": "product",
+            "supply_end_note": "在庫消尽次第。2027年3月頃を予定しています。",
+            "supply_end_packages": ["PTP100錠"],
+            "supply_end_source_url": "https://med.sawai.co.jp/end.pdf",
+            "supply_end_verified_at": "2026-08-28",
+        }
+        if expected is not None:
+            annotation["supply_end_expected"] = expected
+        return annotation
+
+    def test_condition_only_is_not_invented_as_an_end_date(self):
+        annotation = self._end_annotation(None)
+        annotation["supply_end_note"] = "弊社在庫がなくなり次第、販売を中止します。"
+        fields = confirmed_supply_end_fields(annotation, {}, annotation["supply_end_source_url"])
+        self.assertNotIn("supply_end_expected", fields)
+        self.assertEqual(fields["supply_end_note"], annotation["supply_end_note"])
+
+    def test_missing_or_unverified_notice_does_not_erase_recorded_end_information(self):
+        current = self._end_annotation()
+        current.pop("target_products_verified")
+        current.pop("target_scope")
+        for announcement in ({}, {"supply_end_expected": "2028-01"}):
+            with self.subTest(announcement=announcement):
+                self.assertEqual(confirmed_supply_end_fields(
+                    announcement, current, "https://med.sawai.co.jp/end.pdf"), current)
+
+    def test_confirmed_condition_without_date_keeps_same_source_date(self):
+        current = {"source_url": "https://med.sawai.co.jp/end.pdf", "supply_end_expected": "2027-03"}
+        annotation = self._end_annotation(None)
+        fields = confirmed_supply_end_fields(annotation, current, current["source_url"])
+        self.assertEqual(fields["supply_end_expected"], "2027-03")
+
+    def test_legacy_date_is_bound_to_old_source_before_a_notice_switch(self):
+        current = {"source_url": "https://med.sawai.co.jp/old.pdf", "supply_end_expected": "2027-03"}
+        fields = confirmed_supply_end_fields({}, current, "https://med.sawai.co.jp/new.pdf")
+        self.assertEqual(fields, {"supply_end_expected": "2027-03",
+                                  "supply_end_source_url": current["source_url"]})
+
+    def test_end_annotation_cannot_be_attached_to_a_different_source(self):
+        with self.assertRaisesRegex(ValueError, "原典URL"):
+            confirmed_supply_end_fields(self._end_annotation(), {}, "https://med.sawai.co.jp/other.pdf")
+
+    def test_new_notice_condition_does_not_inherit_old_notice_date(self):
+        current = {"source_url": "https://med.sawai.co.jp/old.pdf", "supply_end_expected": "2027-03"}
+        annotation = self._end_annotation(None)
+        fields = confirmed_supply_end_fields(annotation, current, annotation["supply_end_source_url"])
+        self.assertNotIn("supply_end_expected", fields)
+
+    def test_confirmed_end_annotation_rejects_impossible_calendar_date(self):
+        for field, value in (("supply_end_expected", "2027-02-30"),
+                             ("supply_end_expected", "2027-13"),
+                             ("supply_end_verified_at", "2026-08")):
+            with self.subTest(field=field, value=value):
+                annotation = self._end_annotation()
+                annotation[field] = value
+                with self.assertRaises(ValueError):
+                    confirmed_supply_end_fields(annotation, {}, annotation["supply_end_source_url"])
+
+    def test_per_product_end_conditions_do_not_inherit_group_date(self):
+        annotation = self._end_annotation()
+        group = {
+            "products": ["薬A錠"], "target_products_verified": True,
+            "target_scope": "product", "expected_target_count": 2,
+            "announcement": {"maker": "沢井製薬", "title": "販売中止", "event_type": "discontinued",
+                             "url": annotation["supply_end_source_url"], **annotation},
+            "lifecycle_targets": [{"product_name": "薬B錠", "yj_code": "123456789012",
+                                   **self._end_annotation(None),
+                                   "supply_end_note": "在庫消尽次第"}],
+        }
+        expanded = verified_group_announcements([group])
+        self.assertEqual(expanded["薬A錠"]["supply_end_expected"], "2027-03")
+        self.assertNotIn("supply_end_expected", expanded["薬B錠"])
+
+    def test_validator_accepts_legacy_expected_and_verified_optional_evidence(self):
+        document, rows = self._lifecycle_fixture(
+            "123456789012", "沢井製薬", "https://med.sawai.co.jp/end.pdf")
+        item = document["products"]["123456789012"]
+        item["supply_end_expected"] = "2027-03"
+        self.assertEqual(validate(document, rows), [])
+        # 旧予定値に元の出典を付けるだけで、本文の再確認日を捏造しない。
+        item["supply_end_source_url"] = "https://med.sawai.co.jp/old.pdf"
+        self.assertEqual(validate(document, rows), [])
+        item.update({k: v for k, v in self._end_annotation().items() if k.startswith("supply_end_")})
+        self.assertEqual(validate(document, rows), [])
+
+    def test_validator_rejects_unverified_pointer_without_a_legacy_date(self):
+        document, rows = self._lifecycle_fixture(
+            "123456789012", "沢井製薬", "https://med.sawai.co.jp/new.pdf")
+        document["products"]["123456789012"]["supply_end_source_url"] = "https://med.sawai.co.jp/old.pdf"
+        self.assertTrue(any("supply_end_source_url" in error for error in validate(document, rows)))
+
+    def test_validator_rejects_invalid_end_evidence(self):
+        document, rows = self._lifecycle_fixture(
+            "123456789012", "沢井製薬", "https://med.sawai.co.jp/end.pdf")
+        item = document["products"]["123456789012"]
+        item.update({k: v for k, v in self._end_annotation().items() if k.startswith("supply_end_")})
+        for field, value in (("supply_end_expected", "2027-02-30"),
+                             ("announced_at", "2026-13"),
+                             ("verified_at", "2026-02-30"),
+                             ("supply_end_verified_at", "2026-08-29"),
+                             ("supply_end_source_url", "https://evil-sawai.co.jp/end.pdf"),
+                             ("supply_end_note", ""),
+                             ("supply_end_packages", ["PTP100錠", "PTP100錠"]),
+                             ("supply_end_packages", "PTP100錠")):
+            with self.subTest(field=field, value=value):
+                invalid = copy.deepcopy(document)
+                invalid["products"]["123456789012"][field] = value
+                self.assertTrue(any(field in error for error in validate(invalid, rows)))
+
+    def _build_end_fixture(self, directory, groups, existing):
+        root = Path(__file__).resolve().parents[1]
+        base = Path(directory)
+        with (base / "drugs.csv").open("w", encoding="utf-8-sig", newline="") as handle:
+            writer = csv.DictWriter(handle, fieldnames=["商品名", "YJコード", "製造メーカー", "販売メーカー"])
+            writer.writeheader()
+            writer.writerow({"商品名": "テスト錠１ｍｇ", "YJコード": "123456789012",
+                             "製造メーカー": "沢井製薬", "販売メーカー": "沢井製薬"})
+        for filename, value in (("announcements.json", {}), ("groups.json", groups),
+                                ("existing.json", existing)):
+            (base / filename).write_text(json.dumps(value, ensure_ascii=False), encoding="utf-8")
+        result = subprocess.run([
+            sys.executable, str(root / "scripts/build_product_lifecycle.py"),
+            "--csv", str(base / "drugs.csv"), "--announcements", str(base / "announcements.json"),
+            "--manual-groups", str(base / "groups.json"), "--existing", str(base / "existing.json"),
+            "--output", str(base / "output.json"),
+        ], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr[-500:])
+        return json.loads((base / "output.json").read_text())["products"]["123456789012"]
+
+    def test_daily_build_retains_missing_end_data_and_does_not_refresh_or_promote_state(self):
+        document, _ = self._lifecycle_fixture(
+            "123456789012", "沢井製薬", "https://med.sawai.co.jp/end.pdf")
+        annotation = self._end_annotation("2020-03")
+        group = {"products": ["テスト錠１ｍｇ"], "target_products_verified": True,
+                 "target_scope": "product", "expected_target_count": 1,
+                 "announcement": {"maker": "沢井製薬", "title": "販売中止のお知らせ",
+                                  "event_type": "discontinued", "url": annotation["supply_end_source_url"],
+                                  **annotation}}
+        with tempfile.TemporaryDirectory() as directory:
+            item = self._build_end_fixture(directory, [group], document)
+            self.assertEqual(item["state"], "discontinuation_announced")
+            self.assertEqual(item["verified_at"], "2026-08-28")
+            self.assertEqual(item["supply_end_expected"], "2020-03")
+            # 原典取得不能で次回入力が空でも、既存の時期・原典・本文確認日を残す。
+            rebuilt = self._build_end_fixture(directory, [], {"products": {"123456789012": item}})
+            self.assertEqual(rebuilt, item)
+
+    def test_daily_build_notice_switch_preserves_legacy_date_with_old_source(self):
+        old_url, new_url = "https://med.sawai.co.jp/old.pdf", "https://med.sawai.co.jp/new.pdf"
+        document, rows = self._lifecycle_fixture("123456789012", "沢井製薬", old_url)
+        document["products"]["123456789012"]["supply_end_expected"] = "2027-03"
+        group = {"products": ["テスト錠１ｍｇ"], "target_products_verified": True,
+                 "target_scope": "product", "expected_target_count": 1,
+                 "announcement": {"maker": "沢井製薬", "title": "販売中止のお知らせ",
+                                  "event_type": "discontinued", "url": new_url}}
+        with tempfile.TemporaryDirectory() as directory:
+            item = self._build_end_fixture(directory, [group], document)
+            self.assertEqual(item["source_url"], new_url)
+            self.assertEqual(item["supply_end_expected"], "2027-03")
+            self.assertEqual(item["supply_end_source_url"], old_url)
+            self.assertNotIn("supply_end_verified_at", item)
+            self.assertNotIn("supply_end_note", item)
+            self.assertEqual(item["verified_at"], "2026-08-28")
+            document["products"]["123456789012"] = item
+            self.assertEqual(validate(document, rows), [])
+            rebuilt = self._build_end_fixture(directory, [], document)
+            self.assertEqual(rebuilt, item)
+
     def test_verified_tatsumi_and_maruishi_hosts_are_accepted(self):
         cases = (
             ("2190101F1063", "辰巳化学", "https://www.tatsumi-kagaku.com/notice.pdf"),

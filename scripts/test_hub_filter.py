@@ -54,7 +54,7 @@ class HubFilterTests(unittest.TestCase):
             },
         ]
 
-    def test_search_is_limited_to_two_hubs_and_keeps_static_items(self):
+    def test_search_is_limited_to_three_hubs_and_keeps_static_items(self):
         for slug in ITEM_HUB_SLUGS:
             with self.subTest(slug=slug):
                 output = hub_html(slug, self.entries, "2026-10-10")
@@ -70,7 +70,7 @@ class HubFilterTests(unittest.TestCase):
                     self.assertIn("品目行更新 " + entry["updated"], output)
                 self.assertIn('href="https://kyokyu-navi.jp/items/' + slug + '.html"', output)
                 self.assertIn("https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list", output)
-                if slug in {"limited", "stopped"}:
+                if slug in {"limited", "stopped", "supplemental"}:
                     self.assertIn("hidden", parsed.controls["hubFilter"])
                     self.assertIn("この一覧内に該当する品目なし", output)
                     self.assertIn("すべての医薬品の検索結果ではありません", output)
@@ -107,7 +107,7 @@ class HubFilterTests(unittest.TestCase):
                 dates[slug + ".html"],
             )
             output = hub_html(slug, self.entries, "2026-10-10")
-            if slug in {"limited", "stopped"}:
+            if slug in {"limited", "stopped", "supplemental"}:
                 self.assertIn('"dateModified":"2026-10-11"', output)
                 self.assertIn("全体データ基準日 2026-10-10", output)
         self.assertEqual("2026-09-14", dates["1111111F1111.html"])
@@ -137,7 +137,7 @@ function setup(before = "") {
     hidden: true, handlers: {}, addEventListener(event, fn) { this.handlers[event] = fn; }
   }, extra);
   const nodes = {
-    hubFilter: node(), hubItems: node({querySelectorAll: () => rows}),
+    hubFilter: node(), hubItems: node({querySelectorAll: selector => selector === "li" ? rows : []}),
     hubFilterInput: node({value: "", focus() { this.focused = true; }}),
     hubFilterClear: node({disabled: true}),
     hubFilterCount: node({textContent: ""}), hubFilterEmpty: node()
