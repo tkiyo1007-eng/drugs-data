@@ -489,6 +489,7 @@ def discontinuation_guide_page() -> str:
 <nav class="intent" aria-labelledby="discontinuationPathsTitle"><h2 id="discontinuationPathsTitle">目的に合う確認先を選ぶ</h2>
 <div class="list">
 <a href="../items/supplemental.html">販売中止の案内・メーカー補足がある医薬品一覧<small>厚生労働省の現在区分と、メーカーの案内を分けて確認</small></a>
+<a href="../items/supplemental.html#delisting">薬価削除予定・経過措置の掲載欄<small>販売・製造の終了日とは別の情報。販売中止の掲載欄にも薬価情報を併記</small></a>
 <a href="../items/limited.html">限定出荷の医薬品一覧<small>販売・製造終了の案内と、現在の出荷対応を混同しない</small></a>
 <a href="{GUIDE_SLUG}.html">出荷調整・限定出荷の確認ガイド<small>理由や解除見込みの確認方法を読む</small></a>
 <a href="../#demo" data-dsn-event="search-cta-open">薬品名・メーカー名・YJコードから検索<small>対象規格を特定して、詳細の公表値とメーカー案内を確認</small></a>
