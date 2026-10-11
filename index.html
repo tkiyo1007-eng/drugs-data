@@ -54,7 +54,7 @@
         {
           "@type": "Question",
           "name": "データはどのくらいの頻度で更新されますか？",
-          "acceptedAnswer": { "@type": "Answer", "text": "厚生労働省が公表する「医療用医薬品供給状況」データを毎晩自動で取得し、翌朝には最新の状態に更新されます（公表自体は厚労省による平日ごとの更新です）。" }
+          "acceptedAnswer": { "@type": "Answer", "text": "厚生労働省の公表データ（平日更新）を毎晩自動で取得・検証し、取得に成功したデータを公開します。更新や取得が遅れる場合があるため、検索画面の「全体データ基準日」と取得状態を確認してください。品目ごとの公表行更新日は、全体の基準日とは異なります。" }
         },
         {
           "@type": "Question",
@@ -74,12 +74,12 @@
         {
           "@type": "Question",
           "name": "Android版のアプリはありますか？",
-          "acceptedAnswer": { "@type": "Answer", "text": "現在ネイティブアプリはiOS版のみですが、このWeb版はホーム画面に追加してアプリと同じように使えます（Chromeのメニューから「アプリをインストール」または「ホーム画面に追加」）。追加すると全画面で起動し、電波の届かない場所でも直前に取得したデータを表示できます。検索・監視リスト・CSV保存はWeb版でもすべてご利用いただけます。" }
+          "acceptedAnswer": { "@type": "Answer", "text": "現在ネイティブアプリはiOS版のみです。Web版は対応ブラウザからホーム画面に追加して利用できます（Chromeのメニューから「アプリをインストール」または「ホーム画面に追加」）。オフライン時は、このブラウザに供給データが保存されていれば表示できます。事前のオンライン利用とデータ保存が必要で、補助情報を取得できない場合もあります。検索・監視リスト・CSV保存はWeb版でもご利用いただけます。" }
         },
         {
           "@type": "Question",
           "name": "表示されている情報は100%正確ですか？",
-          "acceptedAnswer": { "@type": "Answer", "text": "厚生労働省の供給区分は意味を変えて上書きせず表示しています。見やすくするための差分集計や、メーカー資料の自動抽出・AI要約は出典情報と区別して表示します。公表と実際の流通状況にタイムラグが生じる場合があるため、採用・処方・調剤上の判断は必ず医師・薬剤師等の専門職が最新情報を確認したうえで行ってください。" }
+          "acceptedAnswer": { "@type": "Answer", "text": "厚生労働省の供給区分は意味を変えて上書きせず表示しています。見やすくするための差分集計や、メーカー資料の自動抽出・AI要約は出典情報と区別して表示します。ただし公表と実際の流通状況にタイムラグが生じる場合があるため、採用・処方・調剤上の判断は必ず医師・薬剤師等の専門職が最新情報を確認したうえで行ってください。" }
         },
         {
           "@type": "Question",
@@ -609,6 +609,12 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 .modal-share:hover{background:#fff;color:var(--blue);transform:scale(1.1)}
 .modal-share.done{color:var(--ok)}
+.modal-share-feedback{font-size:12px;line-height:1.7;color:var(--sub)}
+.modal-share-feedback p{margin:0}
+.modal-share-feedback p:not(:empty){margin:10px 0 14px}
+.modal-share-fallback[hidden]{display:none}
+.modal-share-feedback label{display:block;margin-top:8px;font-weight:700}
+.modal-share-feedback input{width:100%;min-width:0;min-height:44px;margin-top:4px;padding:10px;border:1px solid rgba(90,107,148,.3);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit;font-size:16px}
 /* 1件目の監視登録時だけ、次回訪問でのメリットをその場で伝える */
 .watch-first-add{
   display:flex;align-items:center;justify-content:space-between;gap:16px;
@@ -1439,7 +1445,7 @@ footer a:hover{color:var(--blue)}
     </button>
     <div class="data-freshness-notice" id="offlineNotice" role="status" aria-live="polite" hidden>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.7 2.2 17.5A2 2 0 0 0 3.9 20h16.2a2 2 0 0 0 1.7-2.5L13.7 3.7a2 2 0 0 0-3.4 0Z"/></svg>
-      <span>オフライン等のため、前回取得した供給データを表示しています。表示中の日付を確認し、接続後に再読み込みしてください。</span>
+      <span>オフライン等のため、供給データまたは基準日に前回取得分を含みます。表示中データの基準日を確認できない場合があります。接続後に再読み込みしてください。</span>
       <button class="data-freshness-reload" id="offlineReload" type="button">再読み込み</button>
     </div>
     <div class="data-freshness-notice stale" id="staleNotice" role="status" aria-live="polite" hidden>
@@ -2092,6 +2098,14 @@ footer a:hover{color:var(--blue)}
   <p class="sec-lede">医薬品供給ナビの機能追加・修正・掲載情報の更新履歴です。公開内容を確認して手動で追記しています。</p>
   <div class="news-list glass">
     <div class="news-item">
+      <div class="news-date num">2026.10.11</div>
+      <div class="news-body"><span class="news-tag">機能改善</span><a href="items/limited.html">限定出荷</a>・<a href="items/stopped.html">供給停止</a>の一覧に、品目名・成分名・メーカー名・YJコードで絞り込める検索を追加しました。<p>詳細画面の閲覧位置とキーボードの操作位置を保持し、監視リストの保存失敗や通信の停止も画面で確認できるよう改善しました。供給区分・出典・医薬品データは変更していません。</p></div>
+    </div>
+    <div class="news-item">
+      <div class="news-date num">2026.10.10</div>
+      <div class="news-body"><span class="news-tag">確認ガイド</span>検索欄から限定出荷・供給停止の一覧と<a href="guides/how-to-check-drug-supply.html">出荷調整の確認ガイド</a>へ進めるようになりました。<p>厚生労働省の供給区分、メーカー補足、データ日付の違いを確認しながら、一覧や原典を利用できます。</p></div>
+    </div>
+    <div class="news-item">
       <div class="news-date num">2026.09.14</div>
       <div class="news-body"><span class="news-tag">情報更新</span>メーカーの公式案内を確認し、12品目の案内を追加、アミトリプチリン塩酸塩錠10mg「サワイ」の案内を更新しました。<p>対象はゴリムマブBS「F」、クロベタゾールローション・マキサカルシトール軟膏「イワキ」、オルメサルタン「ケミファ」、エソメプラゾール「日新」、タイケルブ、エゼチミブ・イルアミクス・アレンドロン酸「サワイ」の対象規格です。メーカー案内と厚労省データは区別して表示し、厚労省の供給区分は変更していません。</p></div>
     </div>
@@ -2140,8 +2154,8 @@ footer a:hover{color:var(--blue)}
 
 <section id="features" class="reveal">
   <p class="sec-eyebrow">FEATURES</p>
-  <h2>医薬品供給ナビの主な機能</h2>
-  <p class="sec-lede">医薬品供給ナビは、日々の確認作業が少しでも楽になるよう、機能を選び抜いて作りました。</p>
+  <h2>Web版の主な機能</h2>
+  <p class="sec-lede">検索から原典の確認・監視・共有まで、このWeb版で利用できます。データ日付と出典を確認しながら、日々の確認作業にお役立てください。</p>
   <div class="features">
     <div class="feature glass">
       <div class="f-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></div>
@@ -2151,12 +2165,12 @@ footer a:hover{color:var(--blue)}
     <div class="feature glass">
       <div class="f-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
       <h3>供給状況の変更履歴</h3>
-      <p>「最近更新された品目」を時系列で表示。限定出荷への切り替わり、出荷再開──動きのあった薬から順にチェックできます。</p>
+      <p>最近の供給区分の変更と、品目ごとの変更履歴を確認できます。履歴の最新記録日は、全体データ基準日と分けて表示します。</p>
     </div>
     <div class="feature glass">
       <div class="f-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21.2l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
       <h3>監視リスト</h3>
-      <p>気になる医薬品を登録しておけば、状況の変化をまとめて確認。採用品目の監視リストとして毎日の業務に組み込めます。</p>
+      <p>気になる品目をこのブラウザに保存し、再訪時に前回確認からの変化をまとめて確認できます。採用品目はCSVでまとめて登録することもできます。</p>
     </div>
     <div class="feature glass">
       <div class="f-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.2 15.9A10 10 0 1 1 8.1 2.8"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg></div>
@@ -2164,9 +2178,9 @@ footer a:hover{color:var(--blue)}
       <p>供給区分ごとの品目数と構成比をサマリー表示。公表データ全体の内訳を数字とビジュアルで確認できます。</p>
     </div>
     <div class="feature glass">
-      <div class="f-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-      <h3>情報交換の掲示板</h3>
-      <p>「この状況にどう対応しているか」──同じ悩みを持つ医療従事者どうしで情報交換できるコミュニティを内蔵しています。</p>
+      <div class="f-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-4M8.6 13.5l6.8 4"/></svg></div>
+      <h3>検索結果の共有・CSV保存</h3>
+      <p>検索語・供給区分を含むリンクを共有し、検索結果をCSVで保存できます。品目の詳細からは、その品目へのリンクも共有できます。</p>
     </div>
     <div class="feature glass">
       <div class="f-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M12 18h.01"/></svg></div>
@@ -2174,6 +2188,7 @@ footer a:hover{color:var(--blue)}
       <p>調剤台でも、卸との電話中でも。スマホに最適化された UI で、PC を開かずにその場で確認が終わります。</p>
     </div>
   </div>
+  <p class="compare-note">プッシュ通知と医療従事者向け掲示板はiOSアプリ限定です。Web版の監視リストは、再訪時に変化を確認する機能です。</p>
 </section>
 
 <section id="compare" class="reveal">
@@ -2258,7 +2273,7 @@ footer a:hover{color:var(--blue)}
   <div class="faq-list glass">
     <details class="faq-item">
       <summary>データはどのくらいの頻度で更新されますか？</summary>
-      <p>厚生労働省が公表する「医療用医薬品供給状況」データを毎晩自動で取得し、翌朝には最新の状態に更新されます（公表自体は厚労省による平日ごとの更新です）。</p>
+      <p>厚生労働省の公表データ（平日更新）を毎晩自動で取得・検証し、取得に成功したデータを公開します。更新や取得が遅れる場合があるため、検索画面の「全体データ基準日」と取得状態を確認してください。品目ごとの公表行更新日は、全体の基準日とは異なります。</p>
     </details>
     <details class="faq-item">
       <summary>利用は無料ですか？</summary>
@@ -2274,7 +2289,7 @@ footer a:hover{color:var(--blue)}
     </details>
     <details class="faq-item">
       <summary>Android版のアプリはありますか？</summary>
-      <p>現在ネイティブアプリは iOS 版のみですが、この Web 版はホーム画面に追加してアプリと同じように使えます（Chrome のメニューから「アプリをインストール」または「ホーム画面に追加」）。追加すると全画面で起動し、電波の届かない場所でも直前に取得したデータを表示できます。検索・監視リスト・CSV保存は Web 版でもすべてご利用いただけます。</p>
+      <p>現在ネイティブアプリはiOS版のみです。Web版は対応ブラウザからホーム画面に追加して利用できます（Chromeのメニューから「アプリをインストール」または「ホーム画面に追加」）。オフライン時は、このブラウザに供給データが保存されていれば表示できます。事前のオンライン利用とデータ保存が必要で、補助情報を取得できない場合もあります。検索・監視リスト・CSV保存はWeb版でもご利用いただけます。</p>
     </details>
     <details class="faq-item">
       <summary>表示されている情報は100%正確ですか？</summary>
@@ -2305,7 +2320,7 @@ footer a:hover{color:var(--blue)}
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg>
         ホーム画面に追加
       </button>
-      <p class="app-cta-note">Android をお使いの方は、この Web 版をホーム画面に追加するとアプリと同じように起動でき、電波の弱い場所でも前回のデータを表示できます（Chrome のメニュー →「アプリをインストール」／「ホーム画面に追加」）。</p>
+      <p class="app-cta-note">Androidでは、対応ブラウザからこのWeb版をホーム画面に追加できます（Chromeのメニュー →「アプリをインストール」／「ホーム画面に追加」）。供給データがこのブラウザに保存されている場合は、オフラインでも表示できます。</p>
     </div>
     <a class="app-cta-qr" href="https://apps.apple.com/jp/app/id6777696446" target="_blank" rel="noopener" aria-label="QRコードからApp Storeへ">
       <img src="qr-appstore.svg" width="190" height="190" alt="App Store の QR コード" loading="lazy" decoding="async">
@@ -2371,6 +2386,13 @@ footer a:hover{color:var(--blue)}
       <button type="button" class="modal-share" id="mShare" aria-label="この品目へのリンクを共有" title="リンクを共有">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>
       </button>
+    </div>
+    <div class="modal-share-feedback" id="mShareFeedback">
+      <p id="mShareStatus" role="status" aria-live="polite" aria-atomic="true"></p>
+      <div class="modal-share-fallback" id="mShareFallback" hidden>
+        <label for="mShareUrl">この品目のリンク（選択してコピーできます）</label>
+        <input type="text" id="mShareUrl" readonly spellcheck="false">
+      </div>
     </div>
     <div class="modal-badges">
       <span class="status-tag" id="mTag"></span>
@@ -4768,6 +4790,7 @@ function refreshOpenDetail(d){
 }
 function openDetail(d, opts={}){
   if(!d) return;
+  if(currentDetailKey !== itemKey(d) || !$mBack.classList.contains("open")) resetDetailShareFeedback();
   if(opts.track !== false) dsnTrack("detail-open");
   const st = STATUS[d.s];
   const tag = document.getElementById("mTag");
@@ -5124,25 +5147,57 @@ function detailShareURL(item){
   url.hash = "item=" + encodeURIComponent(itemKey(item));
   return url;
 }
+let detailShareGeneration = 0, detailShareResetTimer = null;
+function resetDetailShareFeedback(){
+  detailShareGeneration++;
+  clearTimeout(detailShareResetTimer);
+  detailShareResetTimer = null;
+  document.getElementById("mShareStatus").textContent = "";
+  document.getElementById("mShareFallback").hidden = true;
+  document.getElementById("mShareUrl").value = "";
+  const button = document.getElementById("mShare");
+  button.classList.remove("done");
+  button.title = "リンクを共有";
+}
+function showDetailShareFeedback(message, url=""){
+  clearTimeout(detailShareResetTimer);
+  detailShareResetTimer = null;
+  document.getElementById("mShareStatus").textContent = message;
+  document.getElementById("mShareFallback").hidden = !url;
+  document.getElementById("mShareUrl").value = url;
+}
+document.getElementById("mShareUrl").addEventListener("focus", e=>e.currentTarget.select());
 document.getElementById("mShare").addEventListener("click", async e=>{
   if(!currentDetailName) return;
   const btn = e.currentTarget;
+  const generation = ++detailShareGeneration, key = currentDetailKey;
   const currentItem = findByKey(currentDetailKey);
   const url = detailShareURL(currentItem).href;
-  if(navigator.share){
-    try{
-      await navigator.share({title:`${currentDetailName} の供給状況 — 医薬品供給ナビ`, url});
-      dsnTrack("detail-share-success");
-    }catch(err){}
-    return;
-  }
+  const canUpdate = ()=>generation === detailShareGeneration && key === currentDetailKey && $mBack.classList.contains("open");
   try{
-    await navigator.clipboard.writeText(url);
+    const copied = typeof navigator.share !== "function";
+    if(!copied){
+      await navigator.share({title:`${currentDetailName} の供給状況 — 医薬品供給ナビ`, url});
+    }else{
+      if(typeof navigator.clipboard?.writeText !== "function") throw new Error("リンクのコピーに対応していません");
+      await navigator.clipboard.writeText(url);
+    }
     dsnTrack("detail-share-success");
-    btn.classList.add("done");
-    btn.title = "リンクをコピーしました";
-    setTimeout(()=>{ btn.classList.remove("done"); btn.title = "リンクを共有"; }, 1600);
-  }catch(err){}
+    if(!canUpdate()) return;
+    showDetailShareFeedback(copied ? "この品目のリンクをコピーしました。" : "この品目のリンクを共有しました。");
+    btn.classList.remove("done");
+    btn.title = "リンクを共有";
+    if(copied){
+      btn.classList.add("done");
+      btn.title = "リンクをコピーしました";
+      detailShareResetTimer = setTimeout(()=>{ btn.classList.remove("done"); btn.title = "リンクを共有"; detailShareResetTimer = null; }, 1600);
+    }
+  }catch(err){
+    if(err?.name === "AbortError" || !canUpdate()) return;
+    btn.classList.remove("done");
+    btn.title = "リンクを共有";
+    showDetailShareFeedback("リンクを共有できませんでした。下の品目リンクを選択してコピーしてください。", url);
+  }
 });
 document.getElementById("mFav").addEventListener("click", e=>{
   if(!currentDetailName) return;
@@ -5900,6 +5955,16 @@ function responseUsesCachedData(response){
 function showCachedDataNotice(){
   document.getElementById("offlineNotice").hidden = false;
 }
+function datasetDateFromVersion(version, csvCached=false, versionCached=false){
+  // 個別に保存されるCSVとversionのキャッシュが、同じ更新時点とは確認できない。
+  if(csvCached || versionCached || !version || typeof version !== "object" || Array.isArray(version)) return "";
+  const note = typeof version.note === "string" ? version.note : "";
+  const value = ["string", "number"].includes(typeof version.version) ? version.version : "";
+  const text = `${note} ${value}`;
+  const match = text.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/) || text.match(/(\d{4})-(\d{1,2})-(\d{1,2})/);
+  if(!match || !validSupplyDate(`${match[1]}/${match[2]}/${match[3]}`)) return "";
+  return `${match[1]}-${String(match[2]).padStart(2,"0")}-${String(match[3]).padStart(2,"0")}`;
+}
 document.getElementById("offlineReload").addEventListener("click", ()=>location.reload());
 document.getElementById("dataLoadReload").addEventListener("click", ()=>location.reload());
 
@@ -5914,6 +5979,7 @@ function setDatasetDate(date){
   const noticeText = document.getElementById("staleNoticeText");
   if(!date){
     asOf.textContent = "データ基準日を取得できません。";
+    document.getElementById("today").textContent = "基準日未確認";
     noticeText.innerHTML = `表示中データの基準日を確認できません。重要な判断では、<a href="${OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システム</a>もご確認ください。`;
     notice.hidden = false;
     if(!Object.values(SUPPLEMENTAL_STATE).includes("loading")) updateSupplementalStatus();
@@ -5962,7 +6028,8 @@ function failDataLoad(message){
  try{
   const res = await fetchFirst(CSV_SOURCES);
   if(!res) return failDataLoad("公開データを取得できませんでした。");
-  if(responseUsesCachedData(res)) showCachedDataNotice();
+  const csvCached = responseUsesCachedData(res);
+  if(csvCached) showCachedDataNotice();
   const rows = parseCSV((await res.text()).replace(/^﻿/,""), true)
     .filter(row=>!(row.length===1 && row[0]===""));
   const head = rows.shift();
@@ -6106,13 +6173,11 @@ function failDataLoad(message){
   // データ日付(version.json)
   const vres = await fetchFirst(VER_SOURCES);
   if(vres){
-    if(responseUsesCachedData(vres)) showCachedDataNotice();
+    const versionCached = responseUsesCachedData(vres);
+    if(versionCached) showCachedDataNotice();
     try{
       const v = await vres.json();
-      const text = `${v.note||""} ${v.version||""}`;
-      const m = text.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/) || text.match(/(\d{4})-(\d{1,2})-(\d{1,2})/);
-      if(m) setDatasetDate(`${m[1]}-${String(m[2]).padStart(2,"0")}-${String(m[3]).padStart(2,"0")}`);
-      else setDatasetDate("");
+      setDatasetDate(datasetDateFromVersion(v, csvCached, versionCached));
     }catch(e){ setDatasetDate(""); }
   }else{
     setDatasetDate("");
