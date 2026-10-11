@@ -37,11 +37,14 @@ SITE_ROOT = "https://kyokyu-navi.jp/"
 APP_STORE = "https://apps.apple.com/jp/app/%E5%8C%BB%E8%96%AC%E5%93%81%E4%BE%9B%E7%B5%A6%E3%83%8A%E3%83%93/id6777696446"
 APP_ID = "6777696446"
 OFFICIAL_SUPPLY_URL = "https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list"
+MHLW_PRICE_LIST_URL = "https://www.mhlw.go.jp/topics/2026/04/tp20260401-01.html"
 # 全品目へ一次情報・状態別ハブ・運営方針の導線を追加した実質的な改訂日。
 # 日次生成日ではなく固定値にし、内容が変わらない日にlastmodを進めない。
 ITEM_PAGE_TEMPLATE_LASTMOD = "2026-10-06"  # 成分別ページへの導線を追加
-# ページ内検索を追加した2一覧だけの実質的な改訂日。個別品目のlastmodは進めない。
-HUB_FILTER_TEMPLATE_LASTMOD = {"limited": "2026-10-12", "stopped": "2026-10-12", "supplemental": "2026-10-11"}
+# 状態別5一覧の実質的な改訂日。個別品目のlastmodは進めない。
+HUB_TEMPLATE_LASTMOD = "2026-10-12"
+# ページ内検索の対象は、テンプレートの改訂日とは別に維持する。
+FILTERABLE_HUB_SLUGS = frozenset({"limited", "stopped", "supplemental"})
 DISCONTINUATION_GUIDE = "../guides/how-to-check-discontinuation-and-delisting.html"
 SUPPLEMENTAL_TEMPLATE_LASTMOD = "2026-10-11"
 # drugs-data の generate_curated_pages.py（CATEGORY_MIN_ROWS）と同じ基準。
@@ -1466,6 +1469,18 @@ def hub_supply_evidence(entry):
         for label, field in fields) + '</dl>'
 
 
+def hub_identity_html(entry):
+    """規格と正式YJの原値だけを短く示し、URLキーをコードとして推定しない。"""
+    parts = []
+    spec = str(entry.get("spec") or "").strip()
+    if spec:
+        parts.append(f'規格：{esc(spec)}')
+    yj = str(entry.get("yj_raw") or "").strip()
+    if FORMAL_YJ_RE.fullmatch(yj):
+        parts.append(f'YJコード：{esc(yj)}')
+    return '<span class="hub-identity">' + '｜'.join(parts) + '</span>' if parts else ""
+
+
 def hub_html(slug, entries, dataset_date):
     """検索者とクローラーの両方に文脈を示す状態別の静的一覧。"""
     config = ITEM_HUBS[slug]
@@ -1478,7 +1493,7 @@ def hub_html(slug, entries, dataset_date):
     else:
         group.sort(key=lambda entry: entry.get("display_name", entry["name"]))
 
-    searchable = slug in HUB_FILTER_TEMPLATE_LASTMOD
+    searchable = slug in FILTERABLE_HUB_SLUGS
     items = []
     item_markup = {}
     for entry in group:
@@ -1508,6 +1523,7 @@ def hub_html(slug, entries, dataset_date):
         rendered = (
             f'<li{search_attr}><a href="{entry["key"]}.html">'
             f'{esc(entry.get("display_name", entry["name"]))}</a>'
+            f'{hub_identity_html(entry)}'
             f'<span>{esc(entry["maker"])}｜現在の厚労省区分：'
             f'{esc(STATUSES[entry["status"]]["label"])}{change_note}{update_note}</span>'
             f'{hub_supply_evidence(entry) if slug in {"limited", "stopped"} else ""}'
@@ -1542,7 +1558,7 @@ def hub_html(slug, entries, dataset_date):
             {
                 "@type": "CollectionPage", "name": config["h1"], "url": url,
                 "description": config["description"],
-                "dateModified": max(dataset_date, HUB_FILTER_TEMPLATE_LASTMOD.get(slug, "")),
+                "dateModified": max(dataset_date, HUB_TEMPLATE_LASTMOD),
             },
         ],
     })
@@ -1582,6 +1598,9 @@ def hub_html(slug, entries, dataset_date):
         list_markup = '<div id="hubItems">' + "".join(sections) + '</div>'
     discontinuation_link = (f'      <a href="{DISCONTINUATION_GUIDE}">販売中止・製造中止・薬価削除の確認方法</a>\n'
                            if slug == "supplemental" else "")
+    price_source_link = (f'      <a href="{MHLW_PRICE_LIST_URL}" target="_blank" rel="noopener" '
+                         'data-dsn-event="official-source-open">厚労省の薬価基準・経過措置資料</a>\n'
+                         if slug == "supplemental" else "")
     evidence_note = ('''<p class="evidence-note">理由と解除・解消見込みは公表欄の記載です。「あり」だけでは具体的な解除日を示しません。
 <a href="../guides/how-to-check-drug-supply.html#resumption">解除見込みとメーカー案内を確認する方法</a></p>'''
                      if slug in {"limited", "stopped"} else "")
@@ -1647,7 +1666,8 @@ footer a{{color:#5A6B8C}}{HUB_FILTER_STYLE if searchable else ""}
       <a href="../ingredients/index.html">成分別に確認</a>
       <a href="../categories/index.html">薬効分類別に確認</a>
       <a href="../guides/how-to-check-drug-supply.html">出荷調整の意味・確認方法</a>
-{discontinuation_link}    </nav>
+{discontinuation_link}      <a href="{OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚労省の公式システムで供給区分を確認</a>
+{price_source_link}    </nav>
     <nav class="hub-nav" aria-label="状態別の品目一覧">{other_hubs}</nav>{supplemental_navigation}{evidence_note}{filter_markup}
     {list_markup}
     <p class="official"><a href="{OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システムで品目名・YJコードを再確認</a></p>
@@ -1669,7 +1689,7 @@ def sitemap_xml(key_dates, jst_today, hub_slugs=()):
     body = (f"  <url><loc>{SITE_ROOT}items/index.html</loc><lastmod>{jst_today}</lastmod>"
             f"<changefreq>daily</changefreq></url>\n")
     for slug in sorted(hub_slugs):
-        hub_lastmod = max(jst_today, HUB_FILTER_TEMPLATE_LASTMOD.get(slug, ""))
+        hub_lastmod = max(jst_today, HUB_TEMPLATE_LASTMOD)
         body += (f"  <url><loc>{SITE_ROOT}items/{slug}.html</loc>"
                  f"<lastmod>{hub_lastmod}</lastmod><changefreq>daily</changefreq></url>\n")
     for k in sorted(key_dates):
@@ -1769,6 +1789,7 @@ def main():
             "manufacturer": (r.get("製造メーカー") or "").strip(),
             "ingredient": (r.get("一般名") or "").strip(),
             "spec": (r.get("規格") or "").strip(),
+            "yj_raw": (r.get("YJコード") or "").strip(),
             "updated": official_row_date(r),
             "supply_raw": (r.get("供給状況") or "").strip(),
             "reason": (r.get("理由") or "").strip(),
