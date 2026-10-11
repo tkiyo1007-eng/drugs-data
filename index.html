@@ -1620,6 +1620,7 @@ footer a:hover{color:var(--blue)}
         <a href="categories/index.html">薬効分類別（咳止め・去痰薬など）</a>
         <a href="ingredients/index.html">成分（一般名）別</a>
         <a href="guides/how-to-check-drug-supply.html">出荷調整の理由・見通しの確認方法</a>
+        <a href="guides/how-to-check-discontinuation-and-delisting.html">販売中止・製造中止・薬価削除の確認方法</a>
         <a href="guides/monitor-adopted-drugs.html">採用薬をCSVでまとめて監視する方法</a>
       </div>
     </nav>
@@ -2123,7 +2124,7 @@ footer a:hover{color:var(--blue)}
     </div>
     <div class="news-item">
       <div class="news-date num">2026.07.19</div>
-      <div class="news-body"><span class="news-tag">機能追加</span>検索の絞り込みに「★ お気に入り」と「薬価削除予定」を追加しました。★を付けた品目の一覧確認と、近く販売終了見込みの品目の洗い出しがワンタップでできます。<p>あわせて詳細画面に「共有」ボタンを追加しました。品目ページへの直リンクをコピー・共有できます（スマホでは共有シートが開きます）。検索語・絞り込み条件もURLに保持されるようになり、検索結果ごと共有・ブックマークできます。</p><p>さらに「メーカー別の供給状況」ランキングを新設。限定出荷・供給停止の多いメーカー順に一覧でき、タップでそのメーカーの品目に絞り込めます。</p></div>
+      <div class="news-body"><span class="news-tag">機能追加</span>検索の絞り込みに「★ お気に入り」と「薬価削除予定」を追加しました。★を付けた品目の一覧確認と、薬価削除予定の区分・経過措置期限が収録された品目の確認がワンタップでできます。<p>あわせて詳細画面に「共有」ボタンを追加しました。品目ページへの直リンクをコピー・共有できます（スマホでは共有シートが開きます）。検索語・絞り込み条件もURLに保持されるようになり、検索結果ごと共有・ブックマークできます。</p><p>さらに「メーカー別の供給状況」ランキングを新設。限定出荷・供給停止の多いメーカー順に一覧でき、タップでそのメーカーの品目に絞り込めます。</p></div>
     </div>
     <div class="news-item">
       <div class="news-date num">2026.07.17</div>
@@ -3364,6 +3365,19 @@ function lifecycleAnnouncement(d){
 }
 function isSalesEnding(d){
   return d.s === "ended" || d.delist || !!lifecycleFor(d);
+}
+function lifecycleEndDetails(item){
+  if(!item) return "";
+  const matches = !item.supply_end_source_url || item.supply_end_source_url === item.source_url;
+  const expected = matches && item.supply_end_expected;
+  const note = matches && item.supply_end_note;
+  const packages = matches && Array.isArray(item.supply_end_packages) ? item.supply_end_packages : [];
+  const checked = matches && item.supply_end_verified_at;
+  return `<dt>終了予定時期</dt><dd>${expected ? esc(expected) : "日付の収録なし（メーカー原文で確認）"}`
+    + (note ? `<br>原典の条件・表現：${esc(note)}` : "")
+    + (packages.length ? `<br>対象包装（原典）：${packages.map(value=>esc(value)).join("／")}` : "")
+    + (checked ? `<br>終了予定の原文確認日：${esc(checked)}` : "")
+    + `<br><a href="guides/how-to-check-discontinuation-and-delisting.html">販売中止・製造中止・薬価削除の確認方法</a></dd>`;
 }
 
 // YJコード単位の「厚労省公表区分と、より新しいメーカー公式案内の差異」。
@@ -4876,7 +4890,7 @@ function openDetail(d, opts={}){
   // 同成分・同剤形の関連品目（確認補助）
   const $mRel = document.getElementById("mRelated");
   let relHtml = "";
-  // 薬価削除予定（供給状況欄が「通常出荷」等でも近く販売終了見込み）の品目を
+  // 薬価削除予定（現在の出荷対応とは別の区分・期限）の品目を
   // 「入手しやすい」上位に誤って並べない・緑バッジで誤解させないための実効深刻度
   const effSev = x => x.delist ? Math.max(SEV.ended, SEV[x.s]) : SEV[x.s];
   const relatedBlock = (title, list) =>
@@ -4940,6 +4954,9 @@ function openDetail(d, opts={}){
       : `「${esc(cleanAnnouncementTitle(announcement.title))}」の登録がありますが、確認日${lifecycleNotice.verified_at ? `（${esc(lifecycleNotice.verified_at)}）` : ""}から7日以上経過しているか、確認日を取得できません。販売中止予定とは断定せず、下のメーカー原文で対象・現況をご確認ください。`;
     document.getElementById("mGrid").insertAdjacentHTML("afterbegin",
       `<dt>メーカー案内</dt><dd>${lifecycleDetail}</dd>`);
+  }
+  if(lifecycleNotice){
+    document.getElementById("mGrid").insertAdjacentHTML("beforeend", lifecycleEndDetails(lifecycleFor(d)));
   }
   if(isPackageDiscontinuationAnnouncement(announcement)){
     document.getElementById("mGrid").insertAdjacentHTML("afterbegin",
@@ -5018,7 +5035,7 @@ function openDetail(d, opts={}){
   }
 
   document.getElementById("mNote").textContent = d.delist
-    ? "※ 厚生労働省の公表データ上、出荷量区分が「薬価削除予定」となっている品目です。供給状況欄の表示に関わらず、近く販売終了となる見込みがあります。採用の見直しをご検討ください。"
+    ? "※ 厚生労働省の公表データ上、薬価削除予定の区分または経過措置期限が収録されています。販売・製造の終了や終了日とは別の情報です。薬価の扱い・期限は厚生労働省、販売予定はメーカー原文でそれぞれ確認してください。"
     : discrepancy
       ? "※ 供給区分は厚生労働省の公表値です。黄色の欄は、より新しいメーカー公式案内を別情報として示しています。"
     : LIVE
@@ -6066,7 +6083,7 @@ function failDataLoad(message){
     const volumeMatch = iAlt>=0 ? /出荷量状況:\s*(.*)$/.exec(r[iAlt]||"") : null;
     const shipmentVolume = volumeMatch ? volumeMatch[1].trim() : "";
     // 厚労省Excelの「出荷量状況」区分に「薬価削除予定」が含まれる品目は、
-    // 供給状況欄が「通常出荷」のままでも近く販売終了となる見込みがあるため別途フラグ化。
+    // 供給状況欄とは別の薬価情報としてフラグ化。販売・製造終了は推定しない。
     // 経過措置期限が設定済み＝薬価基準からの削除が決定済みなので同様に扱う（アプリ版と同じ判定）
     const delist = (iAlt>=0 && (r[iAlt]||"").includes("薬価削除予定"))
                 || (iKeika>=0 && !!(r[iKeika]||"").trim());
@@ -6102,7 +6119,7 @@ function failDataLoad(message){
 
   renderDailyUpdate(items);
 
-  // 「薬価削除予定」ピル: 供給状況欄に関わらず近く販売終了見込みの品目を洗い出す
+  // 「薬価削除予定」ピル: 薬価削除予定の区分・経過措置期限が収録された品目を確認する
   const delistCount = items.filter(x=>x.delist).length;
   if(delistCount){
     const $pd = document.getElementById("pillDelist");
