@@ -341,9 +341,9 @@ class ItemPageMetadataTests(unittest.TestCase):
         old_row = {"商品名": "対象錠", "更新日": "2024/03/11"}
         self.assertEqual(item_page_lastmod(old_row), "2026-10-06")
         future_notice = {"product_name": "対象錠", "maker": "対象製薬",
-                         "announced_at": "2026-10-09"}
+                         "announced_at": "2026-10-13"}
         old_row["製造メーカー"] = "対象製薬"
-        self.assertEqual(item_page_lastmod(old_row, future_notice), "2026-10-09")
+        self.assertEqual(item_page_lastmod(old_row, future_notice), "2026-10-13")
 
     def test_discrepancy_must_match_current_official_row_and_manufacturer(self):
         row = {

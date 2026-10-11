@@ -41,7 +41,9 @@ OFFICIAL_SUPPLY_URL = "https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-l
 # 日次生成日ではなく固定値にし、内容が変わらない日にlastmodを進めない。
 ITEM_PAGE_TEMPLATE_LASTMOD = "2026-10-06"  # 成分別ページへの導線を追加
 # ページ内検索を追加した2一覧だけの実質的な改訂日。個別品目のlastmodは進めない。
-HUB_FILTER_TEMPLATE_LASTMOD = {"limited": "2026-10-11", "stopped": "2026-10-11"}
+HUB_FILTER_TEMPLATE_LASTMOD = {"limited": "2026-10-11", "stopped": "2026-10-11", "supplemental": "2026-10-11"}
+DISCONTINUATION_GUIDE = "../guides/how-to-check-discontinuation-and-delisting.html"
+SUPPLEMENTAL_TEMPLATE_LASTMOD = "2026-10-11"
 # drugs-data の generate_curated_pages.py（CATEGORY_MIN_ROWS）と同じ基準。
 # 分類ページが生成される分類だけにリンクし、404を出さない。
 CATEGORY_MIN_ROWS = 3
@@ -88,7 +90,7 @@ ITEM_HUBS = {
     },
     "supplemental": {
         "label": "販売中止・メーカー補足",
-        "h1": "販売中止・メーカー補足がある医薬品一覧",
+        "h1": "販売中止案内・薬価削除予定・メーカー補足の医薬品一覧",
         "description": ("販売中止、薬価削除予定、検証済みメーカー公式案内など、"
                         "厚生労働省の供給区分と分けて確認すべき補足情報がある医療用医薬品の一覧です。"),
         "intro": ("販売中止・薬価削除予定、またはメーカー公式の補足情報を収録した品目を掲載しています。"
@@ -199,7 +201,7 @@ def quick_answers_html(row: dict, status: str, display_name: str) -> str:
 
 
 def is_delist(row: dict) -> bool:
-    """薬価削除予定(近く販売終了となる見込み)か。
+    """薬価削除予定の区分または経過措置期限が収録されているか。
 
     LP(index.html)およびiOSアプリ版と同じ判定にすること。片方だけ変えると、
     LPが「薬価削除予定」として品目ページへリンクしているのにページが生成されず
@@ -482,6 +484,73 @@ def supplemental_labels(row: dict, lifecycle=None, discrepancy=None,
     return list(dict.fromkeys(labels))
 
 
+def lifecycle_end_details(lifecycle: dict) -> str:
+    """終了予定を現在の案内と結びつけ、日付・条件・確認日を分けて示す。"""
+    source = lifecycle.get("supply_end_source_url")
+    matches = not source or source == lifecycle.get("source_url")
+    expected = lifecycle.get("supply_end_expected") if matches else None
+    note = lifecycle.get("supply_end_note") if matches else None
+    packages = lifecycle.get("supply_end_packages") if matches else None
+    checked = lifecycle.get("supply_end_verified_at") if matches else None
+    parts = [f'<span>終了予定時期：{esc(expected) if expected else "日付の収録なし（メーカー原文で確認）"}</span>']
+    if note:
+        parts.append(f'<span>原典の条件・表現：{esc(note)}</span>')
+    if isinstance(packages, list) and packages:
+        parts.append(f'<span>対象包装（原典）：{esc("／".join(str(value) for value in packages))}</span>')
+    if checked:
+        parts.append(f'<span>終了予定の原文確認日：{esc(checked)}</span>')
+    return '<div class="end-details">' + "".join(parts) + '</div>'
+
+
+def supplemental_bucket(entry: dict) -> str:
+    """同じ品目を重複掲載せず、他の掲載理由は品目内に併記する。"""
+    if entry.get("lifecycle") or entry.get("status") == "ended":
+        return "sales-notices"
+    if entry.get("delist"):
+        return "delisting"
+    return "maker-notices"
+
+
+def supplemental_entry_html(entry: dict) -> str:
+    parts = []
+    lifecycle = entry.get("lifecycle") or {}
+    if lifecycle:
+        parts.append('<span class="reason-tag">メーカーの販売中止案内</span>')
+        parts.append(lifecycle_end_details(lifecycle))
+        source_url = str(lifecycle.get("source_url") or "")
+        source_title = lifecycle.get("source_title") or "メーカーの中止案内"
+        if source_url.startswith("https://"):
+            parts.append(f'<span><a href="{esc(source_url)}" target="_blank" rel="noopener" '
+                         f'data-dsn-event="official-source-open">{esc(source_title)}（メーカー原文）</a></span>')
+        parts.append(f'<span>案内公表：{esc(lifecycle.get("announced_at") or "確認できません")}｜'
+                     f'案内の最終確認：{esc(lifecycle.get("verified_at") or "確認できません")}</span>')
+        if not entry.get("lifecycle_current"):
+            parts.append('<span>案内の確認が古い、または確認状態が不明です。現在の扱いは原文で再確認してください。</span>')
+    elif entry.get("status") == "ended":
+        parts.append('<span class="reason-tag">厚労省の公表区分：販売中止</span>')
+    if entry.get("delist_volume"):
+        parts.append('<span class="reason-tag">厚労省：薬価削除予定</span>')
+    elif entry.get("delist") and not entry.get("transition_deadline"):
+        parts.append('<span class="reason-tag">薬価削除予定・経過措置の収録あり</span>')
+    if entry.get("transition_deadline"):
+        parts.append(f'<span>経過措置期限（厚労省）：{esc(entry["transition_deadline"])}</span>')
+    if entry.get("delist"):
+        parts.append('<span>薬価に関する情報は、販売・製造の終了や終了日を示すものではありません。</span>')
+    discrepancy = entry.get("discrepancy") or {}
+    if discrepancy:
+        maker = discrepancy.get("manufacturer") or {}
+        parts.append(f'<span class="reason-tag">メーカー補足：{esc(maker.get("label") or "案内あり")}</span>')
+        source_url = str(maker.get("source_url") or maker.get("url") or "")
+        if source_url.startswith("https://"):
+            parts.append(f'<span><a href="{esc(source_url)}" target="_blank" rel="noopener" '
+                         f'data-dsn-event="official-source-open">メーカー補足の原文</a></span>')
+        parts.append(f'<span>案内公表：{esc(maker.get("announced_at") or "確認できません")}｜'
+                     f'メーカー補足の確認：{esc(entry.get("supplemental_checked") or "確認できません")}</span>')
+        if entry.get("supplemental_warning"):
+            parts.append(f'<span>確認注意：{esc(entry["supplemental_warning"])}</span>')
+    return "".join(parts)
+
+
 def iso_publication_date(value: str) -> str:
     match = re.search(r"(\d{4})[年/.-](\d{1,2})[月/.-](\d{1,2})日?", str(value or ""))
     if not match:
@@ -515,6 +584,10 @@ def item_page_lastmod(row: dict, lifecycle=None, discrepancy=None) -> str:
     """品目データまたは静的ページテンプレートの実質改訂日の新しい方。"""
     dates = [ITEM_PAGE_TEMPLATE_LASTMOD,
              latest_publication_date(row, lifecycle, discrepancy)]
+    if is_delist(row) or supplemental_matches(row, lifecycle):
+        dates.append(SUPPLEMENTAL_TEMPLATE_LASTMOD)
+    if supplemental_matches(row, lifecycle) and lifecycle.get("supply_end_source_url") == lifecycle.get("source_url"):
+        dates.append(iso_publication_date(lifecycle.get("supply_end_verified_at")))
     return max(value for value in dates if value)
 
 
@@ -784,9 +857,10 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
     delist = is_delist(row)
     delist_tag = ('<span class="tag delist">薬価削除予定</span>' if delist else "")
     delist_box = ('<div class="stbox delist-box">この品目は厚生労働省の公表データ上、'
-                  '<strong>薬価削除予定</strong>（経過措置期限の設定を含む）となっています。'
-                  '供給状況欄の表示に関わらず、近く販売終了となる見込みがあります。'
-                  '採用の見直しをご検討ください。</div>' if delist else "")
+                  '<strong>薬価削除予定の区分または経過措置期限</strong>が収録されています。'
+                  '販売・製造の終了や終了日とは別の情報です。薬価の扱い・期限は厚生労働省、'
+                  '販売予定はメーカー原文でそれぞれ確認してください。'
+                  f'<a href="{DISCONTINUATION_GUIDE}">販売中止・製造中止・薬価削除の確認方法</a></div>' if delist else "")
     lifecycle_match = lifecycle if supplemental_matches(row, lifecycle) else None
     discrepancy_match = discrepancy if discrepancy_matches(row, discrepancy) else None
     supplements = supplemental_labels(
@@ -850,7 +924,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
         if lifecycle_match.get("announced_at"):
             lifecycle_box += f'（公表 {esc(lifecycle_match.get("announced_at"))}）'
         verified_at = esc(lifecycle_match.get("verified_at") or "確認日不明")
-        lifecycle_box += (f'''</p><p>案内の最終確認日：{verified_at}。{"確認日が7日以上前のため、現在の扱いは必ず原文で再確認してください。" if not lifecycle_current else "厚労省の現在の供給区分と、メーカーの今後の販売予定は別の情報として併記しています。"}</p>{lifecycle_link}</div>''')
+        lifecycle_box += (f'''</p>{lifecycle_end_details(lifecycle_match)}<p>案内の最終確認日：{verified_at}。{"確認日が7日以上前のため、現在の扱いは必ず原文で再確認してください。" if not lifecycle_current else "厚労省の現在の供給区分と、メーカーの今後の販売予定は別の情報として併記しています。"}</p>{lifecycle_link}<p><a href="{DISCONTINUATION_GUIDE}">販売中止・製造中止・薬価削除の確認方法</a></p></div>''')
 
     discrepancy_box = ""
     if discrepancy_match:
@@ -995,6 +1069,7 @@ h1{{font-size:22px;line-height:1.45;margin-bottom:6px}}
 .supp{{border-radius:12px;padding:14px 16px;font-size:13px;margin:0 0 14px;line-height:1.7}}
 .supp strong{{display:block;margin-bottom:4px}}
 .supp p{{margin:3px 0}}
+.end-details span{{display:block;margin:3px 0;overflow-wrap:anywhere}}
 .supp a{{display:inline-block;margin-top:5px;color:inherit;font-weight:700}}
 .supp-life{{color:#6B4310;background:#FFF3D8;border:1px solid #E4B662}}
 .supp-diff{{color:#5B4100;background:#FFF0B8;border:1px solid #D69B00}}
@@ -1319,6 +1394,7 @@ HUB_FILTER_STYLE = """
 .filter-controls input:focus-visible,.filter-controls button:focus-visible{outline:3px solid #2F63E8;outline-offset:2px}
 .filter-empty{margin-top:10px;font-size:13px;color:#5A6B8C}
 #hubItems li[hidden]{display:none}
+.supplemental-group[hidden]{display:none}
 """
 
 HUB_FILTER_SCRIPT = r"""<script>
@@ -1333,6 +1409,7 @@ HUB_FILTER_SCRIPT = r"""<script>
   if(!panel || !list || !input || !clear || !count || !empty) return;
   function showAll(){
     Array.from(list.querySelectorAll("li")).forEach(function(row){ row.hidden = false; });
+    Array.from(list.querySelectorAll(".supplemental-group")).forEach(function(group){ group.hidden = false; });
     panel.hidden = true;
     empty.hidden = true;
   }
@@ -1353,6 +1430,9 @@ HUB_FILTER_SCRIPT = r"""<script>
       entries.forEach(function(entry, index){
         entry.row.hidden = !matches[index];
         if(matches[index]) shown += 1;
+      });
+      Array.from(list.querySelectorAll(".supplemental-group")).forEach(function(group){
+        group.hidden = !Array.from(group.querySelectorAll("li")).some(function(row){ return !row.hidden; });
       });
       count.textContent = shown.toLocaleString("ja-JP") + " / "
         + entries.length.toLocaleString("ja-JP") + "品目を表示";
@@ -1389,6 +1469,7 @@ def hub_html(slug, entries, dataset_date):
 
     searchable = slug in HUB_FILTER_TEMPLATE_LASTMOD
     items = []
+    item_markup = {}
     for entry in group:
         change = entry.get("latest_change") or {}
         change_note = ""
@@ -1403,12 +1484,24 @@ def hub_html(slug, entries, dataset_date):
             search_text = " ".join(dict.fromkeys(
                 str(entry.get(field) or "") for field in (
                     "key", "name", "display_name", "ingredient", "spec", "maker", "manufacturer")))
+            if slug == "supplemental":
+                search_text += " " + " ".join(entry.get("supplements") or [])
+                if entry.get("delist"):
+                    search_text += " 薬価削除予定 経過措置 " + str(entry.get("transition_deadline") or "")
+                lifecycle = entry.get("lifecycle") or {}
+                search_text += " " + str(lifecycle.get("source_title") or "")
+                if not lifecycle.get("supply_end_source_url") or lifecycle.get("supply_end_source_url") == lifecycle.get("source_url"):
+                    search_text += " " + " ".join(str(lifecycle.get(field) or "") for field in (
+                        "supply_end_expected", "supply_end_note"))
             search_attr = f' data-search="{esc(search_text)}"'
-        items.append(
+        rendered = (
             f'<li{search_attr}><a href="{entry["key"]}.html">'
             f'{esc(entry.get("display_name", entry["name"]))}</a>'
             f'<span>{esc(entry["maker"])}｜現在の厚労省区分：'
-            f'{esc(STATUSES[entry["status"]]["label"])}{change_note}{update_note}</span></li>')
+            f'{esc(STATUSES[entry["status"]]["label"])}{change_note}{update_note}</span>'
+            f'{supplemental_entry_html(entry) if slug == "supplemental" else ""}</li>')
+        items.append(rendered)
+        item_markup[entry["key"]] = rendered
 
     title = f'{config["h1"]}｜医薬品供給ナビ'
     url = f'{SITE_ROOT}items/{slug}.html'
@@ -1455,6 +1548,28 @@ def hub_html(slug, entries, dataset_date):
       <p class="filter-empty" id="hubFilterEmpty" hidden>この一覧内に該当する品目なし。すべての医薬品の検索結果ではありません。検索語を変えるか、クリアしてご確認ください。</p>
     </section>'''
     list_id = ' id="hubItems"' if searchable else ""
+    list_markup = f'<ul{list_id}>{"".join(items)}</ul>'
+    supplemental_navigation = ""
+    if slug == "supplemental":
+        buckets = [
+            ("sales-notices", "販売中止の案内・公表区分がある品目", "メーカーの全製品中止案内、または厚労省の販売中止区分を収録した品目です。出典は各品目で区別しています。一部包装だけの中止・販売移管は全製品の中止と分けて扱います。薬価削除予定がある場合は同じ品目に併記しています。"),
+            ("delisting", "薬価削除予定・経過措置期限がある品目", "厚労省の薬価削除予定区分または経過措置期限が収録され、上のメーカー中止案内には掲載していない品目です。販売・製造の終了日を推定する一覧ではありません。"),
+            ("maker-notices", "その他のメーカー補足がある品目", "メーカーの供給案内などを厚労省の現在区分と分けて確認する品目です。販売・製造の中止とは限りません。"),
+        ]
+        sections, links = [], []
+        for bucket, heading, explanation in buckets:
+            members = [entry for entry in group if supplemental_bucket(entry) == bucket]
+            if not members:
+                continue
+            links.append(f'<a href="#{bucket}">{esc(heading)}（{len(members):,}）</a>')
+            sections.append(f'<section class="supplemental-group" id="{bucket}" aria-labelledby="{bucket}-title">'
+                            f'<h2 id="{bucket}-title">{esc(heading)}（収録 {len(members):,}品目）</h2>'
+                            f'<p class="group-note">{esc(explanation)}</p><ul>'
+                            + "".join(item_markup[entry["key"]] for entry in members) + '</ul></section>')
+        supplemental_navigation = '<nav class="entry-nav" aria-label="補足情報の種類から探す">' + "".join(links) + '</nav>'
+        list_markup = '<div id="hubItems">' + "".join(sections) + '</div>'
+    discontinuation_link = (f'      <a href="{DISCONTINUATION_GUIDE}">販売中止・製造中止・薬価削除の確認方法</a>\n'
+                           if slug == "supplemental" else "")
     return f"""<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -1489,9 +1604,13 @@ h1{{font-size:24px;line-height:1.45;margin-bottom:8px}}
 .hub-nav a{{background:#fff;border:1px solid #CFDBF2;border-radius:999px;padding:7px 12px;text-decoration:none;font-size:12.5px;font-weight:700}}
 .hub-nav a[aria-current="page"]{{background:#2F63E8;color:#fff;border-color:#2F63E8}}
 ul{{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:9px}}
-li{{background:#fff;border:1px solid #E3EAF6;border-radius:10px;padding:10px 12px;font-size:13.5px}}
+li{{background:#fff;border:1px solid #E3EAF6;border-radius:10px;padding:10px 12px;font-size:13.5px;overflow-wrap:anywhere}}
 li a{{text-decoration:none;font-weight:700}}
 li span{{display:block;color:#5A6B8C;font-size:11.5px;margin-top:2px}}
+.supplemental-group{{margin:24px 0 32px;scroll-margin-top:20px}}
+.supplemental-group h2{{font-size:18px;line-height:1.5}}
+.group-note{{font-size:13px;color:#5A6B8C;margin:8px 0 14px}}
+li .reason-tag{{display:inline-block;background:#ECF2FD;color:#284C8C;border-radius:6px;padding:2px 6px;margin-top:7px;font-weight:700}}
 .official{{font-size:13px;margin:22px 0}}
 footer{{font-size:12px;color:#5A6B8C;text-align:center;margin-top:34px}}
 footer a{{color:#5A6B8C}}{HUB_FILTER_STYLE if searchable else ""}
@@ -1510,9 +1629,9 @@ footer a{{color:#5A6B8C}}{HUB_FILTER_STYLE if searchable else ""}
       <a href="../ingredients/index.html">成分別に確認</a>
       <a href="../categories/index.html">薬効分類別に確認</a>
       <a href="../guides/how-to-check-drug-supply.html">出荷調整の意味・確認方法</a>
-    </nav>
-    <nav class="hub-nav" aria-label="状態別の品目一覧">{other_hubs}</nav>{filter_markup}
-    <ul{list_id}>{''.join(items)}</ul>
+{discontinuation_link}    </nav>
+    <nav class="hub-nav" aria-label="状態別の品目一覧">{other_hubs}</nav>{supplemental_navigation}{filter_markup}
+    {list_markup}
     <p class="official"><a href="{OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システムで品目名・YJコードを再確認</a></p>
   </main>
   <footer><a href="index.html">品目別一覧</a>｜<a href="../guides/how-to-check-drug-supply.html">データの見方・確認手順</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer>
@@ -1634,6 +1753,14 @@ def main():
             "spec": (r.get("規格") or "").strip(),
             "updated": official_row_date(r),
             "delist": is_delist(r),
+            "delist_volume": "薬価削除予定" in supply_metadata_values(r).get("出荷量状況", ""),
+            "transition_deadline": (r.get("経過措置期限") or "").strip(),
+            "lifecycle": lifecycle if supplemental_matches(r, lifecycle) and lifecycle.get("state") != "active" else None,
+            "lifecycle_current": bool(supplemental_state["trusted"] and lifecycle
+                                      and lifecycle_verification_is_recent(lifecycle, supplemental_state["checked"])),
+            "discrepancy": discrepancy if discrepancy_matches(r, discrepancy) else None,
+            "supplemental_checked": supplemental_state["checked"],
+            "supplemental_warning": supplemental_state["warning"],
             "supplements": supplemental_labels(
                 r, lifecycle, discrepancy, supplemental_state["checked"],
                 supplemental_state["trusted"]),

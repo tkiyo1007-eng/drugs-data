@@ -48,6 +48,18 @@ def load_csv(path: Path) -> dict[str, dict[str, str]]:
     return {(row.get("YJコード") or "").strip(): row for row in rows}
 
 
+def valid_lifecycle_date(value: object, day_required: bool = False) -> bool:
+    if not isinstance(value, str) or not DATE_RE.fullmatch(value):
+        return False
+    if day_required and len(value) != 10:
+        return False
+    try:
+        dt.date.fromisoformat(value if len(value) == 10 else f"{value}-01")
+        return True
+    except ValueError:
+        return False
+
+
 def validate(
     document: object,
     csv_rows: dict[str, dict[str, str]],
@@ -59,8 +71,11 @@ def validate(
     if document.get("schema_version") != 1:
         errors.append("schema_version は 1 にしてください")
     generated_at = document.get("generated_at")
+    generated_date = None
     try:
-        dt.datetime.fromisoformat(generated_at)
+        generated_time = dt.datetime.fromisoformat(generated_at)
+        generated_date = (generated_time.astimezone(dt.timezone(dt.timedelta(hours=9))).date()
+                          if generated_time.tzinfo else generated_time.date())
     except (TypeError, ValueError):
         errors.append("generated_at はISO 8601形式で指定してください")
 
@@ -96,8 +111,39 @@ def validate(
 
         for field in ("announced_at", "supply_end_expected", "verified_at"):
             value = item.get(field)
-            if value is not None and not DATE_RE.fullmatch(str(value)):
-                errors.append(f"{prefix}.{field}: YYYY-MM または YYYY-MM-DD で指定してください")
+            if value is not None and not valid_lifecycle_date(value):
+                errors.append(f"{prefix}.{field}: 実在するYYYY-MM または YYYY-MM-DD で指定してください")
+
+        end_evidence_fields = (
+            "supply_end_note", "supply_end_packages", "supply_end_verified_at",
+        )
+        has_end_evidence = any(field in item for field in end_evidence_fields)
+        if has_end_evidence:
+            note = item.get("supply_end_note")
+            if not isinstance(note, str) or not note.strip():
+                errors.append(f"{prefix}.supply_end_note: 原文の条件・表現を収録してください")
+            checked = item.get("supply_end_verified_at")
+            if not valid_lifecycle_date(checked, day_required=True):
+                errors.append(f"{prefix}.supply_end_verified_at: 実在するYYYY-MM-DDで指定してください")
+            elif generated_date and dt.date.fromisoformat(checked) > generated_date:
+                errors.append(f"{prefix}.supply_end_verified_at: 生成日より後の確認日は指定できません")
+        if has_end_evidence or "supply_end_source_url" in item:
+            end_url = item.get("supply_end_source_url")
+            source = urlparse(end_url if isinstance(end_url, str) else "")
+            allowed_hosts = OFFICIAL_HOSTS.get(item.get("maker") or "", set())
+            hostname = (source.hostname or "").lower()
+            if (source.scheme != "https" or not any(
+                    hostname == host or hostname.endswith("." + host) for host in allowed_hosts)):
+                errors.append(f"{prefix}.supply_end_source_url: メーカー一次資料のHTTPS URLを指定してください")
+            if not has_end_evidence and not item.get("supply_end_expected"):
+                errors.append(f"{prefix}.supply_end_source_url: 旧形式の予定値に紐付く原典を指定してください")
+        if has_end_evidence:
+            packages = item.get("supply_end_packages")
+            if packages is not None and (
+                    not isinstance(packages, list) or not packages
+                    or any(not isinstance(value, str) or not value.strip() for value in packages)
+                    or len(set(packages)) != len(packages)):
+                errors.append(f"{prefix}.supply_end_packages: 重複のない包装文字列の配列にしてください")
 
         if state != "active":
             for field in ("product_name", "maker", "source_title", "source_url", "verified_at"):
