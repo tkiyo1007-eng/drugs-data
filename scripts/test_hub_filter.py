@@ -78,6 +78,33 @@ class HubFilterTests(unittest.TestCase):
                     self.assertEqual({}, parsed.controls)
                     self.assertNotIn("data-search=", output)
 
+    def test_restricted_hubs_keep_raw_public_fields_without_inferring_dates(self):
+        self.entries[0].update({
+            "supply_raw": "③限定出荷（他社品の影響）", "reason": "１．需要増 <原文>",
+            "release": "ア．あり", "hubs": ["limited", "recent-restrictions"],
+        })
+        self.entries[2].update({
+            "supply_raw": "⑤供給停止", "reason": "７．その他", "release": "ウ．未定",
+        })
+        for slug, values in (
+            ("limited", ("③限定出荷（他社品の影響）", "１．需要増 &lt;原文&gt;", "ア．あり")),
+            ("stopped", ("⑤供給停止", "７．その他", "ウ．未定")),
+        ):
+            output = hub_html(slug, self.entries, "2026-10-10")
+            for value in values:
+                self.assertIn("<dd>" + value + "</dd>", output)
+            self.assertIn("「あり」だけでは具体的な解除日を示しません", output)
+            self.assertIn('href="../guides/how-to-check-drug-supply.html#resumption"', output)
+            self.assertNotIn("１．需要増 <原文>", output)
+            # Raw fields are evidence; the existing medicine-name search contract stays intact.
+            parsed = HubParser()
+            parsed.feed(output)
+            self.assertTrue(all("需要増" not in row.get("data-search", "") for row in parsed.rows))
+        limited = hub_html("limited", self.entries, "2026-10-10")
+        self.assertEqual(3, limited.count("公表欄の記載なし（詳細・原典で確認）"))
+        self.assertNotIn('class="hub-evidence"', hub_html("recent-restrictions", self.entries, "2026-10-10"))
+        self.assertNotIn('class="hub-evidence"', hub_html("supplemental", self.entries, "2026-10-10"))
+
     def test_search_index_includes_ingredient_and_both_makers_and_escapes_text(self):
         self.entries[0]["ingredient"] = '成分" & <script>alert(1)</script>'
         output = hub_html("limited", self.entries, "2026-10-10")
@@ -108,7 +135,7 @@ class HubFilterTests(unittest.TestCase):
             )
             output = hub_html(slug, self.entries, "2026-10-10")
             if slug in {"limited", "stopped", "supplemental"}:
-                self.assertIn('"dateModified":"2026-10-11"', output)
+                self.assertIn('"dateModified":"' + HUB_FILTER_TEMPLATE_LASTMOD[slug] + '"', output)
                 self.assertIn("全体データ基準日 2026-10-10", output)
         self.assertEqual("2026-09-14", dates["1111111F1111.html"])
         self.assertEqual("2026-10-10", dates["index.html"])

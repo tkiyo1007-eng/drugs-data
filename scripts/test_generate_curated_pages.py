@@ -36,10 +36,16 @@ class PageLinks(HTMLParser):
     def __init__(self):
         super().__init__()
         self.hrefs = set()
+        self.ids = []
+        self.element_tags = {}
 
     def handle_starttag(self, tag, attrs):
+        attributes = dict(attrs)
+        if attributes.get("id"):
+            self.ids.append(attributes["id"])
+            self.element_tags[attributes["id"]] = tag
         if tag == "a":
-            self.hrefs.add(dict(attrs).get("href"))
+            self.hrefs.add(attributes.get("href"))
 
 
 class CuratedPageGenerationTests(unittest.TestCase):
@@ -108,6 +114,51 @@ class CuratedPageGenerationTests(unittest.TestCase):
         self.assertEqual(DISCONTINUATION_GUIDE_UPDATED_AT, article["dateModified"])
         self.assertEqual(canonical, breadcrumb["itemListElement"][-1]["item"])
         self.assertIn(f"編集確認日：{DISCONTINUATION_GUIDE_UPDATED_AT}", page)
+
+    def test_guide_fragments_reach_distinct_static_information(self):
+        supply_page = guide_page()
+        supply_links = PageLinks()
+        supply_links.feed(supply_page)
+        for fragment, tag, heading in (
+            ("supply-status", "section", "出荷調整とは"),
+            ("reasons", "section", "「なぜ」は理由欄とメーカー原文を分けて確認"),
+            ("resumption", "h3", "いつまで続くかを確認するには"),
+        ):
+            with self.subTest(fragment=fragment):
+                self.assertEqual(1, supply_links.ids.count(fragment))
+                self.assertEqual(tag, supply_links.element_tags[fragment])
+                anchored = re.search(
+                    rf'<{tag}[^>]*id="{fragment}"[^>]*>(.*?)</{tag}>',
+                    supply_page, re.S,
+                ).group(1)
+                self.assertIn(heading, anchored)
+
+        ending_page = discontinuation_guide_page()
+        ending_links = PageLinks()
+        ending_links.feed(ending_page)
+        expected_terms = {
+            "manufacturing": "製造中止",
+            "manufacturing-sales": "製造販売中止",
+            "sales": "販売中止",
+            "packaging": "一部包装中止",
+            "stopped": "供給停止",
+            "delisting": "薬価削除予定",
+            "transition": "経過措置期限",
+        }
+        for fragment, term in expected_terms.items():
+            with self.subTest(fragment=fragment):
+                self.assertEqual(1, ending_links.ids.count(fragment))
+                self.assertEqual("tr", ending_links.element_tags[fragment])
+                anchored = re.search(
+                    rf'<tr id="{fragment}">(.*?)</tr>', ending_page, re.S,
+                ).group(1)
+                self.assertIn(f'<th scope="row">{term}</th>', anchored)
+        self.assertIn("#manufacturing", ending_links.hrefs)
+        self.assertLess(ending_page.index('href="#manufacturing"'),
+                        ending_page.index('id="manufacturing"'))
+        for href in ending_links.hrefs:
+            if href and href.startswith("#"):
+                self.assertIn(href[1:], ending_links.ids)
 
     def test_guide_revision_date_is_independent_of_news_and_product_dates(self):
         namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}

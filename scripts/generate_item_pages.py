@@ -41,7 +41,7 @@ OFFICIAL_SUPPLY_URL = "https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-l
 # 日次生成日ではなく固定値にし、内容が変わらない日にlastmodを進めない。
 ITEM_PAGE_TEMPLATE_LASTMOD = "2026-10-06"  # 成分別ページへの導線を追加
 # ページ内検索を追加した2一覧だけの実質的な改訂日。個別品目のlastmodは進めない。
-HUB_FILTER_TEMPLATE_LASTMOD = {"limited": "2026-10-11", "stopped": "2026-10-11", "supplemental": "2026-10-11"}
+HUB_FILTER_TEMPLATE_LASTMOD = {"limited": "2026-10-12", "stopped": "2026-10-12", "supplemental": "2026-10-11"}
 DISCONTINUATION_GUIDE = "../guides/how-to-check-discontinuation-and-delisting.html"
 SUPPLEMENTAL_TEMPLATE_LASTMOD = "2026-10-11"
 # drugs-data の generate_curated_pages.py（CATEGORY_MIN_ROWS）と同じ基準。
@@ -1455,6 +1455,17 @@ HUB_FILTER_SCRIPT = r"""<script>
 </script>"""
 
 
+def hub_supply_evidence(entry):
+    """出荷対応・理由・解除見込みの公表欄を、区分や日付へ推定せず表示する。"""
+    fields = (("出荷対応（厚労省原文）", "supply_raw"),
+              ("理由（公表欄）", "reason"),
+              ("解除・解消見込み（公表区分）", "release"))
+    missing = "公表欄の記載なし（詳細・原典で確認）"
+    return '<dl class="hub-evidence">' + "".join(
+        f'<div><dt>{label}</dt><dd>{esc(entry.get(field) or missing)}</dd></div>'
+        for label, field in fields) + '</dl>'
+
+
 def hub_html(slug, entries, dataset_date):
     """検索者とクローラーの両方に文脈を示す状態別の静的一覧。"""
     config = ITEM_HUBS[slug]
@@ -1499,6 +1510,7 @@ def hub_html(slug, entries, dataset_date):
             f'{esc(entry.get("display_name", entry["name"]))}</a>'
             f'<span>{esc(entry["maker"])}｜現在の厚労省区分：'
             f'{esc(STATUSES[entry["status"]]["label"])}{change_note}{update_note}</span>'
+            f'{hub_supply_evidence(entry) if slug in {"limited", "stopped"} else ""}'
             f'{supplemental_entry_html(entry) if slug == "supplemental" else ""}</li>')
         items.append(rendered)
         item_markup[entry["key"]] = rendered
@@ -1570,6 +1582,9 @@ def hub_html(slug, entries, dataset_date):
         list_markup = '<div id="hubItems">' + "".join(sections) + '</div>'
     discontinuation_link = (f'      <a href="{DISCONTINUATION_GUIDE}">販売中止・製造中止・薬価削除の確認方法</a>\n'
                            if slug == "supplemental" else "")
+    evidence_note = ('''<p class="evidence-note">理由と解除・解消見込みは公表欄の記載です。「あり」だけでは具体的な解除日を示しません。
+<a href="../guides/how-to-check-drug-supply.html#resumption">解除見込みとメーカー案内を確認する方法</a></p>'''
+                     if slug in {"limited", "stopped"} else "")
     return f"""<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -1592,7 +1607,7 @@ def hub_html(slug, entries, dataset_date):
 *{{margin:0;padding:0;box-sizing:border-box}}
 body{{font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;color:#1C2A44;background:#F6F9FE;line-height:1.7}}
 .wrap{{max-width:900px;margin:0 auto;padding:24px 18px 56px}}
-.site a,.crumb a,.hub-nav a,.entry-nav a,li a,.official a{{color:#2F63E8}}
+.site a,.crumb a,.hub-nav a,.entry-nav a,li a,.official a,.evidence-note a{{color:#2F63E8}}
 .site a{{text-decoration:none;font-weight:700;font-size:15px}}
 .crumb{{font-size:12px;color:#5A6B8C;margin:16px 0}}
 h1{{font-size:24px;line-height:1.45;margin-bottom:8px}}
@@ -1607,6 +1622,9 @@ ul{{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(2
 li{{background:#fff;border:1px solid #E3EAF6;border-radius:10px;padding:10px 12px;font-size:13.5px;overflow-wrap:anywhere}}
 li a{{text-decoration:none;font-weight:700}}
 li span{{display:block;color:#5A6B8C;font-size:11.5px;margin-top:2px}}
+.hub-evidence{{margin-top:9px;border-top:1px solid #E3EAF6;padding-top:7px;font-size:12px}}
+.hub-evidence div+div{{margin-top:5px}}.hub-evidence dt{{color:#5A6B8C}}.hub-evidence dd{{margin:0;color:#1C2A44}}
+.evidence-note{{font-size:13px;margin:14px 0;color:#5A6B8C}}
 .supplemental-group{{margin:24px 0 32px;scroll-margin-top:20px}}
 .supplemental-group h2{{font-size:18px;line-height:1.5}}
 .group-note{{font-size:13px;color:#5A6B8C;margin:8px 0 14px}}
@@ -1630,7 +1648,7 @@ footer a{{color:#5A6B8C}}{HUB_FILTER_STYLE if searchable else ""}
       <a href="../categories/index.html">薬効分類別に確認</a>
       <a href="../guides/how-to-check-drug-supply.html">出荷調整の意味・確認方法</a>
 {discontinuation_link}    </nav>
-    <nav class="hub-nav" aria-label="状態別の品目一覧">{other_hubs}</nav>{supplemental_navigation}{filter_markup}
+    <nav class="hub-nav" aria-label="状態別の品目一覧">{other_hubs}</nav>{supplemental_navigation}{evidence_note}{filter_markup}
     {list_markup}
     <p class="official"><a href="{OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システムで品目名・YJコードを再確認</a></p>
   </main>
@@ -1752,6 +1770,9 @@ def main():
             "ingredient": (r.get("一般名") or "").strip(),
             "spec": (r.get("規格") or "").strip(),
             "updated": official_row_date(r),
+            "supply_raw": (r.get("供給状況") or "").strip(),
+            "reason": (r.get("理由") or "").strip(),
+            "release": supply_metadata_values(r).get("解除・解消見込み", ""),
             "delist": is_delist(r),
             "delist_volume": "薬価削除予定" in supply_metadata_values(r).get("出荷量状況", ""),
             "transition_deadline": (r.get("経過措置期限") or "").strip(),
