@@ -8,7 +8,8 @@ import xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 
 from generate_item_pages import (
-    HUB_FILTER_TEMPLATE_LASTMOD, ITEM_HUB_SLUGS, hub_html, sitemap_xml,
+    FILTERABLE_HUB_SLUGS, HUB_TEMPLATE_LASTMOD, ITEM_HUB_SLUGS,
+    MHLW_PRICE_LIST_URL, OFFICIAL_SUPPLY_URL, hub_html, sitemap_xml,
 )
 
 
@@ -17,6 +18,7 @@ class HubParser(HTMLParser):
         super().__init__()
         self.rows = []
         self.links = []
+        self.anchors = []
         self.controls = {}
 
     def handle_starttag(self, tag, attrs):
@@ -25,6 +27,7 @@ class HubParser(HTMLParser):
             self.rows.append(attrs)
         if tag == "a":
             self.links.append(attrs.get("href", ""))
+            self.anchors.append(attrs)
         if attrs.get("id", "").startswith("hubFilter"):
             self.controls[attrs["id"]] = attrs
 
@@ -119,7 +122,7 @@ class HubFilterTests(unittest.TestCase):
             self.assertIn(value, text)
         self.assertNotIn("<script>alert(1)</script>", output)
 
-    def test_template_revision_advances_only_changed_hubs_not_item_dates(self):
+    def test_template_revision_covers_all_hubs_without_expanding_filters_or_item_dates(self):
         sitemap = sitemap_xml(
             {"1111111F1111": "2026-09-14"}, "2026-10-10", ITEM_HUB_SLUGS)
         ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
@@ -130,17 +133,73 @@ class HubFilterTests(unittest.TestCase):
         }
         for slug in ITEM_HUB_SLUGS:
             self.assertEqual(
-                HUB_FILTER_TEMPLATE_LASTMOD.get(slug, "2026-10-10"),
+                HUB_TEMPLATE_LASTMOD,
                 dates[slug + ".html"],
             )
             output = hub_html(slug, self.entries, "2026-10-10")
-            if slug in {"limited", "stopped", "supplemental"}:
-                self.assertIn('"dateModified":"' + HUB_FILTER_TEMPLATE_LASTMOD[slug] + '"', output)
-                self.assertIn("全体データ基準日 2026-10-10", output)
+            self.assertIn('"dateModified":"' + HUB_TEMPLATE_LASTMOD + '"', output)
+            self.assertIn("全体データ基準日 2026-10-10", output)
+            self.assertEqual(slug in FILTERABLE_HUB_SLUGS, 'id="hubFilter"' in output)
         self.assertEqual("2026-09-14", dates["1111111F1111.html"])
         self.assertEqual("2026-10-10", dates["index.html"])
         later = sitemap_xml({}, "2026-10-15", ["limited"])
         self.assertIn("<lastmod>2026-10-15</lastmod>", later)
+
+    def test_official_sources_are_reachable_before_items_and_keep_distinct_roles(self):
+        for slug in ITEM_HUB_SLUGS:
+            with self.subTest(slug=slug):
+                entry = dict(self.entries[0], hubs=[slug], status={
+                    "resumed": "ok", "supplemental": "ended", "stopped": "stopped",
+                }.get(slug, "limited"))
+                output = hub_html(slug, [entry], "2026-10-10")
+                navigation = re.search(
+                    r'<nav class="entry-nav" aria-label="医薬品の探し方と確認方法">(.*?)</nav>',
+                    output, re.S,
+                ).group(1)
+                parsed = HubParser()
+                parsed.feed(navigation)
+                supply = [a for a in parsed.anchors if a.get("href") == OFFICIAL_SUPPLY_URL]
+                price = [a for a in parsed.anchors if a.get("href") == MHLW_PRICE_LIST_URL]
+                self.assertEqual(1, len(supply))
+                self.assertEqual(1 if slug == "supplemental" else 0, len(price))
+                for source in supply + price:
+                    self.assertEqual("_blank", source.get("target"))
+                    self.assertIn("noopener", source.get("rel", "").split())
+                    self.assertEqual("official-source-open", source.get("data-dsn-event"))
+                    self.assertNotIn("onclick", source)
+                self.assertIn("厚労省の公式システムで供給区分を確認", navigation)
+                self.assertLess(output.index(navigation), re.search(r'<li(?:\s|>)', output).start())
+                if slug == "supplemental":
+                    self.assertIn("厚労省の薬価基準・経過措置資料", navigation)
+                else:
+                    self.assertNotIn(MHLW_PRICE_LIST_URL, output)
+
+    def test_hub_identity_preserves_spec_and_formal_yj_and_omits_unknown_parts(self):
+        fixtures = (
+            ("1111111F1111", "１１ｍｇ１錠", "1111111F1111",
+             "規格：１１ｍｇ１錠｜YJコード：1111111F1111"),
+            ("X00001", "１０Ｌ", "X00001", "規格：１０Ｌ"),
+            ("x123456abcdef", "", "", ""),
+            ("1111111F1111", "", "", ""),
+            ("x123456abcdef", "", "2222222F2222", "YJコード：2222222F2222"),
+            ("1111111F1111", '<img src=x onerror="alert(1)"> & 規格', "1111111F1111",
+             '規格：&lt;img src=x onerror=&quot;alert(1)&quot;&gt; &amp; 規格｜YJコード：1111111F1111'),
+        )
+        for slug in ITEM_HUB_SLUGS:
+            for key, spec, yj_raw, expected in fixtures:
+                with self.subTest(slug=slug, key=key, spec=spec):
+                    entry = dict(self.entries[0], key=key, spec=spec, yj_raw=yj_raw, hubs=[slug],
+                                 status={"resumed": "ok", "supplemental": "ended",
+                                         "stopped": "stopped"}.get(slug, "limited"))
+                    output = hub_html(slug, [entry], "2026-10-10")
+                    identity = re.findall(r'<span class="hub-identity">(.*?)</span>', output)
+                    self.assertEqual([expected] if expected else [], identity)
+                    self.assertNotIn('<img src=x', output)
+                    self.assertNotIn("YJコード：X00001", output)
+                    self.assertNotIn("YJコード：x123456abcdef", output)
+                    self.assertNotIn("規格：なし", output)
+                    self.assertIn(f'href="{key}.html"', output)
+                    self.assertIn("品目行更新 " + entry["updated"], output)
 
     @unittest.skipUnless(shutil.which("node"), "Node.js is needed to exercise input events")
     def test_real_script_normalizes_and_filters_and_recovers_from_failure(self):
