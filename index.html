@@ -2716,6 +2716,7 @@ function daysAgo(dstr){
 // 実データの取得・列構成・件数を検証できるまで品目は一切表示しない。
 // 医薬品情報に本物らしいサンプルが混ざる方が、空状態より危険なため。
 let ITEMS = [];
+let ITEM_NAME_COUNTS = null;
 let LIVE = false;
 let DATA_STATE = "loading";
 let pendingPrimarySearchFocus = false;
@@ -3484,10 +3485,20 @@ function refreshSalesEndingPill(items=ITEMS){
 }
 // 旧形式の案内・包装・要約JSONは商品名がキー。同名の別YJ・別規格へ
 // 誤って紐づく方が危険なため、CSV内で名称が一意のときだけ互換表示する。
+// 旧形式の補足を照合するときだけ検証済みCSVの各行を一度数える。
+// 以後は同じCSVの索引を使い、カード描画のたびに全品目を正規化しない。
+function buildItemNameCounts(items){
+  const counts = new Map();
+  for(const item of items){
+    const nameKey = norm(item.n);
+    counts.set(nameKey, (counts.get(nameKey) || 0) + 1);
+  }
+  return counts;
+}
 function itemNameIsUnique(d){
   if(!d) return false;
-  const nameKey = norm(d.n);
-  return ITEMS.filter(item=>norm(item.n)===nameKey).length === 1;
+  if(!ITEM_NAME_COUNTS) ITEM_NAME_COUNTS = buildItemNameCounts(ITEMS);
+  return ITEM_NAME_COUNTS.get(norm(d.n)) === 1;
 }
 function legacySupplementalFor(map, d){
   if(!map || !itemNameIsUnique(d)) return null;
@@ -6027,6 +6038,7 @@ function failDataLoad(message){
   DATA_STATE = "error";
   LIVE = false;
   ITEMS = [];
+  ITEM_NAME_COUNTS = null;
   CSV_HEAD = null;
   setDataControlsEnabled(false);
   if(!dataLoadFailureTracked){ dsnTrack("data-load-failed"); dataLoadFailureTracked = true; }
@@ -6113,6 +6125,7 @@ function failDataLoad(message){
   items.sort((a,b)=>b.sd.localeCompare(a.sd) || b.d.localeCompare(a.d));
   CSV_HEAD = head;
   ITEMS = items;
+  ITEM_NAME_COUNTS = null;
   LIVE = true;
   DATA_STATE = "ready";
   setDataControlsEnabled(true);
