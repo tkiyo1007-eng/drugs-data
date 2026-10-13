@@ -17,6 +17,8 @@ Web専用の `industry_headlines.json` は薬事日報公式RSSのHEADLINE NEWS�
 | `industry_topics.json` | 両版に表示する業界トピック |
 | `status_changes.json` | 直近90日分の実スナップショット間の供給区分変更 |
 
+`version.json` の `version` と `note` はサイト取込のスナップショットを表し、厚労省原Excelの基準日や品目行の最終変更日とは異なる。任意追加の `mhlw_excel_date` は、同じコア公開で保持する `mhlw_source.json.excel_date` を確認できた場合だけ `YYYY-MM-DD` で収録する。取込日より後・不正・未取得の場合は項目を省略し、取込日・URL・品目行の日付から補完しない。旧3項目のJSONも引き続き有効で、既存Web・iOSの `version` / `csv_url` / `note` の意味と形式は維持する。表示する原Excel基準日が不明でも、既存CSV読込・供給区分・保存形式を変更しない。
+
 メーカー案内と販売ライフサイクルの `announced_at` は、一次資料に日まで記載が
 ある場合は `YYYY-MM-DD`、年月だけの場合は `YYYY-MM` とする。年月しか分からない
 案内に便宜上の1日を補わず、Web・iOSは文字列の精度をそのまま表示する。収集確認日

@@ -384,13 +384,49 @@ def validated_product_map(document: dict, label: str) -> dict:
 
 def version_date(version: dict) -> str:
     """version.jsonからデータセット全体の基準日をYYYY-MM-DDで返す。"""
-    text = f'{version.get("note", "")} {version.get("version", "")}'
+    if not isinstance(version, dict):
+        return ""
+    note = version.get("note")
+    identifier = version.get("version")
+    note = note if isinstance(note, str) else ""
+    identifier = (identifier if isinstance(identifier, (str, int, float))
+                  and not isinstance(identifier, bool) else "")
+    text = f"{note} {identifier}"
     match = (re.search(r"(\d{4})年(\d{1,2})月(\d{1,2})日", text)
              or re.search(r"(\d{4})-(\d{1,2})-(\d{1,2})", text)
              or re.search(r"\b(\d{4})(\d{2})(\d{2})\d*\b", text))
     if not match:
         return ""
-    return f"{match.group(1)}-{int(match.group(2)):02d}-{int(match.group(3)):02d}"
+    try:
+        return date(int(match.group(1)), int(match.group(2)), int(match.group(3))).isoformat()
+    except ValueError:
+        return ""
+
+
+def mhlw_excel_date(version, dataset_date: str) -> str:
+    """同じversionの取込日と整合する原Excel基準日だけを表示する。"""
+    if not isinstance(version, dict) or version_date(version) != dataset_date:
+        return ""
+    value = version.get("mhlw_excel_date")
+    if not isinstance(value, str) or not re.fullmatch(r"[0-9]{4}-[0-9]{2}-[0-9]{2}", value):
+        return ""
+    try:
+        source_day = date.fromisoformat(value)
+        imported_day = date.fromisoformat(dataset_date)
+    except ValueError:
+        return ""
+    return value if source_day <= imported_day else ""
+
+
+def dataset_dates_html(dataset_date: str, version_metadata=None) -> str:
+    """取込日・原典日・品目日を分け、JavaScriptなしでも生成時点を示す。"""
+    source_date = mhlw_excel_date(version_metadata, dataset_date)
+    return ('<p class="dataset-context">厚労省原Excelの基準日：'
+            f'<span class="mhlw-excel-date" aria-live="polite">{esc(source_date or "確認できません")}</span><br>'
+            'サイト全体の公開データ基準日（サイト取込日）：'
+            f'<span class="dataset-date" aria-live="polite">{esc(dataset_date or "確認できません")}</span><br>'
+            '<span class="dataset-date-context">HTML生成時の確認情報です。</span>'
+            '品目行の更新日やメーカー補足の確認日とは別の情報です。</p>')
 
 
 def normalized_text(value: str) -> str:
@@ -1205,7 +1241,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
               supplemental_trusted=True, supplemental_warning="", title_qualifier="",
               hub_slugs=(), display_names=None, category_codes=None,
               ingredient_slugs=None, manufacturer_notices=(), catalog_yj_codes=None,
-              manufacturer_bulletins=None):
+              manufacturer_bulletins=None, version_metadata=None):
     name = row["商品名"].strip()
     display_name = f"{name}（{title_qualifier}）" if title_qualifier else name
     maker = (row.get("販売メーカー") or row.get("製造メーカー") or "").strip()
@@ -1247,12 +1283,9 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
     # ページ内に「生成日」を書かない。書くと供給状況が何も変わっていない日でも
     # 全ページのHTMLが差し替わり、drugs-data に毎日2,000件規模の無意味なコミットが
     # 積まれてしまう（履歴から「実際に何が変わったか」が読めなくなる）
-    # 全体基準日はversion.jsonからブラウザで取得する。HTMLへ日付を埋め込むと、
-    # 品目自体が変わらない日も全ページが差分になり、履歴と配信量が膨らむため。
-    dataset_context = ('<p class="dataset-context">サイト全体の公開データ基準日：'
-                       '<span class="dataset-date" aria-live="polite">確認中</span>。'
-                       'これはこの静的ページの生成日ではありません。'
-                       'この品目行の最終変更日は下表の「更新日／ステータス更新日」をご確認ください。</p>')
+    # noJSでも原典日と取込日を区別できるよう、生成時に渡されたversionだけを表示する。
+    # 日付表示の追加で品目のdateModified/lastmodは進めない。
+    dataset_context = dataset_dates_html(dataset_date, version_metadata)
     title = page_title(name, st["label"], supplements, title_qualifier)
     desc = (f"{display_name}（{maker}）の厚生労働省公表データ上の供給区分は「{st['label']}」"
             + ("（薬価削除予定）" if delist else "")
@@ -1560,7 +1593,7 @@ footer a{{color:var(--sub)}}
   </main>
   <footer>
     <p class="note">本ページは厚生労働省「医療用医薬品供給状況」の公表データをもとに毎日自動生成される非公式の情報であり、厚生労働省および各製薬企業とは関係ありません。公表と実際の流通状況にタイムラグが生じる場合があります。医薬品の使用・変更は必ず医師・薬剤師にご相談ください。</p>
-    <p>サイト全体の公開データ基準日 <span class="dataset-date" aria-live="polite">確認中</span>｜<a href="{SITE_ROOT}">医薬品供給ナビ</a></p>
+    <p>サイト全体の公開データ基準日（サイト取込日） <span class="dataset-date" aria-live="polite">{esc(dataset_date or "確認できません")}</span>｜<a href="{SITE_ROOT}">医薬品供給ナビ</a></p>
     <p><a href="../guides/how-to-check-drug-supply.html">データの見方・確認手順</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></p>
   </footer>
 </div>
@@ -1648,11 +1681,27 @@ footer a{{color:var(--sub)}}
     }})
     .then(function(result){{
       const version = result.version;
-      const text = String(version.note || "") + " " + String(version.version || "");
-      const match = text.match(/(\d{{4}})年(\d{{1,2}})月(\d{{1,2}})日/) || text.match(/\\b(\d{{4}})(\d{{2}})(\d{{2}})\d*\\b/);
-      const date = match ? match[1] + "-" + String(match[2]).padStart(2,"0") + "-" + String(match[3]).padStart(2,"0") : "確認できません";
-      const label = date + (result.cached ? "（前回取得）" : "");
+      const versionObject = version && typeof version === "object" && !Array.isArray(version);
+      const note = versionObject && typeof version.note === "string" ? version.note : "";
+      const identifier = versionObject && (typeof version.version === "string" || typeof version.version === "number") ? version.version : "";
+      const text = note + " " + String(identifier);
+      const match = text.match(/(\\d{{4}})年(\\d{{1,2}})月(\\d{{1,2}})日/) || text.match(/(\\d{{4}})-(\\d{{1,2}})-(\\d{{1,2}})/) || text.match(/\\b(\\d{{4}})(\\d{{2}})(\\d{{2}})\\d*\\b/);
+      const candidateDate = match ? match[1] + "-" + String(match[2]).padStart(2,"0") + "-" + String(match[3]).padStart(2,"0") : "";
+      const date = validIsoDay(candidateDate) ? candidateDate : "確認できません";
+      const label = date + (result.cached && date !== "確認できません" ? "（前回取得）" : "");
       document.querySelectorAll(".dataset-date").forEach(function(node){{ node.textContent = label; }});
+      function validIsoDay(value){{
+        if(typeof value !== "string" || !/^[0-9]{{4}}-[0-9]{{2}}-[0-9]{{2}}$/.test(value) || value.startsWith("0000-")) return false;
+        const timestamp = Date.parse(value + "T00:00:00Z");
+        return Number.isFinite(timestamp) && new Date(timestamp).toISOString().slice(0, 10) === value;
+      }}
+      const source = versionObject ? version.mhlw_excel_date : null;
+      // cached versionと静的品目CSVの同一世代は確定できないため、原Excel日は表示しない。
+      const sourceDate = !result.cached && validIsoDay(source) && validIsoDay(date) && source <= date ? source : "確認できません";
+      document.querySelectorAll(".mhlw-excel-date").forEach(function(node){{ node.textContent = sourceDate; }});
+      document.querySelectorAll(".dataset-date-context").forEach(function(node){{
+        node.textContent = result.cached ? "前回取得した全体データの確認情報です。" : "現在取得した全体データの確認情報です。";
+      }});
       if(result.cached){{
         datasetWarning.textContent = "オフライン等のため、前回取得したデータ基準日を表示しています。接続後に再読み込みしてください。";
         datasetWarning.hidden = false;
@@ -1666,6 +1715,8 @@ footer a{{color:var(--sub)}}
     }})
     .catch(function(){{
       document.querySelectorAll(".dataset-date").forEach(function(node){{ node.textContent = "確認できません"; }});
+      document.querySelectorAll(".mhlw-excel-date").forEach(function(node){{ node.textContent = "確認できません"; }});
+      document.querySelectorAll(".dataset-date-context").forEach(function(node){{ node.textContent = "現在の全体データの確認情報を取得できません。"; }});
       datasetWarning.textContent = "全体データ基準日を確認できません。重要な判断では厚生労働省公式とメーカー案内もご確認ください。";
       datasetWarning.hidden = false;
     }});
@@ -1677,7 +1728,7 @@ footer a{{color:var(--sub)}}
 """
 
 
-def index_html(entries, dataset_date):
+def index_html(entries, dataset_date, version_metadata=None):
     """items/index.html — ステータス別の全ページ一覧(クローラーの巡回起点)。"""
     sections = []
     order = ["limited", "stopped", "ended", "ok"]
@@ -1732,6 +1783,7 @@ body{{font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo
 .wrap{{max-width:860px;margin:0 auto;padding:24px 18px 56px}}
 h1{{font-size:22px;margin:14px 0 6px}}
 .lede{{font-size:14px;color:#5A6B8C;margin-bottom:26px}}
+.dataset-context{{font-size:13px;color:#5A6B8C;margin:-14px 0 26px}}
 .guide{{font-size:13px;margin:-16px 0 26px}}.guide a{{color:#2F63E8;font-weight:700}}
 .site a{{color:#2F63E8;text-decoration:none;font-weight:700;font-size:15px}}
 .hub-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:0 0 30px}}
@@ -1751,7 +1803,8 @@ footer{{font-size:12px;color:#5A6B8C;text-align:center;margin-top:30px}}
   <header class="site"><a href="{SITE_ROOT}">💊 医薬品供給ナビ</a></header>
   <main>
     <h1>品目別の供給状況一覧</h1>
-    <p class="lede">{esc(desc)}（全体データ基準日 {esc(dataset_date or "確認できません")}）</p>
+    <p class="lede">{esc(desc)}</p>
+    {dataset_dates_html(dataset_date, version_metadata)}
     <p class="guide"><a href="../guides/how-to-check-drug-supply.html">出荷調整の理由・代替検討・PMDA情報の確認手順</a></p>
     <nav class="hub-grid" aria-label="状態別の品目一覧">{hub_cards}</nav>
     {''.join(sections)}
@@ -1869,7 +1922,7 @@ def hub_identity_html(entry):
     return '<span class="hub-identity">' + '｜'.join(parts) + '</span>' if parts else ""
 
 
-def hub_html(slug, entries, dataset_date):
+def hub_html(slug, entries, dataset_date, version_metadata=None):
     """検索者とクローラーの両方に文脈を示す状態別の静的一覧。"""
     config = ITEM_HUBS[slug]
     group = [entry for entry in entries if slug in entry.get("hubs", [])]
@@ -2037,6 +2090,7 @@ body{{font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo
 .crumb{{font-size:12px;color:#5A6B8C;margin:16px 0}}
 h1{{font-size:24px;line-height:1.45;margin-bottom:8px}}
 .lede{{font-size:14px;color:#5A6B8C}}
+.dataset-context{{font-size:13px;color:#5A6B8C;margin-top:12px}}
 .notice{{background:#FFF9E8;border:1px solid #E8CE84;border-radius:12px;padding:13px 15px;font-size:13px;margin:18px 0}}
 .entry-nav{{display:flex;flex-wrap:wrap;gap:8px 18px;margin:18px 0;font-size:13px}}
 .entry-nav a{{display:inline-flex;align-items:center;min-height:44px;text-underline-offset:3px}}
@@ -2065,7 +2119,8 @@ footer a{{color:#5A6B8C}}{HUB_FILTER_STYLE if searchable else ""}
   <nav class="crumb" aria-label="パンくず"><a href="{SITE_ROOT}">トップ</a> › <a href="index.html">品目別の供給状況</a> › {esc(config["label"])}</nav>
   <main>
     <h1>{esc(config["h1"])}</h1>
-    <p class="lede">{esc(config["description"])}（{len(group):,}品目／全体データ基準日 {esc(dataset_date or "確認できません")}）</p>
+    <p class="lede">{esc(config["description"])}（{len(group):,}品目）</p>
+    {dataset_dates_html(dataset_date, version_metadata)}
     <p class="notice">{esc(config["intro"])} 医薬品の使用・変更は、公式情報を確認したうえで医師・薬剤師等の専門職が判断してください。</p>
     <nav class="entry-nav" aria-label="医薬品の探し方と確認方法">
       <a href="../#demo" data-dsn-event="search-cta-open">薬品名・メーカー名で検索</a>
@@ -2250,12 +2305,13 @@ def main():
                 manufacturer_notices=notice_index.get(k, []),
                 catalog_yj_codes=catalog_yj_codes,
                 manufacturer_bulletins=manufacturer_bulletins,
+                version_metadata=version_doc,
             ), encoding="utf-8")
 
-    (out / "index.html").write_text(index_html(entries, dataset_date), encoding="utf-8")
+    (out / "index.html").write_text(index_html(entries, dataset_date, version_doc), encoding="utf-8")
     for slug in ITEM_HUBS:
         (out / f"{slug}.html").write_text(
-            hub_html(slug, entries, dataset_date), encoding="utf-8")
+            hub_html(slug, entries, dataset_date, version_doc), encoding="utf-8")
     key_dates = {
         k: item_page_lastmod(r, lifecycle_products.get(k), discrepancy_products.get(k), notice_index.get(k, []), manufacturer_bulletins)
         for k, (r, _) in targets.items()

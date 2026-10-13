@@ -141,7 +141,7 @@ footer a{color:var(--sub)}
       </div>
       <p class="item-search-note" id="itemSearchNote">検索語はURLの#以降に保持し、アクセス解析には送りません。</p>
     </form>
-    <p class="dataset-context">サイト全体の公開データ基準日：<span class="dataset-date" aria-live="polite">確認中</span>。これはこの静的ページの生成日ではありません。この品目行の最終変更日は下表の「更新日／ステータス更新日」をご確認ください。</p>
+    <p class="dataset-context">厚労省原Excelの基準日：<span class="mhlw-excel-date" aria-live="polite">2026-10-08</span><br>サイト全体の公開データ基準日（サイト取込日）：<span class="dataset-date" aria-live="polite">2026-10-14</span><br><span class="dataset-date-context">HTML生成時の確認情報です。</span>品目行の更新日やメーカー補足の確認日とは別の情報です。</p>
     <p class="dataset-warning" id="datasetWarning" role="status" hidden></p>
 
 <p class="supp-checked">メーカー補足情報の確認日：2026-10-08</p><p class="supp-warning" role="status">補足情報の確認注意：最新のメーカー自動収集（2026-10-14）は全収集元の確認が完了していません：日本ケミファ。供給差異データとメーカー収集健全性の確認日が一致しません。メーカー原文を再確認してください。</p>
@@ -190,7 +190,7 @@ footer a{color:var(--sub)}
   </main>
   <footer>
     <p class="note">本ページは厚生労働省「医療用医薬品供給状況」の公表データをもとに毎日自動生成される非公式の情報であり、厚生労働省および各製薬企業とは関係ありません。公表と実際の流通状況にタイムラグが生じる場合があります。医薬品の使用・変更は必ず医師・薬剤師にご相談ください。</p>
-    <p>サイト全体の公開データ基準日 <span class="dataset-date" aria-live="polite">確認中</span>｜<a href="https://kyokyu-navi.jp/">医薬品供給ナビ</a></p>
+    <p>サイト全体の公開データ基準日（サイト取込日） <span class="dataset-date" aria-live="polite">2026-10-14</span>｜<a href="https://kyokyu-navi.jp/">医薬品供給ナビ</a></p>
     <p><a href="../guides/how-to-check-drug-supply.html">データの見方・確認手順</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></p>
   </footer>
 </div>
@@ -278,11 +278,27 @@ footer a{color:var(--sub)}
     })
     .then(function(result){
       const version = result.version;
-      const text = String(version.note || "") + " " + String(version.version || "");
-      const match = text.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/) || text.match(/\b(\d{4})(\d{2})(\d{2})\d*\b/);
-      const date = match ? match[1] + "-" + String(match[2]).padStart(2,"0") + "-" + String(match[3]).padStart(2,"0") : "確認できません";
-      const label = date + (result.cached ? "（前回取得）" : "");
+      const versionObject = version && typeof version === "object" && !Array.isArray(version);
+      const note = versionObject && typeof version.note === "string" ? version.note : "";
+      const identifier = versionObject && (typeof version.version === "string" || typeof version.version === "number") ? version.version : "";
+      const text = note + " " + String(identifier);
+      const match = text.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/) || text.match(/(\d{4})-(\d{1,2})-(\d{1,2})/) || text.match(/\b(\d{4})(\d{2})(\d{2})\d*\b/);
+      const candidateDate = match ? match[1] + "-" + String(match[2]).padStart(2,"0") + "-" + String(match[3]).padStart(2,"0") : "";
+      const date = validIsoDay(candidateDate) ? candidateDate : "確認できません";
+      const label = date + (result.cached && date !== "確認できません" ? "（前回取得）" : "");
       document.querySelectorAll(".dataset-date").forEach(function(node){ node.textContent = label; });
+      function validIsoDay(value){
+        if(typeof value !== "string" || !/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(value) || value.startsWith("0000-")) return false;
+        const timestamp = Date.parse(value + "T00:00:00Z");
+        return Number.isFinite(timestamp) && new Date(timestamp).toISOString().slice(0, 10) === value;
+      }
+      const source = versionObject ? version.mhlw_excel_date : null;
+      // cached versionと静的品目CSVの同一世代は確定できないため、原Excel日は表示しない。
+      const sourceDate = !result.cached && validIsoDay(source) && validIsoDay(date) && source <= date ? source : "確認できません";
+      document.querySelectorAll(".mhlw-excel-date").forEach(function(node){ node.textContent = sourceDate; });
+      document.querySelectorAll(".dataset-date-context").forEach(function(node){
+        node.textContent = result.cached ? "前回取得した全体データの確認情報です。" : "現在取得した全体データの確認情報です。";
+      });
       if(result.cached){
         datasetWarning.textContent = "オフライン等のため、前回取得したデータ基準日を表示しています。接続後に再読み込みしてください。";
         datasetWarning.hidden = false;
@@ -296,6 +312,8 @@ footer a{color:var(--sub)}
     })
     .catch(function(){
       document.querySelectorAll(".dataset-date").forEach(function(node){ node.textContent = "確認できません"; });
+      document.querySelectorAll(".mhlw-excel-date").forEach(function(node){ node.textContent = "確認できません"; });
+      document.querySelectorAll(".dataset-date-context").forEach(function(node){ node.textContent = "現在の全体データの確認情報を取得できません。"; });
       datasetWarning.textContent = "全体データ基準日を確認できません。重要な判断では厚生労働省公式とメーカー案内もご確認ください。";
       datasetWarning.hidden = false;
     });

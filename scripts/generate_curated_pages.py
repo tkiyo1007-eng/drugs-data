@@ -14,7 +14,10 @@ from pathlib import Path
 from urllib.parse import quote
 
 from jst_time import jst_today
-from generate_item_pages import load_manufacturer_notices, load_manufacturer_bulletins, lifecycle_for_display
+from generate_item_pages import (
+    dataset_dates_html, version_date, load_manufacturer_notices,
+    load_manufacturer_bulletins, lifecycle_for_display,
+)
 
 SITE_ROOT = "https://kyokyu-navi.jp/"
 APP_ID = "6777696446"
@@ -730,6 +733,8 @@ def list_page(kind: str, records: list[dict], updated_at: str) -> str:
 {analytics_footer()}</body></html>"""
 
 
+INGREDIENT_DATE_STYLE = ".dataset-context{font-size:13px;color:var(--sub);margin:12px 0}"
+
 CATEGORY_STYLE = """
 .normal-list{margin:10px 0 0;padding:0;list-style:none;display:grid;gap:4px}.normal-list li{font-size:13px;padding:6px 2px;border-bottom:1px solid var(--line)}.normal-list li span{color:var(--sub);font-size:12px}
 details.normal{margin-top:18px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 16px}details.normal summary{cursor:pointer;font-weight:800;min-height:32px}
@@ -778,7 +783,8 @@ def ingredient_brand_names(name: str, rows: list[dict[str, str]], limit: int = 5
 
 
 def ingredient_page(group: dict, generated_keys: set[str], lifecycle: dict[str, dict],
-                    category_codes: dict[str, str]) -> tuple[str, str]:
+                    category_codes: dict[str, str], dataset_date: str = "",
+                    version_metadata=None) -> tuple[str, str]:
     slug, name, rows = group["slug"], group["name"], group["rows"]
     canonical = f"{SITE_ROOT}ingredients/{slug}.html"
     counts = category_counts(rows)
@@ -816,11 +822,12 @@ def ingredient_page(group: dict, generated_keys: set[str], lifecycle: dict[str, 
     category_links = "／".join(f'<a href="../categories/{esc(code)}.html">{esc(cat)}</a>' for code, cat in categories)
     search_href = "../#q=" + quote(name, safe="")
     body = f"""<!DOCTYPE html><html lang="ja"><head>
-{common_head(title, description, canonical, 'website', [collection, breadcrumb])}<meta name="apple-itunes-app" content="app-id={APP_ID}"><style>{STYLE}{CATEGORY_STYLE}</style></head><body>
+{common_head(title, description, canonical, 'website', [collection, breadcrumb])}<meta name="apple-itunes-app" content="app-id={APP_ID}"><style>{STYLE}{CATEGORY_STYLE}{INGREDIENT_DATE_STYLE}</style></head><body>
 <div class="wrap"><header class="site"><a href="../">💊 医薬品供給ナビ</a></header>
 <nav class="crumb" aria-label="パンくず"><a href="../">トップ</a> › <a href="index.html">成分別の供給状況</a> › {esc(name)}</nav><main>
 <section class="hero"><p class="eyebrow">成分（一般名）</p><h1>{esc(name)}の供給状況</h1>
 <p class="lede">一般名「{esc(name)}」{esc(brand_text)}の{len(rows)}品目について、厚生労働省公表データの現在の供給区分を一覧にしています。限定出荷・供給停止の品目を先に、公表されている品目行の更新日が新しい順に並べています。</p>
+{dataset_dates_html(dataset_date, version_metadata)}
 <div class="summary">{summary}</div>
 <p class="safety">同じ成分でも、規格・剤形・適応・用法用量は品目ごとに異なります。この一覧は代替薬の推薦ではなく、実在庫や入手可否も示しません。切り替えは電子添文を確認のうえ、医師・薬剤師が判断してください。</p>
 {share_control("この成分の供給状況を共有")}</section>
@@ -835,7 +842,8 @@ def ingredient_page(group: dict, generated_keys: set[str], lifecycle: dict[str, 
     return body, lastmod
 
 
-def ingredient_index_page(groups: dict[str, dict], newest_row: str) -> str:
+def ingredient_index_page(groups: dict[str, dict], newest_row: str,
+                          dataset_date: str = "", version_metadata=None) -> str:
     canonical = f"{SITE_ROOT}ingredients/index.html"
     title = "成分別の医薬品供給状況（一般名で探す）｜医薬品供給ナビ"
     description = ("厚生労働省公表データの一般名（成分）ごとに、限定出荷・供給停止の品目数と一覧を確認できます。"
@@ -861,9 +869,10 @@ def ingredient_index_page(groups: dict[str, dict], newest_row: str) -> str:
         {"@type": "ListItem", "position": 1, "name": "医薬品供給ナビ", "item": SITE_ROOT},
         {"@type": "ListItem", "position": 2, "name": "成分別の供給状況", "item": canonical}]}
     return f"""<!DOCTYPE html><html lang="ja"><head>
-{common_head(title, description, canonical, 'website', [breadcrumb])}<meta name="apple-itunes-app" content="app-id={APP_ID}"><style>{STYLE}{CATEGORY_STYLE}</style></head><body>
+{common_head(title, description, canonical, 'website', [breadcrumb])}<meta name="apple-itunes-app" content="app-id={APP_ID}"><style>{STYLE}{CATEGORY_STYLE}{INGREDIENT_DATE_STYLE}</style></head><body>
 <div class="wrap"><header class="site"><a href="../">💊 医薬品供給ナビ</a></header><nav class="crumb"><a href="../">トップ</a> › 成分別の供給状況</nav>
 <main><section class="hero"><p class="eyebrow">BY INGREDIENT</p><h1>成分別の医薬品供給状況</h1><p class="lede">{description}</p><p class="note">品目行の最新更新日：{esc(newest_row or "不明")}（{len(groups)}成分。{INGREDIENT_MIN_ROWS}品目以上、または限定出荷・供給停止を含む{INGREDIENT_MIN_ROWS_WITH_RESTRICTION}品目以上の成分を掲載）</p>
+{dataset_dates_html(dataset_date, version_metadata)}
 {share_control("この一覧を共有")}<p class="note">iPhoneでも品目名や成分名から検索できます。<a href="{APP_STORE}" data-dsn-event="app-store-open">iPhone版を無料で入手</a></p></section>
 <h2>限定出荷・供給停止のある成分（{len(with_restriction)}成分・多い順）</h2>{table}
 {others_html}
@@ -1170,6 +1179,14 @@ def main() -> int:
     args = parser.parse_args()
     site = Path(args.site)
     rows = load_rows(Path(args.csv))
+    # 日付表示はversionに明記された確認情報だけ。品目行や生成日の補完はしない。
+    try:
+        version_doc = load_json(site / "version.json")
+    except (OSError, ValueError):
+        version_doc = {}
+    if not isinstance(version_doc, dict):
+        version_doc = {}
+    dataset_date = version_date(version_doc)
     topics_doc = load_json(site / "industry_topics.json")
     products_doc = load_json(site / "featured_products.json")
     topics = topics_doc.get("topics") or []
@@ -1253,7 +1270,9 @@ def main() -> int:
     ingredient_dir.mkdir(exist_ok=True)
     ingredient_dates: dict[str, str] = {}
     for slug, ingredient in ingredients.items():
-        page, lastmod = ingredient_page(ingredient, generated_keys, lifecycle, category_code_by_name)
+        page, lastmod = ingredient_page(
+            ingredient, generated_keys, lifecycle, category_code_by_name,
+            dataset_date=dataset_date, version_metadata=version_doc)
         (ingredient_dir / f"{slug}.html").write_text(page, encoding="utf-8")
         ingredient_dates[slug] = lastmod
     for stale in ingredient_dir.glob("*.html"):
@@ -1261,7 +1280,8 @@ def main() -> int:
             stale.unlink()  # 掲載条件を外れた成分はサイトマップと同時に外す
     (ingredient_dir / "index.html").write_text(
         ingredient_index_page(ingredients, max((normalize_date(row.get("更新日")) for group in ingredients.values()
-                                                for row in group["rows"]), default="")),
+                                                for row in group["rows"]), default=""),
+                              dataset_date=dataset_date, version_metadata=version_doc),
         encoding="utf-8")
     reports = load_reports(site) if (site / "reports").is_dir() else []
     report_dates: dict[str, str] = {}

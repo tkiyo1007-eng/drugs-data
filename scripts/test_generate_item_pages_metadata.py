@@ -1,5 +1,7 @@
 import json
 import re
+import shutil
+import subprocess
 import unittest
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -41,6 +43,7 @@ from generate_item_pages import (
     supplemental_context,
     validated_product_map,
     version_date,
+    mhlw_excel_date,
 )
 
 
@@ -1002,6 +1005,182 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
         health["last_attempt"]["status"] = "success"
         health["last_attempt"]["sources"][0]["ok"] = True
         self.assertTrue(supplemental_context(health, discrepancy, "2026-10-14")["trusted"])
+
+
+class DatasetSourceDateTests(unittest.TestCase):
+    import_date = "2026-10-14"
+    row = {"商品名": "日付検証錠", "供給状況": "限定出荷",
+           "更新日": "2024/03/11", "ステータス更新日": "2024/03/12",
+           "YJコード": "1234567F1234", "製造メーカー": "検証製薬"}
+
+    def version(self, source="2026-10-08", imported="2026-10-14"):
+        return {"note": imported + "厚労省データ反映", "mhlw_excel_date": source}
+
+    def page(self, metadata=None, imported="2026-10-14"):
+        return page_html(self.row, "1234567F1234", "limited", "2099-01-01", [],
+                         {"1234567F1234"}, dataset_date=imported,
+                         version_metadata=metadata)
+
+    def visible_date_block(self, output):
+        return re.search(r'<p class="dataset-context">(.*?)</p>', output, re.S).group(1)
+
+    def test_explicit_source_date_is_distinct_from_import_and_item_dates(self):
+        metadata = self.version()
+        self.assertEqual("2026-10-08", mhlw_excel_date(metadata, self.import_date))
+        output = self.page(metadata)
+        block = self.visible_date_block(output)
+        self.assertIn('class="mhlw-excel-date" aria-live="polite">2026-10-08</span>', block)
+        self.assertIn('class="dataset-date" aria-live="polite">2026-10-14</span>', block)
+        self.assertIn("サイト取込日", block)
+        self.assertIn("HTML生成時の確認情報です", block)
+        self.assertNotIn("2024-03-11", block)
+        self.assertNotIn("2099-01-01", block)
+        self.assertIn("<th scope=\"row\">更新日</th><td>2024/03/11</td>", output)
+        self.assertIn("2024-03-12", output)
+
+    def test_legacy_missing_source_does_not_guess_from_import_or_row(self):
+        for metadata in (None, {}, {"version": 202610080000},
+                         {"note": "2026年10月14日厚労省データ反映"}):
+            with self.subTest(metadata=metadata):
+                self.assertEqual("", mhlw_excel_date(metadata, self.import_date))
+                block = self.visible_date_block(self.page(metadata))
+                self.assertIn('class="mhlw-excel-date" aria-live="polite">確認できません</span>', block)
+                self.assertIn('class="dataset-date" aria-live="polite">2026-10-14</span>', block)
+
+    def test_source_validation_rejects_invalid_after_import_and_mixed_metadata(self):
+        for value in (None, False, 20261008, "", "2026/10/08", "2026-10-8",
+                      "2026-02-30", "0000-10-08", "2026-10-08T00:00:00Z", " 2026-10-08",
+                      "２０２６-１０-０８", "2026-10-15", "2099-10-08"):
+            with self.subTest(source=value):
+                self.assertEqual("", mhlw_excel_date(self.version(value), self.import_date))
+        for metadata in ([self.version()], self.version(imported="2026-10-08"),
+                         {"mhlw_excel_date": "2026-10-08"}):
+            with self.subTest(metadata=metadata):
+                self.assertEqual("", mhlw_excel_date(metadata, self.import_date))
+        self.assertEqual("2026-10-14", mhlw_excel_date(self.version("2026-10-14"), self.import_date))
+        self.assertEqual("2024-02-29", mhlw_excel_date(self.version("2024-02-29", "2024-03-01"), "2024-03-01"))
+
+    def test_import_date_accepts_only_typed_metadata_and_real_calendar_dates(self):
+        for metadata, expected in (
+            ({"note": "2026年10月14日厚労省データ反映"}, "2026-10-14"),
+            ({"version": 202610140514}, "2026-10-14"),
+            ({"version": "202610140514"}, "2026-10-14"),
+            ({"note": ["2026年10月14日"], "version": 202610140514}, "2026-10-14"),
+            ({"note": "2024年2月29日"}, "2024-02-29"),
+            ({"note": "2026年2月30日"}, ""),
+            ({"note": "2026年2月30日", "version": 202610140514}, ""),
+            ({"note": "2026年13月14日"}, ""),
+            ({"note": "0000年10月14日"}, ""),
+            ({"version": 202602300000}, ""),
+            ({"note": ["2026年10月14日厚労省データ反映"]}, ""),
+            ({"note": {"value": "2026年10月14日"}}, ""),
+            ({"note": 20261014}, ""),
+            ({"version": [202610140514]}, ""),
+            ({"version": {"value": "2026年10月14日"}}, ""),
+            ({"version": True}, ""),
+            (None, ""), ([{"note": "2026年10月14日"}], ""),
+        ):
+            with self.subTest(metadata=metadata):
+                self.assertEqual(expected, version_date(metadata))
+
+    def test_nojs_invalid_import_metadata_shows_both_dates_unknown(self):
+        for metadata in (
+            {"note": "2026年2月30日厚労省データ反映", "mhlw_excel_date": "2026-02-28"},
+            {"note": ["2026年10月14日厚労省データ反映"], "mhlw_excel_date": "2026-10-08"},
+            {"version": [202610140514], "mhlw_excel_date": "2026-10-08"},
+            [{"note": "2026年10月14日厚労省データ反映"}],
+        ):
+            with self.subTest(metadata=metadata):
+                imported = version_date(metadata)
+                output = self.page(metadata, imported=imported)
+                block = self.visible_date_block(output)
+                self.assertEqual(2, block.count("確認できません"))
+                self.assertNotIn("2026-02-30", block)
+                self.assertNotIn("2026-10-14", block)
+
+    def test_source_validation_does_not_depend_on_generation_or_device_clock(self):
+        metadata = self.version("2099-10-08", "2099-10-14")
+        self.assertEqual("2099-10-08", mhlw_excel_date(metadata, "2099-10-14"))
+
+    def test_index_and_all_five_hubs_show_both_dates_without_advancing_metadata(self):
+        entry = {"key": "1234567F1234", "name": "日付検証錠", "maker": "検証製薬",
+                 "status": "limited", "updated": "2024-03-11", "supplements": [],
+                 "hubs": list(ITEM_HUB_SLUGS)}
+        for slug in ITEM_HUB_SLUGS:
+            with self.subTest(slug=slug):
+                old = hub_html(slug, [entry], self.import_date)
+                output = hub_html(slug, [entry], self.import_date, self.version())
+                block = self.visible_date_block(output)
+                self.assertIn(">2026-10-08</span>", block)
+                self.assertIn(">2026-10-14</span>", block)
+                self.assertIn("HTML生成時の確認情報です", block)
+                self.assertEqual(re.findall(r'"dateModified":"([^"]+)"', old),
+                                 re.findall(r'"dateModified":"([^"]+)"', output))
+        output = index_html([entry], self.import_date, self.version())
+        self.assertIn(">2026-10-08</span>", self.visible_date_block(output))
+        self.assertIn(">2026-10-14</span>", self.visible_date_block(output))
+        for metadata in (None, self.version("2026-10-15"), self.version(imported="2026-10-08")):
+            self.assertIn('class="mhlw-excel-date" aria-live="polite">確認できません</span>',
+                          self.visible_date_block(index_html([entry], self.import_date, metadata)))
+
+    def test_date_display_does_not_change_item_publication_or_sitemap_dates(self):
+        old = self.page()
+        output = self.page(self.version())
+        self.assertEqual(re.findall(r'"dateModified":"([^"]+)"', old),
+                         re.findall(r'"dateModified":"([^"]+)"', output))
+        self.assertEqual([item_page_lastmod(self.row)],
+                         re.findall(r'"dateModified":"([^"]+)"', output))
+        sitemap = sitemap_xml({"1234567F1234": item_page_lastmod(self.row)}, "2099-01-01")
+        self.assertIn("items/1234567F1234.html</loc><lastmod>" + item_page_lastmod(self.row) + "</lastmod>", sitemap)
+        self.assertNotIn("items/1234567F1234.html</loc><lastmod>2099-01-01", sitemap)
+
+    @unittest.skipUnless(shutil.which("node"), "Node.jsがありません")
+    def test_generated_script_handles_old_invalid_mixed_cached_and_clock_cases(self):
+        script = re.search(r'<script>\s*(\(function\(\).*?)</script>', self.page(self.version()), re.S).group(1)
+        runner = r"""
+const fs = require('fs');
+const vm = require('vm');
+const input = JSON.parse(fs.readFileSync(0, 'utf8'));
+const nodes = {'.dataset-date': [{textContent:'generated'}], '.mhlw-excel-date': [{textContent:'generated'}], '.dataset-date-context': [{textContent:'generated'}]};
+const warning = {textContent:'', hidden:true};
+global.document = {getElementById: id => id === 'datasetWarning' ? warning : null, querySelectorAll: selector => nodes[selector] || []};
+global.localStorage = {getItem: () => '[]'};
+global.addEventListener = () => {};
+Date.now = () => 0;
+global.fetch = async () => {
+  if(input.failed) throw new Error('unavailable');
+  return {ok:true, headers:{get: () => input.cached ? 'cache' : null}, json:async () => input.version};
+};
+vm.runInThisContext(input.script);
+setImmediate(() => process.stdout.write(JSON.stringify({source:nodes['.mhlw-excel-date'][0].textContent, imported:nodes['.dataset-date'][0].textContent, context:nodes['.dataset-date-context'][0].textContent, warning})));
+"""
+        cases = [
+            ({"note": "2026年10月14日厚労省データ反映"}, False, False, "確認できません", "2026-10-14"),
+            (self.version(), False, False, "2026-10-08", "2026-10-14"),
+            (self.version("2026-02-30"), False, False, "確認できません", "2026-10-14"),
+            ({"note": "2026年2月30日厚労省データ反映", "mhlw_excel_date": "2026-02-28"}, False, False, "確認できません", "確認できません"),
+            ({"note": "2026年2月30日厚労省データ反映", "mhlw_excel_date": "2026-02-28"}, True, False, "確認できません", "確認できません"),
+            (self.version("0000-10-08"), False, False, "確認できません", "2026-10-14"),
+            (self.version("2026-10-15"), False, False, "確認できません", "2026-10-14"),
+            ({"mhlw_excel_date": "2026-10-08"}, False, False, "確認できません", "確認できません"),
+            ({"note": ["2026年10月14日厚労省データ反映"], "mhlw_excel_date": "2026-10-08"}, False, False, "確認できません", "確認できません"),
+            ({"version": [202610140514], "mhlw_excel_date": "2026-10-08"}, False, False, "確認できません", "確認できません"),
+            ({"version": True, "mhlw_excel_date": "2026-10-08"}, False, False, "確認できません", "確認できません"),
+            ([{"note": "2026年10月14日"}], False, False, "確認できません", "確認できません"),
+            ({"version": 202610140514, "mhlw_excel_date": "2026-10-08"}, False, False, "2026-10-08", "2026-10-14"),
+            (self.version(), True, False, "確認できません", "2026-10-14（前回取得）"),
+            (self.version(), False, True, "確認できません", "確認できません"),
+            (self.version("2099-10-08", "2099-10-14"), False, False, "2099-10-08", "2099-10-14"),
+        ]
+        for metadata, cached, failed, source, imported in cases:
+            with self.subTest(metadata=metadata, cached=cached, failed=failed):
+                result = subprocess.run([shutil.which("node"), "-e", runner], input=json.dumps(
+                    {"script":script, "version":metadata, "cached":cached, "failed":failed}),
+                    capture_output=True, text=True, check=True)
+                rendered = json.loads(result.stdout)
+                self.assertEqual(source, rendered["source"])
+                self.assertEqual(imported, rendered["imported"])
+                self.assertNotEqual("generated", rendered["context"])
 
 
 if __name__ == "__main__":

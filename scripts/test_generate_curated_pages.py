@@ -33,6 +33,8 @@ from generate_curated_pages import (
     WEB_HIDDEN_FEATURED_SLUGS,
     discontinuation_guide_page,
     guide_page,
+    ingredient_page,
+    ingredient_index_page,
     list_page,
     product_intent_html,
     product_page,
@@ -60,6 +62,46 @@ class PageLinks(HTMLParser):
             self.element_tags[attributes["id"]] = tag
         if tag == "a":
             self.hrefs.add(attributes.get("href"))
+
+
+class IngredientSourceDateTests(unittest.TestCase):
+    group = {"slug": "1234567", "name": "日付検証成分", "rows": [
+        {"商品名": "日付検証錠", "一般名": "日付検証成分", "供給状況": "限定出荷",
+         "更新日": "2024/03/11", "YJコード": "1234567F1234", "製造メーカー": "検証製薬"}]}
+
+    def block(self, output):
+        return re.search(r'<p class="dataset-context">(.*?)</p>', output, re.S).group(1)
+
+    def test_ingredient_dates_are_generated_metadata_not_row_or_lastmod_dates(self):
+        metadata = {"note": "2026年10月14日厚労省データ反映", "mhlw_excel_date": "2026-10-08"}
+        old, old_lastmod = ingredient_page(self.group, set(), {}, {})
+        page, lastmod = ingredient_page(self.group, set(), {}, {}, "2026-10-14", metadata)
+        index = ingredient_index_page({"1234567": self.group}, "2024-03-11", "2026-10-14", metadata)
+        for output in (page, index):
+            block = self.block(output)
+            self.assertIn('class="mhlw-excel-date" aria-live="polite">2026-10-08</span>', block)
+            self.assertIn('class="dataset-date" aria-live="polite">2026-10-14</span>', block)
+            self.assertIn("サイト取込日", block)
+            self.assertIn("HTML生成時の確認情報です", block)
+            self.assertNotIn("2024-03-11", block)
+            self.assertIn("品目行の最新更新日：2024-03-11", output)
+        self.assertEqual(old_lastmod, lastmod)
+        self.assertEqual(re.findall(r'"dateModified":"([^"]+)"', old),
+                         re.findall(r'"dateModified":"([^"]+)"', page))
+
+    def test_ingredient_unknown_source_does_not_infer_from_any_other_date(self):
+        for metadata in (None, {"note": "2026年10月14日厚労省データ反映"},
+                         {"note": "2026年10月14日厚労省データ反映", "mhlw_excel_date": "2026-02-30"},
+                         {"note": "2026年10月14日厚労省データ反映", "mhlw_excel_date": "2026-10-15"},
+                         {"note": "2026年10月08日厚労省データ反映", "mhlw_excel_date": "2026-10-08"}):
+            with self.subTest(metadata=metadata):
+                page, _ = ingredient_page(self.group, set(), {}, {}, "2026-10-14", metadata)
+                index = ingredient_index_page({"1234567": self.group}, "2024-03-11", "2026-10-14", metadata)
+                for output in (page, index):
+                    self.assertIn('class="mhlw-excel-date" aria-live="polite">確認できません</span>', self.block(output))
+                    self.assertIn('class="dataset-date" aria-live="polite">2026-10-14</span>', self.block(output))
+        old, _ = ingredient_page(self.group, set(), {}, {})
+        self.assertEqual(2, self.block(old).count("確認できません"))
 
 
 class CuratedPageGenerationTests(unittest.TestCase):

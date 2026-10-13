@@ -202,6 +202,17 @@ class RemoteDataHealthTests(unittest.TestCase):
         }
         self.assertEqual(validate_version(document, dt.date(2026, 8, 9), 4), [])
 
+    def test_version_distinguishes_source_date_from_import_and_keeps_legacy_input(self):
+        document = {"version": 202610140514, "csv_url": "https://example.com/drugs.csv",
+                    "note": "2026年10月14日厚労省データ反映"}
+        self.assertEqual(validate_version(document, dt.date(2026, 10, 14), 4), [])
+        document["mhlw_excel_date"] = "2026-10-08"
+        self.assertEqual(validate_version(document, dt.date(2026, 10, 14), 4), [])
+        for value in [None, True, "2026-10-8", "2026-02-30", "2026-10-15"]:
+            with self.subTest(value=value):
+                broken = dict(document, mhlw_excel_date=value)
+                self.assertTrue(any("mhlw_excel_date" in e for e in validate_version(broken, dt.date(2026, 10, 14), 4)))
+
     def test_version_rejects_stale_or_mismatched_snapshot(self) -> None:
         document = {
             "version": 202608082347,
