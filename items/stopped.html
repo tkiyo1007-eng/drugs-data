@@ -14,7 +14,7 @@
 <meta property="og:image" content="https://kyokyu-navi.jp/og_image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="apple-itunes-app" content="app-id=6777696446">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"医薬品供給ナビ","item":"https://kyokyu-navi.jp/"},{"@type":"ListItem","position":2,"name":"品目別の供給状況","item":"https://kyokyu-navi.jp/items/index.html"},{"@type":"ListItem","position":3,"name":"供給停止","item":"https://kyokyu-navi.jp/items/stopped.html"}]},{"@type":"CollectionPage","name":"供給停止の医薬品一覧","url":"https://kyokyu-navi.jp/items/stopped.html","description":"厚生労働省公表データ上で供給停止となっている医療用医薬品を、商品名・規格・メーカー・更新日とともに確認できます。","dateModified":"2026-10-13"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"医薬品供給ナビ","item":"https://kyokyu-navi.jp/"},{"@type":"ListItem","position":2,"name":"品目別の供給状況","item":"https://kyokyu-navi.jp/items/index.html"},{"@type":"ListItem","position":3,"name":"供給停止","item":"https://kyokyu-navi.jp/items/stopped.html"}]},{"@type":"CollectionPage","name":"供給停止の医薬品一覧","url":"https://kyokyu-navi.jp/items/stopped.html","description":"厚生労働省公表データ上で供給停止となっている医療用医薬品を、商品名・規格・メーカー・更新日とともに確認できます。","dateModified":"2026-10-14"}]}</script>
 <script src="../analytics.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -53,6 +53,10 @@ footer a{color:#5A6B8C}
 .filter-controls button{min-height:44px;padding:10px 16px;border:1px solid #B6C8EB;border-radius:10px;font:inherit;font-weight:700;color:#2F63E8;background:#fff;cursor:pointer}
 .filter-controls button:disabled{color:#5A6B8C;cursor:default}
 .filter-controls input:focus-visible,.filter-controls button:focus-visible{outline:3px solid #2F63E8;outline-offset:2px}
+.hub-filter .price-filter{display:flex;align-items:center;gap:10px;min-height:44px;font-size:14px;cursor:pointer}
+.price-filter input{flex:none;width:20px;height:20px;margin:0;accent-color:#2F63E8}
+.price-filter input:focus-visible{outline:3px solid #2F63E8;outline-offset:3px}
+.price-note{font-size:13px;color:#5A6B8C;margin:14px 0}
 .filter-empty{margin-top:10px;font-size:13px;color:#5A6B8C}
 #hubItems li[hidden]{display:none}
 .supplemental-group[hidden]{display:none}
@@ -100,12 +104,14 @@ footer a{color:#5A6B8C}
   const clear = document.getElementById("hubFilterClear");
   const count = document.getElementById("hubFilterCount");
   const empty = document.getElementById("hubFilterEmpty");
+  const priceOnly = document.getElementById("hubFilterPriceOnly");
   if(!panel || !list || !input || !clear || !count || !empty) return;
   function showAll(){
     Array.from(list.querySelectorAll("li")).forEach(function(row){ row.hidden = false; });
     Array.from(list.querySelectorAll(".supplemental-group")).forEach(function(group){ group.hidden = false; });
     panel.hidden = true;
     empty.hidden = true;
+    if(priceOnly) priceOnly.checked = false;
   }
   function normalize(value){
     return String(value || "").normalize("NFKC").toLowerCase()
@@ -113,12 +119,14 @@ footer a{color:#5A6B8C}
   }
   try{
     const entries = Array.from(list.querySelectorAll("li")).map(function(row){
-      return {row:row, text:normalize(row.getAttribute("data-search") || row.textContent)};
+      return {row:row, text:normalize(row.getAttribute("data-search") || row.textContent),
+        priceInfo:row.getAttribute("data-price-info") === "1"};
     });
     function applyFilter(){
       const terms = normalize(input.value).trim().split(/\s+/).filter(Boolean);
       const matches = entries.map(function(entry){
-        return terms.every(function(term){ return entry.text.includes(term); });
+        return (!priceOnly || !priceOnly.checked || entry.priceInfo)
+          && terms.every(function(term){ return entry.text.includes(term); });
       });
       let shown = 0;
       entries.forEach(function(entry, index){
@@ -131,14 +139,16 @@ footer a{color:#5A6B8C}
       count.textContent = shown.toLocaleString("ja-JP") + " / "
         + entries.length.toLocaleString("ja-JP") + "品目を表示";
       empty.hidden = shown !== 0;
-      clear.disabled = input.value.length === 0;
+      clear.disabled = input.value.length === 0 && (!priceOnly || !priceOnly.checked);
     }
     function safelyApplyFilter(){
       try{ applyFilter(); }catch(error){ showAll(); }
     }
     input.addEventListener("input", safelyApplyFilter);
+    if(priceOnly) priceOnly.addEventListener("change", safelyApplyFilter);
     clear.addEventListener("click", function(){
       input.value = "";
+      if(priceOnly) priceOnly.checked = false;
       safelyApplyFilter();
       input.focus();
     });

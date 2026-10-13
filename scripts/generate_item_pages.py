@@ -42,7 +42,7 @@ MHLW_PRICE_LIST_URL = "https://www.mhlw.go.jp/topics/2026/04/tp20260401-01.html"
 # 日次生成日ではなく固定値にし、内容が変わらない日にlastmodを進めない。
 ITEM_PAGE_TEMPLATE_LASTMOD = "2026-10-06"  # 成分別ページへの導線を追加
 # 状態別5一覧の実質的な改訂日。個別品目のlastmodは進めない。
-HUB_TEMPLATE_LASTMOD = "2026-10-12"
+HUB_TEMPLATE_LASTMOD = "2026-10-14"
 # ページ内検索の対象は、テンプレートの改訂日とは別に維持する。
 FILTERABLE_HUB_SLUGS = frozenset({"limited", "stopped", "supplemental"})
 DISCONTINUATION_GUIDE = "../guides/how-to-check-discontinuation-and-delisting.html"
@@ -1395,6 +1395,10 @@ HUB_FILTER_STYLE = """
 .filter-controls button{min-height:44px;padding:10px 16px;border:1px solid #B6C8EB;border-radius:10px;font:inherit;font-weight:700;color:#2F63E8;background:#fff;cursor:pointer}
 .filter-controls button:disabled{color:#5A6B8C;cursor:default}
 .filter-controls input:focus-visible,.filter-controls button:focus-visible{outline:3px solid #2F63E8;outline-offset:2px}
+.hub-filter .price-filter{display:flex;align-items:center;gap:10px;min-height:44px;font-size:14px;cursor:pointer}
+.price-filter input{flex:none;width:20px;height:20px;margin:0;accent-color:#2F63E8}
+.price-filter input:focus-visible{outline:3px solid #2F63E8;outline-offset:3px}
+.price-note{font-size:13px;color:#5A6B8C;margin:14px 0}
 .filter-empty{margin-top:10px;font-size:13px;color:#5A6B8C}
 #hubItems li[hidden]{display:none}
 .supplemental-group[hidden]{display:none}
@@ -1409,12 +1413,14 @@ HUB_FILTER_SCRIPT = r"""<script>
   const clear = document.getElementById("hubFilterClear");
   const count = document.getElementById("hubFilterCount");
   const empty = document.getElementById("hubFilterEmpty");
+  const priceOnly = document.getElementById("hubFilterPriceOnly");
   if(!panel || !list || !input || !clear || !count || !empty) return;
   function showAll(){
     Array.from(list.querySelectorAll("li")).forEach(function(row){ row.hidden = false; });
     Array.from(list.querySelectorAll(".supplemental-group")).forEach(function(group){ group.hidden = false; });
     panel.hidden = true;
     empty.hidden = true;
+    if(priceOnly) priceOnly.checked = false;
   }
   function normalize(value){
     return String(value || "").normalize("NFKC").toLowerCase()
@@ -1422,12 +1428,14 @@ HUB_FILTER_SCRIPT = r"""<script>
   }
   try{
     const entries = Array.from(list.querySelectorAll("li")).map(function(row){
-      return {row:row, text:normalize(row.getAttribute("data-search") || row.textContent)};
+      return {row:row, text:normalize(row.getAttribute("data-search") || row.textContent),
+        priceInfo:row.getAttribute("data-price-info") === "1"};
     });
     function applyFilter(){
       const terms = normalize(input.value).trim().split(/\s+/).filter(Boolean);
       const matches = entries.map(function(entry){
-        return terms.every(function(term){ return entry.text.includes(term); });
+        return (!priceOnly || !priceOnly.checked || entry.priceInfo)
+          && terms.every(function(term){ return entry.text.includes(term); });
       });
       let shown = 0;
       entries.forEach(function(entry, index){
@@ -1440,14 +1448,16 @@ HUB_FILTER_SCRIPT = r"""<script>
       count.textContent = shown.toLocaleString("ja-JP") + " / "
         + entries.length.toLocaleString("ja-JP") + "品目を表示";
       empty.hidden = shown !== 0;
-      clear.disabled = input.value.length === 0;
+      clear.disabled = input.value.length === 0 && (!priceOnly || !priceOnly.checked);
     }
     function safelyApplyFilter(){
       try{ applyFilter(); }catch(error){ showAll(); }
     }
     input.addEventListener("input", safelyApplyFilter);
+    if(priceOnly) priceOnly.addEventListener("change", safelyApplyFilter);
     clear.addEventListener("click", function(){
       input.value = "";
+      if(priceOnly) priceOnly.checked = false;
       safelyApplyFilter();
       input.focus();
     });
@@ -1520,6 +1530,8 @@ def hub_html(slug, entries, dataset_date):
                     search_text += " " + " ".join(str(lifecycle.get(field) or "") for field in (
                         "supply_end_expected", "supply_end_note"))
             search_attr = f' data-search="{esc(search_text)}"'
+            if slug == "supplemental":
+                search_attr += f' data-price-info="{1 if entry.get("delist") else 0}"'
         rendered = (
             f'<li{search_attr}><a href="{entry["key"]}.html">'
             f'{esc(entry.get("display_name", entry["name"]))}</a>'
@@ -1563,6 +1575,22 @@ def hub_html(slug, entries, dataset_date):
         ],
     })
     filter_markup = ""
+    price_filter_markup = ""
+    price_note = ""
+    if slug == "supplemental":
+        price_count = sum(bool(entry.get("delist")) for entry in group)
+        sales_price_count = sum(bool(entry.get("delist"))
+                                and supplemental_bucket(entry) == "sales-notices"
+                                for entry in group)
+        price_note = (f'<p class="price-note">厚労省データの薬価削除予定・経過措置期限は、全体で{price_count:,}品目に収録しています。'
+                      f'そのうち{sales_price_count:,}品目は「販売中止の案内・公表区分がある品目」欄に掲載しています。'
+                      '薬価削除済み、製造・販売の終了や終了日を示すものではありません。</p>')
+        price_filter_markup = '''
+      <label class="price-filter">
+        <input id="hubFilterPriceOnly" type="checkbox" aria-describedby="hubFilterPriceHint" aria-controls="hubItems">
+        <span>厚労省の薬価削除予定・経過措置期限が収録された品目だけ表示</span>
+      </label>
+      <p class="filter-hint" id="hubFilterPriceHint">検索語とこの条件の両方を満たす品目を、すべての掲載欄から表示します。メーカー案内だけの経過措置情報は、原文も別に確認してください。</p>'''
     if searchable:
         filter_markup = f'''
     <section class="hub-filter" id="hubFilter" hidden aria-label="この一覧内の検索">
@@ -1571,7 +1599,7 @@ def hub_html(slug, entries, dataset_date):
       <div class="filter-controls">
         <input id="hubFilterInput" type="search" placeholder="例：薬品名 メーカー" autocomplete="off" aria-describedby="hubFilterHint" aria-controls="hubItems">
         <button id="hubFilterClear" type="button" disabled>クリア</button>
-      </div>
+      </div>{price_filter_markup}
       <p class="filter-count" id="hubFilterCount" role="status" aria-live="polite" aria-atomic="true">{len(group):,} / {len(group):,}品目を表示</p>
       <p class="filter-empty" id="hubFilterEmpty" hidden>この一覧内に該当する品目なし。すべての医薬品の検索結果ではありません。検索語を変えるか、クリアしてご確認ください。</p>
     </section>'''
@@ -1668,7 +1696,7 @@ footer a{{color:#5A6B8C}}{HUB_FILTER_STYLE if searchable else ""}
       <a href="../guides/how-to-check-drug-supply.html">出荷調整の意味・確認方法</a>
 {discontinuation_link}      <a href="{OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚労省の公式システムで供給区分を確認</a>
 {price_source_link}    </nav>
-    <nav class="hub-nav" aria-label="状態別の品目一覧">{other_hubs}</nav>{supplemental_navigation}{evidence_note}{filter_markup}
+    <nav class="hub-nav" aria-label="状態別の品目一覧">{other_hubs}</nav>{supplemental_navigation}{evidence_note}{price_note}{filter_markup}
     {list_markup}
     <p class="official"><a href="{OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システムで品目名・YJコードを再確認</a></p>
   </main>
