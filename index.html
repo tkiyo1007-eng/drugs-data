@@ -54,7 +54,7 @@
         {
           "@type": "Question",
           "name": "データはどのくらいの頻度で更新されますか？",
-          "acceptedAnswer": { "@type": "Answer", "text": "厚生労働省の公表データ（平日更新）を毎晩自動で取得・検証し、取得に成功したデータを公開します。更新や取得が遅れる場合があるため、検索画面の「全体データ基準日」と取得状態を確認してください。品目ごとの公表行更新日は、全体の基準日とは異なります。" }
+          "acceptedAnswer": { "@type": "Answer", "text": "厚生労働省の公表データ（平日更新）を毎晩自動で取得・検証し、取得に成功したデータを公開します。更新や取得が遅れる場合があるため、検索画面の厚労省の原Excel基準日・「全体データ基準日」（サイト取込日）と取得状態を確認してください。品目ごとの公表行更新日は、これらの日付とは異なります。" }
         },
         {
           "@type": "Question",
@@ -1513,7 +1513,8 @@ footer a:hover{color:var(--blue)}
         <a href="https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システムで確認</a>
       </div>
     </div>
-    <p class="data-as-of" id="dataAsOf" role="status" aria-live="polite">データ基準日を確認中です。</p>
+    <p class="data-as-of" role="status" aria-live="polite"><span id="dataAsOf">データ基準日を確認中です。</span><span>（サイト取込日）</span></p>
+    <p class="data-as-of" id="dataSourceAsOf" role="status" aria-live="polite">厚労省の原Excel基準日：確認中です。</p>
     <div class="data-freshness-notice" id="supplementalNotice" role="status" aria-live="polite" hidden>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.7 2.2 17.5A2 2 0 0 0 3.9 20h16.2a2 2 0 0 0 1.7-2.5L13.7 3.7a2 2 0 0 0-3.4 0Z"/></svg>
       <span id="supplementalNoticeText"></span>
@@ -1521,7 +1522,7 @@ footer a:hover{color:var(--blue)}
     <p class="data-as-of" id="supplementalAsOf" role="status" aria-live="polite">メーカー公式案内の補足情報を確認中です。</p>
     <details class="update-info" id="updateInfo">
       <summary>更新情報の見方</summary>
-      <p>全体データ基準日：表示中の供給データの基準日です。※各カードの日付は「その品目行の最終変更日」です。</p>
+      <p>全体データ基準日：当サイトが供給データを取り込んだ日です。厚労省の原Excel基準日は、取り込んだ原資料の基準日として別に表示します。※各カードの日付は「その品目行の最終変更日」です。</p>
       <p>メーカー補足の確認日：当サイトが選定したメーカー・公表案内の確認日です。メーカーの発表日ではなく、補足の表示がないことは「差異なし」を保証しません。</p>
       <p>この画面での取得日時は、公開ファイルを読み込んだ時刻です。情報提供元の更新日時や、最新情報であることを示すものではありません。</p>
     </details>
@@ -2294,7 +2295,7 @@ footer a:hover{color:var(--blue)}
   <div class="faq-list glass">
     <details class="faq-item">
       <summary>データはどのくらいの頻度で更新されますか？</summary>
-      <p>厚生労働省の公表データ（平日更新）を毎晩自動で取得・検証し、取得に成功したデータを公開します。更新や取得が遅れる場合があるため、検索画面の「全体データ基準日」と取得状態を確認してください。品目ごとの公表行更新日は、全体の基準日とは異なります。</p>
+      <p>厚生労働省の公表データ（平日更新）を毎晩自動で取得・検証し、取得に成功したデータを公開します。更新や取得が遅れる場合があるため、検索画面の厚労省の原Excel基準日・「全体データ基準日」（サイト取込日）と取得状態を確認してください。品目ごとの公表行更新日は、これらの日付とは異なります。</p>
     </details>
     <details class="faq-item">
       <summary>利用は無料ですか？</summary>
@@ -2425,9 +2426,10 @@ footer a:hover{color:var(--blue)}
     <div class="modal-note" id="mSupplyReference" hidden></div>
     <div class="modal-note" id="mDataProvenance" role="group" aria-labelledby="mDataProvenanceTitle">
       <h4 id="mDataProvenanceTitle">供給区分の出典・日付</h4>
+      <p id="mSourceDate">厚労省の原Excel基準日：確認できません</p>
       <p id="mDatasetDate">全体データ基準日：確認できません</p>
       <p id="mItemDate">公表行更新日：確認できません</p>
-      <p>データ・品目に記録された日付です。端末での取得・確認日時ではありません。</p>
+      <p>全体データ基準日はサイト取込日です。厚労省の原Excel基準日・公表行更新日とは別で、端末での取得・確認日時ではありません。</p>
       <a class="maker-link" id="mOfficialSupplySource" href="https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省で検索（一般検索画面）</a>
       <p>公式の一般検索画面で、品目名またはYJコードを入力して確認します。</p>
       <a class="maker-link" id="mSupplyDefinition" href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html" target="_blank" rel="noopener" data-dsn-event="official-source-open">供給区分・出荷量の定義（厚生労働省）</a>
@@ -3238,7 +3240,8 @@ function detailPairs(d){
     ].filter(([,v])=>v);
   }
   const days = daysAgo(d.d);
-  if(DATASET_DATE) pairs.push(["全体データ基準日", DATASET_DATE]);
+  pairs.push(["全体データ基準日", DATASET_DATE || "確認できません"]);
+  pairs.push(["厚労省の原Excel基準日", SOURCE_DATE || "確認できません"]);
   if(days!=null) pairs.push(["公表行の最終変更", `${d.d}（${days.toLocaleString()}日前）`]);
   return pairs;
 }
@@ -4922,11 +4925,18 @@ function renderLuliconAlternatives(d){
     : `ルリコン${form}1％（先発品）`;
 }
 function updateDetailDataProvenance(d){
+  const datasetDate = String(DATASET_DATE || "").trim().replaceAll("-", "/") || "確認できません";
+  const sourceDate = String(SOURCE_DATE || "").trim().replaceAll("-", "/") || "確認できません";
+  document.getElementById("mSourceDate").textContent = `厚労省の原Excel基準日：${sourceDate}`;
+  document.getElementById("mDatasetDate").textContent = `全体データ基準日：${datasetDate}`;
+  // 詳細を開いた後にversionが届いた場合も、重複する日付欄の値だけを更新する。
+  for(const [id, value] of [["mGridSourceDate", SOURCE_DATE], ["mGridDatasetDate", DATASET_DATE]]){
+    const field = document.getElementById(id);
+    if(field) field.textContent = value || "確認できません";
+  }
   const selected = d || ITEMS.find(item => itemKey(item) === currentDetailKey);
   if(!selected) return;
-  const datasetDate = String(DATASET_DATE || "").trim().replaceAll("-", "/") || "確認できません";
   const itemDate = String(selected.d || "").trim().replaceAll("-", "/") || "確認できません";
-  document.getElementById("mDatasetDate").textContent = `全体データ基準日：${datasetDate}`;
   document.getElementById("mItemDate").textContent = `公表行更新日：${itemDate}`;
 }
 function refreshOpenDetail(d){
@@ -4974,7 +4984,7 @@ function openDetail(d, opts={}){
   updateDetailDataProvenance(d);
   syncModalFavorite(d);
   document.getElementById("mGrid").innerHTML = detailPairs(d)
-    .map(([h,v])=>`<dt>${esc(h)}</dt><dd>${esc(v)}</dd>`).join("");
+    .map(([h,v])=>`<dt>${esc(h)}</dt><dd${h === "全体データ基準日" ? ' id="mGridDatasetDate"' : h === "厚労省の原Excel基準日" ? ' id="mGridSourceDate"' : ""}>${esc(v)}</dd>`).join("");
   const discrepancy = discrepancyFor(d, true);
   const $mDiscrepancy = document.getElementById("mDiscrepancy");
   if(discrepancy){
@@ -5965,7 +5975,8 @@ function countUp(total){
 /* ===== 実データ読み込み（drugs_app_ready.csv / version.json） ===== */
 const CSV_SOURCES = ["drugs_app_ready.csv", "https://kyokyu-navi.jp/drugs_app_ready.csv"];
 let CSV_HEAD = null; // 実CSVのヘッダー（詳細モーダルで全列を表示するために保持）
-let DATASET_DATE = ""; // version.jsonの全体基準日（品目行の更新日と区別）
+let DATASET_DATE = ""; // version.jsonのサイト取込日（補足照合・既存鮮度判定に使う日付を維持）
+let SOURCE_DATE = ""; // 同じversion応答の原Excel基準日。取込日や品目行の日付で補完しない
 const VER_SOURCES = ["version.json", "https://kyokyu-navi.jp/version.json"];
 const STATUS_GRAD = {
   ok:"linear-gradient(90deg,#3CC383,#2FAE6E)",
@@ -6143,6 +6154,19 @@ function datasetDateFromVersion(version, csvCached=false, versionCached=false){
   if(!match || !validSupplyDate(`${match[1]}/${match[2]}/${match[3]}`)) return "";
   return `${match[1]}-${String(match[2]).padStart(2,"0")}-${String(match[3]).padStart(2,"0")}`;
 }
+function validSourceDate(value, datasetDate){
+  return typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value)
+    && validSupplyDate(value.replaceAll("-", "/"))
+    && typeof datasetDate === "string" && /^\d{4}-\d{2}-\d{2}$/.test(datasetDate)
+    && validSupplyDate(datasetDate.replaceAll("-", "/")) && value <= datasetDate;
+}
+function sourceDateFromVersion(version, csvCached=false, versionCached=false){
+  const datasetDate = datasetDateFromVersion(version, csvCached, versionCached);
+  const value = version && typeof version === "object" && !Array.isArray(version)
+    ? version.mhlw_excel_date : null;
+  // 端末時計でCSVを拒否しない。原資料日が認められた取込日より後という矛盾だけを除く。
+  return validSourceDate(value, datasetDate) ? value : "";
+}
 document.getElementById("offlineReload").addEventListener("click", ()=>location.reload());
 document.getElementById("dataLoadReload").addEventListener("click", ()=>location.reload());
 
@@ -6151,7 +6175,8 @@ const STALE_DATA_DAYS = 7;
 let dataLoadFailureTracked = false;
 function setDatasetDate(date){
   DATASET_DATE = date || "";
-  updateDetailDataProvenance();
+  // 新しいversionや取得失敗に、前回の原Excel基準日を引き継がない。
+  setSourceDate("");
   const asOf = document.getElementById("dataAsOf");
   const notice = document.getElementById("staleNotice");
   const noticeText = document.getElementById("staleNoticeText");
@@ -6176,6 +6201,12 @@ function setDatasetDate(date){
   }
   if(!Object.values(SUPPLEMENTAL_STATE).includes("loading")) updateSupplementalStatus();
 }
+function setSourceDate(date){
+  SOURCE_DATE = validSourceDate(date, DATASET_DATE) ? date : "";
+  const display = SOURCE_DATE.replaceAll("-", ".") || "確認できません";
+  document.getElementById("dataSourceAsOf").textContent = `厚労省の原Excel基準日：${display}`;
+  updateDetailDataProvenance();
+}
 
 function failDataLoad(message){
   // CSVは従来どおり安全に停止。ニュース側の処理は別のmicrotaskへ隔離する。
@@ -6185,6 +6216,7 @@ function failDataLoad(message){
   ITEMS = [];
   ITEM_NAME_COUNTS = null;
   CSV_HEAD = null;
+  setDatasetDate("");
   setDataControlsEnabled(false);
   if(!dataLoadFailureTracked){ dsnTrack("data-load-failed"); dataLoadFailureTracked = true; }
   document.getElementById("dataLoadErrorText").textContent =
@@ -6205,6 +6237,7 @@ function failDataLoad(message){
 
 (async function loadRealData(){
  try{
+  setSourceDate("");
   const res = await fetchFirst(CSV_SOURCES);
   if(!res) return failDataLoad("公開データを取得できませんでした。");
   const csvCached = responseUsesCachedData(res);
@@ -6358,6 +6391,7 @@ function failDataLoad(message){
     try{
       const v = await vres.json();
       setDatasetDate(datasetDateFromVersion(v, csvCached, versionCached));
+      setSourceDate(sourceDateFromVersion(v, csvCached, versionCached));
     }catch(e){ setDatasetDate(""); }
   }else{
     setDatasetDate("");
