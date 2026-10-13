@@ -5105,7 +5105,7 @@ function openDetail(d, opts={}){
   if(d.s !== "ended" && lifecycleNotice){
     const lifecycleDetail = lifecycleNotice.verificationRecent
       ? `「${esc(cleanAnnouncementTitle(announcement.title))}」が公表されています（下の案内文リンク参照）。供給状況欄は現在の出荷区分、メーカー案内は今後の販売予定を示すため、「通常出荷」と「販売中止予定」が同時に表示される場合があります。`
-      : `「${esc(cleanAnnouncementTitle(announcement.title))}」の登録がありますが、確認日${lifecycleNotice.verified_at ? `（${esc(lifecycleNotice.verified_at)}）` : ""}から7日以上経過しているか、確認日を取得できません。販売中止予定とは断定せず、下のメーカー原文で対象・現況をご確認ください。`;
+      : `「${esc(cleanAnnouncementTitle(announcement.title))}」の登録がありますが、案内の確認状態が完全でない、確認日${lifecycleNotice.verified_at ? `（${esc(lifecycleNotice.verified_at)}）` : ""}が古い、または確認日を取得できません。販売中止予定とは断定せず、下のメーカー原文で対象・現況をご確認ください。`;
     document.getElementById("mGrid").insertAdjacentHTML("afterbegin",
       `<dt>メーカー案内</dt><dd>${lifecycleDetail}</dd>`);
   }
