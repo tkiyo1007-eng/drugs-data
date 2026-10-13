@@ -888,6 +888,9 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   font-size:12.5px;font-weight:700;color:var(--blue);transition:.2s;
 }
 .maker-link:hover{background:rgba(79,128,244,.14)}
+.manufacturer-note{padding:12px 0;margin:0;max-width:100%;overflow-wrap:anywhere}
+.manufacturer-note+.manufacturer-note{border-top:1px solid var(--stroke);margin-top:16px}
+.manufacturer-note a:not(.maker-link){color:var(--blue-deep);text-decoration:underline}
 #mDataProvenance .maker-link{color:var(--blue-deep)}
 .maker-link::after{content:"↗";font-size:14px;flex:none}
 #mItemLink::after{content:"→"} /* 同一サイト内リンクなので外部リンク記号は使わない */
@@ -1662,6 +1665,12 @@ footer a:hover{color:var(--blue)}
 <section id="topics" class="reveal">
   <p class="sec-eyebrow">TOPICS</p>
   <h2>医薬品ニュース</h2>
+  <div class="mednews" id="manufacturerNews">
+    <h3>メーカー公式の供給・回収案内</h3>
+    <p class="sec-lede">原典を確認した案内です。現在の厚労省区分とは分けて、対象の規格・包装、理由、メーカーが示す参考候補を確認できます。</p>
+    <p class="news-status" id="manufacturerStatus" role="status" aria-live="polite">メーカー案内を読み込んでいます。</p>
+    <div class="topic-list" id="manufacturerList"></div>
+  </div>
   <div class="mednews" id="medNews">
     <h3>薬事日報の新着見出し</h3>
     <p class="sec-lede">業界ニュースの見出しを自動取得しています。本文はリンク先の薬事日報でご確認ください。供給区分はニュースから変更せず、検索とメーカー原典で確認できます。</p>
@@ -2439,6 +2448,7 @@ footer a:hover{color:var(--blue)}
     <a class="maker-link" id="mPmdaLink" href="#" target="_blank" rel="noopener" data-dsn-event="official-source-open" hidden></a>
     <a class="maker-link" id="mItemLink" href="#" hidden></a>
     <div class="discrepancy-panel" id="mDiscrepancy" role="note" hidden></div>
+    <div class="sum-box" id="mManufacturerNotes" hidden></div>
     <div class="sum-box" id="mSummary" hidden></div>
     <div class="pkg-box" id="mPkgs" hidden></div>
     <p class="modal-note" id="mHistoryNote" role="status" aria-live="polite" aria-atomic="true"></p>
@@ -3345,6 +3355,7 @@ function normalizedPublicationDate(value){
 }
 function lifecycleVerificationIsRecent(item){
   if(!supplementalReady()) return false;
+  if(item && manufacturerSourceChanged(item.source_url)) return false;
   const verified = publicationDayNumber(item && item.verified_at);
   const reference = publicationDayNumber(DATASET_DATE);
   if(verified == null) return false;
@@ -3380,6 +3391,7 @@ function isSalesEnding(d){
 }
 function lifecycleEndDetails(item){
   if(!item) return "";
+  if(manufacturerSourceChanged(item.source_url)) return `<dt>終了予定時期</dt><dd>メーカー原典の更新を検知しました。終了日・条件・包装は再確認待ちです。</dd>`;
   const matches = !item.supply_end_source_url || item.supply_end_source_url === item.source_url;
   const expected = matches && item.supply_end_expected;
   const note = matches && item.supply_end_note;
@@ -3398,11 +3410,15 @@ function lifecycleEndDetails(item){
 let SUPPLY_DISCREPANCIES = {};
 const SUPPLEMENTAL_STATE = {lifecycle:"loading", discrepancies:"loading", health:"loading"};
 let SUPPLEMENTAL_CHECKED_THROUGH = "";
+let SUPPLEMENTAL_DISCREPANCY_CHECKED = "";
+let SUPPLEMENTAL_ATTEMPT = null;
 let SUPPLEMENTAL_MHLW_DATE = "";
 function supplementalReady(){
   const checkedAge = daysAgo(SUPPLEMENTAL_CHECKED_THROUGH);
   return Object.values(SUPPLEMENTAL_STATE).every(state=>state === "loaded")
     && Boolean(DATASET_DATE && SUPPLEMENTAL_MHLW_DATE && DATASET_DATE === SUPPLEMENTAL_MHLW_DATE)
+    && Boolean(SUPPLEMENTAL_CHECKED_THROUGH && SUPPLEMENTAL_CHECKED_THROUGH === SUPPLEMENTAL_DISCREPANCY_CHECKED)
+    && (!SUPPLEMENTAL_ATTEMPT || SUPPLEMENTAL_ATTEMPT.status === "success")
     && checkedAge != null && checkedAge < STALE_DATA_DAYS;
 }
 function updateSupplementalStatus(){
@@ -3411,22 +3427,26 @@ function updateSupplementalStatus(){
   const asOf = document.getElementById("supplementalAsOf");
   const states = Object.values(SUPPLEMENTAL_STATE);
   const incomplete = states.some(state=>state !== "loaded");
-  const dateMismatch = Boolean(DATASET_DATE && SUPPLEMENTAL_MHLW_DATE && DATASET_DATE !== SUPPLEMENTAL_MHLW_DATE);
+  const dateMismatch = Boolean(DATASET_DATE && SUPPLEMENTAL_MHLW_DATE && DATASET_DATE !== SUPPLEMENTAL_MHLW_DATE)
+    || Boolean(SUPPLEMENTAL_CHECKED_THROUGH && SUPPLEMENTAL_DISCREPANCY_CHECKED && SUPPLEMENTAL_CHECKED_THROUGH !== SUPPLEMENTAL_DISCREPANCY_CHECKED);
+  const partial = SUPPLEMENTAL_ATTEMPT && SUPPLEMENTAL_ATTEMPT.status !== "success";
   const checkedAge = daysAgo(SUPPLEMENTAL_CHECKED_THROUGH);
   const checkedStale = checkedAge == null || checkedAge >= STALE_DATA_DAYS;
   if(states.some(state=>state === "loading")){
     asOf.textContent = "メーカー公式案内の補足情報を確認中です。";
     notice.hidden = true;
-  }else if(incomplete || dateMismatch || checkedStale || !DATASET_DATE || !SUPPLEMENTAL_MHLW_DATE){
-    asOf.textContent = "メーカー補足情報：確認不完全";
-    noticeText.innerHTML = dateMismatch || !DATASET_DATE || !SUPPLEMENTAL_MHLW_DATE
+  }else if(incomplete || dateMismatch || checkedStale || partial || !DATASET_DATE || !SUPPLEMENTAL_MHLW_DATE){
+    asOf.textContent = `メーカー補足：確認不完全／全収集元の確認完了 ${SUPPLEMENTAL_CHECKED_THROUGH || "確認できません"}`;
+    noticeText.innerHTML = partial
+      ? `最新の収集試行：${esc(SUPPLEMENTAL_ATTEMPT.checked || "確認できません")}。一部の公式取得先を確認できず、該当メーカーは前回情報を保持しています。確認済みの個別案内の日付は各原典欄をご覧ください。「情報差異なし」とは判断しません。`
+      : dateMismatch || !DATASET_DATE || !SUPPLEMENTAL_MHLW_DATE
       ? `厚労省区分とメーカー補足情報の参照日が一致していません。「情報差異なし」とは判断せず、<a href="${OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省公式</a>とメーカー案内をご確認ください。`
       : checkedStale
         ? `メーカー公式案内の確認日が古い、または確認日を取得できません。厚労省の供給区分は表示できますが、「情報差異0件」とは判定しません。`
         : `メーカー公式案内の補足情報を一部取得できないか、前回キャッシュを使用しています。厚労省の供給区分は表示できますが、「情報差異0件」とは判定しません。`;
     notice.hidden = false;
   }else{
-    asOf.textContent = `メーカー補足：${SUPPLEMENTAL_CHECKED_THROUGH}確認（対象の案内のみ）`;
+    asOf.textContent = `メーカー補足：全収集元の確認完了 ${SUPPLEMENTAL_CHECKED_THROUGH}（対象の案内のみ）`;
     notice.hidden = true;
     noticeText.textContent = "";
   }
@@ -3510,6 +3530,97 @@ function itemNameIsUnique(d){
 function legacySupplementalFor(map, d){
   if(!map || !itemNameIsUnique(d)) return null;
   return map[d.n] || null;
+}
+let MANUFACTURER_NOTICES = [];
+let MANUFACTURER_NOTICES_STATE = "loading";
+let MANUFACTURER_BULLETINS = null;
+let MANUFACTURER_BULLETINS_FAILED = false;
+let MANUFACTURER_BULLETINS_CACHED = false;
+function manufacturerSourceURL(value){
+  try{
+    const url = new URL(value);
+    return url.protocol === "https:" && !url.username && !url.password ? url.href : "";
+  }catch(error){ return ""; }
+}
+function validManufacturerNotice(n){
+  return n && typeof n.id === "string" && typeof n.maker === "string"
+    && typeof n.title === "string" && typeof n.reason === "string"
+    && Boolean(manufacturerSourceURL(n.url)) && /^[a-f0-9]{64}$/.test(n.sha256 || "")
+    && Boolean(normalizedPublicationDate(n.verified_at))
+    && Array.isArray(n.targets) && n.targets.length
+    && n.targets.every(t=>t && normalizeYj(t.yj_code) && typeof t.product_name === "string"
+      && Array.isArray(t.packages) && t.packages.every(p=>p && typeof p.package === "string"))
+    && Array.isArray(n.alternatives) && n.alternatives.every(g=>g && Array.isArray(g.products)
+      && g.products.every(p=>p && typeof p.name === "string"))
+    && Array.isArray(n.cautions) && n.cautions.every(s=>typeof s === "string");
+}
+function manufacturerNoticeChanged(n){
+  return Boolean(MANUFACTURER_BULLETINS && MANUFACTURER_BULLETINS.items.some(item=>
+    item.url === n.url && item.sha256 && item.sha256 !== n.sha256));
+}
+function manufacturerSourceChanged(url){
+  return MANUFACTURER_NOTICES.some(n=>n.url === url && manufacturerNoticeChanged(n));
+}
+function validManufacturerBulletins(data){
+  return data && data.schema_version === 1 && ["ok","partial","failed"].includes(data.status)
+    && typeof data.checked_at === "string" && Boolean(normalizedPublicationDate(data.checked_at))
+    && Array.isArray(data.items) && data.items.every(i=>i && typeof i === "object"
+      && typeof i.maker === "string" && typeof i.title === "string" && manufacturerSourceURL(i.url)
+      && ["confirmed","needs_review"].includes(i.review_status)
+      && (i.sha256 == null || /^[a-f0-9]{64}$/.test(i.sha256)));
+}
+function manufacturerNoticesFor(d, includeChanged=false){
+  if(!d || !d.yj) return [];
+  return MANUFACTURER_NOTICES.flatMap(notice=>{
+    if(!includeChanged && manufacturerNoticeChanged(notice)) return [];
+    const target = notice.targets.find(t=>t.yj_code === normalizeYj(d.yj)
+      && norm(t.product_name) === norm(d.n)
+      && lifecycleMakerMatches(t.maker || notice.maker, itemMakerText(d)));
+    return target ? [{notice,target}] : [];
+  });
+}
+function manufacturerNoticeHTML(notice, target=null, yj=""){
+  const targets = target ? [target] : notice.targets;
+  const groups = notice.alternatives.filter(g=>!yj || !g.target_yj_codes || g.target_yj_codes.includes(yj));
+  const dateText = `文書年月日：${notice.announced_at || "記載なし"}／公式掲載日：${notice.listed_at || "確認できません"}／原文確認日：${notice.verified_at}`;
+  const timing = notice.resumption && (typeof notice.resumption === "string" ? notice.resumption : notice.resumption.text)
+    || notice.expected_resumption && notice.expected_resumption.display || "";
+  const lots = Array.isArray(notice.lots) ? notice.lots.filter(l=>!target || norm(target.product_name).includes(norm(l.strength || ""))) : [];
+  return `<section class="manufacturer-note"><h4>${esc(notice.title)}</h4><p>${esc(dateText)}</p>`
+    + `<ul>${targets.map(t=>`<li>${esc(t.product_name)}：${t.packages.map(p=>esc(p.package)).join("／")}`
+      + (t.seller ? `（販売経路：${esc(t.seller)}）` : "")
+      + (t.planned_timing ? `。${/出荷停止中/.test(t.planned_timing) ? "案内の状況" : "案内の予定時期"}：${esc(t.planned_timing)}` : "")
+      + (ITEMS.some(d=>d.yj === t.yj_code && norm(d.n) === norm(t.product_name))
+        ? ` <a href="items/${encodeURIComponent(t.yj_code)}.html">品目情報</a>`
+        : "（現行供給CSVの収録なし。過去の案内として掲載）") + `</li>`).join("")}</ul>`
+    + `<p><strong>メーカーの説明：</strong>${esc(notice.reason)}</p>`
+    + (timing ? `<p><strong>再開・解除の案内：</strong>${esc(timing)}</p>` : "")
+    + (lots.length ? `<p><strong>クラスII回収対象：</strong>${lots.map(l=>`${esc(l.strength)} ${esc(l.package)} ${esc(l.lot)}`).join("／")}。出荷停止の対象範囲とは異なります。</p>` : "")
+    + groups.map(g=>`<div><p><strong>メーカーが示す参考候補${g.indication ? `（${esc(g.indication)}）` : ""}</strong></p>`
+      + (g.type ? `<p>${esc(g.type)}</p>` : "")
+      + (g.no_alternative_statement ? `<p>${esc(g.no_alternative_statement)}</p>` : "")
+      + (g.products.length ? `<ul>${g.products.map(p=>`<li>${esc(p.name)}${p.product_kind === "medical_device" ? "（医療機器）" : ""}${p.scope ? `：${esc(p.scope)}` : ""}</li>`).join("")}</ul>` : "")
+      + (g.cautions && g.cautions.length ? `<ul>${g.cautions.map(s=>`<li>${esc(s)}</li>`).join("")}</ul>` : "") + `</div>`).join("")
+    + (!groups.length ? `<p>今回の案内に具体的な代替候補品名の記載はありません。</p>` : "")
+    + `<ul>${notice.cautions.map(s=>`<li>${esc(s)}</li>`).join("")}</ul>`
+    + `<p>候補の入手可否や変更の適否を保証するものではありません。電子添文を確認し、医師・薬剤師等が判断してください。</p>`
+    + `<a class="maker-link" href="${esc(manufacturerSourceURL(notice.url))}" target="_blank" rel="noopener" data-dsn-event="official-source-open">${esc(notice.maker)}の原典を確認</a></section>`;
+}
+function renderManufacturerNews(){
+  const node = document.getElementById("manufacturerList");
+  const status = document.getElementById("manufacturerStatus");
+  const bulletins = MANUFACTURER_BULLETINS;
+  const current = MANUFACTURER_NOTICES.filter(n=>!manufacturerNoticeChanged(n));
+  node.innerHTML = current.map(n=>`<details class="topic-card glass"><summary>${esc(n.title)}</summary>${manufacturerNoticeHTML(n)}</details>`).join("");
+  const pending = bulletins ? bulletins.items.filter(i=>i.review_status !== "confirmed" && manufacturerSourceURL(i.url)).slice(0,12) : [];
+  if(pending.length){
+    node.insertAdjacentHTML("beforeend", `<details class="topic-card glass"><summary>新しく検出した公式案内（品目照合前）</summary><p>掲載先の見出しとリンクです。理由・対象規格・供給区分は原典確認後に反映します。</p><ul>${pending.map(i=>`<li>${esc(i.maker)}／掲載日：${esc(i.posted_at || "記載なし")} <a href="${esc(manufacturerSourceURL(i.url))}" target="_blank" rel="noopener">${esc(i.title)}</a></li>`).join("")}</ul></details>`);
+  }
+  status.textContent = (MANUFACTURER_NOTICES_STATE === "loaded" ? `${current.length}件の原典確認済み案内を掲載。`
+    : MANUFACTURER_NOTICES_STATE === "failed" ? "原典確認済み案内を取得できません。取得失敗は案内がないことを意味しません。" : "原典確認済み案内を読み込んでいます。")
+    + (bulletins ? `速報収集試行：${bulletins.checked_at || "確認できません"}。`
+      + (bulletins.status !== "ok" || MANUFACTURER_BULLETINS_CACHED ? "一部の取得先を確認できない、または前回キャッシュを表示しています。新しい案内がないとは判断しません。" : "登録した取得先の見出しを確認しました。全製薬会社を網羅するものではありません。")
+      : MANUFACTURER_BULLETINS_FAILED ? "速報の収集状態を取得できません。新しい案内がないとは判断しません。" : "速報の収集状態を確認中です。");
 }
 function findAnnouncement(d){
   const lifecycle = lifecycleAnnouncement(d);
@@ -3614,7 +3725,7 @@ function loadSupplementalData(){
           throw new Error("invalid discrepancies");
         }
         SUPPLY_DISCREPANCIES = data.products;
-        SUPPLEMENTAL_CHECKED_THROUGH = String(data.source && data.source.manufacturer_checked_through || data.generated_at || "");
+        SUPPLEMENTAL_DISCREPANCY_CHECKED = String(data.source && data.source.manufacturer_checked_through || "");
         const sourceText = String(data.source && data.source.mhlw_note || "");
         const sourceMatch = sourceText.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);
         SUPPLEMENTAL_MHLW_DATE = sourceMatch
@@ -3626,7 +3737,8 @@ function loadSupplementalData(){
         if(!data || !Array.isArray(data.sources) || !data.sources.length || data.sources.some(source=>source.ok !== true)){
           throw new Error("incomplete health");
         }
-        SUPPLEMENTAL_CHECKED_THROUGH = String(data.checked || SUPPLEMENTAL_CHECKED_THROUGH || "");
+        SUPPLEMENTAL_CHECKED_THROUGH = String(data.checked || "");
+        SUPPLEMENTAL_ATTEMPT = data.last_attempt || null;
         SUPPLEMENTAL_STATE.health = cached ? "stale" : "loaded";
       }).catch(()=>{ SUPPLEMENTAL_STATE.health = "failed"; }).finally(updateSupplementalStatus),
     fetchFirst(["maker_announcements.json", "https://kyokyu-navi.jp/maker_announcements.json"])
@@ -3635,6 +3747,26 @@ function loadSupplementalData(){
       }).catch(()=>{}),
     fetchFirst(["announcement_summaries.json", "https://kyokyu-navi.jp/announcement_summaries.json"])
       .then(res => res && res.json()).then(data => { if(data) SUMMARIES = data; }).catch(()=>{}),
+    fetchFirst(["manufacturer_notices.json", "https://kyokyu-navi.jp/manufacturer_notices.json"])
+      .then(res => { if(!res) throw new Error("missing notices"); return res.json(); })
+      .then(data => {
+        if(data.schema_version !== 1 || !Array.isArray(data.notices)) throw new Error("invalid notices");
+        if(data.notices.some(n=>!validManufacturerNotice(n))) throw new Error("invalid notice");
+        MANUFACTURER_NOTICES = data.notices;
+        MANUFACTURER_NOTICES_STATE = "loaded";
+        renderManufacturerNews();
+      }).catch(()=>{
+        MANUFACTURER_NOTICES_STATE = "failed";
+        renderManufacturerNews();
+      }),
+    fetchFirst(["manufacturer_bulletins.json", "https://kyokyu-navi.jp/manufacturer_bulletins.json"])
+      .then(res => { if(!res) throw new Error("missing bulletins"); const cached=responseUsesCachedData(res); return res.json().then(data=>({data,cached})); })
+      .then(({data,cached}) => {
+        if(!validManufacturerBulletins(data)) throw new Error("invalid bulletins");
+        MANUFACTURER_BULLETINS = data;
+        MANUFACTURER_BULLETINS_CACHED = cached;
+        renderManufacturerNews();
+      }).catch(()=>{ MANUFACTURER_BULLETINS_FAILED = true; renderManufacturerNews(); }),
     fetchFirst(["announcement_packages.json", "https://kyokyu-navi.jp/announcement_packages.json"])
       .then(res => res && res.json()).then(data => { if(data) PACKAGES = data; }).catch(()=>{}),
     fetchFirst(["resolution_stats.json", "https://kyokyu-navi.jp/resolution_stats.json"])
@@ -5045,7 +5177,9 @@ function openDetail(d, opts={}){
   // 案内文PDFのAI要約（案内文リンクがある品目のみ）
   const $mSum = document.getElementById("mSummary");
   const summary = announcement ? legacySupplementalFor(SUMMARIES,d) : null;
-  if(summary && summary.lines && summary.lines.length){
+  if(summary && summary.lines && summary.lines.length && MANUFACTURER_NOTICES_STATE === "loaded"
+      && !manufacturerNoticesFor(d,true).length
+      && (!summary.source_url || summary.source_url === announcement.url)){
     $mSum.innerHTML =
       `<div class="sum-title">案内文のポイント（AI要約）</div>
        <ul>${summary.lines.map(l=>`<li>${esc(l)}</li>`).join("")}</ul>
@@ -5055,6 +5189,10 @@ function openDetail(d, opts={}){
     $mSum.hidden = true;
     $mSum.innerHTML = "";
   }
+  const manufacturerNotes = document.getElementById("mManufacturerNotes");
+  const verifiedNotices = manufacturerNoticesFor(d);
+  manufacturerNotes.innerHTML = verifiedNotices.map(({notice,target})=>manufacturerNoticeHTML(notice, target, d.yj)).join("");
+  manufacturerNotes.hidden = !verifiedNotices.length;
 
   document.getElementById("mNote").textContent = d.delist
     ? "※ 厚生労働省の公表データ上、薬価削除予定の区分または経過措置期限が収録されています。販売・製造の終了や終了日とは別の情報です。薬価の扱い・期限は厚生労働省、販売予定はメーカー原文でそれぞれ確認してください。"
