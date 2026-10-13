@@ -849,7 +849,7 @@ def supplemental_entry_html(entry: dict) -> str:
         parts.append(f'<span>案内公表：{esc(lifecycle.get("announced_at") or "確認できません")}｜'
                      f'案内の最終確認：{esc(lifecycle.get("verified_at") or "確認できません")}</span>')
         if not entry.get("lifecycle_current"):
-            parts.append('<span>案内の確認が古い、または確認状態が不明です。現在の扱いは原文で再確認してください。</span>')
+            parts.append('<span>案内の確認状態が完全でない、確認日が古い、または確認日を取得できません。現在の扱いは必ず原文で再確認してください。</span>')
     elif entry.get("status") == "ended":
         parts.append('<span class="reason-tag">厚労省の公表区分：販売中止</span>')
     if entry.get("delist_volume"):
@@ -1297,7 +1297,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
             if lifecycle_match.get("announced_at"):
                 lifecycle_box += f'（公表 {esc(lifecycle_match.get("announced_at"))}）'
             verified_at = esc(lifecycle_match.get("verified_at") or "確認日不明")
-            lifecycle_box += (f'''</p>{lifecycle_end_details(lifecycle_match)}<p>案内の最終確認日：{verified_at}。{"確認日が7日以上前のため、現在の扱いは必ず原文で再確認してください。" if not lifecycle_current else "厚労省の現在の供給区分と、メーカーの今後の販売予定は別の情報として併記しています。"}</p>{lifecycle_link}<p><a href="{DISCONTINUATION_GUIDE}">販売中止・製造中止・薬価削除の確認方法</a></p></div>''')
+            lifecycle_box += (f'''</p>{lifecycle_end_details(lifecycle_match)}<p>案内の最終確認日：{verified_at}。{"案内の確認状態が完全でない、確認日が古い、または確認日を取得できません。現在の扱いは必ず原文で再確認してください。" if not lifecycle_current else "厚労省の現在の供給区分と、メーカーの今後の販売予定は別の情報として併記しています。"}</p>{lifecycle_link}<p><a href="{DISCONTINUATION_GUIDE}">販売中止・製造中止・薬価削除の確認方法</a></p></div>''')
 
     discrepancy_box = ""
     if discrepancy_match:

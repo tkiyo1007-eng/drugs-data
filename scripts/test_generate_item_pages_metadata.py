@@ -961,6 +961,34 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
         entry["status"] = "ended"
         self.assertEqual("sales-notices", supplemental_bucket(entry))
 
+    def test_fresh_lifecycle_verification_with_partial_health_does_not_claim_seven_day_age(self):
+        row, lifecycle = self.row(), self.lifecycle()
+        health = {"checked": "2026-10-14", "sources": [{"source": "parse_towa", "ok": True}],
+                  "last_attempt": {"checked": "2026-10-14", "status": "partial", "sources": [
+                      {"source": "parse_kemifa", "ok": False, "retained": True, "error": "timeout"}]}}
+        discrepancy = {"source": {"mhlw_note": "2026年10月14日", "manufacturer_checked_through": "2026-10-14"}}
+        context = supplemental_context(health, discrepancy, "2026-10-14")
+        self.assertTrue(lifecycle_verification_is_recent(lifecycle, context["checked"]))
+        self.assertFalse(context["trusted"])
+        output = page_html(row, row["YJコード"], "ok", "2026-10-14", [], {row["YJコード"]},
+                           lifecycle=lifecycle, supplemental_checked_date=context["checked"],
+                           supplemental_trusted=context["trusted"], supplemental_warning=context["warning"])
+        self.assertIn("案内の最終確認日：2026-10-14", output)
+        self.assertIn("案内の確認状態が完全でない、確認日が古い、または確認日を取得できません", output)
+        self.assertNotIn("確認日が7日以上前のため", output)
+        self.assertNotIn("メーカー公式：販売中止予定", output)
+        self.assertIn("厚労省：通常出荷", output)
+        self.assertIn('"dateModified":"2026-10-14"', output)
+        entry = {"key": row["YJコード"], "name": row["商品名"], "maker": lifecycle["maker"],
+                 "status": "ok", "updated": "2026-07-07", "lifecycle": lifecycle,
+                 "lifecycle_current": False, "supplements": supplemental_labels(
+                     row, lifecycle, reference_date=context["checked"], trusted=context["trusted"]),
+                 "hubs": ["supplemental"]}
+        hub = hub_html("supplemental", [entry], "2026-10-14")
+        self.assertIn("案内の確認状態が完全でない、確認日が古い、または確認日を取得できません", hub)
+        self.assertNotIn("案内の確認が古い、または確認状態が不明", hub)
+        self.assertIn("案内の最終確認：2026-10-14", hub)
+
     def test_partial_latest_collection_retains_last_complete_date_and_warns_with_attempt_date(self):
         health = {"checked": "2026-10-08", "sources": [{"source": "parse_towa", "ok": True}],
                   "last_attempt": {"checked": "2026-10-14", "status": "partial", "sources": [
