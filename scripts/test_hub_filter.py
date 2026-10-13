@@ -20,16 +20,27 @@ class HubParser(HTMLParser):
         self.links = []
         self.anchors = []
         self.controls = {}
+        self.groups = {}
+        self.current_group = None
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        if tag == "section" and "supplemental-group" in attrs.get("class", "").split():
+            self.current_group = attrs["id"]
+            self.groups[self.current_group] = []
         if tag == "li":
             self.rows.append(attrs)
+            if self.current_group:
+                self.groups[self.current_group].append(attrs)
         if tag == "a":
             self.links.append(attrs.get("href", ""))
             self.anchors.append(attrs)
         if attrs.get("id", "").startswith("hubFilter"):
             self.controls[attrs["id"]] = attrs
+
+    def handle_endtag(self, tag):
+        if tag == "section":
+            self.current_group = None
 
 
 class HubFilterTests(unittest.TestCase):
@@ -56,6 +67,48 @@ class HubFilterTests(unittest.TestCase):
                 "hubs": ["stopped"],
             },
         ]
+
+    def supplemental_entries(self):
+        return [
+            dict(self.entries[0], status="ended", delist=True, hubs=["supplemental"]),
+            dict(self.entries[1], status="ok", delist=True, hubs=["supplemental"]),
+            dict(self.entries[2], name="薬価削除予定という名前のテスト", delist=False,
+                 hubs=["supplemental"]),
+        ]
+
+    def test_price_filter_uses_collected_flag_across_groups_without_duplicate_items(self):
+        entries = self.supplemental_entries()
+        output = hub_html("supplemental", entries, "2026-10-10")
+        parsed = HubParser()
+        parsed.feed(output)
+        self.assertEqual(["1", "1", "0"], [
+            row["data-price-info"] for group in (
+                "sales-notices", "delisting", "maker-notices")
+            for row in parsed.groups[group]])
+        self.assertEqual(3, len(parsed.rows))
+        for entry in entries:
+            self.assertEqual(1, parsed.links.count(entry["key"] + ".html"))
+        self.assertTrue(all("hidden" not in row for row in parsed.rows))
+        self.assertIn("全体で2品目に収録", output)
+        self.assertIn("そのうち1品目は「販売中止", output)
+        self.assertIn("薬価削除済み、製造・販売の終了や終了日を示すものではありません", output)
+        checkbox = parsed.controls["hubFilterPriceOnly"]
+        self.assertEqual("checkbox", checkbox["type"])
+        self.assertEqual("hubFilterPriceHint", checkbox["aria-describedby"])
+        self.assertEqual("hubItems", checkbox["aria-controls"])
+        self.assertNotIn("checked", checkbox)
+        self.assertRegex(output, r'<label class="price-filter">\s*<input id="hubFilterPriceOnly"[^>]*>\s*<span>厚労省の薬価削除予定・経過措置期限が収録された品目だけ表示</span>\s*</label>')
+        self.assertIn("厚労省データの薬価削除予定・経過措置期限は、全体で2品目", output)
+        self.assertIn("メーカー案内だけの経過措置情報は、原文も別に確認してください", output)
+        self.assertNotIn('for="hubFilterPriceOnly"', output)
+        self.assertLess(output.index('class="price-note"'), output.index('id="hubFilter"'))
+        for slug in ITEM_HUB_SLUGS - {"supplemental"}:
+            other = hub_html(slug, [dict(entry, hubs=[slug]) for entry in entries], "2026-10-10")
+            other_parsed = HubParser()
+            other_parsed.feed(other)
+            self.assertNotIn("hubFilterPriceOnly", other_parsed.controls)
+            self.assertTrue(all("data-price-info" not in row for row in other_parsed.rows))
+            self.assertNotIn('class="price-note"', other)
 
     def test_search_is_limited_to_three_hubs_and_keeps_static_items(self):
         for slug in ITEM_HUB_SLUGS:
@@ -210,14 +263,15 @@ class HubFilterTests(unittest.TestCase):
             script for script in re.findall(r"<script>(.*?)</script>", output, re.S)
             if 'getElementById("hubFilter")' in script
         )
-        payload = {"script": script, "rows": [row["data-search"] for row in parsed.rows]}
+        payload = {"script": script, "rows": parsed.rows}
         runner = r'''
 const assert = require("node:assert/strict");
 const vm = require("node:vm");
 const payload = JSON.parse(process.argv[1]);
 function setup(before = "") {
-  const rows = payload.rows.map(text => ({
-    hidden: false, textContent: text, getAttribute: () => text
+  const rows = payload.rows.map(attrs => ({
+    hidden: false, textContent: attrs["data-search"],
+    getAttribute: name => attrs[name] ?? null
   }));
   const node = (extra = {}) => Object.assign({
     hidden: true, handlers: {}, addEventListener(event, fn) { this.handlers[event] = fn; }
@@ -271,6 +325,101 @@ assert.equal(live.nodes.hubFilter.hidden, true);
 const unsupported = setup("String.prototype.normalize = undefined");
 assert.equal(unsupported.nodes.hubFilter.hidden, true);
 assert.ok(unsupported.rows.every(row => !row.hidden));
+'''
+        result = subprocess.run(
+            [shutil.which("node"), "-e", runner, json.dumps(payload, ensure_ascii=False)],
+            capture_output=True, text=True, timeout=20,
+        )
+        self.assertEqual(0, result.returncode, result.stderr)
+
+    @unittest.skipUnless(shutil.which("node"), "Node.js is needed to exercise input events")
+    def test_real_script_price_condition_and_text_clear_empty_and_fail_open(self):
+        output = hub_html("supplemental", self.supplemental_entries(), "2026-10-10")
+        parsed = HubParser()
+        parsed.feed(output)
+        script = next(
+            script for script in re.findall(r"<script>(.*?)</script>", output, re.S)
+            if 'getElementById("hubFilter")' in script
+        )
+        payload = {"script": script, "rows": parsed.rows, "groups": parsed.groups}
+        runner = r'''
+const assert = require("node:assert/strict");
+const vm = require("node:vm");
+const payload = JSON.parse(process.argv[1]);
+function setup(before = "", omitFlag = false) {
+  const rows = payload.rows.map(attrs => ({
+    hidden: false, textContent: attrs["data-search"],
+    key: attrs["data-search"].split(" ")[0],
+    getAttribute: name => omitFlag && name === "data-price-info" ? null : attrs[name] ?? null
+  }));
+  const node = (extra = {}) => Object.assign({
+    hidden: true, handlers: {}, addEventListener(event, fn) { this.handlers[event] = fn; }
+  }, extra);
+  const groups = Object.entries(payload.groups).map(([id, attrs]) => node({
+    id, hidden: false, querySelectorAll: () => rows.filter(row =>
+      attrs.some(attr => attr["data-search"].split(" ")[0] === row.key))
+  }));
+  const nodes = {
+    hubFilter: node(), hubItems: node({querySelectorAll: selector => selector === "li" ? rows : groups}),
+    hubFilterInput: node({value: "", focus() { this.focused = true; }}),
+    hubFilterPriceOnly: node({checked: false}), hubFilterClear: node({disabled: true}),
+    hubFilterCount: node({textContent: ""}), hubFilterEmpty: node()
+  };
+  const context = vm.createContext({document: {getElementById: id => nodes[id] ?? null}});
+  if (before) vm.runInContext(before, context);
+  vm.runInContext(payload.script, context);
+  return {rows, groups, nodes, context};
+}
+const live = setup();
+const input = live.nodes.hubFilterInput;
+const price = live.nodes.hubFilterPriceOnly;
+const clear = live.nodes.hubFilterClear;
+const visible = () => live.rows.filter(row => !row.hidden).map(row => row.key).sort();
+const search = text => { input.value = text; input.handlers.input(); };
+const toggle = value => { price.checked = value; price.handlers.change(); };
+assert.deepEqual(visible(), ["1111111F1111", "2222222F2222", "3333333F3333"]);
+toggle(true);
+assert.deepEqual(visible(), ["1111111F1111", "2222222F2222"]);
+assert.equal(live.nodes.hubFilterCount.textContent, "2 / 3品目を表示");
+assert.deepEqual(live.groups.map(group => [group.id, group.hidden]), [
+  ["sales-notices", false], ["delisting", false], ["maker-notices", true]
+]);
+assert.equal(clear.disabled, false);
+search("テスト 対象製薬");
+assert.deepEqual(visible(), ["2222222F2222"]);
+search("薬価削除予定という名前");
+assert.deepEqual(visible(), []); // The words alone never make delist=false qualify.
+assert.equal(live.nodes.hubFilterEmpty.hidden, false);
+assert.equal(live.nodes.hubFilterCount.textContent, "0 / 3品目を表示");
+assert.ok(live.groups.every(group => group.hidden));
+toggle(false);
+assert.deepEqual(visible(), ["3333333F3333"]);
+toggle(true);
+clear.handlers.click();
+assert.equal(input.value, "");
+assert.equal(price.checked, false);
+assert.equal(input.focused, true);
+assert.equal(clear.disabled, true);
+assert.equal(live.nodes.hubFilterEmpty.hidden, true);
+assert.deepEqual(visible(), ["1111111F1111", "2222222F2222", "3333333F3333"]);
+assert.ok(live.groups.every(group => !group.hidden));
+toggle(true);
+vm.runInContext("String.prototype.normalize = undefined", live.context);
+price.handlers.change();
+assert.deepEqual(visible(), ["1111111F1111", "2222222F2222", "3333333F3333"]);
+assert.ok(live.groups.every(group => !group.hidden));
+assert.equal(live.nodes.hubFilter.hidden, true);
+assert.equal(live.nodes.hubFilterEmpty.hidden, true);
+assert.equal(price.checked, false);
+const unsupported = setup("String.prototype.normalize = undefined");
+assert.equal(unsupported.nodes.hubFilter.hidden, true);
+assert.ok(unsupported.rows.every(row => !row.hidden));
+assert.ok(unsupported.groups.every(group => !group.hidden));
+const missingFlag = setup("", true);
+missingFlag.nodes.hubFilterPriceOnly.checked = true;
+missingFlag.nodes.hubFilterPriceOnly.handlers.change();
+assert.ok(missingFlag.rows.every(row => row.hidden));
+assert.equal(missingFlag.nodes.hubFilterCount.textContent, "0 / 3品目を表示");
 '''
         result = subprocess.run(
             [shutil.which("node"), "-e", runner, json.dumps(payload, ensure_ascii=False)],
