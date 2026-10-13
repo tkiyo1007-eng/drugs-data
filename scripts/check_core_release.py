@@ -47,6 +47,8 @@ def main() -> int:
         errors = validate_retained_bundle(args.base, min_count=args.min_count)
         # 登録元は削除済み対象だけを許容する。URL、構造、重複、現在も存在する
         # 品目とのメーカー・名称一致など、他の不正を免除しない。
+        # 新メーカーregistryはvalidate_retained_bundleで、正しい削除履歴marker
+        # だけを許容し、現在の対象との名称・メーカー不一致を引き続き拒否する。
         errors.extend(validate_manual_groups(str(args.base / "drugs_app_ready.csv"),
                                              str(args.base / "manual_announcement_groups.json"),
                                              allow_removed_targets=True))
@@ -54,7 +56,7 @@ def main() -> int:
         errors = [str(error)]
     if errors:
         raise SystemExit("\n".join(errors))
-    print("OK: 新CSVへ整合済みの保持メーカー4 JSON・lifecycleを読取検証しました")
+    print("OK: 新CSVへ整合済みの保持メーカー4 JSON・lifecycle・原典registryを読取検証しました")
     return 0
 
 

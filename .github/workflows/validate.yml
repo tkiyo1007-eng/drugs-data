@@ -71,6 +71,10 @@ jobs:
           git diff --exit-code -- supply_discrepancies.json
       - name: Web・iOS共通設定の検査
         run: python3 scripts/validate_shared_content.py
+      - name: 原典確認済みメーカー案内と速報収集状態の検査
+        run: |
+          python3 scripts/validate_manufacturer_notices.py
+          python3 scripts/fetch_manufacturer_bulletins.py --validate-only --base .
       - name: 話題・注目製品・供給確認ガイドの再生成確認
         run: |
           python3 scripts/generate_curated_pages.py --csv drugs_app_ready.csv --site .

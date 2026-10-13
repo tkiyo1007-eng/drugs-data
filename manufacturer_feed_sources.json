@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "max_document_checks_per_day": 8,
+  "sources": [
+    {
+      "id": "pfizer",
+      "maker": "ファイザー",
+      "parser": "pfizer_json",
+      "index_url": "https://api.pfizermedicalinformation.com/api/v1/notification-letter-home?domain=pfizermedicalinformation_jp&audience=0&language=ja-jp&limit=14",
+      "index_scope": [{"host": "api.pfizermedicalinformation.com", "path": "/api/v1/notification-letter-home", "exact": true}],
+      "document_scope": [{"host": "www.pfizermedicalinformation.jp", "path": "/sites/default/files/announcement/", "exact": false}],
+      "link_base": "https://www.pfizermedicalinformation.jp/",
+      "robots_4xx_unavailable": true,
+      "access_note": "公式settings.jsで指定された公開通知APIのみ。robots.txtの403は取得不能として明示し、認証が必要なAPIにはアクセスしない",
+      "terms_reviewed_at": "2026-10-14",
+      "terms_note": "見出し・掲載日・原典リンクのみ収集し、本文や画像の公開転載はしない"
+    },
+    {
+      "id": "sandoz",
+      "maker": "サンド",
+      "parser": "sandoz_next",
+      "index_url": "https://www.sandoz.jp/medical/product-notice/?tab=tab2",
+      "index_scope": [{"host": "www.sandoz.jp", "path": "/medical/product-notice/", "exact": true}],
+      "document_scope": [{"host": "sandoz-jp.cms.sandoz.com", "path": "/sites/default/files/Media%20Documents/", "exact": false}],
+      "link_base": "https://www.sandoz.jp/",
+      "access_note": "公開JP一覧の埋込Nextデータを読む。CMSはrobotsのAllow:/sites/*.pdfに合うPDFだけ取得し、CMS HTMLは巡回しない",
+      "terms_reviewed_at": "2026-10-14",
+      "terms_note": "見出し・掲載日・原典リンクのみ。本文・画像の転載なし"
+    },
+    {
+      "id": "sanwa",
+      "maker": "三和化学研究所",
+      "parser": "html",
+      "index_url": "https://med.skk-net.com/significant/083786.html",
+      "index_scope": [{"host": "med.skk-net.com", "path": "/significant/083786.html", "exact": true}],
+      "document_scope": [{"host": "med.skk-net.com", "path": "/significant/item/", "exact": false}],
+      "link_base": "https://med.skk-net.com/",
+      "terms_url": "https://www.skk-net.com/rules.html",
+      "terms_reviewed_at": "2026-10-14",
+      "terms_note": "コンテンツ転載・転用の制限とリンク事前承諾の記載を確認。収集は公開見出し・掲載日・原典リンクに限り、全文・画像を公開転載しない"
+    },
+    {
+      "id": "npi",
+      "maker": "日本薬品工業",
+      "parser": "html",
+      "index_url": "https://www.npi-inc.co.jp/medical/products",
+      "index_scope": [{"host": "www.npi-inc.co.jp", "path": "/medical/products", "exact": true}],
+      "document_scope": [{"host": "www.npi-inc.co.jp", "path": "/medical/info/file/", "exact": false}],
+      "link_base": "https://www.npi-inc.co.jp/",
+      "terms_url": "https://www.npi-inc.co.jp/sitepolicy.html",
+      "terms_reviewed_at": "2026-10-14",
+      "terms_note": "改変・複製・転載の制限とリンク事前連絡の記載を確認。既知の公開PDFのhash検査のみ可。医療関係者同意cookieを自動設定しない",
+      "access_note": "indexが/medical/agreeへ移動する場合は収集失敗として保存。既知の公開原典の監視は別に行う"
+    },
+    {
+      "id": "daiichi",
+      "maker": "第一三共",
+      "parser": "html",
+      "index_url": "https://www.medicalcommunity.jp/products/news",
+      "index_scope": [{"host": "www.medicalcommunity.jp", "path": "/products/news", "exact": true}],
+      "document_scope": [{"host": "www.medicalcommunity.jp", "path": "/filedsp/", "exact": false}],
+      "link_base": "https://www.medicalcommunity.jp/",
+      "terms_url": "https://www.medicalcommunity.jp/terms",
+      "terms_reviewed_at": "2026-10-14",
+      "terms_note": "利用条件ページも職種確認へ移動し全文未確認。職種同意cookieやログインを自動設定しない。公開済み既知PDFのみrobots許可pathでhash検査",
+      "access_note": "職種確認・ログインへ移動したindexは収集失敗として保存し、0件や変更なしに置換しない"
+    },
+    {
+      "id": "towa",
+      "maker": "東和薬品",
+      "parser": "legacy_cache",
+      "index_url": "https://med.towayakuhin.co.jp/medical/product/info.php?tab=5",
+      "index_scope": [{"host": "med.towayakuhin.co.jp", "path": "/medical/product/info.php", "exact": true}],
+      "document_scope": [{"host": "med.towayakuhin.co.jp", "path": "/medical/product/fileloader.php", "exact": true}],
+      "link_base": "https://med.towayakuhin.co.jp/",
+      "reuse_source_id": "parse_towa",
+      "terms_reviewed_at": "2026-10-14",
+      "terms_note": "既存収集結果を読み、職種ゲートを追加通過せず一覧を二重取得しない。PDFは公開直接リンク・robots許可pathで検査",
+      "access_note": "maker_collection_health.jsonのparse_towa成功日を明示。古いキャッシュを当日の一覧確認として扱わない"
+    }
+  ]
+}

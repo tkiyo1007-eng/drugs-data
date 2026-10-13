@@ -5,68 +5,168 @@
    "source": "parse_sawai",
    "ok": true,
    "count": 20,
-   "error": ""
+   "error": "",
+   "last_success": "2026-10-14"
   },
   {
    "source": "parse_nichiiko",
    "ok": true,
    "count": 9,
-   "error": ""
+   "error": "",
+   "last_success": "2026-10-14"
   },
   {
    "source": "parse_nichiiko_excel",
    "ok": true,
    "count": 506,
-   "error": ""
+   "error": "",
+   "last_success": "2026-10-14"
   },
   {
    "source": "parse_nihon_generic",
    "ok": true,
    "count": 86,
-   "error": ""
+   "error": "",
+   "last_success": "2026-10-14"
   },
   {
    "source": "parse_kyorin",
    "ok": true,
    "count": 1,
-   "error": ""
+   "error": "",
+   "last_success": "2026-10-14"
   },
   {
    "source": "parse_dsep",
    "ok": true,
    "count": 1283,
-   "error": ""
+   "error": "",
+   "last_success": "2026-10-14"
   },
   {
    "source": "parse_kemifa",
    "ok": true,
    "count": 79,
-   "error": ""
+   "error": "",
+   "last_success": "2026-10-08"
   },
   {
    "source": "parse_towa",
    "ok": true,
    "count": 39,
-   "error": ""
+   "error": "",
+   "last_success": "2026-10-14"
   },
   {
    "source": "parse_takata",
    "ok": true,
    "count": 278,
-   "error": ""
+   "error": "",
+   "last_success": "2026-10-14"
   },
   {
    "source": "parse_hisamitsu",
    "ok": true,
-   "count": 66,
-   "error": ""
+   "count": 67,
+   "error": "",
+   "last_success": "2026-10-14"
   },
   {
    "source": "parse_nipro",
    "ok": true,
    "count": 80,
-   "error": ""
+   "error": "",
+   "last_success": "2026-10-14"
   }
  ],
- "total": 2447
+ "total": 2448,
+ "last_attempt": {
+  "checked": "2026-10-14",
+  "status": "partial",
+  "sources": [
+   {
+    "source": "parse_sawai",
+    "ok": true,
+    "count": 20,
+    "error": "",
+    "last_success": "2026-10-14"
+   },
+   {
+    "source": "parse_nichiiko",
+    "ok": true,
+    "count": 9,
+    "error": "",
+    "last_success": "2026-10-14"
+   },
+   {
+    "source": "parse_nichiiko_excel",
+    "ok": true,
+    "count": 506,
+    "error": "",
+    "last_success": "2026-10-14"
+   },
+   {
+    "source": "parse_nihon_generic",
+    "ok": true,
+    "count": 86,
+    "error": "",
+    "last_success": "2026-10-14"
+   },
+   {
+    "source": "parse_kyorin",
+    "ok": true,
+    "count": 1,
+    "error": "",
+    "last_success": "2026-10-14"
+   },
+   {
+    "source": "parse_dsep",
+    "ok": true,
+    "count": 1283,
+    "error": "",
+    "last_success": "2026-10-14"
+   },
+   {
+    "source": "parse_kemifa",
+    "ok": false,
+    "count": 0,
+    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1129)>",
+    "retained": true,
+    "retained_count": 79,
+    "last_success": "2026-10-08"
+   },
+   {
+    "source": "parse_towa",
+    "ok": true,
+    "count": 39,
+    "error": "",
+    "last_success": "2026-10-14"
+   },
+   {
+    "source": "parse_takata",
+    "ok": true,
+    "count": 278,
+    "error": "",
+    "last_success": "2026-10-14"
+   },
+   {
+    "source": "parse_hisamitsu",
+    "ok": true,
+    "count": 67,
+    "error": "",
+    "last_success": "2026-10-14"
+   },
+   {
+    "source": "parse_nipro",
+    "ok": true,
+    "count": 80,
+    "error": "",
+    "last_success": "2026-10-14"
+   }
+  ],
+  "total": 2369,
+  "errors": [
+   "parse_kemifa: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1129)>"
+  ]
+ }
 }

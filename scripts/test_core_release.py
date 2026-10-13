@@ -24,6 +24,11 @@ class CoreRegressionScopeTests(unittest.TestCase):
         self.assertEqual([test.id() for test in core], [retained.id(), unrelated.id()])
         self.assertEqual(full.countTestCases(), 3)
 
+    def test_manufacturer_registry_contract_stays_in_core_regressions(self):
+        from test_manufacturer_x_plan import NoticeContractTests
+        full = unittest.defaultTestLoader.loadTestsFromTestCase(NoticeContractTests)
+        self.assertEqual(core_regression_suite(full).countTestCases(), full.countTestCases())
+
 
 if __name__ == "__main__":
     unittest.main()

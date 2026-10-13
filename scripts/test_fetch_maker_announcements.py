@@ -1,4 +1,5 @@
 import csv
+import datetime
 import json
 import os
 import tempfile
@@ -308,6 +309,23 @@ class AnnouncementMatchingTests(unittest.TestCase):
             result = mod.deepen_sawai({}, path, limit=10)
         self.assertEqual(result[name]["event_type"], "discontinued")
 
+    def test_sawai_deep_scan_network_failure_does_not_advance_checked(self):
+        name = "テスト錠１ｍｇ「サワイ」"
+        path = self.make_csv([self.row(name)])
+        old = {"maker": "沢井製薬", "title": "限定出荷", "url": "https://example.test/old.pdf",
+               "checked": "2026-10-08"}
+        with mock.patch.object(mod, "build_sawai_prodid_map", return_value={mod.norm(name): "123"}), \
+             mock.patch.object(mod, "fetch_sawai_prodid_announcement", side_effect=OSError("TLS failure")):
+            result = mod.deepen_sawai({name: dict(old)}, path, limit=10)
+        self.assertEqual(result[name], old)
+
+    def test_sawai_network_failure_is_distinct_from_successful_empty_page(self):
+        with mock.patch.object(mod, "fetch", side_effect=OSError("TLS failure")):
+            with self.assertRaises(OSError):
+                mod.fetch_sawai_prodid_announcement("123")
+        with mock.patch.object(mod, "fetch", return_value="<p>供給案内なし</p>"):
+            self.assertIsNone(mod.fetch_sawai_prodid_announcement("123"))
+
     def test_event_history_keeps_replaced_notice_without_duplicates(self):
         current = {"テスト錠": {"maker": "テスト製薬", "title": "販売中止のご案内",
                                 "url": "https://example.test/end.pdf",
@@ -361,6 +379,135 @@ class AnnouncementMatchingTests(unittest.TestCase):
         errors = "\n".join(mod.collection_anomalies(health, 153, previous))
         self.assertIn("50%未満", errors)
         self.assertIn("parser_b", errors)
+
+    def test_source_drop_is_isolated_without_refreshing_its_success_date(self):
+        previous = {
+            "checked": "2026-10-08", "total": 300,
+            "sources": [
+                {"source": "a", "ok": True, "count": 200, "error": ""},
+                {"source": "b", "ok": True, "count": 100, "error": ""},
+            ],
+        }
+        health = [
+            {"source": "a", "ok": True, "count": 200, "error": ""},
+            {"source": "b", "ok": True, "count": 3, "error": ""},
+        ]
+        document, failed, anomalies = mod.prepare_collection_attempt(
+            health, 203, previous, today="2026-10-14",
+        )
+        self.assertEqual(anomalies, [])
+        self.assertEqual(failed, {"b"})
+        self.assertEqual(document["checked"], "2026-10-08")
+        self.assertEqual(document["last_attempt"]["status"], "partial")
+        self.assertEqual(document["sources"][1]["count"], 100)
+        self.assertEqual(document["sources"][1]["last_success"], "2026-10-08")
+        self.assertEqual(document["last_attempt"]["sources"][1]["count"], 3)
+        self.assertFalse(document["last_attempt"]["sources"][1]["ok"])
+
+    def test_global_drop_and_missing_source_fallback_still_fail_closed(self):
+        previous = {"checked": "2026-10-08", "total": 1000,
+                    "sources": [{"source": "a", "ok": True, "count": 1000, "error": ""}]}
+        document, _, anomalies = mod.prepare_collection_attempt(
+            [{"source": "a", "ok": True, "count": 30, "error": ""}],
+            30, previous, today="2026-10-14",
+        )
+        self.assertTrue(any("50%未満" in error for error in anomalies))
+        self.assertEqual(document["last_attempt"]["status"], "failed")
+        document, _, anomalies = mod.prepare_collection_attempt(
+            [{"source": "a", "ok": False, "count": 0, "error": "TLS失敗"}],
+            0, None, today="2026-10-14",
+        )
+        self.assertTrue(any("前回値" in error for error in anomalies))
+        self.assertEqual(document["last_attempt"]["status"], "failed")
+
+    def test_successful_attempt_advances_all_source_date(self):
+        document, failed, anomalies = mod.prepare_collection_attempt(
+            [{"source": "a", "ok": True, "count": 25, "error": ""}],
+            25, None, today="2026-10-14",
+        )
+        self.assertEqual((failed, anomalies), (set(), []))
+        self.assertEqual(document["checked"], "2026-10-14")
+        self.assertEqual(document["last_attempt"]["status"], "success")
+
+    def test_successful_health_total_keeps_cross_source_url_deduplication(self):
+        document, _, anomalies = mod.prepare_collection_attempt(
+            [{"source": name, "ok": True, "count": 25, "error": ""} for name in ["a", "b"]],
+            25, None, today="2026-10-14",
+        )
+        self.assertEqual(anomalies, [])
+        self.assertEqual(document["total"], 25)
+        self.assertEqual(document["last_attempt"]["total"], 25)
+
+    def test_multiple_source_failures_remain_a_global_failure(self):
+        previous = {"checked": "2026-10-08", "total": 1100,
+                    "sources": [{"source": f"p{i}", "ok": True, "count": 100, "error": ""}
+                                for i in range(11)]}
+        health = [{"source": f"p{i}", "ok": i >= 4, "count": 100 if i >= 4 else 0,
+                   "error": "" if i >= 4 else "TLS失敗"} for i in range(11)]
+        document, _, anomalies = mod.prepare_collection_attempt(
+            health, 700, previous, today="2026-10-14",
+        )
+        self.assertTrue(any("4ソースが失敗" in error for error in anomalies))
+        self.assertEqual(document["checked"], "2026-10-08")
+        self.assertEqual(document["last_attempt"]["status"], "failed")
+
+    def test_partial_main_keeps_failed_source_normal_product_and_history(self):
+        good = "成功錠１ｍｇ「サワイ」"
+        bad = "保持錠１ｍｇ「ケミファ」"
+        csv_path = self.make_csv([
+            self.row(good), self.row(bad, maker="日本ケミファ"),
+        ])
+        with tempfile.TemporaryDirectory() as directory:
+            output = os.path.join(directory, "maker_announcements.json")
+            old_bad = {"maker": "日本ケミファ", "title": "保持錠1mg「ケミファ」限定出荷",
+                       "url": "https://kemifa.test/old.pdf", "event_type": "limited",
+                       "checked": "2026-10-08"}
+            old_history = {bad: [{**old_bad, "first_seen": "2026-10-01", "last_checked": "2026-10-08"}]}
+            old_unmatched = [{"maker": "日本ケミファ", "title": "未照合供給案内",
+                              "url": "https://kemifa.test/unmatched.pdf", "event_type": "supply"}]
+            documents = {
+                "maker_announcements.json": {bad: old_bad},
+                "maker_announcement_events.json": old_history,
+                "unmatched_maker_announcements.json": old_unmatched,
+                "maker_collection_health.json": {
+                    "checked": "2026-10-08", "total": 40,
+                    "sources": [
+                        {"source": "parse_sawai", "ok": True, "count": 20, "error": ""},
+                        {"source": "parse_kemifa", "ok": True, "count": 20, "error": ""},
+                    ],
+                },
+            }
+            for name, data in documents.items():
+                with open(os.path.join(directory, name), "w", encoding="utf-8") as handle:
+                    json.dump(data, handle, ensure_ascii=False)
+
+            def collect(nihon_generic_pages, source_items):
+                items = [("沢井製薬", "2026/10/14 成功錠1mg「サワイ」限定出荷", f"https://sawai.test/{i}.pdf")
+                         for i in range(20)]
+                source_items.update(parse_sawai=items, parse_kemifa=[])
+                return items, [
+                    {"source": "parse_sawai", "ok": True, "count": 20, "error": ""},
+                    {"source": "parse_kemifa", "ok": False, "count": 0, "error": "TLS期限切れ"},
+                ]
+
+            with mock.patch.object(mod, "collect_announcements", side_effect=collect), \
+                 mock.patch.object(mod, "load_manual_announcements", return_value=({}, set(), [])), \
+                 mock.patch.object(mod, "jst_today", return_value=datetime.date(2026, 10, 14)), \
+                 mock.patch.object(mod.sys, "argv", ["fetch", csv_path, output, "2", "0"]):
+                mod.main()
+            with open(output, encoding="utf-8") as handle:
+                current = json.load(handle)
+            self.assertEqual(current[bad], old_bad)
+            self.assertEqual(current[good]["checked"], "2026-10-14")
+            with open(os.path.join(directory, "maker_announcement_events.json"), encoding="utf-8") as handle:
+                self.assertEqual(json.load(handle)[bad], old_history[bad])
+            with open(os.path.join(directory, "unmatched_maker_announcements.json"), encoding="utf-8") as handle:
+                self.assertEqual(json.load(handle), old_unmatched)
+            with open(os.path.join(directory, "maker_collection_health.json"), encoding="utf-8") as handle:
+                health = json.load(handle)
+            self.assertEqual(health["checked"], "2026-10-08")
+            self.assertEqual(health["last_attempt"]["status"], "partial")
+            self.assertEqual(health["sources"][1]["count"], 20)
 
 
 class ParserTests(unittest.TestCase):

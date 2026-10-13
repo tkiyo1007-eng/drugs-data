@@ -1,10 +1,12 @@
 import csv
+import copy
 import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
-from reconcile_optional_data import reconcile, validate_retained_bundle
+from reconcile_optional_data import reconcile, reconcile_manufacturer_notices, validate_retained_bundle
 from validate_maker_announcements import validate_manual_groups
 
 
@@ -141,6 +143,65 @@ class ReconcileOptionalDataTests(unittest.TestCase):
                                         allow_removed_targets=True)
         self.assertTrue(any("HTTPS" in error for error in errors))
         self.assertFalse(any("CSVに存在しない" in error for error in errors))
+
+    def notice_registry(self):
+        return {'schema_version': 1, 'notices': [{
+            'id': 'removed-notice', 'maker': 'ファイザー', 'title': '確認済みの販売中止案内',
+            'reason': '原文の理由', 'url': 'https://www.pfizermedicalinformation.jp/sites/default/files/announcement/fixture.pdf',
+            'sha256': 'a' * 64, 'event_type': 'discontinued', 'announced_at': '2026-08',
+            'listed_at': '2026-08-01', 'verified_at': '2026-08-17',
+            'targets': [
+                {'yj_code': '123456789012', 'product_name': '継続錠', 'maker': '沢井製薬',
+                 'scope': 'product', 'packages': [{'package': '100錠'}]},
+                {'yj_code': '999999999999', 'product_name': '削除済み錠', 'maker': '沢井製薬',
+                 'scope': 'product', 'packages': [{'package': '100錠'}]},
+            ],
+            'alternatives': [{'products': [{'name': '過去候補錠', 'yj_code': '9999999F1020'}]}],
+            'cautions': [],
+        }]}
+
+    def test_removed_notice_targets_and_candidates_are_archived_without_deleting_source_facts(self):
+        document = self.notice_registry()
+        self.write_json('manufacturer_notices.json', document)
+        with mock.patch('reconcile_optional_data.jst_today') as today:
+            today.return_value.isoformat.return_value = '2026-10-14'
+            reconcile(self.base, min_count=1)
+        actual = self.read_json('manufacturer_notices.json')
+        expected = copy.deepcopy(document)
+        expected['notices'][0]['targets'][1]['archived_from_csv_at'] = '2026-10-14'
+        expected['notices'][0]['alternatives'][0]['products'][0]['archived_from_csv_at'] = '2026-10-14'
+        self.assertEqual(actual, expected)
+        self.assertEqual(validate_retained_bundle(self.base, min_count=1), [])
+        before = (self.base / 'manufacturer_notices.json').read_bytes()
+        reconcile(self.base, min_count=1)
+        self.assertEqual((self.base / 'manufacturer_notices.json').read_bytes(), before)
+
+    def test_bad_current_notice_identity_does_not_publish_any_partial_reconciliation(self):
+        document = self.notice_registry()
+        document['notices'][0]['targets'][0]['maker'] = '別会社'
+        document['notices'][0]['targets'][0]['archived_from_csv_at'] = '2026-08-17'
+        self.write_json('manufacturer_notices.json', document)
+        before = {path.name: path.read_bytes() for path in self.base.iterdir() if path.is_file()}
+        with self.assertRaisesRegex(ValueError, 'maker mismatch'):
+            reconcile(self.base, min_count=1)
+        self.assertEqual(before, {path.name: path.read_bytes() for path in self.base.iterdir() if path.is_file()})
+
+    def test_reappearing_exact_identity_is_reactivated_after_validation(self):
+        document = self.notice_registry()
+        document['notices'][0]['targets'][0]['archived_from_csv_at'] = '2026-08-17'
+        rows = [{'YJコード': '123456789012', '商品名': '継続錠', '製造メーカー': '沢井製薬', '販売メーカー': '沢井製薬'}]
+        actual = reconcile_manufacturer_notices(document, rows, today='2026-10-14')
+        self.assertNotIn('archived_from_csv_at', actual['notices'][0]['targets'][0])
+        self.assertEqual(actual['notices'][0]['targets'][1]['archived_from_csv_at'], '2026-10-14')
+
+    def test_current_registry_bytes_are_not_rewritten_when_no_archive_is_needed(self):
+        document = self.notice_registry()
+        document['notices'][0]['targets'] = document['notices'][0]['targets'][:1]
+        document['notices'][0]['alternatives'] = []
+        self.write_json('manufacturer_notices.json', document)
+        before = (self.base / 'manufacturer_notices.json').read_bytes()
+        reconcile(self.base, min_count=1)
+        self.assertEqual((self.base / 'manufacturer_notices.json').read_bytes(), before)
 
 
 if __name__ == "__main__":

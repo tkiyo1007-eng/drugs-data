@@ -77,6 +77,11 @@ def validate_supporting_document(name: str, document: object) -> list[str]:
     if not isinstance(document, expected_type):
         return [f"{name}: ルートは{expected_type.__name__}である必要があります"]
     errors: list[str] = []
+    if name == 'manufacturer_bulletins.json':
+        from fetch_manufacturer_bulletins import validate_document
+        errors.extend(validate_document(document))
+    if name == 'manufacturer_notices.json' and (document.get('schema_version') != 1 or not isinstance(document.get('notices'), list)):
+        errors.append('manufacturer_notices.json: schema_version/noticesが不正です')
     if name in {"product_lifecycle.json", "featured_products.json", "industry_topics.json", "supply_discrepancies.json"}:
         if document.get("schema_version") != 1:  # type: ignore[union-attr]
             errors.append(f"{name}: schema_version は1である必要があります")
@@ -127,6 +132,8 @@ def validate_supporting_document(name: str, document: object) -> list[str]:
                 or len(set(document)) != len(document)):
             errors.append(f"{name}: 品目キーの型・重複・形式が不正です")
     if name == "maker_collection_health.json":
+        from validate_maker_announcements import validate_health_document
+        errors.extend(validate_health_document(document))
         sources = document.get("sources")
         try:
             checked = document.get("checked")
@@ -142,6 +149,16 @@ def validate_supporting_document(name: str, document: object) -> list[str]:
         ):
             errors.append(f"{name}: sourcesの形式が不正です")
     return errors
+
+
+def collection_warning(document: object) -> str:
+    if not isinstance(document, dict): return ''
+    attempt = document.get('last_attempt')
+    if isinstance(attempt, dict) and attempt.get('status') != 'success':
+        return ('メーカー収集は確認不完全。全収集元の確認完了日: '
+                + str(document.get('checked', '不明')) + ' / 最新試行日: '
+                + str(attempt.get('checked', '不明')) + '。失敗した収集元は前回情報を保持しています')
+    return ''
 
 
 def validate_discrepancy_bundle(
@@ -298,6 +315,8 @@ def check_pages(
                           else validate_supporting_document(name, document))
             errors.extend(f"Pages {error}" for error in validation)
             results.append(f"Pages/{name}")
+            if name == 'maker_collection_health.json' and collection_warning(document):
+                results.append('WARNING: ' + collection_warning(document))
         except (ValueError, TypeError) as error:
             errors.append(f"Pages {name}を解析できません: {error}")
     with tempfile.TemporaryDirectory(prefix="drug-supply-pages-health-") as directory:
@@ -328,6 +347,7 @@ def run(
     allow_missing_supply_discrepancies: bool = False,
     allow_missing_industry_headlines: bool = False,
     allow_stale_supply_discrepancies: bool = False,
+    allow_missing_manufacturer_feeds: bool = False,
     include_pages: bool = True,
     csv_max_age_business_days: int | None = None,
 ) -> tuple[list[str], list[str]]:
@@ -372,7 +392,12 @@ def run(
                 documents[name] = document
                 errors.extend(validate_supporting_document(name, document))
                 results.append(name)
+                if name == 'maker_collection_health.json' and collection_warning(document):
+                    results.append('WARNING: ' + collection_warning(document))
             except (OSError, ValueError, RuntimeError, urllib.error.URLError) as error:
+                if (allow_missing_manufacturer_feeds and name in {'manufacturer_notices.json', 'manufacturer_bulletins.json'}
+                        and isinstance(error, urllib.error.HTTPError) and error.code == 404):
+                    continue
                 # 初回導入PRでは、検査コードが先に動き、main上の新ファイルは
                 # まだ404になる。PR時だけこの1ファイルの404を許容し、形式不正や
                 # 導入後のpush・定期監視では従来どおり失敗させる。
@@ -432,10 +457,12 @@ def write_summary(errors: list[str], results: list[str]) -> None:
     summary_path = os.environ.get("GITHUB_STEP_SUMMARY")
     if not summary_path:
         return
-    status = "❌ 異常を検出" if errors else "✅ 正常"
+    warnings = list(dict.fromkeys(r[9:] for r in results if r.startswith('WARNING: ')))
+    status = "❌ 異常を検出" if errors else "⚠️ 公開データの整合性は確認、メーカー収集は不完全" if warnings else "✅ 正常"
     with Path(summary_path).open("a", encoding="utf-8") as handle:
         handle.write(f"## 医薬品供給ナビ データ健全性: {status}\n\n")
-        handle.write(f"取得・検証完了: {len(results)}ファイル\n\n")
+        handle.write(f"取得・検証完了: {sum(not r.startswith('WARNING: ') for r in results)}ファイル\n\n")
+        if warnings: handle.write('\n'.join('- ' + warning for warning in warnings) + '\n')
         if errors:
             handle.write("\n".join(f"- {error}" for error in errors) + "\n")
 
@@ -451,6 +478,7 @@ def main() -> int:
     parser.add_argument("--allow-missing-supply-discrepancies", action="store_true")
     parser.add_argument("--allow-missing-industry-headlines", action="store_true")
     parser.add_argument("--allow-stale-supply-discrepancies", action="store_true")
+    parser.add_argument('--allow-missing-manufacturer-feeds', action='store_true')
     parser.add_argument("--skip-pages", action="store_true",
                         help="未公開PRコードのraw検査用。通常運用では指定しない")
     args = parser.parse_args()
@@ -460,6 +488,7 @@ def main() -> int:
         allow_missing_supply_discrepancies=args.allow_missing_supply_discrepancies,
         allow_missing_industry_headlines=args.allow_missing_industry_headlines,
         allow_stale_supply_discrepancies=args.allow_stale_supply_discrepancies,
+        allow_missing_manufacturer_feeds=args.allow_missing_manufacturer_feeds,
         include_pages=not args.skip_pages,
         csv_max_age_business_days=args.csv_max_age_business_days,
     )
@@ -468,7 +497,9 @@ def main() -> int:
         for error in errors:
             print(f"ERROR: {error}", file=sys.stderr)
         return 1
-    print(f"OK: 公開データ{len(results)}ファイルの取得・鮮度・整合性を検証しました")
+    for warning in set(r for r in results if r.startswith('WARNING: ')):
+        print('::warning title=メーカー収集の確認不完全::' + warning[9:])
+    print(f"OK: 公開データ{sum(not r.startswith('WARNING: ') for r in results)}ファイルの配信・型・整合性を検証しました。メーカー収集の状態は上記警告を参照してください")
     return 0
 
 

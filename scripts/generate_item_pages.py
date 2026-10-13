@@ -47,6 +47,7 @@ HUB_TEMPLATE_LASTMOD = "2026-10-14"
 FILTERABLE_HUB_SLUGS = frozenset({"limited", "stopped", "supplemental"})
 DISCONTINUATION_GUIDE = "../guides/how-to-check-discontinuation-and-delisting.html"
 SUPPLEMENTAL_TEMPLATE_LASTMOD = "2026-10-11"
+MANUFACTURER_NOTICE_TEMPLATE_LASTMOD = "2026-10-14"
 # drugs-data の generate_curated_pages.py（CATEGORY_MIN_ROWS）と同じ基準。
 # 分類ページが生成される分類だけにリンクし、404を出さない。
 CATEGORY_MIN_ROWS = 3
@@ -400,6 +401,15 @@ SUPPLEMENTAL_MAKER_ALIASES = {
     # 日本ジェネリックの公式案内には、製造販売元の長生堂製薬品も掲載される。
     "日本ジェネリック": {"長生堂製薬"},
 }
+COLLECTION_SOURCE_LABELS = {
+    "parse_sawai": "沢井製薬", "parse_nichiiko": "日医工",
+    "parse_nichiiko_excel": "日医工（供給状況一覧）", "parse_nihon_generic": "日本ジェネリック",
+    "parse_kyorin": "キョーリンリメディオ", "parse_dsep": "第一三共エスファ",
+    "parse_kemifa": "日本ケミファ", "parse_towa": "東和薬品", "parse_takata": "高田製薬",
+    "parse_hisamitsu": "久光製薬", "parse_nipro": "ニプロ", "parse_pfizer": "ファイザー",
+    "parse_sandoz": "サンド", "parse_sanwa": "三和化学研究所", "parse_npi": "日本薬品工業",
+    "parse_daiichisankyo": "第一三共",
+}
 
 
 def maker_tokens(value: str) -> set:
@@ -418,6 +428,290 @@ def row_maker_matches(row: dict, maker: str) -> bool:
         source_makers.update(SUPPLEMENTAL_MAKER_ALIASES.get(source_maker, set()))
     row_makers = maker_tokens(row.get("販売メーカー")) | maker_tokens(row.get("製造メーカー"))
     return bool(source_makers and row_makers and source_makers.intersection(row_makers))
+
+
+def load_manufacturer_notices(path: Path) -> list:
+    """手動で原典確認した案内は任意。存在する不正ファイルは公開生成を止める。"""
+    if not path.exists():
+        return []
+    document = load_required_json(path, "確認済みメーカー案内")
+    notices = document.get("notices")
+    if document.get("schema_version") != 1 or not isinstance(notices, list):
+        raise ValueError("確認済みメーカー案内のschema_versionまたはnoticesが不正です")
+    identities = set()
+    for notice in notices:
+        if not isinstance(notice, dict):
+            raise ValueError("確認済みメーカー案内にオブジェクトでない案内があります")
+        if not all(isinstance(notice.get(field), str) and notice[field].strip()
+                   for field in ("id", "maker", "title", "url", "announced_at", "verified_at", "sha256")):
+            raise ValueError("確認済みメーカー案内に必須項目がありません")
+        if notice["id"] in identities:
+            raise ValueError("確認済みメーカー案内のidが重複しています")
+        identities.add(notice["id"])
+        for field in ("reason", "summary", "recall_class", "recall_scope", "recall_started_at", "effective_at"):
+            if notice.get(field) is not None and not isinstance(notice[field], str):
+                raise ValueError("確認済みメーカー案内の説明欄が不正です")
+        if (not notice["url"].startswith("https://")
+                or not re.fullmatch(r"[0-9a-f]{64}", notice["sha256"])):
+            raise ValueError("確認済みメーカー案内の原典URLまたはSHA256が不正です")
+        for field in ("announced_at", "listed_at", "verified_at", "content_updated_at"):
+            value = notice.get(field)
+            if value is None and field not in {"announced_at", "verified_at"}:
+                continue
+            if field in {"verified_at", "content_updated_at"} and isinstance(value, str) and "T" in value:
+                try:
+                    parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+                    if parsed.tzinfo is None:
+                        raise ValueError("タイムゾーン不明")
+                except ValueError as exc:
+                    raise ValueError("確認済みメーカー案内の原文確認日時が不正です") from exc
+                continue
+            if not isinstance(value, str) or not re.fullmatch(r"\d{4}-\d{2}(?:-\d{2})?", value):
+                raise ValueError("確認済みメーカー案内の日付が不正です")
+            try:
+                date.fromisoformat(value + "-01" if len(value) == 7 else value)
+            except ValueError as exc:
+                raise ValueError("確認済みメーカー案内の日付が不正です") from exc
+        if len(notice["verified_at"]) == 7:
+            raise ValueError("確認済みメーカー案内の原文確認日は年月日が必要です")
+        targets = notice.get("targets")
+        if not isinstance(targets, list):
+            raise ValueError("確認済みメーカー案内のtargetsが不正です")
+        for target in targets:
+            if (not isinstance(target, dict)
+                    or not isinstance(target.get("product_name"), str)
+                    or not target["product_name"].strip()
+                    or not FORMAL_YJ_RE.fullmatch(str(target.get("yj_code") or ""))
+                    or target.get("scope") not in {"product", "package", "seller_route", "seller_route_and_package"}):
+                raise ValueError("確認済みメーカー案内の対象品目が不正です")
+            packages = target.get("packages", [])
+            if (not isinstance(packages, list)
+                    or any(not isinstance(package, (str, dict))
+                           or (isinstance(package, str) and not package.strip())
+                           or (isinstance(package, dict) and
+                               (not isinstance(package.get("package"), str) or not package["package"].strip()))
+                           for package in packages)):
+                raise ValueError("確認済みメーカー案内の対象包装が不正です")
+            if target["scope"] in {"package", "seller_route_and_package"} and not packages:
+                raise ValueError("包装限定のメーカー案内に対象包装がありません")
+            if target["scope"] in {"seller_route", "seller_route_and_package"} and not target.get("seller"):
+                raise ValueError("販売経路限定のメーカー案内に販売元がありません")
+            for field in ("maker", "seller", "summary", "planned_timing"):
+                if target.get(field) is not None and not isinstance(target[field], str):
+                    raise ValueError("確認済みメーカー案内の対象範囲説明が不正です")
+        for field in ("cautions", "alternatives"):
+            if not isinstance(notice.get(field, []), list):
+                raise ValueError("確認済みメーカー案内の候補・注意欄が不正です")
+        if any(not isinstance(value, str) for value in notice.get("cautions", [])):
+            raise ValueError("確認済みメーカー案内の注意欄が不正です")
+        for group in notice.get("alternatives", []):
+            if not isinstance(group, dict) or not isinstance(group.get("products"), list):
+                raise ValueError("確認済みメーカー案内の候補品群が不正です")
+            for product in group["products"]:
+                if (not isinstance(product, dict) or not isinstance(product.get("name"), str)
+                        or not product["name"].strip()
+                        or (product.get("yj_code") and not FORMAL_YJ_RE.fullmatch(str(product["yj_code"])))):
+                    raise ValueError("確認済みメーカー案内の候補品が不正です")
+                for field in ("scope", "manufacturer_candidate_scope", "source_class", "product_kind"):
+                    if product.get(field) is not None and not isinstance(product[field], str):
+                        raise ValueError("確認済みメーカー案内の候補品範囲が不正です")
+            for field in ("indication", "type", "no_alternative_statement"):
+                if group.get(field) is not None and not isinstance(group[field], str):
+                    raise ValueError("確認済みメーカー案内の候補条件が不正です")
+            if (not isinstance(group.get("cautions", []), list)
+                    or any(not isinstance(value, str) for value in group.get("cautions", []))
+                    or not isinstance(group.get("target_yj_codes", []), list)
+                    or any(not FORMAL_YJ_RE.fullmatch(str(value)) for value in group.get("target_yj_codes", []))):
+                raise ValueError("確認済みメーカー案内の候補品条件が不正です")
+        for field in ("maker_supply_status", "expected_resumption", "independent_pmda_source"):
+            if notice.get(field) is not None and not isinstance(notice[field], dict):
+                raise ValueError("確認済みメーカー案内の供給・原典欄が不正です")
+        if (not isinstance(notice.get("lots", []), list)
+                or any(not isinstance(lot, dict)
+                       or not all(isinstance(lot.get(field), str) and lot[field].strip()
+                                  for field in ("strength", "package", "lot"))
+                       for lot in notice.get("lots", []))):
+            raise ValueError("確認済みメーカー案内の回収対象ロットが不正です")
+    return notices
+
+
+def manufacturer_notice_index(notices: list) -> dict:
+    index = {}
+    for notice in notices:
+        for target in notice.get("targets", []):
+            key = target["yj_code"]
+            if notice not in index.setdefault(key, []):
+                index[key].append(notice)
+    return index
+
+
+def load_manufacturer_bulletins(path: Path):
+    """任意の原典更新検知。欠落は未確認、存在する形式不正は生成を止める。"""
+    if not path.exists():
+        return None
+    document = load_required_json(path, "メーカー原典更新検知")
+    items = document.get("items")
+    if document.get("schema_version") != 1 or not isinstance(items, list):
+        raise ValueError("メーカー原典更新検知のschema_versionまたはitemsが不正です")
+    for item in items:
+        if (not isinstance(item, dict) or not isinstance(item.get("url"), str)
+                or not item["url"].startswith("https://")
+                or (item.get("sha256") is not None and not re.fullmatch(r"[0-9a-f]{64}", str(item["sha256"])))):
+            raise ValueError("メーカー原典更新検知のURLまたはSHA256が不正です")
+    return document
+
+
+def manufacturer_notice_changed(notice: dict, bulletins=None) -> bool:
+    return bool(bulletins and any(item.get("url") == notice.get("url")
+                                and item.get("sha256") and item["sha256"] != notice.get("sha256")
+                                for item in bulletins.get("items", [])))
+
+
+def matching_manufacturer_notices(row: dict, notices=(), bulletins=None) -> list:
+    """正式YJ・商品名・確認済み対象メーカーが全て一致した案内だけを返す。"""
+    matched = []
+    yj = str(row.get("YJコード") or "").strip()
+    for notice in notices:
+        for target in notice.get("targets", []):
+            if (target.get("yj_code") == yj
+                    and normalized_text(target.get("product_name")) == normalized_text(row.get("商品名"))
+                    and row_maker_matches(row, target.get("maker") or notice.get("maker"))):
+                matched.append({"notice": notice, "target": target,
+                                "source_changed": manufacturer_notice_changed(notice, bulletins)})
+    return matched
+
+
+def manufacturer_notice_label(row: dict, notices=(), bulletins=None) -> str:
+    matches = matching_manufacturer_notices(row, notices, bulletins)
+    if not matches:
+        return ""
+    return ("メーカー原典更新・再確認待ち" if all(match["source_changed"] for match in matches)
+            else "確認済みメーカー案内")
+
+
+def manufacturer_notice_scope_text(target: dict) -> str:
+    scope = {"product": "品目", "package": "一部包装", "seller_route": "販売経路",
+             "seller_route_and_package": "販売経路・一部包装"}[target["scope"]]
+    packages = [str(package.get("package") or "") if isinstance(package, dict) else package
+                for package in target.get("packages", [])]
+    return (f'対象範囲：{scope}'
+            + (f'｜販売元：{target["seller"]}' if target.get("seller") else "")
+            + (f'｜対象包装：{"／".join(packages)}' if packages else ""))
+
+
+def manufacturer_notices_html(row: dict, notices=(), warning="", catalog_yj_codes=None, bulletins=None) -> str:
+    matches = matching_manufacturer_notices(row, notices, bulletins)
+    if not matches:
+        return ""
+    cards = []
+    for match in matches:
+        notice, target = match["notice"], match["target"]
+        if match["source_changed"]:
+            cards.append(f'<article class="supp supp-notice"><h3>原典更新を検出・再確認待ち</h3>'
+                         f'<p>前回登録の案内：{esc(notice["title"])}（文書年月日 {esc(notice["announced_at"])}）</p>'
+                         f'<p>前回の原文確認日：{esc(iso_publication_date(notice["verified_at"]))}</p>'
+                         '<p>原典PDFの内容変更を検出しました。以前の理由説明・参考候補は現在の案内として表示していません。対象・予定・条件を原文で再確認してください。</p>'
+                         f'<p><a href="{esc(notice["url"])}" target="_blank" rel="noopener" '
+                         'data-dsn-event="official-source-open">更新されたメーカー原典を確認</a></p></article>')
+            continue
+        parts = [f'<p>{esc(manufacturer_notice_scope_text(target))}</p>']
+        parts.append(f'<p>原典の案内年月日：{esc(notice["announced_at"])}'
+                     + (f'｜メーカー一覧掲載日：{esc(notice["listed_at"])}' if notice.get("listed_at") else "")
+                     + f'｜原文確認日：{esc(iso_publication_date(notice["verified_at"]))}</p>')
+        for label, value in (("案内の要点", notice.get("summary")), ("対象品目の案内", target.get("summary")),
+                             ("メーカー説明の理由", notice.get("reason"))):
+            if value:
+                parts.append(f'<p>{esc(label)}：{esc(value)}</p>')
+        timing_label = "メーカーの再開・解除に関する案内"
+        timing = target.get("planned_timing") or notice.get("resumption")
+        if target.get("planned_timing") and notice.get("event_type") == "discontinued":
+            timing_label = ("メーカーが案内した状況" if "出荷停止中" in target["planned_timing"]
+                            else "販売中止予定時期")
+        expected_resumption = notice.get("expected_resumption")
+        if isinstance(expected_resumption, dict) and expected_resumption.get("display"):
+            timing, timing_label = expected_resumption["display"], "出荷再開見込み（メーカー予定）"
+        if notice.get("event_type") == "resumed" and notice.get("effective_at"):
+            timing, timing_label = notice["effective_at"], "メーカーが案内した通常出荷再開日"
+        if isinstance(timing, dict):
+            timing = timing.get("text")
+        if timing:
+            parts.append(f'<p>{esc(timing_label)}：{esc(timing)}</p>')
+        if notice.get("event_type") == "resumption_planned":
+            parts.append('<p>メーカーの再開予定の案内です。再開の実施日は確認できていません。</p>')
+        supply = notice.get("maker_supply_status") or {}
+        handling = notice.get("manufacturer_status") or supply.get("handling")
+        volume = notice.get("manufacturer_volume") or supply.get("volume")
+        if handling:
+            parts.append(f'<p>メーカー案内の出荷対応：{esc(handling)}</p>')
+        if volume:
+            parts.append(f'<p>メーカー案内の出荷量：{esc(volume)}</p>')
+        if notice.get("recall_class"):
+            parts.append(f'<p>自主回収区分：クラス{esc(notice["recall_class"])}'
+                         + (f'｜回収開始日：{esc(notice["recall_started_at"])}' if notice.get("recall_started_at") else "") + '</p>')
+            if notice.get("recall_scope"):
+                parts.append(f'<p>回収対象範囲：{esc(notice["recall_scope"])}</p>')
+            lots = []
+            identity_text = normalized_text(target.get("product_name")) + normalized_text(target.get("spec"))
+            for lot in notice.get("lots", []):
+                strength = normalized_text(lot.get("strength"))
+                if strength and strength not in identity_text:
+                    continue
+                lots.append(f'<li>{esc(lot.get("strength"))}｜{esc(lot.get("package"))}｜対象ロット：{esc(lot.get("lot"))}</li>')
+            if lots:
+                parts.append('<p>この規格の回収対象包装・ロット</p><ul>' + "".join(lots) + '</ul>')
+            pmda_source = notice.get("independent_pmda_source") or {}
+            if str(pmda_source.get("url") or "").startswith("https://"):
+                parts.append(f'<p><a href="{esc(pmda_source["url"])}" target="_blank" rel="noopener" '
+                             'data-dsn-event="official-source-open">PMDAの回収情報を確認</a></p>')
+        groups = []
+        for group in notice.get("alternatives", []):
+            selected = group.get("target_yj_codes", [])
+            if selected and row.get("YJコード") not in selected:
+                continue
+            products = []
+            for product in group["products"]:
+                label = esc(product["name"])
+                identifier = product.get("yj_code")
+                if identifier and catalog_yj_codes is not None and identifier in catalog_yj_codes:
+                    label = (f'<a href="{SITE_ROOT}#item={quote(identifier, safe="")}" '
+                             f'data-dsn-event="item-web-open">{label}</a>')
+                elif identifier:
+                    label += ('<span>（現在のCSVに収録なし・原典記載の過去候補）</span>'
+                              if catalog_yj_codes is not None
+                              else '<span>（現在の収録状況は未確認）</span>')
+                product_scope = product.get("scope") or product.get("manufacturer_candidate_scope")
+                if product_scope:
+                    label += f'<span>｜対象規格・包装：{esc(product_scope)}</span>'
+                if product.get("product_kind") == "medical_device":
+                    label += ('<span>｜医療機器'
+                              + (f'（{esc(product["source_class"])}）' if product.get("source_class") else "") + '</span>')
+                products.append(f'<li>{label}</li>')
+            caution = "".join(f'<li>{esc(value)}</li>' for value in group.get("cautions", []))
+            groups.append('<div class="notice-alternatives">'
+                          + (f'<p>対象の適応：{esc(group["indication"])}</p>' if group.get("indication") else "")
+                          + (f'<p>{esc(group["type"])}</p>' if group.get("type") else "")
+                          + (f'<ul>{"".join(products)}</ul>' if products else "")
+                          + (f'<p>メーカーの候補案内：{esc(group["no_alternative_statement"])}</p>' if group.get("no_alternative_statement") else "")
+                          + (f'<ul>{caution}</ul>' if caution else "") + '</div>')
+        if groups:
+            parts.append('<h4>メーカーが示す参考候補</h4>' + "".join(groups)
+                         + '<p>候補の在庫・納入可否は未確認です。医薬品の使用・変更は医師・薬剤師が処方元と確認してください。</p>')
+        cautions = "".join(f'<li>{esc(value)}</li>' for value in notice.get("cautions", []))
+        if cautions:
+            parts.append(f'<ul>{cautions}</ul>')
+        parts.append(f'<p><a href="{esc(notice["url"])}" target="_blank" rel="noopener" '
+                     'data-dsn-event="official-source-open">メーカー公式案内の原文を確認</a></p>')
+        cards.append(f'<article class="supp supp-notice" data-notice-id="{esc(notice["id"])}" '
+                     f'data-source-sha256="{esc(notice["sha256"])}"><h3>{esc(notice["title"])}</h3>'
+                     + "".join(parts) + '</article>')
+    caution = (f'<p class="supp-warning">自動収集の確認注意：{esc(warning)}。原文を再確認してください。</p>'
+               if warning else "")
+    heading = ("確認済みメーカー案内" if any(not match["source_changed"] for match in matches)
+               else "メーカー案内の原典再確認")
+    return ('<section class="manufacturer-notices" aria-labelledby="manufacturerNoticesTitle">'
+            f'<h2 id="manufacturerNoticesTitle">{heading}</h2>'
+            '<p>厚生労働省の現在の供給区分と分けて掲載しています。対象包装・販売経路・予定時期は原文でご確認ください。</p>'
+            + caution + "".join(cards) + '</section>')
 
 
 def supplemental_matches(row: dict, item: dict = None) -> bool:
@@ -450,11 +744,12 @@ def discrepancy_matches(row: dict, item: dict = None) -> bool:
 
 def should_generate(row: dict, key: str, existing: set[str],
                     lifecycle_products: dict, discrepancy_products: dict,
-                    recent_recovery_keys: set = frozenset()) -> bool:
+                    recent_recovery_keys: set = frozenset(), manufacturer_notices=()) -> bool:
     return (map_status(row.get("供給状況") or "") != "ok"
             or is_delist(row)
             or supplemental_matches(row, lifecycle_products.get(key))
             or discrepancy_matches(row, discrepancy_products.get(key))
+            or bool(matching_manufacturer_notices(row, manufacturer_notices))
             or key in recent_recovery_keys
             or key in existing)
 
@@ -551,6 +846,24 @@ def supplemental_entry_html(entry: dict) -> str:
                      f'メーカー補足の確認：{esc(entry.get("supplemental_checked") or "確認できません")}</span>')
         if entry.get("supplemental_warning"):
             parts.append(f'<span>確認注意：{esc(entry["supplemental_warning"])}</span>')
+    for match in entry.get("manufacturer_notices", []):
+        notice, target = match["notice"], match["target"]
+        if match.get("source_changed"):
+            parts.append('<span class="reason-tag">メーカー原典更新・再確認待ち</span>')
+            parts.append(f'<span>前回登録：{esc(notice["title"])}｜原文確認日：{esc(iso_publication_date(notice["verified_at"]))}</span>')
+            parts.append('<span>原典の内容変更を検出しました。以前の理由・参考候補は再確認待ちです。</span>')
+            parts.append(f'<span><a href="{esc(notice["url"])}" target="_blank" rel="noopener" '
+                         'data-dsn-event="official-source-open">更新されたメーカー原典を確認</a></span>')
+            continue
+        parts.append('<span class="reason-tag">確認済みメーカー案内</span>')
+        parts.append(f'<span>{esc(manufacturer_notice_scope_text(target))}</span>')
+        parts.append(f'<span><a href="{esc(notice["url"])}" target="_blank" rel="noopener" '
+                     f'data-dsn-event="official-source-open">{esc(notice["title"])}（メーカー原文）</a></span>')
+        parts.append(f'<span>原典の案内年月日：{esc(notice["announced_at"])}｜'
+                     f'原文確認日：{esc(iso_publication_date(notice["verified_at"]))}</span>')
+        if notice.get("event_type") == "resumption_planned":
+            parts.append('<span>再開予定の案内です。再開の実施日は確認できていません。</span>')
+        parts.append('<span>理由・参考候補の対象適応と条件は品目ページとメーカー原文を確認してください。</span>')
     return "".join(parts)
 
 
@@ -583,7 +896,7 @@ def latest_publication_date(row: dict, lifecycle=None, discrepancy=None) -> str:
     return max(valid) if valid else ""
 
 
-def item_page_lastmod(row: dict, lifecycle=None, discrepancy=None) -> str:
+def item_page_lastmod(row: dict, lifecycle=None, discrepancy=None, manufacturer_notices=()) -> str:
     """品目データまたは静的ページテンプレートの実質改訂日の新しい方。"""
     dates = [ITEM_PAGE_TEMPLATE_LASTMOD,
              latest_publication_date(row, lifecycle, discrepancy)]
@@ -591,6 +904,13 @@ def item_page_lastmod(row: dict, lifecycle=None, discrepancy=None) -> str:
         dates.append(SUPPLEMENTAL_TEMPLATE_LASTMOD)
     if supplemental_matches(row, lifecycle) and lifecycle.get("supply_end_source_url") == lifecycle.get("source_url"):
         dates.append(iso_publication_date(lifecycle.get("supply_end_verified_at")))
+    for match in matching_manufacturer_notices(row, manufacturer_notices):
+        notice = match["notice"]
+        dates.append(MANUFACTURER_NOTICE_TEMPLATE_LASTMOD)
+        # 原典が月単位なら架空の発表日を作らない。手動確認済み内容の改訂日を使う。
+        # 日次の自動取得日は含めないため、同じ原典を取得し直しただけでは進まない。
+        dates.append(iso_publication_date(notice.get("announced_at")))
+        dates.append(iso_publication_date(notice.get("content_updated_at") or notice.get("verified_at")))
     return max(value for value in dates if value)
 
 
@@ -606,6 +926,15 @@ def supplemental_context(health: dict, discrepancy_document: dict,
     checked = iso_publication_date(health.get("checked"))
     source = discrepancy_document.get("source")
     warnings = []
+    last_attempt = health.get("last_attempt")
+    if isinstance(last_attempt, dict) and last_attempt.get("status") != "success":
+        attempted = iso_publication_date(last_attempt.get("checked")) or "日付不明"
+        attempted_sources = last_attempt.get("sources")
+        failed_sources = [str(item.get("maker") or COLLECTION_SOURCE_LABELS.get(item.get("source")) or "名称未確認の収集元")
+                          for item in (attempted_sources if isinstance(attempted_sources, list) else [])
+                          if isinstance(item, dict) and item.get("ok") is not True]
+        warnings.append(f"最新のメーカー自動収集（{attempted}）は全収集元の確認が完了していません"
+                        + ("：" + "／".join(failed_sources) if failed_sources else ""))
     if (not isinstance(sources, list) or not sources
             or any(not isinstance(item, dict) or item.get("ok") is not True
                    for item in sources)):
@@ -847,7 +1176,8 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
               lifecycle=None, discrepancy=None, dataset_date="", supplemental_checked_date="",
               supplemental_trusted=True, supplemental_warning="", title_qualifier="",
               hub_slugs=(), display_names=None, category_codes=None,
-              ingredient_slugs=None):
+              ingredient_slugs=None, manufacturer_notices=(), catalog_yj_codes=None,
+              manufacturer_bulletins=None):
     name = row["商品名"].strip()
     display_name = f"{name}（{title_qualifier}）" if title_qualifier else name
     maker = (row.get("販売メーカー") or row.get("製造メーカー") or "").strip()
@@ -869,6 +1199,9 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
     supplements = supplemental_labels(
         row, lifecycle_match, discrepancy_match, supplemental_checked_date,
         supplemental_trusted)
+    notice_label = manufacturer_notice_label(row, manufacturer_notices, manufacturer_bulletins)
+    if notice_label:
+        supplements.append(notice_label)
     lifecycle_current = bool(supplemental_trusted and lifecycle_match
                              and lifecycle_verification_is_recent(
                                  lifecycle_match, supplemental_checked_date))
@@ -946,6 +1279,9 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
       {"メーカー公式" if supplemental_trusted else "収録済みメーカー案内（要原文確認）"}：{esc(manufacturer.get("label") or "—")}（{esc(manufacturer.get("announced_at") or "公表日不明")}）</p>
       <p>厚労省区分は上書きせず、より新しいメーカー案内を併記しています。実際の受注可否は卸・メーカーにもご確認ください。</p>{source_link}</div>'''
 
+    manufacturer_box = manufacturer_notices_html(row, manufacturer_notices, supplemental_warning,
+                                                catalog_yj_codes, manufacturer_bulletins)
+
     # 詳細表: 既知の列を定義順に、その他の列は後ろに(空欄と重複情報はスキップ)
     detail_rows = []
     seen = set(SKIP_COLS)
@@ -1017,7 +1353,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
     webpage_ld = ld_json({
         "@context": "https://schema.org", "@type": "WebPage",
         "name": title, "description": desc, "url": url, "inLanguage": "ja",
-        "dateModified": item_page_lastmod(row, lifecycle_match, discrepancy_match),
+        "dateModified": item_page_lastmod(row, lifecycle_match, discrepancy_match, manufacturer_notices),
         "isPartOf": {"@type": "WebSite", "name": "医薬品供給ナビ", "url": SITE_ROOT},
     })
     quick_answers = quick_answers_html(row, status, display_name)
@@ -1076,6 +1412,10 @@ h1{{font-size:22px;line-height:1.45;margin-bottom:6px}}
 .supp a{{display:inline-block;margin-top:5px;color:inherit;font-weight:700}}
 .supp-life{{color:#6B4310;background:#FFF3D8;border:1px solid #E4B662}}
 .supp-diff{{color:#5B4100;background:#FFF0B8;border:1px solid #D69B00}}
+.supp-notice{{color:#244F91;background:#EDF3FF;border:1px solid #CCDDF7;overflow-wrap:anywhere}}
+.supp-notice h3{{font-size:15px;line-height:1.6;margin:0 0 8px}}
+.supp-notice h4{{font-size:14px;margin:10px 0 5px}}
+.supp-notice ul{{padding-left:20px;margin:5px 0 10px}}
 .supp-checked{{color:#704700;font-size:12px;font-weight:700;margin:0 0 10px}}
 .supp-warning{{color:#8A3B12;background:#FFF4E8;border:1px solid #F1C69E;border-radius:8px;padding:8px 10px;font-size:12px;font-weight:700;margin:0 0 12px}}
 .dataset-context{{color:var(--sub);font-size:12px;line-height:1.7;margin:-8px 0 14px}}
@@ -1159,6 +1499,7 @@ footer a{{color:var(--sub)}}
 {supplemental_checked}
 {lifecycle_box}
 {discrepancy_box}
+{manufacturer_box}
     <table><tbody>{''.join(detail_rows)}</tbody></table>
     <p class="links">
       <a href="{lp_link}" data-dsn-event="item-web-open">Web版でこの品目を開く{'（同成分・同剤形の一覧つき）' if siblings else ''}</a>
@@ -1750,6 +2091,9 @@ def main():
         version_doc = load_required_json(site / "version.json", "データ基準日")
         health_doc = load_required_json(site / "maker_collection_health.json", "メーカー収集健全性")
         status_events = load_status_changes(site / "status_changes.json")
+        verified_notices = load_manufacturer_notices(site / "manufacturer_notices.json")
+        notice_index = manufacturer_notice_index(verified_notices)
+        manufacturer_bulletins = load_manufacturer_bulletins(site / "manufacturer_bulletins.json")
         lifecycle_products = validated_product_map(lifecycle_doc, "販売中止補足データ")
         discrepancy_products = validated_product_map(discrepancy_doc, "供給差異データ")
         dataset_date = version_date(version_doc)
@@ -1791,7 +2135,7 @@ def main():
         s = map_status(r.get("供給状況") or "")
         if should_generate(
                 r, k, existing, lifecycle_products, discrepancy_products,
-                recovery_keys):
+                recovery_keys, notice_index.get(k, [])):
             targets[k] = (r, s)
     if len(targets) > args.max_pages:
         print(f"::warning::対象{len(targets):,}件が上限{args.max_pages:,}を超えたため、"
@@ -1800,6 +2144,7 @@ def main():
         targets = dict(list(problem.items())[:args.max_pages])
 
     generated_keys = set(targets)
+    catalog_yj_codes = set(by_key)
     identities = build_item_identities(targets, by_key)
     display_names = {
         key: identity["display_name"] for key, identity in identities.items()
@@ -1837,7 +2182,10 @@ def main():
             "latest_change": latest_changes.get(k),
             "recent_recovery": k in recovery_keys,
             "recent_restriction": k in restriction_keys,
+            "manufacturer_notices": matching_manufacturer_notices(r, notice_index.get(k, []), manufacturer_bulletins),
         }
+        if entry["manufacturer_notices"]:
+            entry["supplements"].append(manufacturer_notice_label(r, notice_index.get(k, []), manufacturer_bulletins))
         entry["hubs"] = item_hub_slugs(entry, dataset_date)
         entries.append(entry)
 
@@ -1860,6 +2208,9 @@ def main():
                 display_names=display_names,
                 category_codes=category_codes,
                 ingredient_slugs=ingredient_slugs,
+                manufacturer_notices=notice_index.get(k, []),
+                catalog_yj_codes=catalog_yj_codes,
+                manufacturer_bulletins=manufacturer_bulletins,
             ), encoding="utf-8")
 
     (out / "index.html").write_text(index_html(entries, dataset_date), encoding="utf-8")
@@ -1867,7 +2218,7 @@ def main():
         (out / f"{slug}.html").write_text(
             hub_html(slug, entries, dataset_date), encoding="utf-8")
     key_dates = {
-        k: item_page_lastmod(r, lifecycle_products.get(k), discrepancy_products.get(k))
+        k: item_page_lastmod(r, lifecycle_products.get(k), discrepancy_products.get(k), notice_index.get(k, []))
         for k, (r, _) in targets.items()
     }
     (site / "sitemap-items.xml").write_text(

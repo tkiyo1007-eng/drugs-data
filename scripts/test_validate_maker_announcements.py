@@ -1,4 +1,5 @@
 import csv
+import copy
 import json
 import os
 import tempfile
@@ -8,6 +9,7 @@ from validate_maker_announcements import (
     validate,
     validate_current_history,
     validate_health,
+    validate_health_document,
     validate_history,
     validate_manual_groups,
     validate_unmatched,
@@ -103,6 +105,59 @@ class ValidateMakerAnnouncementsTests(unittest.TestCase):
             "checked": "2026-02-30",
         }})
         self.assertTrue(any("実在日" in e for e in validate(self.csv_path, path, min_count=1)))
+
+    def partial_health(self):
+        return {
+            "checked": "2026-10-08", "total": 100,
+            "sources": [
+                {"source": "a", "ok": True, "count": 80, "error": "", "last_success": "2026-10-14"},
+                {"source": "b", "ok": True, "count": 20, "error": "", "last_success": "2026-10-08"},
+            ],
+            "last_attempt": {
+                "checked": "2026-10-14", "status": "partial", "total": 80,
+                "errors": ["b: TLS取得失敗"],
+                "sources": [
+                    {"source": "a", "ok": True, "count": 80, "error": "", "last_success": "2026-10-14"},
+                    {"source": "b", "ok": False, "count": 0, "error": "TLS取得失敗",
+                     "retained": True, "retained_count": 20, "last_success": "2026-10-08"},
+                ],
+            },
+        }
+
+    def test_partial_attempt_matches_execution_date_without_advancing_all_success_date(self):
+        document = self.partial_health()
+        self.assertEqual(validate_health_document(document, "2026-10-14"), [])
+        self.assertEqual(document["checked"], "2026-10-08")
+        self.assertTrue(validate_health_document(document, "2026-10-15"))
+
+    def test_zero_failed_date_types_and_fake_success_are_rejected(self):
+        changes = [
+            ("zero_success", lambda d: d["last_attempt"]["sources"][0].update(count=0)),
+            ("fake_success", lambda d: d["last_attempt"].update(status="success", errors=[])),
+            ("future_date", lambda d: d.update(checked="2026-10-15")),
+            ("invalid_attempt_date", lambda d: d["last_attempt"].update(checked="2026-02-30")),
+            ("missing_error", lambda d: d["last_attempt"]["sources"][1].update(error="")),
+            ("bool_count", lambda d: d["last_attempt"]["sources"][0].update(count=True)),
+            ("retained_without_date", lambda d: d["last_attempt"]["sources"][1].pop("last_success")),
+            ("source_mismatch", lambda d: d["last_attempt"]["sources"][1].update(source="other")),
+            ("bad_status_type", lambda d: d["last_attempt"].update(status={})),
+            ("retained_count_mismatch", lambda d: d["last_attempt"]["sources"][1].update(retained_count=50)),
+            ("retained_date_mismatch", lambda d: d["last_attempt"]["sources"][1].update(last_success="2026-10-13")),
+            ("adopted_future_date", lambda d: d["sources"][0].update(last_success="2026-10-15")),
+            ("missing_partial_retention", lambda d: d["last_attempt"]["sources"][1].pop("retained")),
+            ("null_attempt", lambda d: d.update(last_attempt=None)),
+        ]
+        for label, change in changes:
+            with self.subTest(label=label):
+                document = copy.deepcopy(self.partial_health())
+                change(document)
+                self.assertTrue(validate_health_document(document))
+
+    def test_failed_bundle_can_report_successful_fetches_without_claiming_bundle_success(self):
+        document = self.partial_health()
+        document["last_attempt"]["status"] = "failed"
+        document["last_attempt"]["errors"].append("bundle検証失敗")
+        self.assertEqual(validate_health_document(document, "2026-10-14"), [])
 
     def test_announced_at_accepts_exact_month_precision_from_2026_notices(self):
         for announced_at in ("2026-05", "2026-07"):

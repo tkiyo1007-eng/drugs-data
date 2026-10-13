@@ -5,13 +5,15 @@ The manufacturer collectors depend on external sites whose HTML and availability
 can change independently of the Ministry of Health, Labour and Welfare (MHLW)
 spreadsheet.  This wrapper builds and validates all collector-owned JSON files in
 a temporary directory.  They replace the last known-good files only as one
-validated set.  When an optional refresh fails, callers may explicitly keep the
-previous set and continue publishing the already-validated MHLW core CSV.
+validated set. When an optional refresh fails, the previous content is retained;
+only a separately validated failed-attempt health record is published. Callers
+may continue publishing the already-validated MHLW core CSV.
 """
 
 from __future__ import annotations
 
 import argparse
+import copy
 import json
 import os
 import shutil
@@ -22,6 +24,7 @@ from pathlib import Path
 from typing import Callable, Optional, Sequence
 
 from jst_time import jst_today
+from validate_maker_announcements import validate_health_document
 
 
 MANAGED_FILES = (
@@ -99,6 +102,47 @@ def _write_github_output(updated: bool) -> None:
             handle.write(f"updated={'true' if updated else 'false'}\n")
 
 
+def publish_failed_attempt(stage: Path, base: Path, checked: str, reason: str) -> None:
+    """前回の採用済み4JSONを守り、検証済みの失敗試行情報だけを公開する。"""
+    name = "maker_collection_health.json"
+    previous = json.loads((base / name).read_text(encoding="utf-8"))
+    if validate_health_document(previous):
+        raise RuntimeError("前回の収集状態が不正なため、失敗試行も安全に保存できません")
+    try:
+        staged = json.loads((stage / name).read_text(encoding="utf-8"))
+        attempt = copy.deepcopy(staged.get("last_attempt"))
+    except (OSError, ValueError, AttributeError):
+        attempt = None
+    if not isinstance(attempt, dict) or attempt.get("checked") != checked:
+        # 取得プロセスが結果を残す前に停止した場合、source別の成功を推測しない。
+        attempt = {
+            "checked": checked, "status": "failed", "total": 0,
+            "sources": [{
+                "source": source["source"], "ok": False, "count": 0,
+                "error": "収集元ごとの取得結果を確認できません",
+                "retained": True, "retained_count": source["count"],
+                "last_success": source.get("last_success") or previous["checked"],
+            } for source in previous["sources"]],
+            "errors": [],
+        }
+    attempt["status"] = "failed"
+    # 取得自体が成功してもbundle検証に失敗した場合、採用済みの成功日は進めない。
+    old_sources = {source["source"]: source for source in previous["sources"]}
+    for source in attempt.get("sources") or []:
+        if isinstance(source, dict) and source.get("source") in old_sources:
+            old = old_sources[source["source"]]
+            source["last_success"] = old.get("last_success") or previous["checked"]
+    if not isinstance(attempt.get("errors"), list):
+        attempt["errors"] = []
+    attempt["errors"].append(reason)
+    document = {**previous, "last_attempt": attempt}
+    errors = validate_health_document(document, expected_checked=checked)
+    if errors:
+        raise RuntimeError("失敗試行の収集状態が不正です: " + " / ".join(errors[:5]))
+    (stage / name).write_text(json.dumps(document, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    publish_validated_files(stage, base, names=(name,))
+
+
 def refresh(
     base: Path,
     *,
@@ -109,7 +153,7 @@ def refresh(
     python_executable: str = sys.executable,
     runner: Runner = subprocess.run,
 ) -> bool:
-    """Return True on refresh; False when the previous complete set is retained.
+    """Return True on refresh; False when the previous content set is retained.
 
     A failed refresh is only recoverable when every managed file existed before
     the attempt.  An initial setup or an incomplete previous set fails closed.
@@ -134,6 +178,7 @@ def refresh(
         )
         if _run(fetch_command, base, runner) != 0:
             if fallback_available:
+                publish_failed_attempt(stage, base, expected_checked, "メーカー案内の取得処理に失敗しました")
                 return False
             raise RuntimeError("メーカー案内の取得に失敗し、前回の完全なデータ一式もありません")
 
@@ -151,6 +196,7 @@ def refresh(
         )
         if _run(validate_command, base, runner) != 0:
             if fallback_available:
+                publish_failed_attempt(stage, base, expected_checked, "メーカー案内のデータ一式の検証に失敗しました")
                 return False
             raise RuntimeError("メーカー案内の検証に失敗し、前回の完全なデータ一式もありません")
 
@@ -186,7 +232,11 @@ def main() -> int:
 
     if updated:
         _write_github_output(True)
-        print("✅ メーカー案内を検証済みデータ一式へ更新しました")
+        health = json.loads((args.base / "maker_collection_health.json").read_text(encoding="utf-8"))
+        if (health.get("last_attempt") or {}).get("status") == "partial":
+            print("::warning title=メーカー補足情報を一部更新::取得成功した収集元を更新し、失敗した収集元は前回値を保持しました", file=sys.stderr)
+        else:
+            print("✅ メーカー案内を検証済みデータ一式へ更新しました")
         return 0
     message = (
         "メーカー案内の取得または検証に失敗したため、前回の検証済みデータを維持します。"
