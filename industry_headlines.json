@@ -3,24 +3,36 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-10-13T07:07:24+09:00",
-  "last_success_at": "2026-10-13T07:07:24+09:00",
+  "checked_at": "2026-10-14T05:14:23+09:00",
+  "last_success_at": "2026-10-14T05:14:23+09:00",
   "items": [
     {
-      "title": "【厚労省】加算係数ゼロは5品目に‐14日に11成分14品目収載",
-      "url": "https://www.yakuji.co.jp/entry140295.html",
-      "date": "2026-10-09",
+      "title": "【エーザイ／米メルク】腎細胞癌で米承認取得‐レンビマ、ウェリレグ併用療法",
+      "url": "https://www.yakuji.co.jp/entry140299.html",
+      "date": "2026-10-13",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【大塚製薬】実行機能障害など改善‐新規ADHD薬の追加解析",
+      "url": "https://www.yakuji.co.jp/entry140298.html",
+      "date": "2026-10-13",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "OTCの知識や使い方発信‐一般薬連など、普及啓発イベント開催",
+      "url": "https://www.yakuji.co.jp/entry140296.html",
+      "date": "2026-10-13",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【GE薬協 川俣会長】需要急増、増産追いつかず‐数量シェア拡大に貢献も",
+      "url": "https://www.yakuji.co.jp/entry140291.html",
+      "date": "2026-10-13",
       "tag": "業界ニュース"
     },
     {
       "title": "【大阪府薬】零売巡り新区分を提言‐薬剤師の対面評価前提",
       "url": "https://www.yakuji.co.jp/entry140287.html",
-      "date": "2026-10-09",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【薬価専門部会】新薬は「乖離率1倍以上に」‐中間年改定で日薬委員主張",
-      "url": "https://www.yakuji.co.jp/entry140285.html",
       "date": "2026-10-09",
       "tag": "業界ニュース"
     },
