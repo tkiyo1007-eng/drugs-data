@@ -56,7 +56,7 @@ def verified_group_announcements(document: object) -> dict[str, dict[str, object
     """公式資料の本文・表で対象品目を再確認済みのグループだけを展開する。"""
     if not isinstance(document, list):
         return {}
-    result: dict[str, dict[str, object]] = {}
+    entries: list[tuple[str, dict[str, object]]] = []
     for group in document:
         if (not isinstance(group, dict)
                 or group.get("target_products_verified") is not True
@@ -77,25 +77,38 @@ def verified_group_announcements(document: object) -> dict[str, dict[str, object
             info = dict(announcement)
             info["target_products_verified"] = True
             info["target_scope"] = "product"
-            result[product_name] = info
+            entries.append((product_name, info))
         for target in lifecycle_targets:
             if not isinstance(target, dict):
                 continue
             product_name = target.get("product_name")
             yj_code = target.get("yj_code")
-            if not isinstance(product_name, str) or not product_name.strip() or not isinstance(yj_code, str):
+            if (not isinstance(product_name, str) or not product_name.strip()
+                    or not isinstance(yj_code, str) or not yj_code.strip()):
                 continue
             info = dict(announcement)
             info["target_products_verified"] = True
             info["target_scope"] = "product"
             info["verified_yj_code"] = yj_code.strip()
+            info["verified_product_name"] = product_name
             if any(field in target for field in SUPPLY_END_FIELDS):
                 for field in SUPPLY_END_FIELDS:
                     info.pop(field, None)
             for field in SUPPLY_END_FIELDS:
                 if field in target:
                     info[field] = target[field]
-            result[product_name] = info
+            entries.append((product_name, info))
+    target_yjs: dict[str, set[str]] = {}
+    for product_name, info in entries:
+        if info.get("verified_yj_code"):
+            target_yjs.setdefault(product_name, set()).add(str(info["verified_yj_code"]))
+    result: dict[str, dict[str, object]] = {}
+    for product_name, info in entries:
+        key = product_name
+        if info.get("verified_yj_code") and len(target_yjs[product_name]) > 1:
+            # 同名の別YJを保持する内部キー。照合と公開には原典の商品名を使う。
+            key = f"{product_name}\0{info['verified_yj_code']}"
+        result[key] = info
     return result
 
 
@@ -406,7 +419,9 @@ def main() -> int:
         manual_scopes = verified_group_scopes(manual_groups)
         announcement_sets.append(verified_group_announcements(manual_groups))
     for announcements in announcement_sets:
-        for product_name, announcement in announcements.items():
+        for announcement_key, announcement in announcements.items():
+            product_name = (announcement.get("verified_product_name", announcement_key)
+                            if isinstance(announcement, dict) else announcement_key)
             title = announcement.get("title") if isinstance(announcement, dict) else ""
             source_url = announcement.get("url") if isinstance(announcement, dict) else ""
             if manual_scopes.get((norm(product_name), str(source_url or ""))) in {"package", "seller_route"}:

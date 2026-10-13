@@ -567,6 +567,17 @@ def manufacturer_notice_changed(notice: dict, bulletins=None) -> bool:
                                 for item in bulletins.get("items", [])))
 
 
+def lifecycle_for_display(lifecycle, notices=(), bulletins=None):
+    """元の履歴を保ち、既知の原典変更だけを表示用の再確認待ち状態にする。"""
+    if not lifecycle:
+        return lifecycle
+    sources = {lifecycle.get("source_url"), lifecycle.get("supply_end_source_url")}
+    if any(notice.get("url") in sources and manufacturer_notice_changed(notice, bulletins)
+           for notice in notices):
+        return dict(lifecycle, source_changed=True)
+    return lifecycle
+
+
 def matching_manufacturer_notices(row: dict, notices=(), bulletins=None) -> list:
     """正式YJ・商品名・確認済み対象メーカーが全て一致した案内だけを返す。"""
     matched = []
@@ -755,6 +766,8 @@ def should_generate(row: dict, key: str, existing: set[str],
 
 
 def lifecycle_verification_is_recent(lifecycle: dict, reference_date: str) -> bool:
+    if (lifecycle or {}).get("source_changed"):
+        return False
     verified = iso_publication_date((lifecycle or {}).get("verified_at"))
     reference = iso_publication_date(reference_date)
     if not verified or not reference:
@@ -770,7 +783,8 @@ def supplemental_labels(row: dict, lifecycle=None, discrepancy=None,
     if supplemental_matches(row, lifecycle):
         lifecycle_current = trusted and lifecycle_verification_is_recent(
             lifecycle, reference_date)
-        labels.append("メーカー：販売中止予定" if lifecycle_current
+        labels.append("メーカー原典更新・再確認待ち" if lifecycle.get("source_changed")
+                      else "メーカー：販売中止予定" if lifecycle_current
                       else "メーカー：販売中止案内あり（要原文確認）")
     if discrepancy_matches(row, discrepancy):
         manufacturer = discrepancy.get("manufacturer") or {}
@@ -784,6 +798,8 @@ def supplemental_labels(row: dict, lifecycle=None, discrepancy=None,
 
 def lifecycle_end_details(lifecycle: dict) -> str:
     """終了予定を現在の案内と結びつけ、日付・条件・確認日を分けて示す。"""
+    if lifecycle.get("source_changed"):
+        return ""
     source = lifecycle.get("supply_end_source_url")
     matches = not source or source == lifecycle.get("source_url")
     expected = lifecycle.get("supply_end_expected") if matches else None
@@ -802,7 +818,7 @@ def lifecycle_end_details(lifecycle: dict) -> str:
 
 def supplemental_bucket(entry: dict) -> str:
     """同じ品目を重複掲載せず、他の掲載理由は品目内に併記する。"""
-    if entry.get("lifecycle") or entry.get("status") == "ended":
+    if (entry.get("lifecycle") and not entry["lifecycle"].get("source_changed")) or entry.get("status") == "ended":
         return "sales-notices"
     if entry.get("delist"):
         return "delisting"
@@ -812,7 +828,17 @@ def supplemental_bucket(entry: dict) -> str:
 def supplemental_entry_html(entry: dict) -> str:
     parts = []
     lifecycle = entry.get("lifecycle") or {}
-    if lifecycle:
+    if lifecycle.get("source_changed"):
+        parts.append('<span class="reason-tag">メーカー原典更新・再確認待ち</span>')
+        parts.append('<span>原典の内容変更を検出しました。以前の販売中止予定・終了日・条件・対象包装は再確認待ちです。</span>')
+        source_url = str(lifecycle.get("source_url") or "")
+        if source_url.startswith("https://"):
+            parts.append(f'<span><a href="{esc(source_url)}" target="_blank" rel="noopener" '
+                         f'data-dsn-event="official-source-open">更新されたメーカー原典を確認</a></span>')
+        parts.append(f'<span>前回収録の案内：{esc(lifecycle.get("source_title") or "メーカー案内")}｜'
+                     f'前回の公表年月日：{esc(lifecycle.get("announced_at") or "確認できません")}｜'
+                     f'前回の原文確認日：{esc(lifecycle.get("verified_at") or "確認できません")}</span>')
+    elif lifecycle:
         parts.append('<span class="reason-tag">メーカーの販売中止案内</span>')
         parts.append(lifecycle_end_details(lifecycle))
         source_url = str(lifecycle.get("source_url") or "")
@@ -896,13 +922,15 @@ def latest_publication_date(row: dict, lifecycle=None, discrepancy=None) -> str:
     return max(valid) if valid else ""
 
 
-def item_page_lastmod(row: dict, lifecycle=None, discrepancy=None, manufacturer_notices=()) -> str:
+def item_page_lastmod(row: dict, lifecycle=None, discrepancy=None, manufacturer_notices=(), manufacturer_bulletins=None) -> str:
     """品目データまたは静的ページテンプレートの実質改訂日の新しい方。"""
+    lifecycle = lifecycle_for_display(lifecycle, manufacturer_notices, manufacturer_bulletins)
     dates = [ITEM_PAGE_TEMPLATE_LASTMOD,
              latest_publication_date(row, lifecycle, discrepancy)]
     if is_delist(row) or supplemental_matches(row, lifecycle):
         dates.append(SUPPLEMENTAL_TEMPLATE_LASTMOD)
-    if supplemental_matches(row, lifecycle) and lifecycle.get("supply_end_source_url") == lifecycle.get("source_url"):
+    if (supplemental_matches(row, lifecycle) and not lifecycle.get("source_changed")
+            and lifecycle.get("supply_end_source_url") == lifecycle.get("source_url")):
         dates.append(iso_publication_date(lifecycle.get("supply_end_verified_at")))
     for match in matching_manufacturer_notices(row, manufacturer_notices):
         notice = match["notice"]
@@ -1194,6 +1222,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
                   '販売・製造の終了や終了日とは別の情報です。薬価の扱い・期限は厚生労働省、'
                   '販売予定はメーカー原文でそれぞれ確認してください。'
                   f'<a href="{DISCONTINUATION_GUIDE}">販売中止・製造中止・薬価削除の確認方法</a></div>' if delist else "")
+    lifecycle = lifecycle_for_display(lifecycle, manufacturer_notices, manufacturer_bulletins)
     lifecycle_match = lifecycle if supplemental_matches(row, lifecycle) else None
     discrepancy_match = discrepancy if discrepancy_matches(row, discrepancy) else None
     supplements = supplemental_labels(
@@ -1254,13 +1283,21 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
                           'data-dsn-event="official-source-open">'
                           'メーカー公式案内の原文を確認</a>'
                           if lifecycle_url.startswith("https://") else "")
-        lifecycle_box = f'''<div class="supp supp-life">
+        if lifecycle_match.get("source_changed"):
+            lifecycle_box = (f'<div class="supp supp-life"><strong>メーカー公式：原典更新・再確認待ち</strong>'
+                             '<p>原典の内容変更を検出しました。以前の販売中止予定・終了日・条件・対象包装は現在の案内として表示していません。メーカー原文で再確認してください。</p>'
+                             f'<p>前回収録の案内：{esc(lifecycle_match.get("source_title") or "メーカー案内")}｜'
+                             f'前回の公表年月日：{esc(lifecycle_match.get("announced_at") or "確認できません")}｜'
+                             f'前回の原文確認日：{esc(lifecycle_match.get("verified_at") or "確認日不明")}</p>'
+                             f'{lifecycle_link}</div>')
+        else:
+            lifecycle_box = f'''<div class="supp supp-life">
       <strong>メーカー公式：{"販売中止予定" if lifecycle_current else "販売中止案内あり（要原文確認）"}</strong>
       <p>{esc(lifecycle_match.get("source_title") or "販売中止の案内")}'''
-        if lifecycle_match.get("announced_at"):
-            lifecycle_box += f'（公表 {esc(lifecycle_match.get("announced_at"))}）'
-        verified_at = esc(lifecycle_match.get("verified_at") or "確認日不明")
-        lifecycle_box += (f'''</p>{lifecycle_end_details(lifecycle_match)}<p>案内の最終確認日：{verified_at}。{"確認日が7日以上前のため、現在の扱いは必ず原文で再確認してください。" if not lifecycle_current else "厚労省の現在の供給区分と、メーカーの今後の販売予定は別の情報として併記しています。"}</p>{lifecycle_link}<p><a href="{DISCONTINUATION_GUIDE}">販売中止・製造中止・薬価削除の確認方法</a></p></div>''')
+            if lifecycle_match.get("announced_at"):
+                lifecycle_box += f'（公表 {esc(lifecycle_match.get("announced_at"))}）'
+            verified_at = esc(lifecycle_match.get("verified_at") or "確認日不明")
+            lifecycle_box += (f'''</p>{lifecycle_end_details(lifecycle_match)}<p>案内の最終確認日：{verified_at}。{"確認日が7日以上前のため、現在の扱いは必ず原文で再確認してください。" if not lifecycle_current else "厚労省の現在の供給区分と、メーカーの今後の販売予定は別の情報として併記しています。"}</p>{lifecycle_link}<p><a href="{DISCONTINUATION_GUIDE}">販売中止・製造中止・薬価削除の確認方法</a></p></div>''')
 
     discrepancy_box = ""
     if discrepancy_match:
@@ -1353,7 +1390,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
     webpage_ld = ld_json({
         "@context": "https://schema.org", "@type": "WebPage",
         "name": title, "description": desc, "url": url, "inLanguage": "ja",
-        "dateModified": item_page_lastmod(row, lifecycle_match, discrepancy_match, manufacturer_notices),
+        "dateModified": item_page_lastmod(row, lifecycle_match, discrepancy_match, manufacturer_notices, manufacturer_bulletins),
         "isPartOf": {"@type": "WebSite", "name": "医薬品供給ナビ", "url": SITE_ROOT},
     })
     quick_answers = quick_answers_html(row, status, display_name)
@@ -1867,7 +1904,7 @@ def hub_html(slug, entries, dataset_date):
                     search_text += " 薬価削除予定 経過措置 " + str(entry.get("transition_deadline") or "")
                 lifecycle = entry.get("lifecycle") or {}
                 search_text += " " + str(lifecycle.get("source_title") or "")
-                if not lifecycle.get("supply_end_source_url") or lifecycle.get("supply_end_source_url") == lifecycle.get("source_url"):
+                if not lifecycle.get("source_changed") and (not lifecycle.get("supply_end_source_url") or lifecycle.get("supply_end_source_url") == lifecycle.get("source_url")):
                     search_text += " " + " ".join(str(lifecycle.get(field) or "") for field in (
                         "supply_end_expected", "supply_end_note"))
             search_attr = f' data-search="{esc(search_text)}"'
@@ -2095,6 +2132,8 @@ def main():
         notice_index = manufacturer_notice_index(verified_notices)
         manufacturer_bulletins = load_manufacturer_bulletins(site / "manufacturer_bulletins.json")
         lifecycle_products = validated_product_map(lifecycle_doc, "販売中止補足データ")
+        lifecycle_products = {key: lifecycle_for_display(value, verified_notices, manufacturer_bulletins)
+                              for key, value in lifecycle_products.items()}
         discrepancy_products = validated_product_map(discrepancy_doc, "供給差異データ")
         dataset_date = version_date(version_doc)
         if not dataset_date:
@@ -2218,7 +2257,7 @@ def main():
         (out / f"{slug}.html").write_text(
             hub_html(slug, entries, dataset_date), encoding="utf-8")
     key_dates = {
-        k: item_page_lastmod(r, lifecycle_products.get(k), discrepancy_products.get(k), notice_index.get(k, []))
+        k: item_page_lastmod(r, lifecycle_products.get(k), discrepancy_products.get(k), notice_index.get(k, []), manufacturer_bulletins)
         for k, (r, _) in targets.items()
     }
     (site / "sitemap-items.xml").write_text(

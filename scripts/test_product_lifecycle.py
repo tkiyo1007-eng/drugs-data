@@ -104,6 +104,98 @@ class ProductLifecycleTests(unittest.TestCase):
         self.assertEqual(expanded["薬A錠"]["supply_end_expected"], "2027-03")
         self.assertNotIn("supply_end_expected", expanded["薬B錠"])
 
+    @staticmethod
+    def _same_name_targets():
+        name = "ゼルフォーム"
+        source = "https://www.pfizermedicalinformation.jp/end.pdf"
+        yjs = ("3322701X1020", "3322701X2027")
+        rows = [{"商品名": name, "YJコード": yj, "製造メーカー": "ファイザー",
+                 "販売メーカー": "ファイザー"} for yj in yjs]
+        group = {
+            "products": [], "target_products_verified": True,
+            "target_scope": "product", "expected_target_count": 2,
+            "announcement": {"maker": "ファイザー", "title": "販売中止予定のご案内",
+                             "event_type": "discontinued", "url": source,
+                             "checked": "2026-10-14", "announced_at": "2026-10"},
+            "lifecycle_targets": [
+                {"product_name": name, "yj_code": yj,
+                 "supply_end_note": "出荷停止中。販売中止日・月の記載はありません",
+                 "supply_end_packages": [package], "supply_end_source_url": source,
+                 "supply_end_verified_at": "2026-10-14"}
+                for yj, package in zip(yjs, ("No.12［4袋］", "No.100［1袋］"))
+            ],
+        }
+        return rows, group
+
+    def _build_target_groups(self, rows, groups, existing=None):
+        root = Path(__file__).resolve().parents[1]
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            with (base / "drugs.csv").open("w", encoding="utf-8-sig", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=["商品名", "YJコード", "製造メーカー", "販売メーカー"])
+                writer.writeheader()
+                writer.writerows(rows)
+            for filename, value in (("announcements.json", {}), ("groups.json", groups),
+                                    ("existing.json", existing or {"products": {}})):
+                (base / filename).write_text(json.dumps(value, ensure_ascii=False), encoding="utf-8")
+            result = subprocess.run([
+                sys.executable, str(root / "scripts/build_product_lifecycle.py"),
+                "--csv", str(base / "drugs.csv"), "--announcements", str(base / "announcements.json"),
+                "--manual-groups", str(base / "groups.json"), "--existing", str(base / "existing.json"),
+                "--output", str(base / "output.json"),
+            ], capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr[-500:])
+            return json.loads((base / "output.json").read_text())["products"]
+
+    def test_verified_same_name_targets_keep_both_yjs_and_original_names(self):
+        _, group = self._same_name_targets()
+        expanded = verified_group_announcements([group])
+        self.assertEqual(len(expanded), 2)
+        self.assertEqual({info["verified_yj_code"] for info in expanded.values()},
+                         {"3322701X1020", "3322701X2027"})
+        self.assertEqual({info["verified_product_name"] for info in expanded.values()}, {"ゼルフォーム"})
+        # 既存の一意の商品名キーのインターフェースを維持する。
+        group["lifecycle_targets"] = group["lifecycle_targets"][:1]
+        group["expected_target_count"] = 1
+        self.assertEqual(set(verified_group_announcements([group])), {"ゼルフォーム"})
+
+    def test_cli_same_name_explicit_targets_generate_distinct_package_facts(self):
+        rows, group = self._same_name_targets()
+        products = self._build_target_groups(rows, [group])
+        self.assertEqual(set(products), {"3322701X1020", "3322701X2027"})
+        for target in group["lifecycle_targets"]:
+            item = products[target["yj_code"]]
+            self.assertEqual(item["product_name"], target["product_name"])
+            self.assertEqual(item["supply_end_packages"], target["supply_end_packages"])
+            self.assertEqual(item["supply_end_source_url"], target["supply_end_source_url"])
+            self.assertNotIn("supply_end_expected", item)
+            self.assertEqual(item["verified_at"], "2026-10-14")
+
+    def test_cli_same_name_target_never_falls_back_after_yj_name_or_maker_mismatch(self):
+        for mismatch in ("missing_yj", "name", "maker", "removed_from_csv"):
+            with self.subTest(mismatch=mismatch):
+                rows, group = self._same_name_targets()
+                if mismatch == "missing_yj":
+                    group["lifecycle_targets"][1]["yj_code"] = "3322701X9999"
+                elif mismatch == "name":
+                    rows[1]["商品名"] = "別の製品"
+                elif mismatch == "maker":
+                    rows[1].update({"製造メーカー": "別製薬", "販売メーカー": "別製薬"})
+                else:
+                    rows = rows[:1]
+                products = self._build_target_groups(rows, [group])
+                self.assertEqual(set(products), {"3322701X1020"})
+                self.assertEqual(products["3322701X1020"]["supply_end_packages"], ["No.12［4袋］"])
+
+    def test_cli_same_name_target_retains_explicit_active_release(self):
+        rows, group = self._same_name_targets()
+        active = {"product_name": "ゼルフォーム", "maker": "ファイザー", "state": "active",
+                  "source_title": "販売中止予定のご案内", "source_url": group["announcement"]["url"],
+                  "verified_at": "2026-10-14"}
+        products = self._build_target_groups(rows, [group], {"products": {"3322701X1020": active}})
+        self.assertEqual(products["3322701X1020"], active)
+        self.assertEqual(products["3322701X2027"]["state"], "discontinuation_announced")
+
     def test_validator_accepts_legacy_expected_and_verified_optional_evidence(self):
         document, rows = self._lifecycle_fixture(
             "123456789012", "沢井製薬", "https://med.sawai.co.jp/end.pdf")

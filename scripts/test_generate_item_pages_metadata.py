@@ -19,6 +19,11 @@ from generate_item_pages import (
     load_manufacturer_notices,
     load_manufacturer_bulletins,
     manufacturer_notice_changed,
+    lifecycle_for_display,
+    lifecycle_end_details,
+    lifecycle_verification_is_recent,
+    supplemental_labels,
+    supplemental_bucket,
     manufacturer_notice_index,
     matching_manufacturer_notices,
     manufacturer_notices_html,
@@ -894,6 +899,67 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
             path.write_text(json.dumps({"schema_version": 1, "items": [{"url": "javascript:alert(1)", "sha256": "a" * 64}]}), encoding="utf-8")
             with self.assertRaises(ValueError):
                 load_manufacturer_bulletins(path)
+
+
+    def lifecycle(self):
+        row, notice = self.row(), self.notice()
+        return {"product_name": row["商品名"], "maker": notice["maker"],
+                "state": "discontinuation_announced", "announced_at": "2026-10",
+                "verified_at": "2026-10-14", "source_url": notice["url"],
+                "source_title": "前回の販売中止案内", "supply_end_source_url": notice["url"],
+                "supply_end_expected": "2027-12", "supply_end_note": "在庫により前後する以前の条件",
+                "supply_end_packages": ["以前の100錠包装"], "supply_end_verified_at": "2026-10-14"}
+
+    def test_lifecycle_hash_guard_is_ephemeral_and_requires_known_url_hash_mismatch(self):
+        notice, lifecycle = self.notice(), self.lifecycle()
+        before = json.dumps(lifecycle, ensure_ascii=False, sort_keys=True)
+        changed = {"items": [{"url": notice["url"], "sha256": "b" * 64}]}
+        display = lifecycle_for_display(lifecycle, [notice], changed)
+        self.assertTrue(display["source_changed"])
+        self.assertEqual(before, json.dumps(lifecycle, ensure_ascii=False, sort_keys=True))
+        self.assertFalse(lifecycle_verification_is_recent(display, "2026-10-14"))
+        self.assertEqual("", lifecycle_end_details(display))
+        alternate_source = dict(lifecycle, source_url="https://example.test/other.pdf")
+        self.assertTrue(lifecycle_for_display(alternate_source, [notice], changed)["source_changed"])
+        for observations in (None, {"items": []}, {"items": [{"url": notice["url"]}]},
+                             {"items": [{"url": notice["url"], "sha256": "a" * 64}]},
+                             {"items": [{"url": "https://example.test/unrelated.pdf", "sha256": "b" * 64}]}):
+            with self.subTest(observations=observations):
+                self.assertIs(lifecycle, lifecycle_for_display(lifecycle, [notice], observations))
+        self.assertIs(lifecycle, lifecycle_for_display(lifecycle, [], changed))
+
+    def test_changed_lifecycle_page_hides_current_assertion_end_conditions_and_packages(self):
+        row, notice, lifecycle = self.row(), self.notice(), self.lifecycle()
+        bulletins = {"items": [{"url": notice["url"], "sha256": "b" * 64}], "checked": "2026-10-20"}
+        output = page_html(row, row["YJコード"], "ok", "2026-10-20", [], {row["YJコード"]},
+                           lifecycle=lifecycle, supplemental_checked_date="2026-10-14",
+                           manufacturer_notices=[notice], manufacturer_bulletins=bulletins)
+        self.assertIn("厚労省：通常出荷", output)
+        self.assertIn("メーカー公式：原典更新・再確認待ち", output)
+        self.assertIn("前回の公表年月日：2026-10", output)
+        self.assertNotIn("メーカー公式：販売中止予定", output)
+        self.assertNotIn("メーカー：販売中止予定", output)
+        for value in ("終了予定時期：", "2027-12", lifecycle["supply_end_note"], lifecycle["supply_end_packages"][0], "終了予定の原文確認日"):
+            self.assertNotIn(value, output)
+        self.assertEqual("2026-10-14", item_page_lastmod(row, lifecycle, manufacturer_notices=[notice], manufacturer_bulletins=bulletins))
+        self.assertIn('"dateModified":"2026-10-14"', output)
+
+    def test_changed_lifecycle_hub_is_pending_and_does_not_search_stale_end_details(self):
+        row, notice = self.row(), self.notice()
+        lifecycle = lifecycle_for_display(self.lifecycle(), [notice], {"items": [{"url": notice["url"], "sha256": "b" * 64}]})
+        labels = supplemental_labels(row, lifecycle, reference_date="2026-10-14")
+        self.assertEqual(["メーカー原典更新・再確認待ち"], labels)
+        entry = {"key": row["YJコード"], "name": row["商品名"], "maker": notice["maker"],
+                 "status": "ok", "updated": "2026-07-07", "lifecycle": lifecycle,
+                 "lifecycle_current": False, "supplements": labels, "hubs": ["supplemental"]}
+        self.assertEqual("maker-notices", supplemental_bucket(entry))
+        output = hub_html("supplemental", [entry], "2026-10-14")
+        self.assertIn("メーカー原典更新・再確認待ち", output)
+        self.assertIn("現在の厚労省区分：通常出荷", output)
+        for value in ("終了予定時期：", "2027-12", lifecycle["supply_end_note"], lifecycle["supply_end_packages"][0]):
+            self.assertNotIn(value, output)
+        entry["status"] = "ended"
+        self.assertEqual("sales-notices", supplemental_bucket(entry))
 
     def test_partial_latest_collection_retains_last_complete_date_and_warns_with_attempt_date(self):
         health = {"checked": "2026-10-08", "sources": [{"source": "parse_towa", "ok": True}],

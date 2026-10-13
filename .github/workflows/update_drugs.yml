@@ -268,6 +268,12 @@ jobs:
       - name: メーカー公式速報を確認（供給区分は変更しない）
         run: python3 scripts/fetch_manufacturer_bulletins.py --base . --reuse-towa-cache
 
+      - name: 原典改訂の検知を品目ページへ反映（収集全体が失敗しても実施）
+        run: |
+          python3 scripts/generate_item_pages.py --csv drugs_app_ready.csv --site .
+          python3 scripts/generate_curated_pages.py --csv drugs_app_ready.csv --site .
+          python3 -m unittest discover -s scripts -p 'test_sitemap_integrity.py'
+
       - name: 不要ファイル削除
         run: rm -f supply_latest.xlsx
 
