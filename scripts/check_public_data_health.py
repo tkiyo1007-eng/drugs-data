@@ -69,6 +69,16 @@ def validate_version(document: object, today: dt.date, max_age_days: int) -> lis
             )
         if isinstance(version, int) and not str(version).startswith(snapshot_date.strftime("%Y%m%d")):
             errors.append("version.json: versionの日付とnoteの日付が一致しません")
+    if "mhlw_excel_date" in document:
+        value = document["mhlw_excel_date"]
+        try:
+            if not isinstance(value, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
+                raise ValueError("invalid date")
+            source_date = dt.date.fromisoformat(value)
+            if snapshot_date is None or source_date > snapshot_date:
+                raise ValueError("date is after import")
+        except ValueError:
+            errors.append("version.json: mhlw_excel_date は取込日以前の実在するYYYY-MM-DDである必要があります")
     return errors
 
 
@@ -215,7 +225,7 @@ def mhlw_ingest_deadline(file_date: dt.date) -> dt.datetime:
                                dt.time(MHLW_INGEST_DEADLINE_HOUR), tzinfo=JST)
 
 
-def check_mhlw_ingest(now: dt.datetime) -> tuple[list[str], list[str], list[str]]:
+def check_mhlw_ingest(now: dt.datetime, version: object = None) -> tuple[list[str], list[str], list[str]]:
     """厚労省が公開した最新Excelが、日次更新で取り込まれているかを確認する。
 
     2026-09-26、9/25版を取得した日次更新が品質検査で止まり、鮮度監視（営業日）は
@@ -227,20 +237,24 @@ def check_mhlw_ingest(now: dt.datetime) -> tuple[list[str], list[str], list[str]
     """
     errors: list[str] = []
     warnings: list[str] = []
-    try:
-        page = fetch(MHLW_SUPPLY_PAGE, 5 * 1024 * 1024).decode("utf-8", "replace")
-    except (OSError, ValueError, RuntimeError, urllib.error.URLError) as error:
-        return [], [f"厚労省の供給状況ページを確認できません（取り込み確認を省略）: {error}"], []
-    stamps = [(mhlw_file_date(match.group(2)), match.group(1)) for match in MHLW_FILE_RE.finditer(page)]
-    stamps = [(date, href) for date, href in stamps if date]
-    if not stamps:
-        return [], ["厚労省ページのExcelファイル名から日付を判定できません（形式変更の可能性。取り込み確認を省略）"], []
-    latest_date, latest_href = max(stamps)
+    # 自サイトの公開メタデータ照合は、外部の最新Excel探索に依存させない。
     try:
         source = json.loads(fetch(BASE_URL + MHLW_SOURCE_NAME, 64 * 1024))
         ingested = dt.date.fromisoformat(str(source.get("excel_date")))
     except (OSError, ValueError, RuntimeError, urllib.error.URLError, AttributeError) as error:
         return [f"{MHLW_SOURCE_NAME}: 取り込み済みの厚労省ファイルを確認できません: {error}"], warnings, []
+    if isinstance(version, dict) and "mhlw_excel_date" in version:
+        if version["mhlw_excel_date"] != ingested.isoformat():
+            errors.append("version.json: mhlw_excel_date とコア公開したmhlw_source.jsonの基準日が一致しません")
+    try:
+        page = fetch(MHLW_SUPPLY_PAGE, 5 * 1024 * 1024).decode("utf-8", "replace")
+    except (OSError, ValueError, RuntimeError, urllib.error.URLError) as error:
+        return errors, [f"厚労省の供給状況ページを確認できません（最新Excelとの比較を省略）: {error}"], []
+    stamps = [(mhlw_file_date(match.group(2)), match.group(1)) for match in MHLW_FILE_RE.finditer(page)]
+    stamps = [(date, href) for date, href in stamps if date]
+    if not stamps:
+        return errors, ["厚労省ページのExcelファイル名から日付を判定できません（形式変更の可能性。最新Excelとの比較を省略）"], []
+    latest_date, latest_href = max(stamps)
     result = f"厚労省最新Excel {latest_date.isoformat()} / 取り込み済み {ingested.isoformat()}"
     deadline = mhlw_ingest_deadline(latest_date)
     if latest_date > ingested and now >= deadline:
@@ -444,7 +458,7 @@ def run(
         errors.extend(pages_errors)
         results.extend(pages_results)
         # 監視は日本時間7:15（UTC前日）や公開直後に動くため、厚労省ファイルとの比較は日本時間で行う。
-        mhlw_errors, mhlw_warnings, mhlw_results = check_mhlw_ingest(jst_now())
+        mhlw_errors, mhlw_warnings, mhlw_results = check_mhlw_ingest(jst_now(), version)
         errors.extend(mhlw_errors)
         results.extend(mhlw_results)
         for warning in mhlw_warnings:

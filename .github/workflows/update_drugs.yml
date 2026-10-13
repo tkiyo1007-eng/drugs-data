@@ -147,6 +147,7 @@ jobs:
         run: |
           python3 - <<'EOF'
           import json, datetime, pytz
+          from scripts.mhlw_source_date import source_excel_date
           jst = pytz.timezone("Asia/Tokyo"); now = datetime.datetime.now(jst)
           version = int(now.strftime("%Y%m%d%H%M"))
           data = {
@@ -154,6 +155,15 @@ jobs:
               "csv_url": "https://raw.githubusercontent.com/tkiyo1007-eng/drugs-data/main/drugs_app_ready.csv",
               "note": f"{now.strftime('%Y年%m月%d日')}厚労省データ反映",
           }
+          try:
+              with open("mhlw_source.json", encoding="utf-8") as source_file:
+                  source_day = source_excel_date(json.load(source_file), now.date())
+          except (OSError, ValueError):
+              source_day = None
+          if source_day:
+              data["mhlw_excel_date"] = source_day
+          else:
+              print("::warning::厚労省原Excelの基準日を確認できません。取込日から補完しません")
           with open("version.json", "w", encoding="utf-8") as f:
               json.dump(data, f, ensure_ascii=False, indent=2)
           print(f"✅ version.json更新: {version}")

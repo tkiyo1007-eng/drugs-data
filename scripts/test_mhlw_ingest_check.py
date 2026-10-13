@@ -14,7 +14,7 @@ PAGE = '<a href="/content/10800000/{}iyakuhinkyoukyu.xlsx">供給状況</a>'
 
 class MhlwIngestCheckTests(unittest.TestCase):
     def run_check(self, page_stamps, ingested="2026-09-18", now=dt.datetime(2026, 9, 26, 7, 15, tzinfo=JST),
-                  page_error=None, source=None):
+                  page_error=None, source=None, version=None):
         def fake_fetch(url, _limit):
             if url == health.MHLW_SUPPLY_PAGE:
                 if page_error:
@@ -26,13 +26,32 @@ class MhlwIngestCheckTests(unittest.TestCase):
                 return json.dumps({"excel_date": ingested}).encode()
             raise AssertionError(url)
         with mock.patch.object(health, "fetch", side_effect=fake_fetch):
-            return health.check_mhlw_ingest(now)
+            return health.check_mhlw_ingest(now, version)
+
+    def test_version_source_date_is_bound_to_the_ingested_source_record(self):
+        now = dt.datetime(2026, 10, 14, 7, 15, tzinfo=JST)
+        version = {"note": "2026年10月14日厚労省データ反映", "mhlw_excel_date": "2026-10-08"}
+        errors, _, _ = self.run_check(["261008"], ingested="2026-10-08", now=now, version=version)
+        self.assertEqual(errors, [])
+        version["mhlw_excel_date"] = "2026-10-14"
+        errors, _, _ = self.run_check(["261008"], ingested="2026-10-08", now=now, version=version)
+        self.assertTrue(any("mhlw_source.json" in error for error in errors))
 
     def test_detects_published_file_not_ingested_after_a_day(self):
         errors, warnings, _ = self.run_check(["260918", "260925"])
         self.assertEqual(1, len(errors))
         self.assertIn("2026-09-25版", errors[0])
         self.assertIn("2026-09-18版のまま", errors[0])
+
+    def test_public_metadata_mismatch_is_detected_during_external_outage_or_format_change(self):
+        version = {"mhlw_excel_date": "2026-10-14"}
+        for failure in (None, urllib.error.URLError("timeout")):
+            with self.subTest(failure=failure):
+                errors, warnings, results = self.run_check(
+                    [], ingested="2026-10-08", page_error=failure, version=version)
+                self.assertTrue(any("mhlw_source.json" in error for error in errors))
+                self.assertTrue(warnings)
+                self.assertEqual(results, [])
 
     def test_same_day_publication_only_warns(self):
         errors, warnings, _ = self.run_check(["260925"], now=dt.datetime(2026, 9, 25, 18, 0, tzinfo=JST))
