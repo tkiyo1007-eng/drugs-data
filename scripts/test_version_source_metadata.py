@@ -4,8 +4,10 @@ import io
 import json
 import os
 from pathlib import Path
+import sys
 import tempfile
 import textwrap
+import types
 import unittest
 from unittest import mock
 
@@ -19,6 +21,9 @@ class VersionSourceMetadataTests(unittest.TestCase):
             @classmethod
             def now(cls, tz=None):
                 return cls(2026, 10, 14, 5, 14, tzinfo=tz)
+        # 回帰CIは標準ライブラリのみ。日次実行のpytz API境界を固定時計と共に代役化する。
+        timezone_module = types.ModuleType('pytz')
+        timezone_module.timezone = mock.Mock(return_value=dt.timezone(dt.timedelta(hours=9)))
         with tempfile.TemporaryDirectory() as folder:
             target = Path(folder)
             if source is not None:
@@ -26,8 +31,11 @@ class VersionSourceMetadataTests(unittest.TestCase):
             previous = Path.cwd()
             try:
                 os.chdir(target)
-                with mock.patch.object(dt, 'datetime', FixedClock), contextlib.redirect_stdout(io.StringIO()) as output:
+                with mock.patch.object(dt, 'datetime', FixedClock), \
+                        mock.patch.dict(sys.modules, {'pytz': timezone_module}), \
+                        contextlib.redirect_stdout(io.StringIO()) as output:
                     exec(compile(program, '<actual-version-workflow>', 'exec'), {})
+                timezone_module.timezone.assert_called_once_with('Asia/Tokyo')
                 return json.loads((target / 'version.json').read_text()), output.getvalue()
             finally:
                 os.chdir(previous)

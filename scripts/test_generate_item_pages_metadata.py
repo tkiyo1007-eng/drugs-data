@@ -1060,6 +1060,44 @@ class DatasetSourceDateTests(unittest.TestCase):
         self.assertEqual("2026-10-14", mhlw_excel_date(self.version("2026-10-14"), self.import_date))
         self.assertEqual("2024-02-29", mhlw_excel_date(self.version("2024-02-29", "2024-03-01"), "2024-03-01"))
 
+    def test_import_date_accepts_only_typed_metadata_and_real_calendar_dates(self):
+        for metadata, expected in (
+            ({"note": "2026年10月14日厚労省データ反映"}, "2026-10-14"),
+            ({"version": 202610140514}, "2026-10-14"),
+            ({"version": "202610140514"}, "2026-10-14"),
+            ({"note": ["2026年10月14日"], "version": 202610140514}, "2026-10-14"),
+            ({"note": "2024年2月29日"}, "2024-02-29"),
+            ({"note": "2026年2月30日"}, ""),
+            ({"note": "2026年2月30日", "version": 202610140514}, ""),
+            ({"note": "2026年13月14日"}, ""),
+            ({"note": "0000年10月14日"}, ""),
+            ({"version": 202602300000}, ""),
+            ({"note": ["2026年10月14日厚労省データ反映"]}, ""),
+            ({"note": {"value": "2026年10月14日"}}, ""),
+            ({"note": 20261014}, ""),
+            ({"version": [202610140514]}, ""),
+            ({"version": {"value": "2026年10月14日"}}, ""),
+            ({"version": True}, ""),
+            (None, ""), ([{"note": "2026年10月14日"}], ""),
+        ):
+            with self.subTest(metadata=metadata):
+                self.assertEqual(expected, version_date(metadata))
+
+    def test_nojs_invalid_import_metadata_shows_both_dates_unknown(self):
+        for metadata in (
+            {"note": "2026年2月30日厚労省データ反映", "mhlw_excel_date": "2026-02-28"},
+            {"note": ["2026年10月14日厚労省データ反映"], "mhlw_excel_date": "2026-10-08"},
+            {"version": [202610140514], "mhlw_excel_date": "2026-10-08"},
+            [{"note": "2026年10月14日厚労省データ反映"}],
+        ):
+            with self.subTest(metadata=metadata):
+                imported = version_date(metadata)
+                output = self.page(metadata, imported=imported)
+                block = self.visible_date_block(output)
+                self.assertEqual(2, block.count("確認できません"))
+                self.assertNotIn("2026-02-30", block)
+                self.assertNotIn("2026-10-14", block)
+
     def test_source_validation_does_not_depend_on_generation_or_device_clock(self):
         metadata = self.version("2099-10-08", "2099-10-14")
         self.assertEqual("2099-10-08", mhlw_excel_date(metadata, "2099-10-14"))
@@ -1125,6 +1163,11 @@ setImmediate(() => process.stdout.write(JSON.stringify({source:nodes['.mhlw-exce
             (self.version("0000-10-08"), False, False, "確認できません", "2026-10-14"),
             (self.version("2026-10-15"), False, False, "確認できません", "2026-10-14"),
             ({"mhlw_excel_date": "2026-10-08"}, False, False, "確認できません", "確認できません"),
+            ({"note": ["2026年10月14日厚労省データ反映"], "mhlw_excel_date": "2026-10-08"}, False, False, "確認できません", "確認できません"),
+            ({"version": [202610140514], "mhlw_excel_date": "2026-10-08"}, False, False, "確認できません", "確認できません"),
+            ({"version": True, "mhlw_excel_date": "2026-10-08"}, False, False, "確認できません", "確認できません"),
+            ([{"note": "2026年10月14日"}], False, False, "確認できません", "確認できません"),
+            ({"version": 202610140514, "mhlw_excel_date": "2026-10-08"}, False, False, "2026-10-08", "2026-10-14"),
             (self.version(), True, False, "確認できません", "2026-10-14（前回取得）"),
             (self.version(), False, True, "確認できません", "確認できません"),
             (self.version("2099-10-08", "2099-10-14"), False, False, "2099-10-08", "2099-10-14"),

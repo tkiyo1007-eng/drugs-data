@@ -384,13 +384,23 @@ def validated_product_map(document: dict, label: str) -> dict:
 
 def version_date(version: dict) -> str:
     """version.jsonからデータセット全体の基準日をYYYY-MM-DDで返す。"""
-    text = f'{version.get("note", "")} {version.get("version", "")}'
+    if not isinstance(version, dict):
+        return ""
+    note = version.get("note")
+    identifier = version.get("version")
+    note = note if isinstance(note, str) else ""
+    identifier = (identifier if isinstance(identifier, (str, int, float))
+                  and not isinstance(identifier, bool) else "")
+    text = f"{note} {identifier}"
     match = (re.search(r"(\d{4})年(\d{1,2})月(\d{1,2})日", text)
              or re.search(r"(\d{4})-(\d{1,2})-(\d{1,2})", text)
              or re.search(r"\b(\d{4})(\d{2})(\d{2})\d*\b", text))
     if not match:
         return ""
-    return f"{match.group(1)}-{int(match.group(2)):02d}-{int(match.group(3)):02d}"
+    try:
+        return date(int(match.group(1)), int(match.group(2)), int(match.group(3))).isoformat()
+    except ValueError:
+        return ""
 
 
 def mhlw_excel_date(version, dataset_date: str) -> str:
@@ -1671,7 +1681,10 @@ footer a{{color:var(--sub)}}
     }})
     .then(function(result){{
       const version = result.version;
-      const text = String(version.note || "") + " " + String(version.version || "");
+      const versionObject = version && typeof version === "object" && !Array.isArray(version);
+      const note = versionObject && typeof version.note === "string" ? version.note : "";
+      const identifier = versionObject && (typeof version.version === "string" || typeof version.version === "number") ? version.version : "";
+      const text = note + " " + String(identifier);
       const match = text.match(/(\\d{{4}})年(\\d{{1,2}})月(\\d{{1,2}})日/) || text.match(/(\\d{{4}})-(\\d{{1,2}})-(\\d{{1,2}})/) || text.match(/\\b(\\d{{4}})(\\d{{2}})(\\d{{2}})\\d*\\b/);
       const candidateDate = match ? match[1] + "-" + String(match[2]).padStart(2,"0") + "-" + String(match[3]).padStart(2,"0") : "";
       const date = validIsoDay(candidateDate) ? candidateDate : "確認できません";
@@ -1682,7 +1695,7 @@ footer a{{color:var(--sub)}}
         const timestamp = Date.parse(value + "T00:00:00Z");
         return Number.isFinite(timestamp) && new Date(timestamp).toISOString().slice(0, 10) === value;
       }}
-      const source = version.mhlw_excel_date;
+      const source = versionObject ? version.mhlw_excel_date : null;
       // cached versionと静的品目CSVの同一世代は確定できないため、原Excel日は表示しない。
       const sourceDate = !result.cached && validIsoDay(source) && validIsoDay(date) && source <= date ? source : "確認できません";
       document.querySelectorAll(".mhlw-excel-date").forEach(function(node){{ node.textContent = sourceDate; }});

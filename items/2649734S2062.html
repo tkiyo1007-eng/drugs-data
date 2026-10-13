@@ -278,7 +278,10 @@ footer a{color:var(--sub)}
     })
     .then(function(result){
       const version = result.version;
-      const text = String(version.note || "") + " " + String(version.version || "");
+      const versionObject = version && typeof version === "object" && !Array.isArray(version);
+      const note = versionObject && typeof version.note === "string" ? version.note : "";
+      const identifier = versionObject && (typeof version.version === "string" || typeof version.version === "number") ? version.version : "";
+      const text = note + " " + String(identifier);
       const match = text.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/) || text.match(/(\d{4})-(\d{1,2})-(\d{1,2})/) || text.match(/\b(\d{4})(\d{2})(\d{2})\d*\b/);
       const candidateDate = match ? match[1] + "-" + String(match[2]).padStart(2,"0") + "-" + String(match[3]).padStart(2,"0") : "";
       const date = validIsoDay(candidateDate) ? candidateDate : "確認できません";
@@ -289,7 +292,7 @@ footer a{color:var(--sub)}
         const timestamp = Date.parse(value + "T00:00:00Z");
         return Number.isFinite(timestamp) && new Date(timestamp).toISOString().slice(0, 10) === value;
       }
-      const source = version.mhlw_excel_date;
+      const source = versionObject ? version.mhlw_excel_date : null;
       // cached versionと静的品目CSVの同一世代は確定できないため、原Excel日は表示しない。
       const sourceDate = !result.cached && validIsoDay(source) && validIsoDay(date) && source <= date ? source : "確認できません";
       document.querySelectorAll(".mhlw-excel-date").forEach(function(node){ node.textContent = sourceDate; });
