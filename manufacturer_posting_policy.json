@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "enabled": true,
+  "approved_at": "2026-10-14",
+  "max_posts_per_day": 1,
+  "max_attempts_per_month": 31,
+  "estimated_usd_per_post_with_url": "0.20",
+  "estimated_monthly_cap_usd": "6.20"
+}

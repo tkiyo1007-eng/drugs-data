@@ -1,0 +1,1170 @@
+{
+  "schema_version": 1,
+  "notices": [
+    {
+      "id": "pfizer-product-withdrawal-202610",
+      "maker": "ファイザー",
+      "title": "販売中止予定のご案内",
+      "url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/HSP27Q003A_ProductWithdrawal2026.pdf",
+      "listed_at": "2026-10-01",
+      "verified_at": "2026-10-14",
+      "sha256": "fae3f417d6cce9cd125015547a74c8e13d4f91beae6fe7d512291b02500fe15e",
+      "source_document_code": "HSP27Q003A",
+      "targets": [
+        {
+          "yj_code": "4291447D1028",
+          "spec": "６０ｍｇ１瓶",
+          "seller": "ファイザー",
+          "manufacturer": "ファイザー",
+          "packages": [
+            {
+              "package": "1バイアル",
+              "unified_product_code": "114-19690-3"
+            }
+          ],
+          "source_pages": [
+            1,
+            2
+          ],
+          "product_name": "トラスツズマブＢＳ点滴静注用６０ｍｇ「ファイザー」",
+          "maker": "ファイザー",
+          "scope": "package",
+          "planned_timing": "2027年12月"
+        },
+        {
+          "yj_code": "4291447D2024",
+          "spec": "１５０ｍｇ１瓶",
+          "seller": "ファイザー",
+          "manufacturer": "ファイザー",
+          "packages": [
+            {
+              "package": "1バイアル",
+              "unified_product_code": "114-19720-7"
+            }
+          ],
+          "source_pages": [
+            1,
+            2
+          ],
+          "product_name": "トラスツズマブＢＳ点滴静注用１５０ｍｇ「ファイザー」",
+          "maker": "ファイザー",
+          "scope": "package",
+          "planned_timing": "2027年12月"
+        },
+        {
+          "yj_code": "4291449A1020",
+          "spec": "１００ｍｇ４ｍＬ１瓶",
+          "seller": "ファイザー",
+          "manufacturer": "ファイザー",
+          "packages": [
+            {
+              "package": "4mL［1バイアル］",
+              "unified_product_code": "114-20920-7"
+            }
+          ],
+          "source_pages": [
+            1,
+            2
+          ],
+          "product_name": "ベバシズマブＢＳ点滴静注１００ｍｇ「ファイザー」",
+          "maker": "ファイザー",
+          "scope": "package",
+          "planned_timing": "2027年3月"
+        },
+        {
+          "yj_code": "4291449A2027",
+          "spec": "４００ｍｇ１６ｍＬ１瓶",
+          "seller": "ファイザー",
+          "manufacturer": "ファイザー",
+          "packages": [
+            {
+              "package": "16mL［1バイアル］",
+              "unified_product_code": "114-20930-6"
+            }
+          ],
+          "source_pages": [
+            1,
+            2
+          ],
+          "product_name": "ベバシズマブＢＳ点滴静注４００ｍｇ「ファイザー」",
+          "maker": "ファイザー",
+          "scope": "package",
+          "planned_timing": "2027年3月"
+        },
+        {
+          "yj_code": "2129012M1020",
+          "spec": "５０ｍｇ１カプセル",
+          "seller": "ファイザー",
+          "manufacturer": "ファイザー",
+          "packages": [
+            {
+              "package": "100カプセル［10カプセル(PTP)×10］",
+              "unified_product_code": "114-05020-5"
+            }
+          ],
+          "source_pages": [
+            1,
+            2
+          ],
+          "product_name": "ピメノールカプセル５０ｍｇ",
+          "maker": "ファイザー",
+          "scope": "package",
+          "planned_timing": "2027年6月"
+        },
+        {
+          "yj_code": "2129012M2027",
+          "spec": "１００ｍｇ１カプセル",
+          "seller": "ファイザー",
+          "manufacturer": "ファイザー",
+          "packages": [
+            {
+              "package": "100カプセル［10カプセル(PTP)×10］",
+              "unified_product_code": "114-05040-3"
+            }
+          ],
+          "source_pages": [
+            1,
+            2
+          ],
+          "product_name": "ピメノールカプセル１００ｍｇ",
+          "maker": "ファイザー",
+          "scope": "package",
+          "planned_timing": "2027年6月"
+        },
+        {
+          "yj_code": "6139500F1024",
+          "spec": "（５００ｍｇ）１瓶",
+          "seller": "ファイザー",
+          "manufacturer": "ファイザー",
+          "packages": [
+            {
+              "package": "10バイアル",
+              "unified_product_code": "114-05800-3"
+            }
+          ],
+          "source_pages": [
+            1,
+            2
+          ],
+          "product_name": "スルペラゾン静注用０．５ｇ",
+          "maker": "ファイザー",
+          "scope": "package",
+          "planned_timing": "2027年12月"
+        },
+        {
+          "yj_code": "6139500F2020",
+          "spec": "（１ｇ）１瓶",
+          "seller": "ファイザー",
+          "manufacturer": "ファイザー",
+          "packages": [
+            {
+              "package": "10バイアル",
+              "unified_product_code": "114-05820-1"
+            }
+          ],
+          "source_pages": [
+            1,
+            2
+          ],
+          "product_name": "スルペラゾン静注用１ｇ",
+          "maker": "ファイザー",
+          "scope": "package",
+          "planned_timing": "2027年12月"
+        },
+        {
+          "yj_code": "6131008C1033",
+          "spec": "１００ｍｇ１ｇ",
+          "seller": "ファイザー",
+          "manufacturer": "ファイザー",
+          "packages": [
+            {
+              "package": "100g［瓶、乾燥剤入り］",
+              "unified_product_code": "114-06120-1"
+            }
+          ],
+          "source_pages": [
+            1,
+            3
+          ],
+          "product_name": "ユナシン細粒小児用１０％",
+          "maker": "ファイザー",
+          "scope": "package",
+          "planned_timing": "2027年3月"
+        },
+        {
+          "yj_code": "1141005M2094",
+          "spec": "２５０ｍｇ１カプセル",
+          "seller": "ファイザー",
+          "manufacturer": "ファイザー",
+          "packages": [
+            {
+              "package": "100カプセル［10カプセル(PTP)×10］",
+              "unified_product_code": "114-22370-8"
+            },
+            {
+              "package": "500カプセル［缶：バラ］",
+              "unified_product_code": "114-22380-7"
+            }
+          ],
+          "source_pages": [
+            1,
+            3
+          ],
+          "product_name": "ポンタールカプセル２５０ｍｇ",
+          "maker": "ファイザー",
+          "scope": "package",
+          "planned_timing": "2027年12月"
+        },
+        {
+          "yj_code": "7990701X1021",
+          "spec": "１０ｃｍ×１２．５ｃｍ１枚",
+          "seller": "ファイザー",
+          "manufacturer": "ファイザー",
+          "packages": [
+            {
+              "package": "100×125mm［1枚入(滅菌封入)］",
+              "unified_product_code": "114-93180-1"
+            }
+          ],
+          "source_pages": [
+            1,
+            4
+          ],
+          "product_name": "ゼルフィルム",
+          "maker": "ファイザー",
+          "scope": "package",
+          "planned_timing": "出荷停止中"
+        },
+        {
+          "yj_code": "7990702X1026",
+          "spec": "２．５ｃｍ×５ｃｍ１枚",
+          "seller": "ファイザー",
+          "manufacturer": "ファイザー",
+          "packages": [
+            {
+              "package": "25×50mm［6枚入(滅菌封入)］",
+              "unified_product_code": "114-93190-0"
+            }
+          ],
+          "source_pages": [
+            1,
+            4
+          ],
+          "product_name": "眼科用ゼルフィルム",
+          "maker": "ファイザー",
+          "scope": "package",
+          "planned_timing": "出荷停止中"
+        },
+        {
+          "yj_code": "3322701X1020",
+          "spec": "２ｃｍ×６ｃｍ×０．７ｃｍ１枚",
+          "seller": "ファイザー",
+          "manufacturer": "ファイザー",
+          "packages": [
+            {
+              "package": "No.12 20×60×7mm［1枚入(滅菌封入)×4袋］",
+              "unified_product_code": "114-93170-2"
+            }
+          ],
+          "source_pages": [
+            1,
+            4
+          ],
+          "product_name": "ゼルフォーム",
+          "maker": "ファイザー",
+          "scope": "package",
+          "planned_timing": "出荷停止中"
+        },
+        {
+          "yj_code": "3322701X2027",
+          "spec": "８ｃｍ×１２．５ｃｍ×１ｃｍ１枚",
+          "seller": "ファイザー",
+          "manufacturer": "ファイザー",
+          "packages": [
+            {
+              "package": "No.100 80×125×10mm［1枚入(滅菌封入)×1袋］",
+              "unified_product_code": "114-93140-5"
+            }
+          ],
+          "source_pages": [
+            1,
+            4
+          ],
+          "product_name": "ゼルフォーム",
+          "maker": "ファイザー",
+          "scope": "package",
+          "planned_timing": "出荷停止中"
+        }
+      ],
+      "reason": "諸般の事情",
+      "alternatives": [
+        {
+          "type": "トラスツズマブBS点滴静注用60mg／150mg「ファイザー」のメーカー参考候補",
+          "target_yj_codes": [
+            "4291447D1028",
+            "4291447D2024"
+          ],
+          "products": [
+            {
+              "product_kind": "medicine",
+              "source_reimbursement_code": "4291442D2030",
+              "manufacturer_candidate_scope": "150mg 1バイアル／統一商品コード170-02024-2",
+              "name": "トラスツズマブBS点滴静注用150mg「NK」",
+              "source_pages": [
+                1,
+                2
+              ],
+              "manufacturer_as_source": "セルトリオン・ヘルスケア・ジャパン株式会社",
+              "yj_code": "4291442D2030",
+              "scope": "150mg 1バイアル／統一商品コード170-02024-2"
+            }
+          ],
+          "cautions": [
+            "メーカーは各製品の添付文書を確認し、患者の状態に応じて判断するよう求めている。候補の確保可能性や切替適否を本サイトが判断するものではない",
+            "販売中止予定時期は在庫状況により前後する可能性がある",
+            "メーカーは60mg／150mgの共同見出しで150mg「NK」のみを記載。60mg候補を新たに補わず、同規格置換・投与量換算を示さない"
+          ],
+          "no_alternative_statement": null
+        },
+        {
+          "type": "ベバシズマブBS点滴静注100mg／400mg「ファイザー」のメーカー参考候補",
+          "target_yj_codes": [
+            "4291449A1020",
+            "4291449A2027"
+          ],
+          "products": [
+            {
+              "product_kind": "medicine",
+              "source_reimbursement_code": "4291463A1020",
+              "manufacturer_candidate_scope": "100mg 4mL 1バイアル／統一商品コード170-02096-9",
+              "name": "ベバシズマブBS点滴静注100mg「CTNK」",
+              "source_pages": [
+                1,
+                2
+              ],
+              "manufacturer_as_source": "日本化薬株式会社",
+              "yj_code": "4291463A1020",
+              "scope": "100mg 4mL 1バイアル／統一商品コード170-02096-9"
+            },
+            {
+              "product_kind": "medicine",
+              "source_reimbursement_code": "4291463A2027",
+              "manufacturer_candidate_scope": "400mg 16mL 1バイアル／統一商品コード170-02098-3",
+              "name": "ベバシズマブBS点滴静注400mg「CTNK」",
+              "source_pages": [
+                1,
+                2
+              ],
+              "manufacturer_as_source": "日本化薬株式会社",
+              "yj_code": "4291463A2027",
+              "scope": "400mg 16mL 1バイアル／統一商品コード170-02098-3"
+            }
+          ],
+          "cautions": [
+            "メーカーは各製品の添付文書を確認し、患者の状態に応じて判断するよう求めている。候補の確保可能性や切替適否を本サイトが判断するものではない",
+            "販売中止予定時期は在庫状況により前後する可能性がある"
+          ],
+          "no_alternative_statement": null
+        },
+        {
+          "type": "ピメノールカプセル50mg／100mgのメーカー参考候補",
+          "target_yj_codes": [
+            "2129012M1020",
+            "2129012M2027"
+          ],
+          "products": [
+            {
+              "product_kind": "medicine",
+              "source_reimbursement_code": "2129007F1012",
+              "manufacturer_candidate_scope": "PTP100錠(10錠×10)／統一商品コード080-68611-8",
+              "name": "シベンゾリンコハク酸塩錠50mg「サワイ」",
+              "source_pages": [
+                1,
+                2
+              ],
+              "manufacturer_as_source": "沢井製薬株式会社",
+              "yj_code": "2129007F1047",
+              "scope": "PTP100錠(10錠×10)／統一商品コード080-68611-8"
+            },
+            {
+              "product_kind": "medicine",
+              "source_reimbursement_code": "2129007F2019",
+              "manufacturer_candidate_scope": "PTP100錠(10錠×10)／統一商品コード080-68711-5",
+              "name": "シベンゾリンコハク酸塩錠100mg「サワイ」",
+              "source_pages": [
+                1,
+                2
+              ],
+              "manufacturer_as_source": "沢井製薬株式会社",
+              "yj_code": "2129007F2043",
+              "scope": "PTP100錠(10錠×10)／統一商品コード080-68711-5"
+            }
+          ],
+          "cautions": [
+            "メーカーは各製品の添付文書を確認し、患者の状態に応じて判断するよう求めている。候補の確保可能性や切替適否を本サイトが判断するものではない",
+            "販売中止予定時期は在庫状況により前後する可能性がある",
+            "メーカー注記：候補は有効成分が対象製品と異なる。効能・効果、用法・用量等に違いがあるため各製品の添付文書を確認し患者の状態に応じて判断する"
+          ],
+          "no_alternative_statement": null
+        },
+        {
+          "type": "スルペラゾン静注用0.5g／1gのメーカー参考候補",
+          "target_yj_codes": [
+            "6139500F1024",
+            "6139500F2020"
+          ],
+          "products": [
+            {
+              "product_kind": "medicine",
+              "source_reimbursement_code": "6139500G1089",
+              "manufacturer_candidate_scope": "1g(力価)キット×10／溶解液は生理食塩液100mLプラスチックバッグ／統一商品コード190-16872-6",
+              "name": "ワイスタール配合点滴静注用1gバッグ",
+              "source_pages": [
+                1,
+                2
+              ],
+              "manufacturer_as_source": "ニプロ株式会社",
+              "yj_code": "6139500G1089",
+              "price_as_source": {
+                "value_jpy": 1081,
+                "scope": "1キットの薬価、原典2026年10月時点"
+              },
+              "scope": "1g(力価)キット×10／溶解液は生理食塩液100mLプラスチックバッグ／統一商品コード190-16872-6"
+            }
+          ],
+          "cautions": [
+            "メーカーは各製品の添付文書を確認し、患者の状態に応じて判断するよう求めている。候補の確保可能性や切替適否を本サイトが判断するものではない",
+            "販売中止予定時期は在庫状況により前後する可能性がある",
+            "対象0.5g／1gの共同見出しで候補1gバッグのみを記載。原典にない0.5g候補を補わない。規格・製剤/包装が異なり用量換算や無条件の置換は示さない"
+          ],
+          "no_alternative_statement": null
+        },
+        {
+          "type": "ユナシン細粒小児用10%のメーカー参考候補",
+          "target_yj_codes": [
+            "6131008C1033"
+          ],
+          "products": [
+            {
+              "product_kind": "medicine",
+              "source_reimbursement_code": "6139100R1036",
+              "manufacturer_candidate_scope": "0.505g［1包］×12(246-74306-8)、1.01g［1包］×12(246-74307-5)、10.1g［1瓶］(246-74305-1)",
+              "name": "クラバモックス小児用配合ドライシロップ",
+              "source_pages": [
+                1,
+                3
+              ],
+              "manufacturer_as_source": "グラクソ・スミスクライン株式会社",
+              "yj_code": "6139100R1036",
+              "scope": "0.505g［1包］×12(246-74306-8)、1.01g［1包］×12(246-74307-5)、10.1g［1瓶］(246-74305-1)"
+            },
+            {
+              "product_kind": "medicine",
+              "source_reimbursement_code": "6131001C1210",
+              "manufacturer_candidate_scope": "100g［瓶、乾燥剤セットキャップ］／統一商品コード919-10075-4",
+              "name": "サワシリン細粒10%",
+              "source_pages": [
+                1,
+                3
+              ],
+              "manufacturer_as_source": "LTLファーマ株式会社",
+              "yj_code": "6131001C1210",
+              "scope": "100g［瓶、乾燥剤セットキャップ］／統一商品コード919-10075-4"
+            },
+            {
+              "product_kind": "medicine",
+              "source_reimbursement_code": "6131001C1252",
+              "manufacturer_candidate_scope": "ボトル(乾燥剤入)100g／統一商品コード222-64897-4",
+              "name": "ワイドシリン細粒10%",
+              "source_pages": [
+                1,
+                3
+              ],
+              "manufacturer_as_source": "Meiji Seika ファルマ株式会社",
+              "yj_code": "6131001C1252",
+              "scope": "ボトル(乾燥剤入)100g／統一商品コード222-64897-4"
+            }
+          ],
+          "cautions": [
+            "メーカーは各製品の添付文書を確認し、患者の状態に応じて判断するよう求めている。候補の確保可能性や切替適否を本サイトが判断するものではない",
+            "販売中止予定時期は在庫状況により前後する可能性がある",
+            "メーカー注記：候補は有効成分が対象製品と異なる。効能・効果、用法・用量等に違いがあるため各製品の添付文書を確認し患者の状態に応じて判断する",
+            "ユナシン錠375mgやユナシン-Sキットはこの販売中止対象へ拡張しない"
+          ],
+          "no_alternative_statement": null
+        },
+        {
+          "type": "ポンタールカプセル250mgのメーカー参考候補",
+          "target_yj_codes": [
+            "1141005M2094"
+          ],
+          "products": [
+            {
+              "product_kind": "medicine",
+              "source_reimbursement_code": "1141007F1063",
+              "manufacturer_candidate_scope": "PTP100錠(896-01081-7)、PTP1000錠(896-01082-4)、瓶バラ500錠(896-01102-9)",
+              "name": "カロナール錠200",
+              "source_pages": [
+                1,
+                3
+              ],
+              "manufacturer_as_source": "あゆみ製薬株式会社",
+              "yj_code": "1141007F1063",
+              "scope": "PTP100錠(896-01081-7)、PTP1000錠(896-01082-4)、瓶バラ500錠(896-01102-9)"
+            },
+            {
+              "product_kind": "medicine",
+              "source_reimbursement_code": "1141007F2027",
+              "manufacturer_candidate_scope": "PTP100錠(896-01087-9)、PTP1000錠(896-01089-3)、瓶バラ500錠(896-01101-2)",
+              "name": "カロナール錠300",
+              "source_pages": [
+                1,
+                3
+              ],
+              "manufacturer_as_source": "あゆみ製薬株式会社",
+              "yj_code": "1141007F2027",
+              "scope": "PTP100錠(896-01087-9)、PTP1000錠(896-01089-3)、瓶バラ500錠(896-01101-2)"
+            },
+            {
+              "product_kind": "medicine",
+              "source_reimbursement_code": "1141007F3023",
+              "manufacturer_candidate_scope": "PTP100錠(896-01121-0)、PTP500錠(896-01122-7)、瓶バラ500錠(896-01105-0)",
+              "name": "カロナール錠500",
+              "source_pages": [
+                1,
+                3
+              ],
+              "manufacturer_as_source": "あゆみ製薬株式会社",
+              "yj_code": "1141007F3023",
+              "scope": "PTP100錠(896-01121-0)、PTP500錠(896-01122-7)、瓶バラ500錠(896-01105-0)"
+            },
+            {
+              "product_kind": "medicine",
+              "source_reimbursement_code": "1149019F1013",
+              "manufacturer_candidate_scope": "PTP100錠(080-31801-9)、PTP1000錠(080-31803-3)、バラ1000錠(080-31806-4)",
+              "name": "ロキソプロフェンNa錠60mg「サワイ」",
+              "source_pages": [
+                1,
+                3
+              ],
+              "manufacturer_as_source": "メディサ新薬株式会社（発売元：沢井製薬株式会社）",
+              "yj_code": "1149019F1587",
+              "scope": "PTP100錠(080-31801-9)、PTP1000錠(080-31803-3)、バラ1000錠(080-31806-4)"
+            }
+          ],
+          "cautions": [
+            "メーカーは各製品の添付文書を確認し、患者の状態に応じて判断するよう求めている。候補の確保可能性や切替適否を本サイトが判断するものではない",
+            "販売中止予定時期は在庫状況により前後する可能性がある",
+            "メーカー注記：候補は有効成分が対象製品と異なる。効能・効果、用法・用量等に違いがあるため各製品の添付文書を確認し患者の状態に応じて判断する",
+            "ポンタール散50%、細粒98.5%、シロップ3.25%はこの販売中止対象へ拡張しない"
+          ],
+          "no_alternative_statement": null
+        },
+        {
+          "type": "ゼルフィルム／眼科用ゼルフィルムのメーカー参考候補",
+          "target_yj_codes": [
+            "7990701X1021",
+            "7990702X1026"
+          ],
+          "products": [],
+          "cautions": [
+            "メーカーは各製品の添付文書を確認し、患者の状態に応じて判断するよう求めている。候補の確保可能性や切替適否を本サイトが判断するものではない",
+            "販売中止予定時期は在庫状況により前後する可能性がある",
+            "メーカーの正確な表現は『了承を得られている代替候補製品はありません』。世の中に代替製品が存在しないと断定しない"
+          ],
+          "no_alternative_statement": "了承を得られている代替候補製品はありません"
+        },
+        {
+          "type": "ゼルフォームのメーカー参考候補",
+          "target_yj_codes": [
+            "3322701X1020",
+            "3322701X2027"
+          ],
+          "products": [
+            {
+              "product_kind": "medical_device",
+              "manufacturer": "ジョンソン・エンド・ジョンソン株式会社",
+              "source_approval_number": "30400BZX00112000",
+              "source_jmdn_code": "35895100",
+              "source_class": "IV 高度管理医療機器",
+              "name": "サージセル・アブソーバブル・ヘモスタットMD",
+              "source_pages": [
+                1,
+                4
+              ],
+              "manufacturer_as_source": "ジョンソン・エンド・ジョンソン株式会社",
+              "yj_code": null,
+              "scope": ""
+            }
+          ],
+          "cautions": [
+            "メーカーは各製品の添付文書を確認し、患者の状態に応じて判断するよう求めている。候補の確保可能性や切替適否を本サイトが判断するものではない",
+            "販売中止予定時期は在庫状況により前後する可能性がある"
+          ],
+          "no_alternative_statement": null
+        }
+      ],
+      "cautions": [
+        "販売中止予定時期は在庫状況により前後する可能性があります",
+        "具体的な製品別の中止原因は今回の案内に記載されていません",
+        "メーカーの参考候補は在庫や受注を保証しません。電子添文を確認し、医師・薬剤師等が患者の状態に応じて判断してください"
+      ],
+      "event_type": "discontinued",
+      "announced_at": "2026-10"
+    },
+    {
+      "id": "pfizer-sulperazon-normal-resumption-20261009",
+      "maker": "ファイザー",
+      "title": "スルペラゾン静注用0.5g、同1g 通常出荷再開のご案内",
+      "url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/SPK27Q002A.pdf",
+      "listed_at": "2026-10-08",
+      "verified_at": "2026-10-14",
+      "sha256": "241d2b15451cefe4369bbbcfede2d9ef8b6a74ca82ab485abf35d655284fb174",
+      "source_document_code": "SPK27Q002A",
+      "targets": [
+        {
+          "yj_code": "6139500F1024",
+          "spec": "（５００ｍｇ）１瓶",
+          "seller": "ファイザー",
+          "manufacturer": "ファイザー",
+          "packages": [
+            {
+              "package": "10バイアル",
+              "unified_product_code": "114-05800-3"
+            }
+          ],
+          "source_pages": [
+            1
+          ],
+          "product_name": "スルペラゾン静注用０．５ｇ",
+          "maker": "ファイザー",
+          "scope": "package"
+        },
+        {
+          "yj_code": "6139500F2020",
+          "spec": "（１ｇ）１瓶",
+          "seller": "ファイザー",
+          "manufacturer": "ファイザー",
+          "packages": [
+            {
+              "package": "10バイアル",
+              "unified_product_code": "114-05820-1"
+            }
+          ],
+          "source_pages": [
+            1
+          ],
+          "product_name": "スルペラゾン静注用１ｇ",
+          "maker": "ファイザー",
+          "scope": "package"
+        }
+      ],
+      "reason": "関係卸への限定出荷を解除し通常出荷を再開",
+      "alternatives": [],
+      "cautions": [
+        "PDFは2026年10月（月単位）、公式APIの掲載日は10/8、再開日は本文に10/9と明記"
+      ],
+      "event_type": "resumed",
+      "effective_at": "2026-10-09",
+      "effective_at_precision": "day",
+      "maker_supply_status": {
+        "volume": "A 出荷量通常",
+        "handling": "①通常出荷"
+      },
+      "announced_at": "2026-10",
+      "x_text": "【メーカー公式案内】ファイザー\nスルペラゾン静注用０．５ｇ\n文書：2026-10／公式掲載：2026-10-08\nメーカーは10月9日から通常出荷再開と案内。厚労省区分とは別情報。\n原典▶ https://www.pfizermedicalinformation.jp/sites/default/files/announcement/SPK27Q002A.pdf"
+    },
+    {
+      "id": "sandoz-zonisamide-tre-temporary-stop-202610",
+      "maker": "サンド",
+      "title": "ゾニサミドOD錠25mg・50mg TRE「サンド」一時出荷停止",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20261013_002.pdf",
+      "listed_at": "2026-10-13",
+      "verified_at": "2026-10-14",
+      "sha256": "f77231698a96779f1c1beadba8f10e9eea73f583d9e10077c8692418301dcbbb",
+      "source_document_code": null,
+      "targets": [
+        {
+          "yj_code": "1169015F2111",
+          "spec": "２５ｍｇ１錠",
+          "seller": "サンド",
+          "manufacturer": "サンド",
+          "packages": [
+            {
+              "package": "PTP30錠",
+              "unified_product_code": "614441909",
+              "gs1_sales": "14987614441906"
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "614441916",
+              "gs1_sales": "14987614441913"
+            }
+          ],
+          "source_pages": [
+            1
+          ],
+          "product_name": "ゾニサミドＯＤ錠２５ｍｇＴＲＥ「サンド」",
+          "maker": "サンド",
+          "scope": "package"
+        },
+        {
+          "yj_code": "1169015F3118",
+          "spec": "５０ｍｇ１錠",
+          "seller": "サンド",
+          "manufacturer": "サンド",
+          "packages": [
+            {
+              "package": "PTP30錠",
+              "unified_product_code": "614442005",
+              "gs1_sales": "14987614442002"
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "614442012",
+              "gs1_sales": "14987614442019"
+            }
+          ],
+          "source_pages": [
+            1
+          ],
+          "product_name": "ゾニサミドＯＤ錠５０ｍｇＴＲＥ「サンド」",
+          "maker": "サンド",
+          "scope": "package"
+        }
+      ],
+      "reason": "現在流通している製品の個装箱の表示の一部に誤記が判明。正しい表示に修正した製品への切替えと市場出荷済み対象製品の自主回収(クラスII)のため",
+      "alternatives": [
+        {
+          "type": "メーカーが示す参考候補",
+          "target_yj_codes": [
+            "1169015F2111"
+          ],
+          "products": [
+            {
+              "product_kind": "medicine",
+              "source_reimbursement_code": null,
+              "manufacturer_candidate_scope": "PTP100錠／共和薬品工業／統一商品コード058258033／GS1販売包装14987058258030",
+              "name": "ゾニサミドOD錠25mgTRE「アメル」",
+              "source_pages": [
+                1
+              ],
+              "manufacturer_as_source": "共和薬品工業株式会社",
+              "yj_code": "1169015F2073",
+              "scope": "PTP100錠／共和薬品工業／統一商品コード058258033／GS1販売包装14987058258030"
+            }
+          ],
+          "cautions": []
+        },
+        {
+          "type": "メーカーが示す参考候補",
+          "target_yj_codes": [
+            "1169015F3118"
+          ],
+          "products": [
+            {
+              "product_kind": "medicine",
+              "source_reimbursement_code": null,
+              "manufacturer_candidate_scope": "PTP100錠／共和薬品工業／統一商品コード058259030／GS1販売包装14987058259037",
+              "name": "ゾニサミドOD錠50mgTRE「アメル」",
+              "source_pages": [
+                1
+              ],
+              "manufacturer_as_source": "共和薬品工業株式会社",
+              "yj_code": "1169015F3070",
+              "scope": "PTP100錠／共和薬品工業／統一商品コード058259030／GS1販売包装14987058259037"
+            }
+          ],
+          "cautions": []
+        }
+      ],
+      "cautions": [
+        "一時出荷停止対象は2規格のPTP30/100錠の4包装。回収対象はその一部ロットであり混同しない",
+        "再開時期・表中状況は現時点での予定で今後変更の可能性があり、変更時は改めて案内する",
+        "メーカー記載候補を原典補足として表示し、同成分というだけで100mg錠/散等の抗てんかん剤へ拡張しない",
+        "メーカーの候補列を転載/要約する範囲であり、医療判断・代替薬推奨・用量換算は行わない"
+      ],
+      "event_type": "stopped",
+      "starts_at": {
+        "value": "2026-10",
+        "display": "2026年10月",
+        "precision": "month"
+      },
+      "expected_resumption": {
+        "value": null,
+        "display": "2027年春頃予定",
+        "precision": "season_approximate",
+        "year": 2027,
+        "season": "spring"
+      },
+      "maker_supply_status": {
+        "volume": "C 出荷停止",
+        "handling": "⑤出荷停止(自社の事情)"
+      },
+      "announced_at": "2026-10",
+      "x_text": "【メーカー公式案内】サンド\nゾニサミドOD錠25mg・50mg TRE「サンド」\n文書：2026-10／公式掲載：2026-10-13\n出荷停止の案内。再開見込みと対象包装は原典で確認。\n原典▶ https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20261013_002.pdf"
+    },
+    {
+      "id": "sandoz-zonisamide-tre-class-ii-recall-20261013",
+      "maker": "サンド",
+      "title": "ゾニサミドOD錠25mg・50mgTRE「サンド」自主回収(クラスII)に関するお知らせとお詫び",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20261013_004.pdf",
+      "listed_at": "2026-10-13",
+      "verified_at": "2026-10-14",
+      "sha256": "072f5fe3ed810292ead5b973b06fece71be640da8ca292e3b691c22b5e7ab40b",
+      "source_document_code": null,
+      "targets": [
+        {
+          "yj_code": "1169015F2111",
+          "spec": "２５ｍｇ１錠",
+          "seller": "サンド",
+          "manufacturer": "サンド",
+          "packages": [
+            {
+              "package": "PTP30錠",
+              "unified_product_code": "614441909",
+              "gs1_sales": "14987614441906"
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "614441916",
+              "gs1_sales": "14987614441913"
+            }
+          ],
+          "source_pages": [
+            1,
+            2
+          ],
+          "product_name": "ゾニサミドＯＤ錠２５ｍｇＴＲＥ「サンド」",
+          "maker": "サンド",
+          "scope": "package"
+        },
+        {
+          "yj_code": "1169015F3118",
+          "spec": "５０ｍｇ１錠",
+          "seller": "サンド",
+          "manufacturer": "サンド",
+          "packages": [
+            {
+              "package": "PTP30錠",
+              "unified_product_code": "614442005",
+              "gs1_sales": "14987614442002"
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "614442012",
+              "gs1_sales": "14987614442019"
+            }
+          ],
+          "source_pages": [
+            1,
+            2
+          ],
+          "product_name": "ゾニサミドＯＤ錠５０ｍｇＴＲＥ「サンド」",
+          "maker": "サンド",
+          "scope": "package"
+        }
+      ],
+      "reason": "個装箱の4箇所で本来「口腔内崩壊錠」とすべき表示が「口膣内崩壊錠」と誤記されており、別の投与経路と解釈される可能性を完全には否定できないため対象ロットを自主回収",
+      "alternatives": [],
+      "cautions": [
+        "誤記は個装箱に限定、PTPシート・アルミピローに誤記なし",
+        "製品そのものの品質・有効性・安全性に関する問題は確認されていないとメーカーが説明",
+        "通常どおり経口投与された場合、重篤な健康被害のおそれはないとメーカーが説明",
+        "膣内投与を含む誤使用事例は発売以来確認されていないとメーカーが説明",
+        "出荷停止対象全包装と回収対象ロットを混同しない",
+        "PDF発行年月は2026年10月。回収開始日はPDF本文10/13とPMDA10/13に明記"
+      ],
+      "event_type": "recall",
+      "recall_class": "II",
+      "recall_started_at": "2026-10-13",
+      "recall_started_at_precision": "day",
+      "recall_scope": "市場に流通している使用期限内の対象包装・ロット。品目全ロット回収とは扱わない",
+      "lots": [
+        {
+          "strength": "25mg",
+          "package": "PTP30錠",
+          "lot": "L0002"
+        },
+        {
+          "strength": "25mg",
+          "package": "PTP100錠",
+          "lot": "L0002"
+        },
+        {
+          "strength": "50mg",
+          "package": "PTP30錠",
+          "lot": "L0002"
+        },
+        {
+          "strength": "50mg",
+          "package": "PTP100錠",
+          "lot": "L0002"
+        },
+        {
+          "strength": "50mg",
+          "package": "PTP100錠",
+          "lot": "L0003"
+        }
+      ],
+      "independent_pmda_source": {
+        "url": "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=2-12985",
+        "index_url": "https://www.info.pmda.go.jp/kaisyuu/rcidx26-2m.html",
+        "recall_number": "2-12985",
+        "source_date": "2026-10-13",
+        "source_date_precision": "day",
+        "class": "II",
+        "verified_at": "2026-10-14T01:09:07.974628+09:00"
+      },
+      "announced_at": "2026-10",
+      "x_text": "【メーカー公式案内】サンド\nゾニサミドOD錠25mg・50mg TRE「サンド」\n文書：2026-10／公式掲載：2026-10-13\n個装箱表示の誤記に伴うクラスII自主回収。対象包装・ロットは原典で確認。\n原典▶ https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20261013_004.pdf"
+    },
+    {
+      "id": "sanwa-lagnos-nf-202610",
+      "maker": "三和化学研究所",
+      "title": "2026年10月 ラグノスNF経口ゼリー分包12g 供給状況に関するお知らせ",
+      "url": "https://med.skk-net.com/significant/item/LAGNF2610i.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-09",
+      "verified_at": "2026-10-14",
+      "sha256": "016f1e44483890bb976a7bf53fa22e1f8094cb7d73d881971e07754b8c350332",
+      "source_index_url": "https://med.skk-net.com/significant/083786.html",
+      "date_precision": "month",
+      "reason": "2025年11月頃から一部増産したが増産量は限られ、製造量が需要全体を満たせない。直近は他社製品の限定出荷等の影響で想定を上回る注文。",
+      "alternatives": [
+        {
+          "indication": "慢性便秘症（器質的疾患による便秘を除く）",
+          "type": "別成分・浸透圧下剤をメーカーが参考として提示",
+          "products": [
+            {
+              "name": "マグミット錠200mg",
+              "yj_code": "2344009F3038",
+              "scope": ""
+            },
+            {
+              "name": "マグミット錠250mg",
+              "yj_code": "2344009F1035",
+              "scope": ""
+            },
+            {
+              "name": "マグミット錠330mg",
+              "yj_code": "2344009F2031",
+              "scope": ""
+            },
+            {
+              "name": "マグミット錠500mg",
+              "yj_code": "2344009F4034",
+              "scope": ""
+            },
+            {
+              "name": "酸化マグネシウム錠250mg「ケンエー」",
+              "yj_code": "2344009F1086",
+              "scope": ""
+            },
+            {
+              "name": "酸化マグネシウム錠330mg「ケンエー」",
+              "yj_code": "2344009F2082",
+              "scope": ""
+            },
+            {
+              "name": "酸化マグネシウム錠500mg「ケンエー」",
+              "yj_code": "2344009F4050",
+              "scope": ""
+            }
+          ],
+          "cautions": [
+            "便秘症の効能・効果を有する酸化マグネシウム製剤を参考として記載",
+            "腎障害患者・高齢患者への投与を検討する際は各剤電子添文を確認とメーカーが注意",
+            "販売業者等欄の丸石製薬に続いて「※200mg錠は未販売」。200mgの全販売経路が未販売とは解釈しない",
+            "包装は参考表に記載された内容で、現在の各販売経路・納入可否を保証しない"
+          ]
+        },
+        {
+          "indication": "高アンモニア血症に伴う症候（精神神経障害、脳波異常、手指振戦）の改善",
+          "type": "同一般名・異剤形/濃度/承認適応の候補",
+          "products": [
+            {
+              "name": "ラクツロース・シロップ60%「コーワ」",
+              "yj_code": "3999001Q1051",
+              "scope": ""
+            }
+          ],
+          "cautions": [
+            "先発品、薬剤料、成分含有量の差から処方元への確認が必要という原文",
+            "慢性便秘症の場合は変更調剤できないと明示",
+            "産婦人科術後の排ガス・排便促進（ラグノス側の別効能）について今回案内に候補記載なし"
+          ]
+        }
+      ],
+      "cautions": [
+        "参考候補はメーカー案内の適応別情報。サイトによる代替薬の推奨ではない",
+        "成分含有量・適応が異なり処方元確認が必要",
+        "コーワ60%は慢性便秘症では変更調剤できない",
+        "各候補の現時点の納入可否・各卸在庫は未確認"
+      ],
+      "event_type": "limited",
+      "manufacturer_status": "②限定出荷（自社の事情）",
+      "manufacturer_volume": "Aプラス 出荷量増加",
+      "resumption": "限定出荷解除日 未定",
+      "targets": [
+        {
+          "yj_code": "3999001Q6029",
+          "product_name": "ラグノスＮＦ経口ゼリー分包１２ｇ",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "12g×84包",
+              "unified_product_code": "086220569"
+            }
+          ],
+          "maker": "三和化学研究所"
+        }
+      ],
+      "x_text": "【メーカー公式案内】三和化学研究所\nラグノスＮＦ経口ゼリー分包１２ｇ\n文書：2026-10／公式掲載：2026-10-09\n限定出荷の案内。対象包装・販売経路は原典で確認。\n原典▶ https://med.skk-net.com/significant/item/LAGNF2610i.pdf"
+    },
+    {
+      "id": "npi-rabeprazole-10mg-500t-202610",
+      "maker": "日本薬品工業",
+      "title": "2026年10月 ラベプラゾールナトリウム錠10mg「ケミファ」日本薬品工業販売品500T 限定出荷のお知らせ",
+      "url": "https://www.npi-inc.co.jp/medical/info/file/1269",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-13",
+      "verified_at": "2026-10-14",
+      "sha256": "4e60762df410dab8ea9e781c8a024fdd3ad4ccbe7f064d2341bdf281987c8d82",
+      "source_index_url": "https://www.npi-inc.co.jp/medical/products",
+      "date_precision": "month",
+      "reason": "製造工程上の確認事項が発生し入庫が遅延",
+      "alternatives": [],
+      "cautions": [
+        "今回案内を10mg全包装、20mg、5mg、日本ケミファ販売ルートへ広げない",
+        "供給が滞った際は他剤への変更検討とメーカーが案内。具体的な品名の提示はなし"
+      ],
+      "event_type": "limited",
+      "manufacturer_status": "②限定出荷（自社の事情）",
+      "manufacturer_volume": "Aプラス 出荷量増加",
+      "resumption": "今回文書に解除日/再開見込みの記載なし",
+      "targets": [
+        {
+          "yj_code": "2329028F1210",
+          "product_name": "ラベプラゾールナトリウム錠１０ｍｇ「ケミファ」",
+          "scope": "seller_route_and_package",
+          "packages": [
+            {
+              "seller": "日本薬品工業",
+              "package": "500T（案内原文）",
+              "unified_product_code": "440576059",
+              "gs1_sales_package": "(01)14987440576056"
+            }
+          ],
+          "seller": "日本薬品工業",
+          "maker": "日本薬品工業"
+        }
+      ],
+      "x_text": "【メーカー公式案内】日本薬品工業\nラベプラゾールナトリウム錠１０ｍｇ「ケミファ」\n文書：2026-10／公式掲載：2026-10-13\n限定出荷の案内。対象包装・販売経路は原典で確認。\n原典▶ https://www.npi-inc.co.jp/medical/info/file/1269"
+    },
+    {
+      "id": "daiichi-sunrythm-injection-50-resumption-202610",
+      "maker": "第一三共",
+      "title": "2026年10月 サンリズム注射液50 限定出荷解除・10月中旬通常出荷再開予定のお知らせ",
+      "url": "https://www.medicalcommunity.jp/filedsp/products$druginfo$news$2026$261013_sr1/field_file_url",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-13",
+      "verified_at": "2026-10-14",
+      "sha256": "19cc088f0b6963af0c1eca69ebbf39703240f421a96269f4c714c48701d5280b",
+      "source_index_url": "https://www.medicalcommunity.jp/products/news",
+      "date_precision": "month",
+      "reason": "安定供給できる見込みとなり、限定出荷解除と通常出荷再開を案内。今回文書に従前の製造原因の詳細はなし。",
+      "alternatives": [],
+      "cautions": [
+        "予定の10月中旬を10月13日実施済みへ変換しない",
+        "正確な実施日は未確認",
+        "メーカーの再開案内と現在の厚労省区分は別表示。現在区分の上書きに使わない",
+        "メーカー今回文書は代替候補を具体的に提示していない"
+      ],
+      "event_type": "resumption_planned",
+      "resumption": {
+        "text": "2026年10月中旬より通常出荷再開予定",
+        "precision": "part_of_month",
+        "completed_verified": false
+      },
+      "manufacturer_status_after_resumption": "①通常出荷",
+      "manufacturer_volume_after_resumption": "A 出荷量通常",
+      "targets": [
+        {
+          "yj_code": "2129408A1020",
+          "product_name": "サンリズム注射液５０",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "5mL 10アンプル",
+              "unified_product_code": "081437955"
+            }
+          ],
+          "maker": "第一三共"
+        }
+      ],
+      "x_text": "【メーカー公式案内】第一三共\nサンリズム注射液５０\n文書：2026-10／公式掲載：2026-10-13\n10月中旬より通常出荷再開予定。実施済みとは未確認。\n原典▶ https://www.medicalcommunity.jp/filedsp/products$druginfo$news$2026$261013_sr1/field_file_url"
+    },
+    {
+      "id": "towa-amaluet-1-stopped-202610",
+      "maker": "東和薬品",
+      "title": "2026年10月更新 アマルエット配合錠1番「トーワ」出荷停止に関するお詫びとお知らせ",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82657&t=4",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-13",
+      "verified_at": "2026-10-14",
+      "sha256": "049ba088a9e033b1fe37645a803ee006bb9d1ca5e4a3ecba250f5888acd96fae",
+      "source_index_url": "https://med.towayakuhin.co.jp/medical/product/info.php?tab=5",
+      "date_precision": "month",
+      "reason": "承認規格を満たす製品の製造ができず、一部納品に遅延が発生し安定供給が困難",
+      "alternatives": [
+        {
+          "type": "メーカーが示す配合剤に対応する単剤の組み合わせ",
+          "products": [
+            {
+              "name": "アムロジピン錠2.5mg「トーワ」",
+              "yj_code": "2171022F1347",
+              "scope": ""
+            },
+            {
+              "name": "アトルバスタチン錠5mg「トーワ」",
+              "yj_code": "2189015F1074",
+              "scope": ""
+            }
+          ],
+          "cautions": [
+            "アムロジピン2.5mgとアトルバスタチン5mgの2製品の組み合わせ。どちらか1製品での置換とは扱わない",
+            "配合剤から単剤への変更は処方元の判断・確認が必要",
+            "各候補の現時点の納入可否・各卸在庫は未確認"
+          ]
+        }
+      ],
+      "cautions": [
+        "対象は1番のPTP100錠です",
+        "単剤2剤への変更は処方元の確認が必要です。片方だけでの置換や重複服用を避けてください",
+        "カデュエット配合錠1番の案内は2026年9月末で終了しています",
+        "参考候補の現在の納入可否・卸在庫は未確認です"
+      ],
+      "original_document_month": "2026-06",
+      "event_type": "stopped",
+      "manufacturer_status": "⑤供給停止",
+      "manufacturer_volume": "C 出荷停止",
+      "resumption": "出荷再開予定時期 未定",
+      "targets": [
+        {
+          "yj_code": "2190101F1101",
+          "product_name": "アマルエット配合錠１番「トーワ」",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155235036"
+            }
+          ],
+          "maker": "東和薬品"
+        }
+      ],
+      "x_text": "【メーカー公式案内】東和薬品\nアマルエット配合錠１番「トーワ」\n文書：2026-10／公式掲載：2026-10-13\n出荷停止の案内。再開見込みと対象包装は原典で確認。\n原典▶ https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82657&t=4"
+    }
+  ]
+}

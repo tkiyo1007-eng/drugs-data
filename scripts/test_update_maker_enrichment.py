@@ -27,7 +27,10 @@ class UpdateMakerEnrichmentTests(unittest.TestCase):
         documents = {
             "maker_announcements.json": {"generation": generation},
             "maker_announcement_events.json": {"generation": generation},
-            "maker_collection_health.json": {"generation": generation},
+            "maker_collection_health.json": {
+                "generation": generation, "checked": "2026-08-17", "total": 2,
+                "sources": [{"source": "parser_a", "ok": True, "count": 2, "error": ""}],
+            },
             "unmatched_maker_announcements.json": [{"generation": generation}],
         }
         for name, document in documents.items():
@@ -51,7 +54,16 @@ class UpdateMakerEnrichmentTests(unittest.TestCase):
             documents = {
                 "maker_announcements.json": {"generation": "new"},
                 "maker_announcement_events.json": {"generation": "new"},
-                "maker_collection_health.json": {"generation": "new"},
+                "maker_collection_health.json": {
+                    "generation": "new", "checked": "2026-08-18", "total": 3,
+                    "sources": [{"source": "parser_a", "ok": True, "count": 3,
+                                 "error": "", "last_success": "2026-08-18"}],
+                    "last_attempt": {
+                        "checked": "2026-08-18", "status": "success", "total": 3, "errors": [],
+                        "sources": [{"source": "parser_a", "ok": True, "count": 3,
+                                     "error": "", "last_success": "2026-08-18"}],
+                    },
+                },
                 "unmatched_maker_announcements.json": [{"generation": "new"}],
             }
             for name, document in documents.items():
@@ -65,7 +77,7 @@ class UpdateMakerEnrichmentTests(unittest.TestCase):
             return subprocess.CompletedProcess(command, 1)
         return result
 
-    def test_fetch_failure_retains_every_previous_file(self):
+    def test_fetch_failure_retains_previous_content_and_publishes_failed_attempt(self):
         self.write_managed_set("old")
         updated = refresh(
             self.base, expected_checked="2026-08-18", runner=self.failed_runner,
@@ -75,8 +87,15 @@ class UpdateMakerEnrichmentTests(unittest.TestCase):
             {name: self.read_generation(name) for name in MANAGED_FILES},
             {name: "old" for name in MANAGED_FILES},
         )
+        health = json.loads((self.base / "maker_collection_health.json").read_text())
+        self.assertEqual(health["checked"], "2026-08-17")
+        self.assertEqual(health["sources"][0]["count"], 2)
+        self.assertEqual(health["last_attempt"]["checked"], "2026-08-18")
+        self.assertEqual(health["last_attempt"]["status"], "failed")
+        self.assertFalse(health["last_attempt"]["sources"][0]["ok"])
+        self.assertIn("確認できません", health["last_attempt"]["sources"][0]["error"])
 
-    def test_validation_failure_retains_every_previous_file(self):
+    def test_validation_failure_keeps_success_date_and_publishes_failed_attempt(self):
         self.write_managed_set("old")
         updated = refresh(
             self.base,
@@ -85,6 +104,31 @@ class UpdateMakerEnrichmentTests(unittest.TestCase):
         )
         self.assertFalse(updated)
         self.assertTrue(all(self.read_generation(name) == "old" for name in MANAGED_FILES))
+        health = json.loads((self.base / "maker_collection_health.json").read_text())
+        self.assertEqual(health["checked"], "2026-08-17")
+        self.assertEqual(health["sources"][0]["count"], 2)
+        self.assertEqual(health["last_attempt"]["status"], "failed")
+        self.assertEqual(health["last_attempt"]["sources"][0]["count"], 3)
+        self.assertEqual(health["last_attempt"]["sources"][0]["last_success"], "2026-08-17")
+        self.assertTrue(any("検証" in value for value in health["last_attempt"]["errors"]))
+
+    def test_invalid_attempt_cannot_replace_previous_health(self):
+        self.write_managed_set("old")
+        original = {name: (self.base / name).read_bytes() for name in MANAGED_FILES}
+
+        def corrupt_attempt(command, cwd):
+            self.fetches_new_set_then_validates(command, cwd)
+            stage = Path(command[3]).parent
+            health_path = stage / "maker_collection_health.json"
+            health = json.loads(health_path.read_text())
+            health["last_attempt"]["sources"][0]["ok"] = True
+            health["last_attempt"]["sources"][0]["count"] = 0
+            health_path.write_text(json.dumps(health))
+            return subprocess.CompletedProcess(command, 1)
+
+        with self.assertRaisesRegex(RuntimeError, "失敗試行の収集状態が不正"):
+            refresh(self.base, expected_checked="2026-08-18", runner=corrupt_attempt)
+        self.assertEqual(original, {name: (self.base / name).read_bytes() for name in MANAGED_FILES})
 
     def test_valid_refresh_publishes_complete_new_set(self):
         self.write_managed_set("old")

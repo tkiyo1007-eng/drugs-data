@@ -5,10 +5,24 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from generate_curated_pages import product_rows_html
 import xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import quote
+
+
+class ChangedManufacturerSourceTests(unittest.TestCase):
+    def test_known_changed_source_preserves_official_status_but_hides_future_assertion(self):
+        row = {'商品名': 'fixture', 'YJコード': '123456789012', '供給状況': '①通常出荷', '製造メーカー': 'maker'}
+        output = product_rows_html([row], set(), {'123456789012': {'state': 'discontinuation_announced', 'source_changed': True}})
+        self.assertIn('通常出荷', output)
+        self.assertIn('メーカー原典更新・再確認待ち', output)
+        self.assertNotIn('>販売中止予定<', output)
+    def test_unmodified_verified_lifecycle_keeps_its_badge(self):
+        row = {'商品名': 'fixture', 'YJコード': '123456789012', '供給状況': '①通常出荷'}
+        output = product_rows_html([row], set(), {'123456789012': {'state': 'discontinuation_announced'}})
+        self.assertIn('>販売中止予定<', output)
 
 from generate_curated_pages import (
     DISCONTINUATION_GUIDE_PUBLISHED_AT,

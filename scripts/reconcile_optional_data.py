@@ -28,9 +28,45 @@ from validate_maker_announcements import (
 )
 from validate_product_lifecycle import validate as validate_lifecycle
 from maker_identity import maker_is_listed_in_row
+from jst_time import jst_today
+from validate_manufacturer_notices import ARCHIVE_FIELD, FORMAL_YJ, validate as validate_notices
 
 
 LIFECYCLE_FILE = "product_lifecycle.json"
+NOTICE_FILE = "manufacturer_notices.json"
+
+
+def reconcile_manufacturer_notices(document: object, rows: list, *, today: str) -> object:
+    """原典の対象は残し、CSVから消えた正式YJだけ履歴として明示する。"""
+    by_yj = {row.get("YJコード"): row for row in rows}
+    if not isinstance(document, dict) or not isinstance(document.get("notices"), list):
+        raise ValueError("確認済みメーカー案内の構造が不正です")
+    for notice in document["notices"]:
+        if not isinstance(notice, dict):
+            continue  # 専用validatorで不正として拒否する。
+        records = list(notice.get("targets") or []) if isinstance(notice.get("targets"), list) else []
+        alternatives = notice.get("alternatives")
+        for group in alternatives if isinstance(alternatives, list) else []:
+            if isinstance(group, dict) and isinstance(group.get("products"), list):
+                records.extend(group["products"])
+        for record in records:
+            if not isinstance(record, dict):
+                continue
+            yj = record.get("yj_code")
+            if isinstance(yj, str) and FORMAL_YJ.fullmatch(yj) and yj not in by_yj:
+                record.setdefault(ARCHIVE_FIELD, today)
+    errors = validate_notices(document, rows)
+    if errors:
+        raise ValueError("確認済みメーカー案内を最新CSVへ整合できません: " + " / ".join(errors[:10]))
+    # 復帰品目も名称/メーカーの一致を先に検証してから履歴markerを外す。
+    for notice in document["notices"]:
+        records = list(notice["targets"])
+        for group in notice["alternatives"]:
+            records.extend(group["products"])
+        for record in records:
+            if isinstance(record, dict) and record.get("yj_code") in by_yj:
+                record.pop(ARCHIVE_FIELD, None)
+    return document
 
 
 def _norm(value: object) -> str:
@@ -57,7 +93,8 @@ def validate_retained_bundle(
     """
     csv_path = csv_path or base / "drugs_app_ready.csv"
     with csv_path.open(encoding="utf-8-sig", newline="") as handle:
-        rows_by_yj = {(row.get("YJコード") or "").strip(): row for row in csv.DictReader(handle)}
+        rows = list(csv.DictReader(handle))
+    rows_by_yj = {(row.get("YJコード") or "").strip(): row for row in rows}
     lifecycle = json.loads((base / LIFECYCLE_FILE).read_text(encoding="utf-8"))
     errors = validate_announcements(str(csv_path), str(base / "maker_announcements.json"),
                                     min_count=min_count)
@@ -67,6 +104,8 @@ def validate_retained_bundle(
     errors.extend(validate_unmatched(str(base / "unmatched_maker_announcements.json")))
     errors.extend(validate_health(str(base / "maker_collection_health.json")))
     errors.extend(validate_lifecycle(lifecycle, rows_by_yj, 0))
+    if (base / NOTICE_FILE).exists():
+        errors.extend(validate_notices(json.loads((base / NOTICE_FILE).read_text(encoding="utf-8")), rows))
     return errors
 
 
@@ -85,6 +124,14 @@ def reconcile(base: Path, *, min_count: int = 300) -> tuple[int, int]:
         stage = Path(directory)
         for name in MANAGED_FILES:
             shutil.copy2(base / name, stage / name)
+        notices_present = (base / NOTICE_FILE).exists()
+        if notices_present:
+            shutil.copy2(base / NOTICE_FILE, stage / NOTICE_FILE)
+            notice_document = json.loads((stage / NOTICE_FILE).read_text(encoding="utf-8"))
+            before = json.dumps(notice_document, ensure_ascii=False)
+            reconcile_manufacturer_notices(notice_document, rows, today=jst_today().isoformat())
+            if json.dumps(notice_document, ensure_ascii=False) != before:
+                _write_json(stage / NOTICE_FILE, notice_document, indent=2, trailing_newline=True)
 
         announcements = json.loads((stage / "maker_announcements.json").read_text(encoding="utf-8"))
         history = json.loads((stage / "maker_announcement_events.json").read_text(encoding="utf-8"))
@@ -128,7 +175,7 @@ def reconcile(base: Path, *, min_count: int = 300) -> tuple[int, int]:
             raise ValueError("前回の補足情報を最新CSVへ整合できません: " + " / ".join(errors[:10]))
 
         publish_validated_files(
-            stage, base, (*MANAGED_FILES, LIFECYCLE_FILE),
+            stage, base, (*MANAGED_FILES, LIFECYCLE_FILE, *((NOTICE_FILE,) if notices_present else ())),
         )
     return removed_announcements, removed_lifecycle
 

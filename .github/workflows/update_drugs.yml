@@ -204,7 +204,7 @@ jobs:
             crisis_index.json items sitemap-items.xml updates sitemap-updates.xml \
             topics products guides ingredients categories reports sitemap-curated.xml mhlw_source.json maker_announcements.json \
             maker_announcement_events.json maker_collection_health.json \
-            unmatched_maker_announcements.json product_lifecycle.json supply_discrepancies.json
+            unmatched_maker_announcements.json product_lifecycle.json supply_discrepancies.json manufacturer_notices.json
           git diff --cached --quiet && echo "コアデータ変更なし" && exit 0
           git commit -m "厚労省供給データ自動更新: $(TZ=Asia/Tokyo date +'%Y/%m/%d')"
           for push_attempt in 1 2 3 4 5; do
@@ -265,6 +265,15 @@ jobs:
         run: python3 scripts/fetch_news.py news.json
         continue-on-error: true
 
+      - name: メーカー公式速報を確認（供給区分は変更しない）
+        run: python3 scripts/fetch_manufacturer_bulletins.py --base . --reuse-towa-cache
+
+      - name: 原典改訂の検知を品目ページへ反映（収集全体が失敗しても実施）
+        run: |
+          python3 scripts/generate_item_pages.py --csv drugs_app_ready.csv --site .
+          python3 scripts/generate_curated_pages.py --csv drugs_app_ready.csv --site .
+          python3 -m unittest discover -s scripts -p 'test_sitemap_integrity.py'
+
       - name: 不要ファイル削除
         run: rm -f supply_latest.xlsx
 
@@ -274,6 +283,7 @@ jobs:
             maker_announcement_events.json maker_collection_health.json unmatched_maker_announcements.json \
             product_lifecycle.json announcement_packages.json packages_cache.json news.json \
             supply_discrepancies.json items sitemap-items.xml topics products guides ingredients categories reports sitemap-curated.xml
+          git add manufacturer_bulletins.json
           git diff --cached --quiet && echo "メーカー補足情報変更なし" && exit 0
           git commit -m "メーカー補足情報自動更新: $(TZ=Asia/Tokyo date +'%Y/%m/%d')"
           for push_attempt in 1 2 3 4 5; do

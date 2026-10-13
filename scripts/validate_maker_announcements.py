@@ -293,15 +293,19 @@ def validate_manual_groups(csv_path, path, *, allow_removed_targets=False):
     return errors
 
 
-def validate_health(path, expected_checked=None):
-    data = _load_json(path)
+def validate_health_document(data, expected_checked=None):
+    """採用済み情報と今回の試行を別々に厳密検査する（旧形式も許容）。"""
     if not isinstance(data, dict):
         return ["収集状態のルートがオブジェクトではありません"]
     errors = []
     checked = data.get("checked")
+    if not isinstance(checked, str) or not checked:
+        errors.append("収集状態.checkedは全収集元の最終成功日が必要です")
     _validate_date(checked, "収集状態.checked", errors)
-    if expected_checked and checked != expected_checked:
-        errors.append(f"収集確認日が日本時間の実行日と一致しません: {checked}（期待値{expected_checked}）")
+    attempt = data.get("last_attempt")
+    actual_checked = attempt.get("checked") if isinstance(attempt, dict) else checked
+    if expected_checked and actual_checked != expected_checked:
+        errors.append(f"収集試行日が日本時間の実行日と一致しません: {actual_checked}（期待値{expected_checked}）")
     sources = data.get("sources")
     if not isinstance(sources, list) or not sources:
         return errors + ["収集状態.sourcesが空または配列ではありません"]
@@ -312,12 +316,13 @@ def validate_health(path, expected_checked=None):
         if not isinstance(source, dict):
             errors.append(f"{label}がオブジェクトではありません")
             continue
-        name = str(source.get("source", "")).strip()
-        if not name:
+        name = source.get("source")
+        if not isinstance(name, str) or not name.strip():
             errors.append(f"{label}.sourceが空です")
         elif name in seen:
             errors.append(f"収集元が重複しています: {name}")
-        seen.add(name)
+        if isinstance(name, str):
+            seen.add(name)
         if not isinstance(source.get("ok"), bool):
             errors.append(f"{label}.okが真偽値ではありません")
         count = source.get("count")
@@ -329,12 +334,128 @@ def validate_health(path, expected_checked=None):
                 errors.append(f"{label}: 成功なのに取得件数が0件です")
         if not isinstance(source.get("error"), str):
             errors.append(f"{label}.errorが文字列ではありません")
+        elif source.get("ok") is True and source["error"]:
+            errors.append(f"{label}: 成功なのにエラーがあります")
+        if "last_success" in source:
+            value = source["last_success"]
+            if not isinstance(value, str) or not value:
+                errors.append(f"{label}.last_successに最終成功日が必要です")
+            _validate_date(value, f"{label}.last_success", errors)
     total = data.get("total")
     if not isinstance(total, int) or isinstance(total, bool) or total < 0:
         errors.append("収集状態.totalが0以上の整数ではありません")
     elif total > count_sum:
         errors.append(f"収集状態.totalが収集元件数の合計を超えています: {total}>{count_sum}")
+    if "last_attempt" not in data:
+        return errors
+    if not isinstance(attempt, dict):
+        return errors + ["収集状態.last_attemptがオブジェクトではありません"]
+    attempt_checked = attempt.get("checked")
+    if not isinstance(attempt_checked, str) or not attempt_checked:
+        errors.append("収集状態.last_attempt.checkedに試行日が必要です")
+    _validate_date(attempt_checked, "収集状態.last_attempt.checked", errors)
+    if isinstance(checked, str) and isinstance(attempt_checked, str) and checked > attempt_checked:
+        errors.append("全収集元の最終成功日が試行日より未来です")
+    status = attempt.get("status")
+    status = status if isinstance(status, str) else ""
+    if status not in {"success", "partial", "failed"}:
+        errors.append("収集状態.last_attempt.statusが不正です")
+    attempt_errors = attempt.get("errors")
+    if (not isinstance(attempt_errors, list)
+            or any(not isinstance(value, str) or not value.strip() for value in attempt_errors)):
+        errors.append("収集状態.last_attempt.errorsはエラー文字列の配列が必要です")
+    elif status == "success" and attempt_errors:
+        errors.append("成功した試行にエラーがあります")
+    elif status in {"partial", "failed"} and not attempt_errors:
+        errors.append("不完全な試行にはエラー理由が必要です")
+    attempt_sources = attempt.get("sources")
+    if not isinstance(attempt_sources, list) or not attempt_sources:
+        return errors + ["収集状態.last_attempt.sourcesが空または配列ではありません"]
+    attempt_seen = set()
+    attempt_count_sum = 0
+    successes = failures = 0
+    for index, source in enumerate(attempt_sources):
+        label = f"収集状態.last_attempt.sources[{index}]"
+        if not isinstance(source, dict):
+            errors.append(f"{label}がオブジェクトではありません")
+            continue
+        name = source.get("source")
+        if not isinstance(name, str) or not name.strip():
+            errors.append(f"{label}.sourceが空または文字列ではありません")
+        elif name in attempt_seen:
+            errors.append(f"試行の収集元が重複しています: {name}")
+        else:
+            attempt_seen.add(name)
+        ok, count, error = source.get("ok"), source.get("count"), source.get("error")
+        if type(ok) is not bool:
+            errors.append(f"{label}.okが真偽値ではありません")
+        if type(count) is not int or count < 0:
+            errors.append(f"{label}.countが0以上の整数ではありません")
+        else:
+            attempt_count_sum += count
+        if not isinstance(error, str):
+            errors.append(f"{label}.errorが文字列ではありません")
+        if ok is True:
+            successes += 1
+            if count == 0 or error:
+                errors.append(f"{label}: 0件またはエラーのある取得を成功にできません")
+        elif ok is False:
+            failures += 1
+            if not isinstance(error, str) or not error.strip():
+                errors.append(f"{label}: 取得失敗の理由が必要です")
+        if "retained" in source and type(source["retained"]) is not bool:
+            errors.append(f"{label}.retainedが真偽値ではありません")
+        if source.get("retained") is True:
+            if ok is not False or type(source.get("retained_count")) is not int or source["retained_count"] <= 0:
+                errors.append(f"{label}: 前回値保持には失敗状態と正のretained_countが必要です")
+            if not source.get("last_success"):
+                errors.append(f"{label}: 前回値保持にはlast_successが必要です")
+        if "last_success" in source:
+            last_success = source["last_success"]
+            if not isinstance(last_success, str) or not last_success:
+                errors.append(f"{label}.last_successに最終成功日が必要です")
+            _validate_date(last_success, f"{label}.last_success", errors)
+            if isinstance(last_success, str) and isinstance(attempt_checked, str) and last_success > attempt_checked:
+                errors.append(f"{label}.last_successが試行日より未来です")
+    if attempt_seen != seen:
+        errors.append("採用済み情報と試行結果の収集元が一致しません")
+    attempt_total = attempt.get("total")
+    if type(attempt_total) is not int or attempt_total < 0:
+        errors.append("収集状態.last_attempt.totalが0以上の整数ではありません")
+    elif attempt_total > attempt_count_sum:
+        errors.append("試行の総取得件数が収集元件数の合計を超えています")
+    if status == "success" and (failures or successes != len(attempt_sources) or checked != attempt_checked):
+        errors.append("全収集元の成功・確認日が揃わない試行をsuccessにできません")
+    if status == "partial" and not (successes and failures):
+        errors.append("partialには取得成功と失敗の両方が必要です")
+    if status in {"success", "partial"}:
+        adopted_by_name = {source["source"]: source for source in sources
+                           if isinstance(source, dict) and isinstance(source.get("source"), str)}
+        for source in attempt_sources:
+            if not isinstance(source, dict) or not isinstance(source.get("source"), str):
+                continue
+            adopted = adopted_by_name.get(source["source"], {})
+            if adopted.get("ok") is not True:
+                errors.append("更新時の採用済み収集元には検証済みの成功情報が必要です")
+            if source.get("ok") is True and adopted.get("count") != source.get("count"):
+                errors.append("取得成功した収集元の採用件数と試行件数が一致しません")
+            if source.get("ok") is True and (
+                source.get("last_success") != attempt_checked
+                or adopted.get("last_success") != attempt_checked
+            ):
+                errors.append("取得成功した収集元の最終成功日と試行日が一致しません")
+            if status == "partial" and source.get("ok") is False and source.get("retained") is not True:
+                errors.append("部分更新で失敗した収集元には前回値保持の記録が必要です")
+            if source.get("retained") is True and (
+                adopted.get("count") != source.get("retained_count")
+                or adopted.get("last_success", checked) != source.get("last_success")
+            ):
+                errors.append("失敗収集元の採用情報と保持件数・成功日が一致しません")
     return errors
+
+
+def validate_health(path, expected_checked=None):
+    return validate_health_document(_load_json(path), expected_checked)
 
 
 def main():

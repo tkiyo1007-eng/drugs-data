@@ -770,7 +770,7 @@
   "target_products_verified": true,
   "target_scope": "product",
   "expected_target_count": 1,
- "announcement": {
+  "announcement": {
    "maker": "日本ケミファ",
    "title": "2026年2月18日 ピコプレップ配合内用剤 販売中止に伴う在庫消尽時期変更のご案内",
    "url": "https://www.nc-medical.com/product_topics/f4bj0h000000gcjd-att/f4bj0h000000gck1.pdf",
@@ -1136,7 +1136,7 @@
   "target_products_verified": true,
   "target_scope": "product",
   "expected_target_count": 1,
- "announcement": {
+  "announcement": {
    "maker": "沢井製薬",
    "title": "2026年8月17日 バルヒディオ配合錠MD「サワイ」限定出荷（販売中止予定品）のご案内",
    "url": "https://med.sawai.co.jp/pdf/announce/announce20.pdf",
@@ -1450,6 +1450,172 @@
    "url": "https://med.sawai.co.jp/file/pr28_1197_2.pdf",
    "event_type": "discontinued",
    "announced_at": "2026-08-07"
+  }
+ },
+ {
+  "products": [],
+  "lifecycle_targets": [
+   {
+    "yj_code": "4291447D1028",
+    "product_name": "トラスツズマブＢＳ点滴静注用６０ｍｇ「ファイザー」",
+    "supply_end_note": "2027年12月（在庫状況により前後する可能性あり）",
+    "supply_end_source_url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/HSP27Q003A_ProductWithdrawal2026.pdf",
+    "supply_end_verified_at": "2026-10-14",
+    "supply_end_packages": [
+     "1バイアル"
+    ],
+    "supply_end_expected": "2027-12"
+   },
+   {
+    "yj_code": "4291447D2024",
+    "product_name": "トラスツズマブＢＳ点滴静注用１５０ｍｇ「ファイザー」",
+    "supply_end_note": "2027年12月（在庫状況により前後する可能性あり）",
+    "supply_end_source_url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/HSP27Q003A_ProductWithdrawal2026.pdf",
+    "supply_end_verified_at": "2026-10-14",
+    "supply_end_packages": [
+     "1バイアル"
+    ],
+    "supply_end_expected": "2027-12"
+   },
+   {
+    "yj_code": "4291449A1020",
+    "product_name": "ベバシズマブＢＳ点滴静注１００ｍｇ「ファイザー」",
+    "supply_end_note": "2027年3月（在庫状況により前後する可能性あり）",
+    "supply_end_source_url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/HSP27Q003A_ProductWithdrawal2026.pdf",
+    "supply_end_verified_at": "2026-10-14",
+    "supply_end_packages": [
+     "4mL［1バイアル］"
+    ],
+    "supply_end_expected": "2027-03"
+   },
+   {
+    "yj_code": "4291449A2027",
+    "product_name": "ベバシズマブＢＳ点滴静注４００ｍｇ「ファイザー」",
+    "supply_end_note": "2027年3月（在庫状況により前後する可能性あり）",
+    "supply_end_source_url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/HSP27Q003A_ProductWithdrawal2026.pdf",
+    "supply_end_verified_at": "2026-10-14",
+    "supply_end_packages": [
+     "16mL［1バイアル］"
+    ],
+    "supply_end_expected": "2027-03"
+   },
+   {
+    "yj_code": "2129012M1020",
+    "product_name": "ピメノールカプセル５０ｍｇ",
+    "supply_end_note": "2027年6月（在庫状況により前後する可能性あり）",
+    "supply_end_source_url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/HSP27Q003A_ProductWithdrawal2026.pdf",
+    "supply_end_verified_at": "2026-10-14",
+    "supply_end_packages": [
+     "100カプセル［10カプセル(PTP)×10］"
+    ],
+    "supply_end_expected": "2027-06"
+   },
+   {
+    "yj_code": "2129012M2027",
+    "product_name": "ピメノールカプセル１００ｍｇ",
+    "supply_end_note": "2027年6月（在庫状況により前後する可能性あり）",
+    "supply_end_source_url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/HSP27Q003A_ProductWithdrawal2026.pdf",
+    "supply_end_verified_at": "2026-10-14",
+    "supply_end_packages": [
+     "100カプセル［10カプセル(PTP)×10］"
+    ],
+    "supply_end_expected": "2027-06"
+   },
+   {
+    "yj_code": "6139500F1024",
+    "product_name": "スルペラゾン静注用０．５ｇ",
+    "supply_end_note": "2027年12月（在庫状況により前後する可能性あり）",
+    "supply_end_source_url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/HSP27Q003A_ProductWithdrawal2026.pdf",
+    "supply_end_verified_at": "2026-10-14",
+    "supply_end_packages": [
+     "10バイアル"
+    ],
+    "supply_end_expected": "2027-12"
+   },
+   {
+    "yj_code": "6139500F2020",
+    "product_name": "スルペラゾン静注用１ｇ",
+    "supply_end_note": "2027年12月（在庫状況により前後する可能性あり）",
+    "supply_end_source_url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/HSP27Q003A_ProductWithdrawal2026.pdf",
+    "supply_end_verified_at": "2026-10-14",
+    "supply_end_packages": [
+     "10バイアル"
+    ],
+    "supply_end_expected": "2027-12"
+   },
+   {
+    "yj_code": "6131008C1033",
+    "product_name": "ユナシン細粒小児用１０％",
+    "supply_end_note": "2027年3月（在庫状況により前後する可能性あり）",
+    "supply_end_source_url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/HSP27Q003A_ProductWithdrawal2026.pdf",
+    "supply_end_verified_at": "2026-10-14",
+    "supply_end_packages": [
+     "100g［瓶、乾燥剤入り］"
+    ],
+    "supply_end_expected": "2027-03"
+   },
+   {
+    "yj_code": "1141005M2094",
+    "product_name": "ポンタールカプセル２５０ｍｇ",
+    "supply_end_note": "2027年12月（在庫状況により前後する可能性あり）",
+    "supply_end_source_url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/HSP27Q003A_ProductWithdrawal2026.pdf",
+    "supply_end_verified_at": "2026-10-14",
+    "supply_end_packages": [
+     "100カプセル［10カプセル(PTP)×10］",
+     "500カプセル［缶：バラ］"
+    ],
+    "supply_end_expected": "2027-12"
+   },
+   {
+    "yj_code": "7990701X1021",
+    "product_name": "ゼルフィルム",
+    "supply_end_note": "予定時期欄は出荷停止中。販売中止日・月の記載はありません",
+    "supply_end_source_url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/HSP27Q003A_ProductWithdrawal2026.pdf",
+    "supply_end_verified_at": "2026-10-14",
+    "supply_end_packages": [
+     "100×125mm［1枚入(滅菌封入)］"
+    ]
+   },
+   {
+    "yj_code": "7990702X1026",
+    "product_name": "眼科用ゼルフィルム",
+    "supply_end_note": "予定時期欄は出荷停止中。販売中止日・月の記載はありません",
+    "supply_end_source_url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/HSP27Q003A_ProductWithdrawal2026.pdf",
+    "supply_end_verified_at": "2026-10-14",
+    "supply_end_packages": [
+     "25×50mm［6枚入(滅菌封入)］"
+    ]
+   },
+   {
+    "yj_code": "3322701X1020",
+    "product_name": "ゼルフォーム",
+    "supply_end_note": "予定時期欄は出荷停止中。販売中止日・月の記載はありません",
+    "supply_end_source_url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/HSP27Q003A_ProductWithdrawal2026.pdf",
+    "supply_end_verified_at": "2026-10-14",
+    "supply_end_packages": [
+     "No.12 20×60×7mm［1枚入(滅菌封入)×4袋］"
+    ]
+   },
+   {
+    "yj_code": "3322701X2027",
+    "product_name": "ゼルフォーム",
+    "supply_end_note": "予定時期欄は出荷停止中。販売中止日・月の記載はありません",
+    "supply_end_source_url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/HSP27Q003A_ProductWithdrawal2026.pdf",
+    "supply_end_verified_at": "2026-10-14",
+    "supply_end_packages": [
+     "No.100 80×125×10mm［1枚入(滅菌封入)×1袋］"
+    ]
+   }
+  ],
+  "target_products_verified": true,
+  "target_scope": "product",
+  "expected_target_count": 14,
+  "announcement": {
+   "maker": "ファイザー",
+   "title": "販売中止予定のご案内",
+   "url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/HSP27Q003A_ProductWithdrawal2026.pdf",
+   "event_type": "discontinued",
+   "announced_at": "2026-10"
   }
  }
 ]

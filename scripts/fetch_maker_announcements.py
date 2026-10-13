@@ -281,6 +281,16 @@ PARSERS = [parse_sawai, parse_nichiiko, parse_nichiiko_excel, parse_nihon_generi
            parse_hisamitsu, parse_nipro]
 PAGINATED_PARSERS = {"parse_nihon_generic", "parse_towa", "parse_takata",
                      "parse_hisamitsu", "parse_nipro"}  # pagesパラメータを渡すパーサー
+# 旧JSONには収集元IDがないため、失敗した収集元の既存案内をメーカー単位で
+# 保持する。日医工の2収集元は同じメーカーだが、成功した側の新案内は採用する。
+SOURCE_MAKERS = {
+    "parse_sawai": "沢井製薬", "parse_nichiiko": "日医工",
+    "parse_nichiiko_excel": "日医工", "parse_nihon_generic": "日本ジェネリック",
+    "parse_kyorin": "キョーリンリメディオ", "parse_dsep": "第一三共エスファ",
+    "parse_kemifa": "日本ケミファ", "parse_towa": "東和薬品",
+    "parse_takata": "高田製薬", "parse_hisamitsu": "久光製薬",
+    "parse_nipro": "ニプロ",
+}
 
 
 # ===== 沢井製薬: 全製品供給状況一覧PDF経由の深掘り =====
@@ -325,10 +335,7 @@ def build_sawai_prodid_map():
 
 def fetch_sawai_prodid_announcement(prodid):
     """1品目のpreview.phpから、供給関連で最も新しい告知PDFを1件取得する"""
-    try:
-        html = fetch(f"https://med.sawai.co.jp/preview.php?prodid={prodid}")
-    except Exception:
-        return None
+    html = fetch(f"https://med.sawai.co.jp/preview.php?prodid={prodid}")
     candidates = []
     for m in re.finditer(r'<a[^>]*href="(/file/pr\d+_\d+(?:_\d+)?\.pdf)"[^>]*>(.*?)</a>', html, re.S):
         href, text = m.group(1), re.sub(r"<[^>]+>", " ", m.group(2))
@@ -377,8 +384,12 @@ def deepen_sawai(result, csv_path, limit=200):
         prodid = prodid_map.get(norm(name))
         if not prodid:
             continue
+        try:
+            found = fetch_sawai_prodid_announcement(prodid)
+        except Exception as error:
+            print(f"[WARN] 沢井個別ページ取得失敗: {prodid}: {error}", file=sys.stderr)
+            continue  # 取得失敗を案内なしと解釈して確認日を進めない。
         checked += 1
-        found = fetch_sawai_prodid_announcement(prodid)
         if found:
             title, url = found
             prev = result.get(name, {})
@@ -392,7 +403,7 @@ def deepen_sawai(result, csv_path, limit=200):
     return result
 
 
-def collect_announcements(nihon_generic_pages=3):
+def collect_announcements(nihon_generic_pages=3, source_items=None):
     all_items = []
     health = []
     seen = set()
@@ -414,13 +425,17 @@ def collect_announcements(nihon_generic_pages=3):
                     all_items.append((maker, title, url))
             health.append({"source": parser.__name__, "ok": bool(items), "count": len(items),
                            "error": "" if items else "取得件数が0件"})
+            if source_items is not None:
+                source_items[parser.__name__] = items
         except Exception as e:
             print(f"[WARN] {parser.__name__} failed: {e}", file=sys.stderr)
             health.append({"source": parser.__name__, "ok": False, "count": 0, "error": str(e)})
+            if source_items is not None:
+                source_items[parser.__name__] = []
     return all_items, health
 
 
-def collection_anomalies(health, total, previous=None):
+def collection_anomalies(health, total, previous=None, *, isolate_sources=False):
     """複数障害・総量急減・収集元ごとの大幅減を検出する。"""
     anomalies = []
     failed = [source for source in health if not source.get("ok")]
@@ -439,10 +454,80 @@ def collection_anomalies(health, total, previous=None):
         for source in health:
             name, count = source.get("source"), source.get("count")
             old_count = previous_sources.get(name)
-            if (isinstance(old_count, int) and old_count >= 20
+            if (not isolate_sources and isinstance(old_count, int) and old_count >= 20
                     and isinstance(count, int) and count * 5 < old_count):
                 anomalies.append(f"{name}の取得件数が前回の20%未満です: {old_count}→{count}件")
     return anomalies
+
+
+def prepare_collection_attempt(health, total, previous=None, *, today=None):
+    """単一収集元の失敗・急減を隔離し、取得結果と採用済み情報を分ける。
+
+    top-levelのcheckedは全収集元が成功した最後の日であり、今回の試行日は
+    last_attempt.checkedにだけ記録する。失敗元のcount/最終成功日を0へ置換しない。
+    """
+    today = today or jst_today().isoformat()
+    previous = previous if isinstance(previous, dict) else {}
+    previous_sources = {
+        source.get("source"): source for source in previous.get("sources") or []
+        if isinstance(source, dict)
+    }
+    attempt_sources = []
+    adopted_sources = []
+    failed_sources = set()
+    errors = []
+    for original in health:
+        source = dict(original)
+        name = source.get("source")
+        old = previous_sources.get(name)
+        old_count = old.get("count") if old else None
+        if (source.get("ok") is True and isinstance(old_count, int) and old_count >= 20
+                and source.get("count", 0) * 5 < old_count):
+            source["ok"] = False
+            source["error"] = (
+                f"取得件数が前回の20%未満です: {old_count}→{source['count']}件"
+            )
+        if source.get("ok") is True:
+            source["last_success"] = today
+            adopted_sources.append({
+                "source": name, "ok": True, "count": source["count"], "error": "",
+                "last_success": today,
+            })
+        else:
+            failed_sources.add(name)
+            errors.append(f"{name}: {source.get('error') or '取得失敗'}")
+            if old and old.get("ok") is True and old.get("count", 0) > 0:
+                last_success = old.get("last_success") or previous.get("checked")
+                source.update(retained=True, retained_count=old["count"], last_success=last_success)
+                adopted_sources.append({**old, "last_success": last_success})
+            else:
+                errors.append(f"{name}: 前回の検証済み収集情報がありません")
+        attempt_sources.append(source)
+    anomalies = collection_anomalies(
+        attempt_sources, total, previous, isolate_sources=True,
+    )
+    if any(name not in previous_sources or previous_sources[name].get("ok") is not True
+           or previous_sources[name].get("count", 0) <= 0 for name in failed_sources):
+        anomalies.append("失敗した収集元の安全な前回値がありません")
+    missing_sources = set(previous_sources) - {source.get("source") for source in health}
+    if missing_sources:
+        anomalies.append("前回の収集元が試行結果から欠けています: " + "/".join(sorted(missing_sources)))
+    status = "failed" if anomalies else ("partial" if failed_sources else "success")
+    if anomalies:
+        errors.extend(anomalies)
+    document = {
+        "checked": today if status == "success" else previous.get("checked", ""),
+        "sources": adopted_sources,
+        # 全成功時は従来どおりメーカー・URL重複を除いた実取得件数。
+        # 部分更新時は旧URL集合がないため、採用済み収集元件数の合計を保持する。
+        # 実取得URL件数はlast_attempt.totalから読み、保持件数と混同しない。
+        "total": total if not failed_sources else sum(source["count"] for source in adopted_sources),
+        "last_attempt": {
+            "checked": today, "status": status, "sources": attempt_sources,
+            "total": total, "errors": errors,
+        },
+    }
+    return document, failed_sources, anomalies
 
 
 # 供給状況と無関係なお知らせ(電子添文改訂・学会情報など)を除外するキーワード
@@ -537,12 +622,14 @@ def has_delist_notice(row):
     return "薬価削除予定" in (row.get("代替候補") or "")
 
 
-def update_event_history(history, current, today=None):
+def update_event_history(history, current, today=None, preserve_names=None):
     """現在の代表案内を品目別履歴へ追記する。同じURLは重複させない。"""
     today = today or jst_today().isoformat()
     result = {name: [dict(e) for e in events]
               for name, events in (history or {}).items() if isinstance(events, list)}
     for name, info in current.items():
+        if name in (preserve_names or ()):
+            continue  # 取得できなかった旧案内のlast_checkedを今日へ進めない。
         events = result.setdefault(name, [])
         found = next((e for e in events
                       if e.get("url") == info.get("url") and e.get("title") == info.get("title")), None)
@@ -698,7 +785,8 @@ def load_manual_announcements(single_path="manual_announcements.json",
     return manual, resolved_urls, group_events
 
 
-def match_to_csv(announcements, csv_path, existing=None, unmatched_out=None):
+def match_to_csv(announcements, csv_path, existing=None, unmatched_out=None,
+                 retained_makers=None):
     """既存の対応表(existing)があれば引き継ぎつつ、今回の取得分で追加・上書きする。
     CSVから消えた品目は既存分から取り除く。通常出荷へ戻った品目の一時的な
     供給案内は除くが、販売中止・包装中止は将来情報なので保持する。
@@ -717,6 +805,9 @@ def match_to_csv(announcements, csv_path, existing=None, unmatched_out=None):
         row = rows_by_name.get(name)
         if not row:
             continue
+        if norm(value.get("maker")) in (retained_makers or ()):
+            result[name] = dict(value)
+            continue  # 取得失敗を通常出荷への変更・案内消失として扱わない。
         # 分類規則の改善を既存生成データにも反映し、過去の誤分類を固定化しない。
         # 手動登録の明示event_typeはこの後のオーバーレイで再適用される。
         event_type = classify_event(value.get("title", ""))
@@ -809,7 +900,8 @@ def main():
         pass
 
     print("メーカーお知らせ取得中...", file=sys.stderr)
-    announcements, health = collect_announcements(nihon_generic_pages=pages)
+    source_items = {}
+    announcements, health = collect_announcements(nihon_generic_pages=pages, source_items=source_items)
     print(f"取得件数: {len(announcements)}", file=sys.stderr)
 
     health_path = os.path.join(os.path.dirname(out_path) or ".", "maker_collection_health.json")
@@ -818,27 +910,41 @@ def main():
             previous_health = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
         previous_health = None
-    health_doc = {"checked": jst_today().isoformat(), "sources": health,
-                  "total": len(announcements)}
+    health_doc, failed_sources, anomalies = prepare_collection_attempt(
+        health, len(announcements), previous_health,
+    )
+    unmapped = failed_sources - SOURCE_MAKERS.keys()
+    if unmapped:
+        anomalies.append("失敗収集元のメーカー範囲が不明です: " + "/".join(sorted(unmapped)))
+        health_doc["last_attempt"]["status"] = "failed"
+        health_doc["last_attempt"]["errors"].append(anomalies[-1])
     with open(health_path, "w", encoding="utf-8") as f:
         json.dump(health_doc, f, ensure_ascii=False, indent=1)
-    failed = [h for h in health if not h["ok"]]
+    failed = [h for h in health_doc["last_attempt"]["sources"] if not h["ok"]]
     for h in failed:
         # GitHub Actionsの画面に警告注釈を出し、単一ソース障害もログに埋もれさせない。
         print(f"::warning title=メーカー案内収集失敗::{h['source']}: {h['error']}", file=sys.stderr)
     # 1社の一時障害では厚労省データ更新を止めないが、複数障害や前回比の大幅減は
     # HTML/API変更の可能性が高いため失敗させ、少量だけ取得できた状態も見逃さない。
-    anomalies = collection_anomalies(health, len(announcements), previous_health)
     if anomalies:
         print(f"❌ メーカー案内の取得異常: {' / '.join(anomalies)}", file=sys.stderr)
         raise SystemExit(1)
 
+    # 急減した収集元は部分取得できても採用しない。失敗元だけを前回値へ戻し、
+    # 他社の取得成功を一社の障害でまとめて捨てない。
+    announcements = list({(norm(maker), url): (maker, title, url)
+                          for source, items in source_items.items() if source not in failed_sources
+                          for maker, title, url in items}.values())
+    retained_makers = {norm(SOURCE_MAKERS[source]) for source in failed_sources
+                       if source in SOURCE_MAKERS}
+
     unmatched = []
-    matched = match_to_csv(announcements, csv_path, existing=existing, unmatched_out=unmatched)
+    matched = match_to_csv(announcements, csv_path, existing=existing, unmatched_out=unmatched,
+                           retained_makers=retained_makers)
     print(f"マッチ件数: {len(matched)}（新規/更新分含む）", file=sys.stderr)
 
     deepen_limit = int(sys.argv[4]) if len(sys.argv) > 4 else 0
-    if deepen_limit > 0:
+    if deepen_limit > 0 and "parse_sawai" not in failed_sources:
         matched = deepen_sawai(matched, csv_path, limit=deepen_limit)
         print(f"沢井深掘り後マッチ件数: {len(matched)}", file=sys.stderr)
 
@@ -857,8 +963,17 @@ def main():
 
     # 自動照合の代表に選ばれなかった旧報・続報や、沢井深掘り・手動登録・
     # 既存引継ぎで解決済みのURLはレビュー待ち一覧から除外する。
-    unmatched = filter_resolved_unmatched(unmatched, matched, manual_urls)
     unmatched_path = os.path.join(os.path.dirname(out_path) or ".", "unmatched_maker_announcements.json")
+    if failed_sources:
+        try:
+            with open(unmatched_path, encoding="utf-8") as f:
+                previous_unmatched = json.load(f)
+            unmatched.extend(record for record in previous_unmatched
+                             if norm(record.get("maker")) in retained_makers)
+        except FileNotFoundError:
+            pass
+    unmatched = list({(norm(record.get("maker")), record.get("url")): record
+                      for record in filter_resolved_unmatched(unmatched, matched, manual_urls)}.values())
     with open(unmatched_path, "w", encoding="utf-8") as f:
         json.dump(unmatched, f, ensure_ascii=False, indent=1)
     print(f"未照合案内: {len(unmatched)}件（{unmatched_path}）", file=sys.stderr)
@@ -870,10 +985,12 @@ def main():
             history = json.load(f)
     except FileNotFoundError:
         history = {}
-    history = update_event_history(history, matched)
+    retained_names = {name for name, info in matched.items()
+                      if norm(info.get("maker")) in retained_makers and info == existing.get(name)}
+    history = update_event_history(history, matched, preserve_names=retained_names)
     # 同一品目に複数のグループ通知がある場合、代表に選ばれない旧通知も履歴へ残す。
     for group_events in manual_group_events:
-        history = update_event_history(history, group_events)
+        history = update_event_history(history, group_events, preserve_names=retained_names)
     with open(events_path, "w", encoding="utf-8") as f:
         json.dump(history, f, ensure_ascii=False, indent=1)
     print(f"案内履歴: {sum(map(len, history.values()))}件（{events_path}）", file=sys.stderr)

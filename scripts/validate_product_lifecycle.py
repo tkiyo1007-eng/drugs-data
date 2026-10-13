@@ -20,6 +20,7 @@ YJ_RE = re.compile(r"^[0-9A-Z]{12}$")
 DATE_RE = re.compile(r"^\d{4}-\d{2}(?:-\d{2})?$")
 STATES = {"active", "discontinuation_announced", "discontinued"}
 OFFICIAL_HOSTS = {
+    "ファイザー": {"www.pfizermedicalinformation.jp"},
     "久光製薬": {"hisamitsu-pharm.jp"},
     "キョーリンリメディオ": {"kyorin-rmd.com"},
     "第一三共エスファ": {"daiichisankyo-ep.co.jp"},

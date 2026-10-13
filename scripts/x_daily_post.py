@@ -37,6 +37,7 @@ from collections import Counter
 from pathlib import Path
 
 from jst_time import jst_today
+import manufacturer_x_plan
 
 SITE_URL = "https://kyokyu-navi.jp/"
 LOG_PATH = Path("x_post_log.json")
@@ -298,6 +299,7 @@ def main(argv: list[str] | None = None) -> int:
     build.add_argument("--out", type=Path, required=True)
     build.add_argument("--today", type=dt.date.fromisoformat, default=None)
     build.add_argument("--reports", type=Path, default=Path("reports"))
+    build.add_argument("--manufacturer", action="store_true")
     sub.add_parser("whoami")
     post = sub.add_parser("post")
     post.add_argument("--plan", type=Path, required=True)
@@ -324,6 +326,8 @@ def main(argv: list[str] | None = None) -> int:
         posts = [build_plan(changes, log, today), build_weekly_plan(changes, log, today),
                  build_monthly_plan(args.reports, log, today)]
         posts[0].setdefault("kind", "daily")
+        if args.manufacturer:
+            posts.append(manufacturer_x_plan.build(Path('.'), log, today, finalize))
         plan = {"posts": posts}
         args.out.write_text(json.dumps(plan, ensure_ascii=False, indent=2), encoding="utf-8")
         print(json.dumps(plan, ensure_ascii=False, indent=2))
@@ -341,17 +345,42 @@ def main(argv: list[str] | None = None) -> int:
         print(f"❌ 認証情報が未設定です: {', '.join(missing)}", file=sys.stderr)
         return 1
     for item in posts:
-        log = load_log()
+        log = load_log(args.log)
         if item["key"] in posted_keys(log):
             print(f"{item['key']} は投稿済みのため中止します")
             continue
+        if item["kind"] == "manufacturer":
+            current = manufacturer_x_plan.build(Path('.'), log, jst_today(), finalize)
+            if current.get('action') != 'post' or current != item:
+                raise ValueError('メーカー速報の当日確認・配信上限・文面が一致しません')
+            manufacturer_x_plan.verify_published(item)
+            # Persist before sending: an uncertain network result must not be retried.
+            pending = {'key': item['key'], 'kind': 'manufacturer', 'post_day': item['post_day'],
+                       'document_key': item['document_key'], 'state': 'pending'}
+            log['posted'].insert(0, pending)
+            (args.log or LOG_PATH).write_text(json.dumps(log, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+            manufacturer_x_plan.reserve_remote(args.log or LOG_PATH)
+            log = load_log(args.log)
+            reserved = next((r for r in log['posted'] if r.get('key') == item['key']
+                             and r.get('state') == 'pending' and r.get('document_key') == item['document_key']), None)
+            without_reservation = {'posted': [r for r in log['posted'] if r.get('key') != item['key']]}
+            refreshed = manufacturer_x_plan.build(Path('.'), without_reservation, jst_today(), finalize)
+            if reserved is None or refreshed != item:
+                raise ValueError('予約保存後にメーカー速報の承認設定・当日確認・文面が変更されました')
+            manufacturer_x_plan.verify_published(item)
         post_id = post_to_x(item["text"], credentials)
         record = {"key": item["key"], "kind": item["kind"], "post_id": post_id,
                   "posted_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")}
         if item["kind"] == "daily":
             record["date"] = item["date"]
+        if item['kind'] == 'manufacturer':
+            log['posted'] = [r for r in log['posted'] if r.get('key') != item['key']]
+            record.update(post_day=item['post_day'], document_key=item['document_key'], state='posted')
         log["posted"].insert(0, record)
-        log["posted"] = log["posted"][:200]
+        # Uncertain manufacturer sends and document dedup keys are never discarded.
+        maker_records = [r for r in log['posted'] if r.get('kind') == 'manufacturer']
+        ordinary_records = [r for r in log['posted'] if r.get('kind') != 'manufacturer'][:200]
+        log['posted'] = maker_records + ordinary_records
         # 1件ごとに保存し、途中で失敗しても成功分を二重投稿しない
         (args.log or LOG_PATH).write_text(json.dumps(log, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         print(f"✅ 投稿しました: {item['key']}（ID {post_id}）")

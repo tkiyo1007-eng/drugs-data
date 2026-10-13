@@ -16,6 +16,17 @@ from generate_item_pages import (
     item_page_lastmod,
     latest_publication_date,
     latest_changes_by_key,
+    load_manufacturer_notices,
+    load_manufacturer_bulletins,
+    manufacturer_notice_changed,
+    lifecycle_for_display,
+    lifecycle_end_details,
+    lifecycle_verification_is_recent,
+    supplemental_labels,
+    supplemental_bucket,
+    manufacturer_notice_index,
+    matching_manufacturer_notices,
+    manufacturer_notices_html,
     load_status_changes,
     official_row_date,
     page_html,
@@ -690,6 +701,279 @@ class ItemPageMetadataTests(unittest.TestCase):
         expected = {group["name"]: slug for slug, group in ingredient_groups(rows).items()}
         self.assertEqual(expected, ingredient_pages(rows))
         self.assertNotIn("C成分", ingredient_pages(rows))
+
+
+class VerifiedManufacturerNoticeTests(unittest.TestCase):
+    def row(self):
+        return {"商品名": "テスト錠10mg「ケミファ」", "一般名": "テスト成分",
+                "製造メーカー": "日本ケミファ", "販売メーカー": "日本薬品工業・日本ケミファ",
+                "供給状況": "①通常出荷", "理由": "７．－", "更新日": "2026/07/07",
+                "YJコード": "2329028F1210"}
+
+    def notice(self):
+        return {"id": "test-notice", "maker": "日本薬品工業", "title": "10mg 500T 限定出荷案内",
+                "url": "https://www.npi-inc.co.jp/medical/info/file/1269", "announced_at": "2026-10",
+                "listed_at": "2026-10-13", "verified_at": "2026-10-14", "sha256": "a" * 64,
+                "event_type": "limited", "reason": "製造工程上の確認事項により入庫が遅延",
+                "targets": [{"product_name": "テスト錠10mg「ケミファ」", "yj_code": "2329028F1210",
+                             "scope": "seller_route_and_package", "seller": "日本薬品工業",
+                             "packages": [{"package": "500T", "unified_product_code": "440576059"}]}],
+                "alternatives": [], "cautions": ["今回案内は日本薬品工業販売品500Tだけが対象"]}
+
+    def test_optional_registry_missing_preserves_existing_behavior_but_invalid_present_fails(self):
+        with TemporaryDirectory() as directory:
+            path = Path(directory) / "manufacturer_notices.json"
+            self.assertEqual([], load_manufacturer_notices(path))
+            document = {"schema_version": 1, "notices": [self.notice()]}
+            path.write_text(json.dumps(document, ensure_ascii=False), encoding="utf-8")
+            self.assertEqual(document["notices"], load_manufacturer_notices(path))
+            for mutation in (lambda n: n.update(sha256="bad"),
+                             lambda n: n.update(url="javascript:alert(1)"),
+                             lambda n: n.update(verified_at="2026-13-01"),
+                             lambda n: n["targets"][0].update(packages=[{}]),
+                             lambda n: n["targets"][0].update(seller="")):
+                invalid = self.notice()
+                mutation(invalid)
+                path.write_text(json.dumps({"schema_version": 1, "notices": [invalid]}), encoding="utf-8")
+                with self.assertRaises(ValueError):
+                    load_manufacturer_notices(path)
+            path.write_text('{broken', encoding="utf-8")
+            with self.assertRaises(ValueError):
+                load_manufacturer_notices(path)
+
+    def test_notice_requires_yj_name_and_maker_identity(self):
+        notice = self.notice()
+        index = manufacturer_notice_index([notice])
+        self.assertEqual([notice], index["2329028F1210"])
+        self.assertEqual(1, len(matching_manufacturer_notices(self.row(), [notice])))
+        for field, value in (("YJコード", "2329028F2216"), ("商品名", "別の錠10mg「ケミファ」")):
+            row = dict(self.row(), **{field: value})
+            self.assertEqual([], matching_manufacturer_notices(row, [notice]))
+        row = dict(self.row(), 製造メーカー="別メーカー", 販売メーカー="別販売元")
+        self.assertEqual([], matching_manufacturer_notices(row, [notice]))
+        self.assertEqual("", manufacturer_notices_html(row, [notice]))
+
+    def test_normal_supply_page_preserves_mhlw_and_displays_only_target_seller_package(self):
+        row, notice = self.row(), self.notice()
+        self.assertFalse(should_generate(row, row["YJコード"], set(), {}, {}))
+        self.assertTrue(should_generate(row, row["YJコード"], set(), {}, {}, manufacturer_notices=[notice]))
+        output = page_html(row, row["YJコード"], "ok", "2026-10-14", [], {row["YJコード"]},
+                           manufacturer_notices=[notice])
+        self.assertIn("厚労省：通常出荷", output)
+        self.assertIn("確認済みメーカー案内", output)
+        self.assertIn("対象範囲：販売経路・一部包装｜販売元：日本薬品工業｜対象包装：500T", output)
+        self.assertIn("原典の案内年月日：2026-10｜", output)
+        self.assertIn("原文確認日：2026-10-14", output)
+        self.assertNotIn("原典の案内年月日：2026-10-13", output)
+        self.assertIn('data-source-sha256="' + "a" * 64 + '"', output)
+        self.assertIn("メーカー説明の理由：製造工程上の確認事項により入庫が遅延", output)
+
+    def test_future_recovery_is_explicitly_a_plan_without_changing_current_supply(self):
+        row = dict(self.row(), 供給状況="②限定出荷（自社の事情）")
+        notice = self.notice()
+        notice.update(event_type="resumption_planned", resumption={"text": "2026年10月中旬より通常出荷再開予定"})
+        output = page_html(row, row["YJコード"], "limited", "2026-10-14", [], {row["YJコード"]},
+                           manufacturer_notices=[notice])
+        self.assertIn("厚労省：限定出荷", output)
+        self.assertIn("2026年10月中旬より通常出荷再開予定", output)
+        self.assertIn("再開の実施日は確認できていません", output)
+        self.assertNotIn("厚労省：通常出荷", output)
+
+    def test_indication_groups_candidate_conditions_and_target_filter_are_preserved_and_escaped(self):
+        notice = self.notice()
+        notice["alternatives"] = [
+            {"indication": "慢性便秘症（器質的疾患による便秘を除く）", "type": "別成分の参考候補",
+             "products": [{"name": "候補<錠>", "yj_code": "2344009F1035"}],
+             "cautions": ["候補の在庫は未確認"]},
+            {"indication": "高アンモニア血症に伴う症候の改善", "type": "同一般名・含有量の異なる候補",
+             "products": [{"name": "ラクツロース・シロップ60%「コーワ」"}],
+             "cautions": ["慢性便秘症の場合は変更調剤できません", "成分含有量が異なるため処方元への確認が必要"]},
+            {"indication": "別規格のみ", "products": [{"name": "非対象の候補"}],
+             "target_yj_codes": ["2329028F2216"]}]
+        notice["reason"] = '</p><script>alert(1)</script>'
+        output = manufacturer_notices_html(self.row(), [notice], catalog_yj_codes={"2344009F1035"})
+        self.assertIn("慢性便秘症（器質的疾患による便秘を除く）", output)
+        self.assertIn("高アンモニア血症に伴う症候の改善", output)
+        self.assertIn("慢性便秘症の場合は変更調剤できません", output)
+        self.assertIn("候補&lt;錠&gt;", output)
+        self.assertIn("&lt;/p&gt;&lt;script&gt;", output)
+        self.assertNotIn("<script>", output)
+        self.assertNotIn("非対象の候補", output)
+        self.assertIn('https://kyokyu-navi.jp/#item=2344009F1035', output)
+
+    def test_manual_notice_lastmod_is_not_advanced_by_generation_or_daily_attempt(self):
+        row, notice = self.row(), self.notice()
+        self.assertEqual("2026-10-14", item_page_lastmod(row, manufacturer_notices=[notice]))
+        notice["listed_at"] = "2026-10-20"
+        self.assertEqual("2026-10-14", item_page_lastmod(row, manufacturer_notices=[notice]))
+        notice["content_updated_at"] = "2026-10-16"
+        self.assertEqual("2026-10-16", item_page_lastmod(row, manufacturer_notices=[notice]))
+        notice["targets"][0]["product_name"] = "別の品目"
+        self.assertEqual("2026-10-06", item_page_lastmod(row, manufacturer_notices=[notice]))
+
+
+    def test_discontinuation_timing_device_candidate_and_no_candidate_statement_are_not_reinterpreted(self):
+        notice = self.notice()
+        notice["event_type"] = "discontinued"
+        notice["targets"][0]["planned_timing"] = "2027年12月"
+        notice["alternatives"] = [{"type": "医療機器の参考候補", "products": [
+            {"name": "候補医療機器", "product_kind": "medical_device", "source_class": "IV 高度管理医療機器",
+             "scope": "一部包装のみ"}]},
+            {"type": "メーカー回答", "products": [], "no_alternative_statement": "了承を得られている代替候補製品はありません"}]
+        output = manufacturer_notices_html(self.row(), [notice])
+        self.assertIn("販売中止予定時期：2027年12月", output)
+        self.assertNotIn("再開・解除に関する案内：2027年12月", output)
+        self.assertIn("医療機器（IV 高度管理医療機器）", output)
+        self.assertIn("対象規格・包装：一部包装のみ", output)
+        self.assertIn("了承を得られている代替候補製品はありません", output)
+        self.assertNotIn("候補医療機器</a>", output)
+        notice["targets"][0]["planned_timing"] = "出荷停止中"
+        self.assertIn("メーカーが案内した状況：出荷停止中", manufacturer_notices_html(self.row(), [notice]))
+
+    def test_recall_lots_are_limited_to_the_current_strength_and_resumption_keeps_approximate_precision(self):
+        row = dict(self.row(), 商品名='ゾニサミドOD錠25mgTRE「サンド」', 製造メーカー="サンド", 販売メーカー="サンド")
+        notice = self.notice()
+        notice["maker"] = "サンド"
+        notice["targets"][0].update(product_name=row["商品名"], maker="サンド")
+        notice.update(event_type="recall", recall_class="II", recall_started_at="2026-10-13",
+                      recall_scope="一部包装・対象ロット", lots=[
+                          {"strength": "25mg", "package": "PTP100錠", "lot": "L0002"},
+                          {"strength": "50mg", "package": "PTP100錠", "lot": "L0003"}])
+        output = manufacturer_notices_html(row, [notice])
+        self.assertIn("自主回収区分：クラスII｜回収開始日：2026-10-13", output)
+        self.assertIn("対象ロット：L0002", output)
+        self.assertNotIn("L0003", output)
+        notice.update(event_type="stopped", expected_resumption={"display": "2027年春頃予定"})
+        output = manufacturer_notices_html(row, [notice])
+        self.assertIn("出荷再開見込み（メーカー予定）：2027年春頃予定", output)
+        self.assertNotIn("2027-03-01", output)
+
+    def test_full_verification_timestamp_is_accepted_but_no_timezone_is_rejected(self):
+        with TemporaryDirectory() as directory:
+            path = Path(directory) / "manufacturer_notices.json"
+            notice = self.notice()
+            notice["verified_at"] = "2026-10-14T01:09:07+09:00"
+            path.write_text(json.dumps({"schema_version": 1, "notices": [notice]}), encoding="utf-8")
+            self.assertEqual([notice], load_manufacturer_notices(path))
+            self.assertIn("原文確認日：2026-10-14", manufacturer_notices_html(self.row(), [notice]))
+            notice["verified_at"] = "2026-10-14T01:09:07"
+            path.write_text(json.dumps({"schema_version": 1, "notices": [notice]}), encoding="utf-8")
+            with self.assertRaises(ValueError):
+                load_manufacturer_notices(path)
+
+
+    def test_removed_candidate_keeps_historical_name_without_current_item_link(self):
+        notice = self.notice()
+        notice["alternatives"] = [{"type": "原典の参考候補", "products": [
+            {"name": "収録済み候補錠", "yj_code": "2344009F1035"},
+            {"name": "削除された候補錠", "yj_code": "2344009F1086", "archived_from_csv_at": "2026-10-14"}]}]
+        output = manufacturer_notices_html(self.row(), [notice], catalog_yj_codes={"2344009F1035"})
+        self.assertIn('href="https://kyokyu-navi.jp/#item=2344009F1035"', output)
+        self.assertIn("削除された候補錠", output)
+        self.assertIn("現在のCSVに収録なし・原典記載の過去候補", output)
+        self.assertNotIn('#item=2344009F1086', output)
+        restored = manufacturer_notices_html(self.row(), [notice], catalog_yj_codes={"2344009F1035", "2344009F1086"})
+        self.assertIn('#item=2344009F1086', restored)
+
+    def test_changed_source_replaces_reason_and_candidates_with_recheck_warning(self):
+        notice = self.notice()
+        notice["alternatives"] = [{"products": [{"name": "以前の参考候補", "yj_code": "2344009F1035"}]}]
+        bulletins = {"schema_version": 1, "items": [{"url": notice["url"], "sha256": "b" * 64}]}
+        self.assertTrue(manufacturer_notice_changed(notice, bulletins))
+        output = manufacturer_notices_html(self.row(), [notice], catalog_yj_codes={"2344009F1035"}, bulletins=bulletins)
+        self.assertIn("原典更新を検出・再確認待ち", output)
+        self.assertNotIn(notice["reason"], output)
+        self.assertNotIn("以前の参考候補", output)
+        self.assertNotIn('#item=2344009F1035', output)
+        self.assertIn(notice["url"], output)
+        bulletins["items"][0].pop("sha256")
+        self.assertFalse(manufacturer_notice_changed(notice, bulletins))
+        self.assertIn(notice["reason"], manufacturer_notices_html(self.row(), [notice], bulletins=bulletins))
+
+    def test_optional_bulletins_missing_is_not_a_claim_of_matching_hash(self):
+        with TemporaryDirectory() as directory:
+            path = Path(directory) / "manufacturer_bulletins.json"
+            self.assertIsNone(load_manufacturer_bulletins(path))
+            path.write_text(json.dumps({"schema_version": 1, "items": [{"url": self.notice()["url"], "sha256": "a" * 64}]}), encoding="utf-8")
+            self.assertFalse(manufacturer_notice_changed(self.notice(), load_manufacturer_bulletins(path)))
+            path.write_text(json.dumps({"schema_version": 1, "items": [{"url": "javascript:alert(1)", "sha256": "a" * 64}]}), encoding="utf-8")
+            with self.assertRaises(ValueError):
+                load_manufacturer_bulletins(path)
+
+
+    def lifecycle(self):
+        row, notice = self.row(), self.notice()
+        return {"product_name": row["商品名"], "maker": notice["maker"],
+                "state": "discontinuation_announced", "announced_at": "2026-10",
+                "verified_at": "2026-10-14", "source_url": notice["url"],
+                "source_title": "前回の販売中止案内", "supply_end_source_url": notice["url"],
+                "supply_end_expected": "2027-12", "supply_end_note": "在庫により前後する以前の条件",
+                "supply_end_packages": ["以前の100錠包装"], "supply_end_verified_at": "2026-10-14"}
+
+    def test_lifecycle_hash_guard_is_ephemeral_and_requires_known_url_hash_mismatch(self):
+        notice, lifecycle = self.notice(), self.lifecycle()
+        before = json.dumps(lifecycle, ensure_ascii=False, sort_keys=True)
+        changed = {"items": [{"url": notice["url"], "sha256": "b" * 64}]}
+        display = lifecycle_for_display(lifecycle, [notice], changed)
+        self.assertTrue(display["source_changed"])
+        self.assertEqual(before, json.dumps(lifecycle, ensure_ascii=False, sort_keys=True))
+        self.assertFalse(lifecycle_verification_is_recent(display, "2026-10-14"))
+        self.assertEqual("", lifecycle_end_details(display))
+        alternate_source = dict(lifecycle, source_url="https://example.test/other.pdf")
+        self.assertTrue(lifecycle_for_display(alternate_source, [notice], changed)["source_changed"])
+        for observations in (None, {"items": []}, {"items": [{"url": notice["url"]}]},
+                             {"items": [{"url": notice["url"], "sha256": "a" * 64}]},
+                             {"items": [{"url": "https://example.test/unrelated.pdf", "sha256": "b" * 64}]}):
+            with self.subTest(observations=observations):
+                self.assertIs(lifecycle, lifecycle_for_display(lifecycle, [notice], observations))
+        self.assertIs(lifecycle, lifecycle_for_display(lifecycle, [], changed))
+
+    def test_changed_lifecycle_page_hides_current_assertion_end_conditions_and_packages(self):
+        row, notice, lifecycle = self.row(), self.notice(), self.lifecycle()
+        bulletins = {"items": [{"url": notice["url"], "sha256": "b" * 64}], "checked": "2026-10-20"}
+        output = page_html(row, row["YJコード"], "ok", "2026-10-20", [], {row["YJコード"]},
+                           lifecycle=lifecycle, supplemental_checked_date="2026-10-14",
+                           manufacturer_notices=[notice], manufacturer_bulletins=bulletins)
+        self.assertIn("厚労省：通常出荷", output)
+        self.assertIn("メーカー公式：原典更新・再確認待ち", output)
+        self.assertIn("前回の公表年月日：2026-10", output)
+        self.assertNotIn("メーカー公式：販売中止予定", output)
+        self.assertNotIn("メーカー：販売中止予定", output)
+        for value in ("終了予定時期：", "2027-12", lifecycle["supply_end_note"], lifecycle["supply_end_packages"][0], "終了予定の原文確認日"):
+            self.assertNotIn(value, output)
+        self.assertEqual("2026-10-14", item_page_lastmod(row, lifecycle, manufacturer_notices=[notice], manufacturer_bulletins=bulletins))
+        self.assertIn('"dateModified":"2026-10-14"', output)
+
+    def test_changed_lifecycle_hub_is_pending_and_does_not_search_stale_end_details(self):
+        row, notice = self.row(), self.notice()
+        lifecycle = lifecycle_for_display(self.lifecycle(), [notice], {"items": [{"url": notice["url"], "sha256": "b" * 64}]})
+        labels = supplemental_labels(row, lifecycle, reference_date="2026-10-14")
+        self.assertEqual(["メーカー原典更新・再確認待ち"], labels)
+        entry = {"key": row["YJコード"], "name": row["商品名"], "maker": notice["maker"],
+                 "status": "ok", "updated": "2026-07-07", "lifecycle": lifecycle,
+                 "lifecycle_current": False, "supplements": labels, "hubs": ["supplemental"]}
+        self.assertEqual("maker-notices", supplemental_bucket(entry))
+        output = hub_html("supplemental", [entry], "2026-10-14")
+        self.assertIn("メーカー原典更新・再確認待ち", output)
+        self.assertIn("現在の厚労省区分：通常出荷", output)
+        for value in ("終了予定時期：", "2027-12", lifecycle["supply_end_note"], lifecycle["supply_end_packages"][0]):
+            self.assertNotIn(value, output)
+        entry["status"] = "ended"
+        self.assertEqual("sales-notices", supplemental_bucket(entry))
+
+    def test_partial_latest_collection_retains_last_complete_date_and_warns_with_attempt_date(self):
+        health = {"checked": "2026-10-08", "sources": [{"source": "parse_towa", "ok": True}],
+                  "last_attempt": {"checked": "2026-10-14", "status": "partial", "sources": [
+                      {"source": "parse_towa", "ok": False, "retained": True, "error": "timeout"}]}}
+        discrepancy = {"source": {"mhlw_note": "2026年10月14日", "manufacturer_checked_through": "2026-10-08"}}
+        context = supplemental_context(health, discrepancy, "2026-10-14")
+        self.assertEqual("2026-10-08", context["checked"])
+        self.assertFalse(context["trusted"])
+        self.assertIn("2026-10-14", context["warning"])
+        self.assertIn("東和薬品", context["warning"])
+        health["last_attempt"]["status"] = "success"
+        health["last_attempt"]["sources"][0]["ok"] = True
+        self.assertTrue(supplemental_context(health, discrepancy, "2026-10-14")["trusted"])
 
 
 if __name__ == "__main__":

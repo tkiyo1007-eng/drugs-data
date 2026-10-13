@@ -14,6 +14,7 @@ from pathlib import Path
 from urllib.parse import quote
 
 from jst_time import jst_today
+from generate_item_pages import load_manufacturer_notices, load_manufacturer_bulletins, lifecycle_for_display
 
 SITE_ROOT = "https://kyokyu-navi.jp/"
 APP_ID = "6777696446"
@@ -288,12 +289,15 @@ def product_rows_html(rows: list[dict[str, str]], generated_keys: set[str],
         status = map_status(row.get("供給状況"))
         label, color, bg, _ = STATUS[status]
         key = item_key(row)
-        future = lifecycle.get(key, {}).get("state") == "discontinuation_announced"
+        item_lifecycle = lifecycle.get(key, {})
+        future = item_lifecycle.get("state") == "discontinuation_announced" and not item_lifecycle.get('source_changed')
         badges = f'<span class="tag" style="color:{color};background:{bg}">{label}</span>'
         if is_delist(row):
             badges += '<span class="tag" style="color:#7A5E49;background:#F2EBE4">薬価削除予定</span>'
         if future:
             badges += '<span class="tag" style="color:#A03030;background:#FBE7E7">販売中止予定</span>'
+        if item_lifecycle.get('source_changed'):
+            badges += '<span class="tag" style="color:#9F5E11;background:#FCF0DF">メーカー原典更新・再確認待ち</span>'
         maker = (row.get("販売メーカー") or row.get("製造メーカー") or "").strip()
         spec = (row.get("規格") or "").strip()
         updated = (row.get("更新日") or "").replace("/", "-")
@@ -1189,6 +1193,9 @@ def main() -> int:
     lifecycle_path = site / "product_lifecycle.json"
     if lifecycle_path.exists():
         lifecycle = load_json(lifecycle_path).get("products") or {}
+    notices = load_manufacturer_notices(site / 'manufacturer_notices.json')
+    bulletins = load_manufacturer_bulletins(site / 'manufacturer_bulletins.json')
+    lifecycle = {key: lifecycle_for_display(value, notices, bulletins) for key, value in lifecycle.items()}
 
     topic_dir, product_dir, guide_dir = site / "topics", site / "products", site / "guides"
     topic_dir.mkdir(exist_ok=True)

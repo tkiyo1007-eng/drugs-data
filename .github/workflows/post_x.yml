@@ -52,7 +52,7 @@ jobs:
       - name: 投稿文を作成（変更記録がある日だけ）
         id: plan
         run: |
-          python3 scripts/x_daily_post.py build --out "$RUNNER_TEMP/x_post.json"
+          python3 scripts/x_daily_post.py build --manufacturer --out "$RUNNER_TEMP/x_post.json"
           echo "action=$(python3 -c "import json,sys;print('post' if any(p['action']=='post' for p in json.load(open(sys.argv[1]))['posts']) else 'skip')" "$RUNNER_TEMP/x_post.json")" >> "$GITHUB_OUTPUT"
       - name: リンク先の日別ページが公開済みか確認
         if: steps.plan.outputs.action == 'post'
@@ -105,7 +105,7 @@ jobs:
           X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
         run: python3 scripts/x_daily_post.py post --plan "$RUNNER_TEMP/x_post.json"
       - name: 投稿記録を保存（二重投稿の防止）
-        if: steps.mode.outputs.live == 'true'
+        if: always() && steps.mode.outputs.live == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
