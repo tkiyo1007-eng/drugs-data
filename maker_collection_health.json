@@ -130,7 +130,7 @@
     "source": "parse_kemifa",
     "ok": false,
     "count": 0,
-    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1129)>",
+    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1016)>",
     "retained": true,
     "retained_count": 79,
     "last_success": "2026-10-08"
@@ -166,7 +166,7 @@
   ],
   "total": 2369,
   "errors": [
-   "parse_kemifa: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1129)>"
+   "parse_kemifa: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1016)>"
   ]
  }
 }

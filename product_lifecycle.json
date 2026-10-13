@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-14T02:05:02+09:00",
+  "generated_at": "2026-10-14T05:18:21+09:00",
   "products": {
     "1124007F1143": {
       "product_name": "トリアゾラム錠０．１２５ｍｇ「ＣＨ」",
@@ -3234,11 +3234,11 @@
       "state": "discontinuation_announced",
       "announced_at": "2026-10",
       "supply_end_note": "予定時期欄は出荷停止中。販売中止日・月の記載はありません",
-      "supply_end_source_url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/HSP27Q003A_ProductWithdrawal2026.pdf",
-      "supply_end_verified_at": "2026-10-14",
       "supply_end_packages": [
         "No.12 20×60×7mm［1枚入(滅菌封入)×4袋］"
       ],
+      "supply_end_source_url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/HSP27Q003A_ProductWithdrawal2026.pdf",
+      "supply_end_verified_at": "2026-10-14",
       "source_title": "販売中止予定のご案内",
       "source_url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/HSP27Q003A_ProductWithdrawal2026.pdf",
       "verified_at": "2026-10-14"

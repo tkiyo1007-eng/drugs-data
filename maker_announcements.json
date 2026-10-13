@@ -6885,6 +6885,14 @@
   "target_products_verified": true,
   "target_scope": "seller_route"
  },
+ "ジクロフェナクＮａ錠２５ｍｇ「ＴＣＫ」": {
+  "maker": "日本ジェネリック",
+  "title": "2026/10/09 供給に関するお知らせ ジクロフェナクNa錠25mg「TCK」 取扱い中止のご案内を掲載いたしました",
+  "url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/DICLT_CHUUSHI_2610.pdf",
+  "event_type": "handling_discontinued",
+  "announced_at": "2026-10-09",
+  "checked": "2026-10-14"
+ },
  "ｄ－クロルフェニラミンマレイン酸塩錠２ｍｇ「ＮＩＧ」": {
   "maker": "日医工",
   "title": "d-クロルフェニラミンマレイン酸塩錠2mg「NIG」 供給状況に関するお知らせ",
@@ -7912,14 +7920,6 @@
   "title": "シクロスポリンカプセル50mg「日医工」 供給状況に関するお知らせ",
   "url": "https://www.nichiiko.co.jp/medicine/file/04490/information/20240417cI1.pdf",
   "event_type": "supply",
-  "checked": "2026-10-14"
- },
- "ジクロフェナクＮａ錠２５ｍｇ「ＴＣＫ」": {
-  "maker": "日本ジェネリック",
-  "title": "2026/10/09 供給に関するお知らせ ジクロフェナクNa錠25mg「TCK」 取扱い中止のご案内を掲載いたしました",
-  "url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/DICLT_CHUUSHI_2610.pdf",
-  "event_type": "handling_discontinued",
-  "announced_at": "2026-10-09",
   "checked": "2026-10-14"
  },
  "ジクロフェナクＮａ錠２５ｍｇ「ＮＩＧ」": {
