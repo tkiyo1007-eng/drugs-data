@@ -22,14 +22,13 @@ from validate_supply_data import ALLOWED_STATUSES, YJ_PATTERN, validate_csv as v
 from validate_product_lifecycle import load_csv, validate as validate_lifecycle
 from validate_supply_discrepancies import load_csv as load_discrepancy_csv, validate as validate_discrepancies
 from public_data_manifest import JSON_FILES, MANIFEST_NAME, PUBLIC_FILES, fingerprint, validate_manifest
+from mhlw_supply_source import MHLW_SUPPLY_PAGE, supply_source_from_page
 
 
 BASE_URL = "https://raw.githubusercontent.com/tkiyo1007-eng/drugs-data/main/"
 PAGES_URL = "https://kyokyu-navi.jp/"
 MAX_JSON_BYTES = 20 * 1024 * 1024
 MAX_CSV_BYTES = 30 * 1024 * 1024
-MHLW_SUPPLY_PAGE = "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html"
-MHLW_FILE_RE = re.compile(r'href="([^"]*?(\d{6})iyakuhinkyoukyu\.xlsx)"')
 MHLW_SOURCE_NAME = "mhlw_source.json"
 SUPPORTING_FILES = JSON_FILES
 NOTE_DATE_RE = re.compile(r"(\d{4})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日")
@@ -250,11 +249,12 @@ def check_mhlw_ingest(now: dt.datetime, version: object = None) -> tuple[list[st
         page = fetch(MHLW_SUPPLY_PAGE, 5 * 1024 * 1024).decode("utf-8", "replace")
     except (OSError, ValueError, RuntimeError, urllib.error.URLError) as error:
         return errors, [f"厚労省の供給状況ページを確認できません（最新Excelとの比較を省略）: {error}"], []
-    stamps = [(mhlw_file_date(match.group(2)), match.group(1)) for match in MHLW_FILE_RE.finditer(page)]
-    stamps = [(date, href) for date, href in stamps if date]
-    if not stamps:
-        return errors, ["厚労省ページのExcelファイル名から日付を判定できません（形式変更の可能性。最新Excelとの比較を省略）"], []
-    latest_date, latest_href = max(stamps)
+    try:
+        latest = supply_source_from_page(page, now.date())
+        latest_date = dt.date.fromisoformat(latest["excel_date"])
+        latest_href = latest["url"]
+    except ValueError as error:
+        return errors, [f"厚労省ページのExcelと公表基準日を確認できません（形式変更の可能性。最新Excelとの比較を省略）: {error}"], []
     result = f"厚労省最新Excel {latest_date.isoformat()} / 取り込み済み {ingested.isoformat()}"
     deadline = mhlw_ingest_deadline(latest_date)
     if latest_date > ingested and now >= deadline:
