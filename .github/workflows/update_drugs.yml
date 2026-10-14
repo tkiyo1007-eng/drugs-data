@@ -33,9 +33,9 @@ jobs:
           import requests, json, hashlib
           from scripts.jst_time import jst_today
           from scripts.mhlw_supply_source import MHLW_SUPPLY_PAGE, decode_supply_page, supply_source_from_page
-          today = jst_today()
           r = requests.get(MHLW_SUPPLY_PAGE, timeout=30)
           body = r.content
+          today = jst_today()
           print(json.dumps({
               "phase": "mhlw_supply_page", "url": MHLW_SUPPLY_PAGE,
               "checked_jst": today.isoformat(), "http_status": r.status_code,

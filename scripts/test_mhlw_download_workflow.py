@@ -16,7 +16,8 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class MhlwDownloadWorkflowTests(unittest.TestCase):
-    def run_download(self, page, *, page_encoding="utf-8", content_type="text/html; charset=UTF-8"):
+    def run_download(self, page, *, page_encoding="utf-8", content_type="text/html; charset=UTF-8",
+                     received_day=None):
         # 実際の日次stepを実行し、公式ページとworkbookのネットワーク境界だけを置換。
         workflow = (ROOT / ".github/workflows/update_drugs.yml").read_text()
         step = workflow.split("name: 供給状況Excel ダウンロード（厚労省ページからリンク取得）", 1)[1]
@@ -29,14 +30,20 @@ class MhlwDownloadWorkflowTests(unittest.TestCase):
                 encoding=encoding, headers={"Content-Type": mime}, status_code=200,
                 raise_for_status=lambda: None)
         body = page if isinstance(page, bytes) else page.encode()
-        requests.get = mock.Mock(side_effect=[response(body, page_encoding, content_type), response(payload)])
+        clock = [dt.date(2026, 10, 14)]
+        responses = [response(body, page_encoding, content_type), response(payload)]
+        def get(url, timeout):
+            if url == MHLW_SUPPLY_PAGE and received_day:
+                clock[0] = received_day
+            return responses.pop(0)
+        requests.get = mock.Mock(side_effect=get)
         output = io.StringIO()
         with tempfile.TemporaryDirectory() as folder:
             previous = Path.cwd()
             try:
                 os.chdir(folder)
                 with mock.patch.dict(sys.modules, {"requests": requests}), \
-                        mock.patch("scripts.jst_time.jst_today", return_value=dt.date(2026, 10, 14)), \
+                        mock.patch("scripts.jst_time.jst_today", side_effect=lambda: clock[0]), \
                         contextlib.redirect_stdout(output):
                     try:
                         exec(compile(program, "<actual-download-workflow>", "exec"), {})
@@ -94,6 +101,20 @@ class MhlwDownloadWorkflowTests(unittest.TestCase):
         diagnostic = json.loads(self.last_output.splitlines()[0])
         self.assertEqual(diagnostic["phase"], "mhlw_supply_page")
         self.assertEqual(diagnostic["bytes"], len(page))
+
+    def test_midnight_response_uses_receipt_day_and_still_rejects_tomorrows_source(self):
+        page = '<a href="/content/10800000/001758803.xlsx">医療用医薬品供給状況（令和８年10月15日現在）</a>'
+        record, calls, _, error = self.run_download(page, received_day=dt.date(2026, 10, 15))
+        self.assertIsNone(error)
+        self.assertEqual(record["excel_date"], "2026-10-15")
+        self.assertEqual(len(calls), 2)
+        self.assertEqual(json.loads(self.last_output.splitlines()[0])["checked_jst"], "2026-10-15")
+        record, calls, files, error = self.run_download(page.replace("10月15日", "10月16日"),
+                                                       received_day=dt.date(2026, 10, 15))
+        self.assertIsNone(record)
+        self.assertIn("未来", error)
+        self.assertEqual(len(calls), 1)
+        self.assertEqual(files, [])
 
 
 if __name__ == "__main__":
