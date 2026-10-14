@@ -16,6 +16,16 @@ CURRENT_LABEL = re.compile(
 )
 
 
+def decode_supply_page(body: bytes) -> str:
+    """UTF-8を明示する厚労省原ページを、推定や破損文字の置換なしで読む。"""
+    if not isinstance(body, bytes) or not body:
+        raise ValueError("厚労省ページの本文バイトを確認できません")
+    try:
+        return body.decode("utf-8-sig", errors="strict")
+    except UnicodeDecodeError as error:
+        raise ValueError("厚労省ページのUTF-8本文を解読できません") from error
+
+
 def workbook_url(href: str) -> str:
     """公式content配下の既知のExcel名だけ許可し、URL補正で不正経路を隠さない。"""
     if not isinstance(href, str) or not href or re.search(r"\s|[\\\x00-\x1f\x7f]", href):

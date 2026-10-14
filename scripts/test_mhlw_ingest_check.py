@@ -86,9 +86,15 @@ class MhlwIngestCheckTests(unittest.TestCase):
         errors, warnings, _ = self.run_check([], page_error=urllib.error.URLError("timeout"))
         self.assertEqual([], errors)
         self.assertTrue(warnings)
-        errors, warnings, _ = self.run_check([])
+        errors, warnings, _ = self.run_check(["renamed"])
         self.assertEqual([], errors)
         self.assertTrue(any("形式変更" in warning for warning in warnings))
+
+    def test_empty_upstream_body_is_unavailable_not_a_healthy_match(self):
+        errors, warnings, results = self.run_check([])
+        self.assertEqual(errors, [])
+        self.assertTrue(any("本文バイト" in value and "比較を省略" in value for value in warnings))
+        self.assertEqual(results, [])
 
     def test_missing_or_broken_source_record_is_an_error(self):
         errors, _, _ = self.run_check(["260925"], source=b"{}")
@@ -103,7 +109,8 @@ class MhlwIngestCheckTests(unittest.TestCase):
         self.assertIsNotNone(recorded_date)
         self.assertEqual(recorded_date, record["excel_date"])
         self.assertEqual(workbook_url(record["url"]), record["url"])
-        self.assertIn("supply_source_from_page(r.text, jst_today())", workflow)
+        self.assertIn("today = jst_today()", workflow)
+        self.assertIn("supply_source_from_page(decode_supply_page(body), today)", workflow)
 
     def test_numeric_filename_uses_anchor_date_and_detects_missing_ingestion(self):
         page = '<a href="/content/10800000/001758803.xlsx">医療用医薬品供給状況（令和８年10月13日現在）</a>'
@@ -114,6 +121,16 @@ class MhlwIngestCheckTests(unittest.TestCase):
         self.assertEqual(warnings, [])
         self.assertTrue(any("2026-10-13版" in value for value in errors))
         self.assertTrue(any("2026-10-13" in value for value in results))
+
+    def test_corrupted_utf8_is_an_unavailable_check_not_a_healthy_match(self):
+        body = PAGE.format("260925").encode() + b"\xff"
+        def fetch(url, _limit):
+            return body if url == health.MHLW_SUPPLY_PAGE else json.dumps({"excel_date": "2026-09-25"}).encode()
+        with mock.patch.object(health, "fetch", side_effect=fetch):
+            errors, warnings, results = health.check_mhlw_ingest(dt.datetime(2026, 9, 26, 7, 15, tzinfo=JST))
+        self.assertEqual(errors, [])
+        self.assertTrue(any("UTF-8" in value and "比較を省略" in value for value in warnings))
+        self.assertEqual(results, [])
 
 
 if __name__ == "__main__":

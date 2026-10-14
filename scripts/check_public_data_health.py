@@ -22,7 +22,7 @@ from validate_supply_data import ALLOWED_STATUSES, YJ_PATTERN, validate_csv as v
 from validate_product_lifecycle import load_csv, validate as validate_lifecycle
 from validate_supply_discrepancies import load_csv as load_discrepancy_csv, validate as validate_discrepancies
 from public_data_manifest import JSON_FILES, MANIFEST_NAME, PUBLIC_FILES, fingerprint, validate_manifest
-from mhlw_supply_source import MHLW_SUPPLY_PAGE, supply_source_from_page
+from mhlw_supply_source import MHLW_SUPPLY_PAGE, decode_supply_page, supply_source_from_page
 
 
 BASE_URL = "https://raw.githubusercontent.com/tkiyo1007-eng/drugs-data/main/"
@@ -246,7 +246,7 @@ def check_mhlw_ingest(now: dt.datetime, version: object = None) -> tuple[list[st
         if version["mhlw_excel_date"] != ingested.isoformat():
             errors.append("version.json: mhlw_excel_date とコア公開したmhlw_source.jsonの基準日が一致しません")
     try:
-        page = fetch(MHLW_SUPPLY_PAGE, 5 * 1024 * 1024).decode("utf-8", "replace")
+        page = decode_supply_page(fetch(MHLW_SUPPLY_PAGE, 5 * 1024 * 1024))
     except (OSError, ValueError, RuntimeError, urllib.error.URLError) as error:
         return errors, [f"厚労省の供給状況ページを確認できません（最新Excelとの比較を省略）: {error}"], []
     try:
