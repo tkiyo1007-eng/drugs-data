@@ -1680,12 +1680,6 @@ footer a:hover{color:var(--blue)}
 <section id="topics" class="reveal">
   <p class="sec-eyebrow">TOPICS</p>
   <h2>医薬品ニュース</h2>
-  <div class="mednews" id="manufacturerNews">
-    <h3>メーカー公式の供給・回収案内</h3>
-    <p class="sec-lede">原典を確認した案内です。現在の厚労省区分とは分けて、対象の規格・包装、理由、メーカーが示す参考候補を確認できます。</p>
-    <p class="news-status" id="manufacturerStatus" role="status" aria-live="polite">メーカー案内を読み込んでいます。</p>
-    <div class="topic-list" id="manufacturerList"></div>
-  </div>
   <div class="mednews" id="medNews">
     <h3>薬事日報の新着見出し</h3>
     <p class="sec-lede">業界ニュースの見出しを自動取得しています。本文はリンク先の薬事日報でご確認ください。供給区分はニュースから変更せず、検索とメーカー原典で確認できます。</p>
@@ -3591,8 +3585,6 @@ function legacySupplementalFor(map, d){
 let MANUFACTURER_NOTICES = [];
 let MANUFACTURER_NOTICES_STATE = "loading";
 let MANUFACTURER_BULLETINS = null;
-let MANUFACTURER_BULLETINS_FAILED = false;
-let MANUFACTURER_BULLETINS_CACHED = false;
 function manufacturerSourceURL(value){
   try{
     const url = new URL(value);
@@ -3662,22 +3654,6 @@ function manufacturerNoticeHTML(notice, target=null, yj=""){
     + `<ul>${notice.cautions.map(s=>`<li>${esc(s)}</li>`).join("")}</ul>`
     + `<p>候補の入手可否や変更の適否を保証するものではありません。電子添文を確認し、医師・薬剤師等が判断してください。</p>`
     + `<a class="maker-link" href="${esc(manufacturerSourceURL(notice.url))}" target="_blank" rel="noopener" data-dsn-event="official-source-open">${esc(notice.maker)}の原典を確認</a></section>`;
-}
-function renderManufacturerNews(){
-  const node = document.getElementById("manufacturerList");
-  const status = document.getElementById("manufacturerStatus");
-  const bulletins = MANUFACTURER_BULLETINS;
-  const current = MANUFACTURER_NOTICES.filter(n=>!manufacturerNoticeChanged(n));
-  node.innerHTML = current.map(n=>`<details class="topic-card glass"><summary>${esc(n.title)}</summary>${manufacturerNoticeHTML(n)}</details>`).join("");
-  const pending = bulletins ? bulletins.items.filter(i=>i.review_status !== "confirmed" && manufacturerSourceURL(i.url)).slice(0,12) : [];
-  if(pending.length){
-    node.insertAdjacentHTML("beforeend", `<details class="topic-card glass"><summary>新しく検出した公式案内（品目照合前）</summary><p>掲載先の見出しとリンクです。理由・対象規格・供給区分は原典確認後に反映します。</p><ul>${pending.map(i=>`<li>${esc(i.maker)}／掲載日：${esc(i.posted_at || "記載なし")} <a href="${esc(manufacturerSourceURL(i.url))}" target="_blank" rel="noopener">${esc(i.title)}</a></li>`).join("")}</ul></details>`);
-  }
-  status.textContent = (MANUFACTURER_NOTICES_STATE === "loaded" ? `${current.length}件の原典確認済み案内を掲載。`
-    : MANUFACTURER_NOTICES_STATE === "failed" ? "原典確認済み案内を取得できません。取得失敗は案内がないことを意味しません。" : "原典確認済み案内を読み込んでいます。")
-    + (bulletins ? `速報収集試行：${bulletins.checked_at || "確認できません"}。`
-      + (bulletins.status !== "ok" || MANUFACTURER_BULLETINS_CACHED ? "一部の取得先を確認できない、または前回キャッシュを表示しています。新しい案内がないとは判断しません。" : "登録した取得先の見出しを確認しました。全製薬会社を網羅するものではありません。")
-      : MANUFACTURER_BULLETINS_FAILED ? "速報の収集状態を取得できません。新しい案内がないとは判断しません。" : "速報の収集状態を確認中です。");
 }
 function findAnnouncement(d){
   const lifecycle = lifecycleAnnouncement(d);
@@ -3811,19 +3787,15 @@ function loadSupplementalData(){
         if(data.notices.some(n=>!validManufacturerNotice(n))) throw new Error("invalid notice");
         MANUFACTURER_NOTICES = data.notices;
         MANUFACTURER_NOTICES_STATE = "loaded";
-        renderManufacturerNews();
       }).catch(()=>{
         MANUFACTURER_NOTICES_STATE = "failed";
-        renderManufacturerNews();
       }),
     fetchFirst(["manufacturer_bulletins.json", "https://kyokyu-navi.jp/manufacturer_bulletins.json"])
-      .then(res => { if(!res) throw new Error("missing bulletins"); const cached=responseUsesCachedData(res); return res.json().then(data=>({data,cached})); })
-      .then(({data,cached}) => {
+      .then(res => { if(!res) throw new Error("missing bulletins"); return res.json(); })
+      .then(data => {
         if(!validManufacturerBulletins(data)) throw new Error("invalid bulletins");
         MANUFACTURER_BULLETINS = data;
-        MANUFACTURER_BULLETINS_CACHED = cached;
-        renderManufacturerNews();
-      }).catch(()=>{ MANUFACTURER_BULLETINS_FAILED = true; renderManufacturerNews(); }),
+      }).catch(()=>{}),
     fetchFirst(["announcement_packages.json", "https://kyokyu-navi.jp/announcement_packages.json"])
       .then(res => res && res.json()).then(data => { if(data) PACKAGES = data; }).catch(()=>{}),
     fetchFirst(["resolution_stats.json", "https://kyokyu-navi.jp/resolution_stats.json"])
