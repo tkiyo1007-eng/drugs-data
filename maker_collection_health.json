@@ -1,172 +1,168 @@
 {
- "checked": "2026-10-08",
+ "checked": "2026-10-15",
  "sources": [
   {
    "source": "parse_sawai",
    "ok": true,
    "count": 20,
    "error": "",
-   "last_success": "2026-10-14"
+   "last_success": "2026-10-15"
   },
   {
    "source": "parse_nichiiko",
    "ok": true,
    "count": 9,
    "error": "",
-   "last_success": "2026-10-14"
+   "last_success": "2026-10-15"
   },
   {
    "source": "parse_nichiiko_excel",
    "ok": true,
    "count": 506,
    "error": "",
-   "last_success": "2026-10-14"
+   "last_success": "2026-10-15"
   },
   {
    "source": "parse_nihon_generic",
    "ok": true,
    "count": 86,
    "error": "",
-   "last_success": "2026-10-14"
+   "last_success": "2026-10-15"
   },
   {
    "source": "parse_kyorin",
    "ok": true,
    "count": 1,
    "error": "",
-   "last_success": "2026-10-14"
+   "last_success": "2026-10-15"
   },
   {
    "source": "parse_dsep",
    "ok": true,
    "count": 1283,
    "error": "",
-   "last_success": "2026-10-14"
+   "last_success": "2026-10-15"
   },
   {
    "source": "parse_kemifa",
    "ok": true,
    "count": 79,
    "error": "",
-   "last_success": "2026-10-08"
+   "last_success": "2026-10-15"
   },
   {
    "source": "parse_towa",
    "ok": true,
    "count": 39,
    "error": "",
-   "last_success": "2026-10-14"
+   "last_success": "2026-10-15"
   },
   {
    "source": "parse_takata",
    "ok": true,
    "count": 278,
    "error": "",
-   "last_success": "2026-10-14"
+   "last_success": "2026-10-15"
   },
   {
    "source": "parse_hisamitsu",
    "ok": true,
    "count": 67,
    "error": "",
-   "last_success": "2026-10-14"
+   "last_success": "2026-10-15"
   },
   {
    "source": "parse_nipro",
    "ok": true,
    "count": 80,
    "error": "",
-   "last_success": "2026-10-14"
+   "last_success": "2026-10-15"
   }
  ],
  "total": 2448,
  "last_attempt": {
-  "checked": "2026-10-14",
-  "status": "partial",
+  "checked": "2026-10-15",
+  "status": "success",
   "sources": [
    {
     "source": "parse_sawai",
     "ok": true,
     "count": 20,
     "error": "",
-    "last_success": "2026-10-14"
+    "last_success": "2026-10-15"
    },
    {
     "source": "parse_nichiiko",
     "ok": true,
     "count": 9,
     "error": "",
-    "last_success": "2026-10-14"
+    "last_success": "2026-10-15"
    },
    {
     "source": "parse_nichiiko_excel",
     "ok": true,
     "count": 506,
     "error": "",
-    "last_success": "2026-10-14"
+    "last_success": "2026-10-15"
    },
    {
     "source": "parse_nihon_generic",
     "ok": true,
     "count": 86,
     "error": "",
-    "last_success": "2026-10-14"
+    "last_success": "2026-10-15"
    },
    {
     "source": "parse_kyorin",
     "ok": true,
     "count": 1,
     "error": "",
-    "last_success": "2026-10-14"
+    "last_success": "2026-10-15"
    },
    {
     "source": "parse_dsep",
     "ok": true,
     "count": 1283,
     "error": "",
-    "last_success": "2026-10-14"
+    "last_success": "2026-10-15"
    },
    {
     "source": "parse_kemifa",
-    "ok": false,
-    "count": 0,
-    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1016)>",
-    "retained": true,
-    "retained_count": 79,
-    "last_success": "2026-10-08"
+    "ok": true,
+    "count": 79,
+    "error": "",
+    "last_success": "2026-10-15"
    },
    {
     "source": "parse_towa",
     "ok": true,
     "count": 39,
     "error": "",
-    "last_success": "2026-10-14"
+    "last_success": "2026-10-15"
    },
    {
     "source": "parse_takata",
     "ok": true,
     "count": 278,
     "error": "",
-    "last_success": "2026-10-14"
+    "last_success": "2026-10-15"
    },
    {
     "source": "parse_hisamitsu",
     "ok": true,
     "count": 67,
     "error": "",
-    "last_success": "2026-10-14"
+    "last_success": "2026-10-15"
    },
    {
     "source": "parse_nipro",
     "ok": true,
     "count": 80,
     "error": "",
-    "last_success": "2026-10-14"
+    "last_success": "2026-10-15"
    }
   ],
-  "total": 2369,
-  "errors": [
-   "parse_kemifa: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1016)>"
-  ]
+  "total": 2448,
+  "errors": []
  }
 }

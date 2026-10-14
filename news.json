@@ -1,5 +1,23 @@
 [
  {
+  "date": "2026/10/14",
+  "title": "プログラム医療機器のページを更新（「生成AIを活用した医療機器の審査ポイント(Draft)」の英訳を公開、対面助言調整可能時期の更新）しました。",
+  "url": "https://www.pmda.go.jp/review-services/drug-reviews/about-reviews/devices/0048.html",
+  "tag": "承認審査"
+ },
+ {
+  "date": "2026/10/14",
+  "title": "「バイオ後続品」のページを更新しました",
+  "url": "https://www.pmda.go.jp/review-services/drug-reviews/about-reviews/p-drugs/0034.html",
+  "tag": "承認審査"
+ },
+ {
+  "date": "2026/10/14",
+  "title": "未承認薬データベースを更新しました",
+  "url": "https://www.pmda.go.jp/review-services/drug-reviews/review-information/p-drugs/0013.html",
+  "tag": "承認審査"
+ },
+ {
   "date": "2026/10/13",
   "title": "「ヘパリン類似物質ローション0.3％「NIT」ニトロソアミン化合物検出及び自主回収（クラスⅡ）に関するお知らせ」を掲載しました",
   "url": "https://www.pmda.go.jp/safety/info-services/drugs/0371.html",
@@ -36,27 +54,9 @@
   "tag": "承認審査"
  },
  {
-  "date": "2026/10/07",
-  "title": "未承認薬データベースを更新しました",
-  "url": "https://www.pmda.go.jp/review-services/drug-reviews/review-information/p-drugs/0013.html",
-  "tag": "承認審査"
- },
- {
   "date": "2026/10/06",
   "title": "外国製造業者認定・登録番号を掲載しました",
   "url": "https://www.pmda.go.jp/review-services/drug-reviews/foreign-mfr/0003.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/10/06",
-  "title": "[イベント]Early Consideration「少数例臨床試験に関する留意事項」説明会の資料を掲載しました",
-  "url": "https://www.pmda.go.jp/review-services/symposia/0207.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/10/05",
-  "title": "年末年始の治験計画届等の提出に関するお願いを掲載しました",
-  "url": "https://www.pmda.go.jp/review-services/trials/0021.html",
   "tag": "承認審査"
  }
 ]
