@@ -3,9 +3,33 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-10-14T05:14:23+09:00",
-  "last_success_at": "2026-10-14T05:14:23+09:00",
+  "checked_at": "2026-10-15T00:17:49+09:00",
+  "last_success_at": "2026-10-15T00:17:49+09:00",
   "items": [
+    {
+      "title": "【GE薬協】見直し求める意見書発表‐医薬品特許期間延長制度",
+      "url": "https://www.yakuji.co.jp/entry140437.html",
+      "date": "2026-10-14",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【がんセ東病院 土井院長】日本で早期臨床試験体制‐新興バイオの開発に対応",
+      "url": "https://www.yakuji.co.jp/entry140434.html",
+      "date": "2026-10-14",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "ノーベル化学賞に硤合氏ら‐不斉合成の自己触媒反応発見",
+      "url": "https://www.yakuji.co.jp/entry140432.html",
+      "date": "2026-10-14",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "獣医療、日薬は大動物から‐12薬局は他業種と連携",
+      "url": "https://www.yakuji.co.jp/entry140431.html",
+      "date": "2026-10-14",
+      "tag": "業界ニュース"
+    },
     {
       "title": "【エーザイ／米メルク】腎細胞癌で米承認取得‐レンビマ、ウェリレグ併用療法",
       "url": "https://www.yakuji.co.jp/entry140299.html",
@@ -16,30 +40,6 @@
       "title": "【大塚製薬】実行機能障害など改善‐新規ADHD薬の追加解析",
       "url": "https://www.yakuji.co.jp/entry140298.html",
       "date": "2026-10-13",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "OTCの知識や使い方発信‐一般薬連など、普及啓発イベント開催",
-      "url": "https://www.yakuji.co.jp/entry140296.html",
-      "date": "2026-10-13",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【GE薬協 川俣会長】需要急増、増産追いつかず‐数量シェア拡大に貢献も",
-      "url": "https://www.yakuji.co.jp/entry140291.html",
-      "date": "2026-10-13",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【大阪府薬】零売巡り新区分を提言‐薬剤師の対面評価前提",
-      "url": "https://www.yakuji.co.jp/entry140287.html",
-      "date": "2026-10-09",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【日病薬】キャリアマップを策定へ‐薬剤師が描く将来像支援",
-      "url": "https://www.yakuji.co.jp/entry140282.html",
-      "date": "2026-10-09",
       "tag": "業界ニュース"
     }
   ]
