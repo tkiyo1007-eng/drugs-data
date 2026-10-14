@@ -30,15 +30,12 @@ jobs:
       - name: 供給状況Excel ダウンロード（厚労省ページからリンク取得）
         run: |
           python3 - <<'EOF'
-          import requests, re
-          PAGE = "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html"
-          r = requests.get(PAGE, timeout=30); r.raise_for_status()
-          m = re.search(r'href="([^"]+\.xlsx)"', r.text)
-          if not m:
-              print("❌ ページ内にxlsxリンクが見つかりません"); exit(1)
-          href = m.group(1)
-          if href.startswith("/"):
-              href = "https://www.mhlw.go.jp" + href
+          import requests, json
+          from scripts.jst_time import jst_today
+          from scripts.mhlw_supply_source import MHLW_SUPPLY_PAGE, supply_source_from_page
+          r = requests.get(MHLW_SUPPLY_PAGE, timeout=30); r.raise_for_status()
+          source = supply_source_from_page(r.text, jst_today())
+          href = source["url"]
           print(f"取得URL: {href}")
           r2 = requests.get(href, timeout=60); r2.raise_for_status()
           with open("supply_latest.xlsx", "wb") as f:
@@ -46,15 +43,10 @@ jobs:
           print(f"✅ ダウンロード成功: {len(r2.content)} bytes")
           # 取り込んだ厚労省ファイルを記録する。コア公開と同じcommitに含めるため、後段で
           # 失敗すると記録は前回のまま残り、公開データ健全性監視が未反映を検出できる。
-          import datetime, json
-          name = href.rsplit("/", 1)[-1]
-          stamp = re.match(r"(\d{6})iyakuhinkyoukyu\.xlsx$", name)
-          excel_date = (datetime.date(2000 + int(stamp.group(1)[:2]), int(stamp.group(1)[2:4]),
-                                      int(stamp.group(1)[4:6])).isoformat() if stamp else None)
           with open("mhlw_source.json", "w", encoding="utf-8") as f:
-              json.dump({"file": name, "url": href, "excel_date": excel_date}, f, ensure_ascii=False, indent=2)
+              json.dump(source, f, ensure_ascii=False, indent=2)
               f.write("\n")
-          print(f"取り込み対象: {name}（{excel_date or '日付を判定できません'}）")
+          print(f"取り込み対象: {source['file']}（{source['excel_date']}）")
           EOF
 
       - name: 前日CSVを退避（供給状況の変化ログ用）

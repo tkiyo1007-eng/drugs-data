@@ -7,6 +7,8 @@ from unittest import mock
 
 import check_public_data_health as health
 from jst_time import JST
+from mhlw_source_date import source_excel_date
+from mhlw_supply_source import workbook_url
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGE = '<a href="/content/10800000/{}iyakuhinkyoukyu.xlsx">供給状況</a>'
@@ -38,7 +40,8 @@ class MhlwIngestCheckTests(unittest.TestCase):
         self.assertTrue(any("mhlw_source.json" in error for error in errors))
 
     def test_detects_published_file_not_ingested_after_a_day(self):
-        errors, warnings, _ = self.run_check(["260918", "260925"])
+        # 複数URLは共通parserで曖昧として拒否する。ここでは一意な最新版の遅延を検査。
+        errors, warnings, _ = self.run_check(["260925"])
         self.assertEqual(1, len(errors))
         self.assertIn("2026-09-25版", errors[0])
         self.assertIn("2026-09-18版のまま", errors[0])
@@ -61,16 +64,16 @@ class MhlwIngestCheckTests(unittest.TestCase):
     def test_waits_for_delayed_daily_update_after_midnight(self):
         # 2026-09-29 1:07、日次更新（23:10予約・実行は3時頃）より前の公開後監視が誤検知した
         errors, warnings, _ = self.run_check(
-            ["260925", "260928"], ingested="2026-09-25", now=dt.datetime(2026, 9, 29, 1, 7, tzinfo=JST))
+            ["260928"], ingested="2026-09-25", now=dt.datetime(2026, 9, 29, 1, 7, tzinfo=JST))
         self.assertEqual([], errors)
         self.assertTrue(any("日次更新の実行待ち" in warning for warning in warnings))
         errors, _, _ = self.run_check(
-            ["260925", "260928"], ingested="2026-09-25", now=dt.datetime(2026, 9, 29, 5, 59, tzinfo=JST))
+            ["260928"], ingested="2026-09-25", now=dt.datetime(2026, 9, 29, 5, 59, tzinfo=JST))
         self.assertEqual([], errors)
 
     def test_scheduled_morning_monitor_detects_failed_daily_update(self):
         errors, _, _ = self.run_check(
-            ["260925", "260928"], ingested="2026-09-25", now=dt.datetime(2026, 9, 29, 7, 15, tzinfo=JST))
+            ["260928"], ingested="2026-09-25", now=dt.datetime(2026, 9, 29, 7, 15, tzinfo=JST))
         self.assertEqual(1, len(errors))
         self.assertIn("2026-09-28版", errors[0])
 
@@ -96,8 +99,21 @@ class MhlwIngestCheckTests(unittest.TestCase):
         self.assertIn('with open("mhlw_source.json", "w"', workflow)
         self.assertIn("sitemap-curated.xml mhlw_source.json maker_announcements.json", workflow)
         record = json.loads((ROOT / "mhlw_source.json").read_text(encoding="utf-8"))
-        self.assertRegex(record["file"], r"^\d{6}iyakuhinkyoukyu\.xlsx$")
-        self.assertEqual(health.mhlw_file_date(record["file"][:6]).isoformat(), record["excel_date"])
+        recorded_date = source_excel_date(record, health.jst_today())
+        self.assertIsNotNone(recorded_date)
+        self.assertEqual(recorded_date, record["excel_date"])
+        self.assertEqual(workbook_url(record["url"]), record["url"])
+        self.assertIn("supply_source_from_page(r.text, jst_today())", workflow)
+
+    def test_numeric_filename_uses_anchor_date_and_detects_missing_ingestion(self):
+        page = '<a href="/content/10800000/001758803.xlsx">医療用医薬品供給状況（令和８年10月13日現在）</a>'
+        def fetch(url, _limit):
+            return (page.encode() if url == health.MHLW_SUPPLY_PAGE else json.dumps({"excel_date": "2026-10-08"}).encode())
+        with mock.patch.object(health, "fetch", side_effect=fetch):
+            errors, warnings, results = health.check_mhlw_ingest(dt.datetime(2026, 10, 14, 7, 15, tzinfo=JST))
+        self.assertEqual(warnings, [])
+        self.assertTrue(any("2026-10-13版" in value for value in errors))
+        self.assertTrue(any("2026-10-13" in value for value in results))
 
 
 if __name__ == "__main__":
