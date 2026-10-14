@@ -30,11 +30,21 @@ jobs:
       - name: 供給状況Excel ダウンロード（厚労省ページからリンク取得）
         run: |
           python3 - <<'EOF'
-          import requests, json
+          import requests, json, hashlib
           from scripts.jst_time import jst_today
-          from scripts.mhlw_supply_source import MHLW_SUPPLY_PAGE, supply_source_from_page
-          r = requests.get(MHLW_SUPPLY_PAGE, timeout=30); r.raise_for_status()
-          source = supply_source_from_page(r.text, jst_today())
+          from scripts.mhlw_supply_source import MHLW_SUPPLY_PAGE, decode_supply_page, supply_source_from_page
+          today = jst_today()
+          r = requests.get(MHLW_SUPPLY_PAGE, timeout=30)
+          body = r.content
+          print(json.dumps({
+              "phase": "mhlw_supply_page", "url": MHLW_SUPPLY_PAGE,
+              "checked_jst": today.isoformat(), "http_status": r.status_code,
+              "content_type": r.headers.get("Content-Type", "")[:256],
+              "requests_encoding": r.encoding, "bytes": len(body),
+              "sha256": hashlib.sha256(body).hexdigest(), "decoder": "utf-8-sig strict",
+          }, ensure_ascii=False), flush=True)
+          r.raise_for_status()
+          source = supply_source_from_page(decode_supply_page(body), today)
           href = source["url"]
           print(f"取得URL: {href}")
           r2 = requests.get(href, timeout=60); r2.raise_for_status()
