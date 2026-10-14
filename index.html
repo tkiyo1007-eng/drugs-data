@@ -895,6 +895,10 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .maker-link::after{content:"↗";font-size:14px;flex:none}
 #mItemLink::after{content:"→"} /* 同一サイト内リンクなので外部リンク記号は使わない */
 .maker-link[hidden]{display:none}
+.search-results-jump{display:block;margin-top:10px;min-height:44px;padding:10px 18px;border:0;border-radius:12px;background:#2250cf;color:#fff;font:inherit;font-size:13px;font-weight:800;cursor:pointer}
+.search-results-jump[hidden]{display:none}
+.search-results-jump:focus-visible{outline:2px solid var(--blue-deep);outline-offset:3px}
+@media(max-width:640px){.search-results-jump{width:100%}}
 .pkg-box{margin-top:12px;padding:13px 16px;border-radius:14px;background:rgba(232,145,47,.07);border:1px solid rgba(232,145,47,.2)}
 .pkg-box[hidden]{display:none}
 .pkg-box .pkg-title{font-size:11.5px;font-weight:800;color:#B0500E;margin-bottom:8px}
@@ -1493,6 +1497,7 @@ footer a:hover{color:var(--blue)}
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       <input id="q" type="search" placeholder="薬品名・成分名・メーカー名・YJコードで検索" aria-label="薬品名・成分名・メーカー名・YJコードで検索" aria-describedby="searchHelp" autocomplete="off">
     </div>
+    <button type="button" class="search-results-jump" id="searchResultsJump" aria-controls="meta list" hidden disabled>検索結果を見る</button>
     <p class="search-help" id="searchHelp">メーカー名・YJコードにも対応。複数語は空白で区切ると、すべてを含む品目に絞り込みます。</p>
     <p class="search-help" id="searchIntentHelp">限定出荷・供給停止は厚労省の公表区分を一覧で確認できます。販売中止・製造中止はメーカー案内、薬価削除・経過措置は厚労省の薬価資料で確認し、現在の出荷対応と分けて扱います。</p>
     <nav class="supply-entry-links" aria-label="供給状況と終了情報の一覧・調べ方">
@@ -2423,7 +2428,6 @@ footer a:hover{color:var(--blue)}
     <p class="data-load-error" id="mStorageSaveError" role="alert" hidden></p>
     <h3 id="mTitle">品目詳細</h3>
     <p class="modal-maker" id="mMaker"></p>
-    <div class="modal-note" id="mSupplyReference" hidden></div>
     <div class="modal-note" id="mDataProvenance" role="group" aria-labelledby="mDataProvenanceTitle">
       <h4 id="mDataProvenanceTitle">供給区分の出典・日付</h4>
       <p id="mSourceDate">厚労省の原Excel基準日：確認できません</p>
@@ -2434,6 +2438,8 @@ footer a:hover{color:var(--blue)}
       <p>公式の一般検索画面で、品目名またはYJコードを入力して確認します。</p>
       <a class="maker-link" id="mSupplyDefinition" href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html" target="_blank" rel="noopener" data-dsn-event="official-source-open">供給区分・出荷量の定義（厚生労働省）</a>
     </div>
+    <dl class="detail-grid" id="mGrid"></dl>
+    <div class="modal-note" id="mSupplyReference" hidden></div>
     <section class="alternatives-box" id="mAlternatives" aria-labelledby="mAlternativesTitle" hidden>
       <h4 id="mAlternativesTitle">代替候補の4つのポイント</h4>
       <p class="alternatives-date">供給情報：2026年9月11日確認（厚労省9月10日版・メーカー案内）</p>
@@ -2454,7 +2460,6 @@ footer a:hover{color:var(--blue)}
     <div class="sum-box" id="mSummary" hidden></div>
     <div class="pkg-box" id="mPkgs" hidden></div>
     <p class="modal-note" id="mHistoryNote" role="status" aria-live="polite" aria-atomic="true"></p>
-    <dl class="detail-grid" id="mGrid"></dl>
     <div id="mRelated" hidden></div>
     <p class="modal-note" id="mNote"></p>
   </div>
@@ -2773,6 +2778,9 @@ const $loadMore = document.getElementById("loadMore");
 const $csvBtn = document.getElementById("csvBtn");
 const $searchShareBtn = document.getElementById("searchShareBtn");
 const $searchShareStatus = document.getElementById("searchShareStatus");
+const $searchResultsJump = document.getElementById("searchResultsJump");
+let searchJumpComposing = false;
+let searchJumpPending = false;
 const $watchDashboard = document.getElementById("watchDashboard");
 const $watchTools = document.querySelector(".watch-tools");
 const $watchPriorityHome = document.getElementById("watchPriorityHome");
@@ -2796,6 +2804,25 @@ function focusSearchResultSummary(){
   $meta.setAttribute("tabindex", "-1");
   $meta.focus({preventScroll:true});
 }
+function syncSearchResultJump(){
+  const ready = LIVE && DATA_STATE === "ready" && LAST_HITS.length > 0
+    && Boolean($q.value.trim() || filter !== "all") && !searchJumpComposing && !searchJumpPending
+    && $list.getAttribute("aria-busy") !== "true";
+  const focused = document.activeElement === $searchResultsJump;
+  $searchResultsJump.hidden = !ready;
+  $searchResultsJump.disabled = !ready;
+  $searchResultsJump.textContent = ready
+    ? `検索結果を見る（${LAST_HITS.length.toLocaleString()}件）` : "検索結果を見る";
+  if(focused && !ready) focusSearchResultSummary();
+}
+$searchResultsJump.addEventListener("click", ()=>{
+  if($searchResultsJump.hidden || $searchResultsJump.disabled) return;
+  cancelPendingPageAnchorRestore();
+  $meta.scrollIntoView({behavior:"instant", block:"start"});
+  focusSearchResultSummary();
+});
+$q.addEventListener("compositionstart", ()=>{ searchJumpComposing = true; syncSearchResultJump(); });
+$q.addEventListener("compositionend", ()=>{ searchJumpComposing = false; syncSearchResultJump(); });
 function isOrdinaryPageAnchor(hash = location.hash){
   if(!hash || hash.startsWith("#item=") || hash.startsWith("#drug=")) return false;
   const params = new URLSearchParams(hash.slice(1));
@@ -2850,6 +2877,7 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
   if(DATA_STATE !== "ready"){
     SHOWN = [];
     LAST_HITS = [];
+    syncSearchResultJump();
     $csvBtn.hidden = true;
     $searchShareBtn.hidden = true;
     $searchShareStatus.textContent = "";
@@ -2868,6 +2896,7 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
   // 履歴が不明な状態を検索0件と混同しない。検索条件・共有URLはそのまま保つ。
   if((filter === "changed" || filter === "watchChanged") && !historyHasSnapshot()){
     SHOWN = []; LAST_HITS = [];
+    syncSearchResultJump();
     $csvBtn.hidden = true; $searchShareBtn.hidden = true; $loadMore.hidden = true;
     $searchShareStatus.textContent = "";
     $meta.textContent = HISTORY_STATE.phase === "loading" ? "変更履歴を確認しています…" : "変更履歴を確認できません";
@@ -2939,6 +2968,7 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
     + (relaxed ? `<span class="search-relaxed-note">「${esc($q.value.trim())}」に一致する品目がないため、${relaxed.categoryLabels.length
       ? `薬効分類「${esc(relaxed.categoryLabels.join("／"))}」として`
       : "用量・剤形の区切りや塩の略記（Na・Mgなど）の表記ゆれを考慮して"}検索した結果です。</span>` : "");
+  syncSearchResultJump();
   if(!hits.length){
     const isFavEmpty = filter==="fav" && !FAVS.size;
     const msg = isFavEmpty
@@ -3093,6 +3123,7 @@ window.addEventListener("hashchange", ()=>{
 let searchTimer = null;
 let lastTrackedSearchKey = "";
 function showPendingSearchState(){
+  searchJumpPending = true;
   // 380msの入力待ち中に、前の検索語の品目を新しい検索結果のように見せない。
   SHOWN = [];
   LAST_HITS = [];
@@ -3102,6 +3133,7 @@ function showPendingSearchState(){
   $loadMore.hidden = true;
   $meta.setAttribute("aria-busy", "true");
   $list.setAttribute("aria-busy", "true");
+  syncSearchResultJump();
   $meta.textContent = "検索しています…";
   $list.replaceChildren();
 }
@@ -3120,6 +3152,7 @@ $q.addEventListener("input", ()=>{
   showPendingSearchState();
   const scheduledAtPageAnchorGeneration = pageAnchorGeneration;
   searchTimer = setTimeout(()=>{
+    searchJumpPending = false;
     visibleCount = PAGE_SIZE;
     applyPendingHistoryOrder();
     // 入力待ちの間にFAQ等へ移動した場合、結果は更新してもそのアンカーをURLから消さない。
@@ -4943,9 +4976,12 @@ function refreshOpenDetail(d){
   const modal = $mBack.querySelector(".modal");
   const detailsOpen = [...modal.querySelectorAll("details")].map(details=>details.open);
   const active = modal.contains(document.activeElement) ? document.activeElement : null;
+  const bounds = modal.getBoundingClientRect();
+  const activeRect = active?.getBoundingClientRect();
   const saved = active && {element:active, id:active.id, scope:active.closest("[id]")?.id,
     href:active.getAttribute("href"), key:active.getAttribute("data-key"),
-    tag:active.tagName, text:active.textContent.trim(), top:active.getBoundingClientRect().top};
+    tag:active.tagName, text:active.textContent.trim(), top:activeRect.top,
+    visible:activeRect.bottom > bounds.top && activeRect.top < bounds.bottom};
   const scrollTop = modal.scrollTop;
   openDetail(d, {route:false, track:false, preserveView:true});
   modal.querySelectorAll("details").forEach((details,index)=>{
@@ -4963,7 +4999,8 @@ function refreshOpenDetail(d){
   }
   if(canRestoreHistoryFocus(target)){
     target.focus({preventScroll:true});
-    modal.scrollTop += target.getBoundingClientRect().top - saved.top;
+    // 画面外に残った焦点への補償で、現在読んでいる位置を動かさない。
+    if(saved.visible) modal.scrollTop += target.getBoundingClientRect().top - saved.top;
   }else modal.focus({preventScroll:true});
 }
 function openDetail(d, opts={}){
@@ -5472,6 +5509,7 @@ document.getElementById("trendingList").addEventListener("click", e=>{
   cancelPendingPageAnchorRestore();
   clearTimeout(searchTimer);
   clearTimeout(hashTimer);
+  searchJumpPending = false;
   hashTimer = null;
   if(location.hash !== hash) history.pushState(null, "", hash);
   $q.value = new URLSearchParams(hash.slice(1)).get("q") || "";
