@@ -3,9 +3,11 @@
     {
       "key": "manufacturer:2026-10-15:sandoz-zonisamide-tre-temporary-stop-202610",
       "kind": "manufacturer",
+      "post_id": "2110391462198124966",
+      "posted_at": "2026-10-14T15:25:08+00:00",
       "post_day": "2026-10-15",
       "document_key": "sandoz-zonisamide-tre-temporary-stop-202610:f77231698a96779f1c1beadba8f10e9eea73f583d9e10077c8692418301dcbbb",
-      "state": "pending"
+      "state": "posted"
     },
     {
       "key": "manufacturer:2026-10-14:sandoz-zonisamide-tre-class-ii-recall-20261013",
