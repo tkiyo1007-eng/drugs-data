@@ -619,6 +619,15 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .modal-share-fallback[hidden]{display:none}
 .modal-share-feedback label{display:block;margin-top:8px;font-weight:700}
 .modal-share-feedback input{width:100%;min-width:0;min-height:44px;margin-top:4px;padding:10px;border:1px solid rgba(90,107,148,.3);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit;font-size:16px}
+.modal-report{margin-top:14px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--bg);color:var(--ink);font-size:12px;line-height:1.8}
+.modal-report summary{min-height:44px;display:list-item;align-content:center;font-size:13px;font-weight:800;cursor:pointer}
+.modal-report p{margin:10px 0;overflow-wrap:anywhere}
+.modal-report-actions{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+.modal-report-actions a,.modal-report-actions button{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit;font-weight:800;text-decoration:none;cursor:pointer}
+.modal-report :is(summary,a,button,textarea):focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.modal-report label{display:block;font-weight:700}
+.modal-report textarea{display:block;width:100%;min-width:0;max-width:100%;margin-top:6px;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit;font-size:16px;line-height:1.6;resize:vertical}
+#mReportStatus:empty{display:none}
 /* 1件目の監視登録時だけ、次回訪問でのメリットをその場で伝える */
 .watch-first-add{
   display:flex;align-items:center;justify-content:space-between;gap:16px;
@@ -2455,6 +2464,18 @@ footer a:hover{color:var(--blue)}
     <a class="maker-link" id="mMakerLink" href="#" target="_blank" rel="noopener" data-dsn-event="official-source-open" hidden></a>
     <a class="maker-link" id="mPmdaLink" href="#" target="_blank" rel="noopener" data-dsn-event="official-source-open" hidden></a>
     <a class="maker-link" id="mItemLink" href="#" hidden></a>
+    <details class="modal-report" id="mReport">
+      <summary id="mReportToggle">表示内容の誤りを報告</summary>
+      <p>メール作成・コピーを選ぶと、品目情報を更新して入力します。個人情報は自動入力しません。誤りと思われる箇所を追記し、内容を確認してからご自身で送信してください。</p>
+      <div class="modal-report-actions">
+        <a id="mReportMail" href="mailto:tkiyo1007@gmail.com">メールを作成</a>
+        <button type="button" id="mReportCopy">報告内容をコピー</button>
+      </div>
+      <p>送信先：tkiyo1007@gmail.com。メールが開かない場合は、報告内容をコピーしてこの宛先へ送信してください。患者情報などの個人情報は記入しないでください。</p>
+      <p id="mReportStatus" role="status" aria-live="polite" aria-atomic="true"></p>
+      <label for="mReportBody">報告内容（選択してコピーできます）</label>
+      <textarea id="mReportBody" rows="8" readonly spellcheck="false"></textarea>
+    </details>
     <div class="discrepancy-panel" id="mDiscrepancy" role="note" hidden></div>
     <div class="sum-box" id="mManufacturerNotes" hidden></div>
     <div class="sum-box" id="mSummary" hidden></div>
@@ -4974,7 +4995,8 @@ function updateDetailDataProvenance(d){
 }
 function refreshOpenDetail(d){
   const modal = $mBack.querySelector(".modal");
-  const detailsOpen = [...modal.querySelectorAll("details")].map(details=>details.open);
+  // 固定の報告欄は自身の開閉を保ち、遅着で増える説明欄の位置対応へ混ぜない。
+  const detailsOpen = [...modal.querySelectorAll("details")].filter(details=>details.id !== "mReport").map(details=>details.open);
   const active = modal.contains(document.activeElement) ? document.activeElement : null;
   const bounds = modal.getBoundingClientRect();
   const activeRect = active?.getBoundingClientRect();
@@ -4984,7 +5006,7 @@ function refreshOpenDetail(d){
     visible:activeRect.bottom > bounds.top && activeRect.top < bounds.bottom};
   const scrollTop = modal.scrollTop;
   openDetail(d, {route:false, track:false, preserveView:true});
-  modal.querySelectorAll("details").forEach((details,index)=>{
+  [...modal.querySelectorAll("details")].filter(details=>details.id !== "mReport").forEach((details,index)=>{
     if(index < detailsOpen.length) details.open = detailsOpen[index];
   });
   modal.scrollTop = scrollTop;
@@ -5005,7 +5027,10 @@ function refreshOpenDetail(d){
 }
 function openDetail(d, opts={}){
   if(!d) return;
-  if(currentDetailKey !== itemKey(d) || !$mBack.classList.contains("open")) resetDetailShareFeedback();
+  if(currentDetailKey !== itemKey(d) || !$mBack.classList.contains("open")){
+    resetDetailShareFeedback();
+    resetDetailReport();
+  }
   if(opts.track !== false) dsnTrack("detail-open");
   const st = STATUS[d.s];
   const tag = document.getElementById("mTag");
@@ -5088,6 +5113,7 @@ function openDetail(d, opts={}){
   $mPmda.textContent = "添付文書・IFを探す（PMDA公式検索・品目名入力済み）";
   $mPmda.hidden = false;
   refreshItemLink(d);
+  prepareDetailReport(d, !document.getElementById("mReport").open);
   // 同成分・同剤形の関連品目（確認補助）
   const $mRel = document.getElementById("mRelated");
   let relHtml = "";
@@ -5275,6 +5301,7 @@ function openDetail(d, opts={}){
   }
 }
 function closeDetail(opts={}){
+  resetDetailReport();
   if(opts.route !== false && (location.hash.startsWith("#item=") || location.hash.startsWith("#drug="))){
     if(history.state && history.state.modal === true){
       // openDetail() が追加した1項目を戻す。閉じるたびに新しい履歴を追加しない
@@ -5315,7 +5342,7 @@ document.addEventListener("keydown", e=>{
   // フォーカストラップ: モーダルを開いている間は Tab が背後のページへ抜けないようにする
   // （aria-modal="true" だけでは実際のフォーカス移動までは制御されない）
   if(e.key!=="Tab") return;
-  const focusable = [...$mBack.querySelectorAll('a[href], button, select, input, [tabindex]:not([tabindex="-1"])')]
+  const focusable = [...$mBack.querySelectorAll('a[href], button, select, input, textarea, summary, [tabindex]:not([tabindex="-1"])')]
     .filter(el=>!el.hasAttribute("hidden") && !el.disabled && el.offsetParent !== null);
   if(!focusable.length) return;
   const first = focusable[0], last = focusable[focusable.length-1];
@@ -5372,6 +5399,101 @@ function detailShareURL(item){
   url.hash = "item=" + encodeURIComponent(itemKey(item));
   return url;
 }
+/* ===== 品目の表示内容の報告（メール下書きのみ） ===== */
+const DETAIL_REPORT_TO = "tkiyo1007@gmail.com";
+function detailReportValue(value, missing="記載なし"){
+  return String(value ?? "").replace(/[\x00-\x1f\x7f]+/g, " ").trim() || missing;
+}
+function detailReportPayload(item){
+  const name = detailReportValue(item.n, "品目名不明");
+  const yj = String(item.yj || "").trim();
+  const formalYJ = FORMAL_ITEM_YJ.test(yj);
+  const url = formalYJ && ITEM_PAGES.has(yj)
+    ? new URL(`items/${encodeURIComponent(yj)}.html`, PUBLIC_SITE_ROOT).href
+    : new URL(`#item=${encodeURIComponent(itemKey(item))}`, PUBLIC_SITE_ROOT).href;
+  const raw = column => {
+    const index = CSV_HEAD?.indexOf(column) ?? -1;
+    return LIVE && item.row && index >= 0 ? item.row[index] : "";
+  };
+  const date = value => detailReportValue(value, "確認できません").replaceAll("-", "/");
+  const body = [
+    "医薬品供給ナビ Web版の表示内容について報告します。", "",
+    `品目名：${name}`,
+    `YJコード：${formalYJ ? yj : "確認できません（正式YJ未確認）"}`,
+    `規格：${detailReportValue(raw("規格") || item.spec)}`,
+    `製造メーカー：${detailReportValue(raw("製造メーカー"))}`,
+    `販売メーカー：${detailReportValue(raw("販売メーカー"))}`,
+    `表示メーカー：${detailReportValue(item.m)}`,
+    `表示データ：${LIVE ? "厚労省公表CSV" : "サンプル表示（実供給情報ではありません）"}`,
+    `表示供給区分：${detailReportValue(raw("供給状況") || STATUS[item.s]?.label, "確認できません")}`,
+    `厚労省の原Excel基準日：${LIVE ? date(SOURCE_DATE) : "確認できません（サンプル表示）"}`,
+    `サイト取込日：${LIVE ? date(DATASET_DATE) : "確認できません（サンプル表示）"}`,
+    `公表行更新日：${LIVE ? date(item.d) : "確認できません（サンプル表示）"}`,
+    `品目URL：${url}`,
+    LIVE ? "供給区分の出典：https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list" : "供給区分の出典：サンプル表示のため該当しません", "",
+    "【誤りと思われる箇所】", "（ご記入ください）", "",
+    "【正しい内容・根拠となる公式情報のURL】", "（ご記入ください）", "",
+    "※ 患者情報などの個人情報は記入しないでください。"
+  ].join("\n");
+  const shortName = Array.from(name).slice(0,60).join("");
+  const subject = `医薬品供給ナビ 表示内容の誤り報告：${shortName}${formalYJ ? `（${yj}）` : ""}`;
+  const mailURL = value => `mailto:${DETAIL_REPORT_TO}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(value)}`;
+  let mailto = mailURL(body);
+  // 長い原値もコピー欄では保持し、メールURLだけを概要にする。
+  const compact = mailto.length > 6000;
+  if(compact) mailto = mailURL([
+    `品目名：${Array.from(name).slice(0,80).join("")}${Array.from(name).length > 80 ? "…（一部省略）" : ""}`,
+    `YJコード：${formalYJ ? yj : "正式YJ未確認"}`, `品目URL：${url}`, "",
+    "Web版の「報告内容をコピー」で詳細をコピーし、このメールへ貼り付けてください。", "",
+    "【誤りと思われる箇所・正しい内容・根拠のURL】", "（ご記入ください）"
+  ].join("\n"));
+  return {body, subject, mailto, compact};
+}
+let detailReportGeneration = 0;
+function resetDetailReport(){
+  detailReportGeneration++;
+  document.getElementById("mReport").open = false;
+  document.getElementById("mReportStatus").textContent = "";
+  document.getElementById("mReportBody").value = "";
+  document.getElementById("mReportMail").href = `mailto:${DETAIL_REPORT_TO}`;
+}
+function prepareDetailReport(item=findByKey(currentDetailKey), replaceBody=true){
+  if(!item) return null;
+  const payload = detailReportPayload(item);
+  document.getElementById("mReportMail").href = payload.mailto;
+  const field = document.getElementById("mReportBody");
+  if(replaceBody || !field.value) field.value = payload.body;
+  return payload;
+}
+document.getElementById("mReport").addEventListener("toggle", e=>{
+  if(e.currentTarget.open && $mBack.classList.contains("open")) prepareDetailReport();
+});
+document.getElementById("mReportMail").addEventListener("focus", ()=>prepareDetailReport());
+document.getElementById("mReportMail").addEventListener("click", e=>{
+  const payload = prepareDetailReport();
+  if(!payload){ e.preventDefault(); return; }
+  document.getElementById("mReportStatus").textContent = payload.compact
+    ? "メールには概要を入力します。詳細は「報告内容をコピー」から貼り付け、内容を確認して送信してください。"
+    : "メールアプリで報告箇所を追記し、内容を確認して送信してください。";
+});
+document.getElementById("mReportCopy").addEventListener("click", async ()=>{
+  const payload = prepareDetailReport();
+  if(!payload) return;
+  const generation = ++detailReportGeneration, key = currentDetailKey;
+  const canUpdate = ()=>generation === detailReportGeneration && key === currentDetailKey && $mBack.classList.contains("open");
+  document.getElementById("mReportStatus").textContent = "報告内容をコピーしています…";
+  try{
+    if(typeof navigator.clipboard?.writeText !== "function") throw new Error("コピー機能は利用できません");
+    await navigator.clipboard.writeText(payload.body);
+    if(canUpdate()) document.getElementById("mReportStatus").textContent = "報告内容をコピーしました。メールに貼り付け、報告箇所を追記して送信してください。";
+  }catch(error){
+    if(!canUpdate()) return;
+    document.getElementById("mReportStatus").textContent = "コピーできませんでした。下の報告内容を選択してコピーしてください。";
+    const field = document.getElementById("mReportBody");
+    field.focus({preventScroll:true});
+    field.select();
+  }
+});
 let detailShareGeneration = 0, detailShareResetTimer = null;
 function resetDetailShareFeedback(){
   detailShareGeneration++;
