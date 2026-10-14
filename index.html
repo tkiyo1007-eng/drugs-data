@@ -5452,7 +5452,13 @@ function renderTrending(){
   // Webの注目一覧だけから除外。共通データ・通常検索・既存の詳細URLは維持する。
   const hidden = new Set(["caduet", "caduet-1", "caduet-2", "caduet-3", "caduet-4",
     "gentacin-ointment", "mounjaro-injection", "loxoprofen-sodium-tape", "celecox-tablets"]);
-  document.getElementById("trendingList").innerHTML = TRENDING.filter(t=>!hidden.has(t.slug)).map(t=>
+  // Webの入口だけを製品群へまとめる。共通データや規格別の既存URLは変更しない。
+  const entries = TRENDING.filter(t=>!hidden.has(t.slug)
+    && !/^amaluet(?:-[1-4])?$/.test(t.slug) && t.slug !== "movicol");
+  entries.splice(Math.min(1, entries.length), 0,
+    {slug:"movicol",label:"モビコール",q:"モビコール"},
+    {slug:"amaluet",label:"アマルエット配合錠１番〜４番",q:"アマルエット配合錠"});
+  document.getElementById("trendingList").innerHTML = entries.map(t=>
     `<a class="trending-chip" href="${details[t.slug] ? '#item='+details[t.slug] : '#q='+encodeURIComponent(t.q)}">${esc(t.label)}</a>`).join("")
     + `<a class="trending-chip" href="#q=${encodeURIComponent('テラムロ')}">テラムロ配合錠</a>`;
 }
