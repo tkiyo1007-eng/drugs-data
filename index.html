@@ -3516,7 +3516,7 @@ function updateSupplementalStatus(){
   if(LIVE){
     renderWatchDashboard();
     renderFavNotice();
-    render();
+    renderSupplementalSearchResults();
   }
 }
 function itemOfficialUpdatedAt(d){
@@ -3826,7 +3826,7 @@ function loadSupplementalData(){
       refreshSalesEndingPill();
       renderWatchDashboard();
       renderFavNotice();
-      render();
+      renderSupplementalSearchResults();
     }
     // 読込中に詳細を開いた場合は、届いた案内文・要約・包装情報をその場で反映する
     if(currentDetailKey && document.getElementById("mBack").classList.contains("open")){
@@ -4352,6 +4352,14 @@ function searchResultFocusTarget(saved){
   if(!saved) return null;
   const favorite = [...$list.querySelectorAll(".fav-btn")].find(button=>button.dataset.key === saved.key);
   return saved.control === "favorite" ? favorite : favorite?.closest(".drug-card")?.querySelector(".drug-open");
+}
+function renderSupplementalSearchResults(){
+  const resultFocus = captureSearchResultFocus(document.activeElement);
+  render();
+  if(!resultFocus) return;
+  const target = searchResultFocusTarget(resultFocus);
+  if(canRestoreHistoryFocus(target)) target.focus({preventScroll:true});
+  else focusSearchResultSummary();
 }
 function toggleFav(item){
   if(!item) return;
