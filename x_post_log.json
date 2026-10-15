@@ -3,9 +3,11 @@
     {
       "key": "manufacturer:2026-10-16:towa-amaluet-1-stopped-202610",
       "kind": "manufacturer",
+      "post_id": "2110759955460481062",
+      "posted_at": "2026-10-15T15:49:24+00:00",
       "post_day": "2026-10-16",
       "document_key": "towa-amaluet-1-stopped-202610:049ba088a9e033b1fe37645a803ee006bb9d1ca5e4a3ecba250f5888acd96fae",
-      "state": "pending"
+      "state": "posted"
     },
     {
       "key": "manufacturer:2026-10-15:sandoz-zonisamide-tre-temporary-stop-202610",
