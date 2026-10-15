@@ -1,6 +1,13 @@
 {
   "posted": [
     {
+      "key": "manufacturer:2026-10-16:towa-amaluet-1-stopped-202610",
+      "kind": "manufacturer",
+      "post_day": "2026-10-16",
+      "document_key": "towa-amaluet-1-stopped-202610:049ba088a9e033b1fe37645a803ee006bb9d1ca5e4a3ecba250f5888acd96fae",
+      "state": "pending"
+    },
+    {
       "key": "manufacturer:2026-10-15:sandoz-zonisamide-tre-temporary-stop-202610",
       "kind": "manufacturer",
       "post_id": "2110391462198124966",
@@ -17,6 +24,13 @@
       "post_day": "2026-10-14",
       "document_key": "sandoz-zonisamide-tre-class-ii-recall-20261013:072f5fe3ed810292ead5b973b06fece71be640da8ca292e3b691c22b5e7ab40b",
       "state": "posted"
+    },
+    {
+      "key": "2026/10/16",
+      "kind": "daily",
+      "post_id": "2110759935675916630",
+      "posted_at": "2026-10-15T15:49:19+00:00",
+      "date": "2026/10/16"
     },
     {
       "key": "2026/10/15",
