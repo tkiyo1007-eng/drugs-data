@@ -6670,6 +6670,30 @@
   "announced_at": "2026-10-09",
   "checked": "2026-10-16"
  },
+ "ニトログリセリンテープ２７ｍｇ「トーワ」": {
+  "maker": "東和薬品",
+  "title": "ニトログリセリンテープ27mg「トーワ」 販売中止のお知らせ NEW",
+  "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83706&t=4&f=20261015_%E3%83%8B%E3%83%88%E3%83%AD%E3%82%B0%E3%83%AA%E3%82%BB%E3%83%AA%E3%83%B3%E3%83%86%E3%83%BC%E3%83%9727mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+  "event_type": "discontinued",
+  "announced_at": "2026-10-15",
+  "checked": "2026-10-16"
+ },
+ "レボホリナート点滴静注用２５ｍｇ「ＮＰ」": {
+  "maker": "ニプロ",
+  "title": "2026年10月15日 レボホリナート点滴静注用25mg／100mg「NP」　販売中止品のご案内",
+  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001Qvrt4IAB",
+  "event_type": "discontinued",
+  "announced_at": "2026-10-15",
+  "checked": "2026-10-16"
+ },
+ "レボホリナート点滴静注用１００ｍｇ「ＮＰ」": {
+  "maker": "ニプロ",
+  "title": "2026年10月15日 レボホリナート点滴静注用25mg／100mg「NP」　販売中止品のご案内",
+  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001Qvrt4IAB",
+  "event_type": "discontinued",
+  "announced_at": "2026-10-15",
+  "checked": "2026-10-16"
+ },
  "ｄ－クロルフェニラミンマレイン酸塩錠２ｍｇ「ＮＩＧ」": {
   "maker": "日医工",
   "title": "d-クロルフェニラミンマレイン酸塩錠2mg「NIG」 供給状況に関するお知らせ",
@@ -9852,14 +9876,6 @@
   "announced_at": "2025-03-28",
   "checked": "2026-10-16"
  },
- "ニトログリセリンテープ２７ｍｇ「トーワ」": {
-  "maker": "東和薬品",
-  "title": "ニトログリセリンテープ27mg「トーワ」 販売中止のお知らせ NEW",
-  "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83706&t=4&f=20261015_%E3%83%8B%E3%83%88%E3%83%AD%E3%82%B0%E3%83%AA%E3%82%BB%E3%83%AA%E3%83%B3%E3%83%86%E3%83%BC%E3%83%9727mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
-  "event_type": "discontinued",
-  "announced_at": "2026-10-15",
-  "checked": "2026-10-16"
- },
  "ブセレリン点鼻液０．１５％「ＩＬＳ」": {
   "maker": "日医工",
   "title": "ブセレリン点鼻液0.15%「ILS」 供給状況に関するお知らせ",
@@ -10632,22 +10648,6 @@
   "title": "リネゾリド点滴静注液600mg「日医工」 供給状況に関するお知らせ",
   "url": "https://www.nichiiko.co.jp/medicine/file/23380/information/20260129cI5.pdf",
   "event_type": "supply",
-  "checked": "2026-10-16"
- },
- "レボホリナート点滴静注用２５ｍｇ「ＮＰ」": {
-  "maker": "ニプロ",
-  "title": "2026年10月15日 レボホリナート点滴静注用25mg／100mg「NP」　販売中止品のご案内",
-  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001Qvrt4IAB",
-  "event_type": "discontinued",
-  "announced_at": "2026-10-15",
-  "checked": "2026-10-16"
- },
- "レボホリナート点滴静注用１００ｍｇ「ＮＰ」": {
-  "maker": "ニプロ",
-  "title": "2026年10月15日 レボホリナート点滴静注用25mg／100mg「NP」　販売中止品のご案内",
-  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001Qvrt4IAB",
-  "event_type": "discontinued",
-  "announced_at": "2026-10-15",
   "checked": "2026-10-16"
  },
  "メドレニック注": {
