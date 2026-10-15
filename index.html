@@ -4073,6 +4073,7 @@ function historyFocusFallback(previous){
   return target;
 }
 function historyReadingAnchor(active, scrollY){
+  if(document.getElementById("mBack").classList.contains("open") && !active?.closest("#mBack .modal")) return null;
   if(active && active !== document.body && !active.closest(".site-nav, .mobile-quick-nav")) return active;
   if(scrollY <= 0) return null;
   // 固定ナビやbodyの焦点は閲覧位置を表さない。今見えている本文を基準にする。
