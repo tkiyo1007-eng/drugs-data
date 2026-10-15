@@ -5811,6 +5811,23 @@ function newsDateKey(value){
   return date.getUTCFullYear() === Number(m[1]) && date.getUTCMonth()+1 === Number(m[3]) && date.getUTCDate() === Number(m[4])
     ? `${m[1]}-${m[3]}-${m[4]}` : "";
 }
+function formatNewsTimestamp(value){
+  let stamp;
+  if(typeof value === "number") stamp = value;
+  else{
+    if(typeof value !== "string") return "不明";
+    const day = newsDateKey(value);
+    if(day) return `${day.replaceAll("-","/")}（時刻不明）`;
+    const match = /^(\d{4}-\d{2}-\d{2})[T ](\d{2}):(\d{2})(?::(\d{2})(?:\.\d+)?)?(Z|[+-]\d{2}:\d{2})?$/.exec(value);
+    if(!match || !newsDateKey(match[1]) || Number(match[2]) > 23
+      || Number(match[3]) > 59 || Number(match[4] || 0) > 59) return "不明";
+    // 元データにない時刻・タイムゾーンを補わず、日付の精度を保つ。
+    if(!match[5] || match[5] === "-00:00") return `${value}（タイムゾーン不明）`;
+    stamp = Date.parse(value);
+  }
+  if(!Number.isFinite(stamp) || !Number.isFinite(new Date(stamp).getTime())) return "不明";
+  return new Intl.DateTimeFormat("ja-JP",{timeZone:"Asia/Tokyo",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hour12:false}).format(new Date(stamp)) + "（日本時間）";
+}
 function safeNewsUrl(value, pmdaOnly=false){
   try{
     if(typeof value !== "string" || !value.startsWith("https://")) return false;
@@ -5884,7 +5901,7 @@ function newsStatusMessage(state,kind,now=Date.now()){
     if(kind === "headlines"){
       if(state.snapshot.collectionStatus === "failed") message += " 情報元からの収集に失敗しています。新着の有無は確認できていません。前回成功分がある場合のみ表示しています。";
       const success = state.snapshot.lastSuccessAt;
-      message += success ? ` 情報元の最終収集成功日時：${success}（記事の発表日時とは異なります）。` : " 情報元の収集成功日時は不明です。";
+      message += success ? ` 情報元の最終収集成功日時：${formatNewsTimestamp(success)}（記事の発表日時とは異なります）。` : " 情報元の収集成功日時は不明です。";
       if(success && now-Date.parse(success) > 48*60*60*1000) message += " 収集から48時間以上経過しています。最新記事は薬事日報でご確認ください。";
     }
     const window = newsDateWindow(state.snapshot.items,now);
@@ -5899,9 +5916,8 @@ function newsStatusMessage(state,kind,now=Date.now()){
     if(window.older.length) message += ` 30日以上前の${window.older.length}件は過去記事として分けています。`;
     if(window.future.length) message += ` 端末の日付より後の${window.future.length}件は表示していません。端末の日付をご確認ください。`;
   }
-  if(state.receivedAt){
-    const time = new Intl.DateTimeFormat("ja-JP",{timeZone:"Asia/Tokyo",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hour12:false}).format(new Date(state.receivedAt));
-    message += ` この画面での${state.source === "cache" ? "キャッシュ読込" : "公開ファイル取得"}日時：${time}（日本時間）。`;
+  if(state.receivedAt != null){
+    message += ` この画面での${state.source === "cache" ? "キャッシュ読込" : "公開ファイル取得"}日時：${formatNewsTimestamp(state.receivedAt)}。`;
   }
   return message;
 }
