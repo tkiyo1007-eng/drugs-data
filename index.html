@@ -2557,7 +2557,7 @@ function pageScrollBehavior(){
   const targets = links.map(link=>({link,target:document.getElementById(link.dataset.quickTarget)}))
     .filter(x=>x.target);
   if(!targets.length) return;
-  let frame = 0, pendingTarget = null, pendingUntil = 0;
+  let frame = 0, pendingTarget = null, pendingUntil = 0, jumpGeneration = 0;
   function updateQuickNav(){
     frame = 0;
     if(!matchMedia("(max-width: 760px)").matches) return;
@@ -2594,16 +2594,28 @@ function pageScrollBehavior(){
   links.forEach(link=>link.addEventListener("click",event=>{
     if(event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     // 標準のリンク動作を残し、URL・戻る履歴・同じタブの再選択を維持する。
+    const generation = ++jumpGeneration;
+    window.scrollTo({left:window.scrollX,top:window.scrollY,behavior:"instant"});
     const root = document.documentElement;
     root.classList.add("quick-nav-jump");
-    setTimeout(()=>root.classList.remove("quick-nav-jump"),0);
+    setTimeout(()=>{ if(generation === jumpGeneration) root.classList.remove("quick-nav-jump"); },0);
     pendingTarget = targets.find(entry=>entry.link === link) || null;
+    const destination = pendingTarget;
     pendingUntil = performance.now() + 1800;
     links.forEach(other=>other.removeAttribute("aria-current"));
     link.setAttribute("aria-current","location");
     // smooth scroll 中の最初のscrollイベントで出発地点へ戻さず、移動先を維持する。
     // 移動が落ち着いた後は実際のスクロール位置から再判定する。
-    setTimeout(()=>{ pendingTarget = null; updateQuickNav(); },1800);
+    // 戻る操作の未反映scrollが標準アンカー移動を上書きした場合も、一度だけ確定する。
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      if(generation === jumpGeneration && pendingTarget === destination && location.hash === link.hash){
+        destination?.target.scrollIntoView({behavior:"instant",block:"start"});
+      }
+    }));
+    setTimeout(()=>{
+      if(generation !== jumpGeneration) return;
+      pendingTarget = null; updateQuickNav();
+    },1800);
   }));
   updateQuickNav();
 })();
@@ -4060,6 +4072,21 @@ function historyFocusFallback(previous){
   target.setAttribute("tabindex","-1");
   return target;
 }
+function historyReadingAnchor(active, scrollY){
+  if(active && active !== document.body && !active.closest(".site-nav, .mobile-quick-nav")) return active;
+  if(scrollY <= 0) return null;
+  // 固定ナビやbodyの焦点は閲覧位置を表さない。今見えている本文を基準にする。
+  const top = Math.max(0, document.querySelector(".site-nav")?.getBoundingClientRect().bottom || 0);
+  const bottom = Math.min(window.innerHeight, document.querySelector(".mobile-quick-nav")?.getBoundingClientRect().top || window.innerHeight);
+  const content = [...document.querySelectorAll("main h2, main h3, main h4, main p, main .drug-card, main summary")];
+  return content.find(element=>{
+    const rect = element.getBoundingClientRect();
+    return rect.height > 0 && rect.top >= top && rect.top < bottom;
+  }) || content.find(element=>{
+    const rect = element.getBoundingClientRect();
+    return rect.height > 0 && rect.bottom > top && rect.top < bottom;
+  }) || null;
+}
 function refreshHistoryViews(){
   if(!LIVE) return;
   if(historySearchComposing){ historyViewPending = true; return; }
@@ -4070,8 +4097,7 @@ function refreshHistoryViews(){
   const activeKey = activeCard?.querySelector(".fav-btn")?.dataset.key;
   const activeClass = active?.classList.contains("fav-btn") ? ".fav-btn" : ".drug-open";
   const y = window.scrollY, x = window.scrollX;
-  // ページ先頭・無フォーカス時は、画面外のカードの移動に合わせてページを動かさない。
-  const anchor = active && active !== document.body ? active : y > 0 ? $list.querySelector(".drug-card") : null;
+  const anchor = historyReadingAnchor(active, y);
   const top = anchor?.getBoundingClientRect().top;
   renderDailyUpdate(ITEMS);
   renderWatchDashboard();
@@ -4108,7 +4134,7 @@ function refreshHistoryViews(){
   const focusFallback = active && active !== document.body && !canRestoreHistoryFocus(focusTarget);
   if(focusFallback) focusTarget = historyFocusFallback(active);
   if(focusTarget?.isConnected && document.activeElement !== focusTarget) focusTarget.focus({preventScroll:true});
-  const stable = focusFallback ? null : anchor?.isConnected ? anchor : focusTarget !== $meta ? focusTarget : null;
+  const stable = focusFallback ? null : anchor?.isConnected ? anchor : activeKey && focusTarget !== $meta ? focusTarget : null;
   const offset = stable?.isConnected && top != null ? stable.getBoundingClientRect().top - top : 0;
   const activeModal = active?.closest("#mBack .modal");
   if(activeModal){
@@ -4116,7 +4142,9 @@ function refreshHistoryViews(){
     activeModal.scrollTop += offset;
     window.scrollTo({left:x,top:y,behavior:"instant"});
   }else{
-    window.scrollTo({left:x,top:y+offset,behavior:"instant"});
+    // DOM更新時のブラウザ自身のscroll補償を戻さず、本文の残差だけを補う。
+    const pageY = stable?.isConnected && top != null ? window.scrollY + offset : y;
+    window.scrollTo({left:x,top:pageY,behavior:"instant"});
   }
 }
 $q.addEventListener("compositionstart",()=>{ historySearchComposing = true; });
