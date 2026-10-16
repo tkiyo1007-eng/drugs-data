@@ -1,4 +1,5 @@
 import contextlib
+from datetime import date, datetime, timedelta, timezone
 import io
 import json
 from pathlib import Path
@@ -147,7 +148,7 @@ class ExtractPdfPackagesTests(unittest.TestCase):
         result, _, _, _, _ = self.extract(texts=("包装単位の記載なし", None))
         self.assertEqual(result, [])
 
-    def run_main(self, announcements, existing=None, *, limit=60, extraction=None):
+    def run_main(self, announcements, existing=None, *, limit=60, extraction=None, day=date(2026, 10, 17)):
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder)
             ann, out, cache = path / "ann.json", path / "out.json", path / "cache.json"
@@ -159,7 +160,7 @@ class ExtractPdfPackagesTests(unittest.TestCase):
                     mock.patch.object(packages, "CACHE_FILE", str(cache)), \
                     mock.patch.object(packages, "extract_from_pdf", side_effect=extraction) as extract, \
                     contextlib.redirect_stderr(output):
-                packages.main()
+                packages.main(day=day)
             return json.loads(cache.read_text()), json.loads(out.read_text()), extract.call_args_list, output.getvalue()
 
     def test_failed_duplicate_uses_one_url_slot_and_available_following_pdf_is_attempted(self):
@@ -226,6 +227,94 @@ class ExtractPdfPackagesTests(unittest.TestCase):
         self.assertEqual(len({call.args[0] for call in calls}), 60)
         self.assertIn("取得試行: 60URL / 成功: 0URL / 失敗: 60URL / 上限待ち: 10URL", output)
 
+    def test_daily_rotation_covers_every_raw_url_with_a_fixed_order_and_budget(self):
+        # Actual main must reach later URLs even when every earlier attempt fails.
+        for total, limit in [(7, 3), (120, 60), (121, 60), (1053, 60), (5, 1)]:
+            announcements = {f"品目{i}": {"url": f"https://maker.example/{i}.pdf"} for i in range(total)}
+            urls = [info["url"] for info in announcements.values()]
+            reached = set()
+            for offset in range((total + limit - 1) // limit):
+                day = date(2026, 10, 17) + timedelta(days=offset)
+                with self.subTest(total=total, limit=limit, day=day):
+                    cache, result, calls, output = self.run_main(announcements, limit=limit,
+                        extraction=RuntimeError("取得不能"), day=day)
+                    start = (day.toordinal() * limit) % total
+                    expected = (urls[start:] + urls[:start])[:limit]
+                    self.assertEqual([call.args[0] for call in calls], expected)
+                    self.assertEqual((cache, result), ({}, {}))
+                    self.assertEqual(len(calls), min(total, limit))
+                    reached.update(expected)
+            self.assertEqual(reached, set(urls), (total, limit))
+
+    def test_rotation_uses_raw_unique_order_before_skipping_cache_and_aliases(self):
+        urls = [f"https://maker.example/{i}.pdf" for i in range(7)]
+        announcements = {}
+        for i, url in enumerate(urls):
+            announcements[f"品目{i}"] = {"url": url}
+            announcements[f"別名{i}"] = {"url": url}
+        value = [{"pkg": "PTP100錠", "until": ""}]
+        previous = {urls[1]: value, urls[3]: []}
+        reached = set()
+        for offset in range(4):
+            day = date(2026, 10, 17) + timedelta(days=offset)
+            start = day.toordinal() * 2 % len(urls)
+            raw_order = urls[start:] + urls[:start]
+            expected = [url for url in raw_order if url not in previous][:2]
+            cache, result, calls, output = self.run_main(announcements, previous, limit=2,
+                extraction=RuntimeError("取得不能"), day=day)
+            self.assertEqual([call.args[0] for call in calls], expected)
+            self.assertEqual(cache, previous)
+            self.assertEqual(list(result), ["品目1", "別名1"])
+            self.assertEqual(len(calls), 2)
+            self.assertIn("上限待ち: 3URL", output)
+            reached.update(expected)
+        self.assertEqual(reached, set(urls) - set(previous))
+
+    def test_same_jst_day_repeats_deterministically_without_normalizing_raw_keys(self):
+        urls = ["https://maker.example/案内.pdf", "https://maker.example/%E6%A1%88%E5%86%85.pdf",
+                "https://maker.example/a.pdf#page=1", "https://maker.example/a.pdf#page=2",
+                "https://maker.example/a.pdf?x=1+2", "https://maker.example/a.pdf?x=1%202"]
+        announcements = {f"品目{i}": {"url": url} for i, url in enumerate(urls)}
+        runs = [self.run_main(announcements, limit=3, extraction=RuntimeError("取得不能")) for _ in range(2)]
+        self.assertEqual(runs[0], runs[1])
+        reached = set()
+        for offset in range(2):
+            cache, result, calls, output = self.run_main(announcements, limit=3,
+                extraction=lambda url: [{"pkg": url, "until": ""}],
+                day=date(2026, 10, 17) + timedelta(days=offset))
+            self.assertEqual(set(cache), {call.args[0] for call in calls})
+            self.assertEqual(list(result), [name for name, info in announcements.items() if info["url"] in cache])
+            for name, entries in result.items():
+                self.assertEqual(entries, [{"pkg": announcements[name]["url"], "until": ""}])
+            reached.update(cache)
+        self.assertEqual(reached, set(urls))
+
+    def test_jst_date_changes_at_utc_fifteen_and_is_read_once_per_run(self):
+        announcements = {f"品目{i}": {"url": f"https://maker.example/{i}.pdf"} for i in range(7)}
+        instants = [datetime(2026, 10, 16, 14, 59, 59, tzinfo=timezone.utc),
+                    datetime(2026, 10, 16, 15, 0, 0, tzinfo=timezone.utc)]
+        orders = []
+        for instant, jst_day in zip(instants, [date(2026, 10, 16), date(2026, 10, 17)]):
+            with mock.patch.object(packages, "datetime") as clock:
+                clock.now.side_effect = lambda tz: instant.astimezone(tz)
+                _, _, calls, _ = self.run_main(announcements, limit=3,
+                    extraction=RuntimeError("取得不能"), day=None)
+            clock.now.assert_called_once_with(timezone(timedelta(hours=9)))
+            explicit = self.run_main(announcements, limit=3,
+                extraction=RuntimeError("取得不能"), day=jst_day)
+            self.assertEqual(calls, explicit[2])
+            orders.append(calls)
+        self.assertNotEqual(orders[0], orders[1])
+
+    def test_empty_announcements_and_zero_limit_never_fetch_or_divide_by_zero(self):
+        for announcements in [{}, {"A": {"url": "https://maker.example/a.pdf"},
+                                  "別名A": {"url": "https://maker.example/a.pdf"}}]:
+            for limit in ([0, 60] if not announcements else [0]):
+                with self.subTest(announcements=announcements, limit=limit):
+                    cache, result, calls, output = self.run_main(announcements, limit=limit, day=None)
+                    self.assertEqual((cache, result, calls), ({}, {}, []))
+                    self.assertIn("取得試行: 0URL / 成功: 0URL / 失敗: 0URL", output)
+
     def test_actual_response_boundaries_write_only_successful_package_values(self):
         origin = "https://maker.example/"
         old_value = [{"pkg": "バラ500錠", "until": ""}]
@@ -262,7 +351,7 @@ class ExtractPdfPackagesTests(unittest.TestCase):
                     mock.patch.object(packages.urllib.request, "build_opener", return_value=types.SimpleNamespace(open=network)), \
                     mock.patch.dict(sys.modules, {"pypdf": types.SimpleNamespace(PdfReader=parse)}), \
                     contextlib.redirect_stderr(output):
-                packages.main()
+                packages.main(day=date(2026, 10, 17))
             self.assertEqual(json.loads(cache.read_text()), {urls["old"]: old_value,
                 urls["good"]: new_value, urls["no-packages"]: []})
             self.assertEqual(json.loads(out.read_text()), {"old": old_value, "good": new_value})

@@ -11,11 +11,14 @@ announcement_packages.json {商品名: [{"pkg":..., "until":...}]} を生成す�
 
 ダウンロード結果はURL単位で packages_cache.json にキャッシュし、
 日次実行では未キャッシュURLを1実行1回だけ試行する（最大60固有URL）。
+候補の原URL固有順を、日本時間の日付と取得上限に応じて循環させ、
+同じ先頭URLの失敗だけで後方の候補が待ち続ける偏りを減らす。
 受信は8MiBまでとし、職種確認・ログインや別URLへの自動転送は通過しない。
 
 usage: extract_pdf_packages.py [announcements.json] [出力.json] [新規取得上限]
 """
 import io
+from datetime import datetime, timedelta, timezone
 import json
 import re
 import sys
@@ -27,6 +30,7 @@ UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
 CACHE_FILE = "packages_cache.json"
 MAX_PDF_BYTES = 8 * 1024 * 1024
 MAX_FETCH_URLS = 60
+JST = timezone(timedelta(hours=9))
 
 # 包装単位: PTP/バラ/分包等の形態語 + 数量単位（×N の連包表記も含む）
 PKG_RE = re.compile(
@@ -95,7 +99,22 @@ def extract_from_pdf(url):
     return found[:10]
 
 
-def main():
+def daily_fetch_order(announcements, fetch_limit, day=None):
+    """cache除外前の原URL固有順を日毎に循環。元の案内・cacheキーは変えない。"""
+    unique = {}
+    for name, info in announcements.items():
+        unique.setdefault(info["url"], (name, info))
+    candidates = list(unique.values())
+    if not candidates or fetch_limit == 0:
+        return candidates
+    if day is None:
+        day = datetime.now(JST).date()
+    # 順・集合・上限が固定で毎日実行する場合、ceil(URL数/上限)日で全候補を含む。
+    start = (day.toordinal() * fetch_limit) % len(candidates)
+    return candidates[start:] + candidates[:start]
+
+
+def main(*, day=None):
     ann_path = sys.argv[1] if len(sys.argv) > 1 else "maker_announcements.json"
     out_path = sys.argv[2] if len(sys.argv) > 2 else "announcement_packages.json"
     fetch_limit = int(sys.argv[3]) if len(sys.argv) > 3 else 60
@@ -112,7 +131,7 @@ def main():
 
     attempted = succeeded = failed = deferred = 0
     seen = set()
-    for name, info in announcements.items():
+    for name, info in daily_fetch_order(announcements, fetch_limit, day):
         url = info["url"]
         if url in cache or url in seen:
             continue
