@@ -1,5 +1,17 @@
 [
  {
+  "date": "2026/10/16",
+  "title": "「副作用が疑われる症例報告に関する情報」に2026年6月分の情報を追加しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/adr-info/suspected-adr/0005.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/10/16",
+  "title": "プログラム医療機器の製造販売承認品目の一覧情報等を更新しました",
+  "url": "https://www.pmda.go.jp/review-services/drug-reviews/about-reviews/devices/0052.html",
+  "tag": "承認審査"
+ },
+ {
   "date": "2026/10/14",
   "title": "プログラム医療機器のページを更新（「生成AIを活用した医療機器の審査ポイント(Draft)」の英訳を公開、対面助言調整可能時期の更新）しました。",
   "url": "https://www.pmda.go.jp/review-services/drug-reviews/about-reviews/devices/0048.html",
@@ -46,17 +58,5 @@
   "title": "使用上の注意の改訂指示通知（医薬品）2026年10月8日付（厚生労働省より発出）を掲載しました",
   "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/revision-of-precautions/0375.html",
   "tag": "安全対策"
- },
- {
-  "date": "2026/10/08",
-  "title": "「治験計画等の届出に関するFAQ」を更新しました",
-  "url": "https://www.pmda.go.jp/review-services/trials/0022.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/10/06",
-  "title": "外国製造業者認定・登録番号を掲載しました",
-  "url": "https://www.pmda.go.jp/review-services/drug-reviews/foreign-mfr/0003.html",
-  "tag": "承認審査"
  }
 ]
