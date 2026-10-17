@@ -4517,9 +4517,22 @@ function toggleFav(item){
   return true;
 }
 addEventListener("storage", event=>{
-  if(event.key !== "favDrugKeysV2") return;
+  const favoritesChanged = event.key === "favDrugKeysV2" || event.key === null;
+  const checkpointChanged = event.key === "drugSupplyNaviWatchStateV1" || event.key === null;
+  if(!favoritesChanged && !checkpointChanged) return;
+  try{ if(event.storageArea && event.storageArea !== localStorage) return; }catch(e){ return; }
+  if(checkpointChanged){
+    try{ WATCH_STATE = readStoredWatchState(); }catch(e){ return; }
+  }
+  const previousActive = document.activeElement;
+  const watchFocus = previousActive?.closest("#watchDashboard, #watchReturn, #favNotice")
+    ? {element:previousActive,key:previousActive.closest(".fav-chg")?.dataset.key} : null;
   const resultFocus = captureSearchResultFocus(document.activeElement);
-  FAVS = readStoredFavoriteKeys();
+  if(favoritesChanged) FAVS = readStoredFavoriteKeys();
+  if(event.key === null){
+    LEGACY_FAV_NAMES = new Set();
+    try{ LEGACY_FAV_NAMES = new Set(JSON.parse(localStorage.getItem("favDrugs")||"[]")); }catch(e){}
+  }
   updateFavPill();
   renderWatchDashboard();
   renderFavNotice();
@@ -4533,6 +4546,16 @@ addEventListener("storage", event=>{
     const target = searchResultFocusTarget(resultFocus);
     if(canRestoreHistoryFocus(target)) target.focus({preventScroll:true});
     else focusSearchResultSummary();
+  }else if(watchFocus){
+    const target = watchFocus.key
+      ? [...$favNotice.querySelectorAll(".fav-chg")].find(button=>button.dataset.key === watchFocus.key)
+      : watchFocus.element;
+    if(canRestoreHistoryFocus(target)) target.focus({preventScroll:true});
+    else{
+      const explanation = document.getElementById("watchDashboardLede");
+      explanation.setAttribute("tabindex", "-1");
+      explanation.focus({preventScroll:true});
+    }
   }
 });
 function syncModalFavorite(item){
@@ -4626,9 +4649,12 @@ async function importWatchFile(file){
         return;
       }
       clearStorageSaveError("favorites");
-      const wasActivated = WATCH_STATE.activated;
-      WATCH_STATE.activated = true;
-      if(!saveWatchState()) WATCH_STATE.activated = wasActivated;
+      try{
+        WATCH_STATE = readStoredWatchState();
+        const wasActivated = WATCH_STATE.activated;
+        WATCH_STATE.activated = true;
+        if(!saveWatchState()) WATCH_STATE.activated = wasActivated;
+      }catch(e){} // 取込は成功。確認状態を読めなければ、その保存値を上書きしない。
       maybeTrackWatchActivation(beforeSize);
       updateFavPill(); renderWatchDashboard(); renderFavNotice(); syncInstallButtons(); setFilter("fav");
       $watchImportResult.textContent = `${matched.toLocaleString()}行を照合し、${newlyAdded.toLocaleString()}品目を新たに監視リストへ追加しました` +
@@ -4657,11 +4683,13 @@ $watchImportFile.addEventListener("change", async ()=>{
 });
 
 /* ===== 監視リストの「前回確認後の変更」 ===== */
-let WATCH_STATE = {version:1,lastCheckedChangeDate:"",lastCheckedAt:"",activated:false};
-try{
+function readStoredWatchState(){
   const saved = JSON.parse(localStorage.getItem("drugSupplyNaviWatchStateV1")||"null");
-  if(saved && saved.version===1) WATCH_STATE = {...WATCH_STATE,...saved};
-}catch(e){}
+  return {version:1,lastCheckedChangeDate:"",lastCheckedAt:"",activated:false,
+    ...(saved && saved.version===1 ? saved : {})};
+}
+let WATCH_STATE = {version:1,lastCheckedChangeDate:"",lastCheckedAt:"",activated:false};
+try{ WATCH_STATE = readStoredWatchState(); }catch(e){}
 let WATCH_UNREAD = [];
 let WATCH_UNREAD_KEYS = new Set();
 let WATCH_DISCREPANCY_KEYS = new Set();
@@ -4798,8 +4826,24 @@ function renderWatchDashboard(){
 
 function markWatchChangesChecked(){
   if(!historyCanConfirm() || !WATCH_UNREAD.length || !LATEST_CHANGE_DATE) return;
+  try{ WATCH_STATE = readStoredWatchState(); }
+  catch(e){
+    const message = "確認済み状態を読み込めませんでした。変更は確認済みにしていません。ブラウザの保存設定を確認して、もう一度お試しください。";
+    showStorageSaveError("checkpoint", message);
+    $watchDashboardStatus.textContent = message;
+    $watchDashboardStatus.className = "watch-dashboard-status warn";
+    return false;
+  }
   const checkpoint = historyDateKey(WATCH_STATE.lastCheckedChangeDate);
-  if(checkpoint && LATEST_CHANGE_DATE < checkpoint) return;
+  if(checkpoint && LATEST_CHANGE_DATE < checkpoint){
+    renderWatchDashboard(); renderFavNotice(); render();
+    clearStorageSaveError("checkpoint");
+    $watchDashboardStatus.textContent = "別のタブで保存された、より新しい確認済み状態を反映しました";
+    $watchDashboardStatus.className = "watch-dashboard-status ok";
+    $watchDashboardStatus.setAttribute("tabindex", "-1");
+    $watchDashboardStatus.focus({preventScroll:true});
+    return;
+  }
   const before = {...WATCH_STATE};
   WATCH_STATE.lastCheckedChangeDate = LATEST_CHANGE_DATE;
   WATCH_STATE.lastCheckedAt = new Date().toISOString();
