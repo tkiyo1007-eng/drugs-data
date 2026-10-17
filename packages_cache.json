@@ -5329,5 +5329,212 @@
    "pkg": "PTP100錠",
    "until": "2026年11月"
   }
+ ],
+ "https://med.sawai.co.jp/file/pr28_116_1.pdf": [
+  {
+   "pkg": "バラ500g",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr28_4584_3.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP140錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ200錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr28_1352_3.pdf": [
+  {
+   "pkg": "PTP14錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP56錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP140錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP28錠",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr28_1210_2.pdf": [
+  {
+   "pkg": "PTP100Cap",
+   "until": ""
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP1000錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ1000錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP700錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ500錠",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr28_155_4.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ500錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP700錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP1000錠",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr28_176_3.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": "2027年4月"
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP1000錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ1000錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ500錠",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr28_94_2.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": "2026年12月"
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP1000錠",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr28_1315_2.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": "2027年4月"
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ500錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr28_4655_1.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ500錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ1000錠",
+   "until": ""
+  }
+ ],
+ "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20251217_009.pdf?_gl=1%2A132acro%2A_gcl_au%2AMTIwNzY1OTcyOC4xNzYwNTkyNjY2": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP140錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  }
+ ],
+ "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20251217_005.pdf?_gl=1%2A132acro%2A_gcl_au%2AMTIwNzY1OTcyOC4xNzYwNTkyNjY2": [],
+ "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20251217_007.pdf?_gl=1%2A132acro%2A_gcl_au%2AMTIwNzY1OTcyOC4xNzYwNTkyNjY2": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ300錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ200錠",
+   "until": ""
+  }
  ]
 }
