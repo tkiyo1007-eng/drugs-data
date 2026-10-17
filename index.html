@@ -216,6 +216,14 @@ body{
 /* 固定ナビに見出しが隠れないよう、すべてのページ内リンク先に共通の余白を確保する */
 section[id]{scroll-margin-top:90px}
 
+/* 外観は検索条件から独立し、このブラウザだけに保存する */
+.appearance-control{display:flex;justify-content:flex-end;align-items:center;gap:8px 12px;flex-wrap:wrap;margin:14px 0 16px}
+.appearance-control[hidden]{display:none}
+.appearance-control label{font-size:13px;font-weight:700;color:var(--ink)}
+.appearance-control select{min-height:44px;max-width:100%;padding:8px 12px;border:1px solid var(--sub);border-radius:12px;background:var(--bg);color:var(--ink);font:inherit;font-size:14px}
+.appearance-control select:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.appearance-status{flex-basis:100%;font-size:12px;color:var(--sub);text-align:right;overflow-wrap:anywhere}
+
 /* スマホの主要導線とアプリ紹介。モバイルだけに表示する */
 .mobile-quick-nav{display:none}
 .mobile-quick-link{
@@ -888,9 +896,12 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 .modal-note{font-size:11.5px;color:var(--sub);margin-top:14px;line-height:1.8}
 .featured-research-copy a,.featured-research-sources a{color:#194cad;text-decoration:underline;text-underline-offset:.15em}
-@media(prefers-color-scheme:dark){
+</style>
+<style media="(prefers-color-scheme: dark)" data-appearance-scheme="dark">
   .featured-research-copy a,.featured-research-sources a{color:#9dbbff}
-}
+
+</style>
+<style>
 .maker-link{
   display:flex;align-items:center;justify-content:space-between;gap:10px;
   margin-top:16px;padding:13px 16px;border-radius:14px;text-decoration:none;
@@ -918,10 +929,13 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   color:#7A4A12;background:rgba(232,145,47,.14);border:1px solid rgba(232,145,47,.35);
 }
 .pkg-note{font-size:10.5px;color:var(--sub);margin-top:8px;line-height:1.7}
-@media(prefers-color-scheme:light){
+</style>
+<style media="(prefers-color-scheme: light)" data-appearance-scheme="light">
   #mPkgs .pkg-title{color:#91400A}
   #mPkgs .pkg-note{color:#47577D}
-}
+
+</style>
+<style>
 .maker-link[hidden]{display:none}
 @media(max-width:640px){
   .modal-backdrop{padding:0;align-items:flex-end}
@@ -1179,7 +1193,8 @@ footer a:hover{color:var(--blue)}
    「白いすりガラス」を「暗い藍のすりガラス」に置き換える。
    ステータス4色（緑/橙/赤/茶）は識別性が命なので色相は変えず、
    暗背景でのコントラストを確保するために明度だけ上げる。 */
-@media (prefers-color-scheme: dark){
+</style>
+<style media="(prefers-color-scheme: dark)" data-appearance-scheme="dark">
   :root{
     --blue-deep:#7FA6FF;
     --blue:#6D9BFF;
@@ -1299,7 +1314,9 @@ footer a:hover{color:var(--blue)}
   .pinned-item + .pinned-item{border-top-color:rgba(126,152,214,.16)}
   .pinned-alerts{background:rgba(255,122,122,.07);border-color:rgba(255,122,122,.25);border-left-color:var(--stopped)}
   .topic-points li{border-color:rgba(126,152,214,.16)}
-}
+
+</style>
+<style>
 
 /* ===== 季節デザイン：ハロウィン（10月のみ） =====
    青いガラスの基調は変えず、ヒーローの背景（夜空・月・星・蜘蛛の巣）と見出し・飾りに紫と琥珀色を足す。
@@ -1376,7 +1393,8 @@ footer a:hover{color:var(--blue)}
   .season-sky .sb2{top:118px;left:auto;right:118px;width:20px;height:9px}
   .season-sky .sb3{display:none}
 }
-@media (prefers-color-scheme: dark){
+</style>
+<style media="(prefers-color-scheme: dark)" data-appearance-scheme="dark">
   .season-halloween .aurora{background:linear-gradient(170deg,#1A1238 0%,#130F2E 30%,#0D1026 62%,#0B1128 100%)}
   .season-halloween .aurora::before{opacity:.3}
   .season-halloween .aurora::after{opacity:.16}
@@ -1391,8 +1409,63 @@ footer a:hover{color:var(--blue)}
   .season-sky .sky-moon{opacity:1}
   .season-sky .sky-bat{color:#B9A6F2}
   .season-sky .sky-bunting{color:#6E5BA8}
-}
+
 </style>
+<script id="appearanceScript">
+// 既存の色メディアをその場で切り替え、規則の順番・検索・医薬品情報は変更しない。
+(function(){
+  const key = "drugSupplyNaviAppearanceV1";
+  const normalize = value => value === "light" || value === "dark" ? value : "system";
+  const styles = Array.from(document.querySelectorAll("style[data-appearance-scheme]"), element => ({
+    element, scheme:element.dataset.appearanceScheme, media:element.media
+  }));
+  const metas = Array.from(document.querySelectorAll('meta[name="theme-color"][media]'), element => ({
+    element, scheme:element.media.includes("dark") ? "dark" : "light", media:element.media
+  }));
+  const system = window.matchMedia("(prefers-color-scheme: dark)");
+  let mode = "system", saved = true;
+  try{ mode = normalize(localStorage.getItem(key)); }catch(e){ saved = false; }
+  function apply(){
+    for(const item of styles.concat(metas)){
+      item.element.media = mode === "system" ? item.media : mode === item.scheme ? "all" : "not all";
+    }
+    const root = document.documentElement;
+    root.dataset.appearance = mode;
+    root.dataset.colorScheme = mode === "system" ? system.matches ? "dark" : "light" : mode;
+    root.style.colorScheme = mode === "system" ? "light dark" : mode;
+    const select = document.getElementById("appearanceSelect");
+    if(select) select.value = mode;
+    const status = document.getElementById("appearanceStatus");
+    if(status) status.textContent = saved
+      ? "選択はこのブラウザに保存されます。"
+      : "設定を保存できないため、次回は引き継がれません。この画面の表示は切り替えられます。";
+  }
+  apply(); // 本文の描画前に保存済みの外観を適用する
+  document.addEventListener("DOMContentLoaded", function(){
+    const control = document.getElementById("appearanceControl");
+    const select = document.getElementById("appearanceSelect");
+    if(!control || !select) return;
+    select.addEventListener("change", function(){
+      mode = normalize(select.value);
+      saved = true;
+      try{ localStorage.setItem(key, mode); }catch(e){ saved = false; }
+      apply();
+    });
+    apply();
+    control.hidden = false;
+  });
+  const onSystemChange = function(){ if(mode === "system") apply(); };
+  if(system.addEventListener) system.addEventListener("change", onSystemChange);
+  else system.addListener(onSystemChange);
+  window.addEventListener("storage", function(event){
+    if(event.key !== key && event.key !== null) return;
+    try{ if(event.storageArea && event.storageArea !== localStorage) return; }catch(e){ return; }
+    mode = normalize(event.newValue);
+    saved = true;
+    apply();
+  });
+})();
+</script>
 </head>
 <body>
 <div class="aurora"><div class="blob"></div></div>
@@ -1525,7 +1598,18 @@ footer a:hover{color:var(--blue)}
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       <input id="q" type="search" placeholder="薬品名・成分名・メーカー名・YJコードで検索" aria-label="薬品名・成分名・メーカー名・YJコードで検索" aria-describedby="searchHelp" autocomplete="off">
     </div>
+
     <button type="button" class="search-results-jump" id="searchResultsJump" aria-controls="meta list" hidden disabled>検索結果を見る</button>
+    <div class="appearance-control" id="appearanceControl" hidden>
+      <label for="appearanceSelect">外観</label>
+      <select id="appearanceSelect" aria-describedby="appearanceStatus">
+        <option value="system">端末設定に合わせる</option>
+        <option value="light">ライトモード</option>
+        <option value="dark">ダークモード</option>
+      </select>
+      <p class="appearance-status" id="appearanceStatus" role="status" aria-live="polite">選択はこのブラウザに保存されます。</p>
+    </div>
+
     <p class="search-help" id="searchHelp">メーカー名・YJコードにも対応。複数語は空白で区切ると、すべてを含む品目に絞り込みます。</p>
     <p class="search-help" id="searchIntentHelp">限定出荷・供給停止は厚労省の公表区分を一覧で確認できます。販売中止・製造中止はメーカー案内、薬価削除・経過措置は厚労省の薬価資料で確認し、現在の出荷対応と分けて扱います。</p>
     <nav class="supply-entry-links" aria-label="供給状況と終了情報の一覧・調べ方">
