@@ -4496,6 +4496,7 @@ function toggleFav(item){
 }
 addEventListener("storage", event=>{
   if(event.key !== "favDrugKeysV2") return;
+  const resultFocus = captureSearchResultFocus(document.activeElement);
   FAVS = readStoredFavoriteKeys();
   updateFavPill();
   renderWatchDashboard();
@@ -4505,6 +4506,11 @@ addEventListener("storage", event=>{
   if(currentDetailKey){
     const currentItem = findByKey(currentDetailKey);
     if(currentItem) syncModalFavorite(currentItem);
+  }
+  if(resultFocus){
+    const target = searchResultFocusTarget(resultFocus);
+    if(canRestoreHistoryFocus(target)) target.focus({preventScroll:true});
+    else focusSearchResultSummary();
   }
 });
 function syncModalFavorite(item){
