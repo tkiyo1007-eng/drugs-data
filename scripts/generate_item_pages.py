@@ -199,7 +199,7 @@ def quick_answers_html(row: dict, status: str, display_name: str) -> str:
         <div><dt>{esc(question)}</dt><dd>厚生労働省公表データの出荷対応は「<strong>{esc(raw_status)}</strong>」{reason_part}です。{esc(official_status_meaning(row, status))}公表されていない個別事情は推測していません。</dd></div>
         <div><dt>解除・解消見込みの公表区分は？</dt><dd>公表欄の記載は「<strong>{esc(release)}</strong>」です。この欄は見込みの有無を示す区分です。具体的な時期は厚生労働省の公式システムとメーカー案内の原文もご確認ください。</dd></div>
         <div><dt>公表上の出荷量は？</dt><dd>出荷量状況の記載は「<strong>{esc(shipment)}</strong>」です。実際の在庫や受注可否は卸・メーカーにもご確認ください。</dd></div>
-        <div><dt>この品目情報はいつ更新？</dt><dd>品目行で確認できる最新日は「<strong>{esc(updated)}</strong>」です。サイト全体の基準日は下に別表示します。</dd></div>
+        <div><dt>この品目情報はいつ更新？</dt><dd>品目行で確認できる最新日は「<strong>{esc(updated)}</strong>」です。サイト全体の基準日は、このページ上部で別に表示します。</dd></div>
       </dl>
     </section>'''
 
