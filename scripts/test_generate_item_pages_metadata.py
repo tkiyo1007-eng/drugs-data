@@ -353,11 +353,11 @@ class ItemPageMetadataTests(unittest.TestCase):
 
     def test_sitemap_lastmod_uses_fixed_template_revision_without_advancing_daily(self):
         old_row = {"商品名": "対象錠", "更新日": "2024/03/11"}
-        self.assertEqual(item_page_lastmod(old_row), "2026-10-06")
+        self.assertEqual(item_page_lastmod(old_row), "2026-10-17")
         future_notice = {"product_name": "対象錠", "maker": "対象製薬",
-                         "announced_at": "2026-10-13"}
+                         "announced_at": "2026-10-23"}
         old_row["製造メーカー"] = "対象製薬"
-        self.assertEqual(item_page_lastmod(old_row, future_notice), "2026-10-13")
+        self.assertEqual(item_page_lastmod(old_row, future_notice), "2026-10-23")
 
     def test_discrepancy_must_match_current_official_row_and_manufacturer(self):
         row = {
@@ -806,13 +806,13 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
 
     def test_manual_notice_lastmod_is_not_advanced_by_generation_or_daily_attempt(self):
         row, notice = self.row(), self.notice()
-        self.assertEqual("2026-10-14", item_page_lastmod(row, manufacturer_notices=[notice]))
+        self.assertEqual("2026-10-17", item_page_lastmod(row, manufacturer_notices=[notice]))
         notice["listed_at"] = "2026-10-20"
-        self.assertEqual("2026-10-14", item_page_lastmod(row, manufacturer_notices=[notice]))
-        notice["content_updated_at"] = "2026-10-16"
-        self.assertEqual("2026-10-16", item_page_lastmod(row, manufacturer_notices=[notice]))
+        self.assertEqual("2026-10-17", item_page_lastmod(row, manufacturer_notices=[notice]))
+        notice["content_updated_at"] = "2026-10-21"
+        self.assertEqual("2026-10-21", item_page_lastmod(row, manufacturer_notices=[notice]))
         notice["targets"][0]["product_name"] = "別の品目"
-        self.assertEqual("2026-10-06", item_page_lastmod(row, manufacturer_notices=[notice]))
+        self.assertEqual("2026-10-17", item_page_lastmod(row, manufacturer_notices=[notice]))
 
 
     def test_discontinuation_timing_device_candidate_and_no_candidate_statement_are_not_reinterpreted(self):
@@ -944,8 +944,8 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
         self.assertNotIn("メーカー：販売中止予定", output)
         for value in ("終了予定時期：", "2027-12", lifecycle["supply_end_note"], lifecycle["supply_end_packages"][0], "終了予定の原文確認日"):
             self.assertNotIn(value, output)
-        self.assertEqual("2026-10-14", item_page_lastmod(row, lifecycle, manufacturer_notices=[notice], manufacturer_bulletins=bulletins))
-        self.assertIn('"dateModified":"2026-10-14"', output)
+        self.assertEqual("2026-10-17", item_page_lastmod(row, lifecycle, manufacturer_notices=[notice], manufacturer_bulletins=bulletins))
+        self.assertIn('"dateModified":"2026-10-17"', output)
 
     def test_changed_lifecycle_hub_is_pending_and_does_not_search_stale_end_details(self):
         row, notice = self.row(), self.notice()
@@ -981,7 +981,7 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
         self.assertNotIn("確認日が7日以上前のため", output)
         self.assertNotIn("メーカー公式：販売中止予定", output)
         self.assertIn("厚労省：通常出荷", output)
-        self.assertIn('"dateModified":"2026-10-14"', output)
+        self.assertIn('"dateModified":"2026-10-17"', output)
         entry = {"key": row["YJコード"], "name": row["商品名"], "maker": lifecycle["maker"],
                  "status": "ok", "updated": "2026-07-07", "lifecycle": lifecycle,
                  "lifecycle_current": False, "supplements": supplemental_labels(
@@ -1014,7 +1014,8 @@ class DatasetSourceDateTests(unittest.TestCase):
            "YJコード": "1234567F1234", "製造メーカー": "検証製薬"}
 
     def version(self, source="2026-10-08", imported="2026-10-14"):
-        return {"note": imported + "厚労省データ反映", "mhlw_excel_date": source}
+        return {"note": imported + "厚労省データ反映", "mhlw_excel_date": source,
+                "version": imported.replace("-", "") + "0300"}
 
     def page(self, metadata=None, imported="2026-10-14"):
         return page_html(self.row, "1234567F1234", "limited", "2099-01-01", [],
@@ -1134,53 +1135,163 @@ class DatasetSourceDateTests(unittest.TestCase):
         self.assertIn("items/1234567F1234.html</loc><lastmod>" + item_page_lastmod(self.row) + "</lastmod>", sitemap)
         self.assertNotIn("items/1234567F1234.html</loc><lastmod>2099-01-01", sitemap)
 
+    def run_version_check(self, received, *, output=None, mode="success", expire=False,
+                          late="", clock="2026-10-14T12:00:00+09:00"):
+        output = self.page(self.version()) if output is None else output
+        script = re.search(r'<script>\s*(\(function\(\).*?)</script>', output, re.S).group(1)
+        initial = {}
+        for selector in ("dataset-date", "mhlw-excel-date", "dataset-date-context",
+                         "current-dataset-date", "current-mhlw-excel-date", "current-dataset-status"):
+            initial["." + selector] = re.findall(
+                r'<span class="' + selector + r'"[^>]*>(.*?)</span>', output, re.S)
+        initial_warning = re.search(r'<p id="datasetWarningText">(.*?)</p>', output, re.S)
+        runner = r"""
+const fs = require('fs'),vm = require('vm');
+const input = JSON.parse(fs.readFileSync(0,'utf8'));
+const nodes = Object.fromEntries(Object.entries(input.initial).map(([key,values])=>[key,values.map(textContent=>({textContent}))]));
+const warning = {hidden:input.warningHidden},warningText = {textContent:input.warningText};
+const timers = new Map(),deadlines=[],requests=[],unhandled=[];let serial=0,finishHeaders,failHeaders,finishBody,failBody;
+process.on('unhandledRejection',error=>unhandled.push(error.message));
+global.document = {getElementById:id=>id==='datasetWarning'?warning:id==='datasetWarningText'?warningText:null,querySelectorAll:selector=>nodes[selector]||[]};
+global.localStorage = {getItem:()=> '[]'};global.addEventListener=()=>{};
+Date.now=()=>Date.parse(input.clock);
+global.setTimeout=(callback,ms)=>{deadlines.push(ms);timers.set(++serial,callback);return serial;};
+global.clearTimeout=id=>timers.delete(id);
+const response=()=>({ok:input.mode!=='http-error',headers:{get:()=>input.mode==='cached'?'cache':null},json:()=>{
+ if(input.mode==='json-error')return Promise.reject(new SyntaxError('invalid JSON'));
+ if(input.mode==='body-pending')return new Promise((resolve,reject)=>{finishBody=resolve;failBody=reject;});
+ return Promise.resolve(input.received);
+}});
+global.fetch=(url,options)=>{
+ requests.push({url,options});
+ if(input.mode==='network-error')return Promise.reject(new Error('network'));
+ if(input.mode==='headers-pending')return new Promise((resolve,reject)=>{finishHeaders=resolve;failHeaders=reject;});
+ return Promise.resolve(response());
+};
+const settle=async()=>{for(let i=0;i<8;i++)await Promise.resolve();await new Promise(resolve=>setImmediate(resolve));};
+const state=()=>({values:Object.fromEntries(Object.entries(nodes).map(([key,values])=>[key,values.map(node=>node.textContent)])),warning:{hidden:warning.hidden,text:warningText.textContent}});
+(async()=>{
+ vm.runInThisContext(input.script);await settle();const beforeDeadline=state();
+ if(input.expire){for(const callback of [...timers.values()])callback();await settle();}
+ const afterDeadline=state();
+ if(input.late==='success'){
+  if(finishHeaders)finishHeaders(response());if(finishBody)finishBody(input.received);await settle();
+  if(finishBody)finishBody(input.received);
+ }else if(input.late==='reject'){
+  if(failHeaders)failHeaders(new Error('late headers'));if(failBody)failBody(new Error('late body'));
+ }
+ await settle();
+ process.stdout.write(JSON.stringify({beforeDeadline,afterDeadline,final:state(),deadlines,activeTimers:timers.size,requests:requests.map(r=>({url:r.url,cache:r.options.cache,hasSignal:r.options.signal instanceof AbortSignal,aborted:r.options.signal?.aborted})),unhandled}));
+})().catch(error=>{console.error(error);process.exitCode=1;});
+"""
+        result = subprocess.run([shutil.which("node"), "-e", runner], input=json.dumps({
+            "script": script, "received": received, "initial": initial, "mode": mode,
+            "expire": expire, "late": late, "clock": clock,
+            "warningHidden": bool(re.search(r'id="datasetWarning"[^>]*\bhidden\b', output)),
+            "warningText": initial_warning.group(1) if initial_warning else "",
+        }), capture_output=True, text=True, timeout=10)
+        self.assertEqual(0, result.returncode, result.stderr)
+        state = json.loads(result.stdout)
+        self.assertEqual([], state["unhandled"])
+        # Every outcome preserves the actual immutable HTML reference, including footer copies.
+        for phase in ("beforeDeadline", "afterDeadline", "final"):
+            for selector in (".dataset-date", ".mhlw-excel-date", ".dataset-date-context"):
+                self.assertEqual(initial[selector], state[phase]["values"][selector])
+        return state
+
     @unittest.skipUnless(shutil.which("node"), "Node.jsがありません")
     def test_generated_script_handles_old_invalid_mixed_cached_and_clock_cases(self):
-        script = re.search(r'<script>\s*(\(function\(\).*?)</script>', self.page(self.version()), re.S).group(1)
-        runner = r"""
-const fs = require('fs');
-const vm = require('vm');
-const input = JSON.parse(fs.readFileSync(0, 'utf8'));
-const nodes = {'.dataset-date': [{textContent:'generated'}], '.mhlw-excel-date': [{textContent:'generated'}], '.dataset-date-context': [{textContent:'generated'}]};
-const warning = {textContent:'', hidden:true};
-global.document = {getElementById: id => id === 'datasetWarning' ? warning : null, querySelectorAll: selector => nodes[selector] || []};
-global.localStorage = {getItem: () => '[]'};
-global.addEventListener = () => {};
-Date.now = () => 0;
-global.fetch = async () => {
-  if(input.failed) throw new Error('unavailable');
-  return {ok:true, headers:{get: () => input.cached ? 'cache' : null}, json:async () => input.version};
-};
-vm.runInThisContext(input.script);
-setImmediate(() => process.stdout.write(JSON.stringify({source:nodes['.mhlw-excel-date'][0].textContent, imported:nodes['.dataset-date'][0].textContent, context:nodes['.dataset-date-context'][0].textContent, warning})));
-"""
-        cases = [
-            ({"note": "2026年10月14日厚労省データ反映"}, False, False, "確認できません", "2026-10-14"),
-            (self.version(), False, False, "2026-10-08", "2026-10-14"),
-            (self.version("2026-02-30"), False, False, "確認できません", "2026-10-14"),
-            ({"note": "2026年2月30日厚労省データ反映", "mhlw_excel_date": "2026-02-28"}, False, False, "確認できません", "確認できません"),
-            ({"note": "2026年2月30日厚労省データ反映", "mhlw_excel_date": "2026-02-28"}, True, False, "確認できません", "確認できません"),
-            (self.version("0000-10-08"), False, False, "確認できません", "2026-10-14"),
-            (self.version("2026-10-15"), False, False, "確認できません", "2026-10-14"),
-            ({"mhlw_excel_date": "2026-10-08"}, False, False, "確認できません", "確認できません"),
-            ({"note": ["2026年10月14日厚労省データ反映"], "mhlw_excel_date": "2026-10-08"}, False, False, "確認できません", "確認できません"),
-            ({"version": [202610140514], "mhlw_excel_date": "2026-10-08"}, False, False, "確認できません", "確認できません"),
-            ({"version": True, "mhlw_excel_date": "2026-10-08"}, False, False, "確認できません", "確認できません"),
-            ([{"note": "2026年10月14日"}], False, False, "確認できません", "確認できません"),
-            ({"version": 202610140514, "mhlw_excel_date": "2026-10-08"}, False, False, "2026-10-08", "2026-10-14"),
-            (self.version(), True, False, "確認できません", "2026-10-14（前回取得）"),
-            (self.version(), False, True, "確認できません", "確認できません"),
-            (self.version("2099-10-08", "2099-10-14"), False, False, "2099-10-08", "2099-10-14"),
+        valid = self.version()
+        invalid = [
+            {"note": "2026年10月14日厚労省データ反映"},
+            self.version("2026-02-30"), self.version("0000-10-08"), self.version("2026-10-15"),
+            {"note": "2026年2月30日厚労省データ反映", "mhlw_excel_date": "2026-02-28", "version": 202602300300},
+            {"mhlw_excel_date": "2026-10-08"},
+            {"note": ["2026年10月14日"], "mhlw_excel_date": "2026-10-08"},
+            {"version": [202610140300], "mhlw_excel_date": "2026-10-08"},
+            {"version": True, "mhlw_excel_date": "2026-10-08"},
+            [{"note": "2026年10月14日"}], {}, None,
+            {**valid, "version": 9007199254740992}, {**valid, "version": "not-a-version"},
+            {**valid, "version": 202610150300},
         ]
-        for metadata, cached, failed, source, imported in cases:
-            with self.subTest(metadata=metadata, cached=cached, failed=failed):
-                result = subprocess.run([shutil.which("node"), "-e", runner], input=json.dumps(
-                    {"script":script, "version":metadata, "cached":cached, "failed":failed}),
-                    capture_output=True, text=True, check=True)
-                rendered = json.loads(result.stdout)
-                self.assertEqual(source, rendered["source"])
-                self.assertEqual(imported, rendered["imported"])
-                self.assertNotEqual("generated", rendered["context"])
+        for metadata in invalid:
+            with self.subTest(metadata=metadata):
+                state = self.run_version_check(metadata)
+                self.assertEqual(["確認できません"], state["final"]["values"][".current-dataset-date"])
+                self.assertFalse(state["final"]["warning"]["hidden"])
+                self.assertIn("一致は未確認", state["final"]["warning"]["text"])
+                self.assertEqual(0, state["activeTimers"])
+        for mode in ("cached", "network-error", "http-error", "json-error"):
+            with self.subTest(mode=mode):
+                state = self.run_version_check(valid, mode=mode)
+                self.assertEqual(["確認できません"], state["final"]["values"][".current-mhlw-excel-date"])
+                self.assertEqual(["確認できません"], state["final"]["values"][".current-dataset-date"])
+                self.assertFalse(state["final"]["warning"]["hidden"])
+                self.assertIn("未確認", state["final"]["warning"]["text"])
+                self.assertEqual(0, state["activeTimers"])
+        for clock, message in (("2026-10-13T12:00:00+09:00", "端末日時"),
+                               ("2026-10-22T12:00:00+09:00", "7日以上")):
+            with self.subTest(clock=clock):
+                state = self.run_version_check(valid, clock=clock)
+                self.assertIn(message, state["final"]["warning"]["text"])
+                self.assertFalse(state["final"]["warning"]["hidden"])
+                if "端末日時" in message:
+                    self.assertNotIn("7日以上", state["final"]["warning"]["text"])
+
+    def test_page_reference_dates_and_recheck_link_precede_actions_without_js(self):
+        output = self.page(self.version())
+        self.assertIn('class="item-freshness"', output)
+        self.assertLess(output.index('class="stbox '), output.index('class="item-freshness"'))
+        self.assertLess(output.index('class="item-freshness"'), output.index('class="watch-card"'))
+        self.assertEqual(1, output.count('<p class="dataset-context">'))
+        self.assertIn('id="datasetWarning" role="status">', output)
+        self.assertIn("このページの情報と現在のデータの一致は未確認です", output)
+        self.assertIn('href="https://kyokyu-navi.jp/#item=1234567F1234" data-dsn-event="item-web-open">Web版で同じ品目', output)
+        self.assertNotIn("生成日：", output)
+        self.assertIn('rel="canonical" href="https://kyokyu-navi.jp/items/1234567F1234.html"', output)
+        self.assertIn('localStorage.setItem("favDrugKeysV2"', output)
+
+    @unittest.skipUnless(shutil.which("node"), "Node.jsがありません")
+    def test_only_complete_same_generation_can_hide_the_item_warning(self):
+        received = self.version()
+        state = self.run_version_check(received)
+        self.assertTrue(state["final"]["warning"]["hidden"])
+        self.assertEqual(["2026-10-14"], state["final"]["values"][".current-dataset-date"])
+        self.assertIn("供給内容は再取得していません", state["final"]["values"][".current-dataset-status"][0])
+        variants = [
+            {**received, "version": 202610141200},  # Same calendar date, different data generation.
+            self.version("2026-10-09"),           # Same identifier, different source Excel date.
+            self.version("2026-10-14", "2026-10-15"),
+        ]
+        for metadata in variants:
+            with self.subTest(metadata=metadata):
+                state = self.run_version_check(metadata)
+                self.assertFalse(state["final"]["warning"]["hidden"])
+                self.assertIn("一致は未確認", state["final"]["warning"]["text"])
+                self.assertNotIn("新しい", state["final"]["warning"]["text"])
+        for static in (None, {}, self.version(None), {**received, "version": None}):
+            with self.subTest(static=static):
+                state = self.run_version_check(received, output=self.page(static))
+                self.assertFalse(state["final"]["warning"]["hidden"])
+                self.assertIn("一致は未確認", state["final"]["warning"]["text"])
+        state = self.run_version_check(received, output=self.page(received, imported=""))
+        self.assertFalse(state["final"]["warning"]["hidden"])
+        self.assertEqual(["確認できません", "確認できません"], state["final"]["values"][".dataset-date"])
+
+    @unittest.skipUnless(shutil.which("node"), "Node.jsがありません")
+    def test_version_deadline_covers_headers_body_and_late_results(self):
+        for mode in ("headers-pending", "body-pending"):
+            for late in ("success", "reject"):
+                with self.subTest(mode=mode, late=late):
+                    state = self.run_version_check(self.version(), mode=mode, expire=True, late=late)
+                    self.assertEqual([30000], state["deadlines"])
+                    self.assertEqual(0, state["activeTimers"])
+                    self.assertEqual([{"url": "../version.json", "cache": "no-cache", "hasSignal": True, "aborted": True}], state["requests"])
+                    self.assertIn("一致は未確認", state["afterDeadline"]["warning"]["text"])
+                    self.assertIn("取得できません", state["afterDeadline"]["values"][".current-dataset-status"][0])
+                    self.assertFalse(state["afterDeadline"]["warning"]["hidden"])
+                    self.assertEqual(state["afterDeadline"], state["final"], "late completion must not overwrite the settled warning")
+
 
 
 if __name__ == "__main__":
