@@ -82,6 +82,29 @@ class ExtractPdfPackagesTests(unittest.TestCase):
                 self.assertIsInstance(result, ValueError)
                 reader.assert_not_called()
 
+    def test_rejected_mime_reports_bounded_header_and_signature_without_body(self):
+        for body, mime, signature in [
+                (b"<html>private-body-not-for-logs</html>", "text/html; charset=utf-8", False),
+                (b"%PDF-private-body-not-for-logs", "application/json", True)]:
+            with self.subTest(mime=mime):
+                result, _, transport, reader, _ = self.extract(body=body, content_type=mime)
+                self.assertIsInstance(result, ValueError)
+                self.assertIn(f"Content-Type={mime!a}; PDF署名={signature}", str(result))
+                self.assertNotIn("private-body-not-for-logs", str(result))
+                self.assertEqual(transport.call_count, 1)
+                reader.assert_not_called()
+
+    def test_rejected_mime_diagnostic_escapes_controls_and_limits_header_characters(self):
+        mime = "text/html\n\x1b\t" + "x" * 80 + "not-logged-tail"
+        result, _, _, reader, _ = self.extract(content_type=mime)
+        self.assertIsInstance(result, ValueError)
+        self.assertIn(f"Content-Type={mime[:80]!a}; PDF署名=True", str(result))
+        self.assertNotIn("not-logged-tail", str(result))
+        self.assertNotIn("\n", str(result))
+        self.assertNotIn("\x1b", str(result))
+        self.assertNotIn("\t", str(result))
+        reader.assert_not_called()
+
     def test_pdf_magic_is_required_with_missing_or_generic_type(self):
         for mime in [None, "application/octet-stream", "application/x-pdf", "APPLICATION/PDF; charset=binary"]:
             with self.subTest(mime=mime):
@@ -146,6 +169,24 @@ class ExtractPdfPackagesTests(unittest.TestCase):
         self.assertTrue(all(page.extract_text.call_count == 1 for page in pages[:4]))
         pages[4].extract_text.assert_not_called()
         result, _, _, _, _ = self.extract(texts=("包装単位の記載なし", None))
+        self.assertEqual(result, [])
+
+    def test_standalone_marked_alternative_heading_stops_later_packages_across_pages(self):
+        for heading in ("■代替品", " ■ 代替品　", "　■　代替品\t"):
+            with self.subTest(heading=heading):
+                result, _, _, _, _ = self.extract(texts=(
+                    "ＰＴＰ１００錠 2026年11月", f"{heading}\nPTP500錠 2027年3月", "バラ1000錠"))
+                self.assertEqual(result, [{"pkg": "PTP100錠", "until": "2026年11月"}])
+
+    def test_body_words_bare_heading_and_other_labels_do_not_stop_extraction(self):
+        for wording in ("代替品への切替をご検討ください", "代替\n品への切り替え", "代替品",
+                        "●代替品", "■代替品について", "■代 替 品", "【代替品】"):
+            with self.subTest(wording=wording):
+                result, _, _, _, _ = self.extract(texts=(f"{wording}\nPTP100錠 2026年11月",))
+                self.assertEqual(result, [{"pkg": "PTP100錠", "until": "2026年11月"}])
+
+    def test_alternative_heading_before_any_original_package_returns_empty(self):
+        result, _, _, _, _ = self.extract(texts=("案内文\n■代替品\nPTP500錠",))
         self.assertEqual(result, [])
 
     def run_main(self, announcements, existing=None, *, limit=60, extraction=None, day=date(2026, 10, 17)):

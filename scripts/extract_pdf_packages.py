@@ -38,6 +38,8 @@ PKG_RE = re.compile(
     r'(?:錠|カプセル|Cap|包|枚|管|瓶|袋|本|個|g|mL|ｇ|ｍＬ|キット)(?:[×x]\s*\d+)?'
 )
 DATE_RE = re.compile(r'20\d{2}年\d{1,2}月')
+# 明示的な独立見出し以降を原品の包装へ混ぜない。本文中の語や他の見出しは推測しない。
+ALTERNATIVE_HEADING_RE = re.compile(r'\s*■\s*代替品\s*')
 
 
 class NoRedirect(urllib.request.HTTPRedirectHandler):
@@ -76,14 +78,17 @@ def extract_from_pdf(url):
         if r.status != 200:
             raise ValueError(f"PDF取得失敗 HTTP {r.status}")
         data = r.read(MAX_PDF_BYTES + 1)
-        content_type = r.headers.get("Content-Type", "").split(";", 1)[0].strip().lower()
+        raw_content_type = r.headers.get("Content-Type", "")
+        content_type = raw_content_type.split(";", 1)[0].strip().lower()
     if len(data) > MAX_PDF_BYTES:
         raise ValueError("PDF取得サイズ上限超過（8MiB）")
     if not data:
         raise ValueError("空の応答。包装記載なしとして保存しない")
+    has_pdf_signature = data.lstrip().startswith(b"%PDF-")
     if content_type not in ("", "application/pdf", "application/x-pdf", "application/octet-stream", "binary/octet-stream"):
-        raise ValueError("PDF以外の応答種別。職種確認・ログイン等を自動通過しない")
-    if not data.lstrip().startswith(b"%PDF-"):
+        raise ValueError("PDF以外の応答種別。職種確認・ログイン等を自動通過しない "
+                         f"Content-Type={raw_content_type[:80]!a}; PDF署名={has_pdf_signature}")
+    if not has_pdf_signature:
         raise ValueError("PDFではない応答。包装記載なしとして保存しない")
     import pypdf
     reader = pypdf.PdfReader(io.BytesIO(data))
@@ -91,6 +96,8 @@ def extract_from_pdf(url):
     text = unicodedata.normalize("NFKC", text)
     found = []
     for line in text.split("\n"):
+        if ALTERNATIVE_HEADING_RE.fullmatch(line):
+            break
         for m in PKG_RE.finditer(line):
             until = DATE_RE.search(line)
             entry = {"pkg": m.group(0).replace(" ", ""), "until": until.group(0) if until else ""}

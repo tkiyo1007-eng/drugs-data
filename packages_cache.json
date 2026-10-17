@@ -5307,5 +5307,27 @@
    "pkg": "PTP100錠",
    "until": ""
   }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/36650/information/IE2081-01.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/03130/information/IE2041-01.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP1000錠",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/files/IG0811-01.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": "2026年11月"
+  }
  ]
 }
