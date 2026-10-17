@@ -40,7 +40,7 @@ OFFICIAL_SUPPLY_URL = "https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-l
 MHLW_PRICE_LIST_URL = "https://www.mhlw.go.jp/topics/2026/04/tp20260401-01.html"
 # 全品目へ一次情報・状態別ハブ・運営方針の導線を追加した実質的な改訂日。
 # 日次生成日ではなく固定値にし、内容が変わらない日にlastmodを進めない。
-ITEM_PAGE_TEMPLATE_LASTMOD = "2026-10-06"  # 成分別ページへの導線を追加
+ITEM_PAGE_TEMPLATE_LASTMOD = "2026-10-17"  # 静的参照日を保持し、現在の世代確認と取得期限を分離
 # 状態別5一覧の実質的な改訂日。個別品目のlastmodは進めない。
 HUB_TEMPLATE_LASTMOD = "2026-10-14"
 # ページ内検索の対象は、テンプレートの改訂日とは別に維持する。
@@ -199,7 +199,7 @@ def quick_answers_html(row: dict, status: str, display_name: str) -> str:
         <div><dt>{esc(question)}</dt><dd>厚生労働省公表データの出荷対応は「<strong>{esc(raw_status)}</strong>」{reason_part}です。{esc(official_status_meaning(row, status))}公表されていない個別事情は推測していません。</dd></div>
         <div><dt>解除・解消見込みの公表区分は？</dt><dd>公表欄の記載は「<strong>{esc(release)}</strong>」です。この欄は見込みの有無を示す区分です。具体的な時期は厚生労働省の公式システムとメーカー案内の原文もご確認ください。</dd></div>
         <div><dt>公表上の出荷量は？</dt><dd>出荷量状況の記載は「<strong>{esc(shipment)}</strong>」です。実際の在庫や受注可否は卸・メーカーにもご確認ください。</dd></div>
-        <div><dt>この品目情報はいつ更新？</dt><dd>品目行で確認できる最新日は「<strong>{esc(updated)}</strong>」です。サイト全体の基準日は下に別表示します。</dd></div>
+        <div><dt>この品目情報はいつ更新？</dt><dd>品目行で確認できる最新日は「<strong>{esc(updated)}</strong>」です。サイト全体の基準日は、このページ上部で別に表示します。</dd></div>
       </dl>
     </section>'''
 
@@ -1284,8 +1284,25 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
     # 全ページのHTMLが差し替わり、drugs-data に毎日2,000件規模の無意味なコミットが
     # 積まれてしまう（履歴から「実際に何が変わったか」が読めなくなる）
     # noJSでも原典日と取込日を区別できるよう、生成時に渡されたversionだけを表示する。
-    # 日付表示の追加で品目のdateModified/lastmodは進めない。
+    # 原典日・取込日の変化だけを品目のdateModified/lastmodへ混ぜない。
+    # 表示構造・照合処理の実質改訂日は、固定のテンプレート日で別に管理する。
     dataset_context = dataset_dates_html(dataset_date, version_metadata)
+    reference_metadata = version_metadata if isinstance(version_metadata, dict) else {}
+    reference_version = reference_metadata.get("version")
+    reference_version = (str(reference_version).strip()
+                         if isinstance(reference_version, (str, int))
+                         and not isinstance(reference_version, bool) else "")
+    reference_import = version_date(reference_metadata)
+    if reference_import != dataset_date:
+        reference_import = ""
+    if (not re.fullmatch(r"[0-9]{8,14}", reference_version)
+            or reference_version[:8] != reference_import.replace("-", "")):
+        reference_version = ""
+    dataset_reference = ld_json({
+        "version": reference_version,
+        "imported": reference_import,
+        "source": mhlw_excel_date(version_metadata, dataset_date),
+    })
     title = page_title(name, st["label"], supplements, title_qualifier)
     desc = (f"{display_name}（{maker}）の厚生労働省公表データ上の供給区分は「{st['label']}」"
             + ("（薬価削除予定）" if delist else "")
@@ -1491,6 +1508,12 @@ h1{{font-size:22px;line-height:1.45;margin-bottom:6px}}
 .dataset-context{{color:var(--sub);font-size:12px;line-height:1.7;margin:-8px 0 14px}}
 .dataset-warning{{color:#704700;background:#FFF3CF;border:1px solid #E4B662;border-radius:10px;padding:9px 12px;font-size:12px;margin:0 0 14px}}
 .dataset-warning[hidden]{{display:none}}
+.item-freshness{{margin:14px 0 20px;padding:14px;border:1px solid #CFDBF2;border-radius:12px;background:#F8FAFF}}
+.item-freshness h2{{font-size:15px;margin:0 0 8px}}
+.item-freshness .dataset-context{{margin:0 0 10px;overflow-wrap:anywhere}}
+.current-dataset-context{{font-size:12px;color:var(--sub);line-height:1.7;overflow-wrap:anywhere}}
+.item-freshness .dataset-warning{{margin:10px 0 0}}
+.dataset-warning a{{display:inline-block;margin-top:5px;color:inherit;font-weight:700}}
 .quick-answers{{margin:18px 0 16px;background:#F8FAFF;border:1px solid #CFDBF2;border-radius:14px;padding:16px}}
 .quick-answers h2{{margin:0 0 10px;font-size:17px}}
 .quick-answers dl>div{{padding:10px 0;border-top:1px solid var(--line)}}
@@ -1547,6 +1570,18 @@ footer a{{color:var(--sub)}}
     <div class="stbox status-{status}">
       厚生労働省公表データ上の供給区分は「<strong>{st['label']}</strong>」です。{STATUS_NOTES[status]}
     </div>
+    <section class="item-freshness" aria-labelledby="itemFreshnessTitle">
+      <h2 id="itemFreshnessTitle">このページが参照したデータ</h2>
+      {dataset_context}
+      <p class="current-dataset-context">現在のサイト全体の確認：<span class="current-dataset-status">取得前・未確認</span><br>
+        現在の厚労省原Excel基準日：<span class="current-mhlw-excel-date">確認できません</span><br>
+        現在のサイト取込日：<span class="current-dataset-date">確認できません</span>
+      </p>
+      <div class="dataset-warning" id="datasetWarning" role="status">
+        <p id="datasetWarningText">このページの情報と現在のデータの一致は未確認です。</p>
+        <a href="{lp_link}" data-dsn-event="item-web-open">Web版で同じ品目の現在の表示を確認</a>
+      </div>
+    </section>
     <div class="watch-card">
       <button class="watch-button" id="watchButton" type="button" aria-pressed="false">☆ この品目を監視リストに追加</button>
       <p class="watch-note">このブラウザ内だけに保存し、次回Web版を開いたときに変化を確認できます。Web版から通知は届きません（プッシュ通知はiOSアプリのみ）。</p>
@@ -1563,8 +1598,6 @@ footer a{{color:var(--sub)}}
       </div>
       <p class="item-search-note" id="itemSearchNote">検索語はURLの#以降に保持し、アクセス解析には送りません。</p>
     </form>
-    {dataset_context}
-    <p class="dataset-warning" id="datasetWarning" role="status" hidden></p>
 {delist_box}
 {supplemental_checked}
 {lifecycle_box}
@@ -1673,53 +1706,86 @@ footer a{{color:var(--sub)}}
     }}
   }});
   const datasetWarning = document.getElementById("datasetWarning");
-  fetch("../version.json", {{cache:"no-cache"}})
-    .then(function(response){{
-      if(!response.ok) throw new Error("version");
-      const cached = response.headers.get("X-DSN-Source") === "cache";
-      return response.json().then(function(version){{ return {{version:version,cached:cached}}; }});
-    }})
+  const datasetWarningText = document.getElementById("datasetWarningText");
+  const pageDatasetReference = {dataset_reference};
+  const datasetController = new AbortController();
+  const DATASET_CHECK_TIMEOUT_MS = 30000;
+  let datasetTimer;
+  function validIsoDay(value){{
+    if(typeof value !== "string" || !/^[0-9]{{4}}-[0-9]{{2}}-[0-9]{{2}}$/.test(value) || value.startsWith("0000-")) return false;
+    const timestamp = Date.parse(value + "T00:00:00Z");
+    return Number.isFinite(timestamp) && new Date(timestamp).toISOString().slice(0, 10) === value;
+  }}
+  function readDatasetReference(version){{
+    if(!version || typeof version !== "object" || Array.isArray(version)) return null;
+    const raw = version.version;
+    const identifier = typeof raw === "string" ? raw.trim()
+      : typeof raw === "number" && Number.isSafeInteger(raw) ? String(raw) : "";
+    if(!/^[0-9]{{8,14}}$/.test(identifier)) return null;
+    const note = typeof version.note === "string" ? version.note : "";
+    const text = note + " " + identifier;
+    const match = text.match(/(\\d{{4}})年(\\d{{1,2}})月(\\d{{1,2}})日/) || text.match(/(\\d{{4}})-(\\d{{1,2}})-(\\d{{1,2}})/) || text.match(/\\b(\\d{{4}})(\\d{{2}})(\\d{{2}})\\d*\\b/);
+    const imported = match ? match[1] + "-" + String(match[2]).padStart(2,"0") + "-" + String(match[3]).padStart(2,"0") : "";
+    const source = version.mhlw_excel_date;
+    if(!validIsoDay(imported) || !validIsoDay(source) || source > imported
+      || identifier.slice(0,8) !== imported.replaceAll("-", "")) return null;
+    return {{version:identifier, imported:imported, source:source}};
+  }}
+  function showCurrentDataset(imported, source, status){{
+    document.querySelectorAll(".current-dataset-date").forEach(function(node){{ node.textContent = imported; }});
+    document.querySelectorAll(".current-mhlw-excel-date").forEach(function(node){{ node.textContent = source; }});
+    document.querySelectorAll(".current-dataset-status").forEach(function(node){{ node.textContent = status; }});
+  }}
+  function warnDataset(message){{
+    datasetWarningText.textContent = message;
+    datasetWarning.hidden = false;
+  }}
+  // ヘッダーとJSON本文の完了をひとつの期限で囲む。取得中は静的な参照日を変更しない。
+  const datasetRequest = (async function(){{
+    const response = await fetch("../version.json", {{cache:"no-cache", signal:datasetController.signal}});
+    if(!response.ok) throw new Error("version");
+    const cached = response.headers.get("X-DSN-Source") === "cache";
+    const reference = readDatasetReference(await response.json());
+    if(!reference) throw new Error("invalid version");
+    return {{reference:reference, cached:cached}};
+  }})();
+  const datasetDeadline = new Promise(function(resolve, reject){{
+    datasetTimer = setTimeout(function(){{
+      datasetController.abort();
+      reject(new Error("version timeout"));
+    }}, DATASET_CHECK_TIMEOUT_MS);
+  }});
+  // 遅着した取得処理はDOMに触れず、先に確定した結果だけを表示する。
+  Promise.race([datasetRequest, datasetDeadline])
     .then(function(result){{
-      const version = result.version;
-      const versionObject = version && typeof version === "object" && !Array.isArray(version);
-      const note = versionObject && typeof version.note === "string" ? version.note : "";
-      const identifier = versionObject && (typeof version.version === "string" || typeof version.version === "number") ? version.version : "";
-      const text = note + " " + String(identifier);
-      const match = text.match(/(\\d{{4}})年(\\d{{1,2}})月(\\d{{1,2}})日/) || text.match(/(\\d{{4}})-(\\d{{1,2}})-(\\d{{1,2}})/) || text.match(/\\b(\\d{{4}})(\\d{{2}})(\\d{{2}})\\d*\\b/);
-      const candidateDate = match ? match[1] + "-" + String(match[2]).padStart(2,"0") + "-" + String(match[3]).padStart(2,"0") : "";
-      const date = validIsoDay(candidateDate) ? candidateDate : "確認できません";
-      const label = date + (result.cached && date !== "確認できません" ? "（前回取得）" : "");
-      document.querySelectorAll(".dataset-date").forEach(function(node){{ node.textContent = label; }});
-      function validIsoDay(value){{
-        if(typeof value !== "string" || !/^[0-9]{{4}}-[0-9]{{2}}-[0-9]{{2}}$/.test(value) || value.startsWith("0000-")) return false;
-        const timestamp = Date.parse(value + "T00:00:00Z");
-        return Number.isFinite(timestamp) && new Date(timestamp).toISOString().slice(0, 10) === value;
-      }}
-      const source = versionObject ? version.mhlw_excel_date : null;
-      // cached versionと静的品目CSVの同一世代は確定できないため、原Excel日は表示しない。
-      const sourceDate = !result.cached && validIsoDay(source) && validIsoDay(date) && source <= date ? source : "確認できません";
-      document.querySelectorAll(".mhlw-excel-date").forEach(function(node){{ node.textContent = sourceDate; }});
-      document.querySelectorAll(".dataset-date-context").forEach(function(node){{
-        node.textContent = result.cached ? "前回取得した全体データの確認情報です。" : "現在取得した全体データの確認情報です。";
-      }});
       if(result.cached){{
-        datasetWarning.textContent = "オフライン等のため、前回取得したデータ基準日を表示しています。接続後に再読み込みしてください。";
-        datasetWarning.hidden = false;
-      }}else if(date !== "確認できません"){{
-        const ageDays = Math.floor((Date.now() - Date.parse(date + "T00:00:00+09:00")) / 86400000);
-        if(ageDays < 0 || ageDays >= 7){{
-          datasetWarning.textContent = "公開データ基準日が7日以上更新されていません。重要な判断では厚生労働省公式とメーカー案内もご確認ください。";
-          datasetWarning.hidden = false;
-        }}
+        showCurrentDataset("確認できません", "確認できません", "前回取得分のため現在の情報は未確認です。");
+        warnDataset("オフライン等で前回取得分が返されたため、このページの情報と現在のデータの一致は未確認です。接続後に再読み込みしてください。");
+        return;
+      }}
+      const current = result.reference;
+      const same = validIsoDay(pageDatasetReference.imported) && validIsoDay(pageDatasetReference.source)
+        && pageDatasetReference.version && current.version === pageDatasetReference.version
+        && current.imported === pageDatasetReference.imported && current.source === pageDatasetReference.source;
+      showCurrentDataset(current.imported, current.source, same
+        ? "参照したデータ識別子・日付が一致しました。品目の供給内容は再取得していません。"
+        : "全体情報は取得しましたが、表示中の品目情報との一致は未確認です。");
+      const ageDays = Math.floor((Date.now() - Date.parse(current.imported + "T00:00:00+09:00")) / 86400000);
+      if(!same){{
+        warnDataset("このページの情報と現在のデータの一致は未確認です。Web版で同じ品目の現在の表示を再確認してください。");
+      }}else if(ageDays < 0){{
+        warnDataset("取得した基準日と端末日時の整合を確認できません。このページの情報と現在のデータの一致は未確認です。");
+      }}else if(ageDays >= 7){{
+        warnDataset("公開データ基準日が7日以上更新されていません。現在の供給状況はWeb版・厚生労働省公式・メーカー案内で再確認してください。");
+      }}else{{
+        datasetWarning.hidden = true;
       }}
     }})
     .catch(function(){{
-      document.querySelectorAll(".dataset-date").forEach(function(node){{ node.textContent = "確認できません"; }});
-      document.querySelectorAll(".mhlw-excel-date").forEach(function(node){{ node.textContent = "確認できません"; }});
-      document.querySelectorAll(".dataset-date-context").forEach(function(node){{ node.textContent = "現在の全体データの確認情報を取得できません。"; }});
-      datasetWarning.textContent = "全体データ基準日を確認できません。重要な判断では厚生労働省公式とメーカー案内もご確認ください。";
-      datasetWarning.hidden = false;
-    }});
+      showCurrentDataset("確認できません", "確認できません", "現在の全体データの確認情報を取得できません。");
+      warnDataset("現在の全体データを確認できません。このページの情報と現在のデータの一致は未確認です。");
+    }})
+    .finally(function(){{ clearTimeout(datasetTimer); }});
 }})();
 </script>
 <script data-goatcounter="https://kt1007.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
