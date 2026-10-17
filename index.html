@@ -3004,6 +3004,7 @@ window.addEventListener("keydown", e=>{
 function render(shouldSyncHash = !isOrdinaryPageAnchor()){
   if(shouldSyncHash) cancelPendingPageAnchorRestore();
   syncSearchPriority();
+  renderedSearchState = null;
   if(DATA_STATE !== "ready"){
     SHOWN = [];
     LAST_HITS = [];
@@ -3087,6 +3088,8 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
   const shown = hits.slice(0, visibleCount);
   SHOWN = shown;
   LAST_HITS = hits;
+  renderedSearchState = {key:norm($q.value.trim()), filter};
+  resumePendingSearchTracking();
   $searchShareStatus.textContent = "";
   $meta.removeAttribute("aria-busy");
   $list.removeAttribute("aria-busy");
@@ -3111,7 +3114,10 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
       : `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="24" width="30" height="14" rx="7" transform="rotate(-18 29 31)"/><path d="M18 27l18 8" transform="rotate(-18 29 31)"/><circle cx="46" cy="46" r="8"/><path d="M52 52l6 6"/></svg>`;
     const allFilterButton = allFilterCount
       ? `<br><button type="button" class="empty-reset" id="emptyAllFilters">絞り込みを外して表示（${allFilterCount.toLocaleString()}件）</button>` : "";
-    $list.innerHTML = `<div class="empty"><div class="empty-icon">${icon}</div>${msg}${allFilterButton}${canReset ? `<br><button type="button" class="empty-reset" id="emptyReset">検索条件をクリア</button>` : ""}</div>`;
+    const activeFilterLabel = document.querySelector("#pills .pill.active")?.textContent.trim() || "すべて";
+    const conditionNote = isFavEmpty ? "" : `<p class="search-help">現在の絞り込み：${esc(activeFilterLabel)}${terms.length > 1
+      ? `<br>空白で区切った${terms.length}語をすべて含む品目に絞り込んでいます。` : ""}</p>`;
+    $list.innerHTML = `<div class="empty"><div class="empty-icon">${icon}</div>${msg}${conditionNote}${allFilterButton}${canReset ? `<br><button type="button" class="empty-reset" id="emptyReset">検索条件をクリア</button>` : ""}</div>`;
     $loadMore.hidden = true;
     if(shouldSyncHash) syncHashSoon(); // 0件でも検索語をURLに残す（リロード・共有で同じ状態を再現できる）
     else restorePendingPageAnchor();
@@ -3252,6 +3258,8 @@ window.addEventListener("hashchange", ()=>{
 // 入力が落ち着いてから描画する（IME変換中の中間文字列で無駄に描画しない効果もある）
 let searchTimer = null;
 let lastTrackedSearchKey = "";
+let pendingTrackedSearchKey = "";
+let renderedSearchState = null;
 function showPendingSearchState(){
   searchJumpPending = true;
   // 380msの入力待ち中に、前の検索語の品目を新しい検索結果のように見せない。
@@ -3269,11 +3277,23 @@ function showPendingSearchState(){
 }
 function trackCurrentSearch(){
   const key = norm($q.value.trim());
-  if(!LIVE || !key || key === lastTrackedSearchKey) return;
+  if(!key || key === lastTrackedSearchKey){ pendingTrackedSearchKey = ""; return; }
+  pendingTrackedSearchKey = key;
+  // 未確定の入力・未取得の履歴は検索0件ではない。確定済みの同じ条件の結果だけを計測する。
+  if(!LIVE || DATA_STATE !== "ready" || searchJumpPending || searchJumpComposing || historySearchComposing
+    || ((filter === "changed" || filter === "watchChanged") && !historyHasSnapshot())
+    || (filter === "ended" && SUPPLEMENTAL_STATE.lifecycle !== "loaded")
+    || renderedSearchState?.key !== key || renderedSearchState.filter !== filter) return;
+  pendingTrackedSearchKey = "";
   lastTrackedSearchKey = key;
   if(LAST_HITS.length && RELAXED_SEARCH) dsnTrack("search-relaxed");
   else if(LAST_HITS.length) dsnTrack("search-success");
   else dsnTrack("search-zero");
+}
+function resumePendingSearchTracking(){
+  if(!pendingTrackedSearchKey) return;
+  if(pendingTrackedSearchKey !== norm($q.value.trim())){ pendingTrackedSearchKey = ""; return; }
+  trackCurrentSearch();
 }
 $q.addEventListener("input", ()=>{
   cancelPendingPageAnchorRestore();
@@ -4255,6 +4275,8 @@ $q.addEventListener("compositionstart",()=>{ historySearchComposing = true; });
 $q.addEventListener("compositionend",()=>{
   historySearchComposing = false;
   if(historyViewPending) refreshHistoryViews();
+  // 全ての変換フラグを解除してから計測する。続くinputは既存の380ms待ちに任せる。
+  queueMicrotask(trackCurrentSearch);
 });
 document.getElementById("historyRetry").addEventListener("click",()=>{
   if(!LIVE || HISTORY_STATE.phase === "loading") return;
