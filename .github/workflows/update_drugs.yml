@@ -22,7 +22,8 @@ jobs:
           python-version: '3.11'
 
       - name: 依存ライブラリインストール
-        run: pip install openpyxl requests pytz pypdf
+        # AES PDFs: https://pypdf.readthedocs.io/en/stable/user/installation.html
+        run: pip install openpyxl requests pytz "pypdf[crypto]"
 
       - name: メーカー案内収集の回帰テスト
         run: python3 -m unittest discover -s scripts -p 'test_*.py'
