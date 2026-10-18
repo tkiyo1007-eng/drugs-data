@@ -1007,14 +1007,23 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 @media(max-width:640px){.topic-card{padding:20px}.topic-title{font-size:15px}.topic-points{padding-left:30px}}
 
 /* ===== 最近問い合わせが多い製品 ===== */
-.trending-list{display:flex;flex-wrap:wrap;gap:10px;padding:28px}
+.trending-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));align-items:start;gap:16px;padding:28px}
+.trending-entry{min-width:0}
 .trending-chip{
   display:inline-flex;align-items:center;text-decoration:none;cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:700;
-  padding:11px 20px;border-radius:999px;color:var(--blue-deep);
+  box-sizing:border-box;width:100%;min-height:44px;overflow-wrap:anywhere;padding:11px 20px;border-radius:22px;color:var(--blue-deep);
   background:rgba(79,128,244,.08);border:1px solid rgba(79,128,244,.22);
   transition:.2s;
 }
 .trending-chip:hover{background:rgba(79,128,244,.16);transform:translateY(-1px)}
+.trending-names{font-size:12px;line-height:1.7;color:var(--ink)}
+.trending-names summary{min-height:44px;box-sizing:border-box;padding:10px 12px;cursor:pointer;color:var(--blue-deep);font-weight:700;overflow-wrap:anywhere}
+.trending-names ul{list-style:none;margin:0;padding:0 10px 8px}
+.trending-names li+li{border-top:1px solid rgba(126,152,214,.25)}
+.trending-formal-link{display:block;min-height:44px;box-sizing:border-box;padding:10px 2px;color:var(--blue-deep);overflow-wrap:anywhere;text-underline-offset:3px}
+.trending-names li>small{display:block;padding:0 2px 10px;color:var(--sub);font-size:11px;overflow-wrap:anywhere}
+.trending-names-note{margin:0;padding:4px 12px 12px;color:var(--sub)}
+.trending-chip:focus-visible,.trending-names summary:focus-visible,.trending-formal-link:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 @media(max-width:640px){.trending-list{padding:20px}}
 
 /* ===== メーカー別の供給状況 ===== */
@@ -2210,7 +2219,7 @@ footer a:hover{color:var(--blue)}
 <section id="trending" class="reveal">
   <p class="sec-eyebrow">TRENDING</p>
   <h2>最近お問い合わせの多い製品</h2>
-  <p class="sec-lede">お問い合わせが増えている製品をまとめました。製品ごとのページでメーカー別の供給状況を比較できます。</p>
+      <p class="sec-lede">お問い合わせが増えている製品をまとめました。複数の規格・メーカーがある製品は、正式販売名の一覧を開いて品目ごとに確認できます。</p>
   <div class="trending-list glass" id="trendingList"></div>
   <p class="topic-note"><a href="products/index.html">注目製品の一覧を見る</a></p>
 </section>
@@ -5794,16 +5803,74 @@ function renderTrending(){
   };
   // Webの注目一覧だけから除外。共通データ・通常検索・既存の詳細URLは維持する。
   const hidden = new Set(["caduet", "caduet-1", "caduet-2", "caduet-3", "caduet-4",
-    "gentacin-ointment", "mounjaro-injection", "loxoprofen-sodium-tape", "celecox-tablets"]);
+    "gentacin-ointment", "mounjaro-injection", "loxoprofen-sodium-tape", "celecox-tablets", "concerta-tablets"]);
   // Webの入口だけを製品群へまとめる。共通データや規格別の既存URLは変更しない。
   const entries = TRENDING.filter(t=>!hidden.has(t.slug)
     && !/^amaluet(?:-[1-4])?$/.test(t.slug) && t.slug !== "movicol");
   entries.splice(Math.min(1, entries.length), 0,
-    {slug:"movicol",label:"モビコール",q:"モビコール"},
+    {slug:"movicol",label:"モビコール配合内用剤ＬＤ・ＨＤ",q:"モビコール"},
     {slug:"amaluet",label:"アマルエット配合錠１番〜４番",q:"アマルエット配合錠"});
-  document.getElementById("trendingList").innerHTML = entries.map(t=>
-    `<a class="trending-chip" href="${details[t.slug] ? '#item='+details[t.slug] : '#q='+encodeURIComponent(t.q)}">${esc(t.label)}</a>`).join("")
-    + `<a class="trending-chip" href="#q=${encodeURIComponent('テラムロ')}">テラムロ配合錠</a>`;
+  entries.push({slug:"teramuro",label:"テラムロ配合錠",q:"テラムロ"});
+  const groups = {
+    movicol:/^モビコール配合内用剤(?:LD|HD)$/,
+    amaluet:/^アマルエット配合錠[1-4]番/,
+    "kenacort-a-injection":/^ケナコルト-A/,
+    "arotinolol-tablets":/^アロチノロール塩酸塩錠/,
+    "nauzelin-od-tablets":/^ナウゼリンOD錠/,
+    "cibenzoline-succinate-tablets":/^シベンゾリンコハク酸塩錠/,
+    "rinderon-injection":/^リンデロン注/,
+    teramuro:/^テラムロ配合錠/,
+  };
+  const singleNames = {
+    "insulin-lispro-bs-solostar":"インスリン　リスプロＢＳ注ソロスター　ＨＵ「サノフィ」",
+  };
+  const grouped = Object.fromEntries(Object.keys(groups).map(slug=>[slug,[]]));
+  const groupPatterns = Object.entries(groups);
+  const singles = new Map();
+  const singleKeys = new Set(Object.values(details));
+  if(LIVE){
+    // 検証済みCSVの正式販売名をそのまま表示。名称・規格・メーカーを推測で補わない。
+    for(const item of ITEMS){
+      const key = normalizeYj(item.yj);
+      if(!key || !item.n) continue;
+      if(singleKeys.has(key)) singles.set(key,item);
+      const name = item.n.normalize("NFKC");
+      for(const [slug, pattern] of groupPatterns){
+        if(pattern.test(name)) grouped[slug].push(item);
+      }
+    }
+  }
+  const list = document.getElementById("trendingList");
+  const open = new Set(Array.from(list.querySelectorAll(".trending-names[open]"),node=>
+    node.closest("[data-trending-slug]").dataset.trendingSlug));
+  const active = document.activeElement;
+  const activeEntry = list.contains(active) ? active.closest("[data-trending-slug]") : null;
+  const focus = activeEntry ? {
+    slug:activeEntry.dataset.trendingSlug,
+    summary:active.hasAttribute("data-trending-summary"),
+    key:active.dataset.trendingKey || "",
+  } : null;
+  list.innerHTML = entries.map(t=>{
+    const key = details[t.slug];
+    const label = singles.get(key)?.n || singleNames[t.slug] || t.label;
+    let names = "";
+    if(groups[t.slug]){
+      const rows = grouped[t.slug].slice().sort((a,b)=>a.n.localeCompare(b.n,"ja",{numeric:true}) || a.yj.localeCompare(b.yj));
+      const summary = rows.length ? `正式販売名の一覧（${rows.length}品目）` : "正式販売名を確認";
+      const content = rows.length ? `<ul>${rows.map(item=>
+        `<li><a class="trending-formal-link" data-trending-key="${esc(normalizeYj(item.yj))}" href="#item=${esc(normalizeYj(item.yj))}">${esc(item.n)}</a><small>${esc(item.m)} · ${esc(item.spec)}</small></li>`).join("")}</ul>`
+        : `<p class="trending-names-note">${LIVE ? "読み込んだデータでは正式販売名を確認できませんでした。" : DATA_STATE === "error" ? "正式販売名を取得できません。時間をおいて再読み込みしてください。" : "正式販売名を確認中です。"}</p>`;
+      names = `<details class="trending-names"${open.has(t.slug) ? " open" : ""}><summary data-trending-summary="${esc(t.slug)}">${summary}</summary>${content}</details>`;
+    }
+    return `<div class="trending-entry" data-trending-slug="${esc(t.slug)}"><a class="trending-chip" href="${key ? '#item='+details[t.slug] : '#q='+encodeURIComponent(t.q)}">${esc(label)}</a>${names}</div>`;
+  }).join("");
+  if(focus){
+    const entry = Array.from(list.querySelectorAll("[data-trending-slug]")).find(node=>node.dataset.trendingSlug === focus.slug);
+    const target = focus.summary ? entry?.querySelector("summary") : focus.key
+      ? Array.from(entry?.querySelectorAll(".trending-formal-link") || []).find(node=>node.dataset.trendingKey === focus.key)
+      : entry?.querySelector(".trending-chip");
+    if(canRestoreHistoryFocus(target)) target.focus({preventScroll:true});
+  }
 }
 renderTrending();
 document.getElementById("trendingList").addEventListener("click", e=>{
@@ -6581,6 +6648,7 @@ function failDataLoad(message){
   LIVE = false;
   ITEMS = [];
   ITEM_NAME_COUNTS = null;
+  if(typeof renderTrending === "function") renderTrending();
   CSV_HEAD = null;
   setDatasetDate("");
   setDataControlsEnabled(false);
@@ -6672,6 +6740,7 @@ function failDataLoad(message){
   ITEM_NAME_COUNTS = null;
   LIVE = true;
   DATA_STATE = "ready";
+  renderTrending();
   setDataControlsEnabled(true);
   document.getElementById("dataLoadError").hidden = true;
   migrateLegacyFavorites(items);
