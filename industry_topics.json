@@ -35,6 +35,7 @@
     },
     {
       "slug": "viatris-distribution-change-20261015",
+      "pinned_until": "2026-12-31",
       "date": "2026.10.15",
       "tag": "流通体制変更",
       "tone": "info",
@@ -140,7 +141,6 @@
           "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html"
         }
       ],
-      "pinned_until": "2026-12-31",
       "target_queries": [
         "モビコール"
       ],
@@ -191,7 +191,6 @@
           "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html"
         }
       ],
-      "pinned_until": "2026-12-31",
       "target_queries": [
         "モビコール"
       ],
