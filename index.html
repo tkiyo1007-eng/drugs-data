@@ -3337,7 +3337,7 @@ $q.addEventListener("input", ()=>{
     visibleCount = PAGE_SIZE;
     applyPendingHistoryOrder();
     // 入力待ちの間にFAQ等へ移動した場合、結果は更新してもそのアンカーをURLから消さない。
-    render(scheduledAtPageAnchorGeneration === pageAnchorGeneration);
+    renderSupplementalSearchResults(scheduledAtPageAnchorGeneration === pageAnchorGeneration);
     trackCurrentSearch();
   }, 380);
 });
@@ -4369,11 +4369,13 @@ const patchKind = x =>
    旧版の商品名ベース favDrugs は初回だけ移行し、ロールバック互換のため併記を続ける。 */
 const normalizeYj = value => String(value || "").replace(/[^0-9A-Za-z]/g, "").toUpperCase();
 function itemKey(item){ return normalizeYj(item && item.yj) || `name:${item ? item.n : ""}`; }
+function readStoredFavoriteKeysOrThrow(){
+  const saved = JSON.parse(localStorage.getItem("favDrugKeysV2")||"[]");
+  if(!Array.isArray(saved)) throw new Error("監視リストの保存形式を確認できません");
+  return new Set(saved.map(String));
+}
 function readStoredFavoriteKeys(){
-  try{
-    const saved = JSON.parse(localStorage.getItem("favDrugKeysV2")||"[]");
-    if(Array.isArray(saved)) return new Set(saved.map(String));
-  }catch(e){}
+  try{ return readStoredFavoriteKeysOrThrow(); }catch(e){}
   return new Set();
 }
 let FAVS = readStoredFavoriteKeys();
@@ -4509,9 +4511,9 @@ function searchResultFocusTarget(saved){
   const favorite = [...$list.querySelectorAll(".fav-btn")].find(button=>button.dataset.key === saved.key);
   return saved.control === "favorite" ? favorite : favorite?.closest(".drug-card")?.querySelector(".drug-open");
 }
-function renderSupplementalSearchResults(){
+function renderSupplementalSearchResults(shouldSyncHash){
   const resultFocus = captureSearchResultFocus(document.activeElement);
-  render();
+  render(shouldSyncHash);
   if(!resultFocus) return;
   const target = searchResultFocusTarget(resultFocus);
   if(canRestoreHistoryFocus(target)) target.focus({preventScroll:true});
@@ -4665,6 +4667,18 @@ async function importWatchFile(file){
       $watchDashboardStatus.classList.add("warn");
       dsnTrack("watchlist-import-failed");
     }else{
+      // 別タブの未処理の追加・解除を保持し、読み取れない保存値は上書きしない。
+      try{ FAVS = readStoredFavoriteKeysOrThrow(); }
+      catch(e){
+        const message = "保存済みの監視リストを読み込めませんでした。追加は行っていません。ブラウザの保存設定を確認し、ページを再読み込みしてからお試しください。";
+        showStorageSaveError("favorites", message);
+        $watchImportResult.textContent = message;
+        $watchImportResult.classList.add("warn");
+        $watchDashboardStatus.textContent = message;
+        $watchDashboardStatus.classList.add("warn");
+        dsnTrack("watchlist-import-failed");
+        return;
+      }
       const beforeSize = FAVS.size;
       const before = new Set(FAVS);
       for(const key of foundKeys) FAVS.add(key);
