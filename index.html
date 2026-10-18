@@ -2241,7 +2241,7 @@ footer a:hover{color:var(--blue)}
 <section id="trending" class="reveal">
   <p class="sec-eyebrow">TRENDING</p>
   <h2>最近お問い合わせの多い製品</h2>
-      <p class="sec-lede">お問い合わせが増えている製品をまとめました。複数の規格・メーカーがある製品は、正式販売名の一覧を開いて品目ごとに確認できます。</p>
+      <p class="sec-lede">お問い合わせが増えている製品をまとめました。複数の規格・メーカーがある製品は、製品一覧を開いて品目ごとに確認できます。</p>
   <div class="trending-list glass" id="trendingList"></div>
   <p class="topic-note"><a href="products/index.html">注目製品の一覧を見る</a></p>
 </section>
@@ -5885,10 +5885,10 @@ function renderTrending(){
     let names = "";
     if(groups[t.slug]){
       const rows = grouped[t.slug].slice().sort((a,b)=>a.n.localeCompare(b.n,"ja",{numeric:true}) || a.yj.localeCompare(b.yj));
-      const summary = rows.length ? `正式販売名の一覧（${rows.length}品目）` : "正式販売名を確認";
+      const summary = rows.length ? `製品一覧（${rows.length}品目）` : "製品一覧";
       const content = rows.length ? `<ul>${rows.map(item=>
         `<li><a class="trending-formal-link" data-trending-key="${esc(normalizeYj(item.yj))}" href="#item=${esc(normalizeYj(item.yj))}">${esc(item.n)}</a><small>${esc(item.m)} · ${esc(item.spec)}</small></li>`).join("")}</ul>`
-        : `<p class="trending-names-note">${LIVE ? "読み込んだデータでは正式販売名を確認できませんでした。" : DATA_STATE === "error" ? "正式販売名を取得できません。時間をおいて再読み込みしてください。" : "正式販売名を確認中です。"}</p>`;
+        : `<p class="trending-names-note">${LIVE ? "読み込んだデータでは製品一覧を確認できませんでした。" : DATA_STATE === "error" ? "製品一覧を取得できません。時間をおいて再読み込みしてください。" : "製品一覧を確認中です。"}</p>`;
       names = `<details class="trending-names"${open.has(t.slug) ? " open" : ""}><summary data-trending-summary="${esc(t.slug)}">${summary}</summary>${content}</details>`;
     }
     return `<div class="trending-entry" data-trending-slug="${esc(t.slug)}"><a class="trending-chip" href="${key ? '#item='+details[t.slug] : '#q='+encodeURIComponent(t.q)}">${esc(label)}</a>${names}</div>`;
