@@ -5889,7 +5889,7 @@ function renderTrending(){
       const content = rows.length ? `<ul>${rows.map(item=>
         `<li><a class="trending-formal-link" data-trending-key="${esc(normalizeYj(item.yj))}" href="#item=${esc(normalizeYj(item.yj))}">${esc(item.n)}</a><small>${esc(item.m)} · ${esc(item.spec)}</small></li>`).join("")}</ul>`
         : `<p class="trending-names-note">${LIVE ? "読み込んだデータでは製品一覧を確認できませんでした。" : DATA_STATE === "error" ? "製品一覧を取得できません。時間をおいて再読み込みしてください。" : "製品一覧を確認中です。"}</p>`;
-      names = `<details class="trending-names"${open.has(t.slug) ? " open" : ""}><summary data-trending-summary="${esc(t.slug)}">${summary}</summary>${content}</details>`;
+      names = `<details class="trending-names"${open.has(t.slug) ? " open" : ""}><summary data-trending-summary="${esc(t.slug)}" aria-label="${esc(summary+"："+label)}">${summary}</summary>${content}</details>`;
     }
     return `<div class="trending-entry" data-trending-slug="${esc(t.slug)}"><a class="trending-chip" href="${key ? '#item='+details[t.slug] : '#q='+encodeURIComponent(t.q)}">${esc(label)}</a>${names}</div>`;
   }).join("");
