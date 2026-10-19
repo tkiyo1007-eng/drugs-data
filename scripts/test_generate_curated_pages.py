@@ -593,3 +593,15 @@ class CuratedPageGenerationTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TopicModificationDateTests(unittest.TestCase):
+    def test_collection_addition_preserves_existing_article_date(self):
+        from generate_curated_pages import topic_page
+        topic = {"slug": "old-topic", "tag": "供給予定", "title": "既存記事", "lede": "内容を維持", "date": "2026.10.01",
+                 "updated_at": "2026-10-15", "source": {"name": "原典", "url": "https://example.org/"}}
+        output = topic_page(topic, [], set(), {}, "2026-10-20")
+        self.assertEqual(json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', output, re.S)[1])["@graph"][0]["dateModified"], "2026-10-15")
+        topic.pop("updated_at")
+        output = topic_page(topic, [], set(), {}, "2026-10-20")
+        self.assertEqual(json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', output, re.S)[1])["@graph"][0]["dateModified"], "2026-10-20")
