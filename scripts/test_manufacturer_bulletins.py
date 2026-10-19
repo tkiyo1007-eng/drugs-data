@@ -43,6 +43,24 @@ class Transport:
 
 
 class MetadataTests(unittest.TestCase):
+    def test_fuso_registry_is_limited_to_the_verified_product_and_pdf(self):
+        root = Path(__file__).resolve().parents[1]
+        config = json.loads((root / 'manufacturer_feed_sources.json').read_text())
+        notices = json.loads((root / 'manufacturer_notices.json').read_text())
+        self.assertIs(mod.validate_registry(notices, config['sources']), notices)
+        source = next(s for s in config['sources'] if s['id'] == 'fuso-codeine')
+        notice = next(n for n in notices['notices'] if n['id'] == 'fuso-codeine-discontinuation-202509')
+        self.assertTrue(mod.in_scope(notice['url'], source['document_scope']))
+        self.assertEqual(1, len(source['document_scope']))
+        self.assertTrue(source['document_scope'][0]['exact'])
+        self.assertTrue(source['index_scope'][0]['exact'])
+        for url in [notice['url'].replace('www.fuso-pharm.co.jp', 'www.fuso-pharm.co.jp.evil.test'),
+                    'https://www.fuso-pharm.co.jp/med/other.pdf',
+                    source['index_url'] + 'other/']:
+            self.assertFalse(mod.in_scope(url, source['document_scope']))
+        previous = json.loads((root / 'manufacturer_bulletins.json').read_text())
+        self.assertEqual([], mod.validate_document(previous, config))
+
     def test_date_only_printed_listing_dates(self):
         self.assertEqual(mod.real_date("2026年10月13日更新"), "2026-10-13")
         self.assertEqual(mod.real_date("2026.10.13"), "2026-10-13")

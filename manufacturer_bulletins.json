@@ -91,6 +91,15 @@
       "error": null,
       "legacy_last_success": "2026-10-19",
       "legacy_collection_checked_date": "2026-10-19"
+    },
+    {
+      "id": "fuso-codeine",
+      "maker": "扶桑薬品工業",
+      "index_url": "https://www.fuso-pharm.co.jp/med/ph/products/33837/",
+      "status": "partial",
+      "last_success_at": null,
+      "coverage": "not_collected",
+      "warning": "今回登録した収集元です。この収集器による一覧・原典の自動確認はまだ行っていません。個別の原文確認日はmanufacturer_notices.jsonに別記しています。"
     }
   ],
   "items": [

@@ -40,7 +40,7 @@ OFFICIAL_SUPPLY_URL = "https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-l
 MHLW_PRICE_LIST_URL = "https://www.mhlw.go.jp/topics/2026/04/tp20260401-01.html"
 # 全品目へ一次情報・状態別ハブ・運営方針の導線を追加した実質的な改訂日。
 # 日次生成日ではなく固定値にし、内容が変わらない日にlastmodを進めない。
-ITEM_PAGE_TEMPLATE_LASTMOD = "2026-10-17"  # 静的参照日を保持し、現在の世代確認と取得期限を分離
+ITEM_PAGE_TEMPLATE_LASTMOD = "2026-10-19"  # 冒頭の公表理由・原文確認限界と規格別導線の実質改訂
 # 状態別5一覧の実質的な改訂日。個別品目のlastmodは進めない。
 HUB_TEMPLATE_LASTMOD = "2026-10-14"
 # ページ内検索の対象は、テンプレートの改訂日とは別に維持する。
@@ -202,6 +202,61 @@ def quick_answers_html(row: dict, status: str, display_name: str) -> str:
         <div><dt>この品目情報はいつ更新？</dt><dd>品目行で確認できる最新日は「<strong>{esc(updated)}</strong>」です。サイト全体の基準日は、このページ上部で別に表示します。</dd></div>
       </dl>
     </section>'''
+
+
+def supply_answer_html(row, status, notices=(), lifecycle=None, bulletins=None):
+    """現在区分・公表理由とメーカーの説明を分離し、終了理由を推測しない。"""
+    reason = str(row.get("理由") or "").strip() or "記載なし"
+    parts = [f'<p>厚生労働省公表データ上の供給区分は「<strong>{STATUSES[status]["label"]}</strong>」です。'
+             + (f'公表理由は「<strong>{esc(reason)}</strong>」です。' if status != "ok" else "")
+             + f'品目行の更新日：{esc(official_row_date(row) or "確認できません")}。</p>']
+    if status == "ended":
+        parts.append(f'<p>{esc(STATUS_NOTES[status])}</p>')
+    matches = matching_manufacturer_notices(row, notices, bulletins)
+    # 包装限定・原典変更検出済みの理由を品目全体の回答へ転用しない。
+    reasons = [m for m in matches if not m["source_changed"]
+               and m["target"]["scope"] == "product" and m["notice"].get("reason")]
+    for match in reasons:
+        notice = match["notice"]
+        parts.append(f'<p>メーカー説明の理由（{esc(notice["title"])}）：{esc(notice["reason"])}'
+                     f' <a href="#manufacturerNoticesTitle">メーカー原文・公表年月日・確認日を見る</a></p>')
+    # 終了理由の確認案内は検索改善の対象品目だけに限定する。
+    # 薬価削除予定や通常出荷の他品目へ、終了理由不明の文言を一律に加えない。
+    if item_key(row) in REVOTOMIN_VARIANTS | {"2242001B2335", "3339950R1142"}:
+        has_end_notice = any(not m["source_changed"] and m["notice"].get("event_type") == "discontinued"
+                             for m in matches)
+        if not has_end_notice:
+            parts.append('<p>このページに収録した情報だけでは、メーカーが説明する具体的な販売終了理由は確認できません。'
+                         '理由は推測せず、メーカー原文での確認が必要です。</p>')
+        parts.append(f'<p>供給停止・販売中止・製造中止・薬価削除は別の情報です。'
+                     f'<a href="{DISCONTINUATION_GUIDE}">終了案内と薬価の確認手順</a>で確認先を分けて説明しています。</p>')
+    if item_key(row) == "2649805M1026" and status == "limited":
+        parts.append('<p>この公表区分は限定出荷です。販売中止を示す区分ではありません。</p>')
+    return "".join(parts)
+
+
+# ブランドと規格の対応を推測せず、確認対象の正式YJを明示する。
+REVOTOMIN_VARIANTS = frozenset({"1172014F1043", "1172014F2120", "1172014F3070",
+                              "1172014B1033", "1172014B2048", "1172014D1077"})
+
+
+def product_variants_html(row, candidates, generated_keys):
+    if item_key(row) not in REVOTOMIN_VARIANTS:
+        return ""
+    variants = [x for x in candidates if item_key(x) in REVOTOMIN_VARIANTS
+                and normalized_text(x.get("一般名")) == normalized_text(row.get("一般名"))
+                and maker_tokens(x.get("製造メーカー")) == maker_tokens(row.get("製造メーカー"))]
+    if len(variants) < 2:
+        return ""
+    links = []
+    for variant in sorted(variants, key=item_key):
+        key = item_key(variant)
+        href = f"{key}.html" if key in generated_keys else SITE_ROOT + "#item=" + quote(key, safe="")
+        label = STATUSES[map_status(variant.get("供給状況") or "")]["label"]
+        links.append(f'<li><a href="{esc(href)}">{esc(variant["商品名"])}</a>：厚労省 {label}</li>')
+    return ('<section aria-labelledby="productVariantsTitle"><h2 id="productVariantsTitle">レボトミンの規格別供給状況</h2>'
+            '<p>規格・剤形ごとに公表区分を確認してください。販売予定や対象包装は各品目のメーカー原文で確認が必要です。代替や規格間の互換性を示す一覧ではありません。</p>'
+            '<ul>' + "".join(links) + '</ul></section>')
 
 
 def is_delist(row: dict) -> bool:
@@ -1241,7 +1296,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
               supplemental_trusted=True, supplemental_warning="", title_qualifier="",
               hub_slugs=(), display_names=None, category_codes=None,
               ingredient_slugs=None, manufacturer_notices=(), catalog_yj_codes=None,
-              manufacturer_bulletins=None, version_metadata=None):
+              manufacturer_bulletins=None, version_metadata=None, product_variants=()):
     name = row["商品名"].strip()
     display_name = f"{name}（{title_qualifier}）" if title_qualifier else name
     maker = (row.get("販売メーカー") or row.get("製造メーカー") or "").strip()
@@ -1304,15 +1359,17 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
         "source": mhlw_excel_date(version_metadata, dataset_date),
     })
     title = page_title(name, st["label"], supplements, title_qualifier)
+    public_metadata = supply_metadata_values(row)
+    reason_description = (f"。公表理由は「{(row.get('理由') or '記載なし').strip()}」"
+                          if status in {"limited", "stopped", "ended"} else "")
     desc = (f"{display_name}（{maker}）の厚生労働省公表データ上の供給区分は「{st['label']}」"
+            + reason_description
             + ("（薬価削除予定）" if delist else "")
             + (f"。メーカー公式補足は「{'／'.join(supplements)}」" if supplements else "")
             + "。サイト全体の最新基準日はページ上で別途表示します。"
             + "理由・解除見込みの公表区分・出荷量状況・同成分・同剤形のほかの品目は、公表されている場合に確認できます。")
-    public_metadata = supply_metadata_values(row)
     if status in {"limited", "stopped", "ended"}:
-        desc += (f"公表理由は「{(row.get('理由') or '記載なし').strip()}」、"
-                 f"解除・解消見込みは「{public_metadata.get('解除・解消見込み', '記載なし')}」です。")
+        desc += f"解除・解消見込みは「{public_metadata.get('解除・解消見込み', '記載なし')}」です。"
     url = f"{SITE_ROOT}items/{key}.html"
     # 商品名は同名品目があるため、LPの詳細リンクも一意な品目キーを使う。
     lp_link = SITE_ROOT + "#item=" + quote(key, safe="")
@@ -1444,6 +1501,8 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
         "isPartOf": {"@type": "WebSite", "name": "医薬品供給ナビ", "url": SITE_ROOT},
     })
     quick_answers = quick_answers_html(row, status, display_name)
+    supply_answer = supply_answer_html(row, status, manufacturer_notices, lifecycle_match, manufacturer_bulletins)
+    variants_html = product_variants_html(row, product_variants, generated_keys)
 
     return f"""<!DOCTYPE html>
 <html lang="ja">
@@ -1568,8 +1627,9 @@ footer a{{color:var(--sub)}}
     <h1>{esc(display_name)}<span class="tag status-{status}">厚労省：{st['label']}</span>{supplemental_tags}{delist_tag}</h1>
     <p class="maker">{esc(maker)}{('｜' + esc(spec)) if spec else ''}</p>
     <div class="stbox status-{status}">
-      厚生労働省公表データ上の供給区分は「<strong>{st['label']}</strong>」です。{STATUS_NOTES[status]}
+      {supply_answer}
     </div>
+{variants_html}
     <section class="item-freshness" aria-labelledby="itemFreshnessTitle">
       <h2 id="itemFreshnessTitle">このページが参照したデータ</h2>
       {dataset_context}
@@ -2372,6 +2432,7 @@ def main():
                 catalog_yj_codes=catalog_yj_codes,
                 manufacturer_bulletins=manufacturer_bulletins,
                 version_metadata=version_doc,
+                product_variants=by_gen.get(g, []),
             ), encoding="utf-8")
 
     (out / "index.html").write_text(index_html(entries, dataset_date, version_doc), encoding="utf-8")
