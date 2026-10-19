@@ -2,14 +2,14 @@
   "schema_version": 1,
   "generated_at": "2026-10-19",
   "source": {
-    "mhlw_version": 202610190219,
-    "mhlw_note": "2026年10月19日厚労省データ反映",
+    "mhlw_version": 202610200452,
+    "mhlw_note": "2026年10月20日厚労省データ反映",
     "manufacturer_checked_through": "2026-10-19"
   },
   "counts": {
-    "high": 4,
-    "review": 8,
-    "total": 12
+    "high": 3,
+    "review": 5,
+    "total": 8
   },
   "products": {
     "1179002F1122": {
@@ -27,34 +27,6 @@
         "maker": "沢井製薬",
         "title": "2026年9月14日 製品の供給状況一覧：アミトリプチリン塩酸塩錠10mg「サワイ」は供給停止",
         "url": "https://med.sawai.co.jp/file/pr115_1773_1.pdf",
-        "scope": "product"
-      },
-      "confidence": "high",
-      "reason": "メーカー・製品規格・公表日の一致を確認",
-      "badge": "情報差異あり",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": true,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "",
-        "verified_target_scope": ""
-      }
-    },
-    "2160003F1111": {
-      "product_name": "スマトリプタン錠５０ｍｇ「タカタ」",
-      "maker": "高田製薬",
-      "official": {
-        "status": "ok",
-        "label": "通常出荷",
-        "updated_at": "2024-10-24"
-      },
-      "manufacturer": {
-        "status": "stopped",
-        "label": "供給停止",
-        "announced_at": "2026-10-16",
-        "maker": "高田製薬",
-        "title": "2026/10/16 出荷停止に関するお知らせとお詫び_スマトリプタン錠50mg「タカタ」",
-        "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000cbw8-att/Sumatriptan.pdf",
         "scope": "product"
       },
       "confidence": "high",
@@ -208,62 +180,6 @@
         "verified_target_scope": ""
       }
     },
-    "4490026C1048": {
-      "product_name": "モンテルカスト細粒４ｍｇ「ＤＳＥＰ」",
-      "maker": "第一三共エスファ",
-      "official": {
-        "status": "limited",
-        "label": "限定出荷（他社品の影響）",
-        "updated_at": "2025-07-15"
-      },
-      "manufacturer": {
-        "status": "ok",
-        "label": "限定出荷解除・通常出荷",
-        "announced_at": "2026-10-16",
-        "maker": "第一三共エスファ",
-        "title": "2026.10.16 供給関連情報 ボリコナゾール錠 50mg「DSEP」PTP50錠、モンテルカストチュアブル錠 5mg「DSEP」PTP100錠、モンテルカスト細粒 4mg「DSEP」14包、140包 限定出荷解除のお知らせ",
-        "url": "https://med.daiichisankyo-ep.co.jp/information/files/2279/VOR_50_PTP50_MON_5_PTP100_4_PAC14PAC140_E1_K.pdf",
-        "scope": "ambiguous"
-      },
-      "confidence": "review",
-      "reason": "関連製品の案内ですが、本品の対象規格を機械判定できません",
-      "badge": "メーカー案内あり・原文確認",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": true,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "",
-        "verified_target_scope": ""
-      }
-    },
-    "4490026F1079": {
-      "product_name": "モンテルカストチュアブル錠５ｍｇ「ＤＳＥＰ」",
-      "maker": "第一三共エスファ",
-      "official": {
-        "status": "limited",
-        "label": "限定出荷（他社品の影響）",
-        "updated_at": "2025-06-18"
-      },
-      "manufacturer": {
-        "status": "ok",
-        "label": "限定出荷解除・通常出荷",
-        "announced_at": "2026-10-16",
-        "maker": "第一三共エスファ",
-        "title": "2026.10.16 供給関連情報 ボリコナゾール錠 50mg「DSEP」PTP50錠、モンテルカストチュアブル錠 5mg「DSEP」PTP100錠、モンテルカスト細粒 4mg「DSEP」14包、140包 限定出荷解除のお知らせ",
-        "url": "https://med.daiichisankyo-ep.co.jp/information/files/2279/VOR_50_PTP50_MON_5_PTP100_4_PAC14PAC140_E1_K.pdf",
-        "scope": "ambiguous"
-      },
-      "confidence": "review",
-      "reason": "関連製品の案内ですが、本品の対象規格を機械判定できません",
-      "badge": "メーカー案内あり・原文確認",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": true,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "",
-        "verified_target_scope": ""
-      }
-    },
     "6132011F1136": {
       "product_name": "セフポドキシムプロキセチル錠１００ｍｇ「ＳＷ」",
       "maker": "沢井製薬",
@@ -284,34 +200,6 @@
       "confidence": "high",
       "reason": "メーカー・製品規格・公表日の一致を確認",
       "badge": "情報差異あり",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": true,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "",
-        "verified_target_scope": ""
-      }
-    },
-    "6179001F1031": {
-      "product_name": "ボリコナゾール錠５０ｍｇ「ＤＳＥＰ」",
-      "maker": "第一三共エスファ",
-      "official": {
-        "status": "limited",
-        "label": "限定出荷（自社の事情）",
-        "updated_at": "2026-05-25"
-      },
-      "manufacturer": {
-        "status": "ok",
-        "label": "限定出荷解除・通常出荷",
-        "announced_at": "2026-10-16",
-        "maker": "第一三共エスファ",
-        "title": "2026.10.16 供給関連情報 ボリコナゾール錠 50mg「DSEP」PTP50錠、モンテルカストチュアブル錠 5mg「DSEP」PTP100錠、モンテルカスト細粒 4mg「DSEP」14包、140包 限定出荷解除のお知らせ",
-        "url": "https://med.daiichisankyo-ep.co.jp/information/files/2279/VOR_50_PTP50_MON_5_PTP100_4_PAC14PAC140_E1_K.pdf",
-        "scope": "ambiguous"
-      },
-      "confidence": "review",
-      "reason": "関連製品の案内ですが、本品の対象規格を機械判定できません",
-      "badge": "メーカー案内あり・原文確認",
       "evidence": {
         "maker_match": true,
         "exact_product_in_title": true,
