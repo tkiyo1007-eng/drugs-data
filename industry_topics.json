@@ -1,7 +1,71 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-15",
+  "updated_at": "2026-10-20",
   "topics": [
+    {
+      "slug": "kenacort-supply-plan-20261020",
+      "date": "2026.10.20",
+      "tag": "供給予定",
+      "tone": "warn",
+      "title": "ケナコルト-A注2製品、12月から出荷量を通常時の約30％へ引き上げ予定　限定出荷は継続",
+      "lede": "ブリストル・マイヤーズ スクイブは、ケナコルト-A注2製品の既存製造ラインで製造を再開したと案内しました。2026年12月から出荷量を通常出荷時の10～15％程度から30％程度へ引き上げる予定ですが、限定出荷は継続します。",
+      "points": [
+        "対象：ケナコルト-A筋注用関節腔内用水懸注40mg/1mL（10バイアル、統一商品コード279-11523-8）。",
+        "対象：ケナコルト-A皮内用関節腔内用水懸注50mg/5mL（5バイアル、統一商品コード279-11503-0）。",
+        "理由：新製造ラインの適格性評価の長期化により、2025年4月から限定出荷を継続しています。供給量回復のため既存製造ラインでの製造を再開し、一定量の在庫を積み増せる見通しが立ったとしています。",
+        "今後の予定：2026年12月から、通常出荷時の10～15％程度だった出荷量を30％程度まで引き上げます。「30％増量」や「通常出荷再開」という意味ではありません。",
+        "限定出荷は引き続き継続します。通常出荷の再開時期は今後の製造・供給状況を踏まえて案内するとしており、在庫消尽時期は未定です。",
+        "文書の出荷量区分はB.出荷量減少、対応状況は②限定出荷（自社の事情）です。新たな製造体制への移行準備も進めるとしています。"
+      ],
+      "notes": [
+        "メーカー文書の表記は2026年10月です。公式お知らせ一覧の掲載日は2026年10月19日、当サイトの記事掲載日は2026年10月20日です。",
+        "提供画像とメーカー公式PDF本文を照合しました。12月の出荷量引き上げは将来予定で、実施済み・在庫確保済みとは扱いません。厚生労働省の現在区分は書き換えていません。"
+      ],
+      "query": "ケナコルト",
+      "target_queries": [
+        "2454402A3033",
+        "2454402A2037"
+      ],
+      "source": {
+        "name": "ブリストル・マイヤーズ スクイブ：今後の供給予定についてのご案内（2026年10月・公式PDF）",
+        "url": "https://www.bmshealthcare.jp/assets/buildeasy/apac-commercial/bms-healthcare-jp/ja/documents/products/kenacort/News_KA2610.pdf"
+      },
+      "sources": [
+        {
+          "name": "メーカー公式お知らせ一覧（2026年10月19日掲載）",
+          "url": "https://www.bmshealthcare.jp/specialty/other"
+        }
+      ]
+    },
+    {
+      "slug": "luliconazole-iwaki-normal-shipment-plan-20261020",
+      "date": "2026.10.20",
+      "tag": "限定出荷解除予定",
+      "tone": "info",
+      "title": "ルリコナゾールクリーム・軟膏1％「イワキ」、10月下旬から通常出荷へ移行予定",
+      "lede": "岩城製薬の2026年10月の案内では、ルリコナゾールクリーム1％「イワキ」とルリコナゾール軟膏1％「イワキ」は、供給体制が整ったことから2026年10月下旬より通常出荷へ移行するとしています。解除予定の案内であり、現在すでに通常出荷となったことを示すものではありません。",
+      "points": [
+        "対象：ルリコナゾールクリーム1％「イワキ」10g×10。統一商品コード020-021719、GS1コード14987020021716。",
+        "対象：ルリコナゾール軟膏1％「イワキ」10g×10。統一商品コード020-021702、GS1コード14987020021709。",
+        "経緯：2026年7月17日から限定出荷としていた2製品について、供給体制が整ったため通常出荷へ移行すると説明しています。",
+        "通常出荷の開始時期：2026年10月下旬。日単位の開始日は記載されていません。",
+        "対象は岩城製薬の上記2剤形・包装です。他社のルリコナゾール製剤や「ルリコン」の解除案内ではありません。"
+      ],
+      "notes": [
+        "提供された岩城製薬「限定出荷解除のご案内」の画像に基づく要約です。文書表記は2026年10月で、日単位の発表日は記載されていません。2026年10月20日は当サイトの記事掲載日です。",
+        "該当する公式PDFの掲載URLは確認できていません。下のリンクはメーカー公式の医療関係者向けお知らせ一覧です。この10月の文書自体を同ページで確認できたという意味ではありません。",
+        "厚生労働省公表データの現在区分と、メーカーが示す10月下旬の予定は別情報です。供給区分を推測で通常出荷へ変更していません。"
+      ],
+      "query": "ルリコナゾール イワキ",
+      "target_queries": [
+        "2655712N1039",
+        "2655712M1033"
+      ],
+      "source": {
+        "name": "岩城製薬公式お知らせ一覧（10月の案内は提供画像で確認・該当PDFのURL未確認）",
+        "url": "https://www.iwakiseiyaku.co.jp/documents_for_medical.html"
+      }
+    },
     {
       "slug": "lilly-insulin-limited-shipment-20261015",
       "date": "2026.10.15",
@@ -31,7 +95,8 @@
           "name": "日本糖尿病学会｜日本イーライリリーのインスリン製剤に関する案内",
           "url": "https://www.jds.or.jp/modules/important/index.php?content_id=552"
         }
-      ]
+      ],
+      "updated_at": "2026-10-15"
     },
     {
       "slug": "viatris-distribution-change-20261015",
@@ -62,7 +127,8 @@
           "name": "Viatris e Channel｜製品コード・薬価一覧・中止品在庫消尽情報",
           "url": "https://www.viatris-e-channel.com/viatris-products/di/other/"
         }
-      ]
+      ],
+      "updated_at": "2026-10-15"
     },
     {
       "slug": "movicol-alternatives-20260930",
@@ -144,7 +210,8 @@
       "target_queries": [
         "モビコール"
       ],
-      "related_label": "代替候補"
+      "related_label": "代替候補",
+      "updated_at": "2026-10-15"
     },
     {
       "slug": "movicol-ld-hd-supply-restriction-20260929",
@@ -194,7 +261,8 @@
       "target_queries": [
         "モビコール"
       ],
-      "related_label": "メーカー案内の代替品"
+      "related_label": "メーカー案内の代替品",
+      "updated_at": "2026-10-15"
     },
     {
       "slug": "lulicon-alternatives-20260911",
@@ -288,7 +356,8 @@
           "name": "厚生労働省｜保険診療の理解のために【医科】（令和8年度）p.17 処方箋の「変更不可」欄・後発医薬品への変更調剤",
           "url": "https://www.mhlw.go.jp/content/001713152.pdf"
         }
-      ]
+      ],
+      "updated_at": "2026-10-15"
     },
     {
       "slug": "chuikyo-drug-price-hearing-20260826",
@@ -307,7 +376,8 @@
       "source": {
         "name": "厚生労働省｜中央社会保険医療協議会 薬価専門部会（第248回）",
         "url": "https://www.mhlw.go.jp/stf/newpage_75790.html"
-      }
+      },
+      "updated_at": "2026-10-15"
     },
     {
       "slug": "gentamicin-iwaki-class2-recall-20260817",
@@ -327,7 +397,8 @@
       "source": {
         "name": "岩城製薬「ゲンタマイシン硫酸塩軟膏0.1%『イワキ』自主回収（クラスII）に関するお詫びとお知らせ」（PDF）",
         "url": "https://www.iwakiseiyaku.co.jp/dcms_media/other/gmoosirase20260817.pdf"
-      }
+      },
+      "updated_at": "2026-10-15"
     },
     {
       "slug": "cefazolin-chm-2g-shipment-stop-20260817",
@@ -346,7 +417,8 @@
       "source": {
         "name": "ケミックス「セファゾリンNa注射用2g『CHM』出荷停止のご案内」（PDF）",
         "url": "https://www.chemixjp.co.jp/chemixwp/wp-content/uploads/2026/08/fc9d53232da3288819d641c74a001c38.pdf"
-      }
+      },
+      "updated_at": "2026-10-15"
     },
     {
       "slug": "sawai-six-products-limited-shipment-20260817",
@@ -373,7 +445,8 @@
       "source": {
         "name": "沢井製薬 供給・中止・発売情報（2026年8月17日付4資料）",
         "url": "https://med.sawai.co.jp/con_list.php?cate=5"
-      }
+      },
+      "updated_at": "2026-10-15"
     },
     {
       "slug": "alelock-5mg-class2-recall-20260817",
@@ -393,7 +466,8 @@
       "source": {
         "name": "協和キリン「アレロック錠5 一部ロットの自主回収（クラスII）に関するお知らせ」（PDF）",
         "url": "https://medical.kyowakirin.co.jp/site/infopdf/notice/1644.pdf"
-      }
+      },
+      "updated_at": "2026-10-15"
     },
     {
       "slug": "sawai-discontinued-products-20260805",
@@ -412,7 +486,8 @@
       "source": {
         "name": "沢井製薬 供給・中止・発売情報（添付資料：販売中止品目のお知らせ）",
         "url": "https://med.sawai.co.jp/con_list.php?cate=5"
-      }
+      },
+      "updated_at": "2026-10-15"
     },
     {
       "slug": "astra-zeneca-bms-merger-report-20260803",
@@ -428,7 +503,8 @@
       "source": {
         "name": "Bloomberg（Yahoo!ニュース）",
         "url": "https://news.yahoo.co.jp/articles/c6f5d95432ac4090b6ae9090105f2244ca056360"
-      }
+      },
+      "updated_at": "2026-10-15"
     },
     {
       "slug": "mounjaro-price-cut-20260803",
@@ -446,7 +522,8 @@
       "source": {
         "name": "日本イーライリリー プレスリリース（PDF）",
         "url": "https://mediaroom.lilly.com/PDFFiles/2026/26-36_com.jp.pdf"
-      }
+      },
+      "updated_at": "2026-10-15"
     },
     {
       "slug": "locoid-transfer-20260723",
@@ -464,7 +541,8 @@
       "source": {
         "name": "鳥居薬品・チェプラファーム プレスリリース（PDF）",
         "url": "https://www.torii.co.jp/release/2026/20260723_1.pdf"
-      }
+      },
+      "updated_at": "2026-10-15"
     },
     {
       "slug": "efluelda-launch-delay-20260721",
@@ -480,7 +558,8 @@
       "source": {
         "name": "サノフィ プレスリリース（PDF）",
         "url": "https://www.sanofi.co.jp/assets/dot-jp/pressreleases/2026/260721-02.pdf"
-      }
+      },
+      "updated_at": "2026-10-15"
     }
   ]
 }

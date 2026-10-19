@@ -138,6 +138,8 @@ def validate(base: Path) -> list[str]:
                 seen_slugs.add(slug)
                 if not valid_date(item.get("date"), dotted=True):
                     errors.append(f"{prefix}.date: YYYY.MM.DDで指定してください")
+                if "updated_at" in item and not valid_date(item["updated_at"]):
+                    errors.append(f"{prefix}.updated_at: YYYY-MM-DDで指定してください")
                 # Web版の検索欄の上に「注目の供給情報」として出す期限（日本時間の暦日で当日まで）
                 if "pinned_until" in item and (
                         not valid_date(item.get("pinned_until"))

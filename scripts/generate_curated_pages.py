@@ -609,7 +609,7 @@ def topic_page(topic: dict, related: list[dict[str, str]], generated_keys: set[s
     description = str(topic["lede"])
     published = normalize_date(topic["date"])
     article = {"@type": "Article", "headline": topic["title"], "description": description,
-               "datePublished": published, "dateModified": normalize_date(updated_at) or published,
+               "datePublished": published, "dateModified": normalize_date(topic.get("updated_at") or updated_at) or published,
                "mainEntityOfPage": canonical,
                "author": {"@type": "Organization", "name": "医薬品供給ナビ運営者"},
                "publisher": {"@type": "Organization", "name": "医薬品供給ナビ"}}
