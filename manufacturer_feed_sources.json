@@ -77,6 +77,28 @@
       "terms_reviewed_at": "2026-10-14",
       "terms_note": "既存収集結果を読み、職種ゲートを追加通過せず一覧を二重取得しない。PDFは公開直接リンク・robots許可pathで検査",
       "access_note": "maker_collection_health.jsonのparse_towa成功日を明示。古いキャッシュを当日の一覧確認として扱わない"
+    },
+    {
+      "id": "fuso-codeine",
+      "maker": "扶桑薬品工業",
+      "parser": "html",
+      "index_url": "https://www.fuso-pharm.co.jp/med/ph/products/33837/",
+      "index_scope": [
+        {
+          "host": "www.fuso-pharm.co.jp",
+          "path": "/med/ph/products/33837/",
+          "exact": true
+        }
+      ],
+      "document_scope": [
+        {
+          "host": "www.fuso-pharm.co.jp",
+          "path": "/med/wp-content/uploads/sites/2/2025/09/%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E4%BA%88%E5%AE%9A%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B%EF%BC%88%E3%82%B3%E3%83%87%E3%82%A4%E3%83%B3%E3%83%AA%E3%83%B3%E9%85%B8%E5%A1%A9%E6%95%A31%E3%80%8C%E3%83%95%E3%82%BD%E3%83%BC%E3%80%8D%EF%BC%89.pdf",
+          "exact": true
+        }
+      ],
+      "link_base": "https://www.fuso-pharm.co.jp/",
+      "access_note": "今回確認した製品ページ1件と販売中止予定の原典PDF1件だけを対象にする。認証・cookie設定・転送追従は行わず、既存robots判定と日次上限を維持する。"
     }
   ]
 }
