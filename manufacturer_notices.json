@@ -1167,6 +1167,44 @@
         }
       ],
       "x_text": "【メーカー公式案内】東和薬品\nアマルエット配合錠１番「トーワ」\n文書：2026-10／公式掲載：2026-10-13\n出荷停止の案内。再開見込みと対象包装は原典で確認。\n原典▶ https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82657&t=4"
+    },
+    {
+      "id": "fuso-codeine-discontinuation-202509",
+      "maker": "扶桑薬品工業",
+      "title": "コデインリン酸塩散1%「フソー」 販売中止予定のお知らせ",
+      "url": "https://www.fuso-pharm.co.jp/med/wp-content/uploads/sites/2/2025/09/%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E4%BA%88%E5%AE%9A%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B%EF%BC%88%E3%82%B3%E3%83%87%E3%82%A4%E3%83%B3%E3%83%AA%E3%83%B3%E9%85%B8%E5%A1%A9%E6%95%A31%E3%80%8C%E3%83%95%E3%82%BD%E3%83%BC%E3%80%8D%EF%BC%89.pdf",
+      "announced_at": "2025-09",
+      "listed_at": "2025-09-26",
+      "verified_at": "2026-10-19",
+      "sha256": "a64160b87b8ac6fe6ac525529bef483d329e13dc5bb97ee873ca2f558114b993",
+      "event_type": "discontinued",
+      "reason": "諸般の事情。原文にはこれ以上の具体的な理由の記載はありません。",
+      "targets": [
+        {
+          "yj_code": "2242001B2335",
+          "product_name": "コデインリン酸塩散１％「フソー」",
+          "maker": "扶桑薬品工業",
+          "scope": "product",
+          "packages": [
+            {
+              "package": "バラ100g",
+              "unified_product_code": "197-92714-2"
+            },
+            {
+              "package": "バラ500g",
+              "unified_product_code": "197-92715-9"
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2025年9月の販売中止予定案内です。販売終了の実施日を確認したものではありません。",
+        "厚労省の現在の供給区分・薬価情報とメーカーの販売予定は別に確認してください。"
+      ]
     }
   ]
 }

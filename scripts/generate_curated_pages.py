@@ -31,7 +31,7 @@ GUIDE_SLUG = "how-to-check-drug-supply"
 GUIDE_UPDATED_AT = "2026-10-12"
 DISCONTINUATION_GUIDE_SLUG = "how-to-check-discontinuation-and-delisting"
 DISCONTINUATION_GUIDE_PUBLISHED_AT = "2026-10-11"
-DISCONTINUATION_GUIDE_UPDATED_AT = "2026-10-12"
+DISCONTINUATION_GUIDE_UPDATED_AT = "2026-10-19"  # 品目別・規格別の確認入口を追加した編集日
 WATCH_GUIDE_SLUG = "monitor-adopted-drugs"
 WATCH_GUIDE_UPDATED_AT = "2026-09-26"
 TEMPLATE_UPDATED_AT = "2026-08-28"
@@ -540,6 +540,14 @@ def discontinuation_guide_page() -> str:
 <p>公表区分や終了予定は、各施設の実在庫や入荷時期を示すものではありません。対象包装の実際の入手可否は卸・メーカーに確認してください。</p>
 <p class="safety">同成分の別製品が掲載されていても、代替薬の推薦ではありません。薬の中止・変更は、適応、用量、剤形、患者の状態などを確認し、医師・薬剤師等の専門職が判断してください。</p>
 </section>
+<section class="intent"><h2>品目別に現在区分と理由を確認する</h2>
+<p>販売中止を調べる場合も、まず正式名・メーカー・規格を特定します。各ページでは厚生労働省の公表区分・理由と、収録できたメーカー原文・公表年月日・確認日を分けて表示しています。メーカー原文で確認できない終了理由は推測しません。</p>
+<ul>
+<li><a href="../items/2242001B2335.html">コデインリン酸塩散１％「フソー」の公表区分とメーカー案内</a></li>
+<li><a href="../items/3339950R1142.html">ヘパリン類似物質外用泡状スプレー０．３％「ＰＰ」の公表区分と確認上の限界</a></li>
+<li><a href="../items/2649805M1026.html">ユベラ軟膏の公表区分と理由</a></li>
+<li><a href="../items/1172014F3070.html#productVariantsTitle">レボトミンの規格別供給状況</a></li>
+</ul></section>
 <p><a href="{WATCH_GUIDE_SLUG}.html">採用薬の供給状況をCSVでまとめて確認する方法</a></p>
 <p class="note">本ガイドは情報源の使い分けを説明する非公式の確認ガイドです。個別品目の製造・販売終了実績、薬価削除済み、代替の適否を認定するものではありません。</p>
 </main><footer>編集確認日：{DISCONTINUATION_GUIDE_UPDATED_AT}｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../">トップ</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
