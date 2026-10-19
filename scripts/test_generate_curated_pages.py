@@ -137,6 +137,7 @@ class CuratedPageGenerationTests(unittest.TestCase):
 
     def test_discontinuation_guide_separates_statuses_and_links_to_their_sources(self):
         page = discontinuation_guide_page()
+        self.assertIn('href="../items/supplemental.html#price-info"', page)
         links = PageLinks()
         links.feed(page)
         for href in (
@@ -160,6 +161,10 @@ class CuratedPageGenerationTests(unittest.TestCase):
         self.assertIn("現在の供給データに品目がないことだけでも", page)
         self.assertIn("過去の案内例は、現在の供給状況の根拠として用いません", page)
         self.assertIn("代替薬の推薦ではありません", page)
+        self.assertNotIn("令和8年10月1日適用", page)
+        self.assertIn(">薬価基準収載品目リストの凡例</a>", page)
+        self.assertIn("リンク先の薬価資料は更新されます", page)
+        self.assertIn("ページに記載された適用日と、対象品目の経過措置による使用期限をそれぞれ確認", page)
         self.assertEqual(1, page.count("<h1>"))
         canonical = f"https://kyokyu-navi.jp/guides/{DISCONTINUATION_GUIDE_SLUG}.html"
         self.assertIn(f'rel="canonical" href="{canonical}"', page)

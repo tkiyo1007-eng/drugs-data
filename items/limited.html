@@ -154,8 +154,16 @@ footer a{color:#5A6B8C}
       safelyApplyFilter();
       input.focus();
     });
+    function applyPriceEntry(){
+      if(priceOnly && typeof window !== "undefined" && window.location.hash === "#price-info"){
+        priceOnly.checked = true;
+        safelyApplyFilter();
+      }
+    }
     applyFilter();
     panel.hidden = false;
+    applyPriceEntry();
+    if(priceOnly && typeof window !== "undefined") window.addEventListener("hashchange", applyPriceEntry);
   }catch(error){ showAll(); }
 })();
 </script>
