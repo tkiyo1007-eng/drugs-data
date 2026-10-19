@@ -89,6 +89,7 @@ class HubFilterTests(unittest.TestCase):
         for entry in entries:
             self.assertEqual(1, parsed.links.count(entry["key"] + ".html"))
         self.assertTrue(all("hidden" not in row for row in parsed.rows))
+        self.assertIn('id="price-info"', output)
         self.assertIn("全体で2品目に収録", output)
         self.assertIn("そのうち1品目は「販売中止", output)
         self.assertIn("薬価削除済み、製造・販売の終了や終了日を示すものではありません", output)
@@ -349,7 +350,7 @@ assert.ok(unsupported.rows.every(row => !row.hidden));
 const assert = require("node:assert/strict");
 const vm = require("node:vm");
 const payload = JSON.parse(process.argv[1]);
-function setup(before = "", omitFlag = false) {
+function setup(before = "", omitFlag = false, hash = "") {
   const rows = payload.rows.map(attrs => ({
     hidden: false, textContent: attrs["data-search"],
     key: attrs["data-search"].split(" ")[0],
@@ -368,10 +369,11 @@ function setup(before = "", omitFlag = false) {
     hubFilterPriceOnly: node({checked: false}), hubFilterClear: node({disabled: true}),
     hubFilterCount: node({textContent: ""}), hubFilterEmpty: node()
   };
-  const context = vm.createContext({document: {getElementById: id => nodes[id] ?? null}});
+  const window = {location: {hash}, handlers: {}, addEventListener(event, fn) { this.handlers[event] = fn; }};
+  const context = vm.createContext({document: {getElementById: id => nodes[id] ?? null}, window});
   if (before) vm.runInContext(before, context);
   vm.runInContext(payload.script, context);
-  return {rows, groups, nodes, context};
+  return {rows, groups, nodes, context, window};
 }
 const live = setup();
 const input = live.nodes.hubFilterInput;
@@ -418,6 +420,20 @@ const unsupported = setup("String.prototype.normalize = undefined");
 assert.equal(unsupported.nodes.hubFilter.hidden, true);
 assert.ok(unsupported.rows.every(row => !row.hidden));
 assert.ok(unsupported.groups.every(group => !group.hidden));
+const entry = setup("", false, "#price-info");
+assert.equal(entry.nodes.hubFilterPriceOnly.checked, true);
+assert.deepEqual(entry.rows.filter(row => !row.hidden).map(row => row.key), ["1111111F1111", "2222222F2222"]);
+assert.equal(entry.nodes.hubFilterCount.textContent, "2 / 3品目を表示");
+entry.nodes.hubFilterClear.handlers.click();
+assert.ok(entry.rows.every(row => !row.hidden));
+entry.window.handlers.hashchange();
+assert.equal(entry.nodes.hubFilterPriceOnly.checked, true);
+const oldAnchor = setup("", false, "#delisting");
+assert.equal(oldAnchor.nodes.hubFilterPriceOnly.checked, false);
+assert.ok(oldAnchor.rows.every(row => !row.hidden));
+const brokenEntry = setup("String.prototype.normalize = undefined", false, "#price-info");
+assert.ok(brokenEntry.rows.every(row => !row.hidden));
+assert.equal(brokenEntry.nodes.hubFilter.hidden, true);
 const missingFlag = setup("", true);
 missingFlag.nodes.hubFilterPriceOnly.checked = true;
 missingFlag.nodes.hubFilterPriceOnly.handlers.change();

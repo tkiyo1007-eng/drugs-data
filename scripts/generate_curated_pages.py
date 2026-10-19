@@ -500,7 +500,7 @@ def discontinuation_guide_page() -> str:
 <div class="list">
 <a href="../items/supplemental.html">販売中止の案内・メーカー補足がある医薬品一覧<small>厚生労働省の現在区分と、メーカーの案内を分けて確認</small></a>
 <a href="#manufacturing">製造中止の意味と確認事項<small>販売中止・供給停止とは別に、メーカー原文の対象規格と実施時期を確認</small></a>
-<a href="../items/supplemental.html#delisting">薬価削除予定・経過措置の掲載欄<small>販売・製造の終了日とは別の情報。販売中止の掲載欄にも薬価情報を併記</small></a>
+<a href="../items/supplemental.html#price-info">薬価削除予定・経過措置のある品目<small>販売・製造の終了日とは別の情報。販売中止の掲載欄にも薬価情報を併記</small></a>
 <a href="../items/limited.html">限定出荷の医薬品一覧<small>販売・製造終了の案内と、現在の出荷対応を混同しない</small></a>
 <a href="{GUIDE_SLUG}.html">出荷調整・限定出荷の確認ガイド<small>理由や解除見込みの確認方法を読む</small></a>
 <a href="../#demo" data-dsn-event="search-cta-open">薬品名・メーカー名・YJコードから検索<small>対象規格を特定して、詳細の公表値とメーカー案内を確認</small></a>
@@ -515,7 +515,7 @@ def discontinuation_guide_page() -> str:
 <tr id="delisting"><th scope="row">薬価削除予定</th><td>厚生労働省の「出荷量」Dの区分です。薬価削除の承認を得て削除に向け対応している状態で、削除済みや削除日を示すものではありません。</td></tr>
 <tr id="transition"><th scope="row">経過措置期限</th><td>薬価基準資料に記載される、経過措置として保険診療に用いることができる期限です。製品の使用期限、メーカーの最終出荷時期、流通在庫の消尽時期とは別です。</td></tr>
 </tbody></table>
-<p class="source">供給停止・薬価削除予定の区分：<a href="{MHLW_SUPPLY_GUIDANCE_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省「医療用医薬品供給状況報告」の用語説明</a>。経過措置による使用期限：<a href="{MHLW_PRICE_LIST_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">薬価基準収載品目リストの凡例（令和8年10月1日適用）</a>。</p>
+<p class="source">供給停止・薬価削除予定の区分：<a href="{MHLW_SUPPLY_GUIDANCE_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省「医療用医薬品供給状況報告」の用語説明</a>。経過措置による使用期限：<a href="{MHLW_PRICE_LIST_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">薬価基準収載品目リストの凡例</a>。</p>
 <p class="source">メーカー案内の読み分けの例：<a href="https://medical.kyowakirin.co.jp/druginfo/drgdiscon/index.html" target="_blank" rel="noopener" data-dsn-event="official-source-open">協和キリンの販売中止品（予定）一覧</a>は、一部包装中止・販売移管・製造販売承認の承継を区別しています。<a href="https://www.med.kyorin-rmd.com/news/pdf/2024/250324chushi.pdf" target="_blank" rel="noopener" data-dsn-event="official-source-open">キョーリンリメディオの製造販売中止案内（2025年3月更新）</a>では、流通在庫切れの予想と経過措置の見込みが別に記載されています。過去の案内例は、現在の供給状況の根拠として用いません。</p>
 </section>
 <section class="intent"><h2>1. 商品名・メーカー・規格・包装を特定する</h2>
@@ -534,7 +534,7 @@ def discontinuation_guide_page() -> str:
 <p>薬価削除予定の表示だけから、削除日や保険診療上の期限を決めません。厚生労働省の薬価基準収載品目リストと告示を、適用日・商品名・コードまで照合し、該当する経過措置による使用期限を確認します。期限の記載がない場合は、未確認としてメーカーや公式窓口に確認してください。</p>
 <p>現在の供給データに品目がないことだけでも、薬価削除済みや製造・販売終了済みとは断定できません。メーカー案内と薬価資料のどちらを確認したか、資料の適用日と確認日を残します。</p>
 <div class="official-links"><a href="{MHLW_PRICE_LIST_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の薬価基準収載品目リスト・経過措置の凡例を確認</a></div>
-<p class="note">参照した薬価資料は令和8年10月1日適用のページです。実際に確認する際は、厚生労働省が公開する最新の適用資料もご確認ください。</p>
+<p class="note">リンク先の薬価資料は更新されます。確認する際は、ページに記載された適用日と、対象品目の経過措置による使用期限をそれぞれ確認してください。</p>
 </section>
 <section class="intent"><h2>5. 入手可否や薬の変更は別に確認する</h2>
 <p>公表区分や終了予定は、各施設の実在庫や入荷時期を示すものではありません。対象包装の実際の入手可否は卸・メーカーに確認してください。</p>

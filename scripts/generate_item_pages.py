@@ -42,7 +42,7 @@ MHLW_PRICE_LIST_URL = "https://www.mhlw.go.jp/topics/2026/04/tp20260401-01.html"
 # 日次生成日ではなく固定値にし、内容が変わらない日にlastmodを進めない。
 ITEM_PAGE_TEMPLATE_LASTMOD = "2026-10-19"  # 冒頭の公表理由・原文確認限界と規格別導線の実質改訂
 # 状態別5一覧の実質的な改訂日。個別品目のlastmodは進めない。
-HUB_TEMPLATE_LASTMOD = "2026-10-14"
+HUB_TEMPLATE_LASTMOD = "2026-10-19"
 # ページ内検索の対象は、テンプレートの改訂日とは別に維持する。
 FILTERABLE_HUB_SLUGS = frozenset({"limited", "stopped", "supplemental"})
 DISCONTINUATION_GUIDE = "../guides/how-to-check-discontinuation-and-delisting.html"
@@ -2018,8 +2018,16 @@ HUB_FILTER_SCRIPT = r"""<script>
       safelyApplyFilter();
       input.focus();
     });
+    function applyPriceEntry(){
+      if(priceOnly && typeof window !== "undefined" && window.location.hash === "#price-info"){
+        priceOnly.checked = true;
+        safelyApplyFilter();
+      }
+    }
     applyFilter();
     panel.hidden = false;
+    applyPriceEntry();
+    if(priceOnly && typeof window !== "undefined") window.addEventListener("hashchange", applyPriceEntry);
   }catch(error){ showAll(); }
 })();
 </script>"""
@@ -2139,7 +2147,7 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
         sales_price_count = sum(bool(entry.get("delist"))
                                 and supplemental_bucket(entry) == "sales-notices"
                                 for entry in group)
-        price_note = (f'<p class="price-note">厚労省データの薬価削除予定・経過措置期限は、全体で{price_count:,}品目に収録しています。'
+        price_note = (f'<p class="price-note" id="price-info">厚労省データの薬価削除予定・経過措置期限は、全体で{price_count:,}品目に収録しています。'
                       f'そのうち{sales_price_count:,}品目は「販売中止の案内・公表区分がある品目」欄に掲載しています。'
                       '薬価削除済み、製造・販売の終了や終了日を示すものではありません。</p>')
         price_filter_markup = '''
