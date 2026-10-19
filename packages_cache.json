@@ -5840,5 +5840,385 @@
    "pkg": "PTP500Cap",
    "until": ""
   }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/72650/information/IE2021-01.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": "2026年12月"
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/72670/information/IE2011-01.pdf": [],
+ "https://www.nichiiko.co.jp/medicine/file/02330/information/IE2031-01.pdf": [
+  {
+   "pkg": "PTP70錠",
+   "until": "2026年12月"
+  },
+  {
+   "pkg": "PTP70錠",
+   "until": "2026年10月"
+  },
+  {
+   "pkg": "PTP70錠",
+   "until": "2026年7月"
+  },
+  {
+   "pkg": "バラ100錠",
+   "until": "2026年7月"
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/02340/information/IE2031-01.pdf": [
+  {
+   "pkg": "PTP70錠",
+   "until": "2026年12月"
+  },
+  {
+   "pkg": "PTP70錠",
+   "until": "2026年10月"
+  },
+  {
+   "pkg": "PTP70錠",
+   "until": "2026年7月"
+  },
+  {
+   "pkg": "バラ100錠",
+   "until": "2026年7月"
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/02500/information/IE2031-01.pdf": [
+  {
+   "pkg": "PTP70錠",
+   "until": "2026年12月"
+  },
+  {
+   "pkg": "PTP70錠",
+   "until": "2026年10月"
+  },
+  {
+   "pkg": "PTP70錠",
+   "until": "2026年7月"
+  },
+  {
+   "pkg": "バラ100錠",
+   "until": "2026年7月"
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/02210/information/IE2051-01.pdf": [
+  {
+   "pkg": "PTP12錠",
+   "until": "2026年12月"
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/50030/information/20251217cI2.pdf": [
+  {
+   "pkg": "PTP30カプセル",
+   "until": ""
+  },
+  {
+   "pkg": "PTP90カプセル",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/03220/information/IE2071-01.pdf": [
+  {
+   "pkg": "PTP14錠",
+   "until": "2026年10月"
+  },
+  {
+   "pkg": "PTP28錠",
+   "until": "2026年9月"
+  },
+  {
+   "pkg": "PTP56錠",
+   "until": "2026年9月"
+  },
+  {
+   "pkg": "PTP140錠",
+   "until": "2026年11月"
+  },
+  {
+   "pkg": "バラ100錠",
+   "until": "2026年12月"
+  },
+  {
+   "pkg": "PTP56錠",
+   "until": "2026年12月"
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/03230/information/IE2071-01.pdf": [
+  {
+   "pkg": "PTP14錠",
+   "until": "2026年10月"
+  },
+  {
+   "pkg": "PTP28錠",
+   "until": "2026年9月"
+  },
+  {
+   "pkg": "PTP56錠",
+   "until": "2026年9月"
+  },
+  {
+   "pkg": "PTP140錠",
+   "until": "2026年11月"
+  },
+  {
+   "pkg": "バラ100錠",
+   "until": "2026年12月"
+  },
+  {
+   "pkg": "PTP56錠",
+   "until": "2026年12月"
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/03240/information/IE2071-01.pdf": [
+  {
+   "pkg": "PTP14錠",
+   "until": "2026年10月"
+  },
+  {
+   "pkg": "PTP28錠",
+   "until": "2026年9月"
+  },
+  {
+   "pkg": "PTP56錠",
+   "until": "2026年9月"
+  },
+  {
+   "pkg": "PTP140錠",
+   "until": "2026年11月"
+  },
+  {
+   "pkg": "バラ100錠",
+   "until": "2026年12月"
+  },
+  {
+   "pkg": "PTP56錠",
+   "until": "2026年12月"
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/59270/information/IA21062-01.pdf": [],
+ "https://www.nichiiko.co.jp/medicine/file/59280/information/IA21062-01.pdf": [],
+ "https://www.nichiiko.co.jp/medicine/file/59290/information/IA21062-01.pdf": [],
+ "https://www.nichiiko.co.jp/medicine/file/78950/information/20260121cI1.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP1000錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ1200錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP42錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP100カプセル",
+   "until": ""
+  },
+  {
+   "pkg": "バラ100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP1200錠",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/08030/information/IG0821-01.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": "2026年11月"
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": "2026年11月"
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/79910/information/IG0831-01.pdf": [
+  {
+   "pkg": "PTP42錠",
+   "until": "2026年8月"
+  },
+  {
+   "pkg": "PTP42錠",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/67790/information/IA21021-01.pdf": [],
+ "https://www.nichiiko.co.jp/medicine/file/24470/information/IE2061-01.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/24460/information/IE2061-01.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr27_1016_2.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": "2026年9月"
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": "2026年10月"
+  },
+  {
+   "pkg": "バラ500錠",
+   "until": "2026年9月"
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr27_266_2.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": "2026年11月"
+  },
+  {
+   "pkg": "PTP1000錠",
+   "until": "2026年12月"
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ500錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP700錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP1000錠",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr27_129_2.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": "2027年1月"
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr27_194_2.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": "2027年1月"
+  },
+  {
+   "pkg": "バラ500錠",
+   "until": "2027年2月"
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": "2027年2月"
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": "2026年12月"
+  },
+  {
+   "pkg": "バラ500錠",
+   "until": "2027年3月"
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ500錠",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr27_1020_2.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": "2026年12月"
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
+ ],
+ "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83377&t=4&f=%E3%83%A1%E3%82%B5%E3%83%A9%E3%82%B8%E3%83%B3%E5%BE%90%E6%94%BE%E9%8C%A0250+mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E4%BE%9B%E7%B5%A6%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%8A%E8%A9%AB%E3%81%B3%E3%81%A8%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP56錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP224錠",
+   "until": ""
+  }
+ ],
+ "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83640&t=4&f=%E3%83%AD%E3%82%B9%E3%83%90%E3%82%B9%E3%82%BF%E3%83%81%E3%83%B3%E9%8C%A05mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%87%BA%E8%8D%B7%E5%81%9C%E6%AD%A2%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%8A%E8%A9%AB%E3%81%B3%E3%81%A8%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ300錠",
+   "until": ""
+  }
+ ],
+ "https://www.nc-medical.com/product_topics/f4bj0h000000es2u-att/f4bj0h000000es3i.pdf": [],
+ "https://www.nichiiko.co.jp/medicine/file/92570/information/20230823cI6.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/92580/information/20230823cI6.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
  ]
 }
