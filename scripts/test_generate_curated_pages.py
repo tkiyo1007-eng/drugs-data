@@ -601,7 +601,7 @@ class TopicModificationDateTests(unittest.TestCase):
         topic = {"slug": "old-topic", "tag": "供給予定", "title": "既存記事", "lede": "内容を維持", "date": "2026.10.01",
                  "updated_at": "2026-10-15", "source": {"name": "原典", "url": "https://example.org/"}}
         output = topic_page(topic, [], set(), {}, "2026-10-20")
-        self.assertIn('"dateModified": "2026-10-15"', output)
+        self.assertEqual(json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', output, re.S)[1])["@graph"][0]["dateModified"], "2026-10-15")
         topic.pop("updated_at")
         output = topic_page(topic, [], set(), {}, "2026-10-20")
-        self.assertIn('"dateModified": "2026-10-20"', output)
+        self.assertEqual(json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', output, re.S)[1])["@graph"][0]["dateModified"], "2026-10-20")
