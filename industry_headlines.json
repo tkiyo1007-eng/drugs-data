@@ -3,9 +3,33 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-10-20T04:52:47+09:00",
-  "last_success_at": "2026-10-20T04:52:47+09:00",
+  "checked_at": "2026-10-21T03:26:56+09:00",
+  "last_success_at": "2026-10-21T03:26:56+09:00",
   "items": [
+    {
+      "title": "【医療保険部会】高齢者窓口負担見直し議論‐低所得者への配慮主張も",
+      "url": "https://www.yakuji.co.jp/entry140631.html",
+      "date": "2026-10-20",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【製薬協 宮柱会長】「国際戦略見直し図る」‐法人化で「実行力強化」",
+      "url": "https://www.yakuji.co.jp/entry140629.html",
+      "date": "2026-10-20",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【インテージHC】緊急避妊薬1.7億円と拡大‐8月度OTC販売",
+      "url": "https://www.yakuji.co.jp/entry140626.html",
+      "date": "2026-10-20",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【徳島県】病院薬剤師の人材確保へ‐薬学生が地域医療現場体験",
+      "url": "https://www.yakuji.co.jp/entry140620.html",
+      "date": "2026-10-20",
+      "tag": "業界ニュース"
+    },
     {
       "title": "【生物由来技術部会】ステミラックが正式承認へ‐条件期限付から本承認は初",
       "url": "https://www.yakuji.co.jp/entry140628.html",
@@ -15,30 +39,6 @@
     {
       "title": "【厚労省】地域薬剤師会に最大1000万円‐医薬品提供体制モデル事業",
       "url": "https://www.yakuji.co.jp/entry140627.html",
-      "date": "2026-10-19",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【武田薬品】ナルコレプシー新薬登場‐日・中同時発売、診断に課題",
-      "url": "https://www.yakuji.co.jp/entry140624.html",
-      "date": "2026-10-19",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【日薬 岩月会長】薬剤師の積極性必要‐「攻めの予防医療」で",
-      "url": "https://www.yakuji.co.jp/entry140621.html",
-      "date": "2026-10-19",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【ツルハHD 鶴羽社長】上期に85億円のシナジー‐ウエルシアHDと統合で",
-      "url": "https://www.yakuji.co.jp/entry140543.html",
-      "date": "2026-10-19",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【インターフェックスで報告】製薬工場、DXで進む省力化‐夜間無人運転や培養自動化",
-      "url": "https://www.yakuji.co.jp/entry140540.html",
       "date": "2026-10-19",
       "tag": "業界ニュース"
     }
