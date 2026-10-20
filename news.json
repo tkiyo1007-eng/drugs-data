@@ -1,5 +1,17 @@
 [
  {
+  "date": "2026/10/20",
+  "title": "[イベント]「2026年度マスターファイル講習会」の案内を更新しました",
+  "url": "https://www.pmda.go.jp/review-services/symposia/0208.html",
+  "tag": "承認審査"
+ },
+ {
+  "date": "2026/10/20",
+  "title": "「「GLP-1受容体作動薬及びGIP/GLP-1受容体作動薬の適正使用について」の再周知について」を掲載しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/0010.html",
+  "tag": "安全対策"
+ },
+ {
   "date": "2026/10/16",
   "title": "「副作用が疑われる症例報告に関する情報」に2026年6月分の情報を追加しました",
   "url": "https://www.pmda.go.jp/safety/info-services/drugs/adr-info/suspected-adr/0005.html",
@@ -45,18 +57,6 @@
   "date": "2026/10/09",
   "title": "「医薬品リスク管理計画書　記載事例」を更新しました。",
   "url": "https://www.pmda.go.jp/safety/info-services/drugs/items-information/rmp/0002.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/10/08",
-  "title": "クラスI回収 該当回収品目　新鮮凍結血漿-LR「日赤」240",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html",
-  "tag": "回収"
- },
- {
-  "date": "2026/10/08",
-  "title": "使用上の注意の改訂指示通知（医薬品）2026年10月8日付（厚生労働省より発出）を掲載しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/revision-of-precautions/0375.html",
   "tag": "安全対策"
  }
 ]
