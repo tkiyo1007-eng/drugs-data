@@ -3,13 +3,31 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-10-21T03:26:56+09:00",
-  "last_success_at": "2026-10-21T03:26:56+09:00",
+  "checked_at": "2026-10-21T10:08:43+09:00",
+  "last_success_at": "2026-10-21T10:08:43+09:00",
   "items": [
     {
-      "title": "【医療保険部会】高齢者窓口負担見直し議論‐低所得者への配慮主張も",
-      "url": "https://www.yakuji.co.jp/entry140631.html",
-      "date": "2026-10-20",
+      "title": "【インスメッド日本法人】気管支拡張症薬を発売‐呼吸器疾患の増悪抑制",
+      "url": "https://www.yakuji.co.jp/entry140748.html",
+      "date": "2026-10-21",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【厚労省】零売の改正省令案公表‐「やむを得ない場合」要件化",
+      "url": "https://www.yakuji.co.jp/entry140742.html",
+      "date": "2026-10-21",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【介護給付費分科会】算定上限を診療報酬と整合‐薬剤師居宅療養指導見直し",
+      "url": "https://www.yakuji.co.jp/entry140739.html",
+      "date": "2026-10-21",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【愛媛県東温市】睡眠障害に先発品を推奨‐BZ系の安易な使用抑制へ",
+      "url": "https://www.yakuji.co.jp/entry140736.html",
+      "date": "2026-10-21",
       "tag": "業界ニュース"
     },
     {
@@ -19,27 +37,9 @@
       "tag": "業界ニュース"
     },
     {
-      "title": "【インテージHC】緊急避妊薬1.7億円と拡大‐8月度OTC販売",
-      "url": "https://www.yakuji.co.jp/entry140626.html",
-      "date": "2026-10-20",
-      "tag": "業界ニュース"
-    },
-    {
       "title": "【徳島県】病院薬剤師の人材確保へ‐薬学生が地域医療現場体験",
       "url": "https://www.yakuji.co.jp/entry140620.html",
       "date": "2026-10-20",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【生物由来技術部会】ステミラックが正式承認へ‐条件期限付から本承認は初",
-      "url": "https://www.yakuji.co.jp/entry140628.html",
-      "date": "2026-10-19",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【厚労省】地域薬剤師会に最大1000万円‐医薬品提供体制モデル事業",
-      "url": "https://www.yakuji.co.jp/entry140627.html",
-      "date": "2026-10-19",
       "tag": "業界ニュース"
     }
   ]

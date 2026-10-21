@@ -2,9 +2,9 @@
  "date": "2026/10/21",
  "score": 89,
  "level": "厳重警戒",
- "delta": 0,
- "limited": 962,
- "stopped": 983,
+ "delta": null,
+ "limited": 961,
+ "stopped": 981,
  "total": 16412,
  "history": [
   {

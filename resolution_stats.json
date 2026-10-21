@@ -4,5 +4,10 @@
   "count": 10,
   "medianDays": 36,
   "avgDays": 34.8
+ },
+ "stopped": {
+  "count": 7,
+  "medianDays": 25,
+  "avgDays": 22.4
  }
 }
