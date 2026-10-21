@@ -1,6 +1,6 @@
 {
-  "version": 202610211008,
+  "version": 202610220334,
   "csv_url": "https://raw.githubusercontent.com/tkiyo1007-eng/drugs-data/main/drugs_app_ready.csv",
-  "note": "2026年10月21日厚労省データ反映",
+  "note": "2026年10月22日厚労省データ反映",
   "mhlw_excel_date": "2026-10-20"
 }
