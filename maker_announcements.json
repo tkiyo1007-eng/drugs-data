@@ -6660,18 +6660,18 @@
  },
  "レボホリナート点滴静注用２５ｍｇ「ＮＰ」": {
   "maker": "ニプロ",
-  "title": "2026年10月15日 レボホリナート点滴静注用25mg／100mg「NP」　販売中止品のご案内",
-  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001Qvrt4IAB",
+  "title": "2026年10月21日 【更新】レボホリナート点滴静注用25mg／100mg「NP」　販売中止品　在庫消尽時期延長のご案内",
+  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001S03gRIAR",
   "event_type": "discontinued",
-  "announced_at": "2026-10-15",
+  "announced_at": "2026-10-21",
   "checked": "2026-10-21"
  },
  "レボホリナート点滴静注用１００ｍｇ「ＮＰ」": {
   "maker": "ニプロ",
-  "title": "2026年10月15日 レボホリナート点滴静注用25mg／100mg「NP」　販売中止品のご案内",
-  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001Qvrt4IAB",
+  "title": "2026年10月21日 【更新】レボホリナート点滴静注用25mg／100mg「NP」　販売中止品　在庫消尽時期延長のご案内",
+  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001S03gRIAR",
   "event_type": "discontinued",
-  "announced_at": "2026-10-15",
+  "announced_at": "2026-10-21",
   "checked": "2026-10-21"
  },
  "カルバゾクロムスルホン酸ナトリウム静注液２５ｍｇ「日医工」": {
@@ -6724,6 +6724,62 @@
   "title": "2026/10/16 出荷停止に関するお知らせとお詫び_スマトリプタン錠50mg「タカタ」",
   "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000cbw8-att/Sumatriptan.pdf",
   "event_type": "stopped",
+  "announced_at": "2026-10-16",
+  "checked": "2026-10-21"
+ },
+ "オキサトミドＤＳ小児用２％「サワイ」": {
+  "maker": "沢井製薬",
+  "title": "2026/10/20 発売情報 PDF NEW オキサトミドDS小児用2％「サワイ」販売中止のご案内 PDF NEW",
+  "url": "https://med.sawai.co.jp/file/pr28_46_3.pdf",
+  "event_type": "discontinued",
+  "announced_at": "2026-10-20",
+  "checked": "2026-10-21"
+ },
+ "トラピジル錠５０ｍｇ「サワイ」": {
+  "maker": "沢井製薬",
+  "title": "2026/10/20 発売情報 PDF NEW トラピジル錠50mg/100mg「サワイ」販売中止のご案内 PDF NEW",
+  "url": "https://med.sawai.co.jp/file/pr28_61_3.pdf",
+  "event_type": "discontinued",
+  "announced_at": "2026-10-20",
+  "checked": "2026-10-21"
+ },
+ "トラピジル錠１００ｍｇ「サワイ」": {
+  "maker": "沢井製薬",
+  "title": "2026/10/20 発売情報 PDF NEW トラピジル錠50mg/100mg「サワイ」販売中止のご案内 PDF NEW",
+  "url": "https://med.sawai.co.jp/file/pr28_61_3.pdf",
+  "event_type": "discontinued",
+  "announced_at": "2026-10-20",
+  "checked": "2026-10-21"
+ },
+ "バラシクロビル錠５００ｍｇ「サワイ」": {
+  "maker": "沢井製薬",
+  "title": "2026/10/20 発売情報 PDF NEW バラシクロビル錠500mg「サワイ」販売中止のご案内 PDF NEW",
+  "url": "https://med.sawai.co.jp/file/pr28_1530_1.pdf",
+  "event_type": "discontinued",
+  "announced_at": "2026-10-20",
+  "checked": "2026-10-21"
+ },
+ "モンテルカストチュアブル錠５ｍｇ「サワイ」": {
+  "maker": "沢井製薬",
+  "title": "2026/10/20 発売情報 PDF NEW モンテルカストチュアブル錠5mg「サワイ」販売中止のご案内 PDF NEW",
+  "url": "https://med.sawai.co.jp/file/pr28_4593_1.pdf",
+  "event_type": "discontinued",
+  "announced_at": "2026-10-20",
+  "checked": "2026-10-21"
+ },
+ "ファモチジン静注液２０ｍｇ「サワイ」": {
+  "maker": "沢井製薬",
+  "title": "2026/10/16 供給関連 PDF NEW ファモチジン静注液10mg/20mg「サワイ」の供給に関するお詫びとお願い PDF NEW",
+  "url": "https://med.sawai.co.jp/file/pr27_4716_1.pdf",
+  "event_type": "supply",
+  "announced_at": "2026-10-16",
+  "checked": "2026-10-21"
+ },
+ "ファモチジン静注液１０ｍｇ「サワイ」": {
+  "maker": "沢井製薬",
+  "title": "2026/10/16 供給関連 PDF NEW ファモチジン静注液10mg/20mg「サワイ」の供給に関するお詫びとお願い PDF NEW",
+  "url": "https://med.sawai.co.jp/file/pr27_4716_1.pdf",
+  "event_type": "supply",
   "announced_at": "2026-10-16",
   "checked": "2026-10-21"
  },
@@ -7413,14 +7469,6 @@
   "title": "エルデカルシトールカプセル0.75μg「日医工」 供給状況に関するお知らせ",
   "url": "https://www.nichiiko.co.jp/medicine/file/32090/information/20230913cI2.pdf",
   "event_type": "supply",
-  "checked": "2026-10-21"
- },
- "オキサトミドＤＳ小児用２％「サワイ」": {
-  "maker": "沢井製薬",
-  "title": "2026/10/20 発売情報 PDF NEW オキサトミドDS小児用2％「サワイ」販売中止のご案内 PDF NEW",
-  "url": "https://med.sawai.co.jp/file/pr28_46_3.pdf",
-  "event_type": "discontinued",
-  "announced_at": "2026-10-20",
   "checked": "2026-10-21"
  },
  "オランザピン錠２．５ｍｇ「ＮＩＧ」": {
@@ -8399,22 +8447,6 @@
   "event_type": "supply",
   "checked": "2026-10-21"
  },
- "トラピジル錠５０ｍｇ「サワイ」": {
-  "maker": "沢井製薬",
-  "title": "2026/10/20 発売情報 PDF NEW トラピジル錠50mg/100mg「サワイ」販売中止のご案内 PDF NEW",
-  "url": "https://med.sawai.co.jp/file/pr28_61_3.pdf",
-  "event_type": "discontinued",
-  "announced_at": "2026-10-20",
-  "checked": "2026-10-21"
- },
- "トラピジル錠１００ｍｇ「サワイ」": {
-  "maker": "沢井製薬",
-  "title": "2026/10/20 発売情報 PDF NEW トラピジル錠50mg/100mg「サワイ」販売中止のご案内 PDF NEW",
-  "url": "https://med.sawai.co.jp/file/pr28_61_3.pdf",
-  "event_type": "discontinued",
-  "announced_at": "2026-10-20",
-  "checked": "2026-10-21"
- },
  "トリアゾラム錠０．１２５ｍｇ「日医工」": {
   "maker": "日医工",
   "title": "トリアゾラム錠0.125mg「日医工」 供給状況に関するお知らせ",
@@ -8623,14 +8655,6 @@
   "title": "ペングッド錠250mg 供給状況に関するお知らせ",
   "url": "https://www.nichiiko.co.jp/medicine/file/17400/information/20250730cI2.pdf",
   "event_type": "supply",
-  "checked": "2026-10-21"
- },
- "バラシクロビル錠５００ｍｇ「サワイ」": {
-  "maker": "沢井製薬",
-  "title": "2026/10/20 発売情報 PDF NEW バラシクロビル錠500mg「サワイ」販売中止のご案内 PDF NEW",
-  "url": "https://med.sawai.co.jp/file/pr28_1530_1.pdf",
-  "event_type": "discontinued",
-  "announced_at": "2026-10-20",
   "checked": "2026-10-21"
  },
  "バルサルタン錠２０ｍｇ「ＤＳＥＰ」": {
@@ -9444,14 +9468,6 @@
   "url": "https://med.daiichisankyo-ep.co.jp/information/files/2279/VOR_50_PTP50_MON_5_PTP100_4_PAC14PAC140_E1_K.pdf",
   "event_type": "resumed",
   "announced_at": "2026-10-16",
-  "checked": "2026-10-21"
- },
- "モンテルカストチュアブル錠５ｍｇ「サワイ」": {
-  "maker": "沢井製薬",
-  "title": "2026/10/20 発売情報 PDF NEW モンテルカストチュアブル錠5mg「サワイ」販売中止のご案内 PDF NEW",
-  "url": "https://med.sawai.co.jp/file/pr28_4593_1.pdf",
-  "event_type": "discontinued",
-  "announced_at": "2026-10-20",
   "checked": "2026-10-21"
  },
  "モンテルカストチュアブル錠５ｍｇ「日医工」": {
@@ -10602,22 +10618,6 @@
   "title": "注射用フィルデシン3mg 供給状況に関するお知らせ",
   "url": "https://www.nichiiko.co.jp/medicine/file/24840/information/20260610cI2.pdf",
   "event_type": "supply",
-  "checked": "2026-10-21"
- },
- "ファモチジン静注液２０ｍｇ「サワイ」": {
-  "maker": "沢井製薬",
-  "title": "2026/10/16 供給関連 PDF NEW ファモチジン静注液10mg/20mg「サワイ」の供給に関するお詫びとお願い PDF NEW",
-  "url": "https://med.sawai.co.jp/file/pr27_4716_1.pdf",
-  "event_type": "supply",
-  "announced_at": "2026-10-16",
-  "checked": "2026-10-21"
- },
- "ファモチジン静注液１０ｍｇ「サワイ」": {
-  "maker": "沢井製薬",
-  "title": "2026/10/16 供給関連 PDF NEW ファモチジン静注液10mg/20mg「サワイ」の供給に関するお詫びとお願い PDF NEW",
-  "url": "https://med.sawai.co.jp/file/pr27_4716_1.pdf",
-  "event_type": "supply",
-  "announced_at": "2026-10-16",
   "checked": "2026-10-21"
  },
  "ファモチジン静注液２０ｍｇ「日医工」": {
