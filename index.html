@@ -3642,10 +3642,39 @@ function supplementalReady(){
     && (!SUPPLEMENTAL_ATTEMPT || SUPPLEMENTAL_ATTEMPT.status === "success")
     && checkedAge != null && checkedAge < STALE_DATA_DAYS;
 }
+function supplementalAttemptScope(attempt){
+  // failed は取得後の一式検証失敗も含むため、試行中の成功を採用済みと表示しない。
+  if(SUPPLEMENTAL_STATE.health !== "loaded" || !attempt || attempt.status !== "partial") return "";
+  const checked = normalizedPublicationDate(attempt.checked);
+  if(!checked || checked !== attempt.checked || !Array.isArray(attempt.sources) || !attempt.sources.length) return "";
+  const labels = {
+    parse_sawai:"沢井製薬", parse_nichiiko:"日医工", parse_nichiiko_excel:"日医工（供給状況一覧）",
+    parse_nihon_generic:"日本ジェネリック", parse_kyorin:"キョーリンリメディオ",
+    parse_dsep:"第一三共エスファ", parse_kemifa:"日本ケミファ", parse_towa:"東和薬品",
+    parse_takata:"高田製薬", parse_hisamitsu:"久光製薬", parse_nipro:"ニプロ"
+  };
+  const sources = attempt.sources;
+  if(!sources.every(source=>source && Object.hasOwn(labels, source.source)
+    && (source.ok === true ? source.last_success === checked : source.ok === false && source.retained === true))
+    || new Set(sources.map(source=>source.source)).size !== sources.length) return "";
+  const retained = sources.filter(source=>source.ok === false);
+  const succeeded = sources.length - retained.length;
+  if(!succeeded || !retained.length) return "";
+  const names = retained.map(source=>{
+    const date = normalizedPublicationDate(source.last_success);
+    const knownDate = date && date === source.last_success && date <= checked;
+    return `${labels[source.source]}（最終取得成功日：${knownDate ? date : "未確認"}）`;
+  });
+  // 日医工のお知らせ/Excelなど、同じメーカーの複数取得先を「社数」に数えない。
+  return `今回の取得成功：${succeeded}/${sources.length}取得先。前回情報を保持：${names.join("、")}。`;
+}
 function updateSupplementalStatus(){
   const notice = document.getElementById("supplementalNotice");
   const noticeText = document.getElementById("supplementalNoticeText");
   const asOf = document.getElementById("supplementalAsOf");
+  // 同じ状態の再描画ではlive領域や、その中のフォーカス中リンクを作り直さない。
+  const setAsOf = text=>{ if(asOf.textContent !== text) asOf.textContent = text; };
+  const setNoticeHTML = html=>{ if(noticeText.innerHTML !== html) noticeText.innerHTML = html; };
   const states = Object.values(SUPPLEMENTAL_STATE);
   const incomplete = states.some(state=>state !== "loaded");
   const dateMismatch = Boolean(DATASET_DATE && SUPPLEMENTAL_MHLW_DATE && DATASET_DATE !== SUPPLEMENTAL_MHLW_DATE)
@@ -3654,22 +3683,22 @@ function updateSupplementalStatus(){
   const checkedAge = daysAgo(SUPPLEMENTAL_CHECKED_THROUGH);
   const checkedStale = checkedAge == null || checkedAge >= STALE_DATA_DAYS;
   if(states.some(state=>state === "loading")){
-    asOf.textContent = "メーカー公式案内の補足情報を確認中です。";
+    setAsOf("メーカー公式案内の補足情報を確認中です。");
     notice.hidden = true;
   }else if(incomplete || dateMismatch || checkedStale || partial || !DATASET_DATE || !SUPPLEMENTAL_MHLW_DATE){
-    asOf.textContent = `メーカー補足：確認不完全／全収集元の確認完了 ${SUPPLEMENTAL_CHECKED_THROUGH || "確認できません"}`;
-    noticeText.innerHTML = partial
-      ? `最新の収集試行：${esc(SUPPLEMENTAL_ATTEMPT.checked || "確認できません")}。一部の公式取得先を確認できず、該当メーカーは前回情報を保持しています。確認済みの個別案内の日付は各原典欄をご覧ください。「情報差異なし」とは判断しません。`
+    setAsOf(`メーカー補足：確認不完全／全収集元の確認完了 ${SUPPLEMENTAL_CHECKED_THROUGH || "確認できません"}`);
+    setNoticeHTML(partial
+      ? `最新の収集試行：${esc(SUPPLEMENTAL_ATTEMPT.checked || "確認できません")}。${esc(supplementalAttemptScope(SUPPLEMENTAL_ATTEMPT) || "一部の公式取得先を確認できず、該当メーカーは前回情報を保持しています。")}確認済みの個別案内の日付は各原典欄をご覧ください。「情報差異なし」とは判断しません。`
       : dateMismatch || !DATASET_DATE || !SUPPLEMENTAL_MHLW_DATE
       ? `厚労省区分とメーカー補足情報の参照日が一致していません。「情報差異なし」とは判断せず、<a href="${OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省公式</a>とメーカー案内をご確認ください。`
       : checkedStale
         ? `メーカー公式案内の確認日が古い、または確認日を取得できません。厚労省の供給区分は表示できますが、「情報差異0件」とは判定しません。`
-        : `メーカー公式案内の補足情報を一部取得できないか、前回キャッシュを使用しています。厚労省の供給区分は表示できますが、「情報差異0件」とは判定しません。`;
+        : `メーカー公式案内の補足情報を一部取得できないか、前回キャッシュを使用しています。厚労省の供給区分は表示できますが、「情報差異0件」とは判定しません。`);
     notice.hidden = false;
   }else{
-    asOf.textContent = `メーカー補足：全収集元の確認完了 ${SUPPLEMENTAL_CHECKED_THROUGH}（対象の案内のみ）`;
+    setAsOf(`メーカー補足：全収集元の確認完了 ${SUPPLEMENTAL_CHECKED_THROUGH}（対象の案内のみ）`);
     notice.hidden = true;
-    noticeText.textContent = "";
+    setNoticeHTML("");
   }
   if(LIVE){
     renderWatchDashboard();
