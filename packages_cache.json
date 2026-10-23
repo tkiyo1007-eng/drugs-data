@@ -7714,5 +7714,57 @@
  "https://www.nichiiko.co.jp/medicine/file/80940/information/20250702cG1.pdf": [],
  "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001MMuOBIA1": [],
  "https://www.nichiiko.co.jp/medicine/file/54070/information/20240918cI3.pdf": [],
- "https://www.nichiiko.co.jp/medicine/file/79070/information/20250618cG1.pdf": []
+ "https://www.nichiiko.co.jp/medicine/file/79070/information/20250618cG1.pdf": [],
+ "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001CyS5FIAV": [],
+ "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q8000012YBIkIAO": [],
+ "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q8000012YhIbIAK": [],
+ "https://www.nc-medical.com/product_topics/f4bj0h0000006yf7-att/f4bj0h0000006yfv.pdf": [],
+ "https://www.npi-inc.co.jp/medical/info/file/1259": [],
+ "https://med.daiichisankyo-ep.co.jp/information/files/1609/パロキセチン錠10㎎｢DSEP｣PTP100錠、PTP500錠限定出荷解除のお知らせ.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  }
+ ],
+ "https://med.daiichisankyo-ep.co.jp/information/files/1536/ロサルヒド配合錠HD「EP」限定出荷解除のお知らせ.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr27_4601_2.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": "2027年1月"
+  },
+  {
+   "pkg": "バラ200錠",
+   "until": "2027年4月"
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": "2026年12月"
+  },
+  {
+   "pkg": "バラ200錠",
+   "until": "2027年7月"
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": "2027年2月"
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ500錠",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr28_4590_2.pdf": []
 }

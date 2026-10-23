@@ -1,5 +1,23 @@
 [
  {
+  "date": "2026/10/23",
+  "title": "「不具合が疑われる症例報告に関する情報（コンビネーション製品）」に2026年6月分の情報を追加しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/adr-info/malfunctions-combination-drugs/0001.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/10/23",
+  "title": "「不具合が疑われる症例報告に関する情報（再生医療等製品）」に2026年6月分の情報を追加しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/ctp/0006.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/10/23",
+  "title": "「不具合が疑われる症例報告に関する情報（医療機器）」に2026年6月分の情報を追加しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/devices/0090.html",
+  "tag": "安全対策"
+ },
+ {
   "date": "2026/10/22",
   "title": "「「小児・希少疾病用医薬品等薬事相談センター事業」に係る相談手数料の助成についてに関する質疑応答集（Q＆A）」を掲載しました",
   "url": "https://www.pmda.go.jp/review-services/f2f-pre/consultations/0118.html",
@@ -39,24 +57,6 @@
   "date": "2026/10/16",
   "title": "プログラム医療機器の製造販売承認品目の一覧情報等を更新しました",
   "url": "https://www.pmda.go.jp/review-services/drug-reviews/about-reviews/devices/0052.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/10/14",
-  "title": "プログラム医療機器のページを更新（「生成AIを活用した医療機器の審査ポイント(Draft)」の英訳を公開、対面助言調整可能時期の更新）しました。",
-  "url": "https://www.pmda.go.jp/review-services/drug-reviews/about-reviews/devices/0048.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/10/14",
-  "title": "「バイオ後続品」のページを更新しました",
-  "url": "https://www.pmda.go.jp/review-services/drug-reviews/about-reviews/p-drugs/0034.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/10/14",
-  "title": "未承認薬データベースを更新しました",
-  "url": "https://www.pmda.go.jp/review-services/drug-reviews/review-information/p-drugs/0013.html",
   "tag": "承認審査"
  }
 ]
