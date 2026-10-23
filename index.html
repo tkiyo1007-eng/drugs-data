@@ -4820,8 +4820,11 @@ function renderWatchDashboard(){
   const historyAvailable = historyHasSnapshot();
   WATCH_UNREAD = getWatchChangesSinceLastCheck();
   WATCH_UNREAD_KEYS = new Set(WATCH_UNREAD.map(change=>change.key));
+  // 監視なし・補足未確認のときは差異を判定しないため、全品目の走査も省く。
+  // 不完全な補足は従来どおり「—」のまま、確認後の照合条件は変えない。
   WATCH_DISCREPANCY_KEYS = new Set(
-    LIVE ? ITEMS.filter(item=>isFav(item) && discrepancyFor(item)).map(item=>itemKey(item)) : []
+    LIVE && FAVS.size && supplementalConfirmed
+      ? ITEMS.filter(item=>isFav(item) && discrepancyFor(item)).map(item=>itemKey(item)) : []
   );
   const worse = WATCH_UNREAD.filter(change=>classifyWatchChange(change)==="worse").length;
   const better = WATCH_UNREAD.filter(change=>classifyWatchChange(change)==="better").length;
