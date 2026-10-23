@@ -5035,10 +5035,11 @@ document.getElementById("watchExportBtn").addEventListener("click",downloadWatch
 
 // 未確認の監視品目を検索リストの上にも表示
 const $favNotice = document.getElementById("favNotice");
+let renderedFavNoticeHTML = "";
 function renderFavNotice(){
   if(!LIVE || !FAVS.size){ $favNotice.hidden = true; return; }
   if(!WATCH_UNREAD.length){ $favNotice.hidden = true; return; }
-  $favNotice.innerHTML =
+  const html =
     `<div class="fav-notice-title">⭐ ${historyCanConfirm() ? "未確認の監視品目" : "前回取得分の監視品目（最新の履歴は未確認）"}（${WATCH_UNREAD.length}件）</div>` +
     WATCH_UNREAD.map(change=>{
       const toOk = mapStatus(change.to) === "ok";
@@ -5046,6 +5047,12 @@ function renderFavNotice(){
         ${esc(change.name)}<span>${esc(STATUS[mapStatus(change.from)].label)}→${esc(STATUS[mapStatus(change.to)].label)} ${esc(change.date.slice(5))}</span>
       </button>`;
     }).join("");
+  // 補足の後着で同じ通知を描き直しても、選択中の品目ボタンを作り直さない。
+  // innerHTMLの読み戻しでは引用符の表記が変わるため、前回入力した文字列と比較する。
+  if(renderedFavNoticeHTML !== html){
+    $favNotice.innerHTML = html;
+    renderedFavNoticeHTML = html;
+  }
   $favNotice.hidden = false;
 }
 $favNotice.addEventListener("click", e=>{
