@@ -3,13 +3,43 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-10-23T03:29:48+09:00",
-  "last_success_at": "2026-10-23T03:29:48+09:00",
+  "checked_at": "2026-10-24T03:16:49+09:00",
+  "last_success_at": "2026-10-24T03:16:49+09:00",
   "items": [
     {
-      "title": "【武田薬品】実薬比較試験で有意な結果‐乾癬薬候補ザソシチニブ",
-      "url": "https://www.yakuji.co.jp/entry140750.html",
-      "date": "2026-10-22",
+      "title": "便秘薬の出荷調整広がる‐EAファーマなど、出荷停止予定の製剤も",
+      "url": "https://www.yakuji.co.jp/entry140876.html",
+      "date": "2026-10-23",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【PMDA】CDx該当性で留意事項‐抗癌剤開発早期に相談を",
+      "url": "https://www.yakuji.co.jp/entry140873.html",
+      "date": "2026-10-23",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【GE・BS学会】ニトロソアミン類で提言‐リスク応じ段階管理を",
+      "url": "https://www.yakuji.co.jp/entry140872.html",
+      "date": "2026-10-23",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "宮城県医薬品卸協会が創立‐法人化で社会貢献果たす",
+      "url": "https://www.yakuji.co.jp/entry140870.html",
+      "date": "2026-10-23",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【厚労省】GLP1適正使用を再周知‐美容目的のケトーシスで",
+      "url": "https://www.yakuji.co.jp/entry140869.html",
+      "date": "2026-10-23",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【厚労省】タブネオス、有効性検証されず‐新患投与中止と代替治療へ",
+      "url": "https://www.yakuji.co.jp/entry140868.html",
+      "date": "2026-10-23",
       "tag": "業界ニュース"
     },
     {
@@ -19,27 +49,9 @@
       "tag": "業界ニュース"
     },
     {
-      "title": "【大阪医薬大薬学部】3年生対象に中期体験学習‐キャリア意識の向上図る",
-      "url": "https://www.yakuji.co.jp/entry140744.html",
-      "date": "2026-10-22",
-      "tag": "業界ニュース"
-    },
-    {
       "title": "【地方私立4医科大】創薬研究活性化へ連携体制‐薬学教育の魅力向上期待",
       "url": "https://www.yakuji.co.jp/entry140740.html",
       "date": "2026-10-22",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【インスメッド日本法人】気管支拡張症薬を発売‐呼吸器疾患の増悪抑制",
-      "url": "https://www.yakuji.co.jp/entry140748.html",
-      "date": "2026-10-21",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【愛媛県東温市】睡眠障害に先発品を推奨‐BZ系の安易な使用抑制へ",
-      "url": "https://www.yakuji.co.jp/entry140736.html",
-      "date": "2026-10-21",
       "tag": "業界ニュース"
     }
   ]
