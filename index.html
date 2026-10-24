@@ -3357,7 +3357,19 @@ document.querySelectorAll("[data-focus-search]").forEach(link=>{
     setTimeout(focusPrimarySearchInput, 450);
   });
 });
-$loadMore.addEventListener("click", ()=>{ visibleCount += PAGE_SIZE; render(); });
+$loadMore.addEventListener("click", ()=>{
+  const previousCount = SHOWN.length;
+  const hadFocus = document.activeElement === $loadMore;
+  visibleCount += PAGE_SIZE;
+  render();
+  // 追加分へ操作を続けられるようにする。最終ページではボタン自体も非表示になる。
+  if(!hadFocus) return;
+  const next = $list.querySelectorAll(".drug-open")[previousCount];
+  if(next){
+    next.scrollIntoView({behavior:"instant", block:"center"});
+    next.focus({preventScroll:true});
+  }else focusSearchResultSummary();
+});
 $pageSize.addEventListener("change", ()=>{ PAGE_SIZE = +$pageSize.value; visibleCount = PAGE_SIZE; render(); });
 
 // 現在の絞り込み結果をCSVでダウンロード（BOM付きUTF-8: Excelで開いても文字化けしない）
