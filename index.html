@@ -2943,6 +2943,11 @@ const $loadMore = document.getElementById("loadMore");
 const $csvBtn = document.getElementById("csvBtn");
 const $searchShareBtn = document.getElementById("searchShareBtn");
 const $searchShareStatus = document.getElementById("searchShareStatus");
+let searchShareGeneration = 0;
+function resetSearchShareFeedback(){
+  searchShareGeneration++;
+  $searchShareStatus.textContent = "";
+}
 const $searchResultsJump = document.getElementById("searchResultsJump");
 let searchJumpComposing = false;
 let searchJumpPending = false;
@@ -3046,7 +3051,7 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
     syncSearchResultJump();
     $csvBtn.hidden = true;
     $searchShareBtn.hidden = true;
-    $searchShareStatus.textContent = "";
+    resetSearchShareFeedback();
     $loadMore.hidden = true;
     $meta.removeAttribute("aria-busy");
     $list.removeAttribute("aria-busy");
@@ -3064,7 +3069,7 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
     SHOWN = []; LAST_HITS = [];
     syncSearchResultJump();
     $csvBtn.hidden = true; $searchShareBtn.hidden = true; $loadMore.hidden = true;
-    $searchShareStatus.textContent = "";
+    resetSearchShareFeedback();
     $meta.textContent = HISTORY_STATE.phase === "loading" ? "変更履歴を確認しています…" : "変更履歴を確認できません";
     $meta.setAttribute("aria-busy", String(HISTORY_STATE.phase === "loading"));
     $list.setAttribute("aria-busy", String(HISTORY_STATE.phase === "loading"));
@@ -3125,7 +3130,7 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
   LAST_HITS = hits;
   renderedSearchState = {key:norm($q.value.trim()), filter};
   resumePendingSearchTracking();
-  $searchShareStatus.textContent = "";
+  resetSearchShareFeedback();
   $meta.removeAttribute("aria-busy");
   $list.removeAttribute("aria-busy");
   $csvBtn.hidden = !LIVE || !hits.length;
@@ -3302,7 +3307,7 @@ function showPendingSearchState(){
   LAST_HITS = [];
   $csvBtn.hidden = true;
   $searchShareBtn.hidden = true;
-  $searchShareStatus.textContent = "";
+  resetSearchShareFeedback();
   $loadMore.hidden = true;
   $meta.setAttribute("aria-busy", "true");
   $list.setAttribute("aria-busy", "true");
@@ -3377,26 +3382,31 @@ $csvBtn.addEventListener("click", ()=>{
 // 共有を明示的に選んだときだけ、その状態を受け取り側へ渡す。
 $searchShareBtn.addEventListener("click", async()=>{
   if(!LIVE || !LAST_HITS.length) return;
+  // 別の検索・再試行へ進んだ後に、古い非同期応答の案内を表示しない。
+  resetSearchShareFeedback();
+  const generation = searchShareGeneration;
   clearTimeout(hashTimer);
   hashTimer = null;
   syncHash();
   const url = new URL(location.href);
   url.searchParams.set("src", "share");
   try{
+    let message;
     if(navigator.share){
       await navigator.share({
         title:"医薬品供給ナビ｜検索結果",
         text:`供給状況の検索結果（${LAST_HITS.length.toLocaleString()}件）`,
         url:url.href,
       });
-      $searchShareStatus.textContent = "検索結果を共有しました。";
+      message = "検索結果を共有しました。";
     }else{
       await navigator.clipboard.writeText(url.href);
-      $searchShareStatus.textContent = "検索語と絞り込みを含む共有用リンクをコピーしました。";
+      message = "検索語と絞り込みを含む共有用リンクをコピーしました。";
     }
     dsnTrack("search-results-share-success");
+    if(generation === searchShareGeneration) $searchShareStatus.textContent = message;
   }catch(error){
-    if(error && error.name === "AbortError") return;
+    if((error && error.name === "AbortError") || generation !== searchShareGeneration) return;
     $searchShareStatus.textContent = "共有できませんでした。URL欄からリンクをコピーしてください。";
   }
 });
@@ -5648,8 +5658,19 @@ function sparkAt(el){
   setTimeout(()=>burst.remove(), 700);
 }
 $list.addEventListener("click", e=>{
-  if(e.target.id === "emptyReset"){ $q.value = ""; setFilter("all"); return; }
-  if(e.target.id === "emptyAllFilters"){ setFilter("all"); return; }
+  // 0件の復帰ボタンは再描画で消えるため、次に操作する場所へ焦点を渡す。
+  if(e.target.id === "emptyReset"){
+    $q.value = ""; setFilter("all");
+    $q.scrollIntoView({behavior:"instant", block:"center"});
+    focusPrimarySearchInput();
+    return;
+  }
+  if(e.target.id === "emptyAllFilters"){
+    setFilter("all");
+    $meta.scrollIntoView({behavior:"instant", block:"start"});
+    focusSearchResultSummary();
+    return;
+  }
   const fav = e.target.closest(".fav-btn");
   if(fav){
     e.stopPropagation();
