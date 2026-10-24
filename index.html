@@ -3264,7 +3264,7 @@ function applyHashState(){
 // タブ・ホーム画面アプリで踏むとハッシュだけが変わり、起動時の applyHashState() は
 // もう走らない。自前のURL更新は replaceState（syncHash）と pushState（品目詳細）で
 // どちらも hashchange を発火させないので、ここで自分の更新を拾い直す心配はない
-window.addEventListener("hashchange", ()=>{
+window.addEventListener("hashchange", (event={})=>{
   // FAQなど通常のページ内リンクへ移動した場合は、直前の検索描画が予約した
   // URL更新でアンカーを上書きしない。
   if(isOrdinaryPageAnchor()){
@@ -3283,6 +3283,13 @@ window.addEventListener("hashchange", ()=>{
   if(location.hash.startsWith("#item=") || location.hash.startsWith("#drug=")) return;
   const p = new URLSearchParams(location.hash.slice(1));
   if(!p.has("q") && !p.has("f")) return; // #demo などページ内リンクは無視する
+  const previousHash = event.oldURL ? new URL(event.oldURL).hash : "";
+  // 同じ確定済み検索へ詳細から戻った時は、追加表示した件数・順序・操作位置を保つ。
+  // 別検索、入力待ち、未確定の絞り込みは従来どおりURLから描画する。
+  if((previousHash.startsWith("#item=") || previousHash.startsWith("#drug="))
+      && (p.get("q") || "") === $q.value.trim() && (p.get("f") || "all") === filter
+      && !searchJumpPending && !searchJumpComposing
+      && renderedSearchState?.key === norm($q.value.trim()) && renderedSearchState.filter === filter) return;
   // 詳細を閉じたpopstateで戻した焦点を、続くhashchangeの再描画でも引き継ぐ。
   const resultFocus = captureSearchResultFocus(document.activeElement);
   $q.value = p.get("q") || "";
