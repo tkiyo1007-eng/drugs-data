@@ -1475,6 +1475,15 @@ footer a:hover{color:var(--blue)}
   });
 })();
 </script>
+<noscript>
+  <style>
+    html .reveal{opacity:1;transform:none}
+    #demo > .demo-shell{display:none}
+    #noScriptSearch{padding:24px}
+    #noScriptSearch a{display:inline-flex;align-items:center;min-height:44px;color:var(--blue-deep);font-weight:700;text-underline-offset:3px}
+    #noScriptSearch a:focus-visible{outline:3px solid var(--blue-mid);outline-offset:3px}
+  </style>
+</noscript>
 </head>
 <body>
 <div class="aurora"><div class="blob"></div></div>
@@ -1602,6 +1611,17 @@ footer a:hover{color:var(--blue)}
   <h2>医薬品の供給状況を検索</h2>
   <p class="sec-lede">出荷調整・限定出荷・供給停止を確認。検索結果から原典と同成分・同剤形の関連品目へ進めます。</p>
 
+  <noscript>
+    <div class="glass" id="noScriptSearch">
+      <p>この画面の検索にはJavaScriptが必要です。出荷調整などの供給状況は、次の製品一覧・確認ガイドから確認できます。</p>
+      <nav class="supply-directory-links" aria-label="JavaScriptを使わずに供給状況を確認">
+        <a href="items/limited.html">出荷調整（限定出荷）の一覧</a>
+        <a href="items/stopped.html">供給停止の一覧</a>
+        <a href="guides/how-to-check-drug-supply.html">出荷調整とは・確認方法</a>
+      </nav>
+      <p class="search-help">一覧のデータ基準日と品目ごとの出典を確認してください。各施設の在庫や入荷を示す情報ではありません。</p>
+    </div>
+  </noscript>
   <div class="demo-shell glass">
     <div class="search-box">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
