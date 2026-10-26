@@ -11,6 +11,8 @@ import types
 import unittest
 from unittest import mock
 
+import scripts.jst_time
+
 
 ROOT = Path(__file__).resolve().parents[1]
 
