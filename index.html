@@ -4389,7 +4389,16 @@ $q.addEventListener("compositionend",()=>{
   historySearchComposing = false;
   if(historyViewPending) refreshHistoryViews();
   // 全ての変換フラグを解除してから計測する。続くinputは既存の380ms待ちに任せる。
-  queueMicrotask(trackCurrentSearch);
+  queueMicrotask(()=>{
+    // 確定・取消後にinputが来ない場合も、変換中に描画した結果を残さない。
+    if(!searchJumpPending && !searchJumpComposing && !historySearchComposing && renderedSearchState
+        && renderedSearchState.key !== norm($q.value.trim())){
+      visibleCount = PAGE_SIZE;
+      applyPendingHistoryOrder();
+      renderSupplementalSearchResults();
+    }
+    trackCurrentSearch();
+  });
 });
 document.getElementById("historyRetry").addEventListener("click",()=>{
   if(!LIVE || HISTORY_STATE.phase === "loading") return;
@@ -5672,8 +5681,12 @@ document.addEventListener("keydown", e=>{
   // フォーカストラップ: モーダルを開いている間は Tab が背後のページへ抜けないようにする
   // （aria-modal="true" だけでは実際のフォーカス移動までは制御されない）
   if(e.key!=="Tab") return;
+  const closedDetails = [...$mBack.querySelectorAll("details:not([open])")];
   const focusable = [...$mBack.querySelectorAll('a[href], button, select, input, textarea, summary, [tabindex]:not([tabindex="-1"])')]
-    .filter(el=>!el.hasAttribute("hidden") && !el.disabled && el.offsetParent !== null);
+    .filter(el=>!el.hasAttribute("hidden") && !el.disabled && el.offsetParent !== null
+      // 閉じたdetailsの子は矩形を持つブラウザでもTab対象外。先頭summaryの操作は残す。
+      && !closedDetails.some(details=>details.contains(el)
+        && ![...details.children].find(child=>child.tagName === "SUMMARY")?.contains(el)));
   if(!focusable.length) return;
   const first = focusable[0], last = focusable[focusable.length-1];
   if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
