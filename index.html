@@ -4605,7 +4605,11 @@ function toggleFav(item){
   if(!item) return;
   const resultFocus = captureSearchResultFocus(document.activeElement);
   // 別タブで追加・解除された直後でも、その最新状態を上書きしない。
-  FAVS = readStoredFavoriteKeys();
+  try{ FAVS = readStoredFavoriteKeysOrThrow(); }
+  catch(e){
+    showStorageSaveError("favorites", FAVORITES_SAVE_ERROR);
+    return false;
+  }
   const key = itemKey(item), beforeSize = FAVS.size;
   const before = new Set(FAVS);
   const added = !FAVS.has(key);
