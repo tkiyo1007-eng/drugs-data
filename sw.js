@@ -40,7 +40,7 @@ const ASSET_FILES = [
   "./icon-512.png",
   "./icon-maskable-512.png",
   "./sonamemo-icon.png",
-  "./lumical-icon.png",
+  "./lumical-icon.png?v=1.10.2",
   "./qr-appstore.svg",
   "./qr-sonamemo.png",
   "./qr-lumical.png",
