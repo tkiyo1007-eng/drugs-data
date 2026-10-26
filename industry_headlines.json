@@ -3,55 +3,43 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-10-26T02:37:35+09:00",
-  "last_success_at": "2026-10-26T02:37:35+09:00",
+  "checked_at": "2026-10-27T04:54:20+09:00",
+  "last_success_at": "2026-10-27T04:54:20+09:00",
   "items": [
     {
-      "title": "便秘薬の出荷調整広がる‐EAファーマなど、出荷停止予定の製剤も",
-      "url": "https://www.yakuji.co.jp/entry140876.html",
-      "date": "2026-10-23",
+      "title": "【製薬団体、薬剤師会など】薬業界にもPHP問題直撃‐ウェブサイト閲覧不可に",
+      "url": "https://www.yakuji.co.jp/entry140932.html",
+      "date": "2026-10-26",
       "tag": "業界ニュース"
     },
     {
-      "title": "【PMDA】CDx該当性で留意事項‐抗癌剤開発早期に相談を",
-      "url": "https://www.yakuji.co.jp/entry140873.html",
-      "date": "2026-10-23",
+      "title": "【キッセイ、腎臓学会ら】タブネオスで対応動き出す‐学会は中止後治療方針公表",
+      "url": "https://www.yakuji.co.jp/entry140931.html",
+      "date": "2026-10-26",
       "tag": "業界ニュース"
     },
     {
-      "title": "【GE・BS学会】ニトロソアミン類で提言‐リスク応じ段階管理を",
-      "url": "https://www.yakuji.co.jp/entry140872.html",
-      "date": "2026-10-23",
+      "title": "【サノフィ日本法人】血小板減少症に新薬‐病態形成過程などに作用",
+      "url": "https://www.yakuji.co.jp/entry140930.html",
+      "date": "2026-10-26",
       "tag": "業界ニュース"
     },
     {
-      "title": "宮城県医薬品卸協会が創立‐法人化で社会貢献果たす",
-      "url": "https://www.yakuji.co.jp/entry140870.html",
-      "date": "2026-10-23",
+      "title": "外国価格調整の米除外、衆院厚労委で問題視",
+      "url": "https://www.yakuji.co.jp/entry140928.html",
+      "date": "2026-10-26",
       "tag": "業界ニュース"
     },
     {
-      "title": "【厚労省】GLP1適正使用を再周知‐美容目的のケトーシスで",
-      "url": "https://www.yakuji.co.jp/entry140869.html",
-      "date": "2026-10-23",
+      "title": "【レジリア】安定供給リスク分析を支援‐厚労省「行動計画」に対応",
+      "url": "https://www.yakuji.co.jp/entry140875.html",
+      "date": "2026-10-26",
       "tag": "業界ニュース"
     },
     {
-      "title": "【厚労省】タブネオス、有効性検証されず‐新患投与中止と代替治療へ",
-      "url": "https://www.yakuji.co.jp/entry140868.html",
-      "date": "2026-10-23",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【セルフM振興財団】セルフM担う薬剤師育成へ‐シンポでOTC適正使用議論",
-      "url": "https://www.yakuji.co.jp/entry140746.html",
-      "date": "2026-10-22",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【地方私立4医科大】創薬研究活性化へ連携体制‐薬学教育の魅力向上期待",
-      "url": "https://www.yakuji.co.jp/entry140740.html",
-      "date": "2026-10-22",
+      "title": "【ツルハHD】多摩美大と共同研究開始‐「スローショッピング」基軸に",
+      "url": "https://www.yakuji.co.jp/entry140874.html",
+      "date": "2026-10-26",
       "tag": "業界ニュース"
     }
   ]
