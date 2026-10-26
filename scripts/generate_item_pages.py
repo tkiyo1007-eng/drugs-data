@@ -1988,6 +1988,7 @@ HUB_FILTER_SCRIPT = r"""<script>
       return {row:row, text:normalize(row.getAttribute("data-search") || row.textContent),
         priceInfo:row.getAttribute("data-price-info") === "1"};
     });
+    let appliedValue = null;
     function applyFilter(){
       const terms = normalize(input.value).trim().split(/\s+/).filter(Boolean);
       const matches = entries.map(function(entry){
@@ -2006,11 +2007,17 @@ HUB_FILTER_SCRIPT = r"""<script>
         + entries.length.toLocaleString("ja-JP") + "品目を表示";
       empty.hidden = shown !== 0;
       clear.disabled = input.value.length === 0 && (!priceOnly || !priceOnly.checked);
+      appliedValue = input.value;
     }
     function safelyApplyFilter(){
       try{ applyFilter(); }catch(error){ showAll(); }
     }
     input.addEventListener("input", safelyApplyFilter);
+    input.addEventListener("compositionend", function(){
+      setTimeout(function(){
+        if(input.value !== appliedValue) safelyApplyFilter();
+      }, 0);
+    });
     if(priceOnly) priceOnly.addEventListener("change", safelyApplyFilter);
     clear.addEventListener("click", function(){
       input.value = "";
