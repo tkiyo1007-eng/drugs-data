@@ -2,14 +2,14 @@
   "schema_version": 1,
   "generated_at": "2026-10-27",
   "source": {
-    "mhlw_version": 202610270454,
-    "mhlw_note": "2026年10月27日厚労省データ反映",
+    "mhlw_version": 202610280425,
+    "mhlw_note": "2026年10月28日厚労省データ反映",
     "manufacturer_checked_through": "2026-10-27"
   },
   "counts": {
-    "high": 4,
+    "high": 3,
     "review": 5,
-    "total": 9
+    "total": 8
   },
   "products": {
     "1179002F1122": {
@@ -27,34 +27,6 @@
         "maker": "沢井製薬",
         "title": "2026年9月14日 製品の供給状況一覧：アミトリプチリン塩酸塩錠10mg「サワイ」は供給停止",
         "url": "https://med.sawai.co.jp/file/pr115_1773_1.pdf",
-        "scope": "product"
-      },
-      "confidence": "high",
-      "reason": "メーカー・製品規格・公表日の一致を確認",
-      "badge": "情報差異あり",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": true,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "",
-        "verified_target_scope": ""
-      }
-    },
-    "2189017F2215": {
-      "product_name": "ロスバスタチン錠５ｍｇ「トーワ」",
-      "maker": "東和薬品",
-      "official": {
-        "status": "stopped",
-        "label": "供給停止",
-        "updated_at": "2026-09-30"
-      },
-      "manufacturer": {
-        "status": "resumed",
-        "label": "出荷再開（供給区分は原文確認）",
-        "announced_at": "2026-10-26",
-        "maker": "東和薬品",
-        "title": "ロスバスタチン錠5mg「トーワ」 出荷再開に関するお知らせ NEW",
-        "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83736&t=4&f=%E3%83%AD%E3%82%B9%E3%83%90%E3%82%B9%E3%82%BF%E3%83%81%E3%83%B3%E9%8C%A05mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%87%BA%E8%8D%B7%E5%86%8D%E9%96%8B%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B_20261026.pdf",
         "scope": "product"
       },
       "confidence": "high",

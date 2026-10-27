@@ -3,9 +3,33 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-10-27T04:54:20+09:00",
-  "last_success_at": "2026-10-27T04:54:20+09:00",
+  "checked_at": "2026-10-28T04:25:12+09:00",
+  "last_success_at": "2026-10-28T04:25:12+09:00",
   "items": [
+    {
+      "title": "【がん研など5者】ネオアンチゲン研究が加速‐NEDO実証事業に採択",
+      "url": "https://www.yakuji.co.jp/entry140934.html",
+      "date": "2026-10-27",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【薬王堂HD】今期出店計画、70店に修正‐千葉県の災害など影響",
+      "url": "https://www.yakuji.co.jp/entry140929.html",
+      "date": "2026-10-27",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【厚労省】自殺者2万人下回る‐25年、若年層対策が急務",
+      "url": "https://www.yakuji.co.jp/entry140927.html",
+      "date": "2026-10-27",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【神奈川県薬】ルーキーメンバー100人超‐正会員移行が今後の課題",
+      "url": "https://www.yakuji.co.jp/entry140926.html",
+      "date": "2026-10-27",
+      "tag": "業界ニュース"
+    },
     {
       "title": "【製薬団体、薬剤師会など】薬業界にもPHP問題直撃‐ウェブサイト閲覧不可に",
       "url": "https://www.yakuji.co.jp/entry140932.html",
@@ -15,30 +39,6 @@
     {
       "title": "【キッセイ、腎臓学会ら】タブネオスで対応動き出す‐学会は中止後治療方針公表",
       "url": "https://www.yakuji.co.jp/entry140931.html",
-      "date": "2026-10-26",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【サノフィ日本法人】血小板減少症に新薬‐病態形成過程などに作用",
-      "url": "https://www.yakuji.co.jp/entry140930.html",
-      "date": "2026-10-26",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "外国価格調整の米除外、衆院厚労委で問題視",
-      "url": "https://www.yakuji.co.jp/entry140928.html",
-      "date": "2026-10-26",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【レジリア】安定供給リスク分析を支援‐厚労省「行動計画」に対応",
-      "url": "https://www.yakuji.co.jp/entry140875.html",
-      "date": "2026-10-26",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【ツルハHD】多摩美大と共同研究開始‐「スローショッピング」基軸に",
-      "url": "https://www.yakuji.co.jp/entry140874.html",
       "date": "2026-10-26",
       "tag": "業界ニュース"
     }
