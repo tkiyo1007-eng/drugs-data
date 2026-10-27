@@ -1661,6 +1661,9 @@ footer a:hover{color:var(--blue)}
     </div>
     <p class="data-as-of" role="status" aria-live="polite"><span id="dataAsOf">データ基準日を確認中です。</span><span>（サイト取込日）</span></p>
     <p class="data-as-of" id="dataSourceAsOf" role="status" aria-live="polite">厚労省の原Excel基準日：確認中です。</p>
+    <div class="data-freshness-notice" id="sourceStaleNotice" role="status" aria-live="polite" hidden>
+      <span>厚労省の原Excel基準日から7日以上経過しています。<a href="https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システム</a>もご確認ください。</span>
+    </div>
     <div class="data-freshness-notice" id="supplementalNotice" role="status" aria-live="polite" hidden>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.7 2.2 17.5A2 2 0 0 0 3.9 20h16.2a2 2 0 0 0 1.7-2.5L13.7 3.7a2 2 0 0 0-3.4 0Z"/></svg>
       <span id="supplementalNoticeText"></span>
@@ -6827,6 +6830,12 @@ function setSourceDate(date){
   SOURCE_DATE = validSourceDate(date, DATASET_DATE) ? date : "";
   const display = SOURCE_DATE.replaceAll("-", ".") || "確認できません";
   document.getElementById("dataSourceAsOf").textContent = `厚労省の原Excel基準日：${display}`;
+  // 取込日が新しくても原資料が古い場合を見落とさない。
+  // 取込日自体が古い場合は既存の警告に任せ、重複表示しない。
+  const sourceAge = SOURCE_DATE ? daysAgo(SOURCE_DATE) : null;
+  const datasetAge = DATASET_DATE ? daysAgo(DATASET_DATE) : null;
+  document.getElementById("sourceStaleNotice").hidden = !(sourceAge != null && sourceAge >= STALE_DATA_DAYS
+    && datasetAge != null && datasetAge < STALE_DATA_DAYS);
   updateDetailDataProvenance();
 }
 
