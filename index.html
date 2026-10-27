@@ -3683,6 +3683,24 @@ let SUPPLEMENTAL_CHECKED_THROUGH = "";
 let SUPPLEMENTAL_DISCREPANCY_CHECKED = "";
 let SUPPLEMENTAL_ATTEMPT = null;
 let SUPPLEMENTAL_MHLW_DATE = "";
+function validSupplementalHealth(data){
+  if(!data || !Array.isArray(data.sources) || !data.sources.length
+    || data.sources.some(source=>!source || source.ok !== true)) return false;
+  // 旧形式はlast_attemptを持たない。新形式が成功を示す場合は、取得先と日付も照合する。
+  if(!Object.hasOwn(data, "last_attempt")) return true;
+  const attempt = data.last_attempt;
+  if(!attempt || typeof attempt !== "object" || Array.isArray(attempt)) return false;
+  if(attempt.status !== "success") return true; // 不完全な試行は既存の警告表示へ渡す
+  if(attempt.checked !== data.checked || !Array.isArray(attempt.sources)
+    || !attempt.sources.length || attempt.sources.length !== data.sources.length
+    || (attempt.errors !== undefined && (!Array.isArray(attempt.errors) || attempt.errors.length))) return false;
+  const names = data.sources.map(source=>source.source);
+  if(names.some(name=>typeof name !== "string" || !name) || new Set(names).size !== names.length) return false;
+  const attempted = attempt.sources.map(source=>source && source.source);
+  return new Set(attempted).size === names.length && attempt.sources.every(source=>source
+    && names.includes(source.source) && source.ok === true && source.retained !== true
+    && (!source.last_success || source.last_success === attempt.checked));
+}
 function supplementalReady(){
   const checkedAge = daysAgo(SUPPLEMENTAL_CHECKED_THROUGH);
   return Object.values(SUPPLEMENTAL_STATE).every(state=>state === "loaded")
@@ -4015,7 +4033,7 @@ function loadSupplementalData(){
       }).catch(()=>{ SUPPLEMENTAL_STATE.discrepancies = "failed"; }).finally(updateSupplementalStatus),
     fetchFirst(["maker_collection_health.json", "https://kyokyu-navi.jp/maker_collection_health.json"])
       .then(res => { if(!res) throw new Error("missing health"); const cached=responseUsesCachedData(res); return res.json().then(data=>({data,cached})); }).then(({data,cached}) => {
-        if(!data || !Array.isArray(data.sources) || !data.sources.length || data.sources.some(source=>source.ok !== true)){
+        if(!validSupplementalHealth(data)){
           throw new Error("incomplete health");
         }
         SUPPLEMENTAL_CHECKED_THROUGH = String(data.checked || "");
