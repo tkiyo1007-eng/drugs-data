@@ -1,5 +1,35 @@
 [
  {
+  "date": "2026/10/27",
+  "title": "医薬品・医療機器等安全性情報 No.433（厚生労働省発行）を掲載しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/safety-info/0166.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/10/27",
+  "title": "使用上の注意の改訂指示通知（医薬品）2026年10月27日付（厚生労働省より発出）を掲載しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/revision-of-precautions/0375.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/10/27",
+  "title": "添付文書改訂相談に基づく添付文書改訂（医薬品）を掲載しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/revision-based-on-the-consultation/0001.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/10/27",
+  "title": "「医薬品に関する評価中のリスク等の情報について」を掲載しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/risk-communications/0001.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/10/27",
+  "title": "我が国における医薬品一般的名称（JAN）の申請等についてのページ 3.JANの変更手続 を更新しました",
+  "url": "https://www.pmda.go.jp/review-services/drug-reviews/procedures/0023.html",
+  "tag": "承認審査"
+ },
+ {
   "date": "2026/10/23",
   "title": "「不具合が疑われる症例報告に関する情報（コンビネーション製品）」に2026年6月分の情報を追加しました",
   "url": "https://www.pmda.go.jp/safety/info-services/drugs/adr-info/malfunctions-combination-drugs/0001.html",
@@ -28,35 +58,5 @@
   "title": "「アバコパン製剤の使用に当たっての留意事項について」を掲載しました",
   "url": "https://www.pmda.go.jp/safety/info-services/drugs/0010.html",
   "tag": "安全対策"
- },
- {
-  "date": "2026/10/21",
-  "title": "クラスI回収 該当回収品目　照射赤血球液-LR「日赤」",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html",
-  "tag": "回収"
- },
- {
-  "date": "2026/10/21",
-  "title": "外国製造業者認定・登録番号を掲載しました",
-  "url": "https://www.pmda.go.jp/review-services/drug-reviews/foreign-mfr/0003.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/10/20",
-  "title": "[イベント]「2026年度マスターファイル講習会」の案内を更新しました",
-  "url": "https://www.pmda.go.jp/review-services/symposia/0208.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/10/16",
-  "title": "「副作用が疑われる症例報告に関する情報」に2026年6月分の情報を追加しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/adr-info/suspected-adr/0005.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/10/16",
-  "title": "プログラム医療機器の製造販売承認品目の一覧情報等を更新しました",
-  "url": "https://www.pmda.go.jp/review-services/drug-reviews/about-reviews/devices/0052.html",
-  "tag": "承認審査"
  }
 ]

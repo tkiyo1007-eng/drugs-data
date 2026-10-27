@@ -2,7 +2,7 @@
  {
   "maker": "沢井製薬",
   "title": "2026/10/08 供給関連 PDF 一部製品 限定出荷解除のお知らせ PDF",
-  "url": "https://med.sawai.co.jp/file/pr27_1119_1.pdf",
+  "url": "https://med.sawai.co.jp/file/pr27_143_1.pdf",
   "event_type": "resumed",
   "announced_at": "2026-10-08"
  },
@@ -788,6 +788,20 @@
   "url": "https://med.daiichisankyo-ep.co.jp/information/files/0/20110627121031_6334_file_txt.pdf",
   "event_type": "supply",
   "announced_at": "2011-06-27"
+ },
+ {
+  "maker": "高田製薬",
+  "title": "2026/10/27 製造販売中止のご案内_クエチアピン錠",
+  "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000ccvp-att/Quetiapine.pdf",
+  "event_type": "discontinued",
+  "announced_at": "2026-10-27"
+ },
+ {
+  "maker": "高田製薬",
+  "title": "2026/10/27 製造販売中止のご案内_オザグレルNa点滴静注,オザグレルNa点滴静注ﾊﾞｯｸﾞ",
+  "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000ccsv-att/Ozagrel.pdf",
+  "event_type": "discontinued",
+  "announced_at": "2026-10-27"
  },
  {
   "maker": "高田製薬",
