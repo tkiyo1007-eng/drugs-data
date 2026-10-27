@@ -115,6 +115,11 @@ def parse_dsep(pages=1):
 def parse_kemifa(pages=1):
     items = []
     html = fetch("https://www.nc-medical.com/product/information/")
+    # HTTP 200でも一覧の途中で応答が終わる場合がある。途中まで取得した
+    # 案内を完全な一覧として採用せず、従来の取得失敗・前回保持へ回す。
+    if (re.search(r"<html\b", html, re.I)
+            and not re.search(r"</(?:body|html)\s*>", html, re.I)):
+        raise ValueError("公式一覧ページのHTMLが途中で終了しています")
     for block in re.findall(r"<tr\b[^>]*>(.*?)</tr>", html, re.S | re.I):
         link = re.search(
             r'<a[^>]*href="(/product_topics/[^"]+\.pdf)"[^>]*>(.*?)</a>',

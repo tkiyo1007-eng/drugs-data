@@ -63,6 +63,27 @@ class AnnouncementMatchingTests(unittest.TestCase):
         self.assertEqual(result[0][1], "2026年7月31日 販売中止のご案内")
         self.assertEqual(mod.extract_announcement_date(result[0][1]), "2026-07-31")
 
+    @mock.patch.object(mod, "fetch")
+    def test_kemifa_truncated_html_rejects_even_when_some_records_exist(self, fetch_mock):
+        fetch_mock.return_value = (
+            '<html><body><table><tr><th class="date">2026年10月27日</th>'
+            '<td><a href="/product_topics/test.pdf">案内</a></td></tr><tr>'
+        )
+        with self.assertRaisesRegex(ValueError, "HTMLが途中で終了"):
+            mod.parse_kemifa()
+
+    @mock.patch.object(mod, "fetch")
+    def test_kemifa_complete_html_remains_parseable(self, fetch_mock):
+        fetch_mock.return_value = (
+            '<html><body><table><tr><th class="date">2026年10月27日</th>'
+            '<td><a href="/product_topics/test.pdf">案内</a></td></tr>'
+            '</table></body></html>'
+        )
+        self.assertEqual(mod.parse_kemifa(), [
+            ("日本ケミファ", "2026年10月27日 案内",
+             "https://www.nc-medical.com/product_topics/test.pdf")
+        ])
+
     @mock.patch("urllib.request.urlopen")
     def test_takata_listing_date_is_kept(self, urlopen_mock):
         response = mock.MagicMock()
