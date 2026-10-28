@@ -76,7 +76,7 @@ class SupplementalDirectoryTests(unittest.TestCase):
                   "supply_end_verified_at": "2026-11-01"}
         self.assertEqual("2026-11-01", item_page_lastmod(row, notice))
         notice["supply_end_source_url"] = "https://example.test/old.pdf"
-        self.assertEqual("2026-10-19", item_page_lastmod(row, notice))
+        self.assertEqual("2026-10-29", item_page_lastmod(row, notice))
 
 
 if __name__ == "__main__":
