@@ -3,9 +3,33 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-10-28T04:25:12+09:00",
-  "last_success_at": "2026-10-28T04:25:12+09:00",
+  "checked_at": "2026-10-29T04:31:19+09:00",
+  "last_success_at": "2026-10-29T04:31:19+09:00",
   "items": [
+    {
+      "title": "【ノバルティスファーマ】腎臓病治療は新潮流へ‐経口薬「ファビハルタ」登場で",
+      "url": "https://www.yakuji.co.jp/entry141038.html",
+      "date": "2026-10-28",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【厚労省】適合性調査で経過措置‐短期間での再調査避ける",
+      "url": "https://www.yakuji.co.jp/entry141034.html",
+      "date": "2026-10-28",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【日病薬地方連絡協議会】5疾病6事業にも「薬剤師」‐第8次医療計画見直しで",
+      "url": "https://www.yakuji.co.jp/entry141031.html",
+      "date": "2026-10-28",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【日薬／RAD-AR】小学校から「くすり教育」を‐市販薬の乱用背景に要望",
+      "url": "https://www.yakuji.co.jp/entry141030.html",
+      "date": "2026-10-28",
+      "tag": "業界ニュース"
+    },
     {
       "title": "【がん研など5者】ネオアンチゲン研究が加速‐NEDO実証事業に採択",
       "url": "https://www.yakuji.co.jp/entry140934.html",
@@ -19,27 +43,9 @@
       "tag": "業界ニュース"
     },
     {
-      "title": "【厚労省】自殺者2万人下回る‐25年、若年層対策が急務",
-      "url": "https://www.yakuji.co.jp/entry140927.html",
-      "date": "2026-10-27",
-      "tag": "業界ニュース"
-    },
-    {
       "title": "【神奈川県薬】ルーキーメンバー100人超‐正会員移行が今後の課題",
       "url": "https://www.yakuji.co.jp/entry140926.html",
       "date": "2026-10-27",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【製薬団体、薬剤師会など】薬業界にもPHP問題直撃‐ウェブサイト閲覧不可に",
-      "url": "https://www.yakuji.co.jp/entry140932.html",
-      "date": "2026-10-26",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【キッセイ、腎臓学会ら】タブネオスで対応動き出す‐学会は中止後治療方針公表",
-      "url": "https://www.yakuji.co.jp/entry140931.html",
-      "date": "2026-10-26",
       "tag": "業界ニュース"
     }
   ]
