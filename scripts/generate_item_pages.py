@@ -40,7 +40,7 @@ OFFICIAL_SUPPLY_URL = "https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-l
 MHLW_PRICE_LIST_URL = "https://www.mhlw.go.jp/topics/2026/04/tp20260401-01.html"
 # 全品目へ一次情報・状態別ハブ・運営方針の導線を追加した実質的な改訂日。
 # 日次生成日ではなく固定値にし、内容が変わらない日にlastmodを進めない。
-ITEM_PAGE_TEMPLATE_LASTMOD = "2026-10-19"  # 冒頭の公表理由・原文確認限界と規格別導線の実質改訂
+ITEM_PAGE_TEMPLATE_LASTMOD = "2026-10-29"  # 検索説明の公表理由・解除見込みと情報日付の区別を整理
 # 状態別5一覧の実質的な改訂日。個別品目のlastmodは進めない。
 HUB_TEMPLATE_LASTMOD = "2026-10-19"
 # ページ内検索の対象は、テンプレートの改訂日とは別に維持する。
@@ -1362,14 +1362,14 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
     public_metadata = supply_metadata_values(row)
     reason_description = (f"。公表理由は「{(row.get('理由') or '記載なし').strip()}」"
                           if status in {"limited", "stopped", "ended"} else "")
+    release_description = (f"。解除・解消見込みは「{public_metadata.get('解除・解消見込み', '記載なし')}」（公表区分）"
+                           if status in {"limited", "stopped", "ended"} else "")
     desc = (f"{display_name}（{maker}）の厚生労働省公表データ上の供給区分は「{st['label']}」"
-            + reason_description
             + ("（薬価削除予定）" if delist else "")
+            + reason_description
+            + release_description
             + (f"。メーカー公式補足は「{'／'.join(supplements)}」" if supplements else "")
-            + "。サイト全体の最新基準日はページ上で別途表示します。"
-            + "理由・解除見込みの公表区分・出荷量状況・同成分・同剤形のほかの品目は、公表されている場合に確認できます。")
-    if status in {"limited", "stopped", "ended"}:
-        desc += f"解除・解消見込みは「{public_metadata.get('解除・解消見込み', '記載なし')}」です。"
+            + "。原Excelの基準日・品目行の更新日はページ内で分けて確認できます。")
     url = f"{SITE_ROOT}items/{key}.html"
     # 商品名は同名品目があるため、LPの詳細リンクも一意な品目キーを使う。
     lp_link = SITE_ROOT + "#item=" + quote(key, safe="")

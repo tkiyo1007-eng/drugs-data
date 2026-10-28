@@ -25,7 +25,7 @@ class ItemAnswerContextTests(unittest.TestCase):
         self.assertNotIn('2099-01-01', top)
         self.assertIn('how-to-check-discontinuation-and-delisting.html', top)
         desc = result.split('<meta name="description" content="', 1)[1].split('">', 1)[0]
-        self.assertLess(desc.index('公表理由'), desc.index('サイト全体'))
+        self.assertLess(desc.index('公表理由'), desc.index('原Excel'))
 
     def test_limited_supply_does_not_become_a_discontinuation(self):
         row = self.row()

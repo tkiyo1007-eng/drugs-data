@@ -1,3 +1,4 @@
+import html
 import json
 import re
 import shutil
@@ -353,11 +354,11 @@ class ItemPageMetadataTests(unittest.TestCase):
 
     def test_sitemap_lastmod_uses_fixed_template_revision_without_advancing_daily(self):
         old_row = {"商品名": "対象錠", "更新日": "2024/03/11"}
-        self.assertEqual(item_page_lastmod(old_row), "2026-10-19")
+        self.assertEqual(item_page_lastmod(old_row), "2026-10-29")
         future_notice = {"product_name": "対象錠", "maker": "対象製薬",
-                         "announced_at": "2026-10-23"}
+                         "announced_at": "2026-10-30"}
         old_row["製造メーカー"] = "対象製薬"
-        self.assertEqual(item_page_lastmod(old_row, future_notice), "2026-10-23")
+        self.assertEqual(item_page_lastmod(old_row, future_notice), "2026-10-30")
 
     def test_discrepancy_must_match_current_official_row_and_manufacturer(self):
         row = {
@@ -806,13 +807,13 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
 
     def test_manual_notice_lastmod_is_not_advanced_by_generation_or_daily_attempt(self):
         row, notice = self.row(), self.notice()
-        self.assertEqual("2026-10-19", item_page_lastmod(row, manufacturer_notices=[notice]))
-        notice["listed_at"] = "2026-10-20"
-        self.assertEqual("2026-10-19", item_page_lastmod(row, manufacturer_notices=[notice]))
-        notice["content_updated_at"] = "2026-10-21"
-        self.assertEqual("2026-10-21", item_page_lastmod(row, manufacturer_notices=[notice]))
+        self.assertEqual("2026-10-29", item_page_lastmod(row, manufacturer_notices=[notice]))
+        notice["listed_at"] = "2026-10-30"
+        self.assertEqual("2026-10-29", item_page_lastmod(row, manufacturer_notices=[notice]))
+        notice["content_updated_at"] = "2026-10-31"
+        self.assertEqual("2026-10-31", item_page_lastmod(row, manufacturer_notices=[notice]))
         notice["targets"][0]["product_name"] = "別の品目"
-        self.assertEqual("2026-10-19", item_page_lastmod(row, manufacturer_notices=[notice]))
+        self.assertEqual("2026-10-29", item_page_lastmod(row, manufacturer_notices=[notice]))
 
 
     def test_discontinuation_timing_device_candidate_and_no_candidate_statement_are_not_reinterpreted(self):
@@ -944,8 +945,8 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
         self.assertNotIn("メーカー：販売中止予定", output)
         for value in ("終了予定時期：", "2027-12", lifecycle["supply_end_note"], lifecycle["supply_end_packages"][0], "終了予定の原文確認日"):
             self.assertNotIn(value, output)
-        self.assertEqual("2026-10-19", item_page_lastmod(row, lifecycle, manufacturer_notices=[notice], manufacturer_bulletins=bulletins))
-        self.assertIn('"dateModified":"2026-10-19"', output)
+        self.assertEqual("2026-10-29", item_page_lastmod(row, lifecycle, manufacturer_notices=[notice], manufacturer_bulletins=bulletins))
+        self.assertIn('"dateModified":"2026-10-29"', output)
 
     def test_changed_lifecycle_hub_is_pending_and_does_not_search_stale_end_details(self):
         row, notice = self.row(), self.notice()
@@ -981,7 +982,7 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
         self.assertNotIn("確認日が7日以上前のため", output)
         self.assertNotIn("メーカー公式：販売中止予定", output)
         self.assertIn("厚労省：通常出荷", output)
-        self.assertIn('"dateModified":"2026-10-19"', output)
+        self.assertIn('"dateModified":"2026-10-29"', output)
         entry = {"key": row["YJコード"], "name": row["商品名"], "maker": lifecycle["maker"],
                  "status": "ok", "updated": "2026-07-07", "lifecycle": lifecycle,
                  "lifecycle_current": False, "supplements": supplemental_labels(
@@ -1292,6 +1293,96 @@ const state=()=>({values:Object.fromEntries(Object.entries(nodes).map(([key,valu
                     self.assertFalse(state["afterDeadline"]["warning"]["hidden"])
                     self.assertEqual(state["afterDeadline"], state["final"], "late completion must not overwrite the settled warning")
 
+
+
+
+class ItemDescriptionTests(unittest.TestCase):
+    def row(self, **overrides):
+        return {
+            "商品名": "確認用錠10mg", "製造メーカー": "確認用製薬",
+            "供給状況": "限定出荷", "理由": "１．需要増",
+            "解除・解消見込み": "ウ. 未定",
+            "YJコード": "1234567F1234", "更新日": "2026/09/01",
+            **overrides,
+        }
+
+    def render(self, row, status="limited", **options):
+        return page_html(row, row["YJコード"], status, "2026-10-29", [],
+                         {row["YJコード"]}, **options)
+
+    def description(self, output):
+        value = re.search(r'<meta name="description" content="([^"]*)">', output)
+        self.assertIsNotNone(value)
+        description = html.unescape(value.group(1))
+        for attribute in ('property="og:description"', 'name="twitter:description"'):
+            match = re.search(r'<meta ' + attribute + r' content="([^"]*)">', output)
+            self.assertEqual(description, html.unescape(match.group(1)))
+        graphs = [json.loads(block) for block in re.findall(
+            r'<script type="application/ld\+json">(.*?)</script>', output)]
+        page = next(graph for graph in graphs if graph.get("@type") == "WebPage")
+        self.assertEqual(description, page["description"])
+        return description
+
+    def test_restricted_descriptions_put_official_answers_before_date_explanation(self):
+        for status, label in (("limited", "限定出荷"), ("stopped", "供給停止"),
+                              ("ended", "販売中止")):
+            with self.subTest(status=status):
+                row = self.row(供給状況=label)
+                description = self.description(self.render(row, status))
+                expected = (f'確認用錠10mg（確認用製薬）の厚生労働省公表データ上の供給区分は「{label}」'
+                            '。公表理由は「１．需要増」。解除・解消見込みは「ウ. 未定」（公表区分）')
+                self.assertTrue(description.startswith(expected), description)
+                self.assertIn("原Excelの基準日・品目行の更新日はページ内で分けて", description)
+                self.assertNotIn("同成分・同剤形のほかの品目", description)
+
+    def test_missing_reason_release_and_dates_are_not_filled_from_generation_day(self):
+        row = self.row(理由="", **{"解除・解消見込み": "", "更新日": ""})
+        description = self.description(self.render(row))
+        self.assertIn("公表理由は「記載なし」。解除・解消見込みは「記載なし」（公表区分）", description)
+        self.assertNotIn("2026-10-29", description)
+        self.assertNotIn("未定", description)
+        self.assertNotIn("メーカー公式補足", description)
+
+    def test_normal_shipment_with_delisting_does_not_gain_a_restart_claim(self):
+        row = self.row(供給状況="通常出荷", 経過措置期限="2027/03/31")
+        description = self.description(self.render(row, "ok"))
+        self.assertIn('供給区分は「通常出荷」（薬価削除予定）', description)
+        self.assertNotIn("公表理由は", description)
+        self.assertNotIn("解除・解消見込みは", description)
+        self.assertNotIn("販売中止", description)
+
+    def test_unverified_and_changed_maker_labels_survive_without_becoming_official_status(self):
+        row = self.row(供給状況="通常出荷")
+        lifecycle = {
+            "product_name": row["商品名"], "maker": row["製造メーカー"],
+            "state": "discontinuation_announced", "announced_at": "2026-10-01",
+            "verified_at": "2026-10-27", "source_url": "https://example.test/notice.pdf",
+        }
+        for changed, label in ((False, "メーカー：販売中止案内あり（要原文確認）"),
+                               (True, "メーカー原典更新・再確認待ち")):
+            with self.subTest(source_changed=changed):
+                output = self.render(
+                    row, "ok", lifecycle={**lifecycle, "source_changed": changed},
+                    supplemental_checked_date="2026-10-27", supplemental_trusted=False)
+                description = self.description(output)
+                self.assertIn('供給区分は「通常出荷」', description)
+                self.assertIn(f'メーカー公式補足は「{label}」', description)
+                self.assertNotIn("メーカー：販売中止予定", description)
+                self.assertNotIn("解除・解消見込みは", description)
+
+    def test_full_source_values_remain_escaped_and_equal_across_search_share_and_schema(self):
+        unsafe = '原値" & <script>確認</script>「条件付き」'
+        reason = unsafe + "長い原文条件" * 40
+        row = self.row(商品名=unsafe, 製造メーカー=unsafe, 理由=reason,
+                       **{"解除・解消見込み": unsafe})
+        output = self.render(row)
+        description = self.description(output)
+        for value in (f"公表理由は「{reason}」", f"解除・解消見込みは「{unsafe}」"):
+            self.assertIn(value, description)
+        raw = re.search(r'<meta name="description" content="([^"]*)">', output).group(1)
+        self.assertIn("&lt;script&gt;", raw)
+        self.assertIn("&quot;", raw)
+        self.assertNotIn("<script>", raw)
 
 
 if __name__ == "__main__":
