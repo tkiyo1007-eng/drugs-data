@@ -11,6 +11,7 @@ from urllib.parse import urlparse
 from maker_identity import maker_is_listed_in_row
 
 MAKER_HOSTS = {
+    '共和薬品工業': 'www.amel-di.com',
     '扶桑薬品工業': 'www.fuso-pharm.co.jp',
     'ファイザー': 'www.pfizermedicalinformation.jp', 'サンド': 'sandoz-jp.cms.sandoz.com',
     '三和化学研究所': 'med.skk-net.com', '日本薬品工業': 'www.npi-inc.co.jp',
@@ -18,6 +19,8 @@ MAKER_HOSTS = {
 }
 SCOPES = {'product', 'package', 'seller_route_and_package'}
 KINDS = {'discontinued', 'limited', 'stopped', 'resumed', 'resumption_planned', 'recall'}
+PACKAGE_STATUSES = {'normal', 'limited', 'stopped', 'unconfirmed'}
+PACKAGE_PLAN_EVENTS = {'stock_depletion', 'shipment_resumption', 'normal_shipment', 'discontinuation'}
 FORMAL_YJ = re.compile(r'[0-9][0-9A-Z]{11}\Z')
 ARCHIVE_FIELD = 'archived_from_csv_at'
 
@@ -44,6 +47,34 @@ def archived_identity(record, yj, label, errors):
         return False
     return True
 
+def validate_package_supply(package, label, errors):
+    """包装の資料時点の状態と予定を分離する。予定日から状態を推測しない。"""
+    if 'supply' not in package:
+        return  # 既存の包装名・コードのみの案内はそのまま扱う。
+    supply = package['supply']
+    if not isinstance(supply, dict):
+        errors.append(label + ': invalid package supply'); return
+    status = supply.get('status')
+    if not isinstance(status, str) or status not in PACKAGE_STATUSES:
+        errors.append(label + ': invalid package supply status')
+    elif status == 'unconfirmed':
+        if 'status_text' in supply:
+            errors.append(label + ': unconfirmed package cannot have status text')
+    elif not isinstance(supply.get('status_text'), str) or not supply['status_text'].strip():
+        errors.append(label + ': missing package source status text')
+    plans = supply.get('plans')
+    if not isinstance(plans, list):
+        errors.append(label + ': invalid package plans')
+    else:
+        for plan in plans:
+            if (not isinstance(plan, dict)
+                    or not isinstance(plan.get('event'), str)
+                    or plan['event'] not in PACKAGE_PLAN_EVENTS
+                    or not isinstance(plan.get('timing'), str) or not plan['timing'].strip()):
+                errors.append(label + ': invalid package plan')
+    if 'note' in supply and (not isinstance(supply['note'], str) or not supply['note'].strip()):
+        errors.append(label + ': invalid package supply note')
+
 def validate(document, rows):
     errors = []
     if not isinstance(document, dict) or type(document.get('schema_version')) is not int or document['schema_version'] != 1 or not isinstance(document.get('notices'), list):
@@ -62,8 +93,11 @@ def validate(document, rows):
         if u.scheme != 'https' or u.hostname != MAKER_HOSTS.get(n.get('maker')) or u.username or u.password: errors.append(label + ': unofficial URL or wrong publisher')
         if not re.fullmatch(r'[a-f0-9]{64}', str(n.get('sha256') or '')): errors.append(label + ': invalid source hash')
         if not isinstance(n.get('event_type'), str) or n['event_type'] not in KINDS: errors.append(label + ': invalid event type')
-        for field in ['announced_at', 'listed_at', 'verified_at']:
+        if 'collection_mode' in n and n['collection_mode'] != 'manual': errors.append(label + ': invalid collection mode')
+        for field in ['announced_at', 'verified_at']:
             if not valid_date(n.get(field), month=field == 'announced_at'): errors.append(label + ': invalid ' + field)
+        # 本文年月やファイル名から公式一覧の掲載日を補わない。未確認は省略する。
+        if 'listed_at' in n and not valid_date(n['listed_at']): errors.append(label + ': invalid listed_at')
         if valid_date(n.get('verified_at')) and n['verified_at'] > dt.datetime.now(dt.timezone(dt.timedelta(hours=9))).date().isoformat(): errors.append(label + ': future verification')
         targets = n.get('targets')
         if not isinstance(targets, list) or not targets:
@@ -90,7 +124,11 @@ def validate(document, rows):
                 errors.append(label + ': target maker mismatch ' + yj)
             if not isinstance(t.get('scope'), str) or t['scope'] not in SCOPES: errors.append(label + ': invalid target scope')
             packages = t.get('packages')
-            if not isinstance(packages, list) or not packages or any(not isinstance(p, dict) or not isinstance(p.get('package'), str) or not p['package'].strip() for p in packages): errors.append(label + ': missing package scope')
+            if not isinstance(packages, list) or not packages or any(not isinstance(p, dict) or not isinstance(p.get('package'), str) or not p['package'].strip() for p in packages):
+                errors.append(label + ': missing package scope')
+            else:
+                for package in packages:
+                    validate_package_supply(package, label, errors)
             if t.get('scope') == 'seller_route_and_package' and not t.get('seller'): errors.append(label + ': missing sales route')
         alternatives = n.get('alternatives')
         if not isinstance(alternatives, list): errors.append(label + ': invalid alternatives'); continue

@@ -50,6 +50,17 @@ class ManufacturerPlanTests(unittest.TestCase):
         n = copy.deepcopy(self.n); n['targets'][0]['archived_from_csv_at'] = '2026-10-14'
         self.write('manufacturer_notices.json', {'notices': [n]})
         self.assertEqual(self.plan()['action'], 'skip')
+    def test_manual_notice_never_posts_even_with_fresh_confirmed_bulletin(self):
+        # All ordinary posting prerequisites are met; mode alone must prevent a post.
+        self.assertEqual(self.plan()['action'], 'post')
+        for mode in ['manual', 'unknown', None]:
+            n = copy.deepcopy(self.n); n['collection_mode'] = mode
+            self.write('manufacturer_notices.json', {'notices': [n]})
+            plan = self.plan(); self.assertEqual(plan['action'], 'skip')
+            path = self.base / 'manual-plan.json'; path.write_text(json.dumps({'posts': [plan]}))
+            with mock.patch.object(xp, 'post_to_x') as post, mock.patch.object(xp, 'load_credentials') as credentials:
+                self.assertEqual(xp.main(['post', '--plan', str(path)]), 0)
+                post.assert_not_called(); credentials.assert_not_called()
     def test_published_page_and_live_source_hash_required(self):
         body = b'%PDF verified'; sha = hashlib.sha256(body).hexdigest()
         item = {'url': 'page', 'source_url': 'source', 'source_sha256': sha}

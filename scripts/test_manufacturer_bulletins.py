@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest import mock
 
 SPEC = importlib.util.spec_from_file_location("bulletins", Path(__file__).with_name("fetch_manufacturer_bulletins.py"))
 mod = importlib.util.module_from_spec(SPEC); SPEC.loader.exec_module(mod)
@@ -28,6 +29,15 @@ def registry(pdf=PDF, url="https://maker.test/pdf/a.pdf"):
 
 def listing(extra=""):
     return ('<table><tr><td>2026/10/13</td><td><a href="/pdf/a.pdf">テスト錠 出荷停止</a></td></tr>' + extra + '</table>').encode()
+
+
+def manual_registry():
+    return {"schema_version": 1, "notices": [{
+        "id": "manual-history", "maker": "共和薬品工業", "title": "保存原典の手動確認",
+        "url": "https://www.amel-di.com/medical/di/download/news?nid=69975",
+        "sha256": mod.digest(PDF), "announced_at": "2026-09", "verified_at": "2026-10-08",
+        "collection_mode": "manual",
+    }]}
 
 
 class Transport:
@@ -111,6 +121,59 @@ class MetadataTests(unittest.TestCase):
 
 
 class CollectionTests(unittest.TestCase):
+    def test_manual_history_creates_no_network_attempt_confirmed_item_or_draft(self):
+        transport = Transport(); cfg = configuration(); cfg['sources'] = []
+        result = mod.collect(cfg, manual_registry(), transport=transport, now=NOW)
+        self.assertEqual(transport.calls, [])
+        self.assertEqual(result['items'], [])
+        self.assertEqual(result['document_checks'], [])
+        self.assertEqual(result['drafts'], [])
+
+    def test_manual_history_does_not_expand_or_change_existing_collection(self):
+        control_transport = Transport()
+        control = mod.collect(configuration(), registry(), transport=control_transport, now=NOW)
+        mixed = registry(); mixed['notices'] += manual_registry()['notices']
+        transport = Transport()
+        result = mod.collect(configuration(), mixed, transport=transport, now=NOW)
+        self.assertEqual(transport.calls, control_transport.calls)
+        self.assertEqual(result, control)
+        self.assertFalse(any('amel-di.com' in url for url, _ in transport.calls))
+
+    def test_former_automatic_confirmation_is_not_retained_for_manual_notice(self):
+        reg = registry()
+        first = mod.collect(configuration(), reg, transport=Transport(), now=NOW)
+        self.assertEqual(first['items'][0]['review_status'], 'confirmed')
+        reg['notices'][0].update(collection_mode='manual', announced_at='2026-10', verified_at='2026-10-08')
+        transport = Transport()
+        with mock.patch.dict(mod.MAKER_HOSTS, {'テスト製薬': 'maker.test'}):
+            result = mod.collect(configuration(), reg, first, transport=transport, now=NOW + dt.timedelta(hours=1))
+        self.assertEqual(transport.calls, [])
+        self.assertEqual(result['items'][0]['review_status'], 'needs_review')
+        self.assertEqual(result['items'][0]['notice_ids'], [])
+        self.assertEqual(result['drafts'], [])
+
+    def test_bad_manual_source_or_mode_rejected_before_network(self):
+        for field, value in [('collection_mode', None), ('collection_mode', 'other'),
+                             ('id', 'Not A Valid ID'), ('sha256', 'bad'),
+                             ('url', 'https://example.test/notice.pdf'),
+                             ('url', 'https://www.amel-di.com.evil.test/notice.pdf'),
+                             ('url', 'https://www.amel-di.com:8080/notice.pdf'),
+                             ('announced_at', '2026-13'), ('verified_at', '2026-10'),
+                             ('verified_at', '2099-01-01'), ('listed_at', None)]:
+            with self.subTest(field=field, value=value):
+                reg = manual_registry(); reg['notices'][0][field] = value
+                transport = Transport()
+                with self.assertRaises(mod.CollectionError):
+                    mod.collect(configuration(), reg, transport=transport, now=NOW)
+                self.assertEqual(transport.calls, [])
+
+    def test_unknown_maker_without_manual_mode_still_fails_scope(self):
+        reg = manual_registry(); reg['notices'][0].pop('collection_mode')
+        transport = Transport()
+        with self.assertRaises(mod.CollectionError):
+            mod.collect(configuration(), reg, transport=transport, now=NOW)
+        self.assertEqual(transport.calls, [])
+
     def test_confirmed_requires_registered_url_and_current_pdf_hash(self):
         transport = Transport()
         result = mod.collect(configuration(), registry(), transport=transport, now=NOW)

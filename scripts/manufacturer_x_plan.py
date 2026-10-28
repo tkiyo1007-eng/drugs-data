@@ -34,6 +34,7 @@ def build(base, log, today, finalize):
     already = {p.get('document_key') for p in history}
     priority = {'recall': 0, 'stopped': 1, 'limited': 2, 'resumption_planned': 3, 'resumed': 4, 'discontinued': 5}
     for n in sorted(notices, key=lambda n: (priority.get(n.get('event_type'), 9), str(n.get('id')))):
+        if 'collection_mode' in n: continue  # manualおよび未知modeは自動投稿対象外。
         if any(t.get('archived_from_csv_at') for t in n['targets']): continue
         try: listed = dt.date.fromisoformat(n['listed_at'])
         except (KeyError, ValueError): continue

@@ -1205,6 +1205,203 @@
         "2025年9月の販売中止予定案内です。販売終了の実施日を確認したものではありません。",
         "厚労省の現在の供給区分・薬価情報とメーカーの販売予定は別に確認してください。"
       ]
+    },
+    {
+      "id": "amel-hilnamin-tablets-package-plan-202609",
+      "maker": "共和薬品工業",
+      "title": "【第二報】ヒルナミン錠（5mg）／（25mg）／（50mg）供給に関するご連絡とお詫び",
+      "url": "https://www.amel-di.com/medical/di/download/news?nid=69975",
+      "announced_at": "2026-09",
+      "verified_at": "2026-10-18",
+      "content_updated_at": "2026-10-29",
+      "sha256": "60eada8c9fa8bb7b2f0789758f173ffc52cb88bdfc80c681baadf0e0453de80b",
+      "collection_mode": "manual",
+      "event_type": "resumption_planned",
+      "reason": "メーカーは、7月28日の熊本地震により製造委託先の三和化学研究所熊本工場が一時操業停止したと説明しています。2026年9月の第二報は、製造再開を2026年10月下旬頃と見込み、製造再開から入庫まで約4か月を要するため、包装ごとの在庫消尽後に一時供給停止する予定を案内しています。",
+      "targets": [
+        {
+          "yj_code": "1172014F1027",
+          "product_name": "ヒルナミン錠（５ｍｇ）",
+          "maker": "共和薬品工業",
+          "spec": "５ｍｇ１錠",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "058-682036",
+              "gs1_sales": "14987058682033",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月"
+                  },
+                  {
+                    "event": "shipment_resumption",
+                    "timing": "2027年3月頃"
+                  }
+                ],
+                "note": "原文の表は供給停止、本文は在庫消尽時点の停止予定と記載。実際の停止時点は未確認です。"
+              }
+            },
+            {
+              "package": "PTP1000錠",
+              "unified_product_code": "058-682111",
+              "gs1_sales": "14987058682118",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年1月"
+                  },
+                  {
+                    "event": "shipment_resumption",
+                    "timing": "2027年3月頃"
+                  }
+                ],
+                "note": "原文の表は供給停止、本文は在庫消尽時点の停止予定と記載。実際の停止時点は未確認です。"
+              }
+            },
+            {
+              "package": "バラ1000錠",
+              "unified_product_code": "058-682616",
+              "gs1_sales": "14987058682613",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年12月"
+                  },
+                  {
+                    "event": "shipment_resumption",
+                    "timing": "2027年3月頃"
+                  }
+                ],
+                "note": "原文の表は供給停止、本文は在庫消尽時点の停止予定と記載。実際の停止時点は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "1172014F2139",
+          "product_name": "ヒルナミン錠（２５ｍｇ）",
+          "maker": "共和薬品工業",
+          "spec": "２５ｍｇ１錠",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "058-683033",
+              "gs1_sales": "14987058683030",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年10月"
+                  },
+                  {
+                    "event": "shipment_resumption",
+                    "timing": "2027年3月頃"
+                  }
+                ],
+                "note": "原文の表は供給停止、本文は在庫消尽時点の停止予定と記載。実際の停止時点は未確認です。"
+              }
+            },
+            {
+              "package": "バラ1000錠",
+              "unified_product_code": "058-683613",
+              "gs1_sales": "14987058683610",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月"
+                  },
+                  {
+                    "event": "shipment_resumption",
+                    "timing": "2027年3月頃"
+                  }
+                ],
+                "note": "原文の表は供給停止、本文は在庫消尽時点の停止予定と記載。実際の停止時点は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "1172014F3038",
+          "product_name": "ヒルナミン錠（５０ｍｇ）",
+          "maker": "共和薬品工業",
+          "spec": "５０ｍｇ１錠",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "058-684030",
+              "gs1_sales": "14987058684037",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月"
+                  },
+                  {
+                    "event": "shipment_resumption",
+                    "timing": "2027年3月頃"
+                  }
+                ],
+                "note": "原文の表は供給停止、本文は在庫消尽時点の停止予定と記載。実際の停止時点は未確認です。"
+              }
+            },
+            {
+              "package": "バラ1000錠",
+              "unified_product_code": "058-684610",
+              "gs1_sales": "14987058684617",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年2月"
+                  },
+                  {
+                    "event": "shipment_resumption",
+                    "timing": "2027年3月頃"
+                  }
+                ],
+                "note": "原文の表は供給停止、本文は在庫消尽時点の停止予定と記載。実際の停止時点は未確認です。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年9月の案内で、原文確認日は2026年10月18日です。現在の包装別在庫や受注可否を示すものではありません。",
+        "2026年10月29日の原典再取得は職種確認画面で止まり、最新の内容は再確認できていません。保存済みの確認済み原文を参照しています。",
+        "この案内は自動での原典追跡対象外です。続報や現在の包装別状況はメーカー・卸へ確認してください。",
+        "原文1ページの表と2ページの状況欄は「C 出荷停止・⑤供給停止」と記載する一方、本文・脚注は在庫消尽までは同水準で出荷し、在庫消尽時点で停止する予定と説明しています。時点の表記が異なるため、包装ごとの出荷対応・実際の停止時点は確定していません。",
+        "表に記載された在庫消尽・出荷再開の予定を掲載しています。予定時期を過ぎても、停止・再開の実施済みとは扱いません。",
+        "対象は錠剤3規格の7包装です。細粒10％・散50％へ、この原因や包装別予定を適用しません。",
+        "メーカーが示す参考製剤は原文2ページと既存のヒルナミン解説で確認してください。この表では包装別情報を整理しています。"
+      ]
     }
   ]
 }

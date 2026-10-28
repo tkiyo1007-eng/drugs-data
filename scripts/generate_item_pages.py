@@ -521,6 +521,56 @@ def row_maker_matches(row: dict, maker: str) -> bool:
     return bool(source_makers and row_makers and source_makers.intersection(row_makers))
 
 
+PACKAGE_PLAN_LABELS = {
+    "stock_depletion": "在庫消尽予定", "shipment_resumption": "出荷再開予定",
+    "normal_shipment": "通常出荷への移行予定", "discontinuation": "販売中止予定",
+}
+
+
+def valid_package_supply(value) -> bool:
+    """包装に明示された案内のみ受理し、品目区分や経過した予定から補完しない。"""
+    if (not isinstance(value, dict) or not isinstance(value.get("status"), str)
+            or value["status"] not in {"normal", "limited", "stopped", "unconfirmed"}):
+        return False
+    if value["status"] == "unconfirmed":
+        if "status_text" in value:
+            return False
+    elif not isinstance(value.get("status_text"), str) or not value["status_text"].strip():
+        return False
+    if "note" in value and (not isinstance(value["note"], str) or not value["note"].strip()):
+        return False
+    plans = value.get("plans")
+    return (isinstance(plans, list)
+            and all(isinstance(plan, dict) and isinstance(plan.get("event"), str)
+                    and plan["event"] in PACKAGE_PLAN_LABELS
+                    and isinstance(plan.get("timing"), str) and bool(plan["timing"].strip())
+                    for plan in plans))
+
+
+def package_supply_html(target: dict) -> str:
+    packages = target.get("packages", [])
+    if not any(isinstance(p, dict) and valid_package_supply(p.get("supply")) for p in packages):
+        return ""
+    rows = []
+    for package in packages:
+        supply = package.get("supply") if isinstance(package, dict) else None
+        if not valid_package_supply(supply):
+            supply = {"status": "unconfirmed", "plans": []}
+        name = package.get("package", "") if isinstance(package, dict) else package
+        status = supply.get("status_text", "包装別情報未確認")
+        plans = [f'<li>{esc(PACKAGE_PLAN_LABELS[p["event"]])}：{esc(p["timing"])}</li>' for p in supply["plans"]]
+        plan_html = '<ul>' + "".join(plans) + '</ul>' if plans else '<p>この包装の予定情報は未確認です。</p>'
+        note = f'<p>{esc(supply["note"])}</p>' if supply.get("note") else ""
+        rows.append('<div class="package-supply-row"><dt>' + esc(name) + '</dt>'
+                    + '<dd><p><strong>案内時点の出荷対応：</strong>' + esc(status) + '</p>'
+                    + plan_html + note + '</dd></div>')
+    return ('<div class="package-supply"><h4>包装別のメーカー情報</h4>'
+            '<p>この案内に記載された包装の情報です。厚労省区分・卸の在庫や受注可否とは別です。'
+            '予定時期を過ぎても、停止・再開の実施を確認した意味ではありません。</p>'
+            '<dl class="package-supply-list">' + "".join(rows) + '</dl>'
+            '<p>掲載のない包装の出荷対応は未確認です。上記の文書年月日・原文確認日と、原典をご確認ください。</p></div>')
+
+
 def load_manufacturer_notices(path: Path) -> list:
     """手動で原典確認した案内は任意。存在する不正ファイルは公開生成を止める。"""
     if not path.exists():
@@ -585,6 +635,9 @@ def load_manufacturer_notices(path: Path) -> list:
                 raise ValueError("確認済みメーカー案内の対象包装が不正です")
             if target["scope"] in {"package", "seller_route_and_package"} and not packages:
                 raise ValueError("包装限定のメーカー案内に対象包装がありません")
+            if any(isinstance(package, dict) and "supply" in package
+                   and not valid_package_supply(package["supply"]) for package in packages):
+                raise ValueError("メーカー案内の包装別出荷情報が不正です")
             if target["scope"] in {"seller_route", "seller_route_and_package"} and not target.get("seller"):
                 raise ValueError("販売経路限定のメーカー案内に販売元がありません")
             for field in ("maker", "seller", "summary", "planned_timing"):
@@ -720,6 +773,7 @@ def manufacturer_notices_html(row: dict, notices=(), warning="", catalog_yj_code
         parts.append(f'<p>原典の案内年月日：{esc(notice["announced_at"])}'
                      + (f'｜メーカー一覧掲載日：{esc(notice["listed_at"])}' if notice.get("listed_at") else "")
                      + f'｜原文確認日：{esc(iso_publication_date(notice["verified_at"]))}</p>')
+        parts.append(package_supply_html(target))
         for label, value in (("案内の要点", notice.get("summary")), ("対象品目の案内", target.get("summary")),
                              ("メーカー説明の理由", notice.get("reason"))):
             if value:
@@ -1425,6 +1479,16 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
 
     manufacturer_box = manufacturer_notices_html(row, manufacturer_notices, supplemental_warning,
                                                 catalog_yj_codes, manufacturer_bulletins)
+    # 包装情報を載せる品目だけに適用し、無関係な全品目のHTMLを変更しない。
+    package_styles = """
+.package-supply{margin:14px 0;padding:12px;border:1px solid #CCDDF7;border-radius:12px;overflow-wrap:anywhere}
+.package-supply .package-supply-list{margin:10px 0;display:grid;gap:10px}
+.package-supply-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:12px;padding:12px;border:1px solid #CCDDF7;border-radius:10px}
+.package-supply-row dt{font-weight:700;min-width:0}
+.package-supply-row dd{margin:0;min-width:0}
+.package-supply-row dd strong{font-size:12px}
+@media(max-width:520px){.package-supply-row{grid-template-columns:minmax(0,1fr)}}
+""" if 'class="package-supply"' in manufacturer_box else ""
 
     # 詳細表: 既知の列を定義順に、その他の列は後ろに(空欄と重複情報はスキップ)
     detail_rows = []
@@ -1561,7 +1625,7 @@ h1{{font-size:22px;line-height:1.45;margin-bottom:6px}}
 .supp-notice{{color:#244F91;background:#EDF3FF;border:1px solid #CCDDF7;overflow-wrap:anywhere}}
 .supp-notice h3{{font-size:15px;line-height:1.6;margin:0 0 8px}}
 .supp-notice h4{{font-size:14px;margin:10px 0 5px}}
-.supp-notice ul{{padding-left:20px;margin:5px 0 10px}}
+.supp-notice ul{{padding-left:20px;margin:5px 0 10px}}{package_styles}
 .supp-checked{{color:#704700;font-size:12px;font-weight:700;margin:0 0 10px}}
 .supp-warning{{color:#8A3B12;background:#FFF4E8;border:1px solid #F1C69E;border-radius:8px;padding:8px 10px;font-size:12px;font-weight:700;margin:0 0 12px}}
 .dataset-context{{color:var(--sub);font-size:12px;line-height:1.7;margin:-8px 0 14px}}
