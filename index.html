@@ -1023,6 +1023,9 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .trending-formal-link{display:block;min-height:44px;box-sizing:border-box;padding:10px 2px;color:var(--blue-deep);overflow-wrap:anywhere;text-underline-offset:3px}
 .trending-names li>small{display:block;padding:0 2px 10px;color:var(--sub);font-size:11px;overflow-wrap:anywhere}
 .trending-names-note{margin:0;padding:4px 12px 12px;color:var(--sub)}
+.trending-page-links{display:flex;flex-wrap:wrap;gap:4px 20px;list-style:none;margin:0;padding:0}
+.trending-page-links a{display:inline-flex;align-items:center;min-height:44px;color:var(--blue-deep);font-size:14px;font-weight:700;overflow-wrap:anywhere;text-underline-offset:3px}
+.trending-page-links a:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 .trending-chip:focus-visible,.trending-names summary:focus-visible,.trending-formal-link:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 @media(max-width:640px){.trending-list{padding:20px}}
 
@@ -2270,6 +2273,14 @@ footer a:hover{color:var(--blue)}
   <h2>最近お問い合わせの多い製品</h2>
       <p class="sec-lede">お問い合わせが増えている製品をまとめました。複数の規格・メーカーがある製品は、製品一覧を開いて品目ごとに確認できます。</p>
   <div class="trending-list glass" id="trendingList"></div>
+  <nav aria-label="品目別の供給情報">
+    <p class="topic-note">品目別ページで供給状況・公表理由・解除見込みを確認</p>
+    <ul class="trending-page-links">
+      <li><a href="items/3999001Q6029.html">ラグノスＮＦ経口ゼリー分包１２ｇ</a></li>
+      <li><a href="items/2649805M1026.html">ユベラ軟膏</a></li>
+      <li><a href="items/1147700S1028.html">ジクトルテープ７５ｍｇ</a></li>
+    </ul>
+  </nav>
   <p class="topic-note"><a href="products/index.html">注目製品の一覧を見る</a></p>
 </section>
 
