@@ -534,6 +534,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   font-size:10.5px;font-weight:900;padding:4px 10px;border-radius:999px;
   color:#5B4100;background:#FFF0B8;border:1px solid #D69B00;white-space:nowrap;
 }
+.package-supply-badge{font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:999px;color:var(--blue-deep);background:rgba(79,128,244,.08);border:1px solid var(--stroke);overflow-wrap:anywhere}
 .change-badge{
   font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:999px;white-space:nowrap;
 }
@@ -912,6 +913,18 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .manufacturer-note{padding:12px 0;margin:0;max-width:100%;overflow-wrap:anywhere}
 .manufacturer-note+.manufacturer-note{border-top:1px solid var(--stroke);margin-top:16px}
 .manufacturer-note a:not(.maker-link){color:var(--blue-deep);text-decoration:underline}
+.package-supply{margin:14px 0;padding:12px;border:1px solid var(--stroke);border-radius:14px;background:rgba(79,128,244,.04);color:var(--ink);overflow-wrap:anywhere}
+.package-supply h5{margin:0 0 8px;font-size:13px;line-height:1.7}
+.package-supply .package-supply-note{margin:6px 0;font-size:11.5px;line-height:1.8;color:var(--ink)}
+.package-supply .package-supply-list{list-style:none;margin:10px 0;padding:0;display:grid;gap:10px}
+.package-supply .package-supply-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.3fr);gap:10px;padding:12px;border:1px solid var(--stroke);border-radius:10px;margin:0;min-width:0}
+.package-supply-row h6{margin:0;font-size:13px;line-height:1.7;align-self:start}
+.package-supply-row dl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:10px;margin:0;min-width:0}
+.package-supply-row dl>div{min-width:0}
+.package-supply-row dt{font-size:11px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.package-supply-row dd{margin:0;font-size:12.5px;line-height:1.8}
+.package-supply-row .package-supply-plan{display:block}
+@media(max-width:640px){.package-supply .package-supply-row,.package-supply-row dl{grid-template-columns:minmax(0,1fr)}}
 #mDataProvenance .maker-link{color:var(--blue-deep)}
 .maker-link::after{content:"↗";font-size:14px;flex:none}
 #mItemLink::after{content:"→"} /* 同一サイト内リンクなので外部リンク記号は使わない */
@@ -3216,6 +3229,7 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
       : "";
     // 差異バッジが付く品目は同じ案内を指すため重ねない
     const makerSupplyBadge = discrepancyBadge ? "" : makerSupplyBadgeHtml(d);
+    const packageSupplyBadge = manufacturerPackageBadgeHtml(d);
     const changeBadge = historyBadgeHtml(d);
     const volumeBadge = shipmentVolumeBadgeHtml(d);
     const specText = d.price
@@ -3236,7 +3250,7 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
       </div>
       <div class="drug-maker">${esc(d.m)}${spec}</div>
       <div class="drug-foot">
-        <span class="drug-tags"><span class="status-tag">${st.label}</span>${discrepancyBadge}${makerSupplyBadge}${changeBadge}${volumeBadge}${delistBadge}${discontinuedBadge}</span>
+        <span class="drug-tags"><span class="status-tag">${st.label}</span>${discrepancyBadge}${makerSupplyBadge}${packageSupplyBadge}${changeBadge}${volumeBadge}${delistBadge}${discontinuedBadge}</span>
         <span class="drug-date num">公表行更新 ${d.d}${ago}</span>
       </div>
     </article>`;
@@ -3871,6 +3885,19 @@ function manufacturerSourceURL(value){
     return url.protocol === "https:" && !url.username && !url.password ? url.href : "";
   }catch(error){ return ""; }
 }
+const MANUFACTURER_PACKAGE_STATES = ["normal","limited","stopped","unconfirmed"];
+const MANUFACTURER_PACKAGE_PLAN_LABELS = {
+  stock_depletion:"在庫消尽予定", shipment_resumption:"出荷再開予定",
+  normal_shipment:"通常出荷への移行予定", discontinuation:"販売中止予定"
+};
+function validManufacturerPackageSupply(s){
+  if(!s || typeof s !== "object" || Array.isArray(s) || !MANUFACTURER_PACKAGE_STATES.includes(s.status)) return false;
+  if(s.status === "unconfirmed" ? Object.hasOwn(s,"status_text") : !(typeof s.status_text === "string" && s.status_text.trim())) return false;
+  if(Object.hasOwn(s,"note") && !(typeof s.note === "string" && s.note.trim())) return false;
+  return Array.isArray(s.plans) && s.plans.every(p=>p && typeof p === "object" && !Array.isArray(p)
+    && typeof p.event === "string" && Object.hasOwn(MANUFACTURER_PACKAGE_PLAN_LABELS,p.event)
+    && typeof p.timing === "string" && Boolean(p.timing.trim()));
+}
 function validManufacturerNotice(n){
   return n && typeof n.id === "string" && typeof n.maker === "string"
     && typeof n.title === "string" && typeof n.reason === "string"
@@ -3878,7 +3905,8 @@ function validManufacturerNotice(n){
     && Boolean(normalizedPublicationDate(n.verified_at))
     && Array.isArray(n.targets) && n.targets.length
     && n.targets.every(t=>t && normalizeYj(t.yj_code) && typeof t.product_name === "string"
-      && Array.isArray(t.packages) && t.packages.every(p=>p && typeof p.package === "string"))
+      && Array.isArray(t.packages) && t.packages.every(p=>p && typeof p.package === "string"
+        && (!Object.hasOwn(p,"supply") || validManufacturerPackageSupply(p.supply))))
     && Array.isArray(n.alternatives) && n.alternatives.every(g=>g && Array.isArray(g.products)
       && g.products.every(p=>p && typeof p.name === "string"))
     && Array.isArray(n.cautions) && n.cautions.every(s=>typeof s === "string");
@@ -3908,6 +3936,29 @@ function manufacturerNoticesFor(d, includeChanged=false){
     return target ? [{notice,target}] : [];
   });
 }
+function manufacturerPackageBadgeHtml(item){
+  const matches = manufacturerNoticesFor(item).filter(({target})=>target.packages.some(p=>validManufacturerPackageSupply(p.supply)));
+  if(!matches.length) return "";
+  // 同じ文書・同じ品目内の明示された状態だけを比較。別文書や予定時期の違いは現在の状態差にしない。
+  const different = matches.some(({target})=>new Set(target.packages.filter(p=>validManufacturerPackageSupply(p.supply)
+    && p.supply.status !== "unconfirmed").map(p=>p.supply.status)).size > 1);
+  return `<span class="package-supply-badge" title="メーカー文書の包装別情報があります。文書の日付と対象包装を詳細で確認してください">${different ? "包装で状況が異なります" : "包装別の案内あり"}</span>`;
+}
+function manufacturerPackageSupplyHTML(notice, target){
+  if(manufacturerNoticeChanged(notice) || !target.packages.some(p=>validManufacturerPackageSupply(p.supply))) return "";
+  return `<div class="package-supply"><h5>メーカーの包装別情報：${esc(target.product_name)}</h5>`
+    + `<p class="package-supply-note">上記のメーカー文書に記載された情報です。厚労省の品目区分とは別に表示し、現在の卸在庫・受注可否を示すものではありません。</p>`
+    + `<ul class="package-supply-list">${target.packages.map(p=>{
+      const s = validManufacturerPackageSupply(p.supply) ? p.supply : null;
+      const status = s && s.status !== "unconfirmed" ? s.status_text : "包装別情報未確認";
+      const plans = s && s.plans.length
+        ? s.plans.map(plan=>`<span class="package-supply-plan">${esc(MANUFACTURER_PACKAGE_PLAN_LABELS[plan.event])}：${esc(plan.timing)}</span>`).join("")
+        : "この欄に確認済みの予定情報はありません";
+      return `<li class="package-supply-row"><h6>${esc(p.package)}</h6><dl><div><dt>案内時点の出荷対応</dt><dd>${esc(status)}</dd></div>`
+        + `<div><dt>予定（原文）</dt><dd>${plans}${s && s.note ? `<p>${esc(s.note)}</p>` : ""}</dd></div></dl></li>`;
+    }).join("")}</ul>`
+    + `<p class="package-supply-note">記載のない包装の状況は未確認です。予定の時期を過ぎても、実施済みとは判断しません。</p></div>`;
+}
 function manufacturerNoticeHTML(notice, target=null, yj=""){
   const targets = target ? [target] : notice.targets;
   const groups = notice.alternatives.filter(g=>!yj || !g.target_yj_codes || g.target_yj_codes.includes(yj));
@@ -3922,6 +3973,7 @@ function manufacturerNoticeHTML(notice, target=null, yj=""){
       + (ITEMS.some(d=>d.yj === t.yj_code && norm(d.n) === norm(t.product_name))
         ? ` <a href="items/${encodeURIComponent(t.yj_code)}.html">品目情報</a>`
         : "（現行供給CSVの収録なし。過去の案内として掲載）") + `</li>`).join("")}</ul>`
+    + targets.map(t=>manufacturerPackageSupplyHTML(notice,t)).join("")
     + `<p><strong>メーカーの説明：</strong>${esc(notice.reason)}</p>`
     + (timing ? `<p><strong>再開・解除の案内：</strong>${esc(timing)}</p>` : "")
     + (lots.length ? `<p><strong>クラスII回収対象：</strong>${lots.map(l=>`${esc(l.strength)} ${esc(l.package)} ${esc(l.lot)}`).join("／")}。出荷停止の対象範囲とは異なります。</p>` : "")
@@ -3930,7 +3982,7 @@ function manufacturerNoticeHTML(notice, target=null, yj=""){
       + (g.no_alternative_statement ? `<p>${esc(g.no_alternative_statement)}</p>` : "")
       + (g.products.length ? `<ul>${g.products.map(p=>`<li>${esc(p.name)}${p.product_kind === "medical_device" ? "（医療機器）" : ""}${p.scope ? `：${esc(p.scope)}` : ""}</li>`).join("")}</ul>` : "")
       + (g.cautions && g.cautions.length ? `<ul>${g.cautions.map(s=>`<li>${esc(s)}</li>`).join("")}</ul>` : "") + `</div>`).join("")
-    + (!groups.length ? `<p>今回の案内に具体的な代替候補品名の記載はありません。</p>` : "")
+    + (!groups.length ? `<p>参考候補の記載・適用条件は原典でご確認ください。</p>` : "")
     + `<ul>${notice.cautions.map(s=>`<li>${esc(s)}</li>`).join("")}</ul>`
     + `<p>候補の入手可否や変更の適否を保証するものではありません。電子添文を確認し、医師・薬剤師等が判断してください。</p>`
     + `<a class="maker-link" href="${esc(manufacturerSourceURL(notice.url))}" target="_blank" rel="noopener" data-dsn-event="official-source-open">${esc(notice.maker)}の原典を確認</a></section>`;
