@@ -19,6 +19,7 @@ import sys
 import urllib.error
 import urllib.parse
 import urllib.request
+from validate_manufacturer_notices import MAKER_HOSTS, valid_date
 
 JST = dt.timezone(dt.timedelta(hours=9))
 UA = "DrugSupplyNavi/1.0 (+https://kyokyu-navi.jp/)"
@@ -132,6 +133,19 @@ def validate_registry(registry, sources):
         if n["id"] in seen or not SHA.fullmatch(n["sha256"]):
             raise CollectionError("案内ID・hashが不正")
         seen.add(n["id"])
+        if "collection_mode" in n:
+            if n["collection_mode"] != "manual":
+                raise CollectionError("案内の収集modeが不正")
+            # 保存原文を手動確認した履歴も公式出典を検証するが、取得scopeには追加しない。
+            p = urllib.parse.urlsplit(normalized_url(n["url"]))
+            if (p.hostname != MAKER_HOSTS.get(n["maker"])
+                    or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", n["id"])
+                    or not valid_date(n.get("announced_at"), month=True)
+                    or not valid_date(n.get("verified_at"))
+                    or n["verified_at"] > dt.datetime.now(JST).date().isoformat()
+                    or ("listed_at" in n and not valid_date(n["listed_at"]))):
+                raise CollectionError("手動確認案内の公式出典・確認日が不正")
+            continue
         if n["maker"] not in by_maker or not in_scope(n["url"], by_maker[n["maker"]]["document_scope"]):
             raise CollectionError("案内URLが登録メーカーscope外")
         if n.get("listed_at") is not None and real_date(n["listed_at"]) != n["listed_at"]:
@@ -441,6 +455,8 @@ def collect(config, registry, previous=None, *, cache_dir=".", transport=fetch_h
         sources.append(state)
     registered = {}
     for notice in registry["notices"]:
+        if notice.get("collection_mode") == "manual":
+            continue  # 手動確認の履歴を自動取得・当日confirmed・速報下書きにしない。
         key = (notice["maker"], normalized_url(notice["url"]))
         registered.setdefault(key, []).append(notice)
         if key not in items:
