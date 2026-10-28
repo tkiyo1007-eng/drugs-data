@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-28",
+  "generated_at": "2026-10-29",
   "source": {
     "mhlw_version": 202610290431,
     "mhlw_note": "2026年10月29日厚労省データ反映",
-    "manufacturer_checked_through": "2026-10-28"
+    "manufacturer_checked_through": "2026-10-29"
   },
   "counts": {
     "high": 3,
