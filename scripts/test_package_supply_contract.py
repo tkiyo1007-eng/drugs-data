@@ -108,6 +108,14 @@ class PackageSupplyContractTests(unittest.TestCase):
             document['notices'][0]['listed_at'] = value
             self.assertTrue(validate(document, rows))
 
+    def test_manual_notice_guides_legacy_clients_to_original_candidate_page(self):
+        # Old clients interpret an empty alternatives array as no candidates in the source.
+        document = json.loads((Path(__file__).resolve().parents[1] / 'manufacturer_notices.json').read_text())
+        notice = next(n for n in document['notices'] if n['id'] == 'amel-hilnamin-tablets-package-plan-202609')
+        self.assertTrue(notice['alternatives'])
+        self.assertTrue(all(g['products'] == [] for g in notice['alternatives']))
+        self.assertIn('原文2ページ', ' '.join(c for g in notice['alternatives'] for c in g['cautions']))
+
     def test_manual_mode_does_not_relax_source_and_date_validation(self):
         document, rows = self.fixture()
         notice = document['notices'][0]; notice['collection_mode'] = 'manual'
