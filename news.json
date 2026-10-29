@@ -1,5 +1,11 @@
 [
  {
+  "date": "2026/10/29",
+  "title": "クラスI回収 該当回収品目　新鮮凍結血漿-LR「日赤」480",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html",
+  "tag": "回収"
+ },
+ {
   "date": "2026/10/28",
   "title": "「リザトリプタンOD錠 10mg「TCK」 ニトロソアミン化合物検出のお知らせ」を掲載しました",
   "url": "https://www.pmda.go.jp/safety/info-services/drugs/0371.html",
@@ -51,12 +57,6 @@
   "date": "2026/10/23",
   "title": "「不具合が疑われる症例報告に関する情報（コンビネーション製品）」に2026年6月分の情報を追加しました",
   "url": "https://www.pmda.go.jp/safety/info-services/drugs/adr-info/malfunctions-combination-drugs/0001.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/10/23",
-  "title": "「不具合が疑われる症例報告に関する情報（再生医療等製品）」に2026年6月分の情報を追加しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/ctp/0006.html",
   "tag": "安全対策"
  }
 ]
