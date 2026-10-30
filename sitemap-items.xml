@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://kyokyu-navi.jp/items/index.html</loc><lastmod>2026-10-30</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://kyokyu-navi.jp/items/limited.html</loc><lastmod>2026-10-30</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://kyokyu-navi.jp/items/recent-restrictions.html</loc><lastmod>2026-10-30</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://kyokyu-navi.jp/items/resumed.html</loc><lastmod>2026-10-30</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://kyokyu-navi.jp/items/stopped.html</loc><lastmod>2026-10-30</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://kyokyu-navi.jp/items/supplemental.html</loc><lastmod>2026-10-30</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://kyokyu-navi.jp/items/index.html</loc><lastmod>2026-10-31</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://kyokyu-navi.jp/items/limited.html</loc><lastmod>2026-10-31</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://kyokyu-navi.jp/items/recent-restrictions.html</loc><lastmod>2026-10-31</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://kyokyu-navi.jp/items/resumed.html</loc><lastmod>2026-10-31</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://kyokyu-navi.jp/items/stopped.html</loc><lastmod>2026-10-31</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://kyokyu-navi.jp/items/supplemental.html</loc><lastmod>2026-10-31</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/1115400X1027.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/1115400X2023.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/1115403D3043.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
@@ -851,7 +851,7 @@
   <url><loc>https://kyokyu-navi.jp/items/2149117F1033.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2149117F1041.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2149117F1050.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://kyokyu-navi.jp/items/2149117F1076.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://kyokyu-navi.jp/items/2149117F1076.html</loc><lastmod>2026-10-30</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2149117F1084.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2149117F1092.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2149117F1114.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
@@ -859,7 +859,7 @@
   <url><loc>https://kyokyu-navi.jp/items/2149117F2030.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2149117F2048.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2149117F2056.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://kyokyu-navi.jp/items/2149117F2072.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://kyokyu-navi.jp/items/2149117F2072.html</loc><lastmod>2026-10-30</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2149117F2080.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2149117F2099.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2149117F2110.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
@@ -1149,6 +1149,7 @@
   <url><loc>https://kyokyu-navi.jp/items/2325004M2075.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2325005F1040.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2325005M2118.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://kyokyu-navi.jp/items/2325006F4027.html</loc><lastmod>2026-10-30</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2325400A1077.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2325401A1020.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2325401A1039.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
@@ -1276,7 +1277,7 @@
   <url><loc>https://kyokyu-navi.jp/items/2399009F1092.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2399009F1149.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2399009F1181.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://kyokyu-navi.jp/items/2399009F1190.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://kyokyu-navi.jp/items/2399009F1190.html</loc><lastmod>2026-10-30</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2399009F2030.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2399009F2064.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2399009F2170.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
@@ -1368,6 +1369,7 @@
   <url><loc>https://kyokyu-navi.jp/items/2492415G6025.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2492420A1021.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2492420G1024.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://kyokyu-navi.jp/items/2492421G1029.html</loc><lastmod>2026-10-30</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2492422G1023.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2499005F1030.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2499007F1021.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
@@ -1438,6 +1440,8 @@
   <url><loc>https://kyokyu-navi.jp/items/2590010F4170.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2590011F1079.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2590013F2104.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://kyokyu-navi.jp/items/2590016F1071.html</loc><lastmod>2026-10-30</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://kyokyu-navi.jp/items/2590016F2078.html</loc><lastmod>2026-10-30</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2590016F2094.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2590016F3023.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/2590016F4020.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
@@ -2367,7 +2371,7 @@
   <url><loc>https://kyokyu-navi.jp/items/6132002M2175.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/6132002M2183.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/6132002R1141.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
-  <url><loc>https://kyokyu-navi.jp/items/6132002R1168.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
+  <url><loc>https://kyokyu-navi.jp/items/6132002R1168.html</loc><lastmod>2026-10-30</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/6132002R2032.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/6132002R4094.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
   <url><loc>https://kyokyu-navi.jp/items/6132005C1053.html</loc><lastmod>2026-10-29</lastmod><changefreq>daily</changefreq></url>
