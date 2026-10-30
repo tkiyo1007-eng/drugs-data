@@ -6,42 +6,42 @@
    "ok": true,
    "count": 20,
    "error": "",
-   "last_success": "2026-10-30"
+   "last_success": "2026-10-31"
   },
   {
    "source": "parse_nichiiko",
    "ok": true,
    "count": 9,
    "error": "",
-   "last_success": "2026-10-30"
+   "last_success": "2026-10-31"
   },
   {
    "source": "parse_nichiiko_excel",
    "ok": true,
    "count": 507,
    "error": "",
-   "last_success": "2026-10-30"
+   "last_success": "2026-10-31"
   },
   {
    "source": "parse_nihon_generic",
    "ok": true,
    "count": 85,
    "error": "",
-   "last_success": "2026-10-30"
+   "last_success": "2026-10-31"
   },
   {
    "source": "parse_kyorin",
    "ok": true,
    "count": 1,
    "error": "",
-   "last_success": "2026-10-30"
+   "last_success": "2026-10-31"
   },
   {
    "source": "parse_dsep",
    "ok": true,
    "count": 1288,
    "error": "",
-   "last_success": "2026-10-30"
+   "last_success": "2026-10-31"
   },
   {
    "source": "parse_kemifa",
@@ -55,33 +55,33 @@
    "ok": true,
    "count": 39,
    "error": "",
-   "last_success": "2026-10-30"
+   "last_success": "2026-10-31"
   },
   {
    "source": "parse_takata",
    "ok": true,
    "count": 289,
    "error": "",
-   "last_success": "2026-10-30"
+   "last_success": "2026-10-31"
   },
   {
    "source": "parse_hisamitsu",
    "ok": true,
-   "count": 67,
+   "count": 68,
    "error": "",
-   "last_success": "2026-10-30"
+   "last_success": "2026-10-31"
   },
   {
    "source": "parse_nipro",
    "ok": true,
    "count": 80,
    "error": "",
-   "last_success": "2026-10-30"
+   "last_success": "2026-10-31"
   }
  ],
- "total": 2465,
+ "total": 2466,
  "last_attempt": {
-  "checked": "2026-10-30",
+  "checked": "2026-10-31",
   "status": "partial",
   "sources": [
    {
@@ -89,42 +89,42 @@
     "ok": true,
     "count": 20,
     "error": "",
-    "last_success": "2026-10-30"
+    "last_success": "2026-10-31"
    },
    {
     "source": "parse_nichiiko",
     "ok": true,
     "count": 9,
     "error": "",
-    "last_success": "2026-10-30"
+    "last_success": "2026-10-31"
    },
    {
     "source": "parse_nichiiko_excel",
     "ok": true,
     "count": 507,
     "error": "",
-    "last_success": "2026-10-30"
+    "last_success": "2026-10-31"
    },
    {
     "source": "parse_nihon_generic",
     "ok": true,
     "count": 85,
     "error": "",
-    "last_success": "2026-10-30"
+    "last_success": "2026-10-31"
    },
    {
     "source": "parse_kyorin",
     "ok": true,
     "count": 1,
     "error": "",
-    "last_success": "2026-10-30"
+    "last_success": "2026-10-31"
    },
    {
     "source": "parse_dsep",
     "ok": true,
     "count": 1288,
     "error": "",
-    "last_success": "2026-10-30"
+    "last_success": "2026-10-31"
    },
    {
     "source": "parse_kemifa",
@@ -140,31 +140,31 @@
     "ok": true,
     "count": 39,
     "error": "",
-    "last_success": "2026-10-30"
+    "last_success": "2026-10-31"
    },
    {
     "source": "parse_takata",
     "ok": true,
     "count": 289,
     "error": "",
-    "last_success": "2026-10-30"
+    "last_success": "2026-10-31"
    },
    {
     "source": "parse_hisamitsu",
     "ok": true,
-    "count": 67,
+    "count": 68,
     "error": "",
-    "last_success": "2026-10-30"
+    "last_success": "2026-10-31"
    },
    {
     "source": "parse_nipro",
     "ok": true,
     "count": 80,
     "error": "",
-    "last_success": "2026-10-30"
+    "last_success": "2026-10-31"
    }
   ],
-  "total": 2385,
+  "total": 2386,
   "errors": [
    "parse_kemifa: 公式一覧ページのHTMLが途中で終了しています"
   ]
