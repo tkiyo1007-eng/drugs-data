@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "month": "2026-10",
+  "snapshot_date": "2026-11-01",
+  "changes": {
+    "items": 297,
+    "days_with_changes": 18,
+    "to_limited": 92,
+    "to_stopped": 71,
+    "to_ok": 96,
+    "other": 38
+  },
+  "previous_month": {
+    "month": "2026-09",
+    "items": 173,
+    "to_limited": 78,
+    "to_stopped": 32,
+    "to_ok": 52,
+    "other": 11
+  },
+  "top_new_restriction_categories": [
+    {
+      "name": "血圧降下剤",
+      "code": "214",
+      "count": 17
+    },
+    {
+      "name": "精神神経用剤",
+      "code": "117",
+      "count": 16
+    },
+    {
+      "name": "消化性潰瘍用剤",
+      "code": "232",
+      "count": 14
+    },
+    {
+      "name": "その他のホルモン剤（抗ホルモン剤を含む。）",
+      "code": "249",
+      "count": 7
+    },
+    {
+      "name": "その他の循環器官用薬",
+      "code": "219",
+      "count": 6
+    },
+    {
+      "name": "血管拡張剤",
+      "code": "217",
+      "count": 6
+    },
+    {
+      "name": "止血剤",
+      "code": "332",
+      "count": 5
+    },
+    {
+      "name": "高脂血症用剤",
+      "code": "218",
+      "count": 5
+    },
+    {
+      "name": "Ｘ線造影剤",
+      "code": "721",
+      "count": 5
+    },
+    {
+      "name": "その他の泌尿生殖器官及び肛門用薬",
+      "code": "259",
+      "count": 4
+    }
+  ],
+  "snapshot_status": {
+    "total": 16422,
+    "ok": 14454,
+    "limited": 978,
+    "stopped": 990
+  },
+  "crisis_index": {
+    "date": "2026-11-01",
+    "score": 90,
+    "level": "厳重警戒"
+  },
+  "resolution": {
+    "updated_at": "2026-11-01",
+    "limited": {
+      "count": 13,
+      "medianDays": 49,
+      "avgDays": 45.7
+    },
+    "stopped": {
+      "count": 6,
+      "medianDays": 25,
+      "avgDays": 26.3
+    }
+  }
+}
