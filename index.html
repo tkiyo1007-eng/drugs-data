@@ -3783,7 +3783,7 @@ function updateSupplementalStatus(){
   }else if(incomplete || dateMismatch || checkedStale || partial || !DATASET_DATE || !SUPPLEMENTAL_MHLW_DATE){
     setAsOf(`メーカー補足：確認不完全／全収集元の確認完了 ${SUPPLEMENTAL_CHECKED_THROUGH || "確認できません"}`);
     setNoticeHTML(partial
-      ? `最新の収集試行：${esc(SUPPLEMENTAL_ATTEMPT.checked || "確認できません")}。${esc(supplementalAttemptScope(SUPPLEMENTAL_ATTEMPT) || "一部の公式取得先を確認できず、該当メーカーは前回情報を保持しています。")}確認済みの個別案内の日付は各原典欄をご覧ください。「情報差異なし」とは判断しません。`
+      ? `最新の収集試行：${esc(SUPPLEMENTAL_ATTEMPT.checked || "確認できません")}。${esc(supplementalAttemptScope(SUPPLEMENTAL_ATTEMPT) || "一部の公式取得先または収集結果を確認できません。表示中の補足情報の日付と原典をご確認ください。")}確認済みの個別案内の日付は各原典欄をご覧ください。「情報差異なし」とは判断しません。`
       : dateMismatch || !DATASET_DATE || !SUPPLEMENTAL_MHLW_DATE
       ? `厚労省区分とメーカー補足情報の参照日が一致していません。「情報差異なし」とは判断せず、<a href="${OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省公式</a>とメーカー案内をご確認ください。`
       : checkedStale
