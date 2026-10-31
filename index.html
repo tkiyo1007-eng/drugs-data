@@ -3734,6 +3734,7 @@ function supplementalReady(){
   return Object.values(SUPPLEMENTAL_STATE).every(state=>state === "loaded")
     && Boolean(DATASET_DATE && SUPPLEMENTAL_MHLW_DATE && DATASET_DATE === SUPPLEMENTAL_MHLW_DATE)
     && Boolean(SUPPLEMENTAL_CHECKED_THROUGH && SUPPLEMENTAL_CHECKED_THROUGH === SUPPLEMENTAL_DISCREPANCY_CHECKED)
+    && normalizedPublicationDate(SUPPLEMENTAL_CHECKED_THROUGH) === SUPPLEMENTAL_CHECKED_THROUGH
     && (!SUPPLEMENTAL_ATTEMPT || SUPPLEMENTAL_ATTEMPT.status === "success")
     && checkedAge != null && checkedAge < STALE_DATA_DAYS;
 }
@@ -3776,12 +3777,14 @@ function updateSupplementalStatus(){
     || Boolean(SUPPLEMENTAL_CHECKED_THROUGH && SUPPLEMENTAL_DISCREPANCY_CHECKED && SUPPLEMENTAL_CHECKED_THROUGH !== SUPPLEMENTAL_DISCREPANCY_CHECKED);
   const partial = SUPPLEMENTAL_ATTEMPT && SUPPLEMENTAL_ATTEMPT.status !== "success";
   const checkedAge = daysAgo(SUPPLEMENTAL_CHECKED_THROUGH);
-  const checkedStale = checkedAge == null || checkedAge >= STALE_DATA_DAYS;
+  const checkedValid = Boolean(SUPPLEMENTAL_CHECKED_THROUGH)
+    && normalizedPublicationDate(SUPPLEMENTAL_CHECKED_THROUGH) === SUPPLEMENTAL_CHECKED_THROUGH;
+  const checkedStale = !checkedValid || checkedAge == null || checkedAge >= STALE_DATA_DAYS;
   if(states.some(state=>state === "loading")){
     setAsOf("メーカー公式案内の補足情報を確認中です。");
     notice.hidden = true;
   }else if(incomplete || dateMismatch || checkedStale || partial || !DATASET_DATE || !SUPPLEMENTAL_MHLW_DATE){
-    setAsOf(`メーカー補足：確認不完全／全収集元の確認完了 ${SUPPLEMENTAL_CHECKED_THROUGH || "確認できません"}`);
+    setAsOf(`メーカー補足：確認不完全／全収集元の確認完了 ${checkedValid ? SUPPLEMENTAL_CHECKED_THROUGH : "確認できません"}`);
     setNoticeHTML(partial
       ? `最新の収集試行：${esc(SUPPLEMENTAL_ATTEMPT.checked || "確認できません")}。${esc(supplementalAttemptScope(SUPPLEMENTAL_ATTEMPT) || "一部の公式取得先または収集結果を確認できません。表示中の補足情報の日付と原典をご確認ください。")}確認済みの個別案内の日付は各原典欄をご覧ください。「情報差異なし」とは判断しません。`
       : dateMismatch || !DATASET_DATE || !SUPPLEMENTAL_MHLW_DATE
