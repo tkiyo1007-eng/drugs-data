@@ -18,6 +18,7 @@ import sys
 import unicodedata
 import urllib.parse
 import urllib.request
+import xml.etree.ElementTree as ET
 
 from jst_time import jst_today
 from maker_identity import maker_is_listed_in_row
@@ -110,6 +111,44 @@ def parse_dsep(pages=1):
         href, text = m.group(1), re.sub(r"<[^>]+>", " ", m.group(2))
         items.append((re.sub(r"\s+", " ", text).strip(), href))
     return [("第一三共エスファ", t, u) for t, u in items]
+
+
+def parse_kemifa_rss():
+    """公式RSSの直近分。これは一覧全件の確認成功を意味しない。"""
+    xml = fetch("https://www.nc-medical.com/product/information/index.xml")
+    if "<!DOCTYPE" in xml.upper() or "<!ENTITY" in xml.upper():
+        raise ValueError("RSSに許可されない宣言があります")
+    root = ET.fromstring(xml)
+    rss = "{http://purl.org/rss/1.0/}"
+    dc = "{http://purl.org/dc/elements/1.1/}"
+    rdf = "{http://www.w3.org/1999/02/22-rdf-syntax-ns#}"
+    if root.tag != rdf + "RDF":
+        raise ValueError("RSS形式を確認できません")
+    nodes = root.findall(rss + "item")
+    refs = [node.get(rdf + "resource") for node in root.findall(
+        rss + "channel/" + rss + "items/" + rdf + "Seq/" + rdf + "li")]
+    if not nodes or len(refs) != len(nodes):
+        raise ValueError("RSSの案内一覧を確認できません")
+    items, seen = [], set()
+    for index, item in enumerate(nodes):
+        title = (item.findtext(rss + "title") or "").strip()
+        link = (item.findtext(rss + "link") or "").strip()
+        date = (item.findtext(dc + "date") or "")[:10]
+        try:
+            day = datetime.date.fromisoformat(date)
+        except ValueError:
+            raise ValueError("RSSの掲載日を確認できません") from None
+        url = urllib.parse.urlsplit(link)
+        if (not title or url.scheme not in ("http", "https") or url.netloc != "www.nc-medical.com"
+                or not url.path.startswith("/product_topics/") or not url.path.lower().endswith(".pdf")
+                or url.query or url.fragment or link in seen or refs[index] != link
+                or item.get(rdf + "about") != link):
+            raise ValueError("RSSの文書情報を確認できません")
+        seen.add(link)
+        secure_link = urllib.parse.urlunsplit(("https", url.netloc, url.path, "", ""))
+        items.append({"maker": "日本ケミファ", "title": title, "url": secure_link,
+                      "event_type": classify_event(title), "listed_at": day.isoformat()})
+    return items
 
 
 def parse_kemifa(pages=1):
@@ -940,12 +979,22 @@ def main():
     announcements = list({(norm(maker), url): (maker, title, url)
                           for source, items in source_items.items() if source not in failed_sources
                           for maker, title, url in items}.values())
+    supplemental = []
+    if "parse_kemifa" in failed_sources:
+        try:
+            supplemental = parse_kemifa_rss()
+        except Exception as error:
+            print(f"[WARN] 日本ケミファRSS補助取得失敗: {error}", file=sys.stderr)
+        else:
+            print(f"日本ケミファRSS補助取得: {len(supplemental)}件（一覧は未確認・要確認候補）", file=sys.stderr)
     retained_makers = {norm(SOURCE_MAKERS[source]) for source in failed_sources
                        if source in SOURCE_MAKERS}
 
     unmatched = []
     matched = match_to_csv(announcements, csv_path, existing=existing, unmatched_out=unmatched,
                            retained_makers=retained_makers)
+    # RSSの題名だけでは包装範囲や文書日を確定できないため、自動で品目へ割り当てない。
+    unmatched.extend(item for item in supplemental if is_supply_related(item["title"]))
     print(f"マッチ件数: {len(matched)}（新規/更新分含む）", file=sys.stderr)
 
     deepen_limit = int(sys.argv[4]) if len(sys.argv) > 4 else 0

@@ -84,6 +84,25 @@ class AnnouncementMatchingTests(unittest.TestCase):
              "https://www.nc-medical.com/product_topics/test.pdf")
         ])
 
+    @mock.patch.object(mod, "fetch")
+    def test_kemifa_rss_extracts_official_document_and_listing_date(self, fetch_mock):
+        url = "http://www.nc-medical.com/product_topics/test.pdf"
+        fetch_mock.return_value = f'''<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+          xmlns="http://purl.org/rss/1.0/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+          <channel><items><rdf:Seq><rdf:li rdf:resource="{url}"/></rdf:Seq></items></channel>
+          <item rdf:about="{url}"><link>{url}</link><title>テスト錠1mg「ケミファ」販売中止</title>
+          <dc:date>2026-10-30T00:00:00+09:00</dc:date></item></rdf:RDF>'''
+        self.assertEqual(mod.parse_kemifa_rss(), [{"maker": "日本ケミファ",
+            "title": "テスト錠1mg「ケミファ」販売中止",
+            "url": "https://www.nc-medical.com/product_topics/test.pdf",
+            "event_type": "discontinued", "listed_at": "2026-10-30"}])
+        for bad in [fetch_mock.return_value.replace("2026-10-30", "2026-02-30"),
+                    fetch_mock.return_value.replace('rdf:about="' + url, 'rdf:about="https://other.invalid/x.pdf'),
+                    '<!DOCTYPE x [<!ENTITY x "bad">]><x/>', '<rdf:RDF']:
+            fetch_mock.return_value = bad
+            with self.assertRaises((ValueError, mod.ET.ParseError)):
+                mod.parse_kemifa_rss()
+
     @mock.patch("urllib.request.urlopen")
     def test_takata_listing_date_is_kept(self, urlopen_mock):
         response = mock.MagicMock()
@@ -475,8 +494,9 @@ class AnnouncementMatchingTests(unittest.TestCase):
     def test_partial_main_keeps_failed_source_normal_product_and_history(self):
         good = "成功錠１ｍｇ「サワイ」"
         bad = "保持錠１ｍｇ「ケミファ」"
+        new = "新着錠１ｍｇ「ケミファ」"
         csv_path = self.make_csv([
-            self.row(good), self.row(bad, maker="日本ケミファ"),
+            self.row(good), self.row(bad, maker="日本ケミファ"), self.row(new, maker="日本ケミファ"),
         ])
         with tempfile.TemporaryDirectory() as directory:
             output = os.path.join(directory, "maker_announcements.json")
@@ -512,6 +532,10 @@ class AnnouncementMatchingTests(unittest.TestCase):
                 ]
 
             with mock.patch.object(mod, "collect_announcements", side_effect=collect), \
+                 mock.patch.object(mod, "parse_kemifa_rss", return_value=[{
+                     "maker": "日本ケミファ", "title": "新着錠1mg「ケミファ」販売中止",
+                     "url": "https://www.nc-medical.com/product_topics/new.pdf",
+                     "event_type": "discontinued", "listed_at": "2026-10-13"}]), \
                  mock.patch.object(mod, "load_manual_announcements", return_value=({}, set(), [])), \
                  mock.patch.object(mod, "jst_today", return_value=datetime.date(2026, 10, 14)), \
                  mock.patch.object(mod.sys, "argv", ["fetch", csv_path, output, "2", "0"]):
@@ -520,10 +544,15 @@ class AnnouncementMatchingTests(unittest.TestCase):
                 current = json.load(handle)
             self.assertEqual(current[bad], old_bad)
             self.assertEqual(current[good]["checked"], "2026-10-14")
+            self.assertNotIn(new, current)
             with open(os.path.join(directory, "maker_announcement_events.json"), encoding="utf-8") as handle:
                 self.assertEqual(json.load(handle)[bad], old_history[bad])
             with open(os.path.join(directory, "unmatched_maker_announcements.json"), encoding="utf-8") as handle:
-                self.assertEqual(json.load(handle), old_unmatched)
+                unmatched = json.load(handle)
+            self.assertIn(old_unmatched[0], unmatched)
+            candidate = next(item for item in unmatched if item["url"].endswith("/new.pdf"))
+            self.assertEqual(candidate["listed_at"], "2026-10-13")
+            self.assertNotIn("announced_at", candidate)
             with open(os.path.join(directory, "maker_collection_health.json"), encoding="utf-8") as handle:
                 health = json.load(handle)
             self.assertEqual(health["checked"], "2026-10-08")
