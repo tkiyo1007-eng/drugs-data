@@ -1344,6 +1344,34 @@
  },
  {
   "maker": "日本ケミファ",
+  "title": "販売中止のご案内（ロスバスタチン錠2.5mg・5mg「ケミファ」）",
+  "url": "https://www.nc-medical.com/product_topics/p5ib910000006swx-att/p5ib910000006sxl.pdf",
+  "event_type": "discontinued",
+  "listed_at": "2026-10-30"
+ },
+ {
+  "maker": "日本ケミファ",
+  "title": "一部包装販売中止のご案内",
+  "url": "https://www.nc-medical.com/product_topics/p5ib910000006sw7-att/p5ib910000006swv.pdf",
+  "event_type": "package_discontinued",
+  "listed_at": "2026-10-30"
+ },
+ {
+  "maker": "日本ケミファ",
+  "title": "バルサルタン錠80mg「ケミファ」100錠包装 製品供給に関するお知らせ",
+  "url": "https://www.nc-medical.com/product_topics/p5ib910000008618-att/p5ib91000000861w.pdf",
+  "event_type": "supply",
+  "listed_at": "2026-10-27"
+ },
+ {
+  "maker": "日本ケミファ",
+  "title": "クロピドグレル錠75mg「ケミファ」140錠包装 出荷調整解除のお知らせ",
+  "url": "https://www.nc-medical.com/product_topics/p5ib91000000860g-att/p5ib910000008614.pdf",
+  "event_type": "resumed",
+  "listed_at": "2026-10-27"
+ },
+ {
+  "maker": "日本ケミファ",
   "title": "2026年10月20日 変更品出荷（切換後ロット等）未定情報一覧_S-2888",
   "url": "https://www.nc-medical.com/product_topics/doc/S-2888.pdf",
   "event_type": "supply",
