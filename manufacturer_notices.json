@@ -1409,6 +1409,64 @@
         "対象は錠剤3規格の7包装です。細粒10％・散50％へ、この原因や包装別予定を適用しません。",
         "メーカーが示す参考製剤は原文2ページと既存のヒルナミン解説で確認してください。この表では包装別情報を整理しています。"
       ]
+    },
+    {
+      "id": "sanwa-calcium-carbonate-package-202610",
+      "maker": "三和化学研究所",
+      "title": "沈降炭酸カルシウム錠500mg「三和」PTP500錠包装の流通に関するお詫びとお願い",
+      "url": "https://med.skk-net.com/significant/item/PCC2610i.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-01",
+      "verified_at": "2026-11-03",
+      "content_updated_at": "2026-11-03",
+      "sha256": "23387000e8afe88c4c0a47d7335a0eaacb2ed2e3229571ba073ef6b7bc97385b",
+      "collection_mode": "manual",
+      "event_type": "resumption_planned",
+      "reason": "2026年10月のメーカー案内によると、熊本地震の影響で製造を一時停止し、PTP500錠は在庫消尽後に出荷を一時停止する予定です。",
+      "targets": [
+        {
+          "yj_code": "2190024F1040",
+          "product_name": "沈降炭酸カルシウム錠５００ｍｇ「三和」",
+          "maker": "三和化学研究所",
+          "spec": "５００ｍｇ１錠",
+          "scope": "package",
+          "source_pages": [1],
+          "packages": [
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "086-231831",
+              "gs1_sales": "14987086231838",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {"event": "stock_depletion", "timing": "2026年10月中旬予定"},
+                  {"event": "shipment_resumption", "timing": "2026年12月中予定"}
+                ],
+                "note": "在庫消尽後に出荷を一時停止。実際の消尽・停止・再開は未確認です。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "supply": {"status": "unconfirmed", "plans": [], "note": "案内時点で当面の在庫を確保し出荷継続。現在の状況は未確認です。"}
+            },
+            {
+              "package": "PTP1000錠",
+              "unified_product_code": "086-231855",
+              "gs1_sales": "14987086231852",
+              "supply": {"status": "unconfirmed", "plans": [], "note": "案内時点で当面の在庫を確保し出荷継続。現在の状況は未確認です。"}
+            },
+            {
+              "package": "バラ500錠",
+              "supply": {"status": "unconfirmed", "plans": [], "note": "案内時点で当面の在庫を確保し出荷継続。現在の状況は未確認です。"}
+            }
+          ]
+        }
+      ],
+      "alternatives": [{"products": [], "cautions": ["メーカーは同製品のPTP1000錠包装を案内しています。詳細は原文をご確認ください。"]}],
+      "cautions": [
+        "2026年10月のメーカー案内です。予定時期を過ぎても、実際の停止や再開が行われたとは判断できません。",
+        "この案内は自動追跡対象外です。最新の包装別状況や受注可否はメーカー・卸にご確認ください。"
+      ]
     }
   ]
 }
