@@ -19,8 +19,10 @@ class SanwaDistributionNoticeTest(unittest.TestCase):
             self.assertIn('現在の状況は未確認', html)
             for p in target['packages']:
                 self.assertIn(p['package'], html)
-                if p['supply']['status'] == 'normal':
+                if '在庫消尽次第' in p['supply']['note']:
                     self.assertEqual(p['supply']['plans'], [{'event': 'discontinuation', 'timing': '在庫消尽次第'}])
+                else:
+                    self.assertEqual(p['supply']['plans'], [])
 
 
 if __name__ == '__main__':

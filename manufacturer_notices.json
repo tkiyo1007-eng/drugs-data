@@ -1623,6 +1623,174 @@
               }
             }
           ]
+        },
+        {
+          "yj_code": "2149044F1105",
+          "product_name": "オルメサルタン錠１０ｍｇ「三和」",
+          "maker": "三和化学研究所",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "086-512633",
+              "supply": {
+                "status": "normal",
+                "status_text": "通常出荷",
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "在庫消尽次第"
+                  }
+                ],
+                "note": "2026年10月1日の一覧では通常出荷、在庫消尽次第販売中止と記載。現在の在庫・出荷状況は未確認です。"
+              }
+            },
+            {
+              "package": "PTP140錠（14錠×10）",
+              "unified_product_code": "086-512640",
+              "supply": {
+                "status": "stopped",
+                "status_text": "供給停止",
+                "plans": [],
+                "note": "2026年10月1日の一覧では供給停止、薬価削除予定と記載。現在の状況は未確認です。"
+              }
+            },
+            {
+              "package": "PTP500錠（10錠×50）",
+              "unified_product_code": "086-512657",
+              "supply": {
+                "status": "normal",
+                "status_text": "通常出荷",
+                "plans": [],
+                "note": "2026年10月1日の一覧では通常出荷、販売中止と記載。現在の在庫・出荷状況は未確認です。"
+              }
+            },
+            {
+              "package": "PTP700錠（14錠×50）",
+              "unified_product_code": "086-512664",
+              "supply": {
+                "status": "stopped",
+                "status_text": "供給停止",
+                "plans": [],
+                "note": "2026年10月1日の一覧では供給停止、薬価削除予定と記載。現在の状況は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149040F2251",
+          "product_name": "カンデサルタン錠４ｍｇ「三和」",
+          "maker": "三和化学研究所",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "086-151498",
+              "supply": {
+                "status": "normal",
+                "status_text": "通常出荷",
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "在庫消尽次第"
+                  }
+                ],
+                "note": "2026年10月1日の一覧では通常出荷、在庫消尽次第販売中止と記載。現在の在庫・出荷状況は未確認です。"
+              }
+            },
+            {
+              "package": "PTP500錠（10錠×50）",
+              "unified_product_code": "086-151504",
+              "supply": {
+                "status": "stopped",
+                "status_text": "供給停止",
+                "plans": [],
+                "note": "2026年10月1日の一覧では供給停止、薬価削除予定と記載。現在の状況は未確認です。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "086-151511",
+              "supply": {
+                "status": "stopped",
+                "status_text": "供給停止",
+                "plans": [],
+                "note": "2026年10月1日の一覧では供給停止、薬価削除予定と記載。現在の状況は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3399008F2226",
+          "product_name": "クロピドグレル錠７５ｍｇ「三和」",
+          "maker": "三和化学研究所",
+          "scope": "package",
+          "source_pages": [
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "086-521857",
+              "supply": {
+                "status": "stopped",
+                "status_text": "供給停止",
+                "plans": [],
+                "note": "2026年10月1日の一覧では供給停止、薬価削除予定と記載。現在の状況は未確認です。"
+              }
+            },
+            {
+              "package": "PTP140錠（14錠×10）",
+              "unified_product_code": "086-521864",
+              "supply": {
+                "status": "stopped",
+                "status_text": "供給停止",
+                "plans": [],
+                "note": "2026年10月1日の一覧では供給停止、薬価削除予定と記載。現在の状況は未確認です。"
+              }
+            },
+            {
+              "package": "PTP500錠（10錠×50）",
+              "unified_product_code": "086-521871",
+              "supply": {
+                "status": "stopped",
+                "status_text": "供給停止",
+                "plans": [],
+                "note": "2026年10月1日の一覧では供給停止、薬価削除予定と記載。現在の状況は未確認です。"
+              }
+            },
+            {
+              "package": "PTP700錠（14錠×50）",
+              "unified_product_code": "086-521819",
+              "supply": {
+                "status": "normal",
+                "status_text": "通常出荷",
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "在庫消尽次第"
+                  }
+                ],
+                "note": "2026年10月1日の一覧では通常出荷、在庫消尽次第販売中止と記載。現在の在庫・出荷状況は未確認です。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "086-521888",
+              "supply": {
+                "status": "stopped",
+                "status_text": "供給停止",
+                "plans": [],
+                "note": "2026年10月1日の一覧では供給停止、薬価削除予定と記載。現在の状況は未確認です。"
+              }
+            }
+          ]
         }
       ],
       "alternatives": [
