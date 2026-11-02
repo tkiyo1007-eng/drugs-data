@@ -106,10 +106,19 @@
 (function(){
   try{
     var season = new URLSearchParams(location.search).get("season");
-    var jstMonth = new Date(Date.now() + 9 * 3600 * 1000).getUTCMonth();
-    if(season === "halloween" || (season !== "off" && jstMonth === 9)){
-      document.documentElement.classList.add("season-halloween");
+    if(season !== "halloween" && season !== "autumn" && season !== "off") season = null;
+    var timer;
+    function refreshSeason(){
+      var jstNow = Date.now() + 9 * 3600 * 1000;
+      var jstMonth = new Date(jstNow).getUTCMonth();
+      document.documentElement.classList.toggle("season-halloween", season === "halloween" || (!season && jstMonth === 9));
+      document.documentElement.classList.toggle("season-autumn", season === "autumn" || (!season && jstMonth === 10));
+      clearTimeout(timer);
+      timer = setTimeout(refreshSeason, 86400000 - (jstNow % 86400000) + 100);
     }
+    refreshSeason();
+    document.addEventListener("visibilitychange", function(){ if(!document.hidden) refreshSeason(); });
+    window.addEventListener("pageshow", refreshSeason);
   }catch(e){}
 })();
 </script>
@@ -1343,6 +1352,19 @@ footer a:hover{color:var(--blue)}
 </style>
 <style>
 
+/* 秋空と紅葉はヘッダーに限定し、検索結果や供給区分の色を変えない。 */
+.autumn-sky{display:none}
+.season-autumn header{position:relative;isolation:isolate;overflow:hidden}
+.season-autumn header::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 78% 8%,rgba(121,191,246,.35),transparent 58%),radial-gradient(ellipse at 95% 78%,rgba(239,178,122,.13),transparent 44%)}
+.season-autumn .autumn-sky{display:block;position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:-1}
+.autumn-leaf{position:absolute;width:42px;height:42px;opacity:.78;animation:autumn-drift 9s ease-in-out infinite alternate}
+.autumn-leaf:nth-child(1){right:3%;top:9%;width:70px;height:70px;color:#cb673f}
+.autumn-leaf:nth-child(2){right:13%;top:21%;width:32px;height:32px;color:#d69b42;animation-delay:-3s}
+.autumn-leaf:nth-child(3){right:5%;top:58%;width:29px;height:29px;color:#c87150;animation-delay:-6s}
+@keyframes autumn-drift{from{transform:translateY(-5px) rotate(-10deg)}to{transform:translateY(8px) rotate(10deg)}}
+@media(max-width:640px){.autumn-leaf:nth-child(1){right:20px;top:10%;width:40px;height:40px;opacity:.7}.autumn-leaf:nth-child(2){right:64px;top:19%;width:24px;height:24px}.autumn-leaf:nth-child(3){right:20px;top:64%;width:22px;height:22px}}
+@media(prefers-reduced-motion:reduce){.autumn-leaf{animation:none}}
+
 /* ===== 季節デザイン：ハロウィン（10月のみ） =====
    青いガラスの基調は変えず、ヒーローの背景（夜空・月・星・蜘蛛の巣）と見出し・飾りに紫と琥珀色を足す。
    橙は「限定出荷」の色と紛れるため、検索結果・詳細・集計など供給区分を示す領域には使わない。
@@ -1548,6 +1570,11 @@ footer a:hover{color:var(--blue)}
 </nav>
 
 <header id="top">
+  <div class="autumn-sky" aria-hidden="true">
+    <svg class="autumn-leaf" viewBox="0 0 64 64"><path fill="currentColor" d="M32 3 37 18 46 10 45 24 60 22 49 32 58 39 43 40 42 54 34 47 32 62 29 47 21 54 20 40 6 39 15 32 4 22 19 24 18 10 27 18Z"/><path d="M32 13v41M32 35 18 25M32 35l14-10" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="1.5"/></svg>
+    <svg class="autumn-leaf" viewBox="0 0 64 64"><path fill="currentColor" d="M32 3 37 18 46 10 45 24 60 22 49 32 58 39 43 40 42 54 34 47 32 62 29 47 21 54 20 40 6 39 15 32 4 22 19 24 18 10 27 18Z"/></svg>
+    <svg class="autumn-leaf" viewBox="0 0 64 64"><path fill="currentColor" d="M32 3 37 18 46 10 45 24 60 22 49 32 58 39 43 40 42 54 34 47 32 62 29 47 21 54 20 40 6 39 15 32 4 22 19 24 18 10 27 18Z"/></svg>
+  </div>
   <div class="season-sky" aria-hidden="true">
     <svg class="sky-moon" viewBox="0 0 100 100"><defs><radialGradient id="moonFill" cx="40%" cy="38%" r="70%"><stop offset="0" stop-color="#FFF6D6"/><stop offset="1" stop-color="#F3D48A"/></radialGradient></defs><path d="M62 8a44 44 0 1 0 30 70A38 38 0 0 1 62 8Z" fill="url(#moonFill)"/></svg>
     <svg class="sky-stars" viewBox="0 0 400 160"><g fill="currentColor"><circle class="tw1" cx="22" cy="30" r="1.6"/><circle class="tw2" cx="88" cy="12" r="1.1"/><circle class="tw3" cx="150" cy="44" r="1.4"/><circle class="tw1" cx="214" cy="18" r="1"/><circle class="tw2" cx="262" cy="62" r="1.5"/><circle class="tw3" cx="318" cy="26" r="1.2"/><circle class="tw1" cx="372" cy="54" r="1.6"/><circle class="tw2" cx="120" cy="96" r="1"/><circle class="tw3" cx="342" cy="112" r="1.1"/><path class="tw2" d="M190 86l2 5 5 2-5 2-2 5-2-5-5-2 5-2Z"/><path class="tw1" d="M300 140l1.6 4 4 1.6-4 1.6-1.6 4-1.6-4-4-1.6 4-1.6Z"/></g></svg>
