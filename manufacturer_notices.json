@@ -1467,6 +1467,177 @@
         "2026年10月のメーカー案内です。予定時期を過ぎても、実際の停止や再開が行われたとは判断できません。",
         "この案内は自動追跡対象外です。最新の包装別状況や受注可否はメーカー・卸にご確認ください。"
       ]
+    },
+    {
+      "id": "sanwa-packages-distribution-list-20261001",
+      "maker": "三和化学研究所",
+      "title": "医薬品出荷状況一覧（2026年10月1日更新）",
+      "url": "https://med.skk-net.com/significant/item/distribution-list-2610.pdf",
+      "announced_at": "2026-10-01",
+      "verified_at": "2026-11-03",
+      "content_updated_at": "2026-11-03",
+      "sha256": "ab703f0d6aec6578d3adbc9f68bd76057de5a85b749927cbcad247830a95667d",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "メーカーの2026年10月1日更新の一覧には、対象製品の包装ごとの出荷対応と販売中止に関する記載があります。",
+      "targets": [
+        {
+          "yj_code": "2149044F2101",
+          "product_name": "オルメサルタン錠２０ｍｇ「三和」",
+          "maker": "三和化学研究所",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "086-512725",
+              "supply": {
+                "status": "normal",
+                "status_text": "通常出荷",
+                "plans": [{"event": "discontinuation", "timing": "在庫消尽次第"}],
+                "note": "2026年10月1日の一覧では通常出荷、在庫消尽次第販売中止。現在の在庫・出荷状況は未確認です。"
+              }
+            },
+            {
+              "package": "PTP140錠（14錠×10）",
+              "unified_product_code": "086-512732",
+              "supply": {
+                "status": "stopped",
+                "status_text": "供給停止",
+                "plans": [],
+                "note": "2026年10月1日の一覧では供給停止、薬価削除予定と記載。現在の状況は未確認です。"
+              }
+            },
+            {
+              "package": "PTP500錠（10錠×50）",
+              "unified_product_code": "086-512756",
+              "supply": {
+                "status": "normal",
+                "status_text": "通常出荷",
+                "plans": [{"event": "discontinuation", "timing": "在庫消尽次第"}],
+                "note": "2026年10月1日の一覧では通常出荷、在庫消尽次第販売中止。現在の在庫・出荷状況は未確認です。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "086-512749",
+              "supply": {
+                "status": "normal",
+                "status_text": "通常出荷",
+                "plans": [{"event": "discontinuation", "timing": "在庫消尽次第"}],
+                "note": "2026年10月1日の一覧では通常出荷、在庫消尽次第販売中止。現在の在庫・出荷状況は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3399008F1220",
+          "product_name": "クロピドグレル錠２５ｍｇ「三和」",
+          "maker": "三和化学研究所",
+          "scope": "package",
+          "source_pages": [
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "086-521932",
+              "supply": {
+                "status": "stopped",
+                "status_text": "供給停止",
+                "plans": [],
+                "note": "2026年10月1日の一覧では供給停止、薬価削除予定と記載。現在の状況は未確認です。"
+              }
+            },
+            {
+              "package": "PTP140錠（14錠×10）",
+              "unified_product_code": "086-521949",
+              "supply": {
+                "status": "normal",
+                "status_text": "通常出荷",
+                "plans": [{"event": "discontinuation", "timing": "在庫消尽次第"}],
+                "note": "2026年10月1日の一覧では通常出荷、在庫消尽次第販売中止。現在の在庫・出荷状況は未確認です。"
+              }
+            },
+            {
+              "package": "PTP500錠（10錠×50）",
+              "unified_product_code": "086-521956",
+              "supply": {
+                "status": "normal",
+                "status_text": "通常出荷",
+                "plans": [{"event": "discontinuation", "timing": "在庫消尽次第"}],
+                "note": "2026年10月1日の一覧では通常出荷、在庫消尽次第販売中止。現在の在庫・出荷状況は未確認です。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "086-521963",
+              "supply": {
+                "status": "normal",
+                "status_text": "通常出荷",
+                "plans": [{"event": "discontinuation", "timing": "在庫消尽次第"}],
+                "note": "2026年10月1日の一覧では通常出荷、在庫消尽次第販売中止。現在の在庫・出荷状況は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "1149027F1034",
+          "product_name": "レリフェン錠４００ｍｇ",
+          "maker": "三和化学研究所",
+          "scope": "package",
+          "source_pages": [
+            3
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "086-470810",
+              "supply": {
+                "status": "stopped",
+                "status_text": "供給停止",
+                "plans": [],
+                "note": "2026年10月1日の一覧では出荷停止・供給停止、一部包装販売中止と記載。現在の状況は未確認です。"
+              }
+            },
+            {
+              "package": "PTP500錠（10錠×50）",
+              "unified_product_code": "086-470827",
+              "supply": {
+                "status": "normal",
+                "status_text": "通常出荷",
+                "plans": [{"event": "discontinuation", "timing": "在庫消尽次第"}],
+                "note": "2026年10月1日の一覧では通常出荷、在庫消尽次第販売中止。現在の在庫・出荷状況は未確認です。"
+              }
+            },
+            {
+              "package": "PTP1000錠（10錠×100）",
+              "unified_product_code": "086-470834",
+              "supply": {
+                "status": "stopped",
+                "status_text": "供給停止",
+                "plans": [],
+                "note": "2026年10月1日の一覧では供給停止、薬価削除予定と記載。現在の状況は未確認です。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "products": [],
+          "cautions": [
+            "包装別の案内はメーカー原文をご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "表示は2026年10月1日更新の一覧に基づきます。その後の包装別の状況や在庫・受注可否は確認できていません。",
+        "メーカーは経過措置期間の終了を2027年3月末日と予定しています。予定の変更や最新の取扱いは原典とメーカー・卸にご確認ください。",
+        "この案内は自動追跡対象外です。厚労省の品目単位の供給区分とは別の情報です。"
+      ]
     }
   ]
 }
