@@ -11,6 +11,7 @@ from urllib.parse import urlparse
 from maker_identity import maker_is_listed_in_row
 
 MAKER_HOSTS = {
+    'エーザイ': 'medical2.eisai.jp',
     '共和薬品工業': 'www.amel-di.com',
     '扶桑薬品工業': 'www.fuso-pharm.co.jp',
     'ファイザー': 'www.pfizermedicalinformation.jp', 'サンド': 'sandoz-jp.cms.sandoz.com',

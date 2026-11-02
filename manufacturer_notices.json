@@ -1806,6 +1806,68 @@
         "メーカーは経過措置期間の終了を2027年3月末日と予定しています。予定の変更や最新の取扱いは原典とメーカー・卸にご確認ください。",
         "この案内は自動追跡対象外です。厚労省の品目単位の供給区分とは別の情報です。"
       ]
+    },
+    {
+      "id": "eisai-yubera-package-202602",
+      "maker": "エーザイ",
+      "title": "ユベラ軟膏 欠品ならびに限定出荷のご案内",
+      "url": "https://medical2.eisai.jp/fileviewer/6971e7148cafe/",
+      "announced_at": "2026-02",
+      "listed_at": "2026-02-03",
+      "verified_at": "2026-11-03",
+      "content_updated_at": "2026-11-03",
+      "sha256": "9e4b9797cdb1cdae8676a0f1e8685e527536141cc96b292c2095aae18dcdaee5",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "2026年2月のメーカー案内では、諸般の事情によりチューブが欠品、ボトルは限定出荷となり、出荷再開時期は未定とされています。",
+      "targets": [
+        {
+          "yj_code": "2649805M1026",
+          "product_name": "ユベラ軟膏",
+          "maker": "エーザイ",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "280g［56gチューブ×5］",
+              "unified_product_code": "028-209812",
+              "gs1_sales": "14987028209819",
+              "supply": {
+                "status": "stopped",
+                "status_text": "出荷停止・供給停止",
+                "plans": [],
+                "note": "2026年2月の案内における状況です。現在の包装別状況は未確認です。"
+              }
+            },
+            {
+              "package": "500gボトル",
+              "unified_product_code": "028-209829",
+              "gs1_sales": "14987028209826",
+              "supply": {
+                "status": "limited",
+                "status_text": "出荷量通常・限定出荷（自社の事情）",
+                "plans": [],
+                "note": "2026年2月の案内における状況です。現在の包装別状況は未確認です。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "products": [],
+          "cautions": [
+            "メーカーの参考製品は原文をご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年2月のメーカー案内です。現在の包装別の出荷状況は確認できていません。",
+        "この案内は自動追跡対象外です。最新の包装別状況や受注可否はメーカー・卸にご確認ください。"
+      ]
     }
   ]
 }

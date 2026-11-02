@@ -116,6 +116,18 @@ class PackageSupplyContractTests(unittest.TestCase):
         self.assertTrue(all(g['products'] == [] for g in notice['alternatives']))
         self.assertIn('原文2ページ', ' '.join(c for g in notice['alternatives'] for c in g['cautions']))
 
+    def test_yubera_package_notice_preserves_historical_scope(self):
+        document = json.loads((Path(__file__).resolve().parents[1] / 'manufacturer_notices.json').read_text())
+        notice = next(n for n in document['notices'] if n['id'] == 'eisai-yubera-package-202602')
+        self.assertEqual(notice['announced_at'], '2026-02')
+        self.assertEqual(notice['collection_mode'], 'manual')
+        target, = notice['targets']
+        self.assertEqual(target['yj_code'], '2649805M1026')
+        packages = {p['gs1_sales']: p['supply'] for p in target['packages']}
+        self.assertEqual(packages['14987028209819']['status'], 'stopped')
+        self.assertEqual(packages['14987028209826']['status'], 'limited')
+        self.assertTrue(all('現在の包装別状況は未確認' in p['note'] for p in packages.values()))
+
     def test_manual_mode_does_not_relax_source_and_date_validation(self):
         document, rows = self.fixture()
         notice = document['notices'][0]; notice['collection_mode'] = 'manual'
