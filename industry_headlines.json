@@ -3,43 +3,67 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-11-02T03:53:48+09:00",
-  "last_success_at": "2026-11-02T03:53:48+09:00",
+  "checked_at": "2026-11-03T07:45:38+09:00",
+  "last_success_at": "2026-11-03T07:45:38+09:00",
   "items": [
     {
-      "title": "【武田薬品】27年度中に国内申請へ‐進行胃癌対象ADC",
-      "url": "https://www.yakuji.co.jp/entry141124.html",
-      "date": "2026-10-30",
+      "title": "【機器・体診部会】穿刺血OTC化の議論再開‐糖尿病患者と予備群で検討",
+      "url": "https://www.yakuji.co.jp/entry141238.html",
+      "date": "2026-11-02",
       "tag": "業界ニュース"
     },
     {
-      "title": "【中外製薬】ディバラシブ、年内の申請予定‐KRAS変異非小細胞肺癌で",
-      "url": "https://www.yakuji.co.jp/entry141123.html",
-      "date": "2026-10-30",
+      "title": "【安全対策部会】指定第2類移行は継続審議‐ロキソニン、販売体制に懸念",
+      "url": "https://www.yakuji.co.jp/entry141237.html",
+      "date": "2026-11-02",
       "tag": "業界ニュース"
     },
     {
-      "title": "【厚労省】添付文書改訂を指示‐プロトピックなど4件",
-      "url": "https://www.yakuji.co.jp/entry141120.html",
-      "date": "2026-10-30",
+      "title": "【インドネシア病院薬剤師協会】薬剤師ら約30人が来訪‐医療安全対策など学ぶ",
+      "url": "https://www.yakuji.co.jp/entry141236.html",
+      "date": "2026-11-02",
       "tag": "業界ニュース"
     },
     {
-      "title": "【厚労省】薬局製剤の取り扱い改正‐指針に漢方59処方追加",
-      "url": "https://www.yakuji.co.jp/entry141119.html",
-      "date": "2026-10-30",
+      "title": "【マルホ／J-TEC】自家培養表皮で販売提携‐白斑治療での普及目指す",
+      "url": "https://www.yakuji.co.jp/entry141235.html",
+      "date": "2026-11-02",
       "tag": "業界ニュース"
     },
     {
-      "title": "【厚科審制度部会】危機対応薬を優先審査対象‐薬機法改正も見据え対応",
-      "url": "https://www.yakuji.co.jp/entry141117.html",
-      "date": "2026-10-30",
+      "title": "【北海道医療大／友愛会】医療人材育成で連携協定‐高校生対象インターン拡充",
+      "url": "https://www.yakuji.co.jp/entry141232.html",
+      "date": "2026-11-02",
       "tag": "業界ニュース"
     },
     {
-      "title": "【薬価部会】安定供給へ薬価引上げを‐政策効果検証求める声も",
-      "url": "https://www.yakuji.co.jp/entry141115.html",
-      "date": "2026-10-30",
+      "title": "【日薬】不正アクセス対応で文書‐セキュリティ対策徹底を",
+      "url": "https://www.yakuji.co.jp/entry141231.html",
+      "date": "2026-11-02",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【日薬 渡邊副会長】OTC類似薬制度周知を‐薬局窓口で説明難しく",
+      "url": "https://www.yakuji.co.jp/entry141229.html",
+      "date": "2026-11-02",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【PMDA】不正アクセスで運用停止‐医療機器ウェブ申請基盤",
+      "url": "https://www.yakuji.co.jp/entry141228.html",
+      "date": "2026-11-02",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【富士フイルムなど】AI創薬で新規化合物発見‐薬剤耐性菌に効果示す",
+      "url": "https://www.yakuji.co.jp/entry141125.html",
+      "date": "2026-11-02",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "薬業界のさらなる発展願う‐東京日本橋で薬祖神例大祭",
+      "url": "https://www.yakuji.co.jp/entry141121.html",
+      "date": "2026-11-02",
       "tag": "業界ニュース"
     }
   ]
