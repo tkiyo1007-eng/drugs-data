@@ -28,7 +28,7 @@ MHLW_PRICE_LIST_URL = "https://www.mhlw.go.jp/topics/2026/04/tp20260401-01.html"
 PMDA_SEARCH_URL = "https://www.pmda.go.jp/PmdaSearch/iyakuSearch/"
 PMDA_RECALL_URL = "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html"
 GUIDE_SLUG = "how-to-check-drug-supply"
-GUIDE_UPDATED_AT = "2026-10-12"
+GUIDE_UPDATED_AT = "2026-11-03"  # 包装別の確認手順を追加した編集日
 DISCONTINUATION_GUIDE_SLUG = "how-to-check-discontinuation-and-delisting"
 DISCONTINUATION_GUIDE_PUBLISHED_AT = "2026-10-11"
 DISCONTINUATION_GUIDE_UPDATED_AT = "2026-10-19"  # 品目別・規格別の確認入口を追加した編集日
@@ -437,6 +437,13 @@ def guide_page() -> str:
 <h3 id="resumption">いつまで続くかを確認するには</h3>
 <p>品目ごとに厚生労働省の「解除・解消見込み」欄と、メーカー公式案内の対象包装・更新日を確認します。見込みの有無の区分だけから具体的な日付を決めず、「未定」や記載のない再開時期を推測で補いません。出荷再開の案内があっても、各施設への入荷時期や実在庫は卸・メーカーにも確認してください。</p>
 <p class="source">現在の公表内容：<a href="{MHLW_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システムで品目名・YJコードを確認</a></p></section>
+<section class="intent" id="package-check"><h2>同じ薬でも包装ごとに状況が違うときは</h2>
+<p>同じ販売名・規格でも、包装ごとにメーカーの案内が異なる場合があります。厚生労働省の供給区分は品目単位なので、その区分だけでは個々の包装の受注可否は分かりません。</p>
+<ol><li><strong>品目を特定する：</strong>販売名、メーカー、規格、YJコードを確認します。</li>
+<li><strong>包装を照合する：</strong>メーカー原文に記載された包装の種類と数量、対象範囲を確認します。情報のない包装は未確認です。</li>
+<li><strong>日付と予定を分ける：</strong>文書日と原文確認日を見て、在庫消尽・出荷再開などの予定を実施済みと決めつけません。</li>
+<li><strong>入手できるか確認する：</strong>実際の在庫や受注可否は、取引先の卸・メーカーへ確認します。</li></ol>
+<p>包装別の案内を確認した例：<a href="../items/2649805M1026.html">ユベラ軟膏</a>、<a href="../items/2190102F1106.html">アマルエット配合錠2番「トーワ」</a>。各品目ページでは、原文の対象包装と確認日をご覧ください。案内は資料時点の情報で、現在の在庫を保証しません。</p></section>
 <nav class="intent" aria-labelledby="guidePathsTitle"><h2 id="guidePathsTitle">目的に合う確認先を選ぶ</h2>
 <div class="list">
 <a href="../items/limited.html">出荷調整（限定出荷）の医薬品一覧<small>厚生労働省公表データで限定出荷の品目を確認</small></a>
