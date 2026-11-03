@@ -544,6 +544,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   color:#5B4100;background:#FFF0B8;border:1px solid #D69B00;white-space:nowrap;
 }
 .package-supply-badge{font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:999px;color:var(--blue-deep);background:rgba(79,128,244,.08);border:1px solid var(--stroke);overflow-wrap:anywhere}
+.package-supply-context{display:block;margin-top:6px;font-size:11px;line-height:1.5;color:var(--sub)}
 .change-badge{
   font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:999px;white-space:nowrap;
 }
@@ -924,6 +925,8 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .manufacturer-note+.manufacturer-note{border-top:1px solid var(--stroke);margin-top:16px}
 .manufacturer-note a:not(.maker-link){color:var(--blue-deep);text-decoration:underline}
 .package-supply{margin:14px 0;padding:12px;border:1px solid var(--stroke);border-radius:14px;background:rgba(79,128,244,.04);color:var(--ink);overflow-wrap:anywhere}
+.manufacturer-note-dates{display:flex;flex-wrap:wrap;gap:6px 14px;line-height:1.7}
+.manufacturer-note-dates span{display:inline-block}
 .package-supply h5{margin:0 0 8px;font-size:13px;line-height:1.7}
 .package-supply .package-supply-note{margin:6px 0;font-size:11.5px;line-height:1.8;color:var(--ink)}
 .package-supply .package-supply-list{list-style:none;margin:10px 0;padding:0;display:grid;gap:10px}
@@ -2688,6 +2691,7 @@ html.season-autumn .autumn-sky{display:none}
       <a class="maker-link" id="mSupplyDefinition" href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html" target="_blank" rel="noopener" data-dsn-event="official-source-open">供給区分・出荷量の定義（厚生労働省）</a>
     </div>
     <dl class="detail-grid" id="mGrid"></dl>
+    <div class="sum-box" id="mManufacturerNotes" hidden></div>
     <div class="modal-note" id="mSupplyReference" hidden></div>
     <section class="alternatives-box" id="mAlternatives" aria-labelledby="mAlternativesTitle" hidden>
       <h4 id="mAlternativesTitle">代替候補の4つのポイント</h4>
@@ -2717,7 +2721,6 @@ html.season-autumn .autumn-sky{display:none}
       <textarea id="mReportBody" rows="8" readonly spellcheck="false"></textarea>
     </details>
     <div class="discrepancy-panel" id="mDiscrepancy" role="note" hidden></div>
-    <div class="sum-box" id="mManufacturerNotes" hidden></div>
     <div class="sum-box" id="mSummary" hidden></div>
     <div class="pkg-box" id="mPkgs" hidden></div>
     <p class="modal-note" id="mHistoryNote" role="status" aria-live="polite" aria-atomic="true"></p>
@@ -3314,6 +3317,7 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
         <span class="drug-tags"><span class="status-tag">${st.label}</span>${discrepancyBadge}${makerSupplyBadge}${packageSupplyBadge}${changeBadge}${volumeBadge}${delistBadge}${discontinuedBadge}</span>
         <span class="drug-date num">公表行更新 ${d.d}${ago}</span>
       </div>
+      ${packageSupplyBadge ? '<span class="package-supply-context">メーカー文書の記載です。現在の在庫は要確認</span>' : ''}
     </article>`;
   }).join("");
   const remaining = hits.length - shown.length;
@@ -4006,7 +4010,7 @@ function manufacturerPackageBadgeHtml(item){
   // 同じ文書・同じ品目内の明示された状態だけを比較。別文書や予定時期の違いは現在の状態差にしない。
   const different = matches.some(({target})=>new Set(target.packages.filter(p=>validManufacturerPackageSupply(p.supply)
     && p.supply.status !== "unconfirmed").map(p=>p.supply.status)).size > 1);
-  return `<span class="package-supply-badge" title="メーカー文書の包装別情報があります。文書の日付と対象包装を詳細で確認してください">${different ? "包装で状況が異なります" : "包装別の案内あり"}</span>`;
+  return `<span class="package-supply-badge" title="メーカー文書の包装別情報があります。文書の日付と対象包装を詳細で確認してください">${different ? "包装別の案内に違いあり" : "包装別の案内あり"}</span>`;
 }
 function manufacturerPackageSupplyHTML(notice, target){
   if(manufacturerNoticeChanged(notice) || !target.packages.some(p=>validManufacturerPackageSupply(p.supply))) return "";
@@ -4026,11 +4030,11 @@ function manufacturerPackageSupplyHTML(notice, target){
 function manufacturerNoticeHTML(notice, target=null, yj=""){
   const targets = target ? [target] : notice.targets;
   const groups = notice.alternatives.filter(g=>!yj || !g.target_yj_codes || g.target_yj_codes.includes(yj));
-  const dateText = `文書年月日：${notice.announced_at || "記載なし"}／公式掲載日：${notice.listed_at || "確認できません"}／原文確認日：${notice.verified_at}`;
+  const dates = [["文書年月日",notice.announced_at || "記載なし"],["公式掲載日",notice.listed_at || "確認できません"],["原文確認日",notice.verified_at]];
   const timing = notice.resumption && (typeof notice.resumption === "string" ? notice.resumption : notice.resumption.text)
     || notice.expected_resumption && notice.expected_resumption.display || "";
   const lots = Array.isArray(notice.lots) ? notice.lots.filter(l=>!target || norm(target.product_name).includes(norm(l.strength || ""))) : [];
-  return `<section class="manufacturer-note"><h4>${esc(notice.title)}</h4><p>${esc(dateText)}</p>`
+  return `<section class="manufacturer-note"><h4>${esc(notice.title)}</h4><p class="manufacturer-note-dates">${dates.map(([label,value])=>`<span>${esc(label)}：${esc(value)}</span>`).join(" ")}</p>`
     + `<ul>${targets.map(t=>`<li>${esc(t.product_name)}：${t.packages.map(p=>esc(p.package)).join("／")}`
       + (t.seller ? `（販売経路：${esc(t.seller)}）` : "")
       + (t.planned_timing ? `。${/出荷停止中/.test(t.planned_timing) ? "案内の状況" : "案内の予定時期"}：${esc(t.planned_timing)}` : "")
