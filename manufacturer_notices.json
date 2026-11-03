@@ -2795,6 +2795,43 @@
         "カデュエット配合錠2番の案内はメーカー文書では2026年9月末で終了とされています。",
         "この案内は自動追跡対象外です。"
       ]
+    },
+    {
+      "id": "kemifa-clopidogrel-75-package-202610",
+      "maker": "日本ケミファ",
+      "title": "クロピドグレル錠75mg「ケミファ」140錠包装 出荷調整解除のお知らせ",
+      "url": "https://www.nc-medical.com/product_topics/p5ib91000000860g-att/p5ib910000008614.pdf",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-04",
+      "content_updated_at": "2026-11-04",
+      "sha256": "dcf524bbdfeb93f206001331bb11516e095030f99f201dc9cc04542e54d5e66e",
+      "collection_mode": "manual",
+      "event_type": "resumed",
+      "reason": "メーカーは140錠包装について、供給体制が整ったため2026年10月27日に出荷調整を解除すると案内しています。",
+      "targets": [
+        {
+          "yj_code": "3399008F2196",
+          "product_name": "クロピドグレル錠７５ｍｇ「ケミファ」",
+          "maker": "日本ケミファ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "140錠",
+              "unified_product_code": "171217146"
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "この案内の対象は140錠包装です。ほかの包装の状況は確認できません。",
+        "公式RSS掲載日は2026年10月27日、文書は2026年10月表記です。現在の在庫・受注可否は未確認です。",
+        "公式一覧を取得できないため、この案内はRSS経由で確認しました。後続の案内・現在の状況はメーカーにご確認ください。",
+        "この案内は自動追跡対象外です。"
+      ]
     }
   ]
 }
