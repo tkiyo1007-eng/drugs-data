@@ -167,6 +167,26 @@ class PackageSupplyContractTests(unittest.TestCase):
             self.assertEqual(packages[code]['plans'], [{'event': 'stock_depletion', 'timing': '2027年1月見込み'}])
             self.assertIn('未確認', packages[code]['note'])
 
+    def test_sawai_stock_plans_preserve_package_dates_as_forecasts(self):
+        document = json.loads((Path(__file__).resolve().parents[1] / 'manufacturer_notices.json').read_text())
+        expected = {
+            '080-210115': '2027年1月見込み', '080-210146': '2027年4月見込み',
+            '080-211112': '2026年12月見込み', '080-211143': '2027年7月見込み',
+            '080-212119': '2027年2月見込み', '080-308010': '2027年2月見込み',
+            '080-308041': '2027年6月見込み',
+        }
+        for notice in document['notices']:
+            if notice['id'] not in ('sawai-irbesartan-package-plan-202610', 'sawai-loratadine-package-plan-202610'):
+                continue
+            self.assertEqual((notice['announced_at'], notice['listed_at']), ('2026-10', '2026-10-20'))
+            for target in notice['targets']:
+                for package in target['packages']:
+                    supply = package['supply']
+                    self.assertEqual(supply['status'], 'limited')
+                    self.assertEqual(supply['plans'], [{'event': 'stock_depletion', 'timing': expected.pop(package['unified_product_code'])}])
+                    self.assertIn('未確認', supply['note'])
+        self.assertEqual(expected, {})
+
     def test_manual_mode_does_not_relax_source_and_date_validation(self):
         document, rows = self.fixture()
         notice = document['notices'][0]; notice['collection_mode'] = 'manual'
