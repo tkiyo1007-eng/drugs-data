@@ -2523,6 +2523,157 @@
         "供給再開時期は案内時点で未定です。最新の包装別状況や受注可否はメーカー・卸にご確認ください。",
         "この案内は自動追跡対象外です。"
       ]
+    },
+    {
+      "id": "maruishi-monilac-package-plan-202610",
+      "maker": "丸石製薬",
+      "title": "モニラック・シロップ65％ 出荷停止のご案内とお詫び",
+      "url": "https://www.maruishi-pharm.co.jp/medical/media/monilac-syrup_syukkateisi_20261019.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-19",
+      "verified_at": "2026-11-03",
+      "content_updated_at": "2026-11-03",
+      "sha256": "fed45ba222d98948a25a9499bd997d4961671b4b0127e49d9667c0d4d5736c9e",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "メーカーは、他社同効薬の影響による需要増と、原薬の一部変更承認申請への対応に時間を要していることを説明しています。",
+      "targets": [
+        {
+          "yj_code": "3999001Q2058",
+          "product_name": "モニラック・シロップ６５％",
+          "maker": "丸石製薬",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "300mL（プラスチック容器）",
+              "unified_product_code": "211-128302",
+              "gs1_sales": "14987211128309",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年12月中旬予定"
+                  },
+                  {
+                    "event": "shipment_resumption",
+                    "timing": "2026年12月下旬予定"
+                  }
+                ],
+                "note": "2026年10月の案内では在庫消尽後に供給を一時停止予定。実際の消尽・停止・現在の包装別状況は未確認です。",
+                "status_text": "限定出荷（自社の事情）"
+              }
+            },
+            {
+              "package": "10mL分包×84包（21包×4）",
+              "unified_product_code": "211-128319",
+              "gs1_sales": "14987211128316",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年10月下旬予定"
+                  },
+                  {
+                    "event": "shipment_resumption",
+                    "timing": "2026年12月下旬予定"
+                  }
+                ],
+                "note": "2026年10月の案内では在庫消尽後に供給を一時停止予定。実際の消尽・停止・現在の包装別状況は未確認です。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "products": [],
+          "cautions": [
+            "メーカーの参考製品は原文をご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "消尽・供給停止・出荷再開はメーカー案内時点の予定で、実施を確認したものではありません。",
+        "2026年12月下旬の再開予定は承認時期により前後する見込みです。",
+        "この案内は自動追跡対象外です。最新の包装別状況や受注可否はメーカー・卸にご確認ください。"
+      ]
+    },
+    {
+      "id": "maruishi-metronidazole-package-plan-202610",
+      "maker": "丸石製薬",
+      "title": "メトロニダゾールゲル0.75％「マルイシ」限定出荷および在庫消尽後出荷停止に関するお詫び",
+      "url": "https://www.maruishi-pharm.co.jp/medical/media/MNG_genteisyuuka-teisi_20261030.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-30",
+      "verified_at": "2026-11-03",
+      "content_updated_at": "2026-11-03",
+      "sha256": "9dd7aeae7560c0f57bedf688e74cb9896bfb82f6067e78076ed0e59c3f3a4084",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "メーカーは、委託製造所にGMP不適合連絡書が発出され、新規製造を一時停止していると説明しています。",
+      "targets": [
+        {
+          "yj_code": "2699713Q1034",
+          "product_name": "メトロニダゾールゲル０．７５％「マルイシ」",
+          "maker": "丸石製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "50g×1",
+              "unified_product_code": "211-162603",
+              "gs1_sales": "14987211162600",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年3月予定"
+                  }
+                ],
+                "note": "2026年10月の案内では在庫消尽後に供給を一時停止予定。実際の消尽・停止・現在の包装別状況は未確認です。",
+                "status_text": "限定出荷（自社の事情）"
+              }
+            },
+            {
+              "package": "100g×1",
+              "unified_product_code": "211-162610",
+              "gs1_sales": "14987211162617",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年5月予定"
+                  }
+                ],
+                "note": "2026年10月の案内では在庫消尽後に供給を一時停止予定。実際の消尽・停止・現在の包装別状況は未確認です。",
+                "status_text": "限定出荷（自社の事情）"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "products": [],
+          "cautions": [
+            "メーカーの参考製品は原文をご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "消尽・供給停止・出荷再開はメーカー案内時点の予定で、実施を確認したものではありません。",
+        "この案内は自動追跡対象外です。最新の包装別状況や受注可否はメーカー・卸にご確認ください。"
+      ]
     }
   ]
 }

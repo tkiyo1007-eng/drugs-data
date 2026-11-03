@@ -205,6 +205,27 @@ class PackageSupplyContractTests(unittest.TestCase):
                 self.assertIn('未確認', supply['note'])
         self.assertEqual(expected, {})
 
+    def test_maruishi_package_plans_preserve_timing_and_unknowns(self):
+        document = json.loads((Path(__file__).resolve().parents[1] / 'manufacturer_notices.json').read_text())
+        expected = {
+            '211-128302': ('limited', '2026年12月中旬予定'),
+            '211-128319': ('unconfirmed', '2026年10月下旬予定'),
+            '211-162603': ('limited', '2027年3月予定'),
+            '211-162610': ('limited', '2027年5月予定'),
+        }
+        for notice in document['notices']:
+            if notice['id'] not in ('maruishi-monilac-package-plan-202610', 'maruishi-metronidazole-package-plan-202610'):
+                continue
+            for target in notice['targets']:
+                for package in target['packages']:
+                    status, timing = expected.pop(package['unified_product_code'])
+                    self.assertEqual(package['supply']['status'], status)
+                    self.assertEqual(package['supply']['plans'][0], {'event': 'stock_depletion', 'timing': timing})
+                    self.assertIn('未確認', package['supply']['note'])
+                    if notice['id'] == 'maruishi-monilac-package-plan-202610':
+                        self.assertEqual(package['supply']['plans'][1], {'event': 'shipment_resumption', 'timing': '2026年12月下旬予定'})
+        self.assertEqual(expected, {})
+
     def test_manual_mode_does_not_relax_source_and_date_validation(self):
         document, rows = self.fixture()
         notice = document['notices'][0]; notice['collection_mode'] = 'manual'
