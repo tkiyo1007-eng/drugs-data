@@ -2746,6 +2746,55 @@
         "販売継続包装の記載は案内時点の情報で、現在の包装別状況は未確認です。",
         "この案内は自動追跡対象外です。最新の包装別状況や受注可否はメーカー・卸にご確認ください。"
       ]
+    },
+    {
+      "id": "towa-amaluet2-package-202610",
+      "maker": "東和薬品",
+      "title": "アマルエット配合錠2番「トーワ」出荷停止に関するお知らせ",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82817&t=4",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-03",
+      "content_updated_at": "2026-11-03",
+      "sha256": "d5c72c367f276e555390cb3b9f4fac1e5b0d0859050bf17a1fcf2468d9af696e",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "メーカーは、承認された規格を満たす製品を製造できず、安定供給が難しいため一時出荷停止と説明しています。",
+      "targets": [
+        {
+          "yj_code": "2190102F1106",
+          "product_name": "アマルエット配合錠２番「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155-236101",
+              "supply": {
+                "status": "stopped",
+                "status_text": "供給停止",
+                "plans": [
+                  {
+                    "event": "shipment_resumption",
+                    "timing": "未定"
+                  }
+                ],
+                "note": "2026年10月更新のメーカー案内時点の出荷対応です。現在の在庫・受注可否は未確認です。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカーは参考候補として、アムロジピン錠2.5mg「トーワ」とアトルバスタチン錠10mg「トーワ」の単剤2剤を案内しています。いずれか一方だけで配合剤に相当するものではありません。",
+        "候補の現在の出荷状況・在庫は未確認です。適応・用量・患者状態などを処方医・薬剤師が確認し、自己判断で変更しないでください。",
+        "カデュエット配合錠2番の案内はメーカー文書では2026年9月末で終了とされています。",
+        "この案内は自動追跡対象外です。"
+      ]
     }
   ]
 }

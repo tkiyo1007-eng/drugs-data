@@ -245,6 +245,21 @@ class PackageSupplyContractTests(unittest.TestCase):
                 self.assertIn('販売継続包装', supply['note'])
                 self.assertEqual(supply['plans'], [])
 
+    def test_towa_amaluet_second_strength_remains_package_scoped(self):
+        document = json.loads((Path(__file__).resolve().parents[1] / 'manufacturer_notices.json').read_text())
+        notice = next(n for n in document['notices'] if n['id'] == 'towa-amaluet2-package-202610')
+        self.assertEqual(notice['collection_mode'], 'manual')
+        self.assertEqual(notice['announced_at'], '2026-10')
+        target, = notice['targets']
+        self.assertEqual(target['yj_code'], '2190102F1106')
+        package, = target['packages']
+        self.assertEqual(package['package'], 'PTP100錠')
+        self.assertEqual(package['supply']['status'], 'stopped')
+        self.assertIn('未確認', package['supply']['note'])
+        self.assertEqual(package['supply']['plans'], [{'event': 'shipment_resumption', 'timing': '未定'}])
+        self.assertTrue(any('単剤2剤' in caution for caution in notice['cautions']))
+        self.assertTrue(any('2026年9月末で終了' in caution for caution in notice['cautions']))
+
     def test_manual_mode_does_not_relax_source_and_date_validation(self):
         document, rows = self.fixture()
         notice = document['notices'][0]; notice['collection_mode'] = 'manual'
