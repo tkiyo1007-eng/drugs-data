@@ -2028,6 +2028,86 @@
         "表示は2026年10月1日更新の一覧に基づきます。その後の包装別の状況や在庫・受注可否は確認できていません。",
         "この案内は自動追跡対象外です。厚労省の品目単位の供給区分とは別の情報です。"
       ]
+    },
+    {
+      "id": "sawai-memantine-od10-package-202610",
+      "maker": "沢井製薬",
+      "title": "メマンチン塩酸塩OD錠10mg「サワイ」の供給に関するお詫びとお願い",
+      "url": "https://med.sawai.co.jp/file/pr27_4702_1.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-30",
+      "verified_at": "2026-11-03",
+      "content_updated_at": "2026-11-03",
+      "sha256": "0078212209f446619f0abe6fc29a1ed5baf381ecf179e39990a496d9cb156a76",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "2026年10月のメーカー案内では、製剤の製造遅延により一時的に品薄となり、安定供給に支障を来していると説明しています。",
+      "targets": [
+        {
+          "yj_code": "1190018F5150",
+          "product_name": "メマンチン塩酸塩ＯＤ錠１０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP14錠",
+              "unified_product_code": "080-113171",
+              "gs1_sales": "14987080113178",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷",
+                "plans": [],
+                "note": "2026年10月の案内では、既採用の医療機関への供給を優先した限定出荷。現在の包装別状況は未確認です。"
+              }
+            },
+            {
+              "package": "PTP56錠",
+              "unified_product_code": "080-113188",
+              "gs1_sales": "14987080113185",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年1月見込み"
+                  }
+                ],
+                "note": "在庫が一時的に消尽する見込み。次回出荷は案内時点で未定です。実際の消尽・出荷状況は未確認です。"
+              }
+            },
+            {
+              "package": "バラ100錠",
+              "unified_product_code": "080-113140",
+              "gs1_sales": "14987080113147",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年1月見込み"
+                  }
+                ],
+                "note": "在庫が一時的に消尽する見込み。次回出荷は案内時点で未定です。実際の消尽・出荷状況は未確認です。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "products": [],
+          "cautions": [
+            "包装別の案内はメーカー原文をご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年10月のメーカー案内に基づく情報です。在庫消尽は見込みであり、実施済みとは限りません。",
+        "この案内は自動追跡対象外です。最新の包装別状況や受注可否はメーカー・卸にご確認ください。"
+      ]
     }
   ]
 }
