@@ -3965,6 +3965,7 @@ function legacySupplementalFor(map, d){
 }
 let MANUFACTURER_NOTICES = [];
 let MANUFACTURER_NOTICES_STATE = "loading";
+let MANUFACTURER_NOTICES_CACHED = false;
 let MANUFACTURER_BULLETINS = null;
 function manufacturerSourceURL(value){
   try{
@@ -4200,11 +4201,12 @@ function loadSupplementalData(){
     fetchFirst(["announcement_summaries.json", "https://kyokyu-navi.jp/announcement_summaries.json"])
       .then(res => res && res.json()).then(data => { if(data) SUMMARIES = data; }).catch(()=>{}),
     fetchFirst(["manufacturer_notices.json", "https://kyokyu-navi.jp/manufacturer_notices.json"])
-      .then(res => { if(!res) throw new Error("missing notices"); return res.json(); })
-      .then(data => {
+      .then(res => { if(!res) throw new Error("missing notices"); const cached=responseUsesCachedData(res); return res.json().then(data=>({data,cached})); })
+      .then(({data,cached}) => {
         if(data.schema_version !== 1 || !Array.isArray(data.notices)) throw new Error("invalid notices");
         if(data.notices.some(n=>!validManufacturerNotice(n))) throw new Error("invalid notice");
         MANUFACTURER_NOTICES = data.notices;
+        MANUFACTURER_NOTICES_CACHED = cached;
         MANUFACTURER_NOTICES_STATE = "loaded";
       }).catch(()=>{
         MANUFACTURER_NOTICES_STATE = "failed";
@@ -5789,8 +5791,13 @@ function openDetail(d, opts={}){
     `<section class="manufacturer-note"><h4>${esc(notice.title)}</h4>`
       + `<p>メーカー原典の更新を検知したため、包装・原因・参考候補は再確認待ちです。最新の案内は原典をご確認ください。</p>`
       + `<a class="maker-link" href="${esc(manufacturerSourceURL(notice.url))}" target="_blank" rel="noopener" data-dsn-event="official-source-open">${esc(notice.maker)}の原典を確認</a></section>`).join("");
-  manufacturerNotes.innerHTML = verifiedNotices.map(({notice,target})=>manufacturerNoticeHTML(notice, target, d.yj)).join("") + pendingNotices;
-  manufacturerNotes.hidden = !verifiedNotices.length && !updatedNotices.length;
+  const noticesAvailability = MANUFACTURER_NOTICES_STATE === "failed"
+    ? "メーカー資料を取得できませんでした。資料がないことを意味しません。原典をご確認ください。"
+    : MANUFACTURER_NOTICES_STATE === "loaded" && MANUFACTURER_NOTICES_CACHED
+      ? "メーカー資料は前回取得分です。最新の案内かは原典をご確認ください。" : "";
+  manufacturerNotes.innerHTML = (noticesAvailability ? `<p>${esc(noticesAvailability)}</p>` : "")
+    + verifiedNotices.map(({notice,target})=>manufacturerNoticeHTML(notice, target, d.yj)).join("") + pendingNotices;
+  manufacturerNotes.hidden = !noticesAvailability && !verifiedNotices.length && !updatedNotices.length;
   const packageJump = document.getElementById("mPackageJump");
   const referenceJump = document.getElementById("mReferenceJump");
   const relatedJump = document.getElementById("mRelatedJump");
