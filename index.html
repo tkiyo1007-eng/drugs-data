@@ -1357,12 +1357,19 @@ footer a:hover{color:var(--blue)}
 .season-autumn header{position:relative;isolation:isolate;overflow:hidden}
 .season-autumn header::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 78% 8%,rgba(121,191,246,.35),transparent 58%),radial-gradient(ellipse at 95% 78%,rgba(239,178,122,.13),transparent 44%)}
 .season-autumn .autumn-sky{display:block;position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:-1}
+/* B案の明るい空と雲。文字の後ろは白を重ねて可読性を保つ。 */
+html[data-color-scheme="light"].season-autumn .aurora{background:linear-gradient(165deg,#a8d9fa 0%,#dbefff 42%,#eef5ff 76%,#e8efff 100%)}
+html[data-color-scheme="light"].season-autumn header::before{background:radial-gradient(ellipse at 14% 46%,rgba(255,255,255,.95) 0%,rgba(255,255,255,.78) 28%,transparent 68%),radial-gradient(ellipse at 74% 38%,rgba(255,255,255,.64),transparent 40%),linear-gradient(165deg,rgba(117,195,250,.32),rgba(226,244,255,.18) 80%)}
+html[data-color-scheme="light"].season-autumn .autumn-sky{background:radial-gradient(ellipse 18% 8% at 5% 40%,rgba(255,255,255,.8),transparent 90%),radial-gradient(ellipse 25% 12% at 73% 55%,rgba(255,255,255,.65),transparent 90%),radial-gradient(ellipse 22% 10% at 30% 83%,rgba(255,255,255,.65),transparent 90%)}
+.autumn-branch{position:absolute;right:30px;top:-12px;width:min(440px,42vw);height:auto;opacity:.92;pointer-events:none}
+@media(max-width:640px){.autumn-branch{width:240px;right:30px;top:-6px;opacity:.83}}
+
 .autumn-leaf{position:absolute;width:42px;height:42px;opacity:.78;animation:autumn-drift 9s ease-in-out infinite alternate}
-.autumn-leaf:nth-child(1){right:3%;top:9%;width:70px;height:70px;color:#cb673f}
-.autumn-leaf:nth-child(2){right:13%;top:21%;width:32px;height:32px;color:#d69b42;animation-delay:-3s}
-.autumn-leaf:nth-child(3){right:5%;top:58%;width:29px;height:29px;color:#c87150;animation-delay:-6s}
+.autumn-leaf:nth-of-type(4){right:3%;top:9%;width:70px;height:70px;color:#cb673f}
+.autumn-leaf:nth-of-type(2){right:13%;top:21%;width:32px;height:32px;color:#d69b42;animation-delay:-3s}
+.autumn-leaf:nth-of-type(3){right:5%;top:58%;width:29px;height:29px;color:#c87150;animation-delay:-6s}
 @keyframes autumn-drift{from{transform:translateY(-5px) rotate(-10deg)}to{transform:translateY(8px) rotate(10deg)}}
-@media(max-width:640px){.autumn-leaf:nth-child(1){right:20px;top:10%;width:40px;height:40px;opacity:.7}.autumn-leaf:nth-child(2){right:64px;top:19%;width:24px;height:24px}.autumn-leaf:nth-child(3){right:20px;top:64%;width:22px;height:22px}}
+@media(max-width:640px){.autumn-leaf:nth-of-type(4){right:20px;top:10%;width:40px;height:40px;opacity:.7}.autumn-leaf:nth-of-type(2){right:64px;top:19%;width:24px;height:24px}.autumn-leaf:nth-of-type(3){right:20px;top:64%;width:22px;height:22px}}
 @media(prefers-reduced-motion:reduce){.autumn-leaf{animation:none}}
 
 /* ===== 季節デザイン：ハロウィン（10月のみ） =====
@@ -1462,7 +1469,7 @@ footer a:hover{color:var(--blue)}
 // 既存の色メディアをその場で切り替え、規則の順番・検索・医薬品情報は変更しない。
 (function(){
   const key = "drugSupplyNaviAppearanceV1";
-  const normalize = value => value === "light" || value === "dark" ? value : "system";
+  const normalize = value => value === null ? "light" : value === "light" || value === "dark" ? value : "system";
   const styles = Array.from(document.querySelectorAll("style[data-appearance-scheme]"), element => ({
     element, scheme:element.dataset.appearanceScheme, media:element.media
   }));
@@ -1470,7 +1477,7 @@ footer a:hover{color:var(--blue)}
     element, scheme:element.media.includes("dark") ? "dark" : "light", media:element.media
   }));
   const system = window.matchMedia("(prefers-color-scheme: dark)");
-  let mode = "system", saved = true;
+  let mode = "light", saved = true;
   try{ mode = normalize(localStorage.getItem(key)); }catch(e){ saved = false; }
   function apply(){
     for(const item of styles.concat(metas)){
@@ -1571,6 +1578,7 @@ footer a:hover{color:var(--blue)}
 
 <header id="top">
   <div class="autumn-sky" aria-hidden="true">
+    <svg class="autumn-branch" viewBox="0 0 420 220" aria-hidden="true"><defs><path id="maple-b" d="M0-27 6-14 16-21 14-9 27-10 18-1 26 5 12 7 11 19 4 13 0 29-4 13-11 19-12 7-26 5-18-1-27-10-14-9-16-21-6-14Z"/></defs><g fill="none" stroke="#96653f" stroke-width="3" stroke-linecap="round"><path d="M420 2C337 17 276 41 214 69S101 107 35 110"/><path d="M337 23q-11 32-7 57M275 43q-4 35-19 52M202 73q-13 26-8 48M132 95q-15 20-17 38M383 10q-5 31 10 53"/></g><g fill="#d8542e"><use href="#maple-b" transform="translate(384 49) rotate(23) scale(1.2)"/><use href="#maple-b" transform="translate(329 70) rotate(-12) scale(1.2)"/><use href="#maple-b" transform="translate(257 91) rotate(18) scale(1.03)"/><use href="#maple-b" transform="translate(195 113) rotate(-12) scale(.8)"/></g><g fill="#eb7b33"><use href="#maple-b" transform="translate(410 94) rotate(-10) scale(.9)"/><use href="#maple-b" transform="translate(360 18) rotate(24) scale(1.08)"/><use href="#maple-b" transform="translate(291 27) rotate(-25) scale(.95)"/><use href="#maple-b" transform="translate(224 51) rotate(12) scale(.8)"/><use href="#maple-b" transform="translate(117 125) rotate(25) scale(.7)"/></g><g fill="#f3ad3d"><use href="#maple-b" transform="translate(366 103) rotate(14) scale(.68)"/><use href="#maple-b" transform="translate(289 102) rotate(-20) scale(.73)"/><use href="#maple-b" transform="translate(151 83) rotate(-18) scale(.64)"/></g></svg>
     <svg class="autumn-leaf" viewBox="0 0 64 64"><path fill="currentColor" d="M32 3 37 18 46 10 45 24 60 22 49 32 58 39 43 40 42 54 34 47 32 62 29 47 21 54 20 40 6 39 15 32 4 22 19 24 18 10 27 18Z"/><path d="M32 13v41M32 35 18 25M32 35l14-10" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="1.5"/></svg>
     <svg class="autumn-leaf" viewBox="0 0 64 64"><path fill="currentColor" d="M32 3 37 18 46 10 45 24 60 22 49 32 58 39 43 40 42 54 34 47 32 62 29 47 21 54 20 40 6 39 15 32 4 22 19 24 18 10 27 18Z"/></svg>
     <svg class="autumn-leaf" viewBox="0 0 64 64"><path fill="currentColor" d="M32 3 37 18 46 10 45 24 60 22 49 32 58 39 43 40 42 54 34 47 32 62 29 47 21 54 20 40 6 39 15 32 4 22 19 24 18 10 27 18Z"/></svg>
