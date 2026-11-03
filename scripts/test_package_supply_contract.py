@@ -154,6 +154,19 @@ class PackageSupplyContractTests(unittest.TestCase):
                 self.assertTrue(all('未確認' in p['supply']['note'] for p in target['packages']))
         self.assertEqual(expected, {})
 
+    def test_sawai_memantine_future_depletion_is_not_a_current_stop(self):
+        document = json.loads((Path(__file__).resolve().parents[1] / 'manufacturer_notices.json').read_text())
+        notice = next(n for n in document['notices'] if n['id'] == 'sawai-memantine-od10-package-202610')
+        self.assertEqual((notice['announced_at'], notice['listed_at']), ('2026-10', '2026-10-30'))
+        target, = notice['targets']
+        self.assertEqual(target['yj_code'], '1190018F5150')
+        packages = {p['unified_product_code']: p['supply'] for p in target['packages']}
+        self.assertEqual(packages['080-113171']['status'], 'limited')
+        for code in ('080-113188', '080-113140'):
+            self.assertEqual(packages[code]['status'], 'unconfirmed')
+            self.assertEqual(packages[code]['plans'], [{'event': 'stock_depletion', 'timing': '2027年1月見込み'}])
+            self.assertIn('未確認', packages[code]['note'])
+
     def test_manual_mode_does_not_relax_source_and_date_validation(self):
         document, rows = self.fixture()
         notice = document['notices'][0]; notice['collection_mode'] = 'manual'
