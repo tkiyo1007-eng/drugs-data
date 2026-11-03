@@ -2322,6 +2322,207 @@
         "供給再開時期は案内時点で未定です。最新の包装別状況や受注可否はメーカー・卸にご確認ください。",
         "この案内は自動追跡対象外です。"
       ]
+    },
+    {
+      "id": "sawai-candesartan-package-plan-202610",
+      "maker": "沢井製薬",
+      "title": "カンデサルタン錠2mg・4mg・8mg・12mg「サワイ」の供給に関するお詫びとお願い",
+      "url": "https://med.sawai.co.jp/file/pr27_1646_2.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-20",
+      "verified_at": "2026-11-03",
+      "content_updated_at": "2026-11-03",
+      "sha256": "cb1fcef7d778598dd44578ea65ee59772eba3c2a4f4bd937acae3dbe6712c7df",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "2026年10月のメーカー案内では、製造工場の生産能力の逼迫により安定供給に支障が生じ、在庫消尽後に供給を一時停止する予定と説明しています。",
+      "targets": [
+        {
+          "yj_code": "2149040F1239",
+          "product_name": "カンデサルタン錠２ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080-004912",
+              "gs1_sales": "14987080004919",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（在庫消尽まで）",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年4月見込み"
+                  }
+                ],
+                "note": "2026年10月の案内では在庫消尽後に供給を一時停止予定。実際の消尽・出荷停止・現在の包装別状況は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149040F2235",
+          "product_name": "カンデサルタン錠４ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080-005117",
+              "gs1_sales": "14987080005114",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（在庫消尽まで）",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年5月見込み"
+                  }
+                ],
+                "note": "2026年10月の案内では在庫消尽後に供給を一時停止予定。実際の消尽・出荷停止・現在の包装別状況は未確認です。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "080-005124",
+              "gs1_sales": "14987080005121",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（在庫消尽まで）",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年5月見込み"
+                  }
+                ],
+                "note": "2026年10月の案内では在庫消尽後に供給を一時停止予定。実際の消尽・出荷停止・現在の包装別状況は未確認です。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "080-005155",
+              "gs1_sales": "14987080005152",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（在庫消尽まで）",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年7月見込み"
+                  }
+                ],
+                "note": "2026年10月の案内では在庫消尽後に供給を一時停止予定。実際の消尽・出荷停止・現在の包装別状況は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149040F3231",
+          "product_name": "カンデサルタン錠８ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080-005315",
+              "gs1_sales": "14987080005312",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（在庫消尽まで）",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年5月見込み"
+                  }
+                ],
+                "note": "2026年10月の案内では在庫消尽後に供給を一時停止予定。実際の消尽・出荷停止・現在の包装別状況は未確認です。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "080-005322",
+              "gs1_sales": "14987080005329",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（在庫消尽まで）",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年5月見込み"
+                  }
+                ],
+                "note": "2026年10月の案内では在庫消尽後に供給を一時停止予定。実際の消尽・出荷停止・現在の包装別状況は未確認です。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "080-005353",
+              "gs1_sales": "14987080005350",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（在庫消尽まで）",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年8月見込み"
+                  }
+                ],
+                "note": "2026年10月の案内では在庫消尽後に供給を一時停止予定。実際の消尽・出荷停止・現在の包装別状況は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149040F4238",
+          "product_name": "カンデサルタン錠１２ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080-005414",
+              "gs1_sales": "14987080005411",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（在庫消尽まで）",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年4月見込み"
+                  }
+                ],
+                "note": "2026年10月の案内では在庫消尽後に供給を一時停止予定。実際の消尽・出荷停止・現在の包装別状況は未確認です。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "products": [],
+          "cautions": [
+            "メーカーの参考製品は原文をご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽は販売予測と在庫数量に基づく見込みであり、実際の消尽・供給停止を確認したものではありません。",
+        "供給再開時期は案内時点で未定です。最新の包装別状況や受注可否はメーカー・卸にご確認ください。",
+        "この案内は自動追跡対象外です。"
+      ]
     }
   ]
 }
