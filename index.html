@@ -5783,8 +5783,14 @@ function openDetail(d, opts={}){
   }
   const manufacturerNotes = document.getElementById("mManufacturerNotes");
   const verifiedNotices = manufacturerNoticesFor(d);
-  manufacturerNotes.innerHTML = verifiedNotices.map(({notice,target})=>manufacturerNoticeHTML(notice, target, d.yj)).join("");
-  manufacturerNotes.hidden = !verifiedNotices.length;
+  const updatedNotices = manufacturerNoticesFor(d, true).filter(({notice})=>manufacturerNoticeChanged(notice));
+  // 原典更新時は古い包装・候補を表示せず、対象品目だけに再確認先を示す。
+  const pendingNotices = updatedNotices.map(({notice})=>
+    `<section class="manufacturer-note"><h4>${esc(notice.title)}</h4>`
+      + `<p>メーカー原典の更新を検知したため、包装・原因・参考候補は再確認待ちです。最新の案内は原典をご確認ください。</p>`
+      + `<a class="maker-link" href="${esc(manufacturerSourceURL(notice.url))}" target="_blank" rel="noopener" data-dsn-event="official-source-open">${esc(notice.maker)}の原典を確認</a></section>`).join("");
+  manufacturerNotes.innerHTML = verifiedNotices.map(({notice,target})=>manufacturerNoticeHTML(notice, target, d.yj)).join("") + pendingNotices;
+  manufacturerNotes.hidden = !verifiedNotices.length && !updatedNotices.length;
   const packageJump = document.getElementById("mPackageJump");
   const referenceJump = document.getElementById("mReferenceJump");
   const relatedJump = document.getElementById("mRelatedJump");
