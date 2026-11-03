@@ -1482,6 +1482,57 @@
       "reason": "メーカーの2026年10月1日更新の一覧には、対象製品の包装ごとの出荷対応と販売中止に関する記載があります。",
       "targets": [
         {
+          "yj_code": "2491001M3044",
+          "product_name": "カルナクリンカプセル２５",
+          "maker": "三和化学研究所",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル（10カプセル×10）",
+              "unified_product_code": "086-151009",
+              "supply": {
+                "status": "stopped",
+                "status_text": "供給停止",
+                "plans": [],
+                "note": "2026年10月1日の一覧では供給停止、販売中止・経過措置期間終了は2027年3月末日予定と記載。現在の状況は未確認です。"
+              }
+            },
+            {
+              "package": "PTP1000カプセル（10カプセル×100）",
+              "unified_product_code": "086-151023",
+              "supply": {
+                "status": "normal",
+                "status_text": "通常出荷",
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "在庫消尽次第"
+                  }
+                ],
+                "note": "2026年10月1日の一覧では通常出荷、在庫消尽次第販売中止。経過措置期間終了は2027年3月末日予定。現在の在庫・出荷状況は未確認です。"
+              }
+            },
+            {
+              "package": "バラ1000カプセル",
+              "unified_product_code": "086-151016",
+              "supply": {
+                "status": "normal",
+                "status_text": "通常出荷",
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "在庫消尽次第"
+                  }
+                ],
+                "note": "2026年10月1日の一覧では通常出荷、在庫消尽次第販売中止。経過措置期間終了は2027年3月末日予定。現在の在庫・出荷状況は未確認です。"
+              }
+            }
+          ]
+        },
+        {
           "yj_code": "2149044F2101",
           "product_name": "オルメサルタン錠２０ｍｇ「三和」",
           "maker": "三和化学研究所",

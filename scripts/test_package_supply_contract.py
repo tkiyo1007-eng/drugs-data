@@ -128,6 +128,17 @@ class PackageSupplyContractTests(unittest.TestCase):
         self.assertEqual(packages['14987028209826']['status'], 'limited')
         self.assertTrue(all('現在の包装別状況は未確認' in p['note'] for p in packages.values()))
 
+    def test_kallikrein_packages_preserve_stopped_and_planned_discontinuation(self):
+        document = json.loads((Path(__file__).resolve().parents[1] / 'manufacturer_notices.json').read_text())
+        notice = next(n for n in document['notices'] if n['id'] == 'sanwa-packages-distribution-list-20261001')
+        target = next(t for t in notice['targets'] if t['yj_code'] == '2491001M3044')
+        packages = {p['unified_product_code']: p['supply'] for p in target['packages']}
+        self.assertEqual(packages['086-151009']['status'], 'stopped')
+        for code in ('086-151023', '086-151016'):
+            self.assertEqual(packages[code]['status'], 'normal')
+            self.assertEqual(packages[code]['plans'], [{'event': 'discontinuation', 'timing': '在庫消尽次第'}])
+        self.assertTrue(all('未確認' in p['note'] for p in packages.values()))
+
     def test_manual_mode_does_not_relax_source_and_date_validation(self):
         document, rows = self.fixture()
         notice = document['notices'][0]; notice['collection_mode'] = 'manual'
