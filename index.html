@@ -2259,6 +2259,16 @@ html.season-autumn .autumn-sky{display:none}
         </div>
         <p class="topic-src">出典：<a href="https://www.eapharma.co.jp/hubfs/medical/news/2026/MVC-H-2-PM-05818.pdf" target="_blank" rel="noopener">EAファーマ：供給案内（2026年10月改訂）</a> ／ <a href="https://www.eapharma.co.jp/hubfs/medical/news/2026/MVC-H-1-PM-05483.pdf" target="_blank" rel="noopener">EAファーマ：持田製薬との販売提携終了（2026年4月）</a></p>
       </article>
+      <article id="antebateSupplyReference" hidden data-reference-title="アンテベートローション：限定出荷の理由と参考候補">
+        <div class="supply-reference-copy featured-research-copy">
+          <p>鳥居薬品の2024年12月の案内に基づく参考情報です。最新の供給区分は上の厚労省公表データをご覧ください。メーカーの後続案内・現在の包装別在庫は未確認です。</p>
+          <p><strong>理由：</strong>当時、想定を上回る注文が続き、安定供給に支障が生じる可能性があるとして限定出荷を案内しました。解除時期は目途が立ち次第案内するとしています。</p>
+          <p><strong>対象包装：</strong>通知は10g×10本・10g×50本を対象としています。通知時点の案内であり、現在の包装別の在庫・受注可否は確認できていません。</p>
+          <p><strong>メーカーが挙げた参考候補：</strong><a href="#item=2646730Q1050">ベタメタゾン酪酸エステルプロピオン酸エステルローション0.05%「MYK」</a>。2024年12月の案内で示された同成分・同濃度のローションです。最新の供給区分は品目詳細で確認でき、卸在庫・受注可否は別途確認が必要です。</p>
+          <p>同成分でも製剤・添加物などが異なる場合があります。適応、禁忌、患者の状態と電子添文を医師・薬剤師が確認し、自己判断で切り替えないでください。</p>
+        </div>
+        <p class="topic-src">出典：<a href="https://www.gifu-upharm.jp/di/salesupply/salesupply2g/ss2101062412.pdf" target="_blank" rel="noopener">鳥居薬品：2024年12月の限定出荷案内（岐阜県病院薬剤師会掲載）</a></p>
+      </article>
       <article id="fentosSupplyReference" hidden data-reference-title="フェントステープ：共同販売終了と包装の確認">
         <div class="supply-reference-copy">
           <p class="topic-lede">久光製薬・協和キリンの2026年10月の案内（日本緩和医療学会が10月15日に掲載）。案内時点の予定と、現在の供給状況は別です。</p>
@@ -2344,7 +2354,7 @@ html.season-autumn .autumn-sky{display:none}
 <section id="trending" class="reveal">
   <p class="sec-eyebrow">TRENDING</p>
   <h2>最近お問い合わせの多い製品</h2>
-      <p class="sec-lede">お問い合わせが増えている製品をまとめました。複数の規格・メーカーがある製品は、製品一覧を開いて品目ごとに確認できます。</p>
+      <p class="sec-lede">お問い合わせが増えている製品をまとめました。複数の規格・メーカーがある製品は、製品一覧を開いて品目ごとに確認できます。品目詳細では公表理由と、確認できたメーカー資料・参考候補をご覧いただけます。</p>
   <div class="trending-list glass" id="trendingList"></div>
   <nav aria-label="品目別の供給情報">
     <p class="topic-note">品目別ページで供給状況・公表理由・解除見込みを確認</p>
@@ -2678,7 +2688,8 @@ html.season-autumn .autumn-sky{display:none}
     <p class="modal-maker" id="mMaker"></p>
     <nav class="detail-shortcuts" id="mDetailShortcuts" aria-label="品目詳細内の移動" hidden>
       <button type="button" id="mPackageJump" hidden>包装別の案内へ ↓</button>
-      <button type="button" id="mReferenceJump" hidden>メーカー補足へ ↓</button>
+      <button type="button" id="mReferenceJump" hidden>原因・参考候補へ ↓</button>
+      <button type="button" id="mRelatedJump" hidden>同成分の候補へ ↓</button>
     </nav>
     <div class="modal-note" id="mDataProvenance" role="group" aria-labelledby="mDataProvenanceTitle">
       <h4 id="mDataProvenanceTitle">供給区分の出典・日付</h4>
@@ -5445,6 +5456,7 @@ function supplyReferenceId(d){
     '2655712M1025':['ルリコン軟膏1%','サンファーマ','luliconSupplyReference'],
     '2655712N1039':['ルリコナゾールクリーム1%「イワキ」','岩城製薬','luliconazoleSupplyReference'],
     '2655712M1033':['ルリコナゾール軟膏1%「イワキ」','岩城製薬','luliconazoleSupplyReference'],
+    '2646730Q1026':['アンテベートローション0.05%','鳥居薬品','antebateSupplyReference'],
   };
   const ref = refs[d?.yj];
   return ref && normalize(d.n) === ref[0] && (normalize(d.m) === ref[1] || (ref[2] === "fentosSupplyReference" && normalize(d.m) === "久光製薬")) ? ref[2] : null;
@@ -5767,9 +5779,11 @@ function openDetail(d, opts={}){
   manufacturerNotes.hidden = !verifiedNotices.length;
   const packageJump = document.getElementById("mPackageJump");
   const referenceJump = document.getElementById("mReferenceJump");
+  const relatedJump = document.getElementById("mRelatedJump");
   packageJump.hidden = !manufacturerNotes.querySelector(".package-supply h5");
   referenceJump.hidden = document.getElementById("mSupplyReference").hidden;
-  document.getElementById("mDetailShortcuts").hidden = packageJump.hidden && referenceJump.hidden;
+  relatedJump.hidden = $mRel.hidden;
+  document.getElementById("mDetailShortcuts").hidden = packageJump.hidden && referenceJump.hidden && relatedJump.hidden;
 
   document.getElementById("mNote").textContent = d.delist
     ? "※ 厚生労働省の公表データ上、薬価削除予定の区分または経過措置期限が収録されています。販売・製造の終了や終了日とは別の情報です。薬価の扱い・期限は厚生労働省、販売予定はメーカー原文でそれぞれ確認してください。"
@@ -5847,6 +5861,7 @@ function jumpInsideDetail(selector){
 }
 document.getElementById("mPackageJump").addEventListener("click", ()=>jumpInsideDetail("#mManufacturerNotes .package-supply h5"));
 document.getElementById("mReferenceJump").addEventListener("click", ()=>jumpInsideDetail("#mSupplyReference h4"));
+document.getElementById("mRelatedJump").addEventListener("click", ()=>jumpInsideDetail("#mRelated .rel-title"));
 $mClose.addEventListener("click", ()=>closeDetail());
 $mBack.addEventListener("click", e=>{ if(e.target===$mBack) closeDetail(); });
 document.addEventListener("keydown", e=>{
@@ -6135,19 +6150,21 @@ function renderTrending(){
     'insulin-lispro-bs-solostar':'2492422G1023',
     'predonine-soluble-10mg':'2456405D1027',
     'predonine-soluble-20mg':'2456405D2023',
+    'antebate-lotion':'2646730Q1026',
   };
   // Webの注目一覧だけから除外。共通データ・通常検索・既存の詳細URLは維持する。
   const hidden = new Set(["caduet", "caduet-1", "caduet-2", "caduet-3", "caduet-4",
     "gentacin-ointment", "mounjaro-injection", "loxoprofen-sodium-tape", "celecox-tablets", "concerta-tablets"]);
   // Webの入口だけを製品群へまとめる。共通データや規格別の既存URLは変更しない。
   const entries = TRENDING.filter(t=>!hidden.has(t.slug)
-    && !/^amaluet(?:-[1-4])?$/.test(t.slug) && t.slug !== "movicol" && t.slug !== "hilnamin" && t.slug !== "fentos");
+    && !/^amaluet(?:-[1-4])?$/.test(t.slug) && t.slug !== "movicol" && t.slug !== "hilnamin" && t.slug !== "fentos" && t.slug !== "antebate-lotion");
   entries.splice(Math.min(1, entries.length), 0,
     {slug:"movicol",label:"モビコール配合内用剤ＬＤ・ＨＤ",q:"モビコール"},
     {slug:"hilnamin",label:"ヒルナミン",q:"ヒルナミン"},
     {slug:"amaluet",label:"アマルエット配合錠１番〜４番",q:"アマルエット配合錠"});
   entries.push({slug:"teramuro",label:"テラムロ配合錠",q:"テラムロ"},
-    {slug:"fentos",label:"フェントステープ",q:"フェントステープ"});
+    {slug:"fentos",label:"フェントステープ",q:"フェントステープ"},
+    {slug:"antebate-lotion",label:"アンテベートローション０．０５％",q:"アンテベートローション"});
   const groups = {
     movicol:/^モビコール配合内用剤(?:LD|HD)$/,
     hilnamin:/^ヒルナミン(?:錠|細粒|散)/,
