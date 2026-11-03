@@ -1919,6 +1919,115 @@
         "2026年2月のメーカー案内です。現在の包装別の出荷状況は確認できていません。",
         "この案内は自動追跡対象外です。最新の包装別状況や受注可否はメーカー・卸にご確認ください。"
       ]
+    },
+    {
+      "id": "sanwa-packages-telmisartan-losarhido-20261001",
+      "maker": "三和化学研究所",
+      "title": "医薬品出荷状況一覧（2026年10月1日更新）",
+      "url": "https://med.skk-net.com/significant/item/distribution-list-2610.pdf",
+      "announced_at": "2026-10-01",
+      "verified_at": "2026-11-03",
+      "content_updated_at": "2026-11-03",
+      "sha256": "ab703f0d6aec6578d3adbc9f68bd76057de5a85b749927cbcad247830a95667d",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "メーカーの2026年10月1日更新の一覧には、対象製品の包装ごとの出荷対応と一部包装の販売中止に関する記載があります。",
+      "targets": [
+        {
+          "yj_code": "2149042F1165",
+          "product_name": "テルミサルタン錠２０ｍｇ「三和」",
+          "maker": "三和化学研究所",
+          "scope": "package",
+          "source_pages": [
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "086-260237",
+              "supply": {
+                "status": "normal",
+                "status_text": "通常出荷",
+                "plans": [],
+                "note": "2026年10月1日の一覧では通常出荷。現在の在庫・出荷状況は未確認です。"
+              }
+            },
+            {
+              "package": "PTP140錠（14錠×10）",
+              "unified_product_code": "086-260244",
+              "supply": {
+                "status": "normal",
+                "status_text": "通常出荷",
+                "plans": [],
+                "note": "2026年10月1日の一覧では通常出荷。現在の在庫・出荷状況は未確認です。"
+              }
+            },
+            {
+              "package": "PTP700錠（14錠×50）",
+              "unified_product_code": "086-260251",
+              "supply": {
+                "status": "stopped",
+                "status_text": "供給停止",
+                "plans": [],
+                "note": "2026年10月1日の一覧では出荷停止・供給停止、一部包装販売中止。現在の在庫・出荷状況は未確認です。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "086-260268",
+              "supply": {
+                "status": "stopped",
+                "status_text": "供給停止",
+                "plans": [],
+                "note": "2026年10月1日の一覧では出荷停止・供給停止、一部包装販売中止。現在の在庫・出荷状況は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149110F1236",
+          "product_name": "ロサルヒド配合錠ＬＤ「三和」",
+          "maker": "三和化学研究所",
+          "scope": "package",
+          "source_pages": [
+            3
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "086-678506",
+              "supply": {
+                "status": "normal",
+                "status_text": "通常出荷",
+                "plans": [],
+                "note": "2026年10月1日の一覧では通常出荷。現在の在庫・出荷状況は未確認です。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "086-678520",
+              "supply": {
+                "status": "stopped",
+                "status_text": "供給停止",
+                "plans": [],
+                "note": "2026年10月1日の一覧では出荷停止・供給停止、一部包装販売中止。現在の在庫・出荷状況は未確認です。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "products": [],
+          "cautions": [
+            "包装別の案内はメーカー原文をご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "表示は2026年10月1日更新の一覧に基づきます。その後の包装別の状況や在庫・受注可否は確認できていません。",
+        "この案内は自動追跡対象外です。厚労省の品目単位の供給区分とは別の情報です。"
+      ]
     }
   ]
 }

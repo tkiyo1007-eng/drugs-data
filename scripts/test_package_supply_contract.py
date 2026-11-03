@@ -139,6 +139,21 @@ class PackageSupplyContractTests(unittest.TestCase):
             self.assertEqual(packages[code]['plans'], [{'event': 'discontinuation', 'timing': '在庫消尽次第'}])
         self.assertTrue(all('未確認' in p['note'] for p in packages.values()))
 
+    def test_sanwa_tele_and_losarhido_packages_keep_source_scope(self):
+        document = json.loads((Path(__file__).resolve().parents[1] / 'manufacturer_notices.json').read_text())
+        notice = next(n for n in document['notices'] if n['id'] == 'sanwa-packages-telmisartan-losarhido-20261001')
+        self.assertNotIn('2027年3月', ' '.join(notice['cautions']))
+        expected = {
+            '2149042F1165': {'086-260237': 'normal', '086-260244': 'normal', '086-260251': 'stopped', '086-260268': 'stopped'},
+            '2149110F1236': {'086-678506': 'normal', '086-678520': 'stopped'},
+        }
+        for target in notice['targets']:
+            if target['yj_code'] in expected:
+                packages = {p['unified_product_code']: p['supply']['status'] for p in target['packages']}
+                self.assertEqual(packages, expected.pop(target['yj_code']))
+                self.assertTrue(all('未確認' in p['supply']['note'] for p in target['packages']))
+        self.assertEqual(expected, {})
+
     def test_manual_mode_does_not_relax_source_and_date_validation(self):
         document, rows = self.fixture()
         notice = document['notices'][0]; notice['collection_mode'] = 'manual'
