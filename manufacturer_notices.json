@@ -2674,6 +2674,78 @@
         "消尽・供給停止・出荷再開はメーカー案内時点の予定で、実施を確認したものではありません。",
         "この案内は自動追跡対象外です。最新の包装別状況や受注可否はメーカー・卸にご確認ください。"
       ]
+    },
+    {
+      "id": "sawai-bazedoxifene-package-202604",
+      "maker": "沢井製薬",
+      "title": "バゼドキシフェン錠20mg「サワイ」一部包装販売中止のお知らせ",
+      "url": "https://med.sawai.co.jp/file/pr28_4695_2.pdf",
+      "announced_at": "2026-04",
+      "listed_at": "2026-04-08",
+      "verified_at": "2026-11-03",
+      "content_updated_at": "2026-11-03",
+      "sha256": "02233dbfdd9ef8a840cca47f788d49db5f1c977e7c09b50312102eb9185585fe",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "メーカーは安定供給体制の構築と生産効率改善のため、一部包装を在庫消尽後に販売中止すると案内しています。",
+      "targets": [
+        {
+          "yj_code": "3999027F1039",
+          "product_name": "バゼドキシフェン錠２０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "080-199175",
+              "gs1_sales": "14987080199172",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月見込み"
+                  },
+                  {
+                    "event": "discontinuation",
+                    "timing": "在庫消尽をもって販売中止予定"
+                  }
+                ],
+                "note": "2026年4月の案内に基づく見込みです。実際の在庫消尽や販売中止は未確認です。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080-199113",
+              "gs1_sales": "14987080199110",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2026年4月の案内では販売継続包装。現在の包装別の受注・出荷状況は未確認です。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "080-199120",
+              "gs1_sales": "14987080199127",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2026年4月の案内では販売継続包装。現在の包装別の受注・出荷状況は未確認です。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "在庫消尽時期は2026年4月の販売予測と在庫数量に基づく見込みで、実際の消尽・販売中止を確認したものではありません。",
+        "販売継続包装の記載は案内時点の情報で、現在の包装別状況は未確認です。",
+        "この案内は自動追跡対象外です。最新の包装別状況や受注可否はメーカー・卸にご確認ください。"
+      ]
     }
   ]
 }

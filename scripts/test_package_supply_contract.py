@@ -226,6 +226,25 @@ class PackageSupplyContractTests(unittest.TestCase):
                         self.assertEqual(package['supply']['plans'][1], {'event': 'shipment_resumption', 'timing': '2026年12月下旬予定'})
         self.assertEqual(expected, {})
 
+    def test_bazedoxifene_preserves_package_forecast_and_uncertainty(self):
+        document = json.loads((Path(__file__).resolve().parents[1] / 'manufacturer_notices.json').read_text())
+        notice = next(n for n in document['notices'] if n['id'] == 'sawai-bazedoxifene-package-202604')
+        self.assertEqual((notice['announced_at'], notice['listed_at'], notice['collection_mode']),
+                         ('2026-04', '2026-04-08', 'manual'))
+        target, = notice['targets']
+        self.assertEqual(target['yj_code'], '3999027F1039')
+        packages = {p['package']: p['supply'] for p in target['packages']}
+        self.assertEqual(set(packages), {'PTP140錠', 'PTP100錠', 'PTP500錠'})
+        self.assertEqual(packages['PTP140錠']['plans'], [
+            {'event': 'stock_depletion', 'timing': '2026年11月見込み'},
+            {'event': 'discontinuation', 'timing': '在庫消尽をもって販売中止予定'}])
+        for name, supply in packages.items():
+            self.assertEqual(supply['status'], 'unconfirmed')
+            self.assertIn('未確認', supply['note'])
+            if name != 'PTP140錠':
+                self.assertIn('販売継続包装', supply['note'])
+                self.assertEqual(supply['plans'], [])
+
     def test_manual_mode_does_not_relax_source_and_date_validation(self):
         document, rows = self.fixture()
         notice = document['notices'][0]; notice['collection_mode'] = 'manual'
