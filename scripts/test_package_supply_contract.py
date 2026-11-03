@@ -187,6 +187,24 @@ class PackageSupplyContractTests(unittest.TestCase):
                     self.assertIn('未確認', supply['note'])
         self.assertEqual(expected, {})
 
+    def test_sawai_candesartan_forecasts_match_each_package(self):
+        document = json.loads((Path(__file__).resolve().parents[1] / 'manufacturer_notices.json').read_text())
+        notice = next(n for n in document['notices'] if n['id'] == 'sawai-candesartan-package-plan-202610')
+        expected = {
+            '080-004912': '2027年4月見込み', '080-005117': '2027年5月見込み',
+            '080-005124': '2027年5月見込み', '080-005155': '2027年7月見込み',
+            '080-005315': '2027年5月見込み', '080-005322': '2027年5月見込み',
+            '080-005353': '2027年8月見込み', '080-005414': '2027年4月見込み',
+        }
+        self.assertEqual({t['yj_code'] for t in notice['targets']}, {'2149040F1239', '2149040F2235', '2149040F3231', '2149040F4238'})
+        for target in notice['targets']:
+            for package in target['packages']:
+                supply = package['supply']
+                self.assertEqual(supply['status'], 'limited')
+                self.assertEqual(supply['plans'], [{'event': 'stock_depletion', 'timing': expected.pop(package['unified_product_code'])}])
+                self.assertIn('未確認', supply['note'])
+        self.assertEqual(expected, {})
+
     def test_manual_mode_does_not_relax_source_and_date_validation(self):
         document, rows = self.fixture()
         notice = document['notices'][0]; notice['collection_mode'] = 'manual'
