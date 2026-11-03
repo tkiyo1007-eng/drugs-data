@@ -2108,6 +2108,220 @@
         "2026年10月のメーカー案内に基づく情報です。在庫消尽は見込みであり、実施済みとは限りません。",
         "この案内は自動追跡対象外です。最新の包装別状況や受注可否はメーカー・卸にご確認ください。"
       ]
+    },
+    {
+      "id": "sawai-irbesartan-package-plan-202610",
+      "maker": "沢井製薬",
+      "title": "イルベサルタン錠50mg・100mg・200mg「サワイ」の供給に関するお詫びとお願い",
+      "url": "https://med.sawai.co.jp/file/pr27_4601_2.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-20",
+      "verified_at": "2026-11-03",
+      "content_updated_at": "2026-11-03",
+      "sha256": "7f5487c3941ef3201a7616df3c55ae97a5cd5bd97291eebc12f922c0311711e9",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "2026年10月のメーカー案内では、製造工場の生産能力の逼迫により安定供給に支障が生じ、在庫消尽後に供給を一時停止する予定と説明しています。",
+      "targets": [
+        {
+          "yj_code": "2149046F1104",
+          "product_name": "イルベサルタン錠５０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080-210115",
+              "gs1_sales": "14987080210112",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（在庫消尽まで）",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年1月見込み"
+                  }
+                ],
+                "note": "2026年10月の案内では在庫消尽後に供給を一時停止予定。実際の消尽・出荷停止・現在の包装別状況は未確認です。"
+              }
+            },
+            {
+              "package": "バラ200錠",
+              "unified_product_code": "080-210146",
+              "gs1_sales": "14987080210143",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（在庫消尽まで）",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年4月見込み"
+                  }
+                ],
+                "note": "2026年10月の案内では在庫消尽後に供給を一時停止予定。実際の消尽・出荷停止・現在の包装別状況は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149046F2100",
+          "product_name": "イルベサルタン錠１００ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080-211112",
+              "gs1_sales": "14987080211119",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（在庫消尽まで）",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年12月見込み"
+                  }
+                ],
+                "note": "2026年10月の案内では在庫消尽後に供給を一時停止予定。実際の消尽・出荷停止・現在の包装別状況は未確認です。"
+              }
+            },
+            {
+              "package": "バラ200錠",
+              "unified_product_code": "080-211143",
+              "gs1_sales": "14987080211140",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（在庫消尽まで）",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年7月見込み"
+                  }
+                ],
+                "note": "2026年10月の案内では在庫消尽後に供給を一時停止予定。実際の消尽・出荷停止・現在の包装別状況は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149046F3107",
+          "product_name": "イルベサルタン錠２００ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080-212119",
+              "gs1_sales": "14987080212116",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（在庫消尽まで）",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年2月見込み"
+                  }
+                ],
+                "note": "2026年10月の案内では在庫消尽後に供給を一時停止予定。実際の消尽・出荷停止・現在の包装別状況は未確認です。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "products": [],
+          "cautions": [
+            "メーカーの参考製品は原文をご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽は販売予測と在庫数量に基づく見込みであり、実際の消尽・供給停止を確認したものではありません。",
+        "供給再開時期は案内時点で未定です。最新の包装別状況や受注可否はメーカー・卸にご確認ください。",
+        "この案内は自動追跡対象外です。"
+      ]
+    },
+    {
+      "id": "sawai-loratadine-package-plan-202610",
+      "maker": "沢井製薬",
+      "title": "ロラタジンDS1％「サワイ」の供給に関するお詫びとお願い",
+      "url": "https://med.sawai.co.jp/file/pr27_1482_2.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-20",
+      "verified_at": "2026-11-03",
+      "content_updated_at": "2026-11-03",
+      "sha256": "9bd4150c092ea399c47c1cb2c8619d536a0e9b94a1c63e2ac3f4e26127bd6d41",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "2026年10月のメーカー案内では、製造工場の生産能力の逼迫により安定供給に支障が生じ、在庫消尽後に供給を一時停止する予定と説明しています。",
+      "targets": [
+        {
+          "yj_code": "4490027R1061",
+          "product_name": "ロラタジンＤＳ１％「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "0.5g×150包",
+              "unified_product_code": "080-308010",
+              "gs1_sales": "14987080308017",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（在庫消尽まで）",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年2月見込み"
+                  }
+                ],
+                "note": "2026年10月の案内では在庫消尽後に供給を一時停止予定。実際の消尽・出荷停止・現在の包装別状況は未確認です。"
+              }
+            },
+            {
+              "package": "バラ100g",
+              "unified_product_code": "080-308041",
+              "gs1_sales": "14987080308048",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（在庫消尽まで）",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年6月見込み"
+                  }
+                ],
+                "note": "2026年10月の案内では在庫消尽後に供給を一時停止予定。実際の消尽・出荷停止・現在の包装別状況は未確認です。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "products": [],
+          "cautions": [
+            "メーカーの参考製品は原文をご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽は販売予測と在庫数量に基づく見込みであり、実際の消尽・供給停止を確認したものではありません。",
+        "供給再開時期は案内時点で未定です。最新の包装別状況や受注可否はメーカー・卸にご確認ください。",
+        "この案内は自動追跡対象外です。"
+      ]
     }
   ]
 }
