@@ -1,5 +1,7 @@
 import csv
+import contextlib
 import datetime
+import io
 import json
 import os
 import tempfile
@@ -539,7 +541,12 @@ class AnnouncementMatchingTests(unittest.TestCase):
                  mock.patch.object(mod, "load_manual_announcements", return_value=({}, set(), [])), \
                  mock.patch.object(mod, "jst_today", return_value=datetime.date(2026, 10, 14)), \
                  mock.patch.object(mod.sys, "argv", ["fetch", csv_path, output, "2", "0"]):
-                mod.main()
+                # 合成障害のActions警告を実運用の障害として注釈表示させない。
+                # 本番コードの警告は捕捉した内容を検証し、変更しない。
+                stderr = io.StringIO()
+                with contextlib.redirect_stderr(stderr):
+                    mod.main()
+            self.assertIn("::warning title=メーカー案内収集失敗::parse_kemifa: TLS期限切れ", stderr.getvalue())
             with open(output, encoding="utf-8") as handle:
                 current = json.load(handle)
             self.assertEqual(current[bad], old_bad)
