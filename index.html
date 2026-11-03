@@ -1690,7 +1690,7 @@ html.season-autumn .autumn-sky{display:none}
   <h3 id="trendingHeading">最近お問い合わせの多い製品</h3>
       <p class="trending-intro">製品名から供給状況や原因・参考候補を確認できます。</p>
   <div class="trending-list" id="trendingList"></div>
-  <button type="button" id="trendingToggle" class="trending-toggle" aria-expanded="false" aria-controls="trendingList">ほかの注目製品を見る</button>
+  <button type="button" id="trendingToggle" class="trending-toggle" aria-expanded="false" aria-controls="trendingList">ほかの製品を見る</button>
   <nav aria-label="品目別の供給情報">
     <p class="topic-note">品目別ページで供給状況・公表理由・解除見込みを確認</p>
     <ul class="trending-page-links">
@@ -6246,7 +6246,7 @@ renderTrending();
 document.getElementById("trendingToggle").addEventListener("click", e=>{
   const expanded = e.currentTarget.getAttribute("aria-expanded") !== "true";
   e.currentTarget.setAttribute("aria-expanded", String(expanded));
-  e.currentTarget.textContent = expanded ? "注目製品を閉じる" : "ほかの注目製品を見る";
+  e.currentTarget.textContent = expanded ? "製品を閉じる" : "ほかの製品を見る";
   document.getElementById("trendingList").classList.toggle("show-all", expanded);
   document.getElementById("trending").classList.toggle("expanded", expanded);
 });
