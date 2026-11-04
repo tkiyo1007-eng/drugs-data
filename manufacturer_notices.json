@@ -3097,6 +3097,327 @@
         "この案内は自動追跡対象外です。",
         "メーカー在庫終了予定は流通状況により変動する場合があります。"
       ]
+    },
+    {
+      "id": "dsep-silodosin-package-discontinuation-202607",
+      "maker": "第一三共エスファ",
+      "title": "シロドシン錠・OD錠「DSEP」包装容量販売終了のご案内",
+      "url": "https://med.daiichisankyo-ep.co.jp/information/files/2237/EPURAG1L01301-1.pdf",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-16",
+      "verified_at": "2026-11-05",
+      "content_updated_at": "2026-11-05",
+      "sha256": "8da748d009b8f6614b3598bf933526da914b8ab0f74c091873ebadaffbca16ae",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "メーカーは対象製品の一部包装容量について、在庫消尽をもって販売を終了すると案内しています。",
+      "targets": [
+        {
+          "yj_code": "2590010F1031",
+          "product_name": "シロドシン錠２ｍｇ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP 140錠（14錠×10）",
+              "unified_product_code": "081-187638",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年10月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 500錠（10錠×50）",
+              "unified_product_code": "081-187645",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年9月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 700錠（14錠×50）",
+              "unified_product_code": "081-187652",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年11月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "プラスチックボトル・バラ 500錠",
+              "unified_product_code": "081-187676",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2028年2月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 100錠（10錠×10）",
+              "unified_product_code": "081-187621",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは販売継続包装として記載。現在の出荷対応・受注可否は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2590010F2038",
+          "product_name": "シロドシン錠４ｍｇ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP 140錠（14錠×10）",
+              "unified_product_code": "081-187706",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年3月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 500錠（10錠×50）",
+              "unified_product_code": "081-187713",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年7月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 700錠（14錠×50）",
+              "unified_product_code": "081-187720",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年3月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 100錠（10錠×10）",
+              "unified_product_code": "081-187690",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは販売継続包装として記載。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "プラスチックボトル・バラ 500錠",
+              "unified_product_code": "081-187744",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは販売継続包装として記載。現在の出荷対応・受注可否は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2590010F3034",
+          "product_name": "シロドシンＯＤ錠２ｍｇ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP 140錠（14錠×10）",
+              "unified_product_code": "081-187775",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年7月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 500錠（10錠×50）",
+              "unified_product_code": "081-187782",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2028年6月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 700錠（14錠×50）",
+              "unified_product_code": "081-187799",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年12月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "プラスチックボトル・バラ 500錠",
+              "unified_product_code": "081-187812",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年7月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 100錠（10錠×10）",
+              "unified_product_code": "081-187768",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは販売継続包装として記載。現在の出荷対応・受注可否は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2590010F4030",
+          "product_name": "シロドシンＯＤ錠４ｍｇ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP 140錠（14錠×10）",
+              "unified_product_code": "081-187843",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年4月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 500錠（10錠×50）",
+              "unified_product_code": "081-187850",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年4月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 700錠（14錠×50）",
+              "unified_product_code": "081-187867",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年4月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 100錠（10錠×10）",
+              "unified_product_code": "081-187836",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは販売継続包装として記載。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "プラスチックボトル・バラ 500錠",
+              "unified_product_code": "081-187881",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは販売継続包装として記載。現在の出荷対応・受注可否は未確認です。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "終了予定時期はメーカー在庫消尽予定であり、在庫状況により前後する可能性があります。",
+        "販売継続はメーカー案内時点の情報であり、現在の受注可否や卸の在庫は確認できません。",
+        "メーカー文書は2026年7月、一覧掲載日は2026年7月16日です。後続案内もメーカーにご確認ください。",
+        "この案内は自動追跡対象外です。"
+      ]
     }
   ]
 }
