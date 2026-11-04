@@ -609,7 +609,8 @@ def watch_guide_page() -> str:
 
 def topic_page(topic: dict, related: list[dict[str, str]], generated_keys: set[str],
                lifecycle: dict[str, dict], updated_at: str,
-               targets: list[dict[str, str]] | None = None) -> str:
+               targets: list[dict[str, str]] | None = None,
+               dataset_date: str = "", version_metadata=None) -> str:
     slug = topic["slug"]
     canonical = f"{SITE_ROOT}topics/{slug}.html"
     title = f"{topic['title']}｜医薬品供給ナビ"
@@ -642,6 +643,10 @@ def topic_page(topic: dict, related: list[dict[str, str]], generated_keys: set[s
     targets = targets or []
     target_keys = {item_key(row) for row in targets}
     related = [row for row in related if item_key(row) not in target_keys]
+    if targets or related:
+        related_html += ('<section aria-label="供給情報の基準日">'
+                         + dataset_dates_html(dataset_date, version_metadata)
+                         + '<p class="note">以下はHTML生成時の公表区分です。現在の状況・包装別の在庫は各品目ページや原典で確認してください。本文は記事掲載時の案内です。</p></section>')
     if targets:
         related_html += (f'<h2>対象品目の現在の供給状況（{len(targets)}品目）</h2>'
                          '<p class="note">厚生労働省公表データの現在区分です。ニュース本文の将来予定とは別にご確認ください。</p>'
@@ -1238,7 +1243,8 @@ def main() -> int:
         related = topic_related_rows(rows, topic)
         targets = topic_related_rows(rows, topic, "target_queries")
         (topic_dir / f"{topic['slug']}.html").write_text(
-            topic_page(topic, related, generated_keys, lifecycle, topics_doc.get("updated_at", ""), targets),
+            topic_page(topic, related, generated_keys, lifecycle, topics_doc.get("updated_at", ""), targets,
+                       dataset_date, version_doc),
             encoding="utf-8")
         topic_dates[topic["slug"]] = max(
             normalize_date(topic.get("date")), TEMPLATE_UPDATED_AT)
