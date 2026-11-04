@@ -601,6 +601,27 @@ if __name__ == "__main__":
     unittest.main()
 
 
+class TopicDatasetDateTests(unittest.TestCase):
+    def test_topic_separates_dataset_and_source_dates_from_item_update(self):
+        from generate_curated_pages import topic_page
+        topic = {"slug": "test-date", "tag": "供給情報", "title": "試験", "lede": "案内", "date": "2026.09.30",
+                 "source": {"name": "原典", "url": "https://example.org/"}}
+        row = {"商品名": "試験薬", "YJコード": "123456789012", "供給状況": "②限定出荷", "更新日": "2026-09-29"}
+        version = {"note": "2026年11月04日厚労省データ反映", "mhlw_excel_date": "2026-11-02"}
+        output = topic_page(topic, [], set(), {}, "2026-10-15", [row], "2026-11-04", version)
+        self.assertIn("厚労省原Excelの基準日：", output)
+        self.assertIn(">2026-11-02</span>", output)
+        self.assertIn(">2026-11-04</span>", output)
+        self.assertIn("更新 2026-09-29", output)
+        self.assertIn("HTML生成時の公表区分", output)
+        self.assertLess(output.index("厚労省原Excelの基準日"), output.index("対象品目の現在の供給状況"))
+        unknown = topic_page(topic, [row], set(), {}, "", dataset_date="", version_metadata={})
+        self.assertIn("確認できません", unknown)
+        self.assertNotIn(">2026-09-29</span>", unknown)
+        no_rows = topic_page(topic, [], set(), {}, "")
+        self.assertNotIn("供給情報の基準日", no_rows)
+
+
 class TopicModificationDateTests(unittest.TestCase):
     def test_collection_addition_preserves_existing_article_date(self):
         from generate_curated_pages import topic_page
