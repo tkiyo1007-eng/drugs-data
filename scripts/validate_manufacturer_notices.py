@@ -21,6 +21,8 @@ MAKER_HOSTS = {
     '東和薬品': 'med.towayakuhin.co.jp',
     '日本ケミファ': 'www.nc-medical.com',
     '杏林製薬': 'www.kyorin-pharm.co.jp',
+    '久光製薬': 'www.hisamitsu-pharm.jp',
+    '日本ベーリンガーインゲルハイム': 'www.bij-kusuri.jp',
 }
 SCOPES = {'product', 'package', 'seller_route_and_package'}
 KINDS = {'discontinued', 'limited', 'stopped', 'resumed', 'resumption_planned', 'recall'}
