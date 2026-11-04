@@ -1067,11 +1067,48 @@ def latest_publication_date(row: dict, lifecycle=None, discrepancy=None) -> str:
     return max(valid) if valid else ""
 
 
-def item_page_lastmod(row: dict, lifecycle=None, discrepancy=None, manufacturer_notices=(), manufacturer_bulletins=None) -> str:
+def exact_target_topic_index(site: Path) -> dict:
+    """記事に明記した完全一致YJのみ。名称検索や代替候補は対象にしない。"""
+    try:
+        doc = json.loads((site / "industry_topics.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    if not isinstance(doc, dict) or not isinstance(doc.get("topics"), list):
+        return {}
+    result = {}
+    for topic in doc["topics"]:
+        if not isinstance(topic, dict):
+            continue
+        slug, title = topic.get("slug"), topic.get("title")
+        targets = topic.get("target_queries")
+        if (not isinstance(slug, str) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug)
+                or not isinstance(title, str) or not title.strip() or not isinstance(targets, list)
+                or not (site / "topics" / f"{slug}.html").is_file()):
+            continue
+        for target in set(x for x in targets if isinstance(x, str) and FORMAL_YJ_RE.fullmatch(x)):
+            result.setdefault(target, []).append({"slug": slug, "title": title.strip(),
+                                                   "date": iso_publication_date(topic.get("date"))})
+    return result
+
+
+def related_topics_html(topics) -> str:
+    if not topics:
+        return ""
+    links = "".join(f'<li><a href="../topics/{esc(t["slug"])}.html">{esc(t["title"])}</a>'
+                    f'（サイト掲載日：{esc(t["date"] or "確認できません")}）</li>' for t in topics)
+    return ('<section aria-labelledby="relatedTopicTitle"><h2 id="relatedTopicTitle">この品目に関する過去の案内</h2>'
+            '<p class="sib-note">記事は掲載時点の情報です。現在の供給区分や包装別の在庫は別途ご確認ください。</p>'
+            f'<ul>{links}</ul></section>')
+
+
+def item_page_lastmod(row: dict, lifecycle=None, discrepancy=None, manufacturer_notices=(), manufacturer_bulletins=None, related_topics=()) -> str:
     """品目データまたは静的ページテンプレートの実質改訂日の新しい方。"""
     lifecycle = lifecycle_for_display(lifecycle, manufacturer_notices, manufacturer_bulletins)
     dates = [ITEM_PAGE_TEMPLATE_LASTMOD,
              latest_publication_date(row, lifecycle, discrepancy)]
+    if related_topics:
+        dates.append("2026-11-04")  # 品目別の関連記事導線を追加した日
+        dates.extend(topic["date"] for topic in related_topics if topic.get("date"))
     if is_delist(row) or supplemental_matches(row, lifecycle):
         dates.append(SUPPLEMENTAL_TEMPLATE_LASTMOD)
     if (supplemental_matches(row, lifecycle) and not lifecycle.get("source_changed")
@@ -1350,7 +1387,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
               supplemental_trusted=True, supplemental_warning="", title_qualifier="",
               hub_slugs=(), display_names=None, category_codes=None,
               ingredient_slugs=None, manufacturer_notices=(), catalog_yj_codes=None,
-              manufacturer_bulletins=None, version_metadata=None, product_variants=()):
+              manufacturer_bulletins=None, version_metadata=None, product_variants=(), related_topics=()):
     name = row["商品名"].strip()
     display_name = f"{name}（{title_qualifier}）" if title_qualifier else name
     maker = (row.get("販売メーカー") or row.get("製造メーカー") or "").strip()
@@ -1561,7 +1598,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
     webpage_ld = ld_json({
         "@context": "https://schema.org", "@type": "WebPage",
         "name": title, "description": desc, "url": url, "inLanguage": "ja",
-        "dateModified": item_page_lastmod(row, lifecycle_match, discrepancy_match, manufacturer_notices, manufacturer_bulletins),
+        "dateModified": item_page_lastmod(row, lifecycle_match, discrepancy_match, manufacturer_notices, manufacturer_bulletins, related_topics),
         "isPartOf": {"@type": "WebSite", "name": "医薬品供給ナビ", "url": SITE_ROOT},
     })
     quick_answers = quick_answers_html(row, status, display_name)
@@ -1712,7 +1749,7 @@ footer a{{color:var(--sub)}}
       <p class="watch-status" id="watchStatus" role="status" aria-live="polite"></p>
       <a href="{SITE_ROOT}#f=fav">監視リストを見る</a>
     </div>
-    {quick_answers}
+    {quick_answers}{related_topics_html(related_topics)}
     <form class="item-search" id="itemSearchForm" role="search">
       <h2>別の薬も検索</h2>
       <label for="itemSearchInput">薬品名・成分名・メーカー名・YJコード</label>
@@ -2415,6 +2452,7 @@ def main():
     restriction_keys = recent_restriction_keys(
         latest_changes, by_key, dataset_date)
 
+    topic_index = exact_target_topic_index(site)
     category_codes = category_pages(rows)
     ingredient_slugs = ingredient_pages(rows)
 
@@ -2512,6 +2550,7 @@ def main():
                 manufacturer_bulletins=manufacturer_bulletins,
                 version_metadata=version_doc,
                 product_variants=by_gen.get(g, []),
+                related_topics=topic_index.get(k, []),
             ), encoding="utf-8")
 
     (out / "index.html").write_text(index_html(entries, dataset_date, version_doc), encoding="utf-8")
@@ -2519,7 +2558,7 @@ def main():
         (out / f"{slug}.html").write_text(
             hub_html(slug, entries, dataset_date, version_doc), encoding="utf-8")
     key_dates = {
-        k: item_page_lastmod(r, lifecycle_products.get(k), discrepancy_products.get(k), notice_index.get(k, []), manufacturer_bulletins)
+        k: item_page_lastmod(r, lifecycle_products.get(k), discrepancy_products.get(k), notice_index.get(k, []), manufacturer_bulletins, topic_index.get(k, []))
         for k, (r, _) in targets.items()
     }
     (site / "sitemap-items.xml").write_text(
