@@ -17,7 +17,8 @@ MAKER_HOSTS = {
     '扶桑薬品工業': 'www.fuso-pharm.co.jp',
     'ファイザー': 'www.pfizermedicalinformation.jp', 'サンド': 'sandoz-jp.cms.sandoz.com',
     '三和化学研究所': 'med.skk-net.com', '日本薬品工業': 'www.npi-inc.co.jp',
-    '第一三共': 'www.medicalcommunity.jp', '東和薬品': 'med.towayakuhin.co.jp',
+    '第一三共': 'www.medicalcommunity.jp', '第一三共エスファ': 'med.daiichisankyo-ep.co.jp',
+    '東和薬品': 'med.towayakuhin.co.jp',
     '日本ケミファ': 'www.nc-medical.com',
 }
 SCOPES = {'product', 'package', 'seller_route_and_package'}
