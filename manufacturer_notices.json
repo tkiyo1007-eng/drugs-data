@@ -3422,7 +3422,7 @@
     {
       "id": "dsep-azosemide-ezetimibe-package-202604",
       "maker": "第一三共エスファ",
-      "title": "アゾセミド錠・エゼチミブ錠・オルメサルタンOD錠「DSEP」包装容量販売終了のご案内",
+      "title": "包装容量販売終了のご案内（第一三共エスファ）",
       "url": "https://med.daiichisankyo-ep.co.jp/information/files/2194/EPALL1N46201-1.pdf",
       "announced_at": "2026-04",
       "listed_at": "2026-04-16",
@@ -3744,6 +3744,321 @@
             {
               "package": "PTP・乾燥剤入り 500錠（10錠×50）",
               "unified_product_code": "081-187256",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは販売継続包装として記載。現在の出荷対応・受注可否は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149032F4128",
+          "product_name": "カルベジロール錠２．５ｍｇ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            2,
+            3
+          ],
+          "packages": [
+            {
+              "package": "PTP 420錠（14錠×30）",
+              "unified_product_code": "081-185436",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2028年6月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 100錠（10錠×10）",
+              "unified_product_code": "081-185429",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは販売継続包装として記載。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 500錠（10錠×50）",
+              "unified_product_code": "081-185467",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは販売継続包装として記載。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "プラスチックボトル・バラ 500錠",
+              "unified_product_code": "081-185474",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは販売継続包装として記載。現在の出荷対応・受注可否は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149032F1170",
+          "product_name": "カルベジロール錠１０ｍｇ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            2,
+            3
+          ],
+          "packages": [
+            {
+              "package": "PTP 420錠（14錠×30）",
+              "unified_product_code": "081-185528",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年12月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 100錠（10錠×10）",
+              "unified_product_code": "081-185481",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは販売継続包装として記載。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 500錠（10錠×50）",
+              "unified_product_code": "081-185535",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは販売継続包装として記載。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "プラスチックボトル・バラ 500錠",
+              "unified_product_code": "081-185580",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは販売継続包装として記載。現在の出荷対応・受注可否は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2189017F1030",
+          "product_name": "ロスバスタチン錠２．５ｍｇ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            2,
+            3
+          ],
+          "packages": [
+            {
+              "package": "PTP 700錠（14錠×50）",
+              "unified_product_code": "081-186938",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年7月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 1,000錠（10錠×100）",
+              "unified_product_code": "081-186921",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年4月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "瓶・バラ 500錠（乾燥剤入り）",
+              "unified_product_code": "081-186945",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年4月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 100錠（10錠×10）",
+              "unified_product_code": "081-186907",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは販売継続包装として記載。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 500錠（10錠×50）",
+              "unified_product_code": "081-186914",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは販売継続包装として記載。現在の出荷対応・受注可否は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2189017F2037",
+          "product_name": "ロスバスタチン錠５ｍｇ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            2,
+            3
+          ],
+          "packages": [
+            {
+              "package": "PTP 700錠（14錠×50）",
+              "unified_product_code": "081-187027",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年6月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "瓶・バラ 500錠（乾燥剤入り）",
+              "unified_product_code": "081-187034",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年3月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 100錠（10錠×10）",
+              "unified_product_code": "081-187003",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは販売継続包装として記載。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 500錠（10錠×50）",
+              "unified_product_code": "081-187010",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは販売継続包装として記載。現在の出荷対応・受注可否は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2189017F3033",
+          "product_name": "ロスバスタチンＯＤ錠２．５ｍｇ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            2,
+            3
+          ],
+          "packages": [
+            {
+              "package": "PTP 700錠（14錠×50）",
+              "unified_product_code": "081-187522",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年4月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 100錠（10錠×10）",
+              "unified_product_code": "081-187508",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは販売継続包装として記載。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 500錠（10錠×50）",
+              "unified_product_code": "081-187515",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは販売継続包装として記載。現在の出荷対応・受注可否は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2189017F4030",
+          "product_name": "ロスバスタチンＯＤ錠５ｍｇ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            2,
+            3
+          ],
+          "packages": [
+            {
+              "package": "PTP 700錠（14錠×50）",
+              "unified_product_code": "081-187577",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年3月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 100錠（10錠×10）",
+              "unified_product_code": "081-187553",
               "supply": {
                 "status": "unconfirmed",
                 "plans": [],
