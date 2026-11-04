@@ -1430,7 +1430,9 @@
           "maker": "三和化学研究所",
           "spec": "５００ｍｇ１錠",
           "scope": "package",
-          "source_pages": [1],
+          "source_pages": [
+            1
+          ],
           "packages": [
             {
               "package": "PTP500錠",
@@ -1439,30 +1441,55 @@
               "supply": {
                 "status": "unconfirmed",
                 "plans": [
-                  {"event": "stock_depletion", "timing": "2026年10月中旬予定"},
-                  {"event": "shipment_resumption", "timing": "2026年12月中予定"}
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年10月中旬予定"
+                  },
+                  {
+                    "event": "shipment_resumption",
+                    "timing": "2026年12月中予定"
+                  }
                 ],
                 "note": "在庫消尽後に出荷を一時停止。実際の消尽・停止・再開は未確認です。"
               }
             },
             {
               "package": "PTP100錠",
-              "supply": {"status": "unconfirmed", "plans": [], "note": "案内時点で当面の在庫を確保し出荷継続。現在の状況は未確認です。"}
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "案内時点で当面の在庫を確保し出荷継続。現在の状況は未確認です。"
+              }
             },
             {
               "package": "PTP1000錠",
               "unified_product_code": "086-231855",
               "gs1_sales": "14987086231852",
-              "supply": {"status": "unconfirmed", "plans": [], "note": "案内時点で当面の在庫を確保し出荷継続。現在の状況は未確認です。"}
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "案内時点で当面の在庫を確保し出荷継続。現在の状況は未確認です。"
+              }
             },
             {
               "package": "バラ500錠",
-              "supply": {"status": "unconfirmed", "plans": [], "note": "案内時点で当面の在庫を確保し出荷継続。現在の状況は未確認です。"}
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "案内時点で当面の在庫を確保し出荷継続。現在の状況は未確認です。"
+              }
             }
           ]
         }
       ],
-      "alternatives": [{"products": [], "cautions": ["メーカーは同製品のPTP1000錠包装を案内しています。詳細は原文をご確認ください。"]}],
+      "alternatives": [
+        {
+          "products": [],
+          "cautions": [
+            "メーカーは同製品のPTP1000錠包装を案内しています。詳細は原文をご確認ください。"
+          ]
+        }
+      ],
       "cautions": [
         "2026年10月のメーカー案内です。予定時期を過ぎても、実際の停止や再開が行われたとは判断できません。",
         "この案内は自動追跡対象外です。最新の包装別状況や受注可否はメーカー・卸にご確認ください。"
@@ -1547,7 +1574,12 @@
               "supply": {
                 "status": "normal",
                 "status_text": "通常出荷",
-                "plans": [{"event": "discontinuation", "timing": "在庫消尽次第"}],
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "在庫消尽次第"
+                  }
+                ],
                 "note": "2026年10月1日の一覧では通常出荷、在庫消尽次第販売中止。現在の在庫・出荷状況は未確認です。"
               }
             },
@@ -1567,7 +1599,12 @@
               "supply": {
                 "status": "normal",
                 "status_text": "通常出荷",
-                "plans": [{"event": "discontinuation", "timing": "在庫消尽次第"}],
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "在庫消尽次第"
+                  }
+                ],
                 "note": "2026年10月1日の一覧では通常出荷、在庫消尽次第販売中止。現在の在庫・出荷状況は未確認です。"
               }
             },
@@ -1577,7 +1614,12 @@
               "supply": {
                 "status": "normal",
                 "status_text": "通常出荷",
-                "plans": [{"event": "discontinuation", "timing": "在庫消尽次第"}],
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "在庫消尽次第"
+                  }
+                ],
                 "note": "2026年10月1日の一覧では通常出荷、在庫消尽次第販売中止。現在の在庫・出荷状況は未確認です。"
               }
             }
@@ -1608,7 +1650,12 @@
               "supply": {
                 "status": "normal",
                 "status_text": "通常出荷",
-                "plans": [{"event": "discontinuation", "timing": "在庫消尽次第"}],
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "在庫消尽次第"
+                  }
+                ],
                 "note": "2026年10月1日の一覧では通常出荷、在庫消尽次第販売中止。現在の在庫・出荷状況は未確認です。"
               }
             },
@@ -1618,7 +1665,12 @@
               "supply": {
                 "status": "normal",
                 "status_text": "通常出荷",
-                "plans": [{"event": "discontinuation", "timing": "在庫消尽次第"}],
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "在庫消尽次第"
+                  }
+                ],
                 "note": "2026年10月1日の一覧では通常出荷、在庫消尽次第販売中止。現在の在庫・出荷状況は未確認です。"
               }
             },
@@ -1628,7 +1680,12 @@
               "supply": {
                 "status": "normal",
                 "status_text": "通常出荷",
-                "plans": [{"event": "discontinuation", "timing": "在庫消尽次第"}],
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "在庫消尽次第"
+                  }
+                ],
                 "note": "2026年10月1日の一覧では通常出荷、在庫消尽次第販売中止。現在の在庫・出荷状況は未確認です。"
               }
             }
@@ -1659,7 +1716,12 @@
               "supply": {
                 "status": "normal",
                 "status_text": "通常出荷",
-                "plans": [{"event": "discontinuation", "timing": "在庫消尽次第"}],
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "在庫消尽次第"
+                  }
+                ],
                 "note": "2026年10月1日の一覧では通常出荷、在庫消尽次第販売中止。現在の在庫・出荷状況は未確認です。"
               }
             },
@@ -2831,6 +2893,209 @@
         "公式RSS掲載日は2026年10月27日、文書は2026年10月表記です。現在の在庫・受注可否は未確認です。",
         "公式一覧を取得できないため、この案内はRSS経由で確認しました。後続の案内・現在の状況はメーカーにご確認ください。",
         "この案内は自動追跡対象外です。"
+      ]
+    },
+    {
+      "id": "kemifa-package-discontinuation-202610",
+      "maker": "日本ケミファ",
+      "title": "一部包装 販売中止のご案内",
+      "url": "https://www.nc-medical.com/product_topics/p5ib910000006sw7-att/p5ib910000006swv.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-30",
+      "verified_at": "2026-11-05",
+      "content_updated_at": "2026-11-05",
+      "sha256": "79121d078e52585d34b22cc965e8b44b4bfd5fffed2f5fd211bb33e98c020927",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "メーカーは対象包装について、メーカー在庫終了後に販売を中止すると案内しています。",
+      "targets": [
+        {
+          "yj_code": "2499011F1036",
+          "product_name": "デュタステリド錠０．５ｍｇＡＶ「ＮＳ」",
+          "maker": "日本ケミファ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP 30錠",
+              "unified_product_code": "171297094",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年12月"
+                  }
+                ],
+                "note": "メーカー在庫終了後にこの包装の販売を中止予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            }
+          ],
+          "summary": "PTP 100錠は販売継続と案内。"
+        },
+        {
+          "yj_code": "4490026C1080",
+          "product_name": "モンテルカスト細粒４ｍｇ「ケミファ」",
+          "maker": "日本ケミファ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "28包",
+              "unified_product_code": "171344101",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年2月"
+                  }
+                ],
+                "note": "メーカー在庫終了後にこの包装の販売を中止予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            }
+          ],
+          "summary": "140包は販売継続と案内。"
+        },
+        {
+          "yj_code": "4490026F1176",
+          "product_name": "モンテルカストチュアブル錠５ｍｇ「ケミファ」",
+          "maker": "日本ケミファ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP 28錠",
+              "unified_product_code": "171257104",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年3月"
+                  }
+                ],
+                "note": "メーカー在庫終了後にこの包装の販売を中止予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            }
+          ],
+          "summary": "PTP 100錠は販売継続と案内。"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカー文書は2026年10月、公式RSS掲載日は2026年10月30日です。",
+        "公式一覧は取得できずRSS経由で原文を確認しました。後続案内・現在の在庫や受注可否はメーカーにご確認ください。",
+        "この案内は自動追跡対象外です。"
+      ]
+    },
+    {
+      "id": "kemifa-rosuvastatin-discontinuation-202610",
+      "maker": "日本ケミファ",
+      "title": "ロスバスタチン錠2.5mg・5mg「ケミファ」販売中止のご案内",
+      "url": "https://www.nc-medical.com/product_topics/p5ib910000006swx-att/p5ib910000006sxl.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-30",
+      "verified_at": "2026-11-05",
+      "content_updated_at": "2026-11-05",
+      "sha256": "b20ab29760f44b99925466f81ef8359363ee74bc3f8b7479004cdb4abcad6d88",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "メーカーは対象製品について、メーカー在庫終了後に取扱いを中止すると案内しています。",
+      "targets": [
+        {
+          "yj_code": "2189017F1146",
+          "product_name": "ロスバスタチン錠２．５ｍｇ「ケミファ」",
+          "maker": "日本ケミファ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP 100錠",
+              "unified_product_code": "171241103",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年2月"
+                  }
+                ],
+                "note": "メーカー在庫終了後にこの包装の販売を中止予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 500錠",
+              "unified_product_code": "171241202",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年2月"
+                  }
+                ],
+                "note": "メーカー在庫終了後にこの包装の販売を中止予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "バラ 500錠",
+              "unified_product_code": "171241257",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年2月"
+                  }
+                ],
+                "note": "メーカー在庫終了後にこの包装の販売を中止予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            }
+          ],
+          "summary": "メーカーは同規格のロスバスタチンOD錠「ケミファ」の販売継続を案内。"
+        },
+        {
+          "yj_code": "2189017F2142",
+          "product_name": "ロスバスタチン錠５ｍｇ「ケミファ」",
+          "maker": "日本ケミファ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP 100錠",
+              "unified_product_code": "171242100",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年1月"
+                  }
+                ],
+                "note": "メーカー在庫終了後にこの包装の販売を中止予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            }
+          ],
+          "summary": "メーカーは同規格のロスバスタチンOD錠「ケミファ」の販売継続を案内。"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカー文書は2026年10月、公式RSS掲載日は2026年10月30日です。",
+        "公式一覧は取得できずRSS経由で原文を確認しました。後続案内・現在の在庫や受注可否はメーカーにご確認ください。",
+        "この案内は自動追跡対象外です。",
+        "メーカー在庫終了予定は流通状況により変動する場合があります。"
       ]
     }
   ]
