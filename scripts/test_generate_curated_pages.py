@@ -118,6 +118,8 @@ class CuratedPageGenerationTests(unittest.TestCase):
             with self.subTest(href=href):
                 self.assertIn(href, links.hrefs)
         self.assertLess(page.index('id="guidePathsTitle"'), page.index("1. 現在の供給区分"))
+        self.assertLess(page.index('id="guidePathsTitle"'), page.index('id="supply-status"'))
+        self.assertIn("原Excelの基準日・品目行の更新日・メーカー案内の日付を分けて確認", page)
         self.assertIn('<nav class="crumb" aria-label="パンくず">', page)
         self.assertIn("出荷調整とは", page)
         self.assertIn("薬ごとの「出荷対応」の区分で確認できます", page)
