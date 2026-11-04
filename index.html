@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>医薬品供給ナビ｜出荷調整・限定出荷・供給停止を検索</title>
+<title>医薬品の出荷調整・限定出荷・供給停止を検索｜医薬品供給ナビ</title>
 <meta name="description" content="厚労省の出荷調整・限定出荷・供給停止を薬品名・成分名・メーカー名・YJコードから無料で検索。販売中止の案内・薬価削除予定の一覧と、製造中止を含む公式情報の確認ガイドを掲載しています。">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta property="og:title" content="医薬品供給ナビ">
@@ -313,6 +313,9 @@ h1 .grad .nb{
 }
 .btn-ghost:hover{background:rgba(255,255,255,.9);transform:translateY(-2px)}
 .hero-note{font-size:12px;color:var(--sub);margin-top:16px}
+.hero-directories{display:flex;flex-wrap:wrap;gap:0 18px;margin-top:0}
+.hero-directories a{display:inline-flex;align-items:center;min-height:44px;color:var(--blue);font-size:13px;font-weight:700;text-underline-offset:3px}
+.hero-directories a:focus-visible{outline:3px solid var(--blue-mid);outline-offset:3px;border-radius:4px}
 .watch-return{
   min-height:44px;margin-top:12px;padding:9px 15px;border-radius:14px;
   display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(176,48,48,.32);
@@ -395,10 +398,10 @@ h1 .grad .nb{
   .lede{font-size:14px;line-height:1.7;margin-bottom:8px}
   header .hero-app-link{min-height:44px;padding:10px 14px;font-size:13px}
   header .btn-primary{padding:12px 20px;font-size:14px}
-  header .hero-note{margin-top:8px;font-size:11.5px}
+  header .hero-note{margin-top:0;font-size:11.5px}
   header .hero-visual{display:none}
   main section{padding:52px 20px}
-  #demo{padding-top:20px}
+  #demo{padding-top:16px}
   #demo .sec-lede{margin-bottom:12px}
 }
 
@@ -1625,6 +1628,10 @@ html.season-autumn .autumn-sky{display:none}
       </a>
       <a class="btn-ghost hero-app-link" href="https://apps.apple.com/jp/app/id6777696446" target="_blank" rel="noopener">iPhone版を無料で入手</a>
     </div>
+    <nav class="hero-directories" aria-label="供給状況の一覧を開く">
+      <a href="items/limited.html">出荷調整（限定出荷）の一覧</a>
+      <a href="items/stopped.html">供給停止の一覧</a>
+    </nav>
     <p class="hero-note">会員登録不要・Web版も無料で利用できます</p>
     <p class="season-note"><svg width="14" height="14" viewBox="0 0 64 56" aria-hidden="true"><ellipse cx="32" cy="33" rx="30" ry="21" fill="#E07A1F"/><path d="M31 10c0-5 2-8 6-9l2 3c-3 1-4 3-4 6Z" fill="#3E7A3A"/></svg><svg width="15" height="15" viewBox="0 0 64 64" aria-hidden="true"><path d="M34 4 20 44h28Z" fill="#4E2AA8"/><path d="M34 4c4 6 9 9 16 10-6 2-11 1-16-4Z" fill="#4E2AA8"/><ellipse cx="32" cy="46" rx="28" ry="7" fill="#3A2180"/><rect x="21" y="36" width="24" height="5" rx="1" fill="#E8A13A"/></svg>10月限定のハロウィンデザインです</p>
     <button class="watch-return" id="watchReturn" type="button" hidden>
