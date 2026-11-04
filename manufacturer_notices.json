@@ -3422,7 +3422,7 @@
     {
       "id": "dsep-azosemide-ezetimibe-package-202604",
       "maker": "第一三共エスファ",
-      "title": "アゾセミド錠・エゼチミブ錠「DSEP」包装容量販売終了のご案内",
+      "title": "アゾセミド錠・エゼチミブ錠・オルメサルタンOD錠「DSEP」包装容量販売終了のご案内",
       "url": "https://med.daiichisankyo-ep.co.jp/information/files/2194/EPALL1N46201-1.pdf",
       "announced_at": "2026-04",
       "listed_at": "2026-04-16",
@@ -3575,6 +3575,175 @@
             {
               "package": "PTP 500錠（10錠×50）",
               "unified_product_code": "081-189465",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは販売継続包装として記載。現在の出荷対応・受注可否は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149044F5038",
+          "product_name": "オルメサルタンＯＤ錠１０ｍｇ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            1,
+            3
+          ],
+          "packages": [
+            {
+              "package": "PTP・乾燥剤入り 140錠（14錠×10）",
+              "unified_product_code": "081-187126",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年6月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP・乾燥剤入り 700錠（14錠×50）",
+              "unified_product_code": "081-187133",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年6月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP・乾燥剤入り 100錠（10錠×10）",
+              "unified_product_code": "081-187102",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは販売継続包装として記載。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP・乾燥剤入り 500錠（10錠×50）",
+              "unified_product_code": "081-187119",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは販売継続包装として記載。現在の出荷対応・受注可否は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149044F6034",
+          "product_name": "オルメサルタンＯＤ錠２０ｍｇ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            1,
+            3
+          ],
+          "packages": [
+            {
+              "package": "PTP・乾燥剤入り 140錠（14錠×10）",
+              "unified_product_code": "081-187195",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年3月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP・乾燥剤入り 700錠（14錠×50）",
+              "unified_product_code": "081-187201",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年4月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP・乾燥剤入り 100錠（10錠×10）",
+              "unified_product_code": "081-187171",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは販売継続包装として記載。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP・乾燥剤入り 500錠（10錠×50）",
+              "unified_product_code": "081-187188",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは販売継続包装として記載。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "プラスチックボトル・バラ 500錠（乾燥剤入り）",
+              "unified_product_code": "081-187218",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは販売継続包装として記載。現在の出荷対応・受注可否は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149044F7030",
+          "product_name": "オルメサルタンＯＤ錠４０ｍｇ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            1,
+            3
+          ],
+          "packages": [
+            {
+              "package": "PTP・乾燥剤入り 140錠（14錠×10）",
+              "unified_product_code": "081-187263",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年7月"
+                  }
+                ],
+                "note": "メーカー在庫終了後に販売終了予定。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP・乾燥剤入り 100錠（10錠×10）",
+              "unified_product_code": "081-187249",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは販売継続包装として記載。現在の出荷対応・受注可否は未確認です。"
+              }
+            },
+            {
+              "package": "PTP・乾燥剤入り 500錠（10錠×50）",
+              "unified_product_code": "081-187256",
               "supply": {
                 "status": "unconfirmed",
                 "plans": [],

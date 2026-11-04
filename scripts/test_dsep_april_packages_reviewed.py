@@ -16,14 +16,14 @@ class DsepAprilPackagesTest(unittest.TestCase):
 
     def test_exact_product_and_manufacturer_identity(self):
         self.assertEqual([], validate({'schema_version': 1, 'notices': [self.notice]}, self.rows))
-        self.assertEqual({'2139008F2052','2139008F1072','2189018F1035'}, {t['yj_code'] for t in self.notice['targets']})
+        self.assertEqual({'2139008F2052','2139008F1072','2189018F1035','2149044F5038','2149044F6034','2149044F7030'}, {t['yj_code'] for t in self.notice['targets']})
 
     def test_current_status_is_not_inferred_from_plans(self):
-        expected = {'2139008F2052': ('081-185320','2027年2月'), '2139008F1072': ('081-185382','2027年1月'), '2189018F1035': ('081-189472','2027年2月')}
+        expected = {'2139008F2052': [('081-185320','2027年2月')], '2139008F1072': [('081-185382','2027年1月')], '2189018F1035': [('081-189472','2027年2月')], '2149044F5038': [('081-187126','2027年6月'),('081-187133','2027年6月')], '2149044F6034': [('081-187195','2027年3月'),('081-187201','2027年4月')], '2149044F7030': [('081-187263','2027年7月')]}
         for target in self.notice['targets']:
             self.assertEqual('package',target['scope'])
             plans = [(p['unified_product_code'],plan['timing']) for p in target['packages'] for plan in p['supply']['plans'] if plan['event']=='stock_depletion']
-            self.assertEqual([expected[target['yj_code']]],plans)
+            self.assertEqual(expected[target['yj_code']],plans)
             self.assertTrue(any(not p['supply']['plans'] for p in target['packages']))
             self.assertTrue(all(p['supply']['status']=='unconfirmed' for p in target['packages']))
 
