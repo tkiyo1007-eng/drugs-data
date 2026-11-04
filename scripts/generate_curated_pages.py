@@ -28,7 +28,7 @@ MHLW_PRICE_LIST_URL = "https://www.mhlw.go.jp/topics/2026/04/tp20260401-01.html"
 PMDA_SEARCH_URL = "https://www.pmda.go.jp/PmdaSearch/iyakuSearch/"
 PMDA_RECALL_URL = "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html"
 GUIDE_SLUG = "how-to-check-drug-supply"
-GUIDE_UPDATED_AT = "2026-11-03"  # 包装別の確認手順を追加した編集日
+GUIDE_UPDATED_AT = "2026-11-04"  # 一覧への導線と確認順序を追加した編集日
 DISCONTINUATION_GUIDE_SLUG = "how-to-check-discontinuation-and-delisting"
 DISCONTINUATION_GUIDE_PUBLISHED_AT = "2026-10-11"
 DISCONTINUATION_GUIDE_UPDATED_AT = "2026-10-19"  # 品目別・規格別の確認入口を追加した編集日
@@ -425,7 +425,17 @@ def guide_page() -> str:
 <nav class="crumb" aria-label="パンくず"><a href="../">トップ</a> › 供給情報の確認ガイド</nav><main>
 <article class="hero"><p class="eyebrow">EVERGREEN GUIDE</p><h1>医薬品の出荷調整・限定出荷を公式情報で確認する方法</h1>
 <p class="lede">出荷調整の意味、現在の供給状況、理由や解除見込みを、出典の役割を分けて確認します。</p>
+<p class="note">一覧は厚生労働省の公表区分を品目単位でまとめたものです。原Excelの基準日・品目行の更新日・メーカー案内の日付を分けて確認し、実際の在庫や受注可否は卸・メーカーへお確かめください。</p>
 {share_control("この確認ガイドを共有")}</article>
+<nav class="intent" aria-labelledby="guidePathsTitle"><h2 id="guidePathsTitle">目的に合う確認先を選ぶ</h2>
+<div class="list">
+<a href="../items/limited.html">出荷調整（限定出荷）の医薬品一覧<small>厚生労働省公表データで限定出荷の品目を確認</small></a>
+<a href="../items/stopped.html">供給停止の医薬品一覧<small>限定出荷と分けて供給停止の品目を確認</small></a>
+<a href="../items/recent-restrictions.html">最近の限定出荷・供給停止への変更<small>直近30日以内の公表区分変更を確認</small></a>
+<a href="{DISCONTINUATION_GUIDE_SLUG}.html">販売中止・製造中止・薬価削除の確認ガイド<small>一部包装中止や経過措置期限を、現在の供給区分と分けて確認</small></a>
+<a href="../ingredients/index.html">成分（一般名）別の供給状況<small>同じ成分の品目を規格・メーカー別に確認</small></a>
+<a href="../#demo" data-dsn-event="search-cta-open">薬品名・成分名・メーカー名・YJコードから検索<small>Web版で対象品目を探し、理由やメーカー案内を確認</small></a>
+</div></nav>
 <section class="intent" id="supply-status"><h2>出荷調整とは</h2>
 <p>医薬品の出荷調整に関する情報は、薬ごとの「出荷対応」の区分で確認できます。厚生労働省の公表では、全ての受注に対応できない「限定出荷」と、供給を停止している「供給停止」を分けて扱います。</p>
 <h3>限定出荷と供給停止の違い</h3>
@@ -444,15 +454,7 @@ def guide_page() -> str:
 <li><strong>日付と予定を分ける：</strong>文書日と原文確認日を見て、在庫消尽・出荷再開などの予定を実施済みと決めつけません。</li>
 <li><strong>入手できるか確認する：</strong>実際の在庫や受注可否は、取引先の卸・メーカーへ確認します。</li></ol>
 <p>包装別の案内を確認した例：<a href="../items/2649805M1026.html">ユベラ軟膏</a>、<a href="../items/2190102F1106.html">アマルエット配合錠2番「トーワ」</a>。各品目ページでは、原文の対象包装と確認日をご覧ください。案内は資料時点の情報で、現在の在庫を保証しません。</p></section>
-<nav class="intent" aria-labelledby="guidePathsTitle"><h2 id="guidePathsTitle">目的に合う確認先を選ぶ</h2>
-<div class="list">
-<a href="../items/limited.html">出荷調整（限定出荷）の医薬品一覧<small>厚生労働省公表データで限定出荷の品目を確認</small></a>
-<a href="../items/stopped.html">供給停止の医薬品一覧<small>限定出荷と分けて供給停止の品目を確認</small></a>
-<a href="../items/recent-restrictions.html">最近の限定出荷・供給停止への変更<small>直近30日以内の公表区分変更を確認</small></a>
-<a href="{DISCONTINUATION_GUIDE_SLUG}.html">販売中止・製造中止・薬価削除の確認ガイド<small>一部包装中止や経過措置期限を、現在の供給区分と分けて確認</small></a>
-<a href="../ingredients/index.html">成分（一般名）別の供給状況<small>同じ成分の品目を規格・メーカー別に確認</small></a>
-<a href="../#demo" data-dsn-event="search-cta-open">薬品名・成分名・メーカー名・YJコードから検索<small>Web版で対象品目を探し、理由やメーカー案内を確認</small></a>
-</div></nav>
+
 <section class="intent"><h2>1. 現在の供給区分は厚生労働省データで確認</h2>
 <p>厚生労働省「医療用医薬品供給状況」では、通常出荷・限定出荷・供給停止などの現在区分、理由、更新日を品目単位で確認します。医薬品供給ナビもこの公表値を意味を変えずに表示します。</p>
 <div class="official-links"><a href="{MHLW_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システムを開く</a></div></section>
