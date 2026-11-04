@@ -2,44 +2,16 @@
   "schema_version": 1,
   "generated_at": "2026-11-04",
   "source": {
-    "mhlw_version": 202611040529,
-    "mhlw_note": "2026年11月04日厚労省データ反映",
+    "mhlw_version": 202611050548,
+    "mhlw_note": "2026年11月05日厚労省データ反映",
     "manufacturer_checked_through": "2026-11-04"
   },
   "counts": {
-    "high": 3,
+    "high": 2,
     "review": 5,
-    "total": 8
+    "total": 7
   },
   "products": {
-    "1179002F1122": {
-      "product_name": "アミトリプチリン塩酸塩錠１０ｍｇ「サワイ」",
-      "maker": "沢井製薬",
-      "official": {
-        "status": "limited",
-        "label": "限定出荷（自社の事情）",
-        "updated_at": "2026-08-31"
-      },
-      "manufacturer": {
-        "status": "stopped",
-        "label": "供給停止",
-        "announced_at": "2026-09-14",
-        "maker": "沢井製薬",
-        "title": "2026年9月14日 製品の供給状況一覧：アミトリプチリン塩酸塩錠10mg「サワイ」は供給停止",
-        "url": "https://med.sawai.co.jp/file/pr115_1773_1.pdf",
-        "scope": "product"
-      },
-      "confidence": "high",
-      "reason": "メーカー・製品規格・公表日の一致を確認",
-      "badge": "情報差異あり",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": true,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "",
-        "verified_target_scope": ""
-      }
-    },
     "2329028F1147": {
       "product_name": "ラベプラゾールＮａ塩錠１０ｍｇ「オーハラ」",
       "maker": "エッセンシャルファーマ・共創未来ファーマ・第一三共エスファ・大原薬品工業",
