@@ -4075,6 +4075,161 @@
         "メーカー文書は2026年4月、一覧掲載日は2026年4月16日です。後続案内もメーカーにご確認ください。",
         "この案内は自動追跡対象外です。"
       ]
+    },
+    {
+      "id": "kyorin-kipres-ketas-package-202610",
+      "maker": "杏林製薬",
+      "title": "キプレス・ケタス 一部包装販売中止のご案内",
+      "url": "https://www.kyorin-pharm.co.jp/prodinfo/information/pdf/202610kipresG4_C5soldout.pdf",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-05",
+      "content_updated_at": "2026-11-05",
+      "sha256": "e445620153ebd222ab0cf31bf76dbc8f333465512ea1d4796338b609b6fc0b05",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "メーカーは諸般の事情により、対象包装を流通在庫切れをもって販売中止すると案内しています。",
+      "targets": [
+        {
+          "yj_code": "4490026C1021",
+          "product_name": "キプレス細粒４ｍｇ",
+          "maker": "杏林製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100包（10包×10）",
+              "unified_product_code": "060-006837",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年3月"
+                  }
+                ],
+                "note": "メーカーは流通在庫切れをもって販売中止予定と案内。時期は予想であり、現在の出荷・受注や在庫は未確認です。"
+              }
+            },
+            {
+              "package": "28包（7包×4）",
+              "unified_product_code": "060-006820",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは案内時点で販売継続包装と記載。現在の出荷・受注や在庫は未確認です。"
+              }
+            },
+            {
+              "package": "140包（7包×20）",
+              "unified_product_code": "060-006844",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは案内時点で販売継続包装と記載。現在の出荷・受注や在庫は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "4490026F1044",
+          "product_name": "キプレスチュアブル錠５ｍｇ",
+          "maker": "杏林製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP 28錠（14錠×2）",
+              "unified_product_code": "060-007087",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年4月"
+                  }
+                ],
+                "note": "メーカーは流通在庫切れをもって販売中止予定と案内。時期は予想であり、現在の出荷・受注や在庫は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 140錠（14錠×10）",
+              "unified_product_code": "060-007599",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年4月"
+                  }
+                ],
+                "note": "メーカーは流通在庫切れをもって販売中止予定と案内。時期は予想であり、現在の出荷・受注や在庫は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 100錠（10錠×10）",
+              "unified_product_code": "060-007094",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは案内時点で販売継続包装と記載。現在の出荷・受注や在庫は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "4490010N1021",
+          "product_name": "ケタスカプセル１０ｍｇ",
+          "maker": "杏林製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "バラ 500カプセル（ポリ瓶）",
+              "unified_product_code": "060-004338",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年5月"
+                  }
+                ],
+                "note": "メーカーは流通在庫切れをもって販売中止予定と案内。時期は予想であり、現在の出荷・受注や在庫は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 100カプセル（10カプセル×10）",
+              "unified_product_code": "060-003966",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは案内時点で販売継続包装と記載。現在の出荷・受注や在庫は未確認です。"
+              }
+            },
+            {
+              "package": "PTP 500カプセル（10カプセル×50）",
+              "unified_product_code": "060-003973",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは案内時点で販売継続包装と記載。現在の出荷・受注や在庫は未確認です。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "在庫切れの時期はメーカーが示す流通在庫切れの予想年月であり、市場状況により変動します。",
+        "販売継続は2026年10月のメーカー案内時点の情報で、現在の受注可否や在庫は未確認です。",
+        "公式一覧の掲載日や後続案内は未確認です。この案内は自動追跡対象外です。"
+      ]
     }
   ]
 }

@@ -20,6 +20,7 @@ MAKER_HOSTS = {
     '第一三共': 'www.medicalcommunity.jp', '第一三共エスファ': 'med.daiichisankyo-ep.co.jp',
     '東和薬品': 'med.towayakuhin.co.jp',
     '日本ケミファ': 'www.nc-medical.com',
+    '杏林製薬': 'www.kyorin-pharm.co.jp',
 }
 SCOPES = {'product', 'package', 'seller_route_and_package'}
 KINDS = {'discontinued', 'limited', 'stopped', 'resumed', 'resumption_planned', 'recall'}
