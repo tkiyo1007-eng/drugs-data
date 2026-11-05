@@ -42,6 +42,15 @@ class ManufacturerPlanTests(unittest.TestCase):
             [{'kind': 'manufacturer', 'post_day': '2026-10-01', 'state': 'pending'}],
             [{'kind': 'manufacturer', 'post_day': '2026-10-01'}]*31]:
             self.assertEqual(self.plan({'posted': posted})['action'], 'skip')
+    def test_discontinued_notice_keeps_reviewed_text_without_manufacturing_inference(self):
+        n = copy.deepcopy(self.n)
+        n['event_type'] = 'discontinued'
+        n['x_text'] = '検査用錠の販売中止。メーカー案内をご確認ください。 https://official.test/notice.pdf'
+        self.write('manufacturer_notices.json', {'notices': [n]})
+        plan = self.plan()
+        self.assertEqual(plan['action'], 'post')
+        self.assertTrue(plan['text'].startswith(n['x_text'] + '\n'))
+        self.assertNotIn('製造中止', plan['text'])
     def test_old_or_future_notice_is_not_backfilled(self):
         for date in ['2026-10-01', '2026-10-15']:
             n = copy.deepcopy(self.n); n['listed_at'] = date; self.write('manufacturer_notices.json', {'notices': [n]})
