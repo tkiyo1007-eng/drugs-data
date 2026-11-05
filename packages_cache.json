@@ -10611,5 +10611,59 @@
    "pkg": "バラ1000カプセル",
    "until": ""
   }
- ]
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/80100/information/20260121cI1.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP1000錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ1200錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP42錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP100カプセル",
+   "until": ""
+  },
+  {
+   "pkg": "バラ100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP1200錠",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/73760/information/20260610cI6.pdf": [],
+ "https://www.nichiiko.co.jp/medicine/file/59680/information/20230906cI1.pdf": [],
+ "https://www.nichiiko.co.jp/medicine/file/71390/information/20230523cG2.pdf": [],
+ "https://www.nichiiko.co.jp/medicine/file/71400/information/20230523cG2.pdf": [],
+ "https://www.nichiiko.co.jp/medicine/file/71430/information/20241106cG1.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP1000錠",
+   "until": ""
+  }
+ ],
+ "https://www.nichiiko.co.jp/medicine/file/40510/information/20250528cI4.pdf": [],
+ "https://www.nichiiko.co.jp/medicine/file/14280/information/20260129cI2.pdf": [],
+ "https://www.nichiiko.co.jp/medicine/file/15620/information/20260325cI9.pdf": [],
+ "https://www.nichiiko.co.jp/medicine/file/73880/information/20250319cG2.pdf": [],
+ "https://www.nichiiko.co.jp/medicine/file/73890/information/20250319cG2.pdf": [],
+ "https://www.nichiiko.co.jp/medicine/file/55980/information/20260907cI1.pdf": []
 }
