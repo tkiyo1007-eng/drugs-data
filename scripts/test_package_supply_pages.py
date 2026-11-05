@@ -45,6 +45,34 @@ class PackageSupplyPageTests(unittest.TestCase):
         self.assertIn("限定出荷（その他）", output)
         self.assertNotIn("供給停止", output)
 
+    def test_empty_plans_without_note_remain_unknown(self):
+        target = {"packages": [{"package": "PTP100錠", "supply": {
+            "status": "limited", "status_text": "限定出荷", "plans": []}}]}
+        output = package_supply_html(target)
+        self.assertIn("この包装の予定情報は未確認です。", output)
+        self.assertIn("限定出荷", output)
+
+    def test_note_without_structured_plan_is_escaped_without_unknown_fallback(self):
+        target = {"packages": [{"package": "PTP100錠", "supply": {
+            "status": "unconfirmed", "plans": [],
+            "note": "<script>alert(1)</script> 来月に出荷停止予定"}}]}
+        output = package_supply_html(target)
+        self.assertIn("&lt;script&gt;alert(1)&lt;/script&gt; 来月に出荷停止予定", output)
+        self.assertNotIn("<script>", output)
+        self.assertNotIn("この包装の予定情報は未確認です。", output)
+        self.assertIn("包装別情報未確認", output)
+
+    def test_zictor_future_stop_note_is_not_labeled_unknown(self):
+        path = Path(__file__).resolve().parent.parent / "manufacturer_notices.json"
+        notices = json.loads(path.read_text(encoding="utf-8"))["notices"]
+        notice = next(n for n in notices if n["id"] == "hisamitsu-zictor-fourth-202610")
+        target, = notice["targets"]
+        output = package_supply_html(target)
+        self.assertIn("2026年11月下旬より当面の間、1枚包装の出荷を停止予定", output)
+        self.assertIn("7枚包装は限定出荷継続", output)
+        self.assertIn("第四報時点：限定出荷", output)
+        self.assertNotIn("この包装の予定情報は未確認です。", output)
+
     def test_fields_are_escaped(self):
         target = self.notice()["targets"][0]
         p = target["packages"][0]

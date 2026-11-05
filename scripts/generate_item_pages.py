@@ -559,8 +559,9 @@ def package_supply_html(target: dict) -> str:
         name = package.get("package", "") if isinstance(package, dict) else package
         status = supply.get("status_text", "包装別情報未確認")
         plans = [f'<li>{esc(PACKAGE_PLAN_LABELS[p["event"]])}：{esc(p["timing"])}</li>' for p in supply["plans"]]
-        plan_html = '<ul>' + "".join(plans) + '</ul>' if plans else '<p>この包装の予定情報は未確認です。</p>'
         note = f'<p>{esc(supply["note"])}</p>' if supply.get("note") else ""
+        plan_html = ('<ul>' + "".join(plans) + '</ul>' if plans
+                     else '' if note else '<p>この包装の予定情報は未確認です。</p>')
         rows.append('<div class="package-supply-row"><dt>' + esc(name) + '</dt>'
                     + '<dd><p><strong>案内時点の出荷対応：</strong>' + esc(status) + '</p>'
                     + plan_html + note + '</dd></div>')
