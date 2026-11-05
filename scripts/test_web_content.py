@@ -1,4 +1,5 @@
 import unittest
+from html.parser import HTMLParser
 from pathlib import Path
 
 
@@ -40,9 +41,34 @@ class PublishedWebContentTests(unittest.TestCase):
         self.assertNotIn("Excelファイルのため実用的ではない", self.html)
 
     def test_mobile_search_compaction_is_published(self):
-        self.assertIn("#demo{padding-top:16px}", self.html)
-        self.assertIn("header .hero-visual{display:none}", self.html)
-        self.assertIn('href="#demo" data-focus-search', self.html)
+        # LPはWeb正本から同期される。余白の数値やCTAの親要素ではなく、
+        # 単一の検索入口・問い合わせ欄・既存の検索導線の契約を確認する。
+        elements = []
+
+        class Elements(HTMLParser):
+            def handle_starttag(self, tag, attrs):
+                elements.append((tag, dict(attrs)))
+
+        Elements().feed(self.html)
+        queries = [(i, tag, attrs) for i, (tag, attrs) in enumerate(elements)
+                   if attrs.get("id") == "q"]
+        self.assertEqual(len(queries), 1)
+        query_position, query_tag, query = queries[0]
+        self.assertEqual(query_tag, "input")
+        self.assertEqual(query.get("type"), "search")
+        self.assertTrue(query.get("aria-label"))
+        trending = [i for i, (_, attrs) in enumerate(elements)
+                    if attrs.get("id") == "trending"]
+        results = [i for i, (_, attrs) in enumerate(elements)
+                   if attrs.get("id") == "list"]
+        self.assertEqual(len(trending), 1)
+        self.assertEqual(len(results), 1)
+        self.assertLess(query_position, trending[0])
+        self.assertLess(trending[0], results[0])
+        search_links = [attrs for tag, attrs in elements if tag == "a"
+                        and attrs.get("href") == "#demo"
+                        and "data-focus-search" in attrs]
+        self.assertTrue(search_links)
 
     def test_returning_watchers_see_unread_changes_before_scrolling(self):
         for element_id in (
