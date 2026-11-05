@@ -362,6 +362,14 @@ h1 .grad .nb{
   .data-freshness-notice{flex-wrap:wrap}
   .data-freshness-reload{margin-left:26px}
 }
+.data-update-notice{display:flex;align-items:center;flex-wrap:wrap;gap:8px 16px;margin:12px 0;
+  padding:10px 14px;border:1px solid var(--stroke);border-radius:14px;background:var(--card-strong);color:var(--ink);font-size:13px;line-height:1.6}
+.data-update-notice[hidden]{display:none}
+.data-update-notice span{flex:1 1 220px}
+.data-update-notice button{border:1px solid currentColor;border-radius:999px;padding:8px 12px;
+  color:var(--ink);background:transparent;font:inherit;font-weight:700;cursor:pointer;min-height:44px;white-space:normal}
+.data-update-notice button:hover{background:var(--card)}
+.data-update-notice button:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 .supply-bar{display:flex;height:14px;border-radius:99px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.25);margin-bottom:16px}
 /* 実データ読込前のプレースホルダー。具体的な比率を示さない中立の帯 */
 .sbar-skeleton{flex:1;background:rgba(255,255,255,.16)}
@@ -1703,6 +1711,10 @@ html.season-autumn .autumn-sky{display:none}
     </div>
 
     <button type="button" class="search-results-jump" id="searchResultsJump" aria-controls="meta list" hidden disabled>検索結果を見る</button>
+    <div class="data-update-notice" id="dataUpdateNotice" role="status" aria-live="polite" hidden>
+      <span>公開データに変更が見つかりました。</span>
+      <button type="button" id="dataUpdateReload">検索条件を保って再読み込み</button>
+    </div>
     <button type="button" id="trendingSearchToggle" class="trending-toggle" aria-expanded="false" aria-controls="trending" hidden>問い合わせの多い製品を開く</button>
     <section id="trending" aria-labelledby="trendingHeading">
   <h3 id="trendingHeading">最近お問い合わせの多い製品</h3>
@@ -3286,6 +3298,20 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
     if(shouldSyncHash) syncHashSoon();
     return;
   }
+  // 期限経過などでメーカー補足を確認できなくても、選択中の条件を0件扱いにしない。
+  if(filter === "watchDiscrepancy" && !supplementalReady()){
+    SHOWN = []; LAST_HITS = [];
+    syncSearchResultJump();
+    $csvBtn.hidden = true; $searchShareBtn.hidden = true; $loadMore.hidden = true;
+    resetSearchShareFeedback();
+    const loading = Object.values(SUPPLEMENTAL_STATE).includes("loading");
+    $meta.textContent = loading ? "メーカー補足情報を確認しています…" : "メーカー補足情報の確認が必要です";
+    $meta.setAttribute("aria-busy", String(loading));
+    $list.setAttribute("aria-busy", String(loading));
+    $list.innerHTML = '<div class="data-loading">メーカー補足情報を確認できないため、情報差異の有無は判定していません。「すべて」や供給区分での検索は利用できます。</div>';
+    if(shouldSyncHash) syncHashSoon();
+    return;
+  }
   // スペース区切りの複数キーワードはAND検索にする（NFKCで全角スペースも半角化済み）
   //
   // YJコード（薬価基準収載医薬品コード）でも引けるようにする。レセコンや薬歴から
@@ -3456,7 +3482,7 @@ function resolveFilter(f){
   if(!f || !HASH_FILTERS.includes(f)) return "all";
   if(f === "fav" && !FAVS.size) return "all";
   // 未取得・取得失敗・正常0件でも、利用者が選んだ監視条件を勝手に解除しない。
-  if(f === "watchDiscrepancy" && !WATCH_DISCREPANCY_KEYS.size) return FAVS.size ? "fav" : "all";
+  // 情報差異も、未取得・未確認の間に選択条件を解除しない。
   return f;
 }
 function applyHashState(){
@@ -5211,11 +5237,9 @@ function renderWatchDashboard(){
     discrepancyPill.textContent = `情報差異 ${WATCH_DISCREPANCY_KEYS.size}`;
     discrepancyPill.style.display = "";
   }else{
-    discrepancyPill.style.display = "none";
-    if(filter === "watchDiscrepancy"){
-      filter = FAVS.size ? "fav" : "all";
-      setActivePill(filter);
-    }
+    discrepancyPill.style.display = filter === "watchDiscrepancy" ? "" : "none";
+    discrepancyPill.textContent = supplementalConfirmed ? "情報差異 0" : "情報差異 未確認";
+    // 再読み込みや期限経過でも選択は維持。未確認はrender側で0件と区別する。
   }
   dashboard.setAttribute("aria-busy", String(!LIVE || !supplementalConfirmed || HISTORY_STATE.phase === "loading"));
 }
@@ -6858,13 +6882,14 @@ for(const [kind,retryId,listId] of [["topics","topicRetry","topicList"],["headli
   });
   refreshNewsViews(kind);
 }
-// 再表示時とJSTの日付変更時は表示期間だけを見直す。通信・検索・保存状態は更新しない。
+// JSTの日付変更時は記事の表示期間とデータの経過日を見直す。取得済みの日付や保存内容は変更しない。
 let newsViewDay = jstDayNumber(Date.now());
 function refreshNewsDateWindow(){
   const day = jstDayNumber(Date.now());
   if(day === newsViewDay) return;
   newsViewDay = day;
   refreshNewsViews("topics");refreshNewsViews("headlines");
+  refreshDataFreshness();
 }
 document.addEventListener("visibilitychange",()=>{if(!document.hidden) refreshNewsDateWindow();});
 window.addEventListener("pageshow",refreshNewsDateWindow);
@@ -7082,6 +7107,71 @@ function validateSupplyCSVRows(head, rows){
 }
 // ===== End public CSV contract =====
 
+// 実際に読み込んだ本文と公開版を比較する。commitや確認時刻だけで「最新」と判定しない。
+const UPDATE_DATA_FILES = new Set([
+  "drugs_app_ready.csv", "version.json", "maker_links.json", "manual_announcements.json",
+  "product_lifecycle.json", "supply_discrepancies.json", "maker_collection_health.json",
+  "maker_announcements.json", "announcement_summaries.json", "manufacturer_notices.json",
+  "manufacturer_bulletins.json", "announcement_packages.json", "resolution_stats.json", "featured_products.json",
+]);
+const LOADED_PUBLIC_DATA = new Map();
+function rememberLoadedPublicData(url, body){
+  try{
+    const name = new URL(url, location.href).pathname.split("/").pop();
+    if(!UPDATE_DATA_FILES.has(name) || !globalThis.crypto?.subtle) return;
+    // 読み込み処理を待たせず、比較が必要なときにだけハッシュの完了を待つ。
+    LOADED_PUBLIC_DATA.set(name, crypto.subtle.digest("SHA-256", body).then(hash=>({
+      sha256:Array.from(new Uint8Array(hash), n=>n.toString(16).padStart(2,"0")).join(""), bytes:body.byteLength,
+    })).catch(()=>null));
+  }catch(error){} // 比較できなくても、既存の検索データ読み込みは妨げない。
+}
+function publishedDataDiffers(manifest, loaded){
+  if(!manifest || manifest.schema_version !== 1 || typeof manifest.source_commit !== "string"
+    || !/^[0-9a-f]{40}$/.test(manifest.source_commit)
+    || !manifest.files || typeof manifest.files !== "object" || Array.isArray(manifest.files)) return false;
+  if(!loaded.has("drugs_app_ready.csv") || !loaded.has("version.json")) return false;
+  // 欠落・不正な配信表は変更の証拠にしない。対象は読み込み済みの検索・補足データだけ。
+  for(const [name, actual] of loaded){
+    const entry = manifest.files[name];
+    if(!actual || !entry || typeof entry.sha256 !== "string" || !/^[0-9a-f]{64}$/.test(entry.sha256)
+      || !Number.isSafeInteger(entry.bytes) || entry.bytes <= 0) return false;
+  }
+  return [...loaded].some(([name, actual])=>manifest.files[name].sha256 !== actual.sha256
+    || manifest.files[name].bytes !== actual.bytes);
+}
+const PUBLIC_UPDATE_INTERVAL_MS = 15*60*1000;
+const PUBLIC_UPDATE_RETURN_GAP_MS = 60*1000;
+let publicUpdateLastAttempt = null, publicUpdatePending = null;
+async function checkForPublishedUpdate(){
+  if(!LIVE || document.hidden || navigator.onLine === false
+    || !LOADED_PUBLIC_DATA.has("drugs_app_ready.csv") || !LOADED_PUBLIC_DATA.has("version.json")) return;
+  if(publicUpdatePending) return publicUpdatePending;
+  const now = Date.now();
+  if(publicUpdateLastAttempt !== null && now >= publicUpdateLastAttempt
+    && now-publicUpdateLastAttempt < PUBLIC_UPDATE_RETURN_GAP_MS) return;
+  publicUpdateLastAttempt = now;
+  publicUpdatePending = (async()=>{
+    try{
+      // 同一サイトの検証済みPages生成物のみ確認。失敗を「更新なし」「最新」に置換しない。
+      const response = await fetchFirst(["public-data-manifest.json"]);
+      if(!response || responseUsesCachedData(response)) return;
+      const manifest = await response.json();
+      const loaded = new Map(await Promise.all([...LOADED_PUBLIC_DATA].map(async ([name, value])=>[name,await value])));
+      if(publishedDataDiffers(manifest, loaded)) document.getElementById("dataUpdateNotice").hidden = false;
+    }catch(error){} // 既存の画面・基準日・保存内容を維持する。
+  })();
+  try{ await publicUpdatePending; }finally{ publicUpdatePending = null; }
+}
+document.addEventListener("visibilitychange",()=>{if(!document.hidden) void checkForPublishedUpdate();});
+window.addEventListener("pageshow",()=>{void checkForPublishedUpdate();});
+setInterval(()=>{if(!document.hidden) void checkForPublishedUpdate();}, PUBLIC_UPDATE_INTERVAL_MS);
+document.getElementById("dataUpdateReload").addEventListener("click",()=>{
+  // 打鍵直後でURL反映待ちでも、既存の検索・絞り込みの保存形式で復元する。
+  clearTimeout(hashTimer); hashTimer = null;
+  syncHash();
+  location.reload();
+});
+
 const PUBLIC_FETCH_TIMEOUT_MS = 30000;
 async function fetchFirst(urls){
   // 相対URLと同じ公開URLを重ねて待たず、応答本文の完了まで期限を適用する。
@@ -7094,7 +7184,8 @@ async function fetchFirst(urls){
         const response = await fetch(url, {cache:"no-cache", signal:controller.signal});
         if(!response.ok) return null;
         const ready = response.clone();
-        await response.arrayBuffer();
+        const body = await response.arrayBuffer();
+        if(!controller.signal.aborted) rememberLoadedPublicData(url, body);
         return ready;
       })();
       const deadline = new Promise(resolve=>{
@@ -7148,13 +7239,25 @@ function setDatasetDate(date){
   DATASET_DATE = date || "";
   // 新しいversionや取得失敗に、前回の原Excel基準日を引き継がない。
   setSourceDate("");
+  refreshDataFreshness();
+}
+function refreshDataFreshness(){
+  const date = DATASET_DATE;
+  renderSourceFreshness();
   const asOf = document.getElementById("dataAsOf");
   const notice = document.getElementById("staleNotice");
   const noticeText = document.getElementById("staleNoticeText");
+  const setNotice = html=>{
+    if(noticeText.innerHTML === html) return;
+    const active = document.activeElement;
+    const restoreLink = active && active.closest("#staleNoticeText");
+    noticeText.innerHTML = html;
+    if(restoreLink) noticeText.querySelector("a")?.focus({preventScroll:true});
+  };
   if(!date){
     asOf.textContent = "データ基準日を取得できません。";
     document.getElementById("today").textContent = "基準日未確認";
-    noticeText.innerHTML = `表示中データの基準日を確認できません。重要な判断では、<a href="${OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システム</a>もご確認ください。`;
+    setNotice(`表示中データの基準日を確認できません。重要な判断では、<a href="${OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システム</a>もご確認ください。`);
     notice.hidden = false;
     if(!Object.values(SUPPLEMENTAL_STATE).includes("loading")) updateSupplementalStatus();
     return;
@@ -7164,7 +7267,7 @@ function setDatasetDate(date){
   asOf.textContent = `全体データ基準日 ${display}`;
   document.getElementById("today").textContent = `${display} 時点`;
   if(age != null && age >= STALE_DATA_DAYS){
-    noticeText.innerHTML = `全体データ基準日から<strong>${age.toLocaleString()}日</strong>経過しています。更新処理が遅れている可能性があるため、<a href="${OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システム</a>もご確認ください。`;
+    setNotice(`全体データ基準日から<strong>${age.toLocaleString()}日</strong>経過しています。更新処理が遅れている可能性があるため、<a href="${OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システム</a>もご確認ください。`);
     notice.hidden = false;
   }else{
     notice.hidden = true;
@@ -7174,6 +7277,9 @@ function setDatasetDate(date){
 }
 function setSourceDate(date){
   SOURCE_DATE = validSourceDate(date, DATASET_DATE) ? date : "";
+  renderSourceFreshness();
+}
+function renderSourceFreshness(){
   const display = SOURCE_DATE.replaceAll("-", ".") || "確認できません";
   document.getElementById("dataSourceAsOf").textContent = `厚労省の原Excel基準日：${display}`;
   // 取込日が新しくても原資料が古い場合を見落とさない。
@@ -7375,6 +7481,7 @@ function failDataLoad(message){
   }else{
     setDatasetDate("");
   }
+  void checkForPublishedUpdate();
  }catch(e){
    failDataLoad("公開データの読み込み中にエラーが発生しました。");
  }
