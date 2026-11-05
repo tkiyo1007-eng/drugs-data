@@ -4056,7 +4056,7 @@ function manufacturerPackageSupplyHTML(notice, target){
       const status = s && s.status !== "unconfirmed" ? s.status_text : "包装別情報未確認";
       const plans = s && s.plans.length
         ? s.plans.map(plan=>`<span class="package-supply-plan">${esc(MANUFACTURER_PACKAGE_PLAN_LABELS[plan.event])}：${esc(plan.timing)}</span>`).join("")
-        : "この欄に確認済みの予定情報はありません";
+        : s && s.note ? "" : "この欄に確認済みの予定情報はありません";
       return `<li class="package-supply-row"><h6>${esc(p.package)}</h6><dl><div><dt>案内時点の出荷対応</dt><dd>${esc(status)}</dd></div>`
         + `<div><dt>予定（原文）</dt><dd>${plans}${s && s.note ? `<p>${esc(s.note)}</p>` : ""}</dd></div></dl></li>`;
     }).join("")}</ul>`
