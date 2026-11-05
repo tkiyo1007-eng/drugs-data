@@ -1064,7 +1064,45 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .trending-page-links a{display:inline-flex;align-items:center;min-height:44px;color:var(--blue-deep);font-size:14px;font-weight:700;overflow-wrap:anywhere;text-underline-offset:3px}
 .trending-page-links a:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 .trending-chip:focus-visible,.trending-names summary:focus-visible,.trending-formal-link:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
-@media(max-width:640px){#trending{padding:14px}.trending-list{grid-template-columns:1fr;gap:8px}}
+/* 検索と選定品目を最初に。紹介・集計はその後にまとめる。 */
+.search-intro{grid-template-columns:1fr;padding:94px 24px 0;gap:0}
+.search-intro .lede{max-width:64em;margin-bottom:0}
+.search-visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.search-overview{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:24px;margin:24px 0;padding-top:24px;border-top:1px solid var(--line)}
+.search-overview .pulse-card{padding:18px 20px;border-radius:18px}
+.search-overview .pulse-total{font-size:34px}
+.search-overview .float-chip{display:none}
+.search-overview .legend{padding-right:0}
+.search-overview .hero-app-link,.search-overview .btn-primary{min-height:44px;box-sizing:border-box;padding:10px 14px;font-size:13px}
+.search-overview .cta-row{gap:8px}
+.search-active .search-discovery,.search-active #searchIntentHelp,.search-active .supply-entry-links{display:none}
+#trending[hidden],#trendingSearchToggle[hidden]{display:none}
+.trending-list{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
+.trending-entry{display:flex;flex-direction:column;border:1px solid rgba(79,128,244,.24);border-radius:16px;background:rgba(79,128,244,.055);overflow:hidden}
+.trending-chip{flex:1;min-height:52px;border:0;border-radius:0;background:transparent;padding:10px 14px}
+.trending-chip:hover{transform:none}
+.trending-chip:focus-visible,.trending-names summary:focus-visible{outline-offset:-3px}
+.trending-hint{margin:0;padding:0 14px 8px;min-height:24px;box-sizing:border-box;font-size:11px;line-height:1.5;color:var(--sub);overflow-wrap:anywhere}
+.trending-reference{display:flex;align-items:center;min-height:44px;padding:8px 14px;box-sizing:border-box;color:var(--blue-deep);font-size:12px;font-weight:700;text-decoration:none;border-top:1px solid rgba(79,128,244,.14)}
+.trending-reference:focus-visible{outline:3px solid var(--blue);outline-offset:-3px}
+.trending-names{border-top:1px solid rgba(79,128,244,.14)}
+.trending-names summary{padding:10px 14px}
+.trending-entry:has(.trending-names[open]){grid-column:1/-1}
+.trending-names[open] ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:0 16px;padding:0 14px 8px}
+.trending-names[open] li{min-width:0}
+.trending-formal-link small{display:block;font-size:11px;text-decoration:none}
+@media(max-width:640px){
+  .search-intro{padding:78px 20px 0}
+  .search-intro .lede{font-size:13px;line-height:1.7}
+  #trending{padding:0;border:0;background:transparent;margin-top:16px}
+  #trending h3{font-size:15px}
+  .trending-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .trending-chip{font-size:13px;padding:9px 10px;min-height:58px}
+  .trending-hint{padding:0 10px 8px}
+  .trending-names summary,.trending-reference{padding:10px;font-size:11.5px}
+  .search-overview{grid-template-columns:1fr;gap:12px}
+}
+@media(max-width:360px){.trending-list{grid-template-columns:1fr}}
 
 /* ===== メーカー別の供給状況 ===== */
 .maker-list{padding:10px 20px}
@@ -1585,7 +1623,7 @@ html.season-autumn .autumn-sky{display:none}
   </a>
 </nav>
 
-<header id="top">
+<header id="top" class="search-intro">
   <div class="autumn-sky" aria-hidden="true">
     <svg class="autumn-branch" viewBox="0 0 420 220" aria-hidden="true"><defs><path id="maple-b" d="M0-27 6-14 16-21 14-9 27-10 18-1 26 5 12 7 11 19 4 13 0 29-4 13-11 19-12 7-26 5-18-1-27-10-14-9-16-21-6-14Z"/></defs><g fill="none" stroke="#96653f" stroke-width="3" stroke-linecap="round"><path d="M420 2C337 17 276 41 214 69S101 107 35 110"/><path d="M337 23q-11 32-7 57M275 43q-4 35-19 52M202 73q-13 26-8 48M132 95q-15 20-17 38M383 10q-5 31 10 53"/></g><g fill="#d8542e"><use href="#maple-b" transform="translate(384 49) rotate(23) scale(1.2)"/><use href="#maple-b" transform="translate(329 70) rotate(-12) scale(1.2)"/><use href="#maple-b" transform="translate(257 91) rotate(18) scale(1.03)"/><use href="#maple-b" transform="translate(195 113) rotate(-12) scale(.8)"/></g><g fill="#eb7b33"><use href="#maple-b" transform="translate(410 94) rotate(-10) scale(.9)"/><use href="#maple-b" transform="translate(360 18) rotate(24) scale(1.08)"/><use href="#maple-b" transform="translate(291 27) rotate(-25) scale(.95)"/><use href="#maple-b" transform="translate(224 51) rotate(12) scale(.8)"/><use href="#maple-b" transform="translate(117 125) rotate(25) scale(.7)"/></g><g fill="#f3ad3d"><use href="#maple-b" transform="translate(366 103) rotate(14) scale(.68)"/><use href="#maple-b" transform="translate(289 102) rotate(-20) scale(.73)"/><use href="#maple-b" transform="translate(151 83) rotate(-18) scale(.64)"/></g></svg>
     <svg class="autumn-leaf" viewBox="0 0 64 64"><path fill="currentColor" d="M32 3 37 18 46 10 45 24 60 22 49 32 58 39 43 40 42 54 34 47 32 62 29 47 21 54 20 40 6 39 15 32 4 22 19 24 18 10 27 18Z"/><path d="M32 13v41M32 35 18 25M32 35l14-10" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="1.5"/></svg>
@@ -1621,18 +1659,6 @@ html.season-autumn .autumn-sky{display:none}
     <span class="eyebrow"><span class="pulse"></span>厚生労働省データ・毎日自動更新</span>
     <h1><span class="nb">医薬品の</span><br><span class="grad">出荷調整・供給状況を<span class="nb">調べる</span></span></h1>
     <p class="lede">薬品名・成分名・メーカー名・YJコードから無料で検索。厚労省の供給区分と、メーカーの販売中止などの補足情報を分けて確認できます。</p>
-    <div class="cta-row">
-      <a class="btn-primary" href="#demo" data-focus-search data-dsn-event="search-cta-open">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
-        供給状況を検索する
-      </a>
-      <a class="btn-ghost hero-app-link" href="https://apps.apple.com/jp/app/id6777696446" target="_blank" rel="noopener">iPhone版を無料で入手</a>
-    </div>
-    <nav class="hero-directories" aria-label="供給状況の一覧を開く">
-      <a href="items/limited.html">出荷調整（限定出荷）の一覧</a>
-      <a href="items/stopped.html">供給停止の一覧</a>
-    </nav>
-    <p class="hero-note">会員登録不要・Web版も無料で利用できます</p>
     <p class="season-note"><svg width="14" height="14" viewBox="0 0 64 56" aria-hidden="true"><ellipse cx="32" cy="33" rx="30" ry="21" fill="#E07A1F"/><path d="M31 10c0-5 2-8 6-9l2 3c-3 1-4 3-4 6Z" fill="#3E7A3A"/></svg><svg width="15" height="15" viewBox="0 0 64 64" aria-hidden="true"><path d="M34 4 20 44h28Z" fill="#4E2AA8"/><path d="M34 4c4 6 9 9 16 10-6 2-11 1-16-4Z" fill="#4E2AA8"/><ellipse cx="32" cy="46" rx="28" ry="7" fill="#3A2180"/><rect x="21" y="36" width="24" height="5" rx="1" fill="#E8A13A"/></svg>10月限定のハロウィンデザインです</p>
     <button class="watch-return" id="watchReturn" type="button" hidden>
       <span>監視品目に未確認の変更</span><strong class="num" id="watchReturnCount">0件</strong><span>変更を見る</span>
@@ -1648,22 +1674,6 @@ html.season-autumn .autumn-sky{display:none}
     </div>
   </div>
 
-  <div class="hero-visual">
-    <div class="pulse-card">
-      <div class="pulse-head"><span>SUPPLY PULSE</span><span id="today" class="num">—</span></div>
-      <div class="pulse-total"><span class="num" id="counter">—</span><small>品目を収載</small></div>
-      <div class="pulse-sub" id="pulseSub">全国の医療用医薬品の供給ステータスを毎日集計</div>
-      <!-- 帯グラフ・凡例・数値は、実データを読み込むまで具体的な値を出さない。
-           固定値を置いておくと、取得に失敗したときに根拠のない数字が
-           本物の集計のように表示され続けてしまう（供給状況を扱う以上これは避ける） -->
-      <div class="supply-bar" id="sbar" aria-hidden="true">
-        <span class="sbar-skeleton"></span>
-      </div>
-      <div class="legend" id="legend"></div>
-    </div>
-    <div class="float-chip glass chip1"><span class="big num" id="chipLim">—</span>限定出荷</div>
-    <div class="float-chip glass chip2"><span class="big num" id="chipStop">—</span>供給停止</div>
-  </div>
 </header>
 
 <!-- 主要コンテンツを main ランドマークに入れる。支援技術でセクションを飛ばして
@@ -1671,9 +1681,9 @@ html.season-autumn .autumn-sky{display:none}
 <main>
 
 <section id="demo" class="reveal">
-  <p class="sec-eyebrow">LIVE SEARCH</p>
-  <h2>医薬品の供給状況を検索</h2>
-  <p class="sec-lede">出荷調整・限定出荷・供給停止を確認。検索結果から原典と同成分・同剤形の関連品目へ進めます。</p>
+  <p class="sec-eyebrow search-visually-hidden">LIVE SEARCH</p>
+  <h2 class="search-visually-hidden">医薬品の供給状況を検索</h2>
+  <p class="sec-lede search-visually-hidden">出荷調整・限定出荷・供給停止を確認。検索結果から原典と同成分・同剤形の関連品目へ進めます。</p>
 
   <noscript>
     <div class="glass" id="noScriptSearch">
@@ -1693,9 +1703,10 @@ html.season-autumn .autumn-sky{display:none}
     </div>
 
     <button type="button" class="search-results-jump" id="searchResultsJump" aria-controls="meta list" hidden disabled>検索結果を見る</button>
+    <button type="button" id="trendingSearchToggle" class="trending-toggle" aria-expanded="false" aria-controls="trending" hidden>問い合わせの多い製品を開く</button>
     <section id="trending" aria-labelledby="trendingHeading">
   <h3 id="trendingHeading">最近お問い合わせの多い製品</h3>
-      <p class="trending-intro">製品名から供給状況や原因・参考候補を確認できます。</p>
+      <p class="trending-intro">包装・原因・参考候補を確認。規格がある製品は一覧から選べます。</p>
   <div class="trending-list" id="trendingList"></div>
   <button type="button" id="trendingToggle" class="trending-toggle" aria-expanded="false" aria-controls="trendingList">ほかの製品を見る</button>
   <nav aria-label="品目別の供給情報">
@@ -1706,6 +1717,39 @@ html.season-autumn .autumn-sky{display:none}
   </nav>
   <p class="topic-note"><a href="products/index.html">注目製品の一覧を見る</a></p>
 </section>
+
+    <aside class="search-discovery search-overview" aria-label="サイトの案内と供給状況の集計">
+  <div class="hero-visual">
+    <div class="pulse-card">
+      <div class="pulse-head"><span>SUPPLY PULSE</span><span id="today" class="num">—</span></div>
+      <div class="pulse-total"><span class="num" id="counter">—</span><small>品目を収載</small></div>
+      <div class="pulse-sub" id="pulseSub">全国の医療用医薬品の供給ステータスを毎日集計</div>
+      <!-- 帯グラフ・凡例・数値は、実データを読み込むまで具体的な値を出さない。
+           固定値を置いておくと、取得に失敗したときに根拠のない数字が
+           本物の集計のように表示され続けてしまう（供給状況を扱う以上これは避ける） -->
+      <div class="supply-bar" id="sbar" aria-hidden="true">
+        <span class="sbar-skeleton"></span>
+      </div>
+      <div class="legend" id="legend"></div>
+    </div>
+    <div class="float-chip glass chip1"><span class="big num" id="chipLim">—</span>限定出荷</div>
+    <div class="float-chip glass chip2"><span class="big num" id="chipStop">—</span>供給停止</div>
+  </div>
+      <div class="search-links">
+    <div class="cta-row">
+      <a class="btn-primary" href="#demo" data-focus-search data-dsn-event="search-cta-open">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+        供給状況を検索する
+      </a>
+      <a class="btn-ghost hero-app-link" href="https://apps.apple.com/jp/app/id6777696446" target="_blank" rel="noopener">iPhone版を無料で入手</a>
+    </div>
+    <nav class="hero-directories" aria-label="供給状況の一覧を開く">
+      <a href="items/limited.html">出荷調整（限定出荷）の一覧</a>
+      <a href="items/stopped.html">供給停止の一覧</a>
+    </nav>
+    <p class="hero-note">会員登録不要・Web版も無料で利用できます</p>
+      </div>
+    </aside>
 
     <div class="appearance-control" id="appearanceControl" hidden>
       <label for="appearanceSelect">外観</label>
@@ -3096,6 +3140,25 @@ function resetSearchShareFeedback(){
 const $searchResultsJump = document.getElementById("searchResultsJump");
 let searchJumpComposing = false;
 let searchJumpPending = false;
+let trendingSearchExpanded = false;
+let trendingSearchWasActive = false;
+function syncTrendingSearchState(){
+  const active = Boolean($q.value.trim()) || filter !== "all";
+  const section = document.getElementById("trending");
+  const toggle = document.getElementById("trendingSearchToggle");
+  if(!section || !toggle) return;
+  if(!active || !trendingSearchWasActive) trendingSearchExpanded = false;
+  trendingSearchWasActive = active;
+  document.getElementById("demo").classList.toggle("search-active", active);
+  section.hidden = active && !trendingSearchExpanded;
+  toggle.hidden = !active;
+  toggle.setAttribute("aria-expanded", String(active && trendingSearchExpanded));
+  toggle.textContent = trendingSearchExpanded ? "問い合わせの多い製品を閉じる" : "問い合わせの多い製品を開く";
+}
+document.getElementById("trendingSearchToggle").addEventListener("click", ()=>{
+  trendingSearchExpanded = !trendingSearchExpanded;
+  syncTrendingSearchState();
+});
 const $watchDashboard = document.getElementById("watchDashboard");
 const $watchTools = document.querySelector(".watch-tools");
 const $watchPriorityHome = document.getElementById("watchPriorityHome");
@@ -3104,6 +3167,7 @@ const $watchPriorityResults = document.getElementById("watchPriorityResults");
 // 空検索では監視リストを主要機能として先に案内し、検索語や絞り込みがある間は
 // 結果を直後に表示する。CSSのorderでは読み上げ順が変わらないため、DOM自体を移す。
 function syncSearchPriority(){
+  syncTrendingSearchState();
   const resultsFirst = Boolean($q.value.trim()) || filter !== "all";
   const anchor = resultsFirst ? $watchPriorityResults : $watchPriorityHome;
   if(!anchor || !$watchDashboard || !$watchTools) return;
@@ -4251,6 +4315,7 @@ function loadSupplementalData(){
       renderWatchDashboard();
       renderFavNotice();
       renderSupplementalSearchResults();
+      renderTrending();
     }
     // 読込中に詳細を開いた場合は、届いた案内文・要約・包装情報をその場で反映する
     if(currentDetailKey && document.getElementById("mBack").classList.contains("open")){
@@ -5541,6 +5606,7 @@ function refreshOpenDetail(d){
   const activeRect = active?.getBoundingClientRect();
   const saved = active && {element:active, id:active.id, scope:active.closest("[id]")?.id,
     href:active.getAttribute("href"), key:active.getAttribute("data-key"),
+    jump:active.getAttribute("data-detail-jump"),
     tag:active.tagName, text:active.textContent.trim(), top:activeRect.top,
     visible:activeRect.bottom > bounds.top && activeRect.top < bounds.bottom};
   const scrollTop = modal.scrollTop;
@@ -5551,6 +5617,13 @@ function refreshOpenDetail(d){
   modal.scrollTop = scrollTop;
   if(!saved) return;
   let target = canRestoreHistoryFocus(saved.element) ? saved.element : saved.id && document.getElementById(saved.id);
+  if(!canRestoreHistoryFocus(target) && saved.jump){
+    target = modal.querySelector(saved.jump);
+    if(target){
+      target.setAttribute("tabindex", "-1");
+      target.setAttribute("data-detail-jump", saved.jump);
+    }
+  }
   if(!canRestoreHistoryFocus(target)){
     const scope = saved.scope && document.getElementById(saved.scope);
     target = [...(scope || modal).querySelectorAll("a, button, summary, input, select, [tabindex]")].find(element=>
@@ -5895,6 +5968,7 @@ function jumpInsideDetail(selector){
   const target = $mBack.querySelector(selector);
   if(!target || !$mBack.classList.contains("open")) return;
   target.setAttribute("tabindex", "-1");
+  target.setAttribute("data-detail-jump", selector);
   target.focus({preventScroll:true});
   target.scrollIntoView({block:"start", behavior:"instant"});
 }
@@ -6178,6 +6252,26 @@ let TRENDING = [
   {slug:"rinderon-injection",label:"リンデロン注",q:"リンデロン注"},
   {slug:"celecox-tablets",label:"セレコックス錠",q:"セレコックス錠"},
 ];
+function trendingNoticeHint(rows){
+  if(!LIVE || !rows.length) return "包装・原典を確認";
+  if(MANUFACTURER_NOTICES_STATE === "loading") return "メーカー案内を確認中";
+  if(MANUFACTURER_NOTICES_STATE === "failed") return "メーカー案内を取得できません";
+  const matchedRows = rows.map(item=>manufacturerNoticesFor(item));
+  const matches = matchedRows.flat();
+  if(!matches.length){
+    return rows.some(item=>manufacturerNoticesFor(item,true).some(({notice})=>manufacturerNoticeChanged(notice)))
+      ? "原典更新・再確認待ち" : "原典・参考情報を確認";
+  }
+  if(MANUFACTURER_NOTICES_CACHED) return "前回取得分のメーカー案内";
+  if(matchedRows.some(matches=>!matches.length)) return "一部規格にメーカー案内あり";
+  // 状態差は同じ文書の同じ品目内だけで判断。予定・別規格・別文書を現在の状態にまとめない。
+  const different = matches.some(({target})=>new Set(target.packages
+    .filter(p=>validManufacturerPackageSupply(p.supply) && p.supply.status !== "unconfirmed")
+    .map(p=>p.supply.status)).size > 1);
+  if(different) return "包装別の案内に違いあり";
+  return matches.some(({target})=>target.packages.some(p=>validManufacturerPackageSupply(p.supply)))
+    ? "包装別の案内あり" : "メーカー案内あり";
+}
 function renderTrending(){
   // 単一品目は既存の詳細へ直行。複数メーカー・規格は選択せず検索結果へ。
   // products/ の既存URLは削除せず、ここからの通常操作だけをWeb本体へ揃える。
@@ -6246,34 +6340,43 @@ function renderTrending(){
   const list = document.getElementById("trendingList");
   const open = new Set(Array.from(list.querySelectorAll(".trending-names[open]"),node=>
     node.closest("[data-trending-slug]").dataset.trendingSlug));
-  const active = document.activeElement;
-  const activeEntry = list.contains(active) ? active.closest("[data-trending-slug]") : null;
-  const focus = activeEntry ? {
-    slug:activeEntry.dataset.trendingSlug,
-    summary:active.hasAttribute("data-trending-summary"),
-    key:active.dataset.trendingKey || "",
-  } : null;
+  const capture = element=>{
+    const entry = element && list.contains(element) ? element.closest("[data-trending-slug]") : null;
+    return entry ? {slug:entry.dataset.trendingSlug,
+      summary:element.hasAttribute("data-trending-summary"),
+      key:element.dataset.trendingKey || "", reference:element.hasAttribute("data-trending-reference")} : null;
+  };
+  const focus = capture(document.activeElement);
+  const returnFocus = capture(lastFocus);
   list.innerHTML = entries.map(t=>{
     const key = details[t.slug];
     const label = singles.get(key)?.n || singleNames[t.slug] || t.label;
     let names = "";
+    const hintRows = groups[t.slug] ? grouped[t.slug] : singles.has(key) ? [singles.get(key)] : [];
     if(groups[t.slug]){
       const rows = grouped[t.slug].slice().sort((a,b)=>a.n.localeCompare(b.n,"ja",{numeric:true}) || a.yj.localeCompare(b.yj));
       const summary = rows.length ? `製品一覧（${rows.length}品目）` : "製品一覧";
-      const content = rows.length ? `<ul>${rows.map(item=>
-        `<li><a class="trending-formal-link" data-trending-key="${esc(normalizeYj(item.yj))}" href="#item=${esc(normalizeYj(item.yj))}">${esc(item.n)}</a><small>${esc(item.m)} · ${esc(item.spec)}</small></li>`).join("")}</ul>`
+      const content = rows.length ? `<p class="trending-names-note">規格を選ぶと原因・参考候補を確認できます。</p><ul>${rows.map(item=>
+        `<li><a class="trending-formal-link" data-trending-reference="${esc(normalizeYj(item.yj))}" data-trending-key="${esc(normalizeYj(item.yj))}" href="#item=${esc(normalizeYj(item.yj))}">${esc(item.n)}</a><small>${esc(item.m)} · ${esc(item.spec)}</small></li>`).join("")}</ul>`
         : `<p class="trending-names-note">${LIVE ? "読み込んだデータでは製品一覧を確認できませんでした。" : DATA_STATE === "error" ? "製品一覧を取得できません。時間をおいて再読み込みしてください。" : "製品一覧を確認中です。"}</p>`;
-      names = `<details class="trending-names"${open.has(t.slug) ? " open" : ""}><summary data-trending-summary="${esc(t.slug)}" aria-label="${esc(summary+"："+label)}">${summary}</summary>${content}</details>`;
+      names = `<details class="trending-names" name="trending-products"${open.has(t.slug) ? " open" : ""}><summary data-trending-summary="${esc(t.slug)}" aria-label="${esc(summary+"："+label)}">${summary}</summary>${content}</details>`;
     }
-    return `<div class="trending-entry" data-trending-slug="${esc(t.slug)}"><a class="trending-chip" href="${key ? '#item='+details[t.slug] : '#q='+encodeURIComponent(t.q)}">${esc(label)}</a>${names}</div>`;
+    const reference = key && singles.has(key)
+      ? `<a class="trending-reference" data-trending-reference="${esc(key)}" href="#item=${esc(key)}" aria-label="${esc(label)}の原因・参考候補">原因・参考候補へ <span aria-hidden="true"> →</span></a>` : "";
+    return `<div class="trending-entry" data-trending-slug="${esc(t.slug)}"><a class="trending-chip" href="${key ? '#item='+details[t.slug] : '#q='+encodeURIComponent(t.q)}">${esc(label)}</a><p class="trending-hint">${esc(trendingNoticeHint(hintRows))}</p>${names}${reference}</div>`;
   }).join("");
-  if(focus){
+  const resolve = focus=>{
+    if(!focus) return null;
     const entry = Array.from(list.querySelectorAll("[data-trending-slug]")).find(node=>node.dataset.trendingSlug === focus.slug);
-    const target = focus.summary ? entry?.querySelector("summary") : focus.key
+    return focus.summary ? entry?.querySelector("summary") : focus.key
       ? Array.from(entry?.querySelectorAll(".trending-formal-link") || []).find(node=>node.dataset.trendingKey === focus.key)
-      : entry?.querySelector(".trending-chip");
-    if(canRestoreHistoryFocus(target)) target.focus({preventScroll:true});
-  }
+      : entry?.querySelector(focus.reference ? ".trending-reference" : ".trending-chip");
+  };
+  // 詳細を開いている間も、閉じた後に戻る元のリンクを維持する。
+  if(returnFocus) lastFocus = resolve(returnFocus);
+  const target = resolve(focus);
+  if(canRestoreHistoryFocus(target)) target.focus({preventScroll:true});
+
 }
 renderTrending();
 document.getElementById("trendingToggle").addEventListener("click", e=>{
@@ -6283,7 +6386,24 @@ document.getElementById("trendingToggle").addEventListener("click", e=>{
   document.getElementById("trendingList").classList.toggle("show-all", expanded);
   document.getElementById("trending").classList.toggle("expanded", expanded);
 });
+document.getElementById("trendingList").addEventListener("toggle", e=>{
+  if(!e.target.matches(".trending-names") || !e.target.open) return;
+  document.querySelectorAll("#trendingList .trending-names[open]").forEach(details=>{
+    if(details !== e.target) details.open = false;
+  });
+}, true);
 document.getElementById("trendingList").addEventListener("click", e=>{
+  const reference = e.target.closest("a[data-trending-reference]");
+  if(reference && e.button === 0 && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey){
+    const item = LIVE && findByKey(reference.dataset.trendingReference);
+    if(item){
+      e.preventDefault();
+      openDetail(item);
+      // データがまだ届いていない場合も詳細は開き、読込後に焦点を勝手に移さない。
+      if(!document.getElementById("mSupplyReference").hidden) jumpInsideDetail("#mSupplyReference h4");
+      return;
+    }
+  }
   const link = e.target.closest('a[href^="#q="]');
   // 別タブ操作と単一品目の詳細リンクはブラウザ標準の動作を維持する。
   if(!link || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
