@@ -102,6 +102,73 @@ class WeeklyMonthlyPlanTests(unittest.TestCase):
         self.assertEqual("skip", xp.build_monthly_plan(Path("/nonexistent"), {"posted": []}, dt.date(2026, 10, 1))["action"])
 
 
+class SupplyKeywordTests(unittest.TestCase):
+    def plans(self, limited=0, stopped=0, resumed=0, other=0):
+        entries = []
+        for count, before, after in (
+            (limited, "①通常出荷", "②限定出荷（自社の事情）"),
+            (stopped, "①通常出荷", "⑤供給停止"),
+            (resumed, "⑤供給停止", "①通常出荷"),
+            (other, "②限定出荷（自社の事情）", "③限定出荷（他社品の影響）"),
+        ):
+            entries.extend(change("2026/09/20", before, after, str(len(entries) + i)) for i in range(count))
+        log = {"posted": []}
+        plans = [xp.build_plan(entries, log, dt.date(2026, 9, 21)),
+                 xp.build_weekly_plan(entries, log, dt.date(2026, 9, 21))]
+        with tempfile.TemporaryDirectory() as directory:
+            reports = Path(directory)
+            (reports / "2026-09.json").write_text(json.dumps({
+                "month": "2026-09", "snapshot_date": "2026-10-01",
+                "changes": {"items": len(entries), "to_limited": limited, "to_stopped": stopped, "to_ok": resumed},
+                "top_new_restriction_categories": [],
+            }), encoding="utf-8")
+            plans.append(xp.build_monthly_plan(reports, log, dt.date(2026, 10, 1)))
+        return plans
+
+    def test_daily_weekly_monthly_tags_follow_actual_transitions(self):
+        cases = [
+            ({"limited": 1, "stopped": 1, "resumed": 1, "other": 1}, "#出荷調整 #出荷停止"),
+            ({"stopped": 5}, "#出荷調整 #出荷停止"),
+            ({"limited": 5}, "#出荷調整 #限定出荷"),
+            ({"resumed": 5}, "#出荷調整 #医薬品供給"),
+            ({"other": 5}, "#出荷調整 #医薬品供給"),
+        ]
+        for counts, hashtags in cases:
+            for plan in self.plans(**counts):
+                with self.subTest(counts=counts, kind=plan.get("kind")):
+                    self.assertEqual("post", plan["action"])
+                    self.assertEqual(hashtags, plan["text"].splitlines()[-1])
+                    self.assertNotIn("製造中止", plan["text"])
+                    self.assertLessEqual(plan["weighted_length"], 280)
+                    self.assertEqual(xp.weighted_length(plan["text"]), plan["weighted_length"])
+
+    def test_mixed_and_large_counts_keep_official_categories_within_limit(self):
+        for plan in self.plans(limited=10000, stopped=10000, resumed=10000, other=10000):
+            with self.subTest(kind=plan.get("kind")):
+                self.assertEqual("post", plan["action"])
+                self.assertIn("40000品目", plan["text"])
+                for category in ("限定出荷へ", "供給停止へ", "通常出荷へ"):
+                    self.assertIn(category, plan["text"])
+                self.assertEqual("#出荷調整 #出荷停止", plan["text"].splitlines()[-1])
+                self.assertNotIn("製造中止", plan["text"])
+                self.assertLessEqual(plan["weighted_length"], 280)
+
+    def test_keyword_change_does_not_reopen_previously_posted_periods(self):
+        daily, weekly, monthly = self.plans(stopped=1)
+        log = {"posted": [{"key": plan["key"], "text": "旧文面 #医薬品供給 #限定出荷"}
+                          for plan in (daily, weekly, monthly)]}
+        entries = [change("2026/09/20", "①通常出荷", "⑤供給停止")]
+        self.assertEqual("skip", xp.build_plan(entries, log, dt.date(2026, 9, 21))["action"])
+        self.assertEqual("skip", xp.build_weekly_plan(entries, log, dt.date(2026, 9, 21))["action"])
+        with tempfile.TemporaryDirectory() as directory:
+            reports = Path(directory)
+            (reports / "2026-09.json").write_text(json.dumps({
+                "month": "2026-09", "snapshot_date": "2026-10-01",
+                "changes": {"items": 1, "to_stopped": 1},
+            }), encoding="utf-8")
+            self.assertEqual("skip", xp.build_monthly_plan(reports, log, dt.date(2026, 10, 1))["action"])
+
+
 class PostCommandTests(unittest.TestCase):
     def setUp(self):
         self.tempdir = tempfile.TemporaryDirectory()

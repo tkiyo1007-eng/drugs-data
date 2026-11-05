@@ -47,8 +47,6 @@ X_URL_LENGTH = 23  # t.co短縮後の長さ
 POST_ENDPOINT = "https://api.x.com/2/tweets"
 ME_ENDPOINT = "https://api.x.com/2/users/me"
 CREDENTIAL_ENV = ("X_API_KEY", "X_API_SECRET", "X_ACCESS_TOKEN", "X_ACCESS_TOKEN_SECRET")
-HASHTAGS = "#医薬品供給 #限定出荷"
-HASHTAGS_WEEKLY = "#医薬品供給 #薬剤師"
 URL_PATTERN = re.compile(r"https?://\S+")
 
 
@@ -60,6 +58,12 @@ def category(status: str) -> str | None:
     if "限定出荷" in status:
         return "limited"
     return None
+
+
+def supply_hashtags(*, stopped: int, limited: int) -> str:
+    """集計された変更に合う検索語を使う。供給停止から製造中止は推定しない。"""
+    topic = "#出荷停止" if stopped > 0 else "#限定出荷" if limited > 0 else "#医薬品供給"
+    return "#出荷調整 " + topic
 
 
 def _weigh(text: str) -> int:
@@ -132,7 +136,8 @@ def build_plan(changes: list, log: dict, today: dt.date) -> dict:
                        ("ok", "通常出荷へ"), ("other", "その他の区分変更")):
         if counts[key]:
             lines.append(f"・{label}：{counts[key]}品目")
-    lines += ["品目の一覧▶ " + url, HASHTAGS]
+    lines += ["品目の一覧▶ " + url,
+              supply_hashtags(stopped=counts["stopped"], limited=counts["limited"])]
     text = "\n".join(lines)
     length = weighted_length(text)
     if length > MAX_WEIGHTED_LENGTH:
@@ -199,7 +204,7 @@ def build_weekly_plan(changes: list, log: dict, today: dt.date) -> dict:
         f"区分が変わった医薬品：{len(entries)}品目（{days}日分の更新）",
         detail,
         "日別の一覧▶ " + url,
-        HASHTAGS_WEEKLY,
+        supply_hashtags(stopped=counts["stopped"], limited=counts["limited"]),
     ))
     return finalize({"kind": "weekly", "key": key, "url": url, "text": text})
 
@@ -228,7 +233,8 @@ def build_monthly_plan(reports_dir: Path, log: dict, today: dt.date) -> dict:
              f"（限定出荷へ{changes.get('to_limited', 0)}・供給停止へ{changes.get('to_stopped', 0)}・通常出荷へ{changes.get('to_ok', 0)}）"]
     if top:
         lines.append(f"新たな制限が多かった分類：{top}")
-    lines += ["薬効分類別の動向・公表区分の件数▶ " + url, HASHTAGS_WEEKLY]
+    lines += ["薬効分類別の動向・公表区分の件数▶ " + url,
+              supply_hashtags(stopped=changes.get("to_stopped", 0), limited=changes.get("to_limited", 0))]
     return finalize({"kind": "monthly", "key": key, "url": url, "text": "\n".join(lines)})
 
 
