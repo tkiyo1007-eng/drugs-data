@@ -10665,5 +10665,19 @@
  "https://www.nichiiko.co.jp/medicine/file/15620/information/20260325cI9.pdf": [],
  "https://www.nichiiko.co.jp/medicine/file/73880/information/20250319cG2.pdf": [],
  "https://www.nichiiko.co.jp/medicine/file/73890/information/20250319cG2.pdf": [],
- "https://www.nichiiko.co.jp/medicine/file/55980/information/20260907cI1.pdf": []
+ "https://www.nichiiko.co.jp/medicine/file/55980/information/20260907cI1.pdf": [],
+ "https://med.sawai.co.jp/file/pr27_4702_1.pdf": [
+  {
+   "pkg": "バラ100錠",
+   "until": "2027年1月"
+  },
+  {
+   "pkg": "PTP14錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP56錠",
+   "until": "2027年1月"
+  }
+ ]
 }

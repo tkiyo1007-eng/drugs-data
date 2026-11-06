@@ -1,5 +1,29 @@
 [
  {
+  "date": "2026/11/06",
+  "title": "クラスI回収 該当回収品目　ARROW PICカテーテルキット HP",
+  "url": "https://www.pmda.go.jp/safety/info-services/devices/0054.html",
+  "tag": "回収"
+ },
+ {
+  "date": "2026/11/06",
+  "title": "「医療機器自主回収のおしらせ（クラスI）（販売名：ARROW PICカテーテルキット HP）」を掲載しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/devices/0096.html",
+  "tag": "回収"
+ },
+ {
+  "date": "2026/11/06",
+  "title": "外国製造業者認定・登録番号を掲載しました",
+  "url": "https://www.pmda.go.jp/review-services/drug-reviews/foreign-mfr/0003.html",
+  "tag": "承認審査"
+ },
+ {
+  "date": "2026/11/06",
+  "title": "[イベント]「こどもくすり会議【序章】―みんなの“こえ”が小児がんのお薬を届ける力になる―」の開催について",
+  "url": "https://www.pmda.go.jp/review-services/symposia/0212.html",
+  "tag": "承認審査"
+ },
+ {
   "date": "2026/11/05",
   "title": "「アバコパン製剤の使用に関する関連学会による文書の公表について（周知依頼）」を掲載しました",
   "url": "https://www.pmda.go.jp/safety/info-services/drugs/0010.html",
@@ -33,30 +57,6 @@
   "date": "2026/11/02",
   "title": "12月簡易相談予定表を掲載しました【医薬品等】",
   "url": "https://www.pmda.go.jp/review-services/f2f-pre/consultations/0005.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/10/30",
-  "title": "「PMDAからの医薬品適正使用のお願い」に「GLP-1受容体作動薬及びGIP/GLP-1受容体作動薬の適正使用のお願い」を掲載しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/properly-use-alert/0002.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/10/30",
-  "title": "「製薬企業からの医薬品の安全使用に関するお知らせ」に「ファンギゾンとアムビゾームの取り違え注意のお願い」を掲載しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/medical-safety-info/0178.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/10/30",
-  "title": "特定の製剤や特定の条件下においてのみ使用が認められた添加剤リストを更新しました。",
-  "url": "https://www.pmda.go.jp/review-services/drug-reviews/pharmaceutical-excipients/0001.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/10/30",
-  "title": "人道的見地から実施される治験の情報（医薬品、機器・再生）を更新しました",
-  "url": "https://www.pmda.go.jp/review-services/trials/0016.html",
   "tag": "承認審査"
  }
 ]
