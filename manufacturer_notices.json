@@ -4884,6 +4884,113 @@
         "この原文は自動追跡対象外です。後続案内と現在の状況はメーカーへご確認ください。"
       ],
       "collection_mode": "manual"
+    },
+    {
+      "maker": "日本ジェネリック",
+      "verified_at": "2026-11-08",
+      "collection_mode": "manual",
+      "id": "jg-camostat-500-package-discontinued-202507",
+      "title": "カモスタットメシル酸塩錠100mg「JG」PTP500錠の包装中止",
+      "url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/CAMOJ_CHUUSHI_2507.pdf",
+      "announced_at": "2025-07",
+      "listed_at": "2025-07-28",
+      "sha256": "ace9222a81f9a0a61259c25586e9185004a3d3f63559369668078113c9c33b67",
+      "event_type": "discontinued",
+      "targets": [
+        {
+          "yj_code": "3999003F1300",
+          "product_name": "カモスタットメシル酸塩錠１００ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "792-31045-5",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2025年10月頃（当時の予定）"
+                  }
+                ],
+                "note": "予定時期を過ぎていますが、この資料だけでは実際の在庫終了日は確認できません。"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "reason": "2025年7月の一部包装中止の案内。PTP500錠の在庫終了予定を2025年10月頃と記載。",
+      "alternatives": [],
+      "cautions": [
+        "同文書は当時PTP100錠を継続販売と説明していますが、2026年9月にはPTP100錠の販売中止が別途案内されています。",
+        "メーカー文書の薬価基準収載医薬品コードは3999003F1017、厚労省収録の本品YJコードは3999003F1300です。品名・メーカー・包装を照合しています。",
+        "本資料は自動追跡対象外です。後続案内と現在の状況はメーカーへご確認ください。"
+      ]
+    },
+    {
+      "maker": "日本ジェネリック",
+      "verified_at": "2026-11-08",
+      "collection_mode": "manual",
+      "id": "jg-camostat-100-discontinued-202609",
+      "title": "カモスタットメシル酸塩錠100mg「JG」PTP100錠の販売中止",
+      "url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/CAMOJ_CHUUSHI_2609.pdf",
+      "announced_at": "2026-09",
+      "listed_at": "2026-09-11",
+      "sha256": "c639fe351a06ad270caf7d2c739d70c83f01a7c42738606770dddc22e091e3af",
+      "event_type": "discontinued",
+      "targets": [
+        {
+          "yj_code": "3999003F1300",
+          "product_name": "カモスタットメシル酸塩錠１００ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792-31041-7",
+              "supply": {
+                "status": "stopped",
+                "status_text": "2026年9月のメーカー文書では出荷停止中",
+                "plans": [],
+                "note": "資料時点の記載です。現在の受注・卸在庫は別途ご確認ください。"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "reason": "出荷停止中の製品について、諸般の事情により販売中止と案内。",
+      "alternatives": [
+        {
+          "type": "メーカーが案内した同成分・同規格の参考候補",
+          "target_yj_codes": [
+            "3999003F1300"
+          ],
+          "products": [
+            {
+              "name": "カモスタットメシル酸塩錠１００ｍｇ「ツルハラ」",
+              "yj_code": "3999003F1386",
+              "maker": "鶴原製薬",
+              "scope": "PTP100錠・PTP1000錠"
+            }
+          ],
+          "cautions": [
+            "候補の入手可否は未確認です。変更の適否は電子添文を確認し、医師・薬剤師が判断してください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "文書は2026年9月時点の案内です。現在の受注・卸在庫を保証しません。",
+        "経過措置期間は2028年3月31日までと予定されています。確定情報はメーカーでご確認ください。",
+        "メーカー文書の薬価基準収載医薬品コードは3999003F1017、厚労省収録の本品YJコードは3999003F1300です。品名・メーカー・包装を照合しています。",
+        "本資料は自動追跡対象外です。後続案内と現在の状況はメーカーへご確認ください。"
+      ]
     }
   ]
 }
