@@ -6327,7 +6327,7 @@ function renderTrending(){
     {slug:"antebate-lotion",label:"アンテベートローション０．０５％",q:"アンテベートローション"},
     {slug:"micardis",label:"ミカルディス錠",q:"ミカルディス"});
   // 表示順は編集上の選定であり、問い合わせの集計順位ではない。
-  const featuredFirst = ["juvela-ointment", "antebate-lotion", "zictor-tape-75mg", "hilnamin", "fentos", "movicol", "micardis", "teramuro", "amaluet"];
+  const featuredFirst = ["movicol", "teramuro", "juvela-ointment", "antebate-lotion", "zictor-tape-75mg", "hilnamin", "fentos", "micardis", "amaluet"];
   entries.sort((a,b)=>{
     const aIndex=featuredFirst.indexOf(a.slug), bIndex=featuredFirst.indexOf(b.slug);
     return (aIndex<0 ? featuredFirst.length : aIndex) - (bIndex<0 ? featuredFirst.length : bIndex);
@@ -6390,7 +6390,8 @@ function renderTrending(){
     }
     const reference = key && singles.has(key)
       ? `<a class="trending-reference" data-trending-reference="${esc(key)}" href="#item=${esc(key)}" aria-label="${esc(label)}の原因・参考候補">原因・参考候補へ <span aria-hidden="true"> →</span></a>` : "";
-    return `<div class="trending-entry" data-trending-slug="${esc(t.slug)}"><a class="trending-chip" href="${key ? '#item='+details[t.slug] : '#q='+encodeURIComponent(t.q)}">${esc(label)}</a><p class="trending-hint">${esc(trendingNoticeHint(hintRows))}</p>${names}${reference}</div>`;
+    const hint = t.slug === "movicol" ? "海外製造所の是正対応。HDは2026年12月から一時出荷停止予定。成人の参考候補：グーフィス（メーカー案内）" : trendingNoticeHint(hintRows);
+    return `<div class="trending-entry" data-trending-slug="${esc(t.slug)}"><a class="trending-chip" href="${key ? '#item='+details[t.slug] : '#q='+encodeURIComponent(t.q)}">${esc(label)}</a><p class="trending-hint">${esc(hint)}</p>${names}${reference}</div>`;
   }).join("");
   const resolve = focus=>{
     if(!focus) return null;
