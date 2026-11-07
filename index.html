@@ -5883,13 +5883,18 @@ function openDetail(d, opts={}){
   // 案内文PDFのAI要約（案内文リンクがある品目のみ）
   const $mSum = document.getElementById("mSummary");
   const summary = announcement ? legacySupplementalFor(SUMMARIES,d) : null;
-  if(summary && summary.lines && summary.lines.length && MANUFACTURER_NOTICES_STATE === "loaded"
-      && !manufacturerNoticesFor(d,true).length
-      && (!summary.source_url || summary.source_url === announcement.url)){
+  const summaryEligible = summary && Array.isArray(summary.lines) && summary.lines.length && announcement
+    && MANUFACTURER_NOTICES_STATE === "loaded" && !manufacturerNoticesFor(d,true).length;
+  if(summaryEligible && typeof summary.source_url === "string" && summary.source_url
+      && summary.source_url === announcement.url){
     $mSum.innerHTML =
       `<div class="sum-title">案内文のポイント（AI要約）</div>
        <ul>${summary.lines.map(l=>`<li>${esc(l)}</li>`).join("")}</ul>
        <p class="sum-note">※ メーカー案内文PDFをAIが自動要約したものです。正確な条件・数値は必ず上の案内文原文でご確認ください。</p>`;
+    $mSum.hidden = false;
+  }else if(summaryEligible){
+    $mSum.innerHTML = `<div class="sum-title">案内文の確認</div>
+      <p class="sum-note">要約と現在のメーカー案内の対応を確認できないため、要約は表示していません。上のメーカー案内原文をご確認ください。</p>`;
     $mSum.hidden = false;
   }else{
     $mSum.hidden = true;
