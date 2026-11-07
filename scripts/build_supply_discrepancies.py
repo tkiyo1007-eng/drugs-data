@@ -220,7 +220,8 @@ def latest_transient_announcement(
 def build(rows: list[dict[str, str]], announcements: dict[str, dict[str, object]],
           version: dict[str, object] | None = None,
           events: dict[str, list[dict[str, object]]] | None = None,
-          manual_groups: object | None = None) -> dict[str, object]:
+          manual_groups: object | None = None,
+          maker_health: dict[str, object] | None = None) -> dict[str, object]:
     products: dict[str, dict[str, object]] = {}
     verified_targets = verified_target_registry(rows, manual_groups or [])
     announcements_by_name = {norm(name): value for name, value in announcements.items()}
@@ -252,6 +253,16 @@ def build(rows: list[dict[str, str]], announcements: dict[str, dict[str, object]
     generated_at = checked_dates[-1] if checked_dates else (
         f"{version_date[:4]}-{version_date[4:6]}-{version_date[6:8]}" if len(version_date) == 8 else ""
     )
+    # 個別文書の確認日を全収集元の確認日と混同しない。
+    manufacturer_checked = str((maker_health or {}).get("checked") or "")
+    try:
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", manufacturer_checked):
+            raise ValueError("invalid date")
+        dt.date.fromisoformat(manufacturer_checked)
+    except ValueError:
+        manufacturer_checked = ""
+    if manufacturer_checked and manufacturer_checked > generated_at:
+        generated_at = manufacturer_checked
     high = sum(value["confidence"] == "high" for value in products.values())
     review = len(products) - high
     return {
@@ -260,7 +271,7 @@ def build(rows: list[dict[str, str]], announcements: dict[str, dict[str, object]
         "source": {
             "mhlw_version": version_value,
             "mhlw_note": str(version.get("note") or ""),
-            "manufacturer_checked_through": checked_dates[-1] if checked_dates else "",
+            "manufacturer_checked_through": manufacturer_checked,
         },
         "counts": {"high": high, "review": review, "total": len(products)},
         "products": dict(sorted(products.items())),
@@ -279,6 +290,7 @@ def main() -> int:
     parser.add_argument("--events", default="maker_announcement_events.json")
     parser.add_argument("--version", default="version.json")
     parser.add_argument("--manual-groups", default="manual_announcement_groups.json")
+    parser.add_argument("--maker-health", default="maker_collection_health.json")
     parser.add_argument("--output", default="supply_discrepancies.json")
     args = parser.parse_args()
     rows = load_rows(Path(args.csv))
@@ -292,7 +304,9 @@ def main() -> int:
         json.loads(manual_groups_path.read_text(encoding="utf-8"))
         if manual_groups_path.exists() else []
     )
-    document = build(rows, announcements, version, events, manual_groups)
+    health_path = Path(args.maker_health)
+    maker_health = json.loads(health_path.read_text(encoding="utf-8")) if health_path.exists() else None
+    document = build(rows, announcements, version, events, manual_groups, maker_health)
     Path(args.output).write_text(
         json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
