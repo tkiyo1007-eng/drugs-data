@@ -46,5 +46,13 @@ class ManufacturerTransfers(unittest.TestCase):
             self.assertNotEqual(rows[code]['販売メーカー'], '砂薬業', code)
         self.assertEqual(rows['1149019F1480']['製造メーカー'], '日医工岐阜工場')
 
+    def test_individual_liquid_gas_manufacturers(self):
+        with (ROOT / 'drugs_app_ready.csv').open(encoding='utf-8-sig', newline='') as f:
+            rows = {row['YJコード']: row for row in csv.DictReader(f)}
+        self.assertEqual(rows['799070BX1042']['製造メーカー'], '日本エア・リキード合同会社')
+        self.assertEqual(rows['799070CX1020']['製造メーカー'], 'エア・ウォーター')
+        for code in ('799070BX1042', '799070CX1020'):
+            self.assertEqual(rows[code]['販売メーカー'], '', code)
+
 if __name__ == '__main__':
     unittest.main()
