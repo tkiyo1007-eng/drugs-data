@@ -30,3 +30,16 @@ class ReviewedGasSourceTests(unittest.TestCase):
             self.assertEqual(rows[code]['商品名'], expected['name'], code)
             self.assertEqual(rows[code]['製造メーカー'], expected['manufacturer'], code)
             self.assertEqual(rows[code]['販売メーカー'], '', code)
+
+    def test_review_evidence_records_source_dates_and_hashes(self):
+        root = Path(__file__).resolve().parent.parent
+        evidence = json.loads((root / 'verified_missing_gas_sellers.json').read_text(encoding='utf-8'))
+        self.assertEqual('2026-11-06', evidence['source_date'])
+        self.assertRegex(evidence['source_sha256'], r'^[0-9a-f]{64}$')
+        documents = evidence['association_document_evidence']
+        self.assertEqual({'液体酸素', '酸素', '窒素', '二酸化炭素', '液体窒素'}, {d['kind'] for d in documents})
+        self.assertEqual(5, len(documents))
+        for document in documents:
+            self.assertRegex(document['document_date'], r'^\d{4}-\d{2}-\d{2}$')
+            self.assertTrue(document['url'].startswith('https://www.jimga.or.jp/'))
+            self.assertRegex(document['sha256'], r'^[0-9a-f]{64}$')
