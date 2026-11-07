@@ -514,5 +514,38 @@
     "https://www.jimga.or.jp/files/page/business/tenpubunsho/2_kc_kyokuhochisso.pdf",
     "https://www.jimga.or.jp/files/page/business/tenpubunsho/3_kn_kyokuhonisankatanso.pdf",
     "https://www.jimga.or.jp/files/page/business/tenpubunsho/5_ec_ekitaichisso.pdf"
+  ],
+  "source_sha256": "66c162539807f463cd97c016d2a13e03b2db989d3d83e90020ce5111a82db8b6",
+  "association_document_evidence": [
+    {
+      "kind": "液体酸素",
+      "document_date": "2026-09-24",
+      "url": "https://www.jimga.or.jp/files/page/business/tenpubunsho/4_es_ekitaisanso.pdf",
+      "sha256": "6dce8addf5f32083134e1b89360e58855e55bf4f551b8807d7368884a0403a93"
+    },
+    {
+      "kind": "酸素",
+      "document_date": "2026-07-01",
+      "url": "https://www.jimga.or.jp/files/page/business/tenpubunsho/1_ks_kyokuhosanso.pdf",
+      "sha256": "6cad75b9320a8ff22da38bffa0a49930b16c2ad13b2d630c050b01597416cc01"
+    },
+    {
+      "kind": "窒素",
+      "document_date": "2026-04-01",
+      "url": "https://www.jimga.or.jp/files/page/business/tenpubunsho/2_kc_kyokuhochisso.pdf",
+      "sha256": "219e96ec52f83b61eb7d4c346d6662ca9afe3e3eb917ee73f36a8f87a713c2f2"
+    },
+    {
+      "kind": "二酸化炭素",
+      "document_date": "2026-10-01",
+      "url": "https://www.jimga.or.jp/files/page/business/tenpubunsho/3_kn_kyokuhonisankatanso.pdf",
+      "sha256": "5f09fecd051175ade3186d83a94206039b96b4336eb860d78cd4ec92cda829b8"
+    },
+    {
+      "kind": "液体窒素",
+      "document_date": "2026-09-24",
+      "url": "https://www.jimga.or.jp/files/page/business/tenpubunsho/5_ec_ekitaichisso.pdf",
+      "sha256": "ae7dbf0a7f9fd0d66785b35a3b0887abdb24bd968afe125382f4f0fb2d7dd082"
+    }
   ]
 }
