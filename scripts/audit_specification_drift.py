@@ -73,7 +73,12 @@ def main() -> None:
     parser.add_argument('--xlsx', type=Path, required=True)
     args = parser.parse_args()
     with args.csv.open(encoding='utf-8-sig', newline='') as source_file:
-        rows = list(csv.DictReader(source_file))
+        reader = csv.DictReader(source_file)
+        if not {'YJコード', '規格'}.issubset(reader.fieldnames or []):
+            raise ValueError('CSVの規格・YJ列を特定できません')
+        rows = list(reader)
+    if not rows:
+        raise ValueError('照合するCSVの品目がありません')
     result = audit(rows, load_source(args.xlsx))
     count = sum(result['pairs'].values())
     print(f"規格照合: {result['rows']}行中、表記正規化後の要確認 {count}件、原表未一致 {result['missing']}件、原表重複 {result['ambiguous']}件")

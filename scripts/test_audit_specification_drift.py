@@ -1,5 +1,7 @@
 import tempfile
 import unittest
+import subprocess
+import sys
 from pathlib import Path
 import openpyxl
 from audit_specification_drift import audit, comparable, load_source
@@ -39,6 +41,18 @@ class SpecificationDriftAudit(unittest.TestCase):
             book.save(path)
             with self.assertRaises(ValueError):
                 load_source(path)
+
+    def test_csv_missing_required_columns_or_empty_fails(self):
+        script = Path(__file__).with_name('audit_specification_drift.py')
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'source.csv'
+            for content in ('YJコード,商品名\nX01,酸素\n', 'YJコード,規格\n'):
+                path.write_text(content, encoding='utf-8')
+                result = subprocess.run([sys.executable, str(script), '--csv', str(path),
+                                         '--xlsx', str(Path(directory) / 'unused.xlsx')],
+                                        capture_output=True, text=True)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn('CSV', result.stderr)
 
 
 if __name__ == '__main__':
