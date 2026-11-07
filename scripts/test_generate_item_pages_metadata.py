@@ -904,6 +904,30 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 load_manufacturer_bulletins(path)
 
+    def test_unfinished_source_review_warns_without_claiming_source_changed(self):
+        notice = self.notice()
+        unavailable = manufacturer_notices_html(self.row(), [notice], bulletins=None)
+        self.assertIn("原典の再確認状況を取得できませんでした", unavailable)
+        self.assertIn(notice["reason"], unavailable)
+        bulletin = {"schema_version": 1, "items": [{"url": notice["url"],
+                    "sha256": notice["sha256"], "review_status": "needs_review",
+                    "review_reason": "原典hashの今回確認が未完了。前回内容は保持"}]}
+        output = manufacturer_notices_html(self.row(), [notice], bulletins=bulletin)
+        self.assertIn("最新の原典は再確認待ちです", output)
+        self.assertIn(notice["reason"], output)
+        self.assertNotIn("原典更新を検出", output)
+        bulletin["items"][0]["sha256"] = None
+        self.assertIn("最新の原典は再確認待ちです", manufacturer_notices_html(self.row(), [notice], bulletins=bulletin))
+        bulletin["items"][0]["review_reason"] = "検証済み原典registryへの登録がない"
+        self.assertNotIn("最新の原典は再確認待ちです", manufacturer_notices_html(self.row(), [notice], bulletins=bulletin))
+        bulletin["items"][0]["review_reason"] = "原典hashの今回確認が未完了。前回内容は保持"
+        bulletin["items"][0]["url"] = "https://example.test/other.pdf"
+        self.assertNotIn("最新の原典は再確認待ちです", manufacturer_notices_html(self.row(), [notice], bulletins=bulletin))
+        bulletin["items"][0].update(url=notice["url"], sha256="b" * 64)
+        changed = manufacturer_notices_html(self.row(), [notice], bulletins=bulletin)
+        self.assertIn("原典更新を検出", changed)
+        self.assertNotIn(notice["reason"], changed)
+
 
     def lifecycle(self):
         row, notice = self.row(), self.notice()
