@@ -4367,6 +4367,53 @@
         "メーカー案内と厚労省の現在区分・卸在庫は別です。",
         "後続案内は未確認で、この案内は自動追跡対象外です。"
       ]
+    },
+    {
+      "id": "nichiiko-azelnidipine-16-resumed-202609",
+      "maker": "日医工",
+      "title": "アゼルニジピン錠16mg「日医工」限定出荷解除のお知らせ",
+      "url": "https://www.nichiiko.co.jp/medicine/file/04330/information/20260929cI1.pdf",
+      "announced_at": "2026-09",
+      "verified_at": "2026-11-08",
+      "sha256": "85c9f8256413364b8328578ed5457e0b1ccbf240cce416079f3c27717ad49336",
+      "collection_mode": "manual",
+      "event_type": "resumed",
+      "effective_at": "2026-09-30",
+      "effective_at_precision": "day",
+      "reason": "日医工は2026年9月の案内で、安定供給の目途が立ったため、9月30日に限定出荷を解除し通常出荷すると説明しています。",
+      "targets": [
+        {
+          "yj_code": "2149043F2131",
+          "product_name": "アゼルニジピン錠１６ｍｇ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-04331-1",
+              "gs1_sales": "14987376043318"
+            },
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "376-04332-8",
+              "gs1_sales": "14987376043325"
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "376-04333-5",
+              "gs1_sales": "14987376043332"
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年9月の案内に基づく情報で、現在の受注可否や卸在庫を示すものではありません。",
+        "この案内は自動追跡対象外です。最新情報はメーカーにご確認ください。"
+      ]
     }
   ]
 }
