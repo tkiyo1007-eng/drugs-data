@@ -38,5 +38,13 @@ class ManufacturerTransfers(unittest.TestCase):
             self.assertEqual(rows[code]['製造メーカー'], '日医工岐阜工場', code)
         self.assertEqual(rows['4490038F1020']['製造メーカー'], 'キエジ・ファーマ・ジャパン')
 
+    def test_takasago_and_emec_manufacturer(self):
+        with (ROOT / 'drugs_app_ready.csv').open(encoding='utf-8-sig', newline='') as f:
+            rows = {row['YJコード']: row for row in csv.DictReader(f)}
+        for code in ('5100081A1080', '5100081X1082'):
+            self.assertEqual(rows[code]['製造メーカー'], '高砂薬業', code)
+            self.assertNotEqual(rows[code]['販売メーカー'], '砂薬業', code)
+        self.assertEqual(rows['1149019F1480']['製造メーカー'], '日医工岐阜工場')
+
 if __name__ == '__main__':
     unittest.main()
