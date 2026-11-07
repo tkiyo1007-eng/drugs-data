@@ -21,6 +21,7 @@ MAKER_HOSTS = {
     '東和薬品': 'med.towayakuhin.co.jp',
     '日本ケミファ': 'www.nc-medical.com',
     '日医工': 'www.nichiiko.co.jp',
+    '住友ファーマ': 'sumitomo-pharma.jp',
     '杏林製薬': 'www.kyorin-pharm.co.jp',
     '久光製薬': 'www.hisamitsu-pharm.jp',
     '日本ベーリンガーインゲルハイム': 'www.bij-kusuri.jp',

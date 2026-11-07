@@ -4414,6 +4414,129 @@
         "2026年9月の案内に基づく情報で、現在の受注可否や卸在庫を示すものではありません。",
         "この案内は自動追跡対象外です。最新情報はメーカーにご確認ください。"
       ]
+    },
+    {
+      "id": "sumitomo-dops100-package-202609",
+      "title": "ドプスOD錠100mg 一部包装の販売中止のご案内",
+      "url": "https://sumitomo-pharma.jp/hubfs/product/package_notification/2026/dops100_chushi_20260915.pdf",
+      "sha256": "b57be8cdbca1a0d3eedd59f4220af1a4d8161ca368021fa899da930563ba23a1",
+      "targets": [
+        {
+          "yj_code": "1169006F1027",
+          "product_name": "ドプスＯＤ錠１００ｍｇ",
+          "maker": "住友ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "116-01011-5",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーが案内した出荷終了時期：2026年11月。在庫品の出荷終了をもって販売中止の案内。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーは2026年9月時点で販売継続包装として案内。現在の受注可否や在庫は未確認。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "maker": "住友ファーマ",
+      "announced_at": "2026-09",
+      "verified_at": "2026-11-08",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "メーカーは諸般の事情により、在庫品の出荷終了をもって販売を中止すると案内しています。",
+      "cautions": [
+        "2026年9月時点のメーカー案内です。出荷終了時期は在庫状況により変動し、実際の終了や現在の在庫・受注可否は未確認です。",
+        "後続案内は未確認で、この案内は自動追跡対象外です。"
+      ]
+    },
+    {
+      "id": "sumitomo-tagamet-injection-202609",
+      "title": "タガメット注射液200mg 販売中止予定のご案内",
+      "url": "https://sumitomo-pharma.jp/hubfs/product/package_notification/2026/tagamet_inj_chushi_20260915.pdf",
+      "sha256": "e5842b5a5266b4dff2551b855998b36ce47789e7fe341843b655d92e651b2316",
+      "targets": [
+        {
+          "yj_code": "2325400A1077",
+          "product_name": "タガメット注射液２００ｍｇ",
+          "maker": "住友ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "2mL×10アンプル",
+              "unified_product_code": "116-23481-8",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーが案内した出荷終了時期：2028年2月頃。"
+              }
+            },
+            {
+              "package": "2mL×50アンプル",
+              "unified_product_code": "116-23491-7",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "メーカーが案内した出荷終了時期：2027年2月頃。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "type": "メーカーが原文で挙げた参考代替薬",
+          "target_yj_codes": [
+            "2325400A1077"
+          ],
+          "products": [
+            {
+              "name": "ファモチジン静注１０ｍｇ「日新」",
+              "yj_code": "2325401A4020",
+              "product_kind": "medicine",
+              "source_pages": [
+                1
+              ]
+            },
+            {
+              "name": "ファモチジン静注２０ｍｇ「日新」",
+              "yj_code": "2325401A3031",
+              "product_kind": "medicine",
+              "source_pages": [
+                1
+              ]
+            }
+          ],
+          "cautions": [
+            "有効成分が異なります。適応・用法用量などの添付文書と患者の状態を確認し、医師・薬剤師が判断してください。現在の供給・在庫は未確認です。"
+          ]
+        }
+      ],
+      "maker": "住友ファーマ",
+      "announced_at": "2026-09",
+      "verified_at": "2026-11-08",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "メーカーは諸般の事情により、在庫品の出荷終了をもって販売を中止すると案内しています。",
+      "cautions": [
+        "2026年9月時点のメーカー案内です。出荷終了時期は在庫状況により変動し、実際の終了や現在の在庫・受注可否は未確認です。",
+        "後続案内は未確認で、この案内は自動追跡対象外です。"
+      ]
     }
   ]
 }
