@@ -67,6 +67,9 @@ jobs:
         run: python3 scripts/fetch_headlines.py industry_headlines.json
         continue-on-error: true
 
+      - name: 確認済み医療用ガスの原表識別を検証
+        run: python3 scripts/check_reviewed_gas_sources.py
+
       - name: 供給状況だけ更新（既存CSVの薬価・メーカーは保持）
         run: |
           python3 - <<'EOF'
