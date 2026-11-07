@@ -4581,6 +4581,99 @@
         "2026年10月5日時点のメーカー案内で、現在も同じ出荷状態であることや卸の在庫を示すものではありません。",
         "後続案内は未確認で、この資料は自動追跡対象外です。厚労省の供給区分と分けて確認してください。"
       ]
+    },
+    {
+      "id": "hisamitsu-menoaid-48-discontinued-20260525",
+      "maker": "久光製薬",
+      "verified_at": "2026-11-08",
+      "content_updated_at": "2026-11-08",
+      "collection_mode": "manual",
+      "alternatives": [],
+      "title": "メノエイドコンビパッチ 出荷再開及び一部包装販売中止のご案内",
+      "url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260525.pdf",
+      "announced_at": "2026-05",
+      "listed_at": "2026-05-25",
+      "sha256": "8e1fa257f6b24b7253ffeee2897a3f13ff1f7eb35fa66598637486401a742fa5",
+      "event_type": "discontinued",
+      "reason": "メーカーは2026年5月、48枚包装の販売中止を案内しています。",
+      "targets": [
+        {
+          "yj_code": "2482800S1026",
+          "product_name": "メノエイドコンビパッチ",
+          "maker": "久光製薬",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "48枚（1枚／1袋×48袋）",
+              "unified_product_code": "188-45501-2",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2026年5月のメーカー文書で販売中止と案内。現在の在庫・受注可否は未確認です。"
+              }
+            }
+          ]
+        }
+      ],
+      "cautions": [
+        "対象は48枚包装です。24枚・96枚包装の販売中止を意味しません。",
+        "2026年5月の案内です。後続案内は未確認で、この資料は自動追跡対象外です。"
+      ]
+    },
+    {
+      "id": "hisamitsu-menoaid-limited-extension-20260716",
+      "maker": "久光製薬",
+      "verified_at": "2026-11-08",
+      "content_updated_at": "2026-11-08",
+      "collection_mode": "manual",
+      "alternatives": [],
+      "title": "メノエイドコンビパッチ 限定出荷延長に関するお知らせ",
+      "url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260716.pdf",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-16",
+      "sha256": "7abe0831a39a4d8c9a8755993d19643c8cf02d91b0e1cf95d5c7a8399112231b",
+      "event_type": "limited",
+      "reason": "メーカーは2026年7月の案内で、7月末までに通常出荷に必要な在庫を確保することが難しく、急な受注や在庫の偏りを防ぐため限定出荷を延長すると説明しています。",
+      "resumption": "2026年7月時点の解除時期は未定で、目途が立ち次第案内するとしています。",
+      "targets": [
+        {
+          "yj_code": "2482800S1026",
+          "product_name": "メノエイドコンビパッチ",
+          "maker": "久光製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "24枚（1枚／1袋×24袋）",
+              "supply": {
+                "status": "limited",
+                "status_text": "2026年7月の案内：限定出荷延長",
+                "plans": [],
+                "note": "現在の受注可否や在庫は未確認です。"
+              }
+            },
+            {
+              "package": "96枚（1枚／1袋×96袋）",
+              "supply": {
+                "status": "limited",
+                "status_text": "2026年7月の案内：限定出荷延長",
+                "plans": [],
+                "note": "現在の受注可否や在庫は未確認です。"
+              }
+            }
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年7月のメーカー案内で、現在も限定出荷中であることや卸の在庫を示すものではありません。",
+        "後続案内は未確認で、この資料は自動追跡対象外です。厚労省の供給区分と分けて確認してください。"
+      ]
     }
   ]
 }
