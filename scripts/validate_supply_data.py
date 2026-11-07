@@ -290,7 +290,7 @@ def main(argv=None):
     try:
         reviewed_file = Path(__file__).resolve().parent.parent / 'verified_missing_gas_sellers.json'
         reviewed = json.loads(reviewed_file.read_text(encoding='utf-8'))['products']
-        if not isinstance(reviewed, dict) or len(reviewed) != 81:
+        if not isinstance(reviewed, dict) or len(reviewed) != 126:
             raise ValueError('確認済み販売元未記載の対象数が不正です')
     except (OSError, ValueError, KeyError, TypeError) as error:
         print(f'確認済み販売元未記載データを検証できません: {error}', file=sys.stderr)

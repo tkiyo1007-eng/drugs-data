@@ -327,6 +327,192 @@
     "X00138": {
       "name": "液化酸素",
       "manufacturer": "森脇産業"
+    },
+    "X00139": {
+      "name": "液化窒素",
+      "manufacturer": "市村酸素"
+    },
+    "X00141": {
+      "name": "液化窒素",
+      "manufacturer": "岩谷産業"
+    },
+    "X00142": {
+      "name": "液化窒素",
+      "manufacturer": "宇野酸素"
+    },
+    "X00143": {
+      "name": "液化窒素",
+      "manufacturer": "大阪ガスリキッド"
+    },
+    "X00144": {
+      "name": "液化窒素",
+      "manufacturer": "鹿児島酸素"
+    },
+    "X00145": {
+      "name": "液化窒素",
+      "manufacturer": "鹿児島熔材"
+    },
+    "X00148": {
+      "name": "液化窒素",
+      "manufacturer": "Ｋｉｓｔ"
+    },
+    "X00149": {
+      "name": "液化窒素",
+      "manufacturer": "協和ガス"
+    },
+    "X00150": {
+      "name": "液化窒素",
+      "manufacturer": "京葉帝酸"
+    },
+    "X00151": {
+      "name": "液化窒素",
+      "manufacturer": "ケミカルジャパン"
+    },
+    "X00153": {
+      "name": "液化窒素",
+      "manufacturer": "高圧ガス工業"
+    },
+    "X00154": {
+      "name": "液化窒素",
+      "manufacturer": "サツマ酸素工業"
+    },
+    "X00155": {
+      "name": "液化窒素",
+      "manufacturer": "三共酸素商会"
+    },
+    "X00159": {
+      "name": "液化窒素",
+      "manufacturer": "日本酸素北海道"
+    },
+    "X00160": {
+      "name": "液化窒素",
+      "manufacturer": "大和酸素工業"
+    },
+    "X00162": {
+      "name": "液化窒素",
+      "manufacturer": "田中酸素"
+    },
+    "X00163": {
+      "name": "液化窒素",
+      "manufacturer": "東亞テクノガス"
+    },
+    "X00164": {
+      "name": "液化窒素",
+      "manufacturer": "東京ガスケミカル"
+    },
+    "X00166": {
+      "name": "液化窒素",
+      "manufacturer": "東邦酸素工業"
+    },
+    "X00167": {
+      "name": "液化窒素",
+      "manufacturer": "浪速酸素"
+    },
+    "X00170": {
+      "name": "液化窒素",
+      "manufacturer": "福岡酸素"
+    },
+    "X00171": {
+      "name": "液化窒素",
+      "manufacturer": "伏山酸素商会"
+    },
+    "X00172": {
+      "name": "液化窒素",
+      "manufacturer": "星医療酸器"
+    },
+    "X00173": {
+      "name": "液化窒素",
+      "manufacturer": "松山酸素"
+    },
+    "X00174": {
+      "name": "液化窒素",
+      "manufacturer": "ヤマザキ産業"
+    },
+    "X00175": {
+      "name": "液化窒素",
+      "manufacturer": "レゾナック・ガスプロダクツ"
+    },
+    "X00179": {
+      "name": "酸素",
+      "manufacturer": "泉産業"
+    },
+    "X00187": {
+      "name": "酸素",
+      "manufacturer": "宇野酸素"
+    },
+    "X00191": {
+      "name": "酸素",
+      "manufacturer": "エバ"
+    },
+    "X00203": {
+      "name": "酸素",
+      "manufacturer": "北九州ガスセンター"
+    },
+    "X00215": {
+      "name": "酸素",
+      "manufacturer": "高圧ガス工業"
+    },
+    "X00222": {
+      "name": "酸素",
+      "manufacturer": "ザ・トーカイ"
+    },
+    "X00231": {
+      "name": "酸素",
+      "manufacturer": "静岡酸素"
+    },
+    "X00253": {
+      "name": "酸素",
+      "manufacturer": "東海アセチレン"
+    },
+    "X00259": {
+      "name": "酸素",
+      "manufacturer": "東洋高圧ガス"
+    },
+    "X00270": {
+      "name": "酸素",
+      "manufacturer": "日東物産"
+    },
+    "X00293": {
+      "name": "酸素",
+      "manufacturer": "フジオックス"
+    },
+    "X00302": {
+      "name": "酸素",
+      "manufacturer": "松山酸素"
+    },
+    "X00320": {
+      "name": "窒素",
+      "manufacturer": "宇野酸素"
+    },
+    "X00330": {
+      "name": "窒素",
+      "manufacturer": "高圧ガス工業"
+    },
+    "X00350": {
+      "name": "窒素",
+      "manufacturer": "松山酸素"
+    },
+    "X00356": {
+      "name": "二酸化炭素",
+      "manufacturer": "宇野酸素"
+    },
+    "X00364": {
+      "name": "二酸化炭素",
+      "manufacturer": "北九州ガスセンター"
+    },
+    "X00376": {
+      "name": "二酸化炭素",
+      "manufacturer": "静岡酸素"
+    },
+    "X00402": {
+      "name": "二酸化炭素",
+      "manufacturer": "松山酸素"
     }
-  }
+  },
+  "additional_association_references": [
+    "https://www.jimga.or.jp/files/page/business/tenpubunsho/1_ks_kyokuhosanso.pdf",
+    "https://www.jimga.or.jp/files/page/business/tenpubunsho/2_kc_kyokuhochisso.pdf",
+    "https://www.jimga.or.jp/files/page/business/tenpubunsho/3_kn_kyokuhonisankatanso.pdf",
+    "https://www.jimga.or.jp/files/page/business/tenpubunsho/5_ec_ekitaichisso.pdf"
+  ]
 }
