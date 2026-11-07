@@ -29,5 +29,14 @@ class ManufacturerTransfers(unittest.TestCase):
             self.assertEqual(rows[code]['製造メーカー'], '大原薬品工業', code)
             self.assertEqual(rows[code]['販売メーカー'], '大原薬品工業', code)
 
+    def test_verified_manufacturer_renames_and_transfers(self):
+        with (ROOT / 'drugs_app_ready.csv').open(encoding='utf-8-sig', newline='') as f:
+            rows = {row['YJコード']: row for row in csv.DictReader(f)}
+        for code in ('2646713N1182', '2646730M1075', '2646730Q1050'):
+            self.assertEqual(rows[code]['製造メーカー'], 'ＭＡＥ', code)
+        for code in ('2190005F1284', '2190005F2183', '1339005F1482', '1339005F2250'):
+            self.assertEqual(rows[code]['製造メーカー'], '日医工岐阜工場', code)
+        self.assertEqual(rows['4490038F1020']['製造メーカー'], 'キエジ・ファーマ・ジャパン')
+
 if __name__ == '__main__':
     unittest.main()
