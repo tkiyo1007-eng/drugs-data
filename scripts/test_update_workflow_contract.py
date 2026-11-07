@@ -9,6 +9,14 @@ class UpdateWorkflowContractTests(unittest.TestCase):
             Path(__file__).resolve().parents[1] / ".github" / "workflows" / "update_drugs.yml"
         ).read_text(encoding="utf-8")
 
+    def test_manufacturer_drift_audit_is_read_only_and_nonblocking(self):
+        start = self.workflow.index('メーカー表記の原表との差を確認（自動変更しない）')
+        end = self.workflow.index('薬価の空欄をマスタから補完', start)
+        step = self.workflow[start:end]
+        self.assertIn('audit_manufacturer_drift.py --csv drugs_app_ready.csv --xlsx supply_latest.xlsx', step)
+        self.assertIn('continue-on-error: true', step)
+        self.assertNotIn('git add', step)
+
     def test_validated_core_and_pages_are_published_before_optional_enrichment(self):
         supply_validation = self.workflow.index("公開前の供給CSV品質検査")
         item_pages = self.workflow.index("品目別SEOページを最新の厚労省データで生成")

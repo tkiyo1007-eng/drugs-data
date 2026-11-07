@@ -137,6 +137,10 @@ jobs:
       - name: メーカー欄に混入した共通文書の説明を除去
         run: python3 scripts/sanitize_maker_fields.py drugs_app_ready.csv
 
+      - name: メーカー表記の原表との差を確認（自動変更しない）
+        run: python3 scripts/audit_manufacturer_drift.py --csv drugs_app_ready.csv --xlsx supply_latest.xlsx
+        continue-on-error: true
+
       - name: 薬価の空欄をマスタから補完（新規追加品目は薬価空欄で入るため）
         run: python3 scripts/fill_prices.py drugs_app_ready.csv yakka_master.csv
 
