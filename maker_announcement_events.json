@@ -946,13 +946,13 @@
    "event_type": "limited",
    "announced_at": "2026-06-12",
    "first_seen": "2026-08-01",
-   "last_checked": "2026-08-03"
+   "last_checked": "2026-11-08"
   },
   {
    "maker": "第一三共エスファ",
    "title": "2013.08.19 新発売予定 2013年8月シルビノール錠5mg販売中止及びニコランジル錠5mg「サワイ」新発売に関するお知らせ",
    "url": "https://med.daiichisankyo-ep.co.jp/information/files/0/20130809111658_9158_file_txt.pdf",
-   "event_type": "discontinued",
+   "event_type": "other",
    "announced_at": "2013-08-19",
    "first_seen": "2026-08-03",
    "last_checked": "2026-11-07"

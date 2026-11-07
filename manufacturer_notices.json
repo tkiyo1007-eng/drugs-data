@@ -4674,6 +4674,60 @@
         "2026年7月のメーカー案内で、現在も限定出荷中であることや卸の在庫を示すものではありません。",
         "後続案内は未確認で、この資料は自動追跡対象外です。厚労省の供給区分と分けて確認してください。"
       ]
+    },
+    {
+      "id": "dsep-nicorandil-5mg-limited-20260612",
+      "maker": "第一三共エスファ",
+      "title": "ニコランジル錠5mg「サワイ」限定出荷及び新規ご採用辞退のお知らせ",
+      "url": "https://med.daiichisankyo-ep.co.jp/information/files/2220/gentei_20260612_E1_G.pdf",
+      "announced_at": "2026-06",
+      "listed_at": "2026-06-12",
+      "verified_at": "2026-11-08",
+      "content_updated_at": "2026-11-08",
+      "sha256": "fea035b3ac25926de89bed4300565f5deee12c2c4236b5b388891ac2077d2a71",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "第一三共エスファは2026年6月、他社製品の限定出荷の影響により安定供給に支障を来す可能性があるため、一部製品を限定出荷し、解除まで新規採用を辞退すると案内しています。",
+      "targets": [
+        {
+          "yj_code": "2171017F2156",
+          "product_name": "ニコランジル錠５ｍｇ「サワイ」",
+          "maker": "第一三共エスファ",
+          "scope": "seller_route_and_package",
+          "seller": "第一三共エスファ",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "081183128",
+              "supply": {
+                "status": "limited",
+                "status_text": "2026年6月の案内：限定出荷",
+                "plans": [],
+                "note": "第一三共エスファ販売分についての案内です。現在の受注可否・在庫は未確認です。"
+              }
+            },
+            {
+              "package": "PTP1000錠",
+              "unified_product_code": "081183135",
+              "supply": {
+                "status": "limited",
+                "status_text": "2026年6月の案内：限定出荷",
+                "plans": [],
+                "note": "第一三共エスファ販売分についての案内です。現在の受注可否・在庫は未確認です。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年6月時点の第一三共エスファ販売分の案内で、他の販売経路や現在の受注可否・卸在庫を示すものではありません。",
+        "原文の参考代替製品は別の対象製品に関するもので、ニコランジルへの代替候補として扱っていません。",
+        "後続案内は未確認で、この資料は自動追跡対象外です。"
+      ]
     }
   ]
 }
