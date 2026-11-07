@@ -712,6 +712,13 @@ def manufacturer_notice_changed(notice: dict, bulletins=None) -> bool:
                                 for item in bulletins.get("items", [])))
 
 
+def manufacturer_notice_needs_review(notice: dict, bulletins=None) -> bool:
+    return bool(bulletins and any(item.get("url") == notice.get("url")
+                                and item.get("review_status") == "needs_review"
+                                and item.get("review_reason") == "原典hashの今回確認が未完了。前回内容は保持"
+                                for item in bulletins.get("items", [])))
+
+
 def lifecycle_for_display(lifecycle, notices=(), bulletins=None):
     """元の履歴を保ち、既知の原典変更だけを表示用の再確認待ち状態にする。"""
     if not lifecycle:
@@ -774,6 +781,10 @@ def manufacturer_notices_html(row: dict, notices=(), warning="", catalog_yj_code
         parts.append(f'<p>原典の案内年月日：{esc(notice["announced_at"])}'
                      + (f'｜メーカー一覧掲載日：{esc(notice["listed_at"])}' if notice.get("listed_at") else "")
                      + f'｜原文確認日：{esc(iso_publication_date(notice["verified_at"]))}</p>')
+        if bulletins is None:
+            parts.append('<p><strong>原典の再確認状況を取得できませんでした。</strong>以下は前回確認した案内です。現在の状況は原文やメーカーにご確認ください。</p>')
+        elif manufacturer_notice_needs_review(notice, bulletins):
+            parts.append('<p><strong>最新の原典は再確認待ちです。</strong>以下は前回確認した案内です。現在の状況は原文やメーカーにご確認ください。</p>')
         parts.append(package_supply_html(target))
         for label, value in (("案内の要点", notice.get("summary")), ("対象品目の案内", target.get("summary")),
                              ("メーカー説明の理由", notice.get("reason"))):

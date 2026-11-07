@@ -220,6 +220,7 @@ class CollectionTests(unittest.TestCase):
         self.assertEqual(item["sha256"], first["items"][0]["sha256"])
         self.assertEqual(item["last_hash_success_at"], first["items"][0]["last_hash_success_at"])
         self.assertEqual(item["review_status"], "needs_review")
+        self.assertEqual(item["review_reason"], "原典hashの今回確認が未完了。前回内容は保持")
         self.assertEqual(result["drafts"], [])
 
     def test_login_or_captcha_response_never_confirmed_as_pdf(self):
@@ -263,6 +264,7 @@ class CollectionTests(unittest.TestCase):
             transport.responses[notice["url"]] = (200, PDF, None)
         first = mod.collect(configuration(), reg, transport=transport, now=NOW)
         omitted = next(i for i in first["items"] if i["hash_status"] == "daily_limit")
+        self.assertEqual(omitted["review_reason"], "原典hashの今回確認が未完了。前回内容は保持")
         self.assertEqual(len(first["document_checks"]), 8)
         second = mod.collect(configuration(), reg, first, transport=transport, now=NOW + dt.timedelta(days=1))
         item = next(i for i in second["items"] if i["id"] == omitted["id"])
