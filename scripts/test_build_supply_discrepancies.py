@@ -24,6 +24,20 @@ def announcement(title="2026年8月10日 テスト錠10mg「ABC」 限定出荷�
 
 
 class SupplyDiscrepancyBuilderTests(unittest.TestCase):
+    def test_single_manual_review_does_not_advance_collection_health_date(self):
+        announcements = {"document": {"checked": "2026-11-08"}}
+        version = {"version": 202611070526}
+        document = build([], announcements, version, maker_health={"checked": "2026-11-07"})
+        self.assertEqual(document["generated_at"], "2026-11-08")
+        self.assertEqual(document["source"]["manufacturer_checked_through"], "2026-11-07")
+        failed_attempt = build([], announcements, version, maker_health={"checked": "2026-11-07", "last_attempt": {"checked": "2026-11-08", "status": "failed"}})
+        self.assertEqual(failed_attempt["source"]["manufacturer_checked_through"], "2026-11-07")
+        unavailable = build([], announcements, version, maker_health=None)
+        self.assertEqual(unavailable["source"]["manufacturer_checked_through"], "")
+        invalid = build([], announcements, version, maker_health={"checked": "2026-02-30"})
+        self.assertEqual(invalid["source"]["manufacturer_checked_through"], "")
+        newer = build([], announcements, version, maker_health={"checked": "2026-11-09"})
+        self.assertEqual(newer["generated_at"], "2026-11-09")
     def test_published_high_confidence_rows_are_product_scope(self):
         root = Path(__file__).resolve().parents[1]
         document = json.loads(
