@@ -4728,6 +4728,162 @@
         "原文の参考代替製品は別の対象製品に関するもので、ニコランジルへの代替候補として扱っていません。",
         "後続案内は未確認で、この資料は自動追跡対象外です。"
       ]
+    },
+    {
+      "maker": "第一三共エスファ",
+      "verified_at": "2026-11-08",
+      "id": "dsep-voriconazole-supply-plan-202607",
+      "title": "ボリコナゾール錠50mg・200mg「DSEP」供給停止・欠品の見込み",
+      "url": "https://med.daiichisankyo-ep.co.jp/information/files/2245/keppin_20260716_E1_K.pdf",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-16",
+      "sha256": "7e293fb353a105c48c37049347f0460ff39410efc3c521a02c30714252147fb7",
+      "event_type": "limited",
+      "targets": [
+        {
+          "yj_code": "6179001F1031",
+          "product_name": "ボリコナゾール錠５０ｍｇ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP50錠（10錠×5）",
+              "unified_product_code": "081-18570-2",
+              "supply": {
+                "status": "limited",
+                "status_text": "2026年7月の案内時点：限定出荷（自社の事情）",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年10月末に供給停止・欠品の見込み（実際の停止は未確認）"
+                  }
+                ],
+                "note": "予定は在庫状況により前後する可能性があります。現在の出荷状況は未確認です。"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        },
+        {
+          "yj_code": "6179001F2038",
+          "product_name": "ボリコナゾール錠２００ｍｇ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP50錠（10錠×5）",
+              "unified_product_code": "081-18575-7",
+              "supply": {
+                "status": "limited",
+                "status_text": "2026年7月の案内時点：限定出荷（自社の事情）",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年1月末に供給停止・欠品の見込み"
+                  }
+                ],
+                "note": "予定は在庫状況により前後する可能性があります。現在の出荷状況は未確認です。"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "reason": "継続的な製造体制の維持が難しく、在庫消尽後に出荷を停止し、その後は供給停止・欠品となる見込みと説明。",
+      "alternatives": [
+        {
+          "type": "2026年7月のメーカー案内に記載された同規格の参考候補",
+          "target_yj_codes": [
+            "6179001F1031"
+          ],
+          "products": [
+            {
+              "name": "ボリコナゾール錠５０ｍｇ「タカタ」",
+              "yj_code": "6179001F1066",
+              "maker": "高田製薬",
+              "scope": "PTP50錠（10錠×5）／統一商品コード 120-61701-0"
+            }
+          ],
+          "cautions": [
+            "現時点の入手可否は未確認です。切替の適否は電子添文を確認し、医師・薬剤師が判断してください。"
+          ]
+        },
+        {
+          "type": "2026年7月のメーカー案内に記載された同規格の参考候補",
+          "target_yj_codes": [
+            "6179001F2038"
+          ],
+          "products": [
+            {
+              "name": "ボリコナゾール錠２００ｍｇ「タカタ」",
+              "yj_code": "6179001F2062",
+              "maker": "高田製薬",
+              "scope": "PTP50錠（10錠×5）／統一商品コード 120-61710-2"
+            }
+          ],
+          "cautions": [
+            "現時点の入手可否は未確認です。切替の適否は電子添文を確認し、医師・薬剤師が判断してください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "この資料は2026年7月時点の見込みです。予定時期は在庫状況により前後し、実際の停止・欠品や現在の納入可否は未確認です。",
+        "50mgについては2026年10月の限定出荷解除・供給停止見込みの後続案内もご確認ください。",
+        "供給再開時期はメーカー案内では未定です。",
+        "この原文は自動追跡対象外です。後続案内と現在の状況はメーカーへご確認ください。"
+      ],
+      "collection_mode": "manual"
+    },
+    {
+      "maker": "第一三共エスファ",
+      "verified_at": "2026-11-08",
+      "id": "dsep-voriconazole50-release-plan-202610",
+      "title": "ボリコナゾール錠50mg「DSEP」限定出荷解除と供給停止・欠品見込み",
+      "url": "https://med.daiichisankyo-ep.co.jp/information/files/2279/VOR_50_PTP50_MON_5_PTP100_4_PAC14PAC140_E1_K.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-16",
+      "sha256": "9707290919b5e4f21072f519e37ed56afcce2cf0aae034739d9cfea4e94560fd",
+      "event_type": "resumed",
+      "targets": [
+        {
+          "yj_code": "6179001F1031",
+          "product_name": "ボリコナゾール錠５０ｍｇ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP50錠（10錠×5）",
+              "unified_product_code": "081-18570-2",
+              "supply": {
+                "status": "normal",
+                "status_text": "2026年10月16日から限定出荷解除の案内",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年10月末に供給停止・欠品の見込み（実際の停止は未確認）"
+                  }
+                ],
+                "note": "予定は在庫状況により前後する可能性があります。現在の出荷状況は未確認です。"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "reason": "2026年10月16日から限定出荷を解除する一方、諸般の事情で同年10月末に供給停止・欠品となる見込みと案内。",
+      "alternatives": [],
+      "cautions": [
+        "2026年10月の案内に記載された見込みで、10月末以降の実際の出荷・在庫状況は未確認です。",
+        "200mgはこの限定出荷解除の対象ではありません。参考候補と供給予定は別の7月案内をご確認ください。",
+        "この原文は自動追跡対象外です。後続案内と現在の状況はメーカーへご確認ください。"
+      ],
+      "collection_mode": "manual"
     }
   ]
 }
