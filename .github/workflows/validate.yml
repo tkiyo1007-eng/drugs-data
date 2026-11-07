@@ -30,6 +30,9 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
+      - name: 回帰テスト用の依存関係を準備
+        if: ${{ !inputs.core_release }}
+        run: python3 -m pip install openpyxl
       - name: Python構文検査
         run: python3 -m py_compile scripts/*.py
       - name: 回帰テスト
