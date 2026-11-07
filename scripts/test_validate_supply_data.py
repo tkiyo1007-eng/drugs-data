@@ -163,6 +163,11 @@ class ValidateSupplyDataTests(unittest.TestCase):
         errors, summary = validate_csv(self.path, **kwargs)
         self.assertEqual([], errors)
         self.assertEqual(1, summary['reviewed_missing_sales'])
+        reviewed['X00001']['exclude_from_limit'] = False
+        errors, summary = validate_csv(self.path, **kwargs)
+        self.assertEqual(0, summary['reviewed_missing_sales'])
+        self.assertTrue(any('記載なし率が上限' in e for e in errors))
+        reviewed['X00001']['exclude_from_limit'] = True
         rows[40]['販売メーカー'] = ''
         self.write(rows)
         self.assertTrue(any('記載なし率が上限' in e for e in validate_csv(self.path, **kwargs)[0]))

@@ -21,7 +21,9 @@ class ReviewedGasSourceTests(unittest.TestCase):
     def test_reviewed_rows_match_published_fields_without_guessing_sellers(self):
         root = Path(__file__).resolve().parent.parent
         reviewed = json.loads((root / 'verified_missing_gas_sellers.json').read_text(encoding='utf-8'))['products']
-        self.assertEqual(126, len(reviewed))
+        self.assertEqual(160, len(reviewed))
+        self.assertEqual(126, sum(v.get('exclude_from_limit', True) is True for v in reviewed.values()))
+        self.assertEqual(34, sum(v.get('exclude_from_limit', True) is False for v in reviewed.values()))
         with (root / 'drugs_app_ready.csv').open(encoding='utf-8-sig', newline='') as f:
             rows = {r['YJコード']: r for r in csv.DictReader(f)}
         for code, expected in reviewed.items():
