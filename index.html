@@ -4078,6 +4078,8 @@ let MANUFACTURER_NOTICES = [];
 let MANUFACTURER_NOTICES_STATE = "loading";
 let MANUFACTURER_NOTICES_CACHED = false;
 let MANUFACTURER_BULLETINS = null;
+let MANUFACTURER_BULLETINS_STATE = "loading";
+let MANUFACTURER_BULLETINS_CACHED = false;
 function manufacturerSourceURL(value){
   try{
     const url = new URL(value);
@@ -4113,6 +4115,18 @@ function validManufacturerNotice(n){
 function manufacturerNoticeChanged(n){
   return Boolean(MANUFACTURER_BULLETINS && MANUFACTURER_BULLETINS.items.some(item=>
     item.url === n.url && item.sha256 && item.sha256 !== n.sha256));
+}
+function manufacturerNoticeNeedsReview(n){
+  // 未登録の別案内と、登録済み原典の今回の確認未完了を混同しない。
+  return Boolean(MANUFACTURER_BULLETINS && MANUFACTURER_BULLETINS.items.some(item=>
+    item.url === n.url && item.review_status === "needs_review"
+    && item.review_reason === "原典hashの今回確認が未完了。前回内容は保持"));
+}
+function manufacturerReviewAvailability(){
+  if(MANUFACTURER_BULLETINS_STATE === "loading") return "原典の再確認状況を取得中です。";
+  if(MANUFACTURER_BULLETINS_STATE === "failed") return "原典の再確認状況を取得できませんでした。以下は前回確認した案内です。現在の状況は原文やメーカーにご確認ください。";
+  if(MANUFACTURER_BULLETINS_CACHED) return "原典の再確認状況は前回取得分です。現在の状況は原文やメーカーにご確認ください。";
+  return "";
 }
 function manufacturerSourceChanged(url){
   return MANUFACTURER_NOTICES.some(n=>n.url === url && manufacturerNoticeChanged(n));
@@ -4166,6 +4180,8 @@ function manufacturerNoticeHTML(notice, target=null, yj=""){
     || notice.expected_resumption && notice.expected_resumption.display || "";
   const lots = Array.isArray(notice.lots) ? notice.lots.filter(l=>!target || norm(target.product_name).includes(norm(l.strength || ""))) : [];
   return `<section class="manufacturer-note"><h4>${esc(notice.title)}</h4><p class="manufacturer-note-dates">${dates.map(([label,value])=>`<span>${esc(label)}：${esc(value)}</span>`).join(" ")}</p>`
+    + (manufacturerReviewAvailability() ? `<p><strong>${esc(manufacturerReviewAvailability())}</strong></p>` : "")
+    + (manufacturerNoticeNeedsReview(notice) ? `<p><strong>最新の原典は再確認待ちです。</strong>以下は前回確認した案内です。現在の状況は原文やメーカーにご確認ください。</p>` : "")
     + `<ul>${targets.map(t=>`<li>${esc(t.product_name)}：${t.packages.map(p=>esc(p.package)).join("／")}`
       + (t.seller ? `（販売経路：${esc(t.seller)}）` : "")
       + (t.planned_timing ? `。${/出荷停止中/.test(t.planned_timing) ? "案内の状況" : "案内の予定時期"}：${esc(t.planned_timing)}` : "")
@@ -4323,11 +4339,15 @@ function loadSupplementalData(){
         MANUFACTURER_NOTICES_STATE = "failed";
       }),
     fetchFirst(["manufacturer_bulletins.json", "https://kyokyu-navi.jp/manufacturer_bulletins.json"])
-      .then(res => { if(!res) throw new Error("missing bulletins"); return res.json(); })
-      .then(data => {
+      .then(res => { if(!res) throw new Error("missing bulletins"); const cached=responseUsesCachedData(res); return res.json().then(data=>({data,cached})); })
+      .then(({data,cached}) => {
         if(!validManufacturerBulletins(data)) throw new Error("invalid bulletins");
         MANUFACTURER_BULLETINS = data;
-      }).catch(()=>{}),
+        MANUFACTURER_BULLETINS_CACHED = cached;
+        MANUFACTURER_BULLETINS_STATE = "loaded";
+      }).catch(()=>{
+        MANUFACTURER_BULLETINS_STATE = "failed";
+      }),
     fetchFirst(["announcement_packages.json", "https://kyokyu-navi.jp/announcement_packages.json"])
       .then(res => res && res.json()).then(data => { if(data) PACKAGES = data; }).catch(()=>{}),
     fetchFirst(["resolution_stats.json", "https://kyokyu-navi.jp/resolution_stats.json"])
