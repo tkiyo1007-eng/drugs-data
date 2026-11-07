@@ -5725,20 +5725,13 @@ function openDetail(d, opts={}){
   if(isWarmPatch(d))
     document.getElementById("mGrid").insertAdjacentHTML("afterbegin",
       `<dt>貼付タイプ</dt><dd>温感タイプ（非温感タイプとの相互の代替にはご注意ください）</dd>`);
-  // 出荷再開・解消の見込み（厚労省コード ア/イ/ウ＋案内文PDF記載の時期。アプリ版⑪と同等）
+  // 出荷再開・解消の見込み（厚労省コード ア/イ/ウ）。包装から抽出した時期は意味が不明なため混ぜない。
   if(d.s !== "ok" || d.delist){
     const altRaw = (d.row && CSV_HEAD) ? String(d.row[CSV_HEAD.indexOf("代替候補")]||"") : "";
     const pm = altRaw.match(/解除\/解消見込み:\s*([アイウ])/);
     const prospect = pm ? ({"ア":"あり（メーカー回答）","イ":"なし（メーカー回答）","ウ":"未定（メーカー回答）"})[pm[1]] : null;
-    // 「2026年7月」等を年月の数値で並べる（文字列順だと11月が7月より先に来てしまう）
-    const untils = [...new Set(((legacySupplementalFor(PACKAGES,d))||[]).map(p=>p.until).filter(Boolean))]
-      .sort((a,b)=>{
-        const ka=a.match(/\d+/g)||[], kb=b.match(/\d+/g)||[];
-        return (+ka[0]||9999)-(+kb[0]||9999) || (+ka[1]||99)-(+kb[1]||99);
-      });
     const parts = [];
     if(prospect) parts.push(`解除見込み: ${prospect}`);
-    if(untils.length) parts.push(`案内文記載の時期: ${untils.join("、")}`);
     // 過去の変化ログから「同じ状況の品目は平均◯日で解除されている」の目安を追加
     // （厚労省データにも他サイトにも無い統計。サンプル数が少ないうちは参考値である旨を明記）
     const statKey = d.s==="stopped" ? "stopped" : (d.s==="limited" ? "limited" : null);
@@ -5875,15 +5868,13 @@ function openDetail(d, opts={}){
     $mMakerLink.removeAttribute("href");
     $mMakerLink.textContent = "";
   }
-  // 案内文PDFから自動抽出した包装単位（案内文リンクがある品目のみ表示）
+  // PDF全体からの抽出結果は別製品の包装を含み得るため、品目別の包装として表示しない。
   const $mPkgs = document.getElementById("mPkgs");
   const pkgs = announcement ? legacySupplementalFor(PACKAGES,d) : null;
   if(pkgs && pkgs.length){
     $mPkgs.innerHTML =
-      `<div class="pkg-title">案内文に記載されている包装単位（自動抽出）</div>
-       <div class="pkg-chips">${pkgs.map(p=>
-         `<span class="pkg-chip">${esc(p.pkg)}${p.until ? `（${esc(p.until)}）` : ""}</span>`).join("")}</div>
-       <p class="pkg-note">※ 案内文PDFの記載から自動抽出しています。時期の意味（在庫消尽・中止・解除見込み等）や対象規格は、必ず上の案内文原文でご確認ください。</p>`;
+      `<div class="pkg-title">包装情報の確認</div>
+       <p class="pkg-note">自動抽出した包装は対象品目との対応を確認できないため表示していません。対象の製品・規格・包装と時期は、上のメーカー案内原文でご確認ください。</p>`;
     $mPkgs.hidden = false;
   }else{
     $mPkgs.hidden = true;
