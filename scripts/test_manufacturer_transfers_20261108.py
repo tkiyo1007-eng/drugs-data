@@ -1,6 +1,9 @@
 """公的資料で確認した承認承継を、品目とメーカーの取り違えなく維持する。"""
 import csv
+import sys
 import unittest
+import tempfile
+from unittest import mock
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -78,6 +81,17 @@ class ManufacturerTransfers(unittest.TestCase):
         self.assert_field_if_present(rows, 'removed', '製造メーカー', '旧会社')
         with self.assertRaises(AssertionError):
             self.assert_field_if_present(rows, 'present', '製造メーカー', '別会社')
+
+    def test_old_nikp_removal_still_checks_remaining_successor(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / 'drugs_app_ready.csv'
+            with path.open('w', encoding='utf-8', newline='') as f:
+                writer = csv.DictWriter(f, fieldnames=['YJコード', '商品名'])
+                writer.writeheader()
+                writer.writerow({'YJコード': '7131001X1461', '商品名': '別の製品'})
+            with mock.patch.object(sys.modules[__name__], 'ROOT', Path(temp)):
+                with self.assertRaises(AssertionError):
+                    self.test_nikp_transfer_keeps_old_and_new_yj_distinct()
 
 if __name__ == '__main__':
     unittest.main()
