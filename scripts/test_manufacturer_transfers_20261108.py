@@ -21,5 +21,13 @@ class ManufacturerTransfers(unittest.TestCase):
         for code in ('1190032S1021','1190401A1023','1190401G1026'):
             self.assertNotEqual(rows[code]['販売メーカー'], '田辺ファーマ', code)
 
+    def test_ohara_transfer_for_permax_and_apokyn(self):
+        with (ROOT / 'drugs_app_ready.csv').open(encoding='utf-8-sig', newline='') as f:
+            rows = {row['YJコード']: row for row in csv.DictReader(f)}
+        # 2026年7月1日承継。旧会社の包装も当面流通する旨は原文参照。
+        for code in ('1169008F1026', '1169008F2022', '1169400G1028'):
+            self.assertEqual(rows[code]['製造メーカー'], '大原薬品工業', code)
+            self.assertEqual(rows[code]['販売メーカー'], '大原薬品工業', code)
+
 if __name__ == '__main__':
     unittest.main()
