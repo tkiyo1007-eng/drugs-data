@@ -66,6 +66,17 @@ class ManufacturerTransfers(unittest.TestCase):
         for code in ('799070BX1042', '799070CX1020'):
             self.assert_field_if_present(rows, code, '販売メーカー', '')
 
+    def test_generic_products_use_yj_specific_manufacturer(self):
+        # 厚労省原表とPMDA添文／山善製薬公表資料を、YJコードごとに照合。
+        with (ROOT / 'drugs_app_ready.csv').open(encoding='utf-8-sig', newline='') as f:
+            rows = {row['YJコード']: row for row in csv.DictReader(f)}
+        expected = {'2344004X1267': '山善製薬', '7131400A9026': '日新製薬',
+                    '7131400H1023': '日新製薬', '7131400A2110': '日新製薬'}
+        for code, manufacturer in expected.items():
+            self.assert_field_if_present(rows, code, '製造メーカー', manufacturer)
+            # 同名品目をまとめた旧販売元リストは、対象品目に紐づく根拠がない。
+            self.assert_field_if_present(rows, code, '販売メーカー', '')
+
     def test_nikp_transfer_keeps_old_and_new_yj_distinct(self):
         with (ROOT / 'drugs_app_ready.csv').open(encoding='utf-8-sig', newline='') as f:
             rows = {row['YJコード']: row for row in csv.DictReader(f)}
