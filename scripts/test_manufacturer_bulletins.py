@@ -53,6 +53,24 @@ class Transport:
 
 
 class MetadataTests(unittest.TestCase):
+    def test_standalone_notice_link_keeps_its_own_date_and_scope(self):
+        source = configuration()["sources"][0]
+        html = '''<div class="news_list">
+          <a href="/pdf/a.pdf"><div>2025年9月26日 販売中止予定のお知らせ</div></a>
+          <a href="https://other.test/pdf/b.pdf"><div>2026年1月2日 出荷停止</div></a>
+          <a href="/pdf/c.pdf"><div>2026年1月3日 包装変更</div></a>
+        </div>'''
+        rows = mod.parse_html(html, source)
+        self.assertEqual(rows, [{"title": "2025年9月26日 販売中止予定のお知らせ",
+                                 "url": "https://maker.test/pdf/a.pdf", "posted_at": "2025-09-26"}])
+
+    def test_standalone_japanese_url_matches_percent_encoded_registry(self):
+        source = configuration()["sources"][0]
+        html = '<a href="/pdf/販売中止.pdf"><div>2025年9月26日 販売中止のお知らせ</div></a>'
+        rows = mod.parse_html(html, source)
+        self.assertEqual(rows[0]['url'], 'https://maker.test/pdf/%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2.pdf')
+        self.assertEqual(rows[0]['url'], mod.normalized_url('https://maker.test/pdf/販売中止.pdf'))
+
     def test_fuso_registry_is_limited_to_the_verified_product_and_pdf(self):
         root = Path(__file__).resolve().parents[1]
         config = json.loads((root / 'manufacturer_feed_sources.json').read_text())
