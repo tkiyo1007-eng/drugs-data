@@ -282,11 +282,11 @@ class ItemPageMetadataTests(unittest.TestCase):
             supplemental_checked_date="2026-08-26",
         )
         self.assertIn("厚生労働省公表データ上の供給区分は「<strong>通常出荷</strong>」", output)
-        self.assertIn("メーカー公式：販売中止予定", output)
+        self.assertIn("メーカー公式：販売中止の案内あり", output)
         self.assertIn("情報差異あり", output)
         self.assertIn("メーカー公式：限定出荷（2026-08-17）", output)
         self.assertEqual(4, output.count('data-dsn-event="official-source-open"'))
-        self.assertIn("メーカー：販売中止予定／メーカー：限定出荷", output)
+        self.assertIn("メーカー：販売中止の案内あり／メーカー：限定出荷", output)
         self.assertIn("サイト全体の公開データ基準日", output)
         self.assertIn('fetch("../version.json"', output)
         self.assertIn('response.headers.get("X-DSN-Source") === "cache"', output)
@@ -440,7 +440,7 @@ class ItemPageMetadataTests(unittest.TestCase):
     def test_seo_title_keeps_meaning_without_exceeding_seventy_characters(self):
         name = "フルボキサミンマレイン酸塩錠２５ｍｇ「タカタ」"
         title = page_title(
-            name, "供給停止", ["メーカー：販売中止予定", "メーカー：限定出荷解除・通常出荷"],
+            name, "供給停止", ["メーカー：販売中止の案内あり", "メーカー：限定出荷解除・通常出荷"],
         )
         self.assertLessEqual(len(title), 70)
         self.assertIn(name, title)
@@ -977,8 +977,8 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
         self.assertIn("厚労省：通常出荷", output)
         self.assertIn("メーカー公式：原典更新・再確認待ち", output)
         self.assertIn("前回の公表年月日：2026-10", output)
-        self.assertNotIn("メーカー公式：販売中止予定", output)
-        self.assertNotIn("メーカー：販売中止予定", output)
+        self.assertNotIn("メーカー公式：販売中止の案内あり", output)
+        self.assertNotIn("メーカー：販売中止の案内あり", output)
         for value in ("終了予定時期：", "2027-12", lifecycle["supply_end_note"], lifecycle["supply_end_packages"][0], "終了予定の原文確認日"):
             self.assertNotIn(value, output)
         self.assertEqual("2026-10-29", item_page_lastmod(row, lifecycle, manufacturer_notices=[notice], manufacturer_bulletins=bulletins))
@@ -1016,7 +1016,7 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
         self.assertIn("案内の最終確認日：2026-10-14", output)
         self.assertIn("案内の確認状態が完全でない、確認日が古い、または確認日を取得できません", output)
         self.assertNotIn("確認日が7日以上前のため", output)
-        self.assertNotIn("メーカー公式：販売中止予定", output)
+        self.assertNotIn("メーカー公式：販売中止の案内あり", output)
         self.assertIn("厚労省：通常出荷", output)
         self.assertIn('"dateModified":"2026-10-29"', output)
         entry = {"key": row["YJコード"], "name": row["商品名"], "maker": lifecycle["maker"],
@@ -1403,7 +1403,7 @@ class ItemDescriptionTests(unittest.TestCase):
                 description = self.description(output)
                 self.assertIn('供給区分は「通常出荷」', description)
                 self.assertIn(f'メーカー公式補足は「{label}」', description)
-                self.assertNotIn("メーカー：販売中止予定", description)
+                self.assertNotIn("メーカー：販売中止の案内あり", description)
                 self.assertNotIn("解除・解消見込みは", description)
 
     def test_full_source_values_remain_escaped_and_equal_across_search_share_and_schema(self):

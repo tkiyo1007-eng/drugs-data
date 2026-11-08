@@ -948,7 +948,7 @@ def supplemental_labels(row: dict, lifecycle=None, discrepancy=None,
         lifecycle_current = trusted and lifecycle_verification_is_recent(
             lifecycle, reference_date)
         labels.append("メーカー原典更新・再確認待ち" if lifecycle.get("source_changed")
-                      else "メーカー：販売中止予定" if lifecycle_current
+                      else "メーカー：販売中止の案内あり" if lifecycle_current
                       else "メーカー：販売中止案内あり（要原文確認）")
     if discrepancy_matches(row, discrepancy):
         manufacturer = discrepancy.get("manufacturer") or {}
@@ -1509,12 +1509,12 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
                              f'{lifecycle_link}</div>')
         else:
             lifecycle_box = f'''<div class="supp supp-life">
-      <strong>メーカー公式：{"販売中止予定" if lifecycle_current else "販売中止案内あり（要原文確認）"}</strong>
+      <strong>メーカー公式：{"販売中止の案内あり" if lifecycle_current else "販売中止案内あり（要原文確認）"}</strong>
       <p>{esc(lifecycle_match.get("source_title") or "販売中止の案内")}'''
             if lifecycle_match.get("announced_at"):
                 lifecycle_box += f'（公表 {esc(lifecycle_match.get("announced_at"))}）'
             verified_at = esc(lifecycle_match.get("verified_at") or "確認日不明")
-            lifecycle_box += (f'''</p>{lifecycle_end_details(lifecycle_match)}<p>案内の最終確認日：{verified_at}。{"案内の確認状態が完全でない、確認日が古い、または確認日を取得できません。現在の扱いは必ず原文で再確認してください。" if not lifecycle_current else "厚労省の現在の供給区分と、メーカーの今後の販売予定は別の情報として併記しています。"}</p>{lifecycle_link}<p><a href="{DISCONTINUATION_GUIDE}">販売中止・製造中止・薬価削除の確認方法</a></p></div>''')
+            lifecycle_box += (f'''</p>{lifecycle_end_details(lifecycle_match)}<p>案内の最終確認日：{verified_at}。{"案内の確認状態が完全でない、確認日が古い、または確認日を取得できません。現在の扱いは必ず原文で再確認してください。" if not lifecycle_current else "厚労省の現在の供給区分と、メーカーの販売中止案内は別の情報として併記しています。"}</p>{lifecycle_link}<p><a href="{DISCONTINUATION_GUIDE}">販売中止・製造中止・薬価削除の確認方法</a></p></div>''')
 
     discrepancy_box = ""
     if discrepancy_match:
