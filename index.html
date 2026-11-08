@@ -91,7 +91,7 @@
   ]
 }
 </script>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232F63E8'/%3E%3Cpath d='M32 16v32M16 32h32' stroke='white' stroke-width='9' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- 本文用のみ。数字(.num)は端末標準フォントのタブular数字を使うので Inter は読み込まない。
@@ -3414,7 +3414,7 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
     const lifecycleNotice = lifecycleAnnouncement(d);
     const discontinuedBadge = d.s !== "ended" && lifecycleNotice
       ? `<span class="discontinued-badge">${lifecycleNotice.verificationRecent
-          ? "販売中止予定"
+          ? "販売中止の案内あり"
           : "販売中止案内あり（要原文確認）"}</span>` : "";
     // 厚労省区分は変更せず、日付・メーカー・製品規格まで一致した新しい
     // メーカー公式案内が異なる状態を示す場合だけ、独立した黄色バッジを付ける。
@@ -3527,6 +3527,13 @@ window.addEventListener("hashchange", (event={})=>{
   const p = new URLSearchParams(location.hash.slice(1));
   if(!p.has("q") && !p.has("f")) return; // #demo などページ内リンクは無視する
   const previousHash = event.oldURL ? new URL(event.oldURL).hash : "";
+  // 詳細を閉じた直後、遅れて届いた hashchange より先に入力された語を守る。
+  if((previousHash.startsWith("#item=") || previousHash.startsWith("#drug="))
+      && detailCloseSearchSnapshot && detailCloseSearchSnapshot.hash === location.hash){
+    const typedAfterClose = $q.value !== detailCloseSearchSnapshot.query;
+    detailCloseSearchSnapshot = null;
+    if(typedAfterClose) return;
+  }
   // 同じ確定済み検索へ詳細から戻った時は、追加表示した件数・順序・操作位置を保つ。
   // 別検索、入力待ち、未確定の絞り込みは従来どおりURLから描画する。
   if((previousHash.startsWith("#item=") || previousHash.startsWith("#drug="))
@@ -3678,6 +3685,7 @@ const $mBack = document.getElementById("mBack");
 const $mClose = document.getElementById("mClose");
 let lastFocus = null;
 let lastFocusResult = null;
+let detailCloseSearchSnapshot = null;
 
 // クリックした品目の詳細項目 [ラベル, 値] を組み立てる
 // 実データ時は CSV の全列（空欄を除く）をそのまま表示するので、列が増えても自動で反映される
@@ -3687,12 +3695,13 @@ const DETAIL_ORDER = ["規格","供給状況","理由","解除・解消見込み
 // 「解除/解消見込み: ... / 出荷量状況: ...」の形で収録されている。
 // その形式だけを正しい項目名に分解し、将来本当の代替候補が入った場合は元の表示を保つ。
 function displayDetailFields(label, value){
+  if(label==="出荷量状況" && /^[－-]$/.test(value.trim())) return [[label,"区分の記載なし"]];
   if(label!=="代替候補") return [[label,value]];
   const m = value.match(/^解除\/解消見込み:\s*(.*?)\s*\/\s*出荷量状況:\s*(.*)$/);
   if(!m) return [[label,value]];
   return [
     ["解除・解消見込み", m[1].trim()],
-    ["出荷量状況", m[2].trim()],
+    ["出荷量状況", /^[－-]$/.test(m[2].trim()) ? "区分の記載なし" : m[2].trim()],
   ].filter(([,v])=>v);
 }
 function detailPairs(d){
@@ -5832,7 +5841,7 @@ function openDetail(d, opts={}){
   // 落とさないよう原文のまま引用）
   if(d.s !== "ended" && lifecycleNotice){
     const lifecycleDetail = lifecycleNotice.verificationRecent
-      ? `「${esc(cleanAnnouncementTitle(announcement.title))}」が公表されています（下の案内文リンク参照）。供給状況欄は現在の出荷区分、メーカー案内は今後の販売予定を示すため、「通常出荷」と「販売中止予定」が同時に表示される場合があります。`
+      ? `「${esc(cleanAnnouncementTitle(announcement.title))}」が公表されています（下の案内文リンク参照）。供給状況欄は現在の出荷区分、メーカー案内は供給区分とは別の情報のため、「通常出荷」と「販売中止の案内あり」が同時に表示される場合があります。`
       : `「${esc(cleanAnnouncementTitle(announcement.title))}」の登録がありますが、案内の確認状態が完全でない、確認日${lifecycleNotice.verified_at ? `（${esc(lifecycleNotice.verified_at)}）` : ""}が古い、または確認日を取得できません。販売中止予定とは断定せず、下のメーカー原文で対象・現況をご確認ください。`;
     document.getElementById("mGrid").insertAdjacentHTML("afterbegin",
       `<dt>メーカー案内</dt><dd>${lifecycleDetail}</dd>`);
@@ -6003,6 +6012,7 @@ window.addEventListener("popstate", ()=>{
   if(found) openDetail(found, {route:false});
   else if($mBack.classList.contains("open")){
     // 通常アンカーの履歴移動では、検索欄へ焦点を戻さない。
+    detailCloseSearchSnapshot = {query:$q.value, hash:location.hash};
     closeDetail({route:false});
   }
 });
