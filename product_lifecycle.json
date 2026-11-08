@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-08T03:47:17+09:00",
+  "generated_at": "2026-11-08T12:35:47+09:00",
   "products": {
     "1124007F1143": {
       "product_name": "トリアゾラム錠０．１２５ｍｇ「ＣＨ」",
@@ -2986,6 +2986,15 @@
       "announced_at": "2026-01",
       "source_title": "オキシドール消毒用液「マルイシ」販売中止（2026年1月）・経過措置のご案内",
       "source_url": "https://www.maruishi-pharm.co.jp/medical/products/14023/",
+      "verified_at": "2026-11-08"
+    },
+    "2619708X1193": {
+      "product_name": "ホルマリン",
+      "maker": "山善製薬",
+      "state": "discontinuation_announced",
+      "announced_at": "2025-05-19",
+      "source_title": "ホルマリン「ヤマゼン」販売中止のご案内",
+      "source_url": "https://www.yamazen-pharm.co.jp/home/wp-content/uploads/2025/08/2505%E3%83%9B%E3%83%AB%E3%83%9E%E3%83%AA%E3%83%B3%E5%88%87%E3%82%8A%E6%9B%BF%E3%81%88%E6%A1%88%E5%86%851.pdf",
       "verified_at": "2026-11-08"
     },
     "261970BQ1140": {
