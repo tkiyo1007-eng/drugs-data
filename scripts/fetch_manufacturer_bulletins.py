@@ -80,7 +80,8 @@ def normalized_url(value):
         path = decoded
     if "\\" in path or any(x in (".", "..") for x in path.split("/")) or any(ord(x) < 32 for x in value + path):
         raise CollectionError("URL pathが不正")
-    return urllib.parse.urlunsplit(("https", p.hostname.lower(), p.path or "/", p.query, ""))
+    encoded_path = urllib.parse.quote(p.path or "/", safe="/%:@!$&'()*+,;=-._~")
+    return urllib.parse.urlunsplit(("https", p.hostname.lower(), encoded_path, p.query, ""))
 
 
 def in_scope(url, scopes):
@@ -272,6 +273,9 @@ class Blocks(HTMLParser):
         if tag in {"tr", "li", "p"}:
             self.stack.append({"tag": tag, "text": [], "links": []})
         if tag == "a" and attrs.get("href"):
+            # 一覧が a 要素そのものの場合も、そのリンク内だけを日付の根拠にする。
+            if not self.stack:
+                self.stack.append({"tag": "a", "text": [], "links": []})
             self.link = {"href": attrs["href"], "text": []}
             for b in self.stack:
                 b["links"].append(self.link)
