@@ -36,6 +36,7 @@ OFFICIAL_HOSTS = {
     "辰巳化学": {"tatsumi-kagaku.com"},
     "住友ファーマ": {"sumitomo-pharma.jp"},
     "岩城製薬": {"iwakiseiyaku.co.jp"},
+    "山善製薬": {"yamazen-pharm.co.jp"},
 }
 
 
