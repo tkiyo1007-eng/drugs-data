@@ -27,6 +27,7 @@ MAKER_HOSTS = {
     '久光製薬': 'www.hisamitsu-pharm.jp',
     '日本ベーリンガーインゲルハイム': 'www.bij-kusuri.jp',
     '日本ジェネリック': 'medical.nihon-generic.co.jp',
+    'LTLファーマ': 'www.ltl-pharma.com',
 }
 SCOPES = {'product', 'package', 'seller_route_and_package'}
 KINDS = {'discontinued', 'limited', 'stopped', 'resumed', 'resumption_planned', 'recall'}

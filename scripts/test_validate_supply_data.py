@@ -152,6 +152,43 @@ class ValidateSupplyDataTests(unittest.TestCase):
         self.assertNotEqual(0, vsd.main(["--csv", str(self.path), "--min-rows", "1", "--max-rows", "30000",
                                          "--max-age-days", "100000"]))
 
+    def test_reviewed_gas_missing_sales_does_not_weaken_other_missing_checks(self):
+        rows = [self.row(商品名=f"薬{i}", YJコード=f"1234567{i:05d}", 薬価="10",
+                         販売メーカー="" if i < 40 else "販売元") for i in range(999)]
+        rows.append(self.row(商品名="液化酸素", YJコード="X00001", 製造メーカー="会社A", 販売メーカー="", 薬価="10"))
+        reviewed = {'X00001': {'name': '液化酸素', 'manufacturer': '会社A'}}
+        kwargs = dict(today=dt.date(2026, 8, 3), min_rows=1, max_rows=2000,
+                      max_missing_sales_maker_rate=4.0, reviewed_missing_sales=reviewed)
+        self.write(rows)
+        errors, summary = validate_csv(self.path, **kwargs)
+        self.assertEqual([], errors)
+        self.assertEqual(1, summary['reviewed_missing_sales'])
+        reviewed['X00001']['exclude_from_limit'] = False
+        errors, summary = validate_csv(self.path, **kwargs)
+        self.assertEqual(0, summary['reviewed_missing_sales'])
+        self.assertTrue(any('記載なし率が上限' in e for e in errors))
+        reviewed['X00001']['exclude_from_limit'] = True
+        rows[40]['販売メーカー'] = ''
+        self.write(rows)
+        self.assertTrue(any('記載なし率が上限' in e for e in validate_csv(self.path, **kwargs)[0]))
+        rows[40]['販売メーカー'] = '販売元'
+        rows[-1]['製造メーカー'] = '別会社'
+        self.write(rows)
+        self.assertTrue(any('識別情報が変わりました' in e for e in validate_csv(self.path, **kwargs)[0]))
+
+    def test_reviewed_missing_sales_still_has_an_overall_cap(self):
+        rows = [self.row(商品名=f"薬{i}", YJコード=f"1234567{i:05d}", 薬価="10",
+                         販売メーカー="" if i < 36 else "販売元") for i in range(990)]
+        reviewed = {}
+        for i in range(10):
+            code = f'X{i:05d}'
+            rows.append(self.row(商品名="液化酸素", YJコード=code, 製造メーカー="会社A", 販売メーカー="", 薬価="10"))
+            reviewed[code] = {'name': '液化酸素', 'manufacturer': '会社A'}
+        self.write(rows)
+        errors, _ = validate_csv(self.path, today=dt.date(2026, 8, 3), min_rows=1, max_rows=2000,
+                                 max_missing_sales_maker_rate=4.0, reviewed_missing_sales=reviewed)
+        self.assertTrue(any('全体率が上限' in e for e in errors))
+
     def test_maker_document_noise_and_invalid_prices_are_rejected(self):
         self.write([self.row(
             製造メーカー="会社名 本注意事項等情報を使用している製造販売業者一覧表",

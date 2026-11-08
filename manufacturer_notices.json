@@ -4991,6 +4991,55 @@
         "メーカー文書の薬価基準収載医薬品コードは3999003F1017、厚労省収録の本品YJコードは3999003F1300です。品名・メーカー・包装を照合しています。",
         "本資料は自動追跡対象外です。後続案内と現在の状況はメーカーへご確認ください。"
       ]
+    },
+    {
+      "id": "ltl-neurovitan-limited-20261026",
+      "maker": "LTLファーマ",
+      "title": "ノイロビタン配合錠の限定出荷（2026年10月26日更新の一覧）",
+      "url": "https://www.ltl-pharma.com/wp-content/uploads/resource/distribution_info/distribution_info.pdf",
+      "announced_at": "2026-10-26",
+      "verified_at": "2026-11-08",
+      "sha256": "50a67a2628ca74474b2dcd433cbd2692ba1bfaa7f4863917042239cece6b3e2a",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "メーカーは熊本地震による製造所の被災を理由に挙げています。",
+      "effective_at": "2026-09-28",
+      "resumption": "限定出荷解除見込みは未定（2026年10月26日更新時点）",
+      "cautions": [
+        "メーカー一覧は2026年10月26日更新の情報です。製造委託施設の生産再開は10月下旬の予定と記載され、実際の再開やその後の生産量は確認できていません。",
+        "資料時点のメーカー案内であり、現在の受注可否・卸在庫を示すものではありません。厚労省公表区分とは別に確認してください。",
+        "この資料は手動確認したもので、後続案内を自動追跡していません。"
+      ],
+      "alternatives": [],
+      "targets": [
+        {
+          "yj_code": "3179106F1039",
+          "product_name": "ノイロビタン配合錠",
+          "maker": "LTLファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "500錠（PTP）",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（2026年10月26日更新のメーカー一覧）",
+                "plans": []
+              }
+            },
+            {
+              "package": "1000錠（瓶）",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（2026年10月26日更新のメーカー一覧）",
+                "plans": []
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

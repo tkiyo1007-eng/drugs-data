@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 import re
 import sys
 from collections import Counter
@@ -66,7 +67,8 @@ def parse_date(value):
 
 def validate_csv(path, *, today=None, min_rows=10000, max_rows=30000, max_age_days=10,
                  max_missing_sales_maker_rate=None, max_missing_price_rate=None,
-                 reject_maker_noise=True, max_age_business_days=None):
+                 reject_maker_noise=True, max_age_business_days=None,
+                 reviewed_missing_sales=None):
     errors = []
     today = today or jst_today()
     try:
@@ -230,12 +232,25 @@ def validate_csv(path, *, today=None, min_rows=10000, max_rows=30000, max_age_da
 
     missing_sales_maker = sum(not (row.get("販売メーカー") or "").strip() for row in rows)
     missing_sales_maker_rate = (missing_sales_maker / len(rows) * 100) if rows else 0.0
+    approved_missing = 0
+    for row in rows:
+        reviewed = (reviewed_missing_sales or {}).get((row.get('YJコード') or '').strip())
+        if not reviewed:
+            continue
+        if row.get('商品名') != reviewed['name'] or row.get('製造メーカー') != reviewed['manufacturer']:
+            errors.append(f"確認済み医療用ガスの識別情報が変わりました: {row.get('YJコード')}")
+        elif reviewed.get('exclude_from_limit', True) and not (row.get('販売メーカー') or '').strip():
+            approved_missing += 1
+    guarded_missing = missing_sales_maker - approved_missing
+    guarded_missing_rate = (guarded_missing / len(rows) * 100) if rows else 0.0
     if (max_missing_sales_maker_rate is not None
-            and missing_sales_maker_rate > max_missing_sales_maker_rate):
+            and guarded_missing_rate > max_missing_sales_maker_rate):
         errors.append(
             f"販売メーカーの記載なし率が上限を超えています: "
-            f"{missing_sales_maker:,}/{len(rows):,}件（{missing_sales_maker_rate:.2f}%、"
+            f"対象外を除き{guarded_missing:,}/{len(rows):,}件（{guarded_missing_rate:.2f}%、"
             f"上限 {max_missing_sales_maker_rate:.2f}%）")
+    if max_missing_sales_maker_rate is not None and missing_sales_maker_rate > 4.5:
+        errors.append(f"販売メーカー記載なしの全体率が上限を超えています: {missing_sales_maker_rate:.2f}%（上限 4.50%）")
     missing_price = sum(not (row.get("薬価") or "").strip() for row in rows)
     missing_price_rate = (missing_price / len(rows) * 100) if rows else 0.0
     if max_missing_price_rate is not None and missing_price_rate > max_missing_price_rate:
@@ -250,6 +265,7 @@ def validate_csv(path, *, today=None, min_rows=10000, max_rows=30000, max_age_da
         "statuses": dict(sorted(statuses.items())),
         "missing_sales_maker": missing_sales_maker,
         "missing_sales_maker_rate": missing_sales_maker_rate,
+        "reviewed_missing_sales": approved_missing,
         "missing_price": missing_price,
         "missing_price_rate": missing_price_rate,
         "missing_shipment_volume": missing_volume,
@@ -271,10 +287,23 @@ def main(argv=None):
     parser.add_argument("--max-missing-price-rate", type=float, default=6.0,
                         help="薬価欄の記載なし率の上限（既定6.0%%）")
     args = parser.parse_args(argv)
+    try:
+        reviewed_file = Path(__file__).resolve().parent.parent / 'verified_missing_gas_sellers.json'
+        reviewed = json.loads(reviewed_file.read_text(encoding='utf-8'))['products']
+        if not isinstance(reviewed, dict) or len(reviewed) != 160:
+            raise ValueError('確認済み販売元未記載の対象数が不正です')
+        if any(not isinstance(v, dict) or not isinstance(v.get('exclude_from_limit', True), bool)
+               for v in reviewed.values()):
+            raise ValueError('確認済み販売元未記載の設定が不正です')
+        if sum(v.get('exclude_from_limit', True) for v in reviewed.values()) != 126:
+            raise ValueError('販売元未記載率の除外対象数が不正です')
+    except (OSError, ValueError, KeyError, TypeError) as error:
+        print(f'確認済み販売元未記載データを検証できません: {error}', file=sys.stderr)
+        return 1
     errors, summary = validate_csv(
         args.csv, min_rows=args.min_rows, max_rows=args.max_rows, max_age_days=args.max_age_days,
         max_missing_sales_maker_rate=args.max_missing_sales_maker_rate,
-        max_missing_price_rate=args.max_missing_price_rate)
+        max_missing_price_rate=args.max_missing_price_rate, reviewed_missing_sales=reviewed)
     print(f"品目数: {summary.get('rows', 0):,}件")
     if summary.get("newest"):
         print(f"最新更新日: {summary['newest']}")
@@ -286,6 +315,7 @@ def main(argv=None):
               f"（{summary['missing_sales_maker_rate']:.2f}%）、"
               f"薬価記載なし={summary['missing_price']:,}件"
               f"（{summary['missing_price_rate']:.2f}%）")
+        print(f"うち品質基準上の確認済み除外: {summary['reviewed_missing_sales']:,}件")
     if summary.get("missing_shipment_volume"):
         print(f"参考: 出荷量状況の原典記載なし={summary['missing_shipment_volume']:,}件"
               f"（{summary['missing_shipment_volume_rate']:.3f}%）。通常出荷の意味ではありません")

@@ -67,6 +67,9 @@ jobs:
         run: python3 scripts/fetch_headlines.py industry_headlines.json
         continue-on-error: true
 
+      - name: 確認済み医療用ガスの原表識別を検証
+        run: python3 scripts/check_reviewed_gas_sources.py
+
       - name: 供給状況だけ更新（既存CSVの薬価・メーカーは保持）
         run: |
           python3 - <<'EOF'
@@ -136,6 +139,14 @@ jobs:
 
       - name: メーカー欄に混入した共通文書の説明を除去
         run: python3 scripts/sanitize_maker_fields.py drugs_app_ready.csv
+
+      - name: メーカー表記の原表との差を確認（自動変更しない）
+        run: python3 scripts/audit_manufacturer_drift.py --csv drugs_app_ready.csv --xlsx supply_latest.xlsx
+        continue-on-error: true
+
+      - name: 規格表記の原表との差を確認（自動変更しない）
+        run: python3 scripts/audit_specification_drift.py --csv drugs_app_ready.csv --xlsx supply_latest.xlsx
+        continue-on-error: true
 
       - name: 薬価の空欄をマスタから補完（新規追加品目は薬価空欄で入るため）
         run: python3 scripts/fill_prices.py drugs_app_ready.csv yakka_master.csv
