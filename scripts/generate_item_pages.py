@@ -130,12 +130,14 @@ SUPPLY_METADATA_RE = re.compile(
 def split_supply_metadata(label: str, value: str) -> list[tuple[str, str]]:
     """CSVの誤解を招く列名を、収録内容に即した表示項目へ分ける。"""
     if label != "代替候補":
+        if label == "出荷量状況" and value.strip() in {"－", "-"}:
+            return [(label, "区分の記載なし")]
         return [(label, value)]
     match = SUPPLY_METADATA_RE.match(value)
     if not match:
         return [(label, value)]
     return [("解除・解消見込み", match.group(1).strip()),
-            ("出荷量状況", match.group(2).strip())]
+            ("出荷量状況", "区分の記載なし" if match.group(2).strip() in {"－", "-"} else match.group(2).strip())]
 
 
 def ld_json(value: object) -> str:
@@ -149,6 +151,8 @@ def supply_metadata_values(row: dict) -> dict[str, str]:
     values = {}
     for field in ("解除・解消見込み", "出荷量状況"):
         value = str(row.get(field) or "").strip()
+        if field == "出荷量状況" and value in {"－", "-"}:
+            value = "区分の記載なし"
         if value:
             values[field] = value
     legacy = str(row.get("代替候補") or "").strip()
@@ -182,6 +186,9 @@ def quick_answers_html(row: dict, status: str, display_name: str) -> str:
     metadata = supply_metadata_values(row)
     release = metadata.get("解除・解消見込み", "記載なし")
     shipment = metadata.get("出荷量状況", "記載なし")
+    shipment_summary = ("出荷量の区分は公表データに記載されていません。"
+                        if shipment in {"区分の記載なし", "記載なし"}
+                        else f'出荷量状況の記載は「<strong>{esc(shipment)}</strong>」です。')
     updated = official_row_date(row) or "確認できません"
     if status == "limited":
         question = f"{display_name}はなぜ限定出荷（出荷調整）？"
@@ -198,7 +205,7 @@ def quick_answers_html(row: dict, status: str, display_name: str) -> str:
       <dl>
         <div><dt>{esc(question)}</dt><dd>厚生労働省公表データの出荷対応は「<strong>{esc(raw_status)}</strong>」{reason_part}です。{esc(official_status_meaning(row, status))}公表されていない個別事情は推測していません。</dd></div>
         <div><dt>解除・解消見込みの公表区分は？</dt><dd>公表欄の記載は「<strong>{esc(release)}</strong>」です。この欄は見込みの有無を示す区分です。具体的な時期は厚生労働省の公式システムとメーカー案内の原文もご確認ください。</dd></div>
-        <div><dt>公表上の出荷量は？</dt><dd>出荷量状況の記載は「<strong>{esc(shipment)}</strong>」です。実際の在庫や受注可否は卸・メーカーにもご確認ください。</dd></div>
+        <div><dt>公表上の出荷量は？</dt><dd>{shipment_summary}実際の在庫や受注可否は卸・メーカーにもご確認ください。</dd></div>
         <div><dt>この品目情報はいつ更新？</dt><dd>品目行で確認できる最新日は「<strong>{esc(updated)}</strong>」です。サイト全体の基準日は、このページ上部で別に表示します。</dd></div>
       </dl>
     </section>'''

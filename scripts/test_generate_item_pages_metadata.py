@@ -49,6 +49,18 @@ from generate_item_pages import (
 
 
 class ItemPageMetadataTests(unittest.TestCase):
+    def test_missing_volume_is_explicit_in_answer_and_table(self):
+        for marker in ("－", "-"):
+            with self.subTest(marker=marker):
+                row = {"商品名": "対象錠", "供給状況": "②限定出荷（自社の事情）",
+                       "代替候補": f"解除/解消見込み: ウ. 未定 / 出荷量状況: {marker}",
+                       "YJコード": "1234567F1234"}
+                self.assertEqual(supply_metadata_values(row)["出荷量状況"], "区分の記載なし")
+                output = page_html(row, "1234567F1234", "limited", "2026-11-08", [], {"1234567F1234"})
+                self.assertIn("出荷量の区分は公表データに記載されていません。", output)
+                self.assertIn("<td>区分の記載なし</td>", output)
+                self.assertEqual(supply_metadata_values({"出荷量状況": marker})["出荷量状況"], "区分の記載なし")
+
     def test_item_page_answers_reason_release_and_shipment_without_inference(self):
         row = {
             "商品名": "テスト錠10mg",
