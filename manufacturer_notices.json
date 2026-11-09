@@ -2,6 +2,64 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "towa-picosulfate-discontinuation-20261029",
+      "maker": "東和薬品",
+      "title": "ピコスルファートNa内用液0.75％「トーワ」 販売中止のお知らせ",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83754&t=4&f=20261029_%E3%83%94%E3%82%B3%E3%82%B9%E3%83%AB%E3%83%95%E3%82%A1%E3%83%BC%E3%83%88Na%E5%86%85%E7%94%A8%E6%B6%B20.75%25%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-29",
+      "verified_at": "2026-11-09",
+      "sha256": "87229d7100a2cb958d615981cdcf447c52a5b43379c4e9d508d263903f7819ab",
+      "event_type": "discontinued",
+      "reason": "原材料価格の調整等を検討したものの、今後の安定供給の見込みが立たないため、在庫限りで販売中止と案内。",
+      "alternatives": [
+        {
+          "type": "メーカーが案内する同一成分の参考候補",
+          "products": [
+            {
+              "name": "ピコスルファートナトリウム内用液０．７５％「イワキ」",
+              "yj_code": "2359005S1348",
+              "scope": ""
+            }
+          ],
+          "cautions": [
+            "処方の変更は医師・薬剤師に確認してください",
+            "参考候補の現在の納入可否・卸在庫は確認できていません"
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年10月のメーカー案内に基づく予定です。実際の在庫・納入状況はメーカーや卸に確認してください",
+        "経過措置期間満了時期は2028年3月末の予定と案内されています。確定した期限ではありません"
+      ],
+      "targets": [
+        {
+          "yj_code": "2359005S1305",
+          "product_name": "ピコスルファートＮａ内用液０．７５％「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10mL×10",
+              "unified_product_code": "155123081",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年11月（予定）"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "towa-betaselemin-discontinuation-20261029",
       "maker": "東和薬品",
       "title": "ベタセレミン配合錠 販売中止のお知らせ",
