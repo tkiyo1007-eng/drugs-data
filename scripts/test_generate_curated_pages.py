@@ -543,7 +543,13 @@ class CuratedPageGenerationTests(unittest.TestCase):
         topic_files = {path.stem for path in (ROOT / "topics").glob("*.html") if path.name != "index.html"}
         product_files = {path.stem for path in (ROOT / "products").glob("*.html") if path.name != "index.html"}
 
-        self.assertEqual(topic_slugs, topic_files)
+        # Preserve the old article URL while removing it from current news listings.
+        archived_topics = {"luliconazole-iwaki-normal-shipment-plan-20261020"}
+        self.assertEqual(topic_slugs | archived_topics, topic_files)
+        self.assertTrue(archived_topics.isdisjoint(topic_slugs))
+        index = (ROOT / "topics" / "index.html").read_text(encoding="utf-8")
+        for slug in archived_topics:
+            self.assertNotIn(f"{slug}.html", index)
         self.assertEqual(product_slugs, product_files)
         sitemap = (ROOT / "sitemap-curated.xml").read_text(encoding="utf-8")
         for kind, slugs in (("topics", topic_slugs), ("products", product_slugs)):
