@@ -128,6 +128,10 @@ class SitemapIntegrityTests(unittest.TestCase):
                 for directory in ("topics", "products", "guides", "ingredients", "categories", "reports")
             )),
         }
+        # An archived article remains reachable by its old URL but is not promoted.
+        expected_by_sitemap["sitemap-curated.xml"].discard(
+            ROOT / "topics" / "luliconazole-iwaki-normal-shipment-plan-20261020.html"
+        )
         for sitemap_name, expected_paths in expected_by_sitemap.items():
             listed_paths = {
                 local_path(location) for location, _ in self.entries_by_sitemap[sitemap_name]
