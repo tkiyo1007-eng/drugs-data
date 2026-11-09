@@ -3,43 +3,55 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-11-09T03:48:49+09:00",
-  "last_success_at": "2026-11-09T03:48:49+09:00",
+  "checked_at": "2026-11-10T07:55:47+09:00",
+  "last_success_at": "2026-11-10T07:55:47+09:00",
   "items": [
     {
-      "title": "【製薬協調査】市販直後調査の柔軟運用を‐対面、非対面で手段多様化",
-      "url": "https://www.yakuji.co.jp/entry141388.html",
-      "date": "2026-11-06",
+      "title": "【東京都／都病薬】病院薬剤師の魅力を発信‐前倒しで就職相談セミナー",
+      "url": "https://www.yakuji.co.jp/entry141493.html",
+      "date": "2026-11-10",
       "tag": "業界ニュース"
     },
     {
-      "title": "【ケーエスケー】配送ルートを自動編成‐欠員発生時、データ基盤活用",
-      "url": "https://www.yakuji.co.jp/entry141387.html",
-      "date": "2026-11-06",
+      "title": "【日本ケミファ】後発品自社開発品増へ‐数年かけて体制強化",
+      "url": "https://www.yakuji.co.jp/entry141490.html",
+      "date": "2026-11-10",
       "tag": "業界ニュース"
     },
     {
-      "title": "【厚労省】マイナンバー活用に難色‐乱用防止薬の購入歴管理",
-      "url": "https://www.yakuji.co.jp/entry141386.html",
-      "date": "2026-11-06",
+      "title": "【米中間選挙結果で】米薬価引き下げ策継続か‐原燃料価格動向は不透明",
+      "url": "https://www.yakuji.co.jp/entry141491.html",
+      "date": "2026-11-09",
       "tag": "業界ニュース"
     },
     {
-      "title": "【介護給付費分科会】薬剤師の継続管理評価‐老健と介護医療院で推進",
-      "url": "https://www.yakuji.co.jp/entry141385.html",
-      "date": "2026-11-06",
+      "title": "【医療保険部会】バイオ後続品選定療養化を‐26年度改定の効果検証",
+      "url": "https://www.yakuji.co.jp/entry141489.html",
+      "date": "2026-11-09",
       "tag": "業界ニュース"
     },
     {
-      "title": "【PMDA】AI活用は人間中心原則‐薬事活動で基本的考え方",
-      "url": "https://www.yakuji.co.jp/entry141383.html",
-      "date": "2026-11-06",
+      "title": "【財務省】27年度改定は完全実施を‐革新的新薬除く全品目で",
+      "url": "https://www.yakuji.co.jp/entry141487.html",
+      "date": "2026-11-09",
       "tag": "業界ニュース"
     },
     {
-      "title": "【厚労省】24年度国民医療費1.5％増‐薬局調剤費は1.4％増",
-      "url": "https://www.yakuji.co.jp/entry141381.html",
-      "date": "2026-11-06",
+      "title": "【中医協総会】ケサンラ薬価引き下げへ‐ゼップバウンドは据置き",
+      "url": "https://www.yakuji.co.jp/entry141486.html",
+      "date": "2026-11-09",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【大正製薬】「大正リビタ」に名称一本化‐健康対策・応援ブランド",
+      "url": "https://www.yakuji.co.jp/entry141391.html",
+      "date": "2026-11-09",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【日薬学術大会】服薬の「苦味」年代で違い‐中学生が初の研究発表",
+      "url": "https://www.yakuji.co.jp/entry141389.html",
+      "date": "2026-11-09",
       "tag": "業界ニュース"
     }
   ]
