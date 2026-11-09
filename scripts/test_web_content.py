@@ -29,7 +29,7 @@ class PublishedWebContentTests(unittest.TestCase):
         self.assertIn("供給停止", self.html)
         self.assertIn("販売中止", self.html)
         self.assertIn("同成分・同剤形の関連品目", self.html)
-        self.assertIn("解除／解消見込み・出荷量状況", self.html)
+        self.assertIn('"解除・解消見込み","出荷量状況"', self.html)
 
     def test_official_system_copy_is_safe_after_private_lp_sync(self):
         if "公式情報との使い分け" not in self.html:
