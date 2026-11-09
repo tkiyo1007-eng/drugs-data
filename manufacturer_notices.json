@@ -2,6 +2,86 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "towa-betaselemin-discontinuation-20261029",
+      "maker": "東和薬品",
+      "title": "ベタセレミン配合錠 販売中止のお知らせ",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83756&t=4&f=20261029_%E3%83%99%E3%82%BF%E3%82%BB%E3%83%AC%E3%83%9F%E3%83%B3%E9%85%8D%E5%90%88%E9%8C%A0_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-29",
+      "verified_at": "2026-11-09",
+      "sha256": "3b0ac8739ddb6a7b62468f66f6df553d0cfea522080ff42e1504fc0fcc2313b4",
+      "event_type": "discontinued",
+      "reason": "原材料価格の調整等を検討したものの、今後の安定供給の見込みが立たないため、在庫限りで販売中止と案内。",
+      "alternatives": [
+        {
+          "type": "メーカーが案内する同一成分の参考候補",
+          "products": [
+            {
+              "name": "セレスタミン配合錠",
+              "yj_code": "2459100F1162",
+              "scope": ""
+            }
+          ],
+          "cautions": [
+            "処方の変更は医師・薬剤師に確認してください",
+            "参考候補の現在の納入可否・卸在庫は確認できていません"
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年10月のメーカー案内に基づく予定です。実際の在庫・納入状況はメーカーや卸に確認してください",
+        "経過措置期間満了時期は2028年3月末の予定と案内されています。確定した期限ではありません"
+      ],
+      "targets": [
+        {
+          "yj_code": "2459100F1197",
+          "product_name": "ベタセレミン配合錠",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155036084",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年9月（予定）"
+                  }
+                ]
+              }
+            },
+            {
+              "package": "PTP1000錠",
+              "unified_product_code": "155036107",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年7月（予定）"
+                  }
+                ]
+              }
+            },
+            {
+              "package": "バラ1000錠",
+              "unified_product_code": "155036091",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2026年10月のメーカー案内では在庫なし。現在の納入状況は未確認です。"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "pfizer-product-withdrawal-202610",
       "maker": "ファイザー",
       "title": "販売中止予定のご案内",
