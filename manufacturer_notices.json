@@ -2,6 +2,48 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "sawai-zirumuro-od-package-supply-202605",
+      "maker": "沢井製薬",
+      "title": "ジルムロ配合OD錠LD/HD「サワイ」供給に関するお詫びとお願い",
+      "url": "https://med.sawai.co.jp/file/pr27_4735_1.pdf",
+      "announced_at": "2026-05",
+      "listed_at": "2026-05-22",
+      "verified_at": "2026-11-10",
+      "sha256": "d2553215a82ca3892c5935c0f64310d1e7a3cf7f9f162f281abe7b0ae6f11bb5",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "2026年5月の案内では、製造工場の製造能力が逼迫して継続的な製造が困難となり、一時製造停止と在庫消尽後の供給一時停止を案内しています。再開時期は確定次第案内するとされています。",
+      "targets": [
+        {
+          "yj_code": "2149121F3024",
+          "product_name": "ジルムロ配合ＯＤ錠ＬＤ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [1],
+          "packages": [
+            {"package": "PTP100錠", "unified_product_code": "080339113", "supply": {"status": "limited", "status_text": "2026年5月案内時点：在庫消尽まで限定出荷", "plans": [{"event": "stock_depletion", "timing": "2026年11月（2026年5月時点の予測）"}], "note": "予測時期の経過は実際の在庫消尽や現在の受注可否を示しません。"}}
+          ]
+        },
+        {
+          "yj_code": "2149121F4020",
+          "product_name": "ジルムロ配合ＯＤ錠ＨＤ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [1],
+          "packages": [
+            {"package": "PTP100錠", "unified_product_code": "080306115", "supply": {"status": "limited", "status_text": "2026年5月案内時点：在庫消尽まで限定出荷", "plans": [{"event": "stock_depletion", "timing": "2026年7月（2026年5月時点の予測）"}], "note": "予測時期の経過は実際の在庫消尽や現在の受注可否を示しません。"}},
+            {"package": "バラ200錠", "unified_product_code": "080306146", "supply": {"status": "limited", "status_text": "2026年5月案内時点：在庫消尽まで限定出荷", "plans": [{"event": "stock_depletion", "timing": "2026年12月（2026年5月時点の予測）"}], "note": "予測時期の経過は実際の在庫消尽や現在の受注可否を示しません。"}}
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年5月案内の予測です。予定時期の経過だけで実際の在庫消尽・包装別の供給停止を判断せず、現在の受注・在庫はメーカー・卸に確認してください。",
+        "メーカーは代替品への切替検討を依頼していますが、具体的な製品はこの案内では指定していません。",
+        "この案内は自動追跡対象外です。後続案内の有無と最新の包装別状況をメーカーにご確認ください。"
+      ]
+    },
+    {
       "id": "towa-picosulfate-discontinuation-20261029",
       "maker": "東和薬品",
       "title": "ピコスルファートNa内用液0.75％「トーワ」 販売中止のお知らせ",
