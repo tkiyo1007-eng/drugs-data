@@ -289,6 +289,23 @@ class RemoteDataHealthTests(unittest.TestCase):
             )
         self.assertFalse(any("supply_discrepancies.jsonを取得" in error for error in errors))
 
+    def test_pr_may_skip_specification_only_for_404(self) -> None:
+        version = {"version": 202608212350, "csv_url": BASE_URL + "drugs_app_ready.csv",
+                   "note": "2026年08月21日厚労省データ反映"}
+        for code, allowed, expected_error in ((404, True, False), (503, True, True), (404, False, True)):
+            def fake_fetch(url: str, _maximum_bytes: int) -> bytes:
+                if url.endswith('version.json'):
+                    return json.dumps(version).encode()
+                if url.endswith('specification_differences.json'):
+                    raise urllib.error.HTTPError(url, code, 'test', {}, None)
+                if url.endswith('drugs_app_ready.csv'):
+                    raise RuntimeError('not needed for this case')
+                return b'{}'
+            with self.subTest(code=code, allowed=allowed), mock.patch('check_public_data_health.fetch', side_effect=fake_fetch):
+                errors, _ = run(dt.date(2026, 8, 22), 4,
+                                allow_missing_specification_differences=allowed, include_pages=False)
+                self.assertEqual(expected_error, any('specification_differences.jsonを取得' in error for error in errors))
+
     def test_first_pr_may_skip_only_missing_industry_headlines_file(self) -> None:
         version = {
             "version": 202608212350,
