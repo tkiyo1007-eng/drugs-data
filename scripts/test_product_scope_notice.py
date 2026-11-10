@@ -3,7 +3,7 @@ import csv
 import unittest
 from pathlib import Path
 
-from generate_item_pages import manufacturer_notice_scope_text
+from generate_item_pages import manufacturer_notice_scope_text, manufacturer_notices_html
 from validate_manufacturer_notices import validate
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -39,6 +39,17 @@ class ProductScopeNoticeTests(unittest.TestCase):
         document = self.notice('product')
         document['notices'][0]['maker_supply_status'] = {'volume': ['出荷量減少']}
         self.assertTrue(any('invalid maker supply status' in e for e in validate(document, self.rows)))
+
+    def test_changed_source_hides_prior_value_and_failed_lookup_warns(self):
+        notice = self.notice('product')['notices'][0]
+        notice['maker_supply_status'] = {'volume': 'B．出荷量減少'}
+        changed = {'items': [{'url': notice['url'], 'sha256': '1' * 64}]}
+        changed_html = manufacturer_notices_html(self.row, [notice], bulletins=changed)
+        self.assertIn('原典更新を検出・再確認待ち', changed_html)
+        self.assertNotIn('B．出荷量減少', changed_html)
+        unavailable_html = manufacturer_notices_html(self.row, [notice], bulletins=None)
+        self.assertIn('原典の再確認状況を取得できませんでした', unavailable_html)
+        self.assertIn('B．出荷量減少', unavailable_html)
 
 
 if __name__ == '__main__':
