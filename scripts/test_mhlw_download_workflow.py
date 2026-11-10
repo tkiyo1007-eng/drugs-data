@@ -1,5 +1,6 @@
 import contextlib
 import datetime as dt
+import hashlib
 import io
 import json
 import os
@@ -64,7 +65,7 @@ class MhlwDownloadWorkflowTests(unittest.TestCase):
         record, calls, _, error = self.run_download(
             '<a href="/content/10800000/001758803.xlsx">医療用医薬品供給状況（令和８年10月13日現在）</a>')
         self.assertIsNone(error)
-        self.assertEqual(record, {"file": "001758803.xlsx", "url": "https://www.mhlw.go.jp/content/10800000/001758803.xlsx", "excel_date": "2026-10-13"})
+        self.assertEqual(record, {"file": "001758803.xlsx", "url": "https://www.mhlw.go.jp/content/10800000/001758803.xlsx", "excel_date": "2026-10-13", "sha256": hashlib.sha256(b"test-only-workbook-payload").hexdigest()})
         self.assertEqual(calls[1], mock.call(record["url"], timeout=60))
 
     def test_ambiguous_or_undated_source_stops_before_download_or_metadata_write(self):

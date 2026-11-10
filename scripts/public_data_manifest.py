@@ -10,6 +10,8 @@ from pathlib import Path
 
 MANIFEST_NAME = "public-data-manifest.json"
 JSON_FILES: dict[str, type] = {
+    "mhlw_source.json": dict,
+    "specification_differences.json": dict,
     "maker_announcements.json": dict,
     "manufacturer_notices.json": dict,
     "manufacturer_bulletins.json": dict,

@@ -33,6 +33,8 @@ from datetime import date, datetime, timezone, timedelta
 from pathlib import Path
 from urllib.parse import quote
 
+from source_specification import load_comparison
+
 SITE_ROOT = "https://kyokyu-navi.jp/"
 APP_STORE = "https://apps.apple.com/jp/app/%E5%8C%BB%E8%96%AC%E5%93%81%E4%BE%9B%E7%B5%A6%E3%83%8A%E3%83%93/id6777696446"
 APP_ID = "6777696446"
@@ -1433,15 +1435,23 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
               supplemental_trusted=True, supplemental_warning="", title_qualifier="",
               hub_slugs=(), display_names=None, category_codes=None,
               ingredient_slugs=None, manufacturer_notices=(), catalog_yj_codes=None,
-              manufacturer_bulletins=None, version_metadata=None, product_variants=(), related_topics=()):
+              manufacturer_bulletins=None, version_metadata=None, product_variants=(), related_topics=(),
+              specification_comparison=None):
     name = row["商品名"].strip()
     display_name = f"{name}（{title_qualifier}）" if title_qualifier else name
     maker = (row.get("販売メーカー") or row.get("製造メーカー") or "").strip()
     gen = (row.get("一般名") or "").strip()
     spec = (row.get("規格") or "").strip()
-    gas_spec_note = ('<p>表示の規格は容器の容量や充填量を示すとは限りません。'
+    gas_spec_note = ('<p>表示の規格は厚労省の原表と異なる場合があり、容器の容量や充填量を示すとは限りません。'
                      '実際の容器・内容量は製造販売業者や納入先にご確認ください。</p>'
                      if gen in {"酸素", "液体酸素", "窒素", "液体窒素", "二酸化炭素"} else "")
+    spec_difference = (specification_comparison or {}).get('differences', {}).get(key)
+    spec_difference_html = ''
+    if spec_difference and spec_difference.get('retained') == spec:
+        source_value = spec_difference.get('source') or '原表に記載なし'
+        source_date = specification_comparison['source_date']
+        spec_difference_html = (f'<p>厚労省原表の規格単位（{esc(source_date)}）：{esc(source_value)}。'
+                                'サイトの保持値と原表の記載が異なります。単位や容器の意味を確認してください。</p>')
     updated = (row.get("更新日") or "").replace("/", "-").strip()
     st = STATUSES[status]
     # 薬価削除予定は供給状況欄が「通常出荷」でも表示する。
@@ -1813,7 +1823,7 @@ footer a{{color:var(--sub)}}
 {lifecycle_box}
 {discrepancy_box}
 {manufacturer_box}
-    <table><tbody>{''.join(detail_rows)}</tbody></table>{gas_spec_note}
+    <table><tbody>{''.join(detail_rows)}</tbody></table>{spec_difference_html}{gas_spec_note}
     <p class="links">
       <a href="{lp_link}" data-dsn-event="item-web-open">Web版でこの品目を開く{'（同成分・同剤形の一覧つき）' if siblings else ''}</a>
       <a href="{OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システムで品目名・YJコードを再確認</a>
@@ -2486,6 +2496,7 @@ def main():
             raise ValueError("version.jsonからデータ基準日を確認できません")
         supplemental_state = supplemental_context(
             health_doc, discrepancy_doc, dataset_date)
+        specification_comparison = load_comparison(site, args.csv, version_doc)
     except ValueError as exc:
         print(f"::error::{exc}", file=sys.stderr)
         return 1
@@ -2600,6 +2611,7 @@ def main():
                 version_metadata=version_doc,
                 product_variants=by_gen.get(g, []),
                 related_topics=topic_index.get(k, []),
+                specification_comparison=specification_comparison,
             ), encoding="utf-8")
 
     (out / "index.html").write_text(index_html(entries, dataset_date, version_doc), encoding="utf-8")

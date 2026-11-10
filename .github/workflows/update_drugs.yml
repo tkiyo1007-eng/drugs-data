@@ -51,6 +51,7 @@ jobs:
           r2 = requests.get(href, timeout=60); r2.raise_for_status()
           with open("supply_latest.xlsx", "wb") as f:
               f.write(r2.content)
+          source["sha256"] = hashlib.sha256(r2.content).hexdigest()
           print(f"✅ ダウンロード成功: {len(r2.content)} bytes")
           # 取り込んだ厚労省ファイルを記録する。コア公開と同じcommitに含めるため、後段で
           # 失敗すると記録は前回のまま残り、公開データ健全性監視が未反映を検出できる。
@@ -154,6 +155,14 @@ jobs:
       - name: 薬価の空欄をマスタから補完（新規追加品目は薬価空欄で入るため）
         run: python3 scripts/fill_prices.py drugs_app_ready.csv yakka_master.csv
 
+      - name: 原表と保持規格の差を元データに紐付ける
+        run: >-
+          python3 scripts/build_specification_differences.py
+          --csv drugs_app_ready.csv --xlsx supply_latest.xlsx
+          --source-metadata mhlw_source.json --output specification_differences.json
+        # 比較に失敗しても日次の供給区分は更新する。旧ファイルはCSV hash照合に失敗する。
+        continue-on-error: true
+
       - name: 公開前の供給CSV品質検査
         run: python3 scripts/validate_supply_data.py --csv drugs_app_ready.csv
 
@@ -227,7 +236,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add drugs_app_ready.csv version.json status_changes.json resolution_stats.json industry_headlines.json \
+          git add drugs_app_ready.csv version.json status_changes.json resolution_stats.json industry_headlines.json specification_differences.json \
             crisis_index.json items sitemap-items.xml updates sitemap-updates.xml \
             topics products guides ingredients categories reports sitemap-curated.xml mhlw_source.json maker_announcements.json \
             maker_announcement_events.json maker_collection_health.json \
