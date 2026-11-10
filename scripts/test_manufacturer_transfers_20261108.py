@@ -144,6 +144,23 @@ class ManufacturerTransfers(unittest.TestCase):
             self.assert_field_if_present(rows, code, '製造メーカー', maker)
             self.assert_field_if_present(rows, code, '販売メーカー', sales)
 
+    def test_honey_and_three_generic_manufacturers(self):
+        # 各YJについて、厚労省原表・PMDA・メーカーの原文を確認。
+        # https://www.pmda.go.jp/PmdaSearch/rdDetail/iyaku/7149003X1333_1?user=1
+        # https://www.maruishi-pharm.co.jp/medical/media/keikasotikikan_entyou_20260317.pdf
+        # https://www.mhlw.go.jp/topics/2017/06/dl/tp20170616-01_1.pdf
+        # https://www.nikko-pharm.co.jp/medicine/
+        with (ROOT / 'drugs_app_ready.csv').open(encoding='utf-8-sig', newline='') as f:
+            rows = {row['YJコード']: row for row in csv.DictReader(f)}
+        for code, maker, sales in (
+            ('7149003X1333', '秋田屋本店', '丸石製薬'),
+            ('7112004X1206', '山善製薬', ''),
+            ('7139700X1039', '日興製薬', ''),
+            ('7131700X1022', '共栄製薬', ''),
+        ):
+            self.assert_field_if_present(rows, code, '製造メーカー', maker)
+            self.assert_field_if_present(rows, code, '販売メーカー', sales)
+
     def test_nikp_transfer_keeps_old_and_new_yj_distinct(self):
         with (ROOT / 'drugs_app_ready.csv').open(encoding='utf-8-sig', newline='') as f:
             rows = {row['YJコード']: row for row in csv.DictReader(f)}
