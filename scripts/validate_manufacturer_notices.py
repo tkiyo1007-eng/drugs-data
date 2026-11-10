@@ -101,6 +101,13 @@ def validate(document, rows):
         ids.add(label)
         for field in ['maker', 'title', 'reason']:
             if not isinstance(n.get(field), str) or not n[field].strip(): errors.append(label + ': missing ' + field)
+        if 'maker_supply_status' in n:
+            status = n['maker_supply_status']
+            if (not isinstance(status, dict) or any(
+                key in status and (not isinstance(status[key], str) or not status[key].strip())
+                for key in ('handling', 'volume')
+            )):
+                errors.append(label + ': invalid maker supply status')
         u = urlparse(str(n.get('url') or ''))
         if u.scheme != 'https' or u.hostname != MAKER_HOSTS.get(n.get('maker')) or u.username or u.password: errors.append(label + ': unofficial URL or wrong publisher')
         if not re.fullmatch(r'[a-f0-9]{64}', str(n.get('sha256') or '')): errors.append(label + ': invalid source hash')
@@ -136,7 +143,7 @@ def validate(document, rows):
                 errors.append(label + ': target maker mismatch ' + yj)
             if not isinstance(t.get('scope'), str) or t['scope'] not in SCOPES: errors.append(label + ': invalid target scope')
             packages = t.get('packages')
-            if not isinstance(packages, list) or not packages or any(not isinstance(p, dict) or not isinstance(p.get('package'), str) or not p['package'].strip() for p in packages):
+            if not isinstance(packages, list) or (not packages and t.get('scope') != 'product') or any(not isinstance(p, dict) or not isinstance(p.get('package'), str) or not p['package'].strip() for p in packages):
                 errors.append(label + ': missing package scope')
             else:
                 for package in packages:
