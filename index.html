@@ -3860,6 +3860,7 @@ function lifecycleEndDetails(item){
 // review は規格等が曖昧なため、検索一覧や監視件数には出さず詳細だけで原文確認を促す。
 let SUPPLY_DISCREPANCIES = {};
 const SUPPLEMENTAL_STATE = {lifecycle:"loading", discrepancies:"loading", health:"loading"};
+SUPPLEMENTAL_STATE.manual = "loading";
 let SUPPLEMENTAL_CHECKED_THROUGH = "";
 let SUPPLEMENTAL_DISCREPANCY_CHECKED = "";
 let SUPPLEMENTAL_ATTEMPT = null;
@@ -4238,17 +4239,22 @@ function loadSupplementalData(){
         if(Array.isArray(data) && data.length) MAKER_LINKS = data;
       }).catch(()=>{}),
     fetchFirst(["manual_announcements.json", "https://kyokyu-navi.jp/manual_announcements.json"])
-      .then(res => res && res.json()).then(data => {
-        if(!data || typeof data !== "object") return;
-        MANUAL_ANNOUNCEMENTS = data.exact && typeof data.exact === "object" ? data.exact : data;
-        if(Array.isArray(data.patterns)){
-          MANUAL_ANNOUNCEMENT_PATTERNS = data.patterns.flatMap(item=>{
-            try{ return [[new RegExp(item.pattern, item.flags||""), item.announcement]]; }
-            catch(e){ return []; }
-          });
-        }
+      .then(res => { if(!res) throw new Error("missing manual announcements"); const cached=responseUsesCachedData(res); return res.json().then(data=>({data,cached})); }).then(({data,cached}) => {
+        if(!data || typeof data !== "object" || Array.isArray(data)) throw new Error("invalid manual announcements");
+        const record = value=>value && typeof value === "object" && !Array.isArray(value);
+        const wrapped = Object.hasOwn(data,"exact") || Object.hasOwn(data,"patterns");
+        if(wrapped && ((Object.hasOwn(data,"exact") && !record(data.exact)) || (Object.hasOwn(data,"patterns") && !Array.isArray(data.patterns)))) throw new Error("invalid manual announcement format");
+        const exact = wrapped ? (data.exact || {}) : data;
+        if(Object.values(exact).some(value=>!record(value))) throw new Error("invalid manual announcement entry");
+        const patterns = wrapped && Array.isArray(data.patterns) ? data.patterns.map(item=>{
+          if(!record(item) || typeof item.pattern !== "string" || !record(item.announcement)) throw new Error("invalid manual announcement pattern");
+          return [new RegExp(item.pattern, item.flags||""), item.announcement];
+        }) : null;
+        MANUAL_ANNOUNCEMENTS = exact;
+        if(patterns) MANUAL_ANNOUNCEMENT_PATTERNS = patterns;
         ANNOUNCEMENTS = {...ANNOUNCEMENTS, ...MANUAL_ANNOUNCEMENTS};
-      }).catch(()=>{}),
+        SUPPLEMENTAL_STATE.manual = cached ? "stale" : "loaded";
+      }).catch(()=>{ SUPPLEMENTAL_STATE.manual = "failed"; }).finally(updateSupplementalStatus),
     fetchFirst(["product_lifecycle.json", "https://kyokyu-navi.jp/product_lifecycle.json"])
       .then(res => { if(!res) throw new Error("missing lifecycle"); const cached=responseUsesCachedData(res); return res.json().then(data=>({data,cached})); }).then(({data,cached}) => {
         if(!data || data.schema_version!==1 || !data.products || typeof data.products!=="object"){
