@@ -1412,6 +1412,9 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
     maker = (row.get("販売メーカー") or row.get("製造メーカー") or "").strip()
     gen = (row.get("一般名") or "").strip()
     spec = (row.get("規格") or "").strip()
+    gas_spec_note = ('<p>表示の規格は容器の容量や充填量を示すとは限りません。'
+                     '実際の容器・内容量は製造販売業者や納入先にご確認ください。</p>'
+                     if gen in {"酸素", "液体酸素", "窒素", "液体窒素", "二酸化炭素"} else "")
     updated = (row.get("更新日") or "").replace("/", "-").strip()
     st = STATUSES[status]
     # 薬価削除予定は供給状況欄が「通常出荷」でも表示する。
@@ -1784,6 +1787,7 @@ footer a{{color:var(--sub)}}
 {discrepancy_box}
 {manufacturer_box}
     <table><tbody>{''.join(detail_rows)}</tbody></table>
+    {gas_spec_note}
     <p class="links">
       <a href="{lp_link}" data-dsn-event="item-web-open">Web版でこの品目を開く{'（同成分・同剤形の一覧つき）' if siblings else ''}</a>
       <a href="{OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システムで品目名・YJコードを再確認</a>
