@@ -3812,6 +3812,14 @@ function normalizedPublicationDate(value){
   if(dayNumber == null) return "";
   return new Date(dayNumber * 86400000).toISOString().slice(0,10);
 }
+function announcementDateLabel(value){
+  const text = String(value || "").normalize("NFKC").trim().replaceAll("/", "-");
+  if (/^\d{4}-\d{1,2}$/.test(text)) {
+    const [year, month] = text.split("-").map(Number);
+    return year > 0 && month >= 1 && month <= 12 ? `${year}-${String(month).padStart(2, "0")}` : "";
+  }
+  return /^\d{4}-\d{1,2}-\d{1,2}$/.test(text) ? normalizedPublicationDate(text) : "";
+}
 function lifecycleVerificationIsRecent(item){
   if(!supplementalReady()) return false;
   if(item && manufacturerSourceChanged(item.source_url)) return false;
@@ -4069,11 +4077,13 @@ function validManufacturerPackageSupply(s){
 function validManufacturerNotice(n){
   return n && typeof n.id === "string" && typeof n.maker === "string"
     && typeof n.title === "string" && typeof n.reason === "string"
+    && (!Object.hasOwn(n,"maker_supply_status") || (n.maker_supply_status && typeof n.maker_supply_status === "object" && !Array.isArray(n.maker_supply_status)
+      && ["handling","volume"].every(key=>!Object.hasOwn(n.maker_supply_status,key) || (typeof n.maker_supply_status[key] === "string" && Boolean(n.maker_supply_status[key].trim())))))
     && Boolean(manufacturerSourceURL(n.url)) && /^[a-f0-9]{64}$/.test(n.sha256 || "")
     && Boolean(normalizedPublicationDate(n.verified_at))
     && Array.isArray(n.targets) && n.targets.length
     && n.targets.every(t=>t && normalizeYj(t.yj_code) && typeof t.product_name === "string"
-      && Array.isArray(t.packages) && t.packages.every(p=>p && typeof p.package === "string"
+      && Array.isArray(t.packages) && (t.packages.length > 0 || t.scope === "product") && t.packages.every(p=>p && typeof p.package === "string"
         && (!Object.hasOwn(p,"supply") || validManufacturerPackageSupply(p.supply))))
     && Array.isArray(n.alternatives) && n.alternatives.every(g=>g && Array.isArray(g.products)
       && g.products.every(p=>p && typeof p.name === "string"))
@@ -4149,13 +4159,15 @@ function manufacturerNoticeHTML(notice, target=null, yj=""){
   return `<section class="manufacturer-note"><h4>${esc(notice.title)}</h4><p class="manufacturer-note-dates">${dates.map(([label,value])=>`<span>${esc(label)}：${esc(value)}</span>`).join(" ")}</p>`
     + (manufacturerReviewAvailability() ? `<p><strong>${esc(manufacturerReviewAvailability())}</strong></p>` : "")
     + (manufacturerNoticeNeedsReview(notice) ? `<p><strong>最新の原典は再確認待ちです。</strong>以下は前回確認した案内です。現在の状況は原文やメーカーにご確認ください。</p>` : "")
-    + `<ul>${targets.map(t=>`<li>${esc(t.product_name)}：${t.packages.map(p=>esc(p.package)).join("／")}`
+    + `<ul>${targets.map(t=>`<li>${esc(t.product_name)}：${t.packages.length ? t.packages.map(p=>esc(p.package)).join("／") : "品目単位の案内（包装別の内訳は未確認）"}`
       + (t.seller ? `（販売経路：${esc(t.seller)}）` : "")
       + (t.planned_timing ? `。${/出荷停止中/.test(t.planned_timing) ? "案内の状況" : "案内の予定時期"}：${esc(t.planned_timing)}` : "")
       + (ITEMS.some(d=>d.yj === t.yj_code && norm(d.n) === norm(t.product_name))
         ? ` <a href="items/${encodeURIComponent(t.yj_code)}.html">品目情報</a>`
         : "（現行供給CSVの収録なし。過去の案内として掲載）") + `</li>`).join("")}</ul>`
     + targets.map(t=>manufacturerPackageSupplyHTML(notice,t)).join("")
+    + (notice.maker_supply_status?.handling ? `<p><strong>メーカー案内時点の出荷対応：</strong>${esc(notice.maker_supply_status.handling)}</p>` : "")
+    + (notice.maker_supply_status?.volume ? `<p><strong>メーカー案内時点の出荷量：</strong>${esc(notice.maker_supply_status.volume)}</p>` : "")
     + `<p><strong>メーカーの説明：</strong>${esc(notice.reason)}</p>`
     + (timing ? `<p><strong>再開・解除の案内：</strong>${esc(timing)}</p>` : "")
     + (lots.length ? `<p><strong>クラスII回収対象：</strong>${lots.map(l=>`${esc(l.strength)} ${esc(l.package)} ${esc(l.lot)}`).join("／")}。出荷停止の対象範囲とは異なります。</p>` : "")
@@ -5830,8 +5842,9 @@ function openDetail(d, opts={}){
   }
   // 出荷再開の案内も同様: 供給状況欄は公表データのまま変えず、案内済みであることを補足する
   if(announcement && d.s !== "ok" && /出荷再開|供給再開|出荷調整解除/.test(announcement.title)){
+    const noticeDate = announcementDateLabel(announcement.announced_at);
     document.getElementById("mGrid").insertAdjacentHTML("afterbegin",
-      `<dt>メーカー案内</dt><dd>「${esc(cleanAnnouncementTitle(announcement.title))}」が公表されています（下の案内文リンク参照）。供給状況欄は厚労省公表データの区分のため、反映が遅れている場合があります。</dd>`);
+      `<dt>メーカー案内</dt><dd>「${esc(cleanAnnouncementTitle(announcement.title))}」（案内の日付：${esc(noticeDate || "確認できません")}）。過去の案内であり、現在の出荷状況を示すとは限りません。対象の規格・包装と最新の状況は下のメーカー原文をご確認ください。供給状況欄には厚労省公表データを表示しています。</dd>`);
   }
   const mLink = needsMakerLink ? findMakerLink(makerRowText) : null;
   const $mMakerLink = document.getElementById("mMakerLink");
