@@ -1,0 +1,1676 @@
+{
+  "schema_version": 1,
+  "source_date": "2026-11-09",
+  "source_sha256": "db1da19b9aa46752f418c688b14ac57643c24b1e46f10b72ad901624ee6afffb",
+  "csv_sha256": "1da3e1a960455e7e3518076d4c6d3e149762dcf8f7277aa5eabd830debcc9fde",
+  "differences": {
+    "X00110": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00030": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00022": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00008": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "799070BX1026": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00016": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00015": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00018": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00020": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00026": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00028": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00039": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00041": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00042": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00051": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00053": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00045": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00046": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00049": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00050": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00052": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00056": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00061": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00065": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00080": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00100": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00102": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00117": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00130": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00134": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00005": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00003": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00007": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00011": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00014": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00021": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00029": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00064": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00126": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00009": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00010": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00132": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00133": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00127": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00034": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00040": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00033": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00035": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00036": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00038": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00103": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00107": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00037": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00111": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00017": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00048": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00074": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00073": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00055": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00054": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00129": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00058": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00059": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00006": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00057": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00023": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00024": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00004": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00066": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00025": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "799070BX1034": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00043": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00125": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00099": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00012": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00096": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00138": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00044": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00062": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00123": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00060": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00079": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00027": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00047": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00128": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00067": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00019": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00131": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00070": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00071": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00072": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00078": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00137": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00092": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00093": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00077": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00136": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00091": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00082": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00083": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00084": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00085": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00106": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00086": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00104": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00105": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00087": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00088": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00089": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00081": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00115": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00116": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00090": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00013": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00097": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00108": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "799070BX1042": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00098": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00068": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00069": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00101": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00109": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00118": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00075": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00124": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00119": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00112": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00113": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00114": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00120": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00031": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00121": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00032": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00122": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00094": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00076": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00063": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00095": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00135": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00148": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "799070CX1020": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00146": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00151": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00154": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00157": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00174": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00175": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00142": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00147": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00140": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00141": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00150": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00149": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00153": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00155": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00156": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00139": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00144": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00145": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00152": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00173": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00172": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00143": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00160": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00162": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00164": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00165": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00166": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00163": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "799070CX1039": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00158": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00159": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00168": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00169": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00171": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00170": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00161": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00167": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00286": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00202": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00195": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00182": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "799070EX1038": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00189": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00188": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00191": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00192": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00193": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00199": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00201": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00211": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00213": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00222": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00224": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00217": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00218": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00220": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00221": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00223": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00227": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00232": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00236": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00251": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00274": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00276": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00293": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00307": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00309": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00178": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00176": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00181": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00187": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00194": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00235": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00303": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00183": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00184": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00310": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00311": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00304": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00206": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00212": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00205": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00207": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00208": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00210": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00278": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00282": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00209": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00287": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00190": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00215": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00245": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00244": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00226": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00225": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00306": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00229": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00230": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00180": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00228": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00196": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00197": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00177": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00237": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00198": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "799070EX1020": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00214": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00302": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00273": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00185": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00268": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00315": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00216": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00233": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00300": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00269": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00231": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00250": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00200": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00179": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00219": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00305": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00238": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00308": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00241": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00242": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00243": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00249": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00314": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00263": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00264": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00248": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00313": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00261": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00253": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00254": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00255": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00281": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00256": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00279": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00280": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00257": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00258": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00259": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00252": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00291": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00292": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00260": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00262": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00186": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00284": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00270": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00283": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "799070EX1046": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00271": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00239": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00240": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00272": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00277": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00275": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00285": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00294": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00246": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00301": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00295": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00288": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00289": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00290": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00297": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00296": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00203": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00298": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00204": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00299": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00265": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00247": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00234": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00266": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00267": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00312": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "799070FX1032": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00321": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00324": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00329": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00331": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00333": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00317": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00320": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00318": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00319": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00327": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00325": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00326": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00330": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00337": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00332": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00316": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00322": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00323": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00328": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00350": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00344": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00335": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00336": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00339": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00346": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00345": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00340": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00341": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "799070FX1024": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00334": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00347": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00349": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00348": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00342": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00338": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00343": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00363": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "799070DX1041": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00357": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00359": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00362": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00369": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00371": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00372": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00374": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00377": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00379": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00404": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00405": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00353": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00356": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00360": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00354": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00355": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00403": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00368": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00366": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00367": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00395": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00358": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00373": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00385": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00375": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00352": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00361": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00351": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "799070DX1025": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00370": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00402": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00400": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00376": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00380": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00383": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00384": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00387": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00388": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00394": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00393": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00389": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "799070DX1033": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00392": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00381": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00382": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00398": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00401": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00396": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00397": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00364": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00365": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00399": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00390": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00386": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00378": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00391": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    },
+    "X00406": {
+      "retained": "１Ｌ",
+      "source": "１０ｍＬ"
+    }
+  }
+}
