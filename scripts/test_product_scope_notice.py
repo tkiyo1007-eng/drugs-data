@@ -61,7 +61,8 @@ class ProductScopeNoticeTests(unittest.TestCase):
         self.assertEqual({(t['yj_code'], tuple(t['source_pages'])) for t in notice['targets']},
                          {('2399006F1579', (8,)), ('1190018F4154', (12,))})
         self.assertTrue(all(t['scope'] == 'product' and t['packages'] == [] for t in notice['targets']))
-        self.assertNotIn('collection_mode', notice)  # registered source participates in hash checks
+        self.assertEqual(notice['collection_mode'], 'manual')
+        self.assertTrue(any('自動で更新を確認していません' in item for item in notice['cautions']))
 
 
 if __name__ == '__main__':
