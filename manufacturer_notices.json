@@ -2,6 +2,44 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "sawai-zaltoprofen-discontinuation-202608",
+      "maker": "沢井製薬",
+      "title": "ザルトプロフェン錠80mg「サワイ」販売中止のご案内",
+      "url": "https://med.sawai.co.jp/file/pr28_1021_3.pdf",
+      "announced_at": "2026-08",
+      "listed_at": "2026-08-07",
+      "verified_at": "2026-11-11",
+      "sha256": "8cd5e76ea2aad7437669cc2bf06ee2ca1e467585f449a2826b37ebc0baf14023",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "安定供給体制の構築と生産効率の改善に向けた製品構成の見直しにより、販売中止を案内しています。",
+      "targets": [
+        {
+          "yj_code": "1149029F1165",
+          "product_name": "ザルトプロフェン錠８０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [1],
+          "packages": [
+            {"package": "PTP100錠", "unified_product_code": "080302513", "supply": {"status": "unconfirmed", "plans": [{"event": "stock_depletion", "timing": "2026年11月（2026年8月時点の予測）"}], "note": "予測時期の経過は実際の在庫消尽や現在の受注可否を示しません。"}},
+            {"package": "PTP500錠", "unified_product_code": "080302520", "supply": {"status": "unconfirmed", "plans": [{"event": "stock_depletion", "timing": "2026年11月（2026年8月時点の予測）"}], "note": "予測時期の経過は実際の在庫消尽や現在の受注可否を示しません。"}}
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "type": "メーカーが案内する異なる成分の参考候補",
+          "products": [{"name": "ロキソプロフェンＮａ錠６０ｍｇ「サワイ」", "yj_code": "1149019F1587", "maker": "沢井製薬", "scope": ""}],
+          "cautions": ["成分が異なり、同等性や入手可能性を保証するものではありません。", "適応・用法・禁忌や患者の状態を確認し、処方変更は医師・薬剤師が判断してください。"]
+        }
+      ],
+      "cautions": [
+        "2026年8月案内の在庫消尽予測です。実際の包装別在庫・受注可否はメーカーや卸にご確認ください。",
+        "2028年3月の経過措置期間満了はメーカー案内の予定です。確定した期限ではありません。",
+        "この案内は自動追跡対象外です。後続案内の有無と最新の包装別状況をメーカーにご確認ください。"
+      ]
+    },
+    {
       "id": "sawai-zirumuro-od-package-supply-202605",
       "maker": "沢井製薬",
       "title": "ジルムロ配合OD錠LD/HD「サワイ」供給に関するお詫びとお願い",
