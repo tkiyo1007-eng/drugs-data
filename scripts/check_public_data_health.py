@@ -362,7 +362,6 @@ def run(
     allow_missing_industry_headlines: bool = False,
     allow_stale_supply_discrepancies: bool = False,
     allow_missing_manufacturer_feeds: bool = False,
-    allow_missing_specification_differences: bool = False,
     include_pages: bool = True,
     csv_max_age_business_days: int | None = None,
 ) -> tuple[list[str], list[str]]:
@@ -410,9 +409,6 @@ def run(
                 if name == 'maker_collection_health.json' and collection_warning(document):
                     results.append('WARNING: ' + collection_warning(document))
             except (OSError, ValueError, RuntimeError, urllib.error.URLError) as error:
-                if (allow_missing_specification_differences and name == 'specification_differences.json'
-                        and isinstance(error, urllib.error.HTTPError) and error.code == 404):
-                    continue
                 if (allow_missing_manufacturer_feeds and name in {'manufacturer_notices.json', 'manufacturer_bulletins.json'}
                         and isinstance(error, urllib.error.HTTPError) and error.code == 404):
                     continue
@@ -497,7 +493,6 @@ def main() -> int:
     parser.add_argument("--allow-missing-industry-headlines", action="store_true")
     parser.add_argument("--allow-stale-supply-discrepancies", action="store_true")
     parser.add_argument('--allow-missing-manufacturer-feeds', action='store_true')
-    parser.add_argument('--allow-missing-specification-differences', action='store_true')
     parser.add_argument("--skip-pages", action="store_true",
                         help="未公開PRコードのraw検査用。通常運用では指定しない")
     args = parser.parse_args()
@@ -508,7 +503,6 @@ def main() -> int:
         allow_missing_industry_headlines=args.allow_missing_industry_headlines,
         allow_stale_supply_discrepancies=args.allow_stale_supply_discrepancies,
         allow_missing_manufacturer_feeds=args.allow_missing_manufacturer_feeds,
-        allow_missing_specification_differences=args.allow_missing_specification_differences,
         include_pages=not args.skip_pages,
         csv_max_age_business_days=args.csv_max_age_business_days,
     )
