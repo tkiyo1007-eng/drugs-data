@@ -112,6 +112,21 @@ class ManufacturerTransfers(unittest.TestCase):
                 self.assertEqual(row['製造メーカー'], 'ジェイ・エム・エス')
                 self.assertEqual(row['販売メーカー'], 'ジェイ・エム・エス')
 
+    def test_syrup_sugar_manufacturers_are_yj_specific(self):
+        # PMDAのYJ別添付文書、厚労省原表、吉田製薬の製品情報で確認。
+        # https://www.pmda.go.jp/PmdaSearch/iyakuDetail/730119_7142001X1171_1_10
+        # https://www.pmda.go.jp/PmdaSearch/iyakuDetail/510022_7142001X1120_1_09
+        # https://www.yamazen-pharm.co.jp/?products=単シロップ
+        # https://www.yoshida-pharm.co.jp/files/interview/1034.pdf
+        with (ROOT / 'drugs_app_ready.csv').open(encoding='utf-8-sig', newline='') as f:
+            rows = {row['YJコード']: row for row in csv.DictReader(f)}
+        for code, maker, sales in (
+            ('7142001X1171', '丸石製薬', ''), ('7142001X1120', '中北薬品', ''),
+            ('7142001X1180', '山善製薬', ''), ('7149002X1037', '小堺製薬', '吉田製薬'),
+        ):
+            self.assert_field_if_present(rows, code, '製造メーカー', maker)
+            self.assert_field_if_present(rows, code, '販売メーカー', sales)
+
     def test_nikp_transfer_keeps_old_and_new_yj_distinct(self):
         with (ROOT / 'drugs_app_ready.csv').open(encoding='utf-8-sig', newline='') as f:
             rows = {row['YJコード']: row for row in csv.DictReader(f)}
