@@ -11,3 +11,4 @@ class GasSpecNoteTest(unittest.TestCase):
             html = page_html(row, row["YJコード"], "ok", "2026-11-10", [], set())
             self.assertEqual(phrase in html, ingredient != "アセトアミノフェン")
             self.assertIn("１Ｌ", html)
+            self.assertFalse(any(line.rstrip() != line for line in html.splitlines()))

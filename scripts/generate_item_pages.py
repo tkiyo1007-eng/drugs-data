@@ -1786,8 +1786,7 @@ footer a{{color:var(--sub)}}
 {lifecycle_box}
 {discrepancy_box}
 {manufacturer_box}
-    <table><tbody>{''.join(detail_rows)}</tbody></table>
-    {gas_spec_note}
+    <table><tbody>{''.join(detail_rows)}</tbody></table>{gas_spec_note}
     <p class="links">
       <a href="{lp_link}" data-dsn-event="item-web-open">Web版でこの品目を開く{'（同成分・同剤形の一覧つき）' if siblings else ''}</a>
       <a href="{OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システムで品目名・YJコードを再確認</a>
