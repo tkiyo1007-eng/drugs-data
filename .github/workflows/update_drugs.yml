@@ -74,6 +74,7 @@ jobs:
         run: |
           python3 - <<'EOF'
           import openpyxl, datetime, csv
+          from scripts.check_supply_source_identity import require_unique_codes
 
           def to_date(v):
               if v is None or v == "": return ""
@@ -95,6 +96,8 @@ jobs:
           data = [r for r in rows[hidx+1:] if r and r[4]]
           if len(data) < 10000:
               print(f"❌ 供給データが少なすぎます({len(data)}件)。誤ダウンロードの可能性があるため中断"); exit(1)
+          # 同一コードを辞書へ格納すると後行が前行を上書きするため、変換前に中断する。
+          require_unique_codes(data)
 
           # Excel列: 1②薬効 2③成分 3④規格 4⑤YJ 5⑥品名 6⑦製販 11⑫状況 12⑬状況更新日 13⑭理由 14⑮ 16⑰ 19⑳ 20㉑
           xl = {}
