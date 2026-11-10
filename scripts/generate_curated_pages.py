@@ -951,7 +951,8 @@ def seasonal_codes(month: int) -> tuple[str, tuple[str, ...]]:
 
 
 def category_page(group: dict, generated_keys: set[str], lifecycle: dict[str, dict],
-                  ingredient_links: list[tuple[str, str]] | None = None) -> tuple[str, str]:
+                  ingredient_links: list[tuple[str, str]] | None = None,
+                  dataset_date: str = "", version_metadata=None) -> tuple[str, str]:
     code, name, rows = group["code"], group["name"], group["rows"]
     canonical = f"{SITE_ROOT}categories/{code}.html"
     counts = category_counts(rows)
@@ -994,11 +995,12 @@ def category_page(group: dict, generated_keys: set[str], lifecycle: dict[str, di
         ingredient_section = (f'<details class="normal"><summary>この分類の成分別ページ（{len(ingredient_links)}成分）</summary>'
                               f'<ul class="normal-list">{links}</ul></details>')
     body = f"""<!DOCTYPE html><html lang="ja"><head>
-{common_head(title, description, canonical, 'website', [collection, breadcrumb])}<style>{STYLE}{CATEGORY_STYLE}</style></head><body>
+{common_head(title, description, canonical, 'website', [collection, breadcrumb])}<style>{STYLE}{CATEGORY_STYLE}{INGREDIENT_DATE_STYLE}</style></head><body>
 <div class="wrap"><header class="site"><a href="../">💊 医薬品供給ナビ</a></header>
 <nav class="crumb" aria-label="パンくず"><a href="../">トップ</a> › <a href="index.html">薬効分類別の供給状況</a> › {esc(name)}</nav><main>
 <section class="hero"><p class="eyebrow">薬効分類 {esc(code)}</p><h1>{esc(name)}の供給状況</h1>
 <p class="lede">厚生労働省公表データで「{esc(name)}」に分類される{len(rows)}品目の現在の供給区分です。限定出荷・供給停止の品目を先に、公表されている品目行の更新日が新しい順に並べています。</p>
+{dataset_dates_html(dataset_date, version_metadata)}
 <div class="summary">{summary}</div>
 <p class="safety">同じ薬効分類でも、適応・用量・投与経路・製剤特性は品目ごとに異なります。この一覧は代替薬の推薦ではなく、実在庫や入手可否も示しません。</p>
 {share_control("この分類の供給状況を共有")}</section>
@@ -1012,7 +1014,8 @@ def category_page(group: dict, generated_keys: set[str], lifecycle: dict[str, di
     return body, lastmod
 
 
-def category_index_page(groups: dict[str, dict], newest_row: str, month: int) -> str:
+def category_index_page(groups: dict[str, dict], newest_row: str, month: int,
+                        dataset_date: str = "", version_metadata=None) -> str:
     canonical = f"{SITE_ROOT}categories/index.html"
     title = "薬効分類別の医薬品供給状況（限定出荷・供給停止の件数）｜医薬品供給ナビ"
     description = ("厚生労働省公表データの薬効分類ごとに、限定出荷・供給停止の品目数と一覧を確認できます。"
@@ -1039,9 +1042,10 @@ def category_index_page(groups: dict[str, dict], newest_row: str, month: int) ->
         {"@type": "ListItem", "position": 1, "name": "医薬品供給ナビ", "item": SITE_ROOT},
         {"@type": "ListItem", "position": 2, "name": "薬効分類別の供給状況", "item": canonical}]}
     return f"""<!DOCTYPE html><html lang="ja"><head>
-{common_head(title, description, canonical, 'website', [breadcrumb])}<style>{STYLE}{CATEGORY_STYLE}</style></head><body>
+{common_head(title, description, canonical, 'website', [breadcrumb])}<style>{STYLE}{CATEGORY_STYLE}{INGREDIENT_DATE_STYLE}</style></head><body>
 <div class="wrap"><header class="site"><a href="../">💊 医薬品供給ナビ</a></header><nav class="crumb"><a href="../">トップ</a> › 薬効分類別の供給状況</nav>
 <main><section class="hero"><p class="eyebrow">BY THERAPEUTIC CATEGORY</p><h1>薬効分類別の医薬品供給状況</h1><p class="lede">{description}</p><p class="note">品目行の最新更新日：{esc(newest_row or "不明")}（{len(groups)}分類。{CATEGORY_MIN_ROWS}品目以上の分類を掲載）</p>
+{dataset_dates_html(dataset_date, version_metadata)}
 {share_control("この一覧を共有")}</section>
 {seasonal_html}
 <h2>すべての薬効分類（限定出荷・供給停止の多い順）</h2>{table(ordered)}
@@ -1277,7 +1281,8 @@ def main() -> int:
     category_dates: dict[str, str] = {}
     for code, group in groups.items():
         page, lastmod = category_page(group, generated_keys, lifecycle,
-                                      sorted(ingredient_links_by_category.get(code, []), key=lambda item: item[1]))
+                                      sorted(ingredient_links_by_category.get(code, []), key=lambda item: item[1]),
+                                      dataset_date=dataset_date, version_metadata=version_doc)
         (category_dir / f"{code}.html").write_text(page, encoding="utf-8")
         category_dates[code] = lastmod
     for stale in category_dir.glob("*.html"):
@@ -1287,7 +1292,8 @@ def main() -> int:
     month = args.month or dataset_month(site)
     (category_dir / "index.html").write_text(
         category_index_page(groups, max((normalize_date(row.get("更新日")) for group in groups.values()
-                                         for row in group["rows"]), default=""), month),
+                                         for row in group["rows"]), default=""), month,
+                            dataset_date=dataset_date, version_metadata=version_doc),
         encoding="utf-8")
     ingredient_dir = site / "ingredients"
     ingredient_dir.mkdir(exist_ok=True)
