@@ -2,6 +2,124 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "towa-rosuvastatin5-resumption-20261026",
+      "maker": "東和薬品",
+      "title": "ロスバスタチン錠5mg「トーワ」出荷再開に関するお知らせ",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83736&t=4&f=%E3%83%AD%E3%82%B9%E3%83%90%E3%82%B9%E3%82%BF%E3%83%81%E3%83%B3%E9%8C%A05mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%87%BA%E8%8D%B7%E5%86%8D%E9%96%8B%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B_20261026.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-26",
+      "verified_at": "2026-11-11",
+      "sha256": "779d2347a5565957fcd3e655a144da6e6669e6d3995167175423f6170cb5ad2c",
+      "event_type": "limited",
+      "reason": "2026年7月の熊本地震で協業先工場からの供給に支障が生じ、岡山工場で追加製造。10月26日から一部包装を出荷再開と案内。",
+      "maker_supply_status": {
+        "volume": "Aプラス 出荷量増加",
+        "handling": "④限定出荷（その他）"
+      },
+      "alternatives": [],
+      "cautions": [
+        "2026年10月の案内です。現在の包装別の受注・在庫はメーカーや卸へ確認してください",
+        "PTP500錠の再開時期はこの案内では示されていません"
+      ],
+      "targets": [
+        {
+          "yj_code": "2189017F2215",
+          "product_name": "ロスバスタチン錠５ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155131109",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2026年10月26日に出荷再開と案内。当時は限定出荷で、現在の納入状況は未確認です。"
+              }
+            },
+            {
+              "package": "バラ300錠",
+              "unified_product_code": "155131123",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2026年10月26日に出荷再開と案内。当時は限定出荷で、現在の納入状況は未確認です。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2026年10月の案内では再開について改めて案内すると記載。現在の受注・在庫は未確認です。"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "towa-imatinib200-discontinuation-20261029",
+      "maker": "東和薬品",
+      "title": "イマチニブ錠200mg「トーワ」販売中止のお知らせ",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83750&t=4&f=20261029_%E3%82%A4%E3%83%9E%E3%83%81%E3%83%8B%E3%83%96%E9%8C%A0200mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-29",
+      "verified_at": "2026-11-11",
+      "sha256": "3fe373868cafdfbbf1745e972f38f6957a99af131471c549d2c056b2586ac7f1",
+      "event_type": "discontinued",
+      "reason": "安定供給を考慮し100mgへ集約、在庫限りで販売中止と案内。",
+      "alternatives": [
+        {
+          "type": "メーカーが案内する同一成分の参考候補",
+          "products": [
+            {
+              "name": "イマチニブ錠１００ｍｇ「トーワ」",
+              "yj_code": "4291011F1168",
+              "scope": ""
+            }
+          ],
+          "cautions": [
+            "規格が異なります。変更の可否は医師・薬剤師に確認してください",
+            "参考候補の現在の納入可否・卸在庫は確認できていません"
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年10月のメーカー案内に基づく予定です。実際の在庫・納入状況はメーカーや卸に確認してください",
+        "経過措置期間満了時期は2028年3月末の予定と案内されています。確定した期限ではありません"
+      ],
+      "targets": [
+        {
+          "yj_code": "4291011F2059",
+          "product_name": "イマチニブ錠２００ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP20錠",
+              "unified_product_code": "155136067",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年6月（予定）"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "towa-candesartan-od-2-discontinuation-20261029",
       "maker": "東和薬品",
       "title": "カンデサルタンOD錠2mg「トーワ」販売中止のお知らせ",
