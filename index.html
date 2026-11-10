@@ -4099,6 +4099,15 @@ function manufacturerNoticeNeedsReview(n){
     item.url === n.url && item.review_status === "needs_review"
     && item.review_reason === "原典hashの今回確認が未完了。前回内容は保持"));
 }
+function manufacturerAutoCheckText(n){
+  if(n.collection_mode === "manual") return "原典の自動再確認：対象外";
+  if(MANUFACTURER_BULLETINS_STATE !== "loaded" || !MANUFACTURER_BULLETINS) return "";
+  const item = MANUFACTURER_BULLETINS.items.find(i=>i.url === n.url && i.review_status === "confirmed"
+    && i.hash_status === "ok" && i.sha256 === n.sha256);
+  const date = item && normalizedPublicationDate(item.document_checked_at);
+  const day = date && publicationDayNumber(date);
+  return day && day <= jstDayNumber(Date.now()) ? `原典の自動再確認日：${date}` : "原典の自動再確認：未確認";
+}
 function manufacturerReviewAvailability(){
   if(MANUFACTURER_BULLETINS_STATE === "loading") return "原典の再確認状況を取得中です。";
   if(MANUFACTURER_BULLETINS_STATE === "failed") return "原典の再確認状況を取得できませんでした。以下は前回確認した案内です。現在の状況は原文やメーカーにご確認ください。";
@@ -4157,6 +4166,7 @@ function manufacturerNoticeHTML(notice, target=null, yj=""){
     || notice.expected_resumption && notice.expected_resumption.display || "";
   const lots = Array.isArray(notice.lots) ? notice.lots.filter(l=>!target || norm(target.product_name).includes(norm(l.strength || ""))) : [];
   return `<section class="manufacturer-note"><h4>${esc(notice.title)}</h4><p class="manufacturer-note-dates">${dates.map(([label,value])=>`<span>${esc(label)}：${esc(value)}</span>`).join(" ")}</p>`
+    + (manufacturerAutoCheckText(notice) ? `<p>${esc(manufacturerAutoCheckText(notice))}</p>` : "")
     + (manufacturerReviewAvailability() ? `<p><strong>${esc(manufacturerReviewAvailability())}</strong></p>` : "")
     + (manufacturerNoticeNeedsReview(notice) ? `<p><strong>最新の原典は再確認待ちです。</strong>以下は前回確認した案内です。現在の状況は原文やメーカーにご確認ください。</p>` : "")
     + `<ul>${targets.map(t=>`<li>${esc(t.product_name)}：${t.packages.length ? t.packages.map(p=>esc(p.package)).join("／") : "品目単位の案内（包装別の内訳は未確認）"}`
