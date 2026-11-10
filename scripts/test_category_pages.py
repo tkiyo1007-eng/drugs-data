@@ -68,6 +68,28 @@ class CategoryPageTests(unittest.TestCase):
         self.assertLess(october.index('href="223.html"'), october.index("すべての薬効分類"))
         self.assertEqual("花粉・夏季に確認が増える分類", seasonal_codes(5)[0])
 
+    def test_data_dates_are_distinct_from_product_row_dates(self):
+        groups = category_groups(self.rows)
+        metadata = {'version': 202611100001, 'mhlw_excel_date': '2026-11-09'}
+        pages = [
+            category_page(groups['223'], set(), {}, dataset_date='2026-11-10', version_metadata=metadata)[0],
+            category_index_page(groups, '2026-09-18', 11, dataset_date='2026-11-10', version_metadata=metadata),
+        ]
+        for page in pages:
+            self.assertIn('厚労省原Excelの基準日：', page)
+            self.assertIn('2026-11-09', page)
+            self.assertIn('サイト取込日', page)
+            self.assertIn('2026-11-10', page)
+            self.assertIn('品目行の最新更新日：2026-09-18', page)
+
+    def test_missing_or_invalid_source_date_is_not_invented(self):
+        groups = category_groups(self.rows)
+        for metadata in ({}, {'version': 202611100001, 'mhlw_excel_date': '2026-02-30'},
+                         {'version': 202611100001, 'mhlw_excel_date': '2026-12-01'}):
+            page = category_page(groups['223'], set(), {}, dataset_date='2026-11-10', version_metadata=metadata)[0]
+            self.assertIn('class="mhlw-excel-date" aria-live="polite">確認できません', page)
+            self.assertIn('class="dataset-date" aria-live="polite">2026-11-10', page)
+
     def test_season_comes_from_dataset_date_not_clock(self):
         with tempfile.TemporaryDirectory() as directory:
             Path(directory, "version.json").write_text('{"note":"2026年10月01日厚労省データ反映"}', encoding="utf-8")
