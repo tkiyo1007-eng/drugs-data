@@ -4281,17 +4281,28 @@ let supplementalDataLoading = null;
 function loadSupplementalData(){
   if(supplementalDataLoading) return supplementalDataLoading;
   supplementalDataLoading = Promise.all([
-    Promise.all([fetchFirst(["specification_differences.json"]), fetchFirst(["mhlw_source.json"])])
-      .then(async ([comparisonResponse, sourceResponse])=>{
-        if(!comparisonResponse || !sourceResponse || responseUsesCachedData(comparisonResponse)
-            || responseUsesCachedData(sourceResponse)) throw new Error("source comparison unavailable");
-        const [comparison, source, csv] = await Promise.all([
-          comparisonResponse.json(), sourceResponse.json(), LOADED_PUBLIC_DATA.get("drugs_app_ready.csv")
+    Promise.all([fetchFirst(["specification_differences.json"]), fetchFirst(["mhlw_source.json"]),
+      fetchFirst(["public-data-manifest.json?source_comparison=1"])])
+      .then(async ([comparisonResponse, sourceResponse, manifestResponse])=>{
+        if(!comparisonResponse || !sourceResponse || !manifestResponse || responseUsesCachedData(comparisonResponse)
+            || responseUsesCachedData(sourceResponse) || responseUsesCachedData(manifestResponse)) throw new Error("source comparison unavailable");
+        const [comparison, source, manifest, csv, comparisonHash, sourceHash] = await Promise.all([
+          comparisonResponse.json(), sourceResponse.json(), manifestResponse.json(),
+          LOADED_PUBLIC_DATA.get("drugs_app_ready.csv"), LOADED_PUBLIC_DATA.get("specification_differences.json"),
+          LOADED_PUBLIC_DATA.get("mhlw_source.json")
         ]);
+        const matchesPublished = (name, actual)=>{
+          const entry = manifest?.files?.[name];
+          return !!actual && !!entry && entry.sha256 === actual.sha256 && entry.bytes === actual.bytes;
+        };
         const url = new URL(source.url);
         const pathName = decodeURIComponent(url.pathname.split("/").pop());
         const fileDate = /^([0-9]{6})iyakuhinkyoukyu\.xlsx$/i.exec(source.file || "");
-        if(comparison?.schema_version !== 1 || !comparison.differences
+        if(manifest?.schema_version !== 1 || !/^[0-9a-f]{40}$/.test(manifest.source_commit || "")
+            || !matchesPublished("drugs_app_ready.csv", csv)
+            || !matchesPublished("specification_differences.json", comparisonHash)
+            || !matchesPublished("mhlw_source.json", sourceHash)
+            || comparison?.schema_version !== 1 || !comparison.differences
             || typeof comparison.differences !== "object" || Array.isArray(comparison.differences)
             || !csv || csv.sha256 !== comparison.csv_sha256
             || !/^[0-9a-f]{64}$/.test(source.sha256 || "") || source.sha256 !== comparison.source_sha256
