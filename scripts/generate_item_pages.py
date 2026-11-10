@@ -678,6 +678,10 @@ def load_manufacturer_notices(path: Path) -> list:
         for field in ("maker_supply_status", "expected_resumption", "independent_pmda_source"):
             if notice.get(field) is not None and not isinstance(notice[field], dict):
                 raise ValueError("確認済みメーカー案内の供給・原典欄が不正です")
+        if any(key in (notice.get("maker_supply_status") or {}) and
+               (not isinstance(notice["maker_supply_status"][key], str) or not notice["maker_supply_status"][key].strip())
+               for key in ("handling", "volume")):
+            raise ValueError("確認済みメーカー案内の出荷区分が不正です")
         if (not isinstance(notice.get("lots", []), list)
                 or any(not isinstance(lot, dict)
                        or not all(isinstance(lot.get(field), str) and lot[field].strip()

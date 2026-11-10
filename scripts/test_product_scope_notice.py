@@ -35,6 +35,11 @@ class ProductScopeNoticeTests(unittest.TestCase):
     def test_package_scope_without_package_is_rejected(self):
         self.assertTrue(any('missing package scope' in e for e in validate(self.notice('package'), self.rows)))
 
+    def test_manufacturer_status_rejects_non_text_values(self):
+        document = self.notice('product')
+        document['notices'][0]['maker_supply_status'] = {'volume': ['出荷量減少']}
+        self.assertTrue(any('invalid maker supply status' in e for e in validate(document, self.rows)))
+
 
 if __name__ == '__main__':
     unittest.main()
