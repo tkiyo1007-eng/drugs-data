@@ -766,7 +766,7 @@ def manufacturer_notice_scope_text(target: dict) -> str:
                 for package in target.get("packages", [])]
     return (f'対象範囲：{scope}'
             + (f'｜販売元：{target["seller"]}' if target.get("seller") else "")
-            + (f'｜対象包装：{"／".join(packages)}' if packages else ""))
+            + (f'｜対象包装：{"／".join(packages)}' if packages else '｜包装別の内訳は未確認' if target["scope"] == "product" else ""))
 
 
 def manufacturer_notices_html(row: dict, notices=(), warning="", catalog_yj_codes=None, bulletins=None) -> str:

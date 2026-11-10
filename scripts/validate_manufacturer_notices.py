@@ -136,7 +136,7 @@ def validate(document, rows):
                 errors.append(label + ': target maker mismatch ' + yj)
             if not isinstance(t.get('scope'), str) or t['scope'] not in SCOPES: errors.append(label + ': invalid target scope')
             packages = t.get('packages')
-            if not isinstance(packages, list) or not packages or any(not isinstance(p, dict) or not isinstance(p.get('package'), str) or not p['package'].strip() for p in packages):
+            if not isinstance(packages, list) or (not packages and t.get('scope') != 'product') or any(not isinstance(p, dict) or not isinstance(p.get('package'), str) or not p['package'].strip() for p in packages):
                 errors.append(label + ': missing package scope')
             else:
                 for package in packages:
