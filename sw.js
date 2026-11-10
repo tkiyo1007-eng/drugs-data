@@ -50,6 +50,8 @@ const ASSET_FILES = [
 const DATA_FILES = [
   "drugs_app_ready.csv",
   "version.json",
+  "mhlw_source.json",
+  "specification_differences.json",
   "status_changes.json",
   "news.json",
   "industry_headlines.json",

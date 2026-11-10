@@ -3642,6 +3642,16 @@ let detailCloseSearchSnapshot = null;
 // 実データ時は CSV の全列（空欄を除く）をそのまま表示するので、列が増えても自動で反映される
 // 規格・供給状況など現場で先に確認したい項目を上位に、コード類は下位に並べる
 const DETAIL_ORDER = ["規格","供給状況","理由","解除・解消見込み","出荷量状況","代替候補","一般名","製造メーカー","販売メーカー","薬効分類","薬価","経過措置期限","ステータス更新日","更新日","YJコード"];
+let SPECIFICATION_COMPARISON = null;
+function specificationDifference(d){
+  const comparison = SPECIFICATION_COMPARISON;
+  if(!comparison || !SOURCE_DATE || comparison.source_date !== SOURCE_DATE) return null;
+  const entry = comparison.differences[d.yj];
+  if(!entry || typeof entry !== "object" || Array.isArray(entry)
+      || typeof entry.retained !== "string" || typeof entry.source !== "string"
+      || entry.retained !== String(d.spec || "").trim()) return null;
+  return entry;
+}
 // 厚労省CSVの「代替候補」列には、実際の代替薬ではなく供給メタデータが
 // 「解除/解消見込み: ... / 出荷量状況: ...」の形で収録されている。
 // その形式だけを正しい項目名に分解し、将来本当の代替候補が入った場合は元の表示を保つ。
@@ -3685,7 +3695,14 @@ function detailPairs(d){
     if(["酸素", "液体酸素", "窒素", "液体窒素", "二酸化炭素"].includes(String(d.g || "").trim())){
       const specIndex = pairs.findIndex(([label])=>label === "規格");
       pairs.splice(specIndex < 0 ? 0 : specIndex + 1, 0,
-        ["規格・容器について", "表示の規格は容器の容量や充填量を示すとは限りません。実際の容器・内容量は製造販売業者や納入先にご確認ください。"]);
+        ["規格・容器について", "表示の規格は厚労省の原表と異なる場合があり、容器の容量や充填量を示すとは限りません。原表および実際の容器・内容量は製造販売業者や納入先にご確認ください。"]);
+    }
+    const specDifference = specificationDifference(d);
+    if(specDifference){
+      const specIndex = pairs.findIndex(([label])=>label === "規格");
+      pairs.splice(specIndex < 0 ? 0 : specIndex + 1, 0,
+        [`厚労省原表の規格単位（${SOURCE_DATE}）`, specDifference.source || "原表に記載なし"],
+        ["規格の確認", "サイトの保持値と原表の記載が異なります。単位や容器の意味を確認してください。"]);
     }
   }else{
     pairs = [
@@ -4264,6 +4281,38 @@ let supplementalDataLoading = null;
 function loadSupplementalData(){
   if(supplementalDataLoading) return supplementalDataLoading;
   supplementalDataLoading = Promise.all([
+    Promise.all([fetchFirst(["specification_differences.json"]), fetchFirst(["mhlw_source.json"])])
+      .then(async ([comparisonResponse, sourceResponse])=>{
+        if(!comparisonResponse || !sourceResponse || responseUsesCachedData(comparisonResponse)
+            || responseUsesCachedData(sourceResponse)) throw new Error("source comparison unavailable");
+        const [comparison, source, csv] = await Promise.all([
+          comparisonResponse.json(), sourceResponse.json(), LOADED_PUBLIC_DATA.get("drugs_app_ready.csv")
+        ]);
+        const url = new URL(source.url);
+        const pathName = decodeURIComponent(url.pathname.split("/").pop());
+        const fileDate = /^([0-9]{6})iyakuhinkyoukyu\.xlsx$/i.exec(source.file || "");
+        if(comparison?.schema_version !== 1 || !comparison.differences
+            || typeof comparison.differences !== "object" || Array.isArray(comparison.differences)
+            || !csv || csv.sha256 !== comparison.csv_sha256
+            || !/^[0-9a-f]{64}$/.test(source.sha256 || "") || source.sha256 !== comparison.source_sha256
+            || source.excel_date !== comparison.source_date || !/^\d{4}-\d{2}-\d{2}$/.test(source.excel_date || "")
+            || !validSupplyDate(source.excel_date.replaceAll("-", "/"))
+            || url.protocol !== "https:" || !["www.mhlw.go.jp", "mhlw.go.jp"].includes(url.hostname)
+            || url.username || url.password || (url.port && url.port !== "443")
+            || typeof source.file !== "string" || !/^[^/\\]+\.xlsx$/i.test(source.file)
+            || !url.pathname.startsWith("/content/") || pathName !== source.file
+            || (fileDate && fileDate[1] !== source.excel_date.slice(2).replaceAll("-", ""))) throw new Error("source comparison mismatch");
+        const rowsByCode = new Map(ITEMS.map(item=>[item.yj, item]));
+        const comparableSpec = value=>value.normalize("NFKC").toLowerCase().replace(/\s/g, "");
+        for(const [key, entry] of Object.entries(comparison.differences)){
+          if(!key || !entry || typeof entry !== "object" || Array.isArray(entry)
+              || Object.keys(entry).sort().join(",") !== "retained,source"
+              || typeof entry.retained !== "string" || typeof entry.source !== "string"
+              || !rowsByCode.has(key) || String(rowsByCode.get(key).spec || "").trim() !== entry.retained
+              || comparableSpec(entry.retained) === comparableSpec(entry.source)) throw new Error("invalid comparison entry");
+        }
+        SPECIFICATION_COMPARISON = comparison;
+      }).catch(()=>{ SPECIFICATION_COMPARISON = null; }),
     fetchFirst(["maker_links.json", "https://kyokyu-navi.jp/maker_links.json"])
       .then(res => res && res.json()).then(data => {
         if(Array.isArray(data) && data.length) MAKER_LINKS = data;
@@ -7160,7 +7209,7 @@ function validateSupplyCSVRows(head, rows){
 
 // 実際に読み込んだ本文と公開版を比較する。commitや確認時刻だけで「最新」と判定しない。
 const UPDATE_DATA_FILES = new Set([
-  "drugs_app_ready.csv", "version.json", "maker_links.json", "manual_announcements.json",
+  "drugs_app_ready.csv", "version.json", "mhlw_source.json", "specification_differences.json", "maker_links.json", "manual_announcements.json",
   "product_lifecycle.json", "supply_discrepancies.json", "maker_collection_health.json",
   "maker_announcements.json", "announcement_summaries.json", "manufacturer_notices.json",
   "manufacturer_bulletins.json", "announcement_packages.json", "resolution_stats.json", "featured_products.json",
@@ -7329,6 +7378,10 @@ function refreshDataFreshness(){
 function setSourceDate(date){
   SOURCE_DATE = validSourceDate(date, DATASET_DATE) ? date : "";
   renderSourceFreshness();
+  if(currentDetailKey && document.getElementById("mBack")?.classList?.contains("open")){
+    const current = findByKey(currentDetailKey);
+    if(current) refreshOpenDetail(current);
+  }
 }
 function renderSourceFreshness(){
   const display = SOURCE_DATE.replaceAll("-", ".") || "確認できません";
