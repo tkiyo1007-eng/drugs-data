@@ -1,5 +1,6 @@
 """Product-level notices must not invent packaging coverage."""
 import csv
+import json
 import unittest
 from pathlib import Path
 
@@ -50,6 +51,17 @@ class ProductScopeNoticeTests(unittest.TestCase):
         unavailable_html = manufacturer_notices_html(self.row, [notice], bulletins=None)
         self.assertIn('原典の再確認状況を取得できませんでした', unavailable_html)
         self.assertIn('B．出荷量減少', unavailable_html)
+
+    def test_registered_sawai_list_keeps_source_scope_and_values(self):
+        document = json.loads((ROOT / 'manufacturer_notices.json').read_text(encoding='utf-8'))
+        notice = next(n for n in document['notices'] if n['id'] == 'sawai-product-supply-list-20261109')
+        self.assertEqual(validate(document, self.rows), [])
+        self.assertEqual(notice['announced_at'], '2026-11-09')
+        self.assertEqual(notice['maker_supply_status']['volume'], 'B．出荷量減少')
+        self.assertEqual({(t['yj_code'], tuple(t['source_pages'])) for t in notice['targets']},
+                         {('2399006F1579', (8,)), ('1190018F4154', (12,))})
+        self.assertTrue(all(t['scope'] == 'product' and t['packages'] == [] for t in notice['targets']))
+        self.assertNotIn('collection_mode', notice)  # registered source participates in hash checks
 
 
 if __name__ == '__main__':
