@@ -2738,6 +2738,7 @@ html.season-autumn .autumn-sky{display:none}
     <dl class="detail-grid" id="mGrid"></dl>
     <div class="sum-box" id="mManufacturerNotes" hidden></div>
     <div class="modal-note" id="mSupplyReference" hidden></div>
+    <section class="modal-note" id="mExactTopicLinks" aria-labelledby="mExactTopicTitle" hidden></section>
     <section class="alternatives-box" id="mAlternatives" aria-labelledby="mAlternativesTitle" hidden>
       <h4 id="mAlternativesTitle">代替候補の4つのポイント</h4>
       <p class="alternatives-date">供給情報：2026年9月11日確認（厚労省9月10日版・メーカー案内）</p>
@@ -5670,6 +5671,7 @@ function openDetail(d, opts={}){
   currentDetailName = d.n;
   currentDetailKey = itemKey(d);
   updateDetailDataProvenance(d);
+  renderDetailExactTopics(d);
   syncModalFavorite(d);
   document.getElementById("mGrid").innerHTML = detailPairs(d)
     .map(([h,v])=>`<dt>${esc(h)}</dt><dd${h === "全体データ基準日" ? ' id="mGridDatasetDate"' : h === "厚労省の原Excel基準日" ? ' id="mGridSourceDate"' : ""}>${esc(v)}</dd>`).join("");
@@ -6759,8 +6761,39 @@ async function loadNewsContent(kind){
     state.phase = error instanceof TypeError ? "invalid" : "failed";
   }finally{
     clearTimeout(timer);
-    if(state.generation === generation){state.controller=null;refreshNewsViews(kind);}
+    if(state.generation === generation){
+      state.controller=null;refreshNewsViews(kind);
+      if(kind === "topics" && currentDetailKey && $mBack.classList.contains("open")){
+        const item = findByKey(currentDetailKey);
+        if(item) renderDetailExactTopics(item);
+      }
+    }
   }
+}
+// 関連記事は正式YJコードの完全一致のみ。取得できなければ記事の有無を断定しない。
+function renderDetailExactTopics(item){
+  const box = document.getElementById("mExactTopicLinks");
+  const yj = String(item?.yj || "");
+  if(!box || (box.dataset.yj === yj && box.contains(document.activeElement))) return;
+  box.dataset.yj = yj;
+  const state = NEWS_STATE.topics;
+  const matches = state.phase === "ready" && state.source === "network" && FORMAL_ITEM_YJ.test(yj)
+    ? (state.snapshot?.items || []).filter(t => typeof t.slug === "string"
+        && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(t.slug)
+        && newsDateKey(t.date) && Date.parse(newsDateKey(t.date))/86400000 <= jstDayNumber(Date.now())
+        && Array.isArray(t.target_queries) && t.target_queries.some(q => q === yj)) : [];
+  const modal = box.closest('.modal'), focus = document.activeElement;
+  const focusRect = focus.getBoundingClientRect(), modalRect = modal?.getBoundingClientRect();
+  const keepPosition = modal && modal.contains(focus) && !box.contains(focus) && focus.getClientRects().length
+    && focusRect.bottom > modalRect.top && focusRect.top < modalRect.bottom;
+  const before = keepPosition ? focus.getBoundingClientRect().top : 0;
+  if(!matches.length){ box.hidden = true; box.replaceChildren(); }
+  else { box.innerHTML = `<h4 id="mExactTopicTitle">この品目のメーカー案内・関連記事</h4>
+    <p>記事は掲載時点の情報です。対象包装と現在の供給状況は原典でご確認ください。</p>
+    <ul>${matches.map(t => `<li><a href="topics/${esc(t.slug)}.html">${esc(t.title)}</a>（記事日付：${esc(t.date)}）</li>`).join("")}</ul>`;
+    box.hidden = false;
+  }
+  if(keepPosition && focus.isConnected) modal.scrollTop += focus.getBoundingClientRect().top - before;
 }
 function startNewsContent(){
   if(newsStarted) return;
