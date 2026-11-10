@@ -2,6 +2,151 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "towa-fluconazole-discontinuation-20261029",
+      "maker": "東和薬品",
+      "title": "フルコナゾール静注100mg/200mg「トーワ」販売中止のお知らせ",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83755&t=4&f=20261029_%E3%83%95%E3%83%AB%E3%82%B3%E3%83%8A%E3%82%BE%E3%83%BC%E3%83%AB%E9%9D%99%E6%B3%A8100mg200mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-29",
+      "verified_at": "2026-11-11",
+      "sha256": "43dff105e7a7ed40ca78ad34bcb22836e836b9a3f1622f6b7761d82c261c4076",
+      "event_type": "discontinued",
+      "reason": "安定供給を考慮し50mgへ集約、在庫限りで販売中止と案内。",
+      "alternatives": [
+        {
+          "type": "メーカーが案内する同一成分の参考候補",
+          "products": [
+            {
+              "name": "フルコナゾール静注５０ｍｇ「トーワ」",
+              "yj_code": "6290401A1110",
+              "scope": ""
+            }
+          ],
+          "cautions": [
+            "規格・濃度が異なります。変更の可否は医師・薬剤師に確認してください",
+            "参考候補の現在の納入可否・卸在庫は確認できていません"
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年10月のメーカー案内に基づく予定です。実際の在庫・納入状況はメーカーや卸に確認してください",
+        "経過措置期間満了時期は2028年3月末の予定と案内されています。確定した期限ではありません"
+      ],
+      "targets": [
+        {
+          "yj_code": "6290401A2184",
+          "product_name": "フルコナゾール静注１００ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "50mL×5瓶",
+              "unified_product_code": "155778021",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年7月（予定）"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6290401A3172",
+          "product_name": "フルコナゾール静注２００ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100mL×5瓶",
+              "unified_product_code": "155779028",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月（予定）"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "towa-simvastatin20-discontinuation-20261029",
+      "maker": "東和薬品",
+      "title": "シンバスタチン錠20mg「トーワ」販売中止のお知らせ",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83753&t=4&f=20261029_%E3%82%B7%E3%83%B3%E3%83%90%E3%82%B9%E3%82%BF%E3%83%81%E3%83%B3%E9%8C%A020mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-29",
+      "verified_at": "2026-11-11",
+      "sha256": "88850d1b6fce4409ecb001c9ea2fece39c5817259ed315f7ba842fb03df3efef",
+      "event_type": "discontinued",
+      "reason": "需要状況等を考慮し5mg・10mgへ集約、在庫限りで販売中止と案内。",
+      "alternatives": [
+        {
+          "type": "メーカーが案内する同一成分の参考候補",
+          "products": [
+            {
+              "name": "シンバスタチン錠５ｍｇ「トーワ」",
+              "yj_code": "2189011F1220",
+              "scope": ""
+            },
+            {
+              "name": "シンバスタチン錠１０ｍｇ「トーワ」",
+              "yj_code": "2189011F2196",
+              "scope": ""
+            }
+          ],
+          "cautions": [
+            "規格・濃度が異なります。変更の可否は医師・薬剤師に確認してください",
+            "参考候補の現在の納入可否・卸在庫は確認できていません"
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年10月のメーカー案内に基づく予定です。実際の在庫・納入状況はメーカーや卸に確認してください",
+        "経過措置期間満了時期は2028年3月末の予定と案内されています。確定した期限ではありません"
+      ],
+      "targets": [
+        {
+          "yj_code": "2189011F3184",
+          "product_name": "シンバスタチン錠２０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155686029",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年6月（予定）"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "sawai-zaltoprofen-discontinuation-202608",
       "maker": "沢井製薬",
       "title": "ザルトプロフェン錠80mg「サワイ」販売中止のご案内",
