@@ -100,6 +100,18 @@ class ManufacturerTransfers(unittest.TestCase):
             self.assert_field_if_present(rows, code, '製造メーカー', manufacturer)
             self.assert_field_if_present(rows, code, '販売メーカー', sales)
 
+    def test_perisate_duplicated_vendor_is_not_reintroduced(self):
+        # メーカー案内ではN/NL両製品群の販売元はジェイ・エム・エス。
+        # https://medical.jms.cc/pdf/customer_information_372.pdf
+        # https://medical.jms.cc/pdf/customer_information_301.pdf
+        with (ROOT / 'drugs_app_ready.csv').open(encoding='utf-8-sig', newline='') as f:
+            rows = list(csv.DictReader(f))
+        prefixes = ('3420415', '3420416', '3420426', '3420427')
+        for row in rows:
+            if row['YJコード'].startswith(prefixes) and row['商品名'].startswith('ペリセート'):
+                self.assertEqual(row['製造メーカー'], 'ジェイ・エム・エス')
+                self.assertEqual(row['販売メーカー'], 'ジェイ・エム・エス')
+
     def test_nikp_transfer_keeps_old_and_new_yj_distinct(self):
         with (ROOT / 'drugs_app_ready.csv').open(encoding='utf-8-sig', newline='') as f:
             rows = {row['YJコード']: row for row in csv.DictReader(f)}
