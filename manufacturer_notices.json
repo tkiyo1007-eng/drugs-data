@@ -2,6 +2,288 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "towa-candesartan-od-2-discontinuation-20261029",
+      "maker": "東和薬品",
+      "title": "カンデサルタンOD錠2mg「トーワ」販売中止のお知らせ",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83752&t=4&f=20261029_%E3%82%AB%E3%83%B3%E3%83%87%E3%82%B5%E3%83%AB%E3%82%BF%E3%83%B3OD%E9%8C%A02mg4mg8mg12mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-29",
+      "verified_at": "2026-11-11",
+      "sha256": "8ff67894c63c570b49884256c081fe6e8331cfef99c4ad3264173b8eaba2061f",
+      "event_type": "discontinued",
+      "reason": "安定供給を考慮して普通錠へ集約し、在庫限りで販売中止と案内。",
+      "alternatives": [
+        {
+          "type": "メーカーが案内する同一成分・剤形違いの参考候補",
+          "products": [
+            {
+              "name": "カンデサルタン錠２ｍｇ「トーワ」",
+              "yj_code": "2149040F1301",
+              "scope": ""
+            }
+          ],
+          "cautions": [
+            "普通錠とOD錠では剤形が異なります。変更の可否は医師・薬剤師に確認してください",
+            "参考候補の現在の納入可否・卸在庫は確認できていません"
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年10月のメーカー案内に基づきます。現在の在庫・納入状況はメーカーや卸に確認してください",
+        "経過措置期間満了時期は2028年3月末の予定と案内されています。確定した期限ではありません"
+      ],
+      "targets": [
+        {
+          "yj_code": "2149040F5056",
+          "product_name": "カンデサルタンＯＤ錠２ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155122107",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2026年10月のメーカー案内では在庫なし。現在の納入状況は未確認です。"
+              }
+            },
+            {
+              "package": "バラ300錠",
+              "unified_product_code": "155122114",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2026年10月のメーカー案内では在庫なし。現在の納入状況は未確認です。"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "towa-candesartan-od-4-discontinuation-20261029",
+      "maker": "東和薬品",
+      "title": "カンデサルタンOD錠4mg「トーワ」販売中止のお知らせ",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83752&t=4&f=20261029_%E3%82%AB%E3%83%B3%E3%83%87%E3%82%B5%E3%83%AB%E3%82%BF%E3%83%B3OD%E9%8C%A02mg4mg8mg12mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-29",
+      "verified_at": "2026-11-11",
+      "sha256": "8ff67894c63c570b49884256c081fe6e8331cfef99c4ad3264173b8eaba2061f",
+      "event_type": "discontinued",
+      "reason": "安定供給を考慮して普通錠へ集約し、在庫限りで販売中止と案内。",
+      "alternatives": [
+        {
+          "type": "メーカーが案内する同一成分・剤形違いの参考候補",
+          "products": [
+            {
+              "name": "カンデサルタン錠４ｍｇ「トーワ」",
+              "yj_code": "2149040F2308",
+              "scope": ""
+            }
+          ],
+          "cautions": [
+            "普通錠とOD錠では剤形が異なります。変更の可否は医師・薬剤師に確認してください",
+            "参考候補の現在の納入可否・卸在庫は確認できていません"
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年10月のメーカー案内に基づきます。現在の在庫・納入状況はメーカーや卸に確認してください",
+        "経過措置期間満了時期は2028年3月末の予定と案内されています。確定した期限ではありません"
+      ],
+      "targets": [
+        {
+          "yj_code": "2149040F6052",
+          "product_name": "カンデサルタンＯＤ錠４ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155123098",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年6月（予定）"
+                  }
+                ]
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "155123128",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年5月（予定）"
+                  }
+                ]
+              }
+            },
+            {
+              "package": "バラ300錠",
+              "unified_product_code": "155123111",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年6月（予定）"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "towa-candesartan-od-8-discontinuation-20261029",
+      "maker": "東和薬品",
+      "title": "カンデサルタンOD錠8mg「トーワ」販売中止のお知らせ",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83752&t=4&f=20261029_%E3%82%AB%E3%83%B3%E3%83%87%E3%82%B5%E3%83%AB%E3%82%BF%E3%83%B3OD%E9%8C%A02mg4mg8mg12mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-29",
+      "verified_at": "2026-11-11",
+      "sha256": "8ff67894c63c570b49884256c081fe6e8331cfef99c4ad3264173b8eaba2061f",
+      "event_type": "discontinued",
+      "reason": "安定供給を考慮して普通錠へ集約し、在庫限りで販売中止と案内。",
+      "alternatives": [
+        {
+          "type": "メーカーが案内する同一成分・剤形違いの参考候補",
+          "products": [
+            {
+              "name": "カンデサルタン錠８ｍｇ「トーワ」",
+              "yj_code": "2149040F3304",
+              "scope": ""
+            }
+          ],
+          "cautions": [
+            "普通錠とOD錠では剤形が異なります。変更の可否は医師・薬剤師に確認してください",
+            "参考候補の現在の納入可否・卸在庫は確認できていません"
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年10月のメーカー案内に基づきます。現在の在庫・納入状況はメーカーや卸に確認してください",
+        "経過措置期間満了時期は2028年3月末の予定と案内されています。確定した期限ではありません"
+      ],
+      "targets": [
+        {
+          "yj_code": "2149040F7059",
+          "product_name": "カンデサルタンＯＤ錠８ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155124101",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2026年10月のメーカー案内では在庫なし。現在の納入状況は未確認です。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "155124132",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2026年10月のメーカー案内では在庫なし。現在の納入状況は未確認です。"
+              }
+            },
+            {
+              "package": "バラ300錠",
+              "unified_product_code": "155124125",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2026年10月のメーカー案内では在庫なし。現在の納入状況は未確認です。"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "towa-candesartan-od-12-discontinuation-20261029",
+      "maker": "東和薬品",
+      "title": "カンデサルタンOD錠12mg「トーワ」販売中止のお知らせ",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83752&t=4&f=20261029_%E3%82%AB%E3%83%B3%E3%83%87%E3%82%B5%E3%83%AB%E3%82%BF%E3%83%B3OD%E9%8C%A02mg4mg8mg12mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-29",
+      "verified_at": "2026-11-11",
+      "sha256": "8ff67894c63c570b49884256c081fe6e8331cfef99c4ad3264173b8eaba2061f",
+      "event_type": "discontinued",
+      "reason": "安定供給を考慮して普通錠へ集約し、在庫限りで販売中止と案内。",
+      "alternatives": [
+        {
+          "type": "メーカーが案内する同一成分・剤形違いの参考候補",
+          "products": [
+            {
+              "name": "カンデサルタン錠１２ｍｇ「トーワ」",
+              "yj_code": "2149040F4300",
+              "scope": ""
+            }
+          ],
+          "cautions": [
+            "普通錠とOD錠では剤形が異なります。変更の可否は医師・薬剤師に確認してください",
+            "参考候補の現在の納入可否・卸在庫は確認できていません"
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年10月のメーカー案内に基づきます。現在の在庫・納入状況はメーカーや卸に確認してください",
+        "経過措置期間満了時期は2028年3月末の予定と案内されています。確定した期限ではありません"
+      ],
+      "targets": [
+        {
+          "yj_code": "2149040F8055",
+          "product_name": "カンデサルタンＯＤ錠１２ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155125085",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2026年10月のメーカー案内では在庫なし。現在の納入状況は未確認です。"
+              }
+            },
+            {
+              "package": "バラ300錠",
+              "unified_product_code": "155125108",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2026年10月のメーカー案内では在庫なし。現在の納入状況は未確認です。"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "towa-epalrestat-discontinuation-20261029",
       "maker": "東和薬品",
       "title": "エパルレスタット錠50mg「トーワ」販売中止のお知らせ",
