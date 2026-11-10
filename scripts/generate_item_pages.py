@@ -730,6 +730,26 @@ def manufacturer_notice_needs_review(notice: dict, bulletins=None) -> bool:
                                 for item in bulletins.get("items", [])))
 
 
+def manufacturer_auto_check_text(notice: dict, bulletins=None) -> str:
+    """手動の原文確認日と、監視によるPDF照合日を混同しない。"""
+    if notice.get("collection_mode") == "manual":
+        return "原典の自動再確認：対象外"
+    if bulletins is None:
+        return ""
+    for item in bulletins.get("items", []):
+        if (item.get("url") != notice.get("url") or item.get("review_status") != "confirmed"
+                or item.get("hash_status") != "ok" or item.get("sha256") != notice.get("sha256")):
+            continue
+        value = str(item.get("document_checked_at") or "")[:10]
+        try:
+            day = datetime.fromisoformat(value).date()
+        except ValueError:
+            continue
+        if day <= datetime.now(timezone(timedelta(hours=9))).date():
+            return f"原典の自動再確認日：{day.isoformat()}"
+    return "原典の自動再確認：未確認"
+
+
 def lifecycle_for_display(lifecycle, notices=(), bulletins=None):
     """元の履歴を保ち、既知の原典変更だけを表示用の再確認待ち状態にする。"""
     if not lifecycle:
@@ -792,6 +812,9 @@ def manufacturer_notices_html(row: dict, notices=(), warning="", catalog_yj_code
         parts.append(f'<p>原典の案内年月日：{esc(notice["announced_at"])}'
                      + (f'｜メーカー一覧掲載日：{esc(notice["listed_at"])}' if notice.get("listed_at") else "")
                      + f'｜原文確認日：{esc(iso_publication_date(notice["verified_at"]))}</p>')
+        auto_check = manufacturer_auto_check_text(notice, bulletins)
+        if auto_check:
+            parts.append(f'<p>{esc(auto_check)}</p>')
         if bulletins is None:
             parts.append('<p><strong>原典の再確認状況を取得できませんでした。</strong>以下は前回確認した案内です。現在の状況は原文やメーカーにご確認ください。</p>')
         elif manufacturer_notice_needs_review(notice, bulletins):
