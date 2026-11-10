@@ -6,6 +6,18 @@ from generate_item_pages import exact_target_topic_index, related_topics_html, i
 
 
 class ExactTopicLinkTests(unittest.TestCase):
+    def test_generated_item_pages_link_to_exact_target_topics(self):
+        root = Path(__file__).resolve().parent.parent
+        topic_index = exact_target_topic_index(root)
+        generated = set(json.loads((root / 'items' / 'keys.json').read_text(encoding='utf-8')))
+        for yj, topics in topic_index.items():
+            if yj not in generated:
+                continue
+            page = (root / 'items' / f'{yj}.html').read_text(encoding='utf-8')
+            for topic in topics:
+                with self.subTest(yj=yj, topic=topic['slug']):
+                    self.assertIn(f'../topics/{topic["slug"]}.html', page)
+
     def test_exact_yj_with_existing_article_only_and_escaped_title(self):
         with tempfile.TemporaryDirectory() as tmp:
             site = Path(tmp)
