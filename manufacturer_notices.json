@@ -2,6 +2,161 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "sandoz-losartan-ptp100-resumed-20261027",
+      "maker": "サンド",
+      "title": "ロサルタンカリウム錠25mg・50mg「サンド」PTP100錠の通常出荷再開",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20261027_007.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-27",
+      "verified_at": "2026-11-11",
+      "sha256": "2b7c627bb3aff7e98c38407f7c73666cf3069ff41747fc0cbfaccd78aacb8e20",
+      "event_type": "resumed",
+      "reason": "原薬変更による製造遅延で一時出荷を停止。2026年10月28日以降、取引卸の受注分から通常出荷へ移行と案内。",
+      "alternatives": [],
+      "cautions": [
+        "2026年10月のメーカー案内です。現在の受注・納入・在庫状況はメーカーや卸に確認してください"
+      ],
+      "targets": [
+        {
+          "yj_code": "2149039F1287",
+          "product_name": "ロサルタンカリウム錠２５ｍｇ「サンド」",
+          "maker": "サンド",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2026年10月28日以降の取引卸受注分から通常出荷へ移行と案内。"
+              },
+              "unified_product_code": "614408605"
+            }
+          ]
+        },
+        {
+          "yj_code": "2149039F2283",
+          "product_name": "ロサルタンカリウム錠５０ｍｇ「サンド」",
+          "maker": "サンド",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2026年10月28日以降の取引卸受注分から通常出荷へ移行と案内。"
+              },
+              "unified_product_code": "614408704"
+            }
+          ]
+        }
+      ],
+      "maker_supply_status": {
+        "volume": "A 出荷量通常",
+        "handling": "①通常出荷"
+      }
+    },
+    {
+      "id": "sandoz-losartan-ptp500-discontinued-20261027",
+      "maker": "サンド",
+      "title": "ロサルタンカリウム錠25mg・50mg「サンド」PTP500錠の販売中止",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20261027_007.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-27",
+      "verified_at": "2026-11-11",
+      "sha256": "2b7c627bb3aff7e98c38407f7c73666cf3069ff41747fc0cbfaccd78aacb8e20",
+      "event_type": "discontinued",
+      "reason": "PTP100錠への包装集約のためPTP500錠を販売中止と案内。販売終了日・現在の在庫状況はこの案内では確認できません。",
+      "alternatives": [],
+      "cautions": [
+        "2026年10月のメーカー案内です。現在の受注・納入・在庫状況はメーカーや卸に確認してください"
+      ],
+      "targets": [
+        {
+          "yj_code": "2149039F1287",
+          "product_name": "ロサルタンカリウム錠２５ｍｇ「サンド」",
+          "maker": "サンド",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP500錠",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2026年10月の案内で販売中止と記載。販売終了日や現在の在庫は未確認です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149039F2283",
+          "product_name": "ロサルタンカリウム錠５０ｍｇ「サンド」",
+          "maker": "サンド",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP500錠",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2026年10月の案内で販売中止と記載。販売終了日や現在の在庫は未確認です。"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sandoz-losartan100-ptp100-stopped-20261027",
+      "maker": "サンド",
+      "title": "ロサルタンカリウム錠100mg「サンド」PTP100錠の出荷停止案内",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20261027_007.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-27",
+      "verified_at": "2026-11-11",
+      "sha256": "2b7c627bb3aff7e98c38407f7c73666cf3069ff41747fc0cbfaccd78aacb8e20",
+      "event_type": "stopped",
+      "reason": "2026年10月の案内では、100mg PTP100錠の出荷状況「C 出荷停止」を継続すると記載。現在の出荷状況は未確認です。",
+      "alternatives": [],
+      "cautions": [
+        "2026年10月のメーカー案内です。現在の受注・納入・在庫状況はメーカーや卸に確認してください"
+      ],
+      "targets": [
+        {
+          "yj_code": "2149039F3271",
+          "product_name": "ロサルタンカリウム錠１００ｍｇ「サンド」",
+          "maker": "サンド",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2026年10月の案内では出荷停止を継続。現在の受注・在庫は未確認です。"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "towa-rosuvastatin5-resumption-20261026",
       "maker": "東和薬品",
       "title": "ロスバスタチン錠5mg「トーワ」出荷再開に関するお知らせ",
