@@ -3,8 +3,8 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-11-10T08:25:14+09:00",
-  "last_success_at": "2026-11-10T08:25:14+09:00",
+  "checked_at": "2026-11-11T02:02:37+09:00",
+  "last_success_at": "2026-11-11T02:02:37+09:00",
   "items": [
     {
       "title": "【東京都／都病薬】病院薬剤師の魅力を発信‐前倒しで就職相談セミナー",
@@ -15,6 +15,18 @@
     {
       "title": "【日本ケミファ】後発品自社開発品増へ‐数年かけて体制強化",
       "url": "https://www.yakuji.co.jp/entry141490.html",
+      "date": "2026-11-10",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【カケハシ薬局活用調査】処方薬の服用中断4割経験‐残薬で処方量調整は2割",
+      "url": "https://www.yakuji.co.jp/entry141488.html",
+      "date": "2026-11-10",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【厚労省】CMC領域AIに説明責任‐高リスクは検証徹底促す",
+      "url": "https://www.yakuji.co.jp/entry141485.html",
       "date": "2026-11-10",
       "tag": "業界ニュース"
     },
@@ -39,18 +51,6 @@
     {
       "title": "【中医協総会】ケサンラ薬価引き下げへ‐ゼップバウンドは据置き",
       "url": "https://www.yakuji.co.jp/entry141486.html",
-      "date": "2026-11-09",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【大正製薬】「大正リビタ」に名称一本化‐健康対策・応援ブランド",
-      "url": "https://www.yakuji.co.jp/entry141391.html",
-      "date": "2026-11-09",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【日薬学術大会】服薬の「苦味」年代で違い‐中学生が初の研究発表",
-      "url": "https://www.yakuji.co.jp/entry141389.html",
       "date": "2026-11-09",
       "tag": "業界ニュース"
     }
