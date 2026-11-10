@@ -3680,6 +3680,12 @@ function detailPairs(d){
         const ia=DETAIL_ORDER.indexOf(a[0]), ib=DETAIL_ORDER.indexOf(b[0]);
         return (ia<0?999:ia)-(ib<0?999:ib);
       });
+    // 原表の規格単位と容器の充填量は同じとは限らない。
+    if(["酸素", "液体酸素", "窒素", "液体窒素", "二酸化炭素"].includes(String(d.g || "").trim())){
+      const specIndex = pairs.findIndex(([label])=>label === "規格");
+      pairs.splice(specIndex < 0 ? 0 : specIndex + 1, 0,
+        ["規格・容器について", "表示の規格は容器の容量や充填量を示すとは限りません。実際の容器・内容量は製造販売業者や納入先にご確認ください。"]);
+    }
   }else{
     pairs = [
       ["一般名", d.g],
