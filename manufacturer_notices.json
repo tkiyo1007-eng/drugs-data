@@ -2,6 +2,127 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "towa-epalrestat-discontinuation-20261029",
+      "maker": "東和薬品",
+      "title": "エパルレスタット錠50mg「トーワ」販売中止のお知らせ",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83751&t=4&f=20261029_%E3%82%A8%E3%83%91%E3%83%AB%E3%83%AC%E3%82%B9%E3%82%BF%E3%83%83%E3%83%88%E9%8C%A050mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-29",
+      "verified_at": "2026-11-11",
+      "sha256": "453ac2610105532df82d31a78a140efec2ee269cd4b160764e51e51da71e6ecc",
+      "event_type": "discontinued",
+      "reason": "需要状況と安定的な製剤供給を考慮し、在庫限りで販売中止と案内。",
+      "alternatives": [
+        {
+          "type": "メーカーが案内する同一成分の参考候補",
+          "products": [
+            {
+              "name": "キネダック錠５０ｍｇ",
+              "yj_code": "3999013F1231",
+              "scope": ""
+            },
+            {
+              "name": "エパルレスタット錠５０ｍｇ「ＮＩＧ」",
+              "yj_code": "3999013F1428",
+              "scope": ""
+            }
+          ],
+          "cautions": [
+            "処方の変更は医師・薬剤師に確認してください",
+            "参考候補の現在の納入可否・卸在庫は確認できていません"
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年10月のメーカー案内に基づく予定です。実際の在庫・納入状況はメーカーや卸に確認してください",
+        "経過措置期間満了時期は2028年3月末の予定と案内されています。確定した期限ではありません"
+      ],
+      "targets": [
+        {
+          "yj_code": "3999013F1339",
+          "product_name": "エパルレスタット錠５０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155733051",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年11月（予定）"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "towa-azulene-discontinuation-20261029",
+      "maker": "東和薬品",
+      "title": "アズレン含嗽用散0.4％「トーワ」販売中止のお知らせ",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83749&t=4&f=20261029_%E3%82%A2%E3%82%BA%E3%83%AC%E3%83%B3%E5%90%AB%E5%97%BD%E7%94%A8%E6%95%A30.4%25%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-29",
+      "verified_at": "2026-11-11",
+      "sha256": "c866b5bdd8281cf4181de967dfd12e66fdb84a593920f872902f684dc00f6af1",
+      "event_type": "discontinued",
+      "reason": "需要状況等により在庫限りで販売中止と案内。",
+      "alternatives": [
+        {
+          "type": "メーカーが案内する同一成分・剤形違いの参考候補",
+          "products": [
+            {
+              "name": "アズノールうがい液４％",
+              "yj_code": "2260700F1021",
+              "scope": ""
+            }
+          ],
+          "cautions": [
+            "剤形・濃度が異なります。変更の可否は医師・薬剤師に確認してください",
+            "参考候補の現在の納入可否・卸在庫は確認できていません"
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年10月のメーカー案内に基づく予定です。実際の在庫・納入状況はメーカーや卸に確認してください",
+        "経過措置期間満了時期は2028年3月末の予定と案内されています。確定した期限ではありません"
+      ],
+      "targets": [
+        {
+          "yj_code": "2260700B1119",
+          "product_name": "アズレン含嗽用散０．４％「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1.5g×800包",
+              "unified_product_code": "155020021",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年11月（予定）"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "towa-fluconazole-discontinuation-20261029",
       "maker": "東和薬品",
       "title": "フルコナゾール静注100mg/200mg「トーワ」販売中止のお知らせ",
