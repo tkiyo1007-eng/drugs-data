@@ -77,6 +77,29 @@ class ManufacturerTransfers(unittest.TestCase):
             # 同名品目をまとめた旧販売元リストは、対象品目に紐づく根拠がない。
             self.assert_field_if_present(rows, code, '販売メーカー', '')
 
+    def test_yj_specific_manufacturer_sources_20261110(self):
+        # PMDA品目別情報とサノフィの承継案内をYJコードごとに確認。
+        # https://www.pmda.go.jp/PmdaSearch/rdDetail/iyaku/6419400D1037_2?user=1
+        # https://pro.campus.sanofi/jp/products/benan
+        # https://www.pmda.go.jp/PmdaSearch/rdDetail/iyaku/2710806U1030_3?user=1
+        # https://www.pmda.go.jp/PmdaSearch/rdDetail/iyaku/7112004X1079_1?user=1
+        # https://www.pmda.go.jp/PmdaSearch/rdDetail/iyaku/7122702X1065_1?user=1
+        # https://www.pmda.go.jp/PmdaSearch/rdDetail/iyaku/7121706X1023_1?user=1
+        # https://www.pmda.go.jp/PmdaSearch/rdDetail/iyaku/7121704X1300_1?user=1
+        with (ROOT / 'drugs_app_ready.csv').open(encoding='utf-8-sig', newline='') as f:
+            rows = {row['YJコード']: row for row in csv.DictReader(f)}
+        expected = {
+            '6419400D1037': ('Medical Parkland', 'Medical Parkland'),
+            '2710806U1030': ('白水貿易', ''),
+            '7112004X1079': ('小堺製薬', ''),
+            '7122702X1065': ('小堺製薬', ''),
+            '7121706X1023': ('小堺製薬', ''),
+            '7121704X1300': ('丸石製薬', ''),
+        }
+        for code, (manufacturer, sales) in expected.items():
+            self.assert_field_if_present(rows, code, '製造メーカー', manufacturer)
+            self.assert_field_if_present(rows, code, '販売メーカー', sales)
+
     def test_nikp_transfer_keeps_old_and_new_yj_distinct(self):
         with (ROOT / 'drugs_app_ready.csv').open(encoding='utf-8-sig', newline='') as f:
             rows = {row['YJコード']: row for row in csv.DictReader(f)}
