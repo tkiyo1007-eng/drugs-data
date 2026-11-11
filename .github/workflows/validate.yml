@@ -42,6 +42,21 @@ jobs:
         run: python3 scripts/check_core_release.py --run-regressions
       - name: 現行供給CSV品質検査
         run: python3 scripts/validate_supply_data.py --csv drugs_app_ready.csv
+      - name: 規格比較と供給データの対応を検査
+        if: ${{ !inputs.core_release }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, 'scripts')
+          from source_specification import valid_comparison
+          doc = json.loads(Path('specification_differences.json').read_text(encoding='utf-8'))
+          meta = json.loads(Path('mhlw_source.json').read_text(encoding='utf-8'))
+          version = json.loads(Path('version.json').read_text(encoding='utf-8'))
+          if not valid_comparison(doc, meta, Path('drugs_app_ready.csv').read_bytes(), version):
+              raise SystemExit('規格比較とCSV・原表の対応を確認できません')
+          PY
       - name: 公開中のWebがCSVを読み込めるか検査
         run: python3 scripts/check_web_client_csv.py --html index.html --csv drugs_app_ready.csv
       - name: 変更履歴の型・日付・供給区分検査
