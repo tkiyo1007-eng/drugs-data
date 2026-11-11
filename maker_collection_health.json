@@ -18,7 +18,7 @@
   {
    "source": "parse_nichiiko_excel",
    "ok": true,
-   "count": 507,
+   "count": 508,
    "error": "",
    "last_success": "2026-11-11"
   },
@@ -79,7 +79,7 @@
    "last_success": "2026-11-11"
   }
  ],
- "total": 2480,
+ "total": 2481,
  "last_attempt": {
   "checked": "2026-11-11",
   "status": "success",
@@ -101,7 +101,7 @@
    {
     "source": "parse_nichiiko_excel",
     "ok": true,
-    "count": 507,
+    "count": 508,
     "error": "",
     "last_success": "2026-11-11"
    },
@@ -162,7 +162,7 @@
     "last_success": "2026-11-11"
    }
   ],
-  "total": 2480,
+  "total": 2481,
   "errors": []
  }
 }

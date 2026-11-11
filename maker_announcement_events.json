@@ -7905,6 +7905,15 @@
  "フロジン外用液５％": [
   {
    "maker": "ニプロ",
+   "title": "2026年11月11日 フロジン外用液5％_　限定出荷解除のご案内",
+   "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001V9g47IAB",
+   "event_type": "resumed",
+   "announced_at": "2026-11-11",
+   "first_seen": "2026-11-11",
+   "last_checked": "2026-11-11"
+  },
+  {
+   "maker": "ニプロ",
    "title": "2026年1月22日 フロジン外用液5%　他社品販売中止ならびに限定出荷に伴う新規ご注文辞退および限定出荷(出荷数割当運用)のお願い",
    "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uW0xVIAS",
    "event_type": "limited",
@@ -13716,6 +13725,14 @@
   }
  ],
  "ロスバスタチンＯＤ錠５ｍｇ「日医工」": [
+  {
+   "maker": "日医工",
+   "title": "ロスバスタチンOD錠5mg「日医工」 供給状況に関するお知らせ",
+   "url": "https://www.nichiiko.co.jp/medicine/file/11190/information/20261110cI1.pdf",
+   "event_type": "supply",
+   "first_seen": "2026-11-11",
+   "last_checked": "2026-11-11"
+  },
   {
    "maker": "日医工",
    "title": "ロスバスタチンOD錠5mg「日医工」 供給状況に関するお知らせ",
@@ -19961,6 +19978,16 @@
    "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001Uj4aLIAR",
    "event_type": "limited",
    "announced_at": "2026-11-10",
+   "first_seen": "2026-11-11",
+   "last_checked": "2026-11-11"
+  }
+ ],
+ "ロスバスタチンＯＤ錠２．５ｍｇ「日医工」": [
+  {
+   "maker": "日医工",
+   "title": "ロスバスタチンOD錠2.5mg「日医工」 供給状況に関するお知らせ",
+   "url": "https://www.nichiiko.co.jp/medicine/file/11180/information/20261110cI1.pdf",
+   "event_type": "supply",
    "first_seen": "2026-11-11",
    "last_checked": "2026-11-11"
   }

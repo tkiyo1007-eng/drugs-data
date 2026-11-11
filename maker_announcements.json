@@ -3858,14 +3858,6 @@
   "target_products_verified": true,
   "target_scope": "product"
  },
- "フロジン外用液５％": {
-  "maker": "ニプロ",
-  "title": "2026年1月22日 フロジン外用液5%　他社品販売中止ならびに限定出荷に伴う新規ご注文辞退および限定出荷(出荷数割当運用)のお願い",
-  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uW0xVIAS",
-  "event_type": "limited",
-  "announced_at": "2026-01-22",
-  "checked": "2026-08-19"
- },
  "セクタークリーム３％": {
   "maker": "久光製薬",
   "title": "2026.04.03 セクタークリーム3％、 セクターゲル3％、 ナボールパップ70㎎、 インサイドパップ70㎎、 ボレースプレー1％、 エクラー軟膏0.3％、 エクラークリーム0.3％、 エクラーローション0.3％、 ハイチオール散32％ 販売中止に関するご案内",
@@ -7048,6 +7040,50 @@
   "announced_at": "2026-11-06",
   "checked": "2026-11-11"
  },
+ "サルポグレラート塩酸塩錠５０ｍｇ「ケミファ」": {
+  "maker": "日本ケミファ",
+  "title": "2026年7月31日 サルポグレラート塩酸塩錠50mg/100mg「ケミファ」発売中止のご案内",
+  "url": "https://www.nc-medical.com/product_topics/p5ib910000001d8p-att/p5ib910000001d9d.pdf",
+  "event_type": "discontinued",
+  "announced_at": "2026-07-31",
+  "target_products_verified": true,
+  "target_scope": "product"
+ },
+ "サルポグレラート塩酸塩錠１００ｍｇ「ケミファ」": {
+  "maker": "日本ケミファ",
+  "title": "2026年7月31日 サルポグレラート塩酸塩錠50mg/100mg「ケミファ」発売中止のご案内",
+  "url": "https://www.nc-medical.com/product_topics/p5ib910000001d8p-att/p5ib910000001d9d.pdf",
+  "event_type": "discontinued",
+  "announced_at": "2026-07-31",
+  "target_products_verified": true,
+  "target_scope": "product"
+ },
+ "ピオグリタゾン錠１５ｍｇ「ケミファ」": {
+  "maker": "日本ケミファ",
+  "title": "2026年7月31日 ピオグリタゾン錠15mg/30mg「ケミファ」発売中止のご案内",
+  "url": "https://www.nc-medical.com/product_topics/p5ib910000001d9f-att/p5ib910000001da3.pdf",
+  "event_type": "discontinued",
+  "announced_at": "2026-07-31",
+  "target_products_verified": true,
+  "target_scope": "product"
+ },
+ "ピオグリタゾン錠３０ｍｇ「ケミファ」": {
+  "maker": "日本ケミファ",
+  "title": "2026年7月31日 ピオグリタゾン錠15mg/30mg「ケミファ」発売中止のご案内",
+  "url": "https://www.nc-medical.com/product_topics/p5ib910000001d9f-att/p5ib910000001da3.pdf",
+  "event_type": "discontinued",
+  "announced_at": "2026-07-31",
+  "target_products_verified": true,
+  "target_scope": "product"
+ },
+ "アスコルビン酸注１ｇ「ＮＰ」": {
+  "maker": "ニプロ",
+  "title": "2026年11月10日 アスコルビン酸注1g｢NP｣　新規ご注文辞退および限定出荷(出荷数割当運用)のお願い",
+  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001Uj4aLIAR",
+  "event_type": "limited",
+  "announced_at": "2026-11-10",
+  "checked": "2026-11-11"
+ },
  "ｄ－クロルフェニラミンマレイン酸塩錠２ｍｇ「ＮＩＧ」": {
   "maker": "日医工",
   "title": "d-クロルフェニラミンマレイン酸塩錠2mg「NIG」 供給状況に関するお知らせ",
@@ -8080,24 +8116,6 @@
   "event_type": "supply",
   "checked": "2026-11-11"
  },
- "サルポグレラート塩酸塩錠５０ｍｇ「ケミファ」": {
-  "maker": "日本ケミファ",
-  "title": "2026年7月31日 サルポグレラート塩酸塩錠50mg/100mg「ケミファ」発売中止のご案内",
-  "url": "https://www.nc-medical.com/product_topics/p5ib910000001d8p-att/p5ib910000001d9d.pdf",
-  "event_type": "discontinued",
-  "announced_at": "2026-07-31",
-  "target_products_verified": true,
-  "target_scope": "product"
- },
- "サルポグレラート塩酸塩錠１００ｍｇ「ケミファ」": {
-  "maker": "日本ケミファ",
-  "title": "2026年7月31日 サルポグレラート塩酸塩錠50mg/100mg「ケミファ」発売中止のご案内",
-  "url": "https://www.nc-medical.com/product_topics/p5ib910000001d8p-att/p5ib910000001d9d.pdf",
-  "event_type": "discontinued",
-  "announced_at": "2026-07-31",
-  "target_products_verified": true,
-  "target_scope": "product"
- },
  "シクロスポリンカプセル１０ｍｇ「日医工」": {
   "maker": "日医工",
   "title": "シクロスポリンカプセル10mg「日医工」 供給状況に関するお知らせ",
@@ -9005,24 +9023,6 @@
   "event_type": "resumed",
   "announced_at": "2024-04-11",
   "checked": "2026-11-11"
- },
- "ピオグリタゾン錠１５ｍｇ「ケミファ」": {
-  "maker": "日本ケミファ",
-  "title": "2026年7月31日 ピオグリタゾン錠15mg/30mg「ケミファ」発売中止のご案内",
-  "url": "https://www.nc-medical.com/product_topics/p5ib910000001d9f-att/p5ib910000001da3.pdf",
-  "event_type": "discontinued",
-  "announced_at": "2026-07-31",
-  "target_products_verified": true,
-  "target_scope": "product"
- },
- "ピオグリタゾン錠３０ｍｇ「ケミファ」": {
-  "maker": "日本ケミファ",
-  "title": "2026年7月31日 ピオグリタゾン錠15mg/30mg「ケミファ」発売中止のご案内",
-  "url": "https://www.nc-medical.com/product_topics/p5ib910000001d9f-att/p5ib910000001da3.pdf",
-  "event_type": "discontinued",
-  "announced_at": "2026-07-31",
-  "target_products_verified": true,
-  "target_scope": "product"
  },
  "ピコスルファートＮａ内用液０．７５％「ＮＩＧ」": {
   "maker": "日医工",
@@ -10003,10 +10003,17 @@
   "event_type": "supply",
   "checked": "2026-11-11"
  },
+ "ロスバスタチンＯＤ錠２．５ｍｇ「日医工」": {
+  "maker": "日医工",
+  "title": "ロスバスタチンOD錠2.5mg「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/11180/information/20261110cI1.pdf",
+  "event_type": "supply",
+  "checked": "2026-11-11"
+ },
  "ロスバスタチンＯＤ錠５ｍｇ「日医工」": {
   "maker": "日医工",
   "title": "ロスバスタチンOD錠5mg「日医工」 供給状況に関するお知らせ",
-  "url": "https://www.nichiiko.co.jp/medicine/file/11190/information/20230425cI6.pdf",
+  "url": "https://www.nichiiko.co.jp/medicine/file/11190/information/20261110cI1.pdf",
   "event_type": "supply",
   "checked": "2026-11-11"
  },
@@ -10130,6 +10137,14 @@
   "title": "アセトアミノフェン坐剤小児用200mg「NIG」 供給状況に関するお知らせ",
   "url": "https://www.nichiiko.co.jp/medicine/file/71430/information/20241106cG1.pdf",
   "event_type": "supply",
+  "checked": "2026-11-11"
+ },
+ "フロジン外用液５％": {
+  "maker": "ニプロ",
+  "title": "2026年11月11日 フロジン外用液5％_　限定出荷解除のご案内",
+  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001V9g47IAB",
+  "event_type": "resumed",
+  "announced_at": "2026-11-11",
   "checked": "2026-11-11"
  },
  "ケトプロフェンパップ３０ｍｇ「日医工」": {
@@ -10263,14 +10278,6 @@
   "event_type": "supply",
   "checked": "2026-11-11"
  },
- "ブデホル吸入粉末剤３０吸入「ニプロ」": {
-  "maker": "ニプロ",
-  "title": "2026年3月3日 ブデホル吸入粉末剤30吸入｢ニプロ｣ 限定出荷解除のご案内",
-  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q8000012YhLpIAK",
-  "event_type": "resumed",
-  "announced_at": "2026-03-03",
-  "checked": "2026-11-11"
- },
  "ブデホル吸入粉末剤６０吸入「ニプロ」": {
   "maker": "ニプロ",
   "title": "2026年6月2日 ブデホル吸入粉末剤60吸入｢ニプロ｣ 限定出荷解除のご案内",
@@ -10388,14 +10395,6 @@
   "title": "アシクロビル点滴静注用250mg「NIG」 供給状況に関するお知らせ",
   "url": "https://www.nichiiko.co.jp/medicine/file/71340/information/20260325cI1.pdf",
   "event_type": "supply",
-  "checked": "2026-11-11"
- },
- "アスコルビン酸注１ｇ「ＮＰ」": {
-  "maker": "ニプロ",
-  "title": "2026年11月10日 アスコルビン酸注1g｢NP｣　新規ご注文辞退および限定出荷(出荷数割当運用)のお願い",
-  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001Uj4aLIAR",
-  "event_type": "limited",
-  "announced_at": "2026-11-10",
   "checked": "2026-11-11"
  },
  "アルプロスタジル注５μｇ「ＮＩＧ」": {
