@@ -3,55 +3,31 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-11-11T05:47:27+09:00",
-  "last_success_at": "2026-11-11T05:47:27+09:00",
+  "checked_at": "2026-11-11T23:49:20+09:00",
+  "last_success_at": "2026-11-11T23:49:20+09:00",
   "items": [
     {
-      "title": "【東京都／都病薬】病院薬剤師の魅力を発信‐前倒しで就職相談セミナー",
-      "url": "https://www.yakuji.co.jp/entry141493.html",
-      "date": "2026-11-10",
+      "title": "【薬局方委員会】局方で新規区分設定せず‐ミニタブレット既存剤形",
+      "url": "https://www.yakuji.co.jp/entry141562.html",
+      "date": "2026-11-11",
       "tag": "業界ニュース"
     },
     {
-      "title": "【日本ケミファ】後発品自社開発品増へ‐数年かけて体制強化",
-      "url": "https://www.yakuji.co.jp/entry141490.html",
-      "date": "2026-11-10",
+      "title": "【都薬 髙橋会長】夜間・休日調剤は約74％‐追加解析で薬局の評価に",
+      "url": "https://www.yakuji.co.jp/entry141559.html",
+      "date": "2026-11-11",
       "tag": "業界ニュース"
     },
     {
-      "title": "【カケハシ薬局活用調査】処方薬の服用中断4割経験‐残薬で処方量調整は2割",
-      "url": "https://www.yakuji.co.jp/entry141488.html",
-      "date": "2026-11-10",
+      "title": "【成長戦略会議】創薬シーズの実用化支援‐40年に官民投資約23兆円",
+      "url": "https://www.yakuji.co.jp/entry141558.html",
+      "date": "2026-11-11",
       "tag": "業界ニュース"
     },
     {
-      "title": "【厚労省】CMC領域AIに説明責任‐高リスクは検証徹底促す",
-      "url": "https://www.yakuji.co.jp/entry141485.html",
-      "date": "2026-11-10",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【米中間選挙結果で】米薬価引き下げ策継続か‐原燃料価格動向は不透明",
-      "url": "https://www.yakuji.co.jp/entry141491.html",
-      "date": "2026-11-09",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【医療保険部会】バイオ後続品選定療養化を‐26年度改定の効果検証",
-      "url": "https://www.yakuji.co.jp/entry141489.html",
-      "date": "2026-11-09",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【財務省】27年度改定は完全実施を‐革新的新薬除く全品目で",
-      "url": "https://www.yakuji.co.jp/entry141487.html",
-      "date": "2026-11-09",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【中医協総会】ケサンラ薬価引き下げへ‐ゼップバウンドは据置き",
-      "url": "https://www.yakuji.co.jp/entry141486.html",
-      "date": "2026-11-09",
+      "title": "【薬学教育協議会】薬学生9割超が成長実感‐実務実習で初の全国調査",
+      "url": "https://www.yakuji.co.jp/entry141557.html",
+      "date": "2026-11-11",
       "tag": "業界ニュース"
     }
   ]
