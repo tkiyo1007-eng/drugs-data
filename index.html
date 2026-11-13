@@ -1002,6 +1002,16 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 .news-more:hover{background:rgba(79,128,244,.18);transform:translateY(-1px)}
 
+.price-list-link{display:flex;align-items:center;gap:6px 12px;flex-wrap:wrap;min-height:44px;
+  margin:12px 0;padding:10px 14px;border:1px solid var(--stroke);border-radius:14px;
+  background:rgba(79,128,244,.08);color:var(--blue-deep);font-size:14px;font-weight:800;
+  overflow-wrap:anywhere;text-decoration:none}
+.price-list-link[hidden],.search-active .price-list-link{display:none}
+.price-list-link:hover .price-list-title{text-decoration:underline}
+.price-list-link:focus-visible{outline:2px solid var(--blue-deep);outline-offset:2px}
+.price-list-title{flex:1 1 220px;min-width:0}
+.price-list-arrow{margin-left:auto}
+
 /* ===== 注目の供給情報（industry_topics.json の pinned_until 付き記事） ===== */
 .pinned-alerts{margin:14px 0 4px;padding:12px 18px;border-radius:14px;
   background:rgba(225,77,77,.05);border:1px solid rgba(225,77,77,.22);border-left:4px solid var(--stopped)}
@@ -1718,6 +1728,11 @@ html.season-autumn .autumn-sky{display:none}
       <span>公開データに変更が見つかりました。</span>
       <button type="button" id="dataUpdateReload">検索条件を保って再読み込み</button>
     </div>
+    <a class="price-list-link" id="topPriceListLink" hidden>
+      <span class="topic-tag">薬価収載</span>
+      <span class="price-list-title"></span>
+      <span class="price-list-arrow" aria-hidden="true">→</span>
+    </a>
     <button type="button" id="trendingSearchToggle" class="trending-toggle" aria-expanded="false" aria-controls="trending" hidden>問い合わせの多い製品を開く</button>
     <section id="trending" aria-labelledby="trendingHeading">
   <h3 id="trendingHeading">問い合わせが多い品目</h3>
@@ -2127,7 +2142,7 @@ html.season-autumn .autumn-sky{display:none}
           <p><strong>厚労省原表の錠剤区分：</strong>2026年10月16日現在の原表では3規格とも「限定出荷（その他）」、理由は「その他の理由」、出荷量は「Aプラス．出荷量増加」、解除・解消見込みは「未定」です。品目行更新日は2026年8月5日です。上記のメーカー包装別予定でこの区分を書き換えていません。</p>
           <p><strong>細粒10%：</strong>厚労省原表では「限定出荷（その他）」、理由は「需要増」、出荷量は「Aプラス．出荷量増加」です。解除・解消見込みには<strong>「2027年3月頃」</strong>と記載されています。これは2026年10月16日公表表にある見込みで、通常出荷の再開を保証する日付ではありません。品目行更新日は2026年10月2日です。錠剤の工場停止・包装別予定を細粒の説明へ流用していません。</p>
           <p><strong>散50%：</strong>厚労省原表の出荷対応は「限定出荷（他社品の影響）」、理由は「需要増」、出荷量は「A．出荷量通常」、解除・解消見込みは「未定」です。公表行更新日は2024年2月7日で、資料全体の基準日とは異なります。錠剤の工場停止を散の原因とは断定できません。</p>
-          <p>出荷量が増加・通常でも、すべての受注に対応できるとは限りません。<a href="https://www.mhlw.go.jp/content/10800000/261016iyakuhinkyoukyu.xlsx" target="_blank" rel="noopener">厚労省：2026年10月16日現在の原Excel</a></p>
+          <p>出荷量が増加・通常でも、すべての受注に対応できるとは限りません。2026年10月16日版の原Excelは、現在厚労省の元のURLから開けません。<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html" target="_blank" rel="noopener">厚労省：最新の供給状況一覧</a>もご確認ください。</p>
           <details class="zictor-reference-options">
             <summary>代替案の参考情報（メーカーが示す製剤と注意点）</summary>
             <p>以下は共和薬品の2026年9月通知に記載された錠剤向けの参考製剤です。同じ成分・規格に限らないため、当サイト独自の切替推奨や用量換算は行っていません。</p>
@@ -2139,7 +2154,7 @@ html.season-autumn .autumn-sky{display:none}
           </details>
           <p><strong>メーカー原文の確認状態：</strong>錠剤の2026年9月第二報PDFは確認済みです。10月8日更新と表示されたメーカー供給一覧の本文、および細粒・散それぞれの個別通知は今回確認できていません。9月通知が最新の包装状況を示すとは限らないため、続報・在庫・受注可否はメーカー・卸へ確認してください。</p>
         </div>
-        <p class="topic-src featured-research-sources">出典・参考資料：<a href="https://www.amel-di.com/medical/di/download/news?nid=69975" target="_blank" rel="noopener">共和薬品：錠剤の第二報（2026年9月）</a> ／ <a href="https://www.mhlw.go.jp/content/10800000/261016iyakuhinkyoukyu.xlsx" target="_blank" rel="noopener">厚労省：2026年10月16日原Excel</a> ／ <a href="https://www.pmda.go.jp/PmdaSearch/rdDetail/iyaku/1172014B2056_3" target="_blank" rel="noopener">PMDA：ヒルナミン</a> ／ <a href="https://www.pmda.go.jp/PmdaSearch/iyakuDetail/460028_1172014F2163_1_07" target="_blank" rel="noopener">PMDA：ツルハラ25mg</a> ／ <a href="https://medical.tanabe-pharma.com/di/file/info/ifn_5698_P20597.pdf" target="_blank" rel="noopener">田辺ファーマ：中止予定案内</a></p>
+        <p class="topic-src featured-research-sources">出典・参考資料：<a href="https://www.amel-di.com/medical/di/download/news?nid=69975" target="_blank" rel="noopener">共和薬品：錠剤の第二報（2026年9月）</a> ／ 厚労省：2026年10月16日原Excel（元URLは現在閲覧不可）・<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html" target="_blank" rel="noopener">最新の供給状況一覧</a> ／ <a href="https://www.pmda.go.jp/PmdaSearch/rdDetail/iyaku/1172014B2056_3" target="_blank" rel="noopener">PMDA：ヒルナミン</a> ／ <a href="https://www.pmda.go.jp/PmdaSearch/iyakuDetail/460028_1172014F2163_1_07" target="_blank" rel="noopener">PMDA：ツルハラ25mg</a> ／ <a href="https://medical.tanabe-pharma.com/di/file/info/ifn_5698_P20597.pdf" target="_blank" rel="noopener">田辺ファーマ：中止予定案内</a></p>
       </article>
       <article id="lisproResearchReference" hidden data-reference-title="インスリン リスプロBS注ソロスター：供給の理由と参考候補">
         <div class="supply-reference-copy featured-research-copy">
@@ -6920,6 +6935,28 @@ function renderPinnedAlerts(box, items){
   box.hidden = false;
 }
 /* ===== ニュース表示の取得状態・日付判定ここまで ===== */
+const $topPriceListLink = document.getElementById("topPriceListLink");
+function renderTopPriceList(){
+  if(document.activeElement === $topPriceListLink) return;
+  const {source, snapshot} = NEWS_STATE.topics;
+  const today = jstDayNumber(Date.now());
+  let latest = null, latestDate = "";
+  if(source === "network"){
+    for(const topic of snapshot?.items || []){
+      if(topic.tag !== "薬価収載" || !topic.slug) continue;
+      const date = newsDateKey(topic.date);
+      if(date > latestDate && Date.parse(date)/86400000 <= today){
+        latest = topic;
+        latestDate = date;
+      }
+    }
+  }
+  $topPriceListLink.hidden = !latest;
+  if(!latest) return;
+  $topPriceListLink.href = `topics/${encodeURIComponent(latest.slug)}.html`;
+  $topPriceListLink.querySelector(".price-list-title").textContent = latest.title;
+}
+$topPriceListLink.addEventListener("blur", renderTopPriceList);
 function renderTopics(list){
   $topicList.innerHTML = list.slice(0, 4).map(t=>`
     <article class="topic-card glass">
@@ -6955,6 +6992,7 @@ function refreshNewsViews(kind){
   const state = NEWS_STATE[kind];
   // 検証済みの編集記事から、検索欄の上の「注目の供給情報」を作る（ニュース欄の操作中でも更新してよい）
   if(kind === "topics") renderPinnedAlerts(document.getElementById("pinnedAlerts"), state.snapshot?.items || []);
+  if(kind === "topics") renderTopPriceList();
   const status = document.getElementById(kind === "topics" ? "topicStatus" : "medNewsStatus");
   const retry = document.getElementById(kind === "topics" ? "topicRetry" : "medNewsRetry");
   const list = document.getElementById(kind === "topics" ? "topicList" : "medNewsList");
