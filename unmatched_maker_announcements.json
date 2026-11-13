@@ -2,7 +2,7 @@
  {
   "maker": "沢井製薬",
   "title": "2026/11/09 供給関連 PDF NEW 一部製品 限定出荷解除のお知らせ PDF NEW",
-  "url": "https://med.sawai.co.jp/file/pr27_243_1.pdf",
+  "url": "https://med.sawai.co.jp/file/pr27_212_1.pdf",
   "event_type": "resumed",
   "announced_at": "2026-11-09"
  },
@@ -872,6 +872,13 @@
   "url": "https://www.nc-medical.com/product_topics/f4bj0h0000004yu5-att/f4bj0h0000004yut.pdf",
   "event_type": "resumed",
   "announced_at": "2026-01-27"
+ },
+ {
+  "maker": "東和薬品",
+  "title": "製造販売中止に伴う経過措置移行のお知らせ NEW",
+  "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83813&t=4&f=20261113-%E7%B5%8C%E9%81%8E%E6%8E%AA%E7%BD%AE%E7%A7%BB%E8%A1%8C%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+  "event_type": "discontinued",
+  "announced_at": "2026-11-13"
  },
  {
   "maker": "高田製薬",
