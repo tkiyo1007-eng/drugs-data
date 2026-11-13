@@ -14,6 +14,17 @@ class DeployWorkflowContractTests(unittest.TestCase):
         cls.deploy = (root / "deploy_pages.yml").read_text(encoding="utf-8")
         cls.validate = (root / "validate.yml").read_text(encoding="utf-8")
 
+    def test_upload_and_deploy_use_same_attempt_specific_artifact(self):
+        upload = self.deploy.split('uses: actions/upload-pages-artifact@v5', 1)[1].split('\n      - ', 1)[0]
+        deploy = self.deploy.split('uses: actions/deploy-pages@v5', 1)[1].split('\n      - ', 1)[0]
+        upload_name = re.search(r'^\s+name: (.+)$', upload, re.MULTILINE)
+        deploy_name = re.search(r'^\s+artifact_name: (.+)$', deploy, re.MULTILINE)
+        self.assertIsNotNone(upload_name)
+        self.assertIsNotNone(deploy_name)
+        self.assertEqual(upload_name.group(1), deploy_name.group(1))
+        self.assertIn('${{ github.run_id }}', upload_name.group(1))
+        self.assertIn('${{ github.run_attempt }}', upload_name.group(1))
+
     def test_push_publication_requires_successful_main_validation_not_pr_or_fork(self):
         self.assertNotIn("\n  push:\n", self.deploy)
         for condition in ("workflows: ['Validate data pipeline', '毎日データ更新']",
