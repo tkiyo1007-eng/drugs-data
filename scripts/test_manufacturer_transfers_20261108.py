@@ -41,6 +41,14 @@ class ManufacturerTransfers(unittest.TestCase):
             self.assert_field_if_present(rows, code, '製造メーカー', '大原薬品工業')
             self.assert_field_if_present(rows, code, '販売メーカー', '大原薬品工業')
 
+    def test_cefmetazole_nichiiko_manufacturer(self):
+        # PMDA電子添文と厚労省原表で4規格の製造販売元を確認。
+        # https://www.pmda.go.jp/PmdaSearch/rdDetail/iyaku/6132408F1056_4?user=1
+        with (ROOT / 'drugs_app_ready.csv').open(encoding='utf-8-sig', newline='') as f:
+            rows = {row['YJコード']: row for row in csv.DictReader(f)}
+        for code in ('6132408F1056', '6132408F2052', '6132408F3172', '6132408F4152'):
+            self.assert_field_if_present(rows, code, '製造メーカー', '日医工')
+
     def test_verified_manufacturer_renames_and_transfers(self):
         with (ROOT / 'drugs_app_ready.csv').open(encoding='utf-8-sig', newline='') as f:
             rows = {row['YJコード']: row for row in csv.DictReader(f)}

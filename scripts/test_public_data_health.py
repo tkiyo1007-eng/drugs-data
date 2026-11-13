@@ -383,6 +383,16 @@ class PagesDataHealthTests(unittest.TestCase):
         for name in PUBLIC_FILES:
             self.assertEqual(self.calls.count(name), 1)
 
+    def test_manifest_matched_but_stale_specification_is_not_healthy(self):
+        original = json.loads(self.bodies['specification_differences.json'])
+        for field, replacement in (('csv_sha256', 'a' * 64), ('source_sha256', 'b' * 64),
+                                   ('source_date', '2026-01-01')):
+            with self.subTest(field=field):
+                self.bodies['specification_differences.json'] = json.dumps({**original, field: replacement}).encode()
+                self.manifest['files']['specification_differences.json'] = fingerprint(self.bodies['specification_differences.json'])
+                errors, _ = self.check()
+                self.assertTrue(any('規格比較データ' in error for error in errors), errors)
+
     def test_temporary_content_mismatch_retries_only_changed_file(self):
         original = self.fetch
         def transient(url, limit):
