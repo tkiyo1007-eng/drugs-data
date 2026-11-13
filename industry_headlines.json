@@ -3,9 +3,45 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-11-13T06:27:23+09:00",
-  "last_success_at": "2026-11-13T06:27:23+09:00",
+  "checked_at": "2026-11-14T05:53:25+09:00",
+  "last_success_at": "2026-11-14T05:53:25+09:00",
   "items": [
+    {
+      "title": "【エーザイ】「レケンビ」皮下注が発売‐在宅自己注射が可能に",
+      "url": "https://www.yakuji.co.jp/entry141688.html",
+      "date": "2026-11-13",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【厚労省】報告品目13品目を薬価収載‐「アイリーア」BSなど",
+      "url": "https://www.yakuji.co.jp/entry141686.html",
+      "date": "2026-11-13",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【生物由来技術部会】「リブメルディ」承認了承‐海外データで通常承認",
+      "url": "https://www.yakuji.co.jp/entry141685.html",
+      "date": "2026-11-13",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【費用対評価部会】1日薬価比率で引き下げ‐「費用増加」品目の価格調整",
+      "url": "https://www.yakuji.co.jp/entry141684.html",
+      "date": "2026-11-13",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【薬価部会】外国価格調整に慎重意見‐MFN対応めぐり議論",
+      "url": "https://www.yakuji.co.jp/entry141682.html",
+      "date": "2026-11-13",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【日女薬】「プレコン」を薬剤師も推進‐サポーター1万人養成へ",
+      "url": "https://www.yakuji.co.jp/entry141680.html",
+      "date": "2026-11-13",
+      "tag": "業界ニュース"
+    },
     {
       "title": "【中外製薬】自動注射製剤を国内申請‐血友病A薬「ヘムライブラ」",
       "url": "https://www.yakuji.co.jp/entry141569.html",
@@ -16,30 +52,6 @@
       "title": "【サノフィ】ボタン一つで大容量投与‐「サークリサ」投与デバイス承認",
       "url": "https://www.yakuji.co.jp/entry141567.html",
       "date": "2026-11-12",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【日病薬中四国ブロック会議】積極的な地域連携が有効‐病棟加算1の算定拡大へ",
-      "url": "https://www.yakuji.co.jp/entry141565.html",
-      "date": "2026-11-12",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "逆ざや仕切価率上昇懸念‐厚労省 安中産振課長「下げる手立てなくなっている」",
-      "url": "https://www.yakuji.co.jp/entry141563.html",
-      "date": "2026-11-12",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【薬局方委員会】局方で新規区分設定せず‐ミニタブレット既存剤形",
-      "url": "https://www.yakuji.co.jp/entry141562.html",
-      "date": "2026-11-11",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【薬学教育協議会】薬学生9割超が成長実感‐実務実習で初の全国調査",
-      "url": "https://www.yakuji.co.jp/entry141557.html",
-      "date": "2026-11-11",
       "tag": "業界ニュース"
     }
   ]
