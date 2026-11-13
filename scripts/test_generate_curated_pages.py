@@ -544,7 +544,13 @@ class CuratedPageGenerationTests(unittest.TestCase):
         product_files = {path.stem for path in (ROOT / "products").glob("*.html") if path.name != "index.html"}
 
         # Preserve the old article URL while removing it from current news listings.
-        archived_topics = {"luliconazole-iwaki-normal-shipment-plan-20261020"}
+        archived_topics = {
+            "luliconazole-iwaki-normal-shipment-plan-20261020",
+            "chuikyo-drug-price-hearing-20260826",
+            "astra-zeneca-bms-merger-report-20260803",
+            "locoid-transfer-20260723",
+            "efluelda-launch-delay-20260721",
+        }
         self.assertEqual(topic_slugs | archived_topics, topic_files)
         self.assertTrue(archived_topics.isdisjoint(topic_slugs))
         index = (ROOT / "topics" / "index.html").read_text(encoding="utf-8")

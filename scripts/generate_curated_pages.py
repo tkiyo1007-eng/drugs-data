@@ -609,6 +609,33 @@ def watch_guide_page() -> str:
 {analytics_footer()}</body></html>'''
 
 
+PRICE_LIST_STYLE = """
+.price-list .intent{margin-top:14px;padding:16px}.price-list h3{margin:0 0 4px}
+.price-list p{margin:4px 0 10px;overflow-wrap:anywhere}
+.price-list .cat-table{table-layout:fixed}.price-list .cat-table th,.price-list .cat-table td{padding:7px 6px;overflow-wrap:anywhere}
+.price-list .cat-table th:nth-child(2){width:25%}.price-list .cat-table th:last-child{width:27%}
+.price-list .cat-table .num{white-space:normal;font-variant-numeric:tabular-nums}
+"""
+
+
+def topic_price_list_html(products: list[dict]) -> str:
+    cards = []
+    for product in products:
+        rows = "".join(
+            f'<tr><th scope="row">{esc(row["name"])}</th><td>{esc(row["unit"])}</td>'
+            f'<td class="num">{esc(row["price"])}円</td></tr>'
+            for row in product["items"]
+        )
+        cards.append(f'<section class="intent"><h3>{esc(product["label"])}</h3>'
+                     f'<p class="meta">成分名　{esc(product["ingredient"])}</p>'
+                     f'<p>効能・効果の概要　{esc(product["indication"])}</p>'
+                     f'<table class="cat-table" aria-label="{esc(product["label"])}の収載薬価">'
+                     '<thead><tr><th scope="col">販売名</th><th scope="col">規格単位</th>'
+                     '<th scope="col" class="num">薬価</th></tr></thead>'
+                     f'<tbody>{rows}</tbody></table></section>')
+    return '<section class="price-list"><h2>製品別の規格・薬価</h2>' + "".join(cards) + '</section>'
+
+
 def topic_page(topic: dict, related: list[dict[str, str]], generated_keys: set[str],
                lifecycle: dict[str, dict], updated_at: str,
                targets: list[dict[str, str]] | None = None,
@@ -637,7 +664,11 @@ def topic_page(topic: dict, related: list[dict[str, str]], generated_keys: set[s
     )
     source_details = (f'<details><summary>出典を確認</summary>{extra_sources}</details>'
                       if extra_sources else "")
-    supplement = (f'<section class="intent"><h2>変更前の確認事項</h2>'
+    price_list = topic.get("price_list")
+    price_style = CATEGORY_STYLE + PRICE_LIST_STYLE if price_list else ""
+    prices_html = "\n" + topic_price_list_html(price_list) if price_list else ""
+    notes_heading = "保険適用と効能・効果の確認" if price_list else "変更前の確認事項"
+    supplement = (f'<section class="intent"><h2>{notes_heading}</h2>'
                   f'{notes}{source_details}</section>') if notes or extra_sources else ""
     related_html = ""
     # 記事の対象品目（例: 供給制限を受けた製品）と、代替候補などの関連品目を分けて示す。
@@ -661,13 +692,13 @@ def topic_page(topic: dict, related: list[dict[str, str]], generated_keys: set[s
                          f'<p class="note">{note}</p>'
                          f'<div class="products">{product_rows_html(related, generated_keys, lifecycle)}</div>')
     return f"""<!DOCTYPE html><html lang="ja"><head>
-{common_head(title, description, canonical, 'article', [article, breadcrumb])}<style>{STYLE}</style></head><body>
+{common_head(title, description, canonical, 'article', [article, breadcrumb])}<style>{STYLE}{price_style}</style></head><body>
 <div class="wrap"><header class="site"><a href="../">💊 医薬品供給ナビ</a></header>
 <nav class="crumb"><a href="../">トップ</a> › <a href="index.html">話題のニュース</a> › {esc(topic['tag'])}</nav><main>
 <article class="hero"><p class="eyebrow">{esc(topic['tag'])}｜{esc(topic['date'])}</p><h1>{esc(topic['title'])}</h1>
 <p class="lede">{esc(topic['lede'])}</p>{f'<ul class="points">{points}</ul>' if points else ''}
 <p class="source">出典：<a href="{esc(source['url'])}" target="_blank" rel="noopener" data-dsn-event="official-source-open">{esc(source['name'])}</a></p>
-{share_control("この記事を共有")}</article>
+{share_control("この記事を共有")}</article>{prices_html}
 {supplement}
 {related_html}
 <div class="cta"><strong>最新の供給状況を検索</strong><p>医薬品名・メーカー名・YJコードから、厚生労働省公表データを確認できます。</p><a href="../" data-dsn-event="topic-to-search">Web版で検索する</a></div>
