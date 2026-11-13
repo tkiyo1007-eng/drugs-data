@@ -128,9 +128,16 @@ class SitemapIntegrityTests(unittest.TestCase):
                 for directory in ("topics", "products", "guides", "ingredients", "categories", "reports")
             )),
         }
-        # An archived article remains reachable by its old URL but is not promoted.
-        expected_by_sitemap["sitemap-curated.xml"].discard(
-            ROOT / "topics" / "luliconazole-iwaki-normal-shipment-plan-20261020.html"
+        # Archived articles remain reachable at their old URLs.
+        expected_by_sitemap["sitemap-curated.xml"].difference_update(
+            ROOT / "topics" / filename
+            for filename in (
+                "luliconazole-iwaki-normal-shipment-plan-20261020.html",
+                "chuikyo-drug-price-hearing-20260826.html",
+                "astra-zeneca-bms-merger-report-20260803.html",
+                "locoid-transfer-20260723.html",
+                "efluelda-launch-delay-20260721.html",
+            )
         )
         for sitemap_name, expected_paths in expected_by_sitemap.items():
             listed_paths = {

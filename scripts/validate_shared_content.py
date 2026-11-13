@@ -45,6 +45,31 @@ def valid_slug(value: object) -> bool:
     return bool(SLUG_RE.fullmatch(slug)) and slug not in RESERVED_SLUGS
 
 
+def valid_topic_price_list(products: object) -> bool:
+    def has_text(record: object, *fields: str) -> bool:
+        return isinstance(record, dict) and all(
+            isinstance(record.get(field), str) and record[field].strip() for field in fields
+        )
+
+    if not isinstance(products, list) or not products:
+        return False
+    names = set()
+    for product in products:
+        if not has_text(product, "label", "ingredient", "indication"):
+            return False
+        rows = product.get("items")
+        if not isinstance(rows, list) or not rows:
+            return False
+        for row in rows:
+            if not has_text(row, "name", "unit", "price"):
+                return False
+            if (not re.fullmatch(r"(?:[1-9]\d{0,2}(?:,\d{3})*|0)(?:\.\d{2})?", row["price"])
+                    or row["price"] in {"0", "0.00"} or row["name"] in names):
+                return False
+            names.add(row["name"])
+    return True
+
+
 def validate(base: Path) -> list[str]:
     errors: list[str] = []
     with (base / "drugs_app_ready.csv").open(encoding="utf-8-sig", newline="") as handle:
@@ -157,6 +182,8 @@ def validate(base: Path) -> list[str]:
                     errors.append(f"{prefix}.source.name: 必須です")
                 elif not valid_https(source.get("url")):
                     errors.append(f"{prefix}.source.url: HTTPS URLを指定してください")
+                if "price_list" in item and not valid_topic_price_list(item["price_list"]):
+                    errors.append(f"{prefix}.price_list: 製品・規格単位・薬価の一覧が不正です")
                 notes = item.get("notes", [])
                 if not isinstance(notes, list) or any(not isinstance(note, str) or not note.strip() for note in notes):
                     errors.append(f"{prefix}.notes: 空でない文字列の配列にしてください")
