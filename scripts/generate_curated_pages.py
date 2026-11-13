@@ -823,6 +823,22 @@ def ingredient_page(group: dict, generated_keys: set[str], lifecycle: dict[str, 
     title = f"{name}の供給状況・出荷調整｜医薬品供給ナビ"
     description = (f"一般名「{name}」{brand_text}の医療用医薬品{len(rows)}品目について、厚生労働省公表データの現在の供給区分を一覧にしました。"
                    f"限定出荷{counts['limited']}品目・供給停止{counts['stopped']}品目。規格・メーカー・更新日も確認できます。")
+    shortcuts = ""
+    if name == "ラクツロース":
+        by_key = {item_key(row): row for row in rows}
+        products = [by_key[key] for key in ("3999001Q2058", "3999001Q6029") if key in by_key]
+        if products:
+            product_names = [unicodedata.normalize("NFKC", row["商品名"]) for row in products]
+            brand_text = f"（{'、'.join(product_names)}など）"
+            description = (f"{'、'.join(product_names)}など、ラクツロース{len(rows)}品目の出荷調整・供給状況。"
+                           f"厚労省公表の限定出荷は{counts['limited']}品目、供給停止は{counts['stopped']}品目。"
+                           "製品ごとの規格・公表理由やメーカー案内を確認できます。")
+            links = "／".join(
+                f'<a href="{row_link(row, generated_keys)}" data-dsn-event="related-item-open">{esc(label)}</a>'
+                for row, label in zip(products, product_names)
+            )
+            shortcuts = f"<p>公表理由・メーカー案内へ：{links}</p>"
+            lastmod = max(lastmod, "2026-11-13")
     summary = "".join(f'<span class="chip" style="color:{STATUS[key][1]};background:{STATUS[key][2]}">{STATUS[key][0]} {count}</span>'
                       for key, count in counts.items() if count)
     item_list = {"@type": "ItemList", "name": f"{name}の品目", "numberOfItems": len(rows),
@@ -850,7 +866,7 @@ def ingredient_page(group: dict, generated_keys: set[str], lifecycle: dict[str, 
 <section class="hero"><p class="eyebrow">成分（一般名）</p><h1>{esc(name)}の供給状況</h1>
 <p class="lede">一般名「{esc(name)}」{esc(brand_text)}の{len(rows)}品目について、厚生労働省公表データの現在の供給区分を一覧にしています。限定出荷・供給停止の品目を先に、公表されている品目行の更新日が新しい順に並べています。</p>
 {dataset_dates_html(dataset_date, version_metadata)}
-<div class="summary">{summary}</div>
+<div class="summary">{summary}</div>{shortcuts}
 <p class="safety">同じ成分でも、規格・剤形・適応・用法用量は品目ごとに異なります。この一覧は代替薬の推薦ではなく、実在庫や入手可否も示しません。切り替えは電子添文を確認のうえ、医師・薬剤師が判断してください。</p>
 {share_control("この成分の供給状況を共有")}</section>
 <h2>限定出荷・供給停止の品目（{len(restricted)}品目）</h2>

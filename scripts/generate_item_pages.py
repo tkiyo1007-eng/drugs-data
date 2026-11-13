@@ -31,7 +31,7 @@ import sys
 import unicodedata
 from datetime import date, datetime, timezone, timedelta
 from pathlib import Path
-from urllib.parse import quote
+from urllib.parse import quote, urlsplit
 
 from source_specification import load_comparison
 
@@ -50,6 +50,10 @@ FILTERABLE_HUB_SLUGS = frozenset({"limited", "stopped", "supplemental"})
 DISCONTINUATION_GUIDE = "../guides/how-to-check-discontinuation-and-delisting.html"
 SUPPLEMENTAL_TEMPLATE_LASTMOD = "2026-10-11"
 MANUFACTURER_NOTICE_TEMPLATE_LASTMOD = "2026-10-14"
+PACKAGE_LANDING_UPDATED_AT = "2026-11-13"
+PACKAGE_LANDING_KEYS = frozenset({
+    "1139003C1044", "1139003C2040", "2325401A1020", "2325401A2027", "2649805M1026",
+})
 # drugs-data の generate_curated_pages.py（CATEGORY_MIN_ROWS）と同じ基準。
 # 分類ページが生成される分類だけにリンクし、404を出さない。
 CATEGORY_MIN_ROWS = 3
@@ -903,6 +907,12 @@ def manufacturer_notices_html(row: dict, notices=(), warning="", catalog_yj_code
         cautions = "".join(f'<li>{esc(value)}</li>' for value in notice.get("cautions", []))
         if cautions:
             parts.append(f'<ul>{cautions}</ul>')
+        if notice.get("collection_mode") == "manual" and notice.get("source_index_url"):
+            index_url = urlsplit(notice["source_index_url"])
+            if (index_url.scheme == "https" and index_url.hostname == urlsplit(notice["url"]).hostname
+                    and not index_url.username and not index_url.password):
+                parts.append(f'<p><a href="{esc(notice["source_index_url"])}" target="_blank" rel="noopener" '
+                             'data-dsn-event="official-source-open">メーカー公式一覧からこの案内を開く</a></p>')
         parts.append(f'<p><a href="{esc(notice["url"])}" target="_blank" rel="noopener" '
                      'data-dsn-event="official-source-open">メーカー公式案内の原文を確認</a></p>')
         cards.append(f'<article class="supp supp-notice" data-notice-id="{esc(notice["id"])}" '
@@ -1157,6 +1167,8 @@ def item_page_lastmod(row: dict, lifecycle=None, discrepancy=None, manufacturer_
     if related_topics:
         dates.append("2026-11-04")  # 品目別の関連記事導線を追加した日
         dates.extend(topic["date"] for topic in related_topics if topic.get("date"))
+    if item_key(row) in PACKAGE_LANDING_KEYS:
+        dates.append(PACKAGE_LANDING_UPDATED_AT)
     if is_delist(row) or supplemental_matches(row, lifecycle):
         dates.append(SUPPLEMENTAL_TEMPLATE_LASTMOD)
     if (supplemental_matches(row, lifecycle) and not lifecycle.get("source_changed")
@@ -1520,6 +1532,20 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
             + release_description
             + (f"。メーカー公式補足は「{'／'.join(supplements)}」" if supplements else "")
             + "。原Excelの基準日・品目行の更新日はページ内で分けて確認できます。")
+    package_jump = ""
+    if key in PACKAGE_LANDING_KEYS:
+        matches = matching_manufacturer_notices(row, manufacturer_notices, manufacturer_bulletins)
+        packages = dict.fromkeys(
+            package["package"] for match in matches if not match["source_changed"]
+            for package in match["target"]["packages"]
+            if isinstance(package, dict) and valid_package_supply(package.get("supply"))
+        )
+        if packages:
+            desc = (f"{display_name}（{maker}）の供給状況。厚労省の公表区分は「{st['label']}」。"
+                    f"メーカー案内で{'・'.join(packages)}の出荷対応と予定を確認できます。"
+                    "案内日・原文確認日と、厚労省原表の基準日を掲載。")
+            package_jump = ('<p><a href="#manufacturerNoticesTitle">'
+                            '包装別の出荷対応・予定とメーカー原文を見る</a></p>')
     url = f"{SITE_ROOT}items/{key}.html"
     # 商品名は同名品目があるため、LPの詳細リンクも一意な品目キーを使う。
     lp_link = SITE_ROOT + "#item=" + quote(key, safe="")
@@ -1787,7 +1813,7 @@ footer a{{color:var(--sub)}}
     <h1>{esc(display_name)}<span class="tag status-{status}">厚労省：{st['label']}</span>{supplemental_tags}{delist_tag}</h1>
     <p class="maker">{esc(maker)}{('｜' + esc(spec)) if spec else ''}</p>
     <div class="stbox status-{status}">
-      {supply_answer}
+      {supply_answer}{package_jump}
     </div>
 {variants_html}
     <section class="item-freshness" aria-labelledby="itemFreshnessTitle">
