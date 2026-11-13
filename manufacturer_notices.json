@@ -6163,6 +6163,162 @@
         "厚労省とメーカーの情報は出典や集計時点が異なる場合があります。いずれかの誤りや現在の在庫状況を示すものではありません。",
         "この案内は2026年11月9日時点のメーカー一覧です。自動で更新を確認していません。最新の状況は原文またはメーカー・卸にご確認ください。"
       ]
-    }
+    },
+      {
+        "id": "taiyo-rivotril-granules-limited-20261029",
+        "maker": "太陽ファルマ",
+        "title": "リボトリール細粒0.1％・0.5％ 限定出荷開始のご案内",
+        "url": "https://www.taiyo-pharma.co.jp/ja/med_home/info/info202610261353/main/0/link/riv_ship_202610.pdf",
+        "source_index_url": "https://www.taiyo-pharma.co.jp/ja/med_home/info.html",
+        "announced_at": "2026-10",
+        "listed_at": "2026-10-29",
+        "verified_at": "2026-11-13",
+        "sha256": "444a0673ad6604139068738fd35156bf9f5fd1ca96cc97a1440a4c3fe3a1861f",
+        "collection_mode": "manual",
+        "event_type": "limited",
+        "reason": "製造継続が困難となり、2026年11月2日から限定出荷。原材料と製品在庫がなくなり次第、製造・供給を停止する見通しと案内。",
+        "maker_supply_status": {
+          "handling": "②限定出荷（自社の事情）"
+        },
+        "targets": [
+          {
+            "yj_code": "1139003C1044",
+            "product_name": "リボトリール細粒０．１％",
+            "maker": "太陽ファルマ",
+            "scope": "package",
+            "source_pages": [
+              1
+            ],
+            "packages": [
+              {
+                "package": "100g（缶）",
+                "unified_product_code": "925117814",
+                "supply": {
+                  "status": "limited",
+                  "status_text": "2026年11月2日から限定出荷（自社の事情）",
+                  "plans": [],
+                  "note": "出荷量は減少（B）。原材料・製品在庫の消尽に伴う供給停止予定は2027年5月（2026年10月案内時点）。"
+                }
+              },
+              {
+                "package": "500g（缶）",
+                "unified_product_code": "925117821",
+                "supply": {
+                  "status": "limited",
+                  "status_text": "2026年11月2日から限定出荷（自社の事情）",
+                  "plans": [],
+                  "note": "出荷量は通常（A）。原材料・製品在庫の消尽に伴う供給停止予定は2027年5月（2026年10月案内時点）。"
+                }
+              }
+            ]
+          },
+          {
+            "yj_code": "1139003C2040",
+            "product_name": "リボトリール細粒０．５％",
+            "maker": "太陽ファルマ",
+            "scope": "package",
+            "source_pages": [
+              1
+            ],
+            "packages": [
+              {
+                "package": "100g（缶）",
+                "unified_product_code": "925117838",
+                "supply": {
+                  "status": "limited",
+                  "status_text": "2026年11月2日から限定出荷（自社の事情）",
+                  "plans": [],
+                  "note": "出荷量は通常（A）。供給停止予定は未定（2026年10月案内時点）。"
+                }
+              }
+            ]
+          }
+        ],
+        "alternatives": [],
+        "cautions": [
+          "太陽ファルマの細粒2規格についての案内です。錠剤や他社品の出荷状況には適用されません。",
+          "今後の供給停止時期や納入可否は、メーカー・卸の最新情報をご確認ください。"
+        ]
+      },
+      {
+        "id": "ltl-gaster-injection-limited-20261026",
+        "maker": "LTLファーマ",
+        "title": "ガスター注射液10mg・20mg 特約店卸への限定出荷のご案内",
+        "url": "https://www.ltl-pharma.com/wp-content/uploads/resource/news_file/%E3%82%AC%E3%82%B9%E3%82%BF%E3%83%BC%E6%B3%A8%E5%B0%84%E6%B6%B2_%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E3%81%AE%E3%81%94%E6%A1%88%E5%86%85.pdf?v=20261026",
+        "announced_at": "2026-10",
+        "listed_at": "2026-10-26",
+        "verified_at": "2026-11-13",
+        "sha256": "1648b40c6d1b4f091750e4c23ecfdee8fb0745e8d902c6b7377521a829538429",
+        "collection_mode": "manual",
+        "event_type": "limited",
+        "reason": "他社品の影響で安定供給に支障が出る可能性があるため、2026年10月26日から特約店卸への出荷を制限。",
+        "resumption": "通常出荷再開は未定（2026年10月案内時点）",
+        "maker_supply_status": {
+          "handling": "③限定出荷（他社品の影響）",
+          "volume": "Aプラス 出荷量増加（通常時の約110％を見込む）"
+        },
+        "targets": [
+          {
+            "yj_code": "2325401A1020",
+            "product_name": "ガスター注射液１０ｍｇ",
+            "maker": "LTLファーマ",
+            "scope": "package",
+            "source_pages": [
+              1
+            ],
+            "packages": [
+              {
+                "package": "5管",
+                "unified_product_code": "919100587",
+                "supply": {
+                  "status": "limited",
+                  "status_text": "2026年10月26日から特約店卸への限定出荷（他社品の影響）",
+                  "plans": [],
+                  "note": "2026年10月案内では通常出荷再開は未定。出荷量は通常時の約110％を見込むと記載。"
+                },
+                "gs1_sales_package": "(01)14987919100584"
+              }
+            ]
+          },
+          {
+            "yj_code": "2325401A2027",
+            "product_name": "ガスター注射液２０ｍｇ",
+            "maker": "LTLファーマ",
+            "scope": "package",
+            "source_pages": [
+              1
+            ],
+            "packages": [
+              {
+                "package": "5管",
+                "unified_product_code": "919100600",
+                "supply": {
+                  "status": "limited",
+                  "status_text": "2026年10月26日から特約店卸への限定出荷（他社品の影響）",
+                  "plans": [],
+                  "note": "2026年10月案内では通常出荷再開は未定。出荷量は通常時の約110％を見込むと記載。"
+                },
+                "gs1_sales_package": "(01)14987919100607"
+              },
+              {
+                "package": "50管",
+                "unified_product_code": "919100594",
+                "supply": {
+                  "status": "limited",
+                  "status_text": "2026年10月26日から特約店卸への限定出荷（他社品の影響）",
+                  "plans": [],
+                  "note": "2026年10月案内では通常出荷再開は未定。出荷量は通常時の約110％を見込むと記載。"
+                },
+                "gs1_sales_package": "(01)14987919100591"
+              }
+            ]
+          }
+        ],
+        "alternatives": [],
+        "cautions": [
+          "この案内はLTLファーマの指定包装に対するものです。他の剤形や他社品には適用されません。",
+          "メーカーの出荷量見通しは、卸の在庫や納入可否を示すものではありません。"
+        ]
+      }
   ]
 }

@@ -23,6 +23,7 @@ from validate_product_lifecycle import load_csv, validate as validate_lifecycle
 from validate_supply_discrepancies import load_csv as load_discrepancy_csv, validate as validate_discrepancies
 from public_data_manifest import JSON_FILES, MANIFEST_NAME, PUBLIC_FILES, fingerprint, validate_manifest
 from mhlw_supply_source import MHLW_SUPPLY_PAGE, decode_supply_page, supply_source_from_page
+from source_specification import valid_comparison
 
 
 BASE_URL = "https://raw.githubusercontent.com/tkiyo1007-eng/drugs-data/main/"
@@ -343,6 +344,10 @@ def check_pages(
         errors.extend(f"Pages CSV: {error}" for error in csv_errors)
         results.append("Pages/drugs_app_ready.csv")
         if not csv_errors:
+            if not valid_comparison(documents.get('specification_differences.json'),
+                                    documents.get('mhlw_source.json'),
+                                    bodies['drugs_app_ready.csv'], documents.get('version.json')):
+                errors.append('Pages 規格比較データ: CSV・原表・基準日の対応を確認できません')
             lifecycle = documents.get("product_lifecycle.json")
             if isinstance(lifecycle, dict):
                 errors.extend(f"Pages product_lifecycle.json: {error}"
