@@ -13,6 +13,8 @@ class DeployWorkflowContractTests(unittest.TestCase):
         root = Path(__file__).resolve().parents[1] / ".github" / "workflows"
         cls.deploy = (root / "deploy_pages.yml").read_text(encoding="utf-8")
         cls.validate = (root / "validate.yml").read_text(encoding="utf-8")
+        cls.scripts = [textwrap.dedent(value) for value in re.findall(
+            r"          script: \|\n((?:(?: {12}[^\n]*|)\n)+)", cls.deploy)]
 
     def test_push_publication_requires_successful_main_validation_not_pr_or_fork(self):
         self.assertNotIn("\n  push:\n", self.deploy)
@@ -71,9 +73,8 @@ class DeployWorkflowContractTests(unittest.TestCase):
 
     @unittest.skipUnless(shutil.which("node"), "Workflow内JavaScriptの隔離実行にはNodeが必要")
     def test_actual_workflow_scripts_pin_main_and_reject_stale_results(self):
-        scripts = [textwrap.dedent(value) for value in re.findall(
-            r"          script: \|\n((?:(?: {12}[^\n]*|)\n)+)", self.deploy)]
-        self.assertEqual(len(scripts), 2)
+        self.assertEqual(len(self.scripts), 3)
+        scripts = [self.scripts[0], self.scripts[2]]
         harness = r"""
           let input = '';
           process.stdin.on('data', chunk => { input += chunk; });
@@ -111,6 +112,43 @@ class DeployWorkflowContractTests(unittest.TestCase):
         self.assertEqual(json.loads(result.stdout), [
             {"sha": "a"}, {}, {"sha": "b"}, {"sha": "b"}, {}, {"matches": "true"}, {"matches": "false"},
         ])
+
+    @unittest.skipUnless(shutil.which("node"), "Workflow内JavaScriptの隔離実行にはNodeが必要")
+    def test_publication_waits_for_this_attempts_artifact_and_rejects_ambiguity(self):
+        self.assertIn("PAGES_ARTIFACT_NAME: github-pages-${{ github.run_attempt }}", self.deploy)
+        self.assertIn("name: ${{ env.PAGES_ARTIFACT_NAME }}", self.deploy)
+        self.assertIn("artifact_name: ${{ env.PAGES_ARTIFACT_NAME }}", self.deploy)
+        harness = r"""
+          const assert = require('node:assert/strict');
+          const fs = require('node:fs');
+          const AsyncFunction = Object.getPrototypeOf(async function() {}).constructor;
+          const script = new AsyncFunction('github', 'context', 'core', 'process', 'setTimeout',
+            fs.readFileSync(0, 'utf8'));
+          const uploaded = {id: 42, expired: false};
+          async function run(results) {
+            let requests = 0;
+            const github = {rest: {actions: {listWorkflowRunArtifacts: async options => {
+              assert.equal(options.run_id, 17);
+              assert.equal(options.name, 'github-pages-2');
+              const artifacts = results[Math.min(requests++, results.length - 1)];
+              return {data: {artifacts, total_count: artifacts.length}};
+            }}}};
+            const context = {repo: {owner: 'owner', repo: 'repo'}, runId: 17};
+            const core = {info: () => {}};
+            const process = {env: {PAGES_ARTIFACT_NAME: 'github-pages-2', PAGES_ARTIFACT_ID: '42'}};
+            await script(github, context, core, process, resolve => resolve());
+            return requests;
+          }
+          (async () => {
+            assert.equal(await run([[], [uploaded]]), 2);
+            await assert.rejects(run([[]]), /参照可能になりません/);
+            await assert.rejects(run([[uploaded, {id: 43}]]), /複数/);
+            await assert.rejects(run([[{id: 43, expired: false}]]), /一致しない/);
+            await assert.rejects(run([[{id: 42, expired: true}]]), /有効期限切れ/);
+          })().catch(error => { console.error(error); process.exitCode = 1; });
+        """
+        subprocess.run([shutil.which("node"), "-e", harness], input=self.scripts[1],
+                       text=True, check=True, timeout=15)
 
 
 if __name__ == "__main__":
