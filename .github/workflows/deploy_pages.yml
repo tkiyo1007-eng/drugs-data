@@ -62,9 +62,12 @@ jobs:
        needs.validate.result == 'success')
     runs-on: ubuntu-latest
     permissions:
+      actions: read
       contents: read
       pages: write
       id-token: write
+    env:
+      PAGES_ARTIFACT_NAME: github-pages-${{ github.run_attempt }}
     concurrency:
       group: pages
       cancel-in-progress: true
@@ -86,8 +89,37 @@ jobs:
           --commit "$SOURCE_COMMIT" --output public-data-manifest.json
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
+        id: upload
         with:
           path: .
+          name: ${{ env.PAGES_ARTIFACT_NAME }}
+      - name: アップロードした公開ファイルが参照可能になるまで待機
+        uses: actions/github-script@v8
+        env:
+          PAGES_ARTIFACT_ID: ${{ steps.upload.outputs.artifact_id }}
+        with:
+          script: |
+            const name = process.env.PAGES_ARTIFACT_NAME;
+            const id = process.env.PAGES_ARTIFACT_ID;
+            if (!/^[1-9]\d*$/.test(id || '')) throw new Error('公開ファイルのアップロードIDを取得できません');
+
+            for (let attempt = 1; attempt <= 6; attempt++) {
+              const {data} = await github.rest.actions.listWorkflowRunArtifacts({
+                ...context.repo, run_id: context.runId, name, per_page: 2,
+                request: {signal: AbortSignal.timeout(5000)},
+              });
+              if (data.total_count > 1) throw new Error(`同名の公開ファイルが複数あります: ${name}`);
+              const artifact = data.artifacts[0];
+              if (artifact) {
+                if (artifact.expired || String(artifact.id) !== id) {
+                  throw new Error(`公開ファイルが今回アップロードしたIDと一致しないか、有効期限切れです: ${name}`);
+                }
+                core.info(`公開ファイルを確認しました: ${name} (${id})`);
+                return;
+              }
+              if (attempt < 6) await new Promise(resolve => setTimeout(resolve, 5000));
+            }
+            throw new Error(`公開ファイルが参照可能になりませんでした: ${name}`);
       - name: 公開直前にmainの一致を再確認
         id: current
         uses: actions/github-script@v8
@@ -102,3 +134,5 @@ jobs:
       - id: deployment
         if: steps.current.outputs.matches == 'true'
         uses: actions/deploy-pages@v5
+        with:
+          artifact_name: ${{ env.PAGES_ARTIFACT_NAME }}
