@@ -7481,6 +7481,186 @@
         "この資料は手動確認したもので、後続案内を自動追跡していません。",
         "100mg・500mg製品はこの補足の対象外です。"
       ]
+    },
+    {
+      "id": "organon-maxalt-limited-release-20261112",
+      "maker": "オルガノン",
+      "title": "マクサルト錠10mg・RPD錠10mgの限定出荷解除案内",
+      "url": "https://organonpro.com/ja-jp/wp-content/uploads/sites/10/2026/11/MAX26LT0001_maxalt_adjustment_20261112.pdf",
+      "source_index_url": "https://organonpro.com/ja-jp/medinfo/supply/",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-12",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "73bb3f3d2aa9c99f327a41af5b14751a2beb7f72650ed96a5dbb6a83f896e735",
+      "collection_mode": "manual",
+      "event_type": "resumption_planned",
+      "summary": "オルガノンは2026年11月中旬から、錠10mgとRPD錠10mgの対象4包装で限定出荷を解除すると案内しました。",
+      "reason": "メーカーは当時の限定出荷の契機として他社品の供給状況の影響を挙げ、今回、安定供給の見通しが立ったと説明しています。",
+      "targets": [
+        {
+          "yj_code": "2160006F1026",
+          "product_name": "マクサルト錠１０ｍｇ",
+          "maker": "オルガノン",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "6錠（PTP）×1",
+              "unified_product_code": "954600080",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード954600080。2026年11月中旬から限定出荷を解除すると案内。"
+              }
+            },
+            {
+              "package": "6錠（PTP）×3",
+              "unified_product_code": "954600097",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード954600097。2026年11月中旬から限定出荷を解除すると案内。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2160006F2022",
+          "product_name": "マクサルトＲＰＤ錠１０ｍｇ",
+          "maker": "オルガノン",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "3錠（ポリプロピレンケース）×2",
+              "unified_product_code": "954600103",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード954600103。2026年11月中旬から限定出荷を解除すると案内。"
+              }
+            },
+            {
+              "package": "3錠（ポリプロピレンケース）×6",
+              "unified_product_code": "954600110",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード954600110。2026年11月中旬から限定出荷を解除すると案内。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "厚労省の供給区分・理由は上の公表データをご確認ください。",
+        "解除の具体的な日付、実施状況、現在の卸在庫は未確認です。医療機関への納品に時間がかかる場合があるとメーカーは案内しています。"
+      ]
+    },
+    {
+      "id": "organon-atozet-discontinuation-20261014",
+      "maker": "オルガノン",
+      "title": "アトーゼット配合錠LD・HDの販売中止予定",
+      "url": "https://organonpro.com/ja-jp/wp-content/uploads/sites/10/2026/10/EZA26LT0006_atozet_tab_ldhd_discontinuation_sales_notification.pdf",
+      "source_index_url": "https://organonpro.com/ja-jp/medinfo/supply/",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-14",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "edac6008729f0cdc76008071fc3cd8697c9369e5a885aed90b6a24321c794d8d",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "summary": "オルガノンはLD・HDの対象包装の販売中止を案内しました。",
+      "reason": "販売中止の理由は「諸般の事情」と案内されており、具体的な事情は公表されていません。",
+      "targets": [
+        {
+          "yj_code": "2189101F1020",
+          "product_name": "アトーゼット配合錠ＬＤ",
+          "maker": "オルガノン",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100錠（10錠PTP×10）",
+              "unified_product_code": "954810120",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（2026年10月の案内時点）",
+                "plans": [],
+                "note": "統一商品コード954810120。販売中止予定の包装です。具体的な販売終了日・出荷停止日は記載されていません。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2189101F2026",
+          "product_name": "アトーゼット配合錠ＨＤ",
+          "maker": "オルガノン",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100錠（10錠PTP×10）",
+              "unified_product_code": "954810144",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（2026年10月の案内時点）",
+                "plans": [],
+                "note": "統一商品コード954810144。販売中止予定の包装です。具体的な販売終了日・出荷停止日は記載されていません。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "type": "オルガノンの販売中止案内に記載された参考候補",
+          "target_yj_codes": [
+            "2189101F1020"
+          ],
+          "products": [
+            {
+              "name": "エゼアト配合錠ＬＤ「ＪＧ」",
+              "yj_code": "2189101F1038",
+              "maker": "日本ジェネリック",
+              "scope": "エゼチミブ10mg・アトルバスタチンとして10mg（1錠あたり、PMDA電子添文で確認）"
+            }
+          ],
+          "cautions": [
+            "候補製品の受注・卸在庫・個別の切替可否は未確認です。"
+          ]
+        },
+        {
+          "type": "オルガノンの販売中止案内に記載された参考候補",
+          "target_yj_codes": [
+            "2189101F2026"
+          ],
+          "products": [
+            {
+              "name": "エゼアト配合錠ＨＤ「ＪＧ」",
+              "yj_code": "2189101F2034",
+              "maker": "日本ジェネリック",
+              "scope": "エゼチミブ10mg・アトルバスタチンとして20mg（1錠あたり、PMDA電子添文で確認）"
+            }
+          ],
+          "cautions": [
+            "候補製品の受注・卸在庫・個別の切替可否は未確認です。"
+          ]
+        }
+      ],
+      "cautions": [
+        "薬価基準の経過措置期間満了は2028年3月末の予定です。メーカーは満了日・薬価削除日を官報告示後に改めて案内するとしています。販売終了日は記載されていません。"
+      ]
     }
   ]
 }
