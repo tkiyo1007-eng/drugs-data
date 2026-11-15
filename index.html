@@ -917,7 +917,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   overflow-wrap:anywhere;line-height:1.65;
 }
 .modal-note{font-size:11.5px;color:var(--sub);margin-top:14px;line-height:1.8}
-.detail-shortcuts{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.detail-shortcuts[hidden]{display:none}.detail-shortcuts button{min-height:44px;padding:8px 14px;border:1px solid var(--stroke);border-radius:12px;background:var(--bg);color:var(--blue-deep);font:inherit;font-size:13px;font-weight:700;cursor:pointer}.detail-shortcuts button:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.detail-shortcuts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:16px 0;padding:12px;border:1px solid var(--stroke);border-radius:16px;background:rgba(79,128,244,.04)}.detail-shortcuts[hidden]{display:none}.detail-shortcuts button{min-height:44px;padding:8px 14px;border:1px solid var(--stroke);border-radius:12px;background:var(--bg);color:var(--blue-deep);font:inherit;font-size:13px;font-weight:700;cursor:pointer}.detail-shortcuts button[hidden]{display:none}.detail-shortcuts button:not([hidden]){text-align:left;line-height:1.6}.detail-shortcuts button:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 .featured-research-copy a,.featured-research-sources a{color:#194cad;text-decoration:underline;text-underline-offset:.15em}
 </style>
 <style media="(prefers-color-scheme: dark)" data-appearance-scheme="dark">
@@ -1971,7 +1971,7 @@ html.season-autumn .autumn-sky{display:none}
   <p class="sec-eyebrow">TOPICS</p>
   <h2>医薬品ニュース</h2>
   <div class="mednews" id="medNews">
-    <h3>薬事日報の新着見出し</h3>
+    <h3>業界ニュース</h3>
     <p class="sec-lede">業界ニュースの見出しを自動取得しています。本文はリンク先の薬事日報でご確認ください。供給区分はニュースから変更せず、検索とメーカー原典で確認できます。</p>
     <p class="news-status" id="medNewsStatus" role="status" aria-live="polite" aria-atomic="true">新着見出しを読み込んでいます。</p>
     <div class="news-status-actions">
@@ -1984,7 +1984,7 @@ html.season-autumn .autumn-sky{display:none}
       <div class="mednews-list glass" id="medNewsArchiveList"></div>
     </details>
   </div>
-  <h3>ニュース・解説記事</h3>
+  <h3>医薬品ニュース</h3>
   <p class="sec-lede">ここは手動で編集する解説記事です。当日を含む直近30日の記事を表示し、それ以前の記事は過去記事一覧で確認できます。最新の供給状況は検索と原典でご確認ください。</p>
   <p class="news-status" id="topicStatus" role="status" aria-live="polite" aria-atomic="true">公開済みの編集記事を読み込んでいます。</p>
   <div class="news-status-actions">
@@ -2741,9 +2741,9 @@ html.season-autumn .autumn-sky{display:none}
     <h3 id="mTitle">品目詳細</h3>
     <p class="modal-maker" id="mMaker"></p>
     <nav class="detail-shortcuts" id="mDetailShortcuts" aria-label="品目詳細内の移動" hidden>
-      <button type="button" id="mPackageJump" hidden>包装別の案内へ ↓</button>
-      <button type="button" id="mReferenceJump" hidden>原因・参考候補へ ↓</button>
-      <button type="button" id="mRelatedJump" hidden>同成分の候補へ ↓</button>
+      <button type="button" id="mReferenceJump" aria-controls="mSupplyReference" hidden>原因・参考候補へ ↓</button>
+      <button type="button" id="mRelatedJump" aria-controls="mRelated" hidden>同成分の候補へ ↓</button>
+      <button type="button" id="mPackageJump" aria-controls="mManufacturerNotes" hidden>包装別の案内へ ↓</button>
     </nav>
     <div class="modal-note" id="mDataProvenance" role="group" aria-labelledby="mDataProvenanceTitle">
       <h4 id="mDataProvenanceTitle">供給区分の出典・日付</h4>
