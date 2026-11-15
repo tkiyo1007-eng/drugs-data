@@ -6498,7 +6498,8 @@
       "title": "ノイロビタン配合錠の限定出荷（2026年10月26日更新の一覧）",
       "url": "https://www.ltl-pharma.com/wp-content/uploads/resource/distribution_info/distribution_info.pdf",
       "announced_at": "2026-10-26",
-      "verified_at": "2026-11-08",
+      "verified_at": "2026-11-15",
+      "content_updated_at": "2026-11-15",
       "sha256": "50a67a2628ca74474b2dcd433cbd2692ba1bfaa7f4863917042239cece6b3e2a",
       "collection_mode": "manual",
       "event_type": "limited",
@@ -6539,6 +6540,63 @@
             }
           ]
         }
+      ]
+    },
+    {
+      "id": "ltl-neurovitan-specialist-wholesalers-202609",
+      "maker": "LTLファーマ",
+      "title": "ノイロビタン配合錠 特約店卸への限定出荷のご案内（2026年9月）",
+      "url": "https://www.ltl-pharma.com/wp-content/uploads/resource/news_file/%E5%8C%BB%E7%99%82%E6%A9%9F%E9%96%A2%E5%90%91%E3%81%91-%E3%83%8E%E3%82%A4%E3%83%AD%E3%83%93%E3%82%BF%E3%83%B3_%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E3%81%AE%E3%81%94%E6%A1%88%E5%86%85.pdf?v=20260911",
+      "source_index_url": "https://www.ltl-pharma.com/product/product-news/?product_name=neurovitan",
+      "announced_at": "2026-09",
+      "listed_at": "2026-09-16",
+      "verified_at": "2026-11-15",
+      "content_updated_at": "2026-11-15",
+      "sha256": "72c32ffa104ad7fa4920630c8f6b1637ad883b4d28cf8ba58b91f20670fea28a",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "2026年7月28日に熊本地方を震源とする地震で製造所が被災し、出荷を再開するまで時間がかかる見込みと案内しました。",
+      "effective_at": "2026-09-28",
+      "resumption": "通常出荷の再開時期は未定（2026年9月の案内時点）",
+      "maker_supply_status": {
+        "handling": "特約店卸への出荷は2026年9月16日〜27日に一時停止し、9月28日から限定出荷とする案内",
+        "volume": "限定出荷期間中は通常出荷時の約30％の見通し（2026年9月の案内時点）"
+      },
+      "targets": [
+        {
+          "yj_code": "3179106F1039",
+          "product_name": "ノイロビタン配合錠",
+          "maker": "LTLファーマ",
+          "scope": "package",
+          "source_pages": [1],
+          "packages": [
+            {
+              "package": "500錠（PTP）",
+              "unified_product_code": "919100228",
+              "gs1_sales": "(01)14987919100225",
+              "supply": {
+                "status": "limited",
+                "status_text": "特約店卸へ9月28日から限定出荷と案内",
+                "plans": []
+              }
+            },
+            {
+              "package": "1000錠（バラ）",
+              "unified_product_code": "919100211",
+              "gs1_sales": "(01)14987919100218",
+              "supply": {
+                "status": "limited",
+                "status_text": "特約店卸へ9月28日から限定出荷と案内",
+                "plans": []
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "特約店卸への2026年9月の案内です。出荷量の見通しは当時の値で、現在の出荷量・受注・卸在庫は未確認です。",
+        "1000錠バラ包装は、10月26日更新のメーカー一覧では1000錠（瓶）と表記されています。"
       ]
     },
     {
