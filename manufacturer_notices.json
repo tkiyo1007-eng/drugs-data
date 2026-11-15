@@ -2,6 +2,103 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "nobel-acenobel-500-limited-second-20250623",
+      "maker": "ノーベルファーマ",
+      "title": "アセノベル徐放錠500mgの限定出荷（第二報）",
+      "url": "https://www.nobelpharma.co.jp/_cms/wp-content/uploads/2025/06/042af1713c9f127c0e16d6546bdf9954.pdf",
+      "announced_at": "2025-06-23",
+      "listed_at": "2025-06-23",
+      "resumption": "2027年11月頃に限定出荷を解除する見込み（2025年6月の第二報）。",
+      "verified_at": "2026-11-15",
+      "content_updated_at": "2026-11-15",
+      "sha256": "969d1948fb445a2f02dcaa0807d9686e80200c9cb7277844244a702d36421694",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "発売後の需要が想定を大きく上回ったため、2025年1月から限定出荷。新たな製造所の立ち上げなど供給体制の整備に時間を要すると説明しています。",
+      "targets": [
+        {
+          "yj_code": "1900001G1020",
+          "product_name": "アセノベル徐放錠５００ｍｇ",
+          "maker": "ノーベルファーマ",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": []
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2025年6月のメーカー文書に示された見込みです。解除の実施日や現在の受注・卸在庫は確認できていません。",
+        "この文書では包装ごとの供給状況や具体的な代替製品は記載されていません。"
+      ]
+    },
+    {
+      "id": "towa-d-chlorpheniramine-syrup-package-discontinuation-202507",
+      "maker": "東和薬品",
+      "title": "d-クロルフェニラミンマレイン酸塩シロップ0.04％「トーワ」の販売中止案内",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80880&t=4",
+      "announced_at": "2025-07",
+      "verified_at": "2026-11-15",
+      "content_updated_at": "2026-11-15",
+      "sha256": "846a6875becbecf7d53347fde9ac4c83dfec9b1f04d93b40467e318f21b8ac1b",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "需要状況などを理由に、東和薬品は500mL包装の販売を在庫限りで終了する方針を公表しました。",
+      "targets": [
+        {
+          "yj_code": "4419002Q1125",
+          "product_name": "ｄ－クロルフェニラミンマレイン酸塩シロップ０．０４％「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "500mL",
+              "unified_product_code": "155131031",
+              "gs1_sales_package": "(01)14987155131038",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年10月（2025年7月の案内）"
+                  }
+                ],
+                "note": "販売中止の対象包装です。文書では経過措置期間の満了を2028年3月末の予定としています。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "type": "メーカー案内の同一成分・同濃度の参考品",
+          "target_yj_codes": [
+            "4419002Q1125"
+          ],
+          "products": [
+            {
+              "name": "ポララミンシロップ０．０４％",
+              "yj_code": "4419002Q1095",
+              "maker": "高田製薬",
+              "scope": "メーカー案内記載の500mL包装（統一商品コード120441202）"
+            }
+          ],
+          "cautions": [
+            "両製品は同じ濃度のシロップですが、電子添文では添加剤に違いがあります。",
+            "候補品の現在の受注・卸在庫は未確認です。変更の可否は最新の電子添文を確認して医師・薬剤師が判断してください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "メーカー記載の在庫終了予定と経過措置期間の満了予定は別の情報です。予定の実施や現在の在庫は未確認です。",
+        "この商品コードの500mL包装に対する案内です。高田製薬の参考品や他社品に対する販売中止案内ではありません。"
+      ]
+    },
+    {
       "id": "hisamitsu-naboal-l30-560-limited-202610",
       "maker": "久光製薬",
       "title": "ナボールテープL30mg 560枚の限定出荷案内（2026年10月）",
