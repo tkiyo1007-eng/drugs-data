@@ -25,6 +25,13 @@ from maker_identity import maker_is_listed_in_row
 
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
 
+# 一覧の題名では規格が省略され、PDF本文に75mgと明記された3件。
+HISAMITSU_VERIFIED_SPEC = {
+    "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260608.pdf": "ジクトルテープ75mg",
+    "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260716_2.pdf": "ジクトルテープ75mg",
+    "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/261030.pdf": "ジクトルテープ75mg",
+}
+
 
 def fetch(url):
     req = urllib.request.Request(url, headers={"User-Agent": UA})
@@ -843,6 +850,9 @@ def match_to_csv(announcements, csv_path, existing=None, unmatched_out=None,
     targets = rows  # 「通常出荷」でも販売中止予定を拾うため全品目を対象にする
 
     supply_anns = [(m, t, u, norm(t)) for m, t, u in announcements if is_supply_related(t)]
+    verified_hisamitsu = [(m, t, u, HISAMITSU_VERIFIED_SPEC[u]) for m, t, u, _ in supply_anns
+                          if m == "久光製薬" and u in HISAMITSU_VERIFIED_SPEC]
+    title_anns = [announcement for announcement in supply_anns if announcement[2] not in HISAMITSU_VERIFIED_SPEC]
 
     result = {}
     for name, value in (existing or {}).items():
@@ -880,15 +890,19 @@ def match_to_csv(announcements, csv_path, existing=None, unmatched_out=None,
             # 代表案内に選ばれなかった旧報・続報も、製品への照合自体は完了している。
             used_urls.add(url)
 
-        for maker, title, url, title_n in supply_anns:
-            if maker_matches_row(maker, r) and name_n in title_n:
+        for maker, title, url, verified_name in verified_hisamitsu:
+            if name_n == verified_name and maker_matches_row(maker, r):
+                add_candidate(maker, title, url)
+
+        for maker, title, url, title_n in title_anns:
+            if name_n in title_n and maker_matches_row(maker, r):
                 add_candidate(maker, title, url)
 
         # 完全一致しない場合、規格違いをまとめた表記（例: 2mg/4mg）にも対応するフォールバック。
         # 公式ソースのメーカー一致に加え規格数値も1つ以上一致させることで誤マッチを防ぐ。
         core, specs, maker_paren = base_name_and_specs(name_n)
         if core and specs:
-            for maker, title, url, title_n in supply_anns:
+            for maker, title, url, title_n in title_anns:
                 # spec は日付(2026/07/08)等の数字と衝突しやすいため、前後が数字でない場合のみ一致とみなす
                 spec_hit = any(re.search(rf"(?<!\d){re.escape(spec)}(?!\d)", title_n)
                                for spec in specs)
@@ -912,7 +926,7 @@ def match_to_csv(announcements, csv_path, existing=None, unmatched_out=None,
         # 数字のない規格記号をまとめた表記（例: MD/EX、LD/HD）にも対応する。
         variant_core, variant, variant_maker = base_name_and_variant(name_n)
         if variant_core and variant:
-            for maker, title, url, title_n in supply_anns:
+            for maker, title, url, title_n in title_anns:
                 variant_hit = re.search(
                     rf"(?<![A-Z]){re.escape(variant)}(?![A-Z])", title_n) is not None
                 if (maker_matches_row(maker, r) and variant_core in title_n
