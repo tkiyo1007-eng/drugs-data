@@ -926,6 +926,8 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 /* 原因・参考候補を読みやすくする。本文・注意書き・原典の日付は変更しない。 */
 #trendingList .trending-reference{font-size:16px;font-weight:800;line-height:1.65;color:var(--ink);background:var(--bg);text-decoration:underline;text-underline-offset:3px}
 #trendingList .trending-hint{font-size:14px;line-height:1.7;color:var(--ink)}
+#mRelated.inquiry-reference-safety > .pkg-note{font-size:16px;line-height:1.8;color:var(--ink)}
+#mSupplyReference .reference-safety-note{font-weight:700;border-left:4px solid var(--blue-mid);padding:8px 12px;background:var(--bg);color:var(--ink)}
 #mReferenceJump,#mRelatedJump{font-size:16px;font-weight:800;color:var(--ink);border:2px solid var(--blue-mid);background:var(--bg)}
 #mSupplyReference,#mAlternatives{font-size:16px;line-height:1.85;color:var(--ink);background:var(--bg);padding:16px;border:1px solid var(--blue-mid);border-radius:16px;overflow-wrap:anywhere}
 #mSupplyReference h4,#mAlternatives h4{font-size:18px;font-weight:800;line-height:1.6;color:var(--ink)}
@@ -5702,6 +5704,11 @@ function supplyReferenceId(d){
   const ref = refs[d?.yj];
   return ref && normalize(d.n) === ref[0] && (normalize(d.m) === ref[1] || (ref[2] === "fentosSupplyReference" && normalize(d.m) === "久光製薬")) ? ref[2] : null;
 }
+// ホームに実際に表示された品目リンクだけを対象にする。医薬品データ・同定条件は変更しない。
+function isHomeInquiryItem(d){
+  const key = String(d?.yj || "");
+  return /^[A-Z0-9]{12}$/.test(key) && !!document.querySelector(`#trendingList [data-trending-reference="${key}"]`);
+}
 function renderSupplyReference(d){
   const target=document.getElementById('mSupplyReference');
   target.replaceChildren();
@@ -5710,12 +5717,35 @@ function renderSupplyReference(d){
   if(!source) return;
   const title=document.createElement('h4');title.textContent=source.dataset.referenceTitle || 'メーカー案内（過去資料・現在の供給区分とは別情報）';
   const notice=document.createElement('p');notice.textContent='この資料は最新の案内・在庫・受注可否を保証しません。現在の状況は原典・取引先で確認してください。';
-  target.append(title,source.querySelector('.supply-reference-copy').cloneNode(true));
+  const pilot = isHomeInquiryItem(d);
+  target.append(title);
+  if(pilot){
+    const caution=document.createElement('p');
+    caution.textContent='以下は資料時点の参考情報です。現在の厚労省公表区分・理由とは異なる場合があります。この情報だけでは切替可否を判断できません。適応・規格・剤形・患者状態を確認し、処方医・薬剤師が判断してください。';
+    caution.className='reference-safety-note';
+    target.append(caution);
+  }
+  target.append(source.querySelector('.supply-reference-copy').cloneNode(true));
   if(source.dataset.referenceFamily === 'amaluet'){
     target.append(document.getElementById('amaluetOptions').content.cloneNode(true));
   }
-  target.append(notice,source.querySelector('.topic-src').cloneNode(true));
-  target.querySelectorAll('details').forEach(details => { details.open = true; });
+  target.append(notice);
+  const citation=source.querySelector('.topic-src').cloneNode(true);
+  if(!pilot) target.append(citation);
+  else if(!target.querySelector('details')) target.querySelector('.reference-safety-note').after(citation);
+  target.querySelectorAll('details').forEach(details => {
+    details.open = true;
+    if(pilot){
+      const caution=document.createElement('p');
+      caution.className='reference-safety-note';
+      caution.textContent='この情報だけでは切替可否を判断できません。参考情報であり、個別の患者への推奨や入手可能性を示すものではありません。';
+      const summary=details.querySelector('summary');
+      if(summary){
+        summary.after(caution);
+        if(!citation.parentNode) caution.after(citation);
+      }
+    }
+  });
 }
 function renderLuliconAlternatives(d){
   const target=document.getElementById('mAlternatives');
@@ -5870,6 +5900,7 @@ function openDetail(d, opts={}){
   prepareDetailReport(d, !document.getElementById("mReport").open);
   // 同成分・同剤形の関連品目（確認補助）
   const $mRel = document.getElementById("mRelated");
+  $mRel.classList.toggle("inquiry-reference-safety", isHomeInquiryItem(d));
   let relHtml = "";
   // 薬価削除予定（現在の出荷対応とは別の区分・期限）の品目を
   // 「入手しやすい」上位に誤って並べない・緑バッジで誤解させないための実効深刻度
@@ -5906,6 +5937,11 @@ function openDetail(d, opts={}){
   if(relHtml){
     $mRel.innerHTML = relHtml +
       `<p class="pkg-note">※ 同成分・同剤形の品目を公開データから機械的に列挙し、同じ規格を優先したうえで、現在の厚労省公表区分と薬価削除予定を考慮した確認補助です。代替適否や実在庫を示す順位ではありません。${dWarm ? "この品目は温感タイプのため、温感タイプの品目のみを表示しています。" : ""}適応・規格・剤形の互換性は必ず添付文書と医師・薬剤師の判断でご確認ください。</p>`;
+    if(isHomeInquiryItem(d)){
+      const caution = $mRel.querySelector('.pkg-note');
+      const heading = $mRel.querySelector('.rel-title');
+      if(caution && heading) heading.after(caution);
+    }
     $mRel.hidden = false;
   }else{
     $mRel.hidden = true;
