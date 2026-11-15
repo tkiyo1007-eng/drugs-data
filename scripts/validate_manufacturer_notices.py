@@ -29,6 +29,7 @@ MAKER_HOSTS = {
     '日本ジェネリック': 'medical.nihon-generic.co.jp',
     'LTLファーマ': 'www.ltl-pharma.com',
     '太陽ファルマ': 'www.taiyo-pharma.co.jp',
+    'ニプロ': 'med.nipro.co.jp',
 }
 SCOPES = {'product', 'package', 'seller_route_and_package'}
 KINDS = {'discontinued', 'limited', 'stopped', 'resumed', 'resumption_planned', 'recall'}
