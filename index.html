@@ -948,6 +948,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .package-supply-row dt{font-size:11px;font-weight:700;color:var(--ink);margin-bottom:4px}
 .package-supply-row dd{margin:0;font-size:12.5px;line-height:1.8}
 .package-supply-row .package-supply-plan{display:block}
+@media(min-width:641px){.package-supply-row dl.package-supply-details-first{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)}}
 @media(max-width:640px){.package-supply .package-supply-row,.package-supply-row dl{grid-template-columns:minmax(0,1fr)}}
 #mDataProvenance .maker-link{color:var(--blue-deep)}
 .maker-link::after{content:"↗";font-size:14px;flex:none}
@@ -4181,12 +4182,15 @@ function manufacturerPackageSupplyHTML(notice, target){
     + `<p class="package-supply-note">上記のメーカー文書に記載された情報です。厚労省の品目区分とは別に表示し、現在の卸在庫・受注可否を示すものではありません。</p>`
     + `<ul class="package-supply-list">${target.packages.map(p=>{
       const s = validManufacturerPackageSupply(p.supply) ? p.supply : null;
-      const status = s && s.status !== "unconfirmed" ? s.status_text : "包装別情報未確認";
-      const plans = s && s.plans.length
-        ? s.plans.map(plan=>`<span class="package-supply-plan">${esc(MANUFACTURER_PACKAGE_PLAN_LABELS[plan.event])}：${esc(plan.timing)}</span>`).join("")
-        : s && s.note ? "" : "この欄に確認済みの予定情報はありません";
-      return `<li class="package-supply-row"><h6>${esc(p.package)}</h6><dl><div><dt>案内時点の出荷対応</dt><dd>${esc(status)}</dd></div>`
-        + `<div><dt>予定（原文）</dt><dd>${plans}${s && s.note ? `<p>${esc(s.note)}</p>` : ""}</dd></div></dl></li>`;
+      const status = `<div><dt>案内時点の出荷対応</dt><dd>${esc(s?.status_text || "未確認")}</dd></div>`;
+      const plans = s?.plans.map(plan=>`<span class="package-supply-plan">${esc(MANUFACTURER_PACKAGE_PLAN_LABELS[plan.event])}：${esc(plan.timing)}</span>`).join("") || "";
+      const note = s?.note ? `<p>${esc(s.note)}</p>` : "";
+      const detailsLabel = note ? (plans ? "予定と補足" : "案内の補足") : "予定（原文）";
+      const details = `<div><dt>${detailsLabel}</dt><dd>${plans + note || "この包装の予定情報は未確認です。"}</dd></div>`;
+      const detailsFirst = !s?.status_text && Boolean(plans || note);
+      return `<li class="package-supply-row"><h6>${esc(p.package)}</h6>`
+        + (detailsFirst ? `<dl class="package-supply-details-first">${details}${status}` : `<dl>${status}${details}`)
+        + `</dl></li>`;
     }).join("")}</ul>`
     + `<p class="package-supply-note">記載のない包装の状況は未確認です。予定の時期を過ぎても、実施済みとは判断しません。</p></div>`;
 }
