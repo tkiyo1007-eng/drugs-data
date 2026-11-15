@@ -2,6 +2,85 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "nipro-teramuro-ap-bp-package-history-202508",
+      "maker": "ニプロ",
+      "title": "テラムロ配合錠AP・BP「ニプロ」の包装別供給案内（2025年8月）",
+      "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uVtfvIAC",
+      "announced_at": "2025-08",
+      "listed_at": "2025-08-25",
+      "verified_at": "2026-11-15",
+      "content_updated_at": "2026-11-15",
+      "sha256": "5596250681056085ef92f28abd45892307af614108699e35399320a0ab30930e",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "2025年8月の案内では、他社の同一成分薬の限定出荷を受け、ニプロも特約店への出荷を割当制としていました。代替供給を予定していたメーカーでの供給が難しくなり、ニプロの在庫がなくなり次第、特約店への供給を停止する方針を示しました。",
+      "targets": [
+        {
+          "yj_code": "2149117F1092",
+          "product_name": "テラムロ配合錠ＡＰ「ニプロ」",
+          "maker": "ニプロ",
+          "scope": "package",
+          "source_pages": [1],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "190-06760-9",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）",
+                "plans": [{"event": "stock_depletion", "timing": "2025年10月予定"}],
+                "note": "案内時点の出荷量はA（通常）と記載。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "190-06763-0",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）",
+                "plans": [{"event": "stock_depletion", "timing": "2025年9月予定"}],
+                "note": "案内時点の出荷量はB（減少）。2025年9月の特約店向け割当数も減らす予定でした。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "190-06764-7",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）",
+                "plans": [{"event": "stock_depletion", "timing": "2026年3月予定"}],
+                "note": "案内時点の出荷量はA（通常）と記載。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149117F2099",
+          "product_name": "テラムロ配合錠ＢＰ「ニプロ」",
+          "maker": "ニプロ",
+          "scope": "package",
+          "source_pages": [1],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "190-06770-8",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）",
+                "plans": [{"event": "stock_depletion", "timing": "2025年10月予定"}],
+                "note": "案内時点の出荷量はA（通常）と記載。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2025年8月のメーカー案内時点の情報です。包装ごとの実際の消尽日、停止日、現在の卸在庫・受注可否は未確認です。",
+        "この案内はニプロのAP・BPの対象包装に限ります。現在の品目単位の供給区分は厚労省の公表欄でご確認ください。"
+      ]
+    },
+    {
       "id": "sandoz-losartan-ptp100-resumed-20261027",
       "maker": "サンド",
       "title": "ロサルタンカリウム錠25mg・50mg「サンド」PTP100錠の通常出荷再開",
