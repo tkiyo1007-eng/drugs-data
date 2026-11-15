@@ -7407,6 +7407,80 @@
           "この案内はLTLファーマの指定包装に対するものです。他の剤形や他社品には適用されません。",
           "メーカーの出荷量見通しは、卸の在庫や納入可否を示すものではありません。"
         ]
-      }
+      },
+    {
+      "id": "maruishi-kcl-reason-202610",
+      "maker": "丸石製薬",
+      "title": "K.C.L.エリキシル（10w/v%）の公表理由（2026年10月）",
+      "url": "https://www.maruishi-pharm.co.jp/medical/media/K.C.L.ELIXIR_syukkateisi_20261016.pdf",
+      "announced_at": "2026-10",
+      "reason": "メーカーは2026年10月の資料で、添加剤として使用していたデヒドロ酢酸の原料が終売となり、日本薬局方に適合する代わりの原料を確保できていないことを説明しています。",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "33d6d6bc7e67626d5967ebc2a5bcae8953101f66ed7490614bc944d1f443ede3",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "targets": [
+        {
+          "yj_code": "3229002S1026",
+          "product_name": "Ｋ．Ｃ．Ｌ．エリキシル（１０Ｗ／Ｖ％）",
+          "maker": "丸石製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "500mL（瓶）",
+              "unified_product_code": "211304935"
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料発表時点のメーカー説明であり、現在の供給区分・出荷量・実在庫・受注可否を示すものではありません。",
+        "この欄は公表理由のみの補足です。代替品の有無や切替可否を判断するものではありません。",
+        "この資料は手動確認したもので、後続案内を自動追跡していません。",
+        "本資料の在庫消尽後の一時停止は将来の予定です。現在供給停止・販売中止になったとの確認ではありません。"
+      ]
+    },
+    {
+      "id": "nipro-ascorbic1g-reason-202611",
+      "maker": "ニプロ",
+      "title": "アスコルビン酸注1g「NP」の公表理由（2026年11月）",
+      "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001Uj4aLIAR",
+      "announced_at": "2026-11",
+      "reason": "メーカーは2026年11月の資料で、想定を上回る注文により次回納品まで供給に支障が生じる見通しとなったため、既存の医療機関への供給を優先し、新規注文の辞退と出荷数の割当を行うことを説明しています。",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "51fb559cd01eb8a4feaebba400db73aaad8bbecfc1c1973f1fb7d56d4fb9d2e8",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "targets": [
+        {
+          "yj_code": "3140400A5072",
+          "product_name": "アスコルビン酸注１ｇ「ＮＰ」",
+          "maker": "ニプロ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×50管",
+              "unified_product_code": "190040022"
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料発表時点のメーカー説明であり、現在の供給区分・出荷量・実在庫・受注可否を示すものではありません。",
+        "この欄は公表理由のみの補足です。代替品の有無や切替可否を判断するものではありません。",
+        "この資料は手動確認したもので、後続案内を自動追跡していません。",
+        "100mg・500mg製品はこの補足の対象外です。"
+      ]
+    }
   ]
 }
