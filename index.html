@@ -7274,25 +7274,35 @@ function rememberLoadedPublicData(url, body){
     })).catch(()=>null));
   }catch(error){} // 比較できなくても、既存の検索データ読み込みは妨げない。
 }
-function publishedDataDiffers(manifest, loaded){
+function comparePublishedData(manifest, loaded){
   if(!manifest || manifest.schema_version !== 1 || typeof manifest.source_commit !== "string"
     || !/^[0-9a-f]{40}$/.test(manifest.source_commit)
-    || !manifest.files || typeof manifest.files !== "object" || Array.isArray(manifest.files)) return false;
-  if(!loaded.has("drugs_app_ready.csv") || !loaded.has("version.json")) return false;
+    || !manifest.files || typeof manifest.files !== "object" || Array.isArray(manifest.files)) return "unknown";
+  if(!loaded.has("drugs_app_ready.csv") || !loaded.has("version.json")) return "unknown";
   // 欠落・不正な配信表は変更の証拠にしない。対象は読み込み済みの検索・補足データだけ。
   for(const [name, actual] of loaded){
     const entry = manifest.files[name];
     if(!actual || !entry || typeof entry.sha256 !== "string" || !/^[0-9a-f]{64}$/.test(entry.sha256)
-      || !Number.isSafeInteger(entry.bytes) || entry.bytes <= 0) return false;
+      || !Number.isSafeInteger(entry.bytes) || entry.bytes <= 0) return "unknown";
   }
   return [...loaded].some(([name, actual])=>manifest.files[name].sha256 !== actual.sha256
-    || manifest.files[name].bytes !== actual.bytes);
+    || manifest.files[name].bytes !== actual.bytes) ? "different" : "same";
+}
+async function loadedDataFingerprints(names){
+  return new Map(await Promise.all([...names].map(async name=>[name, await LOADED_PUBLIC_DATA.get(name)])));
+}
+async function readPublishedDataManifest(){
+  try{
+    const response = await fetchFirst(["public-data-manifest.json"]);
+    return response && !responseUsesCachedData(response) ? await response.json() : null;
+  }catch(error){ return null; }
 }
 const PUBLIC_UPDATE_INTERVAL_MS = 15*60*1000;
 const PUBLIC_UPDATE_RETURN_GAP_MS = 60*1000;
 let publicUpdateLastAttempt = null, publicUpdatePending = null;
-async function checkForPublishedUpdate(){
-  if(!LIVE || document.hidden || navigator.onLine === false
+let initialSupplyCheckFinished = false;
+async function checkForPublishedUpdate(initialManifest){
+  if(!initialSupplyCheckFinished || !LIVE || document.hidden || navigator.onLine === false
     || !LOADED_PUBLIC_DATA.has("drugs_app_ready.csv") || !LOADED_PUBLIC_DATA.has("version.json")) return;
   if(publicUpdatePending) return publicUpdatePending;
   const now = Date.now();
@@ -7302,11 +7312,9 @@ async function checkForPublishedUpdate(){
   publicUpdatePending = (async()=>{
     try{
       // 同一サイトの検証済みPages生成物のみ確認。失敗を「更新なし」「最新」に置換しない。
-      const response = await fetchFirst(["public-data-manifest.json"]);
-      if(!response || responseUsesCachedData(response)) return;
-      const manifest = await response.json();
-      const loaded = new Map(await Promise.all([...LOADED_PUBLIC_DATA].map(async ([name, value])=>[name,await value])));
-      if(publishedDataDiffers(manifest, loaded)) document.getElementById("dataUpdateNotice").hidden = false;
+      const manifest = initialManifest === undefined ? await readPublishedDataManifest() : initialManifest;
+      const loaded = await loadedDataFingerprints(LOADED_PUBLIC_DATA.keys());
+      if(comparePublishedData(manifest, loaded) === "different") document.getElementById("dataUpdateNotice").hidden = false;
     }catch(error){} // 既存の画面・基準日・保存内容を維持する。
   })();
   try{ await publicUpdatePending; }finally{ publicUpdatePending = null; }
@@ -7621,20 +7629,31 @@ function failDataLoad(message){
   document.getElementById("legend").innerHTML = active.map(([k,label])=>
     `<div><span class="dot" style="color:${STATUS_DOT[k]};background:${STATUS_DOT[k]}"></span>${label} ${(counts[k]/total*100).toFixed(1)}%</div>`).join("");
 
-  // データ日付(version.json)
+  // 別々のHTTP応答が200でも、公開切替中に異なる版のCSVと日付が届くことがある。
+  // 配信整合性表で両方の本文を照合できたときだけ、全体と原Excelの基準日を表示する。
   const vres = await fetchFirst(VER_SOURCES);
+  let initialManifest;
   if(vres){
     const versionCached = responseUsesCachedData(vres);
     if(versionCached) showCachedDataNotice();
     try{
       const v = await vres.json();
-      setDatasetDate(datasetDateFromVersion(v, csvCached, versionCached));
-      setSourceDate(sourceDateFromVersion(v, csvCached, versionCached));
+      if(!csvCached && !versionCached){
+        initialManifest = await readPublishedDataManifest();
+      }
+      const supplyData = await loadedDataFingerprints(["drugs_app_ready.csv", "version.json"]);
+      if(comparePublishedData(initialManifest, supplyData) === "same"){
+        setDatasetDate(datasetDateFromVersion(v, csvCached, versionCached));
+        setSourceDate(sourceDateFromVersion(v, csvCached, versionCached));
+      }else{
+        setDatasetDate("");
+      }
     }catch(e){ setDatasetDate(""); }
   }else{
     setDatasetDate("");
   }
-  void checkForPublishedUpdate();
+  initialSupplyCheckFinished = true;
+  void checkForPublishedUpdate(initialManifest);
  }catch(e){
    failDataLoad("公開データの読み込み中にエラーが発生しました。");
  }
