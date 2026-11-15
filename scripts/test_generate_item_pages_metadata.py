@@ -488,6 +488,8 @@ class ItemPageMetadataTests(unittest.TestCase):
             title_qualifier="1mL", hub_slugs=["limited"],
         )
         self.assertIn("<h1>同名注（1mL）", output)
+        self.assertEqual(output.count('href="limited.html"'), 1)
+        self.assertLess(output.index('href="limited.html"'), output.index('id="itemFreshnessTitle"'))
         self.assertIn(
             '<a href="limited.html">限定出荷（出荷調整）の一覧</a>',
             output,
@@ -659,8 +661,8 @@ class ItemPageMetadataTests(unittest.TestCase):
         self.assertIn('href="1234567F1234.html"', output)
 
         limited = hub_html("limited", entries, "2026-08-26")
-        self.assertIn("<title>限定出荷（出荷調整）の医薬品一覧", limited)
-        self.assertIn("<h1>限定出荷（出荷調整）の医薬品一覧</h1>", limited)
+        self.assertIn("<title>医薬品の出荷調整・限定出荷一覧", limited)
+        self.assertIn("<h1>医薬品の出荷調整・限定出荷一覧</h1>", limited)
 
     def test_hub_membership_uses_current_status_supplements_and_verified_recovery(self):
         entry = {"status": "ok", "delist": False, "supplements": [],

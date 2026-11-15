@@ -84,7 +84,7 @@ STATUS_NOTES = {
 ITEM_HUBS = {
     "limited": {
         "label": "限定出荷（出荷調整）",
-        "h1": "限定出荷（出荷調整）の医薬品一覧",
+        "h1": "医薬品の出荷調整・限定出荷一覧",
         "description": ("厚生労働省公表データ上で限定出荷（一般に出荷調整とも呼ばれる状態）となっている医療用医薬品を、"
                         "商品名・規格・メーカー・更新日とともに確認できます。"),
         "intro": ("厚生労働省公表データ上の供給区分が「限定出荷」の品目を掲載しています。"
@@ -1553,11 +1553,16 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
     lp_link = SITE_ROOT + "#item=" + quote(key, safe="")
     pmda = "https://www.pmda.go.jp/PmdaSearch/iyakuSearch/?nameWord=" + quote(name, safe="")
     smart_app_banner = esc(smart_app_banner_content(row))
+    # 現在も限定出荷の品目だけ、既存の一覧リンクを要点の直後へ移す。
+    early_hub_link = ('<nav class="hub-links" aria-label="限定出荷の一覧へ">'
+                      '<a href="limited.html">限定出荷（出荷調整）の一覧</a></nav>'
+                      if status == "limited" and "limited" in hub_slugs else "")
     hub_links = ""
     if hub_slugs:
         links = "".join(
             f'<a href="{esc(slug)}.html">{esc(ITEM_HUBS[slug]["label"])}の一覧</a>'
-            for slug in hub_slugs if slug in ITEM_HUBS)
+            for slug in hub_slugs if slug in ITEM_HUBS
+            and not (early_hub_link and slug == "limited"))
         if links:
             hub_links = f'<nav class="hub-links" aria-label="この品目の状態別一覧">{links}</nav>'
 
@@ -1817,7 +1822,7 @@ footer a{{color:var(--sub)}}
     <div class="stbox status-{status}">
       {supply_answer}{package_jump}
     </div>
-{variants_html}
+{early_hub_link}{variants_html}
     <section class="item-freshness" aria-labelledby="itemFreshnessTitle">
       <h2 id="itemFreshnessTitle">このページが参照したデータ</h2>
       {dataset_context}
@@ -2392,6 +2397,14 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
     evidence_note = ('''<p class="evidence-note">理由と解除・解消見込みは公表欄の記載です。「あり」だけでは具体的な解除日を示しません。
 <a href="../guides/how-to-check-drug-supply.html#resumption">解除見込みとメーカー案内を確認する方法</a></p>'''
                      if slug in {"limited", "stopped"} else "")
+    limited_intro = ('''<section aria-labelledby="limitedGuideTitle">
+      <h2 id="limitedGuideTitle">出荷調整の薬を確認するには</h2>
+      <p>この一覧は、厚生労働省の公表区分が「限定出荷」の医薬品をまとめたものです。
+      <a href="#hubFilter">一覧内を薬品名・メーカー名で絞り込む</a>と、各品目の理由・解除見込みを確認できます。</p>
+      <p>原Excelの基準日とサイト取込日は上記に分けて表示しています。
+      <a href="recent-restrictions.html">最近の限定出荷・供給停止への区分変更</a>も確認できます。
+      公表上の区分は、個別の卸・薬局の在庫や受注可否とは異なります。</p>
+    </section>''' if slug == "limited" else "")
     return f"""<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -2450,7 +2463,7 @@ footer a{{color:#5A6B8C}}{HUB_FILTER_STYLE if searchable else ""}
     <h1>{esc(config["h1"])}</h1>
     <p class="lede">{esc(config["description"])}（{len(group):,}品目）</p>
     {dataset_dates_html(dataset_date, version_metadata)}
-    <p class="notice">{esc(config["intro"])} 医薬品の使用・変更は、公式情報を確認したうえで医師・薬剤師等の専門職が判断してください。</p>
+{limited_intro}    <p class="notice">{esc(config["intro"])} 医薬品の使用・変更は、公式情報を確認したうえで医師・薬剤師等の専門職が判断してください。</p>
     <nav class="entry-nav" aria-label="医薬品の探し方と確認方法">
       <a href="../#demo" data-dsn-event="search-cta-open">薬品名・メーカー名で検索</a>
       <a href="../ingredients/index.html">成分別に確認</a>
