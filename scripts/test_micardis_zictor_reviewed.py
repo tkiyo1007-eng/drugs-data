@@ -20,7 +20,8 @@ class NewManufacturerNotices(unittest.TestCase):
         target, = n['targets']
         self.assertEqual('1147700S1028', target['yj_code'])
         first, second = target['packages']
-        self.assertEqual(('188-488010', '188-488027'), (first['unified_product_code'], second['unified_product_code']))
+        self.assertEqual(('188-48801-0', '188-48802-7'), (first['unified_product_code'], second['unified_product_code']))
+        self.assertEqual(('(01)14987188488017', '(01)14987188488024'), (first['gs1_sales'], second['gs1_sales']))
         self.assertIn('2026年11月下旬', first['supply']['note'])
         self.assertIn('限定出荷継続', second['supply']['status_text'])
         self.assertNotEqual('stopped', first['supply']['status'])

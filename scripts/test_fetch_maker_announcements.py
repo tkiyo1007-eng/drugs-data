@@ -28,6 +28,26 @@ class AnnouncementMatchingTests(unittest.TestCase):
         return {"商品名": name, "一般名": "テスト成分", "製造メーカー": maker,
                 "販売メーカー": maker, "供給状況": status, "代替候補": alt}
 
+    def test_hisamitsu_notices_with_pdf_verified_strength(self):
+        name = "ジクトルテープ７５ｍｇ"
+        other_names = ["ジクトルテープ１０ｍｇ", "ジクトルテープ７５ｍｇ「他社」"]
+        rows = [self.row(name, "久光製薬", "②限定出荷"),
+                self.row(other_names[0], "久光製薬"), self.row(other_names[1], "別会社")]
+        first = "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260428_2.pdf"
+        latest = "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/261030.pdf"
+        unverified = "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/261113.pdf"
+        notices = [
+            ("久光製薬", "2026.04.28 ジクトルテープ75mg 限定出荷", first),
+            ("久光製薬", "2026.10.30 ジクトルテープ限定出荷に関するお知らせ（第四報）", latest),
+            ("久光製薬", "2026.11.13 ジクトルテープ限定出荷に関するお知らせ", unverified),
+        ]
+        unmatched = []
+        matched = mod.match_to_csv(notices, self.make_csv(rows), unmatched_out=unmatched)
+        self.assertEqual(set(matched), {name})
+        self.assertEqual(matched[name]["url"], latest)
+        self.assertEqual(matched[name]["event_type"], "limited")
+        self.assertEqual([item["url"] for item in unmatched], [unverified])
+
     def test_announcement_date_falls_back_to_official_pdf_url(self):
         self.assertEqual(
             mod.extract_announcement_date(

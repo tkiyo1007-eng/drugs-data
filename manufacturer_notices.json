@@ -5731,14 +5731,16 @@
       "maker": "久光製薬",
       "title": "ジクトルテープ75mg 限定出荷に関するお知らせ（第四報）",
       "url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/261030.pdf",
+      "source_index_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/",
       "announced_at": "2026-10",
       "listed_at": "2026-10-30",
-      "verified_at": "2026-11-05",
-      "content_updated_at": "2026-11-05",
+      "verified_at": "2026-11-15",
+      "content_updated_at": "2026-11-15",
       "sha256": "cee5ab5418fffe42bf60922bc4830bb14c5a613e508a0464962d614f031d392e",
       "collection_mode": "manual",
       "event_type": "limited",
       "reason": "限定出荷の早期解除と安定供給に必要な生産数量を確保するため、生産効率の向上を図ると案内しています。",
+      "resumption": "限定出荷は2026年4月30日から。解除時期は未定です。",
       "targets": [
         {
           "yj_code": "1147700S1028",
@@ -5751,7 +5753,8 @@
           "packages": [
             {
               "package": "70枚（1枚／1袋×70袋）",
-              "unified_product_code": "188-488010",
+              "unified_product_code": "188-48801-0",
+              "gs1_sales": "(01)14987188488017",
               "supply": {
                 "status": "limited",
                 "status_text": "第四報時点：限定出荷",
@@ -5761,7 +5764,8 @@
             },
             {
               "package": "70枚（7枚／1袋×10袋）",
-              "unified_product_code": "188-488027",
+              "unified_product_code": "188-48802-7",
+              "gs1_sales": "(01)14987188488024",
               "supply": {
                 "status": "limited",
                 "status_text": "第四報時点：限定出荷継続",
@@ -5776,7 +5780,8 @@
       "cautions": [
         "11月下旬からの出荷停止は予定であり、開始済みとの確認ではありません。",
         "メーカーの案内と厚労省の現在区分・卸在庫は別です。",
-        "原文は2026年10月、公式一覧掲載10月30日。後続案内は未確認で、この案内は自動追跡対象外です。"
+        "解除予定の経緯：6月8日の第二報で6月16日の解除を見送り、7月31日までの限定出荷を案内。7月16日の第三報では、解除直後の注文に対応できる在庫が確保できず、期限を未定に変更しました。",
+        "2026年11月15日に久光製薬の公式一覧を確認し、第四報より後の供給案内は見当たりませんでした。この原文の自動再確認は行っていません。"
       ]
     },
     {
