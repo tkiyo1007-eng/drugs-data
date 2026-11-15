@@ -2,6 +2,162 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "sawai-dalteparin-vial-supply-202611",
+      "maker": "沢井製薬",
+      "title": "ダルテパリンNa静注5000単位/5mL「サワイ」の限定出荷と供給一時停止予定",
+      "url": "https://med.sawai.co.jp/file/pr27_1068_2.pdf",
+      "source_index_url": "https://med.sawai.co.jp/con_list.php?con=4",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-13",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "2a7315c1a4c7e5bb4f1d2306e3789b9b24517fee0f49031de0e761e9e6f763c9",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "品質試験に時間を要して製造できず、品薄となったため、沢井製薬は在庫がなくなり次第、供給を一時停止すると案内しました。",
+      "resumption": "供給再開時期は未定。沢井製薬は確定次第案内するとしています。",
+      "maker_supply_status": {
+        "handling": "②限定出荷（自社の事情）。メーカー在庫がなくなった後は⑤供給停止の予定。",
+        "volume": "A（出荷量通常）。メーカー在庫がなくなった後はC（出荷停止）の予定。"
+      },
+      "targets": [
+        {
+          "yj_code": "3334403A2194",
+          "product_name": "ダルテパリンＮａ静注５０００単位／５ｍＬ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×10バイアル",
+              "unified_product_code": "080645016",
+              "gs1_sales": "(01)14987080645013",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（2026年11月のメーカー案内）",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年12月見込み"
+                  }
+                ],
+                "note": "統一商品コード080645016。メーカー在庫がなくなり次第、供給を一時停止する予定です。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "type": "沢井製薬の案内に記載された同成分の参考製品",
+          "target_yj_codes": [
+            "3334403A2194"
+          ],
+          "products": [
+            {
+              "name": "ダルテパリンＮａ静注５０００単位／２０ｍＬシリンジ「ニプロ」",
+              "yj_code": "3334403G5021",
+              "maker": "ニプロ",
+              "scope": "20mL×10シリンジ（統一商品コード458-12155-5）"
+            }
+          ],
+          "cautions": [
+            "両製品の電子添文では、血液透析時の灌流血液の凝固防止と汎発性血管内血液凝固症（DIC）の適応が共通します。",
+            "1容器あたりの総単位は同じですが、沢井製薬品はバイアル5mL・1,000単位/mL、ニプロ品はシリンジ20mL・250単位/mLです。切り替え時は電子添文と濃度、容器、投与機器の条件を医師・薬剤師が確認してください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "案内は沢井製薬のこの包装が対象です。現在の包装別の受注、卸在庫、実際の在庫消尽・停止は未確認です。"
+      ]
+    },
+    {
+      "id": "shionogi-rinderon-dp-ointment-package-discontinuation-202611",
+      "maker": "塩野義製薬",
+      "title": "リンデロン-DP軟膏の一部包装容量の販売中止予定",
+      "url": "https://www.shionogi.com/content/dam/hcp/jp/news/package/2026/RDDP-A-0001%28V01%29.pdf",
+      "source_index_url": "https://med.shionogi.co.jp/news/package/2026/261104_pdf.html",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-04",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "989fafa085df9d790a19fe73377c543c5e9f29ebd35791a012bf84addfb316b4",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "塩野義製薬は、包装を集約して生産効率を改善し、安定供給につなげると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2646703M1094",
+          "product_name": "リンデロン－ＤＰ軟膏",
+          "maker": "シオノギファーマ",
+          "seller": "塩野義製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5g（チューブ）×50本",
+              "unified_product_code": "087-00669-8",
+              "gs1_sales": "14987087006695",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年6月見込み"
+                  }
+                ],
+                "note": "統一商品コード087-00669-8。在庫がなくなり次第、販売中止予定です。"
+              }
+            },
+            {
+              "package": "10g（チューブ）×50本",
+              "unified_product_code": "087-00670-4",
+              "gs1_sales": "14987087006701",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年3月見込み"
+                  }
+                ],
+                "note": "統一商品コード087-00670-4。在庫がなくなり次第、販売中止予定です。"
+              }
+            },
+            {
+              "package": "5g（チューブ）×10本",
+              "unified_product_code": "087-00668-1",
+              "gs1_sales": "14987087006688",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード087-00668-1。塩野義製薬は販売継続と案内しています。"
+              }
+            },
+            {
+              "package": "200g（瓶）",
+              "unified_product_code": "087-00672-8",
+              "gs1_sales": "14987087006725",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード087-00672-8。塩野義製薬は販売継続と案内しています。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "販売中止は対象包装の在庫がなくなり次第です。在庫消尽予定は流通状況で変わることがあります。",
+        "掲載の対象は塩野義製薬販売の軟膏です。クリーム・ゾルの案内や、現在の受注・卸在庫、販売中止の実施は各原典でご確認ください。"
+      ]
+    },
+    {
       "id": "nobel-acenobel-500-limited-second-20250623",
       "maker": "ノーベルファーマ",
       "title": "アセノベル徐放錠500mgの限定出荷（第二報）",
