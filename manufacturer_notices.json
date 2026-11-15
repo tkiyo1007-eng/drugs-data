@@ -2,6 +2,215 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "hisamitsu-naboal-l30-560-limited-202610",
+      "maker": "久光製薬",
+      "title": "ナボールテープL30mg 560枚の限定出荷案内（2026年10月）",
+      "url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/261009.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-09",
+      "verified_at": "2026-11-15",
+      "content_updated_at": "2026-11-15",
+      "sha256": "98c595f41ff71be93363bea2ebbd46e627b2d2ec8a6cd94c55f23dbf07aa55a1",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "久光製薬は自社の事情によりすべての受注に対応できないため、560枚包装を限定出荷と案内しました。理由の詳細は公表されていません。",
+      "targets": [
+        {
+          "yj_code": "2649734S2062",
+          "product_name": "ナボールテープＬ３０ｍｇ",
+          "maker": "久光製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "560枚（7枚×80袋）",
+              "unified_product_code": "188-42256-4",
+              "gs1_sales_package": "(01)14987188422561",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情）",
+                "plans": [],
+                "note": "案内時点の出荷量はA（通常）。限定出荷は2026年10月9日から、解除時期は未定と記載。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "対象はL30mgの560枚包装です。15mgや別の包装には適用されません。",
+        "現在の卸在庫・受注可否は未確認です。"
+      ]
+    },
+    {
+      "id": "hisamitsu-topical-four-partial-package-discontinuation-202510",
+      "maker": "久光製薬",
+      "title": "久光製薬の外用鎮痛薬4品目 一部包装の販売中止案内（2025年10月）",
+      "url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/251002.pdf",
+      "announced_at": "2025-10",
+      "listed_at": "2025-10-02",
+      "verified_at": "2026-11-15",
+      "content_updated_at": "2026-11-15",
+      "sha256": "53f337612e1a06389b72a1ad6f09b514f00e73e3ff4d66a9cf1be2cf663a660a",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "メーカーは在庫がなくなり次第、一部包装の販売を中止すると案内しました。理由の詳細は公表されていません。",
+      "targets": [
+        {
+          "yj_code": "2649729S4030",
+          "product_name": "モーラスパップ６０ｍｇ",
+          "maker": "久光製薬",
+          "scope": "seller_route_and_package",
+          "seller": "久光製薬の案内対象（祐徳薬品工業の販売分は未確認）",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "70枚（7枚×10袋）",
+              "unified_product_code": "188-41117-9",
+              "gs1_sales_package": "(01)14987188411176",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "在庫がなくなり次第、販売を中止すると案内された包装。出荷終了予定は2025年12月上旬。"
+              }
+            },
+            {
+              "package": "280枚（7枚×40袋）",
+              "unified_product_code": "188-41128-5",
+              "gs1_sales_package": "(01)14987188411282",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "この文書で販売継続とされた包装。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2649734S1066",
+          "product_name": "ナボールテープ１５ｍｇ",
+          "maker": "久光製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "70枚（7枚×10袋）",
+              "unified_product_code": "188-42218-2",
+              "gs1_sales_package": "(01)14987188422189",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "在庫がなくなり次第、販売を中止すると案内された包装。出荷終了予定は2026年6月上旬。"
+              }
+            },
+            {
+              "package": "350枚（7枚×50袋）",
+              "unified_product_code": "188-42235-9",
+              "gs1_sales_package": "(01)14987188422356",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "在庫がなくなり次第、販売を中止すると案内された包装。出荷終了予定は2026年6月下旬。"
+              }
+            },
+            {
+              "package": "700枚（7枚×100袋）",
+              "unified_product_code": "188-42270-0",
+              "gs1_sales_package": "(01)14987188422707",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "この文書で販売継続とされた包装。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2649734S2062",
+          "product_name": "ナボールテープＬ３０ｍｇ",
+          "maker": "久光製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "70枚（7枚×10袋）",
+              "unified_product_code": "188-42217-5",
+              "gs1_sales_package": "(01)14987188422172",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "在庫がなくなり次第、販売を中止すると案内された包装。出荷終了予定は2025年12月上旬。"
+              }
+            },
+            {
+              "package": "280枚（7枚×40袋）",
+              "unified_product_code": "188-42228-1",
+              "gs1_sales_package": "(01)14987188422288",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "在庫がなくなり次第、販売を中止すると案内された包装。出荷終了予定は2025年12月上旬。"
+              }
+            },
+            {
+              "package": "560枚（7枚×80袋）",
+              "unified_product_code": "188-42256-4",
+              "gs1_sales_package": "(01)14987188422561",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "この文書で販売継続とされた包装。2026年10月9日公表の限定出荷案内も参照してください。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2649731S1321",
+          "product_name": "フェルビナクテープ７０ｍｇ「久光」",
+          "maker": "久光製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "280枚（7枚×40袋）",
+              "unified_product_code": "188-44210-4",
+              "gs1_sales_package": "(01)14987188442101",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "在庫がなくなり次第、販売を中止すると案内された包装。出荷終了予定は2025年12月中旬。"
+              }
+            },
+            {
+              "package": "560枚（7枚×80袋）",
+              "unified_product_code": "188-44211-1",
+              "gs1_sales_package": "(01)14987188442118",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "この文書で販売継続とされた包装。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカーは在庫・出荷状況によって予定時期が前後する場合があるとしています。実際の出荷終了日、現在の受注・在庫は未確認です。",
+        "販売継続とされた包装の現在の出荷状況は、後続案内と厚労省の公表値をご確認ください。"
+      ]
+    },
+    {
       "id": "nipro-teramuro-ap-bp-package-history-202508",
       "maker": "ニプロ",
       "title": "テラムロ配合錠AP・BP「ニプロ」の包装別供給案内（2025年8月）",
