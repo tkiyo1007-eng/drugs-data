@@ -32,6 +32,7 @@ MAKER_HOSTS = {
     'ノーベルファーマ': 'www.nobelpharma.co.jp',
     'ニプロ': 'med.nipro.co.jp',
     '塩野義製薬': 'www.shionogi.com',
+    'オルガノン': 'organonpro.com',
 }
 SCOPES = {'product', 'package', 'seller_route_and_package'}
 KINDS = {'discontinued', 'limited', 'stopped', 'resumed', 'resumption_planned', 'recall'}
