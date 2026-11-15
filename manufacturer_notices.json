@@ -2,6 +2,419 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "jg-ketotifen-ch-discontinuation-202611",
+      "maker": "日本ジェネリック",
+      "title": "ケトチフェン点眼液0.05％「CH」の販売中止予定",
+      "url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/KETOO_CHUUSHI_2611.pdf",
+      "source_index_url": "https://medical.nihon-generic.co.jp/news/",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-13",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "7893b23e68457b3fb0d9e45f3d1169fc58e3728c8f1f3b43e8fb5ee43d170a64",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "日本ジェネリックは諸般の事情により、在庫がなくなり次第販売を中止すると案内しました。この案内には具体的な事情の記載はありません。",
+      "targets": [
+        {
+          "yj_code": "1319730Q1311",
+          "product_name": "ケトチフェン点眼液０．０５％「ＣＨ」",
+          "maker": "長生堂製薬",
+          "seller": "日本ジェネリック",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×10本",
+              "unified_product_code": "792162313",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年2月頃"
+                  }
+                ],
+                "note": "統一商品コード792162313。在庫がなくなり次第、販売中止予定です。"
+              },
+              "gs1_sales": "14987792162310"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "type": "販売元の案内に記載された同成分・同濃度の参考製品",
+          "target_yj_codes": [
+            "1319730Q1311"
+          ],
+          "products": [
+            {
+              "name": "ケトチフェン点眼液０．０５％「日東」",
+              "yj_code": "1319730Q1397",
+              "maker": "日東メディック",
+              "scope": "5mL×10本（統一商品コード497305824）"
+            }
+          ],
+          "cautions": [
+            "両製品の電子添文で、ケトチフェン0.05％相当の水性点眼液、アレルギー性結膜炎の適応を確認しました。",
+            "添加剤の記載など各製品の条件は電子添文をご確認ください。参考品の受注・卸在庫は未確認です。"
+          ]
+        }
+      ],
+      "cautions": [
+        "経過措置期間は2028年3月31日までの予定です。メーカーは確定後に経過措置品目一覧で案内するとしています。",
+        "販売中止の実施と現在の受注・卸在庫は未確認です。"
+      ]
+    },
+    {
+      "id": "jg-cefaclor-pediatric-granules-limited-20261109",
+      "maker": "日本ジェネリック",
+      "title": "セファクロル細粒小児用10％「JG」100gの限定出荷（11月9日一覧）",
+      "url": "https://medical.nihon-generic.co.jp/uploadfiles/news/JG_product_list.pdf",
+      "source_index_url": "https://medical.nihon-generic.co.jp/news/",
+      "announced_at": "2026-11-09",
+      "listed_at": "2026-11-09",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "a18617f58292102f509b552ef2dcbbc32d6c87e54f4326808d99c87bc872976c",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "10月26日掲載の個別案内では、他社品の限定出荷による想定を超えた受注を理由に挙げています。11月9日の全品目一覧では、対象包装は出荷量減少・限定出荷です。",
+      "targets": [
+        {
+          "yj_code": "6132005C1240",
+          "product_name": "セファクロル細粒小児用１０％「ＪＧ」",
+          "maker": "長生堂製薬",
+          "seller": "日本ジェネリック",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            4
+          ],
+          "packages": [
+            {
+              "package": "バラ100g",
+              "unified_product_code": "792657987",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "note": "統一商品コード792657987。11月4日現在の川内工場の別紙には出荷再開品目と記載されています。",
+                "status_text": "③限定出荷（他社品の影響、11月9日一覧）"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "限定出荷の解除時期、現在の受注・卸在庫は原文からは確認できません。"
+      ]
+    },
+    {
+      "id": "jg-cefspan-granules-normal-20261109",
+      "maker": "日本ジェネリック",
+      "title": "セフスパン細粒50mg 100gの出荷再開と通常出荷（11月9日一覧）",
+      "url": "https://medical.nihon-generic.co.jp/uploadfiles/news/JG_product_list.pdf",
+      "source_index_url": "https://medical.nihon-generic.co.jp/news/",
+      "announced_at": "2026-11-09",
+      "listed_at": "2026-11-09",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "a18617f58292102f509b552ef2dcbbc32d6c87e54f4326808d99c87bc872976c",
+      "collection_mode": "manual",
+      "event_type": "resumed",
+      "reason": "長生堂製薬と日本ジェネリックは11月4日現在の川内工場の別紙に、この包装を出荷再開品目として掲載しました。11月9日の全品目一覧で通常出荷を確認しています。",
+      "targets": [
+        {
+          "yj_code": "6132008C1022",
+          "product_name": "セフスパン細粒５０ｍｇ",
+          "maker": "長生堂製薬",
+          "seller": "日本ジェネリック",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            5
+          ],
+          "packages": [
+            {
+              "package": "バラ100g",
+              "unified_product_code": "792655617",
+              "supply": {
+                "status": "normal",
+                "plans": [],
+                "note": "統一商品コード792655617。",
+                "status_text": "①通常出荷（11月9日一覧）"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "通常出荷の表記は細粒50mgの100g包装についての記載です。実際の受注や卸在庫は未確認です。"
+      ]
+    },
+    {
+      "id": "jg-kawauchi-package-stops-20261109",
+      "maker": "日本ジェネリック",
+      "title": "長生堂製薬 川内工場の出荷停止・包装中止（日本ジェネリック11月9日一覧）",
+      "url": "https://medical.nihon-generic.co.jp/uploadfiles/news/JG_product_list.pdf",
+      "source_index_url": "https://medical.nihon-generic.co.jp/news/",
+      "announced_at": "2026-11-09",
+      "listed_at": "2026-11-09",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "a18617f58292102f509b552ef2dcbbc32d6c87e54f4326808d99c87bc872976c",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "長生堂製薬は、川内工場の製造再開に時間を要する品目は出荷停止が続くと11月の文書で案内しました。各包装の区分は日本ジェネリックの11月9日一覧に基づきます。",
+      "targets": [
+        {
+          "yj_code": "6132005M1245",
+          "product_name": "セファクロルカプセル２５０ｍｇ「ＪＧ」",
+          "maker": "長生堂製薬",
+          "seller": "日本ジェネリック",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            4
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "792657819",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "note": "統一商品コード792657819。",
+                "status_text": "⑤供給停止（11月9日一覧）"
+              }
+            },
+            {
+              "package": "PTP600カプセル",
+              "unified_product_code": "792657840",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "note": "統一商品コード792657840。",
+                "status_text": "⑤供給停止（11月9日一覧）"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6132016C1035",
+          "product_name": "セフカペンピボキシル塩酸塩細粒小児用１０％「ＣＨ」",
+          "maker": "長生堂製薬",
+          "seller": "日本ジェネリック",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            5
+          ],
+          "packages": [
+            {
+              "package": "バラ100g",
+              "unified_product_code": "792654818",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "note": "統一商品コード792654818。",
+                "status_text": "⑤供給停止（11月9日一覧）"
+              }
+            },
+            {
+              "package": "0.5g×120包",
+              "unified_product_code": "792654825",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "note": "統一商品コード792654825。",
+                "status_text": "包装中止・⑤供給停止（11月9日一覧）"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6132016F1040",
+          "product_name": "セフカペンピボキシル塩酸塩錠７５ｍｇ「ＣＨ」",
+          "maker": "長生堂製薬",
+          "seller": "日本ジェネリック",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            5
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792654610",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "note": "統一商品コード792654610。",
+                "status_text": "⑤供給停止（11月9日一覧）"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6132016F2046",
+          "product_name": "セフカペンピボキシル塩酸塩錠１００ｍｇ「ＣＨ」",
+          "maker": "長生堂製薬",
+          "seller": "日本ジェネリック",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            5
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792654719",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "note": "統一商品コード792654719。",
+                "status_text": "⑤供給停止（11月9日一覧）"
+              }
+            },
+            {
+              "package": "PTP120錠（15錠×8）",
+              "unified_product_code": "792654726",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "note": "統一商品コード792654726。",
+                "status_text": "⑤供給停止（11月9日一覧）"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "792654757",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "note": "統一商品コード792654757。",
+                "status_text": "⑤供給停止（11月9日一覧）"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6132013M1126",
+          "product_name": "セフジニルカプセル５０ｍｇ「ＪＧ」",
+          "maker": "長生堂製薬",
+          "seller": "日本ジェネリック",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            5
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "792657215",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "note": "統一商品コード792657215。",
+                "status_text": "⑤供給停止（11月9日一覧）"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6132013M2149",
+          "product_name": "セフジニルカプセル１００ｍｇ「ＪＧ」",
+          "maker": "長生堂製薬",
+          "seller": "日本ジェネリック",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            5
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "792657314",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "note": "統一商品コード792657314。",
+                "status_text": "⑤供給停止（11月9日一覧）"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6132008M1028",
+          "product_name": "セフスパンカプセル５０ｍｇ",
+          "maker": "長生堂製薬",
+          "seller": "日本ジェネリック",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            5
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "792655419",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "note": "統一商品コード792655419。",
+                "status_text": "⑤供給停止（11月9日一覧）"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6132008M2024",
+          "product_name": "セフスパンカプセル１００ｍｇ",
+          "maker": "長生堂製薬",
+          "seller": "日本ジェネリック",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            5
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "792655518",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "note": "統一商品コード792655518。",
+                "status_text": "⑤供給停止（11月9日一覧）"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6132011F1101",
+          "product_name": "セフポドキシムプロキセチル錠１００ｍｇ「ＪＧ」",
+          "maker": "長生堂製薬",
+          "seller": "日本ジェネリック",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            5
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792657512",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "note": "統一商品コード792657512。",
+                "status_text": "⑤供給停止（11月9日一覧）"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "日本ジェネリック販売分の文書に記載された包装です。出荷再開時期、現在の受注や卸在庫は未確認です。"
+      ]
+    },
+    {
       "id": "sawai-dalteparin-vial-supply-202611",
       "maker": "沢井製薬",
       "title": "ダルテパリンNa静注5000単位/5mL「サワイ」の限定出荷と供給一時停止予定",
