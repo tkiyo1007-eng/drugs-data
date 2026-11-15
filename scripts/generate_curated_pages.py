@@ -692,8 +692,8 @@ def topic_page(topic: dict, related: list[dict[str, str]], generated_keys: set[s
                          f'<p class="note">{note}</p>'
                          f'<div class="products">{product_rows_html(related, generated_keys, lifecycle)}</div>')
     return f"""<!DOCTYPE html><html lang="ja"><head>
-{common_head(title, description, canonical, 'article', [article, breadcrumb])}<style>{STYLE}{price_style}</style></head><body>
-<div class="wrap"><header class="site"><a href="../">💊 医薬品供給ナビ</a></header>
+{common_head(title, description, canonical, 'article', [article, breadcrumb])}<style>{STYLE}{price_style}</style><link rel="stylesheet" href="../top-navigation.css"></head><body>
+<div class="wrap"><header class="site site-with-top"><a href="../">💊 医薬品供給ナビ</a><a class="top-link" href="../#top">トップへ</a></header>
 <nav class="crumb"><a href="../">トップ</a> › <a href="index.html">話題のニュース</a> › {esc(topic['tag'])}</nav><main>
 <article class="hero"><p class="eyebrow">{esc(topic['tag'])}｜{esc(topic['date'])}</p><h1>{esc(topic['title'])}</h1>
 <p class="lede">{esc(topic['lede'])}</p>{f'<ul class="points">{points}</ul>' if points else ''}
