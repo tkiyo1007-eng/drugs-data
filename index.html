@@ -459,6 +459,10 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   flex:1;min-width:0;border:none;outline:none;background:transparent;
   font-size:16px;font-family:inherit;color:var(--ink);
 }
+.search-clear{flex:none;width:44px;height:44px;padding:0;border:0;border-radius:50%;background:transparent;color:var(--ink);font-size:24px;cursor:pointer}
+.search-clear[hidden]{display:none}
+.search-clear:focus-visible{outline:2px solid var(--blue-mid);outline-offset:2px}
+.search-box input::-webkit-search-cancel-button{-webkit-appearance:none}
 .search-box input::placeholder{color:#9AA8CB}
 .pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
 .pill{
@@ -919,6 +923,16 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .modal-note{font-size:11.5px;color:var(--sub);margin-top:14px;line-height:1.8}
 .detail-shortcuts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:16px 0;padding:12px;border:1px solid var(--stroke);border-radius:16px;background:rgba(79,128,244,.04)}.detail-shortcuts[hidden]{display:none}.detail-shortcuts button{min-height:44px;padding:8px 14px;border:1px solid var(--stroke);border-radius:12px;background:var(--bg);color:var(--blue-deep);font:inherit;font-size:13px;font-weight:700;cursor:pointer}.detail-shortcuts button[hidden]{display:none}.detail-shortcuts button:not([hidden]){text-align:left;line-height:1.6}.detail-shortcuts button:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 .featured-research-copy a,.featured-research-sources a{color:#194cad;text-decoration:underline;text-underline-offset:.15em}
+/* 原因・参考候補を読みやすくする。本文・注意書き・原典の日付は変更しない。 */
+#trendingList .trending-reference{font-size:16px;font-weight:800;line-height:1.65;color:var(--ink);background:var(--bg);text-decoration:underline;text-underline-offset:3px}
+#trendingList .trending-hint{font-size:14px;line-height:1.7;color:var(--ink)}
+#mReferenceJump,#mRelatedJump{font-size:16px;font-weight:800;color:var(--ink);border:2px solid var(--blue-mid);background:var(--bg)}
+#mSupplyReference,#mAlternatives{font-size:16px;line-height:1.85;color:var(--ink);background:var(--bg);padding:16px;border:1px solid var(--blue-mid);border-radius:16px;overflow-wrap:anywhere}
+#mSupplyReference h4,#mAlternatives h4{font-size:18px;font-weight:800;line-height:1.6;color:var(--ink)}
+#mSupplyReference p,#mSupplyReference li,#mAlternatives ul{font-size:16px;line-height:1.85;color:var(--ink)}
+#mSupplyReference summary{font-size:16px;font-weight:800;line-height:1.7;color:var(--ink)}
+#mSupplyReference a,#mAlternatives a{font-size:15px;font-weight:700;color:var(--blue-deep);text-decoration:underline;text-underline-offset:3px}
+#mAlternatives .alternatives-date,#mAlternatives .alternatives-note{font-size:14px;line-height:1.8;color:var(--ink)}
 </style>
 <style media="(prefers-color-scheme: dark)" data-appearance-scheme="dark">
   .featured-research-copy a,.featured-research-sources a{color:#9dbbff}
@@ -1722,6 +1736,7 @@ html.season-autumn .autumn-sky{display:none}
     <div class="search-box">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       <input id="q" type="search" placeholder="薬品名・成分名・メーカー名・YJコードで検索" aria-label="薬品名・成分名・メーカー名・YJコードで検索" aria-describedby="searchHelp" autocomplete="off">
+      <button type="button" class="search-clear" id="searchClear" aria-label="検索語をクリア" hidden><span aria-hidden="true">×</span></button>
     </div>
 
     <button type="button" class="search-results-jump" id="searchResultsJump" aria-controls="meta list" hidden disabled>検索結果を見る</button>
@@ -3154,7 +3169,14 @@ const $watchPriorityResults = document.getElementById("watchPriorityResults");
 
 // 空検索では監視リストを主要機能として先に案内し、検索語や絞り込みがある間は
 // 結果を直後に表示する。CSSのorderでは読み上げ順が変わらないため、DOM自体を移す。
+const $searchClear = document.getElementById("searchClear");
+$searchClear.addEventListener("click", ()=>{
+  $q.value = "";
+  $q.focus({preventScroll:true});
+  $q.dispatchEvent(new Event("input", {bubbles:true}));
+});
 function syncSearchPriority(){
+  $searchClear.hidden = !$q.value;
   syncTrendingSearchState();
   const resultsFirst = Boolean($q.value.trim()) || filter !== "all";
   const anchor = resultsFirst ? $watchPriorityResults : $watchPriorityHome;
@@ -6422,8 +6444,7 @@ function renderTrending(){
     {slug:"amaluet",label:"アマルエット配合錠１番〜４番",q:"アマルエット配合錠"});
   entries.push({slug:"teramuro",label:"テラムロ配合錠",q:"テラムロ"},
     {slug:"fentos",label:"フェントステープ",q:"フェントステープ"},
-    {slug:"antebate-lotion",label:"アンテベートローション０．０５％",q:"アンテベートローション"},
-    {slug:"micardis",label:"ミカルディス錠",q:"ミカルディス"});
+    {slug:"antebate-lotion",label:"アンテベートローション０．０５％",q:"アンテベートローション"});
   // 表示順は編集上の選定であり、問い合わせの集計順位ではない。
   const featuredFirst = ["movicol", "teramuro", "juvela-ointment", "antebate-lotion", "zictor-tape-75mg", "hilnamin", "fentos", "micardis", "amaluet"];
   entries.sort((a,b)=>{
