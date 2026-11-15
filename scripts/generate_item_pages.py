@@ -570,14 +570,16 @@ def package_supply_html(target: dict) -> str:
         if not valid_package_supply(supply):
             supply = {"status": "unconfirmed", "plans": []}
         name = package.get("package", "") if isinstance(package, dict) else package
-        status = supply.get("status_text", "包装別情報未確認")
+        status = supply.get("status_text")
+        status_html = '<p><strong>案内時点の出荷対応：</strong>' + esc(status or "未確認") + '</p>'
         plans = [f'<li>{esc(PACKAGE_PLAN_LABELS[p["event"]])}：{esc(p["timing"])}</li>' for p in supply["plans"]]
-        note = f'<p>{esc(supply["note"])}</p>' if supply.get("note") else ""
+        note = f'<p><strong>案内の補足：</strong>{esc(supply["note"])}</p>' if supply.get("note") else ""
         plan_html = ('<ul>' + "".join(plans) + '</ul>' if plans
                      else '' if note else '<p>この包装の予定情報は未確認です。</p>')
+        details_html = plan_html + note
+        row_body = details_html + status_html if not status and (plans or note) else status_html + details_html
         rows.append('<div class="package-supply-row"><dt>' + esc(name) + '</dt>'
-                    + '<dd><p><strong>案内時点の出荷対応：</strong>' + esc(status) + '</p>'
-                    + plan_html + note + '</dd></div>')
+                    + '<dd>' + row_body + '</dd></div>')
     return ('<div class="package-supply"><h4>包装別のメーカー情報</h4>'
             '<p>この案内に記載された包装の情報です。厚労省区分・卸の在庫や受注可否とは別です。'
             '予定時期を過ぎても、停止・再開の実施を確認した意味ではありません。</p>'

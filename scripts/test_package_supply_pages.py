@@ -32,7 +32,7 @@ class PackageSupplyPageTests(unittest.TestCase):
     def test_per_package_unknown_is_not_inherited_from_known_neighbor(self):
         output = package_supply_html(self.notice()["targets"][0])
         self.assertEqual(1, output.count("限定出荷（その他）"))
-        self.assertEqual(1, output.count("包装別情報未確認"))
+        self.assertEqual(1, output.count("案内時点の出荷対応：</strong>未確認"))
         self.assertIn("掲載のない包装", output)
 
     def test_elapsed_plan_remains_plan_not_completed_status(self):
@@ -60,7 +60,9 @@ class PackageSupplyPageTests(unittest.TestCase):
         self.assertIn("&lt;script&gt;alert(1)&lt;/script&gt; 来月に出荷停止予定", output)
         self.assertNotIn("<script>", output)
         self.assertNotIn("この包装の予定情報は未確認です。", output)
-        self.assertIn("包装別情報未確認", output)
+        note = "案内の補足：</strong>&lt;script&gt;alert(1)&lt;/script&gt; 来月に出荷停止予定"
+        status = "案内時点の出荷対応：</strong>未確認"
+        self.assertLess(output.index(note), output.index(status))
 
     def test_zictor_future_stop_note_is_not_labeled_unknown(self):
         path = Path(__file__).resolve().parent.parent / "manufacturer_notices.json"
