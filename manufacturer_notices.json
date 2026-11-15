@@ -7661,6 +7661,123 @@
       "cautions": [
         "薬価基準の経過措置期間満了は2028年3月末の予定です。メーカーは満了日・薬価削除日を官報告示後に改めて案内するとしています。販売終了日は記載されていません。"
       ]
+    },
+    {
+      "id": "jg-olmesartan-5-10-limited-reason-202611",
+      "maker": "日本ジェネリック",
+      "title": "オルメサルタン錠5mg・10mg「JG」の限定出荷の理由",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1877",
+      "source_index_url": "https://medical.nihon-generic.co.jp/news/",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-05",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "8918531a6b752aabe424a6b02db51698f8d57e88d4a41fa58c475adbcb1e1188",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の限定出荷を受けて注文が想定を上回り、生産計画と在庫を踏まえると全ての注文に応えられない見通しとなったため、日本ジェネリックは対象包装を限定出荷としました。従来の数量を超える注文と新規採用を控えるよう案内しています。",
+      "targets": [
+        {
+          "yj_code": "2149044F3035",
+          "product_name": "オルメサルタン錠５ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792100308",
+              "supply": {
+                "status": "limited",
+                "status_text": "③限定出荷（他社品の影響）",
+                "plans": [],
+                "note": "統一商品コード792100308。案内時点の出荷量はA（出荷量通常）。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149044F1032",
+          "product_name": "オルメサルタン錠１０ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792100315",
+              "supply": {
+                "status": "limited",
+                "status_text": "③限定出荷（他社品の影響）",
+                "plans": [],
+                "note": "統一商品コード792100315。案内時点の出荷量はA（出荷量通常）。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "確認したメーカー原典に代替候補の記載はありません。",
+        "原典に解除予定日は記載されていません。現在の供給区分は厚労省欄をご確認ください。卸在庫・受注可否は未確認です。"
+      ]
+    },
+    {
+      "id": "jg-fexofenadine-60-limited-reason-202611",
+      "maker": "日本ジェネリック",
+      "title": "フェキソフェナジン塩酸塩錠60mg「JG」の限定出荷の理由",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1879",
+      "source_index_url": "https://medical.nihon-generic.co.jp/news/",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-05",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "e675dea5f5b6177358b139da66afe8d55f00ce2a2a7f4b05b419427c64793eca",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の限定出荷を受けて注文が想定を上回り、生産計画と在庫を踏まえると全ての注文に応えられない見通しとなったため、日本ジェネリックは対象包装を限定出荷としました。従来の数量を超える注文と新規採用を控えるよう案内しています。",
+      "targets": [
+        {
+          "yj_code": "4490023F1261",
+          "product_name": "フェキソフェナジン塩酸塩錠６０ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792411510",
+              "supply": {
+                "status": "limited",
+                "status_text": "③限定出荷（他社品の影響）",
+                "plans": [],
+                "note": "統一商品コード792411510。案内時点の出荷量はA（出荷量通常）。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "792411558",
+              "supply": {
+                "status": "limited",
+                "status_text": "③限定出荷（他社品の影響）",
+                "plans": [],
+                "note": "統一商品コード792411558。案内時点の出荷量はA（出荷量通常）。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "確認したメーカー原典に代替候補の記載はありません。",
+        "原典に解除予定日は記載されていません。現在の供給区分は厚労省欄をご確認ください。卸在庫・受注可否は未確認です。"
+      ]
     }
   ]
 }
