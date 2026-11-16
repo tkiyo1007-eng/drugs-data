@@ -24,6 +24,7 @@ MAKER_HOSTS = {
     '辰巳化学': 'www.tatsumi-kagaku.com',
     'セオリアファーマ': 'www.ceolia.co.jp',
     'ファイザー': 'www.pfizermedicalinformation.jp', 'サンド': 'sandoz-jp.cms.sandoz.com',
+    'サンドファーマ': 'sandoz-jp.cms.sandoz.com',
     '三和化学研究所': 'med.skk-net.com', '日本薬品工業': 'www.npi-inc.co.jp',
     '第一三共': 'www.medicalcommunity.jp', '第一三共エスファ': 'med.daiichisankyo-ep.co.jp',
     '東和薬品': 'med.towayakuhin.co.jp',
