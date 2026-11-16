@@ -10220,6 +10220,775 @@
       "cautions": [
         "資料で示された時期の経過は、実際の在庫消尽や出荷停止の確認を意味しません。現在の品目区分は厚労省公表欄をご確認ください。"
       ]
+    },
+    {
+      "id": "toaeiyo-bisrase-10-limited-202610",
+      "maker": "トーアエイヨー",
+      "title": "ビスラーゼ注射液10mgの限定出荷案内",
+      "url": "https://med.toaeiyo.co.jp/products/information/notice/info2610-bis.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-28",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "9688361d70d83bd4a4d793d1f89c2a3b2e844e1d98f43b23cb61c14a3ea938ad",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造委託先で製造の継続が難しく、供給継続の見通しが立たないため、既採用施設への供給を優先し、新規注文を辞退すると案内しています。",
+      "targets": [
+        {
+          "yj_code": "3131401A3032",
+          "product_name": "ビスラーゼ注射液１０ｍｇ",
+          "maker": "トーアエイヨー",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1mL×50管",
+              "unified_product_code": "142132119",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年6月見込み（2026年10月資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、10月のメーカー資料）",
+                "note": "統一商品コード 142132119、販売包装単位コード 14987142132116。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.toaeiyo.co.jp/products/information/notice/info2610-bis.pdf",
+          "target_yj_codes": [
+            "3131401A3032"
+          ],
+          "type": "トーアエイヨーが10mgの対象包装に対して明記した候補です。",
+          "products": [
+            {
+              "name": "ビタミンＢ２注１％「イセイ」",
+              "maker": "コーアイセイ",
+              "yj_code": "3131401A3067",
+              "scope": "1mL×50管（メーカー原文記載）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "メーカーは在庫消尽後に供給を停止する方針で、再開の見通しは立っていないと記載しています。"
+      ]
+    },
+    {
+      "id": "toaeiyo-bisrase-20-limited-202610",
+      "maker": "トーアエイヨー",
+      "title": "ビスラーゼ注射液20mgの限定出荷案内",
+      "url": "https://med.toaeiyo.co.jp/products/information/notice/info2610-bis.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-28",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "9688361d70d83bd4a4d793d1f89c2a3b2e844e1d98f43b23cb61c14a3ea938ad",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造委託先で製造の継続が難しく、供給継続の見通しが立たないため、既採用施設への供給を優先し、新規注文を辞退すると案内しています。",
+      "targets": [
+        {
+          "yj_code": "3131401A4020",
+          "product_name": "ビスラーゼ注射液２０ｍｇ",
+          "maker": "トーアエイヨー",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "2mL×50管",
+              "unified_product_code": "142132218",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年6月見込み（2026年10月資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、10月のメーカー資料）",
+                "note": "統一商品コード 142132218、販売包装単位コード 14987142132215。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "メーカーは在庫消尽後に供給を停止する方針で、再開の見通しは立っていないと記載しています。",
+        "メーカーは20mgの代替品はないと案内しています。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "toaeiyo-cibenol-limited-202604",
+      "maker": "トーアエイヨー",
+      "title": "シベノール錠50mg・100mgの限定出荷案内",
+      "url": "https://med.toaeiyo.co.jp/products/information/notice/info2604-cib.pdf",
+      "announced_at": "2026-04",
+      "listed_at": "2026-04-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "713cb0d5a00637de31cc151eaacf1bc731d86ca748a97188763c11c24b4de567",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の出荷停止で需要増が見込まれ、出荷量と在庫では対応が難しいため、既採用施設を優先し新規注文を辞退すると案内しています。",
+      "targets": [
+        {
+          "yj_code": "2129007F1020",
+          "product_name": "シベノール錠５０ｍｇ",
+          "maker": "トーアエイヨー",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "142411016",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、4月のメーカー資料）",
+                "note": "統一商品コード 142411016。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "142411023",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、4月のメーカー資料）",
+                "note": "統一商品コード 142411023。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2129007F2027",
+          "product_name": "シベノール錠１００ｍｇ",
+          "maker": "トーアエイヨー",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "142411115",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、4月のメーカー資料）",
+                "note": "統一商品コード 142411115。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "142411122",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、4月のメーカー資料）",
+                "note": "統一商品コード 142411122。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "両規格のPTP1,000錠とバラ1,000錠は、販売中止予定のためこの限定出荷案内の対象外です。",
+        "2026年11月版のメーカー供給一覧にも、対象包装の限定出荷が記載されています。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "toaeiyo-pantol-limited-202509",
+      "maker": "トーアエイヨー",
+      "title": "パントール注射液100mg・250mg・500mgの限定出荷案内",
+      "url": "https://med.toaeiyo.co.jp/products/information/notice/info2509-pnti.pdf",
+      "announced_at": "2025-09",
+      "listed_at": "2025-09-22",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "d5503d8ea3889695f94ac96288d233adc9bbe0372e4508c88e01d536895f5e0d",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社が事業継続を断念し同一成分薬が出荷停止となった影響で需要が増える見込みに対し、出荷量と在庫で対応できないとして、新規注文の辞退と出荷数の割り当てを続ける案内です。",
+      "targets": [
+        {
+          "yj_code": "3133401A1042",
+          "product_name": "パントール注射液１００ｍｇ",
+          "maker": "トーアエイヨー",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "50管",
+              "unified_product_code": "142122110",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、9月のメーカー資料）",
+                "note": "統一商品コード 142122110。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3133401A2030",
+          "product_name": "パントール注射液２５０ｍｇ",
+          "maker": "トーアエイヨー",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "50管",
+              "unified_product_code": "142122219",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、9月のメーカー資料）",
+                "note": "統一商品コード 142122219。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3133401A3045",
+          "product_name": "パントール注射液５００ｍｇ",
+          "maker": "トーアエイヨー",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "50管",
+              "unified_product_code": "142122516",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、9月のメーカー資料）",
+                "note": "統一商品コード 142122516。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年11月版のメーカー供給一覧でも、対象3規格は限定出荷で、解除見込みは未定です。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "teika-latatimo-limited-202606",
+      "maker": "テイカ製薬",
+      "title": "ラタチモ配合点眼液「TS」の出荷再開・限定出荷案内",
+      "url": "https://teika-products.jp/upFiles/1780535837.pdf",
+      "announced_at": "2026-06",
+      "listed_at": "2026-06-04",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "e3edafd5bac7e7a06cfbdac61a762102900dbe354b766f16c265b30450d8ba22",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "テイカ製薬は2026年6月4日に2.5mL×10本の出荷を再開し、十分な在庫を確保するまで新規購入を控えるよう案内しました。通常出荷の時期は改めて発表するとしています。",
+      "targets": [
+        {
+          "yj_code": "1319817Q1063",
+          "product_name": "ラタチモ配合点眼液「ＴＳ」",
+          "maker": "テイカ製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "2.5mL×10本",
+              "unified_product_code": "399026575",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、6月のメーカー資料）",
+                "note": "統一商品コード 399026575、販売包装単位コード 14987399026572。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "teika-pequiron-limited-202606",
+      "maker": "テイカ製薬",
+      "title": "ペキロンクリーム0.5％の限定出荷案内",
+      "url": "https://teika-products.jp/upFiles/1780270645.pdf",
+      "announced_at": "2026-06",
+      "listed_at": "2026-06-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "24d7796196d1aa0695848e6eaaa0f4bcd94d1b76be2b41051e2bdbf7d81ca91e",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社の類似薬の供給停止で需要が大きく増えたため、既存の取引先への供給を優先して限定出荷にすると案内しています。解除時期は他社の供給状況を踏まえて別途案内する方針です。",
+      "targets": [
+        {
+          "yj_code": "2659711N1033",
+          "product_name": "ペキロンクリーム０．５％",
+          "maker": "テイカ製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10g×10本",
+              "unified_product_code": "399074590",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 399074590、販売包装単位コード 14987399074597。"
+              }
+            },
+            {
+              "package": "10g×50本",
+              "unified_product_code": "399074606",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 399074606、販売包装単位コード 14987399074603。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "jg-miglitol-50-pack-202608",
+      "maker": "日本ジェネリック",
+      "title": "ミグリトール錠50mg「JG」の包装集約と代替包装",
+      "url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/MIGLI50_CHUUSHI_2608.pdf",
+      "announced_at": "2026-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "c1d6cf98a24d547a6856131f06f6a47b82ae585ba770ff8068d80f6bd14b81b9",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "日本ジェネリックは安定供給に向けた生産体制の再構築で包装を集約すると案内しました。販売を続けるPTP100錠は他社品の影響で限定出荷と記載されています。",
+      "targets": [
+        {
+          "yj_code": "3969009F2046",
+          "product_name": "ミグリトール錠５０ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "792313852",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月頃見込み（2026年8月資料）"
+                  }
+                ],
+                "note": "統一商品コード 792313852、販売包装単位コード 14987792313859。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792313814",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、8月のメーカー資料）",
+                "note": "統一商品コード 792313814、販売包装単位コード 14987792313811。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/MIGLI50_CHUUSHI_2608.pdf",
+          "target_yj_codes": [
+            "3969009F2046"
+          ],
+          "type": "メーカーが販売中止対象のPTP500錠を採用している医療機関に案内した同一製品の別包装です。",
+          "products": [
+            {
+              "name": "ミグリトール錠５０ｍｇ「ＪＧ」",
+              "maker": "日本ジェネリック",
+              "yj_code": "3969009F2046",
+              "scope": "PTP100錠（統一商品コード 792313814、販売包装単位コード 14987792313811）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "2026年11月9日のメーカー一覧でもPTP100錠は限定出荷です。"
+      ]
+    },
+    {
+      "id": "jg-losarhyd-hd-discontinuation-202609",
+      "maker": "日本ジェネリック",
+      "title": "ロサルヒド配合錠HD「JG」の販売中止と代替品案内",
+      "url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/LOSHY00_CHUUSHI_2609.pdf",
+      "announced_at": "2026-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "0b1bb3a10b9a4bbadfb110e2c47a375eae2fb65b3c9575189806bb3a1491343a",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "日本ジェネリックは在庫限りで販売中止と案内しました。この資料に販売中止の具体的な理由の記載はありません。",
+      "targets": [
+        {
+          "yj_code": "2149110F2046",
+          "product_name": "ロサルヒド配合錠ＨＤ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792219918",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年12月頃見込み（2026年9月資料）"
+                  }
+                ],
+                "note": "統一商品コード 792219918、販売包装単位コード 14987792219915。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/LOSHY00_CHUUSHI_2609.pdf",
+          "target_yj_codes": [
+            "2149110F2046"
+          ],
+          "type": "メーカーがHDの対象包装に対して明記した候補です。",
+          "products": [
+            {
+              "name": "ロサルヒド配合錠ＨＤ「ＹＤ」",
+              "maker": "陽進堂ホールディングス",
+              "yj_code": "2149110F2160",
+              "scope": "PTP100錠（統一商品コード 476171204、販売包装単位コード 14987476171201）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "メーカー資料上の経過措置は2028年3月31日までの予定です。"
+      ]
+    },
+    {
+      "id": "towa-ambroxol-er-45-discontinuation-202601",
+      "maker": "東和薬品",
+      "title": "アンブロキソール塩酸塩徐放カプセル45mg「トーワ」の販売中止案内",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=81670&t=4&f=20260129_%E3%82%A2%E3%83%B3%E3%83%96%E3%83%AD%E3%82%AD%E3%82%BD%E3%83%BC%E3%83%AB%E5%A1%A9%E9%85%B8%E5%A1%A9%E5%BE%90%E6%94%BE%E3%82%AB%E3%83%97%E3%82%BB%E3%83%AB45mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2026-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "41b59634830ea6d50e8a2f335f7e54a4643f3215791f8ddbab683ea1436d4619",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "製造設備の老朽化などで供給継続が難しくなったため、東和薬品は対象包装を在庫限りで販売中止と案内しました。",
+      "targets": [
+        {
+          "yj_code": "2239001N1160",
+          "product_name": "アンブロキソール塩酸塩徐放カプセル４５ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "155061116",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年4月見込み（2026年1月資料）"
+                  }
+                ],
+                "note": "統一商品コード 155061116、販売包装単位コード 14987155061113。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=81670&t=4&f=20260129_%E3%82%A2%E3%83%B3%E3%83%96%E3%83%AD%E3%82%AD%E3%82%BD%E3%83%BC%E3%83%AB%E5%A1%A9%E9%85%B8%E5%A1%A9%E5%BE%90%E6%94%BE%E3%82%AB%E3%83%97%E3%82%BB%E3%83%AB45mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+          "target_yj_codes": [
+            "2239001N1160"
+          ],
+          "type": "メーカーが示した同成分・同規格のカプセルです。原文での候補対応時期は2026年4月以降の予定でした。",
+          "products": [
+            {
+              "name": "アンブロキソール塩酸塩徐放カプセル４５ｍｇ「ＺＥ」",
+              "maker": "全星薬品工業",
+              "yj_code": "2239001N1178",
+              "scope": "PTP100カプセル（統一商品コード 104067015）、PTP500カプセル（統一商品コード 104067022）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "メーカー資料上の経過措置満了は2027年3月末の予定です。"
+      ]
+    },
+    {
+      "id": "nipro-hibon-discontinuation-202608",
+      "maker": "ニプロ",
+      "title": "ハイボン錠20mgの販売中止と代替候補案内",
+      "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001JVHHGIA5",
+      "announced_at": "2026-08",
+      "listed_at": "2026-08-21",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "cf60ca03b473d2f65419421f7c989df74617f01ee50cc61544c6bbc41d9c0557",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "ニプロは対象2包装を在庫限りで販売中止と案内しました。この資料に販売中止の具体的な理由の記載はありません。",
+      "targets": [
+        {
+          "yj_code": "3131002F1276",
+          "product_name": "ハイボン錠２０ｍｇ",
+          "maker": "ニプロ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP700錠",
+              "unified_product_code": "190-00687-5",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月見込み（2026年8月資料）"
+                  }
+                ],
+                "note": "統一商品コード 190-00687-5、販売包装単位コード 14987190006872。"
+              }
+            },
+            {
+              "package": "バラ1000錠",
+              "unified_product_code": "190-00688-2",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年6月見込み（2026年8月資料）"
+                  }
+                ],
+                "note": "統一商品コード 190-00688-2、販売包装単位コード 14987190006889。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001JVHHGIA5",
+          "target_yj_codes": [
+            "3131002F1276"
+          ],
+          "type": "メーカーが対象2包装に対して明記した同成分・同規格の候補です。",
+          "products": [
+            {
+              "name": "リボフラビン酪酸エステル錠２０ｍｇ「ツルハラ」",
+              "maker": "鶴原製薬",
+              "yj_code": "3131002F1314",
+              "scope": "PTP100錠（271-08415-0）、PTP1,000錠（271-08416-7）、PTP6,000錠（271-08412-9）、バラ1,200錠（271-08414-3）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "メーカー資料上の経過措置期限は2028年3月末の予定です。"
+      ]
+    },
+    {
+      "id": "nipro-levofolinate-100-discontinuation-202610",
+      "maker": "ニプロ",
+      "title": "レボホリナート点滴静注用100mg「NP」の在庫消尽予定変更と代替候補",
+      "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001S03gRIAR",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "4f3f09150d8d5f0e8131a2683597d82202fc1d4c78a93ece1f2b3eb782ab8d49",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "同じ工場の他製品の製造トラブルを受けて100mg製剤の出荷可否を確認した結果、出荷可能と判明し、販売中止前の在庫消尽見込みを延長したとの案内です。",
+      "targets": [
+        {
+          "yj_code": "3929407D2086",
+          "product_name": "レボホリナート点滴静注用１００ｍｇ「ＮＰ」",
+          "maker": "ニプロ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5バイアル",
+              "unified_product_code": "190-12130-1",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年3月見込み。旧予定は2026年11月末（2026年10月資料）"
+                  }
+                ],
+                "note": "統一商品コード 190-12130-1、販売包装単位コード 14987190121308。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001S03gRIAR",
+          "target_yj_codes": [
+            "3929407D2086"
+          ],
+          "type": "メーカーが挙げた100mgの候補です。資料では「タカタ」は「NK」の屋号変更品で、2026年12月の薬価収載・発売後に代替供給を開始する予定です。",
+          "products": [
+            {
+              "name": "レボホリナート点滴静注用１００ｍｇ「ＮＫ」",
+              "maker": "高田製薬",
+              "yj_code": "3929407D2035",
+              "scope": "5バイアル（統一商品コード 120-12970-4、販売包装単位コード 14987120129701）"
+            },
+            {
+              "name": "レボホリナート点滴静注用100mg「タカタ」",
+              "maker": "高田製薬",
+              "scope": "5バイアル。2026年10月資料の発売予定品です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "メーカー資料上の「NP」の経過措置期限は2028年3月末の予定です。"
+      ]
+    },
+    {
+      "id": "iwaki-maxacalcitol-limited-202611",
+      "maker": "岩城製薬",
+      "title": "マキサカルシトール軟膏25μg/g「イワキ」の限定出荷案内",
+      "url": "https://www.iwakiseiyaku.co.jp/dcms_media/other/mcoosirase20261105.pdf",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "9f277d1e07cec722216b247595e9703293dc9f39477045a2c15b177d86a8025b",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "岩城製薬は品質面で確認が必要になったため、2026年11月5日から10g×10を限定出荷と案内しました。解除の時期は改めて案内するとしています。",
+      "targets": [
+        {
+          "yj_code": "2691702M1052",
+          "product_name": "マキサカルシトール軟膏２５μｇ／ｇ「イワキ」",
+          "maker": "岩城製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10g×10",
+              "unified_product_code": "020-004835",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、11月のメーカー資料）",
+                "note": "統一商品コード 020-004835、販売包装単位コード 14987020004832。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
