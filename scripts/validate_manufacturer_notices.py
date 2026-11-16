@@ -32,6 +32,7 @@ MAKER_HOSTS = {
     '住友ファーマ': 'sumitomo-pharma.jp',
     '岩城製薬': 'www.iwakiseiyaku.co.jp',
     '杏林製薬': 'www.kyorin-pharm.co.jp',
+    'キョーリンリメディオ': 'www.med.kyorin-rmd.com',
     '久光製薬': 'www.hisamitsu-pharm.jp',
     '日本ベーリンガーインゲルハイム': 'www.bij-kusuri.jp',
     '日本ジェネリック': 'medical.nihon-generic.co.jp',
