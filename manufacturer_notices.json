@@ -14408,6 +14408,766 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "nissin-ascorbic-202610",
+      "maker": "日新製薬",
+      "title": "アスコルビン酸注500mgPB「日新」供給に関するご連絡",
+      "url": "https://www.yg-nissin.co.jp/products/PDF/4492_6484_z1.pdf",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "b95dac8fb95459a7f574fa127bdfdd52271f73913f85411471f57bdc613a2d62",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "当時の生産計画と在庫では既採用施設への安定供給が難しく、日新製薬が対象包装を自社の事情による限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "3140401A1039",
+          "product_name": "アスコルビン酸注５００ｍｇＰＢ「日新」",
+          "maker": "日新製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×50管",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情）（10月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987447306427。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "日新製薬の2026年11月16日の包装別一覧では、対象包装の限定出荷理由は製造トラブル（製造委託を含む）と記載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nissin-saline-202510",
+      "maker": "日新製薬",
+      "title": "生食液NS（5mL）供給に関するご連絡",
+      "url": "https://www.yg-nissin.co.jp/products/PDF/4109_6197_z1.pdf",
+      "announced_at": "2025-10",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "32c5bfe51d811b1ba6061aae4486f835e9e42fff139a7478a59c5958900f9894",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "想定を上回る注文を受け、既採用施設への安定供給に支障が出たため、日新製薬が対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3311401A1097",
+          "product_name": "生食液ＮＳ",
+          "maker": "日新製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×50管（ルアーフィット）",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）（10月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987447338022。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "日新製薬の2026年11月16日版の包装別一覧でも対象包装の限定出荷を確認しました。",
+        "メーカー個別案内の5mL品と11月16日版の5mL×50管（ルアーフィット）を照合しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nissin-tranexamic-202601",
+      "maker": "日新製薬",
+      "title": "トラネキサム酸注250mg/5mL・1000mg/10mL「日新」供給に関するご連絡",
+      "url": "https://www.yg-nissin.co.jp/products/PDF/4431_6247_z1.pdf",
+      "announced_at": "2026-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "76d9cc8ebac2402fc0e644951521e5e3aa31542e3aa0719cf7ec81258663fcfb",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日新製薬は対象包装を自社の事情による限定出荷とし、出荷量の減少を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3327401A1160",
+          "product_name": "トラネキサム酸注２５０ｍｇ／５ｍＬ「日新」",
+          "maker": "日新製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×50管",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情）（1月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987447397227。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3327401A4274",
+          "product_name": "トラネキサム酸注１０００ｍｇ／１０ｍＬ「日新」",
+          "maker": "日新製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10mL×50管",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情）（1月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987447384227。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "日新製薬の2026年11月16日の包装別一覧では、対象包装の限定出荷理由は製造トラブル（製造委託を含む）と記載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nissin-nichifa-five-202610",
+      "maker": "日新製薬",
+      "title": "ニチファーゲン注（5mL×50管）供給に関するご連絡",
+      "url": "https://www.yg-nissin.co.jp/products/PDF/4195_6489_z1.pdf",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "9855054dd44f1f6cf6717f649af118add05a41885074f99356185c4612a08779",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "当時の生産計画と在庫では既採用施設への安定供給が難しく、日新製薬が対象包装を自社の事情による限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "3919502A2100",
+          "product_name": "ニチファーゲン注",
+          "maker": "日新製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×50管",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情）（10月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987447379223。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "日新製薬の2026年11月16日の包装別一覧では、対象包装の限定出荷理由は製造トラブル（製造委託を含む）と記載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nissin-nichifa-twenty-202610",
+      "maker": "日新製薬",
+      "title": "ニチファーゲン注（20mL×50管）供給に関するご連絡",
+      "url": "https://www.yg-nissin.co.jp/products/PDF/4196_6485_z1.pdf",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "03fdb37b6b5e4014aec61547b3940e3baa6b41b214ddd04127186b1237edcbde",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "当時の生産計画と在庫では既採用施設への安定供給が難しく、日新製薬が対象包装を自社の事情による限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "3919502A1155",
+          "product_name": "ニチファーゲン注",
+          "maker": "日新製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "20mL×50管（ルアーフィット）",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情）（10月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987447379322。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "日新製薬の2026年11月16日の包装別一覧では、対象包装の限定出荷理由は製造トラブル（製造委託を含む）と記載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nissin-famotidine-202610",
+      "maker": "日新製薬",
+      "title": "ファモチジン静注20mg「日新」供給に関するご連絡",
+      "url": "https://www.yg-nissin.co.jp/products/PDF/4213_6486_z1.pdf",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "04ce036dab8b93a31e8b4d2d1dad2edda3a5bcf8f790175377b203045df17d52",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "当時の生産計画と在庫では既採用施設への安定供給が難しく、日新製薬が対象包装を自社の事情による限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "2325401A3031",
+          "product_name": "ファモチジン静注２０ｍｇ「日新」",
+          "maker": "日新製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "20mL×10管",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情）（10月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987447529017。"
+              }
+            },
+            {
+              "package": "20mL×50管",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情）（10月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987447529024。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "日新製薬の2026年11月16日の包装別一覧では、対象包装の限定出荷理由は製造トラブル（製造委託を含む）と記載されています。",
+        "10管は出荷量通常、50管は出荷量減少と案内。受注への対応は両包装とも限定出荷です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nissin-fursultiamine-202610",
+      "maker": "日新製薬",
+      "title": "フルスルチアミン注50mg「日新」供給に関するご連絡",
+      "url": "https://www.yg-nissin.co.jp/products/PDF/4674_6487_z1.pdf",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "dd96f59cb824eca03e026648148ea6a84eecbcf4dedceb5c999aaaf4fbb4863c",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "当時の生産計画と在庫では既採用施設への安定供給が難しく、日新製薬が対象包装を自社の事情による限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "3122401A4137",
+          "product_name": "フルスルチアミン注５０ｍｇ「日新」",
+          "maker": "日新製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "20mL×50管（ルアーフィット）",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情）（10月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987447346027。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "日新製薬の2026年11月16日の包装別一覧では、対象包装の限定出荷理由は製造トラブル（製造委託を含む）と記載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nissin-lidocaine-half-202605",
+      "maker": "日新製薬",
+      "title": "リドカイン塩酸塩注0.5％「日新」供給に関するご連絡",
+      "url": "https://www.yg-nissin.co.jp/products/PDF/4662_6367_z1.pdf",
+      "announced_at": "2026-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "8ff95f2685c192799fa8dc5f4b00735b990c003603c1a548b0df6e3730cc75ea",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "想定を上回る注文を受け、既採用施設への安定供給に支障が出たため、日新製薬が対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "1214400A5060",
+          "product_name": "リドカイン塩酸塩注０．５％「日新」",
+          "maker": "日新製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×10管",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）（5月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987447170516。"
+              }
+            },
+            {
+              "package": "5mL×50管",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）（5月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987447170523。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "日新製薬の2026年11月16日版の包装別一覧でも対象包装の限定出荷を確認しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nissin-lidocaine-one-five-202605",
+      "maker": "日新製薬",
+      "title": "リドカイン塩酸塩注1％「日新」（5mL）供給に関するご連絡",
+      "url": "https://www.yg-nissin.co.jp/products/PDF/4661_6372_z1.pdf",
+      "announced_at": "2026-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "f9dec2656204da6e0332604f7c06e61de6b84b5f9949f96c0c3a79793fdc4dab",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日新製薬は、当時の生産計画と在庫では受注への対応が難しいとして5mLの限定出荷を継続し、50管包装の出荷量を減少に更新しました。",
+      "targets": [
+        {
+          "yj_code": "1214400A7063",
+          "product_name": "リドカイン塩酸塩注１％「日新」",
+          "maker": "日新製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×10管",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）（5月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987447171513。"
+              }
+            },
+            {
+              "package": "5mL×50管",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）（5月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987447171520。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "日新製薬の2026年11月16日版の包装別一覧でも対象包装の限定出荷を確認しました。",
+        "11月16日版の包装別一覧では5mLの2包装とも需要増が限定出荷の理由です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nissin-lidocaine-one-ten-202605",
+      "maker": "日新製薬",
+      "title": "リドカイン塩酸塩注1％「日新」（10mL）供給に関するご連絡",
+      "url": "https://www.yg-nissin.co.jp/products/PDF/4660_6369_z1.pdf",
+      "announced_at": "2026-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "945d513d61d112148b7e9133e8a98b71c7dd8441dc82223117a83a3fc40e3184",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "想定を上回る注文を受け、既採用施設への安定供給に支障が出たため、日新製薬が対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "1214400A8060",
+          "product_name": "リドカイン塩酸塩注１％「日新」",
+          "maker": "日新製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10mL×10管",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）（5月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987447171612。"
+              }
+            },
+            {
+              "package": "10mL×50管",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）（5月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987447171629。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "日新製薬の2026年11月16日版の包装別一覧でも対象包装の限定出荷を確認しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nissin-memantine-202610",
+      "maker": "日新製薬",
+      "title": "メマンチン塩酸塩OD錠15mg「日新」供給に関するご連絡",
+      "url": "https://www.yg-nissin.co.jp/products/PDF/4693_6481_z1.pdf",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "087fd374a5f66643f3eb34d8110a5ef76c588df0a600d78c1bcaf19b97738388",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日新製薬は、当時の生産計画と在庫では受注への対応が難しいとしてPTP14錠の限定出荷を継続し、出荷量を減少に更新しました。",
+      "targets": [
+        {
+          "yj_code": "1190018F7064",
+          "product_name": "メマンチン塩酸塩ＯＤ錠１５ｍｇ「日新」",
+          "maker": "日新製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP14錠",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）（10月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987447016012。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "日新製薬の2026年11月16日版の包装別一覧でも対象包装の限定出荷を確認しました。",
+        "11月16日版の包装別一覧では対象包装の限定出荷理由は需要増です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nissin-hyaluronate-one-202603",
+      "maker": "日新製薬",
+      "title": "ヒアルロン酸Na点眼液0.1％「日新」供給に関するお詫び",
+      "url": "https://www.yg-nissin.co.jp/products/PDF/4216_6274_z1.pdf",
+      "announced_at": "2026-03",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "5361a1b5102e9381afc20fe75cad36f8d264a974ededdf89728bec6e08d5d2fc",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "当時の生産計画と在庫では既採用施設への安定供給が難しく、日新製薬が対象包装を限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "1319720Q3116",
+          "product_name": "ヒアルロン酸Ｎａ点眼液０．１％「日新」",
+          "maker": "日新製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×10瓶",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情）（3月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987447130015。"
+              }
+            },
+            {
+              "package": "5mL×50瓶",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情）（3月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987447130022。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "日新製薬の2026年11月16日版の包装別一覧でも対象包装の限定出荷を確認しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nissin-hyaluronate-three-202603",
+      "maker": "日新製薬",
+      "title": "ヒアルロン酸Na点眼液0.3％「日新」供給に関するお詫び",
+      "url": "https://www.yg-nissin.co.jp/products/PDF/4551_6275_z1.pdf",
+      "announced_at": "2026-03",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "7d4b8053e48d76986de3c79d1530282352462d3e8a692182ebbdd86bd1f407d5",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "当時の生産計画と在庫では既採用施設への安定供給が難しく、日新製薬が対象包装を限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "1319720Y2128",
+          "product_name": "ヒアルロン酸Ｎａ点眼液０．３％「日新」",
+          "maker": "日新製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×10瓶",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情）（3月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987447129118。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "日新製薬の2026年11月16日版の包装別一覧でも対象包装の限定出荷を確認しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nissin-rescalmin-discontinuation-202606",
+      "maker": "日新製薬",
+      "title": "レスカルミン注 製造販売中止のご案内",
+      "url": "https://www.yg-nissin.co.jp/products/PDF/4293_6395_z1.pdf",
+      "announced_at": "2026-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ab39f9e347bd39edfcaf9725705ac9fc46e8828240ca966e033b13ee40c56286",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "日新製薬は、在庫がなくなり次第、レスカルミン注の販売を中止すると案内しました。原文の中止理由は「諸般の事情」です。",
+      "targets": [
+        {
+          "yj_code": "4419500A1030",
+          "product_name": "レスカルミン注",
+          "maker": "日新製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×50管",
+              "unified_product_code": "447403020",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月見込み（2026年6月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 447403020、販売包装単位コード 14987447403027。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.yg-nissin.co.jp/products/PDF/4293_6395_z1.pdf",
+          "target_yj_codes": [
+            "4419500A1030"
+          ],
+          "type": "メーカー文書に記載の別成分の候補",
+          "products": [
+            {
+              "name": "ジフェンヒドラミン塩酸塩注１０ｍｇ「日新」",
+              "maker": "日新製薬",
+              "yj_code": "4411400A1033",
+              "scope": "1mL×100管。原文ではアレルギー性鼻炎の効能・効果を挙げています。"
+            },
+            {
+              "name": "ジフェンヒドラミン塩酸塩注３０ｍｇ「日新」",
+              "maker": "日新製薬",
+              "yj_code": "4411400A2030",
+              "scope": "2mL×100管。原文ではアレルギー性鼻炎の効能・効果を挙げています。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "メーカー資料の経過措置期間満了は2027年3月末の予定です。",
+        "日新製薬の2026年11月16日版の包装別一覧でも対象包装の限定出荷を確認しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "jg-miglitol-limited-202508",
+      "maker": "日本ジェネリック",
+      "title": "ミグリトール錠75mg「JG」 限定出荷に関するご案内",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1783",
+      "announced_at": "2025-08",
+      "listed_at": "2025-08-21",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "9abfb5306ca6470909236f6d80cb3a7802d93eeae4c0c10cd0ed316f1a607763",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の限定出荷の影響で、自社の供給能力を超える需要が見込まれたため、日本ジェネリックが対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3969009F3042",
+          "product_name": "ミグリトール錠７５ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "792313913",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、8月のメーカー資料）",
+                "note": "統一商品コード 792313913。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "日本ジェネリックの2026年11月9日版の包装別一覧でも対象包装の限定出荷を確認しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "jg-zilumlo-limited-202608",
+      "maker": "日本ジェネリック",
+      "title": "ジルムロ配合錠HD「JG」 限定出荷に関するご案内",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1861",
+      "announced_at": "2026-08",
+      "listed_at": "2026-08-31",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "1fa717f4fc56d5169abc138ef1848b29a7b07f48002524bd13a79445eed7bb27",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の限定出荷の影響で、自社の供給能力を超える需要が見込まれたため、日本ジェネリックが対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149121F2036",
+          "product_name": "ジルムロ配合錠ＨＤ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792102692",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、8月のメーカー資料）",
+                "note": "統一商品コード 792102692。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "日本ジェネリックの2026年11月9日版の包装別一覧でも対象包装の限定出荷を確認しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
