@@ -16966,6 +16966,455 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "tatsumi-iluamic-ld-hd-supply-202604",
+      "maker": "辰巳化学",
+      "title": "イルアミクス配合錠LD・HD「TCK」供給についてのお知らせ",
+      "url": "https://www.tatsumi-kagaku.com/file/information/file/1111_1.pdf",
+      "announced_at": "2026-04",
+      "listed_at": "2026-04-14",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "dfbccb6a79ba9537e9623955adfb34ecc8446d7610a6a4f1e7dcbebee0412b36",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "原材料の入庫が遅れ、当初予定していた在庫量を確保できなかったと辰巳化学が案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149118F1062",
+          "product_name": "イルアミクス配合錠ＬＤ「ＴＣＫ」",
+          "maker": "辰巳化学",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "販売包装単位コード 14987124156611。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "販売包装単位コード 14987124156628。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149118F2069",
+          "product_name": "イルアミクス配合錠ＨＤ「ＴＣＫ」",
+          "maker": "辰巳化学",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "販売包装単位コード 14987124156710。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "販売包装単位コード 14987124156727。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "tatsumi-amvalo-supply-202604",
+      "maker": "辰巳化学",
+      "title": "アムバロ配合錠「TCK」供給についてのお知らせ",
+      "url": "https://www.tatsumi-kagaku.com/file/information/file/1110_1.pdf",
+      "announced_at": "2026-04",
+      "listed_at": "2026-04-14",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "7846bd0c1d6a4f0c3c59a399159db66aa96d42355ebe467b9525ac9fd9629394",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "需要が高い状態で生産が逼迫し、製造日程の見通しが立たず在庫を確保できなかったと辰巳化学が案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149114F1099",
+          "product_name": "アムバロ配合錠「ＴＣＫ」",
+          "maker": "辰巳化学",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "販売包装単位コード 14987124152316。"
+              }
+            },
+            {
+              "package": "PTP140錠",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "販売包装単位コード 14987124152347。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "販売包装単位コード 14987124152323。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "tatsumi-rosuvastatin5-supply-202607",
+      "maker": "辰巳化学",
+      "title": "ロスバスタチン錠5mg「TCK」供給についてのお知らせ",
+      "url": "https://www.tatsumi-kagaku.com/file/information/file/1123_1.pdf",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-03",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "19667f2e24eb3cfea71b78e436d277c07c6392dd7e68bcfabb6d6925ed9183fd",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "高い需要が続く中で生産体制が逼迫し、必要な在庫を確保できないと辰巳化学が案内しました。",
+      "targets": [
+        {
+          "yj_code": "2189017F2070",
+          "product_name": "ロスバスタチン錠５ｍｇ「ＴＣＫ」",
+          "maker": "辰巳化学",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "販売包装単位コード 14987124156314。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "販売包装単位コード 14987124156321。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "販売包装単位コード 14987124156369。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "対象は5mgの3包装です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "fuji-golimumab-bs-limited-202609",
+      "maker": "富士製薬工業",
+      "title": "ゴリムマブBS皮下注50mgシリンジ「F」限定出荷のご案内（第2版）",
+      "url": "https://www.fuji-pharma.jp/docs/430/resource_430_3966.pdf",
+      "announced_at": "2026-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ae346276b8d74cd650b16bdbc2bf990cc3ca8d4def1fe265cb7334ebfe1ead8d",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "発売後に注文が想定を大幅に上回り、継続治療中の患者向けにも必要数を確保しにくくなったため、富士製薬工業が特約店への出荷制限を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3999477G1027",
+          "product_name": "ゴリムマブＢＳ皮下注５０ｍｇシリンジ「Ｆ」",
+          "maker": "富士製薬工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1筒",
+              "unified_product_code": "431292104",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 431292104。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "9月の第2版では限定出荷解除を2026年11月下旬頃と見込んでいます。11月13日のメーカー決算説明会資料にも出荷制限の記載があります。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "fuji-denosumab-bs-limited-202611",
+      "maker": "富士製薬工業",
+      "title": "デノスマブBSの出荷制限要因（富士製薬工業の決算説明会資料）",
+      "url": "https://www.fujipharma.jp/__upload/JP_Business_Results_of_FY2026_20261113.pdf",
+      "announced_at": "2026-11",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "b7449624b0043ebbb831622d142df229afbe9851198edde1b7c857f70a019881",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "富士製薬工業の11月13日の資料では、デノスマブBSとゴリムマブBSの出荷制限の要因として、予想を上回る需要と供給量不足を挙げています。",
+      "targets": [
+        {
+          "yj_code": "3999478A1029",
+          "product_name": "デノスマブＢＳ皮下注１２０ｍｇＲＭ「Ｆ」",
+          "maker": "富士製薬工業",
+          "scope": "product",
+          "source_pages": [
+            26,
+            27
+          ],
+          "packages": []
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカーは供給元の生産能力増強と製造委託先の追加などを対策に挙げています。資料にはデノスマブBSの包装別状況や解除日は記載されていません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "pfizer-provera25-limited-202603",
+      "maker": "ファイザー",
+      "title": "プロベラ錠2.5mg 限定出荷のご案内",
+      "url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/PVR27Q001A.pdf",
+      "announced_at": "2026-03",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "34e36341119fc127696b2f762ba94072abbfbdcb4faf3cf76e1896cbbd47af20",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "海外の原薬製造所で機器が故障し、その機器を使えなくなったため、ファイザーは原薬製造を停止し、在庫を使いながら長期の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2478002F1070",
+          "product_name": "プロベラ錠２．５ｍｇ",
+          "maker": "ファイザー",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "SP100錠（10錠×10）",
+              "unified_product_code": "114-81840-9",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、3月のメーカー資料）",
+                "note": "統一商品コード 114-81840-9。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/PVR27Q001A.pdf",
+          "target_yj_codes": [
+            "2478002F1070"
+          ],
+          "type": "メーカーが案内した代替候補",
+          "products": [
+            {
+              "name": "デュファストン錠５ｍｇ",
+              "maker": "ヴィアトリス製薬合同会社",
+              "yj_code": "2478003F1031",
+              "scope": "PTP140錠のみ（PTP100錠は対象外）"
+            },
+            {
+              "name": "エフメノカプセル１００ｍｇ",
+              "maker": "富士製薬工業",
+              "yj_code": "2477001M1026",
+              "scope": "30カプセル包装のみ（300カプセル包装は対象外）"
+            },
+            {
+              "name": "ノアルテン錠（５ｍｇ）",
+              "maker": "富士製薬工業",
+              "yj_code": "2479002F1026",
+              "scope": "100錠"
+            },
+            {
+              "name": "ルトラール錠２ｍｇ",
+              "maker": "富士製薬工業",
+              "yj_code": "2478001F1040",
+              "scope": "100錠"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年3月の案内では通常出荷再開は未定です。候補の適応、効能・効果、用法・用量が異なる場合があるとメーカーは注意しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "pfizer-methotrexate-lyophilized-limited-202609",
+      "maker": "ファイザー",
+      "title": "注射用メソトレキセート5mg・50mg 限定出荷と液剤発売予定のご案内",
+      "url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/MTX27Q004A.pdf",
+      "announced_at": "2026-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "56a6a7dbfb9a29461774621e708ec4a3a582bf51c708c5cc8ac7c7b4e4cfd932",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "海外委託先の製造管理・品質管理への対応を評価した結果、凍結乾燥製剤の製造継続が困難と判断しました。現地での製造終了後、ファイザーは手元の在庫量を踏まえて限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "4222400D1024",
+          "product_name": "注射用メソトレキセート５ｍｇ",
+          "maker": "ファイザー",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "packages": [
+            {
+              "package": "1バイアル",
+              "unified_product_code": "114-55510-6",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 114-55510-6。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "4222400D2020",
+          "product_name": "注射用メソトレキセート５０ｍｇ",
+          "maker": "ファイザー",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "packages": [
+            {
+              "package": "1バイアル",
+              "unified_product_code": "114-55270-9",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 114-55270-9。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/MTX27Q004A.pdf",
+          "target_yj_codes": [
+            "4222400D1024"
+          ],
+          "type": "メーカーが案内した発売予定の代替製剤",
+          "products": [
+            {
+              "name": "メソトレキセート注射液5mg/2mL",
+              "maker": "ファイザー",
+              "scope": "1バイアル（114-97240-8）。メーカーの2026年9月案内では2026年末発売予定で、発売後の候補です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        },
+        {
+          "source_url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/MTX27Q004A.pdf",
+          "target_yj_codes": [
+            "4222400D2020"
+          ],
+          "type": "メーカーが案内した発売予定の代替製剤",
+          "products": [
+            {
+              "name": "メソトレキセート注射液50mg/2mL",
+              "maker": "ファイザー",
+              "scope": "1バイアル（114-97250-7）。メーカーの2026年9月案内では2026年末発売予定で、発売後の候補です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "9月の資料では、液剤の発売後に凍結乾燥製剤を在庫消尽次第販売終了予定としています。凍結乾燥製剤と液剤は剤形が異なります。最新の電子添文をご確認ください。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
     }
   ]
 }

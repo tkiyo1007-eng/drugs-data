@@ -45,13 +45,21 @@ MAKER_HOSTS = {
     'テイカ製薬': 'teika-products.jp',
     'MSD': 'www.msdconnect.jp',
     'アルフレッサ ファーマ': 'www.alfresa-pharma.co.jp',
+    '富士製薬工業': 'www.fuji-pharma.jp',
 }
+MAKER_MANUAL_SOURCE_HOSTS = {'富士製薬工業': ('www.fujipharma.jp',)}
 SCOPES = {'product', 'package', 'seller_route_and_package'}
 KINDS = {'discontinued', 'limited', 'stopped', 'resumed', 'resumption_planned', 'recall'}
 PACKAGE_STATUSES = {'normal', 'limited', 'stopped', 'unconfirmed'}
 PACKAGE_PLAN_EVENTS = {'stock_depletion', 'shipment_resumption', 'normal_shipment', 'discontinuation'}
 FORMAL_YJ = re.compile(r'[0-9][0-9A-Z]{11}\Z')
 ARCHIVE_FIELD = 'archived_from_csv_at'
+
+def is_official_maker_host(maker, hostname):
+    return bool(hostname) and (
+        hostname == MAKER_HOSTS.get(maker)
+        or hostname in MAKER_MANUAL_SOURCE_HOSTS.get(maker, ())
+    )
 
 def norm(value):
     return re.sub(r'\s+', '', unicodedata.normalize('NFKC', str(value or '')).lower())
@@ -126,7 +134,7 @@ def validate(document, rows):
             )):
                 errors.append(label + ': invalid maker supply status')
         u = urlparse(str(n.get('url') or ''))
-        if u.scheme != 'https' or u.hostname != MAKER_HOSTS.get(n.get('maker')) or u.username or u.password: errors.append(label + ': unofficial URL or wrong publisher')
+        if u.scheme != 'https' or not is_official_maker_host(n.get('maker'), u.hostname) or u.username or u.password: errors.append(label + ': unofficial URL or wrong publisher')
         if not re.fullmatch(r'[a-f0-9]{64}', str(n.get('sha256') or '')): errors.append(label + ': invalid source hash')
         if not isinstance(n.get('event_type'), str) or n['event_type'] not in KINDS: errors.append(label + ': invalid event type')
         if 'collection_mode' in n and n['collection_mode'] != 'manual': errors.append(label + ': invalid collection mode')

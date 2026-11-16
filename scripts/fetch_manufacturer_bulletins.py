@@ -19,7 +19,7 @@ import sys
 import urllib.error
 import urllib.parse
 import urllib.request
-from validate_manufacturer_notices import MAKER_HOSTS, valid_date
+from validate_manufacturer_notices import is_official_maker_host, valid_date
 
 JST = dt.timezone(dt.timedelta(hours=9))
 UA = "DrugSupplyNavi/1.0 (+https://kyokyu-navi.jp/)"
@@ -139,7 +139,7 @@ def validate_registry(registry, sources):
                 raise CollectionError("案内の収集modeが不正")
             # 保存原文を手動確認した履歴も公式出典を検証するが、取得scopeには追加しない。
             p = urllib.parse.urlsplit(normalized_url(n["url"]))
-            if (p.hostname != MAKER_HOSTS.get(n["maker"])
+            if (not is_official_maker_host(n["maker"], p.hostname)
                     or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", n["id"])
                     or not valid_date(n.get("announced_at"), month=True)
                     or not valid_date(n.get("verified_at"))
