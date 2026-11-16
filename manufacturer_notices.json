@@ -10989,6 +10989,1239 @@
       "cautions": [
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "sawai-irbe-amlo-202609",
+      "maker": "沢井製薬",
+      "title": "イルアミクス配合錠LD・HD「サワイ」の限定出荷と代替候補",
+      "url": "https://med.sawai.co.jp/file/pr27_4618_2.pdf",
+      "announced_at": "2026-09",
+      "listed_at": "2026-09-14",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "a47284e643f72e2f845a3beeedb675b6e1b77af5006f2d56f8e321be9170b74c",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造工場の生産能力が逼迫して安定供給が難しくなったため、メーカーは既採用施設への供給を優先し、在庫消尽まで限定出荷と案内しています。",
+      "targets": [
+        {
+          "yj_code": "2149118F1119",
+          "product_name": "イルアミクス配合錠ＬＤ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080250319",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年10月見込み（9月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 080250319、販売包装単位コード 14987080250316。"
+              }
+            },
+            {
+              "package": "バラ100錠",
+              "unified_product_code": "080250340",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年1月見込み（9月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 080250340、販売包装単位コード 14987080250347。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149118F2115",
+          "product_name": "イルアミクス配合錠ＨＤ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080251316",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月見込み（9月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 080251316、販売包装単位コード 14987080251313。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "080251323",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年12月見込み（9月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 080251323、販売包装単位コード 14987080251320。"
+              }
+            },
+            {
+              "package": "バラ100錠",
+              "unified_product_code": "080251347",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年12月見込み（9月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 080251347、販売包装単位コード 14987080251344。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr27_4618_2.pdf",
+          "target_yj_codes": [
+            "2149118F1119"
+          ],
+          "type": "沢井製薬が対象製品と同じ規格に対して原文で明記した候補です。",
+          "products": [
+            {
+              "name": "イルアミクス配合錠ＬＤ「オーハラ」",
+              "maker": "大原薬品工業",
+              "yj_code": "2149118F1089",
+              "scope": "PTP100錠（407103106）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        },
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr27_4618_2.pdf",
+          "target_yj_codes": [
+            "2149118F2115"
+          ],
+          "type": "沢井製薬が対象製品と同じ規格に対して原文で明記した候補です。",
+          "products": [
+            {
+              "name": "イルアミクス配合錠ＨＤ「オーハラ」",
+              "maker": "大原薬品工業",
+              "yj_code": "2149118F2085",
+              "scope": "PTP100錠（407103205）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "メーカーは在庫消尽後の一時供給停止と、再開時期の別途案内を示しています。"
+      ]
+    },
+    {
+      "id": "sawai-vals-hctz-202607",
+      "maker": "沢井製薬",
+      "title": "バルヒディオ配合錠MD「サワイ」の限定出荷・販売中止と代替候補",
+      "url": "https://med.sawai.co.jp/file/pr28_1774_3.pdf",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-15",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "5956fa95d38ff93c77cbb8cdb64b2da071b59b1672bde1944b59891104e3a8d9",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "安定供給体制の構築と生産効率の改善に向けて品目構成を見直し、沢井製薬は対象包装の販売中止を案内しました。 MDは既採用施設を優先するため、特約店・販売会社へ限定出荷としています。",
+      "targets": [
+        {
+          "yj_code": "2149112F1073",
+          "product_name": "バルヒディオ配合錠ＭＤ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080342113",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年8月見込み（7月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、7月のメーカー資料）",
+                "note": "統一商品コード 080342113、販売包装単位コード 14987080342110。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr28_1774_3.pdf",
+          "target_yj_codes": [
+            "2149112F1073"
+          ],
+          "type": "沢井製薬が対象製品と同じ規格に対して原文で明記した候補です。",
+          "products": [
+            {
+              "name": "バルヒディオ配合錠ＭＤ「ＮＩＧ」",
+              "maker": "日医工岐阜工場",
+              "yj_code": "2149112F1120",
+              "scope": "PTP100錠（376789639）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "メーカー資料の経過措置期間満了は2028年3月の予定です。"
+      ]
+    },
+    {
+      "id": "sawai-aml-ator-202608",
+      "maker": "沢井製薬",
+      "title": "アマルエット配合錠1〜4番「サワイ」の販売中止と代替候補",
+      "url": "https://med.sawai.co.jp/file/pr28_1756_1.pdf",
+      "announced_at": "2026-08",
+      "listed_at": "2026-08-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "f5460d30b98c27601aa16cc1690dc4302b7a36171552bf7c9fb1a1ea5b5e8206",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "安定供給体制の構築と生産効率の改善に向けて品目構成を見直し、沢井製薬は対象包装の販売中止を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2190101F1080",
+          "product_name": "アマルエット配合錠１番「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080127413",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年4月見込み（8月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 080127413、販売包装単位コード 14987080127410。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2190102F1084",
+          "product_name": "アマルエット配合錠２番「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080128519",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年4月見込み（8月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 080128519、販売包装単位コード 14987080128516。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2190103F1089",
+          "product_name": "アマルエット配合錠３番「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080129318",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年4月見込み（8月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 080129318、販売包装単位コード 14987080129315。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2190104F1083",
+          "product_name": "アマルエット配合錠４番「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080130611",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年4月見込み（8月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 080130611、販売包装単位コード 14987080130618。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr28_1756_1.pdf",
+          "target_yj_codes": [
+            "2190101F1080"
+          ],
+          "type": "メーカーが1〜4番に共通して挙げた成分別製剤です。原文には各番号に対応する組合せや用量の指定はありません。",
+          "products": [
+            {
+              "name": "アトルバスタチン錠５ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "2189015F1058",
+              "scope": "PTP100錠（080235019）、PTP140錠（080235071）、PTP500錠（080235026）、PTP1000錠（080235033）、バラ500錠（080235057）"
+            },
+            {
+              "name": "アトルバスタチン錠１０ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "2189015F2054",
+              "scope": "PTP100錠（080236016）、PTP140錠（080236078）、PTP500錠（080236023）、PTP700錠（080236085）、PTP1000錠（080236030）、バラ500錠（080236054）"
+            },
+            {
+              "name": "アムロジピン錠２．５ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "2171022F1282",
+              "scope": "PTP100錠（080146018）、PTP500錠（080146025）、バラ500錠（080146056）"
+            },
+            {
+              "name": "アムロジピン錠５ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "2171022F2289",
+              "scope": "PTP100錠（080150114）、PTP500錠（080150121）、PTP700錠（080150183）、PTP1000錠（080150138）、バラ500錠（080150152）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        },
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr28_1756_1.pdf",
+          "target_yj_codes": [
+            "2190102F1084"
+          ],
+          "type": "メーカーが1〜4番に共通して挙げた成分別製剤です。原文には各番号に対応する組合せや用量の指定はありません。",
+          "products": [
+            {
+              "name": "アトルバスタチン錠５ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "2189015F1058",
+              "scope": "PTP100錠（080235019）、PTP140錠（080235071）、PTP500錠（080235026）、PTP1000錠（080235033）、バラ500錠（080235057）"
+            },
+            {
+              "name": "アトルバスタチン錠１０ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "2189015F2054",
+              "scope": "PTP100錠（080236016）、PTP140錠（080236078）、PTP500錠（080236023）、PTP700錠（080236085）、PTP1000錠（080236030）、バラ500錠（080236054）"
+            },
+            {
+              "name": "アムロジピン錠２．５ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "2171022F1282",
+              "scope": "PTP100錠（080146018）、PTP500錠（080146025）、バラ500錠（080146056）"
+            },
+            {
+              "name": "アムロジピン錠５ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "2171022F2289",
+              "scope": "PTP100錠（080150114）、PTP500錠（080150121）、PTP700錠（080150183）、PTP1000錠（080150138）、バラ500錠（080150152）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        },
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr28_1756_1.pdf",
+          "target_yj_codes": [
+            "2190103F1089"
+          ],
+          "type": "メーカーが1〜4番に共通して挙げた成分別製剤です。原文には各番号に対応する組合せや用量の指定はありません。",
+          "products": [
+            {
+              "name": "アトルバスタチン錠５ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "2189015F1058",
+              "scope": "PTP100錠（080235019）、PTP140錠（080235071）、PTP500錠（080235026）、PTP1000錠（080235033）、バラ500錠（080235057）"
+            },
+            {
+              "name": "アトルバスタチン錠１０ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "2189015F2054",
+              "scope": "PTP100錠（080236016）、PTP140錠（080236078）、PTP500錠（080236023）、PTP700錠（080236085）、PTP1000錠（080236030）、バラ500錠（080236054）"
+            },
+            {
+              "name": "アムロジピン錠２．５ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "2171022F1282",
+              "scope": "PTP100錠（080146018）、PTP500錠（080146025）、バラ500錠（080146056）"
+            },
+            {
+              "name": "アムロジピン錠５ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "2171022F2289",
+              "scope": "PTP100錠（080150114）、PTP500錠（080150121）、PTP700錠（080150183）、PTP1000錠（080150138）、バラ500錠（080150152）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        },
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr28_1756_1.pdf",
+          "target_yj_codes": [
+            "2190104F1083"
+          ],
+          "type": "メーカーが1〜4番に共通して挙げた成分別製剤です。原文には各番号に対応する組合せや用量の指定はありません。",
+          "products": [
+            {
+              "name": "アトルバスタチン錠５ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "2189015F1058",
+              "scope": "PTP100錠（080235019）、PTP140錠（080235071）、PTP500錠（080235026）、PTP1000錠（080235033）、バラ500錠（080235057）"
+            },
+            {
+              "name": "アトルバスタチン錠１０ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "2189015F2054",
+              "scope": "PTP100錠（080236016）、PTP140錠（080236078）、PTP500錠（080236023）、PTP700錠（080236085）、PTP1000錠（080236030）、バラ500錠（080236054）"
+            },
+            {
+              "name": "アムロジピン錠２．５ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "2171022F1282",
+              "scope": "PTP100錠（080146018）、PTP500錠（080146025）、バラ500錠（080146056）"
+            },
+            {
+              "name": "アムロジピン錠５ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "2171022F2289",
+              "scope": "PTP100錠（080150114）、PTP500錠（080150121）、PTP700錠（080150183）、PTP1000錠（080150138）、バラ500錠（080150152）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "メーカー資料の経過措置期間満了は2028年3月の予定です。"
+      ]
+    },
+    {
+      "id": "sawai-alend17-202609",
+      "maker": "沢井製薬",
+      "title": "アレンドロン酸錠35mg「サワイ」の限定出荷と代替候補",
+      "url": "https://med.sawai.co.jp/file/pr27_1503_2.pdf",
+      "announced_at": "2026-09",
+      "listed_at": "2026-09-14",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "7889b72528f41c14f68cf01102037e755347864b2838fe6eb083688abe13cc10",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造工場の生産能力が逼迫して安定供給が難しくなったため、メーカーは既採用施設への供給を優先し、在庫消尽まで限定出荷と案内しています。",
+      "targets": [
+        {
+          "yj_code": "3999018F2141",
+          "product_name": "アレンドロン酸錠３５ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP20錠",
+              "unified_product_code": "080231011",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年10月見込み（9月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 080231011、販売包装単位コード 14987080231018。"
+              }
+            },
+            {
+              "package": "PTP40錠",
+              "unified_product_code": "080231028",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年10月見込み（9月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 080231028、販売包装単位コード 14987080231025。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr27_1503_2.pdf",
+          "target_yj_codes": [
+            "3999018F2141"
+          ],
+          "type": "沢井製薬が対象製品と同じ規格に対して原文で明記した候補です。",
+          "products": [
+            {
+              "name": "アレンドロン酸錠３５ｍｇ「日医工」",
+              "maker": "日医工",
+              "yj_code": "3999018F2095",
+              "scope": "PTP20錠（376-18191-4）、PTP40錠（376-18192-1）"
+            },
+            {
+              "name": "アレンドロン酸錠３５ｍｇ「ＮＩＧ」",
+              "maker": "日医工岐阜工場",
+              "yj_code": "3999018F2192",
+              "scope": "PTP20錠（376-71001-5）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "メーカーは在庫消尽後の一時供給停止と、再開時期の別途案内を示しています。"
+      ]
+    },
+    {
+      "id": "sawai-cilni20-202608",
+      "maker": "沢井製薬",
+      "title": "シルニジピン錠20mg「サワイ」の販売中止と代替候補",
+      "url": "https://med.sawai.co.jp/file/pr28_1773_2.pdf",
+      "announced_at": "2026-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "b4631ee5bc367294a90353ba5365930ded5f526ed8fb71089de8e22e3255d6f5",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "安定供給体制の構築と生産効率の改善に向けて品目構成を見直し、沢井製薬は対象包装の販売中止を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149037F3078",
+          "product_name": "シルニジピン錠２０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080107217",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年4月見込み（8月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 080107217、販売包装単位コード 14987080107214。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr28_1773_2.pdf",
+          "target_yj_codes": [
+            "2149037F3078"
+          ],
+          "type": "メーカーが明記した同成分の10mg製剤です。対象製品は20mgで、用量の置き換えはこの資料から判断できません。",
+          "products": [
+            {
+              "name": "シルニジピン錠１０ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "2149037F2055",
+              "scope": "PTP100錠（080106012）、PTP500錠（080106029）、バラ500錠（080106050）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "メーカー資料の経過措置期間満了は2028年3月の予定です。"
+      ]
+    },
+    {
+      "id": "sawai-cilos-202608",
+      "maker": "沢井製薬",
+      "title": "シロスタゾール錠50mg・100mg「サワイ」の限定出荷と代替候補",
+      "url": "https://med.sawai.co.jp/file/pr27_194_2.pdf",
+      "announced_at": "2026-08",
+      "listed_at": "2026-08-17",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "558b739d15e87b8f364d497476f5a2b1bf93a8f1367d1f570eb5903988c93177",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造工場の生産能力が逼迫して安定供給が難しくなったため、メーカーは既採用施設への供給を優先し、在庫消尽まで限定出荷と案内しています。",
+      "targets": [
+        {
+          "yj_code": "3399002F1265",
+          "product_name": "シロスタゾール錠５０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080634119",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年1月見込み（8月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 080634119、販売包装単位コード 14987080634116。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "080634157",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年2月見込み（8月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 080634157、販売包装単位コード 14987080634154。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3399002F2288",
+          "product_name": "シロスタゾール錠１００ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080635116",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年2月見込み（8月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 080635116、販売包装単位コード 14987080635113。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "080635123",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年12月見込み（8月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 080635123、販売包装単位コード 14987080635120。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "080635154",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年3月見込み（8月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 080635154、販売包装単位コード 14987080635151。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr27_194_2.pdf",
+          "target_yj_codes": [
+            "3399002F1265"
+          ],
+          "type": "沢井製薬が明記した同成分・同規格のOD錠です。",
+          "products": [
+            {
+              "name": "シロスタゾールＯＤ錠５０ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "3399002F3039",
+              "scope": "PTP100錠（080277019）、PTP500錠（080277026）、バラ500錠（080277057）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        },
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr27_194_2.pdf",
+          "target_yj_codes": [
+            "3399002F2288"
+          ],
+          "type": "沢井製薬が明記した同成分・同規格のOD錠です。",
+          "products": [
+            {
+              "name": "シロスタゾールＯＤ錠１００ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "3399002F4035",
+              "scope": "PTP100錠（080278016）、PTP500錠（080278023）、バラ500錠（080278054）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "メーカーは在庫消尽後の一時供給停止と、再開時期の別途案内を示しています。"
+      ]
+    },
+    {
+      "id": "sawai-montelukast-ch-202610",
+      "maker": "沢井製薬",
+      "title": "モンテルカストチュアブル錠5mg「サワイ」の販売中止と代替候補",
+      "url": "https://med.sawai.co.jp/file/pr28_4593_1.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-20",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "1a661a88761a64f40c8a0ca3f48b18b2ac123cc6025f8d1f0e9c19be968f47f6",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "安定供給体制の構築と生産効率の改善に向けて品目構成を見直し、沢井製薬は対象包装の販売中止を案内しました。",
+      "targets": [
+        {
+          "yj_code": "4490026F1184",
+          "product_name": "モンテルカストチュアブル錠５ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP28錠",
+              "unified_product_code": "080139270",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年9月見込み（10月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 080139270、販売包装単位コード 14987080139277。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080139218",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2028年1月見込み（10月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 080139218、販売包装単位コード 14987080139215。"
+              }
+            },
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "080139287",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年9月見込み（10月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 080139287、販売包装単位コード 14987080139284。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr28_4593_1.pdf",
+          "target_yj_codes": [
+            "4490026F1184"
+          ],
+          "type": "沢井製薬が対象製品と同じ規格に対して原文で明記した候補です。",
+          "products": [
+            {
+              "name": "モンテルカストチュアブル錠５ｍｇ「タカタ」",
+              "maker": "高田製薬",
+              "yj_code": "4490026F1222",
+              "scope": "PTP10錠×10（120-44740-2）、PTP14錠×10（120-44743-3）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "メーカー資料の経過措置期間満了は2028年3月の予定です。"
+      ]
+    },
+    {
+      "id": "sawai-montelukast-fg-202610",
+      "maker": "沢井製薬",
+      "title": "モンテルカスト細粒4mg「サワイ」の販売中止と代替候補",
+      "url": "https://med.sawai.co.jp/file/pr28_4590_2.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-20",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "38310e78e09b0ba675a01ec4f6e79dbc211226544db022f10c903c1a03bf3226",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "安定供給体制の構築と生産効率の改善に向けて品目構成を見直し、沢井製薬は対象包装の販売中止を案内しました。",
+      "targets": [
+        {
+          "yj_code": "4490026C1099",
+          "product_name": "モンテルカスト細粒４ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "0.5g×28包",
+              "unified_product_code": "080138228",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年10月見込み（10月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 080138228、販売包装単位コード 14987080138225。"
+              }
+            },
+            {
+              "package": "0.5g×140包",
+              "unified_product_code": "080138273",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年12月見込み（10月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 080138273、販売包装単位コード 14987080138270。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr28_4590_2.pdf",
+          "target_yj_codes": [
+            "4490026C1099"
+          ],
+          "type": "沢井製薬が対象製品と同じ規格に対して原文で明記した候補です。",
+          "products": [
+            {
+              "name": "モンテルカスト細粒４ｍｇ「タカタ」",
+              "maker": "高田製薬",
+              "yj_code": "4490026C1129",
+              "scope": "0.5g×28包（120-44751-8）、0.5g×140包（120-44753-2）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "メーカー資料の経過措置期間満了は2028年3月の予定です。"
+      ]
+    },
+    {
+      "id": "sawai-valaciclovir-202610",
+      "maker": "沢井製薬",
+      "title": "バラシクロビル錠500mg「サワイ」の販売中止と代替候補",
+      "url": "https://med.sawai.co.jp/file/pr28_1530_1.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-20",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "de53cf0d78b79a073d72f21ab31c5433f604c4c1223889c4f9b629553bd9e710",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "安定供給体制の構築と生産効率の改善に向けて品目構成を見直し、沢井製薬は対象包装の販売中止を案内しました。",
+      "targets": [
+        {
+          "yj_code": "6250019F1233",
+          "product_name": "バラシクロビル錠５００ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP42錠",
+              "unified_product_code": "080003618",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年2月見込み（10月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 080003618、販売包装単位コード 14987080003615。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr28_1530_1.pdf",
+          "target_yj_codes": [
+            "6250019F1233"
+          ],
+          "type": "沢井製薬が対象製品と同じ規格に対して原文で明記した候補です。",
+          "products": [
+            {
+              "name": "バラシクロビル錠５００ｍｇ「杏林」",
+              "maker": "キョーリンリメディオ",
+              "yj_code": "6250019F1209",
+              "scope": "PTP42錠（060305541）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "メーカー資料の経過措置期間満了は2028年3月の予定です。"
+      ]
+    },
+    {
+      "id": "sawai-flavoxate-202608",
+      "maker": "沢井製薬",
+      "title": "フラボキサート塩酸塩錠200mg「サワイ」の販売中止と代替候補",
+      "url": "https://med.sawai.co.jp/file/pr28_94_2.pdf",
+      "announced_at": "2026-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "304ed217660edb725d202ac0693bd825f6325f7dc329cf2ee4031dd2e49f448a",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "安定供給体制の構築と生産効率の改善に向けて品目構成を見直し、沢井製薬は対象包装の販売中止を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2590002F1517",
+          "product_name": "フラボキサート塩酸塩錠２００ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080301813",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年12月見込み（8月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 080301813、販売包装単位コード 14987080301810。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr28_94_2.pdf",
+          "target_yj_codes": [
+            "2590002F1517"
+          ],
+          "type": "沢井製薬が資料に挙げた候補です。成分・適応は製剤によって異なります。原典に各漢方製剤の効能・効果が記載されています。",
+          "products": [
+            {
+              "name": "プロピベリン塩酸塩錠１０ｍｇ「ＮＩＧ」",
+              "maker": "日医工岐阜工場",
+              "yj_code": "2590007F1358",
+              "scope": "PTP100錠（376-79596-8）"
+            },
+            {
+              "name": "セルニルトン錠",
+              "maker": "東菱薬品工業",
+              "yj_code": "2590003F1023",
+              "scope": "PTP100錠（4987197360215）、PTP500錠（4987197360222）、PTP1000錠（4987197360239）"
+            },
+            {
+              "name": "ツムラ猪苓湯エキス顆粒（医療用）",
+              "maker": "ツムラ",
+              "yj_code": "5200103D1101",
+              "scope": "500g（4987138804013）、42包（4987138804044）、189包（4987138804037）"
+            },
+            {
+              "name": "ツムラ猪苓湯合四物湯エキス顆粒（医療用）",
+              "maker": "ツムラ",
+              "yj_code": "5200104D1025",
+              "scope": "500g（4987138811219）、42包（4987138811240）、189包（4987138811233）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "メーカー資料の経過措置期間満了は2028年3月の予定です。"
+      ]
+    },
+    {
+      "id": "sawai-manidipine-202608",
+      "maker": "沢井製薬",
+      "title": "マニジピン塩酸塩錠10mg・20mg「サワイ」の限定出荷と代替候補",
+      "url": "https://med.sawai.co.jp/file/pr27_1020_2.pdf",
+      "announced_at": "2026-08",
+      "listed_at": "2026-08-17",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ea21570a3e3c2ca1bfc63fdcc496683b94662c633429a7e9075cc272a8bfe3ca",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造工場の生産能力が逼迫して安定供給が難しくなったため、メーカーは既採用施設への供給を優先し、在庫消尽まで限定出荷と案内しています。",
+      "targets": [
+        {
+          "yj_code": "2149027F2183",
+          "product_name": "マニジピン塩酸塩錠１０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080101611",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年12月見込み（8月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 080101611、販売包装単位コード 14987080101618。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149027F3180",
+          "product_name": "マニジピン塩酸塩錠２０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080101819",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年12月見込み（8月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 080101819、販売包装単位コード 14987080101816。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr27_1020_2.pdf",
+          "target_yj_codes": [
+            "2149027F2183"
+          ],
+          "type": "沢井製薬が対象製品と同じ規格に対して原文で明記した候補です。",
+          "products": [
+            {
+              "name": "マニジピン塩酸塩錠１０ｍｇ「日医工」",
+              "maker": "日医工",
+              "yj_code": "2149027F2159",
+              "scope": "PTP100錠（376-07311-0）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        },
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr27_1020_2.pdf",
+          "target_yj_codes": [
+            "2149027F3180"
+          ],
+          "type": "沢井製薬が対象製品と同じ規格に対して原文で明記した候補です。",
+          "products": [
+            {
+              "name": "マニジピン塩酸塩錠２０ｍｇ「日医工」",
+              "maker": "日医工",
+              "yj_code": "2149027F3155",
+              "scope": "PTP100錠（376-07321-9）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "メーカーは在庫消尽後の一時供給停止と、再開時期の別途案内を示しています。"
+      ]
     }
   ]
 }
