@@ -29436,6 +29436,1221 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "sandoz-tadalafil-za-limited-202610",
+      "maker": "サンド",
+      "title": "タダラフィル錠2.5mg・5mgZA「サンド」 割当による限定出荷のご案内",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20261027_001.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-27",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ea4e447f0b7a490addd3f7afacf22b1663afc4c8f3fd4cf2f64c9024499baa8a",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造所の包装機械に不具合があり、生産・出荷が遅れて必要な数量を確保できないため、サンドは2026年10月26日受注分からの割当による限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2590016F1071",
+          "product_name": "タダラフィル錠２．５ｍｇＺＡ「サンド」",
+          "maker": "サンド",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "614426302",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、10月のメーカー資料）",
+                "note": "統一商品コード 614426302、販売包装単位コード 14987614426309。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2590016F2078",
+          "product_name": "タダラフィル錠５ｍｇＺＡ「サンド」",
+          "maker": "サンド",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "614426401",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、10月のメーカー資料）",
+                "note": "統一商品コード 614426401、販売包装単位コード 14987614426408。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sandoz-deferasirox-limited-202607",
+      "maker": "サンド",
+      "title": "デフェラシロクス顆粒分包90mg・360mg「サンド」 割当による限定出荷のご案内",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20260728_007.pdf",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-28",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "414940173ec15dcdcf1ba80b167e31234b51ec76cd7ced6127e76bb29135bca9",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "同じ成分の他社製品の供給状況により安定供給が難しくなるおそれがあるため、サンドは2026年7月27日受注分から限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3929008D1030",
+          "product_name": "デフェラシロクス顆粒分包９０ｍｇ「サンド」",
+          "maker": "サンド",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "30包",
+              "unified_product_code": "614427408",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 614427408、販売包装単位コード 14987614427405。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3929008D2037",
+          "product_name": "デフェラシロクス顆粒分包３６０ｍｇ「サンド」",
+          "maker": "サンド",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "30包",
+              "unified_product_code": "614427507",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 614427507、販売包装単位コード 14987614427504。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sandoz-amiodarone100-limited-202509",
+      "maker": "サンド",
+      "title": "アミオダロン塩酸塩錠100mg「サンド」 割当による限定出荷開始",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20250924_001.pdf",
+      "announced_at": "2025-09",
+      "listed_at": "2025-09-24",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "cff74ae6968ac944ef04b8f7db409f84726d96ce10405d1f1abfd6160ea2ac65",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造機器の変更で承認事項の一部変更申請が必要となり、出荷が遅れたため、サンドは2025年9月24日受注分から割当による限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2129010F1049",
+          "product_name": "アミオダロン塩酸塩錠１００ｍｇ「サンド」",
+          "maker": "サンド",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "614258019",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 614258019、販売包装単位コード 14987614258016。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20250924_001.pdf",
+          "target_yj_codes": [
+            "2129010F1049"
+          ],
+          "type": "サンドが対象包装に明記した代替品",
+          "products": [
+            {
+              "name": "アミオダロン塩酸塩速崩錠１００ｍｇ「ＴＥ」",
+              "maker": "トーアエイヨー",
+              "yj_code": "2129010F1065",
+              "scope": "トーアエイヨーの速崩錠100mgのPTP100錠（142351114）。サンドの対象は100mgのPTP100錠です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年4月の続報でも代替品は同じです。同続報は手続きに時間を要し、2026年7月頃から一時出荷停止に移行する見込みと案内しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "sandoz-orgadrone-limited-202509",
+      "maker": "サンドファーマ",
+      "title": "オルガドロン注射液1.9mg・3.8mg・19mg 割当による限定出荷開始",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20250924_005.pdf",
+      "announced_at": "2025-09",
+      "listed_at": "2025-09-24",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "c71232c9338e1680b9bf5d478328261b4e226c7f0d22d64ba982062848a5e929",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の出荷調整の影響で、販売元のサンドは2025年9月24日受注分から各規格の割当による限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2454405H2020",
+          "product_name": "オルガドロン注射液１．９ｍｇ",
+          "maker": "サンドファーマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "0.5mL×50管",
+              "unified_product_code": "614435007",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、9月のメーカー資料）",
+                "note": "統一商品コード 614435007、販売包装単位コード 14987614435004。"
+              }
+            },
+            {
+              "package": "0.5mL×10管",
+              "unified_product_code": "614435014",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、9月のメーカー資料）",
+                "note": "統一商品コード 614435014、販売包装単位コード 14987614435011。"
+              }
+            }
+          ],
+          "seller": "サンド"
+        },
+        {
+          "yj_code": "2454405H4023",
+          "product_name": "オルガドロン注射液３．８ｍｇ",
+          "maker": "サンドファーマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1mL×50管",
+              "unified_product_code": "614434901",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、9月のメーカー資料）",
+                "note": "統一商品コード 614434901、販売包装単位コード 14987614434908。"
+              }
+            },
+            {
+              "package": "1mL×10管",
+              "unified_product_code": "614434918",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、9月のメーカー資料）",
+                "note": "統一商品コード 614434918、販売包装単位コード 14987614434915。"
+              }
+            }
+          ],
+          "seller": "サンド"
+        },
+        {
+          "yj_code": "2454405H6026",
+          "product_name": "オルガドロン注射液１９ｍｇ",
+          "maker": "サンドファーマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×10バイアル",
+              "unified_product_code": "614434802",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、9月のメーカー資料）",
+                "note": "統一商品コード 614434802、販売包装単位コード 14987614434809。"
+              }
+            }
+          ],
+          "seller": "サンド"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。",
+        "製造販売元はサンドファーマ、資料の発行元・販売元はサンドです。"
+      ]
+    },
+    {
+      "id": "sandoz-orgadrone19-continued-202607",
+      "maker": "サンドファーマ",
+      "title": "オルガドロン注射液1.9mg 出荷量回復と限定出荷継続",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20260728_001.pdf",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-28",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ff055e9466c8c51308a7e0a2d2e8e8581e7979523f0f04d9a478b8181cb3879b",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "在庫を積み増して1.9mgの出荷量を通常水準に戻せる一方、需要が供給能力を上回っているため、販売元のサンドは限定出荷を継続すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2454405H2020",
+          "product_name": "オルガドロン注射液１．９ｍｇ",
+          "maker": "サンドファーマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "0.5mL×50管",
+              "unified_product_code": "614435007",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 614435007、販売包装単位コード 14987614435004。"
+              }
+            },
+            {
+              "package": "0.5mL×10管",
+              "unified_product_code": "614435014",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 614435014、販売包装単位コード 14987614435011。"
+              }
+            }
+          ],
+          "seller": "サンド"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "出荷量を通常水準に変更する日は2026年7月27日受注分の予定でした。同資料は3.8mgと19mgの限定出荷も継続としています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。",
+        "製造販売元はサンドファーマ、資料の発行元・販売元はサンドです。"
+      ]
+    },
+    {
+      "id": "sandoz-carbocaine-05-100ml-limited-202606",
+      "maker": "サンドファーマ",
+      "title": "0.5％カルボカイン注100mL×1バイアル 割当出荷開始",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20260625_001.pdf",
+      "announced_at": "2026-06",
+      "listed_at": "2026-06-25",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "6283f0f8b02720a6744864bde3b935b1138914e778b32740beb0fd8958e29c27",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "1％100mLバイアルの限定出荷を受け、予防的に卸への割当を始めると販売元のサンドが案内しました。",
+      "targets": [
+        {
+          "yj_code": "1214402A1021",
+          "product_name": "０．５％カルボカイン注",
+          "maker": "サンドファーマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100mL×1バイアル",
+              "unified_product_code": "614434109",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 614434109、販売包装単位コード 14987614434106。"
+              }
+            }
+          ],
+          "seller": "サンド"
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20260625_001.pdf",
+          "target_yj_codes": [
+            "1214402A1021"
+          ],
+          "type": "サンドが対象濃度・包装に明記した代替品",
+          "products": [
+            {
+              "name": "カルボカインアンプル注０．５％",
+              "maker": "日新製薬",
+              "yj_code": "1214402A5043",
+              "scope": "原文の指定は同濃度の5mL×10管（614433607）。対象は100mL×1バイアルです。販売元サンドの2026年11月版コード一覧で個別YJを照合しました。"
+            },
+            {
+              "name": "カルボカインアンプル注０．５％",
+              "maker": "日新製薬",
+              "yj_code": "1214402A6040",
+              "scope": "原文の指定は同濃度の10mL×10管（614433508）。対象は100mL×1バイアルです。販売元サンドの2026年11月版コード一覧で個別YJを照合しました。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "卸の受注分での開始日は2026年6月24日です。原文で通常出荷の表に載る包装のうち、本文が代替品として指定した同濃度の5mL・10mLを掲載しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "製造販売元はサンドファーマ、資料の発行元・販売元はサンドです。"
+      ]
+    },
+    {
+      "id": "sandoz-carbocaine-1-100ml-limited-202605",
+      "maker": "サンドファーマ",
+      "title": "1％カルボカイン注100mL×1バイアル 割当出荷開始",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20260529_001.pdf",
+      "announced_at": "2026-05",
+      "listed_at": "2026-05-29",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "1917f646bc78ac5d107e349701e2825653fb0354b63a62f424567953e40e6d97",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "2026年に入って需要が急増し供給が追い付かなくなったため、販売元のサンドは卸への割当による限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "1214402A2028",
+          "product_name": "１％カルボカイン注",
+          "maker": "サンドファーマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100mL×1バイアル",
+              "unified_product_code": "614431702",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 614431702、販売包装単位コード 14987614431709。"
+              }
+            }
+          ],
+          "seller": "サンド"
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20260529_001.pdf",
+          "target_yj_codes": [
+            "1214402A2028"
+          ],
+          "type": "サンドが対象濃度・包装に明記した代替品",
+          "products": [
+            {
+              "name": "カルボカインアンプル注１％",
+              "maker": "日新製薬",
+              "yj_code": "1214402A9049",
+              "scope": "原文の指定は同濃度の5mL×10管（614433003）。対象は100mL×1バイアルです。販売元サンドの2026年11月版コード一覧で個別YJを照合しました。"
+            },
+            {
+              "name": "カルボカインアンプル注１％",
+              "maker": "日新製薬",
+              "yj_code": "1214402H1046",
+              "scope": "原文の指定は同濃度の10mL×10管（614432907）。対象は100mL×1バイアルです。販売元サンドの2026年11月版コード一覧で個別YJを照合しました。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "卸の受注分での開始日は2026年5月25日です。原文で通常出荷の表に載る包装のうち、本文が代替品として指定した同濃度の5mL・10mLを掲載しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "製造販売元はサンドファーマ、資料の発行元・販売元はサンドです。"
+      ]
+    },
+    {
+      "id": "sandoz-carbocaine-2-100ml-limited-202606",
+      "maker": "サンドファーマ",
+      "title": "2％カルボカイン注100mL×1バイアル 割当出荷開始",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20260625_001.pdf",
+      "announced_at": "2026-06",
+      "listed_at": "2026-06-25",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "6283f0f8b02720a6744864bde3b935b1138914e778b32740beb0fd8958e29c27",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "1％100mLバイアルの限定出荷を受け、予防的に卸への割当を始めると販売元のサンドが案内しました。",
+      "targets": [
+        {
+          "yj_code": "1214402A3024",
+          "product_name": "２％カルボカイン注",
+          "maker": "サンドファーマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100mL×1バイアル",
+              "unified_product_code": "614431603",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 614431603、販売包装単位コード 14987614431600。"
+              }
+            }
+          ],
+          "seller": "サンド"
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20260625_001.pdf",
+          "target_yj_codes": [
+            "1214402A3024"
+          ],
+          "type": "サンドが対象濃度・包装に明記した代替品",
+          "products": [
+            {
+              "name": "カルボカインアンプル注２％",
+              "maker": "日新製薬",
+              "yj_code": "1214402H4045",
+              "scope": "原文の指定は同濃度の5mL×10管（614433300）。対象は100mL×1バイアルです。販売元サンドの2026年11月版コード一覧で個別YJを照合しました。"
+            },
+            {
+              "name": "カルボカインアンプル注２％",
+              "maker": "日新製薬",
+              "yj_code": "1214402H5041",
+              "scope": "原文の指定は同濃度の10mL×10管（614433201）。対象は100mL×1バイアルです。販売元サンドの2026年11月版コード一覧で個別YJを照合しました。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "卸の受注分での開始日は2026年6月24日です。原文で通常出荷の表に載る包装のうち、本文が代替品として指定した同濃度の5mL・10mLを掲載しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "製造販売元はサンドファーマ、資料の発行元・販売元はサンドです。"
+      ]
+    },
+    {
+      "id": "sandoz-doxorubicin10-discontinued-202507",
+      "maker": "サンド",
+      "title": "ドキソルビシン塩酸塩注射液10mg「サンド」 販売中止のご案内",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20250728_001.pdf",
+      "announced_at": "2025-07",
+      "listed_at": "2025-07-28",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "8518f5c8452f41ceff4e0bd1597852508ef99e279bbe6afe840b247a45f424c8",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "サンドは諸般の事情により在庫限りで販売を終了する方針を案内しました。",
+      "targets": [
+        {
+          "yj_code": "4235402A2021",
+          "product_name": "ドキソルビシン塩酸塩注射液１０ｍｇ「サンド」",
+          "maker": "サンド",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5バイアル",
+              "unified_product_code": "614406328",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年6月頃（2025年7月資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 614406328、販売包装単位コード 14987614406325。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20250728_001.pdf",
+          "target_yj_codes": [
+            "4235402A2021"
+          ],
+          "type": "サンドが製造販売中止に伴い明記した代替品",
+          "products": [
+            {
+              "name": "ドキソルビシン塩酸塩注射用１０ｍｇ「ＮＫ」",
+              "maker": "日本化薬",
+              "yj_code": "4235402D1048",
+              "scope": "日本化薬の注射用10mg「NK」、10バイアル（170007854）。元の注射液と剤形および包装が異なります。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2025年11月には同包装について限定出荷解除の資料が出ています。販売中止案内と限定出荷の解除はそれぞれの日付時点の情報です。",
+        "2025年7月時点の経過措置満了予定は2027年3月です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "sandoz-bromazepam3-limited-202502",
+      "maker": "サンド",
+      "title": "ブロマゼパム錠3mg「サンド」 一時出荷停止の予定",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20250225_001.pdf",
+      "announced_at": "2025-02",
+      "listed_at": "2025-02-25",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "445bac8f7dbebf14f249ed379360daa973d8b3fc398d6657e75c710d54430f84",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "2mgの減数割当出荷の影響で3mgも割当出荷となり、その後、製造所の機械の老朽化を理由にサンドが一時停止を案内しました。",
+      "targets": [
+        {
+          "yj_code": "1124020F3044",
+          "product_name": "ブロマゼパム錠３ｍｇ「サンド」",
+          "maker": "サンド",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "614422908",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、2月のメーカー資料）",
+                "note": "統一商品コード 614422908、販売包装単位コード 14987614422905。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "当時の一時停止予定日は2025年4月18日でした。2026年10月の販売中止資料では3mgの対象包装を在庫消尽済みとしています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sandoz-bromazepam3-discontinued-202610",
+      "maker": "サンド",
+      "title": "ブロマゼパム錠3mg「サンド」 販売中止のご案内",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20261027_011.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-27",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "b62c7d5b3eefbe094c69cd75e74370843a4c2f3c260b9a6ad4fad39e1190c571",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "サンドが諸般の事情による販売中止を案内し、2026年10月資料ではPTP100錠を在庫消尽済みと掲載しました。",
+      "targets": [
+        {
+          "yj_code": "1124020F3044",
+          "product_name": "ブロマゼパム錠３ｍｇ「サンド」",
+          "maker": "サンド",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "614422908",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 614422908、販売包装単位コード 14987614422905。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "同資料の候補欄にレキソタン錠1・2・5が載っています。3mgに対応する製品や規格を割り当てた記載はありません。",
+        "資料は経過措置満了を2028年3月としています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に3mgに対応する代替候補の記載はありません。"
+      ]
+    },
+    {
+      "id": "sandoz-candesartan2-discontinued-202503",
+      "maker": "サンド",
+      "title": "カンデサルタン錠2mg「サンド」 販売中止のご案内",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20250326_005.pdf",
+      "announced_at": "2025-03",
+      "listed_at": "2025-03-26",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "6a3893c6368d966586ffb398c5727dce4c25a30c8b5ce65392bf58e951cdcc01",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "サンドは諸般の事情により在庫限りで販売を終了すると案内しました。2024年3月の一時出荷停止により、販売中止案内時点で一部包装は在庫が消尽していました。",
+      "targets": [
+        {
+          "yj_code": "2149040F1247",
+          "product_name": "カンデサルタン錠２ｍｇ「サンド」",
+          "maker": "サンド",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "614413609",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年1月（2025年3月資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 614413609、販売包装単位コード 14987614413606。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "614413616",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2025年9月（2025年3月資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 614413616、販売包装単位コード 14987614413613。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20250326_005.pdf",
+          "target_yj_codes": [
+            "2149040F1247"
+          ],
+          "type": "サンドの販売中止資料に明記された同規格品",
+          "products": [
+            {
+              "name": "カンデサルタン錠２ｍｇ「武田テバ」",
+              "maker": "T'sファーマ",
+              "yj_code": "2149040F1379",
+              "scope": "同規格の「武田テバ」。原文に列挙された包装はPTP100錠（123001571）、PTP500錠（123001588）、バラ500錠（123001595）です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2025年3月時点の経過措置満了予定は2027年3月です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "sandoz-candesartan4-discontinued-202503",
+      "maker": "サンド",
+      "title": "カンデサルタン錠4mg「サンド」 販売中止のご案内",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20250326_005.pdf",
+      "announced_at": "2025-03",
+      "listed_at": "2025-03-26",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "6a3893c6368d966586ffb398c5727dce4c25a30c8b5ce65392bf58e951cdcc01",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "サンドは諸般の事情により在庫限りで販売を終了すると案内しました。2024年3月の一時出荷停止により、販売中止案内時点で一部包装は在庫が消尽していました。",
+      "targets": [
+        {
+          "yj_code": "2149040F2243",
+          "product_name": "カンデサルタン錠４ｍｇ「サンド」",
+          "maker": "サンド",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "614413708",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "在庫消尽（2025年3月資料の記載）"
+                  }
+                ],
+                "note": "統一商品コード 614413708、販売包装単位コード 14987614413705。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "614413715",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2025年5月（2025年3月資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 614413715、販売包装単位コード 14987614413712。"
+              }
+            },
+            {
+              "package": "PTP700錠",
+              "unified_product_code": "614413722",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "在庫消尽（2025年3月資料の記載）"
+                  }
+                ],
+                "note": "統一商品コード 614413722、販売包装単位コード 14987614413729。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "614413746",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "在庫消尽（2025年3月資料の記載）"
+                  }
+                ],
+                "note": "統一商品コード 614413746、販売包装単位コード 14987614413743。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20250326_005.pdf",
+          "target_yj_codes": [
+            "2149040F2243"
+          ],
+          "type": "サンドの販売中止資料に明記された同規格品",
+          "products": [
+            {
+              "name": "カンデサルタン錠４ｍｇ「武田テバ」",
+              "maker": "T'sファーマ",
+              "yj_code": "2149040F2375",
+              "scope": "同規格の「武田テバ」。原文に列挙された包装はPTP100錠（123001601）、PTP500錠（123001625）、バラ500錠（123001649）です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2025年3月時点の経過措置満了予定は2027年3月です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "sandoz-candesartan8-discontinued-202503",
+      "maker": "サンド",
+      "title": "カンデサルタン錠8mg「サンド」 販売中止のご案内",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20250326_005.pdf",
+      "announced_at": "2025-03",
+      "listed_at": "2025-03-26",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "6a3893c6368d966586ffb398c5727dce4c25a30c8b5ce65392bf58e951cdcc01",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "サンドは諸般の事情により在庫限りで販売を終了すると案内しました。2024年3月の一時出荷停止により、販売中止案内時点で一部包装は在庫が消尽していました。",
+      "targets": [
+        {
+          "yj_code": "2149040F3240",
+          "product_name": "カンデサルタン錠８ｍｇ「サンド」",
+          "maker": "サンド",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "614413807",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2025年4月（2025年3月資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 614413807、販売包装単位コード 14987614413804。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "614413814",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2025年4月（2025年3月資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 614413814、販売包装単位コード 14987614413811。"
+              }
+            },
+            {
+              "package": "PTP700錠",
+              "unified_product_code": "614413821",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "在庫消尽（2025年3月資料の記載）"
+                  }
+                ],
+                "note": "統一商品コード 614413821、販売包装単位コード 14987614413828。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "614413845",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "在庫消尽（2025年3月資料の記載）"
+                  }
+                ],
+                "note": "統一商品コード 614413845、販売包装単位コード 14987614413842。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20250326_005.pdf",
+          "target_yj_codes": [
+            "2149040F3240"
+          ],
+          "type": "サンドの販売中止資料に明記された同規格品",
+          "products": [
+            {
+              "name": "カンデサルタン錠８ｍｇ「武田テバ」",
+              "maker": "T'sファーマ",
+              "yj_code": "2149040F3371",
+              "scope": "同規格の「武田テバ」。原文に列挙された包装はPTP100錠（123001656）、PTP500錠（123001670）、バラ500錠（123001694）です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2025年3月時点の経過措置満了予定は2027年3月です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "sandoz-candesartan12-discontinued-202503",
+      "maker": "サンド",
+      "title": "カンデサルタン錠12mg「サンド」 販売中止のご案内",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20250326_005.pdf",
+      "announced_at": "2025-03",
+      "listed_at": "2025-03-26",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "6a3893c6368d966586ffb398c5727dce4c25a30c8b5ce65392bf58e951cdcc01",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "サンドは諸般の事情により在庫限りで販売を終了すると案内しました。2024年3月の一時出荷停止により、販売中止案内時点で一部包装は在庫が消尽していました。",
+      "targets": [
+        {
+          "yj_code": "2149040F4246",
+          "product_name": "カンデサルタン錠１２ｍｇ「サンド」",
+          "maker": "サンド",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "614413906",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年2月（2025年3月資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 614413906、販売包装単位コード 14987614413903。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20250326_005.pdf",
+          "target_yj_codes": [
+            "2149040F4246"
+          ],
+          "type": "サンドの販売中止資料に明記された同規格品",
+          "products": [
+            {
+              "name": "カンデサルタン錠１２ｍｇ「武田テバ」",
+              "maker": "T'sファーマ",
+              "yj_code": "2149040F4378",
+              "scope": "同規格の「武田テバ」。原文に列挙された包装はPTP100錠（123001700）、バラ500錠（123001717）です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2025年3月時点の経過措置満了予定は2027年3月です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "sandoz-theophylline50-discontinued-202608",
+      "maker": "サンド",
+      "title": "テオフィリン徐放カプセル50mg「サンド」 販売中止のご案内",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20260826_003.pdf",
+      "announced_at": "2026-08",
+      "listed_at": "2026-08-26",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "725712cff812ee778892847254e3f9b4b8dfc9527c0a091fcb729dddecd76bb1",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "2025年の出荷停止予定案内の後、供給再開の見通しが立たず、サンドは2026年8月に販売中止を案内しました。原文では対象包装を在庫消尽済みとしています。",
+      "targets": [
+        {
+          "yj_code": "2251001M3030",
+          "product_name": "テオフィリン徐放カプセル５０ｍｇ「サンド」",
+          "maker": "サンド",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "614427606",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 614427606、販売包装単位コード 14987614427603。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20260826_003.pdf",
+          "target_yj_codes": [
+            "2251001M3030"
+          ],
+          "type": "サンドが2026年8月の販売中止資料に明記した代替品",
+          "products": [
+            {
+              "name": "テオフィリン徐放錠５０ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "2251001F1070",
+              "scope": "50mgのPTP100カプセルに対する、沢井製薬の徐放錠50mgです。メーカーが代替品の承諾を得たのは50mgのみです。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "資料が示す経過措置満了は2027年3月です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "sandoz-theophylline100-discontinued-202608",
+      "maker": "サンド",
+      "title": "テオフィリン徐放カプセル100mg「サンド」 販売中止のご案内",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20260826_003.pdf",
+      "announced_at": "2026-08",
+      "listed_at": "2026-08-26",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "725712cff812ee778892847254e3f9b4b8dfc9527c0a091fcb729dddecd76bb1",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "2025年の出荷停止予定案内の後、供給再開の見通しが立たず、サンドは2026年8月に販売中止を案内しました。原文では対象包装を在庫消尽済みとしています。",
+      "targets": [
+        {
+          "yj_code": "2251001M1061",
+          "product_name": "テオフィリン徐放カプセル１００ｍｇ「サンド」",
+          "maker": "サンド",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "614427705",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 614427705、販売包装単位コード 14987614427702。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料が示す経過措置満了は2027年3月です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に、この規格で承諾を得た代替候補の記載はありません。"
+      ]
+    },
+    {
+      "id": "sandoz-theophylline200-discontinued-202608",
+      "maker": "サンド",
+      "title": "テオフィリン徐放カプセル200mg「サンド」 販売中止のご案内",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20260826_003.pdf",
+      "announced_at": "2026-08",
+      "listed_at": "2026-08-26",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "725712cff812ee778892847254e3f9b4b8dfc9527c0a091fcb729dddecd76bb1",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "2025年の出荷停止予定案内の後、供給再開の見通しが立たず、サンドは2026年8月に販売中止を案内しました。原文では対象包装を在庫消尽済みとしています。",
+      "targets": [
+        {
+          "yj_code": "2251001M2050",
+          "product_name": "テオフィリン徐放カプセル２００ｍｇ「サンド」",
+          "maker": "サンド",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "614427804",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 614427804、販売包装単位コード 14987614427801。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料が示す経過措置満了は2027年3月です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に、この規格で承諾を得た代替候補の記載はありません。"
+      ]
     }
   ]
 }
