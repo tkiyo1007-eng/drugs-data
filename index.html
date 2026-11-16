@@ -933,7 +933,6 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .detail-shortcuts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:16px 0;padding:12px;border:1px solid var(--stroke);border-radius:16px;background:rgba(79,128,244,.04)}.detail-shortcuts[hidden]{display:none}.detail-shortcuts button{min-height:44px;padding:8px 14px;border:1px solid var(--stroke);border-radius:12px;background:var(--bg);color:var(--blue-deep);font:inherit;font-size:13px;font-weight:700;cursor:pointer}.detail-shortcuts button[hidden]{display:none}.detail-shortcuts button:not([hidden]){text-align:left;line-height:1.6}.detail-shortcuts button:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 .featured-research-copy a,.featured-research-sources a{color:#194cad;text-decoration:underline;text-underline-offset:.15em}
 /* 原因・参考候補を読みやすくする。本文・注意書き・原典の日付は変更しない。 */
-#trendingList .trending-reference{font-size:16px;font-weight:800;line-height:1.65;color:var(--ink);background:var(--bg);text-decoration:underline;text-underline-offset:3px}
 #trendingList .trending-hint{font-size:14px;line-height:1.7;color:var(--ink)}
 #mRelated.inquiry-reference-safety > .pkg-note{font-size:16px;line-height:1.8;color:var(--ink)}
 #mSupplyReference .reference-safety-note{font-weight:700;border-left:4px solid var(--blue-mid);padding:8px 12px;background:var(--bg);color:var(--ink)}
@@ -1098,7 +1097,8 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 .trending-chip:hover{background:rgba(79,128,244,.16);transform:translateY(-1px)}
 .trending-names{font-size:12px;line-height:1.7;color:var(--ink)}
-.trending-names summary{min-height:44px;box-sizing:border-box;padding:10px 12px;cursor:pointer;color:var(--blue-deep);font-weight:700;overflow-wrap:anywhere}
+.trending-names summary{cursor:pointer}
+.trending-names summary,.trending-reference{min-height:44px;box-sizing:border-box;padding:10px 14px;color:var(--blue-deep);font-size:13px;font-weight:700;line-height:1.65;overflow-wrap:anywhere}
 .trending-names ul{list-style:none;margin:0;padding:0 10px 8px}
 .trending-names li+li{border-top:1px solid rgba(126,152,214,.25)}
 .trending-formal-link{display:block;min-height:44px;box-sizing:border-box;padding:10px 2px;color:var(--blue-deep);overflow-wrap:anywhere;text-underline-offset:3px}
@@ -1127,10 +1127,9 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .trending-chip:hover{transform:none}
 .trending-chip:focus-visible,.trending-names summary:focus-visible{outline-offset:-3px}
 .trending-hint{margin:0;padding:0 14px 8px;min-height:24px;box-sizing:border-box;font-size:11px;line-height:1.5;color:var(--sub);overflow-wrap:anywhere}
-.trending-reference{display:flex;align-items:center;min-height:44px;padding:8px 14px;box-sizing:border-box;color:var(--blue-deep);font-size:12px;font-weight:700;text-decoration:none;border-top:1px solid rgba(79,128,244,.14)}
+.trending-reference{display:flex;align-items:center;text-decoration:underline;text-underline-offset:3px;border-top:1px solid rgba(79,128,244,.14)}
 .trending-reference:focus-visible{outline:3px solid var(--blue);outline-offset:-3px}
 .trending-names{border-top:1px solid rgba(79,128,244,.14)}
-.trending-names summary{padding:10px 14px}
 .trending-entry:has(.trending-names[open]){grid-column:1/-1}
 .trending-names[open] ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:0 16px;padding:0 14px 8px}
 .trending-names[open] li{min-width:0}
@@ -1143,7 +1142,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   .trending-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
   .trending-chip{font-size:13px;padding:9px 10px;min-height:58px}
   .trending-hint{padding:0 10px 8px}
-  .trending-names summary,.trending-reference{padding:10px;font-size:11.5px}
+  .trending-names summary,.trending-reference{padding:10px;font-size:12px}
   .search-overview{grid-template-columns:1fr;gap:12px}
 }
 @media(max-width:360px){.trending-list{grid-template-columns:1fr}}
@@ -1768,7 +1767,7 @@ html.season-autumn .autumn-sky{display:none}
     <button type="button" id="trendingSearchToggle" class="trending-toggle" aria-expanded="false" aria-controls="trending" hidden>問い合わせの多い製品を開く</button>
     <section id="trending" aria-labelledby="trendingHeading">
   <h3 id="trendingHeading">問い合わせが多い品目</h3>
-      <p class="trending-intro">複数規格の製品は「規格別の原因・案内」から、メーカーと規格を選べます。代替候補はメーカー資料に記載がある場合、品目の詳細に表示します。</p>
+      <p class="trending-intro">複数規格の製品は「規格別の原因・代替案」から、メーカーと規格を選べます。代替候補はメーカー資料に記載がある場合、品目の詳細に表示します。</p>
   <div class="trending-list" id="trendingList"></div>
   <button type="button" id="trendingToggle" class="trending-toggle" aria-expanded="false" aria-controls="trendingList">ほかの製品を見る</button>
   <nav aria-label="品目別の供給情報">
@@ -2796,7 +2795,7 @@ html.season-autumn .autumn-sky{display:none}
     <h3 id="mTitle">品目詳細</h3>
     <p class="modal-maker" id="mMaker"></p>
     <nav class="detail-shortcuts" id="mDetailShortcuts" aria-label="品目詳細内の移動" hidden>
-      <button type="button" id="mReferenceJump" aria-controls="mSupplyReference" hidden>原因・メーカー案内へ ↓</button>
+      <button type="button" id="mReferenceJump" aria-controls="mSupplyReference" hidden>原因と代替案 <span aria-hidden="true">↓</span></button>
       <button type="button" id="mRelatedJump" aria-controls="mRelated" hidden>同成分の候補へ ↓</button>
       <button type="button" id="mPackageJump" aria-controls="mManufacturerNotes" hidden>包装別の案内へ ↓</button>
     </nav>
@@ -6656,14 +6655,14 @@ function renderTrending(){
     const hintRows = groups[t.slug] ? grouped[t.slug] : singles.has(key) ? [singles.get(key)] : [];
     if(groups[t.slug]){
       const rows = grouped[t.slug].slice().sort((a,b)=>a.n.localeCompare(b.n,"ja",{numeric:true}) || a.yj.localeCompare(b.yj));
-      const summary = rows.length ? `規格別の原因・案内（${rows.length}品目）` : "規格別の原因・案内";
+      const summary = rows.length ? `規格別の原因・代替案（${rows.length}品目）` : "規格別の原因・代替案";
       const content = rows.length ? `<p class="trending-names-note">規格・メーカーを選ぶと品目別の供給理由と、確認できたメーカー案内を見られます。</p><ul>${rows.map(item=>
         `<li><a class="trending-formal-link" data-trending-reference="${esc(normalizeYj(item.yj))}" data-trending-key="${esc(normalizeYj(item.yj))}" href="#item=${esc(normalizeYj(item.yj))}">${esc(item.n)}</a><small>${esc(item.m)} · ${esc(item.spec)}</small>${inquiryRowText(item)}</li>`).join("")}</ul>`
         : `<p class="trending-names-note">${LIVE ? "読み込んだデータでは製品一覧を確認できませんでした。" : DATA_STATE === "error" ? "製品一覧を取得できません。時間をおいて再読み込みしてください。" : "製品一覧を確認中です。"}</p>`;
       names = `<details class="trending-names" name="trending-products"${open.has(t.slug) ? " open" : ""}><summary data-trending-summary="${esc(t.slug)}" aria-label="${esc(summary+"："+label)}">${summary}</summary>${content}</details>`;
     }
     const reference = key && singles.has(key)
-      ? `<a class="trending-reference" data-trending-reference="${esc(key)}" href="#item=${esc(key)}" aria-label="${esc(label)}の原因とメーカー案内">原因・メーカー案内へ <span aria-hidden="true"> →</span></a>` : "";
+      ? `<a class="trending-reference" data-trending-reference="${esc(key)}" href="#item=${esc(key)}" aria-label="${esc(label)}の原因と代替案">原因と代替案</a>` : "";
     const hint = inquirySummary(hintRows) || trendingNoticeHint(hintRows);
     return `<div class="trending-entry" data-trending-slug="${esc(t.slug)}"><a class="trending-chip" href="${key ? '#item='+details[t.slug] : '#q='+encodeURIComponent(t.q)}">${esc(label)}</a><p class="trending-hint">${esc(hint)}</p>${names}${reference}</div>`;
   }).join("");
