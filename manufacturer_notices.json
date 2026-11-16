@@ -36847,6 +36847,600 @@
         "レセプト請求は2028年3月31日までの予定と記載されています。",
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
       ]
+    },
+    {
+      "id": "lilly-insulin-six-novo-impact-202610",
+      "maker": "日本イーライリリー",
+      "title": "他社インスリン製剤の製造販売中止案内に伴う限定出荷について",
+      "url": "https://www.nittokyo.or.jp/uploads/files/20261014_Lilly_insulin.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-14",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "3ca143176464b1eff5bd9dcc1f044e92d526b9869a915216824ad4971c98b62a",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "ノボ ノルディスク ファーマの同種同効薬の製造販売中止を受け、通常の需要を超える切替分に対応できる在庫が十分になかったため、日本イーライリリーは治療継続中の患者への供給を優先し、10月14日から対象6品目を限定出荷としました。",
+      "targets": [
+        {
+          "yj_code": "2492414G7027",
+          "product_name": "ヒューマログミックス５０注ミリオペン",
+          "maker": "日本イーライリリー",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "3mL（100単位/mL） 2キット",
+              "unified_product_code": "428879806",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 428879806。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2492413G9025",
+          "product_name": "ヒューマリン３／７注ミリオペン",
+          "maker": "日本イーライリリー",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "3mL（100単位/mL） 2キット",
+              "unified_product_code": "428880307",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 428880307。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2492413P2020",
+          "product_name": "ヒューマリンＲ注ミリオペン",
+          "maker": "日本イーライリリー",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "3mL（100単位/mL） 2キット",
+              "unified_product_code": "428880406",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 428880406。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2492413P1024",
+          "product_name": "ヒューマリンＮ注ミリオペン",
+          "maker": "日本イーライリリー",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "3mL（100単位/mL） 2キット",
+              "unified_product_code": "428880505",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 428880505。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2492420A1021",
+          "product_name": "インスリン　グラルギンＢＳ注カート「リリー」",
+          "maker": "日本イーライリリー",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "3mL（100単位/mL） 2カートリッジ",
+              "unified_product_code": "428766106",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 428766106。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2492420G1024",
+          "product_name": "インスリン　グラルギンＢＳ注ミリオペン「リリー」",
+          "maker": "日本イーライリリー",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "3mL（100単位/mL） 2キット",
+              "unified_product_code": "428771100",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 428771100。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文では、今回の対象品目を他社インスリン製剤の代替として処方することを控えるよう案内しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "この原文には、日本イーライリリーの対象6品目に対する代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "otsuka-hepafilled-jms-limited-202403",
+      "maker": "大塚製薬工場",
+      "title": "ヘパフィルド透析用シリンジ20mL ジェイ・エム・エスの限定出荷継続案内",
+      "url": "https://medical.jms.cc/pdf/customer_information_306.pdf",
+      "announced_at": "2024-03",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "992e6de18be0a35d3ee0e6afa1846f2248bc004ed54243a839a33285685c878a",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "販売元のジェイ・エム・エスは、既採用先に継続して安定供給するため、注文数量を確認する限定出荷を続け、新規の注文を辞退すると2024年3月に案内しました。",
+      "targets": [
+        {
+          "yj_code": "3334402G8042",
+          "product_name": "ヘパフィルド透析用１５０単位／ｍＬシリンジ２０ｍＬ",
+          "maker": "大塚製薬工場",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "20mL・10シリンジブリスター包装×5",
+              "unified_product_code": "494-07760-1",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、3月のメーカー資料）",
+                "note": "統一商品コード 494-07760-1。"
+              }
+            }
+          ],
+          "seller": "ジェイ・エム・エス"
+        },
+        {
+          "yj_code": "3334402P1048",
+          "product_name": "ヘパフィルド透析用２００単位／ｍＬシリンジ２０ｍＬ",
+          "maker": "大塚製薬工場",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "20mL・10シリンジブリスター包装×5",
+              "unified_product_code": "494-07755-7",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、3月のメーカー資料）",
+                "note": "統一商品コード 494-07755-7。"
+              }
+            }
+          ],
+          "seller": "ジェイ・エム・エス"
+        },
+        {
+          "yj_code": "3334402P2028",
+          "product_name": "ヘパフィルド透析用２５０単位／ｍＬシリンジ２０ｍＬ",
+          "maker": "大塚製薬工場",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "20mL・10シリンジブリスター包装×5",
+              "unified_product_code": "494-00876-6",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、3月のメーカー資料）",
+                "note": "統一商品コード 494-00876-6。"
+              }
+            }
+          ],
+          "seller": "ジェイ・エム・エス"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "当時の販売元資料では自社事情で限定出荷、解除時期は未定です。厚労省の現在の理由欄と資料時点の案内をそれぞれ掲載しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "otsuka-saline-tn100-demand-202408",
+      "maker": "大塚製薬工場",
+      "title": "大塚生食注TN・2ポート100mL 限定出荷に関するお知らせとご協力のお願い",
+      "url": "https://www.otsukakj.jp/med_nutrition/news/upload/7fec099aede40c59dae3c7c9193e56.pdf",
+      "announced_at": "2024-08",
+      "listed_at": "2024-08-20",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "988a0bb0dfec7ef15de53ec159f5595fe85c9b5541796b4d069e93079d137e11",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "近年の需要増で生産能力の上限に達し、すべての希望数量に応じられなくなったことから、大塚製薬工場は対象品の割当出荷と新規採用辞退を継続すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "3311402G1027",
+          "product_name": "大塚生食注ＴＮ",
+          "maker": "大塚製薬工場",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "100mLプラボトル（注入針付）×10本",
+              "unified_product_code": "035069812",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、8月のメーカー資料）",
+                "note": "統一商品コード 035069812。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.otsukakj.jp/med_nutrition/news/upload/7fec099aede40c59dae3c7c9193e56.pdf",
+          "target_yj_codes": [
+            "3311402G1027"
+          ],
+          "type": "注射剤の溶解・希釈時について原文が示した代替候補",
+          "products": [
+            {
+              "name": "大塚生食注",
+              "maker": "大塚製薬工場",
+              "yj_code": "3311401A3111",
+              "scope": "注射剤の溶解・希釈に用いる場合に原文の表に挙げられた100mLプラボトル×10本（035175315）。対象品の注入針付きキットと包装形態が異なります。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "大塚製薬工場の2026年9月資料でも大塚生食注TNの100mLは限定出荷を継続。解除対象は同案内で明記された50mLです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "otsuka-saline-tn100-continuing-202609",
+      "maker": "大塚製薬工場",
+      "title": "大塚生食注の50mL限定出荷解除・100mL限定出荷継続の案内",
+      "url": "https://www.otsukakj.jp/med_nutrition/news/upload/784daff21fb5746abd75edf893ab5ed1.pdf",
+      "announced_at": "2026-09",
+      "listed_at": "2026-09-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "c705570b0993439eaa4a2022aee44dc9feeea64e040a5096acc81784fd9266e0",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "大塚製薬工場は、50mLの対象包装について供給体制が改善し、2026年9月9日から通常受注と案内しました。大塚生食注TNの100mLについては、同じ原文で限定出荷の継続を明記しています。",
+      "targets": [
+        {
+          "yj_code": "3311402G1027",
+          "product_name": "大塚生食注ＴＮ",
+          "maker": "大塚製薬工場",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": []
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "100mLに限定出荷解除が適用されるとは記載されていません。対象包装と統一商品コードは2024年8月原文に記載があります。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "otsuka-saline-two-port100-demand-202408",
+      "maker": "大塚製薬工場",
+      "title": "大塚生食注TN・2ポート100mL 限定出荷に関するお知らせとご協力のお願い",
+      "url": "https://www.otsukakj.jp/med_nutrition/news/upload/7fec099aede40c59dae3c7c9193e56.pdf",
+      "announced_at": "2024-08",
+      "listed_at": "2024-08-20",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "988a0bb0dfec7ef15de53ec159f5595fe85c9b5541796b4d069e93079d137e11",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "近年の需要増で生産能力の上限に達し、すべての希望数量に応じられなくなったことから、大塚製薬工場は対象品の割当出荷と新規採用辞退を継続すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "3311402G9036",
+          "product_name": "大塚生食注２ポート１００ｍＬ",
+          "maker": "大塚製薬工場",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "100mLプラボトル（注入針付）×10本",
+              "unified_product_code": "035195511",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、8月のメーカー資料）",
+                "note": "統一商品コード 035195511。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.otsukakj.jp/med_nutrition/news/upload/7fec099aede40c59dae3c7c9193e56.pdf",
+          "target_yj_codes": [
+            "3311402G9036"
+          ],
+          "type": "注射剤の溶解・希釈時について原文が示した代替候補",
+          "products": [
+            {
+              "name": "大塚生食注",
+              "maker": "大塚製薬工場",
+              "yj_code": "3311401A3111",
+              "scope": "注射剤の溶解・希釈に用いる場合に原文の表に挙げられた100mLプラボトル×10本（035175315）。対象品の注入針付きキットと包装形態が異なります。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "大塚製薬工場の2026年9月資料でも大塚生食注2ポート100mLは限定出荷を継続。解除対象は同案内で明記された50mLです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "otsuka-saline-two-port100-continuing-202609",
+      "maker": "大塚製薬工場",
+      "title": "大塚生食注の50mL限定出荷解除・100mL限定出荷継続の案内",
+      "url": "https://www.otsukakj.jp/med_nutrition/news/upload/784daff21fb5746abd75edf893ab5ed1.pdf",
+      "announced_at": "2026-09",
+      "listed_at": "2026-09-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "c705570b0993439eaa4a2022aee44dc9feeea64e040a5096acc81784fd9266e0",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "大塚製薬工場は、50mLの対象包装について供給体制が改善し、2026年9月9日から通常受注と案内しました。大塚生食注2ポート100mLについては、同じ原文で限定出荷の継続を明記しています。",
+      "targets": [
+        {
+          "yj_code": "3311402G9036",
+          "product_name": "大塚生食注２ポート１００ｍＬ",
+          "maker": "大塚製薬工場",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": []
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "100mLに限定出荷解除が適用されるとは記載されていません。対象包装と統一商品コードは2024年8月原文に記載があります。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "otsuka-saline-syringe-three-202308",
+      "maker": "大塚製薬工場",
+      "title": "生食注シリンジ「オーツカ」 限定出荷に関するお知らせ（続報）",
+      "url": "https://www.otsukakj.jp/med_nutrition/news/upload/cb72e4e8e48554f473ee3ca0868e6d1d.pdf",
+      "announced_at": "2023-08",
+      "listed_at": "2023-08-25",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "115bc47e470b3cab7d13bc1de44bd1eec296a3e877654cd0e328191e28219559",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "大塚製薬工場は既採用施設への安定供給を優先し、限定出荷の継続と新規採用辞退を案内しました。規格変更は生産量と出荷量のバランスに影響するとしています。",
+      "targets": [
+        {
+          "yj_code": "3311402P2040",
+          "product_name": "生食注シリンジ「オーツカ」５ｍＬ",
+          "maker": "大塚製薬工場",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "5mL×10シリンジ（ルアースリップ）",
+              "unified_product_code": "035-19021-9",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 035-19021-9。"
+              }
+            },
+            {
+              "package": "5mL×10シリンジ（ルアーロック）",
+              "unified_product_code": "035-52401-4",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 035-52401-4。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3311402G7050",
+          "product_name": "生食注シリンジ「オーツカ」１０ｍＬ",
+          "maker": "大塚製薬工場",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "10mL×10シリンジ（ルアースリップ）",
+              "unified_product_code": "035-24361-8",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 035-24361-8。"
+              }
+            },
+            {
+              "package": "10mL×10シリンジ（ルアーロック）",
+              "unified_product_code": "035-00581-0",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 035-00581-0。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3311402G8056",
+          "product_name": "生食注シリンジ「オーツカ」２０ｍＬ",
+          "maker": "大塚製薬工場",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "20mL×10シリンジ（ルアースリップ）",
+              "unified_product_code": "035-19061-5",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 035-19061-5。"
+              }
+            },
+            {
+              "package": "20mL×10シリンジ（ルアーロック）",
+              "unified_product_code": "035-00571-1",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 035-00571-1。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "これは2023年8月の限定出荷継続の理由と対象包装です。厚労省の現在の理由欄は別に表示しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "otsuka-saline-syringe5-slip-202511",
+      "maker": "大塚製薬工場",
+      "title": "生食注シリンジ「オーツカ」5mLのルアースリップの出荷量変更と限定出荷継続",
+      "url": "https://www.otsukakj.jp/med_nutrition/news/upload/2025dec095b0e6966f65bf27e72658a6.pdf",
+      "announced_at": "2025-11",
+      "listed_at": "2025-12-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "28a7ce371345657b08b3b0425b1afc72df66cd10f187bdaee5c860a597df6b00",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "大塚製薬工場は、3月の出荷再開後も続いた出荷量減少が改善し、ルアースリップタイプを2025年12月1日から出荷量通常に変更すると案内しました。既採用施設を優先し、限定出荷と新規採用辞退は継続です。",
+      "targets": [
+        {
+          "yj_code": "3311402P2040",
+          "product_name": "生食注シリンジ「オーツカ」５ｍＬ",
+          "maker": "大塚製薬工場",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×10本（ルアースリップ）",
+              "unified_product_code": "035-19021-9",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 035-19021-9。"
+              }
+            },
+            {
+              "package": "5mL×10本×10（ルアースリップ）",
+              "unified_product_code": "035-19020-2",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 035-19020-2。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "出荷量の変更は案内に記載されたルアースリップタイプのみが対象です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
