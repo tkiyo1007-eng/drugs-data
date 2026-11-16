@@ -40027,6 +40027,563 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "sumitomo-qvar-cases-limited-202512",
+      "maker": "住友ファーマ",
+      "title": "キュバール50・100エアゾール 限定出荷の第2報",
+      "url": "https://sumitomo-pharma.jp/hubfs/product/package_notification/2025/qvar_gentei_20251212.pdf",
+      "announced_at": "2025-12",
+      "listed_at": "2025-12-12",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "b588c63f3472d2de57fca21c7eb2eb27b0d9cf039c1f0a2a5b73b1234c89a08e",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "容器に使う部品の調達が遅れ、在庫がひっ迫したことから、住友ファーマは2規格の限定出荷を継続しました。部品の調達が想定より遅れ、第2報では解除時期を未定としています。",
+      "targets": [
+        {
+          "yj_code": "2259703G9020",
+          "product_name": "キュバール５０エアゾール",
+          "maker": "住友ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1缶（アダプター付き）",
+              "unified_product_code": "116-18041-2",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、12月のメーカー資料）",
+                "note": "統一商品コード 116-18041-2。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2259703Y1025",
+          "product_name": "キュバール１００エアゾール",
+          "maker": "住友ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1缶（アダプター付き）",
+              "unified_product_code": "116-18101-3",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、12月のメーカー資料）",
+                "note": "統一商品コード 116-18101-3。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sumitomo-qvar100-discontinuation-202605",
+      "maker": "住友ファーマ",
+      "title": "キュバール100エアゾール 販売中止予定とメーカーの参考代替薬",
+      "url": "https://sumitomo-pharma.jp/hubfs/product/package_notification/2026/qvar_chushi_20260512.pdf",
+      "announced_at": "2026-05",
+      "listed_at": "2026-05-12",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "436928c859b15cc690f16855bce503b146dbc66640a49466745adf1bd2502d53",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "住友ファーマはキュバール100エアゾールを在庫出荷終了後に販売中止と公表しました。販売中止の詳しい理由はこの原文に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "2259703Y1025",
+          "product_name": "キュバール１００エアゾール",
+          "maker": "住友ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1缶（アダプター付き）",
+              "unified_product_code": "116-18101-3",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年6月頃に出荷終了予定（2026年5月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 116-18101-3。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://sumitomo-pharma.jp/hubfs/product/package_notification/2026/qvar_chushi_20260512.pdf",
+          "target_yj_codes": [
+            "2259703Y1025"
+          ],
+          "type": "メーカーの販売中止案内に記載の参考代替薬",
+          "products": [
+            {
+              "name": "フルタイド１００ディスカス",
+              "maker": "グラクソ・スミスクライン",
+              "yj_code": "2290700G5021",
+              "scope": "成人患者に処方している場合の候補として記載。成分と吸入器が対象製品と異なります。"
+            },
+            {
+              "name": "アニュイティ１００μｇエリプタ３０吸入用",
+              "maker": "グラクソ・スミスクライン",
+              "yj_code": "2290705G1029",
+              "scope": "成人患者に処方している場合の候補として記載。成分と吸入器が対象製品と異なります。"
+            },
+            {
+              "name": "キュバール５０エアゾール",
+              "maker": "住友ファーマ",
+              "yj_code": "2259703G9020",
+              "scope": "小児患者に処方している場合の候補として記載。100と規格が異なり、50にも別途限定出荷の案内があります。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "この販売中止案内の対象は100です。成人と小児で参考代替薬が異なります。",
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "nissin-dibucalso-limited-202506",
+      "maker": "日新製薬",
+      "title": "ジブカルソー注2mL・5mL 原薬調達難による限定出荷",
+      "url": "https://www.yg-nissin.co.jp/products/PDF/4095_6062_z1.pdf",
+      "announced_at": "2025-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "e7d647dec9ff73b2c17a3087b500af1f69c67dc260e5f41dcf24f205a1037ca8",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製剤に使える原薬を入手できず、注文に十分に対応できないため、日新製薬は2025年7月1日から両規格の限定出荷を行うと案内しました。",
+      "targets": [
+        {
+          "yj_code": "1149502A1038",
+          "product_name": "ジブカルソー注",
+          "maker": "日新製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "2mL×50管",
+              "unified_product_code": "447101025",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、6月のメーカー資料）",
+                "note": "統一商品コード 447101025、販売包装単位コード 14987447101022。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "1149503A1032",
+          "product_name": "ジブカルソー注",
+          "maker": "日新製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×50管",
+              "unified_product_code": "447102022",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、6月のメーカー資料）",
+                "note": "統一商品コード 447102022、販売包装単位コード 14987447102029。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2025年の限定出荷開始時の経緯です。2026年10月には同社が販売中止予定を公表しています。",
+        "厚労省11月16日版では、両規格の理由区分は「薬価削除」です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nissin-dibucalso-discontinuation-202610",
+      "maker": "日新製薬",
+      "title": "ジブカルソー注2mL・5mLの製造販売中止予定と代替候補",
+      "url": "https://www.yg-nissin.co.jp/products/PDF/4095_6482_z1.pdf",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "e4e278dfc2461bbb71ad1c41d1788485db286f17fab6072c167c2f73f37ce83a",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "日新製薬は在庫消尽後に2mL・5mLを販売中止にすると公表しました。販売中止の詳しい理由はこの原文に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "1149502A1038",
+          "product_name": "ジブカルソー注",
+          "maker": "日新製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "2mL×50管",
+              "unified_product_code": "447101025",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年6月（2026年10月のメーカー資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 447101025、販売包装単位コード 14987447101022。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "1149503A1032",
+          "product_name": "ジブカルソー注",
+          "maker": "日新製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×50管",
+              "unified_product_code": "447102022",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年3月（2026年10月のメーカー資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 447102022、販売包装単位コード 14987447102029。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.yg-nissin.co.jp/products/PDF/4095_6482_z1.pdf",
+          "target_yj_codes": [
+            "1149502A1038"
+          ],
+          "type": "メーカーの販売中止案内に記載の候補",
+          "products": [
+            {
+              "name": "ネオビタカイン注シリンジ５ｍＬ",
+              "maker": "ビタカイン製薬",
+              "yj_code": "1149503G1027",
+              "scope": "原文に明記された包装は5mL×10シリンジ。ジブカルソー注2mL×50管とは容器と包装が異なります。1本の液量も異なります。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        },
+        {
+          "source_url": "https://www.yg-nissin.co.jp/products/PDF/4095_6482_z1.pdf",
+          "target_yj_codes": [
+            "1149503A1032"
+          ],
+          "type": "メーカーの販売中止案内に記載の候補",
+          "products": [
+            {
+              "name": "ネオビタカイン注シリンジ５ｍＬ",
+              "maker": "ビタカイン製薬",
+              "yj_code": "1149503G1027",
+              "scope": "原文に明記された包装は5mL×10シリンジ。ジブカルソー注5mL×50管とは容器と包装が異なります。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "経過措置の予定は2028年3月末です。資料の統一名収載コードを、規格・統一商品コードで個別のYJコードと照合しました。",
+        "厚労省11月16日版では、両規格の理由区分は「薬価削除」です。",
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "shio-rd01-limited-202311",
+      "maker": "シオノギファーマ",
+      "title": "リンデロン点眼液0.01％ 限定出荷のお知らせ",
+      "url": "https://www.shionogi.com/content/dam/hcp/jp/news/package/2023/rdgl_20231110.pdf",
+      "announced_at": "2023-11",
+      "listed_at": "2023-11-10",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "22540afe804be5830f189bfb2afafc58971ee77655c602b5eb22f07c4a516e5a",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社の眼科用合成副腎皮質ホルモン剤の限定出荷で需要が急増したため、塩野義製薬は、対象包装の安定供給を図るために限定出荷を始めると案内しました。",
+      "targets": [
+        {
+          "yj_code": "1315706Q1025",
+          "product_name": "リンデロン点眼液０．０１％",
+          "maker": "シオノギファーマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×10本",
+              "unified_product_code": "087-00830-2",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 087-00830-2。"
+              }
+            }
+          ],
+          "seller": "塩野義製薬"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "販売元の塩野義製薬の資料です。対象名・濃度が異なるリンデロンA液の案内は含みません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "shio-rd1-limited-202311",
+      "maker": "シオノギファーマ",
+      "title": "リンデロン点眼・点耳・点鼻液0.1％ 限定出荷のお知らせ",
+      "url": "https://www.shionogi.com/content/dam/hcp/jp/news/package/2023/rde_20231110.pdf",
+      "announced_at": "2023-11",
+      "listed_at": "2023-11-10",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "09bbc4bf792704a73f2dd6209d4b218a9ebffdd1b36158bd863c041dd7fad733",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社の眼科用合成副腎皮質ホルモン剤の限定出荷で需要が急増したため、塩野義製薬は、対象包装の安定供給を図るために限定出荷を始めると案内しました。",
+      "targets": [
+        {
+          "yj_code": "1315706Q2102",
+          "product_name": "リンデロン点眼・点耳・点鼻液０．１％",
+          "maker": "シオノギファーマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×10本",
+              "unified_product_code": "087-03352-6",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 087-03352-6。"
+              }
+            }
+          ],
+          "seller": "塩野義製薬"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "販売元の塩野義製薬の資料です。対象名・濃度が異なるリンデロンA液の案内は含みません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "viatris-atomoxetine-vtrs40-limited-202604",
+      "maker": "ヴィアトリス・ヘルスケア合同会社",
+      "title": "アトモキセチンカプセル40mg「VTRS」 再度の限定出荷",
+      "url": "https://www.viatris-e-channel.com/viatris-products/di/info/pdf/NBZ27Q046A_%E4%BE%9B%E7%B5%A6%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%94%E6%A1%88%E5%86%85%EF%BC%88%E3%82%A2%E3%83%88%E3%83%A2%E3%82%AD%E3%82%BB%E3%83%81%E3%83%B3%E3%82%AB%E3%83%97%E3%82%BB%E3%83%AB%E3%80%8CVTRS%E3%80%8D%EF%BC%89_4%E6%9C%88%E7%89%88.pdf",
+      "announced_at": "2026-04",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "6092a118735504e077d115402bc4b9f7d725696ebeb30ae8c4e35a7c089238ea",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "4月に通常出荷を再開した後、製造上の問題で納品が遅れ、注文も増えたため、ヴィアトリスは安定した在庫を確保できるまで再度の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "1179050M4073",
+          "product_name": "アトモキセチンカプセル４０ｍｇ「ＶＴＲＳ」",
+          "maker": "ヴィアトリス・ヘルスケア合同会社",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP140カプセル",
+              "unified_product_code": "901033404",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、4月のメーカー資料）",
+                "note": "統一商品コード 901033404、販売包装単位コード 14987901033401。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "4月原文で在庫割当後の出荷停止予定を示した25mgは別規格です。40mgでは11月に対象包装の通常受注再開が案内されました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "viatris-vtrs40-and-parox10-normal-orders-202611",
+      "maker": "ヴィアトリス・ヘルスケア合同会社",
+      "title": "ヴィアトリス取扱分 通常受注再開のお知らせ",
+      "url": "https://www.viatris-e-channel.com/viatris-products/di/info/pdf/NBZ27Q107A_%E9%80%9A%E5%B8%B8%E5%87%BA%E8%8D%B7%E5%86%8D%E9%96%8B%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B_11%E6%9C%88%E7%89%88.pdf",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "1f91101d5effac8c5c6ed0c46dfdd2ac62c6238a87845be911251fb5d531bb4e",
+      "collection_mode": "manual",
+      "event_type": "resumed",
+      "reason": "ヴィアトリスは安定供給の見通しが立ったため、アトモキセチン40mgとパロキセチン10mgの記載包装で、特約店からの通常受注を再開したと案内しました。",
+      "targets": [
+        {
+          "yj_code": "1179050M4073",
+          "product_name": "アトモキセチンカプセル４０ｍｇ「ＶＴＲＳ」",
+          "maker": "ヴィアトリス・ヘルスケア合同会社",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP140カプセル",
+              "unified_product_code": "901033404",
+              "supply": {
+                "status": "normal",
+                "plans": [],
+                "status_text": "通常受注再開（2026年11月6日付の販売元案内）",
+                "note": "統一商品コード 901033404、販売包装単位コード 14987901033401。"
+              }
+            }
+          ],
+          "seller": "ヴィアトリス製薬合同会社"
+        },
+        {
+          "yj_code": "1179041F1378",
+          "product_name": "パロキセチン錠１０ｍｇ「ＶＴＲＳ」",
+          "maker": "ヴィアトリス・ヘルスケア合同会社",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "901077200",
+              "supply": {
+                "status": "normal",
+                "plans": [],
+                "status_text": "通常受注再開（2026年11月6日付の販売元案内）",
+                "note": "統一商品コード 901077200、販売包装単位コード 14987901077207。"
+              }
+            }
+          ],
+          "seller": "ヴィアトリス製薬合同会社"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "ヴィアトリス製薬取扱分の記載包装が対象です。11月16日版の厚労省公表値には限定出荷の記載が残っています。現在の受注可否はメーカー・卸に確認してください。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "orphan-rasilez150-discontinuation-202509",
+      "maker": "オーファンパシフィック",
+      "title": "ラジレス錠150mg 販売中止のお知らせ",
+      "url": "https://www.orphanpacific.com/upload/news/20250917092106Ifr6cdSoHdf6n1a8.pdf/%E3%83%A9%E3%82%B8%E3%83%AC%E3%82%B9%E9%8C%A0150mg%E3%80%80%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%94%E6%A1%88%E5%86%85.pdf",
+      "announced_at": "2025-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "5b5fac81b8e4992b57233e6f5c66db1b4c05bb5c43a47926e691c0854d4f8f55",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "オーファンパシフィックは、ラジレス錠150mgの140錠包装を自社在庫の消尽後に販売中止すると発表しました。具体的な事情は原文に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "2149047F1028",
+          "product_name": "ラジレス錠１５０ｍｇ",
+          "maker": "オーファンパシフィック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "140錠",
+              "unified_product_code": "858-21012-5",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年1月（2025年9月のメーカー資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 858-21012-5、販売包装単位コード 14987858210122。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "経過措置満了は2027年3月31日の予定として案内されました。",
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
