@@ -46,6 +46,7 @@ MAKER_HOSTS = {
     'MSD': 'www.msdconnect.jp',
     'アルフレッサ ファーマ': 'www.alfresa-pharma.co.jp',
     '富士製薬工業': 'www.fuji-pharma.jp',
+    '高田製薬': 'www.takata-seiyaku.co.jp',
 }
 MAKER_MANUAL_SOURCE_HOSTS = {'富士製薬工業': ('www.fujipharma.jp',)}
 SCOPES = {'product', 'package', 'seller_route_and_package'}
