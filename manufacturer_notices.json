@@ -8201,6 +8201,124 @@
         "メーカー原文が案内しているのは同じ品目の別包装です。原文に別の薬剤の記載はありません。",
         "包装ごとの状態はメーカーの2026年11月9日版一覧によります。品目単位の供給区分は厚労省の公表欄をご確認ください。卸在庫や受注可否は未確認です。"
       ]
+    },
+    {
+      "id": "nichiiko-iluamix-ee-limited-202609",
+      "maker": "日医工",
+      "title": "イルアミクス配合錠LD・HD「EE」の限定出荷の理由",
+      "url": "https://www.nichiiko.co.jp/medicine/file/92570/information/20260916cI2.pdf",
+      "announced_at": "2026-09",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "03dbb0a8065dfe7e143292ace98683f0543684e98551b95e943a530653acf2c8",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日医工は、他社製品の出荷調整の影響で注文が想定を上回ったと説明しています。安定供給体制が整うまで対象包装の出荷を限定し、新規採用の依頼は辞退すると案内しています。",
+      "targets": [
+        {
+          "yj_code": "2149118F1046",
+          "product_name": "イルアミクス配合錠ＬＤ「ＥＥ」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）・出荷量通常（2026年9月のメーカー資料）",
+                "plans": [],
+                "note": "統一商品コード 376-92570-9、販売包装単位コード 14987376925706。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149118F2042",
+          "product_name": "イルアミクス配合錠ＨＤ「ＥＥ」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）・出荷量通常（2026年9月のメーカー資料）",
+                "plans": [],
+                "note": "統一商品コード 376-92580-8、販売包装単位コード 14987376925805。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年9月のメーカー原文に具体的な解除日や代替候補の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-iluamix-nig-limited-202609",
+      "maker": "日医工",
+      "title": "イルアミクス配合錠LD・HD「NIG」の限定出荷の理由",
+      "url": "https://www.nichiiko.co.jp/medicine/file/72470/information/20260916cI3.pdf",
+      "announced_at": "2026-09",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "38971d447fbcbb84b52cd9e7c982aec7ab42e57df3385317ad23605e43a95ffa",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日医工は、他社製品の出荷調整の影響で注文が想定を上回ったと説明しています。安定供給体制が整うまで対象包装の出荷を限定し、新規採用の依頼は辞退すると案内しています。",
+      "targets": [
+        {
+          "yj_code": "2149118F1194",
+          "product_name": "イルアミクス配合錠ＬＤ「ＮＩＧ」",
+          "maker": "日医工岐阜工場",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）・出荷量通常（2026年9月のメーカー資料）",
+                "plans": [],
+                "note": "統一商品コード 376-72476-0、販売包装単位コード 14987376724767。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149118F2190",
+          "product_name": "イルアミクス配合錠ＨＤ「ＮＩＧ」",
+          "maker": "日医工岐阜工場",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）・出荷量通常（2026年9月のメーカー資料）",
+                "plans": [],
+                "note": "統一商品コード 376-72486-9、販売包装単位コード 14987376724866。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年9月のメーカー原文に具体的な解除日や代替候補の記載はありません。"
+      ]
     }
   ]
 }
