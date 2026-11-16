@@ -159,6 +159,7 @@ MAKER_MANUAL_SOURCE_URLS = {
         'https://www.jrs.or.jp/information/file/3393d536942bdd85d8d84103c5d69b6e1dc48fc4.pdf',
     },
     'ファイザー': {
+        'https://www.j-circ.or.jp/cms/wp-content/uploads/2024/07/C03DA02.pdf',
         'https://www.j-endo.jp/uploads/files/news/20250617-12.pdf',
         'https://www.kansensho.or.jp/uploads/files/news/gakkai/gakkai_230721_2.pdf',
     },
