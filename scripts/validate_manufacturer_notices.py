@@ -51,6 +51,7 @@ MAKER_HOSTS = {
     '高田製薬': 'www.takata-seiyaku.co.jp',
     'コーアイセイ': 'www.koaisei.com',
     '武田薬品工業': 'www.takedamed.com',
+    '大原薬品工業': 'www.ohara-ch.co.jp',
 }
 MAKER_MANUAL_SOURCE_HOSTS = {
     '富士製薬工業': ('www.fujipharma.jp',),
