@@ -7,6 +7,8 @@ import tempfile
 import unittest
 from unittest import mock
 
+from validate_manufacturer_notices import MAKER_HOSTS
+
 SPEC = importlib.util.spec_from_file_location("bulletins", Path(__file__).with_name("fetch_manufacturer_bulletins.py"))
 mod = importlib.util.module_from_spec(SPEC); SPEC.loader.exec_module(mod)
 NOW = dt.datetime(2026, 10, 14, 2, 0, tzinfo=mod.JST)
@@ -163,7 +165,7 @@ class CollectionTests(unittest.TestCase):
         self.assertEqual(first['items'][0]['review_status'], 'confirmed')
         reg['notices'][0].update(collection_mode='manual', announced_at='2026-10', verified_at='2026-10-08')
         transport = Transport()
-        with mock.patch.dict(mod.MAKER_HOSTS, {'テスト製薬': 'maker.test'}):
+        with mock.patch.dict(MAKER_HOSTS, {'テスト製薬': 'maker.test'}):
             result = mod.collect(configuration(), reg, first, transport=transport, now=NOW + dt.timedelta(hours=1))
         self.assertEqual(transport.calls, [])
         self.assertEqual(result['items'][0]['review_status'], 'needs_review')
