@@ -19436,6 +19436,885 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "amel-eszopiclone-ptp100-limited-202610",
+      "maker": "共和薬品工業",
+      "title": "エスゾピクロン錠1mg・2mg「アメル」PTP100錠包装の限定出荷",
+      "url": "https://www.amel-di.com/medical/di/download/news?nid=69982",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "7b916ef05c9e7c5fa5c34b9ffcab99c5f4d269c863944c5757af7ff9b5f69f25",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "共和薬品は入庫が遅れ、想定を上回る需要が重なったため、両規格のPTP100錠包装を限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "1129010F1087",
+          "product_name": "エスゾピクロン錠１ｍｇ「アメル」",
+          "maker": "共和薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "058-295038",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、10月のメーカー資料）",
+                "note": "統一商品コード 058-295038、販売包装単位コード 14987058295035。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "1129010F2083",
+          "product_name": "エスゾピクロン錠２ｍｇ「アメル」",
+          "maker": "共和薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "058-296035",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、10月のメーカー資料）",
+                "note": "統一商品コード 058-296035、販売包装単位コード 14987058296032。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.amel-di.com/medical/di/download/news?nid=69982",
+          "target_yj_codes": [
+            "1129010F1087"
+          ],
+          "type": "共和薬品工業が案内した代替候補",
+          "products": [
+            {
+              "name": "エスゾピクロン錠１ｍｇ「日医工」",
+              "maker": "日医工",
+              "yj_code": "1129010F1168",
+              "scope": "1mgのPTP100錠包装が対象。日医工のPTP100錠（376-065603）。"
+            },
+            {
+              "name": "エスゾピクロン錠１ｍｇ「日新」",
+              "maker": "日新製薬",
+              "yj_code": "1129010F1133",
+              "scope": "1mgのPTP100錠包装が対象。日新製薬製造・日新薬品発売のPTP100錠（447-028018）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        },
+        {
+          "source_url": "https://www.amel-di.com/medical/di/download/news?nid=69982",
+          "target_yj_codes": [
+            "1129010F2083"
+          ],
+          "type": "共和薬品工業が案内した代替候補",
+          "products": [
+            {
+              "name": "エスゾピクロン錠２ｍｇ「日医工」",
+              "maker": "日医工",
+              "yj_code": "1129010F2164",
+              "scope": "2mgのPTP100錠包装が対象。日医工のPTP100錠（376-065702）。"
+            },
+            {
+              "name": "エスゾピクロン錠２ｍｇ「日新」",
+              "maker": "日新製薬",
+              "yj_code": "1129010F2130",
+              "scope": "2mgのPTP100錠包装が対象。日新製薬製造・日新薬品発売のPTP100錠（447-029015）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "原文のPTP100錠包装の限定出荷解除見込みは2027年1月です。バラ100錠の扱いは11月版の包装別一覧を参照してください。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "amel-keflex250-limited-202607",
+      "maker": "共和薬品工業",
+      "title": "ケフレックスカプセル250mg 限定出荷に関するご連絡",
+      "url": "https://www.amel-di.com/medical/di/download/news?nid=69872",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-03",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "f8b0f8df41dc3308dcd709646a3ede4ce08e14a4b90ebaef8bdf6b2e170bd66b",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "出荷再開後に想定を上回る注文が寄せられ、通常出荷の継続が難しくなったため、共和薬品はPTP100カプセルを限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "6132002M2183",
+          "product_name": "ケフレックスカプセル２５０ｍｇ",
+          "maker": "共和薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "058-181034",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、7月のメーカー資料）",
+                "note": "統一商品コード 058-181034、販売包装単位コード 14987058181031。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.amel-di.com/medical/di/download/news?nid=69872",
+          "target_yj_codes": [
+            "6132002M2183"
+          ],
+          "type": "共和薬品工業が案内した代替候補",
+          "products": [
+            {
+              "name": "ケフラールカプセル２５０ｍｇ",
+              "maker": "共和薬品工業",
+              "yj_code": "6132005M1059",
+              "scope": "対象はケフレックスのPTP100カプセル。候補はケフラールのPTP100カプセル（058-633038）。成分が異なります。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "限定出荷の解除時期は、このメーカー案内で未定とされています。",
+        "この品目の包装と対応区分は、共和薬品の2026年11月16日付一覧でも確認しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "amel-hilnamin-granules10-limited-202610",
+      "maker": "共和薬品工業",
+      "title": "ヒルナミン細粒10％ 限定出荷に関するご連絡",
+      "url": "https://www.amel-di.com/medical/di/download/news?nid=69983",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "8605342649e1486fc5a7868ad1139b50e104c7776da1e7474465d8731ca21254",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "2026年7月28日の熊本地震の影響でヒルナミン錠の3規格が限定出荷となり、細粒10％への需要が急増したため、共和薬品は細粒も限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "1172014C1055",
+          "product_name": "ヒルナミン細粒１０％",
+          "maker": "共和薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "バラ500g",
+              "unified_product_code": "058-686553",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、10月のメーカー資料）",
+                "note": "統一商品コード 058-686553、販売包装単位コード 14987058686550。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカー原文での解除予定は2027年3月頃です。包装は11月版の一覧でアルミ袋500gと記載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "amel-barnetil-50mg-granules-limited-202602",
+      "maker": "共和薬品工業",
+      "title": "バルネチール錠100の供給停止と、錠50・細粒50％の限定出荷",
+      "url": "https://www.amel-di.com/medical/di/download/news?nid=69657",
+      "announced_at": "2026-02",
+      "listed_at": "2026-02-03",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "7f6b0f4d80bfa9c126f3389abb6832d4baac28001eec64fa3dcbabcb4fb6dbdb",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "バルネチール錠100の自主回収に伴う供給停止を受けて、共和薬品は錠50・細粒50％を限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "1179032F1026",
+          "product_name": "バルネチール錠５０",
+          "maker": "共和薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "058-656037",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、2月のメーカー資料）",
+                "note": "統一商品コード 058-656037、販売包装単位コード 14987058656034。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "1179032C1046",
+          "product_name": "バルネチール細粒５０％",
+          "maker": "共和薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "バラ100g",
+              "unified_product_code": "058-655535",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、2月のメーカー資料）",
+                "note": "統一商品コード 058-655535、販売包装単位コード 14987058655532。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "錠50と細粒50％は原文で錠100に対する候補です。錠50や細粒50％自体の代替候補名は原文にありません。",
+        "限定出荷の解除時期は、このメーカー案内で未定とされています。",
+        "この品目の包装と対応区分は、共和薬品の2026年11月16日付一覧でも確認しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "amel-carbamazepine-granules-limited-202406",
+      "maker": "共和薬品工業",
+      "title": "カルバマゼピン細粒50％「アメル」限定出荷のお知らせ",
+      "url": "https://www.amel-di.com/medical/di/download/news?nid=69074",
+      "announced_at": "2024-06",
+      "listed_at": "2024-06-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "af29f50e4251b37f8b999b44b3e654809ef849fc816566dc0dc197bdbf952ccb",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "共和薬品は、他社製品の影響で対象包装を限定出荷と案内しています。影響の詳しい内容はこの案内に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "1139002C1066",
+          "product_name": "カルバマゼピン細粒５０％「アメル」",
+          "maker": "共和薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "バラ500g",
+              "unified_product_code": "058-160558",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 058-160558、販売包装単位コード 14987058160555。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "限定出荷の解除時期は、このメーカー案内で未定とされています。",
+        "この品目の包装と対応区分は、共和薬品の2026年11月16日付一覧でも確認しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "amel-tandospirone5-limited-202607",
+      "maker": "共和薬品工業",
+      "title": "タンドスピロンクエン酸塩錠5mg「アメル」限定出荷のお知らせ",
+      "url": "https://www.amel-di.com/medical/di/download/news?nid=69884",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-29",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "dfb8e3c35bf56070da661e1ccf5c817237a1c811a7e86de9df9323b44c6caeb6",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "共和薬品は、他社製品の影響で対象包装を限定出荷と案内しています。影響の詳しい内容はこの案内に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "1129008F1047",
+          "product_name": "タンドスピロンクエン酸塩錠５ｍｇ「アメル」",
+          "maker": "共和薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "058-372036",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 058-372036、販売包装単位コード 14987058372033。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "限定出荷の解除時期は、このメーカー案内で未定とされています。",
+        "この品目の包装と対応区分は、共和薬品の2026年11月16日付一覧でも確認しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "amel-voriconazole-tablets-limited-202607",
+      "maker": "共和薬品工業",
+      "title": "ボリコナゾール錠50mg・100mg・200mg「アメル」限定出荷のお知らせ",
+      "url": "https://www.amel-di.com/medical/di/download/news?nid=69882",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-27",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "7a8c272a3ee6d70a06196fcf03520d9e25c17bdeb40dc987f9a3d9b7baea7545",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "共和薬品は、他社製品の影響で対象包装を限定出荷と案内しています。影響の詳しい内容はこの案内に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "6179001F1058",
+          "product_name": "ボリコナゾール錠５０ｍｇ「アメル」",
+          "maker": "共和薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP50錠",
+              "unified_product_code": "058-519141",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 058-519141、販売包装単位コード 14987058519148。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6179001F3034",
+          "product_name": "ボリコナゾール錠１００ｍｇ「アメル」",
+          "maker": "共和薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP50錠",
+              "unified_product_code": "058-520147",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 058-520147、販売包装単位コード 14987058520144。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6179001F2054",
+          "product_name": "ボリコナゾール錠２００ｍｇ「アメル」",
+          "maker": "共和薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP50錠",
+              "unified_product_code": "058-521144",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 058-521144、販売包装単位コード 14987058521141。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "限定出荷の解除時期は、このメーカー案内で未定とされています。",
+        "この品目の包装と対応区分は、共和薬品の2026年11月16日付一覧でも確認しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "amel-eszopiclone-current-packs-20261116",
+      "maker": "共和薬品工業",
+      "title": "共和薬品の供給状況一覧 エスゾピクロン錠1mg・2mgの包装別情報",
+      "url": "https://www.amel-di.com/medical/di/download/supplystatuslist",
+      "announced_at": "2026-11-16",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "76842b4f4d4b5072e8f1250e9f041ef798ece97b748259ab459e4a5d2f5e1803",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "共和薬品の11月16日版では、両規格ともPTP100錠が限定出荷で、バラ100錠は通常出荷です。",
+      "targets": [
+        {
+          "yj_code": "1129010F1087",
+          "product_name": "エスゾピクロン錠１ｍｇ「アメル」",
+          "maker": "共和薬品工業",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "058295038",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情）（共和薬品11月16日版、B-②）",
+                "note": "統一商品コード 058295038、販売包装単位コード 14987058295035。"
+              }
+            },
+            {
+              "package": "バラ100錠",
+              "unified_product_code": "058295533",
+              "supply": {
+                "status": "normal",
+                "plans": [],
+                "status_text": "通常出荷（共和薬品11月16日版、A-①）",
+                "note": "統一商品コード 058295533、販売包装単位コード 14987058295530。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "1129010F2083",
+          "product_name": "エスゾピクロン錠２ｍｇ「アメル」",
+          "maker": "共和薬品工業",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "058296035",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情）（共和薬品11月16日版、B-②）",
+                "note": "統一商品コード 058296035、販売包装単位コード 14987058296032。"
+              }
+            },
+            {
+              "package": "バラ100錠",
+              "unified_product_code": "058296530",
+              "supply": {
+                "status": "normal",
+                "plans": [],
+                "status_text": "通常出荷（共和薬品11月16日版、Aプラス-①）",
+                "note": "統一商品コード 058296530、販売包装単位コード 14987058296537。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカーが指定した代替候補と解除予定は、別掲の2026年10月案内をご確認ください。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "amel-hilnamin-tablets-current-packs-20261116",
+      "maker": "共和薬品工業",
+      "title": "共和薬品の供給状況一覧 ヒルナミン錠の包装別情報",
+      "url": "https://www.amel-di.com/medical/di/download/supplystatuslist",
+      "announced_at": "2026-11-16",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "76842b4f4d4b5072e8f1250e9f041ef798ece97b748259ab459e4a5d2f5e1803",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "共和薬品の11月16日版では、錠25mgのPTP100錠が出荷停止、瓶1000錠は限定出荷です。錠5mg・50mgの掲載包装も同社一覧で限定出荷と確認しました。",
+      "targets": [
+        {
+          "yj_code": "1172014F1027",
+          "product_name": "ヒルナミン錠（５ｍｇ）",
+          "maker": "共和薬品工業",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "058682036",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他）（共和薬品11月16日版、Aプラス-④）",
+                "note": "統一商品コード 058682036、販売包装単位コード 14987058682033。"
+              }
+            },
+            {
+              "package": "PTP1000錠",
+              "unified_product_code": "058682111",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他）（共和薬品11月16日版、A-④）",
+                "note": "統一商品コード 058682111、販売包装単位コード 14987058682118。"
+              }
+            },
+            {
+              "package": "瓶・バラ1000錠",
+              "unified_product_code": "058682616",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他）（共和薬品11月16日版、Aプラス-④）",
+                "note": "統一商品コード 058682616、販売包装単位コード 14987058682613。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "1172014F2139",
+          "product_name": "ヒルナミン錠（２５ｍｇ）",
+          "maker": "共和薬品工業",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "058683033",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "status_text": "出荷停止（共和薬品11月16日版、C-⑤）",
+                "note": "統一商品コード 058683033、販売包装単位コード 14987058683030。"
+              }
+            },
+            {
+              "package": "瓶・バラ1000錠",
+              "unified_product_code": "058683613",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他）（共和薬品11月16日版、Aプラス-④）",
+                "note": "統一商品コード 058683613、販売包装単位コード 14987058683610。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "1172014F3038",
+          "product_name": "ヒルナミン錠（５０ｍｇ）",
+          "maker": "共和薬品工業",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "058684030",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他）（共和薬品11月16日版、Aプラス-④）",
+                "note": "統一商品コード 058684030、販売包装単位コード 14987058684037。"
+              }
+            },
+            {
+              "package": "瓶・バラ1000錠",
+              "unified_product_code": "058684610",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他）（共和薬品11月16日版、Aプラス-④）",
+                "note": "統一商品コード 058684610、販売包装単位コード 14987058684617。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "錠25mgのPTP100錠はメーカーの一覧で2026年11月2日から出荷停止です。",
+        "地震による製造への影響、原文で指定された代替候補、出荷再開見込みは、別掲の2026年9月案内をご確認ください。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "amel-current-package-6132002r2032-20261116",
+      "maker": "共和薬品工業",
+      "title": "共和薬品の供給状況一覧 ケフレックスシロップ用細粒２００の対象包装",
+      "url": "https://www.amel-di.com/medical/di/download/supplystatuslist",
+      "announced_at": "2026-11-16",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "76842b4f4d4b5072e8f1250e9f041ef798ece97b748259ab459e4a5d2f5e1803",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "共和薬品の一覧では2026年10月1日に「他社品の影響」から「自社の事情」に対応区分が変わりました。具体的な理由は同社一覧に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "6132002R2032",
+          "product_name": "ケフレックスシロップ用細粒２００",
+          "maker": "共和薬品工業",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "瓶・バラ100g",
+              "unified_product_code": "058183236",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情）（共和薬品11月16日版、A-②）",
+                "note": "統一商品コード 058183236、販売包装単位コード 14987058183233。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "共和薬品の11月16日版一覧の代替品欄に、この品目の候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "amel-current-package-6132005e1020-20261116",
+      "maker": "共和薬品工業",
+      "title": "共和薬品の供給状況一覧 Ｌ－ケフラール顆粒の対象包装",
+      "url": "https://www.amel-di.com/medical/di/download/supplystatuslist",
+      "announced_at": "2026-11-16",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "76842b4f4d4b5072e8f1250e9f041ef798ece97b748259ab459e4a5d2f5e1803",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "共和薬品の一覧では2026年11月2日に「他社品の影響」から「自社の事情」に対応区分が変わりました。具体的な理由は同社一覧に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "6132005E1020",
+          "product_name": "Ｌ－ケフラール顆粒",
+          "maker": "共和薬品工業",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "SP100包",
+              "unified_product_code": "058635179",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情）（共和薬品11月16日版、A-②）",
+                "note": "統一商品コード 058635179、販売包装単位コード 14987058635176。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "共和薬品の11月16日版一覧の代替品欄に、この品目の候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "amel-current-package-6132002e1034-20261116",
+      "maker": "共和薬品工業",
+      "title": "共和薬品の供給状況一覧 Ｌ－ケフレックス小児用顆粒の対象包装",
+      "url": "https://www.amel-di.com/medical/di/download/supplystatuslist",
+      "announced_at": "2026-11-16",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "76842b4f4d4b5072e8f1250e9f041ef798ece97b748259ab459e4a5d2f5e1803",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "共和薬品の一覧では2026年11月2日に「他社品の影響」から「自社の事情」に対応区分が変わりました。具体的な理由は同社一覧に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "6132002E1034",
+          "product_name": "Ｌ－ケフレックス小児用顆粒",
+          "maker": "共和薬品工業",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "SP100g",
+              "unified_product_code": "058185476",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情）（共和薬品11月16日版、B-②）",
+                "note": "統一商品コード 058185476、販売包装単位コード 14987058185473。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "共和薬品の11月16日版一覧の代替品欄に、この品目の候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "amel-current-package-6132002e2030-20261116",
+      "maker": "共和薬品工業",
+      "title": "共和薬品の供給状況一覧 Ｌ－ケフレックス顆粒の対象包装",
+      "url": "https://www.amel-di.com/medical/di/download/supplystatuslist",
+      "announced_at": "2026-11-16",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "76842b4f4d4b5072e8f1250e9f041ef798ece97b748259ab459e4a5d2f5e1803",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "共和薬品の一覧では2026年11月2日に「他社品の影響」から「自社の事情」に対応区分が変わりました。具体的な理由は同社一覧に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "6132002E2030",
+          "product_name": "Ｌ－ケフレックス顆粒",
+          "maker": "共和薬品工業",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "SP100g",
+              "unified_product_code": "058184479",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情）（共和薬品11月16日版、B-②）",
+                "note": "統一商品コード 058184479、販売包装単位コード 14987058184476。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "共和薬品の11月16日版一覧の代替品欄に、この品目の候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "amel-current-package-1239003f1046-20261116",
+      "maker": "共和薬品工業",
+      "title": "共和薬品の供給状況一覧 メスチノン錠６０ｍｇの対象包装",
+      "url": "https://www.amel-di.com/medical/di/download/supplystatuslist",
+      "announced_at": "2026-11-16",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "76842b4f4d4b5072e8f1250e9f041ef798ece97b748259ab459e4a5d2f5e1803",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "共和薬品の11月16日版では、現在掲載されているPTP100錠が自社の事情で限定出荷です。同社一覧に具体的な理由の記載はありません。",
+      "targets": [
+        {
+          "yj_code": "1239003F1046",
+          "product_name": "メスチノン錠６０ｍｇ",
+          "maker": "共和薬品工業",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "058600030",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情）（共和薬品11月16日版、A-②）",
+                "note": "統一商品コード 058600030、販売包装単位コード 14987058600037。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "共和薬品の11月16日版一覧の代替品欄に、この品目の候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "amel-mestinon-packaging-machine-202510",
+      "maker": "共和薬品工業",
+      "title": "メスチノン錠60mg 包装仕様及び有効期間変更のお知らせ",
+      "url": "https://www.amel-di.com/medical/di/download/news?nid=69527",
+      "announced_at": "2025-10",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "30a17994079d48d53005791a8da887c6be79cc5e3e977256a10e4f58076ec830",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "包装委託先のSP包装機が故障し、共和薬品は包装変更を前倒しして両面アルミPTP包装で製造を再開すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "1239003F1046",
+          "product_name": "メスチノン錠６０ｍｇ",
+          "maker": "共和薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "058600030",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 058600030、販売包装単位コード 14987058600037。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "包装切替についての2025年10月の案内です。11月16日版の限定出荷の詳細理由は別掲の一覧でも特定できません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
