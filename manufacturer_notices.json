@@ -21519,6 +21519,636 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "nichiiko-gifu-etoposide100-202505",
+      "maker": "日医工",
+      "title": "エトポシド点滴静注100mg「NIG」 限定出荷のお知らせ",
+      "url": "https://www.nichiiko.co.jp/medicine/file/72600/information/20250514cG6.pdf",
+      "announced_at": "2025-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "88fea913e293ffac77e556d03c28e94bbd7420738e8be1ea69fd0bdcc099fd17",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の出荷制限で注文が増え、供給能力を超えたため、日医工は対象包装を限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "4240403A2107",
+          "product_name": "エトポシド点滴静注１００ｍｇ「ＮＩＧ」",
+          "maker": "日医工岐阜工場",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1バイアル",
+              "unified_product_code": "123-87186-0",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 123-87186-0、販売包装単位コード 14987123871867。"
+              }
+            },
+            {
+              "package": "5バイアル",
+              "unified_product_code": "123-87187-7",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 123-87187-7、販売包装単位コード 14987123871874。"
+              }
+            }
+          ],
+          "seller": "日医工"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文では安定供給体制が整うまで新規採用を辞退するとしています。",
+        "日医工の2026年11月11日版の一覧で、この品目の限定出荷を確認しました。日医工岐阜工場製造・日医工販売の範囲です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-gifu-ozagrel80-syringe-202509",
+      "maker": "日医工",
+      "title": "オザグレルNa点滴静注80mgシリンジ「NIG」 限定出荷のお知らせ",
+      "url": "https://www.nichiiko.co.jp/medicine/file/72950/information/20250917cG1.pdf",
+      "announced_at": "2025-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "bb14e727736e0ec3ed174fd395a707dae921ace7faaf5a3c92007e2e1f378554",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の出荷制限で注文が増え、供給能力を超えたため、日医工は対象包装を限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "3999411G3047",
+          "product_name": "オザグレルＮａ点滴静注８０ｍｇシリンジ「ＮＩＧ」",
+          "maker": "日医工岐阜工場",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10シリンジ",
+              "unified_product_code": "123-87614-8",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、9月のメーカー資料）",
+                "note": "統一商品コード 123-87614-8、販売包装単位コード 14987123876145。"
+              }
+            }
+          ],
+          "seller": "日医工"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文では安定供給体制が整うまで新規採用を辞退するとしています。",
+        "日医工の2026年11月11日版の一覧で、この品目の限定出荷を確認しました。日医工岐阜工場製造・日医工販売の範囲です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-gifu-cilnidipine20-202508",
+      "maker": "日医工",
+      "title": "シルニジピン錠20mg「NIG」 限定出荷のお知らせ",
+      "url": "https://www.nichiiko.co.jp/medicine/file/74040/information/20250730cG1.pdf",
+      "announced_at": "2025-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ff7e2fdf62e4a569f5d54630643f5450a8dbd25fd8c0e8a0413c7e79ed8b8332",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の出荷制限で注文が増え、供給能力を超えたため、日医工は対象包装を限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149037F3086",
+          "product_name": "シルニジピン錠２０ｍｇ「ＮＩＧ」",
+          "maker": "日医工岐阜工場",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "123-87448-9",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、8月のメーカー資料）",
+                "note": "統一商品コード 123-87448-9、販売包装単位コード 14987123874486。"
+              }
+            }
+          ],
+          "seller": "日医工"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文では安定供給体制が整うまで新規採用を辞退するとしています。",
+        "日医工の2026年11月11日版の一覧で、この品目の限定出荷を確認しました。日医工岐阜工場製造・日医工販売の範囲です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-gifu-telmisartan-amlodipine-ap-bp-202505",
+      "maker": "日医工",
+      "title": "テラムロ配合錠AP・BP「NIG」 限定出荷のお知らせ",
+      "url": "https://www.nichiiko.co.jp/medicine/file/78450/information/20250514cG7.pdf",
+      "announced_at": "2025-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "518649b180ae71561426a5dd1eabdf877746c24aa09e2afafa66670bfca39359",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の出荷制限で注文が増え、供給能力を超えたため、日医工は対象包装を限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149117F1114",
+          "product_name": "テラムロ配合錠ＡＰ「ＮＩＧ」",
+          "maker": "日医工岐阜工場",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "123-87483-0",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 123-87483-0、販売包装単位コード 14987123874837。"
+              }
+            }
+          ],
+          "seller": "日医工"
+        },
+        {
+          "yj_code": "2149117F2110",
+          "product_name": "テラムロ配合錠ＢＰ「ＮＩＧ」",
+          "maker": "日医工岐阜工場",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "123-87484-7",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 123-87484-7、販売包装単位コード 14987123874844。"
+              }
+            }
+          ],
+          "seller": "日医工"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文では安定供給体制が整うまで新規採用を辞退するとしています。",
+        "日医工の2026年11月11日版の一覧で、この品目の限定出荷を確認しました。日医工岐阜工場製造・日医工販売の範囲です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-gifu-tramadol-acetaminophen-202507",
+      "maker": "日医工",
+      "title": "トアラセット配合錠「NIG」 限定出荷のお知らせ",
+      "url": "https://www.nichiiko.co.jp/medicine/file/78540/information/20250625cG1.pdf",
+      "announced_at": "2025-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "1eaed11dec69e0ce0f562ead288761c16d5cee476a3bf6f22a1f46369bdc019c",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の出荷制限で注文が増え、供給能力を超えたため、日医工は対象包装を限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "1149117F1276",
+          "product_name": "トアラセット配合錠「ＮＩＧ」",
+          "maker": "日医工岐阜工場",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "123-87541-7",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 123-87541-7、販売包装単位コード 14987123875414。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "123-87584-4",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 123-87584-4、販売包装単位コード 14987123875841。"
+              }
+            }
+          ],
+          "seller": "日医工"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文では安定供給体制が整うまで新規採用を辞退するとしています。",
+        "日医工の2026年11月11日版の一覧で、この品目の限定出荷を確認しました。日医工岐阜工場製造・日医工販売の範囲です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-gifu-voriconazole50-200-202607",
+      "maker": "日医工",
+      "title": "ボリコナゾール錠50mg・200mg「NIG」 限定出荷に関するお知らせ",
+      "url": "https://www.nichiiko.co.jp/medicine/file/79890/information/20260722cI2.pdf",
+      "announced_at": "2026-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "23bd5a5f63d2e86e03e468462bc7b46ea1d15e6439981902dcdce9d17cbdcb44",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の出荷制限で注文が増え、供給能力を超えたため、日医工は対象包装を限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "6179001F1112",
+          "product_name": "ボリコナゾール錠５０ｍｇ「ＮＩＧ」",
+          "maker": "日医工岐阜工場",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP50錠",
+              "unified_product_code": "376-79892-1",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 376-79892-1、販売包装単位コード 14987376798928。"
+              }
+            }
+          ],
+          "seller": "日医工"
+        },
+        {
+          "yj_code": "6179001F2119",
+          "product_name": "ボリコナゾール錠２００ｍｇ「ＮＩＧ」",
+          "maker": "日医工岐阜工場",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP50錠",
+              "unified_product_code": "376-79902-7",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 376-79902-7、販売包装単位コード 14987376799024。"
+              }
+            }
+          ],
+          "seller": "日医工"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文では安定供給体制が整うまで新規採用を辞退するとしています。",
+        "日医工の2026年11月11日版の一覧で、この品目の限定出荷を確認しました。日医工岐阜工場製造・日医工販売の範囲です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-gifu-maxacalcitol-202502",
+      "maker": "日医工",
+      "title": "マキサカルシトール静注透析用2.5μg・5μg・10μg「NIG」 限定出荷のお知らせ",
+      "url": "https://www.nichiiko.co.jp/medicine/file/79930/information/20250130cG5.pdf",
+      "announced_at": "2025-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ce17f01a5195fd31ea18c852ec89d4b9f297eadef7f8a6b4b2bd1e1d9d1bf76e",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "想定を上回る勢いで出荷が増え、供給能力を超える需要に応じられないため、日医工が限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3112401A1093",
+          "product_name": "マキサカルシトール静注透析用２．５μｇ「ＮＩＧ」",
+          "maker": "日医工岐阜工場",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10アンプル",
+              "unified_product_code": "123-87431-1",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、2月のメーカー資料）",
+                "note": "統一商品コード 123-87431-1、販売包装単位コード 14987123874318。"
+              }
+            }
+          ],
+          "seller": "日医工"
+        },
+        {
+          "yj_code": "3112401A2090",
+          "product_name": "マキサカルシトール静注透析用５μｇ「ＮＩＧ」",
+          "maker": "日医工岐阜工場",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10アンプル",
+              "unified_product_code": "123-87432-8",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、2月のメーカー資料）",
+                "note": "統一商品コード 123-87432-8、販売包装単位コード 14987123874325。"
+              }
+            }
+          ],
+          "seller": "日医工"
+        },
+        {
+          "yj_code": "3112401A3096",
+          "product_name": "マキサカルシトール静注透析用１０μｇ「ＮＩＧ」",
+          "maker": "日医工岐阜工場",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10アンプル",
+              "unified_product_code": "123-87433-5",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、2月のメーカー資料）",
+                "note": "統一商品コード 123-87433-5、販売包装単位コード 14987123874332。"
+              }
+            }
+          ],
+          "seller": "日医工"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文では安定供給体制が整うまで新規採用を辞退するとしています。",
+        "5μgには製造遅延に伴う別の案内が2025年12月にありました。その案内の切替検討期間は2026年1月中旬まででした。",
+        "日医工の2026年11月11日版の一覧で、この品目の限定出荷を確認しました。日医工岐阜工場製造・日医工販売の範囲です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-gifu-metildigoxin005-202607",
+      "maker": "日医工",
+      "title": "メチルジゴキシン錠0.05mg「NIG」 限定出荷に関するお知らせ",
+      "url": "https://www.nichiiko.co.jp/medicine/file/70180/information/20260722cI3.pdf",
+      "announced_at": "2026-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "0190d0c6c279cc9993a1e751cf69bb1326d78552d38ae1b9472c3d1cc5109d8f",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の出荷制限で注文が増え、供給能力を超えたため、日医工は対象包装を限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "2113005F2044",
+          "product_name": "メチルジゴキシン錠０．０５ｍｇ「ＮＩＧ」",
+          "maker": "日医工岐阜工場",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-70182-2",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 376-70182-2、販売包装単位コード 14987376701829。"
+              }
+            }
+          ],
+          "seller": "日医工"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文では安定供給体制が整うまで新規採用を辞退するとしています。",
+        "日医工の2026年11月11日版の一覧で、この品目の限定出荷を確認しました。日医工岐阜工場製造・日医工販売の範囲です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-gifu-rabeprazole10-202605",
+      "maker": "日医工",
+      "title": "ラベプラゾールNa錠10mg「NIG」 限定出荷に関するお知らせ",
+      "url": "https://www.nichiiko.co.jp/medicine/file/70620/information/20260513cI6.pdf",
+      "announced_at": "2026-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "0b1c5d5032c3be1a3aec4863fdb7c39fa62cf155929349fe9935fe755f11551d",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の出荷制限で注文が増え、供給能力を超えたため、日医工は対象包装を限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "2329028F1333",
+          "product_name": "ラベプラゾールＮａ錠１０ｍｇ「ＮＩＧ」",
+          "maker": "日医工岐阜工場",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-70635-3",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 376-70635-3、販売包装単位コード 14987376706350。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "376-70636-0",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 376-70636-0、販売包装単位コード 14987376706367。"
+              }
+            },
+            {
+              "package": "バラ100錠",
+              "unified_product_code": "376-70637-7",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 376-70637-7、販売包装単位コード 14987376706374。"
+              }
+            }
+          ],
+          "seller": "日医工"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "日医工の2026年11月11日版の一覧で、この品目の限定出荷を確認しました。日医工岐阜工場製造・日医工販売の範囲です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-gifu-losartan-hydrochlorothiazide-hd-202507",
+      "maker": "日医工",
+      "title": "ロサルヒド配合錠HD「NIG」 限定出荷のお知らせ",
+      "url": "https://www.nichiiko.co.jp/medicine/file/70870/information/20250625cG2.pdf",
+      "announced_at": "2025-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "5614748eb6b43af57b62d5e3a846c6a0332576e214d9c0bcadb155469f548c91",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の出荷制限で注文が増え、供給能力を超えたため、日医工は対象包装を限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149110F2348",
+          "product_name": "ロサルヒド配合錠ＨＤ「ＮＩＧ」",
+          "maker": "日医工岐阜工場",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "123-87434-2",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 123-87434-2、販売包装単位コード 14987123874349。"
+              }
+            }
+          ],
+          "seller": "日医工"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文では安定供給体制が整うまで新規採用を辞退するとしています。",
+        "日医工の2026年11月11日版の一覧で、この品目の限定出荷を確認しました。日医工岐阜工場製造・日医工販売の範囲です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "ohara-tramadol-acetaminophen-api-limited-202609",
+      "maker": "大原薬品工業",
+      "title": "トアラセット配合錠「オーハラ」限定出荷に関するお詫び",
+      "url": "https://www.ohara-ch.co.jp/wp/generics/wp-content/uploads/2026/10/e95fb07f9327332dd1ea2896056741c2.pdf",
+      "announced_at": "2026-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "1a6bf4c1b60f3ef47b6008ac6213c8c0090fcfdc7d6aed9a1e80c232cd15171a",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "原薬製造所のトラブルで需要に対応しにくくなったため、大原薬品工業が2026年10月1日から対象3包装を限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "1149117F1128",
+          "product_name": "トアラセット配合錠「オーハラ」",
+          "maker": "大原薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "407239300",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 407239300。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "407239317",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 407239317。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "407239362",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 407239362。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "限定出荷の終了見込みはこのメーカー資料には記載されていません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
