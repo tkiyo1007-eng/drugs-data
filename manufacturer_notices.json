@@ -33679,6 +33679,948 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "nichiiko-amaleto2-20260624",
+      "maker": "日医工",
+      "title": "アマルエット配合錠2番「日医工」 限定出荷に関するお知らせ",
+      "url": "https://www.nichiiko.co.jp/medicine/file/31960/information/20260624cI15.pdf",
+      "announced_at": "2026-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "5eac4ad80fe6e5e679b18029b312695d1c6be43b07e81e9832c51dc1dac26247",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の出荷調整で注文が想定を上回ったため、日医工は安定供給体制が整うまで対象包装を限定出荷とし、新規採用を辞退すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2190102F1114",
+          "product_name": "アマルエット配合錠２番「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-31961-4",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 376-31961-4、販売包装単位コード 14987376319611。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-amaleto3-20260212",
+      "maker": "日医工",
+      "title": "アマルエット配合錠3番「日医工」 限定出荷に関するお知らせ",
+      "url": "https://www.nichiiko.co.jp/medicine/file/31970/information/20260212cI1.pdf",
+      "announced_at": "2026-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "3fd6914e1b2e957e7efac7af0aa44a9dbb2e2cb7a4206eb6ad6bbb11ecae38be",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の出荷調整を受けて注文が想定を上回ったため、日医工は対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2190103F1119",
+          "product_name": "アマルエット配合錠３番「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-31971-3",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2月のメーカー資料）",
+                "note": "統一商品コード 376-31971-3、販売包装単位コード 14987376319710。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-amaleto4-20251212",
+      "maker": "日医工",
+      "title": "アマルエット配合錠4番「日医工」 限定出荷に関するお知らせ",
+      "url": "https://www.nichiiko.co.jp/medicine/file/31980/information/20251212cI1.pdf",
+      "announced_at": "2025-12",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ab035d032ef25acb72e4b4f9544a3bf5cd11073dbaa1d81b873795c895069e95",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の出荷調整を受けて注文が想定を上回ったため、日医工は対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2190104F1113",
+          "product_name": "アマルエット配合錠４番「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-31981-2",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、12月のメーカー資料）",
+                "note": "統一商品コード 376-31981-2、販売包装単位コード 14987376319819。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "この原文は1番も掲載しています。ここで取り上げるのは4番のPTP100錠です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-olmesartan-tablets-20260610",
+      "maker": "日医工",
+      "title": "オルメサルタン錠5mg・10mg・20mg・40mg「日医工」 限定出荷に関するお知らせ",
+      "url": "https://www.nichiiko.co.jp/medicine/file/11130/information/20260610cI8.pdf",
+      "announced_at": "2026-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "cfb1a2e6647802533afe73a7746cbbccc26ed13709f6b336cacd2f2ccfc0c12f",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の出荷調整を受けて注文が想定を上回ったため、日医工は対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149044F3132",
+          "product_name": "オルメサルタン錠５ｍｇ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-11120-1",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 376-11120-1、販売包装単位コード 14987376111208。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149044F1121",
+          "product_name": "オルメサルタン錠１０ｍｇ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-11130-0",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 376-11130-0、販売包装単位コード 14987376111307。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149044F2128",
+          "product_name": "オルメサルタン錠２０ｍｇ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-11140-9",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 376-11140-9、販売包装単位コード 14987376111406。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149044F4139",
+          "product_name": "オルメサルタン錠４０ｍｇ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-11150-8",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 376-11150-8、販売包装単位コード 14987376111505。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-olmesartan-od-20260507",
+      "maker": "日医工",
+      "title": "オルメサルタンOD錠5mg・10mg・20mg・40mg「日医工」 限定出荷に関するお知らせ",
+      "url": "https://www.nichiiko.co.jp/medicine/file/01820/information/20260507cI1.pdf",
+      "announced_at": "2026-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "4c8376165fa957d3e754263e4630acbea5811d48f4097908776983677d39034b",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の出荷調整を受けて注文が想定を上回ったため、日医工は対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149044F8100",
+          "product_name": "オルメサルタンＯＤ錠５ｍｇ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-61460-3",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 376-61460-3、販売包装単位コード 14987376614600。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149044F5097",
+          "product_name": "オルメサルタンＯＤ錠１０ｍｇ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-01820-3",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 376-01820-3、販売包装単位コード 14987376018200。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149044F6093",
+          "product_name": "オルメサルタンＯＤ錠２０ｍｇ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-01830-2",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 376-01830-2、販売包装単位コード 14987376018309。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149044F7081",
+          "product_name": "オルメサルタンＯＤ錠４０ｍｇ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-01840-1",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 376-01840-1、販売包装単位コード 14987376018408。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-zaltoprofen80-20260629",
+      "maker": "日医工",
+      "title": "ザルトプロフェン錠80mg「日医工」 限定出荷に関するお知らせ",
+      "url": "https://www.nichiiko.co.jp/medicine/file/07740/information/20260629cI1.pdf",
+      "announced_at": "2026-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "c9b19d123385eea106e354f0a8d773c4791f62a2b5b3090c743daf8018573a63",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の出荷調整で注文が想定を上回ったため、日医工は安定供給体制が整うまで対象包装を限定出荷とし、新規採用を辞退すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "1149029F1130",
+          "product_name": "ザルトプロフェン錠８０ｍｇ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-07741-5",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 376-07741-5、販売包装単位コード 14987376077412。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "376-07743-9",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 376-07743-9、販売包装単位コード 14987376077436。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-cefaclor-granules20-20260629",
+      "maker": "日医工",
+      "title": "セファクロル細粒20％「日医工」 限定出荷に関するお知らせ",
+      "url": "https://www.nichiiko.co.jp/medicine/file/50520/information/20260629cI2.pdf",
+      "announced_at": "2026-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "4d1a51b54d71cd1ae7327696e26acbcba69b73bd8a89eb35e45c27d35dadc0d2",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の出荷調整で注文が想定を上回ったため、日医工は安定供給体制が整うまで対象包装を限定出荷とし、新規採用を辞退すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "6132005C2106",
+          "product_name": "セファクロル細粒２０％「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "バラ100g",
+              "unified_product_code": "376-50521-5",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 376-50521-5、販売包装単位コード 14987376505212。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-tamsulosin-od02-20260212",
+      "maker": "日医工",
+      "title": "タムスロシン塩酸塩OD錠0.2mg「日医工」 限定出荷に関するお知らせ",
+      "url": "https://www.nichiiko.co.jp/medicine/file/07020/information/20260212cI2.pdf",
+      "announced_at": "2026-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "be0d2f21985ba64f3c848c269231eda29635f6ac0d3e28a962bfda8eb7ec889e",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の出荷調整を受けて注文が想定を上回ったため、日医工は対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2590008F2073",
+          "product_name": "タムスロシン塩酸塩ＯＤ錠０．２ｍｇ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "376-07021-8",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2月のメーカー資料）",
+                "note": "統一商品コード 376-07021-8、販売包装単位コード 14987376070215。"
+              }
+            },
+            {
+              "package": "PTP560錠",
+              "unified_product_code": "376-07022-5",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2月のメーカー資料）",
+                "note": "統一商品コード 376-07022-5、販売包装単位コード 14987376070222。"
+              }
+            },
+            {
+              "package": "バラ300錠",
+              "unified_product_code": "376-07023-2",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2月のメーカー資料）",
+                "note": "統一商品コード 376-07023-2、販売包装単位コード 14987376070239。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-telthia-bp-20251212",
+      "maker": "日医工",
+      "title": "テルチア配合錠BP「日医工」 限定出荷に関するお知らせ",
+      "url": "https://www.nichiiko.co.jp/medicine/file/00900/information/20251212cI2.pdf",
+      "announced_at": "2025-12",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "2b5f83d66126ae198b8123a8b8fc2584e46b90d92053891a04392f245bda1a82",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の出荷調整を受けて注文が想定を上回ったため、日医工は対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149113F2074",
+          "product_name": "テルチア配合錠ＢＰ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-00900-3",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、12月のメーカー資料）",
+                "note": "統一商品コード 376-00900-3、販売包装単位コード 14987376009000。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-pramipexole-20230906",
+      "maker": "日医工",
+      "title": "プラミペキソール塩酸塩錠0.125mg・0.5mg「日医工」 限定出荷に関するお知らせ",
+      "url": "https://www.nichiiko.co.jp/medicine/file/06380/information/20230906cI5.pdf",
+      "announced_at": "2023-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "2c9a44df0fa74535dca4bbec886814af820673699a42c4e06e1ca1f77f1af20a",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の出荷調整を受けて注文が想定を上回ったため、日医工は対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "1169012F1170",
+          "product_name": "プラミペキソール塩酸塩錠０．１２５ｍｇ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-06381-4",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、9月のメーカー資料）",
+                "note": "統一商品コード 376-06381-4、販売包装単位コード 14987376063811。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "1169012F2177",
+          "product_name": "プラミペキソール塩酸塩錠０．５ｍｇ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-06391-3",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、9月のメーカー資料）",
+                "note": "統一商品コード 376-06391-3、販売包装単位コード 14987376063910。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "他社品の影響は2023年9月の開始時の記載です。日医工の2026年11月11日付一覧で、両規格は自社の事情による限定出荷と表示されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-metformin250mt-20260610",
+      "maker": "日医工",
+      "title": "メトホルミン塩酸塩錠250mgMT「日医工」 限定出荷に関するお知らせ",
+      "url": "https://www.nichiiko.co.jp/medicine/file/07580/information/20260610cI9.pdf",
+      "announced_at": "2026-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ecf7ecc044a38a7abf14d99a63e4d9f9326517bba055390d9b387d63de584ebc",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "注文が想定を上回ったため、日医工は対象の2包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3962002F2094",
+          "product_name": "メトホルミン塩酸塩錠２５０ｍｇＭＴ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-07581-7",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、6月のメーカー資料）",
+                "note": "統一商品コード 376-07581-7、販売包装単位コード 14987376075814。"
+              }
+            },
+            {
+              "package": "PTP1000錠",
+              "unified_product_code": "376-07582-4",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、6月のメーカー資料）",
+                "note": "統一商品コード 376-07582-4、販売包装単位コード 14987376075821。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-rosuvastatin-od-20261110",
+      "maker": "日医工",
+      "title": "ロスバスタチンOD錠2.5mg・5mg「日医工」 限定出荷に関するお知らせ",
+      "url": "https://www.nichiiko.co.jp/medicine/file/11180/information/20261110cI1.pdf",
+      "announced_at": "2026-11",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "11ec376fc1e4c9da9c8416aa76d47fcb378d39383703157223775125779fce6f",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の出荷調整で注文が想定を上回ったため、日医工は安定供給体制が整うまで対象包装を限定出荷とし、新規採用を辞退すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2189017F3181",
+          "product_name": "ロスバスタチンＯＤ錠２．５ｍｇ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-11180-5",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 376-11180-5、販売包装単位コード 14987376111802。"
+              }
+            },
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "376-11181-2",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 376-11181-2、販売包装単位コード 14987376111819。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "376-11182-9",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 376-11182-9、販売包装単位コード 14987376111826。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2189017F4188",
+          "product_name": "ロスバスタチンＯＤ錠５ｍｇ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-11190-4",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 376-11190-4、販売包装単位コード 14987376111901。"
+              }
+            },
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "376-11191-1",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 376-11191-1、販売包装単位コード 14987376111918。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "376-11192-8",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 376-11192-8、販売包装単位コード 14987376111925。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-zinc-oxide-ointment-discontinued-202609",
+      "maker": "日医工",
+      "title": "亜鉛華軟膏「日医工」500g包装 販売中止のご案内",
+      "url": "https://www.nichiiko.co.jp/medicine/file/59440/information/II1611-01.pdf",
+      "announced_at": "2026-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "e7b1a590e34d913e2f347cd1c364293f6fee09ac2aa7eaf1db2f5ec98723436c",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "日医工は500g包装を在庫消尽後に販売中止と案内しました。詳しい理由は原文に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "2649704M1228",
+          "product_name": "亜鉛華軟膏「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "500g",
+              "unified_product_code": "376-59441-7",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月（2026年9月資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 376-59441-7、販売包装単位コード 14987376594414。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.nichiiko.co.jp/medicine/file/59440/information/II1611-01.pdf",
+          "target_yj_codes": [
+            "2649704M1228"
+          ],
+          "type": "日医工の原文に記載の代替品",
+          "products": [
+            {
+              "name": "亜鉛華軟膏「ニッコー」",
+              "maker": "日興製薬",
+              "yj_code": "2649704M1171",
+              "scope": "日興製薬の500g。丸石製薬発売分（211-100933）と日興製薬販売発売分（290-130234）が原文に記載されています。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年9月資料で経過措置満了日は2028年3月31日の予定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "nichiiko-etanercept25-syringe-20260624",
+      "maker": "日医工",
+      "title": "エタネルセプトBS皮下注25mgシリンジ0.5mL「日医工」 限定出荷に関するお知らせ",
+      "url": "https://www.nichiiko.co.jp/medicine/file/03870/information/20260624cI16.pdf",
+      "announced_at": "2026-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "12ef575a2d77f71c2afde04c6426cb8a52685410dcac0ed46c636700a6f77c78",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "注文が想定を上回り安定供給に支障が出る可能性があるため、日医工は対象包装を限定出荷とし、新規採用を辞退すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "3999451G2037",
+          "product_name": "エタネルセプトＢＳ皮下注２５ｍｇシリンジ０．５ｍＬ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1シリンジ",
+              "unified_product_code": "376-03870-6",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、6月のメーカー資料）",
+                "note": "統一商品コード 376-03870-6、販売包装単位コード 14987376038703。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "同じ原文に50mgの2品目もあります。この補足の対象は25mgシリンジです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-primperan-injection10-20250910",
+      "maker": "日医工",
+      "title": "プリンペラン注射液10mg 限定出荷に関するお知らせ",
+      "url": "https://www.nichiiko.co.jp/medicine/file/24420/information/20250910cI1.pdf",
+      "announced_at": "2025-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "d088c1c39327f135363cd1643600dce33ba3b53d1b5af03f7eb8f7f495ec71ec",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の出荷調整を受けて注文が想定を上回ったため、日医工は対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2399401A1083",
+          "product_name": "プリンペラン注射液１０ｍｇ",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10アンプル",
+              "unified_product_code": "376-24420-6",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、9月のメーカー資料）",
+                "note": "統一商品コード 376-24420-6、販売包装単位コード 14987376244203。"
+              }
+            },
+            {
+              "package": "50アンプル",
+              "unified_product_code": "376-24421-3",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、9月のメーカー資料）",
+                "note": "統一商品コード 376-24421-3、販売包装単位コード 14987376244210。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-daimezin-multi-20231004",
+      "maker": "日医工ファーマ",
+      "title": "ダイメジン・マルチ注 限定出荷に関するお知らせ",
+      "url": "https://www.nichiiko.co.jp/medicine/file/24060/information/20231004cI3.pdf",
+      "announced_at": "2023-10",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "e188a206db6f7502b973101f57f1565ec17f9b7be9611b608bf54f2e664d3eae",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の販売中止で注文が想定を上回ったため、販売元の日医工は対象の10バイアル包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3179515F1030",
+          "product_name": "ダイメジン・マルチ注",
+          "maker": "日医工ファーマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10バイアル",
+              "unified_product_code": "376-24061-1",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 376-24061-1、販売包装単位コード 14987376240618。"
+              }
+            }
+          ],
+          "seller": "日医工"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "製造販売元は日医工ファーマです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }

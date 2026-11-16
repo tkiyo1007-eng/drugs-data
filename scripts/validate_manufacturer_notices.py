@@ -76,6 +76,9 @@ MAKER_MANUAL_SOURCE_HOSTS = {
 }
 # Specific manufacturer and distributor notices hosted outside the primary company domain.
 MAKER_MANUAL_SOURCE_URLS = {
+    '日医工ファーマ': {
+        'https://www.nichiiko.co.jp/medicine/file/24060/information/20231004cI3.pdf',
+    },
     '持田製薬': {
         'https://www.jrs.or.jp/information/file/202408_mochida.pdf',
     },
