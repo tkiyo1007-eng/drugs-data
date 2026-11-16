@@ -41777,6 +41777,350 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "torii-sidacure2000-limitation-202402",
+      "maker": "鳥居薬品",
+      "title": "シダキュアスギ花粉舌下錠2,000JAU 増量期用の限定出荷継続",
+      "url": "https://www.jibika.or.jp/uploads/files/hoken_shidakyua_2024.pdf",
+      "announced_at": "2024-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ca263de8d6061f7d83a3fd5c949dc220e486b8f7600403633da4651212634205",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "想定を超える需要が続き、不測の事態にも対応できる在庫を作るには増産が必要と鳥居薬品が判断しました。原料のスギ花粉採取量拡大、原薬・製剤の増産を進める間、2,000JAUの限定出荷を続けると案内しました。",
+      "targets": [
+        {
+          "yj_code": "4490035F1027",
+          "product_name": "シダキュアスギ花粉舌下錠２，０００ＪＡＵ",
+          "maker": "鳥居薬品",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "ブリスター7錠（7錠×1）",
+              "unified_product_code": "158290407",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、2月のメーカー資料）",
+                "note": "統一商品コード 158290407。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "5,000JAUは資料で限定出荷対象外の維持期用と記載されており、増量期用への代替として案内されていません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "torii-sidacure2000-forecast-202502",
+      "maker": "鳥居薬品",
+      "title": "シダキュアスギ花粉舌下錠2,000JAU 2025年出荷量の見込み",
+      "url": "https://www.jibika.or.jp/uploads/files/shida_2025.pdf",
+      "announced_at": "2025-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "f67df5ab2687fd0fc795b03428df2b6dd34a33e5c9d78fecb5b63237b2d58c43",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "鳥居薬品は、原薬製造新棟の2025年7月稼働を予定し、特約店への出荷量を同年10月頃から順次増やす計画を示しました。",
+      "targets": [
+        {
+          "yj_code": "4490035F1027",
+          "product_name": "シダキュアスギ花粉舌下錠２，０００ＪＡＵ",
+          "maker": "鳥居薬品",
+          "scope": "product",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": []
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2025年2月発表の計画です。解除の時期は安定供給に必要な在庫を確保できる見通しをもとに判断すると案内されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "terumo-saline-syringe-tip-202406",
+      "maker": "テルモ",
+      "title": "生食注シリンジ「テルモ」5mL・10mL 先端形状別の出荷状況",
+      "url": "https://medical.terumo.co.jp/sites/default/files/assets/news/medicine/pdf/24PN075.pdf",
+      "announced_at": "2024-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "835147c916b729fb4838ab885e5bd7d3384c149c1ce44c33ede8dbff85ac7985",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "テルモは2024年6月資料で、両容量ともスリップ型は供給停止、ロック型は限定出荷を続けると案内しました。この資料に原因の詳細は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "3311402P2082",
+          "product_name": "生食注シリンジ「テルモ」５ｍＬ",
+          "maker": "テルモ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×10本（スリップ）",
+              "unified_product_code": "350411914",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "status_text": "供給停止（2024年6月のメーカー資料）",
+                "note": "統一商品コード 350411914、販売包装単位コード 14987350411911。"
+              }
+            },
+            {
+              "package": "5mL×10本（ロック）",
+              "unified_product_code": "350447494",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、6月のメーカー資料）",
+                "note": "統一商品コード 350447494、販売包装単位コード 14987350447491。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3311402G7084",
+          "product_name": "生食注シリンジ「テルモ」１０ｍＬ",
+          "maker": "テルモ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10mL×10本（スリップ）",
+              "unified_product_code": "350411976",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "status_text": "供給停止（2024年6月のメーカー資料）",
+                "note": "統一商品コード 350411976、販売包装単位コード 14987350411973。"
+              }
+            },
+            {
+              "package": "10mL×10本（ロック）",
+              "unified_product_code": "350447517",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、6月のメーカー資料）",
+                "note": "統一商品コード 350447517、販売包装単位コード 14987350447514。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカーは当時、必要な数量のみの注文と、新規採用の辞退を案内しました。先端形状ごとの現在の状況は確定していません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nipponkayaku-neolamin-10ampoule-discontinuation-202504",
+      "maker": "日本化薬",
+      "title": "ネオラミン・スリービー液（静注用）10アンプル包装販売中止",
+      "url": "https://mink.nipponkayaku.co.jp/product/di/ot_file/o328.pdf",
+      "announced_at": "2025-04",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "e70bd7fb88c3514d1d92a13f7a09969cbedc7bd09dffb623972fb9a1125443ac",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "日本化薬は、10アンプル包装をメーカー在庫がなくなり次第販売中止にすると案内しました。具体的な販売中止理由は資料に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "3179504A1116",
+          "product_name": "ネオラミン・スリービー液（静注用）",
+          "maker": "日本化薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10アンプル",
+              "unified_product_code": "170008004",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2025年9月（2025年4月資料の予定）"
+                  }
+                ],
+                "note": "統一商品コード 170008004、販売包装単位コード 14987170008001。"
+              }
+            },
+            {
+              "package": "50アンプル",
+              "unified_product_code": "170007991",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 170007991、販売包装単位コード 14987170007998。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://mink.nipponkayaku.co.jp/product/di/ot_file/o328.pdf",
+          "target_yj_codes": [
+            "3179504A1116"
+          ],
+          "type": "メーカーが利用を案内した同一製品の販売継続包装",
+          "products": [
+            {
+              "name": "ネオラミン・スリービー液（静注用）",
+              "maker": "日本化薬",
+              "yj_code": "3179504A1116",
+              "scope": "50アンプル包装（170007991、販売包装単位コード14987170007998）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "包装の販売中止についての案内です。現在の限定出荷の具体的な原因は、この原文には記載されていません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "eapharma-movicol-ld-hd-supply-second-202610",
+      "maker": "EAファーマ",
+      "title": "モビコール配合内用剤LD・HD 供給に関するお知らせ（第2版）",
+      "url": "https://www.eapharma.co.jp/hubfs/medical/news/2026/MVC-H-2-PM-05818.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "c92f86457e7c52d2985858bd431045b94bcdebc942c2018dd314c11c2e2d4724",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "海外製造所の品質システムについて現地当局の査察で指摘を受け、製造と出荷を一時停止し、是正措置と当局との確認を行いました。EAファーマは従来どおりの供給が困難と判断し、包装別に限定出荷と一時出荷停止の予定を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2359110B1037",
+          "product_name": "モビコール配合内用剤ＬＤ",
+          "maker": "EAファーマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "LD 100包（EAファーマ販売）",
+              "unified_product_code": "699059402",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "小児向けに限定出荷（2026年10月第2版）",
+                "note": "統一商品コード 699059402。2027年6月頃まで小児向けに限定出荷する予定と案内。"
+              }
+            }
+          ],
+          "seller": "EAファーマ"
+        },
+        {
+          "yj_code": "2359110B2025",
+          "product_name": "モビコール配合内用剤ＨＤ",
+          "maker": "EAファーマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "HD 100包（EAファーマ販売）",
+              "unified_product_code": "699059426",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "shipment_resumption",
+                    "timing": "2027年6月頃に再開見込み（2026年10月第2版、変更の可能性あり）"
+                  }
+                ],
+                "status_text": "2026年11月まで限定出荷（2026年10月第2版）",
+                "note": "統一商品コード 699059426。2026年12月から一時出荷停止予定（2026年10月第2版）。"
+              }
+            }
+          ],
+          "seller": "EAファーマ"
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.eapharma.co.jp/hubfs/medical/news/2026/MVC-H-2-PM-05818.pdf",
+          "target_yj_codes": [
+            "2359110B1037"
+          ],
+          "type": "メーカー原文の成人向け候補",
+          "products": [
+            {
+              "name": "グーフィス錠５ｍｇ",
+              "maker": "EAファーマ",
+              "yj_code": "2359008F1025",
+              "scope": "成人向けとして掲載されたグーフィス錠5mgです。成分・剤形が異なります。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        },
+        {
+          "source_url": "https://www.eapharma.co.jp/hubfs/medical/news/2026/MVC-H-2-PM-05818.pdf",
+          "target_yj_codes": [
+            "2359110B2025"
+          ],
+          "type": "メーカー原文の年齢別案内",
+          "products": [
+            {
+              "name": "モビコール配合内用剤ＬＤ",
+              "maker": "EAファーマ",
+              "yj_code": "2359110B1037",
+              "scope": "小児について原文はLDの継続使用を案内しています。LD自体が小児向けの限定出荷で、HDと含量が異なります。"
+            },
+            {
+              "name": "グーフィス錠５ｍｇ",
+              "maker": "EAファーマ",
+              "yj_code": "2359008F1025",
+              "scope": "成人向けとして掲載されたグーフィス錠5mgです。成分・剤形が異なります。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "LDは本剤を必要とする小児への供給を優先し、供給量に限りがある場合があります。HDの12月停止と翌年6月の再開は2026年10月時点の予定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
     }
   ]
 }

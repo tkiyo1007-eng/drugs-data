@@ -67,6 +67,8 @@ MAKER_HOSTS = {
     '帝國製薬': 'www.teikoku.co.jp',
     '寿製薬': 'www.kotobuki-pharm.co.jp',
     'チェプラファーム': 'www.cheplapharm.jp',
+    '日本化薬': 'mink.nipponkayaku.co.jp',
+    '鳥居薬品': 'www.torii.co.jp',
     '大鵬薬品工業': 'www.taiho.co.jp',
     "T's製薬": 'www.med.ts-pharma.com',
     'グラクソ・スミスクライン': 'gskpro.com',
@@ -93,6 +95,7 @@ MAKER_MANUAL_SOURCE_HOSTS = {
 }
 # Specific manufacturer and distributor notices hosted outside the primary company domain.
 MAKER_MANUAL_SOURCE_URLS = {
+    '鳥居薬品': {'https://www.jibika.or.jp/uploads/files/hoken_shidakyua_2024.pdf', 'https://www.jibika.or.jp/uploads/files/shida_2025.pdf'},
     'チェプラファーム': {'https://www.nichigan.or.jp/Portals/0/resources/news/Visudyne.pdf'},
     '池田薬品工業': {
         'https://www.nichiiko.co.jp/medicine/file/23650/information/20241204cI2.pdf',
