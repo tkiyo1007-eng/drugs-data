@@ -56,6 +56,7 @@ MAKER_HOSTS = {
     '武田薬品工業': 'www.takedamed.com',
     '大原薬品工業': 'www.ohara-ch.co.jp',
     'サンファーマ': 'jp.sunpharma.com',
+    'SBカワスミ': 'www.sb-kawasumi.jp',
     'グラクソ・スミスクライン': 'gskpro.com',
     'ヴィアトリス・ヘルスケア合同会社': 'www.viatris-e-channel.com',
     'ヴィアトリス製薬合同会社': 'www.viatris-e-channel.com',
@@ -77,6 +78,17 @@ MAKER_MANUAL_SOURCE_HOSTS = {
 }
 # Specific manufacturer and distributor notices hosted outside the primary company domain.
 MAKER_MANUAL_SOURCE_URLS = {
+    '長生堂製薬': {
+        'https://medical.nihon-generic.co.jp/uploadfiles/medicine/TATHI50_CHUUSHI_2602.pdf',
+        'https://medical.nihon-generic.co.jp/uploadfiles/medicine/TATHI_CHUUSHI_2507.pdf',
+        'https://medical.nihon-generic.co.jp/a.php?id=1725',
+        'https://medical.nihon-generic.co.jp/a.php?id=1762',
+        'https://medical.nihon-generic.co.jp/a.php?id=1812',
+        'https://medical.nihon-generic.co.jp/uploadfiles/medicine/CETIR00_CHUUSHI_2606.pdf',
+        'https://medical.nihon-generic.co.jp/a.php?id=1805',
+        'https://medical.nihon-generic.co.jp/a.php?id=1841',
+        'https://medical.nihon-generic.co.jp/uploadfiles/news/JG_product_list.pdf',
+    },
     '日医工ファーマ': {
         'https://www.nichiiko.co.jp/medicine/file/24060/information/20231004cI3.pdf',
     },

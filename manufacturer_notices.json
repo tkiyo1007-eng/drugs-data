@@ -35453,6 +35453,1400 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "choseido-tachion50-one-package-end-202602",
+      "maker": "長生堂製薬",
+      "title": "タチオン錠50mg 一部包装中止のご案内",
+      "url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/TATHI50_CHUUSHI_2602.pdf",
+      "announced_at": "2026-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "d7cb4a3f32dff88097987d4bbe411dcbdf32821b09806e4ae7d5016e0f649518",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "長生堂製薬・日本ジェネリックの案内では、対象包装を在庫終了後に販売中止とし、PTP120錠は販売継続としています。中止の具体的な理由は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "3922001F1098",
+          "product_name": "タチオン錠５０ｍｇ",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP600錠",
+              "unified_product_code": "792360436",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年7月頃（資料発表時の予定）"
+                  }
+                ],
+                "note": "統一商品コード 792360436、販売包装単位コード 14987792360433。"
+              }
+            }
+          ],
+          "seller": "日本ジェネリック"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "販売継続の記載は文書の日付時点のものです。継続包装の当時の区分と現行の品目区分は別にご確認ください。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "choseido-tachion100-one-package-end-202507",
+      "maker": "長生堂製薬",
+      "title": "タチオン錠100mg 一部包装中止のご案内",
+      "url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/TATHI_CHUUSHI_2507.pdf",
+      "announced_at": "2025-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "2946d3ea20d858688213a9d4bd57c2126f5b41ea1a7bdcdc2bd1d398c6e4c6e7",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "長生堂製薬・日本ジェネリックの案内では、対象包装を在庫終了後に販売中止とし、PTP120錠とPTP600錠は販売継続としています。中止の具体的な理由は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "3922001F2248",
+          "product_name": "タチオン錠１００ｍｇ",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP1050錠",
+              "unified_product_code": "792360542",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2025年9月頃（資料発表時の予定）"
+                  }
+                ],
+                "note": "統一商品コード 792360542。"
+              }
+            }
+          ],
+          "seller": "日本ジェネリック"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "販売継続の記載は文書の日付時点のものです。継続包装の当時の区分と現行の品目区分は別にご確認ください。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "choseido-salazosulfapyridine500-limited-202501",
+      "maker": "長生堂製薬",
+      "title": "サラゾスルファピリジン腸溶錠500mg「CH」限定出荷に関するご案内",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1725",
+      "announced_at": "2025-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "016025f504fcad9c607261b46b6e346ea577669172e8542696a8ae36de6299d8",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "計画を大きく超える急激な出荷増に対して供給能力が足りず、長生堂製薬・日本ジェネリックはPTP100錠とPTP500錠を限定出荷にすると案内しました。",
+      "targets": [
+        {
+          "yj_code": "6219001H1102",
+          "product_name": "サラゾスルファピリジン腸溶錠５００ｍｇ「ＣＨ」",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "792658410",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、1月のメーカー資料）",
+                "note": "統一商品コード 792658410。"
+              }
+            },
+            {
+              "package": "PTP500錠（10錠×50）",
+              "unified_product_code": "792658458",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、1月のメーカー資料）",
+                "note": "統一商品コード 792658458。"
+              }
+            }
+          ],
+          "seller": "日本ジェネリック"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "choseido-salazosulfapyridine500-package-202506",
+      "maker": "長生堂製薬",
+      "title": "サラゾスルファピリジン腸溶錠500mg「CH」 PTP500錠包装供給支障による代替包装ご使用のお願い",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1762",
+      "announced_at": "2025-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "0f2648ade0af82eb673d11af00f1c4223767b7efdf03f65dba5521dd6216ffc0",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "PTP500錠の納品が遅れ、在庫がなくなり次第一時休止するとの案内です。供給体制が整うまで、メーカーは従来の供給体制を維持できるPTP100錠を案内しました。",
+      "targets": [
+        {
+          "yj_code": "6219001H1102",
+          "product_name": "サラゾスルファピリジン腸溶錠５００ｍｇ「ＣＨ」",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP500錠（10錠×50）",
+              "unified_product_code": "792658458",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "PTP500錠は在庫がなくなり次第一時休止（2025年6月の案内）"
+                  }
+                ],
+                "note": "統一商品コード 792658458。"
+              }
+            },
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "792658410",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 792658410。"
+              }
+            }
+          ],
+          "seller": "日本ジェネリック"
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://medical.nihon-generic.co.jp/a.php?id=1762",
+          "target_yj_codes": [
+            "6219001H1102"
+          ],
+          "type": "メーカー原文に記載の代替包装",
+          "products": [
+            {
+              "name": "サラゾスルファピリジン腸溶錠５００ｍｇ「ＣＨ」",
+              "maker": "長生堂製薬",
+              "yj_code": "6219001H1102",
+              "scope": "2025年6月の一時休止案内で示された、PTP500錠（792658458）に対する同一品目のPTP100錠（792658410）。供給体制が整うまでの案内です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "日本ジェネリックの2026年11月9日一覧では、PTP100錠とPTP500錠の両方が限定出荷と記載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "choseido-salazosulfapyridine250-limited-202512",
+      "maker": "長生堂製薬",
+      "title": "サラゾスルファピリジン腸溶錠250mg「CH」限定出荷継続のご案内",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1812",
+      "announced_at": "2025-12",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "8136e55d970149d0bd1e44baf99656f1205e7393fe864d014dc5f68759cb2886",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "安定供給のため製造所を変更するものの、変更後も当面は対応できる数量を超えると見込まれたため、長生堂製薬・日本ジェネリックは限定出荷の継続を案内しました。",
+      "targets": [
+        {
+          "yj_code": "6219001H2095",
+          "product_name": "サラゾスルファピリジン腸溶錠２５０ｍｇ「ＣＨ」",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "792658311",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、12月のメーカー資料）",
+                "note": "統一商品コード 792658311。"
+              }
+            }
+          ],
+          "seller": "日本ジェネリック"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "製造所変更品の出荷は2026年1月頃の予定と、2025年12月の原文に記載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "choseido-cetirizine10-limited-202512",
+      "maker": "長生堂製薬",
+      "title": "セチリジン塩酸塩錠10mg「CH」 限定出荷に関するご案内",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1805",
+      "announced_at": "2025-12",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "c024db1f0953ab07ea8c82ade4e338c1b4802e835f75e4ac6b7658ac5fb92c62",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "季節性を見込んで在庫を積み増したものの、想定を大幅に上回る出荷が続いたため、長生堂製薬・日本ジェネリックは限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "4490020F2043",
+          "product_name": "セチリジン塩酸塩錠１０ｍｇ「ＣＨ」",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "792451813",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、12月のメーカー資料）",
+                "note": "統一商品コード 792451813。"
+              }
+            }
+          ],
+          "seller": "日本ジェネリック"
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://medical.nihon-generic.co.jp/a.php?id=1805",
+          "target_yj_codes": [
+            "4490020F2043"
+          ],
+          "type": "メーカー原文に記載の代替製品",
+          "products": [
+            {
+              "name": "セチリジン塩酸塩錠１０ｍｇ「ＮＩＧ」",
+              "maker": "日医工岐阜工場",
+              "yj_code": "4490020F2361",
+              "scope": "10mgのPTP100錠のみ。発売元は日医工、製造販売元は日医工岐阜工場。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "choseido-cetirizine10-end-202606",
+      "maker": "長生堂製薬",
+      "title": "セチリジン塩酸塩錠10mg「CH」 販売中止のご案内",
+      "url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/CETIR00_CHUUSHI_2606.pdf",
+      "announced_at": "2026-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "e1d3ec85e3dc793f31a0712605098e4335369c86ae7ac10ad1462b6f4ce08cac",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "長生堂製薬・日本ジェネリックは在庫終了後の販売中止を案内し、10mgの代替品を明記しています。販売中止の具体的な理由は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "4490020F2043",
+          "product_name": "セチリジン塩酸塩錠１０ｍｇ「ＣＨ」",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "792451813",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年8月頃（資料発表時の予定）"
+                  }
+                ],
+                "note": "統一商品コード 792451813、販売包装単位コード 14987792451810。"
+              }
+            }
+          ],
+          "seller": "日本ジェネリック"
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/CETIR00_CHUUSHI_2606.pdf",
+          "target_yj_codes": [
+            "4490020F2043"
+          ],
+          "type": "メーカー原文に記載の代替製品",
+          "products": [
+            {
+              "name": "セチリジン塩酸塩錠１０ｍｇ「ＮＩＧ」",
+              "maker": "日医工岐阜工場",
+              "yj_code": "4490020F2361",
+              "scope": "10mgのPTP100錠のみ。発売元は日医工、製造販売元は日医工岐阜工場。 統一商品コード376779548。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "経過措置期間は原文で2027年3月31日までの予定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "choseido-tamsulosin-od02-limited-202605",
+      "maker": "長生堂製薬",
+      "title": "タムスロシン塩酸塩OD錠0.2mg「CH」 限定出荷に関するご案内",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1841",
+      "announced_at": "2026-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "fb7949a88110f7298d38bd5b291359e55ba92971daf34912b46a44a1097bc272",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社の限定出荷を受けて供給能力を超える需要が見込まれたため、長生堂製薬・日本ジェネリックは出荷量を増やしながら限定出荷としました。",
+      "targets": [
+        {
+          "yj_code": "2590008F2138",
+          "product_name": "タムスロシン塩酸塩ＯＤ錠０．２ｍｇ「ＣＨ」",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP140錠（14錠×10）",
+              "unified_product_code": "792280642",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 792280642。"
+              }
+            }
+          ],
+          "seller": "日本ジェネリック"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "choseido-tachion-packs-jg-202611",
+      "maker": "長生堂製薬",
+      "title": "日本ジェネリック 全品目供給状況一覧",
+      "url": "https://medical.nihon-generic.co.jp/uploadfiles/news/JG_product_list.pdf",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "a18617f58292102f509b552ef2dcbbc32d6c87e54f4326808d99c87bc872976c",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日本ジェネリックの一覧では、タチオン錠50mgのPTP600錠と100mgのPTP1050錠は包装中止、両規格の継続包装は限定出荷です。",
+      "targets": [
+        {
+          "yj_code": "3922001F1098",
+          "product_name": "タチオン錠５０ｍｇ",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            5
+          ],
+          "packages": [
+            {
+              "package": "PTP600錠",
+              "unified_product_code": "792360436",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "status_text": "包装中止（2026年11月9日付の日本ジェネリック販売分一覧）",
+                "note": "統一商品コード 792360436。"
+              }
+            },
+            {
+              "package": "PTP120錠",
+              "unified_product_code": "792360443",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他）（2026年11月9日付の日本ジェネリック販売分一覧）",
+                "note": "統一商品コード 792360443。"
+              }
+            }
+          ],
+          "seller": "日本ジェネリック"
+        },
+        {
+          "yj_code": "3922001F2248",
+          "product_name": "タチオン錠１００ｍｇ",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            5
+          ],
+          "packages": [
+            {
+              "package": "PTP1050錠",
+              "unified_product_code": "792360542",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "status_text": "包装中止・供給停止（2026年11月9日付の日本ジェネリック販売分一覧）",
+                "note": "統一商品コード 792360542。"
+              }
+            },
+            {
+              "package": "PTP120錠",
+              "unified_product_code": "792360511",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他）（2026年11月9日付の日本ジェネリック販売分一覧）",
+                "note": "統一商品コード 792360511。"
+              }
+            },
+            {
+              "package": "PTP600錠",
+              "unified_product_code": "792360535",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他）（2026年11月9日付の日本ジェネリック販売分一覧）",
+                "note": "統一商品コード 792360535。"
+              }
+            }
+          ],
+          "seller": "日本ジェネリック"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "choseido-salazosulfapyridine500-packs-jg-202611",
+      "maker": "長生堂製薬",
+      "title": "日本ジェネリック 全品目供給状況一覧",
+      "url": "https://medical.nihon-generic.co.jp/uploadfiles/news/JG_product_list.pdf",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "a18617f58292102f509b552ef2dcbbc32d6c87e54f4326808d99c87bc872976c",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日本ジェネリックの一覧では、PTP100錠とPTP500錠の両方が限定出荷です。2025年6月に案内された一時休止と代替包装は別の資料に記載されています。",
+      "targets": [
+        {
+          "yj_code": "6219001H1102",
+          "product_name": "サラゾスルファピリジン腸溶錠５００ｍｇ「ＣＨ」",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            4
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "792658410",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情）（2026年11月9日付の日本ジェネリック販売分一覧）",
+                "note": "統一商品コード 792658410。"
+              }
+            },
+            {
+              "package": "PTP500錠（10錠×50）",
+              "unified_product_code": "792658458",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情）（2026年11月9日付の日本ジェネリック販売分一覧）",
+                "note": "統一商品コード 792658458。"
+              }
+            }
+          ],
+          "seller": "日本ジェネリック"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "choseido-cetirizine10-pack-jg-202611",
+      "maker": "長生堂製薬",
+      "title": "日本ジェネリック 全品目供給状況一覧",
+      "url": "https://medical.nihon-generic.co.jp/uploadfiles/news/JG_product_list.pdf",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "a18617f58292102f509b552ef2dcbbc32d6c87e54f4326808d99c87bc872976c",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日本ジェネリックの一覧では、10mgのPTP100錠の出荷量欄は販売中止、対応状況欄は限定出荷（自社の事情）です。",
+      "targets": [
+        {
+          "yj_code": "4490020F2043",
+          "product_name": "セチリジン塩酸塩錠１０ｍｇ「ＣＨ」",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            4
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "792451813",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "status_text": "出荷量欄は販売中止・対応状況欄は限定出荷（2026年11月9日付の日本ジェネリック販売分一覧）",
+                "note": "統一商品コード 792451813。"
+              }
+            }
+          ],
+          "seller": "日本ジェネリック"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "alfresa-sedolina2-end-202507",
+      "maker": "アルフレッサ ファーマ",
+      "title": "セドリーナ錠2mg 販売中止のご案内",
+      "url": "https://www.alfresa-pharma.co.jp/news/pdflink/NEWS_ID/2141/",
+      "announced_at": "2025-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "f1bf67223332d0c048c652daca5f1aeb24df00b193da8ee89007d54b1a2543c3",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "アルフレッサ ファーマは在庫をもって販売を中止し、包装ごとの販売終了予定を案内しました。具体的な中止理由は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "1169001F1202",
+          "product_name": "セドリーナ錠２ｍｇ",
+          "maker": "アルフレッサ ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP1000錠",
+              "unified_product_code": "274-13283-4",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "2027年2月（資料発表時の販売終了予定）"
+                  }
+                ],
+                "note": "統一商品コード 274-13283-4。"
+              }
+            },
+            {
+              "package": "バラ1000錠",
+              "unified_product_code": "274-13285-8",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "2027年3月（資料発表時の販売終了予定）"
+                  }
+                ],
+                "note": "統一商品コード 274-13285-8。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.alfresa-pharma.co.jp/news/pdflink/NEWS_ID/2141/",
+          "target_yj_codes": [
+            "1169001F1202"
+          ],
+          "type": "メーカー原文に記載の代替候補",
+          "products": [
+            {
+              "name": "トリヘキシフェニジル塩酸塩錠２ｍｇ「ＮＩＧ」",
+              "maker": "日医工岐阜工場",
+              "yj_code": "1169001F1270",
+              "scope": "セドリーナ錠2mgの販売中止に伴う候補。製造販売元は日医工岐阜工場、発売元は日医工。2025年7月原文では販売は武田薬品工業です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "対象包装の経過措置期間は原文で2027年3月末日までの予定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "alfresa-noiel200-end-202507",
+      "maker": "アルフレッサ ファーマ",
+      "title": "ノイエルカプセル200mg 販売中止のご案内",
+      "url": "https://www.alfresa-pharma.co.jp/news/pdflink/NEWS_ID/2142/",
+      "announced_at": "2025-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "5605ac4da13da08ce282d50029abfff721d834d23127efbb6fc20affdfb4d117",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "アルフレッサ ファーマは在庫をもって販売を中止し、包装ごとの販売終了予定を案内しました。具体的な中止理由は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "2329004M1175",
+          "product_name": "ノイエルカプセル２００ｍｇ",
+          "maker": "アルフレッサ ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "274-12914-8",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "2026年8月（資料発表時の販売終了予定）"
+                  }
+                ],
+                "note": "統一商品コード 274-12914-8。"
+              }
+            },
+            {
+              "package": "PTP500カプセル",
+              "unified_product_code": "274-12915-5",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "2026年12月（資料発表時の販売終了予定）"
+                  }
+                ],
+                "note": "統一商品コード 274-12915-5。"
+              }
+            },
+            {
+              "package": "PTP1000カプセル",
+              "unified_product_code": "274-12916-2",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "2026年11月（資料発表時の販売終了予定）"
+                  }
+                ],
+                "note": "統一商品コード 274-12916-2。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.alfresa-pharma.co.jp/news/pdflink/NEWS_ID/2142/",
+          "target_yj_codes": [
+            "2329004M1175"
+          ],
+          "type": "メーカー原文に記載の代替候補",
+          "products": [
+            {
+              "name": "レバミピド錠１００ｍｇ「ＤＫ」",
+              "maker": "大興製薬",
+              "yj_code": "2329021F1110",
+              "scope": "ノイエルカプセル200mgに対して原文が挙げた、成分・剤形の異なる候補です。販売元はアルフレッサ ファーマ。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "対象包装の経過措置期間は原文で2027年3月末日までの予定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "alfresa-vitamedin-powder-limited-202302",
+      "maker": "アルフレッサ ファーマ",
+      "title": "ビタメジン配合散 供給に関するお知らせ",
+      "url": "https://www.alfresa-pharma.co.jp/news/pdflink/NEWS_ID/1786/",
+      "announced_at": "2023-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "5782bce20cd6253f888650d29ab8acaa1a1ad4d1194371b181ac4e9b8d57f1c8",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "アルフレッサ ファーマは、他社品の影響で需要が大幅に増え、安定供給に支障が出るおそれがあるとして、配合散を含む対象製品の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3179108B1036",
+          "product_name": "ビタメジン配合散",
+          "maker": "アルフレッサ ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100g瓶",
+              "unified_product_code": "274-13308-4",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2月のメーカー資料）",
+                "note": "統一商品コード 274-13308-4。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sawai-rabeprazole10-quality-202604",
+      "maker": "沢井製薬",
+      "title": "ラベプラゾールNa錠10mg「サワイ」供給に関するお詫びとお願い",
+      "url": "https://med.sawai.co.jp/file/pr27_1322_1.pdf",
+      "announced_at": "2026-04",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "55b6050e859cf20d3350af6f7d476dc9461c45f7de03079731917c0a26267747",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "規格に適合する製剤を製造できず、沢井製薬は2026年4月に、既採用施設を優先した限定出荷と在庫終了後の供給一時停止を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2329028F1104",
+          "product_name": "ラベプラゾールＮａ錠１０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080670018",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、4月のメーカー資料）",
+                "note": "統一商品コード 080670018。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "080670025",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、4月のメーカー資料）",
+                "note": "統一商品コード 080670025。"
+              }
+            },
+            {
+              "package": "バラ100錠",
+              "unified_product_code": "080670049",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、4月のメーカー資料）",
+                "note": "統一商品コード 080670049。"
+              }
+            },
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "080670070",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、4月のメーカー資料）",
+                "note": "統一商品コード 080670070。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr27_1322_1.pdf",
+          "target_yj_codes": [
+            "2329028F1104"
+          ],
+          "type": "2026年4月の供給一時停止時にメーカーが示した代替候補",
+          "products": [
+            {
+              "name": "エソメプラゾールカプセル２０ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "2329029M2074",
+              "scope": "ラベプラゾール10mgの当時の供給一時停止に対する候補。別成分のエソメプラゾール20mg、PTP100カプセル（080011910）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年6月22日に限定出荷で再開し、11月9日にPTP100・500錠とバラ100錠の限定出荷解除が案内されました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "sawai-rabeprazole20-backlog-202605",
+      "maker": "沢井製薬",
+      "title": "ラベプラゾールNa錠20mg「サワイ」供給に関するお詫びとお願い",
+      "url": "https://med.sawai.co.jp/file/pr27_1323_2.pdf",
+      "announced_at": "2026-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "217343580ff2d66886134258d9da3de5f75580a7c95d5dd869ce66523c50d2f8",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "2026年4月の限定出荷開始後、同社10mg品の供給停止の影響で注文が想定を超え、製造が遅れたと沢井製薬が説明しています。",
+      "targets": [
+        {
+          "yj_code": "2329028F2100",
+          "product_name": "ラベプラゾールＮａ錠２０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080671015",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、5月のメーカー資料）",
+                "note": "統一商品コード 080671015。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "当時は在庫終了後の一時停止を案内しました。6月22日に限定出荷で再開し、11月9日にPTP100錠の限定出荷解除が案内されました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sawai-rabeprazole10-ptp140-end-202607",
+      "maker": "沢井製薬",
+      "title": "ラベプラゾールNa錠10mg「サワイ」一部包装販売中止のお知らせ",
+      "url": "https://med.sawai.co.jp/file/pr28_1322_2.pdf",
+      "announced_at": "2026-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "6fb5cd8bc8799d97c3e8390794969f863a3ecdf8fb78bd66b1b44ae7484090ff",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "沢井製薬は安定供給と生産効率改善を目的に、10mgのPTP140錠を在庫消尽後に販売中止とし、販売を継続する同一品目の包装への切替検討を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2329028F1104",
+          "product_name": "ラベプラゾールＮａ錠１０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "080670070",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年1月（2026年7月資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 080670070。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080670018",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 080670018。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "080670025",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 080670025。"
+              }
+            },
+            {
+              "package": "バラ100錠",
+              "unified_product_code": "080670049",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 080670049。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr28_1322_2.pdf",
+          "target_yj_codes": [
+            "2329028F1104"
+          ],
+          "type": "メーカー原文に記載の販売継続包装",
+          "products": [
+            {
+              "name": "ラベプラゾールＮａ錠１０ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "2329028F1104",
+              "scope": "PTP140錠（080670070）に対する、同一品目のPTP100錠（080670018）、PTP500錠（080670025）、バラ100錠（080670049）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "sawai-rabeprazole-specified-packs-resumed-202611",
+      "maker": "沢井製薬",
+      "title": "ラベプラゾールNa錠「サワイ」 対象包装の限定出荷解除",
+      "url": "https://med.sawai.co.jp/file/pr27_1322_3.pdf",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "973e10d2f20812d0cdc081368f2e3e376885c8a9710a66247c8698b47633480a",
+      "collection_mode": "manual",
+      "event_type": "resumed",
+      "reason": "沢井製薬は、供給体制が整ったため、表にある包装の限定出荷を2026年11月9日付で解除したと案内しました。厚労省の品目全体の区分とは集計範囲が異なります。",
+      "targets": [
+        {
+          "yj_code": "2329028F1104",
+          "product_name": "ラベプラゾールＮａ錠１０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080670018",
+              "supply": {
+                "status": "normal",
+                "plans": [],
+                "status_text": "通常出荷（2026年11月9日付のメーカー資料）",
+                "note": "統一商品コード 080670018。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "080670025",
+              "supply": {
+                "status": "normal",
+                "plans": [],
+                "status_text": "通常出荷（2026年11月9日付のメーカー資料）",
+                "note": "統一商品コード 080670025。"
+              }
+            },
+            {
+              "package": "バラ100錠",
+              "unified_product_code": "080670049",
+              "supply": {
+                "status": "normal",
+                "plans": [],
+                "status_text": "通常出荷（2026年11月9日付のメーカー資料）",
+                "note": "統一商品コード 080670049。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2329028F2100",
+          "product_name": "ラベプラゾールＮａ錠２０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080671015",
+              "supply": {
+                "status": "normal",
+                "plans": [],
+                "status_text": "通常出荷（2026年11月9日付のメーカー資料）",
+                "note": "統一商品コード 080671015。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "10mgのPTP140錠は11月の解除対象表に含まれず、7月に別途販売中止予定が案内されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sb-kawasumi-carmi-500ml-end-202607",
+      "maker": "SBカワスミ",
+      "title": "カーミパック生理食塩液・カーミパック生理食塩液L 販売中止予定のお知らせ",
+      "url": "https://www.sb-kawasumi.jp/Portals/0/images/info/news/260715_%E3%82%AB%E3%83%BC%E3%83%9F%E3%83%91%E3%83%83%E3%82%AF%20%E7%94%9F%E7%90%86%E9%A3%9F%E5%A1%A9%E6%B6%B2%E3%83%BB%E3%82%AB%E3%83%BC%E3%83%9F%E3%83%91%E3%83%83%E3%82%AF%20%E7%94%9F%E7%90%86%E9%A3%9F%E5%A1%A9%E6%B6%B2L%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E4%BA%88%E5%AE%9A%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-15",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "80def36f18d3b199b78b1bccfaaed637eb5c67e202eb20f86af3e6f3b7ada00e",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "SBカワスミは、500mLの対象包装を2027年3月頃に販売中止する予定と案内しました。具体的な中止理由は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "3311401A9039",
+          "product_name": "カーミパック生理食塩液",
+          "maker": "SBカワスミ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "500mL（S-500C）20袋",
+              "unified_product_code": "488-24023-3",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "2027年3月頃。実際の時期は在庫状況によります。"
+                  }
+                ],
+                "note": "統一商品コード 488-24023-3。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.sb-kawasumi.jp/Portals/0/images/info/news/260715_%E3%82%AB%E3%83%BC%E3%83%9F%E3%83%91%E3%83%83%E3%82%AF%20%E7%94%9F%E7%90%86%E9%A3%9F%E5%A1%A9%E6%B6%B2%E3%83%BB%E3%82%AB%E3%83%BC%E3%83%9F%E3%83%91%E3%83%83%E3%82%AF%20%E7%94%9F%E7%90%86%E9%A3%9F%E5%A1%A9%E6%B6%B2L%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E4%BA%88%E5%AE%9A%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+          "target_yj_codes": [
+            "3311401A9039"
+          ],
+          "type": "メーカー原文に記載の同容量の代替候補",
+          "products": [
+            {
+              "name": "生理食塩液バッグ「フソー」",
+              "maker": "扶桑薬品工業",
+              "yj_code": "3311401A9110",
+              "scope": "500mLのソフトバッグ20袋（197638253）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "レセプト請求は2028年3月31日までの予定と記載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "sb-kawasumi-carmi-1000ml-end-202607",
+      "maker": "SBカワスミ",
+      "title": "カーミパック生理食塩液・カーミパック生理食塩液L 販売中止予定のお知らせ",
+      "url": "https://www.sb-kawasumi.jp/Portals/0/images/info/news/260715_%E3%82%AB%E3%83%BC%E3%83%9F%E3%83%91%E3%83%83%E3%82%AF%20%E7%94%9F%E7%90%86%E9%A3%9F%E5%A1%A9%E6%B6%B2%E3%83%BB%E3%82%AB%E3%83%BC%E3%83%9F%E3%83%91%E3%83%83%E3%82%AF%20%E7%94%9F%E7%90%86%E9%A3%9F%E5%A1%A9%E6%B6%B2L%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E4%BA%88%E5%AE%9A%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-15",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "80def36f18d3b199b78b1bccfaaed637eb5c67e202eb20f86af3e6f3b7ada00e",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "SBカワスミは、1Lの対象包装を2027年3月頃に販売中止する予定と案内しました。具体的な中止理由は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "3311401H1036",
+          "product_name": "カーミパック生理食塩液",
+          "maker": "SBカワスミ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1L（S-1000C）10袋",
+              "unified_product_code": "488-24065-3",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "2027年3月頃。実際の時期は在庫状況によります。"
+                  }
+                ],
+                "note": "統一商品コード 488-24065-3。"
+              }
+            },
+            {
+              "package": "1L（S-1000BC）10袋",
+              "unified_product_code": "488-24067-7",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "2027年3月頃。実際の時期は在庫状況によります。"
+                  }
+                ],
+                "note": "統一商品コード 488-24067-7。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.sb-kawasumi.jp/Portals/0/images/info/news/260715_%E3%82%AB%E3%83%BC%E3%83%9F%E3%83%91%E3%83%83%E3%82%AF%20%E7%94%9F%E7%90%86%E9%A3%9F%E5%A1%A9%E6%B6%B2%E3%83%BB%E3%82%AB%E3%83%BC%E3%83%9F%E3%83%91%E3%83%83%E3%82%AF%20%E7%94%9F%E7%90%86%E9%A3%9F%E5%A1%A9%E6%B6%B2L%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E4%BA%88%E5%AE%9A%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+          "target_yj_codes": [
+            "3311401H1036"
+          ],
+          "type": "メーカー原文に記載の同容量の代替候補",
+          "products": [
+            {
+              "name": "生理食塩液バッグ「フソー」",
+              "maker": "扶桑薬品工業",
+              "yj_code": "3311401H1117",
+              "scope": "1Lのソフトバッグ10袋（197638277）とALタイプ10袋（197638284）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "レセプト請求は2028年3月31日までの予定と記載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "sb-kawasumi-carmi-1300ml-end-202607",
+      "maker": "SBカワスミ",
+      "title": "カーミパック生理食塩液・カーミパック生理食塩液L 販売中止予定のお知らせ",
+      "url": "https://www.sb-kawasumi.jp/Portals/0/images/info/news/260715_%E3%82%AB%E3%83%BC%E3%83%9F%E3%83%91%E3%83%83%E3%82%AF%20%E7%94%9F%E7%90%86%E9%A3%9F%E5%A1%A9%E6%B6%B2%E3%83%BB%E3%82%AB%E3%83%BC%E3%83%9F%E3%83%91%E3%83%83%E3%82%AF%20%E7%94%9F%E7%90%86%E9%A3%9F%E5%A1%A9%E6%B6%B2L%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E4%BA%88%E5%AE%9A%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-15",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "80def36f18d3b199b78b1bccfaaed637eb5c67e202eb20f86af3e6f3b7ada00e",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "SBカワスミは、1.3Lの対象包装を2027年3月頃に販売中止する予定と案内しました。具体的な中止理由は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "3311401H7026",
+          "product_name": "カーミパック生理食塩液Ｌ",
+          "maker": "SBカワスミ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1.3L（S-1300C）5袋",
+              "unified_product_code": "488-24066-0",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "2027年3月頃。実際の時期は在庫状況によります。"
+                  }
+                ],
+                "note": "統一商品コード 488-24066-0。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文の代替品一覧に同容量の1.3Lは記載されていません。",
+        "レセプト請求は2028年3月31日までの予定と記載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "sb-kawasumi-carmi-1500ml-end-202607",
+      "maker": "SBカワスミ",
+      "title": "カーミパック生理食塩液・カーミパック生理食塩液L 販売中止予定のお知らせ",
+      "url": "https://www.sb-kawasumi.jp/Portals/0/images/info/news/260715_%E3%82%AB%E3%83%BC%E3%83%9F%E3%83%91%E3%83%83%E3%82%AF%20%E7%94%9F%E7%90%86%E9%A3%9F%E5%A1%A9%E6%B6%B2%E3%83%BB%E3%82%AB%E3%83%BC%E3%83%9F%E3%83%91%E3%83%83%E3%82%AF%20%E7%94%9F%E7%90%86%E9%A3%9F%E5%A1%A9%E6%B6%B2L%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E4%BA%88%E5%AE%9A%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-15",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "80def36f18d3b199b78b1bccfaaed637eb5c67e202eb20f86af3e6f3b7ada00e",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "SBカワスミは、1.5Lの対象包装を2027年3月頃に販売中止する予定と案内しました。具体的な中止理由は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "3311401H8030",
+          "product_name": "カーミパック生理食塩液Ｌ",
+          "maker": "SBカワスミ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1.5L（S-1500C）5袋",
+              "unified_product_code": "488-24070-7",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "2027年3月頃。実際の時期は在庫状況によります。"
+                  }
+                ],
+                "note": "統一商品コード 488-24070-7。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.sb-kawasumi.jp/Portals/0/images/info/news/260715_%E3%82%AB%E3%83%BC%E3%83%9F%E3%83%91%E3%83%83%E3%82%AF%20%E7%94%9F%E7%90%86%E9%A3%9F%E5%A1%A9%E6%B6%B2%E3%83%BB%E3%82%AB%E3%83%BC%E3%83%9F%E3%83%91%E3%83%83%E3%82%AF%20%E7%94%9F%E7%90%86%E9%A3%9F%E5%A1%A9%E6%B6%B2L%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E4%BA%88%E5%AE%9A%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+          "target_yj_codes": [
+            "3311401H8030"
+          ],
+          "type": "メーカー原文に記載の同容量の代替候補",
+          "products": [
+            {
+              "name": "生理食塩液バッグ「フソー」",
+              "maker": "扶桑薬品工業",
+              "yj_code": "3311401H8049",
+              "scope": "1.5Lのソフトバッグ5袋（197638314）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "レセプト請求は2028年3月31日までの予定と記載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
     }
   ]
 }
