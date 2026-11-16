@@ -34,6 +34,11 @@ class MakerIdentityTests(unittest.TestCase):
         self.assertFalse(maker_is_listed_in_row("ニプロ", row))
         self.assertFalse(maker_is_listed_in_row("", row))
 
+    def test_exact_maker_name_can_contain_spaces(self):
+        for maker in ("アルフレッサ ファーマ", "Meiji Seika ファルマ"):
+            with self.subTest(maker=maker):
+                self.assertTrue(maker_is_listed_in_row(maker, {"製造メーカー": maker}))
+
 
 if __name__ == "__main__":
     unittest.main()

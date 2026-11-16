@@ -27,8 +27,9 @@ def maker_is_listed_in_row(maker: object, row: dict[str, object]) -> bool:
     maker_n = norm(maker)
     if not maker_n:
         return False
-    row_tokens = set().union(*(
-        maker_tokens(row.get(field)) for field in ("製造メーカー", "販売メーカー")
-    ))
     allowed = {maker_n, *DIRECTED_ALIASES.get(maker_n, set())}
-    return bool(allowed & row_tokens)
+    for field in ("製造メーカー", "販売メーカー"):
+        listed = norm(row.get(field))
+        if listed in allowed or allowed & maker_tokens(listed):
+            return True
+    return False

@@ -34,6 +34,9 @@ MAKER_HOSTS = {
     '塩野義製薬': 'www.shionogi.com',
     'オルガノン': 'organonpro.com',
     'サノフィ': 'www.e-mr.sanofi.co.jp',
+    'テイカ製薬': 'teika-products.jp',
+    'MSD': 'www.msdconnect.jp',
+    'アルフレッサ ファーマ': 'www.alfresa-pharma.co.jp',
 }
 SCOPES = {'product', 'package', 'seller_route_and_package'}
 KINDS = {'discontinued', 'limited', 'stopped', 'resumed', 'resumption_planned', 'recall'}

@@ -1821,7 +1821,7 @@
       "url": "https://med.sawai.co.jp/file/pr27_4735_1.pdf",
       "announced_at": "2026-05",
       "listed_at": "2026-05-22",
-      "verified_at": "2026-11-10",
+      "verified_at": "2026-11-17",
       "sha256": "d2553215a82ca3892c5935c0f64310d1e7a3cf7f9f162f281abe7b0ae6f11bb5",
       "collection_mode": "manual",
       "event_type": "limited",
@@ -1832,9 +1832,25 @@
           "product_name": "ジルムロ配合ＯＤ錠ＬＤ「サワイ」",
           "maker": "沢井製薬",
           "scope": "package",
-          "source_pages": [1],
+          "source_pages": [
+            1
+          ],
           "packages": [
-            {"package": "PTP100錠", "unified_product_code": "080339113", "supply": {"status": "limited", "status_text": "2026年5月案内時点：在庫消尽まで限定出荷", "plans": [{"event": "stock_depletion", "timing": "2026年11月（2026年5月時点の予測）"}], "note": "予測時期の経過は実際の在庫消尽や現在の受注可否を示しません。"}}
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080339113",
+              "supply": {
+                "status": "limited",
+                "status_text": "2026年5月案内時点：在庫消尽まで限定出荷",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月（2026年5月時点の予測）"
+                  }
+                ],
+                "note": "予測時期の経過は実際の在庫消尽や現在の受注可否を示しません。"
+              }
+            }
           ]
         },
         {
@@ -1842,19 +1858,86 @@
           "product_name": "ジルムロ配合ＯＤ錠ＨＤ「サワイ」",
           "maker": "沢井製薬",
           "scope": "package",
-          "source_pages": [1],
+          "source_pages": [
+            1
+          ],
           "packages": [
-            {"package": "PTP100錠", "unified_product_code": "080306115", "supply": {"status": "limited", "status_text": "2026年5月案内時点：在庫消尽まで限定出荷", "plans": [{"event": "stock_depletion", "timing": "2026年7月（2026年5月時点の予測）"}], "note": "予測時期の経過は実際の在庫消尽や現在の受注可否を示しません。"}},
-            {"package": "バラ200錠", "unified_product_code": "080306146", "supply": {"status": "limited", "status_text": "2026年5月案内時点：在庫消尽まで限定出荷", "plans": [{"event": "stock_depletion", "timing": "2026年12月（2026年5月時点の予測）"}], "note": "予測時期の経過は実際の在庫消尽や現在の受注可否を示しません。"}}
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080306115",
+              "supply": {
+                "status": "limited",
+                "status_text": "2026年5月案内時点：在庫消尽まで限定出荷",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年7月（2026年5月時点の予測）"
+                  }
+                ],
+                "note": "予測時期の経過は実際の在庫消尽や現在の受注可否を示しません。"
+              }
+            },
+            {
+              "package": "バラ200錠",
+              "unified_product_code": "080306146",
+              "supply": {
+                "status": "limited",
+                "status_text": "2026年5月案内時点：在庫消尽まで限定出荷",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年12月（2026年5月時点の予測）"
+                  }
+                ],
+                "note": "予測時期の経過は実際の在庫消尽や現在の受注可否を示しません。"
+              }
+            }
           ]
         }
       ],
-      "alternatives": [],
+      "alternatives": [
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr27_4735_1.pdf",
+          "target_yj_codes": [
+            "2149121F3024"
+          ],
+          "type": "沢井製薬が2026年5月の案内で同じ規格に示した候補です。候補は普通錠で、対象のOD錠とは剤形が異なります。",
+          "products": [
+            {
+              "name": "ジルムロ配合錠ＬＤ「サワイ」",
+              "yj_code": "2149121F1064",
+              "maker": "沢井製薬",
+              "scope": "PTP100錠（統一商品コード 080337119、販売包装単位コード 14987080337116）、バラ200錠（統一商品コード 080337140、販売包装単位コード 14987080337147）。"
+            }
+          ],
+          "cautions": [
+            "この案内はメーカー資料の発表時点のものです。候補製剤の供給区分・受注の可否は別途ご確認ください。"
+          ]
+        },
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr27_4735_1.pdf",
+          "target_yj_codes": [
+            "2149121F4020"
+          ],
+          "type": "沢井製薬が2026年5月の案内で同じ規格に示した候補です。候補は普通錠で、対象のOD錠とは剤形が異なります。",
+          "products": [
+            {
+              "name": "ジルムロ配合錠ＨＤ「サワイ」",
+              "yj_code": "2149121F2060",
+              "maker": "沢井製薬",
+              "scope": "PTP100錠（統一商品コード 080338116、販売包装単位コード 14987080338113）、バラ200錠（統一商品コード 080338147、販売包装単位コード 14987080338144）。"
+            }
+          ],
+          "cautions": [
+            "この案内はメーカー資料の発表時点のものです。候補製剤の供給区分・受注の可否は別途ご確認ください。"
+          ]
+        }
+      ],
       "cautions": [
         "2026年5月案内の予測です。予定時期の経過だけで実際の在庫消尽・包装別の供給停止を判断せず、現在の受注・在庫はメーカー・卸に確認してください。",
-        "メーカーは代替品への切替検討を依頼していますが、具体的な製品はこの案内では指定していません。",
         "この案内は自動追跡対象外です。後続案内の有無と最新の包装別状況をメーカーにご確認ください。"
-      ]
+      ],
+      "content_updated_at": "2026-11-17"
     },
     {
       "id": "towa-picosulfate-discontinuation-20261029",
@@ -9808,6 +9891,334 @@
       "cautions": [
         "確認したメーカー原文に代替候補名の記載はありません。",
         "メーカー資料に記載された時点の案内です。"
+      ]
+    },
+    {
+      "id": "towa-hyaluronate-03-discontinuation-202601",
+      "maker": "東和薬品",
+      "title": "ヒアルロン酸ナトリウム点眼液0.3％「トーワ」の販売中止案内",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=81673&t=4",
+      "announced_at": "2026-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "c6ba5de12b935bedd5801b86e5e35b34711e8eb21f0e38243a573294bf948b65",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "東和薬品は原材料価格の調整などを検討したものの、安定供給の見通しが立たず、対象包装を在庫限りで販売中止とすると案内しました。",
+      "targets": [
+        {
+          "yj_code": "1319720Y2071",
+          "product_name": "ヒアルロン酸ナトリウム点眼液０．３％「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×10本",
+              "unified_product_code": "155405026",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年9月見込み（2026年1月資料）"
+                  }
+                ],
+                "note": "統一商品コード 155405026、販売包装単位コード 14987155405023。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=81673&t=4",
+          "target_yj_codes": [
+            "1319720Y2071"
+          ],
+          "type": "東和薬品が2026年1月の販売中止案内で0.3％に対して示した同成分・同濃度の候補です。",
+          "products": [
+            {
+              "name": "ヒアレイン点眼液０．３％",
+              "yj_code": "1319720Y2020",
+              "maker": "参天製薬",
+              "scope": "5mL×10本（統一商品コード 084152268、販売包装単位コード 14987084152265）、5mL×50本（統一商品コード 084152275、販売包装単位コード 14987084152272）。"
+            }
+          ],
+          "cautions": [
+            "この案内はメーカー資料の発表時点のものです。候補製剤の供給区分・受注の可否は別途ご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "経過措置期間の満了は2028年3月末予定と同資料に記載されています。",
+        "資料で示された時期の経過は、実際の在庫消尽や出荷停止の確認を意味しません。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "teika-hyaluronate-ts-03-discontinuation-202610",
+      "maker": "テイカ製薬",
+      "title": "ヒアルロン酸ナトリウム点眼液0.3％「TS」の販売中止案内（第2報）",
+      "url": "https://teika-products.jp/upFiles/1791180172.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "16aef985ab055a1c74c84092ab656e7c2eb0c0aa6391c6e49579824a31992bd1",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "テイカ製薬の第2報は、販売中止に伴う在庫消尽予定と経過措置期間満了予定を更新しました。この資料に具体的な販売中止理由の記載はありません。",
+      "targets": [
+        {
+          "yj_code": "1319720Y2055",
+          "product_name": "ヒアルロン酸ナトリウム点眼液０．３％「ＴＳ」",
+          "maker": "テイカ製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×10本",
+              "unified_product_code": "399027923",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年10月見込み（2026年10月・第2報）"
+                  }
+                ],
+                "note": "統一商品コード 399027923、販売包装単位コード 14987399027920。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://teika-products.jp/upFiles/1791180172.pdf",
+          "target_yj_codes": [
+            "1319720Y2055"
+          ],
+          "type": "テイカ製薬が2026年10月の第2報で0.3％に対して示した同成分・同濃度の候補です。科研製薬が製造販売し、テイカ製薬が発売します。",
+          "products": [
+            {
+              "name": "ヒアルロン酸Ｎａ点眼液０．３％「科研」",
+              "yj_code": "1319720Y2179",
+              "maker": "科研製薬",
+              "scope": "5mL×10本（統一商品コード 399088061、販売包装単位コード 14987399088068）。"
+            }
+          ],
+          "cautions": [
+            "この案内はメーカー資料の発表時点のものです。候補製剤の供給区分・受注の可否は別途ご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "経過措置期間の満了は2028年3月末予定と同資料に記載されています。",
+        "資料で示された時期の経過は、実際の在庫消尽や出荷停止の確認を意味しません。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "msd-tienam-limited-third-report-202609",
+      "maker": "MSD",
+      "title": "チエナム点滴静注用0.5gの限定出荷（第3報）",
+      "url": "https://www.msdconnect.jp/wp-content/uploads/sites/5/2026/09/tienam-shipping-release-20260917.pdf",
+      "announced_at": "2026-09",
+      "listed_at": "2026-09-17",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "d9f5cdec1d2bf8f7432d162efb38150c824586ea259cfa99d9d99f22c5433862",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "MSDは製造工程で通常と異なる事象が発生して納品が遅れ、製造再開後も供給量が足りないため、特約店向けの限定出荷を続けると公表しました。第3報では、製造再開後の製品は2026年10月中旬から出荷予定と案内しています。",
+      "targets": [
+        {
+          "yj_code": "6139501D2105",
+          "product_name": "チエナム点滴静注用０．５ｇ",
+          "maker": "MSD",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "10バイアル（0.5g、20mL容器）",
+              "unified_product_code": "185807517",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情。2026年9月のメーカー資料）",
+                "plans": [],
+                "note": "統一商品コード 185807517。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.msdconnect.jp/wp-content/uploads/sites/5/2026/09/tienam-shipping-release-20260917.pdf",
+          "target_yj_codes": [
+            "6139501D2105"
+          ],
+          "type": "MSDが第3報に記載した候補です。有効成分が異なり、異なる規格も含まれます。切替時の適応・用量は製剤ごとに電子添文等で確認が必要です。",
+          "products": [
+            {
+              "name": "メロペネム点滴静注用０．２５ｇ「トーワ」",
+              "yj_code": "6139400D1106",
+              "maker": "東和薬品",
+              "scope": "10バイアル（統一商品コード 155051117）。"
+            },
+            {
+              "name": "メロペネム点滴静注用０．５ｇ「トーワ」",
+              "yj_code": "6139400D2102",
+              "maker": "東和薬品",
+              "scope": "10バイアル（統一商品コード 155054071）。"
+            },
+            {
+              "name": "メロペネム点滴静注用０．５ｇ「明治」",
+              "yj_code": "6139400D2110",
+              "maker": "Meiji Seika ファルマ",
+              "scope": "10バイアル（統一商品コード 222693684）。"
+            }
+          ],
+          "cautions": [
+            "この案内はメーカー資料の発表時点のものです。候補製剤の供給区分・受注の可否は別途ご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "ロット別の使用期限と適用条件はMSDの第3報に記載されています。"
+      ]
+    },
+    {
+      "id": "alfresa-chloromycetin-250-supply-202604",
+      "maker": "アルフレッサ ファーマ",
+      "title": "クロロマイセチン錠250の原薬納入遅延と出荷停止予定",
+      "url": "https://www.alfresa-pharma.co.jp/news/pdflink/NEWS_ID/2220/",
+      "announced_at": "2026-04",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "6ae3c48a2abcfd4c4ab7510fb644e0dbdaae452ff7b786179625d921dde75014",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "アルフレッサ ファーマは、原薬の入荷が遅れたために限定出荷を開始し、遅延が続いたため対象包装を在庫消尽後に一時出荷停止とする予定を案内しました。",
+      "targets": [
+        {
+          "yj_code": "6151001F2053",
+          "product_name": "クロロマイセチン錠２５０",
+          "maker": "アルフレッサ ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "274-12888-2",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年7月見込み（2026年4月資料）"
+                  }
+                ],
+                "note": "統一商品コード 274-12888-2。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.alfresa-pharma.co.jp/news/pdflink/NEWS_ID/2220/",
+          "target_yj_codes": [
+            "6151001F2053"
+          ],
+          "type": "アルフレッサ ファーマが2026年4月の案内で示した同成分の50mg錠です。1錠の含量は対象の250mg錠と異なります。",
+          "products": [
+            {
+              "name": "クロロマイセチン錠５０",
+              "yj_code": "6151001F1030",
+              "maker": "アルフレッサ ファーマ",
+              "scope": "PTP100錠（統一商品コード 274-12886-8）。"
+            }
+          ],
+          "cautions": [
+            "この案内はメーカー資料の発表時点のものです。候補製剤の供給区分・受注の可否は別途ご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "資料で示された時期の経過は、実際の在庫消尽や出荷停止の確認を意味しません。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "alfresa-chloromycetin-ointment-supply-202512",
+      "maker": "アルフレッサ ファーマ",
+      "title": "クロロマイセチン軟膏2％の出荷停止予定とメーカー案内",
+      "url": "https://www.alfresa-pharma.co.jp/news/pdflink/NEWS_ID/2183/",
+      "announced_at": "2025-12",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "103176be53f50df5a0306e1fe600ae34e8f27dbe3eae08beb52cacfa699ce3ad",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "アルフレッサ ファーマは、限定出荷の案内後に今後の製造に品質上の懸念が生じたため、対象包装を在庫消尽後に一時出荷停止とする予定を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2634706M1020",
+          "product_name": "クロロマイセチン軟膏２％",
+          "maker": "アルフレッサ ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "25g×5",
+              "unified_product_code": "274-12904-9",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年2月見込み（2025年12月資料）"
+                  }
+                ],
+                "note": "統一商品コード 274-12904-9。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.alfresa-pharma.co.jp/news/pdflink/NEWS_ID/2183/",
+          "target_yj_codes": [
+            "2634706M1020"
+          ],
+          "type": "アルフレッサ ファーマが2025年12月の案内で示した候補です。有効成分が異なります。原文は、効能・効果と用法・用量の一部が異なると明記しています。",
+          "products": [
+            {
+              "name": "ゲンタマイシン硫酸塩軟膏０．１％「Ｆ」",
+              "yj_code": "2634710M1093",
+              "maker": "富士製薬工業",
+              "scope": "10g×10本（統一商品コード 431-31012-9）。"
+            }
+          ],
+          "cautions": [
+            "この案内はメーカー資料の発表時点のものです。候補製剤の供給区分・受注の可否は別途ご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "資料で示された時期の経過は、実際の在庫消尽や出荷停止の確認を意味しません。現在の品目区分は厚労省公表欄をご確認ください。"
       ]
     }
   ]
