@@ -43070,6 +43070,354 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "gc-ora-cartridge-equipment-trouble-202511",
+      "maker": "ジーシー昭和薬品",
+      "title": "オーラ注歯科用カートリッジ1.0mL・1.8mL 製造設備の不具合（第9報）",
+      "url": "https://www.gc-showayakuhin.com/medical/contents/other/info/ori_ct10-18_ono_202511.pdf",
+      "announced_at": "2025-11",
+      "listed_at": "2025-11-10",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "f37e2c0847439c42f125242ce1c82155535fe122f0160b129f4caad0505a64e2",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造を再開するための最終確認で設備の制御装置に不具合が見つかり、改善に時間を要したため、ジーシー昭和薬品は出荷再開の見通しを示せないと案内しました。",
+      "targets": [
+        {
+          "yj_code": "2710803U2032",
+          "product_name": "オーラ注歯科用カートリッジ１．０ｍＬ",
+          "maker": "ジーシー昭和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1.0mL×50管",
+              "unified_product_code": "094-640519",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、11月のメーカー資料）",
+                "note": "統一商品コード 094-640519。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2710803U1044",
+          "product_name": "オーラ注歯科用カートリッジ１．８ｍＬ",
+          "maker": "ジーシー昭和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1.8mL×50管",
+              "unified_product_code": "094-640533",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、11月のメーカー資料）",
+                "note": "統一商品コード 094-640533。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2025年11月26日付の第10報は、1.8mLを2025年12月15日から、1.0mLを2026年1月28日から、それぞれ限定出荷で再開する予定を案内しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "gc-ora-cartridge-production-priority-202603",
+      "maker": "ジーシー昭和薬品",
+      "title": "オーラ注歯科用カートリッジ1.0mL・1.8mL 供給量の違い（第11報）",
+      "url": "https://www.gc-showayakuhin.com/medical/contents/other/info/ori_ct10-18_ono_202603.pdf",
+      "announced_at": "2026-03",
+      "listed_at": "2026-03-25",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "eb9d2361512240c5c818e1445c5acbff10bfb8fe81c64d2897405b3084d39dcd",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "ジーシー昭和薬品は需要の多い1.8mLの生産を優先し、2026年4月から従来の取引先向け出荷量が月平均実績まで回復する見通しを示しました。在庫量を踏まえ両規格とも限定出荷を続け、1.0mLは供給量を抑えると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2710803U2032",
+          "product_name": "オーラ注歯科用カートリッジ１．０ｍＬ",
+          "maker": "ジーシー昭和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1.0mL×50管",
+              "unified_product_code": "094-640519",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、3月のメーカー資料）",
+                "note": "統一商品コード 094-640519。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2710803U1044",
+          "product_name": "オーラ注歯科用カートリッジ１．８ｍＬ",
+          "maker": "ジーシー昭和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1.8mL×50管",
+              "unified_product_code": "094-640533",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、3月のメーカー資料）",
+                "note": "統一商品コード 094-640533。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "gc-ora-cartridge-current-list-202608",
+      "maker": "ジーシー昭和薬品",
+      "title": "オーラ注歯科用カートリッジ 容量別の出荷量と見込み（2026年8月一覧）",
+      "url": "https://www.gc-showayakuhin.com/medical/contents/other/info/supply_ono_20260821.pdf",
+      "announced_at": "2026-08",
+      "listed_at": "2026-08-21",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "38c297261c60f79ba668af149386c0698fc125f04a7927cc4f605d0c07443e1d",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "2026年8月の一覧では、1.0mLは出荷量減少と解除時期未定、1.8mLは出荷量通常と12月末の解除見込みが示されています。両規格とも限定出荷です。",
+      "targets": [
+        {
+          "yj_code": "2710803U2032",
+          "product_name": "オーラ注歯科用カートリッジ１．０ｍＬ",
+          "maker": "ジーシー昭和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1.0mL×50管",
+              "unified_product_code": "094-640519",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 094-640519。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2710803U1044",
+          "product_name": "オーラ注歯科用カートリッジ１．８ｍＬ",
+          "maker": "ジーシー昭和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1.8mL×50管",
+              "unified_product_code": "094-640533",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "normal_shipment",
+                    "timing": "2026年12月末の見込み（2026年8月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（出荷量は通常、2026年8月のメーカー資料）",
+                "note": "統一商品コード 094-640533。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "出荷量と出荷対応は別の区分です。1.8mLの期日は2026年8月時点の案内です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "hakusui-xylestesin-a-supply-202602",
+      "maker": "白水貿易",
+      "title": "キシレステシンA注射液（カートリッジ） 品薄状況のお知らせ",
+      "url": "https://www.hakusui-trading.co.jp/wp-content/uploads/2026/02/%E3%82%AD%E3%82%B7%E3%83%AC%E3%82%B9%E3%83%86%E3%82%B7%E3%83%B3%E5%93%81%E8%96%84%E7%8A%B6%E6%B3%81%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2026-02",
+      "listed_at": "2026-02-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "cc510b44bce8d7660b85565cd64bef6a077901f31c418bdaf516c1c037011105",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製剤の製造所を移す手続き中に想定以上の注文があり、移転完了までの備蓄が予定より早く不足したため、白水貿易は出荷制限を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2710806U1030",
+          "product_name": "キシレステシンＡ注射液（カートリッジ）",
+          "maker": "白水貿易",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1.8mL×50本",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "出荷制限（2026年2月のメーカー資料）",
+                "note": "商品コード 00180303、販売包装単位コード 14548188003916。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年7月頃の安定供給は2月発表時点の見込みで、実際の解除は確認できていません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "jg-tathion-injection-100-200-supply-202611",
+      "maker": "長生堂製薬",
+      "title": "タチオン注射用100mg・200mg 日本ジェネリック販売分の限定出荷（11月9日一覧）",
+      "url": "https://medical.nihon-generic.co.jp/uploadfiles/news/JG_product_list.pdf",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "a18617f58292102f509b552ef2dcbbc32d6c87e54f4326808d99c87bc872976c",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日本ジェネリックの11月9日一覧では、長生堂製薬が製造販売する両規格の50管について、出荷量通常と限定出荷が併記されています。個別の理由は一覧に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "3922400D1060",
+          "product_name": "タチオン注射用１００ｍｇ",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            5
+          ],
+          "packages": [
+            {
+              "package": "50管",
+              "unified_product_code": "792360757",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、11月のメーカー資料）",
+                "note": "統一商品コード 792360757、販売包装単位コード 14987792360754。"
+              }
+            }
+          ],
+          "seller": "日本ジェネリック"
+        },
+        {
+          "yj_code": "3922400D3128",
+          "product_name": "タチオン注射用２００ｍｇ",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            5
+          ],
+          "packages": [
+            {
+              "package": "50管",
+              "unified_product_code": "792360856",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、11月のメーカー資料）",
+                "note": "統一商品コード 792360856、販売包装単位コード 14987792360853。"
+              }
+            }
+          ],
+          "seller": "日本ジェネリック"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "日本ジェネリック販売分の対象包装に限る情報です。リンク先の一覧は更新されます。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "jg-oltexer-5g-distribution-normal-202611",
+      "maker": "ビーブランド・メディコーデンタル",
+      "title": "オルテクサー口腔用軟膏0.1％ 5g 日本ジェネリック販売分（11月9日一覧）",
+      "url": "https://medical.nihon-generic.co.jp/uploadfiles/news/JG_product_list.pdf",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "a18617f58292102f509b552ef2dcbbc32d6c87e54f4326808d99c87bc872976c",
+      "collection_mode": "manual",
+      "event_type": "resumed",
+      "reason": "日本ジェネリックの11月9日一覧では、同社の販売分5gは通常出荷と記載されています。",
+      "targets": [
+        {
+          "yj_code": "2399707M1057",
+          "product_name": "オルテクサー口腔用軟膏０．１％",
+          "maker": "ビーブランド・メディコーデンタル",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            3
+          ],
+          "packages": [
+            {
+              "package": "5g",
+              "unified_product_code": "792295585",
+              "supply": {
+                "status": "normal",
+                "plans": [],
+                "status_text": "通常出荷（2026年11月9日、日本ジェネリック販売分）",
+                "note": "統一商品コード 792295585、販売包装単位コード 14987792295582。"
+              }
+            }
+          ],
+          "seller": "日本ジェネリック"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "この一覧の通常出荷は日本ジェネリック販売分です。ビーブランド・メディコーデンタルの案内と厚労省の品目区分はそれぞれ別に掲載しています。リンク先の一覧は更新されます。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }

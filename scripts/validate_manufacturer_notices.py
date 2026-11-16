@@ -71,6 +71,8 @@ MAKER_HOSTS = {
     '鳥居薬品': 'www.torii.co.jp',
     '三笠製薬': 'www.mikasaseiyaku.co.jp',
     'ビーブランド・メディコーデンタル': 'bee.co.jp',
+    'ジーシー昭和薬品': 'www.gc-showayakuhin.com',
+    '白水貿易': 'www.hakusui-trading.co.jp',
     '大鵬薬品工業': 'www.taiho.co.jp',
     "T's製薬": 'www.med.ts-pharma.com',
     'グラクソ・スミスクライン': 'gskpro.com',
@@ -97,6 +99,7 @@ MAKER_MANUAL_SOURCE_HOSTS = {
 }
 # Specific manufacturer and distributor notices hosted outside the primary company domain.
 MAKER_MANUAL_SOURCE_URLS = {
+    'ビーブランド・メディコーデンタル': {'https://medical.nihon-generic.co.jp/uploadfiles/news/JG_product_list.pdf'},
     '全星薬品工業': {
         'https://med.daiichisankyo-ep.co.jp/information/files/1876/%E3%82%A2%E3%82%B8%E3%82%B9%E3%83%AD%E3%83%9E%E3%82%A4%E3%82%B7%E3%83%B3%E9%8C%A0250mg%E3%80%8CDSEP%E3%80%8D%20%20%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B20240312.pdf',
         'https://med.daiichisankyo-ep.co.jp/information/files/2025/EPAZI1N00901-1.pdf',
@@ -140,6 +143,7 @@ MAKER_MANUAL_SOURCE_URLS = {
     '日本イーライリリー': {'https://www.nittokyo.or.jp/uploads/files/20261014_Lilly_insulin.pdf'},
     '大塚製薬工場': {'https://medical.jms.cc/pdf/customer_information_306.pdf'},
     '長生堂製薬': {
+        'https://medical.nihon-generic.co.jp/uploadfiles/news/JG_product_list.pdf',
         'https://medical.nihon-generic.co.jp/uploadfiles/medicine/TATHI50_CHUUSHI_2602.pdf',
         'https://medical.nihon-generic.co.jp/uploadfiles/medicine/TATHI_CHUUSHI_2507.pdf',
         'https://medical.nihon-generic.co.jp/a.php?id=1725',
