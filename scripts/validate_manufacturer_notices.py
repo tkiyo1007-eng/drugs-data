@@ -39,6 +39,7 @@ MAKER_HOSTS = {
     'ノーベルファーマ': 'www.nobelpharma.co.jp',
     'ニプロ': 'med.nipro.co.jp',
     '塩野義製薬': 'www.shionogi.com',
+    'シオノギファーマ': 'www.shionogi-ph.co.jp',
     'オルガノン': 'organonpro.com',
     'サノフィ': 'www.e-mr.sanofi.co.jp',
     'トーアエイヨー': 'med.toaeiyo.co.jp',
@@ -48,7 +49,12 @@ MAKER_HOSTS = {
     '富士製薬工業': 'www.fuji-pharma.jp',
     '高田製薬': 'www.takata-seiyaku.co.jp',
 }
-MAKER_MANUAL_SOURCE_HOSTS = {'富士製薬工業': ('www.fujipharma.jp',)}
+MAKER_MANUAL_SOURCE_HOSTS = {
+    '富士製薬工業': ('www.fujipharma.jp',),
+    '塩野義製薬': ('med.shionogi.co.jp',),
+    # The manufacturer links its drug information to its distributor's site.
+    'シオノギファーマ': ('med.shionogi.co.jp',),
+}
 SCOPES = {'product', 'package', 'seller_route_and_package'}
 KINDS = {'discontinued', 'limited', 'stopped', 'resumed', 'resumption_planned', 'recall'}
 PACKAGE_STATUSES = {'normal', 'limited', 'stopped', 'unconfirmed'}
