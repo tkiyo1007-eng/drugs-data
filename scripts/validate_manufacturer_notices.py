@@ -62,6 +62,7 @@ MAKER_HOSTS = {
     '陽進堂ホールディングス': 'yoshindoholdings.co.jp',
     '共創未来ファーマ': 'www.kyosomirai-p.co.jp',
     '大塚製薬工場': 'www.otsukakj.jp',
+    'オーファンパシフィック': 'www.orphanpacific.com',
     '大鵬薬品工業': 'www.taiho.co.jp',
     "T's製薬": 'www.med.ts-pharma.com',
     'グラクソ・スミスクライン': 'gskpro.com',
@@ -76,7 +77,7 @@ MAKER_MANUAL_SOURCE_HOSTS = {
     '杏林製薬': ('www.kyorin-medicalbridge.jp',),
     '塩野義製薬': ('med.shionogi.co.jp',),
     # The manufacturer links its drug information to its distributor's site.
-    'シオノギファーマ': ('med.shionogi.co.jp',),
+    'シオノギファーマ': ('med.shionogi.co.jp', 'www.shionogi.com'),
     'ノバルティスファーマ': ('www.pro.novartis.com',),
     '阪大微生物病研究会': ('www.biken.or.jp',),
     'ビオメディクス': ('biomedix.co.jp',),
