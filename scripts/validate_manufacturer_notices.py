@@ -66,9 +66,21 @@ MAKER_MANUAL_SOURCE_HOSTS = {
     '塩野義製薬': ('med.shionogi.co.jp',),
     # The manufacturer links its drug information to its distributor's site.
     'シオノギファーマ': ('med.shionogi.co.jp',),
+    'ノバルティスファーマ': ('www.pro.novartis.com',),
+    '阪大微生物病研究会': ('www.biken.or.jp',),
+    'ビオメディクス': ('biomedix.co.jp',),
+    'ロートニッテン': ('www.rohto-nitten.co.jp',),
+    # This notice identifies the distributor's packaging and product code.
+    'ロートニッテンファーマ': ('www.rohto-nitten.co.jp',),
 }
 # Exact copies of manufacturer-authored notices hosted by public institutions.
 MAKER_MANUAL_SOURCE_URLS = {
+    '阪大微生物病研究会': {
+        'https://www.jpa-web.org/dcms_media/other/02_jebik-v-genteishukka_biken_260512.pdf',
+    },
+    '東光薬品工業': {
+        'https://medical.nihon-generic.co.jp/uploadfiles/medicine/FELBI70_CHUUSHI_2507.pdf',
+    },
     'サンド': {
         'https://www.jrs.or.jp/information/file/3393d536942bdd85d8d84103c5d69b6e1dc48fc4.pdf',
     },
