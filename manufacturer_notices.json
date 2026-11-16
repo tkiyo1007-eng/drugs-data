@@ -42121,6 +42121,504 @@
         "LDは本剤を必要とする小児への供給を優先し、供給量に限りがある場合があります。HDの12月停止と翌年6月の再開は2026年10月時点の予定です。",
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
       ]
+    },
+    {
+      "id": "mikasa-zestac-raw-material-202506",
+      "maker": "三笠製薬",
+      "title": "ゼスタッククリーム 原料調達に伴う限定出荷",
+      "url": "https://www.mikasaseiyaku.co.jp/md/wp-content/uploads/2026/02/ZTC_annai_202506-1.pdf",
+      "announced_at": "2025-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "601b0c61fb0440448904cf2c1dba418b2a5b1386b6bbf069039cbc3582a575f4",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "原料の製造元で粗原料の確保が難しく、三笠製薬が原料の入荷見通しを立てられなくなったため、2025年6月に限定出荷と新規採用辞退を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2649865N1023",
+          "product_name": "ゼスタッククリーム",
+          "maker": "三笠製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "25g×10本",
+              "unified_product_code": "387597728",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、6月のメーカー資料）",
+                "note": "統一商品コード 387597728、販売包装単位コード 14987387597725。"
+              }
+            },
+            {
+              "package": "25g×50本",
+              "unified_product_code": "387599814",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、6月のメーカー資料）",
+                "note": "統一商品コード 387599814、販売包装単位コード 14987387599811。"
+              }
+            },
+            {
+              "package": "50g×10本",
+              "unified_product_code": "387599975",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、6月のメーカー資料）",
+                "note": "統一商品コード 387599975、販売包装単位コード 14987387599972。"
+              }
+            },
+            {
+              "package": "50g×50本",
+              "unified_product_code": "387599821",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、6月のメーカー資料）",
+                "note": "統一商品コード 387599821、販売包装単位コード 14987387599828。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "mikasa-zestac-discontinuation-202601",
+      "maker": "三笠製薬",
+      "title": "ゼスタッククリーム 販売中止予定と代替候補",
+      "url": "https://www.mikasaseiyaku.co.jp/md/wp-content/uploads/2026/02/a331c5ea9989784c74bd022d41477311.pdf",
+      "announced_at": "2026-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "705ed60e483162bb817f4762b8a1ada141e9496425e67d9199e58a3a3e299248",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "三笠製薬は、改善策を検討しても原薬を安定して調達できず、販売の継続が難しいと判断し、4包装を在庫消尽後に販売中止と案内しました。",
+      "targets": [
+        {
+          "yj_code": "2649865N1023",
+          "product_name": "ゼスタッククリーム",
+          "maker": "三笠製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "25g×10本",
+              "unified_product_code": "387597728",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "2026年6月（2026年1月資料の予定）"
+                  }
+                ],
+                "note": "統一商品コード 387597728、販売包装単位コード 14987387597725。"
+              }
+            },
+            {
+              "package": "25g×50本",
+              "unified_product_code": "387599814",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "2026年7月（2026年1月資料の予定）"
+                  }
+                ],
+                "note": "統一商品コード 387599814、販売包装単位コード 14987387599811。"
+              }
+            },
+            {
+              "package": "50g×10本",
+              "unified_product_code": "387599975",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "2026年8月（2026年1月資料の予定）"
+                  }
+                ],
+                "note": "統一商品コード 387599975、販売包装単位コード 14987387599972。"
+              }
+            },
+            {
+              "package": "50g×50本",
+              "unified_product_code": "387599821",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "2026年8月（2026年1月資料の予定）"
+                  }
+                ],
+                "note": "統一商品コード 387599821、販売包装単位コード 14987387599828。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.mikasaseiyaku.co.jp/md/wp-content/uploads/2026/02/a331c5ea9989784c74bd022d41477311.pdf",
+          "target_yj_codes": [
+            "2649865N1023"
+          ],
+          "type": "メーカーが販売中止案内で挙げた候補",
+          "products": [
+            {
+              "name": "フェルビナクスチック軟膏３％「三笠」",
+              "maker": "三笠製薬",
+              "yj_code": "2649731M1098",
+              "scope": "40g×10本（387592167）、40g×50本（387592174）。成分と剤形が異なります。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "経過措置期限は2027年3月末予定と記載されています。販売中止予定は4包装で異なり、実際の在庫消尽は確認できていません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "ltl-sawacillin-capsule125-250-limited-202307",
+      "maker": "LTLファーマ",
+      "title": "サワシリンカプセル125・250 特約店卸への限定出荷の開始",
+      "url": "https://www.ltl-pharma.com/wp-content/uploads/resource/news_file/230705_sawacillin.pdf?v=20260721",
+      "announced_at": "2023-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "5ab119e1adb428a0a2d3ce103eaad1a47d10f49fd6c5cafee7cb9607ad1d3d42",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "LTLファーマは、他社製品の影響で安定供給に支障が生じる可能性があるとして、2023年7月5日から特約店卸への限定出荷を開始すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "6131001M1088",
+          "product_name": "サワシリンカプセル１２５",
+          "maker": "LTLファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "919100723",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 919100723、販売包装単位コード 14987919100720。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6131001M2300",
+          "product_name": "サワシリンカプセル２５０",
+          "maker": "LTLファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "919100730",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 919100730、販売包装単位コード 14987919100737。"
+              }
+            },
+            {
+              "package": "PTP500カプセル",
+              "unified_product_code": "919100747",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 919100747、販売包装単位コード 14987919100744。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2023年の開始理由です。厚労省11月16日版では両規格とも自社の事情に区分されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "ltl-sawacillin-capsule125-250-continuing-202503",
+      "maker": "LTLファーマ",
+      "title": "サワシリンカプセル125・250 限定出荷継続の案内",
+      "url": "https://www.ltl-pharma.com/wp-content/uploads/resource/news_file/250319_sawacillin.pdf",
+      "announced_at": "2025-03",
+      "listed_at": "2025-03-19",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "cc9f8b9b5533337036c84b99b67d88695c0089f746a5ea95c12a9a695fde4013",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "LTLファーマは2025年3月に細粒10％の100g瓶の限定出荷を解除する一方、カプセル125・250の限定出荷は継続と案内しました。この資料にカプセルの供給事情の詳細は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "6131001M1088",
+          "product_name": "サワシリンカプセル１２５",
+          "maker": "LTLファーマ",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": []
+        },
+        {
+          "yj_code": "6131001M2300",
+          "product_name": "サワシリンカプセル２５０",
+          "maker": "LTLファーマ",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": []
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "3月19日の解除対象は細粒10％100g瓶です。カプセルの解除日や候補の記載はありません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "orphan-somazon10-historical-reason-202301",
+      "maker": "オーファンパシフィック",
+      "title": "ソマゾン注射用10mg 生産量と既存の処方医療機関に限る案内",
+      "url": "https://www.orphanpacific.com/upload/news/20230118144838PhvrkL1xWtGtftrq.pdf",
+      "announced_at": "2023-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "778acd97351583606202b8649a641ba2e429c74c01846dcda95aee4d835cde6f",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "オーファンパシフィックは、製品を出荷できる見通しが立っても生産量に限りがあるため、既に処方している医療機関への供給に限る方針を2023年1月に案内しました。",
+      "targets": [
+        {
+          "yj_code": "2499408D1028",
+          "product_name": "ソマゾン注射用１０ｍｇ",
+          "maker": "オーファンパシフィック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1バイアル",
+              "unified_product_code": "858100075",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、1月のメーカー資料）",
+                "note": "統一商品コード 858100075。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "orphan-somazon10-continuing-202604",
+      "maker": "オーファンパシフィック",
+      "title": "ソマゾン注射用10mg 既存の処方医療機関への供給を継続",
+      "url": "https://www.orphanpacific.com/upload/news/202603191704173z9kZ9tNm4w0vEkW.pdf",
+      "announced_at": "2026-04",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "a1e31afe1d2a1a8eaed41f4bffee178e8d9929edd40eeebf6f33cee47ea0c270",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "オーファンパシフィックは2026年4月以降も、既に処方している医療機関に供給を限ると案内しました。次の案内は2027年4月頃の予定です。",
+      "targets": [
+        {
+          "yj_code": "2499408D1028",
+          "product_name": "ソマゾン注射用１０ｍｇ",
+          "maker": "オーファンパシフィック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1バイアル",
+              "unified_product_code": "858100075",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、4月のメーカー資料）",
+                "note": "統一商品コード 858100075。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2027年4月頃は次の案内の予定です。出荷制限の解除日や供給再開日は記載されていません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "merck-ovidrel250-limited-resumption-202301",
+      "maker": "メルクバイオファーマ",
+      "title": "オビドレル皮下注シリンジ250μg 2023年の限定出荷による再開",
+      "url": "https://funin-fch.net/wp-content/uploads/2023/01/97b4654c172eccff6e25ec66bc0e4343.pdf",
+      "announced_at": "2023-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "206fde4e50199b0b5f3299c68d82bb4ccea48d0b55c097585c420ac259de1785",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "承認書の記載と製造実態の不一致が判明して出荷を一時停止した後、メルクバイオファーマは2023年2月2日から順次出荷を再開すると案内しました。予想を超える需要を見込み、在庫が十分となるまで特約店への限定出荷としました。",
+      "targets": [
+        {
+          "yj_code": "2413406G1020",
+          "product_name": "オビドレル皮下注シリンジ２５０μｇ",
+          "maker": "メルクバイオファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1シリンジ（ガラスシリンジ、ステンレス針）",
+              "unified_product_code": "496300417",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、1月のメーカー資料）",
+                "note": "統一商品コード 496300417。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2023年の停止と再開の経緯です。現在の限定出荷について同じ原因が続くことは、この資料では確認できません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "bee-oltexer-limited-202604",
+      "maker": "ビーブランド・メディコーデンタル",
+      "title": "オルテクサー口腔用軟膏0.1％ 5g 出荷調整のお知らせ",
+      "url": "https://bee.co.jp/wp/wp-content/uploads/2026/04/9f600ea82213ca14aa3f352a28ddce06.pdf",
+      "announced_at": "2026-04",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "590f1fc758310230688c21a2d5e5f0027136ce779adf385ed1738be7bfb9d1f6",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "中東情勢の影響で供給の見通しが不確かになったため、ビーブランド・メディコーデンタルは安定供給を維持する目的で出荷数量を絞ると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2399707M1057",
+          "product_name": "オルテクサー口腔用軟膏０．１％",
+          "maker": "ビーブランド・メディコーデンタル",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5g",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（その他、4月のメーカー資料）",
+                "plans": []
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料は5g包装を記載しており、統一商品コードや他販売元の受注状況は記載されていません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "bee-oltexer-limited-202608",
+      "maker": "ビーブランド・メディコーデンタル",
+      "title": "オルテクサー口腔用軟膏0.1％ 5g 出荷調整の継続",
+      "url": "https://bee.co.jp/site/wp-content/uploads/2026/10/294569f14f6a6e8358a482a642e48cfb.pdf",
+      "announced_at": "2026-08",
+      "listed_at": "2026-08-25",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "67ed1bae00a48a530e3d20172012301ee32e06896bc56ba976b9f0baacd42ce8",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "ビーブランド・メディコーデンタルは2026年8月にもオルテクサー5gの出荷調整を続けると案内しました。解除の対象はフッ化ナトリウム洗口液でした。",
+      "targets": [
+        {
+          "yj_code": "2399707M1057",
+          "product_name": "オルテクサー口腔用軟膏０．１％",
+          "maker": "ビーブランド・メディコーデンタル",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5g",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（その他、8月のメーカー資料）",
+                "plans": []
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料は5g包装を記載しており、統一商品コードや他販売元の受注状況は記載されていません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
