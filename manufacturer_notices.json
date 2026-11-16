@@ -32016,6 +32016,992 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "daito-temocapril-feldsen-1-end-202610",
+      "maker": "ダイト",
+      "title": "テモカプリル塩酸塩錠1mg「フェルゼン」 製造販売中止のご案内",
+      "url": "https://www.feldsenfpharma.co.jp/dcms_media/other/%E3%83%86%E3%83%A2%E3%82%AB%E3%83%97%E3%83%AA%E3%83%AB%E3%80%8C%E3%83%95%E3%82%A7%E3%83%AB%E3%82%BC%E3%83%B3%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "6e64585ecd5e0d96ae7eda9442d998d7f1c3f87a6de74a5732dd6da2f14b8afb",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "ダイトとフェルゼンファーマは、対象のPTP100錠を在庫消尽後に販売中止と案内しました。原文に詳細な理由は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "2144009F1182",
+          "product_name": "テモカプリル塩酸塩錠１ｍｇ「フェルゼン」",
+          "maker": "ダイト",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "supply": {
+                "status": "unconfirmed",
+                "note": "販売包装単位コード 14987923305203。",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年1月（2026年10月資料の見込み）"
+                  }
+                ]
+              }
+            }
+          ],
+          "seller": "フェルゼンファーマ"
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.feldsenfpharma.co.jp/dcms_media/other/%E3%83%86%E3%83%A2%E3%82%AB%E3%83%97%E3%83%AA%E3%83%AB%E3%80%8C%E3%83%95%E3%82%A7%E3%83%AB%E3%82%BC%E3%83%B3%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2.pdf",
+          "target_yj_codes": [
+            "2144009F1182"
+          ],
+          "type": "ダイトとフェルゼンファーマの連名資料に記載の代替品",
+          "products": [
+            {
+              "name": "エースコール錠１ｍｇ",
+              "maker": "アルフレッサ ファーマ",
+              "yj_code": "2144009F1026",
+              "scope": "同一成分の1mg、PTP100錠（販売包装単位コード14987274140652）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年10月資料で示された経過措置満了日は2027年3月末の予定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "daito-temocapril-feldsen-2-end-202610",
+      "maker": "ダイト",
+      "title": "テモカプリル塩酸塩錠2mg「フェルゼン」 製造販売中止のご案内",
+      "url": "https://www.feldsenfpharma.co.jp/dcms_media/other/%E3%83%86%E3%83%A2%E3%82%AB%E3%83%97%E3%83%AA%E3%83%AB%E3%80%8C%E3%83%95%E3%82%A7%E3%83%AB%E3%82%BC%E3%83%B3%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "6e64585ecd5e0d96ae7eda9442d998d7f1c3f87a6de74a5732dd6da2f14b8afb",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "ダイトとフェルゼンファーマは、対象のPTP100錠を在庫消尽後に販売中止と案内しました。原文に詳細な理由は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "2144009F2189",
+          "product_name": "テモカプリル塩酸塩錠２ｍｇ「フェルゼン」",
+          "maker": "ダイト",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "supply": {
+                "status": "unconfirmed",
+                "note": "販売包装単位コード 14987923305302。",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年1月（2026年10月資料の見込み）"
+                  }
+                ]
+              }
+            }
+          ],
+          "seller": "フェルゼンファーマ"
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.feldsenfpharma.co.jp/dcms_media/other/%E3%83%86%E3%83%A2%E3%82%AB%E3%83%97%E3%83%AA%E3%83%AB%E3%80%8C%E3%83%95%E3%82%A7%E3%83%AB%E3%82%BC%E3%83%B3%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2.pdf",
+          "target_yj_codes": [
+            "2144009F2189"
+          ],
+          "type": "ダイトとフェルゼンファーマの連名資料に記載の代替品",
+          "products": [
+            {
+              "name": "エースコール錠２ｍｇ",
+              "maker": "アルフレッサ ファーマ",
+              "yj_code": "2144009F2022",
+              "scope": "同一成分の2mg、PTP100錠（販売包装単位コード14987274140669）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年10月資料で示された経過措置満了日は2027年3月末の予定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "daito-temocapril-feldsen-4-end-202610",
+      "maker": "ダイト",
+      "title": "テモカプリル塩酸塩錠4mg「フェルゼン」 製造販売中止のご案内",
+      "url": "https://www.feldsenfpharma.co.jp/dcms_media/other/%E3%83%86%E3%83%A2%E3%82%AB%E3%83%97%E3%83%AA%E3%83%AB%E3%80%8C%E3%83%95%E3%82%A7%E3%83%AB%E3%82%BC%E3%83%B3%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "6e64585ecd5e0d96ae7eda9442d998d7f1c3f87a6de74a5732dd6da2f14b8afb",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "ダイトとフェルゼンファーマは、対象のPTP100錠を在庫消尽後に販売中止と案内しました。原文に詳細な理由は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "2144009F3185",
+          "product_name": "テモカプリル塩酸塩錠４ｍｇ「フェルゼン」",
+          "maker": "ダイト",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "supply": {
+                "status": "unconfirmed",
+                "note": "販売包装単位コード 14987923305401。",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月（2026年10月資料の見込み）"
+                  }
+                ]
+              }
+            }
+          ],
+          "seller": "フェルゼンファーマ"
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.feldsenfpharma.co.jp/dcms_media/other/%E3%83%86%E3%83%A2%E3%82%AB%E3%83%97%E3%83%AA%E3%83%AB%E3%80%8C%E3%83%95%E3%82%A7%E3%83%AB%E3%82%BC%E3%83%B3%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2.pdf",
+          "target_yj_codes": [
+            "2144009F3185"
+          ],
+          "type": "ダイトとフェルゼンファーマの連名資料に記載の代替品",
+          "products": [
+            {
+              "name": "エースコール錠４ｍｇ",
+              "maker": "アルフレッサ ファーマ",
+              "yj_code": "2144009F3029",
+              "scope": "同一成分の4mg、PTP100錠（販売包装単位コード14987274140676）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年10月資料で示された経過措置満了日は2027年3月末の予定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "nihon-chemiphar-calvan25-limited-202609",
+      "maker": "日本ケミファ",
+      "title": "カルバン錠25 製品供給に関するお知らせ",
+      "url": "https://www.nc-medical.com/product_topics/p5ib9100000060hz-att/p5ib9100000060in.pdf",
+      "announced_at": "2026-09",
+      "listed_at": "2026-09-15",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ee5dc7834fe9a890effa57a8a25d76e0023437ebf654e765cc537e67cf2eea73",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "想定を上回る注文を受け、増産を進めても供給できる数量に限りがあるため、日本ケミファは対象の包装が品薄になる可能性を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149036F1020",
+          "product_name": "カルバン錠２５",
+          "maker": "日本ケミファ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100錠",
+              "unified_product_code": "171686218",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、9月のメーカー資料）",
+                "note": "統一商品コード 171686218、販売包装単位コード 14987171686215。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "9月の原文で、次回の入荷は10月上旬の見込みでした。対象包装に関する当時の案内です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nihon-chemiphar-valaciclovir500-limited-202609",
+      "maker": "日本ケミファ",
+      "title": "バラシクロビル錠500mg「ケミファ」 製品供給に関するお知らせ",
+      "url": "https://www.nc-medical.com/product_topics/p5ib9100000060hz-att/p5ib9100000060in.pdf",
+      "announced_at": "2026-09",
+      "listed_at": "2026-09-15",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ee5dc7834fe9a890effa57a8a25d76e0023437ebf654e765cc537e67cf2eea73",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "想定を上回る注文を受け、増産を進めても供給できる数量に限りがあるため、日本ケミファは対象の包装が品薄になる可能性を案内しました。",
+      "targets": [
+        {
+          "yj_code": "6250019F1217",
+          "product_name": "バラシクロビル錠５００ｍｇ「ケミファ」",
+          "maker": "日本ケミファ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "42錠",
+              "unified_product_code": "171776100",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、9月のメーカー資料）",
+                "note": "統一商品コード 171776100、販売包装単位コード 14987171776107。"
+              }
+            }
+          ],
+          "seller": "日本ケミファ"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "9月の原文で、次回の入荷は10月上旬の見込みでした。対象包装に関する当時の案内です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "npi-tamsulosin-chemiphar-route-202601",
+      "maker": "日本薬品工業",
+      "title": "タムスロシン塩酸塩OD錠0.2mg「ケミファ」 製品供給に関するお知らせ",
+      "url": "https://www.nc-medical.com/product_topics/f4bj0h000000es1m-att/f4bj0h000000es2a.pdf",
+      "announced_at": "2026-01",
+      "listed_at": "2026-01-27",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "93b556fdbdeda2572b9f982ca2e336b47a2097c3fcb2fd51ad66bb31992f5e73",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "販売元の日本ケミファは、限定出荷中に同社在庫がひっ迫し、さらに出荷量が減る見込みと案内しました。",
+      "targets": [
+        {
+          "yj_code": "2590008F2057",
+          "product_name": "タムスロシン塩酸塩ＯＤ錠０．２ｍｇ「ケミファ」",
+          "maker": "日本薬品工業",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "140錠",
+              "unified_product_code": "171581124",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、1月のメーカー資料）",
+                "note": "統一商品コード 171581124、販売包装単位コード 14987171581121。"
+              }
+            },
+            {
+              "package": "560錠",
+              "unified_product_code": "171581308",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、1月のメーカー資料）",
+                "note": "統一商品コード 171581308、販売包装単位コード 14987171581305。"
+              }
+            }
+          ],
+          "seller": "日本ケミファ"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "製造販売元は日本薬品工業です。1月の日本ケミファ販売分の資料と、厚労省公表の品目全体の区分・理由を分けて表示しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "tanabe-antifungal-creams-limited-202609",
+      "maker": "田辺ファーマ",
+      "title": "エクセルダームクリーム1％・オキナゾールクリーム1％ 限定出荷開始",
+      "url": "https://medical.tanabe-pharma.com/di/file/info/ifn_5727_P20626.pdf",
+      "announced_at": "2026-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "bc410833fe86de1215ca11b5fd146e2de1f879096f4093eda25702ad93ed4f53",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の限定出荷で安定供給が損なわれるおそれがあるため、田辺ファーマは2026年10月1日から限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2655707N1038",
+          "product_name": "エクセルダームクリーム１％",
+          "maker": "田辺ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10gチューブ×10",
+              "unified_product_code": "128-06998-9",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、9月のメーカー資料）",
+                "note": "統一商品コード 128-06998-9。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2655706N1041",
+          "product_name": "オキナゾールクリーム１％",
+          "maker": "田辺ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10gチューブ×20",
+              "unified_product_code": "128-30295-6",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、9月のメーカー資料）",
+                "note": "統一商品コード 128-30295-6。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "jcr-epoetin-alpha-bs-kissei-limited-202508",
+      "maker": "JCRファーマ",
+      "title": "エポエチンアルファBS注750・1500・3000シリンジと750バイアル「JCR」限定出荷",
+      "url": "https://med.kissei.co.jp/information/info122.pdf",
+      "announced_at": "2025-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "d7412dbd3e7eee7b2e1a48881e517aab799ed2004df5b57d69957d2552aa6934",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "同じ効能の製品の販売中止案内で需要の急増が見込まれ、すぐに対応できないため、キッセイ薬品工業は特約店向けの限定出荷を始めると案内しました。",
+      "targets": [
+        {
+          "yj_code": "3999427G1029",
+          "product_name": "エポエチンアルファＢＳ注７５０シリンジ「ＪＣＲ」",
+          "maker": "JCRファーマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10シリンジ",
+              "unified_product_code": "051086015",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、8月のメーカー資料）",
+                "note": "統一商品コード 051086015、販売包装単位コード 14987051086012。"
+              }
+            }
+          ],
+          "seller": "キッセイ薬品工業"
+        },
+        {
+          "yj_code": "3999427G2025",
+          "product_name": "エポエチンアルファＢＳ注１５００シリンジ「ＪＣＲ」",
+          "maker": "JCRファーマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10シリンジ",
+              "unified_product_code": "051086213",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、8月のメーカー資料）",
+                "note": "統一商品コード 051086213、販売包装単位コード 14987051086210。"
+              }
+            }
+          ],
+          "seller": "キッセイ薬品工業"
+        },
+        {
+          "yj_code": "3999427G3021",
+          "product_name": "エポエチンアルファＢＳ注３０００シリンジ「ＪＣＲ」",
+          "maker": "JCRファーマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10シリンジ",
+              "unified_product_code": "051086411",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、8月のメーカー資料）",
+                "note": "統一商品コード 051086411、販売包装単位コード 14987051086418。"
+              }
+            }
+          ],
+          "seller": "キッセイ薬品工業"
+        },
+        {
+          "yj_code": "3999427A1026",
+          "product_name": "エポエチンアルファＢＳ注７５０「ＪＣＲ」",
+          "maker": "JCRファーマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10バイアル",
+              "unified_product_code": "051087012",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、8月のメーカー資料）",
+                "note": "統一商品コード 051087012、販売包装単位コード 14987051087019。"
+              }
+            }
+          ],
+          "seller": "キッセイ薬品工業"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文は既存採用先への供給を優先し、代替としての新規採用・増量の受注を辞退すると案内しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sumitomo-arotinolol-limited-202301",
+      "maker": "住友ファーマ",
+      "title": "アロチノロール塩酸塩錠5mg・10mg「DSP」限定出荷のご案内",
+      "url": "https://sumitomo-pharma.jp/hubfs/product/package_notification/2023/arotinolol_s_package_202301.pdf",
+      "announced_at": "2023-01",
+      "listed_at": "2023-01-25",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "a9478e836006388ae92d94e84d41d48ce545f924428857a25abf0afbfbfbbcb7",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社のアロチノロール製剤の限定出荷を受けて問い合わせが増え、切替や新規採用に応じられる数量をすぐに確保できないため、住友ファーマが限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2123014F1094",
+          "product_name": "アロチノロール塩酸塩錠５ｍｇ「ＤＳＰ」",
+          "maker": "住友ファーマ",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": []
+        },
+        {
+          "yj_code": "2123014F2201",
+          "product_name": "アロチノロール塩酸塩錠１０ｍｇ「ＤＳＰ」",
+          "maker": "住友ファーマ",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": []
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2023年1月の開始案内では、同社の両規格の全包装が対象です。この原文には個々の統一商品コードの記載がありません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sumitomo-sediel5-limited-202608",
+      "maker": "住友ファーマ",
+      "title": "セディール錠5mg PTP100錠の限定出荷",
+      "url": "https://sumitomo-pharma.jp/hubfs/product/package_notification/2026/sediel_gentei_20260901.pdf",
+      "announced_at": "2026-08",
+      "listed_at": "2026-09-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "96484f862a466fb53034247eb40f84d65cba34f3e4e5110073a569de4b33eead",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社のタンドスピロン製剤の供給不安に伴って問い合わせが増え、切替や新規採用に応じられる量を直ちに確保できないため、住友ファーマは既採用先への供給を優先し限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "1129008F1039",
+          "product_name": "セディール錠５ｍｇ",
+          "maker": "住友ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "116-02102-9",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、8月のメーカー資料）",
+                "note": "統一商品コード 116-02102-9。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sumitomo-tagamet200-ptp100-end-202605",
+      "maker": "住友ファーマ",
+      "title": "タガメット錠200mg PTP100錠 販売中止予定のご案内",
+      "url": "https://sumitomo-pharma.jp/hubfs/product/package_notification/2026/tagamet_chushi_20260512.pdf",
+      "announced_at": "2026-05",
+      "listed_at": "2026-05-12",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "54c7c3ad9c439a1793c47bbb92062e2b1033015a4bb7dc8d6b9d42309cd8415d",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "住友ファーマは、対象のPTP100錠を同社在庫の出荷終了に合わせて販売中止にする予定と案内しました。原文に詳細な理由は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "2325001F1211",
+          "product_name": "タガメット錠２００ｍｇ",
+          "maker": "住友ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "116-23431-3",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年1月頃（2026年5月資料での出荷終了見込み）"
+                  }
+                ],
+                "note": "統一商品コード 116-23431-3。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://sumitomo-pharma.jp/hubfs/product/package_notification/2026/tagamet_chushi_20260512.pdf",
+          "target_yj_codes": [
+            "2325001F1211"
+          ],
+          "type": "住友ファーマが原文で示した参考代替候補品",
+          "products": [
+            {
+              "name": "ファモチジンＤ錠２０ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "2325003F4147",
+              "scope": "沢井製薬のファモチジンD錠20mg。成分・規格が異なります。"
+            },
+            {
+              "name": "ファモチジン錠２０ｍｇ「クニヒロ」",
+              "maker": "皇漢堂製薬",
+              "yj_code": "2325003F2365",
+              "scope": "皇漢堂製薬のファモチジン錠20mg。成分・規格が異なります。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2025年3月の同社案内に、他社シメチジン製剤の販売中止に伴う需要増と、PTP100錠の在庫量を十分確保できない事情の記載があります。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "sumitomo-tagamet200-ptp100-limited-202503",
+      "maker": "住友ファーマ",
+      "title": "タガメット錠200mg PTP100錠 出荷量減少に関するご案内",
+      "url": "https://sumitomo-pharma.jp/hubfs/product/package_notification/2025/tagamet_gentei_20250312.pdf",
+      "announced_at": "2025-03",
+      "listed_at": "2025-03-12",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "9a3e8706989edc8f5aaac16cda797e34f69c9a1a71b26594e68b7c611cafac09",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社シメチジン製剤の販売中止に伴う需要増で限定出荷を続けていたところ、十分な在庫量を確保できなくなり、住友ファーマはPTP100錠の出荷量が減ると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2325001F1211",
+          "product_name": "タガメット錠２００ｍｇ",
+          "maker": "住友ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "116-23431-3",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、3月のメーカー資料）",
+                "note": "統一商品コード 116-23431-3。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://sumitomo-pharma.jp/hubfs/product/package_notification/2025/tagamet_gentei_20250312.pdf",
+          "target_yj_codes": [
+            "2325001F1211"
+          ],
+          "type": "住友ファーマが原文で示した参考代替候補品",
+          "products": [
+            {
+              "name": "ファモチジンＤ錠２０ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "2325003F4147",
+              "scope": "沢井製薬のファモチジンD錠20mg。成分・規格が異なります。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "nipro-ascorbic-100-and-500-limited-202206",
+      "maker": "ニプロ",
+      "title": "アスコルビン酸注100mg・500mg「NP」 他社出荷調整に伴う出荷割当の案内",
+      "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/0685g00000HlTZfAAN",
+      "announced_at": "2022-06",
+      "listed_at": "2022-06-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "b733e96b474190b4598d8cfebff5435f7ab7613adab2bf4175ffa0d4c881b585",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社の同じ効能の製品が出荷調整となって需要の増加が見込まれたため、ニプロは既採用先への供給を優先し、新規注文の辞退と出荷数割当を始めると案内しました。",
+      "targets": [
+        {
+          "yj_code": "3140400A2219",
+          "product_name": "アスコルビン酸注１００ｍｇ「ＮＰ」",
+          "maker": "ニプロ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1mL×50管",
+              "unified_product_code": "190-04012-1",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 190-04012-1。"
+              }
+            },
+            {
+              "package": "1mL×100管",
+              "unified_product_code": "190-04013-8",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 190-04013-8。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3140400A4203",
+          "product_name": "アスコルビン酸注５００ｍｇ「ＮＰ」",
+          "maker": "ニプロ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "2mL×50管",
+              "unified_product_code": "190-04032-9",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 190-04032-9。"
+              }
+            },
+            {
+              "package": "2mL×100管",
+              "unified_product_code": "190-04033-6",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 190-04033-6。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "ニプロの2026年11月の資料にも、100mgと500mgは限定出荷を継続すると記載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nipro-ascorbic-100-continuation-202611",
+      "maker": "ニプロ",
+      "title": "アスコルビン酸注「NP」の供給について（100mg・500mgの継続記載）",
+      "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001Uj4aLIAR",
+      "announced_at": "2026-11",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "51fb559cd01eb8a4feaebba400db73aaad8bbecfc1c1973f1fb7d56d4fb9d2e8",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "ニプロは2026年11月の1gの案内で、100mgと500mgも限定出荷を継続すると記載しています。",
+      "targets": [
+        {
+          "yj_code": "3140400A2219",
+          "product_name": "アスコルビン酸注１００ｍｇ「ＮＰ」",
+          "maker": "ニプロ",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": []
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "この資料の包装表と新たな理由の説明は1gが対象です。100mg・500mgの包装は2022年6月の案内をご確認ください。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nipro-ascorbic-500-continuation-202611",
+      "maker": "ニプロ",
+      "title": "アスコルビン酸注「NP」の供給について（100mg・500mgの継続記載）",
+      "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001Uj4aLIAR",
+      "announced_at": "2026-11",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "51fb559cd01eb8a4feaebba400db73aaad8bbecfc1c1973f1fb7d56d4fb9d2e8",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "ニプロは2026年11月の1gの案内で、100mgと500mgも限定出荷を継続すると記載しています。",
+      "targets": [
+        {
+          "yj_code": "3140400A4203",
+          "product_name": "アスコルビン酸注５００ｍｇ「ＮＰ」",
+          "maker": "ニプロ",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": []
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "この資料の包装表と新たな理由の説明は1gが対象です。100mg・500mgの包装は2022年6月の案内をご確認ください。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "alfresa-captopril-granules-discontinued-202510",
+      "maker": "アルフレッサ ファーマ",
+      "title": "カプトリル細粒5％ 100g瓶の販売中止のご案内",
+      "url": "https://www.alfresa-pharma.co.jp/news/pdflink/NEWS_ID/2162/",
+      "announced_at": "2025-10",
+      "listed_at": "2025-10-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "9ec848fdef6f6dc12b1fa01345c3cb2e324119f815ed4063ba23551e574cdb5a",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "アルフレッサ ファーマは、2025年1月の限定出荷案内後、100g瓶を在庫消尽後に販売中止と案内しました。詳細な理由は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "2144001C1074",
+          "product_name": "カプトリル細粒５％",
+          "maker": "アルフレッサ ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100g瓶",
+              "unified_product_code": "274-13317-6",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年5月（2025年10月資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 274-13317-6。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.alfresa-pharma.co.jp/news/pdflink/NEWS_ID/2162/",
+          "target_yj_codes": [
+            "2144001C1074"
+          ],
+          "type": "アルフレッサ ファーマの原文に記載の代替候補品",
+          "products": [
+            {
+              "name": "カプトリル錠１２．５ｍｇ",
+              "maker": "アルフレッサ ファーマ",
+              "yj_code": "2144001F1020",
+              "scope": "PTP100錠（274-13320-6）。元の製品は細粒です。"
+            },
+            {
+              "name": "カプトリル錠２５ｍｇ",
+              "maker": "アルフレッサ ファーマ",
+              "yj_code": "2144001F2026",
+              "scope": "PTP100錠（274-13326-8）。元の製品は細粒です。"
+            },
+            {
+              "name": "カプトリル－Ｒカプセル１８．７５ｍｇ",
+              "maker": "アルフレッサ ファーマ",
+              "yj_code": "2144001N1059",
+              "scope": "PTP100カプセル（274-13312-1）。効能・効果および用法・用量の一部が異なると原文に明記されています。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2025年10月の原文における経過措置満了予定は2027年3月末です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "alfresa-chloromycetin50-limited-202408",
+      "maker": "アルフレッサ ファーマ",
+      "title": "クロロマイセチン錠50 PTP100錠の限定出荷",
+      "url": "https://www.alfresa-pharma.co.jp/news/pdflink/NEWS_ID/2032/",
+      "announced_at": "2024-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "8a63247995620e7ba8a611a62fb625ed706efb8abc1d06cc80ac8a690024a121",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "原薬の入荷が遅れ、安定供給に支障が出る見込みとなったため、アルフレッサ ファーマが対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "6151001F1030",
+          "product_name": "クロロマイセチン錠５０",
+          "maker": "アルフレッサ ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "274-12886-8",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 274-12886-8。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
