@@ -30651,6 +30651,810 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に、この規格で承諾を得た代替候補の記載はありません。"
       ]
+    },
+    {
+      "id": "takata-polaramine-powder-limited-202608",
+      "maker": "高田製薬",
+      "title": "ポララミン散1％ 供給に関するお知らせとお詫び",
+      "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000c1ox-att/POLARAMINE.pdf",
+      "announced_at": "2026-08",
+      "listed_at": "2026-08-25",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "5f4dff0f49afe9ab18262078245aeef3be74453810437ae2f5f3827f1a4f3f7d",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "高田製薬は、生産上の事情で既存採用先への供給を優先するため、対象包装の限定出荷を案内しました。原文に生産上の事情の詳細は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "4419002B1033",
+          "product_name": "ポララミン散１％",
+          "maker": "高田製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "バラ100g",
+              "unified_product_code": "120-44110-3",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 120-44110-3、販売包装単位コード 14987120441100。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "takata-aciclovir-syrup-limited-202601",
+      "maker": "高田製薬",
+      "title": "アシクロビルシロップ8％「タカタ」 供給に関するお知らせとお詫び",
+      "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000a8nu-att/ASIK.pdf",
+      "announced_at": "2026-01",
+      "listed_at": "2026-01-13",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "94c47e87b47b3f6e1fbef4fc03a1c7f54bf303b72c4a7bcdf3caec749c89d5f6",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "高田製薬は、生産上の事情で既存採用先への供給を優先するため、対象包装の限定出荷を案内しました。原文に生産上の事情の詳細は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "6250002Q3045",
+          "product_name": "アシクロビルシロップ８％「タカタ」",
+          "maker": "高田製薬",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "100mL",
+              "unified_product_code": "120-62560-2",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、1月のメーカー資料）",
+                "note": "統一商品コード 120-62560-2。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "takata-azithromycin-granules-sp60-limited-202608",
+      "maker": "高田製薬",
+      "title": "アジスロマイシン小児用細粒10％「タカタ」 SP1g×60包の限定出荷",
+      "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000c1jb-att/Azithromycin.pdf",
+      "announced_at": "2026-08",
+      "listed_at": "2026-08-25",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "e8200d6c5268bc531d19b1cffa29c71c26e443c79dad64618ca509aff28d82bc",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "高田製薬は、生産上の事情で既存採用先への供給を優先するため、対象包装の限定出荷を案内しました。原文に生産上の事情の詳細は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "6149004C1080",
+          "product_name": "アジスロマイシン小児用細粒１０％「タカタ」",
+          "maker": "高田製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "SP1g×60包",
+              "unified_product_code": "120-61461-3",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 120-61461-3、販売包装単位コード 14987120614610。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "案内の対象はSP1g×60包です。厚労省公表の品目単位の理由は原材料調達上の問題です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "takata-terbinafine125-limited-202608",
+      "maker": "高田製薬",
+      "title": "テルビナフィン錠125mg「タカタ」 供給に関するお知らせとお詫び",
+      "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000c1rq-att/Terbinafine.pdf",
+      "announced_at": "2026-08",
+      "listed_at": "2026-08-25",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "8679b02c040b41dbe89705620085193cf4f25926d898e8c5b9071e5f3c6aca7b",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "高田製薬は、生産上の事情で既存採用先への供給を優先するため、対象包装の限定出荷を案内しました。原文に生産上の事情の詳細は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "6290005F1342",
+          "product_name": "テルビナフィン錠１２５ｍｇ「タカタ」",
+          "maker": "高田製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP10錠×10",
+              "unified_product_code": "120-10310-0",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 120-10310-0、販売包装単位コード 14987120103107。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年8月資料では限定出荷の解除予定を2026年11月末としています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "takata-pyrethia5-limited-202608",
+      "maker": "高田製薬",
+      "title": "ピレチア錠5mg 供給に関するお知らせとお詫び",
+      "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000boo7-att/PYRETHIA.pdf",
+      "announced_at": "2026-08",
+      "listed_at": "2026-08-04",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "d1df05db055f6176ea176eb817fcb50a0398ff33db1b5c0f7076a3ad2abeebcf",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "高田製薬は、生産上の事情で既存採用先への供給を優先するため、対象包装の限定出荷を案内しました。原文に生産上の事情の詳細は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "4413002F1031",
+          "product_name": "ピレチア錠（５ｍｇ）",
+          "maker": "高田製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "バラ100錠",
+              "unified_product_code": "120-44161-5",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 120-44161-5、販売包装単位コード 14987120441612。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "takata-fexofenadine60-discontinued-202506",
+      "maker": "高田製薬",
+      "title": "フェキソフェナジン塩酸塩錠60mg「タカタ」 製造販売中止のご案内",
+      "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b00000096z8-att/FEKISOFENAJINS.pdf",
+      "announced_at": "2025-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "c1e1ac3174d601170ec51e11e161b9a711d2031be25a5cba5a2c8ae378b3b54b",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "高田製薬は諸般の事情で製造販売を中止すると案内しました。対象は60mgのPTP10錠×10です。",
+      "targets": [
+        {
+          "yj_code": "4490023F1288",
+          "product_name": "フェキソフェナジン塩酸塩錠６０ｍｇ「タカタ」",
+          "maker": "高田製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP10錠×10",
+              "unified_product_code": "120-44930-7",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2025年6月（同月のメーカー資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 120-44930-7、販売包装単位コード 14987120449304。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b00000096z8-att/FEKISOFENAJINS.pdf",
+          "target_yj_codes": [
+            "4490023F1288"
+          ],
+          "type": "高田製薬の原文に明記された代替品",
+          "products": [
+            {
+              "name": "フェキソフェナジン塩酸塩錠６０ｍｇ「ＳＡＮＩＫ」",
+              "maker": "Meファルマ",
+              "yj_code": "4490023F1091",
+              "scope": "原文は同規格の「SANIK」PTP10錠×10（376-55671-2）を明記。当時の原文は日医工、厚労省2026年11月16日版の製造販売元はMeファルマです。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年4月のメーカー資料では、この包装の経過措置期間が2027年3月末まで延長されたと案内しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "takata-fluconazole50-limited-202510",
+      "maker": "高田製薬",
+      "title": "フルコナゾールカプセル50mg「タカタ」 供給に関するお知らせとお詫び",
+      "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000009sb9-att/FURUKONA.pdf",
+      "announced_at": "2025-10",
+      "listed_at": "2025-10-21",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "e026dd8a95edb8cae4025e5c169d76b08085bf0b36ef3684a770c31bb27175cb",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "高田製薬は、生産上の事情で既存採用先への供給を優先するため、対象包装の限定出荷を案内しました。原文に生産上の事情の詳細は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "6290002M1178",
+          "product_name": "フルコナゾールカプセル５０ｍｇ「タカタ」",
+          "maker": "高田製薬",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP10カプセル×5",
+              "unified_product_code": "120-10250-9",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、10月のメーカー資料）",
+                "note": "統一商品コード 120-10250-9。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000009sb9-att/FURUKONA.pdf",
+          "target_yj_codes": [
+            "6290002M1178"
+          ],
+          "type": "高田製薬の原文に明記された代替品",
+          "products": [
+            {
+              "name": "フルコナゾールカプセル５０ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "6290002M1135",
+              "scope": "沢井製薬の50mg、PTP50カプセル（080603115）。"
+            },
+            {
+              "name": "フルコナゾールカプセル５０ｍｇ「Ｆ」",
+              "maker": "富士製薬工業",
+              "yj_code": "6290002M1062",
+              "scope": "富士製薬工業の50mg、50カプセル（431167877）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "takata-montelukast10-pack-discontinued-202607",
+      "maker": "高田製薬",
+      "title": "モンテルカスト錠10mg「タカタ」 一部包装販売中止",
+      "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bls6-att/HOUSOUSYUYAKU20260703.pdf",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-03",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "60f10df98a1b8cbfc380df8548e6cd19de0c25dfd5ca9f25717570c4287597a1",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "高田製薬は諸般の事情でPTP10錠×50を在庫限りで販売終了すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "4490026F2245",
+          "product_name": "モンテルカスト錠１０ｍｇ「タカタ」",
+          "maker": "高田製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP10錠×50",
+              "unified_product_code": "120-44714-3",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年7月中（同月のメーカー資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 120-44714-3、販売包装単位コード 14987120447140。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "同資料にはPTP10錠×10とPTP10錠×14の販売継続が記載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "takata-risperidone-granules-discontinued-202511",
+      "maker": "高田製薬",
+      "title": "リスペリドン細粒1％「タカタ」 製造販売中止のご案内",
+      "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000a0vi-att/RISPERI.pdf",
+      "announced_at": "2025-11",
+      "listed_at": "2025-11-26",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "45af27082542c55f867385d24511e68702196d071718c9d607308f8341e66221",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "高田製薬は2025年11月に対象品目の製造販売中止を案内しました。",
+      "targets": [
+        {
+          "yj_code": "1179038C1167",
+          "product_name": "リスペリドン細粒１％「タカタ」",
+          "maker": "高田製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "バラ100g",
+              "unified_product_code": "120-11720-6",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "消尽済み（2025年11月資料の記載）"
+                  }
+                ],
+                "note": "統一商品コード 120-11720-6、販売包装単位コード 14987120117203。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000a0vi-att/RISPERI.pdf",
+          "target_yj_codes": [
+            "1179038C1167"
+          ],
+          "type": "高田製薬の原文に明記された代替品",
+          "products": [
+            {
+              "name": "リスペリドン細粒１％「ヨシトミ」",
+              "maker": "全星薬品工業",
+              "yj_code": "1179038C1140",
+              "scope": "原文にある全星薬品工業製造販売・ニプロ販売の「ヨシトミ」。細粒1％の100g（190-59329-0）です。候補は厚労省2026年11月16日版では供給停止です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2025年11月時点の経過措置満了予定は2027年3月31日です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "takata-risperidone-od1-discontinued-202511",
+      "maker": "高田製薬",
+      "title": "リスペリドンOD錠1mg「タカタ」 製造販売中止のご案内",
+      "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000a0vi-att/RISPERI.pdf",
+      "announced_at": "2025-11",
+      "listed_at": "2025-11-26",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "45af27082542c55f867385d24511e68702196d071718c9d607308f8341e66221",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "高田製薬は2025年11月に対象品目の製造販売中止を案内しました。",
+      "targets": [
+        {
+          "yj_code": "1179038F5053",
+          "product_name": "リスペリドンＯＤ錠１ｍｇ「タカタ」",
+          "maker": "高田製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP10錠×10",
+              "unified_product_code": "120-11710-7",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2025年12月（2025年11月資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 120-11710-7、販売包装単位コード 14987120117104。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000a0vi-att/RISPERI.pdf",
+          "target_yj_codes": [
+            "1179038F5053"
+          ],
+          "type": "高田製薬の原文に明記された代替品",
+          "products": [
+            {
+              "name": "リスペリドン錠１ｍｇ「ヨシトミ」",
+              "maker": "全星薬品工業",
+              "yj_code": "1179038F1147",
+              "scope": "原文にある全星薬品工業製造販売・ニプロ販売の「ヨシトミ」。普通錠1mgのPTP100錠（190-59313-9）です。候補は厚労省2026年11月16日版では供給停止です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2025年11月時点の経過措置満了予定は2027年3月31日です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "takata-risperidone-od2-discontinued-202511",
+      "maker": "高田製薬",
+      "title": "リスペリドンOD錠2mg「タカタ」 製造販売中止のご案内",
+      "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000a0vi-att/RISPERI.pdf",
+      "announced_at": "2025-11",
+      "listed_at": "2025-11-26",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "45af27082542c55f867385d24511e68702196d071718c9d607308f8341e66221",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "高田製薬は2025年11月に対象品目の製造販売中止を案内しました。",
+      "targets": [
+        {
+          "yj_code": "1179038F6050",
+          "product_name": "リスペリドンＯＤ錠２ｍｇ「タカタ」",
+          "maker": "高田製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP10錠×10",
+              "unified_product_code": "120-11790-9",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2025年12月（2025年11月資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 120-11790-9、販売包装単位コード 14987120117906。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000a0vi-att/RISPERI.pdf",
+          "target_yj_codes": [
+            "1179038F6050"
+          ],
+          "type": "高田製薬の原文に明記された代替品",
+          "products": [
+            {
+              "name": "リスペリドン錠２ｍｇ「ヨシトミ」",
+              "maker": "全星薬品工業",
+              "yj_code": "1179038F2151",
+              "scope": "原文にある全星薬品工業製造販売・ニプロ販売の「ヨシトミ」。普通錠2mgのPTP100錠（190-59316-0）です。候補は厚労省2026年11月16日版では供給停止です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2025年11月時点の経過措置満了予定は2027年3月31日です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "takata-alprostadil-500-continued-202604",
+      "maker": "高田製薬",
+      "title": "アルプロスタジルアルファデクス点滴静注用500μg「タカタ」 限定出荷 第2報",
+      "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000b5ti-att/ARUPUROSUTAJIRU500.pdf",
+      "announced_at": "2026-04",
+      "listed_at": "2026-04-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "0ebd1868c18b6b2d36977f4ee5b3fa005c4e0894f3fb5404b14d225f511e72d8",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "高田製薬は生産上の事情で2025年1月29日から続く限定出荷を継続し、2026年4月の第2報では解除を2027年5月と見込んでいます。原文には生産上の事情の詳細は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "2190402D2106",
+          "product_name": "アルプロスタジルアルファデクス点滴静注用５００μｇ「タカタ」",
+          "maker": "高田製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5バイアル",
+              "unified_product_code": "120-21990-0",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、4月のメーカー資料）",
+                "note": "統一商品コード 120-21990-0、販売包装単位コード 14987120219907。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000b5ti-att/ARUPUROSUTAJIRU500.pdf",
+          "target_yj_codes": [
+            "2190402D2106"
+          ],
+          "type": "高田製薬の原文に明記された代替品",
+          "products": [
+            {
+              "name": "プロスタンディン点滴静注用５００μｇ",
+              "maker": "丸石製薬",
+              "yj_code": "2190402D2092",
+              "scope": "丸石製薬の同規格、5バイアル（211-352219）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "takata-alprostadil-20-continued-202604",
+      "maker": "高田製薬",
+      "title": "アルプロスタジルアルファデクス注射用20μg「タカタ」 限定出荷 第2報",
+      "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000b5qp-att/ARUPUROSUTAJIRU20.pdf",
+      "announced_at": "2026-04",
+      "listed_at": "2026-04-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "7c11c8b486bb6b7cf37306cceba1698cfc95d04269f6939a38be0e5b7f31b8ce",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "高田製薬は生産上の事情で2025年1月29日から続く限定出荷を継続し、2026年4月の第2報では解除を2027年5月と見込んでいます。原文には生産上の事情の詳細は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "2190402D3080",
+          "product_name": "アルプロスタジルアルファデクス注射用２０μｇ「タカタ」",
+          "maker": "高田製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10バイアル",
+              "unified_product_code": "120-21980-1",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、4月のメーカー資料）",
+                "note": "統一商品コード 120-21980-1、販売包装単位コード 14987120219808。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000b5qp-att/ARUPUROSUTAJIRU20.pdf",
+          "target_yj_codes": [
+            "2190402D3080"
+          ],
+          "type": "高田製薬の原文に明記された代替品",
+          "products": [
+            {
+              "name": "プロスタンディン注射用２０μｇ",
+              "maker": "丸石製薬",
+              "yj_code": "2190402D3064",
+              "scope": "丸石製薬の同規格、10バイアル（211-352110）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "takata-seapara-limited-202507",
+      "maker": "高田製薬",
+      "title": "シーパラ注 供給に関するお知らせとお詫び",
+      "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b00000095rt-att/SIPARA.pdf",
+      "announced_at": "2025-07",
+      "listed_at": "2025-07-03",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "d06a879e11334dd88c23f3974c7cd0e09ca56b367fa464df9ee6d4073aa43403",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造委託先のネオクリティケア製薬で製造が遅れ、供給が追い付かないため、高田製薬は2mL×100管を限定出荷の対象に追加しました。",
+      "targets": [
+        {
+          "yj_code": "3179507A1020",
+          "product_name": "シーパラ注",
+          "maker": "高田製薬",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "2mL×100管",
+              "unified_product_code": "120-31960-0",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、7月のメーカー資料）",
+                "note": "統一商品コード 120-31960-0。"
+              }
+            },
+            {
+              "package": "2mL×10管",
+              "unified_product_code": "120-31961-7",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、7月のメーカー資料）",
+                "note": "統一商品コード 120-31961-7。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "別紙によると2mL×10管は2025年6月13日から、2mL×100管は2025年7月3日から限定出荷です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "takata-lidocaine-iv2-limited-202411",
+      "maker": "高田製薬",
+      "title": "リドカイン静注液2％「タカタ」 供給に関するお知らせとお詫び",
+      "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000007x0o-att/RIDOKAIN.pdf",
+      "announced_at": "2024-11",
+      "listed_at": "2024-11-13",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "6da7988c9f285ba0317ca5d97dd6865f33554e3339b3797186bd7fb083186286",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "高田製薬は、生産上の事情で既存採用先への供給を優先するため、対象包装の限定出荷を案内しました。原文に生産上の事情の詳細は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "1214401A5049",
+          "product_name": "リドカイン静注液２％「タカタ」",
+          "maker": "高田製薬",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "5mL×10管",
+              "unified_product_code": "120-12570-6",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、11月のメーカー資料）",
+                "note": "統一商品コード 120-12570-6。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文は2024年11月の開始を案内した資料です。そこで示された2025年8月の解除予定は経過しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
