@@ -12813,6 +12813,952 @@
         "対象包装の限定出荷は2026年11月9日版の日本ジェネリック供給一覧にも記載されています。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "hisamitsu-topical-discontinued-202604",
+      "maker": "久光製薬",
+      "title": "久光製薬の外用剤7品目の販売中止と代替候補",
+      "url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
+      "announced_at": "2026-04",
+      "listed_at": "2026-04-03",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "e31f085027aa2ed41bfbbfebce48c5f8d1e81fb80a478b3de8f890ec4327a12b",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "久光製薬は対象包装を在庫限りで販売中止と案内しました。具体的な販売中止理由の記載はありません。",
+      "targets": [
+        {
+          "yj_code": "2649729N1053",
+          "product_name": "セクタークリーム３％",
+          "maker": "久光製薬",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "25g×10本",
+              "unified_product_code": "188413012",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月見込み（4月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 188413012、販売包装単位コード 14987188413019。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2649729Q1041",
+          "product_name": "セクターゲル３％",
+          "maker": "久光製薬",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "25g×10本",
+              "unified_product_code": "188414019",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月見込み（4月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 188414019、販売包装単位コード 14987188414016。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2649734S3042",
+          "product_name": "ナボールパップ７０ｍｇ",
+          "maker": "久光製薬",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "70枚（7枚/袋×10袋）",
+              "unified_product_code": "188421178",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月見込み（4月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 188421178、販売包装単位コード 14987188421175。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2659708R1050",
+          "product_name": "ボレースプレー１％",
+          "maker": "久光製薬",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "10mL×10本",
+              "unified_product_code": "188466018",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月見込み（4月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 188466018、販売包装単位コード 14987188466015。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2646729M1048",
+          "product_name": "エクラー軟膏０．３％",
+          "maker": "久光製薬",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "5g×10本",
+              "unified_product_code": "188492017",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月見込み（4月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 188492017、販売包装単位コード 14987188492014。"
+              }
+            },
+            {
+              "package": "10g×10本",
+              "unified_product_code": "188492031",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月見込み（4月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 188492031、販売包装単位コード 14987188492038。"
+              }
+            },
+            {
+              "package": "500gボトル",
+              "unified_product_code": "188492055",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月見込み（4月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 188492055、販売包装単位コード 14987188492052。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2646729N1043",
+          "product_name": "エクラークリーム０．３％",
+          "maker": "久光製薬",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "5g×10本",
+              "unified_product_code": "188492215",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月見込み（4月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 188492215、販売包装単位コード 14987188492212。"
+              }
+            },
+            {
+              "package": "10g×10本",
+              "unified_product_code": "188492239",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月見込み（4月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 188492239、販売包装単位コード 14987188492236。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2646729Q1031",
+          "product_name": "エクラーローション０．３％",
+          "maker": "久光製薬",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "10g×10本",
+              "unified_product_code": "188490914",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月見込み（4月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 188490914、販売包装単位コード 14987188490911。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
+          "target_yj_codes": [
+            "2649729N1053"
+          ],
+          "type": "久光製薬がセクタークリーム・ゲルの対象包装に共通して挙げた候補です。成分または剤形が異なります。",
+          "products": [
+            {
+              "name": "セクターローション３％",
+              "maker": "久光製薬",
+              "yj_code": "2649729Q2030",
+              "scope": "100mL×10本（188415160）"
+            },
+            {
+              "name": "ナボールゲル１％",
+              "maker": "久光製薬",
+              "yj_code": "2649734Q1050",
+              "scope": "50g×10本（188425121）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        },
+        {
+          "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
+          "target_yj_codes": [
+            "2649729Q1041"
+          ],
+          "type": "久光製薬がセクタークリーム・ゲルの対象包装に共通して挙げた候補です。成分または剤形が異なります。",
+          "products": [
+            {
+              "name": "セクターローション３％",
+              "maker": "久光製薬",
+              "yj_code": "2649729Q2030",
+              "scope": "100mL×10本（188415160）"
+            },
+            {
+              "name": "ナボールゲル１％",
+              "maker": "久光製薬",
+              "yj_code": "2649734Q1050",
+              "scope": "50g×10本（188425121）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        },
+        {
+          "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
+          "target_yj_codes": [
+            "2649734S3042"
+          ],
+          "type": "久光製薬が70mgの対象包装に対して挙げた候補です。候補には規格・成分が異なる製剤が含まれます。",
+          "products": [
+            {
+              "name": "ジクロフェナクＮａパップ７０ｍｇ「ラクール」",
+              "maker": "三友薬品",
+              "yj_code": "2649734S3077",
+              "scope": "280枚（7枚/袋×40袋）（435443014）"
+            },
+            {
+              "name": "ナボールパップ１４０ｍｇ",
+              "maker": "久光製薬",
+              "yj_code": "2649734S4049",
+              "scope": "280枚（7枚/袋×40袋）（188421284）"
+            },
+            {
+              "name": "モーラスパップ３０ｍｇ",
+              "maker": "久光製薬",
+              "yj_code": "2649729S1154",
+              "scope": "70枚（188411070）、210枚（188411216）、840枚（188411841）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        },
+        {
+          "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
+          "target_yj_codes": [
+            "2659708R1050"
+          ],
+          "type": "久光製薬がスプレーの対象包装に対して挙げた別剤形です。ボレー外用液1％については2026年9月に在庫限りで販売中止する別案内が出ています。",
+          "products": [
+            {
+              "name": "ボレークリーム１％",
+              "maker": "久光製薬",
+              "yj_code": "2659708N1066",
+              "scope": "10g×20本（188463024）"
+            },
+            {
+              "name": "ボレー外用液１％",
+              "maker": "久光製薬",
+              "yj_code": "2659708Q1054",
+              "scope": "10mL×20本（188465028）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        },
+        {
+          "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
+          "target_yj_codes": [
+            "2646729M1048"
+          ],
+          "type": "久光製薬がこの剤形の対象包装に対して挙げた候補です。成分・濃度などは製剤ごとに異なります。",
+          "products": [
+            {
+              "name": "リンデロン－Ｖ軟膏０．１２％",
+              "maker": "シオノギファーマ",
+              "yj_code": "2646701M2156",
+              "scope": "5gチューブ×10（087003604）、5gチューブ×50（087003611）、10gチューブ×50（087003628）、200g瓶（087003598）"
+            },
+            {
+              "name": "メサデルム軟膏０．１％",
+              "maker": "岡山大鵬薬品",
+              "yj_code": "2646726M1095",
+              "scope": "5g×10（795820807）、10g×10（795820906）、100g容器（795821002）、500g容器（795821101）"
+            },
+            {
+              "name": "ボアラ軟膏０．１２％",
+              "maker": "マルホ",
+              "yj_code": "2646724M1045",
+              "scope": "5g×10（213096913）、5g×50（213096920）、10g×10（213096937）、10g×50（213096944）、100g瓶（213096951）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        },
+        {
+          "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
+          "target_yj_codes": [
+            "2646729N1043"
+          ],
+          "type": "久光製薬がこの剤形の対象包装に対して挙げた候補です。成分・濃度などは製剤ごとに異なります。",
+          "products": [
+            {
+              "name": "リンデロン－Ｖクリーム０．１２％",
+              "maker": "シオノギファーマ",
+              "yj_code": "2646701N2135",
+              "scope": "5gチューブ×10（087003703）、5gチューブ×50（087003710）、10gチューブ×50（087003727）、30gチューブ×5（087010565）"
+            },
+            {
+              "name": "メサデルムクリーム０．１％",
+              "maker": "岡山大鵬薬品",
+              "yj_code": "2646726N1090",
+              "scope": "5g×10（795821200）、10g×10（795821309）、100g容器（795821408）、500g容器（795821507）"
+            },
+            {
+              "name": "ボアラクリーム０．１２％",
+              "maker": "マルホ",
+              "yj_code": "2646724N1040",
+              "scope": "5g×10（213097712）、5g×50（213097729）、10g×10（213097736）、10g×50（213097743）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        },
+        {
+          "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260403.pdf",
+          "target_yj_codes": [
+            "2646729Q1031"
+          ],
+          "type": "久光製薬がこの剤形の対象包装に対して挙げた候補です。成分・濃度などは製剤ごとに異なります。",
+          "products": [
+            {
+              "name": "リンデロン－Ｖローション",
+              "maker": "シオノギファーマ",
+              "yj_code": "2646701Q1038",
+              "scope": "10mL瓶×10（087028997）"
+            },
+            {
+              "name": "メサデルムローション０．１％",
+              "maker": "岡山大鵬薬品",
+              "yj_code": "2646726Q1046",
+              "scope": "10g容器×10（795821606）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "経過措置期間は別途案内すると記載されています。"
+      ]
+    },
+    {
+      "id": "sawai-dilazep-202608",
+      "maker": "沢井製薬",
+      "title": "ジラゼプ塩酸塩錠50mg「サワイ」の限定出荷と代替候補",
+      "url": "https://med.sawai.co.jp/file/pr27_129_2.pdf",
+      "announced_at": "2026-08",
+      "listed_at": "2026-08-17",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "a198afce0047bc2189f18cf56ebc50382160c9873cb54cfcc3ea4ffb5d5ca85a",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造工場の生産能力が逼迫して安定供給が難しくなったため、メーカーは既採用施設への供給を優先し、在庫消尽まで限定出荷と案内しています。",
+      "targets": [
+        {
+          "yj_code": "2171005F1335",
+          "product_name": "ジラゼプ塩酸塩錠５０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080303718",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年1月見込み（8月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 080303718、販売包装単位コード 14987080303715。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr27_129_2.pdf",
+          "target_yj_codes": [
+            "2171005F1335"
+          ],
+          "type": "沢井製薬が対象製品と同じ規格に対して原文で明記した候補です。",
+          "products": [
+            {
+              "name": "コメリアンコーワ錠５０",
+              "maker": "興和",
+              "yj_code": "2171005F1068",
+              "scope": "PTP100錠（770580108）、PTP500錠（770580207）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "メーカーは在庫消尽後の一時供給停止と、再開時期の別途案内を示しています。"
+      ]
+    },
+    {
+      "id": "sawai-etodolac-202608",
+      "maker": "沢井製薬",
+      "title": "エトドラク錠200mg「SW」の限定出荷と代替候補",
+      "url": "https://med.sawai.co.jp/file/pr27_266_2.pdf",
+      "announced_at": "2026-08",
+      "listed_at": "2026-08-17",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "342bfdcd5abc0bf440da327f354380922c91b9e5a116c9f64c26ca92a771b925",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造工場の生産能力が逼迫して安定供給が難しくなったため、メーカーは既採用施設への供給を優先し、在庫消尽まで限定出荷と案内しています。",
+      "targets": [
+        {
+          "yj_code": "1149032F2171",
+          "product_name": "エトドラク錠２００ｍｇ「ＳＷ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080100812",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月見込み（8月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 080100812、販売包装単位コード 14987080100819。"
+              }
+            },
+            {
+              "package": "PTP1000錠",
+              "unified_product_code": "080100836",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年12月見込み（8月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 080100836、販売包装単位コード 14987080100833。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr27_266_2.pdf",
+          "target_yj_codes": [
+            "1149032F2171"
+          ],
+          "type": "沢井製薬が対象製品と同じ規格に対して原文で明記した候補です。",
+          "products": [
+            {
+              "name": "ハイペン錠２００ｍｇ",
+              "maker": "日本新薬",
+              "yj_code": "1149032F2023",
+              "scope": "PTP100錠（173000760）、PTP500錠（173000777）、バラ500錠（173000869）、PTP700錠（173000999）、PTP1000錠（173000784）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "メーカーは在庫消尽後の一時供給停止と、再開時期の別途案内を示しています。"
+      ]
+    },
+    {
+      "id": "sawai-omeprazole-202608",
+      "maker": "沢井製薬",
+      "title": "オメプラゾール錠20「SW」の限定出荷と代替候補",
+      "url": "https://med.sawai.co.jp/file/pr27_1016_2.pdf",
+      "announced_at": "2026-08",
+      "listed_at": "2026-08-27",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "af59a964c54845aa67204ff401fd5aaa3b7c5a3da7b4458cdf26be9d0bf17fc9",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "出荷前の製品試験で規格を満たさない結果が出て該当ロットを出荷できず、安定供給が難しくなったため、既採用施設を優先する案内です。",
+      "targets": [
+        {
+          "yj_code": "2329022H1094",
+          "product_name": "オメプラゾール錠２０「ＳＷ」",
+          "maker": "メディサ新薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080957317",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年9月見込み（8月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 080957317、販売包装単位コード 14987080957314。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "080957324",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年10月見込み（8月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 080957324、販売包装単位コード 14987080957321。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "080957355",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年9月見込み（8月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 080957355、販売包装単位コード 14987080957352。"
+              }
+            }
+          ],
+          "seller": "沢井製薬"
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr27_1016_2.pdf",
+          "target_yj_codes": [
+            "2329022H1094"
+          ],
+          "type": "販売元の沢井製薬が、同規格の候補として原文に明記しています。",
+          "products": [
+            {
+              "name": "オメプラゾール腸溶錠２０ｍｇ「武田テバ」",
+              "maker": "T'sファーマ",
+              "yj_code": "2329022H1221",
+              "scope": "PTP100錠（123412711）、PTP500錠（123000116）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "メーカーは在庫消尽後の一時供給停止と、再開時期の別途案内を示しています。"
+      ]
+    },
+    {
+      "id": "sawai-silodosin-202607",
+      "maker": "沢井製薬",
+      "title": "シロドシンOD錠2mg「サワイ」の限定出荷と代替候補",
+      "url": "https://med.sawai.co.jp/file/pr27_4659_1.pdf",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "25d6e8aff2f44783b2fcbe417f5a592575d4e9dccc698ea5e1afc503517bc195",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造工場の生産能力が逼迫して安定供給が難しくなったため、メーカーは既採用施設への供給を優先し、在庫消尽まで限定出荷と案内しています。",
+      "targets": [
+        {
+          "yj_code": "2590010F3131",
+          "product_name": "シロドシンＯＤ錠２ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080615118",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年2月見込み（7月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、7月のメーカー資料）",
+                "note": "統一商品コード 080615118、販売包装単位コード 14987080615115。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr27_4659_1.pdf",
+          "target_yj_codes": [
+            "2590010F3131"
+          ],
+          "type": "沢井製薬が対象製品と同じ規格に対して原文で明記した候補です。",
+          "products": [
+            {
+              "name": "シロドシンＯＤ錠２ｍｇ「ＤＳＥＰ」",
+              "maker": "第一三共エスファ",
+              "yj_code": "2590010F3034",
+              "scope": "PTP100錠（081187768）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "メーカーは在庫消尽後の一時供給停止と、再開時期の別途案内を示しています。"
+      ]
+    },
+    {
+      "id": "sawai-probucol-202608",
+      "maker": "沢井製薬",
+      "title": "プロブコール錠250mg「サワイ」の販売中止と代替候補",
+      "url": "https://med.sawai.co.jp/file/pr28_198_3.pdf",
+      "announced_at": "2026-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "af1207fca63483f98e9452062322f44580be485f3d232995684d4e8efc92dfce",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "安定供給体制の構築と生産効率の改善に向けて品目構成を見直し、沢井製薬は対象包装の販売中止を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2189008F1465",
+          "product_name": "プロブコール錠２５０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080023517",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年10月見込み（8月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 080023517、販売包装単位コード 14987080023514。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr28_198_3.pdf",
+          "target_yj_codes": [
+            "2189008F1465"
+          ],
+          "type": "メーカーが明記した別成分の候補です。用量や切替の可否は原文だけでは決められません。",
+          "products": [
+            {
+              "name": "アトルバスタチン錠５ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "2189015F1058",
+              "scope": "PTP100錠（080235019）、PTP140錠（080235071）、PTP500錠（080235026）、PTP1000錠（080235033）、バラ500錠（080235057）"
+            },
+            {
+              "name": "アトルバスタチン錠１０ｍｇ「サワイ」",
+              "maker": "沢井製薬",
+              "yj_code": "2189015F2054",
+              "scope": "PTP100錠（080236016）、PTP140錠（080236078）、PTP500錠（080236023）、PTP700錠（080236085）、PTP1000錠（080236030）、バラ500錠（080236054）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "メーカー資料の経過措置期間満了は2028年3月の予定です。"
+      ]
+    },
+    {
+      "id": "sawai-tosufloxacin-75-202607",
+      "maker": "沢井製薬",
+      "title": "トスフロキサシントシル酸塩錠75mg「サワイ」の限定出荷と代替候補",
+      "url": "https://med.sawai.co.jp/file/pr27_1271_1.pdf",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-15",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "aeeaa5c2c2368dc76a93d1a60d3fed651654d155bead917d4b989d8b8cfeae46",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "150mgの供給が難しくなったとの案内で、75mgは既採用施設への供給を優先するため特約店・販売会社への出荷を限定するとしています。",
+      "targets": [
+        {
+          "yj_code": "6241010F1080",
+          "product_name": "トスフロキサシントシル酸塩錠７５ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080560111",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、7月のメーカー資料）",
+                "note": "統一商品コード 080560111、販売包装単位コード 14987080560118。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr27_1271_1.pdf",
+          "target_yj_codes": [
+            "6241010F1080"
+          ],
+          "type": "メーカーが75mg・150mgの案内で共通して挙げた150mg錠です。75mgと150mgは規格が異なります。",
+          "products": [
+            {
+              "name": "オゼックス錠１５０",
+              "maker": "富士フイルム富山化学",
+              "yj_code": "6241010F2027",
+              "scope": "PTP100錠（4987473602114）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "原文の在庫消尽後の一時停止の記載は150mgに対するものです。"
+      ]
+    },
+    {
+      "id": "sawai-tosufloxacin-150-202607",
+      "maker": "沢井製薬",
+      "title": "トスフロキサシントシル酸塩錠150mg「サワイ」の限定出荷と代替候補",
+      "url": "https://med.sawai.co.jp/file/pr27_1271_1.pdf",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-15",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "aeeaa5c2c2368dc76a93d1a60d3fed651654d155bead917d4b989d8b8cfeae46",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "規格を満たす製剤を製造できず安定供給が難しくなったため、沢井製薬は在庫消尽後に一時供給停止する方針を案内しました。",
+      "targets": [
+        {
+          "yj_code": "6241010F2086",
+          "product_name": "トスフロキサシントシル酸塩錠１５０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080561118",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年9月見込み（7月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、7月のメーカー資料）",
+                "note": "統一商品コード 080561118、販売包装単位コード 14987080561115。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr27_1271_1.pdf",
+          "target_yj_codes": [
+            "6241010F2086"
+          ],
+          "type": "沢井製薬が対象製品と同じ規格に対して原文で明記した候補です。",
+          "products": [
+            {
+              "name": "オゼックス錠１５０",
+              "maker": "富士フイルム富山化学",
+              "yj_code": "6241010F2027",
+              "scope": "PTP100錠（4987473602114）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "メーカーは在庫消尽後の一時供給停止と、再開時期の別途案内を示しています。"
+      ]
     }
   ]
 }
