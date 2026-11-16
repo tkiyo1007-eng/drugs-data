@@ -159,6 +159,24 @@ class CollectionTests(unittest.TestCase):
         self.assertEqual(result, control)
         self.assertFalse(any('amel-di.com' in url for url, _ in transport.calls))
 
+    def test_public_institution_reprint_is_exact_and_manual_only(self):
+        url = 'https://www.city.funabashi.lg.jp/kodomo/kenkou/005/p076734_d/fil/R8_takeda.pdf'
+        config = configuration(); config['sources'] = []
+        reg = manual_registry()
+        notice = reg['notices'][0]
+        notice.update(maker='武田薬品工業', url=url)
+        transport = Transport()
+        result = mod.collect(config, reg, transport=transport, now=NOW)
+        self.assertEqual(result['items'], [])
+        self.assertEqual(transport.calls, [])
+        notice.update(url=url.replace('R8_takeda.pdf', 'other.pdf'))
+        with self.assertRaises(mod.CollectionError):
+            mod.collect(config, reg, transport=transport, now=NOW)
+        notice.update(url=url, maker='共和薬品工業')
+        with self.assertRaises(mod.CollectionError):
+            mod.collect(config, reg, transport=transport, now=NOW)
+        self.assertEqual(transport.calls, [])
+
     def test_former_automatic_confirmation_is_not_retained_for_manual_notice(self):
         reg = registry()
         first = mod.collect(configuration(), reg, transport=Transport(), now=NOW)
