@@ -22149,6 +22149,732 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "kyorin-ferring-pentasa-granules94-limited-202512",
+      "maker": "杏林製薬",
+      "title": "ペンタサ顆粒94％ ご発注に関するご協力のお願い",
+      "url": "https://www.kyorin-medicalbridge.jp/product/information/files/202512pentasa_grapology.pdf",
+      "announced_at": "2025-12",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "d2ee767b9b6c00200e1fbaecb60daeb8ab7d8cb64cb7b574e91a0246511f33de",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "世界的に需要が増え、海外製造所の造粒工程では十分に増産できないため、フェリング・ファーマと杏林製薬が対象4包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2399009D2020",
+          "product_name": "ペンタサ顆粒９４％",
+          "maker": "フェリング・ファーマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "250mg分包（0.265g×100包）",
+              "unified_product_code": "060-00818-3",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、12月のメーカー資料）",
+                "note": "統一商品コード 060-00818-3、販売包装単位コード 14987060008180。"
+              }
+            },
+            {
+              "package": "500mg分包（0.53g×100包）",
+              "unified_product_code": "060-00819-0",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、12月のメーカー資料）",
+                "note": "統一商品コード 060-00819-0、販売包装単位コード 14987060008197。"
+              }
+            },
+            {
+              "package": "1,000mg分包（1.06g×100包）",
+              "unified_product_code": "060-00820-6",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、12月のメーカー資料）",
+                "note": "統一商品コード 060-00820-6、販売包装単位コード 14987060008203。"
+              }
+            },
+            {
+              "package": "2,000mg分包（2.12g×100包）",
+              "unified_product_code": "060-00821-3",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、12月のメーカー資料）",
+                "note": "統一商品コード 060-00821-3、販売包装単位コード 14987060008210。"
+              }
+            }
+          ],
+          "seller": "杏林製薬"
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.kyorin-medicalbridge.jp/product/information/files/202512pentasa_grapology.pdf",
+          "target_yj_codes": [
+            "2399009D2020"
+          ],
+          "type": "メーカーが案内した代替薬",
+          "products": [
+            {
+              "name": "アサコール錠４００ｍｇ",
+              "maker": "ゼリア新薬工業",
+              "yj_code": "2399009F3028",
+              "scope": "100錠・500錠。現在処方中で供給減により継続投与が難しい場合の案内です。対象は潰瘍性大腸炎（重症を除く）です。"
+            },
+            {
+              "name": "リアルダ錠１２００ｍｇ",
+              "maker": "持田製薬",
+              "yj_code": "2399009F4024",
+              "scope": "56錠・224錠。現在処方中で供給減により継続投与が難しい場合の案内です。対象は潰瘍性大腸炎（重症を除く）です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2025年12月の案内では250mg・500mg分包は出荷量通常、1,000mg・2,000mg分包は出荷量減少としています。いずれも同資料では限定出荷です。",
+        "原文の通常供給再開時期は未定です。案内は顆粒94％の対象4包装に限られます。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "kyorin-ferring-pentasa-tablets-limited-202512",
+      "maker": "杏林製薬",
+      "title": "ペンタサ錠250mg・500mg ご発注に関するご協力のお願い",
+      "url": "https://www.kyorin-medicalbridge.jp/product/information/files/202512pentasa_tabapology.pdf",
+      "announced_at": "2025-12",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "2238496527e0322eb2e557aa6d6e84773c189a04e97ff589d283a8b6f7abf9bb",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "ペンタサ顆粒94％の限定出荷に伴い錠剤への需要が増えると見込まれたため、フェリング・ファーマと杏林製薬は既存の納入先を優先して錠剤の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2399009F1149",
+          "product_name": "ペンタサ錠２５０ｍｇ",
+          "maker": "フェリング・ファーマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "060-00727-8",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、12月のメーカー資料）",
+                "note": "統一商品コード 060-00727-8、販売包装単位コード 14987060007275。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "060-00728-5",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、12月のメーカー資料）",
+                "note": "統一商品コード 060-00728-5、販売包装単位コード 14987060007282。"
+              }
+            }
+          ],
+          "seller": "杏林製薬"
+        },
+        {
+          "yj_code": "2399009F2030",
+          "product_name": "ペンタサ錠５００ｍｇ",
+          "maker": "フェリング・ファーマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "060-00729-2",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、12月のメーカー資料）",
+                "note": "統一商品コード 060-00729-2、販売包装単位コード 14987060007299。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "060-00730-8",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、12月のメーカー資料）",
+                "note": "統一商品コード 060-00730-8、販売包装単位コード 14987060007305。"
+              }
+            }
+          ],
+          "seller": "杏林製薬"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文は新規採用・増量の辞退を案内しています。顆粒の案内に記載された代替薬は、この錠剤の代替候補には含めていません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "kyorin-ferring-pentasa-suppositories-limited-202507",
+      "maker": "杏林製薬",
+      "title": "ペンタサ坐剤1g ご発注に関するご協力のお願い",
+      "url": "https://www.kyorin-medicalbridge.jp/product/information/files/202507pentasa_spapology.pdf",
+      "announced_at": "2025-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "f2c3c22d4cc88d49d21b3a4ad7fe7e80cbdf1edae17fdcbe05a4e2419a50677f",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "一部ロットの品質試験で問題が見つかり、その後のロットの出荷時期が確定できなかったため、フェリング・ファーマと杏林製薬が限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2399715J1020",
+          "product_name": "ペンタサ坐剤１ｇ",
+          "maker": "フェリング・ファーマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "SP50個",
+              "unified_product_code": "060-00790-2",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、7月のメーカー資料）",
+                "note": "統一商品コード 060-00790-2、販売包装単位コード 14987060007909。"
+              }
+            },
+            {
+              "package": "SP100個",
+              "unified_product_code": "060-00791-9",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、7月のメーカー資料）",
+                "note": "統一商品コード 060-00791-9、販売包装単位コード 14987060007916。"
+              }
+            }
+          ],
+          "seller": "杏林製薬"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2025年9月の後続原文で、100個包装は10月3日から限定出荷で再開、50個包装は限定出荷を継続と案内されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "kyorin-ferring-pentasa-suppositories-resumption-202509",
+      "maker": "杏林製薬",
+      "title": "ペンタサ坐剤1g 限定出荷による出荷再開のご案内",
+      "url": "https://www.kyorin-medicalbridge.jp/product/information/files/202509pentasa_spapology.pdf",
+      "announced_at": "2025-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "028a329926c42ccce1bf71e0aa109b96d2f94c4b5b586fffac8e7ebfce3552c9",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "100個包装は、安定供給に必要な在庫が確保できていないため、2025年10月3日から限定出荷で再開すると案内されました。50個包装の限定出荷も継続するとしています。",
+      "targets": [
+        {
+          "yj_code": "2399715J1020",
+          "product_name": "ペンタサ坐剤１ｇ",
+          "maker": "フェリング・ファーマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "SP100個",
+              "unified_product_code": "060-00791-9",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "shipment_resumption",
+                    "timing": "2025年10月3日（限定出荷で再開、2025年9月の案内）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 060-00791-9、販売包装単位コード 14987060007916。"
+              }
+            }
+          ],
+          "seller": "杏林製薬"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sun-ludiomil-limited-202606",
+      "maker": "サンファーマ",
+      "title": "ルジオミール錠10mg・25mg 限定出荷のお知らせ",
+      "url": "https://jp.sunpharma.com/null/470a4c0de5dd566d7e0d925f4233955992f12cc3.pdf",
+      "announced_at": "2026-06",
+      "listed_at": "2026-06-03",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "3f5250a023899adbc14da36ffcac38d4c38a76e8493ad38ab73934639f9569c3",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の影響で需要が急増し、供給が逼迫したため、サンファーマが限定出荷の開始を案内しました。",
+      "targets": [
+        {
+          "yj_code": "1179008F1022",
+          "product_name": "ルジオミール錠１０ｍｇ",
+          "maker": "サンファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "047211537",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 047211537、販売包装単位コード 14987047211534。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "1179008F2029",
+          "product_name": "ルジオミール錠２５ｍｇ",
+          "maker": "サンファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "047211568",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 047211568、販売包装単位コード 14987047211565。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文での開始は2026年6月2日出荷分です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sun-lulicon-cream-ointment-limited-202602",
+      "maker": "サンファーマ",
+      "title": "ルリコンクリーム1％・軟膏1％ 限定出荷のお知らせ",
+      "url": "https://jp.sunpharma.com/null/7c78bc1dd11ca2b94eef5f2dbe7d0d922d5b1642.pdf",
+      "announced_at": "2026-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "bde42666ced4a12f37550dd4f167171024d9af712c1e26982fcdaab4fb29a5e8",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の影響で需要が急増し、供給が逼迫したため、サンファーマが限定出荷の開始を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2655712N1020",
+          "product_name": "ルリコンクリーム１％",
+          "maker": "サンファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10g×10本",
+              "unified_product_code": "047105010",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2月のメーカー資料）",
+                "note": "統一商品コード 047105010、販売包装単位コード 14987047105017。"
+              }
+            },
+            {
+              "package": "10g×20本",
+              "unified_product_code": "047105027",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2月のメーカー資料）",
+                "note": "統一商品コード 047105027、販売包装単位コード 14987047105024。"
+              }
+            },
+            {
+              "package": "10g×50本",
+              "unified_product_code": "047105034",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2月のメーカー資料）",
+                "note": "統一商品コード 047105034、販売包装単位コード 14987047105031。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2655712M1025",
+          "product_name": "ルリコン軟膏１％",
+          "maker": "サンファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10g×10本",
+              "unified_product_code": "047105218",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2月のメーカー資料）",
+                "note": "統一商品コード 047105218、販売包装単位コード 14987047105215。"
+              }
+            },
+            {
+              "package": "10g×20本",
+              "unified_product_code": "047105225",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2月のメーカー資料）",
+                "note": "統一商品コード 047105225、販売包装単位コード 14987047105222。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年2月の案内で通常発注だったクリーム30g×10本については、2026年3月に別途販売中止が案内されました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sun-lulicon-cream-30g-discontinued-202603",
+      "maker": "サンファーマ",
+      "title": "ルリコンクリーム1％ 30g×10本 販売中止のお知らせ",
+      "url": "https://jp.sunpharma.com/null/d7db7a3d90346895c90fcc4d06f64cd70fb0ac5c.pdf",
+      "announced_at": "2026-03",
+      "listed_at": "2026-03-18",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "f0b76b69e6f933f9e81d805a546bb24f2b7916ba878f47c0fedd2a57c1b17120",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "サンファーマはクリーム30g×10本の販売中止と、その在庫が一部に偏らないように出荷量を調整すると案内しました。販売中止そのものの具体的な理由は原文にありません。",
+      "targets": [
+        {
+          "yj_code": "2655712N1020",
+          "product_name": "ルリコンクリーム１％",
+          "maker": "サンファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "30g×10本",
+              "unified_product_code": "047105232",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年7月（2026年3月のメーカー資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 047105232、販売包装単位コード 14987047105239。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://jp.sunpharma.com/null/d7db7a3d90346895c90fcc4d06f64cd70fb0ac5c.pdf",
+          "target_yj_codes": [
+            "2655712N1020"
+          ],
+          "type": "メーカーが案内した販売継続包装",
+          "products": [
+            {
+              "name": "ルリコンクリーム１％",
+              "maker": "サンファーマ",
+              "yj_code": "2655712N1020",
+              "scope": "クリーム30g×10本の販売中止に対する案内。10g×10本・10g×20本・10g×50本。当時はいずれも出荷調整中。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "sun-lamisil-cream-limited-202510",
+      "maker": "サンファーマ",
+      "title": "ラミシールクリーム1％ 限定出荷のお知らせ",
+      "url": "https://jp.sunpharma.com/null/0e3b60376bb3b7e6093b24965694ae96cd3b715e.pdf",
+      "announced_at": "2025-10",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "fb22b8544e9a12364290ba50a2f07e6c852e2c6e2f49795e11eaa1abd20273d2",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の影響で需要が急増し、供給が逼迫したため、サンファーマが限定出荷の開始を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2659710N1152",
+          "product_name": "ラミシールクリーム１％",
+          "maker": "サンファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10g×10本",
+              "unified_product_code": "047211407",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 047211407、販売包装単位コード 14987047211404。"
+              }
+            },
+            {
+              "package": "10g×50本",
+              "unified_product_code": "047211414",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 047211414、販売包装単位コード 14987047211411。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文での開始は2025年10月21日出荷分です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sun-apresoline-injection20-limited-202511",
+      "maker": "サンファーマ",
+      "title": "アプレゾリン注射用20mg 限定出荷のお知らせ",
+      "url": "https://jp.sunpharma.com/null/b8f0de1092f060fa7fe02a272ad5569b494e38a3.pdf",
+      "announced_at": "2025-11",
+      "listed_at": "2025-11-25",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "3f2444dec7b47689645fcf07733196060d2654f12793c3ea3d2a7bf81e4c6cbf",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "2025年11月の案内では、需要が急増し、生産数量の確保が難しい状態が続いたため、サンファーマは10管包装を限定出荷としました。",
+      "targets": [
+        {
+          "yj_code": "2142400D1049",
+          "product_name": "アプレゾリン注射用２０ｍｇ",
+          "maker": "サンファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10管",
+              "unified_product_code": "047211001",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、11月のメーカー資料）",
+                "note": "統一商品コード 047211001、販売包装単位コード 14987047211008。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "当時のメーカー資料の区分は「その他」です。現在の厚労省公表欄の区分と区別してください。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sun-apresoline-injection20-discontinued-202606",
+      "maker": "サンファーマ",
+      "title": "アプレゾリン注射用20mg 販売中止のお知らせ",
+      "url": "https://jp.sunpharma.com/null/bbab8efad216b2b2a68392359991d13772566b47.pdf",
+      "announced_at": "2026-06",
+      "listed_at": "2026-07-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "c4f45c1aa923784cb2564192985990a38642b421a5ea4e6927249f65bce2d81a",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "サンファーマは10管包装の販売中止を案内しました。具体的な販売中止理由は原文に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "2142400D1049",
+          "product_name": "アプレゾリン注射用２０ｍｇ",
+          "maker": "サンファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10管",
+              "unified_product_code": "047211001",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年12月（2026年6月のメーカー資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 047211001、販売包装単位コード 14987047211008。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://jp.sunpharma.com/null/bbab8efad216b2b2a68392359991d13772566b47.pdf",
+          "target_yj_codes": [
+            "2142400D1049"
+          ],
+          "type": "メーカーが案内した代替製品",
+          "products": [
+            {
+              "name": "ペルジピン注射液２ｍｇ",
+              "maker": "LTLファーマ",
+              "yj_code": "2149400A1027",
+              "scope": "アプレゾリン注射用20mg・10管の販売中止に対する案内。候補の包装は10管。"
+            },
+            {
+              "name": "ペルジピン注射液１０ｍｇ",
+              "maker": "LTLファーマ",
+              "yj_code": "2149400A2023",
+              "scope": "アプレゾリン注射用20mg・10管の販売中止に対する案内。候補の包装は10管。"
+            },
+            {
+              "name": "ペルジピン注射液２５ｍｇ",
+              "maker": "LTLファーマ",
+              "yj_code": "2149400A3020",
+              "scope": "アプレゾリン注射用20mg・10管の販売中止に対する案内。候補の包装は5管。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "代替製品は有効成分が異なります。適応・投与方法はそれぞれの電子添文をご確認ください。",
+        "経過措置期間満了は2028年3月末の見込みと案内されています。",
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "sun-tegretol-granules50-resumed-limited-202406",
+      "maker": "サンファーマ",
+      "title": "テグレトール細粒50％ 出荷再開のお知らせ",
+      "url": "https://jp.sunpharma.com/null/9265c0592cff3793218b95f60b52839eb94a7ffb.pdf",
+      "announced_at": "2024-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "b94c57633e131f1824d82a89694479afa1d1ee68e57551b4729948e348b94374",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造工程で確認が必要になり出荷を一時停止し、影響がないと確認した後、需要増を見込んで限定出荷で再開するとサンファーマが案内しました。",
+      "targets": [
+        {
+          "yj_code": "1139002C1082",
+          "product_name": "テグレトール細粒５０％",
+          "maker": "サンファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100g",
+              "unified_product_code": "047211223",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "shipment_resumption",
+                    "timing": "2024年6月27日（限定出荷で再開、当時の案内）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、6月のメーカー資料）",
+                "note": "統一商品コード 047211223、販売包装単位コード 14987047211220。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }

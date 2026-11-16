@@ -52,9 +52,11 @@ MAKER_HOSTS = {
     'コーアイセイ': 'www.koaisei.com',
     '武田薬品工業': 'www.takedamed.com',
     '大原薬品工業': 'www.ohara-ch.co.jp',
+    'サンファーマ': 'jp.sunpharma.com',
 }
 MAKER_MANUAL_SOURCE_HOSTS = {
     '富士製薬工業': ('www.fujipharma.jp',),
+    '杏林製薬': ('www.kyorin-medicalbridge.jp',),
     '塩野義製薬': ('med.shionogi.co.jp',),
     # The manufacturer links its drug information to its distributor's site.
     'シオノギファーマ': ('med.shionogi.co.jp',),
