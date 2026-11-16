@@ -25093,6 +25093,686 @@
         "販売中止時期は在庫状況で前後し、経過措置期間満了は2027年3月末日の予定と案内されています。",
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
       ]
+    },
+    {
+      "id": "fuso-vitamin-c-injection-limited-202306",
+      "maker": "扶桑薬品工業",
+      "title": "ビタミンC注「フソー」100mg・500mg・2g 限定出荷のお知らせ",
+      "url": "https://www.fuso-pharm.co.jp/med/wp-content/uploads/sites/2/2024/05/ST_20230612121019_978.pdf",
+      "announced_at": "2023-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "850f0bce1da2eb8e4538bb192b0089cdef431aa22bd8e2a046fa67fc63d0708d",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の影響で需要が大きく増え、安定供給に支障が出るおそれがあるため、扶桑薬品工業が限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3140400A2154",
+          "product_name": "ビタミンＣ注「フソー」－１００ｍｇ",
+          "maker": "扶桑薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1mL×50管（ガラスアンプル）",
+              "unified_product_code": "197-62614-4",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 197-62614-4。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3140400A4157",
+          "product_name": "ビタミンＣ注「フソー」－５００ｍｇ",
+          "maker": "扶桑薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "2mL×50管（ガラスアンプル）",
+              "unified_product_code": "197-62616-8",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 197-62616-8。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3140400A6044",
+          "product_name": "ビタミンＣ注「フソー」－２ｇ",
+          "maker": "扶桑薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10mL×50管（ガラスアンプル）",
+              "unified_product_code": "197-62618-2",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 197-62618-2。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカー原文の対象は50管包装です。",
+        "メーカーの2026年10月30日現在の供給一覧でも、この規格は限定出荷です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "fuso-glucolin-injection-limited-202308",
+      "maker": "扶桑薬品工業",
+      "title": "グルコリン配合静注 限定出荷のお知らせ",
+      "url": "https://www.fuso-pharm.co.jp/med/wp-content/uploads/sites/2/2024/05/ST_20230808095752_990.pdf",
+      "announced_at": "2023-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "0119baedc0b5bb4611811b5d3b10684c701faaf56805596b9d4fe232ca2e3ebb",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の影響で需要が大きく増え、安定供給に支障が出るおそれがあるため、扶桑薬品工業が限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3919502A1430",
+          "product_name": "グルコリン配合静注",
+          "maker": "扶桑薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "20mL×50管（プラスチックアンプル）",
+              "unified_product_code": "197-24515-4",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、8月のメーカー資料）",
+                "note": "統一商品コード 197-24515-4。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカーの2026年10月30日現在の供給一覧でも、この規格は限定出荷です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "fuso-previta-s-injection-limited-202507",
+      "maker": "扶桑薬品工業",
+      "title": "プレビタS注射液 限定出荷のお知らせ",
+      "url": "https://www.fuso-pharm.co.jp/med/wp-content/uploads/sites/2/2025/07/%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B%EF%BC%88%E3%83%97%E3%83%AC%E3%83%93%E3%82%BFS%E6%B3%A8%E5%B0%84%E6%B6%B2%EF%BC%89.pdf",
+      "announced_at": "2025-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "988261ce8b1b134a360d9a5aa7cd226455e1a1da3d90cb17c91bd0c2985e2181",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の影響で需要が大きく増え、安定供給に支障が出るおそれがあるため、扶桑薬品工業が限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3172400A1046",
+          "product_name": "プレビタＳ注射液",
+          "maker": "扶桑薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×50管（ガラスアンプル）",
+              "unified_product_code": "197-64410-0",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 197-64410-0。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカーの2026年10月30日現在の供給一覧でも、この規格は限定出荷です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "fuso-biogen50-injection-limited-202508",
+      "maker": "扶桑薬品工業",
+      "title": "バイオゲン静注50mg 限定出荷のお知らせ",
+      "url": "https://www.fuso-pharm.co.jp/med/wp-content/uploads/sites/2/2025/08/%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B%EF%BC%88%E3%83%90%E3%82%A4%E3%82%AA%E3%82%B2%E3%83%B3%E9%9D%99%E6%B3%A850mg%EF%BC%89.pdf",
+      "announced_at": "2025-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "e8575708e61312f3109d557923e9c8a774d81fd6d066d158f1ee74fca0b45619",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の影響で需要が大きく増え、安定供給に支障が出るおそれがあるため、扶桑薬品工業が限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3122402A5162",
+          "product_name": "バイオゲン静注５０ｍｇ",
+          "maker": "扶桑薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "20mL×50管（プラスチックアンプル）",
+              "unified_product_code": "197-60023-6",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、8月のメーカー資料）",
+                "note": "統一商品コード 197-60023-6。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカーの2026年10月30日現在の供給一覧でも、この規格は限定出荷です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "fuso-bsix10-injection-limited-202509",
+      "maker": "扶桑薬品工業",
+      "title": "ビーシックス注「フソー」10mg 限定出荷のお知らせ",
+      "url": "https://www.fuso-pharm.co.jp/med/wp-content/uploads/sites/2/2025/09/%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B%EF%BC%88%E3%83%93%E3%83%BC%E3%82%B7%E3%83%83%E3%82%AF%E3%82%B9%E6%B3%A8%E3%80%8C%E3%83%95%E3%82%BD%E3%83%BC%E3%80%8D-10mg%E3%80%81-30mg%EF%BC%89.pdf",
+      "announced_at": "2025-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "6f9ce44e630cd78d12a2e4b4042f3c75b13a57653105f58112f76b0af5880687",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の影響で需要が大きく増え、安定供給に支障が出るおそれがあるため、扶桑薬品工業が限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3134400A1061",
+          "product_name": "ビーシックス注「フソー」－１０ｍｇ",
+          "maker": "扶桑薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1mL×50管（ガラスアンプル）",
+              "unified_product_code": "197-62212-2",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、9月のメーカー資料）",
+                "note": "統一商品コード 197-62212-2。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文の30mgも対象でしたが、掲載は厚労省データで限定出荷の10mgのみです。",
+        "メーカーの2026年10月30日現在の供給一覧でも、この規格は限定出荷です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "fuso-maxacalcitol-syringes-fuso-limited-202508",
+      "maker": "扶桑薬品工業",
+      "title": "マキサカルシトール静注透析用シリンジ「フソー」 供給に関するお知らせとお詫び",
+      "url": "https://www.fuso-pharm.co.jp/med/wp-content/uploads/sites/2/2025/08/%E4%BE%9B%E7%B5%A6%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B%E3%81%A8%E3%81%8A%E8%A9%AB%E3%81%B3%EF%BC%88%E3%83%9E%E3%82%AD%E3%82%B5%E3%82%AB%E3%83%AB%E3%82%B7%E3%83%88%E3%83%BC%E3%83%AB%E9%9D%99%E6%B3%A8%E9%80%8F%E6%9E%90%E7%94%A8%E3%82%B7%E3%83%AA%E3%83%B3%E3%82%B8%EF%BC%89.pdf",
+      "announced_at": "2025-08",
+      "listed_at": "2025-08-29",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "75696a9be429874c2d5b2648cc23ab6d764aa668cf5b06efaeef9109194318d1",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "扶桑薬品工業は、増産を進めても増えた需要に見合う供給が難しいため、2021年5月からの限定出荷を継続すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "3112401G1037",
+          "product_name": "マキサカルシトール静注透析用シリンジ２．５μｇ「フソー」",
+          "maker": "扶桑薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "2.5μg 1mL×10シリンジ",
+              "unified_product_code": "197-70513-9",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、8月のメーカー資料）",
+                "note": "統一商品コード 197-70513-9。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3112401G2033",
+          "product_name": "マキサカルシトール静注透析用シリンジ５μｇ「フソー」",
+          "maker": "扶桑薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5μg 1mL×10シリンジ",
+              "unified_product_code": "197-70514-6",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、8月のメーカー資料）",
+                "note": "統一商品コード 197-70514-6。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3112401G3030",
+          "product_name": "マキサカルシトール静注透析用シリンジ１０μｇ「フソー」",
+          "maker": "扶桑薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10μg 1mL×10シリンジ",
+              "unified_product_code": "197-70515-3",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、8月のメーカー資料）",
+                "note": "統一商品コード 197-70515-3。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "対象は扶桑薬品工業が販売するシリンジ製剤です。原文では新規採用を辞退としています。",
+        "メーカーの2026年10月30日現在の供給一覧でも、この規格は限定出荷です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "fuso-maxacalcitol-syringes-isei-limited-202508",
+      "maker": "扶桑薬品工業",
+      "title": "マキサカルシトール静注透析用シリンジ「イセイ」 供給に関するお知らせとお詫び",
+      "url": "https://www.fuso-pharm.co.jp/med/wp-content/uploads/sites/2/2025/08/%E4%BE%9B%E7%B5%A6%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B%E3%81%A8%E3%81%8A%E8%A9%AB%E3%81%B3%EF%BC%88%E3%83%9E%E3%82%AD%E3%82%B5%E3%82%AB%E3%83%AB%E3%82%B7%E3%83%88%E3%83%BC%E3%83%AB%E9%9D%99%E6%B3%A8%E9%80%8F%E6%9E%90%E7%94%A8%E3%82%B7%E3%83%AA%E3%83%B3%E3%82%B8%EF%BC%89.pdf",
+      "announced_at": "2025-08",
+      "listed_at": "2025-08-29",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "75696a9be429874c2d5b2648cc23ab6d764aa668cf5b06efaeef9109194318d1",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "扶桑薬品工業は、増産を進めても増えた需要に見合う供給が難しいため、2021年5月からの限定出荷を継続すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "3112401G1029",
+          "product_name": "マキサカルシトール静注透析用シリンジ２．５μｇ「イセイ」",
+          "maker": "コーアイセイ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "2.5μg 1mL×10シリンジ",
+              "unified_product_code": "197-70510-8",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、8月のメーカー資料）",
+                "note": "統一商品コード 197-70510-8。"
+              }
+            }
+          ],
+          "seller": "扶桑薬品工業"
+        },
+        {
+          "yj_code": "3112401G2025",
+          "product_name": "マキサカルシトール静注透析用シリンジ５μｇ「イセイ」",
+          "maker": "コーアイセイ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5μg 1mL×10シリンジ",
+              "unified_product_code": "197-70511-5",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、8月のメーカー資料）",
+                "note": "統一商品コード 197-70511-5。"
+              }
+            }
+          ],
+          "seller": "扶桑薬品工業"
+        },
+        {
+          "yj_code": "3112401G3021",
+          "product_name": "マキサカルシトール静注透析用シリンジ１０μｇ「イセイ」",
+          "maker": "コーアイセイ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10μg 1mL×10シリンジ",
+              "unified_product_code": "197-70512-2",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、8月のメーカー資料）",
+                "note": "統一商品コード 197-70512-2。"
+              }
+            }
+          ],
+          "seller": "扶桑薬品工業"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "対象は扶桑薬品工業が販売するシリンジ製剤です。原文では新規採用を辞退としています。",
+        "メーカーの2026年10月30日現在の供給一覧でも、この規格は限定出荷です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "alfresa-cefmetazon-four-doses-limited-202410",
+      "maker": "アルフレッサ ファーマ",
+      "title": "セフメタゾン筋注用0.5g・静注用0.25g・0.5g・2g 限定出荷について",
+      "url": "https://www.alfresa-pharma.co.jp/news/pdflink/NEWS_ID/2050/",
+      "announced_at": "2024-10",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "9ec251d3c768374f358db74ce7b77a5f2f750f3100e321fc0a46d9737a14aa28",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の影響で需要が大幅に増え、安定供給が難しくなるおそれがあるため、アルフレッサ ファーマが限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "6132408E1034",
+          "product_name": "セフメタゾン筋注用０．５ｇ",
+          "maker": "アルフレッサ ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10バイアル",
+              "unified_product_code": "274-13032-8",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 274-13032-8。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6132408F1021",
+          "product_name": "セフメタゾン静注用０．２５ｇ",
+          "maker": "アルフレッサ ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10バイアル",
+              "unified_product_code": "274-13023-6",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 274-13023-6。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6132408F2028",
+          "product_name": "セフメタゾン静注用０．５ｇ",
+          "maker": "アルフレッサ ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10バイアル",
+              "unified_product_code": "274-13025-0",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 274-13025-0。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6132408F4055",
+          "product_name": "セフメタゾン静注用２ｇ",
+          "maker": "アルフレッサ ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10バイアル",
+              "unified_product_code": "274-13030-4",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 274-13030-4。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "剤形・規格ごとの原文の対象包装です。静注用1gは別資料に掲載しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "alfresa-cefmetazon-iv1-limited-202409",
+      "maker": "アルフレッサ ファーマ",
+      "title": "セフメタゾン静注用1g 限定出荷について",
+      "url": "https://www.alfresa-pharma.co.jp/news/pdflink/NEWS_ID/2035/",
+      "announced_at": "2024-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "356f7651ff6efbdba5b07a4aa4f8a3fde0d0ec1ed0cc3f9df54e76ed485d054a",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の影響で需要が大幅に増え、安定供給が難しくなるおそれがあるため、アルフレッサ ファーマが限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "6132408F3059",
+          "product_name": "セフメタゾン静注用１ｇ",
+          "maker": "アルフレッサ ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10バイアル",
+              "unified_product_code": "274-13027-4",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、9月のメーカー資料）",
+                "note": "統一商品コード 274-13027-4。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "alfresa-nidran-limited-202311",
+      "maker": "アルフレッサ ファーマ",
+      "title": "ニドラン注射用25mg・50mg 限定出荷について",
+      "url": "https://www.alfresa-pharma.co.jp/news/pdflink/NEWS_ID/1925/",
+      "announced_at": "2023-11",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "5b1abbe57ab9ee78f86a80e10fa67aa827e29b1b92a9d86501a6aa1f94848893",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "想定を大きく上回る需要があり、安定供給が難しくなるおそれがあるため、アルフレッサ ファーマが限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "4219400D1029",
+          "product_name": "ニドラン注射用２５ｍｇ",
+          "maker": "アルフレッサ ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "6バイアル",
+              "unified_product_code": "274-14083-9",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、11月のメーカー資料）",
+                "note": "統一商品コード 274-14083-9。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "4219400D2025",
+          "product_name": "ニドラン注射用５０ｍｇ",
+          "maker": "アルフレッサ ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "6バイアル",
+              "unified_product_code": "274-14084-6",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、11月のメーカー資料）",
+                "note": "統一商品コード 274-14084-6。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "50mgの包装は2026年の後続資料に出荷再開の案内があります。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "alfresa-nidran50-resumed-limited-202610",
+      "maker": "アルフレッサ ファーマ",
+      "title": "ニドラン注射用50mg 製品供給について",
+      "url": "https://www.alfresa-pharma.co.jp/news/get/NEWS_ID/2274/",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "5684480df163ec1caee8c403fc0ab0bdaedc96e5c72c6096648512f5111e94a1",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "2026年4月に出荷停止を案内していた50mgの6バイアル包装について、アルフレッサ ファーマが2026年10月に限定出荷で再開すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "4219400D2025",
+          "product_name": "ニドラン注射用５０ｍｇ",
+          "maker": "アルフレッサ ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "6バイアル",
+              "unified_product_code": "274-14084-6",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、10月のメーカー資料）",
+                "note": "統一商品コード 274-14084-6。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "10月の資料では出荷量は通常、対応区分は「自社の事情」です。厚労省の区分と分けて表示しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
