@@ -34,6 +34,7 @@ MAKER_HOSTS = {
     '塩野義製薬': 'www.shionogi.com',
     'オルガノン': 'organonpro.com',
     'サノフィ': 'www.e-mr.sanofi.co.jp',
+    'トーアエイヨー': 'med.toaeiyo.co.jp',
     'テイカ製薬': 'teika-products.jp',
     'MSD': 'www.msdconnect.jp',
     'アルフレッサ ファーマ': 'www.alfresa-pharma.co.jp',
