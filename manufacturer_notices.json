@@ -8319,6 +8319,388 @@
       "cautions": [
         "2026年9月のメーカー原文に具体的な解除日や代替候補の記載はありません。"
       ]
+    },
+    {
+      "id": "nichiiko-dutasteride-av-limited-202608",
+      "maker": "日医工",
+      "title": "デュタステリドカプセル0.5mgAV「日医工」の限定出荷の理由",
+      "url": "https://www.nichiiko.co.jp/medicine/file/50030/information/20260826cI2.pdf",
+      "announced_at": "2026-08",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "b3e6cfe63c1e167d7e07131bdd6f951303c097a6bfcbe7d44093dc705d76d0ee",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日医工は、他社製品の出荷調整の影響で注文が想定を上回ったと説明しています。安定供給体制が整うまで対象包装の出荷を限定し、新規採用の依頼は辞退すると案内しています。",
+      "targets": [
+        {
+          "yj_code": "2499011M1124",
+          "product_name": "デュタステリドカプセル０．５ｍｇＡＶ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP30カプセル",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）・出荷量通常（2026-08のメーカー資料）",
+                "plans": [],
+                "note": "統一商品コード 376-50030-2、販売包装単位コード 14987376500309。"
+              }
+            },
+            {
+              "package": "PTP90カプセル",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）・出荷量通常（2026-08のメーカー資料）",
+                "plans": [],
+                "note": "統一商品コード 376-50031-9、販売包装単位コード 14987376500316。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-valaciclovir-ee-limited-202607",
+      "maker": "日医工",
+      "title": "バラシクロビル錠500mg「EE」の限定出荷の理由",
+      "url": "https://www.nichiiko.co.jp/medicine/file/91090/information/20260728cI3.pdf",
+      "announced_at": "2026-07",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "ef0c5171a1872ece01633ebc6d02d8a0928117613b7de2d6452309ddd1df569e",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日医工は、他社製品の出荷調整の影響で注文が想定を上回ったと説明しています。安定供給体制が整うまで対象包装の出荷を限定し、新規採用の依頼は辞退すると案内しています。",
+      "targets": [
+        {
+          "yj_code": "6250019F1063",
+          "product_name": "バラシクロビル錠５００ｍｇ「ＥＥ」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP42錠",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）・出荷量通常（2026-07のメーカー資料）",
+                "plans": [],
+                "note": "統一商品コード 376-91090-3、販売包装単位コード 14987376910900。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-valaciclovir-nig-limited-202608",
+      "maker": "日医工",
+      "title": "バラシクロビル錠500mg「NIG」の限定出荷の理由",
+      "url": "https://www.nichiiko.co.jp/medicine/file/78950/information/20260826cI4.pdf",
+      "announced_at": "2026-08",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "ebc649db7842442041a02f81476cb5ca801b6062c6999ada6fb18f7ff765cc27",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日医工は、他社製品の出荷調整の影響で注文が想定を上回ったと説明しています。安定供給体制が整うまで対象包装の出荷を限定し、新規採用の依頼は辞退すると案内しています。",
+      "targets": [
+        {
+          "yj_code": "6250019F1373",
+          "product_name": "バラシクロビル錠５００ｍｇ「ＮＩＧ」",
+          "maker": "日医工岐阜工場",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP42錠",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）・出荷量通常（2026-08のメーカー資料）",
+                "plans": [],
+                "note": "統一商品コード 376-78952-3、販売包装単位コード 14987376789520。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-lisinopril-limited-202610",
+      "maker": "日医工",
+      "title": "リシノプリル錠5mg・20mg「NIG」の限定出荷の理由",
+      "url": "https://www.nichiiko.co.jp/medicine/file/70700/information/20261022cI2.pdf",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "2c625f9b679e3d8dbf3df31c6d94119f615117d8577f90f41eeeb2c4f1029d89",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日医工は、他社製品の出荷調整の影響で注文が想定を上回ったと説明しています。安定供給体制が整うまで対象包装の出荷を限定し、新規採用の依頼は辞退すると案内しています。",
+      "targets": [
+        {
+          "yj_code": "2144006F1146",
+          "product_name": "リシノプリル錠５ｍｇ「ＮＩＧ」",
+          "maker": "日医工岐阜工場",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）・出荷量通常（2026-10のメーカー資料）",
+                "plans": [],
+                "note": "統一商品コード 376-70702-2、販売包装単位コード 14987376707029。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2144006F3149",
+          "product_name": "リシノプリル錠２０ｍｇ「ＮＩＧ」",
+          "maker": "日医工岐阜工場",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）・出荷量通常（2026-10のメーカー資料）",
+                "plans": [],
+                "note": "統一商品コード 376-70722-0、販売包装単位コード 14987376707227。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-carbazochrome-25-50-limited-202610",
+      "maker": "日医工",
+      "title": "カルバゾクロムスルホン酸ナトリウム静注液25mg・50mg「日医工」の限定出荷の理由",
+      "url": "https://www.nichiiko.co.jp/medicine/file/40710/information/20261015cI1.pdf",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "129937e6daaf9d909e176ab4519067f328782f8cff088c10066c2a5740dd0e9e",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日医工は、25mg・50mgでは一時的な需要増が見込まれるため、安定供給を維持する目的で限定出荷すると説明しています。必要以上の注文を控えるよう求め、新規採用の依頼は辞退すると案内しています。",
+      "targets": [
+        {
+          "yj_code": "3321401A2170",
+          "product_name": "カルバゾクロムスルホン酸ナトリウム静注液２５ｍｇ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×50管",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情）・出荷量通常（2026-10のメーカー資料）",
+                "plans": [],
+                "note": "統一商品コード 376-40711-3、販売包装単位コード 14987376407110。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3321401A3185",
+          "product_name": "カルバゾクロムスルホン酸ナトリウム静注液５０ｍｇ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10mL×50管",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情）・出荷量通常（2026-10のメーカー資料）",
+                "plans": [],
+                "note": "統一商品コード 376-40721-2、販売包装単位コード 14987376407219。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "確認したメーカー原文に代替候補名の記載はありません。",
+        "厚労省の公表理由欄と、メーカー文書で25mg・50mgについて説明された理由をそれぞれ掲載しています。"
+      ]
+    },
+    {
+      "id": "nichiiko-carbazochrome-100-limited-202610",
+      "maker": "日医工",
+      "title": "カルバゾクロムスルホン酸ナトリウム静注液100mg「日医工」の限定出荷の理由",
+      "url": "https://www.nichiiko.co.jp/medicine/file/40710/information/20261015cI1.pdf",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "129937e6daaf9d909e176ab4519067f328782f8cff088c10066c2a5740dd0e9e",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日医工は、100mgの製造ラインの一時的な不具合で製造が遅れたため、限定出荷としたと説明しています。10月29日頃の次回出荷はこの案内時点の予定で、出荷の実施は確認できていません。",
+      "targets": [
+        {
+          "yj_code": "3321401A4246",
+          "product_name": "カルバゾクロムスルホン酸ナトリウム静注液１００ｍｇ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "20mL×50管",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情）・出荷量減少（2026-10のメーカー資料）",
+                "plans": [],
+                "note": "統一商品コード 376-40731-1、販売包装単位コード 14987376407318。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-glutathione-limited-202610",
+      "maker": "日医工",
+      "title": "グルタチオン注射用200mg「NIG」の限定出荷の理由",
+      "url": "https://www.nichiiko.co.jp/medicine/file/73630/information/20261022cI1.pdf",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "cec104d42014cdbe2ed2840092db0c874b319afab542f82003cdbea885477796",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日医工は、9月に限定出荷の解除を案内しました。その後、他社製品の出荷調整で注文が想定を上回り、安定供給体制が整うまで対象包装の出荷を再び限定し、新規採用の依頼は辞退すると案内しています。",
+      "targets": [
+        {
+          "yj_code": "3922400D3136",
+          "product_name": "グルタチオン注射用２００ｍｇ「ＮＩＧ」",
+          "maker": "日医工岐阜工場",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100アンプル",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）・出荷量通常（2026-10のメーカー資料）",
+                "plans": [],
+                "note": "統一商品コード 376-73632-9、販売包装単位コード 14987376736326。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-famotidine-limited-202610",
+      "maker": "日医工",
+      "title": "ファモチジン静注液10mg・20mg「日医工」の限定出荷の理由",
+      "url": "https://www.nichiiko.co.jp/medicine/file/04380/information/20261020cI2.pdf",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "0dbc96422b46f6bc4bc315ebbd8b995b763852b307c03a7d221d024e951d46da",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日医工は、他社製品の出荷調整の影響で注文が想定を上回ったと説明しています。安定供給体制が整うまで対象包装の出荷を限定し、新規採用の依頼は辞退すると案内しています。",
+      "targets": [
+        {
+          "yj_code": "2325401A4062",
+          "product_name": "ファモチジン静注液１０ｍｇ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10mL×10管",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）・出荷量通常（2026-10のメーカー資料）",
+                "plans": [],
+                "note": "統一商品コード 376-04371-7、販売包装単位コード 14987376043714。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2325401A3066",
+          "product_name": "ファモチジン静注液２０ｍｇ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "20mL×10管",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）・出荷量通常（2026-10のメーカー資料）",
+                "plans": [],
+                "note": "統一商品コード 376-04380-9、販売包装単位コード 14987376043806。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
