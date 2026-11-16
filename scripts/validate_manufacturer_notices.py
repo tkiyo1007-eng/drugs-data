@@ -49,12 +49,21 @@ MAKER_HOSTS = {
     'アルフレッサ ファーマ': 'www.alfresa-pharma.co.jp',
     '富士製薬工業': 'www.fuji-pharma.jp',
     '高田製薬': 'www.takata-seiyaku.co.jp',
+    'コーアイセイ': 'www.koaisei.com',
+    '武田薬品工業': 'www.takedamed.com',
 }
 MAKER_MANUAL_SOURCE_HOSTS = {
     '富士製薬工業': ('www.fujipharma.jp',),
     '塩野義製薬': ('med.shionogi.co.jp',),
     # The manufacturer links its drug information to its distributor's site.
     'シオノギファーマ': ('med.shionogi.co.jp',),
+}
+# Exact copies of manufacturer-authored notices hosted by public institutions.
+MAKER_MANUAL_SOURCE_URLS = {
+    '武田薬品工業': {
+        'https://www.city.funabashi.lg.jp/kodomo/kenkou/005/p076734_d/fil/R8_takeda.pdf',
+        'https://www.jspho.org/files/oshirase/20260203b.pdf',
+    },
 }
 SCOPES = {'product', 'package', 'seller_route_and_package'}
 KINDS = {'discontinued', 'limited', 'stopped', 'resumed', 'resumption_planned', 'recall'}
@@ -63,10 +72,11 @@ PACKAGE_PLAN_EVENTS = {'stock_depletion', 'shipment_resumption', 'normal_shipmen
 FORMAL_YJ = re.compile(r'[0-9][0-9A-Z]{11}\Z')
 ARCHIVE_FIELD = 'archived_from_csv_at'
 
-def is_official_maker_host(maker, hostname):
-    return bool(hostname) and (
-        hostname == MAKER_HOSTS.get(maker)
-        or hostname in MAKER_MANUAL_SOURCE_HOSTS.get(maker, ())
+def is_official_maker_source(maker, url):
+    return url.scheme == 'https' and not (url.username or url.password) and bool(url.hostname) and (
+        url.hostname == MAKER_HOSTS.get(maker)
+        or url.hostname in MAKER_MANUAL_SOURCE_HOSTS.get(maker, ())
+        or url.geturl() in MAKER_MANUAL_SOURCE_URLS.get(maker, ())
     )
 
 def norm(value):
@@ -142,7 +152,7 @@ def validate(document, rows):
             )):
                 errors.append(label + ': invalid maker supply status')
         u = urlparse(str(n.get('url') or ''))
-        if u.scheme != 'https' or not is_official_maker_host(n.get('maker'), u.hostname) or u.username or u.password: errors.append(label + ': unofficial URL or wrong publisher')
+        if not is_official_maker_source(n.get('maker'), u): errors.append(label + ': unofficial URL or wrong publisher')
         if not re.fullmatch(r'[a-f0-9]{64}', str(n.get('sha256') or '')): errors.append(label + ': invalid source hash')
         if not isinstance(n.get('event_type'), str) or n['event_type'] not in KINDS: errors.append(label + ': invalid event type')
         if 'collection_mode' in n and n['collection_mode'] != 'manual': errors.append(label + ': invalid collection mode')

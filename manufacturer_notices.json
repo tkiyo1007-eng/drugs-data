@@ -20315,6 +20315,530 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "koaisei-pyridoxal-10-30-limited-202512",
+      "maker": "コーアイセイ",
+      "title": "ピリドキサール錠10mg・30mg「イセイ」供給に関するお知らせ",
+      "url": "https://www.koaisei.com/assets/item/medical/news/%E3%83%94%E3%83%AA%E3%83%89%E3%82%AD%E3%82%B5%E3%83%BC%E3%83%AB%E9%8C%A010mg%E3%83%BB30mg%E3%80%8C%E3%82%A4%E3%82%BB%E3%82%A4%E3%80%8D%E4%BE%9B%E7%B5%A6%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%8A%E8%A9%AB%E3%81%B3%E3%81%A8%E3%81%8A%E9%A1%98%E3%81%84.pdf",
+      "announced_at": "2025-12",
+      "listed_at": "2025-12-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "5ee0a74ae6b42ab01d3e704e30b880092169da8ab6aab531d1dc9ea3aa79bab3",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社の出荷制限で注文が想定を上回り、既存の医療機関への供給を優先するため、コーアイセイが限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3134003F1205",
+          "product_name": "ピリドキサール錠１０ｍｇ「イセイ」",
+          "maker": "コーアイセイ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "013407100",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、12月のメーカー資料）",
+                "note": "統一商品コード 013407100。"
+              }
+            },
+            {
+              "package": "PTP1000錠",
+              "unified_product_code": "013407131",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、12月のメーカー資料）",
+                "note": "統一商品コード 013407131。"
+              }
+            },
+            {
+              "package": "バラ1000錠",
+              "unified_product_code": "013407148",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、12月のメーカー資料）",
+                "note": "統一商品コード 013407148。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3134003F3143",
+          "product_name": "ピリドキサール錠３０ｍｇ「イセイ」",
+          "maker": "コーアイセイ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "013407308",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、12月のメーカー資料）",
+                "note": "統一商品コード 013407308。"
+              }
+            },
+            {
+              "package": "PTP1000錠",
+              "unified_product_code": "013407339",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、12月のメーカー資料）",
+                "note": "統一商品コード 013407339。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカー資料で限定出荷の解消見込みは未定です。",
+        "10mgのバラ1000錠は、2026年6月に別掲の包装集約が案内されました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "koaisei-pyridoxal10-package-consolidation-202606",
+      "maker": "コーアイセイ",
+      "title": "ピリドキサール錠10mg「イセイ」包装規格集約のご案内",
+      "url": "https://www.koaisei.com/assets/item/%E3%83%94%E3%83%AA%E3%83%89%E3%82%AD%E3%82%B5%E3%83%BC%E3%83%AB%E9%8C%A010mg%E3%80%8C%E3%82%A4%E3%82%BB%E3%82%A4%E3%80%8D%E5%8C%85%E8%A3%85%E8%A6%8F%E6%A0%BC%E9%9B%86%E7%B4%84%E3%81%AE%E3%81%94%E6%A1%88%E5%86%85.pdf",
+      "announced_at": "2026-06",
+      "listed_at": "2026-06-19",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "27f3d4cd36cd80ce9c95300a0982b054b174a3f7c01577473d68a309a4b12574",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "製造・供給能力を高めるため、バラ1000錠は在庫消尽後に販売を終え、PTP100錠とPTP1000錠へ包装を集約するとコーアイセイが案内しました。",
+      "targets": [
+        {
+          "yj_code": "3134003F1205",
+          "product_name": "ピリドキサール錠１０ｍｇ「イセイ」",
+          "maker": "コーアイセイ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "バラ1000錠",
+              "unified_product_code": "013407148",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年3月（2026年6月のメーカー資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 013407148、販売包装単位コード 14987013407145。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "013407100",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 013407100、販売包装単位コード 14987013407107。"
+              }
+            },
+            {
+              "package": "PTP1000錠",
+              "unified_product_code": "013407131",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 013407131、販売包装単位コード 14987013407138。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "koaisei-riboflavin20-limited-202510",
+      "maker": "コーアイセイ",
+      "title": "リボフラビン酪酸エステル錠20mg「イセイ」供給に関するお知らせ",
+      "url": "https://www.koaisei.com/assets/item/medical/database/%E3%83%AA%E3%83%9C%E3%83%95%E3%83%A9%E3%83%93%E3%83%B3%E9%85%AA%E9%85%B8%E3%82%A8%E3%82%B9%E3%83%86%E3%83%AB%E9%8C%A020mg%E3%80%8C%E3%82%A4%E3%82%BB%E3%82%A4%E3%80%8D%E4%BE%9B%E7%B5%A6%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%8A%E8%A9%AB%E3%81%B3%E3%81%A8%E3%81%8A%E9%A1%98%E3%81%84.pdf",
+      "announced_at": "2025-10",
+      "listed_at": "2025-10-14",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "3ca1db933d20c95c82bacac842530f5ad1ef0bf75a5cbf3ccbe0c12412c603c1",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社の出荷制限で注文が想定を上回り、既存の医療機関への供給を優先するため、コーアイセイが限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3131002F1322",
+          "product_name": "リボフラビン酪酸エステル錠２０ｍｇ「イセイ」",
+          "maker": "コーアイセイ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "013307608",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 013307608。"
+              }
+            },
+            {
+              "package": "PTP1000錠",
+              "unified_product_code": "013307639",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 013307639。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカー資料で限定出荷の解消見込みは未定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "alfresa-four-injections-stock-depletion-202601",
+      "maker": "アルフレッサ ファーマ",
+      "title": "アミサリン注・イスコチン注・ズファジラン筋注 製品供給に関する続報",
+      "url": "https://www.alfresa-pharma.co.jp/news/pdflink/NEWS_ID/2188/",
+      "announced_at": "2026-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "dbf5af127aa836558cc8b8dbcac322c8bab8f106379cfee3c4322319d9d9af48",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造再開のめどが立たず、現在庫を使い切り次第、出荷停止とする方針をアルフレッサ ファーマが案内しました。",
+      "targets": [
+        {
+          "yj_code": "2121400A1034",
+          "product_name": "アミサリン注１００ｍｇ",
+          "maker": "アルフレッサ ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1mL×10アンプル",
+              "unified_product_code": "274-12997-1",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年4月（2026年1月のメーカー資料の見込み）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、1月のメーカー資料）",
+                "note": "統一商品コード 274-12997-1。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2121400A2030",
+          "product_name": "アミサリン注２００ｍｇ",
+          "maker": "アルフレッサ ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "2mL×10アンプル",
+              "unified_product_code": "274-12999-5",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年6月（2026年1月のメーカー資料の見込み）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、1月のメーカー資料）",
+                "note": "統一商品コード 274-12999-5。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6222400A1035",
+          "product_name": "イスコチン注１００ｍｇ",
+          "maker": "アルフレッサ ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "2mL×20アンプル",
+              "unified_product_code": "274-13011-3",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年12月（2026年1月のメーカー資料の見込み）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、1月のメーカー資料）",
+                "note": "統一商品コード 274-13011-3。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2172400A1033",
+          "product_name": "ズファジラン筋注５ｍｇ",
+          "maker": "アルフレッサ ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1mL×20アンプル",
+              "unified_product_code": "274-14103-4",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年5月（2026年1月のメーカー資料の見込み）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、1月のメーカー資料）",
+                "note": "統一商品コード 274-14103-4。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "予定の月は各包装に表示しています。終了と再開の実施は資料時点で確認できません。",
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "alfresa-oraspore-1g-package-end-202412",
+      "maker": "アルフレッサ ファーマ",
+      "title": "オラスポア小児用ドライシロップ10％ 一部包装販売中止のご案内",
+      "url": "https://www.alfresa-pharma.co.jp/news/pdflink/NEWS_ID/2067/",
+      "announced_at": "2024-12",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "66add6a49de282b97f05f5a9343b6f5f5c451dac04859ed6bfcf53aa38e8204b",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "アルフレッサ ファーマは1g×120包を在庫限りで販売終了、100g×1瓶を販売継続と案内しました。具体的な事情はこの原文に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "6132006R1093",
+          "product_name": "オラスポア小児用ドライシロップ１０％",
+          "maker": "アルフレッサ ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1g×120包",
+              "unified_product_code": "274-05716-8",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "2025年6月（2024年12月のメーカー資料の予定）"
+                  }
+                ],
+                "note": "統一商品コード 274-05716-8。"
+              }
+            },
+            {
+              "package": "100g×1瓶",
+              "unified_product_code": "274-05714-4",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 274-05714-4。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "これは一部包装の販売終了案内です。現在の限定出荷に関する理由は厚労省の公表欄を参照してください。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "ltl-sawacillin-tablet-sp-to-ptp-202610",
+      "maker": "LTLファーマ",
+      "title": "サワシリン錠250 SP100錠からPTP100錠への包装仕様変更",
+      "url": "https://www.ltl-pharma.com/wp-content/uploads/resource/news_file/%E3%82%B5%E3%83%AF%E3%82%B7%E3%83%AA%E3%83%B3%E9%8C%A0_%E5%8C%85%E8%A3%85%E4%BB%95%E6%A7%98%E5%A4%89%E6%9B%B4%E3%81%AE%E3%81%94%E6%A1%88%E5%86%85.pdf?v=20261015",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-15",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "aaed79634dbc8ce0850bfb541e8fd8306bdef9f91f4a8e8f3cd4bf6704809102",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "限定出荷中のサワシリン錠250で生産効率と供給能力を高めるため、LTLファーマはSP100錠を終了し、PTP100錠に切り替えると案内しました。",
+      "targets": [
+        {
+          "yj_code": "6131001F2026",
+          "product_name": "サワシリン錠２５０",
+          "maker": "LTLファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "SP100錠",
+              "unified_product_code": "919100778",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "2026年11月（2026年10月のメーカー資料の予定）"
+                  }
+                ],
+                "note": "統一商品コード 919100778、販売包装単位コード 14987919100775。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "919101294",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 919101294、販売包装単位コード 14987919101291。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "新包装PTP100錠の出荷開始は2026年11月の予定と案内されました。対象は錠250です。限定出荷の具体的な発生原因は、この包装変更案内には記載されていません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "takeda-mumps-vaccine-limited-restart-202601",
+      "maker": "武田薬品工業",
+      "title": "乾燥弱毒生おたふくかぜワクチン「タケダ」出荷再開予定のおしらせ",
+      "url": "https://www.city.funabashi.lg.jp/kodomo/kenkou/005/p076734_d/fil/R8_takeda.pdf",
+      "announced_at": "2026-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "58d38f0855bd9cf059635e806dcfe48052f04f6089716d6ba516eaec3d6d1b6e",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "原液の品質試験で通常と異なる結果が出たため、武田薬品は2025年8月分を最後に出荷を停止しました。試験内の中和工程を見直して再試験で適合を確認し、安定するまで特約店への出荷を限定する方針を案内しました。",
+      "targets": [
+        {
+          "yj_code": "631340AD1040",
+          "product_name": "乾燥弱毒生おたふくかぜワクチン「タケダ」",
+          "maker": "武田薬品工業",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": []
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "武田薬品は原液に外来性ウイルスの混入を示す証拠は確認されなかったと報告しています。船橋市が掲載した武田薬品の原文です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "takeda-glovenin-500-limited-after-narita-restart-202512",
+      "maker": "武田薬品工業",
+      "title": "成田工場の再稼働及び血漿分画製剤の今後の供給に関するお知らせ",
+      "url": "https://www.jspho.org/files/oshirase/20260203b.pdf",
+      "announced_at": "2025-12",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "70b001ca5b376ea986add7389766391c49bc6b6ddb911624324d835ece160bde",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "武田薬品は成田工場の製造工程を確認するため一時停止し、調査後に製造を再開しました。献血グロベニン-I静注用500mgは安定供給の体制が整うまで限定出荷を続けると案内しました。",
+      "targets": [
+        {
+          "yj_code": "6343402X1075",
+          "product_name": "献血グロベニン－Ｉ静注用５００ｍｇ",
+          "maker": "武田薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "1瓶（500mg、溶解液付き）",
+              "unified_product_code": "123150088",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、12月のメーカー資料）",
+                "note": "統一商品コード 123150088。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料時点で通常出荷の再開時期は未定です。日本小児血液・がん学会が掲載した武田薬品の原文です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
