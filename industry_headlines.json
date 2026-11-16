@@ -3,55 +3,49 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-11-16T04:45:06+09:00",
-  "last_success_at": "2026-11-16T04:45:06+09:00",
+  "checked_at": "2026-11-17T07:02:18+09:00",
+  "last_success_at": "2026-11-17T07:02:18+09:00",
   "items": [
     {
-      "title": "【エーザイ】「レケンビ」皮下注が発売‐在宅自己注射が可能に",
-      "url": "https://www.yakuji.co.jp/entry141688.html",
-      "date": "2026-11-13",
+      "title": "【日薬 岩月会長】薬局集約化推進に反論‐予算確保は国の責務",
+      "url": "https://www.yakuji.co.jp/entry141779.html",
+      "date": "2026-11-17",
       "tag": "業界ニュース"
     },
     {
-      "title": "【厚労省】報告品目13品目を薬価収載‐「アイリーア」BSなど",
-      "url": "https://www.yakuji.co.jp/entry141686.html",
-      "date": "2026-11-13",
+      "title": "【GE・BS学会】低リスクは厳密管理不要に‐ニトロソアミン対応で提言",
+      "url": "https://www.yakuji.co.jp/entry141768.html",
+      "date": "2026-11-17",
       "tag": "業界ニュース"
     },
     {
-      "title": "【生物由来技術部会】「リブメルディ」承認了承‐海外データで通常承認",
-      "url": "https://www.yakuji.co.jp/entry141685.html",
-      "date": "2026-11-13",
+      "title": "【キャリアパス懇談会】薬剤師の専門性評価難しく‐専門医と異なる制度設計を",
+      "url": "https://www.yakuji.co.jp/entry141777.html",
+      "date": "2026-11-16",
       "tag": "業界ニュース"
     },
     {
-      "title": "【費用対評価部会】1日薬価比率で引き下げ‐「費用増加」品目の価格調整",
-      "url": "https://www.yakuji.co.jp/entry141684.html",
-      "date": "2026-11-13",
+      "title": "【厚労省】後発品企業38社をA区分‐一部企業への発注殺到懸念",
+      "url": "https://www.yakuji.co.jp/entry141775.html",
+      "date": "2026-11-16",
       "tag": "業界ニュース"
     },
     {
-      "title": "【薬価部会】外国価格調整に慎重意見‐MFN対応めぐり議論",
-      "url": "https://www.yakuji.co.jp/entry141682.html",
-      "date": "2026-11-13",
+      "title": "【内閣府専門部会】放射性薬の提供体制充実へ‐アクションプラン大筋で了承",
+      "url": "https://www.yakuji.co.jp/entry141773.html",
+      "date": "2026-11-16",
       "tag": "業界ニュース"
     },
     {
-      "title": "【日女薬】「プレコン」を薬剤師も推進‐サポーター1万人養成へ",
-      "url": "https://www.yakuji.co.jp/entry141680.html",
-      "date": "2026-11-13",
+      "title": "【ロート製薬】目薬6製品を自主回収‐ベトナム拠点で管理不備",
+      "url": "https://www.yakuji.co.jp/entry141771.html",
+      "date": "2026-11-16",
       "tag": "業界ニュース"
     },
     {
-      "title": "【中外製薬】自動注射製剤を国内申請‐血友病A薬「ヘムライブラ」",
-      "url": "https://www.yakuji.co.jp/entry141569.html",
-      "date": "2026-11-12",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【サノフィ】ボタン一つで大容量投与‐「サークリサ」投与デバイス承認",
-      "url": "https://www.yakuji.co.jp/entry141567.html",
-      "date": "2026-11-12",
+      "title": "【武田薬品】乾癬治療薬を国内申請‐TYK2阻害剤ザソシチニブ",
+      "url": "https://www.yakuji.co.jp/entry141690.html",
+      "date": "2026-11-16",
       "tag": "業界ニュース"
     }
   ]
