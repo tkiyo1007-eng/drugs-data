@@ -61,6 +61,8 @@ MAKER_HOSTS = {
     '陽進堂ホールディングス': 'yoshindoholdings.co.jp',
     '共創未来ファーマ': 'www.kyosomirai-p.co.jp',
     '大塚製薬工場': 'www.otsukakj.jp',
+    '大鵬薬品工業': 'www.taiho.co.jp',
+    "T's製薬": 'www.med.ts-pharma.com',
     'グラクソ・スミスクライン': 'gskpro.com',
     'ヴィアトリス・ヘルスケア合同会社': 'www.viatris-e-channel.com',
     'ヴィアトリス製薬合同会社': 'www.viatris-e-channel.com',

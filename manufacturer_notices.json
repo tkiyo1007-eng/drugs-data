@@ -38058,6 +38058,432 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "taiho-protecadin-od10-limited-202610",
+      "maker": "大鵬薬品工業",
+      "title": "プロテカジンOD錠10 供給に関するご連絡とお詫び",
+      "url": "https://www.taiho.co.jp/medical/news/files/pdf/2026102903.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-29",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "808ec87850959d08235b2694336e709b37c7f832bbd4b21154f1ec38237aa45e",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "想定を上回る需要が続いたため、大鵬薬品工業は供給を継続できるよう、100錠と1000錠のPTP包装を対象に限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2325006F4027",
+          "product_name": "プロテカジンＯＤ錠１０",
+          "maker": "大鵬薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "117666212",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、10月のメーカー資料）",
+                "note": "統一商品コード 117666212。"
+              }
+            },
+            {
+              "package": "PTP1000錠",
+              "unified_product_code": "117666229",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、10月のメーカー資料）",
+                "note": "統一商品コード 117666229。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.taiho.co.jp/medical/news/files/pdf/2026102903.pdf",
+          "target_yj_codes": [
+            "2325006F4027"
+          ],
+          "type": "メーカー原文に記載の候補",
+          "products": [
+            {
+              "name": "プロテカジン錠１０",
+              "maker": "大鵬薬品工業",
+              "yj_code": "2325006F2032",
+              "scope": "同社の普通錠10。PTP100錠（117666052）、PTP1000錠（117666076）、バラ500錠（117666168）。対象のOD錠とは剤形が異なります。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "限定出荷の解除時期は供給状況を見て改めて案内すると原文に記されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "taiho-ipd100-limited-202405",
+      "maker": "大鵬薬品工業",
+      "title": "アイピーディカプセル100 供給に関するご連絡とお詫び",
+      "url": "https://www.taiho.co.jp/medical/news/E20240508.pdf",
+      "announced_at": "2024-05",
+      "listed_at": "2024-05-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "1c73f0abf7dce8a1a4a7214cf8dafd1452f6b7f7d20ed7c79dc1da6b3a4b4661",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の供給制限の影響で当初の想定を超える注文があり、大鵬薬品工業は安定供給を続けるため、新規採用辞退と限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "4490016M2020",
+          "product_name": "アイピーディカプセル１００",
+          "maker": "大鵬薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "117-11002-9",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 117-11002-9。"
+              }
+            },
+            {
+              "package": "PTP500カプセル",
+              "unified_product_code": "117-11001-2",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 117-11001-2。"
+              }
+            },
+            {
+              "package": "PTP3000カプセル",
+              "unified_product_code": "117-11004-3",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 117-11004-3。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文は100の対象包装のみです。2024年5月時点の案内では、解除時期は別に案内する方針でした。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "taiho-pelex-limited-202401",
+      "maker": "大鵬薬品工業",
+      "title": "ペレックス配合顆粒・小児用ペレックス配合顆粒 供給に関するご連絡とお詫び",
+      "url": "https://www.taiho.co.jp/medical/news/files/pdf/E20240105.pdf",
+      "announced_at": "2024-01",
+      "listed_at": "2024-01-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "be9bd9e3f464f2e37155520225cf5d055a4370d25e8dafe43d09e34ffbf522f3",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の供給制限の影響で当初の想定を超える注文があり、大鵬薬品工業は安定供給を続けるため、新規採用辞退と限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "1180105D1035",
+          "product_name": "ペレックス配合顆粒",
+          "maker": "大鵬薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1g×1000包（ヒートシール）",
+              "unified_product_code": "117-67261-9",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、1月のメーカー資料）",
+                "note": "統一商品コード 117-67261-9。"
+              }
+            },
+            {
+              "package": "1g×2000包（ヒートシール）",
+              "unified_product_code": "117-67262-6",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、1月のメーカー資料）",
+                "note": "統一商品コード 117-67262-6。"
+              }
+            },
+            {
+              "package": "バラ500g",
+              "unified_product_code": "117-67260-2",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、1月のメーカー資料）",
+                "note": "統一商品コード 117-67260-2。"
+              }
+            },
+            {
+              "package": "バラ5kg",
+              "unified_product_code": "117-67263-3",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、1月のメーカー資料）",
+                "note": "統一商品コード 117-67263-3。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "1180101D1037",
+          "product_name": "小児用ペレックス配合顆粒",
+          "maker": "大鵬薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "バラ500g",
+              "unified_product_code": "117-67308-1",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、1月のメーカー資料）",
+                "note": "統一商品コード 117-67308-1。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "対象包装は2024年1月資料の表に掲載されたものです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "fuso-saline-kit100-limited-202312",
+      "maker": "扶桑薬品工業",
+      "title": "生食注キット「フソー」100mL 限定出荷のお知らせ",
+      "url": "https://www.fuso-pharm.co.jp/med/wp-content/uploads/sites/2/2024/05/ST_20231212084627_1011.pdf",
+      "announced_at": "2023-12",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "97c4da5be1a83035947353a03556f269b1d1ceb6659872527ca82f8aa2f35305",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の影響で需要が大幅に増え、安定供給に支障が出るおそれがあるため、扶桑薬品工業は新規採用を辞退し、対象包装を限定出荷としました。",
+      "targets": [
+        {
+          "yj_code": "3311402G5049",
+          "product_name": "生食注キット「フソー」",
+          "maker": "扶桑薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100mL×10キット",
+              "unified_product_code": "197638376",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、12月のメーカー資料）",
+                "note": "統一商品コード 197638376。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "同社の2026年10月1日案内で解除したのは50mLです。100mLは同社10月30日付の供給一覧で引き続き限定出荷です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "fuso-saline-kit100-continuing-202610",
+      "maker": "扶桑薬品工業",
+      "title": "扶桑薬品工業 10月30日付の供給状況一覧",
+      "url": "https://www.fuso-pharm.co.jp/med/wp-content/uploads/sites/2/2026/10/kyoukyu-20261030.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-30",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "54ff37a98a9c45b4bc9f0300279ee1a40080ec001e442d13009d9e4fb2b2d121",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "扶桑薬品工業の2026年10月30日付の一覧では、100mLは出荷量増加、対応状況は他社品の影響による限定出荷と記載されています。",
+      "targets": [
+        {
+          "yj_code": "3311402G5049",
+          "product_name": "生食注キット「フソー」",
+          "maker": "扶桑薬品工業",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": []
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年10月1日に解除案内が掲載された50mLは、100mLとは別規格です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "ts-alinamin-f5-f10-limited-202509",
+      "maker": "T's製薬",
+      "title": "アリナミンF5注・F10注 限定出荷に関するお知らせ",
+      "url": "https://www.med.ts-pharma.com/di-net/kaitei/w_20250911.pdf",
+      "announced_at": "2025-09",
+      "listed_at": "2025-09-11",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "826b95c39c77c65ceb9355ddf49c0d44e490d1a009e566eb4a80102b46ea0301",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "アリナミンF25注・F50注・F100注の限定出荷を受けてF5注とF10注への需要が増え、安定供給に支障が出るおそれがあったため、T’s製薬は対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3122401A1049",
+          "product_name": "アリナミンＦ５注",
+          "maker": "T's製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "50管",
+              "unified_product_code": "123005128",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 123005128、販売包装単位コード 14987123005125。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3122401A2045",
+          "product_name": "アリナミンＦ１０注",
+          "maker": "T's製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "50管",
+              "unified_product_code": "123005159",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 123005159、販売包装単位コード 14987123005156。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "F25注・F50注・F100注は需要が増えた経緯に登場する製品です。対象はF5注とF10注の包装に限ります。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "ts-p77-panvitan-limited-202212",
+      "maker": "T's製薬",
+      "title": "調剤用パンビタン末 他社供給遅延に伴う限定出荷のお知らせ",
+      "url": "https://www.med.ts-pharma.com/di-net/kaitei/20221212_other.pdf",
+      "announced_at": "2022-12",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "1935f7d5d1e7875ef3154ddaf9a7ea61de8d27d9ca025d0ee70a4ceb91381ddc",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の供給遅延を受け、想定を上回る注文があったため、当時の武田テバ薬品は対象品について特約店への限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3179121A1028",
+          "product_name": "調剤用パンビタン末",
+          "maker": "T's製薬",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "100g",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（2022年12月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987123127247。"
+              }
+            },
+            {
+              "package": "500g（100g×5）",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（2022年12月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987123024782。"
+              }
+            },
+            {
+              "package": "1kg（200g×5）",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（2022年12月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987123024799。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2022年当時の限定出荷開始の経緯です。現在の製造販売元はT’s製薬で、厚労省公表欄の理由は別に表示しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
