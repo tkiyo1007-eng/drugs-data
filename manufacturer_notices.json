@@ -13759,6 +13759,655 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "メーカーは在庫消尽後の一時供給停止と、再開時期の別途案内を示しています。"
       ]
+    },
+    {
+      "id": "fujimoto-kairock-discontinuation-202607",
+      "maker": "藤本製薬",
+      "title": "カイロック細粒40％ 販売中止のお知らせ",
+      "url": "https://www.fujimoto-pharm.co.jp/wp-content/uploads/CYL-003_2607.pdf",
+      "announced_at": "2026-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "d3f5a568e08fd77e780f47b2df27dbfaf37a1c1c2c05f294ed084a77082227c5",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "原薬を調達できないため、藤本製薬が手元の在庫の出荷終了をもって販売を中止すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2325001C2092",
+          "product_name": "カイロック細粒４０％",
+          "maker": "藤本製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "0.5g分包×200包",
+              "unified_product_code": "196225201",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年7月見込み（7月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 196225201、販売包装単位コード 14987196225208。"
+              }
+            },
+            {
+              "package": "100gバラ",
+              "unified_product_code": "196225010",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年1月見込み（7月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 196225010、販売包装単位コード 14987196225017。"
+              }
+            },
+            {
+              "package": "500gバラ",
+              "unified_product_code": "196225003",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年12月見込み（7月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 196225003、販売包装単位コード 14987196225000。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.fujimoto-pharm.co.jp/wp-content/uploads/CYL-003_2607.pdf",
+          "target_yj_codes": [
+            "2325001C2092"
+          ],
+          "type": "メーカー文書に記載の別成分の候補",
+          "products": [
+            {
+              "name": "ガスター散１０％",
+              "maker": "LTLファーマ",
+              "yj_code": "2325003B1022",
+              "scope": "50g×1瓶（919100457）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "メーカー資料の経過措置期間満了は2028年3月31日の予定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "sawai-bepotastine-10-supply-202605",
+      "maker": "沢井製薬",
+      "title": "ベポタスチンベシル酸塩錠5mg・10mg「サワイ」供給に関するお詫びとお願い",
+      "url": "https://med.sawai.co.jp/file/pr27_4625_1.pdf",
+      "announced_at": "2026-05",
+      "listed_at": "2026-05-22",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "56963fb5bfd64c4fbc0967ea6e6b356ad27d37326544141b76c0db55e83f1bc8",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造工場の生産能力が逼迫して10mgの製造を一時停止。沢井製薬は既採用施設への供給を優先し、在庫消尽までの限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "4490022F2093",
+          "product_name": "ベポタスチンベシル酸塩錠１０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080002710",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年9月見込み（5月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、5月のメーカー資料）",
+                "note": "統一商品コード 080002710、販売包装単位コード 14987080002717。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "080002727",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月見込み（5月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、5月のメーカー資料）",
+                "note": "統一商品コード 080002727、販売包装単位コード 14987080002724。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr27_4625_1.pdf",
+          "target_yj_codes": [
+            "4490022F2093"
+          ],
+          "type": "原文に示された製品・規格・包装です。",
+          "products": [
+            {
+              "name": "ベポタスチンベシル酸塩錠１０ｍｇ「日医工」",
+              "maker": "日医工",
+              "yj_code": "4490022F2115",
+              "scope": "PTP100錠（376-24170-0）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "メーカーは在庫消尽後の一時供給停止と、再開時期の別途案内を示しています。",
+        "沢井製薬の2026年11月13日版一覧で、対象品目の限定出荷を確認しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "sawai-bepotastine-5-supply-202605",
+      "maker": "沢井製薬",
+      "title": "ベポタスチンベシル酸塩錠5mg・10mg「サワイ」供給に関するお詫びとお願い",
+      "url": "https://med.sawai.co.jp/file/pr27_4625_1.pdf",
+      "announced_at": "2026-05",
+      "listed_at": "2026-05-22",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "56963fb5bfd64c4fbc0967ea6e6b356ad27d37326544141b76c0db55e83f1bc8",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "沢井製薬は、5mgについて既採用施設への供給を優先するため、特約店・販売会社への限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "4490022F1097",
+          "product_name": "ベポタスチンベシル酸塩錠５ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080002611",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、5月のメーカー資料）",
+                "note": "統一商品コード 080002611、販売包装単位コード 14987080002618。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料が示す代替品と在庫消尽後の一時停止は10mg向けの案内です。",
+        "沢井製薬の2026年11月13日版一覧で、対象品目の限定出荷を確認しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に対象規格の代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sawai-celecoxib-100-supply-202607",
+      "maker": "沢井製薬",
+      "title": "セレコキシブ錠100mg「サワイ」供給に関するお詫びとお願い",
+      "url": "https://med.sawai.co.jp/file/pr27_4690_2.pdf",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "eb8ca90d433ed25158be9b9bce3e962fd7b856cb9636d2ec6983aed111e272d1",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造工場の生産能力が逼迫したため、沢井製薬は対象包装の限定出荷と、在庫消尽後の一時供給停止を案内しました。",
+      "targets": [
+        {
+          "yj_code": "1149037F1119",
+          "product_name": "セレコキシブ錠１００ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080191117",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年9月見込み（7月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、7月のメーカー資料）",
+                "note": "統一商品コード 080191117、販売包装単位コード 14987080191114。"
+              }
+            },
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "080191179",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年3月見込み（7月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、7月のメーカー資料）",
+                "note": "統一商品コード 080191179、販売包装単位コード 14987080191176。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "080191124",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年10月見込み（7月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、7月のメーカー資料）",
+                "note": "統一商品コード 080191124、販売包装単位コード 14987080191121。"
+              }
+            },
+            {
+              "package": "バラ200錠",
+              "unified_product_code": "080191148",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月見込み（7月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、7月のメーカー資料）",
+                "note": "統一商品コード 080191148、販売包装単位コード 14987080191145。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr27_4690_2.pdf",
+          "target_yj_codes": [
+            "1149037F1119"
+          ],
+          "type": "原文に示された製品・規格・包装です。",
+          "products": [
+            {
+              "name": "セレコキシブ錠１００ｍｇ「日医工」",
+              "maker": "日医工",
+              "yj_code": "1149037F1151",
+              "scope": "PTP100錠（376-11900-9）、PTP140錠（376-11902-3）、バラ200錠（376-11904-7）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "メーカーは在庫消尽後の一時供給停止と、再開時期の別途案内を示しています。",
+        "沢井製薬の2026年11月13日版一覧で、対象品目の限定出荷を確認しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "sawai-dienogest-1-supply-202606",
+      "maker": "沢井製薬",
+      "title": "ジエノゲスト錠1mg「サワイ」供給に関するお詫びとお願い",
+      "url": "https://med.sawai.co.jp/file/pr27_4576_1.pdf",
+      "announced_at": "2026-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "9bbca6b05a9131ba06c56ec9d05423639be876f029d551c1eddac1e8ab89e69b",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製剤の製造が遅れて一時的に品薄となったため、沢井製薬が既採用施設への供給を優先し、限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2499010F1090",
+          "product_name": "ジエノゲスト錠１ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080129219",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、6月のメーカー資料）",
+                "note": "統一商品コード 080129219、販売包装単位コード 14987080129216。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.sawai.co.jp/file/pr27_4576_1.pdf",
+          "target_yj_codes": [
+            "2499010F1090"
+          ],
+          "type": "原文に示された製品・規格・包装です。",
+          "products": [
+            {
+              "name": "ジエノゲスト錠１ｍｇ「モチダ」",
+              "maker": "持田製薬販売",
+              "yj_code": "2499010F1120",
+              "scope": "PTP100錠（224057309）、PTP140錠（224057323）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "沢井製薬の2026年11月13日版一覧で、対象品目の限定出荷を確認しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "fuso-hosphlan-limited-202610",
+      "maker": "扶桑薬品工業",
+      "title": "ホスフラン注10mg・20mg 限定出荷のお知らせ",
+      "url": "https://www.fuso-pharm.co.jp/med/wp-content/uploads/sites/2/2026/10/%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B%EF%BC%88%E3%83%9B%E3%82%B9%E3%83%95%E3%83%A9%E3%83%B3%E6%B3%A8-10mg-20mg%EF%BC%89.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-30",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "1de5c3d4b88f2826da6dc01c3e790f06b6494a001d72b0d445aa1c10748cb367",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の影響で需要が大きく増え、安定した供給に支障が出るおそれがあるため、扶桑薬品工業が限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3131401A3083",
+          "product_name": "ホスフラン注－１０ｍｇ",
+          "maker": "扶桑薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1mL×50管（ガラスアンプル）",
+              "unified_product_code": "197-680184",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 197-680184。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3131401A4039",
+          "product_name": "ホスフラン注－２０ｍｇ",
+          "maker": "扶桑薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "2mL×50管（ガラスアンプル）",
+              "unified_product_code": "197-680191",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 197-680191。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "扶桑薬品工業の2026年10月30日版供給一覧にも対象品目の限定出荷が掲載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "fuso-bicarbonate-500g-limited-202606",
+      "maker": "扶桑薬品工業",
+      "title": "炭酸水素ナトリウム「フソー」バラ500g 限定出荷のお知らせ",
+      "url": "https://www.fuso-pharm.co.jp/med/wp-content/uploads/sites/2/2026/06/%E3%80%90%E5%8C%BB%E7%99%82%E9%96%A2%E4%BF%82%E8%80%85%E5%90%84%E4%BD%8D%E3%80%91%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B%EF%BC%88%E7%82%AD%E9%85%B8%E6%B0%B4%E7%B4%A0%E3%83%8A%E3%83%88%E3%83%AA%E3%82%A6%E3%83%A0%E3%80%8C%E3%83%95%E3%82%BD%E3%83%BC%E3%80%8D%EF%BC%88%E3%83%90%E3%83%A9%EF%BC%89500g%EF%BC%89.pdf",
+      "announced_at": "2026-06",
+      "listed_at": "2026-07-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "bffb2c4e23ae1a10ebe838e88b41a29a628419fc85370771698a6384c9f899fa",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の影響で需要が大きく増え、安定した供給に支障が出るおそれがあるため、扶桑薬品工業が限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2344004X1216",
+          "product_name": "炭酸水素ナトリウム「フソー」",
+          "maker": "扶桑薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "バラ500g",
+              "unified_product_code": "197-403103",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 197-403103。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "扶桑薬品工業の2026年10月30日版供給一覧にも対象品目の限定出荷が掲載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "fuso-thiamine-limited-202511",
+      "maker": "扶桑薬品工業",
+      "title": "チアミン塩化物塩酸塩注「フソー」 限定出荷のお知らせ",
+      "url": "https://www.fuso-pharm.co.jp/med/wp-content/uploads/sites/2/2025/11/%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B%EF%BC%88%E3%83%81%E3%82%A2%E3%83%9F%E3%83%B3%E5%A1%A9%E5%8C%96%E7%89%A9%E5%A1%A9%E9%85%B8%E5%A1%A9%E6%B3%A85mg10mg20mg50mg%E3%80%8C%E3%83%95%E3%82%BD%E2%80%95%E3%80%8D%EF%BC%89.pdf",
+      "announced_at": "2025-11",
+      "listed_at": "2025-11-17",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "53e83e4695a6ea1d61237a81cafdd05ef7a9aa99aba9fd837050bc7aba71d95d",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の影響で需要が大きく増え、安定した供給に支障が出るおそれがあるため、扶桑薬品工業が限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3121400A2299",
+          "product_name": "チアミン塩化物塩酸塩注１０ｍｇ「フソー」",
+          "maker": "扶桑薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1mL×50管（ガラスアンプル）",
+              "unified_product_code": "197-625291",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 197-625291。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3121400A3171",
+          "product_name": "チアミン塩化物塩酸塩注２０ｍｇ「フソー」",
+          "maker": "扶桑薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1mL×50管（ガラスアンプル）",
+              "unified_product_code": "197-625307",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 197-625307。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3121400A4100",
+          "product_name": "チアミン塩化物塩酸塩注５０ｍｇ「フソー」",
+          "maker": "扶桑薬品工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1mL×50管（ガラスアンプル）",
+              "unified_product_code": "197-624225",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 197-624225。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "扶桑薬品工業の2026年10月30日版供給一覧にも対象品目の限定出荷が掲載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "ceolia-isosorbide-70-limited-202609",
+      "maker": "セオリアファーマ",
+      "title": "イソソルビド内用液70％「CEO」・分包30mL「CEO」限定出荷のご案内",
+      "url": "https://www.ceolia.co.jp/wp-content/uploads/2026/08/isosorbide_CEO_info2.pdf",
+      "announced_at": "2026-09",
+      "listed_at": "2026-09-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "41030cf81acc8d810e8ad4ed7321354ae27039a4670e3296ae027539edd0777e",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "想定を超える需要増により安定供給に支障が出るおそれがあるため、セオリアファーマが2026年9月1日から限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2139001S1079",
+          "product_name": "イソソルビド内用液７０％「ＣＥＯ」",
+          "maker": "セオリアファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "500mL×1（プラスチック瓶）",
+              "unified_product_code": "123-15654-7",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 123-15654-7、販売包装単位コード 14987123156544。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2139001S2040",
+          "product_name": "イソソルビド内用液７０％分包３０ｍＬ「ＣＥＯ」",
+          "maker": "セオリアファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "30mL×42（分包）",
+              "unified_product_code": "123-15655-4",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 123-15655-4、販売包装単位コード 14987123156551。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカー資料では、新規または増量の注文への対応が難しいと案内しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }

@@ -15,6 +15,8 @@ MAKER_HOSTS = {
     '丸石製薬': 'www.maruishi-pharm.co.jp',
     '共和薬品工業': 'www.amel-di.com',
     '扶桑薬品工業': 'www.fuso-pharm.co.jp',
+    '藤本製薬': 'www.fujimoto-pharm.co.jp',
+    'セオリアファーマ': 'www.ceolia.co.jp',
     'ファイザー': 'www.pfizermedicalinformation.jp', 'サンド': 'sandoz-jp.cms.sandoz.com',
     '三和化学研究所': 'med.skk-net.com', '日本薬品工業': 'www.npi-inc.co.jp',
     '第一三共': 'www.medicalcommunity.jp', '第一三共エスファ': 'med.daiichisankyo-ep.co.jp',
