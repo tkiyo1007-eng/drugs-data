@@ -233,6 +233,11 @@ def supply_answer_html(row, status, notices=(), lifecycle=None, bulletins=None):
         notice = match["notice"]
         parts.append(f'<p>メーカー説明の理由（{esc(notice["title"])}）：{esc(notice["reason"])}'
                      f' <a href="#manufacturerNoticesTitle">メーカー原文・公表年月日・確認日を見る</a></p>')
+    if any(not match["source_changed"] and any(
+        group.get("source_url") == match["notice"]["url"] and item_key(row) in group.get("target_yj_codes", ())
+        for group in match["notice"].get("alternatives", ())
+    ) for match in matches):
+        parts.append('<p><a href="#manufacturerNoticesTitle">メーカーが案内した原因・代替候補を見る</a></p>')
     # 終了理由の確認案内は検索改善の対象品目だけに限定する。
     # 薬価削除予定や通常出荷の他品目へ、終了理由不明の文言を一律に加えない。
     if item_key(row) in REVOTOMIN_VARIANTS | {"2242001B2335", "3339950R1142"}:
@@ -667,6 +672,9 @@ def load_manufacturer_notices(path: Path) -> list:
         for group in notice.get("alternatives", []):
             if not isinstance(group, dict) or not isinstance(group.get("products"), list):
                 raise ValueError("確認済みメーカー案内の候補品群が不正です")
+            if "source_url" in group and (group["source_url"] != notice["url"]
+                    or not group["products"] or not group.get("target_yj_codes")):
+                raise ValueError("候補品の対象または原典URLが確認済みメーカー案内と一致しません")
             for product in group["products"]:
                 if (not isinstance(product, dict) or not isinstance(product.get("name"), str)
                         or not product["name"].strip()
@@ -874,6 +882,7 @@ def manufacturer_notices_html(row: dict, notices=(), warning="", catalog_yj_code
                 parts.append(f'<p><a href="{esc(pmda_source["url"])}" target="_blank" rel="noopener" '
                              'data-dsn-event="official-source-open">PMDAの回収情報を確認</a></p>')
         groups = []
+        sourced_groups = []
         for group in notice.get("alternatives", []):
             selected = group.get("target_yj_codes", [])
             if selected and row.get("YJコード") not in selected:
@@ -897,12 +906,22 @@ def manufacturer_notices_html(row: dict, notices=(), warning="", catalog_yj_code
                               + (f'（{esc(product["source_class"])}）' if product.get("source_class") else "") + '</span>')
                 products.append(f'<li>{label}</li>')
             caution = "".join(f'<li>{esc(value)}</li>' for value in group.get("cautions", []))
-            groups.append('<div class="notice-alternatives">'
+            candidate_group = ('<div class="notice-alternatives">'
                           + (f'<p>対象の適応：{esc(group["indication"])}</p>' if group.get("indication") else "")
                           + (f'<p>{esc(group["type"])}</p>' if group.get("type") else "")
                           + (f'<ul>{"".join(products)}</ul>' if products else "")
                           + (f'<p>メーカーの候補案内：{esc(group["no_alternative_statement"])}</p>' if group.get("no_alternative_statement") else "")
                           + (f'<ul>{caution}</ul>' if caution else "") + '</div>')
+            if group.get("source_url") == notice["url"]:
+                sourced_groups.append(candidate_group)
+            else:
+                groups.append(candidate_group)
+        if sourced_groups:
+            parts.append('<h4>代替候補（メーカー資料）</h4>'
+                         '<p><strong>この情報だけでは切替可否を判断できません。</strong> '
+                         f'<a href="{esc(notice["url"])}" target="_blank" rel="noopener" '
+                         'data-dsn-event="official-source-open">代替候補の原典を確認</a></p>'
+                         + "".join(sourced_groups))
         if groups:
             parts.append('<h4>メーカーが示す参考候補</h4>' + "".join(groups)
                          + '<p>候補の在庫・納入可否は未確認です。医薬品の使用・変更は医師・薬剤師が処方元と確認してください。</p>')

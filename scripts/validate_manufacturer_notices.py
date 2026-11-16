@@ -33,6 +33,7 @@ MAKER_HOSTS = {
     'ニプロ': 'med.nipro.co.jp',
     '塩野義製薬': 'www.shionogi.com',
     'オルガノン': 'organonpro.com',
+    'サノフィ': 'www.e-mr.sanofi.co.jp',
 }
 SCOPES = {'product', 'package', 'seller_route_and_package'}
 KINDS = {'discontinued', 'limited', 'stopped', 'resumed', 'resumption_planned', 'recall'}
@@ -158,6 +159,8 @@ def validate(document, rows):
         if not isinstance(alternatives, list): errors.append(label + ': invalid alternatives'); continue
         for g in alternatives:
             if not isinstance(g, dict) or not isinstance(g.get('products'), list): errors.append(label + ': invalid candidate group'); continue
+            if 'source_url' in g and (g['source_url'] != n.get('url') or not g['products'] or not g.get('target_yj_codes')):
+                errors.append(label + ': candidate source must match the notice and identify targeted products')
             selected = g.get('target_yj_codes') or []
             if not isinstance(selected, list) or any(not isinstance(yj, str) or not FORMAL_YJ.fullmatch(yj) for yj in selected):
                 errors.append(label + ': invalid candidate group targets')

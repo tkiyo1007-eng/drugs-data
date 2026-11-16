@@ -7778,6 +7778,240 @@
         "確認したメーカー原典に代替候補の記載はありません。",
         "原典に解除予定日は記載されていません。現在の供給区分は厚労省欄をご確認ください。卸在庫・受注可否は未確認です。"
       ]
+    },
+    {
+      "id": "dsep-teramuro-supply-reason-20260902",
+      "maker": "第一三共エスファ",
+      "title": "テラムロ配合錠AP・BP「DSEP」の供給制限の理由と対策",
+      "url": "https://med.daiichisankyo-ep.co.jp/information/files/2284/gentei_202609_E1_G.pdf",
+      "source_index_url": "https://med.daiichisankyo-ep.co.jp/information/?certification=1",
+      "announced_at": "2026-09",
+      "listed_at": "2026-09-02",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "81650d84aa047088bf5d6a408980e06c6f8af5f7db0711971f34802902263de8",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "第一三共エスファは、製造設備の一時的な不具合で在庫水準が大幅に低下し、出荷制限を実施したと説明しています。生産の効率化に加えて設備を増強し、生産量が増えるまでには時間を要する見込みとしています。",
+      "targets": [
+        {
+          "yj_code": "2149117F1033",
+          "product_name": "テラムロ配合錠ＡＰ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "081186754",
+              "supply": {
+                "status": "limited",
+                "status_text": "出荷制限（2026年9月の案内時点）",
+                "plans": [],
+                "note": "統一商品コード081186754。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "081186761",
+              "supply": {
+                "status": "limited",
+                "status_text": "出荷制限（2026年9月の案内時点）",
+                "plans": [],
+                "note": "統一商品コード081186761。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149117F2030",
+          "product_name": "テラムロ配合錠ＢＰ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "081186853",
+              "supply": {
+                "status": "limited",
+                "status_text": "出荷制限（2026年9月の案内時点）",
+                "plans": [],
+                "note": "統一商品コード081186853。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "確認した9月のメーカー原典に、具体的な解除予定日や代替候補の記載はありません。",
+        "厚労省の供給区分と理由は公表欄をご確認ください。現在の卸在庫・受注可否は未確認です。"
+      ]
+    },
+    {
+      "id": "sanofi-lispro-solostar-supply-and-alternative-20260116",
+      "maker": "サノフィ",
+      "title": "インスリン リスプロBS注ソロスターHU「サノフィ」の限定出荷と代替候補",
+      "url": "https://www.e-mr.sanofi.co.jp/dam/jcr:e368e64f-9893-4dc0-a046-7ff0f6de9d35/lss_info2026_02.2026-01-15-03-57-06.pdf",
+      "source_index_url": "https://www.e-mr.sanofi.co.jp/products/insulin_lispro/",
+      "announced_at": "2026-01",
+      "listed_at": "2026-01-16",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "efc6ceec55caf00e81e32f014ac25dbc67231db09c53ac9659820fb3aff66c06",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "サノフィは、世界的なインスリンの供給量低下と自社品の需要増を見込み、製造能力に制約がある中で基礎インスリンの生産能力を維持するために追加インスリンの製造を調整したと説明しています。2026年3月から本品の出荷量が大幅に減る見込みで、安定供給再開の時期はこの案内時点で未定です。",
+      "targets": [
+        {
+          "yj_code": "2492422G1023",
+          "product_name": "インスリン　リスプロＢＳ注ソロスター　ＨＵ「サノフィ」",
+          "maker": "サノフィ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "3mL×2本",
+              "unified_product_code": "199324079",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷・B（出荷量減少）（2026年1月の案内時点）",
+                "plans": [],
+                "note": "統一商品コード199324079。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.e-mr.sanofi.co.jp/dam/jcr:e368e64f-9893-4dc0-a046-7ff0f6de9d35/lss_info2026_02.2026-01-15-03-57-06.pdf",
+          "target_yj_codes": [
+            "2492422G1023"
+          ],
+          "type": "サノフィは新規処方を控えるよう案内し、既存の患者では血糖管理に懸念のある方を除き、処方医が変更を検討する場合の候補を示しています。",
+          "products": [
+            {
+              "name": "インスリン　アスパルトＢＳ注ソロスター　ＮＲ「サノフィ」",
+              "yj_code": "2492423G1028",
+              "maker": "サノフィ",
+              "scope": "300単位／3mL。インスリン リスプロとは異なる成分のインスリン アスパルト。"
+            }
+          ],
+          "cautions": [
+            "処方医・薬剤師が患者の状態と最新の電子添文を確認してください。受注・在庫は未確認です。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年1月に発表された案内です。現在の厚労省区分・出荷量は公表欄をご確認ください。",
+        "この案内の対象はソロスターHUです。カートやバイアルは対象に含みません。"
+      ]
+    },
+    {
+      "id": "towa-teramuro-resumption-and-restriction-202610",
+      "maker": "東和薬品",
+      "title": "テラムロ配合錠AP・BP「トーワ」の出荷再開と限定出荷の理由",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83764&t=4&f=%E3%83%86%E3%83%A9%E3%83%A0%E3%83%AD%E9%85%8D%E5%90%88%E9%8C%A0APBP%EF%BD%A2%E3%83%88%E3%83%BC%E3%83%AF%EF%BD%A3_%E5%87%BA%E8%8D%B7%E5%86%8D%E9%96%8B%EF%BC%86%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E7%B6%99%E7%B6%9A%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "source_index_url": "https://med.towayakuhin.co.jp/medical/product/info.php?tab=5",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "7e31258d85599e05f1a808679e25b6ad7ac75794d8d426244a5e2141a51eb9b2",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "東和薬品は、出荷再開後も十分な在庫を確保できず、安定供給体制を整えるには時間がかかるため、対象5包装の限定出荷を継続すると案内しています。",
+      "maker_supply_status": {
+        "handling": "②限定出荷（自社の事情）",
+        "volume": "B（出荷量減少）"
+      },
+      "resumption": "出荷再開日は2026年10月29日と案内。限定出荷の解除時期は案内時点で未定です。",
+      "targets": [
+        {
+          "yj_code": "2149117F1076",
+          "product_name": "テラムロ配合錠ＡＰ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155349016",
+              "supply": {
+                "status": "limited",
+                "status_text": "出荷再開後も限定出荷（2026年10月の案内時点）",
+                "plans": [],
+                "note": "統一商品コード155349016。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "155349047",
+              "supply": {
+                "status": "limited",
+                "status_text": "出荷再開後も限定出荷（2026年10月の案内時点）",
+                "plans": [],
+                "note": "統一商品コード155349047。"
+              }
+            },
+            {
+              "package": "バラ300錠",
+              "unified_product_code": "155349030",
+              "supply": {
+                "status": "limited",
+                "status_text": "出荷再開後も限定出荷（2026年10月の案内時点）",
+                "plans": [],
+                "note": "統一商品コード155349030。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149117F2072",
+          "product_name": "テラムロ配合錠ＢＰ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155350043",
+              "supply": {
+                "status": "limited",
+                "status_text": "出荷再開後も限定出荷（2026年10月の案内時点）",
+                "plans": [],
+                "note": "統一商品コード155350043。"
+              }
+            },
+            {
+              "package": "バラ100錠",
+              "unified_product_code": "155350050",
+              "supply": {
+                "status": "limited",
+                "status_text": "出荷再開後も限定出荷（2026年10月の案内時点）",
+                "plans": [],
+                "note": "統一商品コード155350050。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "確認した10月のメーカー原典に、代替候補の記載はありません。",
+        "現在の厚労省公表理由は公表欄をご確認ください。卸在庫・受注可否は未確認です。"
+      ]
     }
   ]
 }
