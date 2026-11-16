@@ -15591,6 +15591,811 @@
         "新規採用や既採用施設の増量には応じられないと案内しています。",
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
       ]
+    },
+    {
+      "id": "dsep-eletriptan-limited-202601",
+      "maker": "第一三共エスファ",
+      "title": "第一三共エスファ 限定出荷及び新規ご採用辞退に関するお知らせ",
+      "url": "https://med.daiichisankyo-ep.co.jp/information/files/2153/gentei_20260120_E1_G.pdf",
+      "announced_at": "2026-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "5dffb8f708b196f8640f6e2372c0bfc972dd2001349344758fd0f5ef6d44853c",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の出荷停止の影響で注文が想定を上回ったため、第一三共エスファが在庫逼迫や流通在庫の偏りを抑える目的で限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2160005F1030",
+          "product_name": "エレトリプタン錠２０ｍｇ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP10錠",
+              "unified_product_code": "081188550",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、1月のメーカー資料）",
+                "note": "統一商品コード 081188550。"
+              }
+            },
+            {
+              "package": "PTP10錠（患者用シート）",
+              "unified_product_code": "081188567",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、1月のメーカー資料）",
+                "note": "統一商品コード 081188567。"
+              }
+            },
+            {
+              "package": "PTP50錠（患者用シート）",
+              "unified_product_code": "081188574",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、1月のメーカー資料）",
+                "note": "統一商品コード 081188574。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "第一三共エスファの2026年11月9日更新の限定出荷一覧に、対象包装が掲載されています。",
+        "メーカーは限定出荷の解除まで新規採用を辞退すると案内しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "dsep-dutasteride-limited-202508",
+      "maker": "第一三共エスファ",
+      "title": "第一三共エスファ 限定出荷及び新規ご採用辞退に関するお知らせ",
+      "url": "https://med.daiichisankyo-ep.co.jp/information/files/2094/gentei_20250808_E1_G.pdf",
+      "announced_at": "2025-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "95f6ae81b66d446a488f5badd866e71f3cc05eff678a07c747bec871bddd2cda",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の限定出荷の影響で注文が想定を上回ったため、第一三共エスファが在庫逼迫や流通在庫の偏りを抑える目的で限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2499011M1051",
+          "product_name": "デュタステリドカプセル０．５ｍｇＡＶ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP30カプセル",
+              "unified_product_code": "081189809",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、8月のメーカー資料）",
+                "note": "統一商品コード 081189809。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2499011F1028",
+          "product_name": "デュタステリド錠０．５ｍｇＡＶ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP30錠",
+              "unified_product_code": "081189854",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、8月のメーカー資料）",
+                "note": "統一商品コード 081189854。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "081189861",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、8月のメーカー資料）",
+                "note": "統一商品コード 081189861。"
+              }
+            },
+            {
+              "package": "バラ300錠",
+              "unified_product_code": "081189878",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、8月のメーカー資料）",
+                "note": "統一商品コード 081189878。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "第一三共エスファの2026年11月9日更新の限定出荷一覧に、対象包装が掲載されています。",
+        "メーカーは限定出荷の解除まで新規採用を辞退すると案内しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "dsep-telmisartan-limited-202511",
+      "maker": "第一三共エスファ",
+      "title": "第一三共エスファ 限定出荷及び新規ご採用辞退に関するお知らせ",
+      "url": "https://med.daiichisankyo-ep.co.jp/information/files/2131/gentei_20251121_E1_G.pdf",
+      "announced_at": "2025-11",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "bbe73275dc4603ffb30421fa94c7b03ac0cc7f0e7d75356848064332629bafa6",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の出荷停止の影響で注文が想定を上回ったため、第一三共エスファが在庫逼迫や流通在庫の偏りを抑える目的で限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149113F1035",
+          "product_name": "テルチア配合錠ＡＰ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "081186655",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 081186655。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149113F2031",
+          "product_name": "テルチア配合錠ＢＰ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "081186709",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 081186709。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149042F3036",
+          "product_name": "テルミサルタン錠８０ｍｇ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "081186556",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 081186556。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "第一三共エスファの2026年11月9日更新の限定出荷一覧に、対象包装が掲載されています。",
+        "メーカーは限定出荷の解除まで新規採用を辞退すると案内しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "dsep-toaraset-limited-202502",
+      "maker": "第一三共エスファ",
+      "title": "第一三共エスファ 限定出荷及び新規ご採用辞退に関するお知らせ",
+      "url": "https://med.daiichisankyo-ep.co.jp/information/files/2017/gentei_20250207_E1_G.pdf",
+      "announced_at": "2025-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "c20fd4594f47630147f39d635b51590701f5f285a36fd40914576cba7764dfb6",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "注文数が想定を上回ったため、第一三共エスファは在庫逼迫や流通在庫の偏りを抑える目的で限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "1149117F1039",
+          "product_name": "トアラセット配合錠「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "081188505",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、2月のメーカー資料）",
+                "note": "統一商品コード 081188505。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "081188512",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、2月のメーカー資料）",
+                "note": "統一商品コード 081188512。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "第一三共エスファの2026年11月9日更新の限定出荷一覧に、対象包装が掲載されています。",
+        "メーカーは限定出荷の解除まで新規採用を辞退すると案内しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "dsep-valaciclovir-limited-202605",
+      "maker": "第一三共エスファ",
+      "title": "第一三共エスファ 限定出荷及び新規ご採用辞退に関するお知らせ",
+      "url": "https://med.daiichisankyo-ep.co.jp/information/files/2208/gentei_20260519_E1_G.pdf",
+      "announced_at": "2026-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "4ea68e62bb1d7f8b8b75a7b4b884a2d07c53770ca3113b993cbe3dbdfe117240",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "2026年度の薬価改定の影響で需要が増え、安定供給に支障が生じると見込まれたため、第一三共エスファが限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "6250019F1055",
+          "product_name": "バラシクロビル錠５００ｍｇ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP42錠",
+              "unified_product_code": "081183081",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、5月のメーカー資料）",
+                "note": "統一商品コード 081183081。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "第一三共エスファの2026年11月9日更新の限定出荷一覧に、対象包装が掲載されています。",
+        "メーカーは限定出荷の解除まで新規採用を辞退すると案内しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "dsep-valsartan-limited-202609",
+      "maker": "第一三共エスファ",
+      "title": "第一三共エスファ 限定出荷及び新規ご採用辞退に関するお知らせ",
+      "url": "https://med.daiichisankyo-ep.co.jp/information/files/2268/gentei_20260915_E1_G.pdf",
+      "announced_at": "2026-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ff4bcc16c80d58e90f9cea71e78f36ed0afda2a9847281a975f79907d53de2f1",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の限定出荷の影響で注文が想定を上回ったため、第一三共エスファが在庫逼迫や流通在庫の偏りを抑える目的で限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149041F3058",
+          "product_name": "バルサルタン錠８０ｍｇ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "081183319",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、9月のメーカー資料）",
+                "note": "統一商品コード 081183319。"
+              }
+            },
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "081183326",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、9月のメーカー資料）",
+                "note": "統一商品コード 081183326。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "081183357",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、9月のメーカー資料）",
+                "note": "統一商品コード 081183357。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149041F4054",
+          "product_name": "バルサルタン錠１６０ｍｇ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "081183371",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、9月のメーカー資料）",
+                "note": "統一商品コード 081183371。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "第一三共エスファの2026年11月9日更新の限定出荷一覧に、対象包装が掲載されています。",
+        "メーカーは限定出荷の解除まで新規採用を辞退すると案内しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "dsep-tazopipe-limited-202604",
+      "maker": "第一三共エスファ",
+      "title": "第一三共エスファ 限定出荷及び新規ご採用辞退に関するお知らせ",
+      "url": "https://med.daiichisankyo-ep.co.jp/information/files/2190/gentei_20260406_E1_G.pdf",
+      "announced_at": "2026-04",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "0ea59c6b77eba165eb5c6fa57f9bb650565997ce21d9b4661a4947e1a5449c20",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "2026年度の薬価改定の影響で需要が増え、安定供給に支障が生じると見込まれたため、第一三共エスファが限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "6139505F3054",
+          "product_name": "タゾピペ配合静注用２．２５「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10バイアル",
+              "unified_product_code": "081184682",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、4月のメーカー資料）",
+                "note": "統一商品コード 081184682。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6139505F4050",
+          "product_name": "タゾピペ配合静注用４．５「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10バイアル",
+              "unified_product_code": "081184699",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、4月のメーカー資料）",
+                "note": "統一商品コード 081184699。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "第一三共エスファの2026年11月9日更新の限定出荷一覧に、対象包装が掲載されています。",
+        "メーカーは限定出荷の解除まで新規採用を辞退すると案内しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "hisamitsu-2655711n1034-limited-202606",
+      "maker": "久光製薬",
+      "title": "アトラント・ボレー 限定出荷に関するお知らせ",
+      "url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260618.pdf",
+      "announced_at": "2026-06",
+      "listed_at": "2026-06-18",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "3f17d609658e9a9d8dd08157cd2412bf2d6ffba07a9cd8270236395976aacfd1",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の影響で需要が急増したため、久光製薬が対象包装の限定出荷を案内しました。 対象包装の開始日は、メーカー資料では2026年5月22日です。",
+      "targets": [
+        {
+          "yj_code": "2655711N1034",
+          "product_name": "アトラントクリーム１％",
+          "maker": "久光製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10gチューブ×20本",
+              "unified_product_code": "188-49021-1",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 188-49021-1、販売包装単位コード 14987188490218。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "この資料の掲載時点では解除時期は未定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "hisamitsu-2655711m1039-limited-202606",
+      "maker": "久光製薬",
+      "title": "アトラント・ボレー 限定出荷に関するお知らせ",
+      "url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260618.pdf",
+      "announced_at": "2026-06",
+      "listed_at": "2026-06-18",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "3f17d609658e9a9d8dd08157cd2412bf2d6ffba07a9cd8270236395976aacfd1",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の影響で需要が急増したため、久光製薬が対象包装の限定出荷を案内しました。 対象包装の開始日は、メーカー資料では2026年5月22日です。",
+      "targets": [
+        {
+          "yj_code": "2655711M1039",
+          "product_name": "アトラント軟膏１％",
+          "maker": "久光製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10gチューブ×20本",
+              "unified_product_code": "188-49031-0",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 188-49031-0、販売包装単位コード 14987188490317。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "この資料の掲載時点では解除時期は未定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "hisamitsu-2655711q1030-limited-202606",
+      "maker": "久光製薬",
+      "title": "アトラント・ボレー 限定出荷に関するお知らせ",
+      "url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260618.pdf",
+      "announced_at": "2026-06",
+      "listed_at": "2026-06-18",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "3f17d609658e9a9d8dd08157cd2412bf2d6ffba07a9cd8270236395976aacfd1",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の影響で需要が急増したため、久光製薬が対象包装の限定出荷を案内しました。 対象包装の開始日は、メーカー資料では2026年6月18日です。",
+      "targets": [
+        {
+          "yj_code": "2655711Q1030",
+          "product_name": "アトラント外用液１％",
+          "maker": "久光製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10mLプラスチック容器×20本",
+              "unified_product_code": "188-49011-2",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 188-49011-2、販売包装単位コード 14987188490119。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "この資料の掲載時点では解除時期は未定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "hisamitsu-2659708n1066-limited-202606",
+      "maker": "久光製薬",
+      "title": "アトラント・ボレー 限定出荷に関するお知らせ",
+      "url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260618.pdf",
+      "announced_at": "2026-06",
+      "listed_at": "2026-06-18",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "3f17d609658e9a9d8dd08157cd2412bf2d6ffba07a9cd8270236395976aacfd1",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の影響で需要が急増したため、久光製薬が対象包装の限定出荷を案内しました。 対象包装の開始日は、メーカー資料では2026年6月18日です。",
+      "targets": [
+        {
+          "yj_code": "2659708N1066",
+          "product_name": "ボレークリーム１％",
+          "maker": "久光製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10gチューブ×20本",
+              "unified_product_code": "188-46302-4",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 188-46302-4、販売包装単位コード 14987188463021。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "この資料の掲載時点では解除時期は未定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "hisamitsu-2659708q1054-limited-202606",
+      "maker": "久光製薬",
+      "title": "アトラント・ボレー 限定出荷に関するお知らせ",
+      "url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260618.pdf",
+      "announced_at": "2026-06",
+      "listed_at": "2026-06-18",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "3f17d609658e9a9d8dd08157cd2412bf2d6ffba07a9cd8270236395976aacfd1",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の影響で需要が急増したため、久光製薬が対象包装の限定出荷を案内しました。 対象包装の開始日は、メーカー資料では2026年6月18日です。",
+      "targets": [
+        {
+          "yj_code": "2659708Q1054",
+          "product_name": "ボレー外用液１％",
+          "maker": "久光製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10mLプラスチック容器×20本",
+              "unified_product_code": "188-46502-8",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 188-46502-8、販売包装単位コード 14987188465025。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "この資料の掲載時点では解除時期は未定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "hisamitsu-bolee-liquid-discontinuation-202609",
+      "maker": "久光製薬",
+      "title": "ボレー外用液1％ 販売中止のご案内",
+      "url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260916.pdf",
+      "announced_at": "2026-09",
+      "listed_at": "2026-09-16",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "67ee7913fd0341e40ca27eef2ec070f73fdf9f06cd90c96111ea452ba132b04e",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "久光製薬は、在庫がなくなり次第、ボレー外用液1％の販売を中止すると案内しました。原文の中止理由は「諸般の事情」です。",
+      "targets": [
+        {
+          "yj_code": "2659708Q1054",
+          "product_name": "ボレー外用液１％",
+          "maker": "久光製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10mLプラスチック容器×20本",
+              "unified_product_code": "188-46502-8",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年3月見込み（2026年9月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 188-46502-8、販売包装単位コード 14987188465025。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "経過措置期間はメーカーから別途案内予定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "jg-gefitinib250-discontinuation-202606",
+      "maker": "日本ジェネリック",
+      "title": "ゲフィチニブ錠250mg「JG」販売中止のご案内",
+      "url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/GEFIT_CHUUSHI_2606.pdf",
+      "announced_at": "2026-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "66dcbeecee5bf6ff16c1f69fdb7470c01ba6a6d915585a62d012fe8c9b105135",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "日本ジェネリックは、在庫がなくなり次第、ゲフィチニブ錠250mg「JG」を販売中止と案内しました。原文の中止理由は「諸般の事情」です。",
+      "targets": [
+        {
+          "yj_code": "4291013F1043",
+          "product_name": "ゲフィチニブ錠２５０ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP14錠",
+              "unified_product_code": "792101480",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年10月頃の見込み（2026年6月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 792101480、販売包装単位コード 14987792101487。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/GEFIT_CHUUSHI_2606.pdf",
+          "target_yj_codes": [
+            "4291013F1043"
+          ],
+          "type": "日本ジェネリックが原文に挙げた同規格の候補",
+          "products": [
+            {
+              "name": "ゲフィチニブ錠２５０ｍｇ「ＤＳＥＰ」",
+              "maker": "第一三共エスファ",
+              "yj_code": "4291013F1035",
+              "scope": "PTP14錠（081188000）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "メーカーの11月9日版一覧には当該包装が販売中止と記載されています。",
+        "6月のメーカー資料に記された経過措置期間は2027年3月31日までの予定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
     }
   ]
 }
