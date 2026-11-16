@@ -31455,6 +31455,567 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "novartis-jadenu-limited-202607",
+      "maker": "ノバルティスファーマ",
+      "title": "ジャドニュ顆粒分包90mg・360mg 製品供給について 限定出荷のご案内",
+      "url": "https://www.pro.novartis.com/jp-ja/sites/pro_novartis_com_jp/files/2026-07/ot__icl_202607.pdf",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-27",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "62c1d2a65dc92195d21ee3adc484f3cb31963231a2ac8b8133835a7d81a92f94",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "同じ効能の製品の供給状況を受けて通常を上回る需要が見込まれるため、ノバルティス ファーマは2026年7月28日から限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3929008D1022",
+          "product_name": "ジャドニュ顆粒分包９０ｍｇ",
+          "maker": "ノバルティスファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "30包",
+              "unified_product_code": "443-37530-7",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 443-37530-7。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3929008D2029",
+          "product_name": "ジャドニュ顆粒分包３６０ｍｇ",
+          "maker": "ノバルティスファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "30包",
+              "unified_product_code": "443-37531-4",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 443-37531-4。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "7月の資料で、通常出荷再開の予定は両規格とも未定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "biken-jebik-tanabe-limited-202605",
+      "maker": "阪大微生物病研究会",
+      "title": "ジェービックV 限定出荷のお知らせ（田辺ファーマの販売分）",
+      "url": "https://www.biken.or.jp/upload/product/document_pdf/jebik_v_tm/info_jebik_v_tp_20260511.pdf",
+      "announced_at": "2026-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "dcc80c12b76f7b10dbcc894ed621d10dcf73d8463bed4a8b4f23b09bd0cb1ad9",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "バイアルの充填工程に用いる凍結乾燥機が故障し、一時製造できない状態となりました。微研会から田辺ファーマへの出荷が一旦止まるため、田辺ファーマは2026年5月12日から特約店向けの限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "631340ND1022",
+          "product_name": "ジェービック　Ｖ",
+          "maker": "阪大微生物病研究会",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "1人分1バイアル・注射用水0.7mL添付",
+              "unified_product_code": "128-16298-7",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、5月のメーカー資料）",
+                "note": "統一商品コード 128-16298-7。"
+              }
+            }
+          ],
+          "seller": "田辺ファーマ"
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.biken.or.jp/upload/product/document_pdf/jebik_v_tm/info_jebik_v_tp_20260511.pdf",
+          "target_yj_codes": [
+            "631340ND1022"
+          ],
+          "type": "微研会と販売元の連名資料に記載の代替品",
+          "products": [
+            {
+              "name": "エンセバック皮下注用",
+              "maker": "KMバイオロジクス",
+              "yj_code": "631340ND1030",
+              "scope": "KMバイオロジクス製造販売・Meiji Seika ファルマ販売。1バイアル、注射用水0.7mL 1バイアル添付（統一商品コード222000277）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年11月頃は、5月の資料で示された微研会から販売元への出荷再開見込みです。11月16日版の厚労省データ上は限定出荷で、解消見込みは未定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "biken-jebik-takeda-limited-202605",
+      "maker": "阪大微生物病研究会",
+      "title": "ジェービックV 限定出荷のお知らせ（武田薬品工業の販売分）",
+      "url": "https://www.jpa-web.org/dcms_media/other/02_jebik-v-genteishukka_biken_260512.pdf",
+      "announced_at": "2026-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "22ec7378bb46d7a1147f6078f44b7bd7b9021f18ed7b4cd32c9c53f3196f9782",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "バイアルの充填工程に用いる凍結乾燥機が故障し、一時製造できない状態となりました。微研会から武田薬品工業への出荷が一旦止まるため、武田薬品工業は2026年5月12日から特約店向けの限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "631340ND1022",
+          "product_name": "ジェービック　Ｖ",
+          "maker": "阪大微生物病研究会",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "1人分1バイアル・注射用水0.7mL添付",
+              "unified_product_code": "123-15048-4",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、5月のメーカー資料）",
+                "note": "統一商品コード 123-15048-4。"
+              }
+            }
+          ],
+          "seller": "武田薬品工業"
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.jpa-web.org/dcms_media/other/02_jebik-v-genteishukka_biken_260512.pdf",
+          "target_yj_codes": [
+            "631340ND1022"
+          ],
+          "type": "微研会と販売元の連名資料に記載の代替品",
+          "products": [
+            {
+              "name": "エンセバック皮下注用",
+              "maker": "KMバイオロジクス",
+              "yj_code": "631340ND1030",
+              "scope": "KMバイオロジクス製造販売・Meiji Seika ファルマ販売。1バイアル、注射用水0.7mL 1バイアル添付（統一商品コード222000277）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年11月頃は、5月の資料で示された微研会から販売元への出荷再開見込みです。11月16日版の厚労省データ上は限定出荷で、解消見込みは未定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "biomedix-azelnidipine16-limited-202608",
+      "maker": "ビオメディクス",
+      "title": "アゼルニジピン錠16mg「BMD」 供給に関するお詫びとお願い",
+      "url": "https://biomedix.co.jp/medical/info/info-4487/",
+      "announced_at": "2026-08",
+      "listed_at": "2026-08-04",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "7f86b2de4570ebde5788c198d19725ce71c1128a1b1136727ddccb6d068bd3f2",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造委託先からの入荷が遅れたため、ビオメディクスは出荷調整を行い、在庫がなくなり次第、出荷を一時停止する予定と案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149043F2140",
+          "product_name": "アゼルニジピン錠１６ｍｇ「ＢＭＤ」",
+          "maker": "ビオメディクス",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100錠",
+              "unified_product_code": "809160219",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年8月中旬（当時の見込み）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 809160219。"
+              }
+            },
+            {
+              "package": "500錠",
+              "unified_product_code": "809160226",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年9月上旬（当時の見込み）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 809160226。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "8月の資料では供給再開時期は後日案内される予定です。対象は16mgの2包装です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "toko-felbinac70-jg-route-discontinued-202507",
+      "maker": "東光薬品工業",
+      "title": "フェルビナクパップ70mg「東光」 日本ジェネリックでの取り扱い中止",
+      "url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/FELBI70_CHUUSHI_2507.pdf",
+      "announced_at": "2025-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "0ebd6dc1128e050bc3d508d3e30c18b150473f0efde0bf52b2ccfa61673aea69",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "販売元の日本ジェネリックは、350枚包装を同社在庫の消尽後に取り扱い中止と案内しました。供給に関する詳しい理由は原文に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "2649731S1275",
+          "product_name": "フェルビナクパップ７０ｍｇ「東光」",
+          "maker": "東光薬品工業",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "350枚（7枚×50袋）",
+              "unified_product_code": "792295981",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2025年11月頃（2025年7月資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 792295981、販売包装単位コード 14987792295988。"
+              }
+            }
+          ],
+          "seller": "日本ジェネリック"
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/FELBI70_CHUUSHI_2507.pdf",
+          "target_yj_codes": [
+            "2649731S1275"
+          ],
+          "type": "日本ジェネリックの原文に記載の代替品",
+          "products": [
+            {
+              "name": "フェルビナクパップ７０ｍｇ「ラクール」",
+              "maker": "三友薬品",
+              "yj_code": "2649731S1267",
+              "scope": "三友薬品製造販売・ラクール薬品販売。300枚（6枚×50）と350枚（7枚×50）の2包装。原文に限定出荷継続と個別問い合わせの記載があります。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "日本ジェネリックの2026年11月9日一覧にも、同じ統一商品コードで取扱中止と記載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "rohto-nitten-cyanocobalamin-limited-202505",
+      "maker": "ロートニッテン",
+      "title": "シアノコバラミン点眼液0.02％「日点」 限定出荷に関するお知らせ",
+      "url": "https://www.rohto-nitten.co.jp/upload/product/79/202505_cyanocobalamin.pdf",
+      "announced_at": "2025-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "e93fac7445d0382139bf2ee6a5ee779f5eac872cbaa30fc35b77853b62eeebb0",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製剤の限定出荷の影響で安定供給に支障が出るおそれがあるため、ロートニッテンは2025年5月13日出荷分から限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "1319710Q2116",
+          "product_name": "シアノコバラミン点眼液０．０２％「日点」",
+          "maker": "ロートニッテン",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×10",
+              "unified_product_code": "421150629",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 421150629。"
+              }
+            },
+            {
+              "package": "5mL×50",
+              "unified_product_code": "421150650",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 421150650。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "rohto-nitten-bimatoprost-limited-202508",
+      "maker": "ロートニッテン",
+      "title": "ビマトプロスト点眼液0.03％「日点」 限定出荷に関するお知らせ",
+      "url": "https://www.rohto-nitten.co.jp/upload/minfo/318/202508_bimatoprost.pdf",
+      "announced_at": "2025-08",
+      "listed_at": "2025-08-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "60b065bb1cb4e4eac3e230be53d0931ee6a1b138b8e555de58adb4823a96c6ec",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製剤の販売中止の影響で安定供給に支障が出るおそれがあるため、ロートニッテンは対象包装を限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "1319757Q1086",
+          "product_name": "ビマトプロスト点眼液０．０３％「日点」",
+          "maker": "ロートニッテン",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "2.5mL×5",
+              "unified_product_code": "421244212",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、8月のメーカー資料）",
+                "note": "統一商品コード 421244212。"
+              }
+            },
+            {
+              "package": "2.5mL×10",
+              "unified_product_code": "421244229",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、8月のメーカー資料）",
+                "note": "統一商品コード 421244229。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "案内の開始日は2025年8月6日出荷分からです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "rohto-nitten-dormolol-limited-202606",
+      "maker": "ロートニッテン",
+      "title": "ドルモロール配合点眼液「日点」 限定出荷に関するお知らせ",
+      "url": "https://www.rohto-nitten.co.jp/upload/minfo/336/20260605_dorzolamidehyarulonate.pdf",
+      "announced_at": "2026-06",
+      "listed_at": "2026-06-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "cacade4a044717dec4e32c535b37245977ae4aec0d920d1e71cbe0fccd662b78",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製剤の販売中止の影響で安定供給に支障が出るおそれがあるため、ロートニッテンは対象包装を限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "1319819Q1062",
+          "product_name": "ドルモロール配合点眼液「日点」",
+          "maker": "ロートニッテン",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×5",
+              "unified_product_code": "421222210",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 421222210。"
+              }
+            },
+            {
+              "package": "5mL×10",
+              "unified_product_code": "421222227",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 421222227。"
+              }
+            }
+          ],
+          "seller": "ロートニッテン"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "案内の開始日は2026年6月9日出荷分からです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "rohto-nitten-hyaluronate-nitten-brand-limited-202606",
+      "maker": "ロートニッテン",
+      "title": "ヒアルロン酸ナトリウム点眼液0.3％「日点」 限定出荷に関するお知らせ",
+      "url": "https://www.rohto-nitten.co.jp/upload/minfo/336/20260605_dorzolamidehyarulonate.pdf",
+      "announced_at": "2026-06",
+      "listed_at": "2026-06-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "cacade4a044717dec4e32c535b37245977ae4aec0d920d1e71cbe0fccd662b78",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製剤の販売中止の影響で安定供給に支障が出るおそれがあるため、ロートニッテンは対象包装を限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "1319720Y2152",
+          "product_name": "ヒアルロン酸ナトリウム点眼液０．３％「日点」",
+          "maker": "ロートニッテン",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×10",
+              "unified_product_code": "421590227",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 421590227。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "案内の開始日は2026年6月9日出荷分からです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "rohto-nitten-hyaluronate-farma-limited-202606",
+      "maker": "ロートニッテンファーマ",
+      "title": "ヒアルロン酸ナトリウム点眼液0.3％「ニッテン」 限定出荷に関するお知らせ",
+      "url": "https://www.rohto-nitten.co.jp/upload/minfo/336/20260605_dorzolamidehyarulonate.pdf",
+      "announced_at": "2026-06",
+      "listed_at": "2026-06-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "cacade4a044717dec4e32c535b37245977ae4aec0d920d1e71cbe0fccd662b78",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製剤の販売中止の影響で安定供給に支障が出るおそれがあるため、ロートニッテンは対象包装を限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "1319720Y2144",
+          "product_name": "ヒアルロン酸ナトリウム点眼液０．３％「ニッテン」",
+          "maker": "ロートニッテンファーマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×10",
+              "unified_product_code": "421591224",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 421591224。"
+              }
+            }
+          ],
+          "seller": "ロートニッテン"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "案内の開始日は2026年6月9日出荷分からです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
