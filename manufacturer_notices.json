@@ -26518,6 +26518,710 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "fuji-iohexol-20ml-limited-202611",
+      "maker": "富士製薬工業",
+      "title": "イオヘキソール300注20mL・350注20mL「F」 限定出荷のご案内",
+      "url": "https://www.fuji-pharma.jp/docs/430/resource_430_3983.pdf",
+      "announced_at": "2026-11",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ae71e1cc7c8f3fef24eb1b551af628d378e66b6344f17950f8bd3ae3affa3395",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の供給停止を受けて想定より多い注文が見込まれ、既存採用先の供給を確保するため、富士製薬工業が対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "7219415A9090",
+          "product_name": "イオヘキソール３００注２０ｍＬ「Ｆ」",
+          "maker": "富士製薬工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5瓶",
+              "unified_product_code": "431291602",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 431291602。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "7219415H3082",
+          "product_name": "イオヘキソール３５０注２０ｍＬ「Ｆ」",
+          "maker": "富士製薬工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5瓶",
+              "unified_product_code": "431291701",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 431291701。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年11月5日時点の一覧では、300注20mLの出荷量は通常、350注20mLの出荷量は増加です。両包装とも受注対応は限定出荷です。",
+        "2026年11月5日付の富士製薬工業の一覧でも、対象包装は限定出荷と掲載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "fuji-hcg3000-limited-202301",
+      "maker": "富士製薬工業",
+      "title": "注射用HCG3,000単位「F」 限定出荷のご案内",
+      "url": "https://www.fuji-pharma.jp/docs/430/other_430_3052.pdf",
+      "announced_at": "2023-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "92761983b58d80ad186af6e25725ed24d774fb9aef8f2e6cbc13d6cd22f0d14d",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "効能の一部が共通する他社品の欠品案内を受け、富士製薬工業が既存採用先の供給を優先するため限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2413402X3068",
+          "product_name": "注射用ＨＣＧ３，０００単位「Ｆ」",
+          "maker": "富士製薬工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10アンプル",
+              "unified_product_code": "431227533",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、1月のメーカー資料）",
+                "note": "統一商品コード 431227533。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年11月5日付の富士製薬工業の一覧でも、対象包装は限定出荷と掲載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "fuji-hcg5000-limited-202309",
+      "maker": "富士製薬工業",
+      "title": "注射用HCG5,000単位「F」 限定出荷に関するご案内 第3報",
+      "url": "https://www.fuji-pharma.jp/docs/430/other_430_3294.pdf",
+      "announced_at": "2023-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "776dfeb43013ed917b90fa60a82511f3232434f2062ca645249a2df2a66b3429",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "必要な原薬量を当面確保できず、当時の出荷量を維持すると将来の供給停止が避けられないため、富士製薬工業は2023年10月以降の出荷量をさらに抑えると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2413402X4099",
+          "product_name": "注射用ＨＣＧ５，０００単位「Ｆ」",
+          "maker": "富士製薬工業",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "10アンプル",
+              "unified_product_code": "431227540",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 431227540。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.fuji-pharma.jp/docs/430/other_430_3294.pdf",
+          "target_yj_codes": [
+            "2413402X4099"
+          ],
+          "type": "富士製薬工業の第3報に明記された代替製剤",
+          "products": [
+            {
+              "name": "オビドレル皮下注シリンジ２５０μｇ",
+              "maker": "メルクバイオファーマ",
+              "yj_code": "2413406G1020",
+              "scope": "対象はHCG5,000単位「F」の10アンプル包装です。原文の別紙は生殖補助医療での卵胞成熟・黄体化と一般不妊治療での排卵誘発・黄体化に下線を付けています。候補の電子添文では、後者に関係する効能は視床下部・下垂体の機能障害に伴う無排卵または希発排卵に限られます。候補は1シリンジ、統一商品コード496300417。成分・剤形が異なり、候補自体も厚労省2026年11月16日版では限定出荷です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "第3報は3,000単位・10,000単位を今回の代替案の対象としていません。",
+        "2026年11月5日付の富士製薬工業の一覧でも、対象包装は限定出荷と掲載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "fuji-hmg150-limited-202608",
+      "maker": "富士製薬工業",
+      "title": "HMG注射用150単位「F」 限定出荷のご案内",
+      "url": "https://www.fuji-pharma.jp/docs/430/resource_430_3939.pdf",
+      "announced_at": "2026-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "a6748e846b1ecab9665678379fea71e71387effe69b6ba8d74e8cc6d954d7cc1",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の限定出荷を受けて想定より多い注文が見込まれ、既存採用先の供給を確保するため、富士製薬工業が対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2413400D4123",
+          "product_name": "ＨＭＧ注射用１５０単位「Ｆ」",
+          "maker": "富士製薬工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10管",
+              "unified_product_code": "431220183",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、8月のメーカー資料）",
+                "note": "統一商品コード 431220183。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年11月5日付の富士製薬工業の一覧でも、対象包装は限定出荷と掲載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "fuji-chloramphenicol-vaginal-limited-202604",
+      "maker": "富士製薬工業",
+      "title": "クロラムフェニコール腟錠100mg「F」 限定出荷のご案内",
+      "url": "https://www.fuji-pharma.jp/docs/430/resource_430_3869.pdf",
+      "announced_at": "2026-04",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "e69d37fa5b1098b49fd076578fc20894fe7b538667f71a575a2dd9d3061d0e9c",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の限定出荷を受けて想定より多い注文が見込まれ、既存採用先の供給を確保するため、富士製薬工業が対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2521701H1068",
+          "product_name": "クロラムフェニコール腟錠１００ｍｇ「Ｆ」",
+          "maker": "富士製薬工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "60錠",
+              "unified_product_code": "431310150",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、4月のメーカー資料）",
+                "note": "統一商品コード 431310150。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年11月5日付の富士製薬工業の一覧でも、対象包装は限定出荷と掲載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "fuji-gentamicin-ointment-limited-202605",
+      "maker": "富士製薬工業",
+      "title": "ゲンタマイシン硫酸塩軟膏0.1％「F」 限定出荷のご案内",
+      "url": "https://www.fuji-pharma.jp/docs/333/resource_333_3898.pdf",
+      "announced_at": "2026-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "fd7da4244b60bae3be8726f9784983025439981600efd853e22ebd2d1af80562",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の限定出荷を受けて想定より多い注文が見込まれ、既存採用先の供給を確保するため、富士製薬工業が対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2634710M1093",
+          "product_name": "ゲンタマイシン硫酸塩軟膏０．１％「Ｆ」",
+          "maker": "富士製薬工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10g×10本",
+              "unified_product_code": "431310129",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 431310129。"
+              }
+            },
+            {
+              "package": "10g×50本",
+              "unified_product_code": "431310136",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 431310136。"
+              }
+            },
+            {
+              "package": "100g×1個",
+              "unified_product_code": "431310143",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 431310143。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年11月5日付の富士製薬工業の一覧でも、対象包装は限定出荷と掲載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "fuji-dinoprost-limited-202607",
+      "maker": "富士製薬工業",
+      "title": "ジノプロスト注射液1000μg「F」 限定出荷のご案内",
+      "url": "https://www.fuji-pharma.jp/docs/430/resource_430_3937.pdf",
+      "announced_at": "2026-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "84bb230aa398de1be20a94f97e526a293e71c5c6fea9e27b6cbf30679fd76ce8",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の限定出荷を受けて想定より多い注文が見込まれ、既存採用先の供給を確保するため、富士製薬工業が対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2499401A2093",
+          "product_name": "ジノプロスト注射液１０００μｇ「Ｆ」",
+          "maker": "富士製薬工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10管",
+              "unified_product_code": "431220152",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 431220152。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年11月5日付の富士製薬工業の一覧でも、対象包装は限定出荷と掲載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "fuji-dexart-165-330-limited-202410",
+      "maker": "富士製薬工業",
+      "title": "デキサート注射液1.65mg・3.3mg 限定出荷のご案内",
+      "url": "https://www.fuji-pharma.jp/docs/115/resource_115_3566.pdf",
+      "announced_at": "2024-10",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "350999090fa5223177491779d44fb41f88d1787e2d5df273f4bd60ef082e8bc9",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の供給停止を受けて想定より多い注文が見込まれ、既存採用先の供給を確保するため、富士製薬工業が対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2454405H1032",
+          "product_name": "デキサート注射液１．６５ｍｇ",
+          "maker": "富士製薬工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10管",
+              "unified_product_code": "431204145",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 431204145。"
+              }
+            },
+            {
+              "package": "50管",
+              "unified_product_code": "431204152",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 431204152。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2454405H3035",
+          "product_name": "デキサート注射液３．３ｍｇ",
+          "maker": "富士製薬工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10管",
+              "unified_product_code": "431204169",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 431204169。"
+              }
+            },
+            {
+              "package": "50管",
+              "unified_product_code": "431204176",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 431204176。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年11月5日付の富士製薬工業の一覧でも、対象包装は限定出荷と掲載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "fuji-dexart-660-continuing-202410",
+      "maker": "富士製薬工業",
+      "title": "デキサート注射液6.6mg 既存の限定出荷を継続",
+      "url": "https://www.fuji-pharma.jp/docs/115/resource_115_3566.pdf",
+      "announced_at": "2024-10",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "350999090fa5223177491779d44fb41f88d1787e2d5df273f4bd60ef082e8bc9",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "富士製薬工業の2024年10月資料は、6.6mgの10瓶・50瓶について、以前からの限定出荷を継続すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2454405H5038",
+          "product_name": "デキサート注射液６．６ｍｇ",
+          "maker": "富士製薬工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10瓶",
+              "unified_product_code": "431204183",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 431204183。"
+              }
+            },
+            {
+              "package": "50瓶",
+              "unified_product_code": "431204190",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 431204190。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "6.6mgは同じ資料に掲載されていますが、1.65mg・3.3mgと同時に限定出荷を開始した包装ではありません。",
+        "2026年11月5日付の富士製薬工業の一覧でも、対象包装は限定出荷と掲載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "fuji-testosterone-depot-limited-202310",
+      "maker": "富士製薬工業",
+      "title": "テスチノンデポー筋注用125mg・250mg 限定出荷のご案内",
+      "url": "https://www.fuji-pharma.jp/docs/430/other_430_3318.pdf",
+      "announced_at": "2023-10",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "4412c6421e7c8f102f9cabe4286be3d9d813f903ae3bf73f46d0a8f20b350514",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の限定出荷で想定より注文が増え、既存採用先への安定供給が難しくなったため、富士製薬工業が限定出荷を始めました。",
+      "targets": [
+        {
+          "yj_code": "2461400A1060",
+          "product_name": "テスチノンデポー筋注用１２５ｍｇ",
+          "maker": "富士製薬工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10管",
+              "unified_product_code": "431292043",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 431292043。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2461400A2083",
+          "product_name": "テスチノンデポー筋注用２５０ｍｇ",
+          "maker": "富士製薬工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10管",
+              "unified_product_code": "431292050",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 431292050。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2025年3月の続報では解除の見通しが立たず、限定出荷を継続する旨を案内しています。",
+        "2026年11月5日付の富士製薬工業の一覧でも、対象包装は限定出荷と掲載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "fuji-progynon-limited-202606",
+      "maker": "富士製薬工業",
+      "title": "プロギノン・デポー筋注10mg 限定出荷のご案内",
+      "url": "https://www.fuji-pharma.jp/docs/430/resource_430_3913.pdf",
+      "announced_at": "2026-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "7b3b589c584fb09d42fd013f448a0f778e01ec449da8984d06e051d7a52d13d4",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "想定を上回る注文が続いたと、富士製薬工業は2026年6月の開始時に説明しています。",
+      "targets": [
+        {
+          "yj_code": "2473402A2059",
+          "product_name": "プロギノン・デポー筋注１０ｍｇ",
+          "maker": "富士製薬工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10管",
+              "unified_product_code": "431220121",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、6月のメーカー資料）",
+                "note": "統一商品コード 431220121。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "厚労省の2026年11月16日版での理由は原材料調達上の問題です。ここに掲載した案内は開始時点の説明です。",
+        "2026年11月5日付の富士製薬工業の一覧でも、対象包装は限定出荷と掲載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "fuji-medroxyprogesterone-25-5-limited-202507",
+      "maker": "富士製薬工業",
+      "title": "メドロキシプロゲステロン酢酸エステル錠2.5mg・5mg「F」 限定出荷のご案内",
+      "url": "https://www.fuji-pharma.jp/docs/430/resource_430_3697.pdf",
+      "announced_at": "2025-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "df35b0480d1197d9a4bc9c5db3e2a8c5f9c807393b88e45359644466a5deedce",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の供給停止を受けて想定より多い注文が見込まれ、既存採用先の供給を確保するため、富士製薬工業が対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2478002F1100",
+          "product_name": "メドロキシプロゲステロン酢酸エステル錠２．５ｍｇ「Ｆ」",
+          "maker": "富士製薬工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100錠",
+              "unified_product_code": "431121190",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 431121190。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2478002F2068",
+          "product_name": "メドロキシプロゲステロン酢酸エステル錠５ｍｇ「Ｆ」",
+          "maker": "富士製薬工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100錠",
+              "unified_product_code": "431121213",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 431121213。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年11月5日付の富士製薬工業の一覧でも、対象包装は限定出荷と掲載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "fuji-medroxyprogesterone-200-limited-202602",
+      "maker": "富士製薬工業",
+      "title": "メドロキシプロゲステロン酢酸エステル錠200mg「F」 限定出荷のご案内",
+      "url": "https://www.fuji-pharma.jp/docs/333/resource_333_3816.pdf",
+      "announced_at": "2026-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "6af310470e7536db27dc7074ff93b5a1e76d938d292c33b374de0b8031409270",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の限定出荷を受けて想定より多い注文が見込まれ、既存採用先の供給を確保するため、富士製薬工業が対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2478002F3064",
+          "product_name": "メドロキシプロゲステロン酢酸エステル錠２００ｍｇ「Ｆ」",
+          "maker": "富士製薬工業",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100錠",
+              "unified_product_code": "431121237",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2月のメーカー資料）",
+                "note": "統一商品コード 431121237。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年11月5日付の富士製薬工業の一覧でも、対象包装は限定出荷と掲載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
