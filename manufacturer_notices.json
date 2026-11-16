@@ -15168,6 +15168,429 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "kyowa-nauzelin-od-alternatives-202606",
+      "maker": "協和キリン",
+      "title": "ナウゼリン錠5・錠10 限定出荷解除のお知らせ（OD錠5・OD錠10の限定出荷継続・代替品）",
+      "url": "https://medical.kyowakirin.co.jp/site/infopdf/notice/1640.pdf",
+      "announced_at": "2026-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ee36cc396782c2483ad764aeb4cbed0986bc64f1a375ad19faad3dc942913487",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "協和キリンは、在庫の確保を見込める普通錠の限定出荷を7月1日に解除し、OD錠は対象包装の限定出荷を継続すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2399005F3020",
+          "product_name": "ナウゼリンＯＤ錠５",
+          "maker": "協和キリン",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "057581774",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、6月のメーカー資料）",
+                "note": "統一商品コード 057581774、販売包装単位コード 14987057581771。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2399005F4026",
+          "product_name": "ナウゼリンＯＤ錠１０",
+          "maker": "協和キリン",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "057581798",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、6月のメーカー資料）",
+                "note": "統一商品コード 057581798、販売包装単位コード 14987057581795。"
+              }
+            },
+            {
+              "package": "PTP1000錠",
+              "unified_product_code": "057581804",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、6月のメーカー資料）",
+                "note": "統一商品コード 057581804、販売包装単位コード 14987057581801。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://medical.kyowakirin.co.jp/site/infopdf/notice/1640.pdf",
+          "target_yj_codes": [
+            "2399005F3020"
+          ],
+          "type": "協和キリンが2026年6月の原文に記載した普通錠のうち、同規格の候補",
+          "products": [
+            {
+              "name": "ナウゼリン錠５",
+              "maker": "協和キリン",
+              "yj_code": "2399005F1027",
+              "scope": "PTP100錠（057080123）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        },
+        {
+          "source_url": "https://medical.kyowakirin.co.jp/site/infopdf/notice/1640.pdf",
+          "target_yj_codes": [
+            "2399005F4026"
+          ],
+          "type": "協和キリンが2026年6月の原文に記載した普通錠のうち、同規格の候補",
+          "products": [
+            {
+              "name": "ナウゼリン錠１０",
+              "maker": "協和キリン",
+              "yj_code": "2399005F2023",
+              "scope": "PTP100錠（057080185）、PTP1000錠（057080192）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "9月14日更新の協和キリンの一覧でもOD錠3包装の限定出荷を確認しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "kyowa-nauzelin-od5-limited-context-202604",
+      "maker": "協和キリン",
+      "title": "ナウゼリンOD錠 供給を限定した経緯（4月の再開案内）",
+      "url": "https://medical.kyowakirin.co.jp/site/infopdf/notice/1632.pdf",
+      "announced_at": "2026-04",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "1266b9598911bcafb81d161cf5dd286f285e7fc83f0363a857dc9ac1146e2e32",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "OD錠10の100錠包装が委託先からの入荷遅延で一時停止したあと、OD錠5は需要増に対応しきれない見通しのため、協和キリンが限定出荷の継続を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2399005F3020",
+          "product_name": "ナウゼリンＯＤ錠５",
+          "maker": "協和キリン",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "057581774",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、4月のメーカー資料）",
+                "note": "統一商品コード 057581774、販売包装単位コード 14987057581771。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "代替品の案内は、同メーカーの6月資料に更新されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "kyowa-nauzelin-od10-resumption-context-202604",
+      "maker": "協和キリン",
+      "title": "ナウゼリンOD錠10 PTP100錠包装 限定出荷再開に関するお知らせ",
+      "url": "https://medical.kyowakirin.co.jp/site/infopdf/notice/1632.pdf",
+      "announced_at": "2026-04",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "1266b9598911bcafb81d161cf5dd286f285e7fc83f0363a857dc9ac1146e2e32",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "100錠包装は製造委託先からの入荷遅延で一時停止し、入荷再開後の5月11日（沖縄は5月12日）から限定数量で再開。1000錠包装は需要増に対応しきれない見通しのため、協和キリンが限定出荷の継続を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2399005F4026",
+          "product_name": "ナウゼリンＯＤ錠１０",
+          "maker": "協和キリン",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "057581798",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、4月のメーカー資料）",
+                "note": "統一商品コード 057581798、販売包装単位コード 14987057581795。"
+              }
+            },
+            {
+              "package": "PTP1000錠",
+              "unified_product_code": "057581804",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、4月のメーカー資料）",
+                "note": "統一商品コード 057581804、販売包装単位コード 14987057581801。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "代替品の案内は、同メーカーの6月資料に更新されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "kyowa-hisron5-limited-202602",
+      "maker": "協和キリン",
+      "title": "ヒスロン錠5 限定出荷に関するお詫びとお知らせ",
+      "url": "https://medical.kyowakirin.co.jp/site/infopdf/notice/1618.pdf",
+      "announced_at": "2026-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "a3e3c3e30c7df5b02f3a25ed365b8da865837d05d07591c56c9373a5e4ff1044",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "原材料調達の問題で安定供給が難しくなる見通しのため、協和キリンが2026年2月25日から限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2478002F2033",
+          "product_name": "ヒスロン錠５",
+          "maker": "協和キリン",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "057008905",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、2月のメーカー資料）",
+                "note": "統一商品コード 057008905、販売包装単位コード 14987057008902。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://medical.kyowakirin.co.jp/site/infopdf/notice/1618.pdf",
+          "target_yj_codes": [
+            "2478002F2033"
+          ],
+          "type": "協和キリンが原文に記載した別成分の候補",
+          "products": [
+            {
+              "name": "デュファストン錠５ｍｇ",
+              "maker": "ヴィアトリス製薬合同会社",
+              "yj_code": "2478003F1031",
+              "scope": "PTP140錠。メーカー文書の比較表では効能・効果に違いがあります。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "原文は新規採用への対応が難しいと案内しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "kyowa-hisronh200-limited-202609",
+      "maker": "協和キリン",
+      "title": "ヒスロンH錠200mg 限定出荷に関するお詫びとお知らせ（第4報）",
+      "url": "https://medical.kyowakirin.co.jp/site/infopdf/notice/1649.pdf",
+      "announced_at": "2026-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "973cfee7b388256b673fafb40605caaf3679ab5a2709895b049b0f908b0b9651",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "協和キリンは、新たな原材料の調達、製剤の同等性確認と承認事項の変更に向けた対応を進めており、解除時期は見通せないと案内しました。",
+      "targets": [
+        {
+          "yj_code": "2478002F3056",
+          "product_name": "ヒスロンＨ錠２００ｍｇ",
+          "maker": "協和キリン",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "057559087",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 057559087、販売包装単位コード 14987057559084。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "包装とコードは協和キリンの9月14日更新の供給一覧で照合しました。原文は本剤を必要とする患者への優先供給を案内しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "kyowa-nesp10-limited-202606",
+      "maker": "協和キリン",
+      "title": "ネスプ注射液10μg・20μgプラシリンジ 限定出荷のお詫びとご案内",
+      "url": "https://medical.kyowakirin.co.jp/site/infopdf/notice/1636.pdf",
+      "announced_at": "2026-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "f0cc03b928ea61e80657713afe382e03af33720fb1e7058aa22f8c007077be80",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "20μgへの急な需要増が10μgにも波及し、安定供給が難しくなると見込まれたため、協和キリンが10μgの限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3999425S5028",
+          "product_name": "ネスプ注射液１０μｇプラシリンジ",
+          "maker": "協和キリン",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "0.5mL×10シリンジ",
+              "unified_product_code": "057591681",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、6月のメーカー資料）",
+                "note": "統一商品コード 057591681、販売包装単位コード 14987057591688。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://medical.kyowakirin.co.jp/site/infopdf/notice/1636.pdf",
+          "target_yj_codes": [
+            "3999425S5028"
+          ],
+          "type": "メーカーが原文に挙げた同規格の候補",
+          "products": [
+            {
+              "name": "ダルベポエチン　アルファ注１０μｇシリンジ「ＫＫＦ」",
+              "maker": "協和キリンフロンティア",
+              "yj_code": "3999425S5036",
+              "scope": "10μgシリンジ（原文に包装数量の指定なし）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "新規採用や既採用施設の増量には応じられないと案内しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "kyowa-nesp20-limited-202606",
+      "maker": "協和キリン",
+      "title": "ネスプ注射液10μg・20μgプラシリンジ 限定出荷のお詫びとご案内",
+      "url": "https://medical.kyowakirin.co.jp/site/infopdf/notice/1636.pdf",
+      "announced_at": "2026-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "f0cc03b928ea61e80657713afe382e03af33720fb1e7058aa22f8c007077be80",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "需要が想定を上回り、生産を調整しても急激な増加への対応が難しくなったため、協和キリンが20μgの限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3999425S7020",
+          "product_name": "ネスプ注射液２０μｇプラシリンジ",
+          "maker": "協和キリン",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "0.5mL×10シリンジ",
+              "unified_product_code": "057591704",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、6月のメーカー資料）",
+                "note": "統一商品コード 057591704、販売包装単位コード 14987057591701。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://medical.kyowakirin.co.jp/site/infopdf/notice/1636.pdf",
+          "target_yj_codes": [
+            "3999425S7020"
+          ],
+          "type": "メーカーが原文に挙げた同規格の候補",
+          "products": [
+            {
+              "name": "ダルベポエチン　アルファ注２０μｇシリンジ「ＫＫＦ」",
+              "maker": "協和キリンフロンティア",
+              "yj_code": "3999425S7039",
+              "scope": "20μgシリンジ（原文に包装数量の指定なし）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "新規採用や既採用施設の増量には応じられないと案内しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
     }
   ]
 }

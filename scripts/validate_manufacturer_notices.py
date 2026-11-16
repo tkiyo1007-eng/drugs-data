@@ -17,6 +17,7 @@ MAKER_HOSTS = {
     '扶桑薬品工業': 'www.fuso-pharm.co.jp',
     '藤本製薬': 'www.fujimoto-pharm.co.jp',
     '日新製薬': 'www.yg-nissin.co.jp',
+    '協和キリン': 'medical.kyowakirin.co.jp',
     'セオリアファーマ': 'www.ceolia.co.jp',
     'ファイザー': 'www.pfizermedicalinformation.jp', 'サンド': 'sandoz-jp.cms.sandoz.com',
     '三和化学研究所': 'med.skk-net.com', '日本薬品工業': 'www.npi-inc.co.jp',
