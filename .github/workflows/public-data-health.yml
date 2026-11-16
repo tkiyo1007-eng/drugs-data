@@ -79,10 +79,13 @@ jobs:
           ]
           SITEMAPS = ("sitemap.xml", "sitemap-items.xml", "sitemap-updates.xml", "sitemap-curated.xml")
           NAMESPACE = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
-          MAX_BYTES = 2 * 1024 * 1024
+          MAX_SITEMAP_BYTES = 2 * 1024 * 1024
+          # 補足情報のハブは原典の掲載件数に応じてサイズが増える。
+          MAX_HUB_BYTES = 8 * 1024 * 1024
 
 
           def fetch(url):
+              max_bytes = MAX_HUB_BYTES if url in HUB_URLS else MAX_SITEMAP_BYTES
               separator = "&" if "?" in url else "?"
               request = urllib.request.Request(
                   f"{url}{separator}health_check={time.time_ns()}",
@@ -94,11 +97,11 @@ jobs:
                   actual, expected = urlsplit(response.geturl()), urlsplit(url)
                   if (actual.scheme, actual.netloc, actual.path) != (expected.scheme, expected.netloc, expected.path):
                       raise RuntimeError(f"想定外のURLへ転送されました: {url}")
-                  body = response.read(MAX_BYTES + 1)
+                  body = response.read(max_bytes + 1)
               if not body:
                   raise RuntimeError(f"応答が空です: {url}")
-              if len(body) > MAX_BYTES:
-                  raise RuntimeError(f"応答が{MAX_BYTES}バイトを超えています: {url}")
+              if len(body) > max_bytes:
+                  raise RuntimeError(f"応答が{max_bytes}バイトを超えています: {url}")
               return body
 
 
