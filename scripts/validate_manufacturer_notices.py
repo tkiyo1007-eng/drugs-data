@@ -97,6 +97,16 @@ MAKER_MANUAL_SOURCE_HOSTS = {
 }
 # Specific manufacturer and distributor notices hosted outside the primary company domain.
 MAKER_MANUAL_SOURCE_URLS = {
+    '全星薬品工業': {
+        'https://med.daiichisankyo-ep.co.jp/information/files/1876/%E3%82%A2%E3%82%B8%E3%82%B9%E3%83%AD%E3%83%9E%E3%82%A4%E3%82%B7%E3%83%B3%E9%8C%A0250mg%E3%80%8CDSEP%E3%80%8D%20%20%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B20240312.pdf',
+        'https://med.daiichisankyo-ep.co.jp/information/files/2025/EPAZI1N00901-1.pdf',
+    },
+    '佐藤薬品工業': {
+        'https://www.alfresa-pharma.co.jp/news/pdflink/NEWS_ID/2012/',
+    },
+    '大興製薬': {
+        'https://medical.nihon-generic.co.jp/a.php?id=982',
+    },
     'メルクバイオファーマ': {'https://funin-fch.net/wp-content/uploads/2023/01/97b4654c172eccff6e25ec66bc0e4343.pdf'},
     '鳥居薬品': {'https://www.jibika.or.jp/uploads/files/hoken_shidakyua_2024.pdf', 'https://www.jibika.or.jp/uploads/files/shida_2025.pdf'},
     'チェプラファーム': {'https://www.nichigan.or.jp/Portals/0/resources/news/Visudyne.pdf'},
@@ -114,6 +124,7 @@ MAKER_MANUAL_SOURCE_URLS = {
         'https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001FkBAdIAN',
     },
     'シオノケミカル': {
+        'https://www.hikari-pharm.co.jp/wp-content/uploads/2026/03/eto_gv5_2025.12.25.pdf',
         'https://www.nichiiko.co.jp/medicine/file/80935/information/20260422cI1.pdf',
         'https://www.nc-medical.com/product_topics/f4bj0h000000knx2-att/f4bj0h000000knxq.pdf',
     },

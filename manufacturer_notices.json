@@ -42619,6 +42619,457 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "jg-verapamil40-taiko-limited-202210",
+      "maker": "大興製薬",
+      "title": "ベラパミル塩酸塩錠40mg「JG」 限定出荷のお知らせ",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=982",
+      "announced_at": "2022-10",
+      "listed_at": "2022-10-19",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "9bb560211f61edc588f89c7c3bdac8d0d6696138aa81f535dd689107c62c7268",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日本ジェネリックは、他社の限定出荷などの影響で供給能力を超える需要が見込まれ、安定供給に支障が出ると判断して限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2171008F1118",
+          "product_name": "ベラパミル塩酸塩錠４０ｍｇ「ＪＧ」",
+          "maker": "大興製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792271015",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 792271015、販売包装単位コード 14987792271012。"
+              }
+            }
+          ],
+          "seller": "日本ジェネリック"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "販売元の2026年11月9日一覧にも同じ包装の限定出荷が掲載されています。対象の製造販売元は大興製薬です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "alfresa-sato-kcl-sr600-limited-202407",
+      "maker": "佐藤薬品工業",
+      "title": "塩化カリウム徐放錠600mg「St」 限定出荷のお知らせ",
+      "url": "https://www.alfresa-pharma.co.jp/news/pdflink/NEWS_ID/2012/",
+      "announced_at": "2024-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "b0b66cf9c45bf236e1d754793e21898dcefcaabeee773fa6df1f92add186d362",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "アルフレッサ ファーマは、大幅な需要増で供給が不安定になるおそれが生じたため、佐藤薬品工業が製造販売する対象2包装を限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "3229002G1082",
+          "product_name": "塩化カリウム徐放錠６００ｍｇ「Ｓｔ」",
+          "maker": "佐藤薬品工業",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "274-13661-0",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、7月のメーカー資料）",
+                "note": "統一商品コード 274-13661-0。"
+              }
+            },
+            {
+              "package": "PTP1000錠",
+              "unified_product_code": "274-13662-7",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、7月のメーカー資料）",
+                "note": "統一商品コード 274-13662-7。"
+              }
+            }
+          ],
+          "seller": "アルフレッサ ファーマ"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "hikari-etoposide-sn-limited-202512",
+      "maker": "シオノケミカル",
+      "title": "エトポシド点滴静注液100mg「SN」 限定出荷継続のお知らせ",
+      "url": "https://www.hikari-pharm.co.jp/wp-content/uploads/2026/03/eto_gv5_2025.12.25.pdf",
+      "announced_at": "2025-12",
+      "listed_at": "2025-12-25",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "b912bdd78b2066b38f6825eb0e272b7d78c128d855116ba184879d5ae28e5bbf",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社の同成分薬の販売中止でさらに需要が増える見込みのため、発売元の光製薬は既採用施設を優先し、特約店への割当出荷と新規採用辞退を続けると案内しました。",
+      "targets": [
+        {
+          "yj_code": "4240403A2093",
+          "product_name": "エトポシド点滴静注液１００ｍｇ「ＳＮ」",
+          "maker": "シオノケミカル",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×5瓶",
+              "unified_product_code": "186-76001-9",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、12月のメーカー資料）",
+                "note": "統一商品コード 186-76001-9。"
+              }
+            }
+          ],
+          "seller": "光製薬"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "光製薬発売の包装に限る案内です。メーカー原文では必要数量以上の発注を控えるよう求めています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "zensei-dsep-azithromycin250-limited-202403",
+      "maker": "全星薬品工業",
+      "title": "アジスロマイシン錠250mg「DSEP」 2024年の限定出荷の経緯",
+      "url": "https://med.daiichisankyo-ep.co.jp/information/files/1876/%E3%82%A2%E3%82%B8%E3%82%B9%E3%83%AD%E3%83%9E%E3%82%A4%E3%82%B7%E3%83%B3%E9%8C%A0250mg%E3%80%8CDSEP%E3%80%8D%20%20%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B20240312.pdf",
+      "announced_at": "2024-03",
+      "listed_at": "2024-03-12",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "7d8dbdcb9dbce90754fdac858a8cfdb06380eee872b1161152b7b65207b0d3b5",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "全星薬品工業と第一三共エスファは、他社の販売中止・限定出荷の影響で2023年6月から限定出荷としており、2024年3月資料では製造委託先の納品遅れで数量の確保が難しいと案内しました。",
+      "targets": [
+        {
+          "yj_code": "6149004F1036",
+          "product_name": "アジスロマイシン錠２５０ｍｇ「ＤＳＥＰ」",
+          "maker": "全星薬品工業",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP60錠",
+              "unified_product_code": "081183043",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、3月のメーカー資料）",
+                "note": "統一商品コード 081183043。"
+              }
+            },
+            {
+              "package": "PTP60錠（患者さん用パッケージ入）",
+              "unified_product_code": "081183050",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、3月のメーカー資料）",
+                "note": "統一商品コード 081183050。"
+              }
+            }
+          ],
+          "seller": "第一三共エスファ"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2024年3月の経緯です。2025年3月に両包装はいったん限定出荷が解除されました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "zensei-dsep-azithromycin250-patient-package-stop-202503",
+      "maker": "全星薬品工業",
+      "title": "アジスロマイシン錠250mg「DSEP」 患者さん用パッケージ入り販売終了",
+      "url": "https://med.daiichisankyo-ep.co.jp/information/files/2025/EPAZI1N00901-1.pdf",
+      "announced_at": "2025-03",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "314aa237a1959a9d3afef2efc104b58d8b179813f361d1224fcde96eafd2ab44",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "第一三共エスファは、患者さん用パッケージ入りPTP60錠を在庫消尽に合わせて販売終了とし、通常のPTP60錠を販売継続包装として案内しました。",
+      "targets": [
+        {
+          "yj_code": "6149004F1036",
+          "product_name": "アジスロマイシン錠２５０ｍｇ「ＤＳＥＰ」",
+          "maker": "全星薬品工業",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP60錠（患者さん用パッケージ入）",
+              "unified_product_code": "081183050",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "2025年6月（メーカー資料の予定）"
+                  }
+                ],
+                "note": "統一商品コード 081183050。"
+              }
+            },
+            {
+              "package": "PTP60錠（6錠×10）",
+              "unified_product_code": "081183043",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 081183043、販売包装単位コード 14987081183040。"
+              }
+            }
+          ],
+          "seller": "第一三共エスファ"
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.daiichisankyo-ep.co.jp/information/files/2025/EPAZI1N00901-1.pdf",
+          "target_yj_codes": [
+            "6149004F1036"
+          ],
+          "type": "メーカーが示した同一製品の販売継続包装",
+          "products": [
+            {
+              "name": "アジスロマイシン錠２５０ｍｇ「ＤＳＥＰ」",
+              "maker": "全星薬品工業",
+              "yj_code": "6149004F1036",
+              "scope": "通常のPTP60錠（6錠×10、081183043）。患者さん用パッケージ入りとは包装が異なります。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "製造販売元の2026年8月一覧では、販売継続包装も2025年7月から他社品の影響で限定出荷です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "sanwa-rosuvastatin25-discontinuation-202410",
+      "maker": "三和化学研究所",
+      "title": "ロスバスタチン錠2.5mg「三和」 販売中止予定と代替候補",
+      "url": "https://med.skk-net.com/information/item/3DC2410i.pdf",
+      "announced_at": "2024-10",
+      "listed_at": "2024-10-11",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "9679551a1c9b8d083e73108a9ad889fcfbb21c1b1db3739fafd65cc18e57dccf",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "三和化学研究所は普通錠2.5mgの4包装を在庫消尽後に販売中止と案内しました。販売中止の具体的理由は資料に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "2189017F1170",
+          "product_name": "ロスバスタチン錠２．５ｍｇ「三和」",
+          "maker": "三和化学研究所",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "086471435",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2025年5月（2024年10月資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 086471435。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "086471442",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2025年3月（2024年10月資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 086471442。"
+              }
+            },
+            {
+              "package": "PTP700錠",
+              "unified_product_code": "086471459",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2025年7月（2024年10月資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 086471459。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "086471466",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2025年4月（2024年10月資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 086471466。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.skk-net.com/information/item/3DC2410i.pdf",
+          "target_yj_codes": [
+            "2189017F1170"
+          ],
+          "type": "三和化学研究所が案内した2.5mgの代替候補",
+          "products": [
+            {
+              "name": "ロスバスタチンＯＤ錠２．５ｍｇ「三和」",
+              "maker": "三和化学研究所",
+              "yj_code": "2189017F3157",
+              "scope": "三和のOD錠。PTP100・500・700錠、バラ500錠。対象の普通錠と剤形が異なります。"
+            },
+            {
+              "name": "ロスバスタチン錠２．５ｍｇ「トーワ」",
+              "maker": "東和薬品",
+              "yj_code": "2189017F1219",
+              "scope": "東和薬品の普通錠。PTP100・500錠、バラ300錠。厚労省11月16日版で東和品も限定出荷です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2024年の資料にある経過措置期限は2026年3月資料で変更されました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "sanwa-rosuvastatin25-transitional-period-202603",
+      "maker": "三和化学研究所",
+      "title": "ロスバスタチン錠2.5mg「三和」 経過措置期間延長のお知らせ",
+      "url": "https://med.skk-net.com/information/item/keikasochi2603i.pdf",
+      "announced_at": "2026-03",
+      "listed_at": "2026-03-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "5620b3c541c5a35b05d66fdf1416e606c6d0b2fe813d2d3505051fd394459d55",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "三和化学研究所は、2026年3月の告示に合わせ、対象4包装の経過措置期間を2027年3月末まで延長すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2189017F1170",
+          "product_name": "ロスバスタチン錠２．５ｍｇ「三和」",
+          "maker": "三和化学研究所",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "086471435",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 086471435。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "086471442",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 086471442。"
+              }
+            },
+            {
+              "package": "PTP700錠",
+              "unified_product_code": "086471459",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 086471459。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "086471466",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 086471466。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "統一名収載品目に該当し、この品目・包装単独での官報告示はない旨をメーカーは記載しています。供給の再開予定は記載されていません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
