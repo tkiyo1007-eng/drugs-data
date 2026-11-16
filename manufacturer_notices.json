@@ -8701,6 +8701,200 @@
       "cautions": [
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "nichiiko-amoxicillin-125-restriction-202610",
+      "maker": "日医工",
+      "title": "アモキシシリンカプセル125mg「日医工」の限定出荷の理由",
+      "url": "https://www.nichiiko.co.jp/medicine/file/00990/information/20261020cI1.pdf",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "c9bcd240e636fa94abef1faaa01fb46578eeb54e6ccf808b7535450a90d9adcf",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日医工は2026年9月に限定出荷の解除を案内しました。その後、他社製品の出荷調整で注文が想定を上回り、125mgの対象包装を再び限定出荷とし、新規採用の依頼は辞退すると案内しています。",
+      "targets": [
+        {
+          "yj_code": "6131001M1118",
+          "product_name": "アモキシシリンカプセル１２５ｍｇ「日医工」",
+          "maker": "日医工ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "note": "統一商品コード 376-00991-1、販売包装単位コード 14987376009918。",
+                "status_text": "限定出荷（他社品の影響）・出荷量通常（2026年10月のメーカー資料）"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nichiiko-cilnidipine-10-restriction-202405",
+      "maker": "日医工",
+      "title": "シルニジピン錠10mg「NIG」の限定出荷の理由",
+      "url": "https://www.nichiiko.co.jp/medicine/file/74030/information/20240509cG1.pdf",
+      "announced_at": "2024-05",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "e64a8c7c789a7466460f61a3f1723c9ad3abd6d9dad27e602f6b1ffc6a9c0ebd",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日医工は2024年5月、他社製品の限定出荷などにより需要が供給能力を上回ったと説明し、10mgの対象包装の限定出荷と新規採用の辞退を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149037F2110",
+          "product_name": "シルニジピン錠１０ｍｇ「ＮＩＧ」",
+          "maker": "日医工岐阜工場",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "note": "統一商品コード 123-87392-5、販売包装単位コード 14987123873922。",
+                "status_text": "限定出荷（他社品の影響）・出荷量通常（2024年5月のメーカー資料）"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "note": "統一商品コード 123-87391-8、販売包装単位コード 14987123873915。",
+                "status_text": "限定出荷（他社品の影響）・出荷量通常（2024年5月のメーカー資料）"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "確認したメーカー原文に代替候補名の記載はありません。",
+        "確認した原文は10mgと20mgが対象です。この品目の包装欄は10mgの記載を抜粋しています。"
+      ]
+    },
+    {
+      "id": "nichiiko-etanercept-50-pen-resumption-202610",
+      "maker": "日医工",
+      "title": "エタネルセプトBS皮下注50mgペン1.0mL「日医工」の出荷再開予定",
+      "url": "https://www.nichiiko.co.jp/medicine/file/03890/information/20261027cI2.pdf",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "e72dd170f14ea878e4dd7d6efbccdaabf06038da28d5fdcedd4291581dd072c9",
+      "collection_mode": "manual",
+      "event_type": "resumption_planned",
+      "reason": "日医工は培地の変更に伴う対応と製造工程のトラブルで出荷を停止したと説明しています。2026年11月24日にメーカー出荷を再開し、その後も当面は限定出荷を続ける予定と公表しました。",
+      "targets": [
+        {
+          "yj_code": "3999451G4030",
+          "product_name": "エタネルセプトＢＳ皮下注５０ｍｇペン１．０ｍＬ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1キット",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "shipment_resumption",
+                    "timing": "2026年11月24日（メーカー出荷予定）"
+                  }
+                ],
+                "note": "統一商品コード 376-03890-4、販売包装単位コード 14987376038901。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "確認したメーカー原文に代替候補名の記載はありません。",
+        "メーカーの再開予定です。実際の出荷や卸への到着は確認していません。"
+      ]
+    },
+    {
+      "id": "nichiiko-losarhid-hd-withdrawal-202609",
+      "maker": "日医工",
+      "title": "ロサルヒド配合錠HD「日医工」の販売中止案内",
+      "url": "https://www.nichiiko.co.jp/medicine/file/08540/information/II16101-01.pdf",
+      "announced_at": "2026-09",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "5d0b0e519834821cf8a75cc2bc5b18c91095f97a873fa6eff0db7f6d9fe46bc1",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "日医工はHDの対象包装を在庫消尽後に販売中止とする案内を出しました。個別の中止理由の記載はありません。2026年10月の在庫消尽と2028年3月31日の経過措置満了は、この資料時点の予定です。",
+      "targets": [
+        {
+          "yj_code": "2149110F2240",
+          "product_name": "ロサルヒド配合錠ＨＤ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年10月（2026年9月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 376-08540-3、販売包装単位コード 14987376085400。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.nichiiko.co.jp/medicine/file/08540/information/II16101-01.pdf",
+          "target_yj_codes": [
+            "2149110F2240"
+          ],
+          "type": "日医工の販売中止案内でHDのPTP100錠について記載された代替候補です。",
+          "products": [
+            {
+              "name": "プレミネント配合錠ＨＤ",
+              "yj_code": "2149110F2020",
+              "maker": "オルガノン",
+              "scope": "PTP100錠（統一商品コード 954808707、販売包装単位コード 14987954808704）。HD同士で照合しました。"
+            }
+          ],
+          "cautions": [
+            "候補の在庫や個別の患者への適否は確認していません。"
+          ]
+        }
+      ],
+      "cautions": [
+        "メーカーの販売中止予定と厚労省公表の供給区分は別に表示しています。実際の在庫消尽や販売中止の実施は確認していません。"
+      ]
     }
   ]
 }
