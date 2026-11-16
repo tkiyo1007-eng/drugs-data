@@ -9429,6 +9429,386 @@
       "cautions": [
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "jg-valhydio-md-ex-limited-202610",
+      "maker": "日本ジェネリック",
+      "title": "バルヒディオ配合錠MD・EX「JG」の限定出荷の理由",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1873",
+      "announced_at": "2026-10",
+      "source_index_url": "https://medical.nihon-generic.co.jp/news/",
+      "listed_at": "2026-10-22",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "ec8561d154b76883026fa271c46fbac92d52e137880703994298aa3df02a872c",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日本ジェネリックは、他社製品の限定出荷の影響で想定を超える注文があり、生産計画と在庫からすべての注文に応えられない見通しとなったため、対象包装を限定出荷としたと説明しています。",
+      "targets": [
+        {
+          "yj_code": "2149112F1057",
+          "product_name": "バルヒディオ配合錠ＭＤ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "792220471",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（2026-10の資料時点）",
+                "plans": [],
+                "note": "統一商品コード792220471。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149112F2053",
+          "product_name": "バルヒディオ配合錠ＥＸ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "792220570",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（2026-10の資料時点）",
+                "plans": [],
+                "note": "統一商品コード792220570。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "確認したメーカー原文に代替候補名の記載はありません。",
+        "メーカー資料に記載された時点の案内です。"
+      ]
+    },
+    {
+      "id": "jg-sertraline-limited-202610",
+      "maker": "日本ジェネリック",
+      "title": "セルトラリン錠25mg・50mg・100mg「JG」の限定出荷の理由",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1868",
+      "announced_at": "2026-10",
+      "source_index_url": "https://medical.nihon-generic.co.jp/news/",
+      "listed_at": "2026-10-08",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "c24dc72b5022df6b1960f9ebd5f15d655b066422651167d8b4ce389e26463336",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日本ジェネリックは、製造工場の生産能力が逼迫し、生産計画と在庫から安定供給に支障が出る見通しとなったため、対象包装を限定出荷としたと説明しています。",
+      "targets": [
+        {
+          "yj_code": "1179046F1044",
+          "product_name": "セルトラリン錠２５ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792114510",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（2026-10の資料時点）",
+                "plans": [],
+                "note": "統一商品コード792114510。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "1179046F2040",
+          "product_name": "セルトラリン錠５０ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792114619",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（2026-10の資料時点）",
+                "plans": [],
+                "note": "統一商品コード792114619。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "1179046F3098",
+          "product_name": "セルトラリン錠１００ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792115319",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（2026-10の資料時点）",
+                "plans": [],
+                "note": "統一商品コード792115319。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "確認したメーカー原文に代替候補名の記載はありません。",
+        "メーカー資料に記載された時点の案内です。"
+      ]
+    },
+    {
+      "id": "jg-sodium-bicarbonate-ns-limited-202610",
+      "maker": "日本ジェネリック",
+      "title": "日本ジェネリック販売の重ソー静注7％「NS」の限定出荷の理由",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1869",
+      "announced_at": "2026-10",
+      "source_index_url": "https://medical.nihon-generic.co.jp/news/",
+      "listed_at": "2026-10-08",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "7d82d83bf9a2cacf927169d85fadc5411c507fb6b403f011cc7895d492966525",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "販売元の日本ジェネリックは、製造販売元の日新製薬からの納期遅延により供給に支障が出る見通しとなり、自社の取り扱う対象包装を限定出荷にすると案内しています。",
+      "targets": [
+        {
+          "yj_code": "3929400A3246",
+          "product_name": "重ソー静注７％「ＮＳ」",
+          "maker": "日新製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "20mL×50管（ルアーフィット）",
+              "unified_product_code": "792356354",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（2026-10の資料時点）",
+                "plans": [],
+                "note": "統一商品コード792356354。"
+              }
+            }
+          ],
+          "seller": "日本ジェネリック"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "確認したメーカー原文に代替候補名の記載はありません。",
+        "メーカー資料に記載された時点の案内です。"
+      ]
+    },
+    {
+      "id": "jg-silodosin-od4-limited-202609",
+      "maker": "日本ジェネリック",
+      "title": "シロドシンOD錠4mg「JG」の限定出荷の理由",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1864",
+      "announced_at": "2026-09",
+      "source_index_url": "https://medical.nihon-generic.co.jp/news/",
+      "listed_at": "2026-09-24",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "9be3606817b67e468fb71e2acc78eff41483938d7b31555ff824f3b214734ed1",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日本ジェネリックは、製造工場の生産能力が逼迫し、生産計画と在庫から安定供給に支障が出る見通しとなったため、対象包装を限定出荷としたと説明しています。",
+      "targets": [
+        {
+          "yj_code": "2590010F4170",
+          "product_name": "シロドシンＯＤ錠４ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792102548",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（2026-09の資料時点）",
+                "plans": [],
+                "note": "統一商品コード792102548。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "確認したメーカー原文に代替候補名の記載はありません。",
+        "メーカー資料に記載された時点の案内です。"
+      ]
+    },
+    {
+      "id": "jg-metformin-500mt-limited-202609",
+      "maker": "日本ジェネリック",
+      "title": "メトホルミン塩酸塩錠500mgMT「JG」の限定出荷の理由",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1863",
+      "announced_at": "2026-09",
+      "source_index_url": "https://medical.nihon-generic.co.jp/news/",
+      "listed_at": "2026-09-24",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "f83d24247458bbc7fb0bffd38d8edf72598c1cb4c19f0668a6d4cf359c1d9143",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日本ジェネリックは、製造工場の生産能力が逼迫し、生産計画と在庫から安定供給に支障が出る見通しとなったため、対象包装を限定出荷としたと説明しています。",
+      "targets": [
+        {
+          "yj_code": "3962002F3040",
+          "product_name": "メトホルミン塩酸塩錠５００ｍｇＭＴ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792313319",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（2026-09の資料時点）",
+                "plans": [],
+                "note": "統一商品コード792313319。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "792313357",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（2026-09の資料時点）",
+                "plans": [],
+                "note": "統一商品コード792313357。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "792313388",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（2026-09の資料時点）",
+                "plans": [],
+                "note": "統一商品コード792313388。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "確認したメーカー原文に代替候補名の記載はありません。",
+        "メーカー資料に記載された時点の案内です。"
+      ]
+    },
+    {
+      "id": "towa-miglitol50-limited-202601",
+      "maker": "東和薬品",
+      "title": "ミグリトール錠50mg「トーワ」の出荷再開と限定出荷継続の理由",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=81599&t=4",
+      "announced_at": "2026-01",
+      "verified_at": "2026-11-16",
+      "content_updated_at": "2026-11-16",
+      "sha256": "f1126d165c72b5b175e1f44e13afbe9f132139660b7ef8060f7cbd88448365ef",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "東和薬品は2026年1月7日の出荷再開を告知し、当時は十分な在庫が確保できず、安定供給体制を整えるまで時間がかかるため限定出荷を続けると説明しました。解除時期は案内時点で未定です。",
+      "targets": [
+        {
+          "yj_code": "3969009F2038",
+          "product_name": "ミグリトール錠５０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155360011",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（2026-01の資料時点）",
+                "plans": [],
+                "note": "統一商品コード155360011。"
+              }
+            },
+            {
+              "package": "PTP210錠",
+              "unified_product_code": "155360028",
+              "supply": {
+                "status": "stopped",
+                "status_text": "販売中止（2026年1月のメーカー資料）",
+                "plans": [],
+                "note": "統一商品コード155360028。1月の資料に販売中止と記載。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "155360042",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（2026-01の資料時点）",
+                "plans": [],
+                "note": "統一商品コード155360042。"
+              }
+            },
+            {
+              "package": "PTP1050錠",
+              "unified_product_code": "155360059",
+              "supply": {
+                "status": "stopped",
+                "status_text": "販売中止（2026年1月のメーカー資料）",
+                "plans": [],
+                "note": "統一商品コード155360059。1月の資料に販売中止と記載。"
+              }
+            },
+            {
+              "package": "バラ300錠",
+              "unified_product_code": "155360035",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（2026-01の資料時点）",
+                "plans": [],
+                "note": "統一商品コード155360035。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "確認したメーカー原文に代替候補名の記載はありません。",
+        "メーカー資料に記載された時点の案内です。"
+      ]
     }
   ]
 }
