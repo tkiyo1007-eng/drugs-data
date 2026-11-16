@@ -38829,6 +38829,670 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "towa-supratast-100-limited-202601",
+      "maker": "東和薬品",
+      "title": "スプラタストトシル酸塩カプセル100mg「トーワ」 出荷再開後の限定出荷",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=81600&t=4&f=%E3%82%B9%E3%83%97%E3%83%A9%E3%82%BF%E3%82%B9%E3%83%88%E3%83%88%E3%82%B7%E3%83%AB%E9%85%B8%E5%A1%A9%E3%82%AB%E3%83%97%E3%82%BB%E3%83%AB100mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%87%BA%E8%8D%B7%E5%86%8D%E9%96%8B%EF%BC%86%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E7%B6%99%E7%B6%9A%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2026-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "6e248ec1be94b1e16b211bb5a8559b12abd67c40095a218d224c6c9e37f70f88",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "東和薬品は一時停止から出荷を再開した際、在庫を十分に確保できず安定供給体制を整えるのに時間がかかるため、限定出荷を続けると案内しました。",
+      "targets": [
+        {
+          "yj_code": "4490016M2100",
+          "product_name": "スプラタストトシル酸塩カプセル１００ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "155087109",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、1月のメーカー資料）",
+                "note": "統一商品コード 155087109。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年1月7日の出荷再開後も、限定出荷を続ける案内です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "towa-montelukast-od10-limited-202502",
+      "maker": "東和薬品",
+      "title": "モンテルカストOD錠10mg「トーワ」 出荷再開後の限定出荷",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80390&t=4&f=%E3%83%A2%E3%83%B3%E3%83%86%E3%83%AB%E3%82%AB%E3%82%B9%E3%83%88OD%E9%8C%A010mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%87%BA%E8%8D%B7%E5%86%8D%E9%96%8B%E5%8F%8A%E3%81%B3%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E7%B6%99%E7%B6%9A%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2025-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "d40cecf67c699b9745155b9b20b9142c480b543591259812f09f59bc912b82f1",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "東和薬品は一時停止から出荷を再開した際、在庫を十分に確保できず安定供給体制を整えるのに時間がかかるため、限定出荷を続けると案内しました。",
+      "targets": [
+        {
+          "yj_code": "4490026F4108",
+          "product_name": "モンテルカストＯＤ錠１０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155363012",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、2月のメーカー資料）",
+                "note": "統一商品コード 155363012。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "155363043",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、2月のメーカー資料）",
+                "note": "統一商品コード 155363043。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80390&t=4&f=%E3%83%A2%E3%83%B3%E3%83%86%E3%83%AB%E3%82%AB%E3%82%B9%E3%83%88OD%E9%8C%A010mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%87%BA%E8%8D%B7%E5%86%8D%E9%96%8B%E5%8F%8A%E3%81%B3%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E7%B6%99%E7%B6%9A%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+          "target_yj_codes": [
+            "4490026F4108"
+          ],
+          "type": "メーカー原文の包装集約先",
+          "products": [
+            {
+              "name": "モンテルカストＯＤ錠１０ｍｇ「トーワ」",
+              "maker": "東和薬品",
+              "yj_code": "4490026F4108",
+              "scope": "PTP140錠の集約先は同製品のPTP100錠（155363012）とPTP500錠（155363043）。2025年2月案内時点ではいずれも限定出荷。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2025年2月3日に限定出荷で再開した包装です。PTP140錠は包装集約のため、同資料の時点では出荷停止と明記されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "ikeda-urea-nich-route-limited",
+      "maker": "池田薬品工業",
+      "title": "尿素クリーム10％「日医工」 日医工取扱分の限定出荷",
+      "url": "https://www.nichiiko.co.jp/medicine/file/23650/information/20241204cI2.pdf",
+      "announced_at": "2024-12",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ae8b6a50c1a27ed42a8eb57d8b6650034df53c7b65c78d407a047467210c012b",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の出荷調整を受け、想定を上回る注文があったため、販売元の日医工が対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2669701N1095",
+          "product_name": "尿素クリーム１０％「日医工」",
+          "maker": "池田薬品工業",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "20g×10本",
+              "unified_product_code": "376-23650-8",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、12月のメーカー資料）",
+                "note": "統一商品コード 376-23650-8、販売包装単位コード 14987376236505。"
+              }
+            }
+          ],
+          "seller": "日医工"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "対象は原文を出した販売元の流通分です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nipro-pharma-telamuro-ee-nich-route-202505",
+      "maker": "ニプロファーマ",
+      "title": "テラムロ配合錠AP・BP「EE」 日医工取扱分の限定出荷",
+      "url": "https://www.nichiiko.co.jp/medicine/file/90840/information/20250514cI6.pdf",
+      "announced_at": "2025-05",
+      "listed_at": "2025-05-14",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "433e4b3cf161f433a272c2249289756be029258c319ca170f98f8872b48aef88",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の出荷調整を受け、想定を上回る注文があったため、販売元の日医工が対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149117F1041",
+          "product_name": "テラムロ配合錠ＡＰ「ＥＥ」",
+          "maker": "ニプロファーマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-90830-6",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 376-90830-6、販売包装単位コード 14987376908303。"
+              }
+            }
+          ],
+          "seller": "日医工"
+        },
+        {
+          "yj_code": "2149117F2048",
+          "product_name": "テラムロ配合錠ＢＰ「ＥＥ」",
+          "maker": "ニプロファーマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-90840-5",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 376-90840-5、販売包装単位コード 14987376908402。"
+              }
+            }
+          ],
+          "seller": "日医工"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "対象は原文を出した販売元の流通分です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nissin-eperisone-dsep-route-202503",
+      "maker": "日新製薬",
+      "title": "エペリゾン塩酸塩錠50mg「日新」 第一三共エスファ取扱分の限定出荷",
+      "url": "https://med.daiichisankyo-ep.co.jp/information/files/2026/gentei_20250304_E1_G.pdf",
+      "announced_at": "2025-03",
+      "listed_at": "2025-03-04",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "cf29548c332803c71804e0ed88c216de5431f4418390d2f194ef4dc7af6e6b97",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "第一三共エスファは、他社の限定出荷などで想定を上回る注文があり、在庫の逼迫や卸ごとの在庫偏在を防ぐため、対象包装の限定出荷と新規採用辞退を案内しました。",
+      "targets": [
+        {
+          "yj_code": "1249009F1430",
+          "product_name": "エペリゾン塩酸塩錠５０ｍｇ「日新」",
+          "maker": "日新製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "081184040",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、3月のメーカー資料）",
+                "note": "統一商品コード 081184040。"
+              }
+            },
+            {
+              "package": "PTP1000錠",
+              "unified_product_code": "081184057",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、3月のメーカー資料）",
+                "note": "統一商品コード 081184057。"
+              }
+            }
+          ],
+          "seller": "第一三共エスファ"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "対象は原文を出した販売元の流通分です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nikko-sodium-bicarbonate-nipro-route-202607",
+      "maker": "日興製薬",
+      "title": "炭酸水素ナトリウム「ニッコー」 ニプロ取扱分の限定出荷",
+      "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001FkBAdIAN",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-24",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "174e857103db087f0825903c36b443cab39d453217cd053b1ace46bf37e06855",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社が販売する同一成分薬の限定出荷を受けて需要増が見込まれ、手持ち在庫と出荷量で対応できないため、ニプロは既存の医療機関を優先し、出荷数を割り当てると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2344004X1364",
+          "product_name": "炭酸水素ナトリウム「ニッコー」",
+          "maker": "日興製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "500g",
+              "unified_product_code": "190-74844-7",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 190-74844-7。"
+              }
+            }
+          ],
+          "seller": "ニプロ"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "対象は原文を出した販売元の流通分です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "shionochem-metformin-sn-nichiiko-route-202604",
+      "maker": "シオノケミカル",
+      "title": "メトホルミン塩酸塩錠250mg「SN」 日医工取扱分の出荷調整",
+      "url": "https://www.nichiiko.co.jp/medicine/file/80935/information/20260422cI1.pdf",
+      "announced_at": "2026-04",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "b115b91d8f1d89c0ba5f085f524f98ec43dfcdccd0ba98fd9ca42f5f9a286056",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造委託先からの入荷が遅れ、必要な供給量を確保できないため、日医工は限定出荷と新規採用辞退を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3962002F1110",
+          "product_name": "メトホルミン塩酸塩錠２５０ｍｇ「ＳＮ」",
+          "maker": "シオノケミカル",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-80932-0",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、4月のメーカー資料）",
+                "note": "統一商品コード 376-80932-0、販売包装単位コード 14987376809327。"
+              }
+            }
+          ],
+          "seller": "日医工"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "対象は原文を出した販売元の流通分です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "shionochem-metformin-sn-chemiphar-route-202604",
+      "maker": "シオノケミカル",
+      "title": "メトホルミン塩酸塩錠250mg「SN」 日本ケミファ取扱分の出荷調整",
+      "url": "https://www.nc-medical.com/product_topics/f4bj0h000000knx2-att/f4bj0h000000knxq.pdf",
+      "announced_at": "2026-04",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "e772d79e4fdc9c1150bfd6d2c82b53957f82dc7be49ddddd2691c6ceb2db7d95",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造販売元からの納品が遅れ、手持ち在庫が品薄になる見込みのため、日本ケミファは出荷調整と新規採用辞退を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3962002F1110",
+          "product_name": "メトホルミン塩酸塩錠２５０ｍｇ「ＳＮ」",
+          "maker": "シオノケミカル",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100錠",
+              "unified_product_code": "171528235",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、4月のメーカー資料）",
+                "note": "統一商品コード 171528235、販売包装単位コード 14987171528232。"
+              }
+            }
+          ],
+          "seller": "日本ケミファ"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "対象は原文を出した販売元の流通分です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sawai-vardenafil10-limited-202606",
+      "maker": "沢井製薬",
+      "title": "バルデナフィル錠10mg「サワイ」 限定出荷のお知らせ",
+      "url": "https://med.sawai.co.jp/file/pr27_4712_1.pdf",
+      "announced_at": "2026-06",
+      "listed_at": "2026-06-15",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "56143a14ac747e68082025fedf3cbd486935675a2cb3d2c71ba86b010348373a",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "注文が想定を上回って一時的に品薄となり、生産計画と在庫状況からすべての注文に対応できないため、沢井製薬は既採用施設を優先して限定出荷を始めました。",
+      "targets": [
+        {
+          "yj_code": "259000BF2033",
+          "product_name": "バルデナフィル錠１０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP20錠",
+              "unified_product_code": "080160113",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、6月のメーカー資料）",
+                "note": "統一商品コード 080160113、販売包装単位コード 14987080160110。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "novartis-tykerb250-supply-outlook-202609",
+      "maker": "ノバルティスファーマ",
+      "title": "タイケルブ錠250mg 供給に関するお知らせ",
+      "url": "https://www.pro.novartis.com/jp-ja/sites/pro_novartis_com_jp/files/2026-09/ot_tyk_202609.pdf",
+      "announced_at": "2026-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "c4f448da45c72591a8e5f6a983a004c7b1da412e67cf77d234bba3f5fe678c6e",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "溶出試験で規格外となる製品が生じ、今後の供給が見通せないため、ノバルティスは在庫を使い切った後に供給を一時停止する予定と案内しました。",
+      "targets": [
+        {
+          "yj_code": "4291022F1026",
+          "product_name": "タイケルブ錠２５０ｍｇ",
+          "maker": "ノバルティスファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100錠",
+              "unified_product_code": "443-36805-7",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "在庫消尽後に一時停止予定（2026年9月のメーカー資料。時期未記載）"
+                  }
+                ],
+                "note": "統一商品コード 443-36805-7。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料時点で市場に流通していた製品に品質上の問題はないとの案内です。供給再開時期は資料時点で未定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "hisamitsu-eclar50-limited-202607",
+      "maker": "久光製薬",
+      "title": "エクラープラスター20μg/cm² 50枚包装の限定出荷",
+      "url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260727.pdf",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-27",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "0a2c59c77b399900923e918b0f9cc2ecdf66736c0a50b86af687b2dd1a50ce82",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "久光製薬は2026年7月27日から対象の50枚包装を限定出荷としました。原文に具体的な理由は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "2646729S2035",
+          "product_name": "エクラープラスター２０μｇ／ｃ㎡",
+          "maker": "久光製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "50枚（1枚/1袋×50袋）",
+              "unified_product_code": "188-40206-1",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、7月のメーカー資料）",
+                "note": "統一商品コード 188-40206-1、販売包装単位コード 14987188402068。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料時点の限定出荷の解除時期は未定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "bms-kenacort-a-sixth-report-202610",
+      "maker": "ブリストル・マイヤーズ スクイブ",
+      "title": "ケナコルト-A 40mg/1mL・50mg/5mL 今後の供給予定 第6報",
+      "url": "https://www.bmshealthcare.jp/assets/buildeasy/apac-commercial/bms-healthcare-jp/ja/documents/products/kenacort/News_KA2610.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-21",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "20e5fba82968a64b666e56f80cd6918e8abae5e6f862df756fefd9ba010f84d0",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "新しい製造ラインの適格性評価が長引いたため、ブリストル・マイヤーズ スクイブは2025年4月から2品目の限定出荷を続けています。2026年10月の第6報では、既存ラインで製造を再開し、在庫を積み増せる見込みになったと案内しました。",
+      "targets": [
+        {
+          "yj_code": "2454402A3033",
+          "product_name": "ケナコルト－Ａ筋注用関節腔内用水懸注４０ｍｇ／１ｍＬ",
+          "maker": "ブリストル・マイヤーズ スクイブ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10バイアル",
+              "unified_product_code": "279-11523-8",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、10月のメーカー資料）",
+                "note": "統一商品コード 279-11523-8。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2454402A2037",
+          "product_name": "ケナコルト－Ａ皮内用関節腔内用水懸注５０ｍｇ／５ｍＬ",
+          "maker": "ブリストル・マイヤーズ スクイブ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5バイアル",
+              "unified_product_code": "279-11503-0",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、10月のメーカー資料）",
+                "note": "統一商品コード 279-11503-0。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカーの計画では2026年12月から通常時の約30％に増量します。限定出荷は継続し、通常出荷の再開時期と在庫消尽時期は資料上未定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "shionogi-finibax-vials-limited-202507",
+      "maker": "塩野義製薬",
+      "title": "フィニバックス点滴静注用0.25g・0.5g 出荷量変更のお知らせ",
+      "url": "https://www.shionogi.com/content/dam/hcp/jp/news/package/2025/FBX_20250723.pdf",
+      "announced_at": "2025-07",
+      "listed_at": "2025-07-23",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "84d70fe0a7f661e09e1530c38b555d8bf2ad48e9d65eb4aa46bb146d7dae901c",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "原薬の一部が品質基準を満たさなかったため、塩野義製薬は限定出荷を継続していました。2025年7月の資料では、バイアル2規格は限定出荷を続け、キットの0.25gは在庫回復の見込みから解除すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "6139402D1032",
+          "product_name": "フィニバックス点滴静注用０．２５ｇ",
+          "maker": "塩野義製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10瓶",
+              "unified_product_code": "087-03891-0",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、7月のメーカー資料）",
+                "note": "統一商品コード 087-03891-0。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6139402D2020",
+          "product_name": "フィニバックス点滴静注用０．５ｇ",
+          "maker": "塩野義製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10瓶",
+              "unified_product_code": "087-03889-7",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、7月のメーカー資料）",
+                "note": "統一商品コード 087-03889-7。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "解除対象の0.25gキットと、この資料で限定出荷が続くバイアルを区別しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }

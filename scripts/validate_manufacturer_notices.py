@@ -85,6 +85,25 @@ MAKER_MANUAL_SOURCE_HOSTS = {
 }
 # Specific manufacturer and distributor notices hosted outside the primary company domain.
 MAKER_MANUAL_SOURCE_URLS = {
+    '池田薬品工業': {
+        'https://www.nichiiko.co.jp/medicine/file/23650/information/20241204cI2.pdf',
+    },
+    'ニプロファーマ': {
+        'https://www.nichiiko.co.jp/medicine/file/90840/information/20250514cI6.pdf',
+    },
+    '日新製薬': {
+        'https://med.daiichisankyo-ep.co.jp/information/files/2026/gentei_20250304_E1_G.pdf',
+    },
+    '日興製薬': {
+        'https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001FkBAdIAN',
+    },
+    'シオノケミカル': {
+        'https://www.nichiiko.co.jp/medicine/file/80935/information/20260422cI1.pdf',
+        'https://www.nc-medical.com/product_topics/f4bj0h000000knx2-att/f4bj0h000000knxq.pdf',
+    },
+    'ブリストル・マイヤーズ スクイブ': {
+        'https://www.bmshealthcare.jp/assets/buildeasy/apac-commercial/bms-healthcare-jp/ja/documents/products/kenacort/News_KA2610.pdf',
+    },
     'テルモ': {'https://jasect.org/wp/wp-content/uploads/2023/02/23PN005.pdf'},
     'ヤンセンファーマ': {
         'https://www.js-adhd.org/doc/js-adhd/oshirase_20260706.pdf',
