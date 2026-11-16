@@ -84,7 +84,8 @@ jobs:
           MAX_HUB_BYTES = 8 * 1024 * 1024
 
 
-          def fetch(url, max_bytes=MAX_SITEMAP_BYTES):
+          def fetch(url):
+              max_bytes = MAX_HUB_BYTES if url in HUB_URLS else MAX_SITEMAP_BYTES
               separator = "&" if "?" in url else "?"
               request = urllib.request.Request(
                   f"{url}{separator}health_check={time.time_ns()}",
@@ -171,7 +172,7 @@ jobs:
               for url in HUB_URLS:
                   try:
                       parser = PageSignals()
-                      parser.feed(fetch(url, MAX_HUB_BYTES).decode("utf-8"))
+                      parser.feed(fetch(url).decode("utf-8"))
                       if parser.canonicals != [url]:
                           errors.append(
                               f"canonicalが自己URLと一致しません: {url} -> {parser.canonicals}"
