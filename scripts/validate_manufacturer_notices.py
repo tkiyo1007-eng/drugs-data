@@ -42,6 +42,7 @@ MAKER_HOSTS = {
     '太陽ファルマ': 'www.taiyo-pharma.co.jp',
     'ノーベルファーマ': 'www.nobelpharma.co.jp',
     'ニプロ': 'med.nipro.co.jp',
+    'テルモ': 'medical.terumo.co.jp',
     '塩野義製薬': 'www.shionogi.com',
     'シオノギファーマ': 'www.shionogi-ph.co.jp',
     'オルガノン': 'organonpro.com',
@@ -84,6 +85,11 @@ MAKER_MANUAL_SOURCE_HOSTS = {
 }
 # Specific manufacturer and distributor notices hosted outside the primary company domain.
 MAKER_MANUAL_SOURCE_URLS = {
+    'テルモ': {'https://jasect.org/wp/wp-content/uploads/2023/02/23PN005.pdf'},
+    'ヤンセンファーマ': {
+        'https://www.js-adhd.org/doc/js-adhd/oshirase_20260706.pdf',
+        'https://www.js-adhd.org/doc/js-adhd/oshirase_20260723_01.pdf',
+    },
     'バイエル薬品': {'https://www.jsge.or.jp/wp-content/uploads/2026/10/43e13de6fd20d8db3390e8f5078a04b8.pdf'},
     '日本イーライリリー': {'https://www.nittokyo.or.jp/uploads/files/20261014_Lilly_insulin.pdf'},
     '大塚製薬工場': {'https://medical.jms.cc/pdf/customer_information_306.pdf'},
