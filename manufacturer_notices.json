@@ -40584,6 +40584,469 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "asahi-bredinin-od25-50-limited-202610",
+      "maker": "旭化成セラピューティクス",
+      "title": "ブレディニンOD錠25・50 限定出荷のお知らせ",
+      "url": "https://akp-pharma-digital.com/info/products/pdf/bredinin_od_limited_shipment_202610.pdf",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "e788f3a7d9e3dc904921a2d02ab9c98d4f473307f53aa07472051d6b68382cd7",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "旭化成セラピューティクスは、想定を超える注文が続いて供給を維持できないおそれが高まり、2026年10月14日から特約店への限定出荷を始めたと案内しました。",
+      "targets": [
+        {
+          "yj_code": "3999002F3023",
+          "product_name": "ブレディニンＯＤ錠２５",
+          "maker": "旭化成セラピューティクス",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "153138407",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、10月のメーカー資料）",
+                "note": "統一商品コード 153138407。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3999002F4020",
+          "product_name": "ブレディニンＯＤ錠５０",
+          "maker": "旭化成セラピューティクス",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "153138414",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、10月のメーカー資料）",
+                "note": "統一商品コード 153138414。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "asahi-bredinin-od25-50-discontinuation-202605",
+      "maker": "旭化成セラピューティクス",
+      "title": "ブレディニンOD錠25・50 販売中止予定と代替候補",
+      "url": "https://akp-pharma-digital.com/info/products/pdf/bredinin_od_discontinued.pdf",
+      "announced_at": "2026-05",
+      "listed_at": "2026-05-18",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "1e14f84aff1abdf96eaf81b31db9ab816c128e8e33c3aa1bc33e9236e756741c",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "旭化成セラピューティクスは、ブレディニンOD錠25・50の販売中止を案内しました。販売中止の具体的な理由はこの資料に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "3999002F3023",
+          "product_name": "ブレディニンＯＤ錠２５",
+          "maker": "旭化成セラピューティクス",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "153138407",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "卸への出荷は2027年4月終了予定（2026年5月資料）"
+                  }
+                ],
+                "note": "統一商品コード 153138407、販売包装単位コード 14987153138404。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3999002F4020",
+          "product_name": "ブレディニンＯＤ錠５０",
+          "maker": "旭化成セラピューティクス",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "153138414",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "卸への出荷は2027年4月終了予定（2026年5月資料）"
+                  }
+                ],
+                "note": "統一商品コード 153138414、販売包装単位コード 14987153138411。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://akp-pharma-digital.com/info/products/pdf/bredinin_od_discontinued.pdf",
+          "target_yj_codes": [
+            "3999002F3023"
+          ],
+          "type": "メーカーの販売中止案内に記載の候補",
+          "products": [
+            {
+              "name": "ブレディニン錠２５",
+              "maker": "旭化成セラピューティクス",
+              "yj_code": "3999002F1020",
+              "scope": "同じ含量の普通錠PTP100錠（153-13600-7、販売包装単位コード 14987153136004）。対象のOD錠とは剤形が異なります。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        },
+        {
+          "source_url": "https://akp-pharma-digital.com/info/products/pdf/bredinin_od_discontinued.pdf",
+          "target_yj_codes": [
+            "3999002F4020"
+          ],
+          "type": "メーカーの販売中止案内に記載の候補",
+          "products": [
+            {
+              "name": "ブレディニン錠５０",
+              "maker": "旭化成セラピューティクス",
+              "yj_code": "3999002F2027",
+              "scope": "同じ含量の普通錠PTP100錠（153-13610-6、販売包装単位コード 14987153136103）。対象のOD錠とは剤形が異なります。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "資料では2027年4月に経過措置に移行、2028年4月に薬価削除予定です。対象はOD錠です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "teikoku-nizoral-cream2-limited-202609",
+      "maker": "帝國製薬",
+      "title": "ニゾラールクリーム2％ 製品供給のお知らせ（更新）",
+      "url": "https://www.teikoku.co.jp/med_database/fileviewer/fileview?file_class=11&file_name=11_256.pdf",
+      "announced_at": "2026-09",
+      "listed_at": "2026-09-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "598e48c3541f03a6f9f67dde608240d2b5799fbb60025267a99b7632edfe782c",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "帝國製薬は、他社の同種同効品の限定出荷で需要が増えた結果、すべての注文に対応できないため、特約店向けの限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2655709N1053",
+          "product_name": "ニゾラールクリーム２％",
+          "maker": "帝國製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10g×20本",
+              "unified_product_code": "641082229",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、9月のメーカー資料）",
+                "note": "統一商品コード 641082229、販売包装単位コード 14987641082226。"
+              }
+            },
+            {
+              "package": "10g×50本",
+              "unified_product_code": "641082236",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、9月のメーカー資料）",
+                "note": "統一商品コード 641082236、販売包装単位コード 14987641082233。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "解除時期は決まり次第案内する方針です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "teikoku-ketoprofen-xr120-limited-202609",
+      "maker": "帝國製薬",
+      "title": "ケトプロフェンパップXR120mg「テイコク」 製品供給のお知らせ（更新）",
+      "url": "https://www.teikoku.co.jp/med_database/fileviewer/fileview?file_class=11&file_name=11_254.pdf",
+      "announced_at": "2026-09",
+      "listed_at": "2026-09-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "7480edc850cf28b0b8b4f6f14a9578a215bfcffd89544540ed503acadadd6564",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "帝國製薬は、需要が増えた結果、すべての注文に対応できないため、特約店向けの限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2649729S5036",
+          "product_name": "ケトプロフェンパップＸＲ１２０ｍｇ「テイコク」",
+          "maker": "帝國製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "7枚×10",
+              "unified_product_code": "641077829",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 641077829、販売包装単位コード 14987641077826。"
+              }
+            },
+            {
+              "package": "7枚×40",
+              "unified_product_code": "641077836",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 641077836、販売包装単位コード 14987641077833。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "解除時期は決まり次第案内する方針です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "kotobuki-flecainide50-100-limited-202506",
+      "maker": "寿製薬",
+      "title": "フレカイニド酢酸塩錠50mg・100mg「KO」 製品供給のお知らせ",
+      "url": "https://www.kotobuki-pharm.co.jp/prs2/wp-content/uploads/2025.6_FLE.pdf",
+      "announced_at": "2025-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "384869539f1820a589d0abf683330735d6f8ae5c403130b0dfbec12886ec746f",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の影響で需要が大幅に増え、すべての注文に応じられる数量の確保が難しくなったため、寿製薬は既採用の医療機関を優先し、限定出荷を始めると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2129009F1038",
+          "product_name": "フレカイニド酢酸塩錠５０ｍｇ「ＫＯ」",
+          "maker": "寿製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "071157016",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 071157016、販売包装単位コード 14987071157013。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "071157023",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 071157023、販売包装単位コード 14987071157020。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "071157030",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 071157030、販売包装単位コード 14987071157037。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2129009F2034",
+          "product_name": "フレカイニド酢酸塩錠１００ｍｇ「ＫＯ」",
+          "maker": "寿製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "071158013",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 071158013、販売包装単位コード 14987071158010。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "071158020",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 071158020、販売包装単位コード 14987071158027。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2025年6月資料の対象規格・包装に限ります。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "organon-tetramide10-limited-followup-202408",
+      "maker": "オルガノン",
+      "title": "テトラミド錠10mg 限定出荷のお知らせ 第2報",
+      "url": "https://organonpro.com/ja-jp/wp-content/uploads/sites/10/2024/08/OTH24OT0028_tetramide_adjustment_202408.pdf",
+      "announced_at": "2024-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "4a65917efb00ccd7dae9c922fd749162bd9ae9e537b9a16d8610c13b5f906007",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "添加剤の供給元を変更する過程で製造設備に問題が見つかり、オルガノンは10mgを限定出荷にしました。第2報では原因を特定し製造を再開したものの、在庫が十分でないため限定出荷を続けると案内しました。",
+      "targets": [
+        {
+          "yj_code": "1179033F1020",
+          "product_name": "テトラミド錠１０ｍｇ",
+          "maker": "オルガノン",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP105錠（21錠×5）",
+              "unified_product_code": "954600165",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 954600165。"
+              }
+            },
+            {
+              "package": "バラ1000錠",
+              "unified_product_code": "954600172",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 954600172。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2024年8月資料では直近の出荷停止を回避できる見込みでした。対象は10mgの2包装です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "cheplapharm-visudyne-limited-202509",
+      "maker": "チェプラファーム",
+      "title": "ビスダイン静注用15mg 限定出荷のお知らせ",
+      "url": "https://www.nichigan.or.jp/Portals/0/resources/news/Visudyne.pdf",
+      "announced_at": "2025-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "8dbbc6063be011ba4c123c03c9501b85a8ed2a92d0365d7af37effaa31cd9bb7",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "新しい製造所での製造条件の検討に時間がかかり、承認事項一部変更承認申請の計画を見直すことになったため、チェプラファームは2025年9月1日から限定出荷を行うと案内しました。",
+      "targets": [
+        {
+          "yj_code": "1319401F1026",
+          "product_name": "ビスダイン静注用１５ｍｇ",
+          "maker": "チェプラファーム",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1バイアル",
+              "unified_product_code": "994500258",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 994500258。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2025年の開始案内です。限定出荷の解除時期は資料時点で未定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
