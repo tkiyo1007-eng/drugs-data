@@ -57,6 +57,9 @@ MAKER_HOSTS = {
     '大原薬品工業': 'www.ohara-ch.co.jp',
     'サンファーマ': 'jp.sunpharma.com',
     'SBカワスミ': 'www.sb-kawasumi.jp',
+    'バイエル薬品': 'pharma-navi.bayer.jp',
+    '陽進堂ホールディングス': 'yoshindoholdings.co.jp',
+    '共創未来ファーマ': 'www.kyosomirai-p.co.jp',
     '大塚製薬工場': 'www.otsukakj.jp',
     'グラクソ・スミスクライン': 'gskpro.com',
     'ヴィアトリス・ヘルスケア合同会社': 'www.viatris-e-channel.com',
@@ -79,6 +82,7 @@ MAKER_MANUAL_SOURCE_HOSTS = {
 }
 # Specific manufacturer and distributor notices hosted outside the primary company domain.
 MAKER_MANUAL_SOURCE_URLS = {
+    'バイエル薬品': {'https://www.jsge.or.jp/wp-content/uploads/2026/10/43e13de6fd20d8db3390e8f5078a04b8.pdf'},
     '日本イーライリリー': {'https://www.nittokyo.or.jp/uploads/files/20261014_Lilly_insulin.pdf'},
     '大塚製薬工場': {'https://medical.jms.cc/pdf/customer_information_306.pdf'},
     '長生堂製薬': {

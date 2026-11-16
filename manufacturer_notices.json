@@ -37441,6 +37441,623 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "tatsumi-triazolam0125-end-202608",
+      "maker": "辰巳化学",
+      "title": "トリアゾラム錠0.125mg「TCK」 販売中止品目のご案内",
+      "url": "https://www.tatsumi-kagaku.com/file/information/file/1128_1.pdf",
+      "announced_at": "2026-08",
+      "listed_at": "2026-08-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "05005e17f7f49f5e3a2e1df25a6c25dce808c9191988e22e5e5e558b04dcf7b1",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "辰巳化学は対象包装の販売中止と代替製品を案内しました。販売中止の具体的な理由は原文に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "1124007F1097",
+          "product_name": "トリアゾラム錠０．１２５ｍｇ「ＴＣＫ」",
+          "maker": "辰巳化学",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "124037319",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年9月（原文発表時点の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 124037319、販売包装単位コード 14987124037316。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.tatsumi-kagaku.com/file/information/file/1128_1.pdf",
+          "target_yj_codes": [
+            "1124007F1097"
+          ],
+          "type": "メーカー原文に記載の同規格の代替製品",
+          "products": [
+            {
+              "name": "トリアゾラム錠０．１２５ｍｇ「日医工」",
+              "maker": "日医工",
+              "yj_code": "1124007F1135",
+              "scope": "PTP100錠（376371018、販売包装単位コード14987376371015）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "経過措置期間は資料で2028年3月末までを予定。資料の在庫消尽・経過措置の時期は発表時点の内容です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "tatsumi-valhydio-md-end-202606",
+      "maker": "辰巳化学",
+      "title": "バルヒディオ配合錠MD「TCK」 販売中止品目のご案内",
+      "url": "https://www.tatsumi-kagaku.com/file/information/file/1121_1.pdf",
+      "announced_at": "2026-06",
+      "listed_at": "2026-06-22",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "3a64899a46317cc3de0e5e030c59707a5029889616668401558011db70d71ea7",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "辰巳化学は対象包装の販売中止と代替製品を案内しました。販売中止の具体的な理由は原文に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "2149112F1065",
+          "product_name": "バルヒディオ配合錠ＭＤ「ＴＣＫ」",
+          "maker": "辰巳化学",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "124154719",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年9月（原文発表時点の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 124154719、販売包装単位コード 14987124154716。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.tatsumi-kagaku.com/file/information/file/1121_1.pdf",
+          "target_yj_codes": [
+            "2149112F1065"
+          ],
+          "type": "メーカー原文に記載の同規格の代替製品",
+          "products": [
+            {
+              "name": "バルヒディオ配合錠ＭＤ「ＮＩＧ」",
+              "maker": "日医工岐阜工場",
+              "yj_code": "2149112F1120",
+              "scope": "MDのPTP100錠（376789639、販売包装単位コード14987376789636）。発売元は日医工。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "経過措置期間は資料で2028年3月末までを予定。資料の在庫消尽・経過措置の時期は発表時点の内容です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "tatsumi-valhydio-ex-end-202606",
+      "maker": "辰巳化学",
+      "title": "バルヒディオ配合錠EX「TCK」 販売中止品目のご案内",
+      "url": "https://www.tatsumi-kagaku.com/file/information/file/1121_1.pdf",
+      "announced_at": "2026-06",
+      "listed_at": "2026-06-22",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "3a64899a46317cc3de0e5e030c59707a5029889616668401558011db70d71ea7",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "辰巳化学は対象包装の販売中止と代替製品を案内しました。販売中止の具体的な理由は原文に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "2149112F2061",
+          "product_name": "バルヒディオ配合錠ＥＸ「ＴＣＫ」",
+          "maker": "辰巳化学",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "124154818",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年10月（原文発表時点の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 124154818、販売包装単位コード 14987124154815。"
+              }
+            },
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "124154849",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年10月（原文発表時点の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 124154849、販売包装単位コード 14987124154843。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.tatsumi-kagaku.com/file/information/file/1121_1.pdf",
+          "target_yj_codes": [
+            "2149112F2061"
+          ],
+          "type": "メーカー原文に記載の同規格の代替製品",
+          "products": [
+            {
+              "name": "バルヒディオ配合錠ＥＸ「ＮＩＧ」",
+              "maker": "日医工岐阜工場",
+              "yj_code": "2149112F2126",
+              "scope": "EXのPTP100錠（376789738、販売包装単位コード14987376789735）。発売元は日医工。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "経過措置期間は資料で2028年3月末までを予定。資料の在庫消尽・経過措置の時期は発表時点の内容です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "tatsumi-fexofenadine30-end-202602",
+      "maker": "辰巳化学",
+      "title": "フェキソフェナジン塩酸塩錠30mg「TCK」 販売中止品目のご案内",
+      "url": "https://www.tatsumi-kagaku.com/file/information/file/1093_1.pdf",
+      "announced_at": "2026-02",
+      "listed_at": "2026-02-13",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "84933dba4819cff40fd8dfe8c5103b29b66c056503e8a6ec49663fc1c9a6fe45",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "辰巳化学は対象包装の販売中止と代替製品を案内しました。販売中止の具体的な理由は原文に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "4490023F2101",
+          "product_name": "フェキソフェナジン塩酸塩錠３０ｍｇ「ＴＣＫ」",
+          "maker": "辰巳化学",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "販売包装単位コード 14987124142119。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.tatsumi-kagaku.com/file/information/file/1093_1.pdf",
+          "target_yj_codes": [
+            "4490023F2101"
+          ],
+          "type": "メーカー原文に記載の同規格の代替製品",
+          "products": [
+            {
+              "name": "フェキソフェナジン塩酸塩錠３０ｍｇ「杏林」",
+              "maker": "キョーリンリメディオ",
+              "yj_code": "4490023F2152",
+              "scope": "30mgのPTP100錠（販売包装単位コード14987060305265）。販売元は杏林製薬。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "経過措置期間は資料で2027年3月末までを予定。資料の在庫消尽・経過措置の時期は発表時点の内容です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "tatsumi-mirtazapine15-end-202512",
+      "maker": "辰巳化学",
+      "title": "ミルタザピン錠15mg「TCK」 販売中止品目のご案内",
+      "url": "https://www.tatsumi-kagaku.com/file/information/file/1081_1.pdf",
+      "announced_at": "2025-12",
+      "listed_at": "2025-12-15",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ca12df4b2a210ce6dd5b258516d1ac9706b6ece4ad829c07e8b1c6990072e369",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "辰巳化学は対象包装の販売中止と代替製品を案内しました。販売中止の具体的な理由は原文に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "1179051F1061",
+          "product_name": "ミルタザピン錠１５ｍｇ「ＴＣＫ」",
+          "maker": "辰巳化学",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "販売包装単位コード 14987124157014。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.tatsumi-kagaku.com/file/information/file/1081_1.pdf",
+          "target_yj_codes": [
+            "1179051F1061"
+          ],
+          "type": "メーカー原文に記載の同規格の代替製品",
+          "products": [
+            {
+              "name": "ミルタザピン錠１５ｍｇ「明治」",
+              "maker": "大蔵製薬",
+              "yj_code": "1179051F1207",
+              "scope": "15mgのPTP100錠・500錠・1,000錠とバラ500錠。販売元はMeiji Seika ファルマ。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "経過措置期間は資料で2027年3月末までを予定。資料の在庫消尽・経過措置の時期は発表時点の内容です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "yoshindo-fresmin-limited-202308",
+      "maker": "陽進堂ホールディングス",
+      "title": "フレスミンS注射液1000μg 限定出荷のお知らせ",
+      "url": "https://yoshindoholdings.co.jp/data_base/db/pdf/etc_230801.pdf",
+      "announced_at": "2023-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "42df43594590d03a4e21cb78adbed60f18ba94e8853978603e2c8516db8a81ee",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "2022年4月に製造販売中止を案内した後、メチルマロン酸血症の治療で引き続き必要との学会の意見を受けた一方、主原料を十分に調達できず、陽進堂はこの治療を継続中の患者向けに限定出荷すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "3136401A1192",
+          "product_name": "フレスミンＳ注射液１０００μｇ",
+          "maker": "陽進堂ホールディングス",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "1mL×50管",
+              "unified_product_code": "476163803",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 476163803。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://yoshindoholdings.co.jp/data_base/db/pdf/etc_230801.pdf",
+          "target_yj_codes": [
+            "3136401A1192"
+          ],
+          "type": "メーカー原文に記載の一般の代替候補",
+          "products": [
+            {
+              "name": "シアノコバラミン注１０００μｇ「ＮＰ」",
+              "maker": "ニプロ",
+              "yj_code": "3136402A3181",
+              "scope": "1mL×50管（190042538）。成分が異なり、効能・効果と用法・用量も一部異なります。原文はメチルマロン酸血症に対する代替医薬品はないとしています。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "この資料の日付時点で製造販売元はエイワイファーマ、販売元は陽進堂です。現在の厚労省公表上の製造販売元は陽進堂ホールディングス。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "bayer-gastrografin-third-notice-202610",
+      "maker": "バイエル薬品",
+      "title": "ガストログラフイン経口・注腸用 限定出荷のお知らせ（第3報）",
+      "url": "https://www.jsge.or.jp/wp-content/uploads/2026/10/43e13de6fd20d8db3390e8f5078a04b8.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "27d6f0403160e381fa2ab8b308c34ff4cc484cc8fac2e2b2df718e10ddddaccc",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "ニトロソアミン類の検出に伴い、バイエル薬品は検査でN-ニトロソ-メグルミンが暫定管理値未満と確認できたロットのみを出荷しています。海外製造所からの入荷調整で改善を見込む一方、製造体制・検査結果・入荷状況で供給が変動するため、限定出荷の継続を案内しました。",
+      "targets": [
+        {
+          "yj_code": "7211001X1030",
+          "product_name": "ガストログラフイン経口・注腸用",
+          "maker": "バイエル薬品",
+          "scope": "product",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": []
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年10月資料では、9月以降、月あたり通常時の需要約1か月分の供給量の確保に取り組むとしています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "kmp-limited-1179052m1057-202611",
+      "maker": "共創未来ファーマ",
+      "title": "デュロキセチンカプセル20mg「KMP」 限定出荷に関するご連絡とお詫び",
+      "url": "https://www.kyosomirai-p.co.jp/wp-content/uploads/2026/10/info_20261102_01.pdf",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "2b11a71e2b4e244ed3e1479d174ddef0747d84933148cf2d2dde7f49353d2620",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "同社の対象表では当該包装を自社の事情による限定出荷としています。個別の事情の詳細は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "1179052M1057",
+          "product_name": "デュロキセチンカプセル２０ｍｇ「ＫＭＰ」",
+          "maker": "共創未来ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "885024740",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情）、出荷量は増加（10月30日の対象表）",
+                "note": "統一商品コード 885024740、販売包装単位コード 14987885024747。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "供給一覧の基準日は2026年10月30日です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "kmp-limited-2149042f3052-202611",
+      "maker": "共創未来ファーマ",
+      "title": "テルミサルタン錠80mg「FFP」 限定出荷に関するご連絡とお詫び",
+      "url": "https://www.kyosomirai-p.co.jp/wp-content/uploads/2026/10/info_20261102_01.pdf",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "2b11a71e2b4e244ed3e1479d174ddef0747d84933148cf2d2dde7f49353d2620",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "同社の対象表では当該包装を自社の事情による限定出荷としています。個別の事情の詳細は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "2149042F3052",
+          "product_name": "テルミサルタン錠８０ｍｇ「ＦＦＰ」",
+          "maker": "共創未来ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "885011559",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情）、出荷量は増加（10月30日の対象表）",
+                "note": "統一商品コード 885011559、販売包装単位コード 14987885011556。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "供給一覧の基準日は2026年10月30日です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "kmp-limited-1149117f1284-202611",
+      "maker": "共創未来ファーマ",
+      "title": "トアラセット配合錠「KMP」 限定出荷に関するご連絡とお詫び",
+      "url": "https://www.kyosomirai-p.co.jp/wp-content/uploads/2026/10/info_20261102_01.pdf",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "2b11a71e2b4e244ed3e1479d174ddef0747d84933148cf2d2dde7f49353d2620",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "共創未来ファーマは、他社限定出荷の影響で需要が急増し、生産計画と在庫ではすべての受注に対応できないとして、既採用の施設への安定供給を優先すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "1149117F1284",
+          "product_name": "トアラセット配合錠「ＫＭＰ」",
+          "maker": "共創未来ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "885023552",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響）、出荷量は通常（10月30日の対象表）",
+                "note": "統一商品コード 885023552、販売包装単位コード 14987885023559。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "供給一覧の基準日は2026年10月30日です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "kmp-limited-2189017f2304-202611",
+      "maker": "共創未来ファーマ",
+      "title": "ロスバスタチン錠5mg「KMP」 限定出荷に関するご連絡とお詫び",
+      "url": "https://www.kyosomirai-p.co.jp/wp-content/uploads/2026/10/info_20261102_01.pdf",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "2b11a71e2b4e244ed3e1479d174ddef0747d84933148cf2d2dde7f49353d2620",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "共創未来ファーマは、他社限定出荷の影響で需要が急増し、生産計画と在庫ではすべての受注に対応できないとして、既採用の施設への安定供給を優先すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2189017F2304",
+          "product_name": "ロスバスタチン錠５ｍｇ「ＫＭＰ」",
+          "maker": "共創未来ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "885023309",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響）、出荷量は通常（10月30日の対象表）",
+                "note": "統一商品コード 885023309、販売包装単位コード 14987885023306。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "885023323",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響）、出荷量は増加（10月30日の対象表）",
+                "note": "統一商品コード 885023323、販売包装単位コード 14987885023320。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "885023347",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響）、出荷量は通常（10月30日の対象表）",
+                "note": "統一商品コード 885023347、販売包装単位コード 14987885023344。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "供給一覧の基準日は2026年10月30日です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
