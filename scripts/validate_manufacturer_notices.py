@@ -57,6 +57,7 @@ MAKER_HOSTS = {
     '大原薬品工業': 'www.ohara-ch.co.jp',
     'サンファーマ': 'jp.sunpharma.com',
     'SBカワスミ': 'www.sb-kawasumi.jp',
+    '大塚製薬工場': 'www.otsukakj.jp',
     'グラクソ・スミスクライン': 'gskpro.com',
     'ヴィアトリス・ヘルスケア合同会社': 'www.viatris-e-channel.com',
     'ヴィアトリス製薬合同会社': 'www.viatris-e-channel.com',
@@ -78,6 +79,8 @@ MAKER_MANUAL_SOURCE_HOSTS = {
 }
 # Specific manufacturer and distributor notices hosted outside the primary company domain.
 MAKER_MANUAL_SOURCE_URLS = {
+    '日本イーライリリー': {'https://www.nittokyo.or.jp/uploads/files/20261014_Lilly_insulin.pdf'},
+    '大塚製薬工場': {'https://medical.jms.cc/pdf/customer_information_306.pdf'},
     '長生堂製薬': {
         'https://medical.nihon-generic.co.jp/uploadfiles/medicine/TATHI50_CHUUSHI_2602.pdf',
         'https://medical.nihon-generic.co.jp/uploadfiles/medicine/TATHI_CHUUSHI_2507.pdf',
