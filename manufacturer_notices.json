@@ -20839,6 +20839,686 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "tatsumi-15-products-limited-package-list-20261022",
+      "maker": "辰巳化学",
+      "title": "辰巳化学の出荷・供給状況別紙 2026年10月22日",
+      "url": "https://www.tatsumi-kagaku.com/file/important/file/3_2.pdf",
+      "announced_at": "2026-10-22",
+      "listed_at": "2026-10-22",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "f3e67e47ecfacd0578b3f1bfeb90bdabff5b3c2a77f284128d2bad01cb75cf76",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "辰巳化学の2026年10月22日付別紙に対象包装と出荷予定が掲載されています。対象品目に固有の詳しい原因は、同社本文・別紙では特定できません。",
+      "targets": [
+        {
+          "yj_code": "6131001M1142",
+          "product_name": "アモキシシリンカプセル１２５ｍｇ「ＴＣＫ」",
+          "maker": "辰巳化学",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "124271621",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、辰巳化学2026年10月22日資料）",
+                "note": "統一商品コード 124271621、販売包装単位コード 14987124271628。 資料時点の次回出荷予定は調整中です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6131001M2351",
+          "product_name": "アモキシシリンカプセル２５０ｍｇ「ＴＣＫ」",
+          "maker": "辰巳化学",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "124270525",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、辰巳化学2026年10月22日資料）",
+                "note": "統一商品コード 124270525、販売包装単位コード 14987124270522。 資料時点の次回出荷予定は2027年1月上旬です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6131001C2119",
+          "product_name": "アモキシシリン細粒２０％「ＴＣＫ」",
+          "maker": "辰巳化学",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100g",
+              "unified_product_code": "124370423",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、辰巳化学2026年10月22日資料）",
+                "note": "統一商品コード 124370423、販売包装単位コード 14987124370420。 資料時点の次回出荷予定は2027年1月上旬です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "1149001F2214",
+          "product_name": "イブプロフェン錠２００ｍｇ「ＴＣＫ」",
+          "maker": "辰巳化学",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "124135626",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、辰巳化学2026年10月22日資料）",
+                "note": "統一商品コード 124135626、販売包装単位コード 14987124135623。 資料時点の次回出荷予定は調整中です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "1249009F1465",
+          "product_name": "エペリゾン塩酸塩錠５０ｍｇ「ＴＣＫ」",
+          "maker": "辰巳化学",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP1000錠",
+              "unified_product_code": "124150643",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、辰巳化学2026年10月22日資料）",
+                "note": "統一商品コード 124150643、販売包装単位コード 14987124150640。 資料時点の次回出荷予定は2026年11月中旬です。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "124150612",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、辰巳化学2026年10月22日資料）",
+                "note": "統一商品コード 124150612、販売包装単位コード 14987124150619。 資料時点の次回出荷予定は2026年11月中旬です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2233002F2154",
+          "product_name": "カルボシステイン錠５００ｍｇ「ＴＣＫ」",
+          "maker": "辰巳化学",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP1000錠",
+              "unified_product_code": "124135145",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、辰巳化学2026年10月22日資料）",
+                "note": "統一商品コード 124135145、販売包装単位コード 14987124135142。 資料時点の次回出荷予定は2026年12月上旬です。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "124135121",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、辰巳化学2026年10月22日資料）",
+                "note": "統一商品コード 124135121、販売包装単位コード 14987124135128。 資料時点の次回出荷予定は調整中です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6149003F2267",
+          "product_name": "クラリスロマイシン錠２００ｍｇ「ＴＣＫ」",
+          "maker": "辰巳化学",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "124170245",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、辰巳化学2026年10月22日資料）",
+                "note": "統一商品コード 124170245、販売包装単位コード 14987124170242。 資料時点の次回出荷予定は調整中です。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "124170238",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、辰巳化学2026年10月22日資料）",
+                "note": "統一商品コード 124170238、販売包装単位コード 14987124170235。 資料時点の次回出荷予定は調整中です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149121F1048",
+          "product_name": "ジルムロ配合錠ＬＤ「ＴＣＫ」",
+          "maker": "辰巳化学",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "124158823",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、辰巳化学2026年10月22日資料）",
+                "note": "統一商品コード 124158823、販売包装単位コード 14987124158820。 資料時点の次回出荷予定は調整中です。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "124158816",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、辰巳化学2026年10月22日資料）",
+                "note": "統一商品コード 124158816、販売包装単位コード 14987124158813。 資料時点の次回出荷予定は2026年11月下旬です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149121F2044",
+          "product_name": "ジルムロ配合錠ＨＤ「ＴＣＫ」",
+          "maker": "辰巳化学",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "124158922",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、辰巳化学2026年10月22日資料）",
+                "note": "統一商品コード 124158922、販売包装単位コード 14987124158929。 資料時点の次回出荷予定は2026年12月上旬です。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "124158915",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、辰巳化学2026年10月22日資料）",
+                "note": "統一商品コード 124158915、販売包装単位コード 14987124158912。 資料時点の次回出荷予定は調整中です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149042F2099",
+          "product_name": "テルミサルタン錠４０ｍｇ「ＴＣＫ」",
+          "maker": "辰巳化学",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "124155426",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、辰巳化学2026年10月22日資料）",
+                "note": "統一商品コード 124155426、販売包装単位コード 14987124155423。 資料時点の次回出荷予定は調整中です。"
+              }
+            }
+          ],
+          "summary": "PTP100錠は原文別紙と同社コード一覧のGS1が一致せず、包装別欄は照合できたPTP500錠です。"
+        },
+        {
+          "yj_code": "1124003C1114",
+          "product_name": "ニトラゼパム細粒１％「ＴＣＫ」",
+          "maker": "辰巳化学",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1kg",
+              "unified_product_code": "124337730",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、辰巳化学2026年10月22日資料）",
+                "note": "統一商品コード 124337730、販売包装単位コード 14987124337737。 資料時点の次回出荷予定は調整中です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3962002F2051",
+          "product_name": "メトホルミン塩酸塩錠２５０ｍｇＭＴ「ＴＣＫ」",
+          "maker": "辰巳化学",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "124150322",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、辰巳化学2026年10月22日資料）",
+                "note": "統一商品コード 124150322、販売包装単位コード 14987124150329。 資料時点の次回出荷予定は2026年12月上旬です。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "124150315",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、辰巳化学2026年10月22日資料）",
+                "note": "統一商品コード 124150315、販売包装単位コード 14987124150312。 資料時点の次回出荷予定は2026年12月上旬です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3962002F3058",
+          "product_name": "メトホルミン塩酸塩錠５００ｍｇＭＴ「ＴＣＫ」",
+          "maker": "辰巳化学",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "124150421",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、辰巳化学2026年10月22日資料）",
+                "note": "統一商品コード 124150421、販売包装単位コード 14987124150428。 資料時点の次回出荷予定は調整中です。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "124150414",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、辰巳化学2026年10月22日資料）",
+                "note": "統一商品コード 124150414、販売包装単位コード 14987124150411。 資料時点の次回出荷予定は調整中です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "4490026F2156",
+          "product_name": "モンテルカスト錠１０ｍｇ「ＴＣＫ」",
+          "maker": "辰巳化学",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "124155228",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、辰巳化学2026年10月22日資料）",
+                "note": "統一商品コード 124155228、販売包装単位コード 14987124155225。 資料時点の次回出荷予定は2026年11月中旬です。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "124155211",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、辰巳化学2026年10月22日資料）",
+                "note": "統一商品コード 124155211、販売包装単位コード 14987124155218。 資料時点の次回出荷予定は2026年11月中旬です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2189017F1073",
+          "product_name": "ロスバスタチン錠２．５ｍｇ「ＴＣＫ」",
+          "maker": "辰巳化学",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "124156225",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、辰巳化学2026年10月22日資料）",
+                "note": "統一商品コード 124156225、販売包装単位コード 14987124156222。 資料時点の次回出荷予定は2026年11月中旬です。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "124156218",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、辰巳化学2026年10月22日資料）",
+                "note": "統一商品コード 124156218、販売包装単位コード 14987124156215。 資料時点の次回出荷予定は2026年11月中旬です。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "「出荷予定」はメーカーが資料時点で案内した時期です。限定出荷の解除は別途案内されます。",
+        "包装は別紙と同社のコード一覧で一致したものを掲載しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "メーカーの10月22日付本文と別紙に、対象品目への代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sawai-theophylline-dry-syrup-limited-restart-202508",
+      "maker": "沢井製薬",
+      "title": "テオフィリン徐放ドライシロップ小児用20％「サワイ」出荷再開のご案内",
+      "url": "https://med.sawai.co.jp/file/pr27_3_3.pdf",
+      "announced_at": "2025-08",
+      "listed_at": "2025-08-04",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "74ffeca26e42c7a6e47c2953884ecad2018c59783b7bcadd10f779148323f641",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "2025年7月の一時出荷停止後、沢井製薬は8月4日に出荷を再開しました。安定供給に必要な在庫が十分にないため、特約店・販売会社向けの出荷を限定すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2251001R1123",
+          "product_name": "テオフィリン徐放ドライシロップ小児用２０％「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "バラ100g",
+              "unified_product_code": "080000440",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 080000440、販売包装単位コード 14987080000447。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年11月13日付の沢井製薬の供給状況一覧でも、この品目の限定出荷を確認しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sawai-theophylline-dry-syrup-production-delay-202507",
+      "maker": "沢井製薬",
+      "title": "テオフィリン徐放ドライシロップ小児用20％「サワイ」供給に関するお詫びとお願い",
+      "url": "https://med.sawai.co.jp/file/pr27_3_1.pdf",
+      "announced_at": "2025-07",
+      "listed_at": "2025-07-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "bee849f41435ee81a705d2b809dc596d38fb8cda601766f9852a02cc822bf7a7",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "沢井製薬は製造遅延で供給が難しくなり、対象包装を在庫消尽次第、一時停止すると案内しました。この停止後の出荷再開と限定出荷は2025年8月の別資料に記載されています。",
+      "targets": [
+        {
+          "yj_code": "2251001R1123",
+          "product_name": "テオフィリン徐放ドライシロップ小児用２０％「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "バラ100g",
+              "unified_product_code": "080000440",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 080000440、販売包装単位コード 14987080000447。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "jg-ferrous-citrate-packages-limited-20261109",
+      "maker": "日本ジェネリック",
+      "title": "日本ジェネリック 全品目供給状況一覧 クエン酸第一鉄Na錠50mg「JG」",
+      "url": "https://medical.nihon-generic.co.jp/uploadfiles/news/JG_product_list.pdf",
+      "announced_at": "2026-11-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "a18617f58292102f509b552ef2dcbbc32d6c87e54f4326808d99c87bc872976c",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日本ジェネリックの11月9日版では、PTP100錠・PTP500錠・バラ500錠が他社品の影響で限定出荷です。影響の詳細は、この一覧に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "3222013F1149",
+          "product_name": "クエン酸第一鉄Ｎａ錠５０ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            3
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792312510",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 792312510。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "792312558",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 792312558。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "792312589",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 792312589。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "JANコードはPTP100錠が4987792312510、PTP500錠が4987792312558、バラ500錠が4987792312589です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nipro-omega3-56pack-limited-202507",
+      "maker": "ニプロ",
+      "title": "オメガ-3脂肪酸エチル粒状カプセル2g「ニプロ」供給に関するお詫び",
+      "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uW09VIAS",
+      "announced_at": "2025-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "8a8dfc73d84e51a82175e24883e52357741d03f880d452126ad0491f4babb4fa",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "新規採用が増えて需要が想定を上回り、生産計画と在庫では注文すべてに応じられないため、ニプロが特約店向けの割当数を従来より減らして限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2189019M1071",
+          "product_name": "オメガ－３脂肪酸エチル粒状カプセル２ｇ「ニプロ」",
+          "maker": "ニプロ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "56包",
+              "unified_product_code": "190-01703-1",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、7月のメーカー資料）",
+                "note": "統一商品コード 190-01703-1。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "解除時期は確定後に案内するとされています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nipro-aprindine-10-20-limited-202411",
+      "maker": "ニプロ",
+      "title": "アプリンジン塩酸塩カプセル10mg・20mg「NP」限定出荷のお知らせ",
+      "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uVsS6IAK",
+      "announced_at": "2024-11",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "7acc2d75b06fa07c5211ed7a870680e098654bc8a0cdbd3d462da2d926fb1dcb",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "想定を上回る需要に出荷量・在庫量が追いつかず、在庫の偏りを防ぐため、ニプロが特約店への出荷を割当制とする方針を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2129004M1050",
+          "product_name": "アプリンジン塩酸塩カプセル１０ｍｇ「ＮＰ」",
+          "maker": "ニプロ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "190-00281-5",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、11月のメーカー資料）",
+                "note": "統一商品コード 190-00281-5。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2129004M2065",
+          "product_name": "アプリンジン塩酸塩カプセル２０ｍｇ「ＮＰ」",
+          "maker": "ニプロ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "190-00291-4",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、11月のメーカー資料）",
+                "note": "統一商品コード 190-00291-4。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "解除時期は確定後に案内するとされています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
