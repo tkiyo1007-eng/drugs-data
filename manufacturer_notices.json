@@ -28834,6 +28834,608 @@
         "販売中止包装に関する案内です。厚労省の品目単位の限定出荷理由は需要増と公表されています。",
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
       ]
+    },
+    {
+      "id": "iwaki-adapalene-limited-202512",
+      "maker": "岩城製薬",
+      "title": "アダパレンゲル0.1％「イワキ」 一時出荷停止解除と限定出荷",
+      "url": "https://www.iwakiseiyaku.co.jp/dcms_media/other/apgeosirase20251211.pdf",
+      "announced_at": "2025-12",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ac8b8b4b5ce054c82163c968f737c852877b213e8f79cead64a8e1c886999385",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "需要に応じる生産数量を確保できず2025年10月から一時停止していました。在庫を積み増し、岩城製薬は12月12日から限定出荷で再開しました。",
+      "targets": [
+        {
+          "yj_code": "2699711Q1108",
+          "product_name": "アダパレンゲル０．１％「イワキ」",
+          "maker": "岩城製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "15g×10本",
+              "unified_product_code": "020-018641",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、12月のメーカー資料）",
+                "note": "統一商品コード 020-018641、販売包装単位コード 14987020018648。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "対象包装は岩城製薬の2026年11月5日付供給一覧でも照合しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "iwaki-clindamycin-gel-limited-202501",
+      "maker": "岩城製薬",
+      "title": "クリンダマイシンリン酸エステルゲル1％「イワキ」 10g×10本の限定出荷",
+      "url": "https://www.iwakiseiyaku.co.jp/dcms_media/other/cmgeosirase20250107.pdf",
+      "announced_at": "2025-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "2d501990d672db36be2c40a7349e8dccfcd32b42fe00ade93cf05a1d66be8507",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他製品の需要が想定を超え、本品の生産が遅れたため、岩城製薬は既存採用先を優先して10g×10本を限定出荷としました。",
+      "targets": [
+        {
+          "yj_code": "2634713M1054",
+          "product_name": "クリンダマイシンリン酸エステルゲル１％「イワキ」",
+          "maker": "岩城製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10g×10本",
+              "unified_product_code": "020-004668",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、1月のメーカー資料）",
+                "note": "統一商品コード 020-004668、販売包装単位コード 14987020004665。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "同じ月に別途案内があり、10g×50本はその後販売中止になっています。",
+        "対象包装は岩城製薬の2026年11月5日付供給一覧でも照合しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "iwaki-clindamycin-gel-discontinued-202501",
+      "maker": "岩城製薬",
+      "title": "クリンダマイシンリン酸エステルゲル1％「イワキ」 10g×50本の販売中止",
+      "url": "https://www.iwakiseiyaku.co.jp/dcms_media/other/cmgeosirase20250127.pdf",
+      "announced_at": "2025-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "6a297fa2de012d92b1d45c970edb4d8447c51ccd362bbecc30526807b5caf706",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "岩城製薬は諸般の事情で10g×50本の販売を中止しました。",
+      "targets": [
+        {
+          "yj_code": "2634713M1054",
+          "product_name": "クリンダマイシンリン酸エステルゲル１％「イワキ」",
+          "maker": "岩城製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10g×50本",
+              "unified_product_code": "020-017781",
+              "supply": {
+                "status": "stopped",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2025年2月（2025年1月資料の見込み）"
+                  }
+                ],
+                "status_text": "販売中止・在庫消尽（2026年11月5日のメーカー一覧）",
+                "note": "統一商品コード 020-017781、販売包装単位コード 14987020017788。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.iwakiseiyaku.co.jp/dcms_media/other/cmgeosirase20250127.pdf",
+          "target_yj_codes": [
+            "2634713M1054"
+          ],
+          "type": "岩城製薬が販売中止時の代替包装として明記",
+          "products": [
+            {
+              "name": "クリンダマイシンリン酸エステルゲル１％「イワキ」",
+              "maker": "岩城製薬",
+              "yj_code": "2634713M1054",
+              "scope": "10g×50本の販売中止に伴う、同一製品の10g×10本（020-004668、販売包装GS1 14987020004665）。候補包装自体は2025年1月6日から限定出荷と案内されています。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "対象包装は岩城製薬の2026年11月5日付供給一覧でも照合しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "iwaki-gentamicin-ointment-limited-202605",
+      "maker": "岩城製薬",
+      "title": "ゲンタマイシン硫酸塩軟膏0.1％「イワキ」 限定出荷のご案内",
+      "url": "https://www.iwakiseiyaku.co.jp/dcms_media/other/gmoosirase20260527.pdf",
+      "announced_at": "2026-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "9b74a3718e300c6c396878c495172efa0c9053aaee9afcca92a214ada56b7fd0",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の限定出荷により受注増が見込まれ、既存採用先の供給を確保するため、岩城製薬は5月27日から対象の3包装を限定出荷としました。",
+      "targets": [
+        {
+          "yj_code": "2634710M1085",
+          "product_name": "ゲンタマイシン硫酸塩軟膏０．１％「イワキ」",
+          "maker": "岩城製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10g×10本",
+              "unified_product_code": "020-017569",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 020-017569、販売包装単位コード 14987020017566。"
+              }
+            },
+            {
+              "package": "10g×50本",
+              "unified_product_code": "020-017576",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 020-017576、販売包装単位コード 14987020017573。"
+              }
+            },
+            {
+              "package": "500g",
+              "unified_product_code": "020-017583",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 020-017583、販売包装単位コード 14987020017580。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "対象包装は岩城製薬の2026年11月5日付供給一覧でも照合しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "iwaki-tacrolimus-ointment-limited-202607",
+      "maker": "岩城製薬",
+      "title": "タクロリムス軟膏0.1％「イワキ」 限定出荷のご案内 第2報",
+      "url": "https://www.iwakiseiyaku.co.jp/dcms_media/other/tloosirase20260709.pdf",
+      "announced_at": "2026-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "e60528c0524034e147426cae684d20c75e6c7fec7c96696ed3bdfed5a3395b07",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "試験機器のトラブルは解消したものの需要に応じられない状態が続き、岩城製薬は7月の第2報で限定出荷の継続を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2699709M1052",
+          "product_name": "タクロリムス軟膏０．１％「イワキ」",
+          "maker": "岩城製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5g×10本",
+              "unified_product_code": "020-004705",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 020-004705、販売包装単位コード 14987020004702。"
+              }
+            },
+            {
+              "package": "5g×50本",
+              "unified_product_code": "020-004712",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 020-004712、販売包装単位コード 14987020004719。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "対象包装は岩城製薬の2026年11月5日付供給一覧でも照合しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "iwaki-terbinafine-cream-limited-202605",
+      "maker": "岩城製薬",
+      "title": "テルビナフィン塩酸塩クリーム1％「イワキ」 限定出荷での再開",
+      "url": "https://www.iwakiseiyaku.co.jp/dcms_media/other/tfcosirase20260511.pdf",
+      "announced_at": "2026-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "339b478e3b45c19da4b0e90ae7a355a17ab0b82c39cf803a4adf433e05c5c4b6",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "2026年5月11日から供給を再開しましたが、十分な供給量には届いていないため、岩城製薬は2包装を限定出荷としました。",
+      "targets": [
+        {
+          "yj_code": "2659710N1225",
+          "product_name": "テルビナフィン塩酸塩クリーム１％「イワキ」",
+          "maker": "岩城製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10g×10本",
+              "unified_product_code": "020-020156",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、5月のメーカー資料）",
+                "note": "統一商品コード 020-020156、販売包装単位コード 14987020020153。"
+              }
+            },
+            {
+              "package": "10g×50本",
+              "unified_product_code": "020-020163",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、5月のメーカー資料）",
+                "note": "統一商品コード 020-020163、販売包装単位コード 14987020020160。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカー製品ページで薬価基準収載コード2659710N1012、製品の個別YJコード2659710N1225と照合しました。",
+        "対象包装は岩城製薬の2026年11月5日付供給一覧でも照合しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "iwaki-nizoral-lotion-limited-202411",
+      "maker": "岩城製薬",
+      "title": "ニゾラールローション2％ 限定出荷のご案内",
+      "url": "https://www.iwakiseiyaku.co.jp/dcms_media/other/nzlosirase20241203.pdf",
+      "announced_at": "2024-11",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "a26f67a7667c6a8f0d33df774f3abc8f5f1a1ad77cdd7961f6871f38444487b5",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の限定出荷の影響で需要が急増し、在庫不足が見込まれ生産計画の見直しが必要となったため、岩城製薬は2024年12月2日から限定出荷としました。",
+      "targets": [
+        {
+          "yj_code": "2655709Q1025",
+          "product_name": "ニゾラールローション２％",
+          "maker": "岩城製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10g×10本",
+              "unified_product_code": "020-018955",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 020-018955、販売包装単位コード 14987020018952。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "対象包装は岩城製薬の2026年11月5日付供給一覧でも照合しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "iwaki-bifonazole-cream-small-limited-202510",
+      "maker": "岩城製薬",
+      "title": "ビホナゾールクリーム1％「イワキ」 10g×10本の限定出荷",
+      "url": "https://www.iwakiseiyaku.co.jp/dcms_media/other/bfcosirase20251031.pdf",
+      "announced_at": "2025-10",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "d49a6b8cfae7f6a7593b54e4418cafed7733157901fe9a713ae05066cd09b9d9",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "生産スケジュールの見直しに時間を要しており、岩城製薬は既存採用先を優先し2025年10月31日から限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2655708N1318",
+          "product_name": "ビホナゾールクリーム１％「イワキ」",
+          "maker": "岩城製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10g×10本",
+              "unified_product_code": "020-020309",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、10月のメーカー資料）",
+                "note": "統一商品コード 020-020309、販売包装単位コード 14987020020306。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "対象包装は岩城製薬の2026年11月5日付供給一覧でも照合しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "iwaki-bifonazole-cream-discontinued-202502",
+      "maker": "岩城製薬",
+      "title": "ビホナゾールクリーム1％「イワキ」 10g×50本の販売中止",
+      "url": "https://www.iwakiseiyaku.co.jp/dcms_media/other/bfcosirase20250303.pdf",
+      "announced_at": "2025-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "c8d1a38f0412bd16a9d2cf4159d07f464653ce4c4538dc1844dfad445533942f",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "岩城製薬は諸般の事情で10g×50本の販売を中止し、後続の2026年6月資料で在庫消尽を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2655708N1318",
+          "product_name": "ビホナゾールクリーム１％「イワキ」",
+          "maker": "岩城製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10g×50本",
+              "unified_product_code": "020-020316",
+              "supply": {
+                "status": "stopped",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2025年3月（2025年2月資料の見込み）"
+                  }
+                ],
+                "status_text": "販売中止・在庫消尽（2026年11月5日のメーカー一覧）",
+                "note": "統一商品コード 020-020316、販売包装単位コード 14987020020313。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.iwakiseiyaku.co.jp/dcms_media/other/bfcosirase20250303.pdf",
+          "target_yj_codes": [
+            "2655708N1318"
+          ],
+          "type": "岩城製薬が販売中止時の代替包装として明記",
+          "products": [
+            {
+              "name": "ビホナゾールクリーム１％「イワキ」",
+              "maker": "岩城製薬",
+              "yj_code": "2655708N1318",
+              "scope": "10g×50本の販売中止に伴う同一製品の10g×10本（020-020309、販売包装GS1 14987020020306）。候補包装はメーカーの2026年6月資料と同年11月5日の一覧でも限定出荷です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "対象包装は岩城製薬の2026年11月5日付供給一覧でも照合しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "iwaki-bifonazole-cream-600g-limited-202606",
+      "maker": "岩城製薬",
+      "title": "ビホナゾールクリーム1％「イワキ」 600gの限定出荷での再開",
+      "url": "https://www.iwakiseiyaku.co.jp/dcms_media/other/bfcosirase20260605.pdf",
+      "announced_at": "2026-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "67971c15c0959cf6dccb8d863c402dbe86f06b64b1dec2bd89ce6edf87027226",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "岩城製薬は2026年6月8日から600gの供給を再開しました。供給量は十分に確保できていないとして、限定出荷を案内しています。",
+      "targets": [
+        {
+          "yj_code": "2655708N1318",
+          "product_name": "ビホナゾールクリーム１％「イワキ」",
+          "maker": "岩城製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "600g",
+              "unified_product_code": "020-020323",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、6月のメーカー資料）",
+                "note": "統一商品コード 020-020323、販売包装単位コード 14987020020320。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "対象包装は岩城製薬の2026年11月5日付供給一覧でも照合しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "iwaki-lanoconazole-cream-limited-202509",
+      "maker": "岩城製薬",
+      "title": "ラノコナゾールクリーム1％「イワキ」 限定出荷のご案内",
+      "url": "https://www.iwakiseiyaku.co.jp/dcms_media/other/lccosirase20250916.pdf",
+      "announced_at": "2025-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "831f03878441cbc44f22fa342ab4fb2bbcd6d4527677caa9ac428362d91a0c35",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他製品の需要増で本品の生産が遅れ、十分な在庫が確保できないため、岩城製薬が2025年9月16日から限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2655710N1048",
+          "product_name": "ラノコナゾールクリーム１％「イワキ」",
+          "maker": "岩城製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10g×10本",
+              "unified_product_code": "020-004620",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 020-004620、販売包装単位コード 14987020004627。"
+              }
+            },
+            {
+              "package": "10g×50本",
+              "unified_product_code": "020-004637",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 020-004637、販売包装単位コード 14987020004634。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "対象包装は岩城製薬の2026年11月5日付供給一覧でも照合しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "iwaki-lanoconazole-ointment-limited-202506",
+      "maker": "岩城製薬",
+      "title": "ラノコナゾール軟膏1％「イワキ」 限定出荷のご案内",
+      "url": "https://www.iwakiseiyaku.co.jp/dcms_media/other/lcoosirase20250611.pdf",
+      "announced_at": "2025-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "cc65b6d2330959cb613963f9356c9afb75055073f0e8ea2e6e80e8d59db10538",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他製品の需要増で本品の生産が遅れ、十分な在庫が確保できないため、岩城製薬が2025年6月10日から限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2655710M1042",
+          "product_name": "ラノコナゾール軟膏１％「イワキ」",
+          "maker": "岩城製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10g×10本",
+              "unified_product_code": "020-004644",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、6月のメーカー資料）",
+                "note": "統一商品コード 020-004644、販売包装単位コード 14987020004641。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "対象包装は岩城製薬の2026年11月5日付供給一覧でも照合しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
