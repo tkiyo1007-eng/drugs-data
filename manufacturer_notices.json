@@ -43991,6 +43991,284 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "kyosomirai-towa-olmesartan-od-seller-limited-202611",
+      "maker": "共創未来ファーマ",
+      "title": "オルメサルタンOD錠「トーワ」4規格 共創未来ファーマ販売分の限定出荷",
+      "url": "https://www.kyosomirai-p.co.jp/wp-content/uploads/2026/10/info_20261102_01.pdf",
+      "announced_at": "2026-11",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "2b11a71e2b4e244ed3e1479d174ddef0747d84933148cf2d2dde7f49353d2620",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "共創未来ファーマは、他社の限定出荷に伴う需要増に対して、生産計画と在庫ではすべての注文に対応できないと案内しました。既採用の医療機関への供給を優先し、新規採用や注文の増加を控えるよう依頼しています。",
+      "targets": [
+        {
+          "yj_code": "2149044F8070",
+          "product_name": "オルメサルタンＯＤ錠５ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "885012006",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、共創未来ファーマの2026年11月資料）",
+                "note": "統一商品コード 885012006、販売包装単位コード 14987885012003。"
+              }
+            }
+          ],
+          "seller": "共創未来ファーマ"
+        },
+        {
+          "yj_code": "2149044F5089",
+          "product_name": "オルメサルタンＯＤ錠１０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "885012051",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、共創未来ファーマの2026年11月資料）",
+                "note": "統一商品コード 885012051、販売包装単位コード 14987885012058。"
+              }
+            },
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "885012068",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、共創未来ファーマの2026年11月資料）",
+                "note": "統一商品コード 885012068、販売包装単位コード 14987885012065。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "885012075",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、共創未来ファーマの2026年11月資料）",
+                "note": "統一商品コード 885012075、販売包装単位コード 14987885012072。"
+              }
+            },
+            {
+              "package": "バラ300錠",
+              "unified_product_code": "885012082",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、共創未来ファーマの2026年11月資料）",
+                "note": "統一商品コード 885012082、販売包装単位コード 14987885012089。"
+              }
+            }
+          ],
+          "seller": "共創未来ファーマ"
+        },
+        {
+          "yj_code": "2149044F6085",
+          "product_name": "オルメサルタンＯＤ錠２０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "885012105",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、共創未来ファーマの2026年11月資料）",
+                "note": "統一商品コード 885012105、販売包装単位コード 14987885012102。"
+              }
+            },
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "885012112",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、共創未来ファーマの2026年11月資料）",
+                "note": "統一商品コード 885012112、販売包装単位コード 14987885012119。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "885012129",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、共創未来ファーマの2026年11月資料）",
+                "note": "統一商品コード 885012129、販売包装単位コード 14987885012126。"
+              }
+            },
+            {
+              "package": "PTP700錠",
+              "unified_product_code": "885012136",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、共創未来ファーマの2026年11月資料）",
+                "note": "統一商品コード 885012136、販売包装単位コード 14987885012133。"
+              }
+            },
+            {
+              "package": "バラ300錠",
+              "unified_product_code": "885012143",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、共創未来ファーマの2026年11月資料）",
+                "note": "統一商品コード 885012143、販売包装単位コード 14987885012140。"
+              }
+            }
+          ],
+          "seller": "共創未来ファーマ"
+        },
+        {
+          "yj_code": "2149044F7073",
+          "product_name": "オルメサルタンＯＤ錠４０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "885012150",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、共創未来ファーマの2026年11月資料）",
+                "note": "統一商品コード 885012150、販売包装単位コード 14987885012157。"
+              }
+            },
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "885012167",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、共創未来ファーマの2026年11月資料）",
+                "note": "統一商品コード 885012167、販売包装単位コード 14987885012164。"
+              }
+            }
+          ],
+          "seller": "共創未来ファーマ"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "対象表は2026年10月30日時点です。共創未来ファーマが販売する統一商品コード885で始まる包装に限ります。",
+        "製造販売元は東和薬品です。厚労省が公表する品目全体の区分・理由と、販売元が案内する対象包装の区分・理由はそれぞれの公表内容です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "towa-maxacalcitol-three-strengths-shipment-resumed-202512",
+      "maker": "東和薬品",
+      "title": "マキサカルシトール静注透析用「トーワ」3規格 2025年12月の出荷再開と限定出荷",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?f=%E3%83%9E%E3%82%AD%E3%82%B5%E3%82%AB%E3%83%AB%E3%82%B7%E3%83%88%E3%83%BC%E3%83%AB%E9%9D%99%E6%B3%A8%E9%80%8F%E6%9E%90%E7%94%A82.5%CE%BCg_5%CE%BCg_10%CE%BCg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%87%BA%E8%8D%B7%E5%86%8D%E9%96%8B%EF%BC%86%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E7%B6%99%E7%B6%9A%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf&id=81506&t=4",
+      "announced_at": "2025-12",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "0a22cf158115d14a913d58866c97065e70397e58061403dcd1167dbe68c5919a",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "東和薬品は2025年12月18日に出荷を再開しました。当時は在庫を十分に確保できず、供給体制を整えるまで限定出荷を継続すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "3112401A1077",
+          "product_name": "マキサカルシトール静注透析用２．５μｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1mL×10管",
+              "unified_product_code": "155318029",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、2025年12月のメーカー資料）",
+                "note": "統一商品コード 155318029。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3112401A2073",
+          "product_name": "マキサカルシトール静注透析用５μｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1mL×10管",
+              "unified_product_code": "155319071",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、2025年12月のメーカー資料）",
+                "note": "統一商品コード 155319071。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3112401A3070",
+          "product_name": "マキサカルシトール静注透析用１０μｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1mL×10管",
+              "unified_product_code": "155320060",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、2025年12月のメーカー資料）",
+                "note": "統一商品コード 155320060。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2025年12月の再開時点の案内です。現在の厚労省公表欄は他社品の影響による需要増です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
