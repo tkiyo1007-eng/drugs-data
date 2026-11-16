@@ -1768,7 +1768,7 @@ html.season-autumn .autumn-sky{display:none}
     <button type="button" id="trendingSearchToggle" class="trending-toggle" aria-expanded="false" aria-controls="trending" hidden>問い合わせの多い製品を開く</button>
     <section id="trending" aria-labelledby="trendingHeading">
   <h3 id="trendingHeading">問い合わせが多い品目</h3>
-      <p class="trending-intro">メーカー案内の要点と、品目ごとの原因・代替候補を確認できます。</p>
+      <p class="trending-intro">複数規格の製品は「規格別の原因・案内」から、メーカーと規格を選べます。代替候補はメーカー資料に記載がある場合、品目の詳細に表示します。</p>
   <div class="trending-list" id="trendingList"></div>
   <button type="button" id="trendingToggle" class="trending-toggle" aria-expanded="false" aria-controls="trendingList">ほかの製品を見る</button>
   <nav aria-label="品目別の供給情報">
@@ -6641,7 +6641,7 @@ function renderTrending(){
     const hintRows = groups[t.slug] ? grouped[t.slug] : singles.has(key) ? [singles.get(key)] : [];
     if(groups[t.slug]){
       const rows = grouped[t.slug].slice().sort((a,b)=>a.n.localeCompare(b.n,"ja",{numeric:true}) || a.yj.localeCompare(b.yj));
-      const summary = rows.length ? `製品一覧（${rows.length}品目）` : "製品一覧";
+      const summary = rows.length ? `規格別の原因・案内（${rows.length}品目）` : "規格別の原因・案内";
       const content = rows.length ? `<p class="trending-names-note">規格・メーカーを選ぶと品目別の供給理由と、確認できたメーカー案内を見られます。</p><ul>${rows.map(item=>
         `<li><a class="trending-formal-link" data-trending-reference="${esc(normalizeYj(item.yj))}" data-trending-key="${esc(normalizeYj(item.yj))}" href="#item=${esc(normalizeYj(item.yj))}">${esc(item.n)}</a><small>${esc(item.m)} · ${esc(item.spec)}</small>${inquiryRowText(item)}</li>`).join("")}</ul>`
         : `<p class="trending-names-note">${LIVE ? "読み込んだデータでは製品一覧を確認できませんでした。" : DATA_STATE === "error" ? "製品一覧を取得できません。時間をおいて再読み込みしてください。" : "製品一覧を確認中です。"}</p>`;
