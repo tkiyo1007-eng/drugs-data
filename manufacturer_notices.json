@@ -33002,6 +33002,683 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "bi-micamlo-limited-202505",
+      "maker": "日本ベーリンガーインゲルハイム",
+      "title": "ミカムロ配合錠AP・BP 供給体制に関するお知らせ",
+      "url": "https://www.bij-kusuri.jp/information/files/mca_t_info_202505.pdf",
+      "announced_at": "2025-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "c2287197b2b325c7ab22a4f261968b8145b2f48f11c498ae95e7fd9848a35ac4",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の限定出荷に伴い注文が想定を上回り、すべての注文に応じるのが難しくなったため、日本ベーリンガーインゲルハイムは特約店向けの限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149117F1025",
+          "product_name": "ミカムロ配合錠ＡＰ",
+          "maker": "日本ベーリンガーインゲルハイム",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "413-590518",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 413-590518。"
+              }
+            },
+            {
+              "package": "PTP500錠（10錠×50）",
+              "unified_product_code": "413-590532",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 413-590532。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149117F2021",
+          "product_name": "ミカムロ配合錠ＢＰ",
+          "maker": "日本ベーリンガーインゲルハイム",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "413-590617",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 413-590617。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "bi-micombi-limited-202511",
+      "maker": "日本ベーリンガーインゲルハイム",
+      "title": "ミコンビ配合錠AP・BP 供給体制に関するお知らせ",
+      "url": "https://www.bij-kusuri.jp/information/files/mco_t_info_202511.pdf",
+      "announced_at": "2025-11",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ccbbc9ce31c7d2565b6b7939f576c8d8693a99041beed5eced963460d3243c9a",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社の同一成分製品の限定出荷で需要が増えると見込まれ、当時の出荷量と在庫量では十分に対応できないため、日本ベーリンガーインゲルハイムは特約店向けの限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149113F1027",
+          "product_name": "ミコンビ配合錠ＡＰ",
+          "maker": "日本ベーリンガーインゲルハイム",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "413-670517",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 413-670517。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149113F2023",
+          "product_name": "ミコンビ配合錠ＢＰ",
+          "maker": "日本ベーリンガーインゲルハイム",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "413-670616",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 413-670616。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "bi-alesion10-limited-202606",
+      "maker": "日本ベーリンガーインゲルハイム",
+      "title": "アレジオン錠10 PTP100錠 供給体制に関するお知らせ",
+      "url": "https://www.bij-kusuri.jp/information/files/al_t_info_202606.pdf",
+      "announced_at": "2026-06",
+      "listed_at": "2026-06-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "52925b84abb2c969848986c4a7415acc4a49fef5181148ac271e256d562ae7dd",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造した一部ロットで規格に適合しない製品が確認され、そのロットの出荷を見送ったため、日本ベーリンガーインゲルハイムは、在庫と供給見通しを踏まえて限定出荷すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "4490014F1025",
+          "product_name": "アレジオン錠１０",
+          "maker": "日本ベーリンガーインゲルハイム",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "413-040518",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、6月のメーカー資料）",
+                "note": "統一商品コード 413-040518。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "6月資料では原因の解明と対策の検討を進めており、解除時期は示されていません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "bi-alesion10-discontinued-202607",
+      "maker": "日本ベーリンガーインゲルハイム",
+      "title": "アレジオン錠10 PTP100錠 販売中止のお知らせ",
+      "url": "https://www.bij-kusuri.jp/information/files/al_t_info_202607.pdf",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-21",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "b7a24bbbb68ef34973b4242d45a55160f19d6747f244ce0d7feedf1c4e307290",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "日本ベーリンガーインゲルハイムは、事前の予測より早く在庫がなくなる見込みとなり、現行在庫をもって対象包装の販売を中止する予定と案内しました。",
+      "targets": [
+        {
+          "yj_code": "4490014F1025",
+          "product_name": "アレジオン錠１０",
+          "maker": "日本ベーリンガーインゲルハイム",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "413040518",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年9月頃（2026年7月資料での販売終了見込み）"
+                  }
+                ],
+                "note": "統一商品コード 413040518、販売包装単位コード 14987413040515。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.bij-kusuri.jp/information/files/al_t_info_202607.pdf",
+          "target_yj_codes": [
+            "4490014F1025"
+          ],
+          "type": "販売中止の原文に記載の代替候補品",
+          "products": [
+            {
+              "name": "ビラノア錠２０ｍｇ",
+              "maker": "大鵬薬品工業",
+              "yj_code": "4490033F1028",
+              "scope": "大鵬薬品工業のビラノア錠20mg、100錠（117630015）、420錠（117630114）、500錠（117630022）。成分と規格が異なります。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年7月資料の経過措置満了日は2028年3月31日の予定です。錠20の販売継続には言及がありますが、代替候補欄に明記されているのはビラノア錠20mgです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "shionogi-almeta-limited-202507",
+      "maker": "シオノギファーマ",
+      "title": "アルメタ軟膏 限定出荷のお知らせ 第4報",
+      "url": "https://med.shionogi.co.jp/news/package/2025/250702_pdf.html",
+      "announced_at": "2025-07",
+      "listed_at": "2025-07-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "3988b6430b14fb63492a82b5cae2f9e6abd991f911d1719ae3185004b0679c96",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "原薬の輸入が滞り、従来の出荷量の10％に抑えていたところ、さらに製造トラブルが発生しました。塩野義製薬は、手元の在庫を計画的に出荷し、原薬の入荷や製品の出荷再開時期は未定と案内しました。",
+      "targets": [
+        {
+          "yj_code": "2646727M1022",
+          "product_name": "アルメタ軟膏",
+          "maker": "シオノギファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5gチューブ×10本",
+              "unified_product_code": "087-01624-6",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、7月のメーカー資料）",
+                "note": "統一商品コード 087-01624-6。"
+              }
+            },
+            {
+              "package": "5gチューブ×50本",
+              "unified_product_code": "087-01625-3",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、7月のメーカー資料）",
+                "note": "統一商品コード 087-01625-3。"
+              }
+            },
+            {
+              "package": "10gチューブ×50本",
+              "unified_product_code": "087-01626-0",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、7月のメーカー資料）",
+                "note": "統一商品コード 087-01626-0。"
+              }
+            },
+            {
+              "package": "200g瓶",
+              "unified_product_code": "087-02948-2",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、7月のメーカー資料）",
+                "note": "統一商品コード 087-02948-2。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2024年2月からの限定出荷について説明した第4報です。2025年11月の包装販売中止の案内もご確認ください。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "shionogi-almeta-pack-discontinued-202511",
+      "maker": "シオノギファーマ",
+      "title": "アルメタ軟膏 50本包装2種類の販売中止",
+      "url": "https://med.shionogi.co.jp/news/package/2025/251104-1_pdf.html",
+      "announced_at": "2025-11",
+      "listed_at": "2025-11-04",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "88049386996ce2713e4c1cb2a7e6c1ffd33ad8f758a402af0de49b5e1d612a17",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "シオノギファーマと塩野義製薬は、5g×50本と10g×50本を在庫消尽後に販売中止とし、5g×10本と200g瓶は販売を継続すると案内しました。販売中止の詳しい理由は原文に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "2646727M1022",
+          "product_name": "アルメタ軟膏",
+          "maker": "シオノギファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5gチューブ×50本",
+              "unified_product_code": "087-01625-3",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年2月（2025年11月資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 087-01625-3、販売包装単位コード 14987087016250。"
+              }
+            },
+            {
+              "package": "10gチューブ×50本",
+              "unified_product_code": "087-01626-0",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年2月（2025年11月資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 087-01626-0、販売包装単位コード 14987087016267。"
+              }
+            },
+            {
+              "package": "5gチューブ×10本",
+              "unified_product_code": "087-01624-6",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 087-01624-6、販売包装単位コード 14987087016243。"
+              }
+            },
+            {
+              "package": "200g瓶",
+              "unified_product_code": "087-02948-2",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 087-02948-2、販売包装単位コード 14987087029489。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "販売継続と、現在の出荷が通常であるかは別の情報です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "shionogi-predonine-eye-limited-202406",
+      "maker": "シオノギファーマ",
+      "title": "プレドニン眼軟膏 限定出荷のお知らせ 第3報",
+      "url": "https://med.shionogi.co.jp/news/package/2024/240619-2_pdf.html",
+      "announced_at": "2024-06",
+      "listed_at": "2024-06-19",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "89a9bb707ab023451f1548d77d3b0ee1984830abd2a7d2f35a7b123efb4440d9",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "需要が増えたことと、令和6年能登半島地震で一時的に製造が止まったことから在庫が少ない状態が続きました。製造できる設備が限られて増産も難しいため、塩野義製薬は限定出荷を継続すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "1315705M1037",
+          "product_name": "プレドニン眼軟膏",
+          "maker": "シオノギファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5gチューブ×10本",
+              "unified_product_code": "087-02593-4",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、6月のメーカー資料）",
+                "note": "統一商品コード 087-02593-4。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2024年6月の第3報では、継続する需要増加自体の原因は不明で、出荷量は通常量を維持するとしています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "mochida-urokinase-60000-eighth-notice-202408",
+      "maker": "持田製薬",
+      "title": "ウロナーゼ静注用6万単位 供給についてのご案内 第8報",
+      "url": "https://www.jrs.or.jp/information/file/202408_mochida.pdf",
+      "announced_at": "2024-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "975535934c99f31943492398b38451e592a9d54271a39689fad02d7f9cbc7da4",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "原薬の製法を変更した後に収率が下がり、従来の量を確保しにくくなったと持田製薬が案内しました。比活性低下の根本原因は未解明で、規格に合う原薬を再び製造できるか不確かとしています。",
+      "targets": [
+        {
+          "yj_code": "3954400D4080",
+          "product_name": "ウロナーゼ静注用６万単位",
+          "maker": "持田製薬",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "10バイアル",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987224010639。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文は代替療法の検討に言及しています。対象となる薬品名の指定はありません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sawai-ezetimibe10-limited-202609",
+      "maker": "沢井製薬",
+      "title": "エゼチミブ錠10mg「サワイ」 供給に関するお詫びとお願い",
+      "url": "https://med.sawai.co.jp/file/pr27_4684_1.pdf",
+      "announced_at": "2026-09",
+      "listed_at": "2026-09-14",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "561b215eef913431c250d03081d71af0219182f760e1a422e1f73b26a5d27f34",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "想定を上回る注文で一時的に品薄となり、生産計画と在庫からすべての注文には応じられないため、沢井製薬は既採用先への供給を優先して限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2189018F1132",
+          "product_name": "エゼチミブ錠１０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080190110",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 080190110、販売包装単位コード 14987080190117。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "080190127",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 080190127、販売包装単位コード 14987080190124。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sawai-tandospirone5-limited-202606",
+      "maker": "沢井製薬",
+      "title": "タンドスピロンクエン酸塩錠5mg「サワイ」 供給に関するお詫びとお願い",
+      "url": "https://med.sawai.co.jp/file/pr27_1176_1.pdf",
+      "announced_at": "2026-06",
+      "listed_at": "2026-06-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "0d9b9bb9a6faf6d41983fbc76c42a4e7e713ee748aadd8ca0dd7ce4a4ff81a22",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製剤の製造が遅れて一時的に品薄となったため、沢井製薬は既採用先への供給を優先して限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "1129008F1055",
+          "product_name": "タンドスピロンクエン酸塩錠５ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080124115",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、6月のメーカー資料）",
+                "note": "統一商品コード 080124115、販売包装単位コード 14987080124112。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sawai-picosulfate25-limited-202606",
+      "maker": "沢井製薬",
+      "title": "ピコスルファートNa錠2.5mg「サワイ」 供給に関するお詫びとお願い",
+      "url": "https://med.sawai.co.jp/file/pr27_109_1.pdf",
+      "announced_at": "2026-06",
+      "listed_at": "2026-06-10",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "748d276c100493fcd132ca02b03aff25572d4d27b4045d3d515ca574945c12f8",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "想定を上回る注文で一時的に品薄となり、生産計画と在庫からすべての注文には応じられないため、沢井製薬は既採用先への供給を優先して限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2359005F1234",
+          "product_name": "ピコスルファートＮａ錠２．５ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080119814",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 080119814、販売包装単位コード 14987080119811。"
+              }
+            },
+            {
+              "package": "PTP1000錠",
+              "unified_product_code": "080119838",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 080119838、販売包装単位コード 14987080119835。"
+              }
+            },
+            {
+              "package": "バラ1000錠",
+              "unified_product_code": "080119869",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 080119869、販売包装単位コード 14987080119866。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sawai-bifonazole-cream-limited-202605",
+      "maker": "沢井製薬",
+      "title": "ビホナゾールクリーム1％「サワイ」 供給に関するお詫びとお願い",
+      "url": "https://med.sawai.co.jp/file/pr27_222_1.pdf",
+      "announced_at": "2026-05",
+      "listed_at": "2026-05-28",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "44d356f3b52bddceb3f4a8720c68592158a8b9be3b0f55a6e331a53978656dc9",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "想定を上回る注文で一時的に品薄となり、生産計画と在庫からすべての注文には応じられないため、沢井製薬は既採用先への供給を優先して限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2655708N1300",
+          "product_name": "ビホナゾールクリーム１％「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10g×50本",
+              "unified_product_code": "080104919",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 080104919、販売包装単位コード 14987080104916。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
