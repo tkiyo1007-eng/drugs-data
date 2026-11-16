@@ -53,6 +53,7 @@ MAKER_HOSTS = {
     '武田薬品工業': 'www.takedamed.com',
     '大原薬品工業': 'www.ohara-ch.co.jp',
     'サンファーマ': 'jp.sunpharma.com',
+    'グラクソ・スミスクライン': 'gskpro.com',
     'ヴィアトリス・ヘルスケア合同会社': 'www.viatris-e-channel.com',
     'ヴィアトリス製薬合同会社': 'www.viatris-e-channel.com',
 }
@@ -65,6 +66,10 @@ MAKER_MANUAL_SOURCE_HOSTS = {
 }
 # Exact copies of manufacturer-authored notices hosted by public institutions.
 MAKER_MANUAL_SOURCE_URLS = {
+    'ファイザー': {
+        'https://www.j-endo.jp/uploads/files/news/20250617-12.pdf',
+        'https://www.kansensho.or.jp/uploads/files/news/gakkai/gakkai_230721_2.pdf',
+    },
     '武田薬品工業': {
         'https://www.city.funabashi.lg.jp/kodomo/kenkou/005/p076734_d/fil/R8_takeda.pdf',
         'https://www.jspho.org/files/oshirase/20260203b.pdf',

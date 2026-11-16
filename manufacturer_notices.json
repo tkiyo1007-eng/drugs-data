@@ -24355,6 +24355,744 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "pfizer-depo-medrol-limited-202506",
+      "maker": "ファイザー",
+      "title": "デポ・メドロール水懸注20mg・40mg 限定出荷のご案内",
+      "url": "https://www.j-endo.jp/uploads/files/news/20250617-12.pdf",
+      "announced_at": "2025-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "b527f478e63bc012cbe0e6740110e45701f3438b577e8afd36cca7c01863fc80",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社の同種同効薬が限定出荷となり、増える代替需要をまかなう在庫は確保できないため、ファイザーは既存の納入先を優先して限定出荷を始めました。",
+      "targets": [
+        {
+          "yj_code": "2456402C1044",
+          "product_name": "デポ・メドロール水懸注２０ｍｇ",
+          "maker": "ファイザー",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5バイアル",
+              "unified_product_code": "114-81610-8",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 114-81610-8。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2456402C2040",
+          "product_name": "デポ・メドロール水懸注４０ｍｇ",
+          "maker": "ファイザー",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5バイアル",
+              "unified_product_code": "114-81620-7",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 114-81620-7。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "出荷量は通常の需要分を確保しているとの案内で、通常出荷の再開時期は原文では未定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "pfizer-unasyn375-limited-202307",
+      "maker": "ファイザー",
+      "title": "ユナシン錠375mg 限定出荷のお詫びとお願い（第2報）",
+      "url": "https://www.kansensho.or.jp/uploads/files/news/gakkai/gakkai_230721_2.pdf",
+      "announced_at": "2023-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "514d16ca4a749d93806da08926486711b7c7431418013e775bda613e9b542e5c",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "需要が増え、ペニシリン製剤を製造する専用工場で生産の前倒しが難しく、在庫が足りなくなるおそれがあったため、ファイザーが限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "6131008F1030",
+          "product_name": "ユナシン錠３７５ｍｇ",
+          "maker": "ファイザー",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "114-06100-3",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、7月のメーカー資料）",
+                "note": "統一商品コード 114-06100-3。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "需要増の要因は原文時点で調査中です。第1報の候補は供給元から代替薬辞退の連絡を受け、第2報で削除されました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nipro-saline-syringe-5-slip-10-limited-202502",
+      "maker": "ニプロ",
+      "title": "生食注シリンジ「NP」5mL中口・10mL中口/ロック 供給に関するお詫び",
+      "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uVxl7IAC",
+      "announced_at": "2025-02",
+      "listed_at": "2025-02-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "bcf3625ed2f77dffea9a44115e5f38ef3f7ec91f97e56c4b79fd5328f255b3b9",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "ニプロは想定を超える需要増で通常出荷を続けることが難しくなり、対象包装の新規注文を辞退し、限定出荷すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "3311402P2066",
+          "product_name": "生食注シリンジ「ＮＰ」",
+          "maker": "ニプロ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×10シリンジ（中口）",
+              "unified_product_code": "458-12610-9",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、2月のメーカー資料）",
+                "note": "統一商品コード 458-12610-9。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3311402G7025",
+          "product_name": "生食注シリンジ「ＮＰ」",
+          "maker": "ニプロ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10mL×10シリンジ（中口）",
+              "unified_product_code": "458-12619-2",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、2月のメーカー資料）",
+                "note": "統一商品コード 458-12619-2。"
+              }
+            },
+            {
+              "package": "10mL×10シリンジ（ロック）",
+              "unified_product_code": "458-12616-1",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、2月のメーカー資料）",
+                "note": "統一商品コード 458-12616-1。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2025年2月の対象は5mL中口と10mLの2包装です。5mLロックはその後2025年4月1日に限定出荷で再開と案内されました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nipro-saline-syringe-5-lock-restart-202503",
+      "maker": "ニプロ",
+      "title": "生食注シリンジ「NP」5mLロック 限定出荷による出荷再開のご案内",
+      "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uVyFlIAK",
+      "announced_at": "2025-03",
+      "listed_at": "2025-04-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "8fc9065673c570c440664730e7db8b609ba5e6280b08c58f23fef73c64d1442b",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "想定を超える需要で一時停止していた5mLロック包装について、ニプロは納入予定を踏まえ、2025年4月1日から限定出荷で再開すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "3311402P2066",
+          "product_name": "生食注シリンジ「ＮＰ」",
+          "maker": "ニプロ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×10シリンジ（ロック）",
+              "unified_product_code": "458-12611-6",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "shipment_resumption",
+                    "timing": "2025年4月1日（限定出荷で再開）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、3月のメーカー資料）",
+                "note": "統一商品コード 458-12611-6。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2025年1月の一時停止時に10mLロックが案内されていました。5mLロックの再開資料には代替候補の記載がありません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nipro-saline-syringe20-limited-202502",
+      "maker": "ニプロ",
+      "title": "生食注シリンジ「NP」20mL 供給に関するお詫び",
+      "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uVxEsIAK",
+      "announced_at": "2025-02",
+      "listed_at": "2025-02-18",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "375cac0abfb3cd1dcc8b6bcb4d3a89bfffd966d9c067296f062d474b3a3ab3ab",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "ニプロは想定を超える需要増で通常出荷を続けることが難しくなり、対象包装の新規注文を辞退し、限定出荷すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "3311402G8021",
+          "product_name": "生食注シリンジ「ＮＰ」",
+          "maker": "ニプロ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "20mL×10シリンジ（横口）",
+              "unified_product_code": "458-12552-2",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、2月のメーカー資料）",
+                "note": "統一商品コード 458-12552-2。"
+              }
+            },
+            {
+              "package": "20mL×10シリンジ（ロック）",
+              "unified_product_code": "458-12553-9",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、2月のメーカー資料）",
+                "note": "統一商品コード 458-12553-9。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "対象表の20mL横口・ロックだけを掲載しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nipro-saline-syringe50-limited-202504",
+      "maker": "ニプロ",
+      "title": "生食注シリンジ50mL「ニプロ」 供給に関するお詫び",
+      "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uV7HvIAK",
+      "announced_at": "2025-04",
+      "listed_at": "2025-04-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "febda4a98b02a0f79deefc6ee0e6792e4fc68879a7d8aa32903ddf2507157709",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "ニプロは想定を超える需要増で通常出荷を続けることが難しくなり、対象包装の新規注文を辞退し、限定出荷すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "3311402P6029",
+          "product_name": "生食注シリンジ５０ｍＬ「ニプロ」",
+          "maker": "ニプロ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "50mL×5シリンジ（ロック）",
+              "unified_product_code": "458-12557-7",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、4月のメーカー資料）",
+                "note": "統一商品コード 458-12557-7。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2025年4月7日から既存取引先を対象に限定出荷との案内です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nipro-dutasteride-av-limited-202405",
+      "maker": "ニプロ",
+      "title": "デュタステリドカプセル0.5mgAV「ニプロ」 限定出荷のお願い",
+      "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uThfgIAC",
+      "announced_at": "2024-05",
+      "listed_at": "2024-05-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "93c3917d7f8d2c8a353e0f41a6d4c8b3e062cbdd5960cc973a75683b4cee9e43",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社の同成分製品の自主回収で需要が増えると見込まれ、出荷量と在庫量では増加分に応じられないため、ニプロは限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2499011M1132",
+          "product_name": "デュタステリドカプセル０．５ｍｇＡＶ「ニプロ」",
+          "maker": "ニプロ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP30カプセル",
+              "unified_product_code": "190-01013-1",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 190-01013-1。"
+              }
+            },
+            {
+              "package": "PTP90カプセル",
+              "unified_product_code": "190-01014-8",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 190-01014-8。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "対象はAVカプセルの2包装です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nipro-montelukast-other-strength-limited-202604",
+      "maker": "ニプロ",
+      "title": "モンテルカスト「ニプロ」 5mg錠の解除資料にある3品目の限定出荷継続案内",
+      "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q8000014sHCNIA2",
+      "announced_at": "2026-04",
+      "listed_at": "2026-04-24",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "fdc4384acb36c782e0a8c13713b3acf7445d78d31b496f46f7a56cf16503da07",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "ニプロの2026年4月の資料では、5mgの普通錠は限定出荷解除、10mg錠・4mg細粒・5mgチュアブル錠は限定出荷継続とされています。継続する3品目の詳しい原因はこの原文に記載がありません。",
+      "targets": [
+        {
+          "yj_code": "4490026F2318",
+          "product_name": "モンテルカスト錠１０ｍｇ「ニプロ」",
+          "maker": "ニプロ",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": []
+        },
+        {
+          "yj_code": "4490026C1196",
+          "product_name": "モンテルカスト細粒４ｍｇ「ニプロ」",
+          "maker": "ニプロ",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": []
+        },
+        {
+          "yj_code": "4490026F1273",
+          "product_name": "モンテルカストチュアブル錠５ｍｇ「ニプロ」",
+          "maker": "ニプロ",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": []
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "この3品目について、個別の対象包装は資料に記載されていません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nipro-wystar-1g-vial-limited-202602",
+      "maker": "ニプロ",
+      "title": "ワイスタール配合静注用1g 0.5gの解除資料にある限定出荷継続案内",
+      "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uWC0zIAG",
+      "announced_at": "2026-02",
+      "listed_at": "2026-02-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "d6aa001c3f188b3339904d74c5236566c98a11d1fcc2ea196f848e0aaf78ddd1",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "ニプロの2026年2月の資料では、0.5gは限定出荷解除、1gバッグは通常出荷、配合静注用1gのバイアル製剤のみ限定出荷継続と案内されています。1gバイアル製剤の詳しい原因はこの原文に記載がありません。",
+      "targets": [
+        {
+          "yj_code": "6139500F2179",
+          "product_name": "ワイスタール配合静注用１ｇ",
+          "maker": "ニプロ",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": []
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "1gバイアル製剤の個別包装は資料に記載されていません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sun-nadifloxacin-urea-limited-202411",
+      "maker": "サンファーマ",
+      "title": "ナジフロキサシン・尿素クリーム「SUN」 限定出荷開始のお知らせ",
+      "url": "https://jp.sunpharma.com/null/eb7de8f978c09315dbd3b709b41b2774b772f96f.pdf",
+      "announced_at": "2024-11",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "26e92f0bc9f0683821b5d727a26c98a65ecda5e6085eeaf3c8a303267a462ba3",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "想定を超える需要があり、十分な生産数量を確保できず全注文に応じられないため、サンファーマが対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2639700N1075",
+          "product_name": "ナジフロキサシンクリーム１％「ＳＵＮ」",
+          "maker": "サンファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10g×10本",
+              "unified_product_code": "047310919",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、11月のメーカー資料）",
+                "note": "統一商品コード 047310919、販売包装単位コード 14987047310916。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2639700Q1071",
+          "product_name": "ナジフロキサシンローション１％「ＳＵＮ」",
+          "maker": "サンファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "20mL×10本",
+              "unified_product_code": "047310926",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、11月のメーカー資料）",
+                "note": "統一商品コード 047310926、販売包装単位コード 14987047310923。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2669701N1109",
+          "product_name": "尿素クリーム１０％「ＳＵＮ」",
+          "maker": "サンファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "20g×10本",
+              "unified_product_code": "047110854",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、11月のメーカー資料）",
+                "note": "統一商品コード 047110854、販売包装単位コード 14987047110851。"
+              }
+            },
+            {
+              "package": "500g",
+              "unified_product_code": "047110878",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、11月のメーカー資料）",
+                "note": "統一商品コード 047110878、販売包装単位コード 14987047110875。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2669701N2113",
+          "product_name": "尿素クリーム２０％「ＳＵＮ」",
+          "maker": "サンファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "25g×10本",
+              "unified_product_code": "047110885",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、11月のメーカー資料）",
+                "note": "統一商品コード 047110885、販売包装単位コード 14987047110882。"
+              }
+            },
+            {
+              "package": "500g",
+              "unified_product_code": "047110908",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、11月のメーカー資料）",
+                "note": "統一商品コード 047110908、販売包装単位コード 14987047110905。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文の開始日は2024年11月19日です。当時の対応区分は「その他」です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sun-taiko-clindamycin-gel-limited-202411",
+      "maker": "サンファーマ",
+      "title": "クリンダマイシンリン酸エステルゲル1％「SUN」 限定出荷開始のお知らせ",
+      "url": "https://jp.sunpharma.com/null/eb7de8f978c09315dbd3b709b41b2774b772f96f.pdf",
+      "announced_at": "2024-11",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "26e92f0bc9f0683821b5d727a26c98a65ecda5e6085eeaf3c8a303267a462ba3",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "想定を超える需要があり、十分な生産数量を確保できず全注文に応じられないため、サンファーマが対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2634713M1097",
+          "product_name": "クリンダマイシンリン酸エステルゲル１％「ＳＵＮ」",
+          "maker": "大興製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10g×10本",
+              "unified_product_code": "047108042",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、11月のメーカー資料）",
+                "note": "統一商品コード 047108042、販売包装単位コード 14987047108049。"
+              }
+            }
+          ],
+          "seller": "サンファーマ"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文の開始日は2024年11月19日で、サンファーマ販売・大興製薬製造販売の範囲です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "ucb-gsk-zyrtec-dry-limited-202601",
+      "maker": "グラクソ・スミスクライン",
+      "title": "ジルテックドライシロップ1.25％ 限定出荷に関するお知らせ",
+      "url": "https://gskpro.com/content/dam/global/hcpportal/ja_JP/documents/news/PM-JP-CTR-LTR-260001.pdf",
+      "announced_at": "2026-01",
+      "listed_at": "2026-01-26",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "2180fd2aaee8d821c4687bb4aa0768fdb0a719a46fcdd54b4a8a66ea38928ac8",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "同じ成分の他社品で供給に支障が出たため2022年2月に限定出荷を開始し、ユーシービージャパンとグラクソ・スミスクラインは2026年1月の原文で限定出荷継続を案内しました。",
+      "targets": [
+        {
+          "yj_code": "4490020R1027",
+          "product_name": "ジルテックドライシロップ１．２５％",
+          "maker": "ユーシービージャパン",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100g（瓶）",
+              "unified_product_code": "246741101",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、1月のメーカー資料）",
+                "note": "統一商品コード 246741101。"
+              }
+            }
+          ],
+          "seller": "グラクソ・スミスクライン"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "後日、同包装の販売中止予定が別資料で案内されました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "ucb-gsk-zyrtec-dry-discontinued-202606",
+      "maker": "グラクソ・スミスクライン",
+      "title": "ジルテックドライシロップ1.25％ 100g瓶 販売中止のご案内",
+      "url": "https://gskpro.com/content/dam/global/hcpportal/ja_JP/documents/news/PM-JP-CTR-LTR-260002.pdf",
+      "announced_at": "2026-06",
+      "listed_at": "2026-06-23",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "681961bd63d1d106207a6fe43c340b2fde7602099fb83159b03ca35262be727a",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "ユーシービージャパンとグラクソ・スミスクラインは100g瓶を2026年12月に販売中止予定と案内しました。具体的な販売中止理由は原文には記載されていません。",
+      "targets": [
+        {
+          "yj_code": "4490020R1027",
+          "product_name": "ジルテックドライシロップ１．２５％",
+          "maker": "ユーシービージャパン",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100g（瓶）",
+              "unified_product_code": "246741101",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "2026年12月（メーカー発表時点の予定）"
+                  }
+                ],
+                "note": "統一商品コード 246741101。"
+              }
+            }
+          ],
+          "seller": "グラクソ・スミスクライン"
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://gskpro.com/content/dam/global/hcpportal/ja_JP/documents/news/PM-JP-CTR-LTR-260002.pdf",
+          "target_yj_codes": [
+            "4490020R1027"
+          ],
+          "type": "メーカーが案内した代替製品",
+          "products": [
+            {
+              "name": "セチリジン塩酸塩ＤＳ１．２５％「タカタ」",
+              "maker": "高田製薬",
+              "yj_code": "4490020R1035",
+              "scope": "ジルテックドライシロップ1.25％ 100g瓶の販売中止に対する案内。候補は高田製薬のバラ100g（120-44850-8）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "販売中止時期は在庫状況で前後し、経過措置期間満了は2027年3月末日の予定と案内されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
     }
   ]
 }
