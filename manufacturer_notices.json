@@ -34621,6 +34621,838 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "towa-telthia-ap-package-consolidation-202505",
+      "maker": "東和薬品",
+      "title": "テルチア配合錠AP「トーワ」 包装集約のお知らせとご協力のお願い",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=77133&t=4",
+      "announced_at": "2025-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "bef421de01a34f6b04e97e660a906fab971ad9b61666163c7912848cf7856a4b",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "すべての注文に応じられる数量を確保できず、安定供給と生産効率の改善に向けて、東和薬品は一部包装を集約し、対象包装の出荷を一時停止すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149113F1060",
+          "product_name": "テルチア配合錠ＡＰ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "バラ100錠",
+              "unified_product_code": "155351033",
+              "supply": {
+                "status": "stopped",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "在庫消尽済み（2025年5月更新資料の記載）"
+                  }
+                ],
+                "status_text": "出荷一時停止（2025年5月更新資料）",
+                "note": "統一商品コード 155351033。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155351026",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155351026。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=77133&t=4",
+          "target_yj_codes": [
+            "2149113F1060"
+          ],
+          "type": "東和薬品の原文に記載の供給継続包装",
+          "products": [
+            {
+              "name": "テルチア配合錠ＡＰ「トーワ」",
+              "maker": "東和薬品",
+              "yj_code": "2149113F1060",
+              "scope": "同一品目のPTP100錠（155351026）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "包装集約の発表は2023年3月です。供給継続包装は2025年5月更新資料で示された包装です。",
+        "品目全体の供給区分・理由と、包装集約の案内を分けて表示しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "towa-atenolol50-package-consolidation-202505",
+      "maker": "東和薬品",
+      "title": "アテノロール錠50mg「トーワ」 包装集約のお知らせとご協力のお願い",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=74951&t=4",
+      "announced_at": "2025-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "0009d1f3f1ecc681f4a7df4480c54ee6fe9358ee93eb1870a544d8474da237f8",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "すべての注文に応じられる数量を確保できず、安定供給と生産効率の改善に向けて、東和薬品は一部包装を集約し、対象包装の出荷を一時停止すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2123011F2585",
+          "product_name": "アテノロール錠５０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "バラ1000錠",
+              "unified_product_code": "155116090",
+              "supply": {
+                "status": "stopped",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "在庫消尽済み（2025年5月更新資料の記載）"
+                  }
+                ],
+                "status_text": "出荷一時停止（2025年5月更新資料）",
+                "note": "統一商品コード 155116090。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155116076",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155116076。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "155116083",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155116083。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=74951&t=4",
+          "target_yj_codes": [
+            "2123011F2585"
+          ],
+          "type": "東和薬品の原文に記載の供給継続包装",
+          "products": [
+            {
+              "name": "アテノロール錠５０ｍｇ「トーワ」",
+              "maker": "東和薬品",
+              "yj_code": "2123011F2585",
+              "scope": "同一品目のPTP100錠（155116076）、PTP500錠（155116083）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "包装集約の発表は2022年7月です。供給継続包装は2025年5月更新資料で示された包装です。",
+        "品目全体の供給区分・理由と、包装集約の案内を分けて表示しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "towa-levofloxacin500-package-consolidation-202505",
+      "maker": "東和薬品",
+      "title": "レボフロキサシン錠500mg「トーワ」 包装集約のお知らせとご協力のお願い",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=75411&t=4",
+      "announced_at": "2025-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "c3d6a59beb96e46114fb3cc6beb85637eed49069d7b80d4a74389701c2a1177c",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "すべての注文に応じられる数量を確保できず、安定供給と生産効率の改善に向けて、東和薬品は一部包装を集約し、対象包装の出荷を一時停止すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "6241013F3256",
+          "product_name": "レボフロキサシン錠５００ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "バラ100錠",
+              "unified_product_code": "155132069",
+              "supply": {
+                "status": "stopped",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "在庫消尽済み（2025年5月更新資料の記載）"
+                  }
+                ],
+                "status_text": "出荷一時停止（2025年5月更新資料）",
+                "note": "統一商品コード 155132069。"
+              }
+            },
+            {
+              "package": "PTP50錠（5錠シート）",
+              "unified_product_code": "155132052",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155132052。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=75411&t=4",
+          "target_yj_codes": [
+            "6241013F3256"
+          ],
+          "type": "東和薬品の原文に記載の供給継続包装",
+          "products": [
+            {
+              "name": "レボフロキサシン錠５００ｍｇ「トーワ」",
+              "maker": "東和薬品",
+              "yj_code": "6241013F3256",
+              "scope": "同一品目のPTP50錠（5錠シート）（155132052）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "包装集約の発表は2022年9月です。供給継続包装は2025年5月更新資料で示された包装です。",
+        "品目全体の供給区分・理由と、包装集約の案内を分けて表示しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "towa-fexofenadine-od60-package-consolidation-202601",
+      "maker": "東和薬品",
+      "title": "フェキソフェナジン塩酸塩OD錠60mg「トーワ」 包装集約のお知らせとご協力のお願い",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=81609&t=4",
+      "announced_at": "2026-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "e542525c913fe180dd68c0a47f200e243d5af705ce54042c371e603ef5a95550",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "すべての注文に応じられる数量を確保できず、安定供給と生産効率の改善に向けて、東和薬品は一部包装を集約し、対象包装の出荷を一時停止すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "4490023F3051",
+          "product_name": "フェキソフェナジン塩酸塩ＯＤ錠６０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "155029147",
+              "supply": {
+                "status": "stopped",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "在庫消尽済み（2026年1月資料の記載）"
+                  }
+                ],
+                "status_text": "出荷一時停止（2026年1月資料）",
+                "note": "統一商品コード 155029147。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155029116",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155029116。"
+              }
+            },
+            {
+              "package": "バラ300錠",
+              "unified_product_code": "155029130",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155029130。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=81609&t=4",
+          "target_yj_codes": [
+            "4490023F3051"
+          ],
+          "type": "東和薬品の原文に記載の供給継続包装",
+          "products": [
+            {
+              "name": "フェキソフェナジン塩酸塩ＯＤ錠６０ｍｇ「トーワ」",
+              "maker": "東和薬品",
+              "yj_code": "4490023F3051",
+              "scope": "同一品目のPTP100錠（155029116）、バラ300錠（155029130）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "包装集約の発表は2026年1月です。供給継続包装は2026年1月資料で示された包装です。",
+        "品目全体の供給区分・理由と、包装集約の案内を分けて表示しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "towa-finasteride1-package-consolidation-202505",
+      "maker": "東和薬品",
+      "title": "フィナステリド錠1mg「トーワ」 包装集約のお知らせとご協力のお願い",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=74842&t=4",
+      "announced_at": "2025-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "0916f63723807bae3cec2117595ef91b2bae2a312b6c23c239a0092ca89291fe",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "すべての注文に応じられる数量を確保できず、安定供給と生産効率の改善に向けて、東和薬品は一部包装を集約し、対象包装の出荷を一時停止すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "249900XF2087",
+          "product_name": "フィナステリド錠１ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "155322033",
+              "supply": {
+                "status": "stopped",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "在庫消尽済み（2025年5月更新資料の記載）"
+                  }
+                ],
+                "status_text": "出荷一時停止（2025年5月更新資料）",
+                "note": "統一商品コード 155322033。"
+              }
+            },
+            {
+              "package": "PTP28錠",
+              "unified_product_code": "155322019",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155322019。"
+              }
+            },
+            {
+              "package": "バラ30錠",
+              "unified_product_code": "155322026",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155322026。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=74842&t=4",
+          "target_yj_codes": [
+            "249900XF2087"
+          ],
+          "type": "東和薬品の原文に記載の供給継続包装",
+          "products": [
+            {
+              "name": "フィナステリド錠１ｍｇ「トーワ」",
+              "maker": "東和薬品",
+              "yj_code": "249900XF2087",
+              "scope": "同一品目のPTP28錠（155322019）、バラ30錠（155322026）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "包装集約の発表は2022年6月です。供給継続包装は2025年5月更新資料で示された包装です。",
+        "品目全体の供給区分・理由と、包装集約の案内を分けて表示しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "towa-naftopidil-od50-package-consolidation-202505",
+      "maker": "東和薬品",
+      "title": "ナフトピジルOD錠50mg「トーワ」 包装集約のお知らせとご協力のお願い",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=76601&t=4",
+      "announced_at": "2025-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "e42a95ac54df6bd3eb9657e581db466822b24d77534882a275ff61cdfcaa334a",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "すべての注文に応じられる数量を確保できず、安定供給と生産効率の改善に向けて、東和薬品は一部包装を集約し、対象包装の出荷を一時停止すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2590009F4224",
+          "product_name": "ナフトピジルＯＤ錠５０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "バラ300錠",
+              "unified_product_code": "155261066",
+              "supply": {
+                "status": "stopped",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "在庫消尽済み（2025年5月更新資料の記載）"
+                  }
+                ],
+                "status_text": "出荷一時停止（2025年5月更新資料）",
+                "note": "統一商品コード 155261066。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155261042",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155261042。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=76601&t=4",
+          "target_yj_codes": [
+            "2590009F4224"
+          ],
+          "type": "東和薬品の原文に記載の供給継続包装",
+          "products": [
+            {
+              "name": "ナフトピジルＯＤ錠５０ｍｇ「トーワ」",
+              "maker": "東和薬品",
+              "yj_code": "2590009F4224",
+              "scope": "同一品目のPTP100錠（155261042）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "包装集約の発表は2022年12月です。供給継続包装は2025年5月更新資料で示された包装です。",
+        "品目全体の供給区分・理由と、包装集約の案内を分けて表示しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "towa-telthia-bp-package-consolidation-202505",
+      "maker": "東和薬品",
+      "title": "テルチア配合錠BP「トーワ」 包装集約のお知らせとご協力のお願い",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=76599&t=4",
+      "announced_at": "2025-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "1fc1663b896d04ea28f7ce6e3bd759fb839956b153090d779c9618aeecb005f1",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "すべての注文に応じられる数量を確保できず、安定供給と生産効率の改善に向けて、東和薬品は一部包装を集約し、対象包装の出荷を一時停止すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149113F2066",
+          "product_name": "テルチア配合錠ＢＰ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "バラ100錠",
+              "unified_product_code": "155352023",
+              "supply": {
+                "status": "stopped",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "在庫消尽済み（2025年5月更新資料の記載）"
+                  }
+                ],
+                "status_text": "出荷一時停止（2025年5月更新資料）",
+                "note": "統一商品コード 155352023。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155352016",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155352016。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=76599&t=4",
+          "target_yj_codes": [
+            "2149113F2066"
+          ],
+          "type": "東和薬品の原文に記載の供給継続包装",
+          "products": [
+            {
+              "name": "テルチア配合錠ＢＰ「トーワ」",
+              "maker": "東和薬品",
+              "yj_code": "2149113F2066",
+              "scope": "同一品目のPTP100錠（155352016）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "包装集約の発表は2022年12月です。供給継続包装は2025年5月更新資料で示された包装です。",
+        "品目全体の供給区分・理由と、包装集約の案内を分けて表示しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "jb-albumin5-and-25-limited-202610",
+      "maker": "一般社団法人日本血液製剤機構",
+      "title": "献血アルブミン5％「JB」・25％「ベネシス」 出荷状況変更",
+      "url": "https://www.jbpo.or.jp/med/info/files/info2091_file01.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-19",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "da107da2cf3da80cb52f8923ad71b54ddb9b938163755a317135cb6b311df0db",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の限定出荷を受けた需要増に対応してきたところ、製造・供給体制の都合で、日本血液製剤機構は5％と25％「ベネシス」の既存出荷先を優先し、限定出荷を続けると案内しました。",
+      "targets": [
+        {
+          "yj_code": "6343410X1088",
+          "product_name": "献血アルブミン５％静注５ｇ／１００ｍＬ「ＪＢ」",
+          "maker": "一般社団法人日本血液製剤機構",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "5g/100mL 1瓶",
+              "unified_product_code": "867512210",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、10月のメーカー資料）",
+                "note": "統一商品コード 867512210。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6343410X2130",
+          "product_name": "献血アルブミン５％静注１２．５ｇ／２５０ｍＬ「ＪＢ」",
+          "maker": "一般社団法人日本血液製剤機構",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "12.5g/250mL 1瓶",
+              "unified_product_code": "867512227",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、10月のメーカー資料）",
+                "note": "統一商品コード 867512227。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6343410X4087",
+          "product_name": "献血アルブミン２５％静注５ｇ／２０ｍＬ「ベネシス」",
+          "maker": "一般社団法人日本血液製剤機構",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "5g/20mL 1瓶",
+              "unified_product_code": "867171127",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、10月のメーカー資料）",
+                "note": "統一商品コード 867171127。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6343410X5199",
+          "product_name": "献血アルブミン２５％静注１２．５ｇ／５０ｍＬ「ベネシス」",
+          "maker": "一般社団法人日本血液製剤機構",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "12.5g/50mL 1瓶",
+              "unified_product_code": "867195536",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、10月のメーカー資料）",
+                "note": "統一商品コード 867195536。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "10月の原文では対象4品目の区分を他社品の影響から自社の事情に変更しています。個別の製造・供給事情の詳細は記載されていません。",
+        "同じ原文の20％「JB」と赤十字アルブミン25％は限定出荷解除の対象です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "mochida-tocilizumab-ma-ayumi-limited-202610",
+      "maker": "持田製薬",
+      "title": "トシリズマブBS点滴静注200mg・400mg「MA」 あゆみ製薬の限定出荷案内",
+      "url": "https://www.ayumi-pharma.com/upd/med/doc/325/tcz_info2610.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ca6b6c8c2cc2baa6c01fd27864bbdba0e28a214ecd227cc2e670f6ef7fc9a7f4",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "販売元のあゆみ製薬は、安定供給のため、納入済み施設への供給を優先し、200mg・400mgを2026年10月5日から限定出荷すると案内しました。原文に他社製品の具体名や供給への影響の詳細は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "6399436A2022",
+          "product_name": "トシリズマブＢＳ点滴静注２００ｍｇ「ＭＡ」",
+          "maker": "持田製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1本",
+              "unified_product_code": "896041064",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 896041064。"
+              }
+            }
+          ],
+          "seller": "あゆみ製薬"
+        },
+        {
+          "yj_code": "6399436A3029",
+          "product_name": "トシリズマブＢＳ点滴静注４００ｍｇ「ＭＡ」",
+          "maker": "持田製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1本",
+              "unified_product_code": "896041071",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 896041071。"
+              }
+            }
+          ],
+          "seller": "あゆみ製薬"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "10月資料では限定出荷期間は未定で、80mgは通常出荷の継続対象です。製造販売元は持田製薬です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "meiji-sp-troche-limited-resumption-202501",
+      "maker": "Meiji Seika ファルマ",
+      "title": "SPトローチ0.25mg「明治」 出荷再開および限定出荷のご案内",
+      "url": "https://meiji-medical-net.com/common/uploads/news/000036_SUPN_20250130.pdf",
+      "announced_at": "2025-01",
+      "listed_at": "2025-01-30",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "be502efe2c963676ebee937d7ba8a04f8af8b5d05ad8bf8e2960137f38df3c53",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "需要が想定を上回り出荷を一時停止した後、一定量の在庫確保の見通しが立ったものの、需要増が続くと見込まれたため、Meiji Seika ファルマは限定出荷で受注を再開すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2399710E1046",
+          "product_name": "ＳＰトローチ０．２５ｍｇ「明治」",
+          "maker": "Meiji Seika ファルマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP1,200錠",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（その他、1月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987222697412。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2025年1月の資料では、2025年2月4日から新規採用を辞退して受注再開と案内しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "meiji-teicoplanin-two-strengths-limited-202401",
+      "maker": "Meiji Seika ファルマ",
+      "title": "テイコプラニン点滴静注用200mg・400mg「明治」 限定出荷のご案内",
+      "url": "https://meiji-medical-net.com/common/uploads/news/000334_SUPN_20240201.pdf",
+      "announced_at": "2024-01",
+      "listed_at": "2024-02-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "cdae7de30fedac24e5cf5f56509b72ee9818e6d8fd2b2f0513866fc6f08b4fa0",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の販売中止・限定出荷で急な需要増が見込まれ、その増加にすぐには対応できないため、Meiji Seika ファルマは既採用先への安定供給を優先して、特約店への限定出荷と新規採用辞退を案内しました。",
+      "targets": [
+        {
+          "yj_code": "6119401D1159",
+          "product_name": "テイコプラニン点滴静注用２００ｍｇ「明治」",
+          "maker": "Meiji Seika ファルマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10バイアル",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響、1月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987222624326。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6119401D2058",
+          "product_name": "テイコプラニン点滴静注用４００ｍｇ「明治」",
+          "maker": "Meiji Seika ファルマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10バイアル",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響、1月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987222624579。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
