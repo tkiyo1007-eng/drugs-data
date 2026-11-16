@@ -69,6 +69,9 @@ MAKER_HOSTS = {
     'ヴィアトリス製薬合同会社': 'www.viatris-e-channel.com',
 }
 MAKER_MANUAL_SOURCE_HOSTS = {
+    '堀井薬品工業': ('www.horii-pharm.co.jp',),
+    'マルホ': ('www.maruho.co.jp',),
+    'クリニジェン': ('clinigen.co.jp',),
     '富士製薬工業': ('www.fujipharma.jp',),
     '杏林製薬': ('www.kyorin-medicalbridge.jp',),
     '塩野義製薬': ('med.shionogi.co.jp',),
@@ -89,6 +92,7 @@ MAKER_MANUAL_SOURCE_URLS = {
         'https://www.nichiiko.co.jp/medicine/file/23650/information/20241204cI2.pdf',
     },
     'ニプロファーマ': {
+        'https://www.maruho.co.jp/medical/pdf/products/actosin/news/2609actosin_an.pdf',
         'https://www.nichiiko.co.jp/medicine/file/90840/information/20250514cI6.pdf',
     },
     '日新製薬': {
