@@ -38484,6 +38484,351 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "janssen-concerta-limited-202607",
+      "maker": "ヤンセンファーマ",
+      "title": "コンサータ錠18mg・27mg・36mgの限定出荷継続のお知らせ",
+      "url": "https://www.js-adhd.org/doc/js-adhd/oshirase_20260706.pdf",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "27b41363a19d0ded35405f0e1b848f456f4ea11e5a508805835f2bc067e1c82b",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "需要増に対応して増産し、在庫に改善の兆しがあったものの、特約店や医療機関で十分な在庫を確保できるまでには至らず、ヤンセンファーマは7月以降も限定出荷を続けると案内しました。",
+      "targets": [
+        {
+          "yj_code": "1179009G1022",
+          "product_name": "コンサータ錠１８ｍｇ",
+          "maker": "ヤンセンファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "672830127",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、7月のメーカー資料）",
+                "note": "統一商品コード 672830127、販売包装単位コード 14987672830124。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "1179009G2029",
+          "product_name": "コンサータ錠２７ｍｇ",
+          "maker": "ヤンセンファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "672830141",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、7月のメーカー資料）",
+                "note": "統一商品コード 672830141、販売包装単位コード 14987672830148。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "1179009G3025",
+          "product_name": "コンサータ錠３６ｍｇ",
+          "maker": "ヤンセンファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "672135529",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、7月のメーカー資料）",
+                "note": "統一商品コード 672135529、販売包装単位コード 14987672135526。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカーは、解除の見通しが立ち次第、改めて案内するとしています。限定出荷中の新規患者への使用・既存患者の用量変更を控えるよう依頼しています。",
+        "原文は同効薬の検討に言及しています。候補となる個別の製品名は記載していません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "janssen-concerta-pharmacy-transfer-202607",
+      "maker": "ヤンセンファーマ",
+      "title": "コンサータ錠の薬局間譲渡・譲受に関するメーカー案内",
+      "url": "https://www.js-adhd.org/doc/js-adhd/oshirase_20260723_01.pdf",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-23",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "db6a80aebd9c296101bc73723b066e726a813302ad0afd6cbef2409ab856fd68",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "ヤンセンファーマは、安定供給が確保されるまでの間、厚労省通知に基づいてADHD適正流通管理システムに登録された薬局間でのみ、所定の手続きに従い譲渡・譲受が可能と案内しました。",
+      "targets": [
+        {
+          "yj_code": "1179009G1022",
+          "product_name": "コンサータ錠１８ｍｇ",
+          "maker": "ヤンセンファーマ",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": []
+        },
+        {
+          "yj_code": "1179009G2029",
+          "product_name": "コンサータ錠２７ｍｇ",
+          "maker": "ヤンセンファーマ",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": []
+        },
+        {
+          "yj_code": "1179009G3025",
+          "product_name": "コンサータ錠３６ｍｇ",
+          "maker": "ヤンセンファーマ",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": []
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "譲渡・譲受の手続きはメーカー原文とADHD適正流通管理システムの案内をご確認ください。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nipro-heparin-dialysis-12-16-limited-202308",
+      "maker": "ニプロ",
+      "title": "ヘパリンNa透析用シリンジの限定出荷開始のお知らせ",
+      "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/0685g00000HlTevAAF",
+      "announced_at": "2023-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "3437be9b3674ec96f29a6692f82c5b42c61d38e7332cd667a36d876a9e2e49cd",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造工場からの納品が遅れ、一時的な在庫減少が見込まれたため、ニプロは既存の医療機関を優先し、特約店への出荷数を割り当てると案内しました。",
+      "targets": [
+        {
+          "yj_code": "3334402P4020",
+          "product_name": "ヘパリンＮａ透析用２５０単位／ｍＬシリンジ１２ｍＬ「ニプロ」",
+          "maker": "ニプロ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "12mL×50シリンジ",
+              "unified_product_code": "458-12480-8",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 458-12480-8。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3334402P5027",
+          "product_name": "ヘパリンＮａ透析用２５０単位／ｍＬシリンジ１６ｍＬ「ニプロ」",
+          "maker": "ニプロ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "16mL×50シリンジ",
+              "unified_product_code": "458-12485-3",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 458-12485-3。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2023年8月の限定出荷開始時の理由です。2026年3月の同社資料では12mL・16mLの限定出荷継続が案内されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nipro-heparin-dialysis-12-16-continuing-202603",
+      "maker": "ニプロ",
+      "title": "ヘパリンNa透析用250単位/mLシリンジ12mL・16mL 限定出荷を継続",
+      "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q8000012YhIbIAK",
+      "announced_at": "2026-03",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "139cae67d44e7c8e6da76a3c7ede2b961101b120c919d94ed078e850eb1527d9",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "ニプロの2026年3月の資料では、透析用250単位/mLの12mLと16mLは限定出荷が続くと案内されています。",
+      "targets": [
+        {
+          "yj_code": "3334402P4020",
+          "product_name": "ヘパリンＮａ透析用２５０単位／ｍＬシリンジ１２ｍＬ「ニプロ」",
+          "maker": "ニプロ",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": []
+        },
+        {
+          "yj_code": "3334402P5027",
+          "product_name": "ヘパリンＮａ透析用２５０単位／ｍＬシリンジ１６ｍＬ「ニプロ」",
+          "maker": "ニプロ",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": []
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年3月2日に解除されたのは、250単位/mLの20mL「ニプロ」と、500単位/mLの10mL・20mL「NP」です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "terumo-kcl10-equipment-limited-202301",
+      "maker": "テルモ",
+      "title": "KCL注10mEqキット「テルモ」設備トラブルに伴う2023年の供給案内",
+      "url": "https://jasect.org/wp/wp-content/uploads/2023/02/23PN005.pdf",
+      "announced_at": "2023-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "a7c2acd5a6b2355e1a275e6dc5d4bd2bf59b21b32a990cef2220d0151c34bd39",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "テルモは、設備トラブルのためKCL注10mEqキットを一時的に出荷停止し、出荷を制限すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "3319402G3028",
+          "product_name": "ＫＣＬ注１０ｍＥｑキット「テルモ」",
+          "maker": "テルモ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10mL×10本",
+              "unified_product_code": "350027955",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、1月のメーカー資料）",
+                "note": "統一商品コード 350027955、販売包装単位コード 14987350027952。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://jasect.org/wp/wp-content/uploads/2023/02/23PN005.pdf",
+          "target_yj_codes": [
+            "3319402G3028"
+          ],
+          "type": "2023年1月案内に記載された当時の候補",
+          "products": [
+            {
+              "name": "ＫＣＬ注２０ｍＥｑキット「テルモ」",
+              "maker": "テルモ",
+              "yj_code": "3319402G4024",
+              "scope": "2023年1月案内が供給再開までの候補として挙げた20mL×10本（350027931）。10mEq製品とは1キット当たりの容量と電解質量が異なります。2024年7月の継続案内には候補の記載がありません。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2023年1月資料の出荷制限期間は当初2023年2月下旬までの予定でした。後の2024年7月資料でも対象包装の限定出荷が継続しています。",
+        "2023年1月原文には当時の一時的な候補が記載されています。2024年7月の継続案内には候補の再掲がありません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "terumo-kcl10-continuing-202407",
+      "maker": "テルモ",
+      "title": "KCL注10mEqキット「テルモ」出荷制限継続のお知らせ",
+      "url": "https://medical.terumo.co.jp/sites/default/files/assets/news/medicine/pdf/24PN083.pdf",
+      "announced_at": "2024-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "f18ab7166908c8680da05c75a957d019fd523ddc50b2e04169b3e7b0313a2937",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "テルモは対象包装の限定出荷を継続し、新規採用を辞退すると案内しました。資料上の出荷量区分は通常です。",
+      "targets": [
+        {
+          "yj_code": "3319402G3028",
+          "product_name": "ＫＣＬ注１０ｍＥｑキット「テルモ」",
+          "maker": "テルモ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10mL×10本",
+              "unified_product_code": "350027955",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、7月のメーカー資料）",
+                "note": "統一商品コード 350027955、販売包装単位コード 14987350027952。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "この継続案内には候補となる製品名の記載はありません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
