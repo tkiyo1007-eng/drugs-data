@@ -16396,6 +16396,576 @@
         "6月のメーカー資料に記された経過措置期間は2027年3月31日までの予定です。",
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
       ]
+    },
+    {
+      "id": "taiyo-pidoxal-tablets-limited-202511",
+      "maker": "太陽ファルマ",
+      "title": "ピドキサール錠10mg・20mg・30mg 限定出荷開始のご案内",
+      "url": "https://www.taiyo-pharma.co.jp/ja/med_home/info/info2026198737815055/main/0/link/pal_t_ship_202511.pdf",
+      "announced_at": "2025-11",
+      "listed_at": "2025-11-27",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "b97f6f0ab7c81c5934fbeeffdb11cf6c327237239f8c6dd9cbf372dcc3ec872f",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "原材料の入手が難しくなって製造に支障が出たため、太陽ファルマが対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3134003F1388",
+          "product_name": "ピドキサール錠１０ｍｇ",
+          "maker": "太陽ファルマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "925119719",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、11月のメーカー資料）",
+                "note": "統一商品コード 925119719。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "925168052",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、11月のメーカー資料）",
+                "note": "統一商品コード 925168052。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3134003F2147",
+          "product_name": "ピドキサール錠２０ｍｇ",
+          "maker": "太陽ファルマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "925119726",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、11月のメーカー資料）",
+                "note": "統一商品コード 925119726。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "925168090",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、11月のメーカー資料）",
+                "note": "統一商品コード 925168090。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3134003F3330",
+          "product_name": "ピドキサール錠３０ｍｇ",
+          "maker": "太陽ファルマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "925119733",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、11月のメーカー資料）",
+                "note": "統一商品コード 925119733。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "925168113",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、11月のメーカー資料）",
+                "note": "統一商品コード 925168113。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "太陽ファルマの2026年11月2日版一覧にも限定出荷が掲載されています。",
+        "メーカー資料の限定出荷解除時期は未定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "taiyo-digoxin-injection-limited-202608",
+      "maker": "太陽ファルマ",
+      "title": "ジゴシン注0.25mg 供給継続・仕様変更のご案内",
+      "url": "https://www.taiyo-pharma.co.jp/ja/med_home/info/info60263907981505/main/0/link/dig_i_ship_norm_202608.pdf",
+      "announced_at": "2026-08",
+      "listed_at": "2026-08-19",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ab7d089d31eed3b07439344e92b47128cb70cca6c35bf79014f31989a19f4157",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造委託先からの納品が難しくなり、太陽ファルマが限定出荷しました。製造所の移管で供給を続けられるようになり、8月資料では当面の限定出荷継続を案内しています。",
+      "targets": [
+        {
+          "yj_code": "2113400A1032",
+          "product_name": "ジゴシン注０．２５ｍｇ",
+          "maker": "太陽ファルマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1mL×10アンプル",
+              "unified_product_code": "925117715",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 925117715。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "太陽ファルマの2026年11月2日版一覧にも限定出荷が掲載されています。",
+        "製造所の移管に伴い包装などの仕様が変わります。メーカー資料の通常出荷再開時期は未定です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "tatsumi-diclofenac25-supply-202611",
+      "maker": "辰巳化学",
+      "title": "ジクロフェナクNa錠25mg「TCK」供給についてのお詫びとご連絡",
+      "url": "https://www.tatsumi-kagaku.com/file/information/file/1143_1.pdf",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-12",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "7e17c3492e15a26fb0eaa5348b9b8eee4989e18a1c28043bf9297bc92feac2c1",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "一部の原材料を変更したことで製造スケジュールに大幅な遅れが生じ、安定供給に支障が出たと辰巳化学が案内しました。",
+      "targets": [
+        {
+          "yj_code": "1147002F1641",
+          "product_name": "ジクロフェナクＮａ錠２５ｍｇ「ＴＣＫ」",
+          "maker": "辰巳化学",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "販売包装単位コード 14987124145318。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "対象は辰巳化学の販売包装単位コードが記載された包装です。原文では供給時期の見通しを示せないと案内しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "jb-venoglobulin-ih10-limited-202304",
+      "maker": "一般社団法人日本血液製剤機構",
+      "title": "献血ヴェノグロブリンIH10％静注 5規格の限定出荷に関するお知らせ",
+      "url": "https://www.jbpo.or.jp/med/info/files/info1448_file01.pdf",
+      "announced_at": "2023-04",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "3cf26722ac77a0e0fc3af33f7344d322d37a0a81750db041693f5974d0087397",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "想定を上回る注文が続き、日本血液製剤機構は安定供給体制を確保するため、2023年4月の資料で対象規格の限定出荷継続を案内しました。",
+      "targets": [
+        {
+          "yj_code": "6343428A6028",
+          "product_name": "献血ヴェノグロブリンＩＨ１０％静注０．５ｇ／５ｍＬ",
+          "maker": "一般社団法人日本血液製剤機構",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×1瓶",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（その他、2023年4月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987867505141。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6343428A7024",
+          "product_name": "献血ヴェノグロブリンＩＨ１０％静注２．５ｇ／２５ｍＬ",
+          "maker": "一般社団法人日本血液製剤機構",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "25mL×1瓶",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（その他、2023年4月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987867505165。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6343428A8020",
+          "product_name": "献血ヴェノグロブリンＩＨ１０％静注５ｇ／５０ｍＬ",
+          "maker": "一般社団法人日本血液製剤機構",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "50mL×1瓶",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（その他、2023年4月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987867505172。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6343428A9027",
+          "product_name": "献血ヴェノグロブリンＩＨ１０％静注１０ｇ／１００ｍＬ",
+          "maker": "一般社団法人日本血液製剤機構",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100mL×1瓶",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（その他、2023年4月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987867505189。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6343428H1024",
+          "product_name": "献血ヴェノグロブリンＩＨ１０％静注２０ｇ／２００ｍＬ",
+          "maker": "一般社団法人日本血液製剤機構",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "200mL×1瓶",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（その他、2023年4月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987867505196。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "この掲載対象はIH10％の5規格です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "jb-cross-eight-resumption-202605",
+      "maker": "一般社団法人 日本血液製剤機構",
+      "title": "クロスエイトMC 3000単位供給再開と全5規格の出荷案内",
+      "url": "https://www.jbpo.or.jp/general/info/files/info2052_file01.pdf",
+      "announced_at": "2026-05",
+      "listed_at": "2026-05-13",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "43b0b0206d9bbe73549a6c218c0c061f1da328e53e783e22ddd8c816b4b56de4",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "一定量の在庫が整うまで全需要に応えられない見込みのため、日本血液製剤機構は5規格の供給量に応じた出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "6343406X5133",
+          "product_name": "クロスエイトＭＣ静注用２５０単位",
+          "maker": "一般社団法人 日本血液製剤機構",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "250国際単位×1バイアル",
+              "supply": {
+                "status": "limited",
+                "status_text": "供給可能量に応じた出荷（2026年5月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987867025311。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6343406X6130",
+          "product_name": "クロスエイトＭＣ静注用５００単位",
+          "maker": "一般社団法人 日本血液製剤機構",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "500国際単位×1バイアル",
+              "supply": {
+                "status": "limited",
+                "status_text": "供給可能量に応じた出荷（2026年5月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987867025328。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6343406X8108",
+          "product_name": "クロスエイトＭＣ静注用１０００単位",
+          "maker": "一般社団法人 日本血液製剤機構",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1000国際単位×1バイアル",
+              "supply": {
+                "status": "limited",
+                "status_text": "供給可能量に応じた出荷（2026年5月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987867025335。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6343406X9023",
+          "product_name": "クロスエイトＭＣ静注用２０００単位",
+          "maker": "一般社団法人 日本血液製剤機構",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "2000国際単位×1バイアル",
+              "supply": {
+                "status": "limited",
+                "status_text": "供給可能量に応じた出荷（2026年5月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987867025342。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6343406Y1028",
+          "product_name": "クロスエイトＭＣ静注用３０００単位",
+          "maker": "一般社団法人 日本血液製剤機構",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "3000国際単位×1バイアル",
+              "supply": {
+                "status": "limited",
+                "status_text": "供給可能量に応じた出荷（2026年5月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987867025366。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "1000・2000単位は2025年10月20日に再開。3000単位の供給再開は2026年5月25日と案内しました。包装とGS1は2025年1月のメーカー原文で照合しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "jb-cross-eight-manufacturing-202501",
+      "maker": "一般社団法人 日本血液製剤機構",
+      "title": "クロスエイトMC 製造一時停止の経緯",
+      "url": "https://www.jbpo.or.jp/med/di/file/4ead1199b6e7a06d8cfb05ae32a49798/",
+      "announced_at": "2025-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "00cead390a5f2192bb51de8f716aad1c5acc8080e5a2bdee123955941808827f",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日本血液製剤機構は、製造工程の不具合による異物混入を受け、製造を一時停止し、対象5規格を限定出荷すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "6343406X5133",
+          "product_name": "クロスエイトＭＣ静注用２５０単位",
+          "maker": "一般社団法人 日本血液製剤機構",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "250国際単位×1バイアル",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情、2025年1月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987867025311。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6343406X6130",
+          "product_name": "クロスエイトＭＣ静注用５００単位",
+          "maker": "一般社団法人 日本血液製剤機構",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "500国際単位×1バイアル",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情、2025年1月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987867025328。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6343406X8108",
+          "product_name": "クロスエイトＭＣ静注用１０００単位",
+          "maker": "一般社団法人 日本血液製剤機構",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "1000国際単位×1バイアル",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情、2025年1月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987867025335。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6343406X9023",
+          "product_name": "クロスエイトＭＣ静注用２０００単位",
+          "maker": "一般社団法人 日本血液製剤機構",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "2000国際単位×1バイアル",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情、2025年1月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987867025342。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6343406Y1028",
+          "product_name": "クロスエイトＭＣ静注用３０００単位",
+          "maker": "一般社団法人 日本血液製剤機構",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "3000国際単位×1バイアル",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情、2025年1月のメーカー資料）",
+                "plans": [],
+                "note": "販売包装単位コード 14987867025366。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "供給再開と在庫が整うまでの出荷については2026年5月の案内に記載があります。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
