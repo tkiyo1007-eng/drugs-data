@@ -12222,6 +12222,597 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "メーカーは在庫消尽後の一時供給停止と、再開時期の別途案内を示しています。"
       ]
+    },
+    {
+      "id": "jg-lanthanum-od-discontinued-202509",
+      "maker": "日本ジェネリック",
+      "title": "炭酸ランタンOD錠250mg・500mg「JG」の販売中止と代替候補",
+      "url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/LANTHOD00_CHUUSHI_2509.pdf",
+      "announced_at": "2025-09",
+      "listed_at": "2025-09-19",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "8bad4f0bbcc96037277b457e415fe96647d7b349a607cab8483a5c9732103ee2",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "日本ジェネリックは対象のPTP100錠を在庫限りで販売中止と案内しました。2025年9月資料に具体的な理由の記載はありません。",
+      "targets": [
+        {
+          "yj_code": "2190029F3053",
+          "product_name": "炭酸ランタンＯＤ錠２５０ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792100636",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2025年12月見込み（2025年9月の資料）"
+                  }
+                ],
+                "note": "統一商品コード 792100636。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2190029F4050",
+          "product_name": "炭酸ランタンＯＤ錠５００ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792100643",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2025年11月見込み（2025年9月の資料）"
+                  }
+                ],
+                "note": "統一商品コード 792100643。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/LANTHOD00_CHUUSHI_2509.pdf",
+          "target_yj_codes": [
+            "2190029F3053"
+          ],
+          "type": "メーカーが各規格に対応して明記した「FCI」です。製造販売元は富士化学工業、販売元は日本ジェネリックです。",
+          "products": [
+            {
+              "name": "炭酸ランタンＯＤ錠２５０ｍｇ「ＦＣＩ」",
+              "maker": "富士化学工業",
+              "yj_code": "2190029F3070",
+              "scope": "PTP100錠（原文記載）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        },
+        {
+          "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/LANTHOD00_CHUUSHI_2509.pdf",
+          "target_yj_codes": [
+            "2190029F4050"
+          ],
+          "type": "メーカーが各規格に対応して明記した「FCI」です。製造販売元は富士化学工業、販売元は日本ジェネリックです。",
+          "products": [
+            {
+              "name": "炭酸ランタンＯＤ錠５００ｍｇ「ＦＣＩ」",
+              "maker": "富士化学工業",
+              "yj_code": "2190029F4076",
+              "scope": "PTP100錠（原文記載）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "2026年3月5日付の経過措置品目一覧にも、同じ代替品が記載されています。",
+        "保険請求の扱いは、最新の薬価基準・経過措置品目一覧をご確認ください。"
+      ]
+    },
+    {
+      "id": "hisamitsu-naboor-sr-discontinued-202607",
+      "maker": "久光製薬",
+      "title": "ナボールSRカプセル37.5の販売中止と代替候補",
+      "url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260703.pdf",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-03",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ee6851f2f5d75ee82fccf0d5abb80bee624df5647ee95c08da0b3e2f11cb2a70",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "久光製薬は在庫限りで販売中止と案内しました。2026年7月の資料に販売中止の具体的な理由の記載はありません。",
+      "targets": [
+        {
+          "yj_code": "1147002N1123",
+          "product_name": "ナボールＳＲカプセル３７．５",
+          "maker": "久光製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "188-49251-2",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月見込み（2026年7月の資料）"
+                  }
+                ],
+                "note": "統一商品コード 188-49251-2、販売包装単位コード 14987188492519。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/260703.pdf",
+          "target_yj_codes": [
+            "1147002N1123"
+          ],
+          "type": "メーカーが37.5mgの対象包装に対して明記した候補です。",
+          "products": [
+            {
+              "name": "ボルタレンＳＲカプセル３７．５ｍｇ",
+              "maker": "同仁医薬化工",
+              "yj_code": "1147002N1174",
+              "scope": "PTP100カプセル（統一商品コード 443328846）"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "経過措置期間は別途案内すると記載されています。"
+      ]
+    },
+    {
+      "id": "pfizer-mycobutin-limited-202609",
+      "maker": "ファイザー",
+      "title": "ミコブティンカプセル150mgの限定出荷案内",
+      "url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/MBT27Q001A.pdf",
+      "announced_at": "2026-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "f8c517da51e02ef5a0094d26ecb86d6a6f184685f9b32b335fc68c456e9de093",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "ファイザーは需要が予測を大きく上回り、製造計画と在庫を踏まえて、安全在庫を確保するまで新規採用を辞退すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "6169001M1026",
+          "product_name": "ミコブティンカプセル１５０ｍｇ",
+          "maker": "ファイザー",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "瓶100カプセル",
+              "unified_product_code": "114-05010-6",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "normal_shipment",
+                    "timing": "2027年6月予定（2026年9月資料）"
+                  }
+                ],
+                "status_text": "限定出荷（その他、9月のメーカー資料）",
+                "note": "統一商品コード 114-05010-6。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "pfizer-neomedrol-limited-202609",
+      "maker": "ファイザー",
+      "title": "ネオメドロールEE軟膏の限定出荷継続案内",
+      "url": "https://www.pfizermedicalinformation.jp/sites/default/files/announcement/NEM27Q002A.pdf",
+      "announced_at": "2026-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "7895e7b2d95f7032ccd5b63b3d40b113c06c4d1c3cb6e28d8a11a579456daab4",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "海外の原薬委託製造所で製造が遅れ、2026年4月に開始した限定出荷を在庫と製造計画を踏まえて続けると案内しています。",
+      "targets": [
+        {
+          "yj_code": "1319807M1025",
+          "product_name": "ネオメドロールＥＥ軟膏",
+          "maker": "ファイザー",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "3gチューブ×10本",
+              "unified_product_code": "114-94140-4",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "normal_shipment",
+                    "timing": "2027年中頃予定（2026年9月資料）"
+                  }
+                ],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 114-94140-4。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "通常出荷再開の見込みを、4月資料の2026年9月頃から変更しています。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "jg-zirumro-ld-limited-202608",
+      "maker": "日本ジェネリック",
+      "title": "ジルムロ配合錠LD「JG」の限定出荷案内",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1856",
+      "announced_at": "2026-08",
+      "listed_at": "2026-08-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "5609363d37267aca611c471d67d5f359dd2d175a1911dd11e7811a22c7db708a",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日本ジェネリックは供給能力を超える需要を受け、製造工場の生産上の事情から供給に支障が出るとして、LDのPTP100錠を限定出荷としました。",
+      "targets": [
+        {
+          "yj_code": "2149121F1030",
+          "product_name": "ジルムロ配合錠ＬＤ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792102685",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、8月のメーカー資料）",
+                "note": "統一商品コード 792102685。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "対象包装の限定出荷は2026年11月9日版の日本ジェネリック供給一覧にも記載されています。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "jg-voriconazole-limited-202608",
+      "maker": "日本ジェネリック",
+      "title": "ボリコナゾール錠50mg・100mg・200mg「JG」の限定出荷案内",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1859",
+      "announced_at": "2026-08",
+      "listed_at": "2026-08-20",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "efa8f817081cacb3a5c1c77bb8a6bad21beeae57f5296b196b000aacebcfe28f",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日本ジェネリックは他社の限定出荷の影響で自社の供給能力を超える需要を見込み、3規格のPTP50錠を限定出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "6179001F1040",
+          "product_name": "ボリコナゾール錠５０ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP50錠",
+              "unified_product_code": "792611347",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、8月のメーカー資料）",
+                "note": "統一商品コード 792611347。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6179001F3026",
+          "product_name": "ボリコナゾール錠１００ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP50錠",
+              "unified_product_code": "792611446",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、8月のメーカー資料）",
+                "note": "統一商品コード 792611446。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6179001F2046",
+          "product_name": "ボリコナゾール錠２００ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP50錠",
+              "unified_product_code": "792611545",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、8月のメーカー資料）",
+                "note": "統一商品コード 792611545。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "対象包装の限定出荷は2026年11月9日版の日本ジェネリック供給一覧にも記載されています。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "jg-arotinolol-limited-202406",
+      "maker": "日本ジェネリック",
+      "title": "アロチノロール塩酸塩錠5mg・10mg「JG」の限定出荷案内",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1572",
+      "announced_at": "2024-06",
+      "listed_at": "2024-06-10",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "97d0566d5d664e12b1d8cf8869c83a64376ad0ee371791a760f1aebdccf538cd",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "2024年6月のメーカー資料は、他社の限定出荷などで自社の供給力を上回る需要が見込まれたため、両規格を限定出荷とすると説明しています。",
+      "targets": [
+        {
+          "yj_code": "2123014F1108",
+          "product_name": "アロチノロール塩酸塩錠５ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792216115",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 792216115。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2123014F2210",
+          "product_name": "アロチノロール塩酸塩錠１０ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792216214",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、6月のメーカー資料）",
+                "note": "統一商品コード 792216214。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "対象包装の限定出荷は2026年11月9日版の日本ジェネリック供給一覧にも記載されています。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "jg-ketoconazole-cream-limited-202411",
+      "maker": "日本ジェネリック",
+      "title": "ケトコナゾールクリーム2％「JG」の限定出荷案内",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1692",
+      "announced_at": "2024-11",
+      "listed_at": "2024-11-28",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "00cd715327a34920ccc07938d48226eb5e4d8c0087e67018647c4b05cef3c50e",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "2024年11月のメーカー資料は、他社製品の限定出荷の影響などで需要が自社の供給力を上回ると見込んだと説明しています。",
+      "targets": [
+        {
+          "yj_code": "2655709N1070",
+          "product_name": "ケトコナゾールクリーム２％「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10gチューブ×10本",
+              "unified_product_code": "792214012",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 792214012。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "対象包装の限定出荷は2026年11月9日版の日本ジェネリック供給一覧にも記載されています。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "jg-ketoconazole-lotion-limited-202411",
+      "maker": "日本ジェネリック",
+      "title": "ケトコナゾールローション2％「JG」の限定出荷案内",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1691",
+      "announced_at": "2024-11",
+      "listed_at": "2024-11-28",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "b38fcc8d149659a524a8542a217e3e23945bd1980428ae1b010ffdd06eae10e9",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "2024年11月のメーカー資料は、他社製品の限定出荷の影響などで需要が自社の供給力を上回ると見込んだと説明しています。",
+      "targets": [
+        {
+          "yj_code": "2655709Q1068",
+          "product_name": "ケトコナゾールローション２％「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10gプラスチック容器×10本",
+              "unified_product_code": "792214111",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 792214111。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "対象包装の限定出荷は2026年11月9日版の日本ジェネリック供給一覧にも記載されています。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "jg-terbinafine-cream-limited-202507",
+      "maker": "日本ジェネリック",
+      "title": "テルビナフィン塩酸塩クリーム1％「JG」の限定出荷案内",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1768",
+      "announced_at": "2025-07",
+      "listed_at": "2025-07-24",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "7a1724e72e7e743434ed53d044d69b8ec2bdcde20f4f1460c5aa01e93b61793f",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "2025年7月のメーカー資料は、他社製品の限定出荷の影響などで需要が自社の供給力を上回ると見込んだと説明しています。",
+      "targets": [
+        {
+          "yj_code": "2659710N1187",
+          "product_name": "テルビナフィン塩酸塩クリーム１％「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10g×10本",
+              "unified_product_code": "792214210",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、7月のメーカー資料）",
+                "note": "統一商品コード 792214210。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "対象包装の限定出荷は2026年11月9日版の日本ジェネリック供給一覧にも記載されています。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
