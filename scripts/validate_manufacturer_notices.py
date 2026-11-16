@@ -33,6 +33,7 @@ MAKER_HOSTS = {
     '岩城製薬': 'www.iwakiseiyaku.co.jp',
     '杏林製薬': 'www.kyorin-pharm.co.jp',
     'キョーリンリメディオ': 'www.med.kyorin-rmd.com',
+    'あすか製薬': 'www.aska-pharma.co.jp',
     '久光製薬': 'www.hisamitsu-pharm.jp',
     '日本ベーリンガーインゲルハイム': 'www.bij-kusuri.jp',
     '日本ジェネリック': 'medical.nihon-generic.co.jp',
@@ -67,6 +68,9 @@ MAKER_MANUAL_SOURCE_HOSTS = {
 }
 # Exact copies of manufacturer-authored notices hosted by public institutions.
 MAKER_MANUAL_SOURCE_URLS = {
+    'サンド': {
+        'https://www.jrs.or.jp/information/file/3393d536942bdd85d8d84103c5d69b6e1dc48fc4.pdf',
+    },
     'ファイザー': {
         'https://www.j-endo.jp/uploads/files/news/20250617-12.pdf',
         'https://www.kansensho.or.jp/uploads/files/news/gakkai/gakkai_230721_2.pdf',
