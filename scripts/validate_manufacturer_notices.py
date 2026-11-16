@@ -48,6 +48,7 @@ MAKER_HOSTS = {
     'オルガノン': 'organonpro.com',
     'サノフィ': 'www.e-mr.sanofi.co.jp',
     'トーアエイヨー': 'med.toaeiyo.co.jp',
+    '吉田製薬': 'www.yoshida-pharm.co.jp',
     'テイカ製薬': 'teika-products.jp',
     'MSD': 'www.msdconnect.jp',
     'アルフレッサ ファーマ': 'www.alfresa-pharma.co.jp',

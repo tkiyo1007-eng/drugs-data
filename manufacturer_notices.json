@@ -43482,6 +43482,515 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "teika-bimatoprost-restart-and-limited-202504",
+      "maker": "テイカ製薬",
+      "title": "ビマトプロスト点眼液0.03％「TS」 出荷再開後の限定出荷",
+      "url": "https://teika-products.jp/upFiles/1745211164.pdf",
+      "announced_at": "2025-04",
+      "listed_at": "2025-04-21",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "758be8e7bc12cc774387919d04e938dc63bc0d8cdc50fb7c1d585dc424929802",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "2025年3月に製造の遅れで供給が停止しました。テイカ製薬は4月21日から出荷を再開しましたが、一度に大量の注文を受けにくいため、出荷量を通常としながら限定出荷にすると案内しました。",
+      "targets": [
+        {
+          "yj_code": "1319757Q1043",
+          "product_name": "ビマトプロスト点眼液０．０３％「ＴＳ」",
+          "maker": "テイカ製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "2.5mL×5本",
+              "unified_product_code": "399027473",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、4月のメーカー資料）",
+                "note": "統一商品コード 399027473、販売包装単位コード 14987399027470。"
+              }
+            },
+            {
+              "package": "2.5mL×10本",
+              "unified_product_code": "399027480",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、4月のメーカー資料）",
+                "note": "統一商品コード 399027480、販売包装単位コード 14987399027487。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "再開時の案内です。5本包装は、後の2026年7月第3報で在庫消尽が確認されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "teika-bimatoprost-5-pack-depletion-202607",
+      "maker": "テイカ製薬",
+      "title": "ビマトプロスト点眼液0.03％「TS」 5本包装の在庫消尽と販売継続包装",
+      "url": "https://teika-products.jp/upFiles/1782948950.pdf",
+      "announced_at": "2026-07",
+      "listed_at": "2026-07-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "e9ec245654a1999c1ca03341ce3302860900ad9106da339923870ca4bd65cf0c",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "テイカ製薬は、3月に販売中止を案内した2.5mL×5本が在庫消尽となり、2.5mL×10本を販売継続包装として示しました。",
+      "targets": [
+        {
+          "yj_code": "1319757Q1043",
+          "product_name": "ビマトプロスト点眼液０．０３％「ＴＳ」",
+          "maker": "テイカ製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "2.5mL×5本",
+              "unified_product_code": "399027473",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "在庫消尽済み（2026年7月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 399027473。"
+              }
+            },
+            {
+              "package": "2.5mL×10本",
+              "unified_product_code": "399027480",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 399027480。 2026年7月の案内にある販売継続包装です。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://teika-products.jp/upFiles/1782948950.pdf",
+          "target_yj_codes": [
+            "1319757Q1043"
+          ],
+          "type": "メーカーが示した同一製品の販売継続包装",
+          "products": [
+            {
+              "name": "ビマトプロスト点眼液０．０３％「ＴＳ」",
+              "maker": "テイカ製薬",
+              "yj_code": "1319757Q1043",
+              "scope": "販売中止対象の2.5mL×5本に対するメーカー案内。販売継続包装は2.5mL×10本（399027480）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "10本包装の統一商品コードは2025年4月のメーカー資料で照合しました。販売継続の記載から受注・在庫は判断できません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "yoshida-katiri-packs-202611",
+      "maker": "吉田製薬",
+      "title": "カチリ「ヨシダ」50g・500gの出荷対応",
+      "url": "https://www.yoshida-pharm.co.jp/files/information/653.pdf",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-16",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "74c8753dac9dd7d3893a4d7701c989f263dcc5e2c4edd607fa529c258f72d431",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "吉田製薬の11月16日一覧では、50gは在庫消尽後に一時供給停止予定で、500gは限定出荷です。",
+      "targets": [
+        {
+          "yj_code": "2649804X1206",
+          "product_name": "カチリ「ヨシダ」",
+          "maker": "吉田製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "50g",
+              "unified_product_code": "288750116",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月中旬の見込み（2026年11月16日一覧）"
+                  },
+                  {
+                    "event": "shipment_resumption",
+                    "timing": "2027年1月中旬の見込み（2026年10月のメーカー資料）"
+                  }
+                ],
+                "status_text": "限定出荷。在庫消尽後に一時供給停止予定（2026年11月16日一覧）",
+                "note": "統一商品コード 288750116、販売包装単位コード 14987288750113。"
+              }
+            },
+            {
+              "package": "500g",
+              "unified_product_code": "288750253",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、11月のメーカー資料）",
+                "note": "統一商品コード 288750253、販売包装単位コード 14987288750250。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "停止と再開の実施日は未確認です。500gの出荷制限にこの設備の影響があるかは資料に記載されていません。",
+        "50gの設備不具合と再開見込みは2026年10月の個別案内に基づきます。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "yoshida-katiri-equipment-202610",
+      "maker": "吉田製薬",
+      "title": "カチリ「ヨシダ」50g 生産設備の不具合に伴う一時供給停止予定",
+      "url": "https://www.yoshida-pharm.co.jp/files/information/651.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-28",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "439b95fef8577d09fa46f4c520bbaec64c6f03db8eaac2184ca21e2e9707aeb3",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "生産設備の不具合への対応が必要となり、計画どおりの生産が難しくなったため、吉田製薬は50gの在庫消尽後の一時供給停止を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2649804X1206",
+          "product_name": "カチリ「ヨシダ」",
+          "maker": "吉田製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "50g",
+              "unified_product_code": "288750116",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "shipment_resumption",
+                    "timing": "2027年1月中旬の見込み（2026年10月のメーカー資料）"
+                  }
+                ],
+                "note": "統一商品コード 288750116、販売包装単位コード 14987288750113。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "対象は50gです。500gは限定出荷を継続するとの案内です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "yoshida-zinc-ointment-packs-202611",
+      "maker": "吉田製薬",
+      "title": "亜鉛華軟膏・亜鉛華（10％）単軟膏「ヨシダ」 出荷調整品一覧",
+      "url": "https://www.yoshida-pharm.co.jp/files/information/653.pdf",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-16",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "74c8753dac9dd7d3893a4d7701c989f263dcc5e2c4edd607fa529c258f72d431",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "吉田製薬は、対象包装の出荷量を通常としつつ、他社品の影響による限定出荷と記載しています。具体的な事情や解除予定は示されていません。",
+      "targets": [
+        {
+          "yj_code": "2649704M1180",
+          "product_name": "亜鉛華軟膏「ヨシダ」",
+          "maker": "吉田製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "500g",
+              "unified_product_code": "288730255",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 288730255。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2649710M2092",
+          "product_name": "亜鉛華（１０％）単軟膏「ヨシダ」",
+          "maker": "吉田製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "50g",
+              "unified_product_code": "288731108",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 288731108。"
+              }
+            },
+            {
+              "package": "500g",
+              "unified_product_code": "288731252",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、11月のメーカー資料）",
+                "note": "統一商品コード 288731252。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "towa-famo10-resumption-history-202511",
+      "maker": "東和薬品",
+      "title": "ファモチジン注射液10mg「トーワ」 出荷再開時の限定出荷",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=81345&t=4&f=%E3%83%95%E3%82%A1%E3%83%A2%E3%83%81%E3%82%B8%E3%83%B3%E6%B3%A8%E5%B0%84%E6%B6%B210mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D+_%E5%87%BA%E8%8D%B7%E5%86%8D%E9%96%8B%EF%BC%86%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E7%B6%99%E7%B6%9A%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2025-11",
+      "listed_at": "2025-11-27",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "7d7bb83ce6ebba70361ce4fc2e0b3528ff110086808339bd0e8de982cba7f47d",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "東和薬品は、一時停止後に出荷を再開しましたが、当時は在庫が十分に確保できず、安定供給の体制を整えるまで限定出荷を続けると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2325401A1039",
+          "product_name": "ファモチジン注射液１０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5管",
+              "unified_product_code": "155156133",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、11月のメーカー資料）",
+                "note": "統一商品コード 155156133。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2025年の出荷再開時の対象包装と当時の理由です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "towa-famo20-resumption-history-202510",
+      "maker": "東和薬品",
+      "title": "ファモチジン注射液20mg「トーワ」 出荷再開時の限定出荷",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=81287&t=4&f=%E3%83%95%E3%82%A1%E3%83%A2%E3%83%81%E3%82%B8%E3%83%B3%E6%B3%A8%E5%B0%84%E6%B6%B220mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D+_%E5%87%BA%E8%8D%B7%E5%86%8D%E9%96%8B%EF%BC%86%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E7%B6%99%E7%B6%9A%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2025-10",
+      "listed_at": "2025-10-29",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "96d1363511dcd184aa7d55aa50416325b9b4a23f0702caaefc4d504370d97f81",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "東和薬品は、一時停止後に出荷を再開しましたが、当時は在庫が十分に確保できず、安定供給の体制を整えるまで限定出荷を続けると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2325401A2035",
+          "product_name": "ファモチジン注射液２０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10管",
+              "unified_product_code": "155156140",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、10月のメーカー資料）",
+                "note": "統一商品コード 155156140。"
+              }
+            },
+            {
+              "package": "50管",
+              "unified_product_code": "155156157",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、10月のメーカー資料）",
+                "note": "統一商品コード 155156157。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2025年の出荷再開時の対象包装と当時の理由です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "towa-furr-resumption-history-202509",
+      "maker": "東和薬品",
+      "title": "フルスルチアミン静注50mg「トーワ」 出荷再開時の限定出荷",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=81054&t=4&f=%E3%83%95%E3%83%AB%E3%82%B9%E3%83%AB%E3%83%81%E3%82%A2%E3%83%9F%E3%83%B3%E9%9D%99%E6%B3%A850mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%87%BA%E8%8D%B7%E5%86%8D%E9%96%8B%EF%BC%86%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E7%B6%99%E7%B6%9A%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2025-09",
+      "listed_at": "2025-09-04",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "f8db5be39541512c40552f3a9aed44b143b7d63cf6d873531582e651eceb21b8",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "東和薬品は、一時停止後に出荷を再開しましたが、当時は在庫が十分に確保できず、安定供給の体制を整えるまで限定出荷を続けると案内しました。",
+      "targets": [
+        {
+          "yj_code": "3122401A4153",
+          "product_name": "フルスルチアミン静注５０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "20mL×10管",
+              "unified_product_code": "155092127",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 155092127。"
+              }
+            },
+            {
+              "package": "20mL×50管",
+              "unified_product_code": "155092134",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、9月のメーカー資料）",
+                "note": "統一商品コード 155092134。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2025年の出荷再開時の対象包装と当時の理由です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "towa-flusultiamine-equipment-stop-202507",
+      "maker": "東和薬品",
+      "title": "フルスルチアミン静注50mg「トーワ」 一時停止の経緯",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80801&t=4&f=20250723_%E3%83%95%E3%83%AB%E3%82%B9%E3%83%AB%E3%83%81%E3%82%A2%E3%83%9F%E3%83%B3%E9%9D%99%E6%B3%A850mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%87%BA%E8%8D%B7%E5%81%9C%E6%AD%A2%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%8A%E8%A9%AB%E3%81%B3%E3%81%A8%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2025-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "2d78f6d9c94f5d494dff2b77dc0450bfd3632b38c0115dc6aae44b06ae92d66f",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "アンプル製剤の製造ラインが一時的に稼働を停止し、東和薬品は2025年7月に対象包装の在庫が尽き次第、出荷を一時停止すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "3122401A4153",
+          "product_name": "フルスルチアミン静注５０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "20mL×10管",
+              "unified_product_code": "155092127",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155092127。"
+              }
+            },
+            {
+              "package": "20mL×50管",
+              "unified_product_code": "155092134",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155092134。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2025年9月の資料で出荷再開が案内されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
