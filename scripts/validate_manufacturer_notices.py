@@ -72,9 +72,19 @@ MAKER_MANUAL_SOURCE_HOSTS = {
     'ロートニッテン': ('www.rohto-nitten.co.jp',),
     # This notice identifies the distributor's packaging and product code.
     'ロートニッテンファーマ': ('www.rohto-nitten.co.jp',),
+    '田辺ファーマ': ('medical.tanabe-pharma.com',),
 }
-# Exact copies of manufacturer-authored notices hosted by public institutions.
+# Specific manufacturer and distributor notices hosted outside the primary company domain.
 MAKER_MANUAL_SOURCE_URLS = {
+    '日本薬品工業': {
+        'https://www.nc-medical.com/product_topics/f4bj0h000000es1m-att/f4bj0h000000es2a.pdf',
+    },
+    'ダイト': {
+        'https://www.feldsenfpharma.co.jp/dcms_media/other/%E3%83%86%E3%83%A2%E3%82%AB%E3%83%97%E3%83%AA%E3%83%AB%E3%80%8C%E3%83%95%E3%82%A7%E3%83%AB%E3%82%BC%E3%83%B3%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2.pdf',
+    },
+    'JCRファーマ': {
+        'https://med.kissei.co.jp/information/info122.pdf',
+    },
     '阪大微生物病研究会': {
         'https://www.jpa-web.org/dcms_media/other/02_jebik-v-genteishukka_biken_260512.pdf',
     },
