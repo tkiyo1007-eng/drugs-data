@@ -25773,6 +25773,751 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "kyorin-rimedio-toaraset-limited-202610",
+      "maker": "キョーリンリメディオ",
+      "title": "トアラセット配合錠「杏林」 限定出荷のご案内",
+      "url": "https://www.med.kyorin-rmd.com/news/pdf/2026/261029genteisyukka.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-29",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "9faa181e35d51e752a90bf585fec4a503f95b60f3510a9813747fb9f6c1d4bb4",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の供給の影響で安定供給に支障が出る見通しとなったため、キョーリンリメディオは対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "1149117F1144",
+          "product_name": "トアラセット配合錠「杏林」",
+          "maker": "キョーリンリメディオ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "060308399",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 060308399、販売包装単位コード 14987060308396。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "060308405",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 060308405、販売包装単位コード 14987060308402。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文の限定出荷開始日は2026年11月6日です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "kyorin-rimedio-famotidine-iv-limited-202610",
+      "maker": "キョーリンリメディオ",
+      "title": "ファモチジン静注10mg・20mg「杏林」 限定出荷のご案内",
+      "url": "https://www.med.kyorin-rmd.com/news/pdf/2026/261019genteisyukka.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-19",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "5d048fb245a53ff7cd940bc4613cf70967a1815746f111e3bb4c4f56b00388c7",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の供給の影響で安定供給に支障が出る見通しとなったため、キョーリンリメディオは対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2325401A4046",
+          "product_name": "ファモチジン静注１０ｍｇ「杏林」",
+          "maker": "キョーリンリメディオ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10mL×10管",
+              "unified_product_code": "060306111",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 060306111、販売包装単位コード 14987060306118。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2325401A3040",
+          "product_name": "ファモチジン静注２０ｍｇ「杏林」",
+          "maker": "キョーリンリメディオ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "20mL×10管",
+              "unified_product_code": "060306128",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 060306128、販売包装単位コード 14987060306125。"
+              }
+            },
+            {
+              "package": "20mL×50管",
+              "unified_product_code": "060306135",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、10月のメーカー資料）",
+                "note": "統一商品コード 060306135、販売包装単位コード 14987060306132。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文の限定出荷開始日は2026年10月23日です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "kyorin-rimedio-mirtazapine15-limited-202610",
+      "maker": "キョーリンリメディオ",
+      "title": "ミルタザピン錠15mg「杏林」 限定出荷のご案内",
+      "url": "https://www.med.kyorin-rmd.com/news/pdf/2026/261008genteisyukka.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "5fb771ed32b265778cedfb345a0f47986c99050d864e7ed941ec4425dbab6c3b",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造に遅れが生じ、安定供給に支障が出る見通しとなったため、キョーリンリメディオが15mgの3包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "1179051F1100",
+          "product_name": "ミルタザピン錠１５ｍｇ「杏林」",
+          "maker": "キョーリンリメディオ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "060308429",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、10月のメーカー資料）",
+                "note": "統一商品コード 060308429、販売包装単位コード 14987060308426。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "060308436",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、10月のメーカー資料）",
+                "note": "統一商品コード 060308436、販売包装単位コード 14987060308433。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "060308450",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、10月のメーカー資料）",
+                "note": "統一商品コード 060308450、販売包装単位コード 14987060308457。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文の限定出荷開始日は2026年10月15日です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "kyorin-rimedio-rabeprazole10-limited-202604",
+      "maker": "キョーリンリメディオ",
+      "title": "ラベプラゾールNa錠10mg「杏林」 限定出荷のご案内",
+      "url": "https://www.med.kyorin-rmd.com/news/pdf/2026/260423genteisyukka.pdf",
+      "announced_at": "2026-04",
+      "listed_at": "2026-04-23",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "4be33c24536f9ca3b077254675a8bf184f610ce617f231f2ca246dcaf69b0c85",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の供給の影響で安定供給に支障が出る見通しとなったため、キョーリンリメディオは対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2329028F1082",
+          "product_name": "ラベプラゾールＮａ錠１０ｍｇ「杏林」",
+          "maker": "キョーリンリメディオ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "060303776",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、4月のメーカー資料）",
+                "note": "統一商品コード 060303776、販売包装単位コード 14987060303773。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "060303783",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、4月のメーカー資料）",
+                "note": "統一商品コード 060303783、販売包装単位コード 14987060303780。"
+              }
+            },
+            {
+              "package": "バラ100錠",
+              "unified_product_code": "060303790",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、4月のメーカー資料）",
+                "note": "統一商品コード 060303790、販売包装単位コード 14987060303797。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文の限定出荷開始日は2026年5月7日です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "kyorin-rimedio-simvastatin10-limited-202604",
+      "maker": "キョーリンリメディオ",
+      "title": "シンバスタチン錠10mg「杏林」 限定出荷のご案内",
+      "url": "https://www.med.kyorin-rmd.com/news/pdf/2026/260408genteisyukka.pdf",
+      "announced_at": "2026-04",
+      "listed_at": "2026-04-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "1e8b4af26e146d21d0785da5a7390d7149a9661fd05eed2d42354d771910cf09",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "想定を超える需要があり、安定供給に支障が出るおそれがあるため、キョーリンリメディオは対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2189011F2234",
+          "product_name": "シンバスタチン錠１０ｍｇ「杏林」",
+          "maker": "キョーリンリメディオ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "060307330",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、4月のメーカー資料）",
+                "note": "統一商品コード 060307330、販売包装単位コード 14987060307337。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文の限定出荷開始日は2026年4月13日です。",
+        "同じ包装には2026年9月の製造販売中止資料があります。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "kyorin-rimedio-mexiletine-limited-202509",
+      "maker": "キョーリンリメディオ",
+      "title": "メキシレチン塩酸塩錠50mg・100mg「杏林」 限定出荷のご案内",
+      "url": "https://www.med.kyorin-rmd.com/news/pdf/2025/250910genteisyukka.pdf",
+      "announced_at": "2025-09",
+      "listed_at": "2025-09-11",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "a44599697097e43d8287fb793ca1acdf07bf1bdaca0554bed614752ecc13716b",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の供給の影響で安定供給に支障が出る見通しとなったため、キョーリンリメディオは対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2129003F1049",
+          "product_name": "メキシレチン塩酸塩錠５０ｍｇ「杏林」",
+          "maker": "キョーリンリメディオ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "060305084",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、9月のメーカー資料）",
+                "note": "統一商品コード 060305084、販売包装単位コード 14987060305081。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2129003F2045",
+          "product_name": "メキシレチン塩酸塩錠１００ｍｇ「杏林」",
+          "maker": "キョーリンリメディオ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "060305107",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、9月のメーカー資料）",
+                "note": "統一商品コード 060305107、販売包装単位コード 14987060305104。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文の限定出荷開始日は2025年9月19日です。",
+        "同じ包装には2026年9月の製造販売中止資料があります。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "kyorin-rimedio-simva10-discontinued-202609",
+      "maker": "キョーリンリメディオ",
+      "title": "シンバスタチン錠10mg「杏林」 製造販売中止のご案内",
+      "url": "https://www.med.kyorin-rmd.com/news/pdf/2026/260917chushi.pdf",
+      "announced_at": "2026-09",
+      "listed_at": "2026-09-17",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "0ac9ed5cf2c22e5a2fc9e2236ce49f5623805ebfee01e544cce11e8e765be941",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "キョーリンリメディオはPTP100錠を流通在庫切れで製造販売終了と案内しました。原文の流通在庫切れ見込みは2027年9月です。",
+      "targets": [
+        {
+          "yj_code": "2189011F2234",
+          "product_name": "シンバスタチン錠１０ｍｇ「杏林」",
+          "maker": "キョーリンリメディオ",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "060307330",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年9月（2026年9月のメーカー資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 060307330、販売包装単位コード 14987060307337。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.med.kyorin-rmd.com/news/pdf/2026/260917chushi.pdf",
+          "target_yj_codes": [
+            "2189011F2234"
+          ],
+          "type": "メーカーが製造販売中止に伴い案内した代替品",
+          "products": [
+            {
+              "name": "シンバスタチン錠１０ｍｇ「ＳＷ」",
+              "maker": "メディサ新薬",
+              "yj_code": "2189011F2170",
+              "scope": "この規格のPTP100錠の製造販売中止に対する案内。メディサ新薬製造販売、沢井製薬発売。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "経過措置期間満了は2028年3月末の見込みと案内されています。",
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "kyorin-rimedio-mexiletine50-discontinued-202609",
+      "maker": "キョーリンリメディオ",
+      "title": "メキシレチン塩酸塩錠50mg「杏林」 製造販売中止のご案内",
+      "url": "https://www.med.kyorin-rmd.com/news/pdf/2026/260917chushi.pdf",
+      "announced_at": "2026-09",
+      "listed_at": "2026-09-17",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "0ac9ed5cf2c22e5a2fc9e2236ce49f5623805ebfee01e544cce11e8e765be941",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "キョーリンリメディオはPTP100錠を流通在庫切れで製造販売終了と案内しました。原文の流通在庫切れ見込みは2026年12月です。",
+      "targets": [
+        {
+          "yj_code": "2129003F1049",
+          "product_name": "メキシレチン塩酸塩錠５０ｍｇ「杏林」",
+          "maker": "キョーリンリメディオ",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "060305084",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年12月（2026年9月のメーカー資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 060305084、販売包装単位コード 14987060305081。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.med.kyorin-rmd.com/news/pdf/2026/260917chushi.pdf",
+          "target_yj_codes": [
+            "2129003F1049"
+          ],
+          "type": "メーカーが製造販売中止に伴い案内した代替品",
+          "products": [
+            {
+              "name": "メキシレチン塩酸塩錠５０ｍｇ「ＫＣＣ」",
+              "maker": "キョーリンリメディオ",
+              "yj_code": "2129003F1057",
+              "scope": "この規格のPTP100錠の製造販売中止に対する案内。キョーリンリメディオ製造販売、杏林製薬販売。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "経過措置期間満了は2028年3月末の見込みと案内されています。",
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "kyorin-rimedio-mexiletine100-discontinued-202609",
+      "maker": "キョーリンリメディオ",
+      "title": "メキシレチン塩酸塩錠100mg「杏林」 製造販売中止のご案内",
+      "url": "https://www.med.kyorin-rmd.com/news/pdf/2026/260917chushi.pdf",
+      "announced_at": "2026-09",
+      "listed_at": "2026-09-17",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "0ac9ed5cf2c22e5a2fc9e2236ce49f5623805ebfee01e544cce11e8e765be941",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "キョーリンリメディオはPTP100錠を流通在庫切れで製造販売終了と案内しました。原文の流通在庫切れ見込みは2027年1月です。",
+      "targets": [
+        {
+          "yj_code": "2129003F2045",
+          "product_name": "メキシレチン塩酸塩錠１００ｍｇ「杏林」",
+          "maker": "キョーリンリメディオ",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "060305107",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年1月（2026年9月のメーカー資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 060305107、販売包装単位コード 14987060305104。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.med.kyorin-rmd.com/news/pdf/2026/260917chushi.pdf",
+          "target_yj_codes": [
+            "2129003F2045"
+          ],
+          "type": "メーカーが製造販売中止に伴い案内した代替品",
+          "products": [
+            {
+              "name": "メキシレチン塩酸塩錠１００ｍｇ「ＫＣＣ」",
+              "maker": "キョーリンリメディオ",
+              "yj_code": "2129003F2053",
+              "scope": "この規格のPTP100錠の製造販売中止に対する案内。キョーリンリメディオ製造販売、杏林製薬販売。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "経過措置期間満了は2028年3月末の見込みと案内されています。",
+        "在庫消尽時期は資料発表時点の見込みです。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "kyorin-rimedio-riboflavin-butyrate-limited-202508",
+      "maker": "キョーリンリメディオ",
+      "title": "リボフラビン酪酸エステル錠20mg「杏林」 限定出荷のご案内",
+      "url": "https://www.med.kyorin-rmd.com/news/pdf/2025/250818genteisyukka.pdf",
+      "announced_at": "2025-08",
+      "listed_at": "2025-08-19",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "7a078c1ed9d980e8f1e3e1731ffcf568f8766b7368ab1f5d1a8f5445d43d30bc",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "想定を超える需要があり、安定供給に支障が出るおそれがあるため、キョーリンリメディオは対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3131002F1330",
+          "product_name": "リボフラビン酪酸エステル錠２０ｍｇ「杏林」",
+          "maker": "キョーリンリメディオ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "060307354",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、8月のメーカー資料）",
+                "note": "統一商品コード 060307354、販売包装単位コード 14987060307351。"
+              }
+            },
+            {
+              "package": "PTP1200錠",
+              "unified_product_code": "060307361",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、8月のメーカー資料）",
+                "note": "統一商品コード 060307361、販売包装単位コード 14987060307368。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文の限定出荷開始日は2025年8月26日です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "kyorin-rimedio-cyanocobalamin-eye-limited-202505",
+      "maker": "キョーリンリメディオ",
+      "title": "シアノコバラミン点眼液0.02％「杏林」 限定出荷のご案内",
+      "url": "https://www.med.kyorin-rmd.com/news/pdf/2025/250520genteisyukka.pdf",
+      "announced_at": "2025-05",
+      "listed_at": "2025-05-20",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ed8bbda71102a4c6e3b7e3ed590a3673f32a8c4ea0f8adf195818abf1eda5d77",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の供給の影響で安定供給に支障が出る見通しとなったため、キョーリンリメディオは対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "1319710Q2108",
+          "product_name": "シアノコバラミン点眼液０．０２％「杏林」",
+          "maker": "キョーリンリメディオ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×10本",
+              "unified_product_code": "060307415",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、5月のメーカー資料）",
+                "note": "統一商品コード 060307415、販売包装単位コード 14987060307412。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文の限定出荷開始日は2025年5月27日です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "kyorin-rimedio-levocetirizine-levo-bulk-limited-202602",
+      "maker": "キョーリンリメディオ",
+      "title": "レボセチリジン塩酸塩DS0.5％「杏林」 バラ100g 限定出荷のご案内",
+      "url": "https://www.med.kyorin-rmd.com/news/pdf/2026/260205genteisyukka.pdf",
+      "announced_at": "2026-02",
+      "listed_at": "2026-02-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "8e263bf47040065084aa20e46a542aa07111e50be850e7ea2792a33d98f692fc",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の供給の影響で安定供給に支障が出る見通しとなったため、キョーリンリメディオは対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "4490028R1040",
+          "product_name": "レボセチリジン塩酸塩ＤＳ０．５％「杏林」",
+          "maker": "キョーリンリメディオ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "バラ100g",
+              "unified_product_code": "060309426",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2月のメーカー資料）",
+                "note": "統一商品コード 060309426、販売包装単位コード 14987060309423。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文の限定出荷開始日は2026年2月13日です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "kyorin-rimedio-levocetirizine-levo-pack-limited-202603",
+      "maker": "キョーリンリメディオ",
+      "title": "レボセチリジン塩酸塩DS0.5％「杏林」 0.5g×100包 限定出荷のご案内",
+      "url": "https://www.med.kyorin-rmd.com/news/pdf/2026/260306genteisyukka.pdf",
+      "announced_at": "2026-03",
+      "listed_at": "2026-03-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "7e3b2692e5ee27da7567d3e33cb3665ec4db943e8d781467373c9013e274ac6f",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の供給の影響で安定供給に支障が出る見通しとなったため、キョーリンリメディオは対象包装の限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "4490028R1040",
+          "product_name": "レボセチリジン塩酸塩ＤＳ０．５％「杏林」",
+          "maker": "キョーリンリメディオ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "0.5g×100包",
+              "unified_product_code": "060309419",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、3月のメーカー資料）",
+                "note": "統一商品コード 060309419、販売包装単位コード 14987060309416。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文の限定出荷開始日は2026年3月13日です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
