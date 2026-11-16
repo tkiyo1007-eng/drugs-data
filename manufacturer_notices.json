@@ -43418,6 +43418,70 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "aska-enarmon-depot-ingredient-202411",
+      "maker": "あすか製薬",
+      "title": "エナルモンデポー筋注125mg・250mg 原薬の追加承認と供給について",
+      "url": "https://jspe.umin.jp/pdf/news_250901.pdf",
+      "announced_at": "2024-11",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "1c2e3da5843411486a0b9c399beb4246d641696b36ed56c3e8b5f8638a98d71d",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "あすか製薬は、原薬を追加する申請が承認され、追加した原薬で製造を進めると報告しました。安定供給の準備が整うまで、両規格の10管包装は限定出荷を続けるとしていました。",
+      "targets": [
+        {
+          "yj_code": "2461400A1079",
+          "product_name": "エナルモンデポー筋注１２５ｍｇ",
+          "maker": "あすか製薬",
+          "scope": "package",
+          "source_pages": [
+            3
+          ],
+          "packages": [
+            {
+              "package": "10管",
+              "unified_product_code": "123-15082-8",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、11月のメーカー資料）",
+                "note": "統一商品コード 123-15082-8。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2461400A2091",
+          "product_name": "エナルモンデポー筋注２５０ｍｇ",
+          "maker": "あすか製薬",
+          "scope": "package",
+          "source_pages": [
+            3
+          ],
+          "packages": [
+            {
+              "package": "10管",
+              "unified_product_code": "123-15083-5",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、11月のメーカー資料）",
+                "note": "統一商品コード 123-15083-5。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2024年11月の経緯です。厚労省11月16日版の品目区分・理由は「他社品の影響・需要増」です。",
+        "同じPDFの1〜2ページは富士製薬工業の別資料です。あすか製薬の対象包装と候補の記載有無は3ページで確認しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }

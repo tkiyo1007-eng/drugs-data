@@ -99,6 +99,7 @@ MAKER_MANUAL_SOURCE_HOSTS = {
 }
 # Specific manufacturer and distributor notices hosted outside the primary company domain.
 MAKER_MANUAL_SOURCE_URLS = {
+    'あすか製薬': {'https://jspe.umin.jp/pdf/news_250901.pdf'},
     'ビーブランド・メディコーデンタル': {'https://medical.nihon-generic.co.jp/uploadfiles/news/JG_product_list.pdf'},
     '全星薬品工業': {
         'https://med.daiichisankyo-ep.co.jp/information/files/1876/%E3%82%A2%E3%82%B8%E3%82%B9%E3%83%AD%E3%83%9E%E3%82%A4%E3%82%B7%E3%83%B3%E9%8C%A0250mg%E3%80%8CDSEP%E3%80%8D%20%20%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B20240312.pdf',
