@@ -53,6 +53,8 @@ MAKER_HOSTS = {
     '武田薬品工業': 'www.takedamed.com',
     '大原薬品工業': 'www.ohara-ch.co.jp',
     'サンファーマ': 'jp.sunpharma.com',
+    'ヴィアトリス・ヘルスケア合同会社': 'www.viatris-e-channel.com',
+    'ヴィアトリス製薬合同会社': 'www.viatris-e-channel.com',
 }
 MAKER_MANUAL_SOURCE_HOSTS = {
     '富士製薬工業': ('www.fujipharma.jp',),
