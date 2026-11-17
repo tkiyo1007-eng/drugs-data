@@ -50056,6 +50056,264 @@
       "cautions": [
         "2023年の一部包装販売中止の理由です。現行の限定出荷の具体的な製造トラブルは、この案内では確認できません。"
       ]
+    },
+    {
+      "id": "sawai-telamuro-ap-ptp140-discontinuation-202305",
+      "maker": "沢井製薬",
+      "title": "テラムロ配合錠AP「サワイ」PTP140錠の販売中止と当時の別包装",
+      "url": "https://med.sawai.co.jp/file/pr28_4577_1.pdf",
+      "announced_at": "2023-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "19b0656530a0e59dd0774743cdd4e8c417fef7a4dc146b1380bc14de96900c17",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "listed_at": "2023-05-09",
+      "source_index_url": "https://med.sawai.co.jp/preview.php?prodid=4577",
+      "reason": "沢井製薬は注文に十分対応できない状況を踏まえ、安定供給と生産効率改善のため、2021年11月に一時停止を案内したPTP140錠を販売中止としました。2023年5月の原文で在庫消尽済みとしています。",
+      "targets": [
+        {
+          "yj_code": "2149117F1050",
+          "product_name": "テラムロ配合錠ＡＰ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "080132776",
+              "gs1_sales": "(01)14987080132773",
+              "supply": {
+                "status": "stopped",
+                "status_text": "販売中止・在庫消尽済み（2023年5月の案内）",
+                "plans": [],
+                "note": "統一商品コード080132776、販売包装単位コード14987080132773。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080132714",
+              "gs1_sales": "(01)14987080132711",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "販売継続と案内（2023年5月時点）。統一商品コード080132714。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "080132721",
+              "gs1_sales": "(01)14987080132728",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "販売継続と案内（2023年5月時点）。統一商品コード080132721。"
+              }
+            },
+            {
+              "package": "バラ100錠",
+              "unified_product_code": "080132745",
+              "gs1_sales": "(01)14987080132742",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "販売継続と案内（2023年5月時点）。統一商品コード080132745。"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "type": "沢井製薬がPTP140錠の採用先に案内した同じAP規格の別包装",
+          "source_url": "https://med.sawai.co.jp/file/pr28_4577_1.pdf",
+          "target_yj_codes": [
+            "2149117F1050"
+          ],
+          "products": [
+            {
+              "name": "テラムロ配合錠ＡＰ「サワイ」",
+              "maker": "沢井製薬",
+              "scope": "PTP100錠（統一商品コード080132714、販売包装単位コード14987080132711）"
+            },
+            {
+              "name": "テラムロ配合錠ＡＰ「サワイ」",
+              "maker": "沢井製薬",
+              "scope": "PTP500錠（統一商品コード080132721、販売包装単位コード14987080132728）"
+            },
+            {
+              "name": "テラムロ配合錠ＡＰ「サワイ」",
+              "maker": "沢井製薬",
+              "scope": "バラ100錠（統一商品コード080132745、販売包装単位コード14987080132742）"
+            }
+          ],
+          "cautions": [
+            "2023年5月の包装切替案内です。現在の卸在庫・納入可否は購入先でご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "対象はテラムロ配合錠AP「サワイ」のPTP140錠です。現行の限定出荷理由は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "sawai-ambroxol-15-20261109-resumption",
+      "maker": "沢井製薬",
+      "title": "アンブロキソール塩酸塩錠15mg「サワイ」の3包装の限定出荷解除",
+      "url": "https://med.sawai.co.jp/file/pr27_235_1.pdf",
+      "announced_at": "2026-11",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "973e10d2f20812d0cdc081368f2e3e376885c8a9710a66247c8698b47633480a",
+      "collection_mode": "manual",
+      "event_type": "resumed",
+      "listed_at": "2026-11-09",
+      "source_index_url": "https://med.sawai.co.jp/con_list.php?cate=5",
+      "reason": "沢井製薬は安定供給体制が整ったとして、2026年11月9日から対象3包装の限定出荷を解除し、通常出荷と案内しました。",
+      "targets": [
+        {
+          "yj_code": "2239001F1467",
+          "product_name": "アンブロキソール塩酸塩錠１５ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080078012",
+              "gs1_sales": "(01)14987080078019",
+              "supply": {
+                "status": "normal",
+                "status_text": "①通常出荷（2026年11月9日のメーカー案内）",
+                "plans": [],
+                "note": "統一商品コード080078012、販売包装単位コード14987080078019。"
+              }
+            },
+            {
+              "package": "PTP1000錠",
+              "unified_product_code": "080078029",
+              "gs1_sales": "(01)14987080078026",
+              "supply": {
+                "status": "normal",
+                "status_text": "①通常出荷（2026年11月9日のメーカー案内）",
+                "plans": [],
+                "note": "統一商品コード080078029、販売包装単位コード14987080078026。"
+              }
+            },
+            {
+              "package": "バラ1000錠",
+              "unified_product_code": "080078067",
+              "gs1_sales": "(01)14987080078064",
+              "supply": {
+                "status": "normal",
+                "status_text": "①通常出荷（2026年11月9日のメーカー案内）",
+                "plans": [],
+                "note": "統一商品コード080078067、販売包装単位コード14987080078064。"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "確認した解除案内には、開始時の具体的な経緯や代替候補の記載はありません。",
+        "メーカーの案内は3包装が対象です。厚労省の品目単位の供給区分は公表欄でご確認ください。"
+      ]
+    },
+    {
+      "id": "npi-telmisartan-80-100t-stop-202602",
+      "maker": "日本薬品工業",
+      "title": "テルミサルタン錠80mg「NPI」100錠の日本薬品工業販売分の出荷停止（2026年2月）",
+      "url": "https://www.npi-inc.co.jp/medical/info/file/1208",
+      "announced_at": "2026-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "6499049c89f4cfc0009c2f0ad9ebd4a3aed681c4369946b9f803f59d398ac17a",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "日本薬品工業は、製造の都合で入庫が遅れたため、同社販売分の100錠包装を在庫消尽から次の入庫まで出荷停止すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149042F3087",
+          "product_name": "テルミサルタン錠８０ｍｇ「ＮＰＩ」",
+          "maker": "日本薬品工業",
+          "scope": "seller_route_and_package",
+          "packages": [
+            {
+              "package": "100錠",
+              "unified_product_code": "440441012",
+              "gs1_sales": "(01)14987440441019",
+              "supply": {
+                "status": "stopped",
+                "status_text": "⑤供給停止（2026年2月の案内）",
+                "plans": [
+                  {
+                    "event": "shipment_resumption",
+                    "timing": "2026年3月9日頃（当時の見込み）"
+                  }
+                ],
+                "note": "統一商品コード440441012、販売包装単位コード14987440441019。"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ],
+          "seller": "日本薬品工業"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文は他剤への変更の検討を依頼しています。具体的な候補名の記載はありません。",
+        "日本薬品工業販売分の2026年2月の案内です。3月の再開案内と、厚労省公表欄の現行区分をご確認ください。"
+      ]
+    },
+    {
+      "id": "npi-telmisartan-80-100t-resumed-202603",
+      "maker": "日本薬品工業",
+      "title": "テルミサルタン錠80mg「NPI」100錠の日本薬品工業販売分の供給再開（2026年3月）",
+      "url": "https://www.npi-inc.co.jp/medical/info/file/1218",
+      "announced_at": "2026-03",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "c081d6ed35657aad8bd21c6e8ee1fe948e96fc99554767a9e43ecd7359b084d1",
+      "collection_mode": "manual",
+      "event_type": "resumed",
+      "reason": "日本薬品工業は、2026年2月に停止した同社販売分の100錠包装の出荷を再開したと案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149042F3087",
+          "product_name": "テルミサルタン錠８０ｍｇ「ＮＰＩ」",
+          "maker": "日本薬品工業",
+          "scope": "seller_route_and_package",
+          "packages": [
+            {
+              "package": "100錠",
+              "unified_product_code": "440441012",
+              "gs1_sales": "(01)14987440441019",
+              "supply": {
+                "status": "normal",
+                "status_text": "①通常出荷（2026年3月の案内）",
+                "plans": [],
+                "note": "統一商品コード440441012、販売包装単位コード14987440441019。"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ],
+          "seller": "日本薬品工業"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "代替候補の記載はありません。こちらは2026年3月の再開案内です。日本薬品工業の11月10日版一覧では、80mgの品目単位の対応は③限定出荷（他社品の影響）です。"
+      ],
+      "source_index_url": "https://www.npi-inc.co.jp/medical/info/file/973"
     }
   ]
 }
