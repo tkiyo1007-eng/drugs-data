@@ -49762,6 +49762,120 @@
         "この原文に新たな代替候補の記載はありません。2026年6月に案内された候補は、限定出荷の案内に記載しています。",
         "通常出荷の予定はメーカー受注分が対象です。実際の解除と現行区分は厚労省公表欄やメーカーの続報をご確認ください。"
       ]
+    },
+    {
+      "id": "sawai-minocycline-50-100-ptp-resumed-20261109",
+      "maker": "沢井製薬",
+      "title": "ミノサイクリン塩酸塩錠50mg・100mg「サワイ」PTP100錠の限定出荷解除",
+      "url": "https://med.sawai.co.jp/file/pr27_235_1.pdf",
+      "source_index_url": "https://med.sawai.co.jp/con_list.php?cate=5",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "973e10d2f20812d0cdc081368f2e3e376885c8a9710a66247c8698b47633480a",
+      "collection_mode": "manual",
+      "event_type": "resumed",
+      "reason": "沢井製薬は安定供給体制が整ったとして、両規格のPTP100錠を11月9日から通常出荷に戻すと案内しました。今回の解除案内には、限定出荷に至った具体的な経緯の記載はありません。",
+      "targets": [
+        {
+          "yj_code": "6152005F1095",
+          "product_name": "ミノサイクリン塩酸塩錠５０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080034414",
+              "gs1_sales": "(01)14987080034411",
+              "supply": {
+                "status": "normal",
+                "status_text": "①通常出荷（11月9日の沢井製薬案内）",
+                "plans": [],
+                "note": "2026年11月9日から限定出荷を解除。統一商品コード080034414、販売包装単位コード(01)14987080034411。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6152005F2113",
+          "product_name": "ミノサイクリン塩酸塩錠１００ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080034315",
+              "gs1_sales": "(01)14987080034312",
+              "supply": {
+                "status": "normal",
+                "status_text": "①通常出荷（11月9日の沢井製薬案内）",
+                "plans": [],
+                "note": "2026年11月9日から限定出荷を解除。統一商品コード080034315、販売包装単位コード(01)14987080034312。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "沢井製薬のPTP100錠を対象とした解除案内です。厚労省公表欄には、これと別に品目単位の供給区分と理由を表示しています。",
+        "確認した解除案内に代替候補の記載はありません。"
+      ]
+    },
+    {
+      "id": "jg-sawai-mesalazine-400-ptp-route-discontinuation-202407",
+      "maker": "日本ジェネリック",
+      "title": "メサラジン腸溶錠400mg「サワイ」PTP100錠の日本ジェネリック取扱中止案内",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1592",
+      "source_index_url": "https://medical.nihon-generic.co.jp/medical/2399009F3044/",
+      "announced_at": "2024-07",
+      "listed_at": "2024-07-12",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "45f4137ce735ecf89929f37d5dc68a8b05329b7dcf85bd394cd04295b44f45f3",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "日本ジェネリックは諸般の事情により、同社扱いのPTP100錠を在庫がなくなり次第取り扱い中止と案内しました。具体的な事情の記載はありません。原文は製造販売元の沢井製薬が販売を継続すると説明しています。",
+      "targets": [
+        {
+          "yj_code": "2399009F3044",
+          "product_name": "メサラジン腸溶錠４００ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792101664",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2024年9月頃（当時の見込み）"
+                  }
+                ],
+                "note": "日本ジェネリック扱いの統一商品コード792101664。日本ジェネリックの製品ページでは取扱中止品です。"
+              }
+            }
+          ],
+          "seller": "日本ジェネリック"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "日本ジェネリックの販売経路に限った2024年の案内です。沢井製薬扱いの販売継続は当時の案内内容です。現在の卸在庫や受注状況はこの資料では確認できません。",
+        "確認した取扱中止原文に代替候補の記載はありません。"
+      ]
     }
   ]
 }
