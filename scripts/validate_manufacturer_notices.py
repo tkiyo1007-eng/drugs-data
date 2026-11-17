@@ -86,6 +86,7 @@ MAKER_MANUAL_SOURCE_HOSTS = {
     'マルホ': ('www.maruho.co.jp',),
     'クリニジェン': ('clinigen.co.jp',),
     '千寿製薬': ('www.senju.co.jp',),
+    'シオエ製薬': ('www.sioe-pharm.co.jp',),
     '富士製薬工業': ('www.fujipharma.jp',),
     '杏林製薬': ('www.kyorin-medicalbridge.jp',),
     '塩野義製薬': ('med.shionogi.co.jp',),
@@ -103,6 +104,10 @@ MAKER_MANUAL_SOURCE_HOSTS = {
 # Specific manufacturer and distributor notices hosted outside the primary company domain.
 MAKER_MANUAL_SOURCE_URLS = {
     '日東メディック': {'https://www.pmda.go.jp/files/000283184.pdf'},
+    '小堺製薬': {
+        'https://drive.google.com/file/d/17AlzsfqIg9BNdXJxXKcIpM6zuUSi3KSB/view?usp=sharing',
+        'https://drive.google.com/file/d/1B6H_4eMDbk0g4tcqnbk79P9nLG3_wgk2/view?usp=sharing',
+    },
     '帝人ファーマ': {'https://medical.teijin-pharma.co.jp/content/dam/teijin-medical-web/sites/documents/news/2026/2026060202/LAT_2026060202.pdf'},
     'あすか製薬': {'https://jspe.umin.jp/pdf/news_250901.pdf'},
     'ビーブランド・メディコーデンタル': {'https://medical.nihon-generic.co.jp/uploadfiles/news/JG_product_list.pdf'},

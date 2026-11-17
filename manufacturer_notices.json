@@ -45259,6 +45259,275 @@
         "2026年6月に限定出荷を案内した経緯です。厚労省の11月16日版では品目の理由は薬価削除と公表されています。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "sioe-zinc-10-ointment-limited-202301",
+      "maker": "シオエ製薬",
+      "title": "亜鉛華（10％）単軟膏シオエ500gの限定出荷",
+      "url": "https://www.sioe-pharm.co.jp/storage/products/pdf/seihin230116.pdf",
+      "announced_at": "2023-01",
+      "listed_at": "2023-01-16",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "3c04a9a120a50812b531c5e6ef5f7faddd01bfbb78f6d7883f325d884d7af736",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "同種同効薬の供給停止や限定出荷で注文が大きく増え、増産しても在庫がひっ迫したとシオエ製薬と日本新薬が説明しています。既採用先への供給を続けるため、2023年1月18日から限定出荷を始めました。",
+      "targets": [
+        {
+          "yj_code": "2649710M2033",
+          "product_name": "亜鉛華（１０％）単軟膏シオエ",
+          "maker": "シオエ製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "500g",
+              "unified_product_code": "173-08278-0",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2023年1月の資料）",
+                "note": "統一商品コード 173-08278-0。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料には別品目の亜鉛華軟膏 シオエも掲載されています。そちらはメーカーが2026年7月に限定出荷解除を案内したため、ここでは10％単軟膏の500gのみを掲載しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sioe-sodium-bicarbonate-lactose-500g-limited-202609",
+      "maker": "シオエ製薬",
+      "title": "炭酸水素ナトリウム シオエ・乳糖水和物「シオエ」500gの限定出荷",
+      "url": "https://www.sioe-pharm.co.jp/storage/products/pdf/seihin260901.pdf",
+      "announced_at": "2026-09",
+      "listed_at": "2026-09-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "430e827208e18674f095fdce743dee8b1313fef00f2ed22ec944ecb1446ed530",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社製品の出荷調整に伴い、現在の生産計画と在庫ではすべての注文への対応が難しくなる見通しと、シオエ製薬と日本新薬が案内しました。既存の医療機関への供給を優先するため、出荷数量に上限を設けました。",
+      "targets": [
+        {
+          "yj_code": "2344004X1119",
+          "product_name": "炭酸水素ナトリウム　シオエ",
+          "maker": "シオエ製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "500g（粉末）",
+              "unified_product_code": "173-08114-1",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2026年9月の資料）",
+                "note": "統一商品コード 173-08114-1。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "7111001X1345",
+          "product_name": "乳糖水和物「シオエ」",
+          "maker": "シオエ製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "500g（細粒状）",
+              "unified_product_code": "173-08223-0",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2026年9月の資料）",
+                "note": "統一商品コード 173-08223-0。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年9月1日出荷分から。安定供給の再開時期は判明後に案内するとしています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sioe-sodium-bicarbonate-5kg-discontinuation-202604",
+      "maker": "シオエ製薬",
+      "title": "炭酸水素ナトリウム シオエ5kg販売中止とメーカー案内の代替包装",
+      "url": "https://www.sioe-pharm.co.jp/storage/products/pdf/seihin260406.pdf",
+      "announced_at": "2026-04",
+      "listed_at": "2026-04-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "d65e122005c7a5d5e2fd1df6d8c05197135d57e066cd83ed77ca6c99f790d793",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "シオエ製薬と日本新薬は、5kgの販売中止を案内し、同じ製品の500gを主な代替品として記載しました。5kgの販売中止について具体的な事情は公表されていません。",
+      "targets": [
+        {
+          "yj_code": "2344004X1119",
+          "product_name": "炭酸水素ナトリウム　シオエ",
+          "maker": "シオエ製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5kg（粉末）",
+              "unified_product_code": "173-08115-8",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "2026年10月頃（2026年4月の案内の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 173-08115-8。"
+              }
+            },
+            {
+              "package": "500g（粉末）",
+              "unified_product_code": "173-08114-1",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 173-08114-1。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.sioe-pharm.co.jp/storage/products/pdf/seihin260406.pdf",
+          "target_yj_codes": [
+            "2344004X1119"
+          ],
+          "type": "メーカーが5kgに対して案内した代替包装",
+          "products": [
+            {
+              "name": "炭酸水素ナトリウム　シオエ",
+              "maker": "シオエ製薬",
+              "yj_code": "2344004X1119",
+              "scope": "日本新薬販売の5kg（173-08115-8）に対する500g（173-08114-1）。500gも2026年9月の案内で限定出荷です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "メーカー製品ページでは5kgは販売中止です。候補の500gは2026年9月案内の限定出荷対象です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "kozakai-zinc-10-ointment-limited-202304",
+      "maker": "小堺製薬",
+      "title": "亜鉛華（10％）単軟膏「コザカイ・Ｍ」500gの限定出荷",
+      "url": "https://drive.google.com/file/d/17AlzsfqIg9BNdXJxXKcIpM6zuUSi3KSB/view?usp=sharing",
+      "announced_at": "2023-04",
+      "listed_at": "2023-04-17",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ddb49dc6b6602685493be6b3ba19b8a5ba73d94990563cbc5a50acf21bf3075d",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "小堺製薬は、同種同効薬の販売中止に伴う注文増で供給が不安定となり、通常の数量を超える注文と新規採用に対応できないと案内しました。",
+      "targets": [
+        {
+          "yj_code": "2649710M2025",
+          "product_name": "亜鉛華（１０％）単軟膏「コザカイ・Ｍ」",
+          "maker": "小堺製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "500g",
+              "unified_product_code": "371-501045",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2023年4月の資料）",
+                "note": "統一商品コード 371-501045。"
+              }
+            }
+          ],
+          "seller": "小堺製薬"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "限定出荷は2023年2月14日から。当時は500gの製造を優先するため、15kgは注文があっても製造できないと案内されました。小堺製薬が案内した包装の情報です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "kozakai-zinc-ointment-limited-202309",
+      "maker": "小堺製薬",
+      "title": "亜鉛華軟膏「コザカイ・Ｍ」500gの限定出荷",
+      "url": "https://drive.google.com/file/d/1B6H_4eMDbk0g4tcqnbk79P9nLG3_wgk2/view?usp=sharing",
+      "announced_at": "2023-09",
+      "listed_at": "2023-09-20",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "4b9b76ba07d806771ff2919def127519d3ffe87ca5311e83c5046cb80c40a2cf",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "小堺製薬は、同種同効薬の販売中止で通常を上回る注文があり、供給が不安定となったため、2023年9月21日から限定出荷を実施したと案内しました。",
+      "targets": [
+        {
+          "yj_code": "2649704M1066",
+          "product_name": "亜鉛華軟膏「コザカイ・Ｍ」",
+          "maker": "小堺製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "500g",
+              "unified_product_code": "371-301003",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2023年9月の資料）",
+                "note": "統一商品コード 371-301003。"
+              }
+            }
+          ],
+          "seller": "小堺製薬"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "小堺製薬が案内した500g包装の情報です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
