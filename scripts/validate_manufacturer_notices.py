@@ -82,6 +82,7 @@ MAKER_HOSTS = {
     'ヴィアトリス製薬合同会社': 'www.viatris-e-channel.com',
 }
 MAKER_MANUAL_SOURCE_HOSTS = {
+    '本草製薬': ('www.honzo.co.jp',),
     '堀井薬品工業': ('www.horii-pharm.co.jp',),
     'マルホ': ('www.maruho.co.jp',),
     'クリニジェン': ('clinigen.co.jp',),
