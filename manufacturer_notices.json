@@ -2,6 +2,44 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "mepharma-montelukast-granules4-limited-20261111",
+      "maker": "Meファルマ",
+      "title": "モンテルカスト細粒4mg「明治」140包の限定出荷（2026年11月11日）",
+      "url": "https://www.meiji-seika-pharma.co.jp/me-pharma/medical/excel/document_information01.xlsx",
+      "announced_at": "2026-11-11",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "81d5c61bb6b8d66f759429300d024509d9862d6a3289e32299cfa6ef23c2f30e",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "販売元のMeファルマは、2026年11月11日更新の供給状況一覧で、分包140包を他社品の影響による限定出荷としています。出荷量は増加です。",
+      "targets": [
+        {
+          "yj_code": "4490026C1218",
+          "product_name": "モンテルカスト細粒４ｍｇ「明治」",
+          "maker": "Meiji Seika ファルマ",
+          "seller": "Meファルマ",
+          "scope": "seller_route_and_package",
+          "summary": "供給状況一覧の「供給状況」シート78行目で、YJコードと対象包装を確認しました。分包140包（7包×20）はPMDAの電子添文でも照合しました。",
+          "packages": [
+            {
+              "package": "分包140包（7包×20）",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "11月11日版では他社品の影響による限定出荷・出荷量増加"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原典リンクはExcelの供給状況一覧です。掲載内容は2026年11月11日版で確認しました。一覧は更新される場合があります。",
+        "具体的な経緯、解除時期、代替候補は一覧では確認できません。他の包装や現在の受注・流通在庫は未確認です。"
+      ]
+    },
+    {
       "id": "kenei-sodium-bicarbonate-limited-20261015",
       "maker": "健栄製薬",
       "title": "炭酸水素ナトリウム「ケンエー」7包装の限定出荷（2026年10月15日）",
