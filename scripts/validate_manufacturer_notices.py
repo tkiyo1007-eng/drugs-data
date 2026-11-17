@@ -111,7 +111,14 @@ MAKER_MANUAL_SOURCE_HOSTS = {
 MAKER_MANUAL_SOURCE_URLS = {
     '日東メディック': {'https://www.pmda.go.jp/files/000283184.pdf'},
     '沢井製薬': {'https://www.jga.gr.jp/assets/pdf/medical/supply/63199438957cc967ba228275e96e9825f40fb12c.pdf'},
-    "T'sファーマ": {'https://www.hospital.or.jp/site/news/file/1693270450.pdf'},
+    "T'sファーマ": {
+        'https://www.hospital.or.jp/site/news/file/1693270450.pdf',
+        'https://www.med.ts-pharma.com/di-net/kaitei/w_20230828_Budesonide_inhalation_solution_0.5_TT.pdf',
+    },
+    '佐藤製薬': {
+        'https://medinfo-sato.com/update/pdf/241008_pastaron.pdf',
+        'https://medinfo-sato.com/update/pdf/260508_pastaron.pdf',
+    },
     '第一三共': {
         'https://oisya3.com/makuhari/wp-content/uploads/2025/02/%E3%81%8A%E3%81%9F%E3%81%B5%E3%81%8F%E3%81%8B%E3%81%9C%E5%87%BA%E8%8D%B7%E5%81%9C%E6%AD%A2-3.pdf',
         'https://www.city.suginami.tokyo.jp/documents/968/otafuku202509daiitisankyou.pdf',
@@ -191,6 +198,7 @@ MAKER_MANUAL_SOURCE_URLS = {
     '持田製薬': {
         'https://www.jrs.or.jp/information/file/202408_mochida.pdf',
         'https://www.ayumi-pharma.com/upd/med/doc/325/tcz_info2610.pdf',
+        'https://med.mochida.co.jp/etc/img/flo-d202607.pdf',
     },
     '日本薬品工業': {
         'https://www.nc-medical.com/product_topics/f4bj0h000000es1m-att/f4bj0h000000es2a.pdf',
