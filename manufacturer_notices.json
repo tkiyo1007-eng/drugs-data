@@ -45687,6 +45687,881 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "towa-cand4-package-consolidation-202303",
+      "maker": "東和薬品",
+      "title": "カンデサルタン錠4mg「トーワ」の包装集約と供給継続包装",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=77127&t=4&f=%E3%82%AB%E3%83%B3%E3%83%87%E3%82%B5%E3%83%AB%E3%82%BF%E3%83%B3%E9%8C%A04mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%8C%85%E8%A3%85%E9%9B%86%E7%B4%84%E6%96%87%E6%9B%B8.pdf",
+      "announced_at": "2023-03",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "3825bbde4062a6a39d28844ffd92e0c8e7c2f653d0f550fd03d1a83a547687f8",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "東和薬品は、注文に十分な数量を確保できず、供給体制と生産効率を改善するために包装を集約し、対象包装は在庫消尽後に出荷を一時停止すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149040F2308",
+          "product_name": "カンデサルタン錠４ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "155222074",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2023年4月（集約案内の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 155222074。"
+              }
+            },
+            {
+              "package": "PTP700錠",
+              "unified_product_code": "155222104",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2023年5月（集約案内の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 155222104。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155222067",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155222067。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "155222098",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155222098。"
+              }
+            },
+            {
+              "package": "バラ300錠",
+              "unified_product_code": "155222081",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155222081。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=77127&t=4&f=%E3%82%AB%E3%83%B3%E3%83%87%E3%82%B5%E3%83%AB%E3%82%BF%E3%83%B3%E9%8C%A04mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%8C%85%E8%A3%85%E9%9B%86%E7%B4%84%E6%96%87%E6%9B%B8.pdf",
+          "target_yj_codes": [
+            "2149040F2308"
+          ],
+          "type": "メーカーが切替検討を依頼した同一品目の供給継続包装",
+          "products": [
+            {
+              "name": "カンデサルタン錠４ｍｇ「トーワ」",
+              "maker": "東和薬品",
+              "yj_code": "2149040F2308",
+              "scope": "包装集約の対象はPTP140錠、PTP700錠。当時の供給継続包装はPTP100錠（155222067）、PTP500錠（155222098）、バラ300錠（155222081）。東和薬品の2026年10月29日一覧では、いずれも限定出荷です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽日は当時の見込みです。集約対象の各コードは2026年10月29日の東和薬品一覧に掲載されていません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "towa-candesartan-4-resumed-limited-202403",
+      "maker": "東和薬品",
+      "title": "カンデサルタン錠4mg「トーワ」3包装の出荷再開と限定出荷継続",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=78612&t=4&f=%E3%80%90%E5%8C%BB%E7%99%82%E9%96%A2%E4%BF%82%E8%80%85%E5%90%84%E4%BD%8D%E3%80%91%E3%82%AB%E3%83%B3%E3%83%87%E3%82%B5%E3%83%AB%E3%82%BF%E3%83%B3%E9%8C%A04mg_%E5%87%BA%E8%8D%B7%E5%86%8D%E9%96%8B%26%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7_20240305.pdf",
+      "announced_at": "2024-03",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "f28a0846ea3baf52c3d5318389e0437e451c93551c2f6df23aaba263b8f54b49",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "東和薬品は2024年3月5日に対象3包装の出荷を再開しました。当時は十分な在庫を確保できなかったため、安定供給体制が整うまで限定出荷を続けると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149040F2308",
+          "product_name": "カンデサルタン錠４ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155222067",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（2024年3月のメーカー資料）",
+                "note": "統一商品コード 155222067。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "155222098",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（2024年3月のメーカー資料）",
+                "note": "統一商品コード 155222098。"
+              }
+            },
+            {
+              "package": "バラ300錠",
+              "unified_product_code": "155222081",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（2024年3月のメーカー資料）",
+                "note": "統一商品コード 155222081。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "PTP140錠と700錠は再開対象から除かれています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "towa-cand8-package-consolidation-202303",
+      "maker": "東和薬品",
+      "title": "カンデサルタン錠8mg「トーワ」の包装集約と供給継続包装",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=77128&t=4&f=%E3%82%AB%E3%83%B3%E3%83%87%E3%82%B5%E3%83%AB%E3%82%BF%E3%83%B3%E9%8C%A08mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%8C%85%E8%A3%85%E9%9B%86%E7%B4%84%E6%96%87%E6%9B%B8.pdf",
+      "announced_at": "2023-03",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "74cff74c1560fa670f82bdbdd585f45cb3014d3a3d91349e7768d90a3ae7720d",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "東和薬品は、注文に十分な数量を確保できず、供給体制と生産効率を改善するために包装を集約し、対象包装は在庫消尽後に出荷を一時停止すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149040F3304",
+          "product_name": "カンデサルタン錠８ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "155223194",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2023年6月（集約案内の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 155223194。"
+              }
+            },
+            {
+              "package": "PTP700錠",
+              "unified_product_code": "155223224",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2023年7月（集約案内の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 155223224。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155223187",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155223187。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "155223217",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155223217。"
+              }
+            },
+            {
+              "package": "バラ300錠",
+              "unified_product_code": "155223200",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155223200。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=77128&t=4&f=%E3%82%AB%E3%83%B3%E3%83%87%E3%82%B5%E3%83%AB%E3%82%BF%E3%83%B3%E9%8C%A08mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%8C%85%E8%A3%85%E9%9B%86%E7%B4%84%E6%96%87%E6%9B%B8.pdf",
+          "target_yj_codes": [
+            "2149040F3304"
+          ],
+          "type": "メーカーが切替検討を依頼した同一品目の供給継続包装",
+          "products": [
+            {
+              "name": "カンデサルタン錠８ｍｇ「トーワ」",
+              "maker": "東和薬品",
+              "yj_code": "2149040F3304",
+              "scope": "包装集約の対象はPTP140錠、PTP700錠。当時の供給継続包装はPTP100錠（155223187）、PTP500錠（155223217）、バラ300錠（155223200）。東和薬品の2026年10月29日一覧では、いずれも限定出荷です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽日は当時の見込みです。集約対象の各コードは2026年10月29日の東和薬品一覧に掲載されていません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "towa-cand12-package-consolidation-202303",
+      "maker": "東和薬品",
+      "title": "カンデサルタン錠12mg「トーワ」の包装集約と供給継続包装",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=77126&t=4&f=%E3%82%AB%E3%83%B3%E3%83%87%E3%82%B5%E3%83%AB%E3%82%BF%E3%83%B3%E9%8C%A012mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%8C%85%E8%A3%85%E9%9B%86%E7%B4%84%E6%96%87%E6%9B%B8.pdf",
+      "announced_at": "2023-03",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "45ef965faa6e9a0a8b05c157b77f5d64456a3bec2f1fe76d976a80e652ae5a5c",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "東和薬品は、注文に十分な数量を確保できず、供給体制と生産効率を改善するために包装を集約し、対象包装は在庫消尽後に出荷を一時停止すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149040F4300",
+          "product_name": "カンデサルタン錠１２ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "155224108",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2023年6月（集約案内の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 155224108。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "155224122",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2023年9月（集約案内の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 155224122。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155224092",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155224092。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=77126&t=4&f=%E3%82%AB%E3%83%B3%E3%83%87%E3%82%B5%E3%83%AB%E3%82%BF%E3%83%B3%E9%8C%A012mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%8C%85%E8%A3%85%E9%9B%86%E7%B4%84%E6%96%87%E6%9B%B8.pdf",
+          "target_yj_codes": [
+            "2149040F4300"
+          ],
+          "type": "メーカーが切替検討を依頼した同一品目の供給継続包装",
+          "products": [
+            {
+              "name": "カンデサルタン錠１２ｍｇ「トーワ」",
+              "maker": "東和薬品",
+              "yj_code": "2149040F4300",
+              "scope": "包装集約の対象はPTP140錠、PTP500錠。当時の供給継続包装はPTP100錠（155224092）。東和薬品の2026年10月29日一覧では、いずれも限定出荷です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽日は当時の見込みです。集約対象の各コードは2026年10月29日の東和薬品一覧に掲載されていません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "towa-amalu3-package-consolidation-202212",
+      "maker": "東和薬品",
+      "title": "アマルエット配合錠3番「トーワ」の包装集約と供給継続包装",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=76584&t=4&f=%E3%82%A2%E3%83%9E%E3%83%AB%E3%82%A8%E3%83%83%E3%83%88%E9%85%8D%E5%90%88%E9%8C%A03%E7%95%AA%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%8C%85%E8%A3%85%E9%9B%86%E7%B4%84%E6%96%87%E6%9B%B8.pdf",
+      "announced_at": "2022-12",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "0873caa4e8a9329dd20e36e20fd22466c517fab70b4c6f241d5e2638831db104",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "東和薬品は、注文に十分な数量を確保できず、供給体制と生産効率を改善するために包装を集約し、対象包装は在庫消尽後に出荷を一時停止すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2190103F1100",
+          "product_name": "アマルエット配合錠３番「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "155237085",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2023年3月（集約案内の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 155237085。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "155237092",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2023年3月（集約案内の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 155237092。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155237078",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155237078。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=76584&t=4&f=%E3%82%A2%E3%83%9E%E3%83%AB%E3%82%A8%E3%83%83%E3%83%88%E9%85%8D%E5%90%88%E9%8C%A03%E7%95%AA%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%8C%85%E8%A3%85%E9%9B%86%E7%B4%84%E6%96%87%E6%9B%B8.pdf",
+          "target_yj_codes": [
+            "2190103F1100"
+          ],
+          "type": "メーカーが切替検討を依頼した同一品目の供給継続包装",
+          "products": [
+            {
+              "name": "アマルエット配合錠３番「トーワ」",
+              "maker": "東和薬品",
+              "yj_code": "2190103F1100",
+              "scope": "包装集約の対象はPTP140錠、PTP500錠。当時の供給継続包装はPTP100錠（155237078）。東和薬品の2026年10月29日一覧では、いずれも限定出荷です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽日は当時の見込みです。集約対象の各コードは2026年10月29日の東和薬品一覧に掲載されていません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "towa-amalu4-package-consolidation-202303",
+      "maker": "東和薬品",
+      "title": "アマルエット配合錠4番「トーワ」の包装集約と供給継続包装",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=77119&t=4&f=%E3%82%A2%E3%83%9E%E3%83%AB%E3%82%A8%E3%83%83%E3%83%88%E9%85%8D%E5%90%88%E9%8C%A04%E7%95%AA%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%8C%85%E8%A3%85%E9%9B%86%E7%B4%84%E6%96%87%E6%9B%B8.pdf",
+      "announced_at": "2023-03",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "f09b629a291aac1feacdd92ed5b82a33a41cceb2608d0a5842490e278b3de24e",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "東和薬品は、注文に十分な数量を確保できず、供給体制と生産効率を改善するために包装を集約し、対象包装は在庫消尽後に出荷を一時停止すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2190104F1105",
+          "product_name": "アマルエット配合錠４番「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "155238099",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2023年5月（集約案内の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 155238099。"
+              }
+            },
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "155238082",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2023年12月（集約案内の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 155238082。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155238075",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155238075。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=77119&t=4&f=%E3%82%A2%E3%83%9E%E3%83%AB%E3%82%A8%E3%83%83%E3%83%88%E9%85%8D%E5%90%88%E9%8C%A04%E7%95%AA%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%8C%85%E8%A3%85%E9%9B%86%E7%B4%84%E6%96%87%E6%9B%B8.pdf",
+          "target_yj_codes": [
+            "2190104F1105"
+          ],
+          "type": "メーカーが切替検討を依頼した同一品目の供給継続包装",
+          "products": [
+            {
+              "name": "アマルエット配合錠４番「トーワ」",
+              "maker": "東和薬品",
+              "yj_code": "2190104F1105",
+              "scope": "包装集約の対象はPTP500錠、PTP140錠。当時の供給継続包装はPTP100錠（155238075）。東和薬品の2026年10月29日一覧では、いずれも限定出荷です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽日は当時の見込みです。集約対象の各コードは2026年10月29日の東和薬品一覧に掲載されていません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "towa-lanso-package-consolidation-202405",
+      "maker": "東和薬品",
+      "title": "ランソプラゾールOD錠15mg「トーワ」の包装集約と供給継続包装",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=79070&t=4&f=%E3%83%A9%E3%83%B3%E3%82%BD%E3%83%97%E3%83%A9%E3%82%BE%E3%83%BC%E3%83%ABOD%E9%8C%A015mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%8C%85%E8%A3%85%E9%9B%86%E7%B4%84%E6%96%87%E6%9B%B8.pdf",
+      "announced_at": "2024-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ff7436c24f819b8d64a1fb7ff25276a4c42ecb032b41ba8ee59919f9c7a8a630",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "東和薬品は、注文に十分な数量を確保できず、供給体制と生産効率を改善するために包装を集約し、対象包装は在庫消尽後に出荷を一時停止すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2329023F1071",
+          "product_name": "ランソプラゾールＯＤ錠１５ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP700錠",
+              "unified_product_code": "155186116",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2024年6月（集約案内の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 155186116。"
+              }
+            },
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "155186086",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2024年7月（集約案内の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 155186086。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155186079",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155186079。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "155186109",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155186109。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "155186093",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155186093。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=79070&t=4&f=%E3%83%A9%E3%83%B3%E3%82%BD%E3%83%97%E3%83%A9%E3%82%BE%E3%83%BC%E3%83%ABOD%E9%8C%A015mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%8C%85%E8%A3%85%E9%9B%86%E7%B4%84%E6%96%87%E6%9B%B8.pdf",
+          "target_yj_codes": [
+            "2329023F1071"
+          ],
+          "type": "メーカーが切替検討を依頼した同一品目の供給継続包装",
+          "products": [
+            {
+              "name": "ランソプラゾールＯＤ錠１５ｍｇ「トーワ」",
+              "maker": "東和薬品",
+              "yj_code": "2329023F1071",
+              "scope": "包装集約の対象はPTP700錠、PTP140錠。当時の供給継続包装はPTP100錠（155186079）、PTP500錠（155186109）、バラ500錠（155186093）。東和薬品の2026年10月29日一覧では、いずれも限定出荷です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽日は当時の見込みです。集約対象の各コードは2026年10月29日の東和薬品一覧に掲載されていません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "towa-soli-package-consolidation-202311",
+      "maker": "東和薬品",
+      "title": "ソリフェナシンコハク酸塩錠2.5mg「トーワ」の包装集約と供給継続包装",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=78007&t=4&f=%E3%82%BD%E3%83%AA%E3%83%95%E3%82%A7%E3%83%8A%E3%82%B7%E3%83%B3%E3%82%B3%E3%83%8F%E3%82%AF%E9%85%B8%E5%A1%A9%E9%8C%A02.5mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%8C%85%E8%A3%85%E9%9B%86%E7%B4%84%E6%96%87%E6%9B%B8.pdf",
+      "announced_at": "2023-11",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "08fc33070303a86e80ad40487d6dcbffcbef2e92eb13a25cdfb1ba44cb39528f",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "東和薬品は、注文に十分な数量を確保できず、供給体制と生産効率を改善するために包装を集約し、対象包装は在庫消尽後に出荷を一時停止すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2590011F1079",
+          "product_name": "ソリフェナシンコハク酸塩錠２．５ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "155153125",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2023年12月（集約案内の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 155153125。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155153101",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155153101。"
+              }
+            },
+            {
+              "package": "バラ100錠",
+              "unified_product_code": "155153118",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155153118。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=78007&t=4&f=%E3%82%BD%E3%83%AA%E3%83%95%E3%82%A7%E3%83%8A%E3%82%B7%E3%83%B3%E3%82%B3%E3%83%8F%E3%82%AF%E9%85%B8%E5%A1%A9%E9%8C%A02.5mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%8C%85%E8%A3%85%E9%9B%86%E7%B4%84%E6%96%87%E6%9B%B8.pdf",
+          "target_yj_codes": [
+            "2590011F1079"
+          ],
+          "type": "メーカーが切替検討を依頼した同一品目の供給継続包装",
+          "products": [
+            {
+              "name": "ソリフェナシンコハク酸塩錠２．５ｍｇ「トーワ」",
+              "maker": "東和薬品",
+              "yj_code": "2590011F1079",
+              "scope": "包装集約の対象はPTP140錠。当時の供給継続包装はPTP100錠（155153101）、バラ100錠（155153118）。東和薬品の2026年10月29日一覧では、いずれも限定出荷です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽日は当時の見込みです。集約対象の各コードは2026年10月29日の東和薬品一覧に掲載されていません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "towa-camu-package-consolidation-202306",
+      "maker": "東和薬品",
+      "title": "カムシア配合錠HD「トーワ」の包装集約と供給継続包装",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=77560&t=4&f=%E3%82%AB%E3%83%A0%E3%82%B7%E3%82%A2%E9%85%8D%E5%90%88%E9%8C%A0HD%EF%BD%A2%E3%83%88%E3%83%BC%E3%83%AF%EF%BD%A3_%E5%8C%85%E8%A3%85%E9%9B%86%E7%B4%84%E6%96%87%E6%9B%B8.pdf",
+      "announced_at": "2023-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "1c590d564f5d49a07bb60eaa1e72d764584304fe5da9b684d95e52a8dcd07b78",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "東和薬品は、注文に十分な数量を確保できず、供給体制と生産効率を改善するために包装を集約し、対象包装は在庫消尽後に出荷を一時停止すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149116F2086",
+          "product_name": "カムシア配合錠ＨＤ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "155345049",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2023年9月（集約案内の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 155345049。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155345025",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155345025。"
+              }
+            },
+            {
+              "package": "バラ100錠",
+              "unified_product_code": "155345032",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155345032。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=77560&t=4&f=%E3%82%AB%E3%83%A0%E3%82%B7%E3%82%A2%E9%85%8D%E5%90%88%E9%8C%A0HD%EF%BD%A2%E3%83%88%E3%83%BC%E3%83%AF%EF%BD%A3_%E5%8C%85%E8%A3%85%E9%9B%86%E7%B4%84%E6%96%87%E6%9B%B8.pdf",
+          "target_yj_codes": [
+            "2149116F2086"
+          ],
+          "type": "メーカーが切替検討を依頼した同一品目の供給継続包装",
+          "products": [
+            {
+              "name": "カムシア配合錠ＨＤ「トーワ」",
+              "maker": "東和薬品",
+              "yj_code": "2149116F2086",
+              "scope": "包装集約の対象はPTP140錠。当時の供給継続包装はPTP100錠（155345025）、バラ100錠（155345032）。東和薬品の2026年10月29日一覧では、いずれも限定出荷です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽日は当時の見込みです。集約対象の各コードは2026年10月29日の東和薬品一覧に掲載されていません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "towa-terbinafine-cream-50-tubes-discontinuation-202406",
+      "maker": "東和薬品",
+      "title": "テルビナフィン塩酸塩クリーム1％「トーワ」50本包装の販売中止と販売継続包装",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=79109&t=4&f=20240607_%E3%83%86%E3%83%AB%E3%83%93%E3%83%8A%E3%83%95%E3%82%A3%E3%83%B3%E5%A1%A9%E9%85%B8%E5%A1%A9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%A01%EF%BC%85%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E4%B8%80%E9%83%A8%E5%8C%85%E8%A3%85%E3%81%AE%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2024-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "53acd9d966fd474eabf9864fe6b8a894eb1becd6e67358a4bf45ea07963c8ef9",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "東和薬品は10g×50本を在庫限りで販売中止と案内し、10g×10本を販売継続包装として示しました。具体的な販売中止理由は資料に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "2659710N1217",
+          "product_name": "テルビナフィン塩酸塩クリーム１％「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10g×50本",
+              "unified_product_code": "155942040",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2024年12月（メーカー資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 155942040、販売包装単位コード 14987155942047。"
+              }
+            },
+            {
+              "package": "10g×10本",
+              "unified_product_code": "155942033",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 155942033、販売包装単位コード 14987155942030。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=79109&t=4&f=20240607_%E3%83%86%E3%83%AB%E3%83%93%E3%83%8A%E3%83%95%E3%82%A3%E3%83%B3%E5%A1%A9%E9%85%B8%E5%A1%A9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%A01%EF%BC%85%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E4%B8%80%E9%83%A8%E5%8C%85%E8%A3%85%E3%81%AE%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+          "target_yj_codes": [
+            "2659710N1217"
+          ],
+          "type": "メーカーが示した同一製品の販売継続包装",
+          "products": [
+            {
+              "name": "テルビナフィン塩酸塩クリーム１％「トーワ」",
+              "maker": "東和薬品",
+              "yj_code": "2659710N1217",
+              "scope": "対象の10g×50本に対する販売継続包装は10g×10本（155942033）。東和薬品の2026年10月29日一覧では限定出荷です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "50本包装の在庫消尽時期は資料発表時点の見込みです。2026年10月29日の東和薬品一覧で10本包装は限定出荷です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
     }
   ]
 }
