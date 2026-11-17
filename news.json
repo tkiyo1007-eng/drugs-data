@@ -1,5 +1,17 @@
 [
  {
+  "date": "2026/11/17",
+  "title": "新医薬品の承認品目一覧（2026年11月16日承認分まで）を掲載しました",
+  "url": "https://www.pmda.go.jp/review-services/drug-reviews/review-information/p-drugs/0040.html",
+  "tag": "承認審査"
+ },
+ {
+  "date": "2026/11/17",
+  "title": "医薬品の適応判定を目的として承認されたコンパニオン診断薬等（2026年11月12日版）を掲載しました",
+  "url": "https://www.pmda.go.jp/review-services/drug-reviews/review-information/cd/0001.html",
+  "tag": "承認審査"
+ },
+ {
   "date": "2026/11/16",
   "title": "「定期の予防接種等による副反応疑いの報告等の取扱いについて」の一部改正について」を掲載しました",
   "url": "https://www.pmda.go.jp/safety/reports/hcp/prev-vacc-act/0003.html",
@@ -45,18 +57,6 @@
   "date": "2026/11/09",
   "title": "クラスI回収 該当回収品目　照射赤血球液-LR「日赤」",
   "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html",
-  "tag": "回収"
- },
- {
-  "date": "2026/11/09",
-  "title": "「申請電子データ提出に関する技術情報」を更新しました",
-  "url": "https://www.pmda.go.jp/review-services/drug-reviews/about-reviews/p-drugs/0028.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/11/06",
-  "title": "クラスI回収 該当回収品目　ARROW PICカテーテルキット HP",
-  "url": "https://www.pmda.go.jp/safety/info-services/devices/0054.html",
   "tag": "回収"
  }
 ]
