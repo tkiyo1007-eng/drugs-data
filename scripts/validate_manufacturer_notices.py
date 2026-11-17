@@ -118,6 +118,8 @@ MAKER_MANUAL_SOURCE_URLS = {
     '佐藤製薬': {
         'https://medinfo-sato.com/update/pdf/241008_pastaron.pdf',
         'https://medinfo-sato.com/update/pdf/260508_pastaron.pdf',
+        'https://medinfo-sato.com/update/pdf/260924_pastaron.pdf',
+        'https://medinfo-sato.com/update/pdf/261015_pastaron.pdf',
     },
     '科研製薬': {
         'https://medical-pro.kaken.co.jp/product/mentax/documents/mentax_kyokyu_20260708.pdf',
@@ -193,7 +195,10 @@ MAKER_MANUAL_SOURCE_URLS = {
         'https://www.haigan.gr.jp/wp-content/uploads/2026/06/%E3%83%AC%E3%83%83%E3%83%88%E3%83%B4%E3%82%A3%E3%83%A2%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf',
     },
     '大塚製薬工場': {'https://medical.jms.cc/pdf/customer_information_306.pdf'},
-    '大塚製薬': {'https://www.otsuka-elibrary.jp/pdf_viewer/?f=%2Finfo%2Ffile%2F241115-information.pdf'},
+    '大塚製薬': {
+        'https://www.otsuka-elibrary.jp/pdf_viewer/?f=%2Finfo%2Ffile%2F241115-information.pdf',
+        'https://www.otsuka-elibrary.jp/pdf_viewer/?f=%2Finfo%2Ffile%2F260901-information.pdf',
+    },
     '長生堂製薬': {
         'https://medical.nihon-generic.co.jp/uploadfiles/news/JG_product_list.pdf',
         'https://medical.nihon-generic.co.jp/uploadfiles/medicine/TATHI50_CHUUSHI_2602.pdf',

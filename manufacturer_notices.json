@@ -2,6 +2,414 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "daiichisankyo-tranex-500-limited-202605",
+      "maker": "第一三共",
+      "title": "トランサミン錠500mgの需要増による限定出荷（2026年5月）",
+      "url": "https://www.medicalcommunity.jp/filedsp/node%24171926/field_file_url",
+      "announced_at": "2026-05",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "367630d688e4466f36cd849f9c1b157ef3137f017568afd27418e8b1b47748d7",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "第一三共は需要の急増で安定供給への影響が見込まれるため、従来から処方している医療機関への供給を優先し、卸への出荷を制限すると説明しています。",
+      "targets": [
+        {
+          "yj_code": "3327002F2041",
+          "product_name": "トランサミン錠５００ｍｇ",
+          "maker": "第一三共",
+          "source_pages": [
+            1
+          ],
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "081227761",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "2026年5月の案内では限定出荷（自社の事情）"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "081214419",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "2026年5月の案内では限定出荷（自社の事情）"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文の区分記号と区分名に表記の差があるため、メーカー欄は区分名を表示しています。",
+        "現在の包装別の受注・出荷状況は未確認です。",
+        "この原文には代替候補の記載がありません。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
+      "id": "daiichisankyo-loxonin-gel-1-limited-202505",
+      "maker": "第一三共",
+      "title": "ロキソニンゲル1％の需要増による限定出荷（2025年5月）",
+      "url": "https://www.medicalcommunity.jp/filedsp/node%24139546/field_file_url",
+      "announced_at": "2025-05",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "852f68aa64f5a9e55aab6be0169c48e42286dbdce3b55c7e387dd7b9a713d81f",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "第一三共は他社製品の販売中止などで需要が急増し、安定供給への影響が見込まれるため、従来から処方している医療機関を優先して卸への出荷を制限すると説明しています。",
+      "targets": [
+        {
+          "yj_code": "2649735Q1020",
+          "product_name": "ロキソニンゲル１％",
+          "maker": "第一三共",
+          "source_pages": [
+            1
+          ],
+          "scope": "package",
+          "packages": [
+            {
+              "package": "25g×10",
+              "unified_product_code": "081105519",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "2025年5月の案内では③限定出荷（他社品の影響）"
+              }
+            },
+            {
+              "package": "50g×10",
+              "unified_product_code": "081105557",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "2025年5月の案内では③限定出荷（他社品の影響）"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "現在の包装別の受注・出荷状況は未確認です。",
+        "この原文には代替候補の記載がありません。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
+      "id": "otsuka-lorelco-250-limited-202609",
+      "maker": "大塚製薬",
+      "title": "ロレルコ錠250mgの他社品販売中止に伴う限定出荷（2026年9月）",
+      "url": "https://www.otsuka-elibrary.jp/pdf_viewer/?f=%2Finfo%2Ffile%2F260901-information.pdf",
+      "announced_at": "2026-09",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "7caab8453b0b12ea3bb4b4f8dccdb834a6d05cff8114cad43b6bb3681b7854e4",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "大塚製薬は他社製品の販売中止の影響で安定供給に支障が出るおそれがあるため、対象包装を限定出荷とすると案内しています。案内時点で解除時期は未定です。",
+      "targets": [
+        {
+          "yj_code": "2189008F1287",
+          "product_name": "ロレルコ錠２５０ｍｇ",
+          "maker": "大塚製薬",
+          "source_pages": [
+            1
+          ],
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "035363514",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "2026年9月の案内では③限定出荷（他社品の影響）"
+              },
+              "gs1_sales": "14987035363511"
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "現在の包装別の受注・出荷状況は未確認です。",
+        "この原文には代替候補の記載がありません。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
+      "id": "sato-pastaron-lotion-limited-202609",
+      "maker": "佐藤製薬",
+      "title": "パスタロンローション10％の需要増による限定出荷（2026年9月）",
+      "url": "https://medinfo-sato.com/update/pdf/260924_pastaron.pdf",
+      "announced_at": "2026-09",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "4c550c1cbcb9ba68ed91a8b8b7ed3cbe0dbf2d40c734b055061f8b531699ad51",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "佐藤製薬は他社の尿素ローション製剤の販売中止などで注文が急増し、増産しても必要な供給量を確保しにくいため、既採用施設を優先して2026年10月2日から特約店向けに限定出荷とすると説明しています。",
+      "targets": [
+        {
+          "yj_code": "2669701Q1059",
+          "product_name": "パスタロンローション１０％",
+          "maker": "佐藤製薬",
+          "source_pages": [
+            1
+          ],
+          "scope": "package",
+          "packages": [
+            {
+              "package": "50g×10",
+              "unified_product_code": "316130507",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "2026年10月2日から③限定出荷（他社品の影響）"
+              },
+              "gs1_sales": "14987316130504"
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "解除時期は案内時点で未定です。",
+        "現在の包装別の受注・出荷状況は未確認です。",
+        "この原文には代替候補の記載がありません。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ],
+      "listed_at": "2026-09-24"
+    },
+    {
+      "id": "viatris-cilostazol-od50-package-discontinuation-202609",
+      "maker": "ヴィアトリス・ヘルスケア合同会社",
+      "title": "シロスタゾールOD錠50mg「VTRS」の販売中止予定と代替製品（2026年9月）",
+      "url": "https://www.viatris-e-channel.com/viatris-products/di/info/pdf/NBZ27Q090A_2026%E5%B9%B410%E6%9C%88%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E4%BA%88%E5%AE%9A%E8%A3%BD%E5%93%81%EF%BC%88%E3%82%B7%E3%83%AD%E3%82%B9%E3%82%BF%E3%82%BE%E3%83%BC%E3%83%ABOD%E9%8C%A0%E3%80%8CVTRS%E3%80%8D%EF%BC%899%E6%9C%88%E4%BB%98.pdf",
+      "announced_at": "2026-09",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "248676c1f5543c7b4bb66ae80b456f34c2ba601bf6dcc2c628427cac2a398b7e",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "ヴィアトリスは安定供給体制と生産効率の改善に向けた製品構成の見直しにより、対象包装を在庫消尽後に販売中止とする予定です。経過措置期間の満了予定は2028年3月末です。",
+      "targets": [
+        {
+          "yj_code": "3399002F3128",
+          "product_name": "シロスタゾールＯＤ錠５０ｍｇ「ＶＴＲＳ」",
+          "maker": "ヴィアトリス・ヘルスケア合同会社",
+          "source_pages": [
+            1
+          ],
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "901061605",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年9月の案内で2027年4月頃見込み"
+                  }
+                ]
+              },
+              "gs1_sales": "14987901061602"
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "901061704",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年9月の案内で2027年12月頃見込み"
+                  }
+                ]
+              },
+              "gs1_sales": "14987901061701"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "target_yj_codes": [
+            "3399002F3128"
+          ],
+          "source_url": "https://www.viatris-e-channel.com/viatris-products/di/info/pdf/NBZ27Q090A_2026%E5%B9%B410%E6%9C%88%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E4%BA%88%E5%AE%9A%E8%A3%BD%E5%93%81%EF%BC%88%E3%82%B7%E3%83%AD%E3%82%B9%E3%82%BF%E3%82%BE%E3%83%BC%E3%83%ABOD%E9%8C%A0%E3%80%8CVTRS%E3%80%8D%EF%BC%899%E6%9C%88%E4%BB%98.pdf",
+          "type": "メーカー原文に記載の販売中止に伴う代替製品",
+          "products": [
+            {
+              "name": "シロスタゾールＯＤ錠５０ｍｇ「ケミファ」",
+              "yj_code": "3399002F3063",
+              "maker": "日本薬品工業",
+              "scope": "同一剤形のOD錠50mg。PTP100錠、PTP500錠、バラ500錠。販売元は日本ケミファ。"
+            }
+          ],
+          "cautions": [
+            "対象は「VTRS」OD錠50mgのPTP100錠・500錠です。候補包装の出荷・在庫は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "この案内は販売中止についての説明です。厚労省11月16日版の現在の限定出荷の具体的な経緯はこの文書では確認できません。",
+        "在庫消尽見込みは販売状況で前後し、経過措置・最終出荷予定は官報告示後に案内予定です。",
+        "現在の包装別の受注・出荷状況は未確認です。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
+      "id": "sato-pastaron-soft-500g-package-discontinuation-202610",
+      "maker": "佐藤製薬",
+      "title": "パスタロンソフト軟膏10％・20％の500g包装の限定出荷解除と販売中止予定（2026年10月）",
+      "url": "https://medinfo-sato.com/update/pdf/261015_pastaron.pdf",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "09c0c6605bdafa47509254cee7c0917c6af651dbe2c323ef045f0b0e5bc8d072",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "佐藤製薬は500g包装に限り2026年10月26日から限定出荷を解除し、保有在庫の範囲で通常出荷した後、在庫がなくなり次第販売中止と案内しました。販売中止の具体的な理由は原文に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "2669701M1073",
+          "product_name": "パスタロンソフト軟膏１０％",
+          "maker": "佐藤製薬",
+          "source_pages": [
+            1
+          ],
+          "scope": "package",
+          "packages": [
+            {
+              "package": "500g",
+              "unified_product_code": "316130026",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "normal_shipment",
+                    "timing": "原文で2026年10月26日から"
+                  },
+                  {
+                    "event": "stock_depletion",
+                    "timing": "案内時点で2027年5月見込み"
+                  }
+                ],
+                "note": "2026年10月26日の限定出荷解除は特約店への出荷開始日です。在庫の範囲内で通常出荷し、在庫消尽後は販売中止の予定です。"
+              },
+              "gs1_sales": "14987316130023"
+            },
+            {
+              "package": "20g×10本",
+              "unified_product_code": "316129990",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "2026年10月の案内で②限定出荷（自社の事情）を継続",
+                "note": "佐藤製薬が販売を継続すると示した包装です。"
+              },
+              "gs1_sales": "14987316129997"
+            }
+          ]
+        },
+        {
+          "yj_code": "2669701M2100",
+          "product_name": "パスタロンソフト軟膏２０％",
+          "maker": "佐藤製薬",
+          "source_pages": [
+            1
+          ],
+          "scope": "package",
+          "packages": [
+            {
+              "package": "500g",
+              "unified_product_code": "316130101",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "normal_shipment",
+                    "timing": "原文で2026年10月26日から"
+                  },
+                  {
+                    "event": "stock_depletion",
+                    "timing": "案内時点で2027年4月見込み"
+                  }
+                ],
+                "note": "2026年10月26日の限定出荷解除は特約店への出荷開始日です。在庫の範囲内で通常出荷し、在庫消尽後は販売中止の予定です。"
+              },
+              "gs1_sales": "14987316130108"
+            },
+            {
+              "package": "25g×10本",
+              "unified_product_code": "316130071",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "2026年10月の案内で②限定出荷（自社の事情）を継続",
+                "note": "佐藤製薬が販売を継続すると示した包装です。"
+              },
+              "gs1_sales": "14987316130078"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "target_yj_codes": [
+            "2669701M1073"
+          ],
+          "source_url": "https://medinfo-sato.com/update/pdf/261015_pastaron.pdf",
+          "type": "500g包装の販売中止案内に記載された継続販売包装",
+          "products": [
+            {
+              "name": "パスタロンソフト軟膏１０％",
+              "yj_code": "2669701M1073",
+              "maker": "佐藤製薬",
+              "scope": "同一規格の20g×10本（統一商品コード316129990）。"
+            }
+          ],
+          "cautions": [
+            "500g包装の販売中止に伴いメーカーが案内した包装です。継続販売包装も資料時点で限定出荷が続いています。現在の受注・在庫は未確認です。"
+          ]
+        },
+        {
+          "target_yj_codes": [
+            "2669701M2100"
+          ],
+          "source_url": "https://medinfo-sato.com/update/pdf/261015_pastaron.pdf",
+          "type": "500g包装の販売中止案内に記載された継続販売包装",
+          "products": [
+            {
+              "name": "パスタロンソフト軟膏２０％",
+              "yj_code": "2669701M2100",
+              "maker": "佐藤製薬",
+              "scope": "同一規格の25g×10本（統一商品コード316130071）。"
+            }
+          ],
+          "cautions": [
+            "500g包装の販売中止に伴いメーカーが案内した包装です。継続販売包装も資料時点で限定出荷が続いています。現在の受注・在庫は未確認です。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫終了見込みは出荷状況により変わります。厚労省11月16日版の品目区分は②限定出荷です。",
+        "現在の包装別の受注・出荷状況は未確認です。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ],
+      "listed_at": "2026-10-15"
+    },
+    {
       "id": "takeda-takecab-od-limited-202606",
       "maker": "武田薬品工業",
       "title": "タケキャブOD錠10mg・20mgの限定出荷継続と代替製品（2026年6月続報）",
