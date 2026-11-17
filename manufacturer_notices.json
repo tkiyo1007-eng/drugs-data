@@ -49876,6 +49876,186 @@
         "日本ジェネリックの販売経路に限った2024年の案内です。沢井製薬扱いの販売継続は当時の案内内容です。現在の卸在庫や受注状況はこの資料では確認できません。",
         "確認した取扱中止原文に代替候補の記載はありません。"
       ]
+    },
+    {
+      "id": "daiichi-mumps-initial-shortage-202501",
+      "maker": "第一三共",
+      "title": "おたふくかぜ生ワクチン「第一三共」の限定出荷・欠品と当時の代替候補",
+      "url": "https://oisya3.com/makuhari/wp-content/uploads/2025/02/%E3%81%8A%E3%81%9F%E3%81%B5%E3%81%8F%E3%81%8B%E3%81%9C%E5%87%BA%E8%8D%B7%E5%81%9C%E6%AD%A2-3.pdf",
+      "announced_at": "2025-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "561d875020f63aa0151a92d05e465ef5314094dffd9fe18f2f1293a0ad7cf1c5",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "第一三共は、2025年3月以降に出荷予定の製品で、ワクチン有効成分の力価が自社の品質規格を満たさず、2月から限定出荷、3月から欠品と案内しました。",
+      "targets": [
+        {
+          "yj_code": "631340AD1075",
+          "product_name": "おたふくかぜ生ワクチン「第一三共」",
+          "maker": "第一三共",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "1人分1バイアル",
+              "unified_product_code": "081112210",
+              "supply": {
+                "status": "stopped",
+                "status_text": "2025年3月から欠品の見込み（2025年1月の案内）",
+                "plans": [],
+                "note": "対象の統一商品コード081112210。"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "type": "第一三共が2025年1月の原文で案内した当時の代替製品",
+          "source_url": "https://oisya3.com/makuhari/wp-content/uploads/2025/02/%E3%81%8A%E3%81%9F%E3%81%B5%E3%81%8F%E3%81%8B%E3%81%9C%E5%87%BA%E8%8D%B7%E5%81%9C%E6%AD%A2-3.pdf",
+          "target_yj_codes": [
+            "631340AD1075"
+          ],
+          "products": [
+            {
+              "name": "乾燥弱毒生おたふくかぜワクチン「タケダ」",
+              "yj_code": "631340AD1040",
+              "maker": "武田薬品工業",
+              "scope": "1人分1バイアル（統一商品コード123134859）"
+            }
+          ],
+          "cautions": [
+            "2025年1月の欠品への案内です。厚労省11月16日版では、タケダ品も限定出荷（自社の事情）です。現在の卸在庫・納入可否は購入先でご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "当時の欠品理由です。現在の厚労省公表区分と、第一三共の2025年9月の出荷再開案内をご確認ください。"
+      ]
+    },
+    {
+      "id": "daiichi-mumps-limited-resumption-202509",
+      "maker": "第一三共",
+      "title": "おたふくかぜ生ワクチン「第一三共」の出荷再開・限定出荷（第二報）",
+      "url": "https://www.city.suginami.tokyo.jp/documents/968/otafuku202509daiitisankyou.pdf",
+      "announced_at": "2025-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "70d5f3a3ea36430b755e19eeef0a226290e320777bdc82366ea0dc4d4f6c82f8",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "第一三共は、2025年9月中旬に1人分1バイアルの出荷を再開し、同時に限定出荷とすると案内しました。第二報では対象ロットの有効期間と箱・ラベルでの期限確認を案内しています。",
+      "targets": [
+        {
+          "yj_code": "631340AD1075",
+          "product_name": "おたふくかぜ生ワクチン「第一三共」",
+          "maker": "第一三共",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "1人分1バイアル",
+              "unified_product_code": "081112210",
+              "supply": {
+                "status": "limited",
+                "status_text": "出荷再開と同時に限定出荷（2025年9月の案内）",
+                "plans": [
+                  {
+                    "event": "shipment_resumption",
+                    "timing": "2025年9月中旬（第二報での案内）"
+                  }
+                ],
+                "note": "対象の統一商品コード081112210。"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "この第二報に具体的な限定出荷の理由や新たな代替候補の記載はありません。",
+        "有効期間の記載は2025年9月に案内されたロットの情報です。"
+      ]
+    },
+    {
+      "id": "sawai-terbinafine-cream-50-pack-discontinuation-202305",
+      "maker": "沢井製薬",
+      "title": "テルビナフィン塩酸塩クリーム1％「サワイ」10g×50本の販売中止案内",
+      "url": "https://med.sawai.co.jp/file/pr28_1067_1.pdf",
+      "announced_at": "2023-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "628b9d560b540b7dbcdbe3354df3225814a86c8bc2836652c601424c48384d7b",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "listed_at": "2023-05-09",
+      "reason": "沢井製薬は、注文に十分対応できない当時の状況を踏まえ、安定供給と生産効率改善のため、10g×50本を在庫消尽後に販売中止すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2659710N1209",
+          "product_name": "テルビナフィン塩酸塩クリーム１％「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "10g×50本",
+              "unified_product_code": "080036128",
+              "gs1_sales": "(01)14987080036125",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2024年7月の見込み（2023年5月の案内）"
+                  }
+                ],
+                "note": "販売中止対象。統一商品コード080036128。"
+              }
+            },
+            {
+              "package": "10g×10本",
+              "unified_product_code": "080036111",
+              "gs1_sales": "(01)14987080036118",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2023年5月の原文が販売継続とした包装。統一商品コード080036111。"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "type": "沢井製薬が10g×50本の採用先に案内した同一製品の別包装",
+          "source_url": "https://med.sawai.co.jp/file/pr28_1067_1.pdf",
+          "target_yj_codes": [
+            "2659710N1209"
+          ],
+          "products": [
+            {
+              "name": "テルビナフィン塩酸塩クリーム１％「サワイ」",
+              "yj_code": "2659710N1209",
+              "maker": "沢井製薬",
+              "scope": "10g×10本（統一商品コード080036111、販売包装単位コード14987080036118）"
+            }
+          ],
+          "cautions": [
+            "2023年5月の案内です。現在の卸在庫や注文への対応は未確認です。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2023年の一部包装販売中止の理由です。現行の限定出荷の具体的な製造トラブルは、この案内では確認できません。"
+      ]
     }
   ]
 }

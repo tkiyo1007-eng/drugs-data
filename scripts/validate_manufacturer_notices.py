@@ -107,6 +107,10 @@ MAKER_MANUAL_SOURCE_HOSTS = {
 # Specific manufacturer and distributor notices hosted outside the primary company domain.
 MAKER_MANUAL_SOURCE_URLS = {
     '日東メディック': {'https://www.pmda.go.jp/files/000283184.pdf'},
+    '第一三共': {
+        'https://oisya3.com/makuhari/wp-content/uploads/2025/02/%E3%81%8A%E3%81%9F%E3%81%B5%E3%81%8F%E3%81%8B%E3%81%9C%E5%87%BA%E8%8D%B7%E5%81%9C%E6%AD%A2-3.pdf',
+        'https://www.city.suginami.tokyo.jp/documents/968/otafuku202509daiitisankyou.pdf',
+    },
     '小堺製薬': {
         'https://drive.google.com/file/d/17AlzsfqIg9BNdXJxXKcIpM6zuUSi3KSB/view?usp=sharing',
         'https://drive.google.com/file/d/1B6H_4eMDbk0g4tcqnbk79P9nLG3_wgk2/view?usp=sharing',
