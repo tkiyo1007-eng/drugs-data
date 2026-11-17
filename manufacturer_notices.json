@@ -44269,6 +44269,438 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "nihon-chemiphar-calvan50-limited-202511",
+      "maker": "日本ケミファ",
+      "title": "カルバン錠50 100錠包装の出荷調整と当時の代替候補",
+      "url": "https://www.nc-medical.com/product_topics/f4bj0h000000c35d-att/f4bj0h000000c361.pdf",
+      "announced_at": "2025-11",
+      "listed_at": "2025-11-26",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "a261baea3aba3935b66d4fa4cd7460ab2866185f70499081dd2818d4bbad982c",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日本ケミファは想定を上回る注文があり、増産しても品薄となるおそれがあるとして、当時の出荷調整と新規採用の辞退を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149036F2026",
+          "product_name": "カルバン錠５０",
+          "maker": "日本ケミファ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "171687215",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、2025年11月のメーカー資料）",
+                "note": "統一商品コード 171687215、販売包装単位コード 14987171687212。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.nc-medical.com/product_topics/f4bj0h000000c35d-att/f4bj0h000000c361.pdf",
+          "target_yj_codes": [
+            "2149036F2026"
+          ],
+          "type": "日本ケミファが当時の案内に記載した代替候補",
+          "products": [
+            {
+              "name": "カルバン錠２５",
+              "maker": "日本ケミファ",
+              "yj_code": "2149036F1020",
+              "scope": "カルバン錠25の100錠包装（統一商品コード171686218）。規格が異なります。2026年11月10日の日本ケミファ一覧では、候補の25mgも限定出荷です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "候補はこの資料の対象包装について当時記載された製品です。現在の出荷区分・理由は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "nihon-chemiphar-calvan100-limited-202512",
+      "maker": "日本ケミファ",
+      "title": "カルバン錠100 100錠包装の出荷調整と当時の代替候補",
+      "url": "https://www.nc-medical.com/product_topics/f4bj0h000000daj4-att/f4bj0h000000dajs.pdf",
+      "announced_at": "2025-12",
+      "listed_at": "2025-12-22",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "6c63c264c880603a5866790b604fdb670072dedc91bc7441364138acc1a74b70",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日本ケミファは想定を上回る注文があり、増産しても品薄となるおそれがあるとして、当時の出荷調整と新規採用の辞退を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149036F3022",
+          "product_name": "カルバン錠１００",
+          "maker": "日本ケミファ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "171688212",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、2025年12月のメーカー資料）",
+                "note": "統一商品コード 171688212、販売包装単位コード 14987171688219。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.nc-medical.com/product_topics/f4bj0h000000daj4-att/f4bj0h000000dajs.pdf",
+          "target_yj_codes": [
+            "2149036F3022"
+          ],
+          "type": "日本ケミファが当時の案内に記載した代替候補",
+          "products": [
+            {
+              "name": "カルバン錠２５",
+              "maker": "日本ケミファ",
+              "yj_code": "2149036F1020",
+              "scope": "カルバン錠25の100錠包装（統一商品コード171686218）。規格が異なります。2026年11月10日の日本ケミファ一覧では、候補の25mgも限定出荷です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "候補はこの資料の対象包装について当時記載された製品です。現在の出荷区分・理由は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "nittomedic-heparinoid-lotion-100g-demand-202601",
+      "maker": "日東メディック",
+      "title": "ヘパリン類似物質ローション0.3%「NIT」100g包装の再調整の経緯",
+      "url": "https://www.nittomedic.co.jp/info/images/oshirase_20260129.pdf",
+      "announced_at": "2026-01",
+      "listed_at": "2026-01-29",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "18ee3d0a926d3047ed7b078c42e46c9da4a571e5db1d8cb509059b7585b78fe0",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "2026年1月には想定を上回る一時的な需要増があり、日東メディックは100g×10の限定出荷を再開しました。",
+      "targets": [
+        {
+          "yj_code": "3339950Q1147",
+          "product_name": "ヘパリン類似物質ローション０．３％「ＮＩＴ」",
+          "maker": "日東メディック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100g×10（チューブ）",
+              "unified_product_code": "497308870",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、2026年1月のメーカー資料）",
+                "note": "統一商品コード 497308870。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "この包装の限定出荷はメーカーの次の案内で2026年4月2日に解除されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nittomedic-heparinoid-lotion-package-difference-202604",
+      "maker": "日東メディック",
+      "title": "ヘパリン類似物質ローション0.3%「NIT」100gの限定出荷解除、50gは継続",
+      "url": "https://www.nittomedic.co.jp/info/images/oshirase_20206040201.pdf",
+      "announced_at": "2026-04",
+      "listed_at": "2026-04-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "8fcd8939445b3969d5a0376868c8205b36fb4c22bba7a77aaea811cdf3bc8c4a",
+      "collection_mode": "manual",
+      "event_type": "resumed",
+      "reason": "日東メディックは、100g×10の供給体制が整ったため、2026年4月2日から限定出荷を解除しました。50g×10は限定出荷継続と案内し、9月25日の一覧にも50g×10が掲載されています。",
+      "targets": [
+        {
+          "yj_code": "3339950Q1147",
+          "product_name": "ヘパリン類似物質ローション０．３％「ＮＩＴ」",
+          "maker": "日東メディック",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100g×10（チューブ）",
+              "unified_product_code": "497308870",
+              "supply": {
+                "status": "normal",
+                "plans": [
+                  {
+                    "event": "normal_shipment",
+                    "timing": "2026年4月2日（メーカー案内）"
+                  }
+                ],
+                "status_text": "通常出荷（2026年4月のメーカー資料）",
+                "note": "統一商品コード 497308870。"
+              }
+            },
+            {
+              "package": "50g×10（チューブ）",
+              "unified_product_code": "497308856",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷継続（2026年4月のメーカー資料）",
+                "note": "統一商品コード 497308856。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "10月の自主回収は指定ロットに対する別の案内です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nittomedic-heparinoid-lotion-lot-recall-202610",
+      "maker": "日東メディック",
+      "title": "ヘパリン類似物質ローション0.3%「NIT」 自主回収の対象ロット",
+      "url": "https://www.pmda.go.jp/files/000283184.pdf",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-13",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ecef9c606330be2e095be9579504fa5e38dd63cef42dee8c6dd38c819860a811",
+      "collection_mode": "manual",
+      "event_type": "recall",
+      "reason": "日東メディックはニトロソアミン化合物が検出されたため、50g・100gの対象ロットのクラスⅡ自主回収を2026年10月13日に開始しました。",
+      "targets": [
+        {
+          "yj_code": "3339950Q1147",
+          "product_name": "ヘパリン類似物質ローション０．３％「ＮＩＴ」",
+          "maker": "日東メディック",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "packages": [
+            {
+              "package": "50g×10（チューブ）",
+              "unified_product_code": "497308856",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 497308856。"
+              }
+            },
+            {
+              "package": "100g×10（チューブ）",
+              "unified_product_code": "497308870",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 497308870。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "対象は原典別紙に列挙されたロットです。供給区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nittomedic-toa-cyanocobalamin-limited-202504",
+      "maker": "日東メディック",
+      "title": "シアノコバラミン点眼液0.02%「ニットー」2包装の限定出荷",
+      "url": "https://www.nittomedic.co.jp/info/images/oshirase_2025041801.pdf",
+      "announced_at": "2025-04",
+      "listed_at": "2025-04-21",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "66d9e7964980ad5beb176d119956c41a17acd5b625fe544d6f10fa45aaeaf3a6",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "販売元の日東メディックは5mL×10本と5mL×50本を限定出荷とし、新規の採用と注文増加を当面辞退すると案内しました。具体的な原因は個別案内に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "1319710Q2124",
+          "product_name": "シアノコバラミン点眼液０．０２％「ニットー」",
+          "maker": "東亜薬品",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×10本",
+              "unified_product_code": "497305626",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、2025年4月の販売元資料）",
+                "note": "統一商品コード 497305626、販売包装単位コード 14987497305623。"
+              }
+            },
+            {
+              "package": "5mL×50本",
+              "unified_product_code": "497305633",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（その他、2025年4月の販売元資料）",
+                "note": "統一商品コード 497305633、販売包装単位コード 14987497305630。"
+              }
+            }
+          ],
+          "seller": "日東メディック"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "製造販売元は東亜薬品、販売元は日東メディックです。日東メディックの2026年9月25日一覧でも両包装の限定出荷を確認しました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "lilly-retevmo-capsule-limited-and-tablets-202606",
+      "maker": "日本イーライリリー",
+      "title": "レットヴィモカプセル40mg・80mg 56カプセル包装の限定出荷と代替候補",
+      "url": "https://www.haigan.gr.jp/wp-content/uploads/2026/06/%E3%83%AC%E3%83%83%E3%83%88%E3%83%B4%E3%82%A3%E3%83%A2%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2026-06",
+      "listed_at": "2026-06-25",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "5cab8457e4ca8782c26092d8375931793efd02cba4cbac18e54296ba0cd071c0",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日本イーライリリーは、カプセル製剤の注文が想定を上回り、安定供給が難しくなったため、2026年6月に限定出荷としました。",
+      "targets": [
+        {
+          "yj_code": "4291075M1027",
+          "product_name": "レットヴィモカプセル４０ｍｇ",
+          "maker": "日本イーライリリー",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP56カプセル（8カプセル×7）",
+              "unified_product_code": "428397706",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、2026年6月のメーカー資料）",
+                "note": "統一商品コード 428397706。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "4291075M2023",
+          "product_name": "レットヴィモカプセル８０ｍｇ",
+          "maker": "日本イーライリリー",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP56カプセル（8カプセル×7）",
+              "unified_product_code": "428298003",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、2026年6月のメーカー資料）",
+                "note": "統一商品コード 428298003。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.haigan.gr.jp/wp-content/uploads/2026/06/%E3%83%AC%E3%83%83%E3%83%88%E3%83%B4%E3%82%A3%E3%83%A2%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+          "target_yj_codes": [
+            "4291075M1027"
+          ],
+          "type": "日本イーライリリーが案内した錠剤",
+          "products": [
+            {
+              "name": "レットヴィモ錠４０ｍｇ",
+              "maker": "日本イーライリリー",
+              "yj_code": "4291075F1028",
+              "scope": "カプセル製剤の服用中の患者が対象の案内です。対象規格は40mg、錠剤はPTP56錠（8錠×7、統一商品コード428534002）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        },
+        {
+          "source_url": "https://www.haigan.gr.jp/wp-content/uploads/2026/06/%E3%83%AC%E3%83%83%E3%83%88%E3%83%B4%E3%82%A3%E3%83%A2%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+          "target_yj_codes": [
+            "4291075M2023"
+          ],
+          "type": "日本イーライリリーが案内した錠剤",
+          "products": [
+            {
+              "name": "レットヴィモ錠８０ｍｇ",
+              "maker": "日本イーライリリー",
+              "yj_code": "4291075F2024",
+              "scope": "カプセル製剤の服用中の患者が対象の案内です。対象規格は80mg、錠剤はPTP56錠（8錠×7、統一商品コード428608208）。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "メーカーの9月のお知らせ一覧にはカプセル製剤の供給終了案内もあります。6月資料で案内された対象包装と候補を掲載しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
     }
   ]
 }
