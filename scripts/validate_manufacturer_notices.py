@@ -111,6 +111,7 @@ MAKER_MANUAL_SOURCE_HOSTS = {
 MAKER_MANUAL_SOURCE_URLS = {
     'クラシエ薬品': {'https://www.kampoyubi.jp/products/20241213_oshirase.pdf'},
     '日東メディック': {'https://www.pmda.go.jp/files/000283184.pdf'},
+    'ニプロESファーマ': {'https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uVxwQIAS'},
     '沢井製薬': {'https://www.jga.gr.jp/assets/pdf/medical/supply/63199438957cc967ba228275e96e9825f40fb12c.pdf'},
     "T'sファーマ": {
         'https://www.hospital.or.jp/site/news/file/1693270450.pdf',

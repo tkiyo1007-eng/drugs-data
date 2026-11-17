@@ -2,6 +2,218 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "sandoz-xylocaine-pump-limited-202311",
+      "maker": "サンド",
+      "title": "キシロカインポンプスプレー8％の入荷遅延による限定出荷（2023年11月）",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20231129_009.pdf",
+      "announced_at": "2023-11",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "4907a8b180e5d18c3074f15e664d57c36061c8c445775b7a9c056125811716d7",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "販売元のサンドは、製造元からの入荷が遅れたため、2023年12月1日から2024年4月まで割当出荷を予定していました。原文では出荷量の回復時期は未定です。",
+      "targets": [
+        {
+          "yj_code": "1214701R1050",
+          "product_name": "キシロカインポンプスプレー８％",
+          "maker": "サンドファーマ",
+          "scope": "seller_route_and_package",
+          "seller": "サンド",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1瓶",
+              "supply": {
+                "status": "limited",
+                "status_text": "出荷量通常・②限定出荷（2023年11月の資料）",
+                "plans": []
+              },
+              "unified_product_code": "614433904",
+              "gs1_sales": "14987614433901"
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "案内の対象はサンド販売分の8％ポンプスプレー1瓶です。",
+        "資料の日付時点の案内です。現在の具体的な供給制限の経緯と包装別の受注・出荷状況は未確認です。",
+        "この原文には代替候補の記載がありません。"
+      ]
+    },
+    {
+      "id": "nipro-es-asparapotassium-tablets-limited-202208",
+      "maker": "ニプロESファーマ",
+      "title": "アスパラカリウム錠300mgの割当出荷による供給再開・継続（2022年8月）",
+      "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uVxwQIAS",
+      "announced_at": "2022-08",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "8ee9a0cc31045d3e399522cdf2e57b90bd11afb8ff11fd175608bb06dca75f4c",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "ニプロESファーマは、製造委託先からの納品遅延でPTP1000錠の供給が滞り、2022年8月25日から新規注文を辞退しつつ特約店への割当出荷で再開すると案内しました。他の3包装は割当出荷を継続する案内です。",
+      "targets": [
+        {
+          "yj_code": "3229005F1080",
+          "product_name": "アスパラカリウム錠３００ｍｇ",
+          "maker": "ニプロ",
+          "scope": "seller_route_and_package",
+          "seller": "ニプロESファーマ",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "supply": {
+                "status": "limited",
+                "status_text": "出荷量通常・②限定出荷（2022年8月の資料）",
+                "plans": [],
+                "note": "割当出荷の継続対象です。"
+              },
+              "unified_product_code": "813704904"
+            },
+            {
+              "package": "PTP500錠",
+              "supply": {
+                "status": "limited",
+                "status_text": "出荷量通常・②限定出荷（2022年8月の資料）",
+                "plans": [],
+                "note": "割当出荷の継続対象です。"
+              },
+              "unified_product_code": "813704911"
+            },
+            {
+              "package": "PTP1000錠",
+              "supply": {
+                "status": "limited",
+                "status_text": "出荷量通常・②限定出荷（2022年8月の資料）",
+                "plans": [
+                  {
+                    "event": "shipment_resumption",
+                    "timing": "2022年8月25日（割当出荷）"
+                  }
+                ],
+                "note": "供給再開日は当時の案内です。"
+              },
+              "unified_product_code": "813704928"
+            },
+            {
+              "package": "バラ1000錠",
+              "supply": {
+                "status": "limited",
+                "status_text": "出荷量通常・②限定出荷（2022年8月の資料）",
+                "plans": [],
+                "note": "割当出荷の継続対象です。"
+              },
+              "unified_product_code": "813704942"
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "統一商品コードは2022年のニプロESファーマ販売分です。現行の製造販売元と販売元はニプロです。",
+        "原文に限定出荷の解除日は示されていません。",
+        "資料の日付時点の案内です。現在の具体的な供給制限の経緯と包装別の受注・出荷状況は未確認です。",
+        "この原文には代替候補の記載がありません。"
+      ]
+    },
+    {
+      "id": "ts-takepron-iv30-limited-202304",
+      "maker": "T's製薬",
+      "title": "タケプロン静注用30mgの限定出荷継続（2023年4月）",
+      "url": "https://www.med.ts-pharma.com/di-net/kaitei/w_2023040301.pdf",
+      "announced_at": "2023-04",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "6dd6d65dda888bb431af9b83f6b2d8d2ae00d1b99dac6fdc8f65981fd8f919a8",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "武田テバ薬品と武田テバファーマの共同案内では、想定を超える注文が続き、安定供給を確保するため特約店への限定出荷を行っていました。静注用30mgの10瓶は出荷量通常・③限定出荷と記載されています。",
+      "targets": [
+        {
+          "yj_code": "2329404F1020",
+          "product_name": "タケプロン静注用３０ｍｇ",
+          "maker": "T's製薬",
+          "scope": "seller_route_and_package",
+          "seller": "武田薬品工業",
+          "source_pages": [
+            1,
+            3,
+            4
+          ],
+          "packages": [
+            {
+              "package": "10瓶",
+              "supply": {
+                "status": "limited",
+                "status_text": "出荷量通常・③限定出荷（2023年4月の資料）",
+                "plans": []
+              },
+              "gs1_sales": "14987123129456"
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "当時の製造販売元は武田テバ薬品（現T’s製薬）です。現在の販売元は武田薬品工業です。",
+        "2026年11月16日の厚労省データでは、品目全体が②限定出荷（自社の事情）、理由は「その他の理由」です。",
+        "リンク先で医療関係者向けの確認画面が開く場合があります。",
+        "資料の日付時点の案内です。現在の具体的な供給制限の経緯と包装別の受注・出荷状況は未確認です。",
+        "この原文には代替候補の記載がありません。"
+      ]
+    },
+    {
+      "id": "ts-takepron-iv30-limited-202202",
+      "maker": "T's製薬",
+      "title": "タケプロン静注用30mgの他社品の供給遅延に伴う出荷調整（2022年2月）",
+      "url": "https://www.med.ts-pharma.com/di-net/kaitei/1104_TAKEPRON_iv_30mg20220225.pdf",
+      "announced_at": "2022-02",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "e3b864c0cf5d545ebf66f2d30f7b1113fc6185ea67472f0de13959b6982bdd5c",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "武田テバ薬品は、他社品の供給遅延に伴い想定を超える注文があったため、安定供給を確保する目的で特約店向けの出荷調整を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2329404F1020",
+          "product_name": "タケプロン静注用３０ｍｇ",
+          "maker": "T's製薬",
+          "scope": "seller_route_and_package",
+          "seller": "武田薬品工業",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10瓶",
+              "supply": {
+                "status": "limited",
+                "status_text": "出荷調整の対象（2022年2月の資料）",
+                "plans": []
+              },
+              "gs1_sales": "14987123129456"
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "当時の製造販売元は武田テバ薬品（現T’s製薬）です。現在の販売元は武田薬品工業です。",
+        "2026年11月16日の厚労省データでは、品目全体が②限定出荷（自社の事情）、理由は「その他の理由」です。",
+        "リンク先で医療関係者向けの確認画面が開く場合があります。",
+        "資料の日付時点の案内です。現在の具体的な供給制限の経緯と包装別の受注・出荷状況は未確認です。",
+        "この原文には代替候補の記載がありません。"
+      ]
+    },
+    {
       "id": "nipro-pegfilgrastim-bs-limited-202403",
       "maker": "ニプロ",
       "title": "ペグフィルグラスチムBS皮下注3.6mg「ニプロ」の限定出荷理由（2024年3月）",
