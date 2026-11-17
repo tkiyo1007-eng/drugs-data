@@ -2,6 +2,232 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "nipro-pegfilgrastim-bs-limited-202403",
+      "maker": "ニプロ",
+      "title": "ペグフィルグラスチムBS皮下注3.6mg「ニプロ」の限定出荷理由（2024年3月）",
+      "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uVlf8IAC",
+      "announced_at": "2024-03",
+      "listed_at": "2024-03-13",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "b8a9d6a921cb55c9e14d804d090f033b721653870b0fa151abd332d739700cde",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "販売元のニプロは、他社の同一成分薬の限定出荷に伴う需要増を見込み、出荷量と在庫量では対応しきれないため、既存の納入先を優先し在庫の偏りを防ぐ目的で特約店への限定出荷を実施すると説明しています。",
+      "maker_supply_status": {
+        "handling": "③ 限定出荷（他社品の影響）",
+        "volume": "A 出荷量通常"
+      },
+      "targets": [
+        {
+          "yj_code": "3399416G1028",
+          "product_name": "ペグフィルグラスチムＢＳ皮下注３．６ｍｇ「ニプロ」",
+          "maker": "持田製薬販売",
+          "seller": "ニプロ",
+          "source_pages": [
+            1
+          ],
+          "scope": "seller_route_and_package",
+          "packages": [
+            {
+              "package": "1シリンジ",
+              "unified_product_code": "190-10005-4",
+              "supply": {
+                "status": "limited",
+                "status_text": "2024年3月の案内では③ 限定出荷（他社品の影響）",
+                "plans": []
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "この原文には代替候補や限定出荷の解除時期の記載がありません。",
+        "2024年3月のニプロ販売分への案内です。現在の包装別在庫・受注可否は未確認です。"
+      ]
+    },
+    {
+      "id": "torii-zefnart-cream-limited-202607",
+      "maker": "鳥居薬品",
+      "title": "ゼフナートクリーム2%の限定出荷理由（2026年7月）",
+      "url": "https://www.torii.co.jp/iyakuDB/data/notice/zef_2607.pdf",
+      "announced_at": "2026-07",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "be9c953f34b40fdbef22aa32d59855424c6e76147e41e45cd47592651e3b8908",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "販売元の鳥居薬品は、想定を上回る注文が続き、安定供給に影響するおそれがあるため限定出荷としたと説明しています。案内時点では前年並みの出荷量を見込む一方、新規採用を当面辞退するとしています。",
+      "maker_supply_status": {
+        "handling": "③ 限定出荷（他社品の影響）",
+        "volume": "A 出荷量通常"
+      },
+      "targets": [
+        {
+          "yj_code": "2659712N1020",
+          "product_name": "ゼフナートクリーム２％",
+          "maker": "全薬工業",
+          "seller": "鳥居薬品",
+          "source_pages": [
+            1
+          ],
+          "scope": "seller_route_and_package",
+          "packages": [
+            {
+              "package": "10g×10本",
+              "unified_product_code": "158309512",
+              "gs1_sales": "14987158309519",
+              "supply": {
+                "status": "limited",
+                "status_text": "2026年7月の案内では③ 限定出荷（他社品の影響）",
+                "plans": []
+              }
+            },
+            {
+              "package": "10g×50本",
+              "unified_product_code": "158309529",
+              "gs1_sales": "14987158309526",
+              "supply": {
+                "status": "limited",
+                "status_text": "2026年7月の案内では③ 限定出荷（他社品の影響）",
+                "plans": []
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "この原文には代替候補や限定出荷の解除時期の記載がありません。",
+        "2026年7月の鳥居薬品販売分への案内です。現在の包装別在庫・受注可否は未確認です。",
+        "原文を開くと、鳥居薬品の医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
+      "id": "kracie-clindamycin-gel-limited-202412",
+      "maker": "クラシエ薬品",
+      "title": "クリンダマイシンリン酸エステルゲル1%「クラシエ」の限定出荷理由（2024年12月）",
+      "url": "https://www.kampoyubi.jp/products/20241213_oshirase.pdf",
+      "announced_at": "2024-12",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "8cd2131c9f9e774e81805207d581698a312e669a5582b7b58d39bc5f0bf286fb",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "販売元のクラシエ薬品は、想定を超える需要増で安定供給に支障が出るおそれがあるため、限定出荷を実施すると説明しています。",
+      "maker_supply_status": {
+        "handling": "④ 限定出荷（その他）",
+        "volume": "A 出荷量通常"
+      },
+      "resumption": "2024年12月13日現在の別表では解除時期は未定とされ、判明次第案内するとしています。",
+      "targets": [
+        {
+          "yj_code": "2634713M1100",
+          "product_name": "クリンダマイシンリン酸エステルゲル１％「クラシエ」",
+          "maker": "シオノケミカル",
+          "seller": "クラシエ薬品",
+          "source_pages": [
+            1,
+            2
+          ],
+          "scope": "seller_route_and_package",
+          "packages": [
+            {
+              "package": "10g×10本",
+              "unified_product_code": "045480089",
+              "gs1_sales": "14987045480086",
+              "supply": {
+                "status": "limited",
+                "status_text": "2024年12月の案内では④ 限定出荷（その他）",
+                "plans": []
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "この原文には対象品目の代替候補の記載がありません。",
+        "対象はクラシエ薬品販売分です。現在の包装別在庫・受注可否は未確認です。",
+        "原文を開くと、販売元の医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
+      "id": "torii-antebate-lotion-limited-202412",
+      "maker": "鳥居薬品",
+      "title": "アンテベートローション0.05%の限定出荷理由と代替候補（2024年12月）",
+      "url": "https://www.torii.co.jp/iyakuDB/data/notice/ant_2412.pdf",
+      "announced_at": "2024-12",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "35013f60e8ac35fd25c4ee37b3af2c43f3914a586c66a9e7762a18bfcf5284b7",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "鳥居薬品は、想定を上回る注文が続き、安定供給に影響するおそれがあるため限定出荷としたと説明しています。案内時点では前年並みの出荷量を見込む一方、新規採用を当面辞退するとしています。",
+      "maker_supply_status": {
+        "handling": "④ 限定出荷（その他）",
+        "volume": "A 出荷量通常"
+      },
+      "resumption": "2024年12月の原文では、解除の目途が立ち次第案内するとしています。",
+      "targets": [
+        {
+          "yj_code": "2646730Q1026",
+          "product_name": "アンテベートローション０．０５％",
+          "maker": "鳥居薬品",
+          "source_pages": [
+            1
+          ],
+          "scope": "package",
+          "packages": [
+            {
+              "package": "10g×10本",
+              "unified_product_code": "158143215",
+              "gs1_sales": "14987158143212",
+              "supply": {
+                "status": "limited",
+                "status_text": "2024年12月の案内では④ 限定出荷（その他）",
+                "plans": []
+              }
+            },
+            {
+              "package": "10g×50本",
+              "unified_product_code": "158143239",
+              "gs1_sales": "14987158143236",
+              "supply": {
+                "status": "limited",
+                "status_text": "2024年12月の案内では④ 限定出荷（その他）",
+                "plans": []
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "target_yj_codes": [
+            "2646730Q1026"
+          ],
+          "source_url": "https://www.torii.co.jp/iyakuDB/data/notice/ant_2412.pdf",
+          "products": [
+            {
+              "name": "ベタメタゾン酪酸エステルプロピオン酸エステルローション０．０５％「ＭＹＫ」",
+              "yj_code": "2646730Q1050",
+              "maker": "ＭＡＥ",
+              "scope": "原文記載の製造販売元は前田薬品工業、販売元は佐藤製薬。対象は佐藤製薬販売分の10g×10本（316136172）と10g×50本（316136189）。"
+            }
+          ],
+          "cautions": [
+            "現在の包装別の在庫・受注可否は未確認です。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2024年12月の対象包装への案内です。現在の供給区分は厚労省公表欄で確認してください。",
+        "原文を開くと、鳥居薬品の医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
       "id": "daiichisankyo-tranex-500-limited-202605",
       "maker": "第一三共",
       "title": "トランサミン錠500mgの需要増による限定出荷（2026年5月）",
