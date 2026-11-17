@@ -2,6 +2,52 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "nipro-pegfilgrastim-bs-limited-202403",
+      "maker": "ニプロ",
+      "title": "ペグフィルグラスチムBS皮下注3.6mg「ニプロ」の限定出荷理由（2024年3月）",
+      "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uVlf8IAC",
+      "announced_at": "2024-03",
+      "listed_at": "2024-03-13",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "b8a9d6a921cb55c9e14d804d090f033b721653870b0fa151abd332d739700cde",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "販売元のニプロは、他社の同一成分薬の限定出荷に伴う需要増を見込み、出荷量と在庫量では対応しきれないため、既存の納入先を優先し在庫の偏りを防ぐ目的で特約店への限定出荷を実施すると説明しています。",
+      "maker_supply_status": {
+        "handling": "③ 限定出荷（他社品の影響）",
+        "volume": "A 出荷量通常"
+      },
+      "targets": [
+        {
+          "yj_code": "3399416G1028",
+          "product_name": "ペグフィルグラスチムＢＳ皮下注３．６ｍｇ「ニプロ」",
+          "maker": "持田製薬販売",
+          "seller": "ニプロ",
+          "source_pages": [
+            1
+          ],
+          "scope": "seller_route_and_package",
+          "packages": [
+            {
+              "package": "1シリンジ",
+              "unified_product_code": "190-10005-4",
+              "supply": {
+                "status": "limited",
+                "status_text": "2024年3月の案内では③ 限定出荷（他社品の影響）",
+                "plans": []
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "この原文には代替候補や限定出荷の解除時期の記載がありません。",
+        "2024年3月のニプロ販売分への案内です。現在の包装別在庫・受注可否は未確認です。"
+      ]
+    },
+    {
       "id": "torii-zefnart-cream-limited-202607",
       "maker": "鳥居薬品",
       "title": "ゼフナートクリーム2%の限定出荷理由（2026年7月）",
