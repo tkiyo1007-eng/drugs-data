@@ -49063,6 +49063,263 @@
         "リンク先の一覧は随時更新されます。掲載内容は確認時に取得した11月10日版に基づきます。",
         "確認したメーカー原文に代替候補の記載はありません。"
       ]
+    },
+    {
+      "id": "kokando-cimetidine-limited-202310",
+      "maker": "皇漢堂製薬",
+      "url": "https://www.kokando.co.jp/wp/wp-content/uploads/2023/10/cimetidinegenteisyukka23.10.pdf",
+      "source_index_url": "https://www.kokando.co.jp/medical_personnel/ethical_pharmaceuticals/medical-supply/",
+      "announced_at": "2023-10",
+      "listed_at": "2023-10-18",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "bed91fc7dfeb76fd84fa91dbcc63d929f72f03d56ddfb0aafa10f8164037817b",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "title": "シメチジン錠200mg・400mg「クニヒロ」限定出荷のご案内",
+      "reason": "皇漢堂製薬は、他社の同成分製剤の限定出荷を受けて想定を超える注文があり、安定供給のため2023年10月19日から出荷数を割り当てると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2325001F1521",
+          "product_name": "シメチジン錠２００ｍｇ「クニヒロ」",
+          "maker": "皇漢堂製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "gs1_sales_package": "(01)14987343501100",
+              "unified_product_code": "343501103",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "note": "統一商品コード 343501103、販売包装単位コード 14987343501100。",
+                "status_text": "限定出荷（2023年10月の案内）"
+              }
+            },
+            {
+              "package": "PTP1,000錠",
+              "gs1_sales_package": "(01)14987343501124",
+              "unified_product_code": "343501127",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "note": "統一商品コード 343501127、販売包装単位コード 14987343501124。",
+                "status_text": "限定出荷（2023年10月の案内）"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2325001F2200",
+          "product_name": "シメチジン錠４００ｍｇ「クニヒロ」",
+          "maker": "皇漢堂製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "バラ100錠",
+              "gs1_sales_package": "(01)14987343501056",
+              "unified_product_code": "343501059",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "note": "統一商品コード 343501059、販売包装単位コード 14987343501056。",
+                "status_text": "限定出荷（2023年10月の案内）"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "gs1_sales_package": "(01)14987343501063",
+              "unified_product_code": "343501066",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "note": "統一商品コード 343501066、販売包装単位コード 14987343501063。",
+                "status_text": "限定出荷（2023年10月の案内）"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "こちらは2023年10月の案内です。同じ包装について、皇漢堂製薬は2026年9月1日から限定出荷を解除すると後日案内しました。",
+        "確認したメーカー原文に代替候補の記載はありません。"
+      ]
+    },
+    {
+      "id": "kokando-cimetidine-resumption-20260901",
+      "maker": "皇漢堂製薬",
+      "url": "https://www.kokando.co.jp/wp/wp-content/uploads/2026/09/%E3%82%B7%E3%83%A1%E3%83%81%E3%82%B8%E3%83%B3%E9%8C%A0%EF%BD%A2%E3%82%AF%E3%83%8B%E3%83%92%E3%83%AD%EF%BD%A3_%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E8%A7%A3%E9%99%A4%E3%81%AE%E3%81%94%E6%A1%88%E5%86%852026.9.pdf",
+      "source_index_url": "https://www.kokando.co.jp/medical_personnel/ethical_pharmaceuticals/medical-supply/",
+      "announced_at": "2026-08",
+      "listed_at": "2026-09-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ffd073869428e583b5fa865c199e35f7ea95d976bf34a3d4e0fbac174fda5b7d",
+      "collection_mode": "manual",
+      "event_type": "resumption_planned",
+      "title": "シメチジン錠200mg・400mg「クニヒロ」限定出荷解除のご案内",
+      "reason": "十分な在庫を確保できる見込みとなったため、皇漢堂製薬は対象包装の限定出荷を2026年9月1日から解除し、通常出荷に戻すと案内しました。",
+      "targets": [
+        {
+          "yj_code": "2325001F1521",
+          "product_name": "シメチジン錠２００ｍｇ「クニヒロ」",
+          "maker": "皇漢堂製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "gs1_sales_package": "(01)14987343501100",
+              "unified_product_code": "343501103",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "normal_shipment",
+                    "timing": "2026年9月1日から限定出荷解除・通常出荷と案内"
+                  }
+                ],
+                "note": "統一商品コード 343501103、販売包装単位コード 14987343501100。"
+              }
+            },
+            {
+              "package": "PTP1,000錠",
+              "gs1_sales_package": "(01)14987343501124",
+              "unified_product_code": "343501127",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "normal_shipment",
+                    "timing": "2026年9月1日から限定出荷解除・通常出荷と案内"
+                  }
+                ],
+                "note": "統一商品コード 343501127、販売包装単位コード 14987343501124。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2325001F2200",
+          "product_name": "シメチジン錠４００ｍｇ「クニヒロ」",
+          "maker": "皇漢堂製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "バラ100錠",
+              "gs1_sales_package": "(01)14987343501056",
+              "unified_product_code": "343501059",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "normal_shipment",
+                    "timing": "2026年9月1日から限定出荷解除・通常出荷と案内"
+                  }
+                ],
+                "note": "統一商品コード 343501059、販売包装単位コード 14987343501056。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "gs1_sales_package": "(01)14987343501063",
+              "unified_product_code": "343501066",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "normal_shipment",
+                    "timing": "2026年9月1日から限定出荷解除・通常出荷と案内"
+                  }
+                ],
+                "note": "統一商品コード 343501066、販売包装単位コード 14987343501063。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "11月16日版の厚労省一覧は、両規格とも2024年7月4日更新の限定出荷（他社品の影響）です。メーカー案内と厚労省公表の間で表示が異なります。",
+        "確認したのはメーカーの案内です。解除の実施状況と卸在庫は、流通先またはメーカーでご確認ください。",
+        "確認したメーカー原文に代替候補の記載はありません。"
+      ]
+    },
+    {
+      "id": "kokando-azulene-glutamine-allocation-202303",
+      "maker": "皇漢堂製薬",
+      "url": "https://www.kokando.co.jp/wp/wp-content/uploads/2023/03/azulenesyukkasaikaiwariatekeizokuannai23.4.pdf",
+      "source_index_url": "https://www.kokando.co.jp/medical_personnel/ethical_pharmaceuticals/medical-supply/",
+      "announced_at": "2023-03",
+      "listed_at": "2023-03-17",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "d87a85bd53cab498e717c282c25bd921d471dd98a133885ccdbc93d873dab40c",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "title": "アズレンスルホン酸ナトリウム・L-グルタミン配合顆粒「クニヒロ」出荷再開及び出荷数割当調整継続のお知らせ",
+      "reason": "皇漢堂製薬は2023年4月3日から出荷を再開する一方、十分な在庫を確保できていなかったため、2包装の出荷数割当を継続すると案内しました。割当調整の解除時期は当時未定でした。",
+      "targets": [
+        {
+          "yj_code": "2329122D1465",
+          "product_name": "アズレンスルホン酸ナトリウム・Ｌ－グルタミン配合顆粒「クニヒロ」",
+          "maker": "皇漢堂製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "バラ500g",
+              "gs1_sales_package": "(01)14987343500929",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "shipment_resumption",
+                    "timing": "2023年4月3日から割当を継続して出荷再開と案内"
+                  }
+                ],
+                "note": "JANコード 4987343500922、販売包装単位コード 14987343500929。",
+                "status_text": "出荷数割当を継続（2023年3月の案内）"
+              }
+            },
+            {
+              "package": "0.67g×600包",
+              "gs1_sales_package": "(01)14987343500912",
+              "supply": {
+                "status": "limited",
+                "plans": [
+                  {
+                    "event": "shipment_resumption",
+                    "timing": "2023年4月3日から割当を継続して出荷再開と案内"
+                  }
+                ],
+                "note": "JANコード 4987343500915、販売包装単位コード 14987343500912。",
+                "status_text": "出荷数割当を継続（2023年3月の案内）"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2023年3月の原文は、先行する一時出荷停止の具体的な原因には言及していません。",
+        "11月16日版の厚労省一覧では、2024年3月1日更新の限定出荷（自社の事情）で、理由は「その他の理由」です。",
+        "確認したメーカー原文に代替候補の記載はありません。"
+      ]
     }
   ]
 }
