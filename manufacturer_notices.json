@@ -4879,8 +4879,8 @@
       "url": "https://www.maruishi-pharm.co.jp/medical/media/monilac-syrup_syukkateisi_20261019.pdf",
       "announced_at": "2026-10",
       "listed_at": "2026-10-19",
-      "verified_at": "2026-11-03",
-      "content_updated_at": "2026-11-03",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
       "sha256": "fed45ba222d98948a25a9499bd997d4961671b4b0127e49d9667c0d4d5736c9e",
       "collection_mode": "manual",
       "event_type": "limited",
@@ -4940,9 +4940,24 @@
       ],
       "alternatives": [
         {
-          "products": [],
+          "source_url": "https://www.maruishi-pharm.co.jp/medical/media/monilac-syrup_syukkateisi_20261019.pdf",
+          "target_yj_codes": [
+            "3999001Q2058"
+          ],
+          "indication": "小児における便秘の改善",
+          "type": "丸石製薬が2026年10月の案内で明記した、小児の便秘に対する候補",
+          "products": [
+            {
+              "name": "マグミット錠１００ｍｇ",
+              "maker": "マグミット製薬",
+              "yj_code": "2344009F7025",
+              "scope": "100mg・PTP100錠（10錠×10）、丸石製薬発売。統一商品コード211-127190、販売包装単位コード14987211127197。"
+            }
+          ],
           "cautions": [
-            "メーカーの参考製品は原文をご確認ください。"
+            "モニラックはラクツロースのシロップ剤、マグミットは酸化マグネシウムの錠剤です。成分・剤形が異なります。",
+            "マグミット錠の電子添文では、緩下剤としての小児の用法は1歳以上が対象です。年齢、腎機能、高マグネシウム血症等の注意事項は電子添文でご確認ください。",
+            "この候補は小児の便秘についての案内です。モニラックのその他の適応に対する候補や現在の在庫は確認していません。"
           ]
         }
       ],
