@@ -2,6 +2,225 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "hikari-glucose-30-discontinuation-202604",
+      "maker": "光製薬",
+      "title": "光糖液30％の販売中止予定とメーカーが案内した20％製品",
+      "url": "https://www.hikari-pharm.co.jp/wp-content/uploads/2026/04/g30_sb500.2026.04.20.pdf",
+      "announced_at": "2026-04",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "b0b378bcc9d8ec535b3dd86106566e7fc3778cab320fcc24353e12e9ffec5bcc",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "光製薬は在庫がなくなり次第、対象包装の販売を中止すると案内しました。販売中止を決めた具体的な背景は原文に記載がありません。",
+      "targets": [
+        {
+          "yj_code": "3231401T2024",
+          "product_name": "光糖液３０％",
+          "maker": "光製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "500mL×20袋（ソフトバッグ）",
+              "unified_product_code": "186119541",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "在庫消尽後に販売中止予定。流通在庫により時期は前後する可能性があります。 統一商品コード186119541。"
+              }
+            }
+          ],
+          "planned_timing": "2027年10月（2026年4月の案内）"
+        }
+      ],
+      "alternatives": [
+        {
+          "type": "光製薬が販売中止予定にあわせて案内した別濃度の製品",
+          "source_url": "https://www.hikari-pharm.co.jp/wp-content/uploads/2026/04/g30_sb500.2026.04.20.pdf",
+          "target_yj_codes": [
+            "3231401T2024"
+          ],
+          "products": [
+            {
+              "name": "光糖液２０％",
+              "yj_code": "3231401T1028",
+              "maker": "光製薬",
+              "scope": "500mL×20袋（ソフトバッグ）、統一商品コード186118544"
+            }
+          ],
+          "cautions": [
+            "原文の候補は20％です。対象品の30％とは濃度が異なります。",
+            "同じ容量でもブドウ糖量が異なります。電子添文と処方内容を確認してください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "メーカーが示した経過措置期限は2028年3月31日予定です。販売中止の実施や現在の受注・在庫は未確認です。"
+      ]
+    },
+    {
+      "id": "hikari-levoleucovorin-discontinuation-202509",
+      "maker": "光製薬",
+      "title": "レボホリナート点滴静注用25mg・100mg「HK」の販売中止予定と規格別の代替候補",
+      "url": "https://www.hikari-pharm.co.jp/wp-content/uploads/2026/03/lev_gv_2025.09.05.pdf",
+      "announced_at": "2025-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "c78c4578beab5ae52709c5f0e4c9d6200a63506461658a3c4a732d4c553e2f26",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "光製薬は在庫がなくなり次第、対象包装の販売を中止すると案内しました。販売中止を決めた具体的な背景は原文に記載がありません。",
+      "targets": [
+        {
+          "yj_code": "3929407D1055",
+          "product_name": "レボホリナート点滴静注用２５ｍｇ「ＨＫ」",
+          "maker": "光製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "25mg×10瓶（ガラスバイアル）",
+              "unified_product_code": "186740011",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "在庫消尽後に販売中止予定。販売中止の実施と在庫消尽は未確認です。 統一商品コード186740011。"
+              }
+            }
+          ],
+          "planned_timing": "2026年11月（2025年9月の案内）"
+        },
+        {
+          "yj_code": "3929407D2078",
+          "product_name": "レボホリナート点滴静注用１００ｍｇ「ＨＫ」",
+          "maker": "光製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100mg×5瓶（ガラスバイアル）",
+              "unified_product_code": "186740110",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "在庫消尽後に販売中止予定。販売中止の実施と在庫消尽は未確認です。 統一商品コード186740110。"
+              }
+            }
+          ],
+          "planned_timing": "2026年7月（2025年9月の案内）"
+        }
+      ],
+      "alternatives": [
+        {
+          "type": "光製薬が対象包装の在庫消尽後に案内した同規格の製品",
+          "source_url": "https://www.hikari-pharm.co.jp/wp-content/uploads/2026/03/lev_gv_2025.09.05.pdf",
+          "target_yj_codes": [
+            "3929407D1055"
+          ],
+          "products": [
+            {
+              "name": "レボホリナート点滴静注用２５ｍｇ「サワイ」",
+              "yj_code": "3929407D1098",
+              "maker": "沢井製薬",
+              "scope": "25mg×10瓶（ガラスバイアル）、統一商品コード080732013"
+            }
+          ],
+          "cautions": [
+            "光製薬の2025年9月の原文では、対象包装の在庫がなくなった後の候補として案内しています。",
+            "出荷・受注・卸在庫は購入先で最新の情報をご確認ください。"
+          ]
+        },
+        {
+          "type": "光製薬が対象包装の在庫消尽後に案内した同規格の製品",
+          "source_url": "https://www.hikari-pharm.co.jp/wp-content/uploads/2026/03/lev_gv_2025.09.05.pdf",
+          "target_yj_codes": [
+            "3929407D2078"
+          ],
+          "products": [
+            {
+              "name": "レボホリナート点滴静注用１００ｍｇ「サワイ」",
+              "yj_code": "3929407D2094",
+              "maker": "沢井製薬",
+              "scope": "100mg×5瓶（ガラスバイアル）、統一商品コード080733010"
+            }
+          ],
+          "cautions": [
+            "光製薬の2025年9月の原文では、対象包装の在庫がなくなった後の候補として案内しています。",
+            "出荷・受注・卸在庫は購入先で最新の情報をご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2025年9月の原文では経過措置期限を2027年3月31日予定と案内しています。厚労省の現在の供給区分と、メーカーが案内した販売中止予定は別の情報です。"
+      ]
+    },
+    {
+      "id": "ayumi-raloxifene-shipping-history-202110",
+      "maker": "あゆみ製薬",
+      "title": "ラロキシフェン塩酸塩錠60mg「あゆみ」の2021年の一時出荷停止と当時の代替候補",
+      "url": "https://www.ayumi-pharma.com/pdf/news_211019_2.pdf",
+      "announced_at": "2021-10",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "8cd05e7eb6721bada4ff31142d8748d8f71b1a81fee50d379543323cdfc5b439",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "あゆみ製薬は2021年10月、同成分の他社品の出荷調整で需要が増え、安定した供給が難しくなったため、特約店への出荷を一時的に止めると案内しました。",
+      "targets": [
+        {
+          "yj_code": "3999021F1120",
+          "product_name": "ラロキシフェン塩酸塩錠６０ｍｇ「あゆみ」",
+          "maker": "シオノケミカル",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "896817621",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2021年11月22日からの一時出荷停止を案内した当時の対象です。現在の包装別出荷状況は未確認です。 統一商品コード896817621。"
+              }
+            }
+          ],
+          "seller": "あゆみ製薬"
+        }
+      ],
+      "alternatives": [
+        {
+          "type": "あゆみ製薬が2021年10月の一時出荷停止について案内した当時の候補",
+          "source_url": "https://www.ayumi-pharma.com/pdf/news_211019_2.pdf",
+          "target_yj_codes": [
+            "3999021F1120"
+          ],
+          "products": [
+            {
+              "name": "ラロキシフェン塩酸塩錠６０ｍｇ「日医工」",
+              "yj_code": "3999021F1104",
+              "maker": "日医工"
+            }
+          ],
+          "cautions": [
+            "2021年の一時出荷停止の案内です。候補製品の包装や適用期限は原文に記載がありません。",
+            "2024年11月更新の限定出荷に対する現在の案内は未確認です。"
+          ]
+        }
+      ],
+      "cautions": [
+        "厚労省欄には現在の供給区分を表示しています。2024年11月更新の限定出荷に関する具体的なメーカー説明は未確認です。"
+      ]
+    },
+    {
       "id": "towa-limited-demand-explanation-20250327",
       "maker": "東和薬品",
       "title": "東和薬品の限定出荷に関する過去の案内（2025年3月27日）",
