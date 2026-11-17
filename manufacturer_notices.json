@@ -2,6 +2,111 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "wakamoto-linolosal-injection-limited-202410",
+      "maker": "わかもと製薬",
+      "title": "リノロサール注射液3規格の需要急増による限定出荷（2024年10月）",
+      "url": "https://web.archive.org/web/20260413041712id_/https://www.wakamoto-pharm.co.jp/upd/pdf/0000001332_1.pdf",
+      "announced_at": "2024-10",
+      "listed_at": "2024-10-31",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "d79a0a6de07534afbce3aaac607411e6ae8df6bd036c29dd5b1358f5d714a1b2",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "わかもと製薬は、3規格の需要が急増し安定供給に支障が出るおそれがあるとして、2024年11月1日から特約店向けの出荷を調整しました。すでに使用していた患者の処方継続を優先し、新規納品と既存の取引先からの注文増は辞退する案内です。",
+      "targets": [
+        {
+          "yj_code": "2454404A1080",
+          "product_name": "リノロサール注射液２ｍｇ（０．４％）",
+          "maker": "わかもと製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "0.5mL×10アンプル",
+              "unified_product_code": "243313639",
+              "supply": {
+                "status": "limited",
+                "status_text": "出荷量通常・③限定出荷（2024年10月の資料）",
+                "plans": [],
+                "note": "統一商品コード 243313639。"
+              }
+            },
+            {
+              "package": "0.5mL×50アンプル",
+              "unified_product_code": "243313646",
+              "supply": {
+                "status": "limited",
+                "status_text": "出荷量通常・③限定出荷（2024年10月の資料）",
+                "plans": [],
+                "note": "統一商品コード 243313646。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2454404A2087",
+          "product_name": "リノロサール注射液４ｍｇ（０．４％）",
+          "maker": "わかもと製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "1mL×10アンプル",
+              "unified_product_code": "243313745",
+              "supply": {
+                "status": "limited",
+                "status_text": "出荷量通常・③限定出荷（2024年10月の資料）",
+                "plans": [],
+                "note": "統一商品コード 243313745。"
+              }
+            },
+            {
+              "package": "1mL×50アンプル",
+              "unified_product_code": "243313752",
+              "supply": {
+                "status": "limited",
+                "status_text": "出荷量通常・③限定出荷（2024年10月の資料）",
+                "plans": [],
+                "note": "統一商品コード 243313752。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2454404A3083",
+          "product_name": "リノロサール注射液２０ｍｇ（０．４％）",
+          "maker": "わかもと製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×10アンプル",
+              "unified_product_code": "243313530",
+              "supply": {
+                "status": "limited",
+                "status_text": "出荷量通常・③限定出荷（2024年10月の資料）",
+                "plans": [],
+                "note": "統一商品コード 243313530。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "限定出荷の解除時期は、2024年10月の案内では未定でした。この資料からは、その後の解除や現在の包装別の出荷・受注状況は確認できません。",
+        "この原文には代替候補の記載がありません。",
+        "原文リンクは、わかもと製薬が公開したPDFの2026年4月13日付保存版です。"
+      ]
+    },
+    {
       "id": "sandoz-xylocaine-pump-limited-202311",
       "maker": "サンド",
       "title": "キシロカインポンプスプレー8％の入荷遅延による限定出荷（2023年11月）",
