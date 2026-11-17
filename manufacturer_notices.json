@@ -608,8 +608,8 @@
       "title": "d-クロルフェニラミンマレイン酸塩シロップ0.04％「トーワ」の販売中止案内",
       "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80880&t=4",
       "announced_at": "2025-07",
-      "verified_at": "2026-11-15",
-      "content_updated_at": "2026-11-15",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
       "sha256": "846a6875becbecf7d53347fde9ac4c83dfec9b1f04d93b40467e318f21b8ac1b",
       "collection_mode": "manual",
       "event_type": "discontinued",
@@ -644,7 +644,8 @@
       ],
       "alternatives": [
         {
-          "type": "メーカー案内の同一成分・同濃度の参考品",
+          "type": "東和薬品が案内した同一成分・同濃度の代替候補",
+          "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80880&t=4",
           "target_yj_codes": [
             "4419002Q1125"
           ],
@@ -653,7 +654,7 @@
               "name": "ポララミンシロップ０．０４％",
               "yj_code": "4419002Q1095",
               "maker": "高田製薬",
-              "scope": "メーカー案内記載の500mL包装（統一商品コード120441202）"
+              "scope": "500mL包装（統一商品コード120441202）。メーカーは2025年7月30日から対応可能となる見込みと案内しました。"
             }
           ],
           "cautions": [
