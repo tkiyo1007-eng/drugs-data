@@ -83,6 +83,7 @@ MAKER_HOSTS = {
 }
 MAKER_MANUAL_SOURCE_HOSTS = {
     '本草製薬': ('www.honzo.co.jp',),
+    '皇漢堂製薬': ('www.kokando.co.jp',),
     '堀井薬品工業': ('www.horii-pharm.co.jp',),
     'マルホ': ('www.maruho.co.jp',),
     'クリニジェン': ('clinigen.co.jp',),
