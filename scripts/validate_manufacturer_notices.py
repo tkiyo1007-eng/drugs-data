@@ -134,6 +134,7 @@ MAKER_MANUAL_SOURCE_URLS = {
         'https://medical-pro.kaken.co.jp/product/prostaglandine/prostaglandine_kyokyu_20260729',
     },
     'Meファルマ': {
+        'https://www.meiji-seika-pharma.co.jp/me-pharma/medical/excel/document_information01.xlsx',
         'https://www.meiji-seika-pharma.co.jp/me-pharma/medical/news/pdf/news_230801.pdf',
         'https://www.meiji-seika-pharma.co.jp/me-pharma/medical/news/pdf/news_250924.pdf',
         'https://www.meiji-seika-pharma.co.jp/me-pharma/medical/news/pdf/news_251215.pdf',
