@@ -184,6 +184,7 @@ MAKER_MANUAL_SOURCE_URLS = {
         'https://www.nc-medical.com/product_topics/f4bj0h000000es1m-att/f4bj0h000000es2a.pdf',
     },
     'ダイト': {
+        'https://www.daitonet.co.jp/pdf/medical/pdf_medical_05.pdf',
         'https://www.feldsenfpharma.co.jp/dcms_media/other/%E3%83%86%E3%83%A2%E3%82%AB%E3%83%97%E3%83%AA%E3%83%AB%E3%80%8C%E3%83%95%E3%82%A7%E3%83%AB%E3%82%BC%E3%83%B3%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2.pdf',
     },
     'JCRファーマ': {
