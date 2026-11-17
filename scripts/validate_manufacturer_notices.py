@@ -103,6 +103,7 @@ MAKER_MANUAL_SOURCE_HOSTS = {
 # Specific manufacturer and distributor notices hosted outside the primary company domain.
 MAKER_MANUAL_SOURCE_URLS = {
     '日東メディック': {'https://www.pmda.go.jp/files/000283184.pdf'},
+    '帝人ファーマ': {'https://medical.teijin-pharma.co.jp/content/dam/teijin-medical-web/sites/documents/news/2026/2026060202/LAT_2026060202.pdf'},
     'あすか製薬': {'https://jspe.umin.jp/pdf/news_250901.pdf'},
     'ビーブランド・メディコーデンタル': {'https://medical.nihon-generic.co.jp/uploadfiles/news/JG_product_list.pdf'},
     '全星薬品工業': {
