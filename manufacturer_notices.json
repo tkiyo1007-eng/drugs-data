@@ -48585,6 +48585,150 @@
         "経過措置は原文で2027年3月末の見込みです。厚労省公表データの対象4品目にも2027年3月31日までと記載されています。",
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
       ]
+    },
+    {
+      "id": "fuso-saline-glass-ampoule-limited-202509",
+      "maker": "扶桑薬品工業",
+      "title": "生理食塩液「フソー」5mLガラスアンプル2包装の限定出荷案内",
+      "url": "https://www.fuso-pharm.co.jp/med/wp-content/uploads/sites/2/2025/09/%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B%EF%BC%88%E7%94%9F%E7%90%86%E9%A3%9F%E5%A1%A9%E6%B6%B2%E3%80%8C%E3%83%95%E3%82%BD%E3%83%BC%E3%80%8D%EF%BC%89.pdf",
+      "announced_at": "2025-09",
+      "listed_at": "2025-09-18",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "af6092c7eb6f0e39417a6ece367d79a47a9e11507c23e897b3d16097ca18ecc2",
+      "collection_mode": "manual",
+      "source_index_url": "https://www.fuso-pharm.co.jp/med/ph/products/33612/",
+      "event_type": "limited",
+      "reason": "扶桑薬品工業は、他社製品の影響で需要が大幅に増え、安定供給に支障が出るおそれがあるため限定出荷を案内しました。",
+      "maker_supply_status": {
+        "handling": "③限定出荷（他社品の影響）",
+        "volume": "A．出荷量通常"
+      },
+      "targets": [
+        {
+          "yj_code": "3311401A1089",
+          "product_name": "生理食塩液「フソー」",
+          "maker": "扶桑薬品工業",
+          "scope": "seller_route_and_package",
+          "seller": "扶桑薬品工業",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "ガラスアンプル5mL×10管",
+              "unified_product_code": "197638109",
+              "gs1_sales_package": "(01)14987197638106",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（2025年9月の案内）",
+                "plans": []
+              }
+            },
+            {
+              "package": "ガラスアンプル5mL×50管",
+              "unified_product_code": "197638420",
+              "gs1_sales_package": "(01)14987197638427",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（2025年9月の案内）",
+                "plans": []
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2025年9月の案内は扶桑薬品工業が公表した2包装です。同じYJコードのアルフレッサ ファーマ販売包装の出荷対応は、この案内では確認できません。",
+        "生理食塩液PL「フソー」や生食注キット「フソー」は対象外です。",
+        "確認したメーカー原文に代替候補名の記載はありません。",
+        "厚労省の品目単位の現在の供給区分は別欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "fuso-saline-glass-ampoule-followup-20261030",
+      "maker": "扶桑薬品工業",
+      "title": "生理食塩液「フソー」5mLの10月30日供給一覧",
+      "url": "https://www.fuso-pharm.co.jp/med/wp-content/uploads/sites/2/2026/10/kyoukyu-all-20261030.pdf",
+      "announced_at": "2026-10-30",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "6aff39316bb2349fd0aa2b49272c2f8c3a10564b1ec91642b62508c87e4bab12",
+      "collection_mode": "manual",
+      "source_index_url": "https://www.fuso-pharm.co.jp/med/ph/stable-supply/",
+      "event_type": "limited",
+      "reason": "10月30日付の扶桑薬品工業一覧は、5mL製品の出荷量を増加、出荷対応を他社品の影響による限定出荷と記載しています。",
+      "maker_supply_status": {
+        "handling": "③限定出荷（他社品の影響）",
+        "volume": "Aプラス．出荷量増加"
+      },
+      "targets": [
+        {
+          "yj_code": "3311401A1089",
+          "product_name": "生理食塩液「フソー」",
+          "maker": "扶桑薬品工業",
+          "scope": "product",
+          "source_pages": [
+            2
+          ],
+          "packages": []
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "10月30日付の一覧は品目単位です。各包装と販売経路の現行状況はこの資料では確認できません。",
+        "確認したメーカー原文に代替候補名の記載はありません。",
+        "厚労省の品目単位の現在の供給区分は別欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "nichiiko-tocopherol-nicotinate-towa-limited-202409",
+      "maker": "日医工",
+      "title": "トコフェロールニコチン酸エステルカプセル100mg「トーワ」日医工販売分の限定出荷案内",
+      "url": "https://www.nichiiko.co.jp/medicine/files/20240904cI1.pdf",
+      "announced_at": "2024-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "f50b29c05db19b9a7082c14c6791d0b57fc21618e6f165b38d3136f37189d505",
+      "collection_mode": "manual",
+      "source_index_url": "https://www.nichiiko.co.jp/medicine/product/04800",
+      "event_type": "limited",
+      "reason": "日医工は、同社販売分に他社品の出荷調整で想定を超える注文が寄せられたため、2024年9月に限定出荷を案内しました。",
+      "maker_supply_status": {
+        "handling": "③限定出荷（他社品の影響）",
+        "volume": "A．出荷量通常"
+      },
+      "targets": [
+        {
+          "yj_code": "2190006M1210",
+          "product_name": "トコフェロールニコチン酸エステルカプセル１００ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "seller_route_and_package",
+          "seller": "日医工",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "376048002",
+              "gs1_sales_package": "(01)14987376048009",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（2024年9月の案内）",
+                "plans": []
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "東和薬品が製造販売するうち日医工の販売包装に限った過去の案内です。東和薬品自身の販売分や別の包装には適用しません。",
+        "厚労省11月16日版にある現在の品目理由は「その他の理由」です。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
