@@ -117,7 +117,10 @@ MAKER_MANUAL_SOURCE_URLS = {
     'わかもと製薬': {
         'https://web.archive.org/web/20260413041712id_/https://www.wakamoto-pharm.co.jp/upd/pdf/0000001332_1.pdf',
     },
-    '沢井製薬': {'https://www.jga.gr.jp/assets/pdf/medical/supply/63199438957cc967ba228275e96e9825f40fb12c.pdf'},
+    '沢井製薬': {
+        'https://www.jga.gr.jp/assets/pdf/medical/supply/63199438957cc967ba228275e96e9825f40fb12c.pdf',
+        'https://web.archive.org/web/20260408085923id_/https://med.sawai.co.jp/file/pr27_4756_1.pdf',
+    },
     "T'sファーマ": {
         'https://www.hospital.or.jp/site/news/file/1693270450.pdf',
         'https://www.med.ts-pharma.com/di-net/kaitei/w_20230828_Budesonide_inhalation_solution_0.5_TT.pdf',
