@@ -2,6 +2,211 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "towa-limited-demand-explanation-20250327",
+      "maker": "東和薬品",
+      "title": "東和薬品の限定出荷に関する過去の案内（2025年3月27日）",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=77411&t=6",
+      "source_index_url": "https://med.towayakuhin.co.jp/medical/",
+      "announced_at": "2025-03-27",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "61b4ab281b4e0515df3d43aaa359ff230c2e210b9043e171fe6a6acdec79a8d7",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "東和薬品は2025年3月27日の案内で、他社品の供給停止等を受けて需要が増え、新規・既採用先の注文を満たす数量を確保できなかったと説明しています。",
+      "targets": [
+        {
+          "yj_code": "2171006N1164",
+          "product_name": "ジルチアゼム塩酸塩徐放カプセル１００ｍｇ「トーワ」",
+          "maker": "佐藤薬品工業",
+          "seller": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            1,
+            5
+          ],
+          "packages": [],
+          "summary": "東和薬品が発売する100mg徐放カプセルの案内です。2025年3月27日付の別紙では③限定出荷（他社品の影響）、出荷量はA（出荷量通常）です。"
+        },
+        {
+          "yj_code": "1169012F4021",
+          "product_name": "プラミペキソール塩酸塩ＯＤ錠０．５ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            1,
+            7
+          ],
+          "packages": [],
+          "summary": "2025年3月27日付の別紙では③限定出荷（他社品の影響）、出荷量はAプラス（出荷量増加）です。"
+        },
+        {
+          "yj_code": "1249009F1422",
+          "product_name": "エペリゾン塩酸塩錠５０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            1,
+            4
+          ],
+          "packages": [],
+          "summary": "2025年3月27日付の別紙では③限定出荷（他社品の影響）、出荷量はA（出荷量通常）です。"
+        },
+        {
+          "yj_code": "2399006F1552",
+          "product_name": "トリメブチンマレイン酸塩錠１００ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            1,
+            6
+          ],
+          "packages": [],
+          "summary": "2025年3月27日付の別紙では③限定出荷（他社品の影響）、出荷量はA（出荷量通常）です。"
+        },
+        {
+          "yj_code": "3399005F1234",
+          "product_name": "ベラプロストＮａ錠２０μｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            1,
+            8
+          ],
+          "packages": [],
+          "summary": "2025年3月27日付の別紙では③限定出荷（他社品の影響）、出荷量はA（出荷量通常）です。"
+        },
+        {
+          "yj_code": "3999411A4091",
+          "product_name": "オザグレルＮａ点滴静注液８０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            1,
+            4
+          ],
+          "packages": [],
+          "summary": "2025年3月27日付の別紙では③限定出荷（他社品の影響）、出荷量はAプラス（出荷量増加）です。"
+        },
+        {
+          "yj_code": "3999411G4051",
+          "product_name": "オザグレルＮａ注８０ｍｇシリンジ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            1,
+            4
+          ],
+          "packages": [],
+          "summary": "2025年3月27日付の別紙では③限定出荷（他社品の影響）、出荷量はAプラス（出荷量増加）です。"
+        },
+        {
+          "yj_code": "4490026C1161",
+          "product_name": "モンテルカスト細粒４ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            1,
+            8
+          ],
+          "packages": [],
+          "summary": "2025年3月27日付の別紙では③限定出荷（他社品の影響）、出荷量はA（出荷量通常）です。"
+        },
+        {
+          "yj_code": "6149002F1193",
+          "product_name": "ロキシスロマイシン錠１５０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            1,
+            9
+          ],
+          "packages": [],
+          "summary": "2025年3月27日付の別紙では③限定出荷（他社品の影響）、出荷量はA（出荷量通常）です。"
+        },
+        {
+          "yj_code": "6149004F1168",
+          "product_name": "アジスロマイシン錠２５０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            1,
+            4
+          ],
+          "packages": [],
+          "summary": "2025年3月27日付の別紙では③限定出荷（他社品の影響）、出荷量はAプラス（出荷量増加）です。"
+        },
+        {
+          "yj_code": "6250002F1262",
+          "product_name": "アシクロビル錠２００ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            1,
+            4
+          ],
+          "packages": [],
+          "summary": "2025年3月27日付の別紙では③限定出荷（他社品の影響）、出荷量はAプラス（出荷量増加）です。"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2025年3月27日時点の説明です。この案内の対象行に代替候補名の記載はありません。包装の内訳と現在の受注可否は未確認です。現在の供給区分と公表理由は厚労省の欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "zoki-olopatadine-ds-limited-history-202012",
+      "maker": "日本臓器製薬",
+      "title": "オロパタジン塩酸塩ドライシロップ1％「日本臓器」の過去の出荷調整（2020年12月）",
+      "url": "https://www.nippon-zoki.co.jp/mtassets/files/ef14432c7c32b022fb06eddeb7a4900e0c238fdd.pdf",
+      "source_index_url": "https://www.nippon-zoki.co.jp/medical/news/important/index.html",
+      "announced_at": "2020-12",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "74d4e2bce824ec3081bac8c305f5bdc3383bb26e22fa7673c2f748be6db5d79a",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日本臓器製薬の2020年12月の案内では、同成分の他社品の出荷一時停止に伴い、想定を超える注文に対応しきれず、既採用先への供給を優先して新規採用を辞退するとしています。",
+      "targets": [
+        {
+          "yj_code": "4490025R1020",
+          "product_name": "オロパタジン塩酸塩ドライシロップ１％「日本臓器」",
+          "maker": "日本臓器製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "分包0.25g×100包",
+              "unified_product_code": "174423032",
+              "gs1_sales": "14987174423039",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2020年12月の出荷調整案内に記載された対象包装です。現在の包装別出荷状況は未確認です。"
+              }
+            },
+            {
+              "package": "バラ100g",
+              "unified_product_code": "174423018",
+              "gs1_sales": "14987174423015",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2020年12月の出荷調整案内に記載された対象包装です。現在の包装別出荷状況は未確認です。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "この案内は2020年12月のものです。原文に代替候補名の記載はありません。現在の限定出荷の具体的な原因と受注可否は未確認です。"
+      ],
+      "listed_at": "2020-12-28"
+    },
+    {
       "id": "jg-ketotifen-ch-discontinuation-202611",
       "maker": "日本ジェネリック",
       "title": "ケトチフェン点眼液0.05％「CH」の販売中止予定",

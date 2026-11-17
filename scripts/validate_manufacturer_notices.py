@@ -103,6 +103,7 @@ MAKER_MANUAL_SOURCE_HOSTS = {
     '田辺ファーマ': ('medical.tanabe-pharma.com',),
     'Meiji Seika ファルマ': ('meiji-medical-net.com',),
     'セルトリオン・ヘルスケア・ジャパン': ('celltrionhealthcare.jp',),
+    '日本臓器製薬': ('www.nippon-zoki.co.jp',),
 }
 # Specific manufacturer and distributor notices hosted outside the primary company domain.
 MAKER_MANUAL_SOURCE_URLS = {
