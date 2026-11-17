@@ -11,6 +11,7 @@ from urllib.parse import urlparse
 from maker_identity import maker_is_listed_in_row
 
 MAKER_HOSTS = {
+    '日東メディック': 'www.nittomedic.co.jp',
     'エーザイ': 'medical2.eisai.jp', '沢井製薬': 'med.sawai.co.jp',
     'EAファーマ': 'www.eapharma.co.jp',
     '丸石製薬': 'www.maruishi-pharm.co.jp',
@@ -100,6 +101,7 @@ MAKER_MANUAL_SOURCE_HOSTS = {
 }
 # Specific manufacturer and distributor notices hosted outside the primary company domain.
 MAKER_MANUAL_SOURCE_URLS = {
+    '日東メディック': {'https://www.pmda.go.jp/files/000283184.pdf'},
     'あすか製薬': {'https://jspe.umin.jp/pdf/news_250901.pdf'},
     'ビーブランド・メディコーデンタル': {'https://medical.nihon-generic.co.jp/uploadfiles/news/JG_product_list.pdf'},
     '全星薬品工業': {
@@ -142,7 +144,10 @@ MAKER_MANUAL_SOURCE_URLS = {
         'https://www.js-adhd.org/doc/js-adhd/oshirase_20260723_01.pdf',
     },
     'バイエル薬品': {'https://www.jsge.or.jp/wp-content/uploads/2026/10/43e13de6fd20d8db3390e8f5078a04b8.pdf'},
-    '日本イーライリリー': {'https://www.nittokyo.or.jp/uploads/files/20261014_Lilly_insulin.pdf'},
+    '日本イーライリリー': {
+        'https://www.nittokyo.or.jp/uploads/files/20261014_Lilly_insulin.pdf',
+        'https://www.haigan.gr.jp/wp-content/uploads/2026/06/%E3%83%AC%E3%83%83%E3%83%88%E3%83%B4%E3%82%A3%E3%83%A2%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf',
+    },
     '大塚製薬工場': {'https://medical.jms.cc/pdf/customer_information_306.pdf'},
     '長生堂製薬': {
         'https://medical.nihon-generic.co.jp/uploadfiles/news/JG_product_list.pdf',
