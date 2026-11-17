@@ -40,6 +40,7 @@ from generate_curated_pages import (
     product_page,
     product_seo_metadata,
     search_rows,
+    topic_page,
     topic_related_rows,
 )
 
@@ -105,6 +106,22 @@ class IngredientSourceDateTests(unittest.TestCase):
 
 
 class CuratedPageGenerationTests(unittest.TestCase):
+    def test_topic_renders_verified_publisher_pdfs_only_on_the_matching_article(self):
+        doc = json.loads((ROOT / "industry_topics.json").read_text(encoding="utf-8"))
+        topic = next(item for item in doc["topics"] if item["slug"] == "rakool-packaged-supply-20261118")
+        sources = {source["url"] for source in topic["publisher_http_sources"]}
+        unexpected = "http://www.rakool.co.jp/other.pdf"
+        topic["publisher_http_sources"].append({"name": "別のPDF", "url": unexpected})
+
+        links = PageLinks()
+        links.feed(topic_page(topic, [], set(), {}, doc["updated_at"]))
+        self.assertTrue(sources <= links.hrefs)
+        self.assertNotIn(unexpected, links.hrefs)
+
+        other_links = PageLinks()
+        other_links.feed(topic_page({**topic, "slug": "other-topic"}, [], set(), {}, doc["updated_at"]))
+        self.assertTrue(sources.isdisjoint(other_links.hrefs))
+
     def test_guide_has_static_purpose_links_and_published_status_boundaries(self):
         page = guide_page()
         links = PageLinks()

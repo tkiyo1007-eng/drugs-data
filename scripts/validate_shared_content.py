@@ -38,6 +38,23 @@ def valid_date(value: object, dotted: bool = False) -> bool:
 
 SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 RESERVED_SLUGS = {"index", "about", "privacy"}
+# 公式配布先がHTTPのみの原文は、掲載記事と照合済みのPDFを個別に指定する。
+TOPIC_PUBLISHER_HTTP_URLS = {
+    "rakool-packaged-supply-20261118": {
+        "http://www.rakool.co.jp/upload/1794528979append.pdf",
+        "http://www.rakool.co.jp/upload/1791523455append.pdf",
+    },
+}
+
+
+def valid_topic_publisher_http_source(slug: str, source: object) -> bool:
+    return (
+        isinstance(source, dict)
+        and isinstance(source.get("name"), str)
+        and bool(source["name"].strip())
+        and isinstance(source.get("url"), str)
+        and source["url"] in TOPIC_PUBLISHER_HTTP_URLS.get(slug, ())
+    )
 
 
 def valid_slug(value: object) -> bool:
@@ -195,6 +212,13 @@ def validate(base: Path) -> list[str]:
                         if (not isinstance(extra, dict) or not str(extra.get("name") or "").strip()
                                 or not valid_https(extra.get("url"))):
                             errors.append(f"{prefix}.sources[{source_index}]: 出典名とHTTPS URLを指定してください")
+                publisher_sources = item.get("publisher_http_sources", [])
+                if not isinstance(publisher_sources, list):
+                    errors.append(f"{prefix}.publisher_http_sources: 出典の配列にしてください")
+                else:
+                    for source_index, extra in enumerate(publisher_sources):
+                        if not valid_topic_publisher_http_source(slug, extra):
+                            errors.append(f"{prefix}.publisher_http_sources[{source_index}]: 出典名と記事で許可したPDF URLを指定してください")
                 query = norm(item.get("query"))
                 raw_queries = item.get("queries")
                 queries: list[tuple[str, object]] = []

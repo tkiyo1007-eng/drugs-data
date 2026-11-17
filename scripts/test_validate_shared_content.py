@@ -28,6 +28,16 @@ class SharedContentValidationTests(unittest.TestCase):
         self.assertTrue(any(".sources[0]" in error for error in errors))
         self.assertTrue(any(".notes" in error for error in errors))
 
+    def test_publisher_http_sources_require_exact_pdf_and_article(self):
+        slug = "rakool-packaged-supply-20261118"
+        pdf = "http://www.rakool.co.jp/upload/1794528979append.pdf"
+        official = {"name": "原文PDF", "url": pdf}
+        self.assertTrue(MODULE.valid_topic_publisher_http_source(slug, official))
+        self.assertFalse(MODULE.valid_topic_publisher_http_source("other-topic", official))
+        for url in (pdf + "?redirect=1", "http://www.rakool.co.jp/other.pdf", "javascript:alert(1)", [pdf]):
+            with self.subTest(url=url):
+                self.assertFalse(MODULE.valid_topic_publisher_http_source(slug, {**official, "url": url}))
+
     def test_pinned_until_must_be_a_date_on_or_after_the_article(self):
         # Web版の「注目の供給情報」の掲載期限。形式不正や記事日付より前の期限は拒否する
         base = Path(__file__).resolve().parents[1]

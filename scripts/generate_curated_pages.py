@@ -18,6 +18,7 @@ from generate_item_pages import (
     dataset_dates_html, version_date, load_manufacturer_notices,
     load_manufacturer_bulletins, lifecycle_for_display,
 )
+from validate_shared_content import valid_topic_publisher_http_source
 
 SITE_ROOT = "https://kyokyu-navi.jp/"
 APP_ID = "6777696446"
@@ -656,6 +657,17 @@ def topic_page(topic: dict, related: list[dict[str, str]], generated_keys: set[s
         {"@type": "ListItem", "position": 3, "name": topic["title"], "item": canonical}]}
     points = "".join(f"<li>{esc(point)}</li>" for point in topic.get("points") or [])
     source = topic["source"]
+    publisher_sources = topic.get("publisher_http_sources")
+    publisher_links = ""
+    if isinstance(publisher_sources, list):
+        publisher_links = "".join(
+            f'<li><a href="{esc(item["url"])}" target="_blank" rel="noopener noreferrer" '
+            f'data-dsn-event="official-source-open">{esc(item["name"])}</a></li>'
+            for item in publisher_sources if valid_topic_publisher_http_source(slug, item)
+        )
+    publisher_html = (f'<section><h2>メーカーの原文</h2><ul>{publisher_links}</ul></section>\n'
+                      if publisher_links else "")
+    source_label = "参照" if publisher_links else "出典"
     notes = "".join(f'<p>{esc(note)}</p>' for note in topic.get("notes") or [])
     extra_sources = "".join(
         f'<p class="source">出典：<a href="{esc(item["url"])}" target="_blank" '
@@ -697,7 +709,7 @@ def topic_page(topic: dict, related: list[dict[str, str]], generated_keys: set[s
 <nav class="crumb"><a href="../">トップ</a> › <a href="index.html">話題のニュース</a> › {esc(topic['tag'])}</nav><main>
 <article class="hero"><p class="eyebrow">{esc(topic['tag'])}｜{esc(topic['date'])}</p><h1>{esc(topic['title'])}</h1>
 <p class="lede">{esc(topic['lede'])}</p>{f'<ul class="points">{points}</ul>' if points else ''}
-<p class="source">出典：<a href="{esc(source['url'])}" target="_blank" rel="noopener" data-dsn-event="official-source-open">{esc(source['name'])}</a></p>
+{publisher_html}<p class="source">{source_label}：<a href="{esc(source['url'])}" target="_blank" rel="noopener" data-dsn-event="official-source-open">{esc(source['name'])}</a></p>
 {share_control("この記事を共有")}</article>{prices_html}
 {supplement}
 {related_html}
