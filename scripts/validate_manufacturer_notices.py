@@ -106,6 +106,8 @@ MAKER_MANUAL_SOURCE_HOSTS = {
     '日本臓器製薬': ('www.nippon-zoki.co.jp',),
     '光製薬': ('www.hikari-pharm.co.jp',),
     'あゆみ製薬': ('www.ayumi-pharma.com',),
+    '健栄製薬': ('www.kenei-pharm.com',),
+    '藤永製薬': ('fujinaga-pharm.co.jp',),
 }
 # Specific manufacturer and distributor notices hosted outside the primary company domain.
 MAKER_MANUAL_SOURCE_URLS = {
