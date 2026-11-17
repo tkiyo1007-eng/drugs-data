@@ -2,6 +2,362 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "sawai-limited-order-history-20260408",
+      "maker": "沢井製薬",
+      "title": "沢井製薬の過去の限定出荷案内（2026年4月8日時点）",
+      "url": "https://web.archive.org/web/20260408085923id_/https://med.sawai.co.jp/file/pr27_4756_1.pdf",
+      "announced_at": "2026-04",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "3bd03c8eebf44745cd511044f50d3f919f540a5fff56eea906557e2dcd923262",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "沢井製薬は、2026年4月の案内で、対象製品の注文が想定を上回り、受注に十分応じられないため、既採用の医療機関への供給を優先して特約店や販売会社への出荷を制限していると説明しました。",
+      "targets": [
+        {
+          "yj_code": "1139010F2071",
+          "product_name": "レベチラセタム錠５００ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            1,
+            3
+          ],
+          "summary": "2026年4月8日時点の別添では③限定出荷（他社品の影響）、出荷量通常です。",
+          "packages": []
+        },
+        {
+          "yj_code": "1149117F1160",
+          "product_name": "トアラセット配合錠「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            1,
+            3
+          ],
+          "summary": "2026年4月8日時点の別添では③限定出荷（他社品の影響）、出荷量増加です。",
+          "packages": []
+        },
+        {
+          "yj_code": "1231013M1105",
+          "product_name": "チキジウム臭化物カプセル５ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            1,
+            2
+          ],
+          "summary": "2026年4月8日時点の別添では③限定出荷（他社品の影響）、出荷量通常です。",
+          "packages": []
+        },
+        {
+          "yj_code": "2123014F1116",
+          "product_name": "アロチノロール塩酸塩錠５ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            1,
+            2
+          ],
+          "summary": "2026年4月8日時点の別添では②限定出荷（自社の事情）、出荷量減少です。",
+          "packages": []
+        },
+        {
+          "yj_code": "2149037F2055",
+          "product_name": "シルニジピン錠１０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            1,
+            2
+          ],
+          "summary": "2026年4月8日時点の別添では②限定出荷（自社の事情）、出荷量通常です。",
+          "packages": []
+        },
+        {
+          "yj_code": "2149110F2291",
+          "product_name": "ロサルヒド配合錠ＨＤ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            1,
+            3
+          ],
+          "summary": "2026年4月8日時点の別添では③限定出荷（他社品の影響）、出荷量通常です。",
+          "packages": []
+        },
+        {
+          "yj_code": "2251001F2166",
+          "product_name": "テオフィリン徐放錠１００ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            1,
+            2
+          ],
+          "summary": "2026年4月8日時点の別添では②限定出荷（自社の事情）、出荷量通常です。",
+          "packages": []
+        },
+        {
+          "yj_code": "2251001F3154",
+          "product_name": "テオフィリン徐放錠２００ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            1,
+            2
+          ],
+          "summary": "2026年4月8日時点の別添では②限定出荷（自社の事情）、出荷量通常です。",
+          "packages": []
+        },
+        {
+          "yj_code": "2399005F2350",
+          "product_name": "ドンペリドン錠１０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            1,
+            3
+          ],
+          "summary": "2026年4月8日時点の別添では③限定出荷（他社品の影響）、出荷量増加です。",
+          "packages": []
+        },
+        {
+          "yj_code": "2499011M1094",
+          "product_name": "デュタステリドカプセル０．５ｍｇＡＶ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            1,
+            3
+          ],
+          "summary": "2026年4月8日時点の別添では③限定出荷（他社品の影響）、出荷量増加です。",
+          "packages": []
+        },
+        {
+          "yj_code": "2590005F1316",
+          "product_name": "オキシブチニン塩酸塩錠２ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            1,
+            2
+          ],
+          "summary": "2026年4月8日時点の別添では②限定出荷（自社の事情）、出荷量減少です。",
+          "packages": []
+        },
+        {
+          "yj_code": "2590005F2274",
+          "product_name": "オキシブチニン塩酸塩錠３ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            1,
+            2
+          ],
+          "summary": "2026年4月8日時点の別添では②限定出荷（自社の事情）、出荷量減少です。",
+          "packages": []
+        },
+        {
+          "yj_code": "2590005F3173",
+          "product_name": "オキシブチニン塩酸塩錠１ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            1,
+            2
+          ],
+          "summary": "2026年4月8日時点の別添では②限定出荷（自社の事情）、出荷量減少です。",
+          "packages": []
+        },
+        {
+          "yj_code": "2590008F2120",
+          "product_name": "タムスロシン塩酸塩ＯＤ錠０．２ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            1,
+            2
+          ],
+          "summary": "2026年4月8日時点の別添では②限定出荷（自社の事情）、出荷量通常です。",
+          "packages": []
+        },
+        {
+          "yj_code": "2634713M1062",
+          "product_name": "クリンダマイシンリン酸エステルゲル１％「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            1,
+            2
+          ],
+          "summary": "2026年4月8日時点の別添では②限定出荷（自社の事情）、出荷量通常です。",
+          "packages": []
+        },
+        {
+          "yj_code": "3222013F1157",
+          "product_name": "クエン酸第一鉄Ｎａ錠５０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            1,
+            2
+          ],
+          "summary": "2026年4月8日時点の別添では③限定出荷（他社品の影響）、出荷量通常です。",
+          "packages": []
+        },
+        {
+          "yj_code": "4490100F1030",
+          "product_name": "プソフェキ配合錠「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            1,
+            3
+          ],
+          "summary": "2026年4月8日時点の別添では②限定出荷（自社の事情）、出荷量増加です。",
+          "packages": []
+        },
+        {
+          "yj_code": "6149002F1177",
+          "product_name": "ロキシスロマイシン錠１５０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            1,
+            3
+          ],
+          "summary": "2026年4月8日時点の別添では②限定出荷（自社の事情）、出荷量通常です。",
+          "packages": []
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "この説明は案内全体に対するものです。品目別の詳しい経緯、対象包装、代替候補は原文に記載されていません。解除時期は後日案内とされています。",
+        "厚労省欄で現在の供給区分と公表理由をご確認ください。メーカーの当時の原文は公開保存版で確認しました。"
+      ]
+    },
+    {
+      "id": "npi-telmisartan40-limited-20261110",
+      "maker": "日本薬品工業",
+      "title": "テルミサルタン錠40mg「NPI」の供給状況（2026年11月10日）",
+      "url": "https://www.npi-inc.co.jp/medical/info/file/973",
+      "announced_at": "2026-11-10",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "91b71dfae98abaa8232e026cdb397bf31bcda88c77a56456fa463535fd3360a6",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日本薬品工業は、2026年11月10日付の取扱い製品供給状況一覧で、40mgを他社品の影響による限定出荷、出荷量増加と記載しています。",
+      "targets": [
+        {
+          "yj_code": "2149042F2080",
+          "product_name": "テルミサルタン錠４０ｍｇ「ＮＰＩ」",
+          "maker": "日本薬品工業",
+          "scope": "product",
+          "source_pages": [
+            2
+          ],
+          "packages": []
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "11月10日付の一覧は品目単位です。具体的な経緯、包装の内訳、代替候補の記載はありません。日新製薬販売分の包装の状況は同社の案内に掲載しています。"
+      ]
+    },
+    {
+      "id": "nissin-npi-telmisartan40-discontinuation-202606",
+      "maker": "日新製薬",
+      "title": "テルミサルタン錠40mg「NPI」日新製薬販売分の販売中止予定（2026年6月）",
+      "url": "https://www.yg-nissin.co.jp/products/PDF/4569_6405_z1.pdf",
+      "announced_at": "2026-06",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "ebe8c28eb848c1e708e3cb82ae4f8dd4e3eb942c5054df55d20f943cce6a7f99",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "日新製薬と日本薬品工業は、日新製薬販売分の対象包装を在庫がなくなり次第販売中止と案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149042F2080",
+          "product_name": "テルミサルタン錠４０ｍｇ「ＮＰＩ」",
+          "maker": "日本薬品工業",
+          "seller": "日新製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "summary": "日新製薬販売分のPTP100錠、PTP140錠、PTP500錠が対象です。",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "447566015",
+              "gs1_sales": "14987447566012",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年2月（6月の案内での見込み）"
+                  },
+                  {
+                    "event": "discontinuation",
+                    "timing": "在庫消尽後（6月の案内）"
+                  }
+                ],
+                "note": "統一商品コード447566015、販売包装単位のGS1コード14987447566012。"
+              }
+            },
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "447566008",
+              "gs1_sales": "14987447566005",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年2月（6月の案内での見込み）"
+                  },
+                  {
+                    "event": "discontinuation",
+                    "timing": "在庫消尽後（6月の案内）"
+                  }
+                ],
+                "note": "統一商品コード447566008、販売包装単位のGS1コード14987447566005。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "447566022",
+              "gs1_sales": "14987447566029",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年11月（6月の案内での見込み）"
+                  },
+                  {
+                    "event": "discontinuation",
+                    "timing": "在庫消尽後（6月の案内）"
+                  }
+                ],
+                "note": "統一商品コード447566022、販売包装単位のGS1コード14987447566029。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "11月17日更新の日新製薬の出荷状況一覧では、対象の3包装はいずれも出荷対応が通常出荷で、備考欄には販売中止と記載されています。実際の在庫消尽日は確認できません。",
+        "6月の案内に販売中止の具体的な事情や代替候補の記載はありません。日本薬品工業が販売する包装の状況は、同社の案内をご確認ください。"
+      ],
+      "source_index_url": "https://www.yg-nissin.co.jp/products/download/nissin-supplystate261117.pdf"
+    },
+    {
       "id": "mepharma-montelukast-granules4-limited-20261111",
       "maker": "Meファルマ",
       "title": "モンテルカスト細粒4mg「明治」140包の限定出荷（2026年11月11日）",
