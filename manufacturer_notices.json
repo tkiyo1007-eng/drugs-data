@@ -50530,6 +50530,182 @@
       "cautions": [
         "対象はテラムロ配合錠BP「サワイ」のPTP140錠です。現行の限定出荷理由は厚労省公表欄をご確認ください。"
       ]
+    },
+    {
+      "id": "sawai-telchia-ap-ptp140-500-discontinuation-202305",
+      "maker": "沢井製薬",
+      "title": "テルチア配合錠AP「サワイ」の一部包装販売中止と当時の別包装",
+      "url": "https://med.sawai.co.jp/file/pr28_4579_4.pdf",
+      "source_index_url": "https://med.sawai.co.jp/preview.php?prodid=4579",
+      "announced_at": "2023-05",
+      "listed_at": "2023-05-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ac0f941ef883cf523ad117661a74a0bbe3dc3221661f8f75d3adedc9d7c59e9a",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "沢井製薬は注文に十分に対応できない状況を踏まえ、安定供給と生産効率改善のため、PTP140錠・PTP500錠を在庫消尽で販売中止とする旨を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149113F1043",
+          "product_name": "テルチア配合錠ＡＰ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "080681274",
+              "gs1_sales": "(01)14987080681271",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2023年11月の見込み（当時の案内）"
+                  }
+                ],
+                "note": "2021年11月に一時供給停止を案内した包装です。 統一商品コード080681274。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "080681229",
+              "gs1_sales": "(01)14987080681226",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2024年6月の見込み（当時の案内）"
+                  }
+                ],
+                "note": "在庫がなくなり次第、販売を中止すると案内。 統一商品コード080681229。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080681212",
+              "gs1_sales": "(01)14987080681219",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2023年5月の原文では販売継続の包装。 統一商品コード080681212。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "type": "沢井製薬がPTP140錠・PTP500錠の採用先に案内した同じAP規格の別包装",
+          "source_url": "https://med.sawai.co.jp/file/pr28_4579_4.pdf",
+          "target_yj_codes": [
+            "2149113F1043"
+          ],
+          "products": [
+            {
+              "name": "テルチア配合錠ＡＰ「サワイ」",
+              "maker": "沢井製薬",
+              "scope": "PTP100錠（統一商品コード080681212、販売包装単位コード14987080681219）"
+            }
+          ],
+          "cautions": [
+            "2023年5月の包装切替案内です。現在の卸在庫・納入可否は購入先でご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2023年5月時点の案内です。現行の品目単位の供給区分や理由は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "sawai-telchia-bp-ptp140-500-discontinuation-202305",
+      "maker": "沢井製薬",
+      "title": "テルチア配合錠BP「サワイ」の一部包装販売中止と当時の別包装",
+      "url": "https://med.sawai.co.jp/file/pr28_4580_4.pdf",
+      "source_index_url": "https://med.sawai.co.jp/preview.php?prodid=4580",
+      "announced_at": "2023-05",
+      "listed_at": "2023-05-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "59bbbe19cd8577fecce050b2e409bd11d84d8eb417e00fbb77d2a2c7ce58c805",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "沢井製薬は注文に十分に対応できない状況を踏まえ、安定供給と生産効率改善のため、PTP140錠・PTP500錠を在庫消尽で販売中止とする旨を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149113F2040",
+          "product_name": "テルチア配合錠ＢＰ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "080682271",
+              "gs1_sales": "(01)14987080682278",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "note": "2021年11月に一時供給停止を案内した包装です。 統一商品コード080682271。",
+                "status_text": "販売中止・在庫消尽済み（2023年5月の案内）"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "080682226",
+              "gs1_sales": "(01)14987080682223",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2024年6月の見込み（当時の案内）"
+                  }
+                ],
+                "note": "在庫がなくなり次第、販売を中止すると案内。 統一商品コード080682226。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080682219",
+              "gs1_sales": "(01)14987080682216",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2023年5月の原文では販売継続の包装。 統一商品コード080682219。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "type": "沢井製薬がPTP140錠・PTP500錠の採用先に案内した同じBP規格の別包装",
+          "source_url": "https://med.sawai.co.jp/file/pr28_4580_4.pdf",
+          "target_yj_codes": [
+            "2149113F2040"
+          ],
+          "products": [
+            {
+              "name": "テルチア配合錠ＢＰ「サワイ」",
+              "maker": "沢井製薬",
+              "scope": "PTP100錠（統一商品コード080682219、販売包装単位コード14987080682216）"
+            }
+          ],
+          "cautions": [
+            "2023年5月の包装切替案内です。現在の卸在庫・納入可否は購入先でご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2023年5月時点の案内です。現行の品目単位の供給区分や理由は厚労省公表欄をご確認ください。"
+      ]
     }
   ]
 }
