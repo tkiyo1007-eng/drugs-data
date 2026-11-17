@@ -50706,6 +50706,162 @@
       "cautions": [
         "2023年5月時点の案内です。現行の品目単位の供給区分や理由は厚労省公表欄をご確認ください。"
       ]
+    },
+    {
+      "id": "kyowakirin-allelock-discontinuation-schedule-202611",
+      "maker": "協和キリン",
+      "title": "アレロック錠2.5・5／OD錠2.5・5の販売中止予定（協和キリン公開一覧）",
+      "url": "https://medical.kyowakirin.co.jp/druginfo/drgdiscon/index.html",
+      "source_index_url": "https://medical.kyowakirin.co.jp/druginfo/newslist/index.html",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-16",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "e1d7ca7ea7453fec6484e1a7a824cdd898b79061c8e055582994ebf5e204ad0c",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "協和キリンの公開一覧に販売中止の具体的な理由は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "4490025F1023",
+          "product_name": "アレロック錠２．５",
+          "maker": "協和キリン",
+          "scope": "product",
+          "packages": [],
+          "planned_timing": "2027年11月30日。経過措置期間満了は2028年3月31日予定（協和キリンの公開一覧）。"
+        },
+        {
+          "yj_code": "4490025F2020",
+          "product_name": "アレロック錠５",
+          "maker": "協和キリン",
+          "scope": "product",
+          "packages": [],
+          "planned_timing": "2027年11月30日。経過措置期間満了は2028年3月31日予定（協和キリンの公開一覧）。"
+        },
+        {
+          "yj_code": "4490025F3026",
+          "product_name": "アレロックＯＤ錠２．５",
+          "maker": "協和キリン",
+          "scope": "product",
+          "packages": [],
+          "planned_timing": "2027年11月30日。経過措置期間満了は2028年3月31日予定（協和キリンの公開一覧）。"
+        },
+        {
+          "yj_code": "4490025F4022",
+          "product_name": "アレロックＯＤ錠５",
+          "maker": "協和キリン",
+          "scope": "product",
+          "packages": [],
+          "planned_timing": "2027年11月30日。経過措置期間満了は2028年3月31日予定（協和キリンの公開一覧）。"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "確認した資料は協和キリンの「販売中止品（予定）一覧」です。個別のお知らせPDFは会員向けで、包装別の詳細と代替候補の有無は未確認です。",
+        "販売中止予定と経過措置期間満了予定はメーカーの案内です。現行の供給区分・経過措置期限は厚労省の公表欄をご確認ください。",
+        "この案内の対象は協和キリンの錠剤とOD錠です。日新製薬が製造販売するアレロック顆粒0.5％は今回の販売中止予定に含まれていません。"
+      ]
+    },
+    {
+      "id": "kyowakirin-onglyza-discontinuation-schedule-202611",
+      "maker": "協和キリン",
+      "title": "オングリザ錠2.5mg・5mgの販売中止予定（協和キリン公開一覧）",
+      "url": "https://medical.kyowakirin.co.jp/druginfo/drgdiscon/index.html",
+      "source_index_url": "https://medical.kyowakirin.co.jp/druginfo/newslist/index.html",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-16",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "e1d7ca7ea7453fec6484e1a7a824cdd898b79061c8e055582994ebf5e204ad0c",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "協和キリンの公開一覧に販売中止の具体的な理由は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "3969017F1028",
+          "product_name": "オングリザ錠２．５ｍｇ",
+          "maker": "協和キリン",
+          "scope": "product",
+          "packages": [],
+          "planned_timing": "2027年11月30日。経過措置期間満了は2028年3月31日予定（協和キリンの公開一覧）。"
+        },
+        {
+          "yj_code": "3969017F2024",
+          "product_name": "オングリザ錠５ｍｇ",
+          "maker": "協和キリン",
+          "scope": "product",
+          "packages": [],
+          "planned_timing": "2027年11月30日。経過措置期間満了は2028年3月31日予定（協和キリンの公開一覧）。"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "確認した資料は協和キリンの「販売中止品（予定）一覧」です。個別のお知らせPDFは会員向けで、包装別の詳細と代替候補の有無は未確認です。",
+        "販売中止予定と経過措置期間満了予定はメーカーの案内です。現行の供給区分・経過措置期限は厚労省の公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "maruishi-monilac-package-followup-20261116",
+      "maker": "丸石製薬",
+      "title": "モニラック・シロップ65％の包装別出荷状況（丸石製薬の11月16日付一覧）",
+      "url": "https://www.maruishi-pharm.co.jp/medical/media/syukkajokyo_20261116.pdf",
+      "announced_at": "2026-11-16",
+      "listed_at": "2026-11-16",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "81ca7aec124bd732c5918cb3c2e9ee03e5261259916d0bd00373a0139c75ec78",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "丸石製薬の11月16日付一覧では、300mLと10mL分包×84包はいずれも限定出荷（自社の事情）で、在庫消尽後に供給を一時停止する旨が記載されています。",
+      "targets": [
+        {
+          "yj_code": "3999001Q2058",
+          "product_name": "モニラック・シロップ６５％",
+          "maker": "丸石製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "300mL",
+              "unified_product_code": "211-128302",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情）",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年12月中旬予定"
+                  }
+                ],
+                "note": "統一商品コード211-128302。11月16日付一覧の出荷量はA（通常、2025年度月平均との比較）。"
+              }
+            },
+            {
+              "package": "10mL分包×84包（21包×4）",
+              "unified_product_code": "211-128319",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情）",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年10月下旬予定"
+                  }
+                ],
+                "note": "統一商品コード211-128319。11月16日付一覧の出荷量はB（減少、2025年度月平均との比較）。10月下旬は一覧記載の見込みで、実際の消尽・停止は未確認です。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "11月16日付一覧には実際の在庫消尽日・停止実施日・再開時期・代替候補の記載がありません。",
+        "10月19日掲載の案内の再開見込みは当時の予定です。現在の包装別出荷・受注可否はメーカー・卸にご確認ください。"
+      ],
+      "source_index_url": "https://www.maruishi-pharm.co.jp/medical/"
     }
   ]
 }
