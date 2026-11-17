@@ -45135,6 +45135,130 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "alfresa-vitamedin-b25-injection-limited-202302",
+      "maker": "アルフレッサ ファーマ",
+      "title": "ビタメジン配合カプセルB25・静注用の限定出荷開始時の案内",
+      "url": "https://www.alfresa-pharma.co.jp/news/pdflink/NEWS_ID/1786/",
+      "announced_at": "2023-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "5782bce20cd6253f888650d29ab8acaa1a1ad4d1194371b181ac4e9b8d57f1c8",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "アルフレッサ ファーマは、他社製品の影響で需要が大幅に増え、安定供給に支障が出るおそれがあるとして、2023年2月に限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3179109M1074",
+          "product_name": "ビタメジン配合カプセルＢ２５",
+          "maker": "アルフレッサ ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "274-13297-1",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（2023年2月のメーカー資料）",
+                "note": "統一商品コード 274-13297-1。"
+              }
+            },
+            {
+              "package": "PTP1000カプセル",
+              "unified_product_code": "274-13298-8",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（2023年2月のメーカー資料）",
+                "note": "統一商品コード 274-13298-8。"
+              }
+            },
+            {
+              "package": "缶1000カプセル",
+              "unified_product_code": "274-13301-5",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（2023年2月のメーカー資料）",
+                "note": "統一商品コード 274-13301-5。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3179506F1023",
+          "product_name": "ビタメジン静注用",
+          "maker": "アルフレッサ ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "50バイアル",
+              "unified_product_code": "274-13310-7",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（2023年2月のメーカー資料）",
+                "note": "統一商品コード 274-13310-7。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "包装は案内当時の対象です。B25は別規格B50の販売中止案内でB50に対する候補として挙げられています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "teijin-laxoberon-25-tablet-limited-202606",
+      "maker": "帝人ファーマ",
+      "title": "ラキソベロン錠2.5mg 100錠包装の限定出荷開始時の案内",
+      "url": "https://medical.teijin-pharma.co.jp/content/dam/teijin-medical-web/sites/documents/news/2026/2026060202/LAT_2026060202.pdf",
+      "announced_at": "2026-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "4c3b23b008b0830c568eb567088c198ce760f19993d89872a3f2725a9483d323",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "帝人ファーマは、他社の同種製剤が限定出荷となった影響で、安定供給を確保するために2026年6月に限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2359005F1218",
+          "product_name": "ラキソベロン錠２．５ｍｇ",
+          "maker": "帝人ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "294-23541-6",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2026年6月のメーカー資料）",
+                "note": "統一商品コード 294-23541-6。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年6月に限定出荷を案内した経緯です。厚労省の11月16日版では品目の理由は薬価削除と公表されています。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
