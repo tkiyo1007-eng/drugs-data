@@ -2,6 +2,85 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "supply-history-6141002f2078-202101",
+      "maker": "沢井製薬",
+      "title": "エリスロマイシン錠200mg「サワイ」の過去の供給停止理由と再開（2021年1月）",
+      "url": "https://www.jga.gr.jp/assets/pdf/medical/supply/63199438957cc967ba228275e96e9825f40fb12c.pdf",
+      "announced_at": "2021-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "485d55820b1ffe0aa873a9ec25d01f0bf3a74a98ebfc6c52eddd0cb65effe270",
+      "collection_mode": "manual",
+      "event_type": "resumed",
+      "reason": "沢井製薬の2021年1月の案内では、規格に適合する原薬を調達できず、一時的に供給を停止したと説明しています。安定供給体制を整え、2021年1月4日からの供給再開を案内しました。",
+      "targets": [
+        {
+          "yj_code": "6141002F2078",
+          "product_name": "エリスロマイシン錠２００ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "gs1_sales": "14987080595318",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "当時の供給再開の対象包装。統一商品コード080595311。現在の包装別出荷状況は未確認です。"
+              },
+              "unified_product_code": "080595311"
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "日本ジェネリック製薬協会が再掲した沢井製薬の原文です。2026年1月更新の限定出荷について、具体的な原因を示すメーカー原文は未確認です。2021年の原文に代替候補の記載はありません。"
+      ]
+    },
+    {
+      "id": "supply-history-2290701g4038-202308",
+      "maker": "T'sファーマ",
+      "title": "ブデソニド吸入液0.25mg「武田テバ」の過去の出荷停止理由（2023年8月）",
+      "url": "https://www.hospital.or.jp/site/news/file/1693270450.pdf",
+      "announced_at": "2023-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "d31b11623ec60794ff3b8b2568e0d399df202fa00083c206e1dfebdd1b76ffbe",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "当時の武田テバファーマは、一部ロットの安定性試験で類縁物質が承認規格の上限を超える可能性があることから、予防的に出荷を一時停止すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2290701G4038",
+          "product_name": "ブデソニド吸入液０．２５ｍｇ「武田テバ」",
+          "maker": "T'sファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "2mL×30アンプル（5アンプル×6袋）",
+              "gs1_sales": "14987123412565",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2023年8月の案内に記載された対象包装です。現在の包装別出荷状況は未確認です。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "日本病院会が再掲した旧・武田テバファーマ（現T’sファーマ）の原文で、0.25mgが対象です。0.5mgは対象外です。2025年9月更新の限定出荷の詳細はこの資料では確認できず、当時の原文に代替候補の記載はありません。"
+      ]
+    },
+    {
       "id": "hikari-glucose-30-discontinuation-202604",
       "maker": "光製薬",
       "title": "光糖液30％の販売中止予定とメーカーが案内した20％製品",
