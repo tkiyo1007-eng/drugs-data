@@ -3,12 +3,24 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-11-17T08:22:50+09:00",
-  "last_success_at": "2026-11-17T08:22:50+09:00",
+  "checked_at": "2026-11-18T07:16:55+09:00",
+  "last_success_at": "2026-11-18T07:16:55+09:00",
   "items": [
     {
       "title": "【日薬 岩月会長】薬局集約化推進に反論‐予算確保は国の責務",
       "url": "https://www.yakuji.co.jp/entry141779.html",
+      "date": "2026-11-17",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【武田薬品】卵巣癌薬「エラヒア」発売‐新規経口抗てんかん薬も",
+      "url": "https://www.yakuji.co.jp/entry141772.html",
+      "date": "2026-11-17",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【NPhA】中間年改定廃止 再び要望‐安定的な調達さらに困難",
+      "url": "https://www.yakuji.co.jp/entry141769.html",
       "date": "2026-11-17",
       "tag": "業界ニュース"
     },
@@ -19,32 +31,14 @@
       "tag": "業界ニュース"
     },
     {
-      "title": "【キャリアパス懇談会】薬剤師の専門性評価難しく‐専門医と異なる制度設計を",
-      "url": "https://www.yakuji.co.jp/entry141777.html",
-      "date": "2026-11-16",
-      "tag": "業界ニュース"
-    },
-    {
       "title": "【厚労省】後発品企業38社をA区分‐一部企業への発注殺到懸念",
       "url": "https://www.yakuji.co.jp/entry141775.html",
       "date": "2026-11-16",
       "tag": "業界ニュース"
     },
     {
-      "title": "【内閣府専門部会】放射性薬の提供体制充実へ‐アクションプラン大筋で了承",
-      "url": "https://www.yakuji.co.jp/entry141773.html",
-      "date": "2026-11-16",
-      "tag": "業界ニュース"
-    },
-    {
       "title": "【ロート製薬】目薬6製品を自主回収‐ベトナム拠点で管理不備",
       "url": "https://www.yakuji.co.jp/entry141771.html",
-      "date": "2026-11-16",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【武田薬品】乾癬治療薬を国内申請‐TYK2阻害剤ザソシチニブ",
-      "url": "https://www.yakuji.co.jp/entry141690.html",
       "date": "2026-11-16",
       "tag": "業界ニュース"
     }
