@@ -48190,6 +48190,400 @@
         "在庫消尽日は当時の見込みです。集約対象の各コードは2026年10月29日の東和薬品一覧に掲載されていません。",
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
       ]
+    },
+    {
+      "id": "yoshindo-yd-solita-t3-t3g-limited-202508",
+      "maker": "陽進堂ホールディングス",
+      "title": "YDソリターT3号・T3号G輸液 2容量の限定出荷開始時の案内",
+      "url": "https://yoshindoholdings.co.jp/data_base/db/pdf/etc_250804.pdf",
+      "announced_at": "2025-08",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "46cb2d568f5deb1a52da4f6925ecd8f3539cb6a1a5435e2d5c46dc662d961f0b",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "陽進堂は、想定を超える出荷が続き、2025年8月に限定出荷すると案内しました。原文には、T3号とT3号Gのそれぞれに同容量の代替候補が示されています。",
+      "targets": [
+        {
+          "yj_code": "3319510A5136",
+          "product_name": "ＹＤソリタ－Ｔ３号輸液",
+          "maker": "陽進堂ホールディングス",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "200mL×20袋",
+              "unified_product_code": "476170023",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（2025年8月のメーカー資料）",
+                "note": "統一商品コード 476170023。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3319510A4113",
+          "product_name": "ＹＤソリタ－Ｔ３号輸液",
+          "maker": "陽進堂ホールディングス",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "500mL×20袋",
+              "unified_product_code": "476170030",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（2025年8月のメーカー資料）",
+                "note": "統一商品コード 476170030。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3319511A5050",
+          "product_name": "ＹＤソリタ－Ｔ３号Ｇ輸液",
+          "maker": "陽進堂ホールディングス",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "200mL×20袋",
+              "unified_product_code": "476170122",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（2025年8月のメーカー資料）",
+                "note": "統一商品コード 476170122。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3319511A4053",
+          "product_name": "ＹＤソリタ－Ｔ３号Ｇ輸液",
+          "maker": "陽進堂ホールディングス",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "500mL×20袋",
+              "unified_product_code": "476170139",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（2025年8月のメーカー資料）",
+                "note": "統一商品コード 476170139。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://yoshindoholdings.co.jp/data_base/db/pdf/etc_250804.pdf",
+          "target_yj_codes": [
+            "3319510A5136"
+          ],
+          "type": "陽進堂が原文に記載した同容量の代替候補",
+          "products": [
+            {
+              "name": "ソリタ－Ｔ３号輸液",
+              "maker": "陽進堂ホールディングス",
+              "yj_code": "3319510A5128",
+              "scope": "200mL×20袋（統一商品コード 476162721）。原文で同容量・同製剤区分の候補として案内。厚労省11月16日版では候補は通常出荷です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        },
+        {
+          "source_url": "https://yoshindoholdings.co.jp/data_base/db/pdf/etc_250804.pdf",
+          "target_yj_codes": [
+            "3319510A4113"
+          ],
+          "type": "陽進堂が原文に記載した同容量の代替候補",
+          "products": [
+            {
+              "name": "ソリタ－Ｔ３号輸液",
+              "maker": "陽進堂ホールディングス",
+              "yj_code": "3319510A4105",
+              "scope": "500mL×20袋（統一商品コード 476162738）。原文で同容量・同製剤区分の候補として案内。厚労省11月16日版では候補は通常出荷です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        },
+        {
+          "source_url": "https://yoshindoholdings.co.jp/data_base/db/pdf/etc_250804.pdf",
+          "target_yj_codes": [
+            "3319511A5050"
+          ],
+          "type": "陽進堂が原文に記載した同容量の代替候補",
+          "products": [
+            {
+              "name": "ソリタ－Ｔ３号Ｇ輸液",
+              "maker": "陽進堂ホールディングス",
+              "yj_code": "3319511A5041",
+              "scope": "200mL×20袋（統一商品コード 476162820）。原文で同容量・同製剤区分の候補として案内。厚労省11月16日版では候補は通常出荷です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        },
+        {
+          "source_url": "https://yoshindoholdings.co.jp/data_base/db/pdf/etc_250804.pdf",
+          "target_yj_codes": [
+            "3319511A4053"
+          ],
+          "type": "陽進堂が原文に記載した同容量の代替候補",
+          "products": [
+            {
+              "name": "ソリタ－Ｔ３号Ｇ輸液",
+              "maker": "陽進堂ホールディングス",
+              "yj_code": "3319511A4045",
+              "scope": "500mL×20袋（統一商品コード 476162837）。原文で同容量・同製剤区分の候補として案内。厚労省11月16日版では候補は通常出荷です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "資料発行時、候補の製造販売元はエイワイファーマ、販売元は陽進堂でした。2026年4月1日の経営統合後は陽進堂ホールディングスです。",
+        "2025年9月には、同じ対象包装の製造販売中止が別途案内されました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "yoshindo-yd-t3-stop-202509",
+      "maker": "陽進堂ホールディングス",
+      "title": "YDソリターT3号輸液 200mL・500mLの製造販売中止と代替候補",
+      "url": "https://yoshindoholdings.co.jp/data_base/db/pdf/etc_250909_04.pdf",
+      "announced_at": "2025-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "c4f97c501434a3335e2a5ec9cfe7a1cfd4d5790f28a455a8322c2d6febe85e64",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "陽進堂は、対象包装を在庫消尽後に販売中止すると案内しました。この案内には販売中止の具体的な理由は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "3319510A5136",
+          "product_name": "ＹＤソリタ－Ｔ３号輸液",
+          "maker": "陽進堂ホールディングス",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "200mL×20袋",
+              "unified_product_code": "476170023",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2025年9月中旬（メーカー資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 476170023。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3319510A4113",
+          "product_name": "ＹＤソリタ－Ｔ３号輸液",
+          "maker": "陽進堂ホールディングス",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "500mL×20袋",
+              "unified_product_code": "476170030",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2025年10月上旬（メーカー資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 476170030。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://yoshindoholdings.co.jp/data_base/db/pdf/etc_250909_04.pdf",
+          "target_yj_codes": [
+            "3319510A5136"
+          ],
+          "type": "陽進堂が原文に記載した同容量の代替候補",
+          "products": [
+            {
+              "name": "ソリタ－Ｔ３号輸液",
+              "maker": "陽進堂ホールディングス",
+              "yj_code": "3319510A5128",
+              "scope": "200mL×20袋（統一商品コード 476162721）。原文で同容量・同製剤区分の候補として案内。厚労省11月16日版では候補は通常出荷です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        },
+        {
+          "source_url": "https://yoshindoholdings.co.jp/data_base/db/pdf/etc_250909_04.pdf",
+          "target_yj_codes": [
+            "3319510A4113"
+          ],
+          "type": "陽進堂が原文に記載した同容量の代替候補",
+          "products": [
+            {
+              "name": "ソリタ－Ｔ３号輸液",
+              "maker": "陽進堂ホールディングス",
+              "yj_code": "3319510A4105",
+              "scope": "500mL×20袋（統一商品コード 476162738）。原文で同容量・同製剤区分の候補として案内。厚労省11月16日版では候補は通常出荷です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "資料発行時、候補の製造販売元はエイワイファーマ、販売元は陽進堂でした。2026年4月1日の経営統合後は陽進堂ホールディングスです。",
+        "経過措置は原文で2027年3月末の見込みです。厚労省公表データの対象4品目にも2027年3月31日までと記載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "yoshindo-yd-t3g-stop-202509",
+      "maker": "陽進堂ホールディングス",
+      "title": "YDソリターT3号G輸液 200mL・500mLの製造販売中止と代替候補",
+      "url": "https://yoshindoholdings.co.jp/data_base/db/pdf/etc_250909_03.pdf",
+      "announced_at": "2025-09",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ddb65b3cb9c82b8cb4fc957c9bac83e97acf2968396542cea5a220151dfcb0f0",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "陽進堂は、対象包装を在庫消尽後に販売中止すると案内しました。この案内には販売中止の具体的な理由は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "3319511A5050",
+          "product_name": "ＹＤソリタ－Ｔ３号Ｇ輸液",
+          "maker": "陽進堂ホールディングス",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "200mL×20袋",
+              "unified_product_code": "476170122",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年3月中旬（メーカー資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 476170122。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3319511A4053",
+          "product_name": "ＹＤソリタ－Ｔ３号Ｇ輸液",
+          "maker": "陽進堂ホールディングス",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "500mL×20袋",
+              "unified_product_code": "476170139",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2025年10月下旬（メーカー資料の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 476170139。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://yoshindoholdings.co.jp/data_base/db/pdf/etc_250909_03.pdf",
+          "target_yj_codes": [
+            "3319511A5050"
+          ],
+          "type": "陽進堂が原文に記載した同容量の代替候補",
+          "products": [
+            {
+              "name": "ソリタ－Ｔ３号Ｇ輸液",
+              "maker": "陽進堂ホールディングス",
+              "yj_code": "3319511A5041",
+              "scope": "200mL×20袋（統一商品コード 476162820）。原文で同容量・同製剤区分の候補として案内。厚労省11月16日版では候補は通常出荷です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        },
+        {
+          "source_url": "https://yoshindoholdings.co.jp/data_base/db/pdf/etc_250909_03.pdf",
+          "target_yj_codes": [
+            "3319511A4053"
+          ],
+          "type": "陽進堂が原文に記載した同容量の代替候補",
+          "products": [
+            {
+              "name": "ソリタ－Ｔ３号Ｇ輸液",
+              "maker": "陽進堂ホールディングス",
+              "yj_code": "3319511A4045",
+              "scope": "500mL×20袋（統一商品コード 476162837）。原文で同容量・同製剤区分の候補として案内。厚労省11月16日版では候補は通常出荷です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "資料発行時、候補の製造販売元はエイワイファーマ、販売元は陽進堂でした。2026年4月1日の経営統合後は陽進堂ホールディングスです。",
+        "経過措置は原文で2027年3月末の見込みです。厚労省公表データの対象4品目にも2027年3月31日までと記載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
     }
   ]
 }
