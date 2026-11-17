@@ -199,7 +199,6 @@ body{
   transition:box-shadow .3s;
 }
 .brand{display:flex;align-items:center;gap:10px;flex-shrink:0;white-space:nowrap;font-weight:900;font-size:16px;letter-spacing:.02em;text-decoration:none;color:var(--ink)}
-.brand-home-label{font-size:12px;color:var(--blue-deep);text-decoration:underline;text-underline-offset:3px}
 .brand-mark{
   width:34px;height:34px;border-radius:10px;flex:none;
   background:linear-gradient(150deg,var(--cyan),var(--blue) 70%);
@@ -220,7 +219,7 @@ body{
   transition:transform .2s,box-shadow .2s;
 }
 .nav-cta:hover{transform:translateY(-1px);box-shadow:0 10px 24px -6px rgba(47,99,232,.7)}
-@media(max-width:760px){.nav-links a:not(.nav-cta),.brand-home-label{display:none}}
+@media(max-width:760px){.nav-links a:not(.nav-cta){display:none}}
 @media(min-width:761px){.nav-links a:not(.nav-cta){padding-inline:7px}}
 @media(max-width:1200px) and (min-width:761px){.nav-links a:not(.nav-cta):nth-child(n+4):not([href="#app"]){display:none}}
 @media(min-width:761px) and (max-width:900px){
@@ -241,7 +240,25 @@ section[id]{scroll-margin-top:90px}
 .appearance-control select:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 .appearance-status{flex-basis:100%;font-size:12px;color:var(--sub);text-align:right;overflow-wrap:anywhere}
 
-/* スマホの主要導線とアプリ紹介。モバイルだけに表示する */
+/* ホームは共通、クイックナビはスマホだけに表示する */
+.quick-nav-dock{
+  position:fixed;z-index:180;
+  left:max(20px,env(safe-area-inset-left,0px));
+  bottom:max(18px,env(safe-area-inset-bottom,0px));
+  display:grid;gap:8px;pointer-events:none;
+}
+.home-return{
+  justify-self:start;pointer-events:auto;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:48px;padding:0 16px;border:1px solid #c1d4ff;border-radius:999px;
+  color:#fff;background:linear-gradient(135deg,#315fd3,#1f44af);
+  box-shadow:0 8px 24px -9px rgba(15,45,124,.72),inset 0 1px 0 rgba(255,255,255,.22);
+  font-size:13px;font-weight:800;line-height:1;text-decoration:none;
+}
+.home-return svg{width:21px;height:21px;flex:none}
+.home-return:hover{background:linear-gradient(135deg,#2b55c5,#193999)}
+.home-return:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.quick-nav-dock[data-keyboard-open]{display:none}
 .mobile-quick-nav{display:none}
 .mobile-quick-link{
   position:relative;
@@ -260,16 +277,19 @@ section[id]{scroll-margin-top:90px}
 .mobile-quick-link:active{transform:scale(.96)}
 .mobile-quick-link:focus-visible{outline:3px solid rgba(47,99,232,.48);outline-offset:2px}
 @media(max-width:760px){
-  body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
-  .mobile-quick-nav{
-    position:fixed;z-index:180;left:10px;right:10px;
+  body{padding-bottom:calc(132px + env(safe-area-inset-bottom,0px))}
+  .quick-nav-dock{
+    left:max(10px,env(safe-area-inset-left,0px));
+    right:max(10px,env(safe-area-inset-right,0px));
     bottom:calc(var(--quick-nav-viewport-inset,0px) + max(8px,env(safe-area-inset-bottom,0px)));
-    display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;
+  }
+  .mobile-quick-nav{
+    pointer-events:auto;
+    display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;
     padding:6px;border-radius:20px;background:rgba(255,255,255,.9);
     border:1px solid rgba(255,255,255,.92);box-shadow:0 14px 40px -14px rgba(20,39,94,.5);
     backdrop-filter:blur(24px) saturate(1.45);-webkit-backdrop-filter:blur(24px) saturate(1.45);
   }
-  .mobile-quick-nav[data-keyboard-open]{display:none}
 }
 
 /* ===== ヒーロー ===== */
@@ -1630,7 +1650,6 @@ html.season-autumn .autumn-sky{display:none}
   <a class="brand" href="#top" data-home-link aria-label="医薬品供給ナビのトップへ">
     <span class="brand-mark" aria-hidden="true">✚</span>
     医薬品供給ナビ
-    <span class="brand-home-label">トップへ</span>
   </a>
   <div class="nav-links">
     <a href="#daily-update">最新の変更</a>
@@ -1645,33 +1664,35 @@ html.season-autumn .autumn-sky{display:none}
   </div>
 </nav>
 
-<nav class="mobile-quick-nav" aria-label="モバイルクイックナビ">
-  <a class="mobile-quick-link" href="#top" data-quick-target="top" data-home-link aria-current="location">
+<div class="quick-nav-dock">
+  <a class="home-return" href="#top" data-quick-target="top" data-home-link aria-current="location">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7M5 9v12h14V9M9 21v-7h6v7"/></svg>
     <span>ホーム</span>
   </a>
-  <a class="mobile-quick-link" href="#demo" data-quick-target="demo">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
-    <span>検索</span>
-  </a>
-  <a class="mobile-quick-link" href="#daily-update" data-quick-target="daily-update">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7v5h-5"/><path d="M4 17v-5h5"/><path d="M6.1 8.2A7 7 0 0 1 19.8 12M4.2 12a7 7 0 0 0 13.7 3.8"/></svg>
-    <span>更新</span>
-  </a>
-  <a class="mobile-quick-link" href="#topics" data-quick-target="topics">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg>
-    <span>ニュース</span>
-  </a>
-  <a class="mobile-quick-link" id="mobileWatchLink" href="#watchDashboard" data-quick-target="watchDashboard" aria-label="監視">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-3.8 7-10V5l-7-3-7 3v6c0 6.2 7 10 7 10Z"/><path d="m9 12 2 2 4-5"/></svg>
-    <span>監視</span>
-    <span class="mobile-quick-badge" id="mobileWatchBadge" aria-hidden="true" hidden></span>
-  </a>
-  <a class="mobile-quick-link" href="#app" data-quick-target="app" aria-label="アプリ紹介">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>
-    <span>アプリ</span>
-  </a>
-</nav>
+  <nav class="mobile-quick-nav" aria-label="モバイルクイックナビ">
+    <a class="mobile-quick-link" href="#demo" data-quick-target="demo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+      <span>検索</span>
+    </a>
+    <a class="mobile-quick-link" href="#daily-update" data-quick-target="daily-update">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7v5h-5"/><path d="M4 17v-5h5"/><path d="M6.1 8.2A7 7 0 0 1 19.8 12M4.2 12a7 7 0 0 0 13.7 3.8"/></svg>
+      <span>更新</span>
+    </a>
+    <a class="mobile-quick-link" href="#topics" data-quick-target="topics">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg>
+      <span>ニュース</span>
+    </a>
+    <a class="mobile-quick-link" id="mobileWatchLink" href="#watchDashboard" data-quick-target="watchDashboard" aria-label="監視">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-3.8 7-10V5l-7-3-7 3v6c0 6.2 7 10 7 10Z"/><path d="m9 12 2 2 4-5"/></svg>
+      <span>監視</span>
+      <span class="mobile-quick-badge" id="mobileWatchBadge" aria-hidden="true" hidden></span>
+    </a>
+    <a class="mobile-quick-link" href="#app" data-quick-target="app" aria-label="アプリ紹介">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>
+      <span>アプリ</span>
+    </a>
+  </nav>
+</div>
 
 <header id="top" class="search-intro">
   <div class="autumn-sky" aria-hidden="true">
@@ -2896,9 +2917,9 @@ function pageScrollBehavior(){
 
 /* iOSのブラウザUI・キーボードで変わる可視領域に下部ナビを追従させる。 */
 (function(){
-  const nav = document.querySelector('.mobile-quick-nav');
+  const dock = document.querySelector('.quick-nav-dock');
   const viewport = window.visualViewport;
-  if(!nav || !viewport) return; // 非対応ブラウザは通常のCSS固定位置を使う。
+  if(!dock || !viewport) return; // 非対応ブラウザは通常のCSS固定位置を使う。
   let frame = 0;
   function update(){
     frame = 0;
@@ -2907,8 +2928,8 @@ function pageScrollBehavior(){
     const unzoomed = Math.abs(viewport.scale - 1) < .05;
     const inset = window.innerHeight - viewport.height - viewport.offsetTop;
     // ピンチズームはキーボードと見なさず、通常の固定位置を維持する。
-    nav.toggleAttribute('data-keyboard-open', unzoomed && editing && window.innerHeight - viewport.height > 120);
-    nav.style.setProperty('--quick-nav-viewport-inset', `${unzoomed ? inset : 0}px`);
+    dock.toggleAttribute('data-keyboard-open', unzoomed && editing && window.innerHeight - viewport.height > 120);
+    dock.style.setProperty('--quick-nav-viewport-inset', `${unzoomed ? inset : 0}px`);
   }
   function schedule(){ if(!frame) frame = requestAnimationFrame(update); }
   viewport.addEventListener('resize', schedule);
@@ -2922,26 +2943,33 @@ function pageScrollBehavior(){
 
 /* スマホ下部ナビの現在地。検索内の監視ダッシュボードも独立した主要導線として扱う */
 (function(){
-  const links = [...document.querySelectorAll(".mobile-quick-link")];
+  const links = [...document.querySelectorAll("[data-quick-target]")];
   const targets = links.map(link=>({link,target:document.getElementById(link.dataset.quickTarget)}))
     .filter(x=>x.target);
   if(!targets.length) return;
   let frame = 0, pendingTarget = null, pendingUntil = 0, jumpGeneration = 0;
+  function setQuickLocation(current){
+    for(const entry of targets){
+      if(entry === current) entry.link.setAttribute("aria-current","location");
+      else entry.link.removeAttribute("aria-current");
+    }
+  }
   function updateQuickNav(){
     frame = 0;
-    if(!matchMedia("(max-width: 760px)").matches) return;
+    const home = window.scrollY <= 1 ? targets.find(entry=>entry.target.id === "top") : null;
+    if(!matchMedia("(max-width: 760px)").matches){
+      setQuickLocation(home);
+      return;
+    }
     if(pendingTarget && performance.now() < pendingUntil){
-      for(const entry of targets){
-        if(entry === pendingTarget) entry.link.setAttribute("aria-current","location");
-        else entry.link.removeAttribute("aria-current");
-      }
+      setQuickLocation(pendingTarget);
       return;
     }
     pendingTarget = null;
     const focusY = innerHeight * .42;
     const watch = targets.find(entry=>entry.target.id === "watchDashboard");
     const watchRect = watch && watch.target.getBoundingClientRect();
-    let current = window.scrollY <= 1 ? targets.find(entry=>entry.target.id === "top") : null;
+    let current = home;
     if(!current && watchRect && watchRect.top <= focusY && watchRect.bottom >= focusY) current = watch;
     let bestAbove = -Infinity, nearest = Infinity;
     if(!current){
@@ -2951,17 +2979,14 @@ function pageScrollBehavior(){
         if(bestAbove === -Infinity && Math.abs(top-focusY) < nearest){ current = entry; nearest = Math.abs(top-focusY); }
       }
     }
-    for(const entry of targets){
-      if(entry === current) entry.link.setAttribute("aria-current","location");
-      else entry.link.removeAttribute("aria-current");
-    }
+    setQuickLocation(current);
   }
   function scheduleQuickNav(){
     if(!frame) frame = requestAnimationFrame(updateQuickNav);
   }
   addEventListener("scroll",scheduleQuickNav,{passive:true});
   addEventListener("resize",scheduleQuickNav,{passive:true});
-  document.querySelectorAll(".mobile-quick-link, [data-home-link]").forEach(link=>link.addEventListener("click",event=>{
+  document.querySelectorAll("[data-quick-target], [data-home-link]").forEach(link=>link.addEventListener("click",event=>{
     if(event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     const generation = ++jumpGeneration;
     const root = document.documentElement;
@@ -4776,7 +4801,7 @@ function historyFocusFallback(previous){
 }
 function historyReadingAnchor(active, scrollY){
   if(document.getElementById("mBack").classList.contains("open") && !active?.closest("#mBack .modal")) return null;
-  if(active && active !== document.body && !active.closest(".site-nav, .mobile-quick-nav")) return active;
+  if(active && active !== document.body && !active.closest(".site-nav, .mobile-quick-nav") && !active.closest(".home-return")) return active;
   if(scrollY <= 0) return null;
   // 固定ナビやbodyの焦点は閲覧位置を表さない。今見えている本文を基準にする。
   const top = Math.max(0, document.querySelector(".site-nav")?.getBoundingClientRect().bottom || 0);
