@@ -48729,6 +48729,119 @@
         "厚労省11月16日版にある現在の品目理由は「その他の理由」です。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "chemifa-mesalazine-tablets-shortage-202410",
+      "maker": "日本ケミファ",
+      "title": "メサラジン錠250mg／500mg「ケミファ」 供給停止に関するお知らせ",
+      "url": "https://www.nc-medical.com/product_topics/a6ahnp0000003r66-att/a6ahnp0000003r6u.pdf",
+      "source_index_url": "https://www.nc-medical.com/product/mesalazine_t.html",
+      "announced_at": "2024-10",
+      "listed_at": "2024-10-28",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "ae99e31588e7cb822b99609bb96388670e0ba3dd449353762241ea889a417981",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "2024年10月の案内では、限定出荷中に製造委託先で新たな確認事項が生じ、次回入荷が未定となったため、在庫がなくなり次第、一時的に供給を停止するとしています。",
+      "targets": [
+        {
+          "yj_code": "2399009F1092",
+          "product_name": "メサラジン錠２５０ｍｇ「ケミファ」",
+          "maker": "日本ケミファ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "seller": "日本ケミファ",
+          "packages": [
+            {
+              "package": "100錠",
+              "unified_product_code": "171568217",
+              "supply": {
+                "status": "stopped",
+                "status_text": "在庫がなくなり次第、一時供給停止（2024年10月の案内）",
+                "plans": [],
+                "note": "統一商品コード 171568217、販売包装単位コード 14987171568214。"
+              }
+            },
+            {
+              "package": "500錠",
+              "unified_product_code": "171568316",
+              "supply": {
+                "status": "stopped",
+                "status_text": "在庫がなくなり次第、一時供給停止（2024年10月の案内）",
+                "plans": [],
+                "note": "統一商品コード 171568316、販売包装単位コード 14987171568313。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2399009F2064",
+          "product_name": "メサラジン錠５００ｍｇ「ケミファ」",
+          "maker": "日本ケミファ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "seller": "日本ケミファ",
+          "packages": [
+            {
+              "package": "100錠",
+              "unified_product_code": "171595107",
+              "supply": {
+                "status": "stopped",
+                "status_text": "在庫がなくなり次第、一時供給停止（2024年10月の案内）",
+                "plans": [],
+                "note": "統一商品コード 171595107、販売包装単位コード 14987171595104。"
+              }
+            },
+            {
+              "package": "500錠",
+              "unified_product_code": "171595305",
+              "supply": {
+                "status": "stopped",
+                "status_text": "在庫がなくなり次第、一時供給停止（2024年10月の案内）",
+                "plans": [],
+                "note": "統一商品コード 171595305、販売包装単位コード 14987171595302。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.nc-medical.com/product_topics/a6ahnp0000003r66-att/a6ahnp0000003r6u.pdf",
+          "target_yj_codes": [
+            "2399009F1092",
+            "2399009F2064"
+          ],
+          "type": "メーカーが当時示した同種同効品",
+          "products": [
+            {
+              "name": "ペンタサ顆粒９４％",
+              "maker": "フェリング・ファーマ",
+              "yj_code": "2399009D2020",
+              "scope": "1,000mg分包（1.06g×100包、統一商品コード 060008206）"
+            },
+            {
+              "name": "ペンタサ顆粒９４％",
+              "maker": "フェリング・ファーマ",
+              "yj_code": "2399009D2020",
+              "scope": "2,000mg分包（2.12g×100包、統一商品コード 060008213）"
+            }
+          ],
+          "cautions": [
+            "日本ケミファが供給の滞りに備えて2024年10月に示した参考情報です。候補は顆粒剤で、対象の錠剤とは剤形が異なります。",
+            "原文に候補の案内期限は記載されていません。候補の現在の供給区分は、品目検索でご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "日本ケミファの2024年10月資料に記載された販売包装の案内です。日本薬品工業の販売包装には適用しません。",
+        "厚労省公表欄には現在の品目区分・理由を掲載しています。2026年の限定出荷に関する具体的なメーカー原文は未確認です。"
+      ]
     }
   ]
 }
