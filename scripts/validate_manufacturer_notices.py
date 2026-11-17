@@ -119,6 +119,19 @@ MAKER_MANUAL_SOURCE_URLS = {
         'https://medinfo-sato.com/update/pdf/241008_pastaron.pdf',
         'https://medinfo-sato.com/update/pdf/260508_pastaron.pdf',
     },
+    '科研製薬': {
+        'https://medical-pro.kaken.co.jp/product/mentax/documents/mentax_kyokyu_20260708.pdf',
+        'https://medical-pro.kaken.co.jp/product/mentax/mentaxcream_chushi_20261019',
+        'https://medical-pro.kaken.co.jp/product/prostaglandine/prostaglandine_kyokyu_20260729',
+    },
+    'Meファルマ': {
+        'https://www.meiji-seika-pharma.co.jp/me-pharma/medical/news/pdf/news_230801.pdf',
+        'https://www.meiji-seika-pharma.co.jp/me-pharma/medical/news/pdf/news_250924.pdf',
+        'https://www.meiji-seika-pharma.co.jp/me-pharma/medical/news/pdf/news_251215.pdf',
+        'https://www.meiji-seika-pharma.co.jp/me-pharma/medical/news/pdf/news_260204_02.pdf',
+        'https://www.meiji-seika-pharma.co.jp/me-pharma/medical/news/pdf/news_260406.pdf',
+        'https://www.meiji-seika-pharma.co.jp/me-pharma/medical/news/pdf/news_260420.pdf',
+    },
     '第一三共': {
         'https://oisya3.com/makuhari/wp-content/uploads/2025/02/%E3%81%8A%E3%81%9F%E3%81%B5%E3%81%8F%E3%81%8B%E3%81%9C%E5%87%BA%E8%8D%B7%E5%81%9C%E6%AD%A2-3.pdf',
         'https://www.city.suginami.tokyo.jp/documents/968/otafuku202509daiitisankyou.pdf',

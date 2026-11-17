@@ -2,6 +2,505 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "kaken-mentax-cream-package-discontinuation-202610",
+      "maker": "科研製薬",
+      "title": "メンタックスクリーム1％の10g×50本販売中止予定と継続販売包装（2026年10月）",
+      "url": "https://medical-pro.kaken.co.jp/product/mentax/mentaxcream_chushi_20261019",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "e7f8a50a74339abb5472292398f62a3bc6dcfe4606be63eeaeab484096d9fd8a",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "科研製薬は10g×50本を在庫がなくなり次第販売中止とし、10g×20本は販売を継続する方針と案内しました。具体的な販売中止理由や在庫終了日は記載されていません。",
+      "targets": [
+        {
+          "yj_code": "2659708N1082",
+          "product_name": "メンタックスクリーム１％",
+          "maker": "科研製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10g×50本",
+              "unified_product_code": "042122340",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "在庫消尽後の販売中止対象です。実際の在庫終了日は未確認です。"
+              }
+            },
+            {
+              "package": "10g×20本",
+              "unified_product_code": "042122326",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2026年10月の案内に販売を継続すると記載されています。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "type": "10g×50本の販売中止案内に記載された継続販売包装",
+          "source_url": "https://medical-pro.kaken.co.jp/product/mentax/mentaxcream_chushi_20261019",
+          "target_yj_codes": [
+            "2659708N1082"
+          ],
+          "products": [
+            {
+              "name": "メンタックスクリーム１％",
+              "maker": "科研製薬",
+              "yj_code": "2659708N1082",
+              "scope": "同一製品の10g×20本（統一商品コード042122326）。"
+            }
+          ],
+          "cautions": [
+            "科研製薬の2026年10月の案内で10g×50本の販売中止に伴い示された包装です。現在の出荷・受注・在庫は未確認です。"
+          ]
+        }
+      ],
+      "cautions": [
+        "現在の包装別の受注・在庫は未確認です。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
+      "id": "kaken-mentax-cream-demand-limited-202607",
+      "maker": "科研製薬",
+      "title": "メンタックスクリーム1％の需要増による限定出荷（2026年7月）",
+      "url": "https://medical-pro.kaken.co.jp/product/mentax/documents/mentax_kyokyu_20260708.pdf",
+      "announced_at": "2026-07",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "79530557bf1e9fbaf07371b0e2c49041d6c4c710ab5fdff41ba839f7aee16ba0",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "科研製薬は他社品の限定出荷などで注文が急増し、安定供給への影響が見込まれたため、特約店への出荷を制限すると説明しています。",
+      "targets": [
+        {
+          "yj_code": "2659708N1082",
+          "product_name": "メンタックスクリーム１％",
+          "maker": "科研製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10g×20本",
+              "unified_product_code": "042122326",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "2026年7月案内で③限定出荷（他社品の影響）"
+              }
+            },
+            {
+              "package": "10g×50本",
+              "unified_product_code": "042122340",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "2026年7月案内で③限定出荷（他社品の影響）",
+                "note": "2026年10月の後続案内では、在庫消尽後の販売中止対象です。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "現在の包装別の受注・在庫は未確認です。",
+        "この原文には代替候補の記載がありません。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
+      "id": "kaken-prostaglandin-e2-limited-202607",
+      "maker": "科研製薬",
+      "title": "プロスタグランジンE₂錠0.5mg「科研」の限定出荷（2026年7月）",
+      "url": "https://medical-pro.kaken.co.jp/product/prostaglandine/prostaglandine_kyokyu_20260729",
+      "announced_at": "2026-07",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "2ff68ca58133624c3fb142e2833cb985fecfb25f9e2da1caf64cbe1eaf99736b",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "科研製薬は他社製品の出荷調整により安定供給に支障が出るおそれがあるため、特約店への出荷を制限すると説明しています。",
+      "targets": [
+        {
+          "yj_code": "2499005F1030",
+          "product_name": "プロスタグランジンＥ２錠０．５ｍｇ「科研」",
+          "maker": "科研製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP60錠",
+              "unified_product_code": "042292104",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "2026年7月案内で③限定出荷（他社品の影響）",
+                "note": "原文での出荷量はA（通常）です。"
+              }
+            }
+          ],
+          "seller": "科研製薬"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "科研製薬が特約店向けに出した案内です。",
+        "現在の包装別の受注・在庫は未確認です。",
+        "この原文には代替候補の記載がありません。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
+      "id": "me-pharma-rabeprazole-na-10-limited-202604",
+      "maker": "Meファルマ",
+      "title": "ラベプラゾールNa塩錠10mg「明治」の限定出荷（2026年4月）",
+      "url": "https://www.meiji-seika-pharma.co.jp/me-pharma/medical/news/pdf/news_260420.pdf",
+      "announced_at": "2026-04",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "07daea3f9ae4c4754a21120ff19821f02409d4cfbd07ff0b4552ab33c4648b22",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "Meファルマは、他社の同成分製品の限定出荷に伴う急な需要増が見込まれるため、特約店への出荷を制限し、新規採用を辞退すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2329028F1155",
+          "product_name": "ラベプラゾールＮａ塩錠１０ｍｇ「明治」",
+          "maker": "Meiji Seika ファルマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "gs1_sales": "14987916002089",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "2026-04の案内では③限定出荷（他社品の影響）"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "gs1_sales": "14987916002096",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "2026-04の案内では③限定出荷（他社品の影響）"
+              }
+            },
+            {
+              "package": "バラ100錠",
+              "gs1_sales": "14987916002102",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "2026-04の案内では③限定出荷（他社品の影響）"
+              }
+            }
+          ],
+          "seller": "Meファルマ"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "Meファルマの取扱い分についての案内です。",
+        "解除時期は案内時点で未定です。",
+        "現在の包装別の受注・在庫は未確認です。",
+        "この原文には代替候補の記載がありません。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
+      "id": "me-pharma-dutasteride-av-limited-202602",
+      "maker": "Meファルマ",
+      "title": "デュタステリド錠0.5mgAV「明治」の限定出荷（2026年2月）",
+      "url": "https://www.meiji-seika-pharma.co.jp/me-pharma/medical/news/pdf/news_260204_02.pdf",
+      "announced_at": "2026-02",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "3a861df99dd2ca45c918615319e3de5bc98eaf8a97d69c9fed81020cdfd55255",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "Meファルマは、他社の同成分製品の限定出荷に伴う急な需要増が見込まれるため、特約店への出荷を制限し、新規採用を辞退すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2499011F1052",
+          "product_name": "デュタステリド錠０．５ｍｇＡＶ「明治」",
+          "maker": "Meiji Seika ファルマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP30錠",
+              "gs1_sales": "14987916001808",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "2026-02の案内では③限定出荷（他社品の影響）"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "gs1_sales": "14987916001815",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "2026-02の案内では③限定出荷（他社品の影響）"
+              }
+            },
+            {
+              "package": "バラ300錠",
+              "gs1_sales": "14987916001822",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "2026-02の案内では③限定出荷（他社品の影響）"
+              }
+            }
+          ],
+          "seller": "Meファルマ"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "Meファルマの取扱い分についての案内です。",
+        "解除時期は案内時点で未定です。",
+        "現在の包装別の受注・在庫は未確認です。",
+        "この原文には代替候補の記載がありません。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
+      "id": "me-pharma-tamsulosin-od-02-limited-202604",
+      "maker": "Meファルマ",
+      "title": "タムスロシン塩酸塩OD錠0.2mg「明治」の限定出荷（2026年4月）",
+      "url": "https://www.meiji-seika-pharma.co.jp/me-pharma/medical/news/pdf/news_260406.pdf",
+      "announced_at": "2026-04",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "d41fe137017ecdd78f8d1cb2e417726830fd7c4d6e67a2bcf201a39abc27dce5",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "Meファルマは、他社の同成分製品の限定出荷に伴う急な需要増が見込まれるため、特約店への出荷を制限し、新規採用を辞退すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2590008F2090",
+          "product_name": "タムスロシン塩酸塩ＯＤ錠０．２ｍｇ「明治」",
+          "maker": "Meiji Seika ファルマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP140錠",
+              "gs1_sales": "14987916002218",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "2026-04の案内では③限定出荷（他社品の影響）"
+              }
+            }
+          ],
+          "seller": "Meファルマ"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "Meファルマの取扱い分についての案内です。",
+        "解除時期は案内時点で未定です。",
+        "現在の包装別の受注・在庫は未確認です。",
+        "この原文には代替候補の記載がありません。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
+      "id": "me-pharma-metformin-250-limited-202512",
+      "maker": "Meファルマ",
+      "title": "メトホルミン塩酸塩錠250mgMT「明治」の限定出荷（2025年12月）",
+      "url": "https://www.meiji-seika-pharma.co.jp/me-pharma/medical/news/pdf/news_251215.pdf",
+      "announced_at": "2025-12",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "cb3dfd0494e7c61c8f5e31b7af58c891e8a8a21f499798051ff6e180e16cc809",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "Meファルマは、原薬調達に伴う入荷遅延に加え、需要増による在庫減少と製造トラブルによる製造の遅れ・製造量の低下が重なったため、限定出荷と新規採用辞退を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3962002F2132",
+          "product_name": "メトホルミン塩酸塩錠２５０ｍｇＭＴ「明治」",
+          "maker": "Meiji Seika ファルマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "gs1_sales": "14987916000733",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "2025-12の案内では②限定出荷（自社の事情）"
+              }
+            },
+            {
+              "package": "PTP1000錠",
+              "gs1_sales": "14987916000740",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "2025-12の案内では②限定出荷（自社の事情）"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "gs1_sales": "14987916000757",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "2025-12の案内では②限定出荷（自社の事情）"
+              }
+            }
+          ],
+          "seller": "Meファルマ"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "Meファルマの取扱い分についての案内です。",
+        "解除時期は案内時点で未定です。",
+        "現在の包装別の受注・在庫は未確認です。",
+        "この原文には代替候補の記載がありません。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
+      "id": "me-pharma-metformin-500-limited-202509",
+      "maker": "Meファルマ",
+      "title": "メトホルミン塩酸塩錠500mgMT「明治」の限定出荷（2025年9月）",
+      "url": "https://www.meiji-seika-pharma.co.jp/me-pharma/medical/news/pdf/news_250924.pdf",
+      "announced_at": "2025-09",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "b7dc51442a9281fcbe5788f8b523f3c5b7fcacbc0173a2ed4504ed812fd77013",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "Meファルマは、原薬調達に伴う製造所からの入荷遅延で在庫が少なくなり、通常出荷の継続が難しくなったため、限定出荷と新規採用辞退を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3962002F3139",
+          "product_name": "メトホルミン塩酸塩錠５００ｍｇＭＴ「明治」",
+          "maker": "Meiji Seika ファルマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "gs1_sales": "14987916000771",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "2025-09の案内では②限定出荷（自社の事情）"
+              }
+            },
+            {
+              "package": "PTP1000錠",
+              "gs1_sales": "14987916000788",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "2025-09の案内では②限定出荷（自社の事情）"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "gs1_sales": "14987916000795",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "2025-09の案内では②限定出荷（自社の事情）"
+              }
+            }
+          ],
+          "seller": "Meファルマ"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "Meファルマの取扱い分についての案内です。",
+        "解除時期は案内時点で未定です。",
+        "現在の包装別の受注・在庫は未確認です。",
+        "この原文には代替候補の記載がありません。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
+      "id": "me-pharma-montelukast-od-10-limited-202309",
+      "maker": "Meファルマ",
+      "title": "モンテルカストOD錠10mg「明治」の限定出荷（2023年9月）",
+      "url": "https://www.meiji-seika-pharma.co.jp/me-pharma/medical/news/pdf/news_230801.pdf",
+      "announced_at": "2023-09",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "c4e9575d19d911731322de1a9d4105e70ef9a97188f24a8bc38aedeaaba8fd85",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "Meiji Seika ファルマとMeファルマは、2023年10月以降の販売移管後もMeファルマ取扱いのPTP100錠で出荷割当と新規採用辞退を続けると案内しました。他社品の影響と記載されていますが、対象他社品や具体的な経緯は文書に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "4490026F4086",
+          "product_name": "モンテルカストＯＤ錠１０ｍｇ「明治」",
+          "maker": "Meiji Seika ファルマ",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "gs1_sales": "14987916002256",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "2023-09の案内では③限定出荷（他社品の影響）"
+              }
+            }
+          ],
+          "seller": "Meファルマ"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "Meファルマの取扱い分についての案内です。",
+        "解除時期は案内時点で未定です。",
+        "現在の包装別の受注・在庫は未確認です。",
+        "この原文には代替候補の記載がありません。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
       "id": "takata-montelukast-od5-lift-20260428",
       "maker": "高田製薬",
       "title": "モンテルカストOD錠5mg「タカタ」100錠包装の限定出荷解除（2026年4月）",
