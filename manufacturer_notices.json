@@ -50314,6 +50314,222 @@
         "代替候補の記載はありません。こちらは2026年3月の再開案内です。日本薬品工業の11月10日版一覧では、80mgの品目単位の対応は③限定出荷（他社品の影響）です。"
       ],
       "source_index_url": "https://www.npi-inc.co.jp/medical/info/file/973"
+    },
+    {
+      "id": "towa-alendronate-35-ptp50-consolidation-202206",
+      "maker": "東和薬品",
+      "title": "アレンドロン酸錠３５ｍｇ「トーワ」の包装集約と当時案内された別包装",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=74812&t=4",
+      "source_index_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=77411&t=6",
+      "announced_at": "2022-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "22abb2c9b36eb9001039e675eea9c07f4e634703070dac7b45a73dde3c4673c9",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "東和薬品は、当時の受注に応じきれない状況を受け、安定供給と生産効率改善のために包装を集約し、PTP50錠を在庫消尽から一時出荷停止とする旨を案内しました。",
+      "targets": [
+        {
+          "yj_code": "3999018F2087",
+          "product_name": "アレンドロン酸錠３５ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP50錠",
+              "unified_product_code": "155396027",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2022年9月の見込み（当時の案内）"
+                  }
+                ],
+                "note": "在庫消尽後に一時出荷停止と案内。統一商品コード155396027。"
+              }
+            },
+            {
+              "package": "PTP20錠",
+              "unified_product_code": "155396010",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "原文が供給継続とした包装。統一商品コード155396010。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "type": "東和薬品がPTP50錠を採用していた医療機関に案内した同一製品の別包装",
+          "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=74812&t=4",
+          "target_yj_codes": [
+            "3999018F2087"
+          ],
+          "products": [
+            {
+              "name": "アレンドロン酸錠３５ｍｇ「トーワ」",
+              "maker": "東和薬品",
+              "scope": "PTP20錠（統一商品コード155396010）"
+            }
+          ],
+          "cautions": [
+            "当時の包装切替案内です。現在の卸在庫や個別の受注への対応は購入先でご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "メーカー通知に記載された対象包装と当時の計画です。現行の品目単位の供給区分・理由は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "towa-valsartan-20-ptp140-consolidation-202311",
+      "maker": "東和薬品",
+      "title": "バルサルタン錠２０ｍｇ「トーワ」の包装集約と当時案内された別包装",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=78009&t=4",
+      "source_index_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=29116&t=0",
+      "announced_at": "2023-11",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "d6be40acfbe8f0833825ce8e0ad66612e953ae350572e360f198b286f772a801",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "東和薬品は、当時の受注に応じきれない状況を受け、安定供給と生産効率改善のために包装を集約し、PTP140錠を在庫消尽から一時出荷停止とする旨を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149041F1276",
+          "product_name": "バルサルタン錠２０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "155097146",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2023年12月の見込み（当時の案内）"
+                  }
+                ],
+                "note": "在庫消尽後に一時出荷停止と案内。統一商品コード155097146。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155097139",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "原文が供給継続とした包装。統一商品コード155097139。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "type": "東和薬品がPTP140錠を採用していた医療機関に案内した同一製品の別包装",
+          "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=78009&t=4",
+          "target_yj_codes": [
+            "2149041F1276"
+          ],
+          "products": [
+            {
+              "name": "バルサルタン錠２０ｍｇ「トーワ」",
+              "maker": "東和薬品",
+              "scope": "PTP100錠（統一商品コード155097139）"
+            }
+          ],
+          "cautions": [
+            "当時の包装切替案内です。現在の卸在庫や個別の受注への対応は購入先でご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "メーカー通知に記載された対象包装と当時の計画です。現行の品目単位の供給区分・理由は厚労省公表欄をご確認ください。",
+        "原文の統一名コード2149041F1012と個別コード2149041F1276は、東和薬品のインタビューフォームで同一製品と照合しました。"
+      ]
+    },
+    {
+      "id": "sawai-telamuro-bp-ptp140-discontinuation-202305",
+      "maker": "沢井製薬",
+      "title": "テラムロ配合錠BP「サワイ」PTP140錠の販売中止と当時の別包装",
+      "url": "https://med.sawai.co.jp/file/pr28_4578_1.pdf",
+      "announced_at": "2023-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "b29ff2fbf5c3c8388270a5c0533b724ef2fb64f282f70b5f2c6f0291db2e467d",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "listed_at": "2023-05-09",
+      "source_index_url": "https://med.sawai.co.jp/preview.php?prodid=4578",
+      "reason": "沢井製薬は注文に十分対応できない状況を踏まえ、安定供給と生産効率改善のため、2021年11月に一時停止を案内したPTP140錠を販売中止としました。2023年5月の原文で在庫消尽済みとしています。",
+      "targets": [
+        {
+          "yj_code": "2149117F2056",
+          "product_name": "テラムロ配合錠ＢＰ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "080133773",
+              "gs1_sales": "(01)14987080133770",
+              "supply": {
+                "status": "stopped",
+                "status_text": "販売中止・在庫消尽済み（2023年5月の案内）",
+                "plans": [],
+                "note": "統一商品コード080133773、販売包装単位コード14987080133770。"
+              }
+            },
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "080133711",
+              "gs1_sales": "(01)14987080133718",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "販売継続と案内（2023年5月時点）。統一商品コード080133711。"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "type": "沢井製薬がPTP140錠の採用先に案内した同じBP規格の別包装",
+          "source_url": "https://med.sawai.co.jp/file/pr28_4578_1.pdf",
+          "target_yj_codes": [
+            "2149117F2056"
+          ],
+          "products": [
+            {
+              "name": "テラムロ配合錠ＢＰ「サワイ」",
+              "maker": "沢井製薬",
+              "scope": "PTP100錠（統一商品コード080133711、販売包装単位コード14987080133718）"
+            }
+          ],
+          "cautions": [
+            "2023年5月の包装切替案内です。現在の卸在庫・納入可否は購入先でご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "対象はテラムロ配合錠BP「サワイ」のPTP140錠です。現行の限定出荷理由は厚労省公表欄をご確認ください。"
+      ]
     }
   ]
 }
