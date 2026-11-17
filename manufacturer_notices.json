@@ -48906,6 +48906,163 @@
         "メーカー案内はサンドのこの包装が対象です。厚労省公表欄には品目区分とその基準日を別に表示しています。",
         "出荷終了はサンドの案内に基づきます。卸在庫や候補の納入可否は未確認です。"
       ]
+    },
+    {
+      "id": "honzo-choreito-tokakujokito-limited-20260903",
+      "maker": "本草製薬",
+      "title": "医療用漢方製剤 供給状況に関するお知らせとお詫び",
+      "url": "https://www.honzo.co.jp/information/uploads/2026/20260903_info.pdf",
+      "source_index_url": "https://www.honzo.co.jp/information/",
+      "announced_at": "2026-09-03",
+      "listed_at": "2026-09-03",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "f93601bc69924ac1ecfe72f77729ba5d81fbe86e99cf3eead4a7f254e2904441",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "本草製薬は2026年9月3日付の案内で、自社の供給規模を超える需要増により、安定供給に必要な在庫を確保しにくくなったと説明しています。生産計画の見直しと増産体制の強化を進めていました。",
+      "targets": [
+        {
+          "yj_code": "5200103D1144",
+          "product_name": "本草猪苓湯エキス顆粒－Ｍ",
+          "maker": "本草製薬",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "500g（バラ包装）",
+              "unified_product_code": "334300500",
+              "gs1_sales_package": "(01)14987334300507",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（9月3日の案内）",
+                "plans": [],
+                "note": "統一商品コード 334300500、販売包装単位コード 14987334300507。"
+              }
+            },
+            {
+              "package": "2.5g×42包",
+              "unified_product_code": "334340407",
+              "gs1_sales_package": "(01)14987334340404",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（9月3日の案内）",
+                "plans": [],
+                "note": "統一商品コード 334340407、販売包装単位コード 14987334340404。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "5200106D1091",
+          "product_name": "本草桃核承気湯エキス顆粒－Ｍ",
+          "maker": "本草製薬",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "2.5g×294包",
+              "unified_product_code": "334330613",
+              "gs1_sales_package": "(01)14987334330610",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（9月3日の案内）",
+                "plans": [],
+                "note": "統一商品コード 334330613、販売包装単位コード 14987334330610。"
+              }
+            },
+            {
+              "package": "2.5g×42包",
+              "unified_product_code": "334340612",
+              "gs1_sales_package": "(01)14987334340619",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（9月3日の案内）",
+                "plans": [],
+                "note": "統一商品コード 334340612、販売包装単位コード 14987334340619。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "9月3日のメーカー資料では、対象包装は出荷量A（通常）、対応区分は②（限定出荷）、解除時期は未定です。",
+        "厚労省公表欄には現在の品目区分と理由を表示しています。メーカー欄は9月3日時点の説明と対象包装です。",
+        "確認したメーカー原文に代替候補の記載はありません。"
+      ]
+    },
+    {
+      "id": "npi-amlodipine-od-5mg-limited-packages-20261110",
+      "maker": "日本薬品工業",
+      "title": "日本薬品工業株式会社 取扱い製品供給状況一覧（2026年11月10日版）",
+      "url": "https://www.npi-inc.co.jp/medical/info/file/973",
+      "announced_at": "2026-11-10",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "91b71dfae98abaa8232e026cdb397bf31bcda88c77a56456fa463535fd3360a6",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日本薬品工業の11月10日版では、他社品の影響による限定出荷（③）で、出荷量は増加（Aプラス）です。対象は日本薬品工業の500錠、バラ500錠、1,000錠の3包装です。需要増の内訳や解除時期は資料に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "2171022F4168",
+          "product_name": "アムロジピンＯＤ錠５ｍｇ「ケミファ」",
+          "maker": "日本薬品工業",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "seller": "日本薬品工業",
+          "packages": [
+            {
+              "package": "PTP500錠（10錠×50）",
+              "unified_product_code": "440563059",
+              "gs1_sales_package": "(01)14987440563056",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（11月10日版）",
+                "plans": [],
+                "note": "統一商品コード 440563059、販売包装単位コード 14987440563056。"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "440563080",
+              "gs1_sales_package": "(01)14987440563087",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（11月10日版）",
+                "plans": [],
+                "note": "統一商品コード 440563080、販売包装単位コード 14987440563087。"
+              }
+            },
+            {
+              "package": "PTP1,000錠（10錠×100）",
+              "unified_product_code": "440563103",
+              "gs1_sales_package": "(01)14987440563100",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（11月10日版）",
+                "plans": [],
+                "note": "統一商品コード 440563103、販売包装単位コード 14987440563100。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "この3包装は日本薬品工業販売分です。日本ケミファ販売分の包装状況は、同社の案内でご確認ください。",
+        "リンク先の一覧は随時更新されます。掲載内容は確認時に取得した11月10日版に基づきます。",
+        "確認したメーカー原文に代替候補の記載はありません。"
+      ]
     }
   ]
 }
