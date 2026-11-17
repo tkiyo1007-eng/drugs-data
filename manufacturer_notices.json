@@ -44701,6 +44701,440 @@
         "メーカーの9月のお知らせ一覧にはカプセル製剤の供給終了案内もあります。6月資料で案内された対象包装と候補を掲載しています。",
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
       ]
+    },
+    {
+      "id": "senju-cyanocobalamin-limited-202505",
+      "maker": "千寿製薬",
+      "title": "シアノコバラミン点眼液0.02％「センジュ」5mL×10・×50の限定出荷",
+      "url": "https://www.senju.co.jp/sites/default/files/news_file/2025-05/CYN_20250513.pdf",
+      "announced_at": "2025-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "04109a66aa7b6c89688604a9b2d325a929382ea5b429f814430ec9ef5fd12259",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "千寿製薬は、他社製品の限定出荷の影響で安定供給が難しくなるおそれがあるとして、対象製品を限定出荷にし、新規・増量の注文に対応できないと案内しました。",
+      "targets": [
+        {
+          "yj_code": "1319710Q2132",
+          "product_name": "シアノコバラミン点眼液０．０２％「センジュ」",
+          "maker": "千寿製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×10本",
+              "unified_product_code": "123001328",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2025年5月の資料）",
+                "note": "統一商品コード 123001328、販売包装単位コード 14987123001325。"
+              }
+            },
+            {
+              "package": "5mL×50本",
+              "unified_product_code": "123001366",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2025年5月の資料）",
+                "note": "統一商品コード 123001366、販売包装単位コード 14987123001363。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2025年5月19日、卸向けの出荷分からの案内です。",
+        "千寿製薬の2026年6月8日一覧でも当該規格は限定出荷で、解除日は未定と記載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "senju-hyaluronate-03-limited-202405",
+      "maker": "千寿製薬",
+      "title": "ヒアルロン酸Na点眼液0.3％「センジュ」5mL×10・×50の限定出荷",
+      "url": "https://www.senju.co.jp/sites/default/files/news_file/2024-05/HAL_0.1_0.3_20240522.pdf",
+      "announced_at": "2024-05",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "666cc286fd8d947f76063e7a83c6cc39245d18f77af37e07c2d545d73c501c08",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "千寿製薬は、他社製品の限定出荷の影響で安定供給が難しくなるおそれがあるとして、対象製品を限定出荷にし、新規・増量の注文に対応できないと案内しました。",
+      "targets": [
+        {
+          "yj_code": "1319720Y2187",
+          "product_name": "ヒアルロン酸Ｎａ点眼液０．３％「センジュ」",
+          "maker": "千寿製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×10本",
+              "unified_product_code": "123001397",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2024年5月の資料）",
+                "note": "統一商品コード 123001397、販売包装単位コード 14987123001394。"
+              }
+            },
+            {
+              "package": "5mL×50本",
+              "unified_product_code": "123001403",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2024年5月の資料）",
+                "note": "統一商品コード 123001403、販売包装単位コード 14987123001400。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2024年5月27日、卸向けの出荷分からの案内です。2026年6月一覧では0.1％の限定出荷が解除されているため、ここでは0.3％包装を掲載しています。",
+        "千寿製薬の2026年6月8日一覧でも当該規格は限定出荷で、解除日は未定と記載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nikko-phenol-zinc-liniment-limited-202502",
+      "maker": "日興製薬",
+      "title": "フェノール・亜鉛華リニメント「ニッコー」500gの限定出荷",
+      "url": "https://nikko-seiyaku.com/nikko_site/wp-content/uploads/2025/02/%E3%80%90%E6%97%A5%E8%88%88%E8%A3%BD%E8%96%AC%E8%B2%A9%E5%A3%B2%E3%80%91%E3%83%95%E3%82%A7%E3%83%8E%E3%83%BC%E3%83%AB%E3%83%BB%E4%BA%9C%E9%89%9B%E8%8F%AF%E3%83%AA%E3%83%8B%E3%83%A1%E3%83%B3%E3%83%88%E3%80%80%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2025-02",
+      "listed_at": "2025-02-28",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "6a76bc4be3b002f395055f93354106a58a3e7de91ececba6a41136c567f03ecc",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日興製薬と日興製薬販売は、原料調達の事情で製造と安定供給が難しくなり、全代理店向けに限定出荷すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2649804X1192",
+          "product_name": "フェノール・亜鉛華リニメント「ニッコー」",
+          "maker": "日興製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "500g",
+              "unified_product_code": "290165533",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（自社の事情、2025年2月の案内）",
+                "note": "統一商品コード 290165533。"
+              }
+            }
+          ],
+          "seller": "日興製薬販売"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "日興製薬販売扱いの500g包装です。2025年5月には同じ包装の在庫消尽後の出荷停止予定が案内されました。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nikko-phenol-zinc-liniment-stop-plan-202505",
+      "maker": "日興製薬",
+      "title": "フェノール・亜鉛華リニメント「ニッコー」500g 在庫消尽後の出荷停止案内",
+      "url": "https://nikko-seiyaku.com/nikko_site/wp-content/uploads/2025/05/%E3%80%90%E6%97%A5%E8%88%88%E8%A3%BD%E8%96%AC%E8%B2%A9%E5%A3%B2%E3%80%91%E3%83%95%E3%82%A7%E3%83%8E%E3%83%BC%E3%83%AB%E3%83%BB%E4%BA%9C%E9%89%9B%E8%8F%AF%E3%83%AA%E3%83%8B%E3%83%A1%E3%83%B3%E3%83%88%E3%80%80%E4%BE%9B%E7%B5%A6%E5%81%9C%E6%AD%A2%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2025-05",
+      "listed_at": "2025-05-14",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "6a1406207acc625bc04ae732d6f042275837b3d9183234b863089281b20395d2",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "日興製薬と日興製薬販売は、一部原料を確保できる見通しが立たず、当時の在庫をもって出荷を停止すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2649804X1192",
+          "product_name": "フェノール・亜鉛華リニメント「ニッコー」",
+          "maker": "日興製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "500g",
+              "unified_product_code": "290165533",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "日付未記載（2025年5月の案内）"
+                  }
+                ],
+                "note": "統一商品コード 290165533。"
+              }
+            }
+          ],
+          "seller": "日興製薬販売"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "日興製薬販売扱いの500g包装です。停止の実施日や再開日はこの資料で確認できません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nikko-maruishi-zinc-10-ointment-500g-limited-202302",
+      "maker": "日興製薬",
+      "title": "亜鉛華（10％）単軟膏「ニッコー」500gの限定出荷",
+      "url": "https://www.maruishi-pharm.co.jp/medical/media/aenkatannanko_genteishukka_230217.pdf",
+      "announced_at": "2023-02",
+      "listed_at": "2023-02-17",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "775e8275f3c9ac6d385bf26b8cda308f60dfbdc414ba32ab2a57aeb7ebc2b760",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社の同種同効製品が限定出荷となり、想定を上回る注文に対して必要量を確保できず、丸石製薬は既採用先の供給を優先するために限定出荷を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2649710M2050",
+          "product_name": "亜鉛華（１０％）単軟膏「ニッコー」",
+          "maker": "日興製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "500g",
+              "unified_product_code": "211-100322",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2023年2月の資料）",
+                "note": "統一商品コード 211-100322、販売包装単位コード 14987211100329。"
+              }
+            }
+          ],
+          "seller": "丸石製薬"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2023年2月20日の特約店向け出荷から。丸石製薬の2026年11月16日一覧でも、この500g包装は限定出荷です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nikko-maruishi-zinc-10-ointment-15kg-end-202310",
+      "maker": "日興製薬",
+      "title": "亜鉛華（10％）単軟膏「ニッコー」15kgの販売中止と販売継続包装",
+      "url": "https://www.maruishi-pharm.co.jp/media/aenkatannanko_chushi_20231013.pdf",
+      "announced_at": "2023-10",
+      "listed_at": "2023-10-13",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "f6fe11a8fb4e5f9f94607a788818529c491887cc4bc3ef290eda4904926f471f",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "丸石製薬は、15kg包装を在庫消尽後に販売中止すると案内し、500gを販売継続包装として示しました。15kgの販売中止について具体的な理由の記載はありません。",
+      "targets": [
+        {
+          "yj_code": "2649710M2050",
+          "product_name": "亜鉛華（１０％）単軟膏「ニッコー」",
+          "maker": "日興製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "15kg",
+              "unified_product_code": "211-100377",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "2024年9月頃（2023年10月案内の見込み）"
+                  }
+                ],
+                "note": "統一商品コード 211-100377、販売包装単位コード 14987211100374。"
+              }
+            },
+            {
+              "package": "500g",
+              "unified_product_code": "211-100322",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "統一商品コード 211-100322、販売包装単位コード 14987211100329。"
+              }
+            }
+          ],
+          "seller": "丸石製薬"
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.maruishi-pharm.co.jp/media/aenkatannanko_chushi_20231013.pdf",
+          "target_yj_codes": [
+            "2649710M2050"
+          ],
+          "type": "メーカーが示した同一製品の販売継続包装",
+          "products": [
+            {
+              "name": "亜鉛華（１０％）単軟膏「ニッコー」",
+              "maker": "日興製薬",
+              "yj_code": "2649710M2050",
+              "scope": "丸石製薬扱いの15kgに対する販売継続包装は同社扱いの500g（211-100322）。2026年11月16日の同社一覧では500gは限定出荷です。"
+            }
+          ],
+          "cautions": [
+            "切替可否や候補の供給・受注状況は個別にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "対象はいずれも丸石製薬扱いの包装です。同社製品ページでは15kgは販売中止、2026年11月16日一覧では500gは限定出荷と記載されています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "nikko-maruishi-sucrode-limited-202601",
+      "maker": "日興製薬",
+      "title": "スクロードパスタ ボトル・チューブ計4包装の限定出荷",
+      "url": "https://www.maruishi-pharm.co.jp/medical/media/sucrode-pasta_genteishukka_20260116.pdf",
+      "announced_at": "2026-01",
+      "listed_at": "2026-01-16",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "cba5c9da52f12eb66542225ea6abb85c686b8fda852f5a6c5dd11b4111a0e7bd",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社の同種同効薬の販売中止で需要が急増し、確保できた数量では対応が難しいと日興製薬と丸石製薬が案内しました。新規医療機関への納入を辞退し、特約店ごとに出荷可能数量を設定しました。",
+      "targets": [
+        {
+          "yj_code": "2699801V1050",
+          "product_name": "スクロードパスタ",
+          "maker": "日興製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "100g（ボトル）",
+              "unified_product_code": "211-306113",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2026年1月の資料）",
+                "note": "統一商品コード 211-306113、販売包装単位コード 14987211306110。"
+              }
+            },
+            {
+              "package": "100g（チューブ）",
+              "unified_product_code": "211-306168",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2026年1月の資料）",
+                "note": "統一商品コード 211-306168、販売包装単位コード 14987211306165。"
+              }
+            },
+            {
+              "package": "100g×10（チューブ）",
+              "unified_product_code": "211-306175",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2026年1月の資料）",
+                "note": "統一商品コード 211-306175、販売包装単位コード 14987211306172。"
+              }
+            },
+            {
+              "package": "500g（ボトル）",
+              "unified_product_code": "211-306151",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2026年1月の資料）",
+                "note": "統一商品コード 211-306151、販売包装単位コード 14987211306158。"
+              }
+            }
+          ],
+          "seller": "丸石製薬"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年1月19日の特約店向け出荷から。丸石製薬の2026年11月16日一覧では、同社販売の4包装はいずれも限定出荷です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "maruishi-macrogol-4000-limited-202609",
+      "maker": "丸石製薬",
+      "title": "マクロゴール4000（丸石）500gの限定出荷",
+      "url": "https://www.maruishi-pharm.co.jp/medical/media/macrogol4000__genteisyukka_20261001.pdf",
+      "announced_at": "2026-09",
+      "listed_at": "2026-10-01",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "185fd85403fe595e5ffc02f73a50b963293912a5be0446e63d48da60d2abd880",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "丸石製薬は、他社製剤の限定出荷で注文が想定を大きく上回り、必要な数量を確保できないため、新規医療機関への納入を辞退し、特約店向けの出荷数量を制限すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "7123703X1067",
+          "product_name": "マクロゴール４０００（丸石）",
+          "maker": "丸石製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "500g（袋）",
+              "unified_product_code": "211-160111",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2026年9月の資料）",
+                "note": "統一商品コード 211-160111、販売包装単位コード 14987211160118。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年10月1日の特約店向け出荷から。丸石製薬の2026年11月16日一覧でもこの500g包装は限定出荷です。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }

@@ -85,6 +85,7 @@ MAKER_MANUAL_SOURCE_HOSTS = {
     '堀井薬品工業': ('www.horii-pharm.co.jp',),
     'マルホ': ('www.maruho.co.jp',),
     'クリニジェン': ('clinigen.co.jp',),
+    '千寿製薬': ('www.senju.co.jp',),
     '富士製薬工業': ('www.fujipharma.jp',),
     '杏林製薬': ('www.kyorin-medicalbridge.jp',),
     '塩野義製薬': ('med.shionogi.co.jp',),
@@ -128,6 +129,11 @@ MAKER_MANUAL_SOURCE_URLS = {
         'https://med.daiichisankyo-ep.co.jp/information/files/2026/gentei_20250304_E1_G.pdf',
     },
     '日興製薬': {
+        'https://nikko-seiyaku.com/nikko_site/wp-content/uploads/2025/02/%E3%80%90%E6%97%A5%E8%88%88%E8%A3%BD%E8%96%AC%E8%B2%A9%E5%A3%B2%E3%80%91%E3%83%95%E3%82%A7%E3%83%8E%E3%83%BC%E3%83%AB%E3%83%BB%E4%BA%9C%E9%89%9B%E8%8F%AF%E3%83%AA%E3%83%8B%E3%83%A1%E3%83%B3%E3%83%88%E3%80%80%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf',
+        'https://nikko-seiyaku.com/nikko_site/wp-content/uploads/2025/05/%E3%80%90%E6%97%A5%E8%88%88%E8%A3%BD%E8%96%AC%E8%B2%A9%E5%A3%B2%E3%80%91%E3%83%95%E3%82%A7%E3%83%8E%E3%83%BC%E3%83%AB%E3%83%BB%E4%BA%9C%E9%89%9B%E8%8F%AF%E3%83%AA%E3%83%8B%E3%83%A1%E3%83%B3%E3%83%88%E3%80%80%E4%BE%9B%E7%B5%A6%E5%81%9C%E6%AD%A2%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf',
+        'https://www.maruishi-pharm.co.jp/medical/media/aenkatannanko_genteishukka_230217.pdf',
+        'https://www.maruishi-pharm.co.jp/media/aenkatannanko_chushi_20231013.pdf',
+        'https://www.maruishi-pharm.co.jp/medical/media/sucrode-pasta_genteishukka_20260116.pdf',
         'https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001FkBAdIAN',
     },
     'シオノケミカル': {
