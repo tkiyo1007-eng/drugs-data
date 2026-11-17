@@ -2,6 +2,718 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "takata-montelukast-od5-lift-20260428",
+      "maker": "高田製薬",
+      "title": "モンテルカストOD錠5mg「タカタ」100錠包装の限定出荷解除（2026年4月）",
+      "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bbex-att/KAIJYO.pdf",
+      "announced_at": "2026-04",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "76afcbd292e55a944786766d6f61163dd9ee03ae1e201b81fb339846f4178763",
+      "collection_mode": "manual",
+      "event_type": "resumed",
+      "reason": "高田製薬は安定供給体制が整ったとして、対象の100錠包装の限定出荷を2026年4月28日に解除すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "4490026F5040",
+          "product_name": "モンテルカストＯＤ錠５ｍｇ「タカタ」",
+          "maker": "高田製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP10錠×10（100錠）",
+              "unified_product_code": "120447204",
+              "gs1_sales": "14987120447201",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "normal_shipment",
+                    "timing": "原文の限定出荷解除日 2026年4月28日"
+                  }
+                ],
+                "note": "高田製薬が2026年4月28日の限定出荷解除を案内した包装です。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカーの案内はこの包装を対象としています。厚労省の11月16日版では品目全体が②限定出荷（自社の事情）です。現在の包装別の受注・出荷状況は未確認です。",
+        "この原文には代替候補の記載がありません。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
+      "id": "takata-montelukast-od5-limited-20260401",
+      "maker": "高田製薬",
+      "title": "モンテルカストOD錠5mg「タカタ」100錠包装の限定出荷開始（2026年4月）",
+      "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000asov-att/Montelukast.pdf",
+      "announced_at": "2026-04-01",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "469e1ca9826cdaa2e91fc90b41bc5083cb9fe389ed2938fc62f567c7653e99e9",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "高田製薬は、想定を上回る一時的な需要増で安定供給が難しくなったため、2026年4月1日から対象包装を限定出荷とし、新規採用を辞退すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "4490026F5040",
+          "product_name": "モンテルカストＯＤ錠５ｍｇ「タカタ」",
+          "maker": "高田製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP10錠×10（100錠）",
+              "unified_product_code": "120447204",
+              "gs1_sales": "14987120447201",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "note": "2026年4月1日の限定出荷開始の対象です。後続のメーカー案内では4月28日の限定出荷解除が示されています。",
+                "status_text": "2026年4月1日から限定出荷"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカーの案内はこの包装を対象としています。厚労省の11月16日版では品目全体が②限定出荷（自社の事情）です。現在の包装別の受注・出荷状況は未確認です。",
+        "この原文には代替候補の記載がありません。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
+      "id": "takata-gentacin-ointment-limited-20260515",
+      "maker": "高田製薬",
+      "title": "ゲンタシン軟膏0.1％の資材入手難による限定出荷（2026年5月）",
+      "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000bdv5-att/KYOUKYU.pdf",
+      "announced_at": "2026-05-15",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "ebc03c9ede58db4a1015cb7117db714f9c60d7d25e38267a97f32d0d6dface3d",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "高田製薬は一部資材の入手が難しくなったため、対象包装の限定出荷を2026年5月15日から開始しました。新規採用を辞退し、既採用先には必要量に合わせた発注をお願いしています。",
+      "targets": [
+        {
+          "yj_code": "2634710M1077",
+          "product_name": "ゲンタシン軟膏０．１％",
+          "maker": "高田製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10g×10本",
+              "unified_product_code": "120263002",
+              "gs1_sales": "14987120263009",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "note": "2026年5月の案内の限定出荷対象です。",
+                "status_text": "2026年5月15日から限定出荷"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料に資材の名称は記載されていません。現在の包装別の受注・出荷状況は未確認です。",
+        "この原文には代替候補の記載がありません。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
+      "id": "takata-lidocaine-infusion-1-limited-20250910",
+      "maker": "高田製薬",
+      "title": "リドカイン点滴静注液1％「タカタ」の委託先破産による限定出荷（2025年9月）",
+      "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b0000009grd-att/NEOKURITHI.pdf",
+      "announced_at": "2025-09-10",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "da559e6566184ff966d44c5764840fca100bfd12bad2db557e76c14f577f0a70",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造委託先のネオクリティケア製薬が破産手続きに入ったことで、製造・入荷予定が立たなくなったと高田製薬が説明しています。2025年9月10日から対象包装を限定出荷とし、既採用先への供給を優先する案内です。",
+      "targets": [
+        {
+          "yj_code": "1214404A2035",
+          "product_name": "リドカイン点滴静注液１％「タカタ」",
+          "maker": "高田製薬",
+          "scope": "package",
+          "source_pages": [
+            1,
+            2
+          ],
+          "packages": [
+            {
+              "package": "200mL×10袋",
+              "unified_product_code": "120125805",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "note": "2025年9月の案内では出荷量減少・②限定出荷（自社の事情）です。",
+                "status_text": "2025年9月10日から②限定出荷（自社の事情）"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "現在の包装別の受注・出荷状況は未確認です。",
+        "この原文には代替候補の記載がありません。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
+      "id": "sato-pastaron-soft-limited-202605",
+      "maker": "佐藤製薬",
+      "title": "パスタロンソフト軟膏10％・20％の限定出荷継続（2026年5月）",
+      "url": "https://medinfo-sato.com/update/pdf/260508_pastaron.pdf",
+      "announced_at": "2026-05",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "84c6bed6ad42ac4a2b8a66567873a528c36c4a514a3fdb5b50feec0ecb99845f",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "佐藤製薬は安定供給に必要な製品在庫の確保にさらに時間がかかるため、供給体制が整うまで限定出荷を続けると説明しています。案内時点で限定出荷解除時期は未定です。",
+      "targets": [
+        {
+          "yj_code": "2669701M1073",
+          "product_name": "パスタロンソフト軟膏１０％",
+          "maker": "佐藤製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "20g×10本",
+              "unified_product_code": "316129990",
+              "gs1_sales": "14987316129997",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "note": "2026年5月の限定出荷継続案内の対象包装です。",
+                "status_text": "2026年5月の案内では②限定出荷（自社の事情）"
+              }
+            },
+            {
+              "package": "500g",
+              "unified_product_code": "316130026",
+              "gs1_sales": "14987316130023",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "note": "2026年5月の限定出荷継続案内の対象包装です。",
+                "status_text": "2026年5月の案内では②限定出荷（自社の事情）"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2669701M2100",
+          "product_name": "パスタロンソフト軟膏２０％",
+          "maker": "佐藤製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "25g×10本",
+              "unified_product_code": "316130071",
+              "gs1_sales": "14987316130078",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "note": "2026年5月の限定出荷継続案内の対象包装です。",
+                "status_text": "2026年5月の案内では②限定出荷（自社の事情）"
+              }
+            },
+            {
+              "package": "500g",
+              "unified_product_code": "316130101",
+              "gs1_sales": "14987316130108",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "note": "2026年5月の限定出荷継続案内の対象包装です。",
+                "status_text": "2026年5月の案内では②限定出荷（自社の事情）"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "各規格について原文に記載された2包装が対象です。現在の包装別の受注・出荷状況は未確認です。",
+        "この原文には代替候補の記載がありません。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
+      "id": "sato-pastaron-soft-package-discontinuation-202410",
+      "maker": "佐藤製薬",
+      "title": "パスタロンソフト軟膏の一部包装の販売中止と代替包装（2024年10月）",
+      "url": "https://medinfo-sato.com/update/pdf/241008_pastaron.pdf",
+      "announced_at": "2024-10",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "d44a486e4e4a278ea01c91124097d9d5adf751bd280a0a110f27d4ff1089ee92",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "佐藤製薬は2024年10月に一部包装の販売中止を案内しました。個別の販売中止理由は原文に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "2669701M1073",
+          "product_name": "パスタロンソフト軟膏１０％",
+          "maker": "佐藤製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "20g×50本",
+              "unified_product_code": "316130002",
+              "gs1_sales": "14987316130009",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2024年10月の案内時点で2025年1月見込み"
+                  }
+                ],
+                "note": "販売中止の対象です。2024年10月案内での流通在庫終了見込みは2025年1月でした。"
+              }
+            },
+            {
+              "package": "20g×10本",
+              "unified_product_code": "316129990",
+              "gs1_sales": "14987316129997",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2024年10月の原文で販売継続とされた包装です。"
+              }
+            },
+            {
+              "package": "50g×10本",
+              "unified_product_code": "316130019",
+              "gs1_sales": "14987316130016",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2024年10月の原文で販売継続とされた包装です。"
+              }
+            },
+            {
+              "package": "500g",
+              "unified_product_code": "316130026",
+              "gs1_sales": "14987316130023",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2024年10月の原文で販売継続とされた包装です。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2669701M2100",
+          "product_name": "パスタロンソフト軟膏２０％",
+          "maker": "佐藤製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "25g×50本",
+              "unified_product_code": "316130088",
+              "gs1_sales": "14987316130085",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2024年10月の案内時点で2025年1月見込み"
+                  }
+                ],
+                "note": "販売中止の対象です。2024年10月案内での流通在庫終了見込みは2025年1月でした。"
+              }
+            },
+            {
+              "package": "25g×10本",
+              "unified_product_code": "316130071",
+              "gs1_sales": "14987316130078",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2024年10月の原文で販売継続とされた包装です。"
+              }
+            },
+            {
+              "package": "50g×10本",
+              "unified_product_code": "316130095",
+              "gs1_sales": "14987316130092",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2024年10月の原文で販売継続とされた包装です。"
+              }
+            },
+            {
+              "package": "500g",
+              "unified_product_code": "316130101",
+              "gs1_sales": "14987316130108",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2024年10月の原文で販売継続とされた包装です。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "type": "2024年10月に販売中止対象の包装へ案内された代替包装",
+          "target_yj_codes": [
+            "2669701M1073"
+          ],
+          "source_url": "https://medinfo-sato.com/update/pdf/241008_pastaron.pdf",
+          "products": [
+            {
+              "name": "パスタロンソフト軟膏１０％",
+              "maker": "佐藤製薬",
+              "yj_code": "2669701M1073",
+              "scope": "同一規格の20g×10本（316129990）・50g×10本（316130019）・500g（316130026）。"
+            }
+          ],
+          "cautions": [
+            "20g×50本の販売中止に伴う2024年10月時点の案内です。2026年5月の限定出荷に対する候補の案内はありません。現在の受注・在庫は未確認です。"
+          ]
+        },
+        {
+          "type": "2024年10月に販売中止対象の包装へ案内された代替包装",
+          "target_yj_codes": [
+            "2669701M2100"
+          ],
+          "source_url": "https://medinfo-sato.com/update/pdf/241008_pastaron.pdf",
+          "products": [
+            {
+              "name": "パスタロンソフト軟膏２０％",
+              "maker": "佐藤製薬",
+              "yj_code": "2669701M2100",
+              "scope": "同一規格の25g×10本（316130071）・50g×10本（316130095）・500g（316130101）。"
+            }
+          ],
+          "cautions": [
+            "25g×50本の販売中止に伴う2024年10月時点の案内です。2026年5月の限定出荷に対する候補の案内はありません。現在の受注・在庫は未確認です。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫終了は流通在庫により前後する見込みとして示されました。実際の在庫終了日は未確認です。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
+      "id": "torii-zefnart-solution-limited-202606",
+      "maker": "鳥居薬品",
+      "title": "ゼフナート外用液2％の需要増による限定出荷（2026年6月）",
+      "url": "https://www.torii.co.jp/iyakuDB/data/notice/zef_2606.pdf",
+      "announced_at": "2026-06",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "97863e6415ab84a54cbee3264917bc2d1b7719bc8d3d0aeed9f7d02b4e8d66c7",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "鳥居薬品は想定を上回る注文が続き、安定供給への影響が見込まれたため、対象包装を限定出荷としたと説明しています。前年並みの出荷量を確保する予定とし、新規採用は辞退すると案内しています。",
+      "targets": [
+        {
+          "yj_code": "2659712Q1026",
+          "product_name": "ゼフナート外用液２％",
+          "maker": "全薬工業",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10mL×10",
+              "unified_product_code": "158309550",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "note": "2026年6月に鳥居薬品の取扱い分で限定出荷とされた包装です。",
+                "status_text": "2026年6月の案内では④限定出荷（その他）"
+              }
+            }
+          ],
+          "seller": "鳥居薬品"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "鳥居薬品が販売する外用液の対象包装についての案内です。現在の包装別の受注・出荷状況は未確認です。",
+        "この原文には代替候補の記載がありません。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
+      "id": "ts-budesonide-inhalation-05-limited-202308",
+      "maker": "T'sファーマ",
+      "title": "ブデソニド吸入液0.5mg「武田テバ」の過去の限定出荷（2023年8月）",
+      "url": "https://www.med.ts-pharma.com/di-net/kaitei/w_20230828_Budesonide_inhalation_solution_0.5_TT.pdf",
+      "announced_at": "2023-08",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "e4964d035f53c9c8ddb6909311ce9c5eb4cef5ef43217e66d96a15ce129a2ef1",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "当時の武田テバファーマは計画を上回る注文に加え、0.25mg製剤の出荷停止に伴う需要増が見込まれたため、0.5mgの対象包装を限定出荷としたと説明しています。",
+      "targets": [
+        {
+          "yj_code": "2290701G5034",
+          "product_name": "ブデソニド吸入液０．５ｍｇ「武田テバ」",
+          "maker": "T'sファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "2mL×30アンプル（5アンプル×6袋）",
+              "gs1_sales": "14987123412572",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "note": "2023年8月の限定出荷対象です。",
+                "status_text": "2023年8月の案内では②限定出荷（自社の事情）"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "厚労省の2026年11月16日版での公表理由は原材料調達上の問題です。現在の具体的な経緯はこの2023年の案内では確認できません。",
+        "この原文には代替候補の記載がありません。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
+      "id": "ts-metabolin-g20-withdrawal-alternatives-202601",
+      "maker": "T's製薬",
+      "title": "メタボリンG注射液20mgの代替候補取り下げと在庫消尽見込み（2026年1月）",
+      "url": "https://www.med.ts-pharma.com/di-net/kaitei/w_20260114_METABOLIN_inj.pdf",
+      "announced_at": "2026-01",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "b02a64b88977edc2e6a86c70685e84f795d10d3effe47c4afb64955e52d5cd20",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "T's製薬は、ビタミンB1注射製剤の供給が不安定で全数の代替が難しいため、2025年9月に示した代替候補を取り下げました。2026年1月時点で、20mg・50管の在庫消尽は2027年1月の見込みです。",
+      "targets": [
+        {
+          "yj_code": "3121400A3120",
+          "product_name": "メタボリンＧ注射液２０ｍｇ",
+          "maker": "T's製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "50管",
+              "unified_product_code": "123037822",
+              "gs1_sales": "14987123037829",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年1月の案内時点で2027年1月見込み"
+                  }
+                ],
+                "note": "在庫消尽後に供給停止とする案内です。2027年1月は当時の見込みで、出荷状況により前後します。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "供給停止の実施は未確認です。2026年1月の原文で案内できる候補はありません。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
+      "id": "ts-metabolin-g20-contract-manufacturing-202509",
+      "maker": "T's製薬",
+      "title": "メタボリンG注射液20mgの製造委託先破産と供給停止予定（2025年9月）",
+      "url": "https://www.med.ts-pharma.com/di-net/kaitei/w_20250910.pdf",
+      "announced_at": "2025-09",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "d1fad428c3b4e62349746258a6afe02e2d05475ee5c91fa7b90086aae882cb61",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "T's製薬は、製剤の製造委託先であるネオクリティケア製薬の破産手続きに伴い製造継続が難しくなったため、在庫消尽後に対象包装の供給を停止する予定と案内しました。",
+      "targets": [
+        {
+          "yj_code": "3121400A3120",
+          "product_name": "メタボリンＧ注射液２０ｍｇ",
+          "maker": "T's製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "50管",
+              "unified_product_code": "123037822",
+              "gs1_sales": "14987123037829",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "2025年9月の文書に記載された供給停止予定の対象包装です。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "この文書に記載された代替候補は、2026年1月の後続案内で取り下げられました。供給停止の実施は未確認です。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
+      "id": "ts-nicolin-h-limited-202610",
+      "maker": "T's製薬",
+      "title": "ニコリンH注射液0.5g・1gの需要増による限定出荷（2026年10月）",
+      "url": "https://www.med.ts-pharma.com/di-net/kaitei/w_20261006_NICHOLIN_H.pdf",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "285dfcc8aa771ebc77f32edaa9339f7bd0588684fefa0350a8612762c139e4ce",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "T's製薬は想定を上回る需要増で安定供給への影響が見込まれるため、2026年10月から対象包装の限定出荷を実施すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2190404H4118",
+          "product_name": "ニコリンＨ注射液０．５ｇ",
+          "maker": "T's製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "50管",
+              "unified_product_code": "123107761",
+              "gs1_sales": "14987123107768",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "note": "2026年10月の限定出荷案内で対象とされた0.5gの包装です。",
+                "status_text": "2026年10月から②限定出荷（自社の事情）"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2190404H5084",
+          "product_name": "ニコリンＨ注射液１ｇ",
+          "maker": "T's製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10管",
+              "unified_product_code": "123107785",
+              "gs1_sales": "14987123107782",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "note": "2026年10月の限定出荷案内で対象とされた1gの包装です。",
+                "status_text": "2026年10月から②限定出荷（自社の事情）"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "現在の包装別の受注・出荷状況は未確認です。",
+        "この原文には代替候補の記載がありません。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
+      "id": "mochida-florid-d-cream-limited-202607",
+      "maker": "持田製薬",
+      "title": "フロリードDクリーム1％の他社品の影響による限定出荷（2026年7月）",
+      "url": "https://med.mochida.co.jp/etc/img/flo-d202607.pdf",
+      "announced_at": "2026-07",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "5111060c7f33acbd0a626a8aedb730ad0980774d5bfdf55faa9553df05cd7b5a",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "持田製薬は、他社の同効薬の限定出荷により代替需要が増え、想定を上回る注文すべてには応じられないため、既採用先への供給を優先して特約店への出荷を制限したと説明しています。解除時期は案内時点で未定です。",
+      "targets": [
+        {
+          "yj_code": "2655702N1060",
+          "product_name": "フロリードＤクリーム１％",
+          "maker": "持田製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "20本",
+              "unified_product_code": "224107516",
+              "gs1_sales": "14987224107513",
+              "supply": {
+                "status": "limited",
+                "status_text": "2026年7月28日出荷分から③限定出荷（他社品の影響）",
+                "plans": [],
+                "note": "2026年7月27日の受注分から対象。7月の案内で出荷量はA（通常）です。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文では100本入りは販売中止と記載されています。現在の包装別の受注・在庫は未確認です。",
+        "この原文には代替候補の記載がありません。",
+        "原文を開くと、メーカーの医療関係者向け確認画面が表示される場合があります。"
+      ]
+    },
+    {
       "id": "towa-loratadine-od10-package-consolidation-202212",
       "maker": "東和薬品",
       "title": "ロラタジンOD錠10mg「トーワ」の包装集約と当時の代替候補（2022年12月）",
