@@ -45528,6 +45528,165 @@
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
         "確認したメーカー原文に代替候補名の記載はありません。"
       ]
+    },
+    {
+      "id": "sandoz-xylocaine-polyamp-one-5-and-10ml-limited-202606",
+      "maker": "サンドファーマ",
+      "title": "キシロカイン注ポリアンプ1％ 5mL・10mLの限定出荷継続と出荷量変更（2026年6月案内）",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20260625_005.pdf",
+      "announced_at": "2026-06",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "7acf787138a33d1887e8ea3786894ff871379a43bca05c886380aea13c161241",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "サンドは他社製品の供給停止の影響を受け、在庫を増やしても需要が供給能力を上回るため、2026年6月の時点では割当による限定出荷を続けると案内しました。",
+      "targets": [
+        {
+          "yj_code": "1214400A7055",
+          "product_name": "キシロカイン注ポリアンプ１％",
+          "maker": "サンドファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×10管",
+              "unified_product_code": "614431009",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2026年6月の販売元資料）",
+                "note": "統一商品コード 614431009、販売包装単位コード 14987614431006。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "1214400A8051",
+          "product_name": "キシロカイン注ポリアンプ１％",
+          "maker": "サンドファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10mL×10管",
+              "unified_product_code": "614430903",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "限定出荷（他社品の影響、2026年6月の販売元資料）",
+                "note": "統一商品コード 614430903、販売包装単位コード 14987614430900。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "出荷量の変更は2026年6月24日の取引卸からの受注分から。",
+        "厚労省の2026年11月16日版では、この規格の品目区分は限定出荷です。サンドの2026年7月案内では、記載した販売包装は限定出荷を解除しています。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "sandoz-xylocaine-polyamp-one-5-and-10ml-resumed-202607",
+      "maker": "サンドファーマ",
+      "title": "キシロカイン注ポリアンプ1％ 5mL・10mL 2包装の限定出荷解除（2026年7月案内）",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20260728_003.pdf",
+      "announced_at": "2026-07",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "33aab591b76c4587bb108da5ae5b3c27b84fb5c061cac8ffecae912d8ff9c4cb",
+      "collection_mode": "manual",
+      "event_type": "resumed",
+      "reason": "サンドは、他のキシロカイン製剤の入庫遅延に伴う限定出荷について、供給体制が整ったため、2026年7月27日から対象2包装の限定出荷を解除すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "1214400A7055",
+          "product_name": "キシロカイン注ポリアンプ１％",
+          "maker": "サンドファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×10管",
+              "unified_product_code": "614431009",
+              "supply": {
+                "status": "normal",
+                "plans": [],
+                "status_text": "通常出荷（2026年7月の販売元資料）",
+                "note": "統一商品コード 614431009、販売包装単位コード 14987614431006。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "1214400A8051",
+          "product_name": "キシロカイン注ポリアンプ１％",
+          "maker": "サンドファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "10mL×10管",
+              "unified_product_code": "614430903",
+              "supply": {
+                "status": "normal",
+                "plans": [],
+                "status_text": "通常出荷（2026年7月の販売元資料）",
+                "note": "統一商品コード 614430903、販売包装単位コード 14987614430900。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "厚労省の2026年11月16日版では、この規格の品目区分は限定出荷です。サンドの2026年7月案内では、記載した販売包装は限定出荷を解除しています。",
+        "7月27日以降の取引卸からの受注分が対象です。案内から現在の在庫は判断できません。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
+    },
+    {
+      "id": "daito-vtrs-levetiracetam-500-limited-202602",
+      "maker": "ダイト",
+      "title": "レベチラセタム錠500mg「VTRS」の出荷調整（2026年2月案内）",
+      "url": "https://www.daitonet.co.jp/pdf/medical/pdf_medical_05.pdf",
+      "announced_at": "2026-02",
+      "verified_at": "2026-11-17",
+      "content_updated_at": "2026-11-17",
+      "sha256": "63cce23a4819a5b4f41bf6c788e46ca02c21b0d94d1412ec1e63278c1085d10f",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "ダイトは、想定を上回る注文があったため、安定供給を目的として販売委託先のヴィアトリス製薬合同会社と協議し、出荷調整を行ったと案内しました。",
+      "targets": [
+        {
+          "yj_code": "1139010F2047",
+          "product_name": "レベチラセタム錠５００ｍｇ「ＶＴＲＳ」",
+          "maker": "ダイト",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": []
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2026年2月25日時点の対象表には500mgのみが掲載され、包装ごとの区分は記載されていません。現在の包装ごとの受注状況は販売元にご確認ください。",
+        "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。",
+        "確認したメーカー原文に代替候補名の記載はありません。"
+      ]
     }
   ]
 }
