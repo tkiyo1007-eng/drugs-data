@@ -2,6 +2,154 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "kenei-sodium-bicarbonate-limited-20261015",
+      "maker": "健栄製薬",
+      "title": "炭酸水素ナトリウム「ケンエー」7包装の限定出荷（2026年10月15日）",
+      "url": "https://www.kenei-pharm.com/cms/wp-content/uploads/2023/11/369487ace79390fb8ff99633a320ebea.pdf",
+      "source_index_url": "https://www.kenei-pharm.com/medical/",
+      "announced_at": "2026-10-15",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "f806d5ce7d4dfeb457e92f65bc7dd343f7b3c82f8d8f34c1f3ff0085a50fe80f",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "健栄製薬は、2026年10月15日現在の出荷状況一覧で、対象の7包装を他社品の影響による限定出荷としています。7包装とも出荷量は増加です。",
+      "targets": [
+        {
+          "yj_code": "2344004X1070",
+          "product_name": "炭酸水素ナトリウム「ケンエー」",
+          "maker": "健栄製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "summary": "2026年10月15日現在の一覧に掲載された医療用の7包装です。粉末・結晶と統一商品コードは健栄製薬の製品情報でも照合しました。",
+          "packages": [
+            {
+              "package": "500g（粉末）",
+              "unified_product_code": "286105734",
+              "gs1_sales": "14987286105731",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "10月15日現在、他社品の影響による限定出荷・出荷量増加"
+              }
+            },
+            {
+              "package": "1kg（結晶）",
+              "unified_product_code": "286103198",
+              "gs1_sales": "14987286103195",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "10月15日現在、他社品の影響による限定出荷・出荷量増加"
+              }
+            },
+            {
+              "package": "5kg（粉末、1kg×5）",
+              "unified_product_code": "286103044",
+              "gs1_sales": "14987286103041",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "10月15日現在、他社品の影響による限定出荷・出荷量増加"
+              }
+            },
+            {
+              "package": "10kg（結晶、1kg×10）",
+              "unified_product_code": "286103112",
+              "gs1_sales": "14987286103119",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "10月15日現在、他社品の影響による限定出荷・出荷量増加"
+              }
+            },
+            {
+              "package": "25kg（粉末、5kg×5）",
+              "unified_product_code": "286103082",
+              "gs1_sales": "14987286103089",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "10月15日現在、他社品の影響による限定出荷・出荷量増加"
+              }
+            },
+            {
+              "package": "1g×1,050（結晶）",
+              "unified_product_code": "286100883",
+              "gs1_sales": "14987286100880",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "10月15日現在、他社品の影響による限定出荷・出荷量増加"
+              }
+            },
+            {
+              "package": "1g×3,250（結晶）",
+              "unified_product_code": "286100890",
+              "gs1_sales": "14987286100897",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "10月15日現在、他社品の影響による限定出荷・出荷量増加"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "具体的な経緯、解除時期、代替候補は一覧に記載されていません。現在の包装別の受注可否や流通在庫は未確認です。"
+      ],
+      "listed_at": "2026-10-15"
+    },
+    {
+      "id": "fujinaga-carbamazepine-valproate-limited-20260410",
+      "maker": "藤永製薬",
+      "title": "カルバマゼピン細粒50％・バルプロ酸Na徐放顆粒40％「フジナガ」の過去の限定出荷（2026年4月10日）",
+      "url": "https://fujinaga-pharm.co.jp/medical/pdf/antei/yoshiki03_2026-04-10.pdf",
+      "source_index_url": "https://fujinaga-pharm.co.jp/medical/products.html",
+      "announced_at": "2026-04-10",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "52636d60e8c268a19b3d2832e482e8cea41b28916402d6f070d8cb4f618c08c0",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "藤永製薬は、2026年4月10日更新の安定供給資料で、対象の2品目を他社の事情による限定出荷と記載しています。",
+      "targets": [
+        {
+          "yj_code": "1139002C1090",
+          "product_name": "カルバマゼピン細粒５０％「フジナガ」",
+          "maker": "藤永製薬",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "summary": "対象は細粒50％です。2025年4月の同社資料にも、他社事情による限定出荷の記載があります。",
+          "seller": "第一三共",
+          "packages": []
+        },
+        {
+          "yj_code": "1139004D1087",
+          "product_name": "バルプロ酸Ｎａ徐放顆粒４０％「フジナガ」",
+          "maker": "藤永製薬",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "summary": "対象は徐放顆粒40％です。2026年4月の資料では薬価基準収載コードとYJコードが別に記載されています。",
+          "seller": "第一三共",
+          "packages": []
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "4月10日の資料に、他社品の銘柄や具体的な経緯、対象包装、解除時期、代替候補の記載はありません。",
+        "同社の10月13日版は予備対応力の資料です。現在の限定出荷の詳しい事情と解除の有無は、これらの資料からは確認できません。"
+      ]
+    },
+    {
       "id": "wakamoto-linolosal-injection-limited-202410",
       "maker": "わかもと製薬",
       "title": "リノロサール注射液3規格の需要急増による限定出荷（2024年10月）",
