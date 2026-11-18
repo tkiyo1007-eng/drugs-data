@@ -1098,12 +1098,21 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .topic-note a{color:var(--blue);font-weight:700}
 @media(max-width:640px){.topic-card{padding:20px}.topic-title{font-size:15px}.topic-points{padding-left:30px}}
 
+/* 検索前に、直近の供給区分の変更を確認できる。 */
+.home-changes{margin:14px 0;padding:15px 17px;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+.home-changes h3{margin:0;color:var(--ink);font-size:16px}
+.home-changes p{margin:4px 0;color:var(--sub);font-size:12px}
+.home-changes ul{list-style:none;margin:4px 0;padding:0}
+.home-changes li{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:2px 10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:13px;line-height:1.45;color:var(--ink);overflow-wrap:anywhere}
+.home-changes li small{font-size:12px;color:var(--sub)}
+.home-changes nav{display:flex;gap:0 18px;flex-wrap:wrap}
+.home-changes a{display:inline-flex;align-items:center;min-height:44px;color:var(--blue-deep);font-size:13px;font-weight:700;text-underline-offset:3px}
 /* ===== 最近問い合わせが多い製品 ===== */
 #trending{margin:20px 0 18px;padding:18px;border:1px solid var(--line);border-radius:18px;background:rgba(79,128,244,.045)}
 #trending h3{margin:0;font-size:16px;color:var(--ink)}
 .trending-intro{margin:6px 0 12px;font-size:12px;line-height:1.6;color:var(--sub)}
 .trending-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));align-items:start;gap:10px}
-.trending-list:not(.show-all) .trending-entry:nth-child(n+10){display:none}
+.trending-list:not(.show-all) .trending-entry:nth-child(n+5){display:none}
 .trending-toggle{min-height:44px;margin-top:8px;padding:8px 2px;border:0;background:transparent;color:var(--blue-deep);font:inherit;font-size:13px;font-weight:800;cursor:pointer}
 .trending-toggle:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 #trending nav,#trending > .topic-note{display:none}
@@ -1780,6 +1789,15 @@ html.season-autumn .autumn-sky{display:none}
       <span>公開データに変更が見つかりました。</span>
       <button type="button" id="dataUpdateReload">検索条件を保って再読み込み</button>
     </div>
+    <section class="home-changes search-discovery" aria-labelledby="homeChangesHeading">
+      <h3 id="homeChangesHeading">直近の供給状況の変更</h3>
+      <p id="homeChangeDate" role="status">変更履歴を確認中です。</p>
+      <ul id="homeChangeList"></ul>
+      <nav aria-label="供給状況の一覧">
+        <a id="homeChangeDay" href="#daily-update">変更履歴の詳細</a>
+        <a href="items/limited.html">現在の限定出荷一覧</a>
+      </nav>
+    </section>
     <a class="price-list-link" id="topPriceListLink" hidden>
       <span class="topic-tag">薬価収載</span>
       <span class="price-list-title"></span>
@@ -4735,6 +4753,19 @@ const $dailyUpdateShare = document.getElementById("dailyUpdateShare");
 const $dailyUpdateFeed = document.getElementById("dailyUpdateFeed");
 const $dailyShareStatus = document.getElementById("dailyShareStatus");
 let DAILY_SHARE = null;
+function renderHomeChanges(message, changed = []){
+  document.getElementById("homeChangeDate").textContent = message;
+  document.getElementById("homeChangeList").innerHTML = changed.slice(0,3).map(item=>{
+    const event = latestChangeFor(item);
+    const from = STATUS[mapPublishedStatus(event.from)].label;
+    const to = STATUS[mapPublishedStatus(event.to)].label;
+    const transition = from === to ? to + "（区分変更）" : from + " → " + to;
+    return `<li><strong>${esc(item.n)}</strong><small>${esc(transition)}</small></li>`;
+  }).join("");
+  const link = document.getElementById("homeChangeDay");
+  link.href = changed.length ? `updates/${LATEST_CHANGE_DATE.replaceAll("/","-")}.html` : "#daily-update";
+  link.textContent = changed.length ? "この日の変更一覧" : "変更履歴の詳細";
+}
 function historyStatusMessage(){
   const phase = HISTORY_STATE.phase;
   const retained = historyHasSnapshot() && (phase !== "ready" || HISTORY_STATE.source !== "network");
@@ -4755,6 +4786,7 @@ function renderDailyUpdate(items){
   document.getElementById("dailyUpdateStats").replaceChildren();
   const stateMessage = historyStatusMessage();
   if(!historyHasSnapshot()){
+    renderHomeChanges(stateMessage || "変更履歴は未確認です。");
     document.getElementById("dailyUpdateDate").textContent = HISTORY_STATE.phase === "loading" ? "変更履歴を読み込み中" : "変更履歴は未確認";
     document.getElementById("dailyUpdateTitle").textContent = HISTORY_STATE.phase === "loading" ? "供給状況の変更を確認しています" : "変更履歴を確認できません";
     document.getElementById("dailyUpdateSummary").textContent = stateMessage;
@@ -4763,6 +4795,7 @@ function renderDailyUpdate(items){
   const cacheLabel = HISTORY_STATE.source !== "network" || HISTORY_STATE.phase !== "ready" ? "前回取得分・" : "";
   const freshnessNote = "履歴の最新記録日は、全体データ基準日や履歴全体の確認済み日とは異なります。";
   if(!LATEST_CHANGE_DATE){
+    renderHomeChanges(cacheLabel + "取得した履歴に変更記録はありません。");
     document.getElementById("dailyUpdateDate").textContent = `${cacheLabel}変更記録0件`;
     document.getElementById("dailyUpdateTitle").textContent = "取得した変更履歴には、供給区分の変更記録はありません";
     document.getElementById("dailyUpdateSummary").textContent = stateMessage + "現在も変更がないことを保証するものではありません。履歴全体の確認済み日は取得できません。";
@@ -4773,6 +4806,8 @@ function renderDailyUpdate(items){
   for(const x of changed) counts[mapStatus(latestChangeFor(x).to)]++;
   const [y,m,d] = LATEST_CHANGE_DATE.replaceAll("/","-").split("-");
   const dateLabel = `${y}年${Number(m)}月${Number(d)}日`;
+  renderHomeChanges(`${cacheLabel}変更検知日 ${dateLabel}` +
+    (changed.length ? "" : "（現在の供給区分と一致する品目はありません）"), changed);
   document.getElementById("dailyUpdateDate").textContent = `${cacheLabel}履歴の最新記録 ${dateLabel}`;
   document.getElementById("dailyUpdateTitle").textContent = changed.length
     ? `${changed.length.toLocaleString()}品目の供給状況の変更記録があります`
@@ -6635,8 +6670,8 @@ function renderTrending(){
     && !/^amaluet-[1-4]$/.test(t.slug) && !/^predonine-soluble-(10|20)mg$/.test(t.slug)
     && t.slug !== "fentos").concat(webEntries);
   // 表示順は編集上の選定であり、問い合わせの集計順位ではない。
-  const featuredFirst = ["kenacort-a-injection", "juvela-ointment", "teramuro", "zictor-tape-75mg",
-    "movicol", "daiphen", "pentasa", "eperisone-towa", "memantine-od-towa", "tamsulosin-towa",
+  const featuredFirst = ["movicol", "juvela-ointment", "teramuro", "zictor-tape-75mg",
+    "kenacort-a-injection", "daiphen", "pentasa", "eperisone-towa", "memantine-od-towa", "tamsulosin-towa",
     "hilnamin", "antebate-lotion", "micardis", "amaluet"];
   entries.sort((a,b)=>{
     const aIndex=featuredFirst.indexOf(a.slug), bIndex=featuredFirst.indexOf(b.slug);
@@ -7702,6 +7737,7 @@ function failDataLoad(message){
   document.getElementById("demoNote").textContent =
     "※ データを検証できない間は、サンプルを含む品目情報を表示しません。";
   $dailyUpdateCard.setAttribute("aria-busy","false");
+  renderHomeChanges("供給データを取得できず、変更を確認できません。");
   document.getElementById("dailyUpdateDate").textContent = "データ取得エラー";
   document.getElementById("dailyUpdateTitle").textContent = "供給変更を取得できませんでした";
   document.getElementById("dailyUpdateSummary").textContent = "時間をおいてページを再読み込みしてください。";
