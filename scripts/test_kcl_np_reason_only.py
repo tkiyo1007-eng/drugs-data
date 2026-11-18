@@ -12,4 +12,12 @@ class ReasonOnlyTests(unittest.TestCase):
    self.assertNotIn('resumption',n);self.assertNotIn('maker_supply_status',n)
  def test_static_details_preserve_official_status_and_source(self):
   for yj,url in [('3229002S1026','K.C.L.ELIXIR_syukkateisi_20261016.pdf'),('3140400A5072','068Q800001Uj4aLIAR')]:
-   s=(ROOT/'items'/f'{yj}.html').read_text();self.assertIn(url,s);h1=re.search(r'<h1[^>]*>(.*?)</h1>',s,re.S).group(1);self.assertIn('status-limited',h1);self.assertNotIn('status-stopped',h1)
+   page = (ROOT / 'items' / f'{yj}.html').read_text()
+   self.assertIn(url, page)
+   with (ROOT / 'drugs_app_ready.csv').open(encoding='utf-8-sig', newline='') as f:
+    status = next(r['供給状況'] for r in csv.DictReader(f) if r['YJコード'] == yj)
+   if '限定出荷' in status:
+    self.assertIn(f'<strong class="status limited">{status}</strong>', page)
+   else:
+    self.assertNotIn('<strong class="status limited">', page)
+    self.assertIn(f'<td>{status}</td>', page)

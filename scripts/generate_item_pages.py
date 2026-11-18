@@ -33,7 +33,7 @@ from datetime import date, datetime, timezone, timedelta
 from pathlib import Path
 from urllib.parse import quote, urlsplit
 
-import item_page_trial
+import limited_item_page
 from source_specification import load_comparison
 
 SITE_ROOT = "https://kyokyu-navi.jp/"
@@ -1191,6 +1191,8 @@ def item_page_lastmod(row: dict, lifecycle=None, discrepancy=None, manufacturer_
     lifecycle = lifecycle_for_display(lifecycle, manufacturer_notices, manufacturer_bulletins)
     dates = [ITEM_PAGE_TEMPLATE_LASTMOD,
              latest_publication_date(row, lifecycle, discrepancy)]
+    if strict_status(row.get("供給状況")) == "limited":
+        dates.append("2026-11-18")  # 限定出荷の正式ページに供給概要・原文・規格比較を導入
     if related_topics:
         dates.append("2026-11-04")  # 品目別の関連記事導線を追加した日
         dates.extend(topic["date"] for topic in related_topics if topic.get("date"))
@@ -1476,6 +1478,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
               ingredient_slugs=None, manufacturer_notices=(), catalog_yj_codes=None,
               manufacturer_bulletins=None, version_metadata=None, product_variants=(), related_topics=(),
               specification_comparison=None):
+    limited_layout = strict_status(row.get("供給状況")) == "limited"
     name = row["商品名"].strip()
     display_name = f"{name}（{title_qualifier}）" if title_qualifier else name
     maker = (row.get("販売メーカー") or row.get("製造メーカー") or "").strip()
@@ -1632,7 +1635,8 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
       <p>厚労省区分は上書きせず、より新しいメーカー案内を併記しています。実際の受注可否は卸・メーカーにもご確認ください。</p>{source_link}</div>'''
 
     manufacturer_box = manufacturer_notices_html(row, manufacturer_notices, supplemental_warning,
-                                                catalog_yj_codes, manufacturer_bulletins)
+                                                catalog_yj_codes, manufacturer_bulletins,
+                                                link_first_alternatives=limited_layout)
     # 包装情報を載せる品目だけに適用し、無関係な全品目のHTMLを変更しない。
     package_styles = """
 .package-supply{margin:14px 0;padding:12px;border:1px solid #CCDDF7;border-radius:12px;overflow-wrap:anywhere}
@@ -1663,21 +1667,38 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
     related_heading = (f"同成分・同剤形（{esc(gen)}）のほかの品目の供給状況"
                        if gen else "同成分・同剤形のほかの品目の供給状況")
     if siblings:
-        lis = []
-        for s in siblings[:12]:
-            s_key = item_key(s)
-            s_status = map_status(s.get("供給状況") or "")
-            s_st = STATUSES[s_status]
-            href = (f"{s_key}.html" if s_key in generated_keys
-                    else SITE_ROOT + "#item=" + quote(s_key, safe=""))
-            lis.append(
-                f'<li><a href="{href}" data-dsn-event="related-item-open">'
-                f'{esc((display_names or {}).get(s_key, s["商品名"]))}</a>'
-                f'<span class="tag status-{s_status}">{s_st["label"]}</span>'
-                f'<span class="mk">{esc("｜".join(filter(None, [(s.get("規格") or "").strip(), (s.get("販売メーカー") or s.get("製造メーカー") or "").strip()])))}</span></li>')
         warm_note = ("この品目は温感タイプのため、温感タイプの品目のみを表示しています。"
                      if is_warm_patch(row) else "")
-        sib_html = f"""
+        if limited_layout:
+            comparison = []
+            for candidate in [row, *siblings[:12]]:
+                candidate_key = item_key(candidate)
+                href = (f"{candidate_key}.html" if candidate_key in generated_keys
+                        else SITE_ROOT + "#item=" + quote(candidate_key, safe=""))
+                handling = candidate.get("供給状況") or "記載なし"
+                if is_delist(candidate):
+                    handling += "（薬価削除予定）"
+                comparison.append(((display_names or {}).get(candidate_key, candidate["商品名"]), href,
+                                   candidate.get("規格") or "", candidate.get("販売メーカー") or candidate.get("製造メーカー") or "",
+                                   handling, candidate.get("理由") or "記載なし",
+                                   supply_metadata_values(candidate).get("解除・解消見込み", "記載なし")))
+            note = ("同じ規格を優先し、その中で現在の厚生労働省公表区分と薬価削除予定を考慮して表示しています。"
+                    "代替適否や実在庫を示す順位ではありません。" + warm_note)
+            sib_html = limited_item_page.comparison_html(comparison, note)
+        else:
+            lis = []
+            for s in siblings[:12]:
+                s_key = item_key(s)
+                s_status = map_status(s.get("供給状況") or "")
+                s_st = STATUSES[s_status]
+                href = (f"{s_key}.html" if s_key in generated_keys
+                        else SITE_ROOT + "#item=" + quote(s_key, safe=""))
+                lis.append(
+                    f'<li><a href="{href}" data-dsn-event="related-item-open">'
+                    f'{esc((display_names or {}).get(s_key, s["商品名"]))}</a>'
+                    f'<span class="tag status-{s_status}">{s_st["label"]}</span>'
+                    f'<span class="mk">{esc("｜".join(filter(None, [(s.get("規格") or "").strip(), (s.get("販売メーカー") or s.get("製造メーカー") or "").strip()])))}</span></li>')
+            sib_html = f"""
 <section>
   <h2>{related_heading}</h2>
   <p class="sib-note">同じ規格を優先し、その中で現在の厚生労働省公表区分と薬価削除予定を考慮して表示しています。代替適否や実在庫を示す順位ではありません。{esc(warm_note)}適応・規格・剤形の互換性は必ず添付文書と医師・薬剤師の判断でご確認ください。</p>
@@ -1722,33 +1743,38 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
     supply_answer = supply_answer_html(row, status, manufacturer_notices, lifecycle_match, manufacturer_bulletins)
     variants_html = product_variants_html(row, product_variants, generated_keys)
 
-    return f"""<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{esc(title)}</title>
-<meta name="description" content="{esc(desc)}">
-<meta name="robots" content="index,follow,max-image-preview:large">
-<link rel="canonical" href="{url}">
-<meta property="og:type" content="article">
-<meta property="og:title" content="{esc(title)}">
-<meta property="og:description" content="{esc(desc)}">
-<meta property="og:url" content="{url}">
-<meta property="og:image" content="{SITE_ROOT}og_image.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="医薬品供給ナビの供給状況サマリー">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{esc(title)}">
-<meta name="twitter:description" content="{esc(desc)}">
-<meta name="twitter:image" content="{SITE_ROOT}og_image.png">
-<meta name="twitter:image:alt" content="医薬品供給ナビの供給状況サマリー">
-<meta name="apple-itunes-app" content="{smart_app_banner}">
-<script type="application/ld+json">{breadcrumb_ld}</script>
-<script type="application/ld+json">{webpage_ld}</script>
-<script src="../analytics.js"></script>
-<style>
+    topic_box = related_topics_html(related_topics)
+    main_attr = ""
+    promoted_sections = ""
+    if limited_layout:
+        main_attr = ' id="main"'
+        styles = ('<link rel="icon" href="../icon-192.png"><link rel="stylesheet" href="trial/trial.css">'
+                  '<link rel="stylesheet" href="limited-detail.css"><script defer src="trial/trial.js"></script>')
+        header = ('<a class="skip" href="#main">本文へ</a><header><div class="bar">'
+                  '<a class="brand" href="../"><span aria-hidden="true">✚</span>医薬品供給ナビ</a>'
+                  '<a href="../#top">トップへ</a></div></header>\n')
+        shortcuts = []
+        if manufacturer_box:
+            shortcuts.append(("manufacturerNoticesTitle", "メーカー案内"))
+        if 'id="trialAlternatives"' in manufacturer_box:
+            shortcuts.append(("trialAlternatives", "原文の代替候補"))
+        if topic_box:
+            shortcuts.append(("relatedTopicTitle", "過去の記録"))
+        if siblings:
+            shortcuts.append(("compare", "規格を比較"))
+        intro = ('<nav class="trail" aria-label="パンくず"><a href="index.html">品目別の供給状況</a> / 品目詳細</nav>'
+                 + limited_item_page.overview_html(
+                     row, display_name, maker, public_metadata.get("解除・解消見込み"),
+                     mhlw_excel_date(version_metadata, dataset_date), reference_import, reference_version,
+                     official_row_date(row), delist, matching_manufacturer_notices(row, manufacturer_notices, manufacturer_bulletins),
+                     shortcuts, spec_difference_html + gas_spec_note))
+        # Keep warnings beside the source they qualify. Render each full notice and topic only once.
+        promoted_sections = (delist_box + lifecycle_box + discrepancy_box + supplemental_checked
+                             + manufacturer_box + topic_box + '<h2 id="itemDetails">品目の詳細</h2>')
+        delist_box = lifecycle_box = discrepancy_box = supplemental_checked = manufacturer_box = topic_box = ""
+        spec_difference_html = gas_spec_note = legacy_share = ""
+    else:
+        styles = f"""<style>
 :root{{--blue:#2F63E8;--ink:#1C2A44;--sub:#5A6B8C;--line:#E3EAF6}}
 *{{margin:0;padding:0;box-sizing:border-box}}
 body{{font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;color:var(--ink);background:#F6F9FE;line-height:1.75}}
@@ -1835,17 +1861,50 @@ h2{{font-size:16.5px;margin-bottom:12px}}
 footer{{font-size:12px;color:var(--sub);margin-top:34px;text-align:center}}
 footer a{{color:var(--sub)}}
 </style>
-<link rel="stylesheet" href="../top-navigation.css">
+<link rel="stylesheet" href="../top-navigation.css">"""
+        header = f"""  <header class="site site-with-top"><a href="{SITE_ROOT}">💊 医薬品供給ナビ</a><a class="top-link" href="../#top">トップへ</a></header>
+  <nav class="crumb" aria-label="パンくず"><a href="{SITE_ROOT}">トップ</a> › <a href="index.html">品目別の供給状況</a> › {esc(display_name)}</nav>
+"""
+        intro = f"""    <h1>{esc(display_name)}<span class="tag status-{status}">厚労省：{st['label']}</span>{supplemental_tags}{delist_tag}</h1>
+    <p class="maker">{esc(maker)}{('｜' + esc(spec)) if spec else ''}</p>
+"""
+        legacy_share = """    <button class="share" id="shareButton" type="button">この品目ページを共有</button>
+    <p class="share-status" id="shareStatus" role="status" aria-live="polite"></p>
+"""
+
+    return f"""<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{esc(title)}</title>
+<meta name="description" content="{esc(desc)}">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="{url}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{esc(title)}">
+<meta property="og:description" content="{esc(desc)}">
+<meta property="og:url" content="{url}">
+<meta property="og:image" content="{SITE_ROOT}og_image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="医薬品供給ナビの供給状況サマリー">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{esc(title)}">
+<meta name="twitter:description" content="{esc(desc)}">
+<meta name="twitter:image" content="{SITE_ROOT}og_image.png">
+<meta name="twitter:image:alt" content="医薬品供給ナビの供給状況サマリー">
+<meta name="apple-itunes-app" content="{smart_app_banner}">
+<script type="application/ld+json">{breadcrumb_ld}</script>
+<script type="application/ld+json">{webpage_ld}</script>
+<script src="../analytics.js"></script>
+{styles}
 </head>
 <body>
 <div class="wrap">
-  <header class="site site-with-top"><a href="{SITE_ROOT}">💊 医薬品供給ナビ</a><a class="top-link" href="../#top">トップへ</a></header>
-  <nav class="crumb" aria-label="パンくず"><a href="{SITE_ROOT}">トップ</a> › <a href="index.html">品目別の供給状況</a> › {esc(display_name)}</nav>
-  <main>
+{header}  <main{main_attr}>
   <div class="card">
-    <h1>{esc(display_name)}<span class="tag status-{status}">厚労省：{st['label']}</span>{supplemental_tags}{delist_tag}</h1>
-    <p class="maker">{esc(maker)}{('｜' + esc(spec)) if spec else ''}</p>
-    <div class="stbox status-{status}">
+{intro}{promoted_sections}    <div class="stbox status-{status}">
       {supply_answer}{package_jump}
     </div>
 {early_hub_link}{variants_html}
@@ -1867,7 +1926,7 @@ footer a{{color:var(--sub)}}
       <p class="watch-status" id="watchStatus" role="status" aria-live="polite"></p>
       <a href="{SITE_ROOT}#f=fav">監視リストを見る</a>
     </div>
-    {quick_answers}{related_topics_html(related_topics)}
+    {quick_answers}{topic_box}
     <form class="item-search" id="itemSearchForm" role="search">
       <h2>別の薬も検索</h2>
       <label for="itemSearchInput">薬品名・成分名・メーカー名・YJコード</label>
@@ -1889,9 +1948,7 @@ footer a{{color:var(--sub)}}
       <a href="{pmda}" target="_blank" rel="noopener" data-dsn-event="official-source-open">PMDAで添付文書を探す</a>
     </p>
 {hub_links}
-    <button class="share" id="shareButton" type="button">この品目ページを共有</button>
-    <p class="share-status" id="shareStatus" role="status" aria-live="polite"></p>
-  </div>
+{legacy_share}  </div>
 {sib_html}
 {ingredient_html}
 {category_html}
@@ -2681,28 +2738,8 @@ def main():
                 specification_comparison=specification_comparison,
             ), encoding="utf-8")
 
-        if k in item_page_trial.TRIAL_KEYS:
-            comparison = []
-            for candidate in [r, *sibs[:12]]:
-                candidate_key = item_key(candidate)
-                href = (f"../{candidate_key}.html" if candidate_key in generated_keys
-                        else SITE_ROOT + "#item=" + quote(candidate_key, safe=""))
-                candidate_status = candidate.get("供給状況") or "記載なし"
-                if is_delist(candidate):
-                    candidate_status += "（薬価削除予定）"
-                comparison.append((display_names.get(candidate_key, candidate["商品名"]), href,
-                                   candidate.get("規格") or "", candidate_status,
-                                   candidate.get("理由") or "記載なし",
-                                   supply_metadata_values(candidate).get("解除・解消見込み", "記載なし")))
-            trial_notices = manufacturer_notices_html(
-                r, notice_index.get(k, []), supplemental_state["warning"], catalog_yj_codes,
-                manufacturer_bulletins, link_first_alternatives=True)
-            item_page_trial.write_page(
-                out / "trial", dict(entry, status=strict_status(entry["supply_raw"])),
-                mhlw_excel_date(version_doc, dataset_date), dataset_date,
-                version_doc.get("version", ""), trial_notices, topic_index.get(k, []), comparison)
-
-    item_page_trial.write_index(out / "trial", entries)
+    limited_item_page.prepare_assets(site)
+    limited_item_page.write_pilot_links(out / "trial", entries)
     (out / "index.html").write_text(index_html(entries, dataset_date, version_doc), encoding="utf-8")
     for slug in ITEM_HUBS:
         (out / f"{slug}.html").write_text(

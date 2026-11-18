@@ -9,7 +9,9 @@
   const product = document.querySelector("h1").textContent;
   const status = Array.from(panel.querySelectorAll(".status, .caution"), el => el.textContent).join(" / ");
   const spec = document.querySelector(".spec").firstChild.textContent.trim();
-  const url = new URL(location.pathname, location.origin).href;
+  const sharedUrl = new URL(location.pathname, location.origin);
+  sharedUrl.searchParams.set("src", "share");
+  const url = sharedUrl.href;
   let matches = false;
   function dateIsRecent() {
     const age = Date.now() - Date.parse(date + "T00:00:00+09:00");
@@ -37,15 +39,32 @@
       freshness.textContent = matches ? "" : "最新データとの一致を確認できません。厚労省の公表ページをご確認ください。";
     }
   }
-  checkVersion();
-  window.addEventListener("pageshow", event => {
-    if (event.persisted) checkVersion();
-  });
+  // The full item page already checks its version, source date and offline-cache status.
+  const datasetWarning = document.getElementById("datasetWarning");
+  if (datasetWarning) {
+    const update = () => {
+      matches = datasetWarning.hidden && dateIsRecent();
+      freshness.hidden = matches;
+      freshness.classList.toggle("warning", !matches);
+      freshness.textContent = matches ? "" : "最新データとの一致を確認できません。出典と日付をご確認ください。";
+    };
+    new MutationObserver(update).observe(datasetWarning, {attributes:true, attributeFilter:["hidden"], childList:true, subtree:true});
+    update();
+    window.addEventListener("pageshow", event => {
+      if (event.persisted) location.reload();
+    });
+  } else {
+    checkVersion();
+    window.addEventListener("pageshow", event => {
+      if (event.persisted) checkVersion();
+    });
+  }
   button.hidden = false;
   button.addEventListener("click", async () => {
+    const displaySpec = panel.dataset.specNote === "1" ? spec + "（規格単位は原表をご確認ください）" : spec;
     const text = matches && dateIsRecent()
-      ? [product, spec, "厚労省公表 " + status, "厚労省基準日 " + date].join("\n")
-      : [product, spec, "最新の供給状況は原典をご確認ください。"].join("\n");
+      ? [product, displaySpec, "厚労省公表 " + status, "厚労省基準日 " + date].join("\n")
+      : [product, displaySpec, "最新の供給状況は原典をご確認ください。"].join("\n");
     manual.hidden = true;
     feedback.textContent = "";
     try {
@@ -56,6 +75,7 @@
         await navigator.clipboard.writeText(text + "\n" + url);
         feedback.textContent = "共有文とリンクをコピーしました。";
       }
+      if (window.dsnTrack) window.dsnTrack("item-share-success");
     } catch (error) {
       if (error.name === "AbortError") return;
       manual.value = text + "\n" + url;

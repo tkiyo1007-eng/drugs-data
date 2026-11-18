@@ -148,9 +148,9 @@ class ItemPageMetadataTests(unittest.TestCase):
             row, "1234567F1000", "limited", "2026-08-28", ordered,
             {"1234567F1000", "1234567F1001", "1234567F1002", "1234567F1003"},
         )
-        self.assertIn('<span class="mk">20mg1錠</span>', output)
+        self.assertIn('<small>20mg1錠</small>', output)
         self.assertIn("同じ規格を優先し、その中で現在の厚生労働省公表区分と薬価削除予定", output)
-        self.assertIn("ほかの品目の供給状況", output)
+        self.assertIn("同成分・同剤形の供給状況", output)
 
     def test_item_page_explicitly_explains_when_no_related_candidates_exist(self):
         row = {

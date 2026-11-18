@@ -1,0 +1,38 @@
+/* Additional controls from the full item page, using the same palette as the overview. */
+.intro .spec b {font-weight:400}
+.intro p:not(.maker,.spec) {font-size:.88rem;margin-top:8px}
+#itemDetails {margin:2rem 0 .75rem}
+#itemDetails,.watch-button,#manufacturerNoticesTitle,#relatedTopicTitle,#trialAlternatives {scroll-margin-top:16px}
+.card>section:not(.summary,.manufacturer-notices),main>section:not(#compare),.watch-card,.item-search,.cta,.card>.supp,.stbox,.hub-links {
+  margin:14px 0;padding:clamp(14px,3vw,24px);background:var(--paper);border:1px solid var(--line);border-radius:14px
+}
+.watch-card a,.links a,.hub-links a,footer a,.cta a {display:inline-flex;align-items:center;min-height:44px}
+.watch-button,.item-search button {border:1px solid #2454ae;border-radius:9px;color:white;background:#2454ae;font:inherit;font-weight:700;min-height:44px;padding:8px 14px;cursor:pointer}
+.watch-button.on {background:var(--tint);color:var(--blue);border-color:var(--line)}
+.watch-note,.watch-status,.item-search-note,.dataset-context,.current-dataset-context,.note,.supp-checked {font-size:.86rem;color:var(--muted)}
+.watch-note,.supp-checked,.current-dataset-context,.item-search-note,.item-search label,.cta p,.stbox p,.supp p {margin:.5rem 0}
+.item-search label {display:block}
+.item-search-row {display:flex;flex-wrap:wrap;gap:8px}
+.item-search input {min-width:0;max-width:100%;flex:1 1 12em;background:var(--paper);color:var(--ink);border:1px solid var(--muted);border-radius:8px;font:inherit;padding:8px 12px}
+.quick-answers dl>div+div {margin-top:.8rem}
+.quick-answers dd {font-weight:400}
+.stbox,.sib-note,.supp,.cta {font-size:.94rem}
+.dataset-warning,.supp-warning,.delist-box {color:var(--amber);background:var(--cream);padding:8px 12px}
+.dataset-warning a,.supp-warning a {color:inherit}
+.card>table {min-width:0;background:var(--paper);table-layout:fixed}
+.card>table th {width:36%}
+.card>table tr:first-child {background:transparent}
+.end-details span {display:block}
+.supp-checked {font-weight:650}
+.supp-checked+.supp-warning {margin:8px 0}
+.links,.cta,.hub-links {display:flex;flex-wrap:wrap;gap:0 14px}
+.cta {display:block}
+.cta a {margin-right:12px}
+footer {display:block;width:min(100% - 32px,960px);margin:0 auto;padding:16px 0 32px}
+footer p {margin:.5rem 0}
+@media(max-width:420px) {
+  h1 {font-size:1.6rem}
+  .sources {gap:6px}
+  .source-link {text-align:start;flex-wrap:wrap;justify-content:flex-start}
+  .facts {grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+}
