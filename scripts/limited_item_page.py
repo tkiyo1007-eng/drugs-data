@@ -83,13 +83,13 @@ def write_pilot_links(folder, entries):
             continue
         name = escape(available[key]["display_name"])
         href = "../" + key + ".html"
-        path.write_text(f'''<!doctype html><html lang="ja"><head><meta charset="utf-8">
+        path.write_text(f'''<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,follow">
 <link rel="canonical" href="{SITE}items/{key}.html"><meta http-equiv="refresh" content="0;url={href}">
 <title>{name}｜医薬品供給ナビ</title></head><body><main><a href="{href}">{name}の品目ページを開く</a></main></body></html>
 ''', encoding="utf-8")
         items.append(f'<li><a href="{href}">{name}</a></li>')
-    (folder / "index.html").write_text(f'''<!doctype html><html lang="ja"><head><meta charset="utf-8">
+    (folder / "index.html").write_text(f'''<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,follow">
 <link rel="stylesheet" href="trial.css"><title>品目ページのご案内｜医薬品供給ナビ</title></head><body>
 <header><div class="bar"><a class="brand" href="../../"><span aria-hidden="true">✚</span>医薬品供給ナビ</a></div></header>
