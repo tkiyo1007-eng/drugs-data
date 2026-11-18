@@ -765,8 +765,13 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   background:rgba(255,255,255,.58);border:1px solid rgba(79,128,244,.2);
 }
 .watch-empty-start[hidden],.watch-dashboard-grid[hidden],.watch-dashboard-actions[hidden]{display:none}
-.watch-empty-start p{font-size:12px;line-height:1.7;color:var(--sub)}
-.watch-empty-start strong{display:block;font-size:13px;color:var(--ink)}
+.watch-empty-start summary{cursor:pointer;min-height:44px;padding:10px 4px;font-size:14px;font-weight:700;color:var(--blue-deep)}
+.watch-empty-start summary:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.watch-dashboard:has(.watch-empty-start:not([hidden])){padding:0 12px}
+.watch-dashboard:has(.watch-empty-start:not([hidden])) .watch-dashboard-head{display:none}
+.watch-dashboard .watch-empty-start:not([hidden]){display:block;padding:0;margin:0;border:0;background:transparent}
+.watch-empty-start[open] .watch-empty-start-actions{padding:0 0 12px}
+.watch-dashboard .watch-dashboard-status:empty{margin:0;min-height:0}
 .watch-empty-start-actions{display:flex;gap:8px;flex-wrap:wrap;flex:none}
 .watch-empty-start .watch-btn.secondary{color:var(--blue);background:rgba(255,255,255,.78);box-shadow:none}
 .watch-dashboard-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:18px}
@@ -1137,7 +1142,45 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   .trending-hint{padding:0 10px 8px}
   .trending-names summary,.trending-reference{padding:10px;font-size:12px}
 }
-@media(max-width:360px){.trending-list{grid-template-columns:1fr}}
+/* 最初の4製品は名前と詳細への入口に絞る。 */
+.trending-list:not(.show-all){grid-template-columns:repeat(4,minmax(0,1fr))}
+.trending-list:not(.show-all) .trending-hint{display:none}
+@media(max-width:800px){.trending-list:not(.show-all){grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:360px){.trending-list.show-all{grid-template-columns:1fr}}
+.has-search-term .pills{flex-wrap:nowrap;overflow-x:auto;padding:4px 2px;gap:6px;margin:6px 0}
+.has-search-term .pill{flex:none;white-space:nowrap;transition-property:color,background-color,border-color,box-shadow,transform}
+.has-search-term .result-bar{margin-bottom:4px}
+.has-search-term .result-total{display:none}
+.search-row{display:flex;gap:8px;align-items:stretch;margin-bottom:12px}
+.search-row .search-box{flex:1;min-width:0;margin:0}
+.search-row .search-results-jump{width:auto;flex:none;margin:0;padding:8px 12px}
+.result-options{margin-left:auto;max-width:100%}
+.result-options summary{display:none;cursor:pointer;color:var(--blue-deep);font-size:13px;font-weight:700;padding:10px 2px;min-height:44px}
+.has-search-term .result-options summary{display:list-item}
+.has-search-term .result-options[open]{width:100%}
+.result-options .search-share-status:empty{display:none}
+@media(max-width:640px){
+  body:has(#demo.has-search-term) .search-intro h1{font-size:17px;line-height:1.35;margin:5px 0 0}
+  body:has(#demo.has-search-term) .search-intro h1 br,body:has(#demo.has-search-term) .search-intro .lede{display:none}
+  .has-search-term .search-box{padding:6px 12px}
+  .has-search-term .drug-spec{color:var(--sub)}
+}
+@media(max-width:360px){
+  body:has(#demo.has-search-term) .search-intro h1{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);margin:0}
+  body:has(#demo.has-search-term) .search-intro .autumn-label{margin-bottom:0}
+  #demo.has-search-term{padding-top:6px}
+  .has-search-term .search-row{margin-bottom:2px}
+  .has-search-term .pills{padding:0 2px;margin:0}
+  .has-search-term .result-bar{margin-bottom:0}
+  .has-search-term .demo-shell{padding:12px}
+  .has-search-term .drug-card{padding:10px 22px 12px 14px}
+  .has-search-term .fav-btn{width:44px;padding:0;font-size:0}
+  .has-search-term .fav-btn::before{content:"☆";font-size:20px}
+  .has-search-term .fav-btn.on::before{content:"★"}
+  .has-search-term .drug-maker{margin-bottom:4px}
+}
+
+
 
 /* ===== メーカー別の供給状況 ===== */
 .maker-list{padding:10px 20px}
@@ -1741,17 +1784,32 @@ html.season-autumn .autumn-sky{display:none}
     </div>
   </noscript>
   <div class="demo-shell glass">
+    <div class="search-row">
     <div class="search-box">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       <input id="q" type="search" placeholder="薬品名・成分名・メーカー名・YJコードで検索" aria-label="薬品名・成分名・メーカー名・YJコードで検索" autocomplete="off">
       <button type="button" class="search-clear" id="searchClear" aria-label="検索語をクリア" hidden><span aria-hidden="true">×</span></button>
     </div>
 
-    <button type="button" class="search-results-jump" id="searchResultsJump" aria-controls="meta list" hidden disabled>検索結果を見る</button>
+    <button type="button" class="search-results-jump" id="searchResultsJump" aria-controls="meta list" hidden disabled>結果へ</button>
+    </div>
     <div class="data-update-notice" id="dataUpdateNotice" role="status" aria-live="polite" hidden>
       <span>公開データに変更が見つかりました。</span>
       <button type="button" id="dataUpdateReload">検索条件を保って再読み込み</button>
     </div>
+    <div class="data-load-error" id="dataLoadError" role="alert" hidden>
+      <strong>供給状況データを表示できません</strong>
+      <span id="dataLoadErrorText">誤った情報を表示しないため、検索結果を停止しています。</span>
+      <div class="data-load-error-actions">
+        <button type="button" id="dataLoadReload">再読み込み</button>
+        <a href="https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システムで確認</a>
+      </div>
+    </div>
+    <div class="data-freshness-notice" id="sourceStaleNotice" role="status" aria-live="polite" hidden>
+      <span>厚労省の原Excel基準日から7日以上経過しています。<a href="https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システム</a>もご確認ください。</span>
+    </div>
+    <template id="searchContextHome"></template>
+    <div id="searchContext">
     <a class="price-list-link" id="topPriceListLink" hidden>
       <span class="topic-tag">薬価収載</span>
       <span class="price-list-title"></span>
@@ -1782,19 +1840,8 @@ html.season-autumn .autumn-sky{display:none}
     </div>
 
     <aside class="pinned-alerts" id="pinnedAlerts" aria-labelledby="pinnedAlertsTitle" hidden></aside>
-    <div class="data-load-error" id="dataLoadError" role="alert" hidden>
-      <strong>供給状況データを表示できません</strong>
-      <span id="dataLoadErrorText">誤った情報を表示しないため、検索結果を停止しています。</span>
-      <div class="data-load-error-actions">
-        <button type="button" id="dataLoadReload">再読み込み</button>
-        <a href="https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システムで確認</a>
-      </div>
-    </div>
     <p class="data-as-of" role="status" aria-live="polite"><span id="dataAsOf">データ基準日を確認中です。</span><span>（サイト取込日）</span></p>
     <p class="data-as-of" id="dataSourceAsOf" role="status" aria-live="polite">厚労省の原Excel基準日：確認中です。</p>
-    <div class="data-freshness-notice" id="sourceStaleNotice" role="status" aria-live="polite" hidden>
-      <span>厚労省の原Excel基準日から7日以上経過しています。<a href="https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システム</a>もご確認ください。</span>
-    </div>
     <div hidden>
     <div class="data-freshness-notice" id="supplementalNotice" role="status" aria-live="polite" hidden>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.7 2.2 17.5A2 2 0 0 0 3.9 20h16.2a2 2 0 0 0 1.7-2.5L13.7 3.7a2 2 0 0 0-3.4 0Z"/></svg>
@@ -1822,6 +1869,7 @@ html.season-autumn .autumn-sky{display:none}
       <p>メーカー補足の確認日：当サイトが選定したメーカー・公表案内の確認日です。メーカーの発表日ではなく、補足の表示がないことは「差異なし」を保証しません。</p>
       <p>この画面での取得日時は、公開ファイルを読み込んだ時刻です。情報提供元の更新日時や、最新情報であることを示すものではありません。</p>
     </details>
+    </div>
     <div class="pills" id="pills" role="group" aria-label="供給状況で絞り込む">
       <button type="button" class="pill active" data-f="all" aria-pressed="true">すべて</button>
       <button type="button" class="pill" data-f="ok" aria-pressed="false">通常出荷</button>
@@ -1847,13 +1895,13 @@ html.season-autumn .autumn-sky{display:none}
         </div>
         <p class="watch-dashboard-check" id="watchLastChecked">最終確認：未設定</p>
       </div>
-      <div class="watch-empty-start" id="watchEmptyStart" hidden>
-        <p><strong>まず、1品目を監視してみましょう</strong>次回アクセス時に、登録した品目の変化をまとめて確認できます。</p>
+      <details class="watch-empty-start" id="watchEmptyStart" hidden>
+        <summary>☆ 気になる薬を監視する</summary>
         <div class="watch-empty-start-actions">
           <button type="button" class="watch-btn" id="watchEmptySearch" data-dsn-event="search-cta-open">薬を検索して1品目追加</button>
           <button type="button" class="watch-btn secondary" id="watchEmptyImport" disabled>CSVからまとめて追加</button>
         </div>
-      </div>
+      </details>
       <div class="watch-dashboard-grid" id="watchDashboardGrid" role="group" aria-label="監視リストの集計" hidden>
         <div class="watch-stat"><span>監視中</span><strong class="num" id="watchCount">0</strong></div>
         <div class="watch-stat"><span>未確認の変更</span><strong class="num" id="watchUnreadCount">0</strong></div>
@@ -1886,7 +1934,9 @@ html.season-autumn .autumn-sky{display:none}
     </div>
     <div class="result-bar">
       <p class="result-meta" id="meta" role="status" aria-live="polite"></p>
-      <div class="result-actions">
+      <details class="result-options" id="resultOptions" open>
+        <summary>表示・共有</summary>
+        <div class="result-actions">
         <button type="button" class="csv-btn" id="searchShareBtn" hidden>検索結果を共有</button>
         <button type="button" class="csv-btn" id="csvBtn" hidden>CSV保存</button>
         <label class="page-size">表示件数
@@ -1898,8 +1948,9 @@ html.season-autumn .autumn-sky{display:none}
             <option value="99999">全件</option>
           </select>
         </label>
-      </div>
-      <p class="search-share-status" id="searchShareStatus" role="status" aria-live="polite"></p>
+        </div>
+        <p class="search-share-status" id="searchShareStatus" role="status" aria-live="polite"></p>
+      </details>
     </div>
     <div class="watch-first-add" id="watchFirstAdd" hidden>
       <p class="watch-first-add-message" id="watchFirstAddMessage" role="status" aria-live="polite" aria-atomic="true">
@@ -1915,6 +1966,7 @@ html.season-autumn .autumn-sky{display:none}
     <p class="data-load-error" id="storageSaveError" role="alert" hidden></p>
     <div class="drug-list" id="list"></div>
     <button type="button" class="load-more" id="loadMore" hidden></button>
+    <template id="searchContextBelowResults"></template>
     <template id="watchPriorityResults"></template>
     <p class="demo-note" id="demoNote">※ 厚生労働省公表の最新データを読み込んでいます。読み込み完了後、この画面で全品目を検索できます。</p>
     <p class="demo-note">限定出荷・供給停止・販売中止・薬価削除予定の品目には、1品目ごとの詳細ページがあります → <a href="items/index.html">品目別の供給状況ページ一覧</a></p>
@@ -2500,7 +2552,7 @@ html.season-autumn .autumn-sky{display:none}
   <div class="news-list glass">
     <div class="news-item">
       <div class="news-date num">2026.11.18</div>
-      <div class="news-body"><span class="news-tag">検索画面</span>問い合わせが多い品目は、モビコール、ユベラ、テラムロ、ジクトルの4製品を先に表示します。他の製品は「ほかの製品を見る」から開けます。検索結果までの案内も整理しました。</div>
+      <div class="news-body"><span class="news-tag">検索画面</span>薬名を入力すると、検索欄のすぐ下で品目と供給区分を確認できます。問い合わせが多い4製品をコンパクトにまとめ、監視する薬が未登録のときは登録方法を1行にまとめました。</div>
     </div>
     <div class="news-item">
       <div class="news-date num">2026.11.17</div>
@@ -2934,6 +2986,10 @@ function pageScrollBehavior(){
   addEventListener("resize",scheduleQuickNav,{passive:true});
   document.querySelectorAll("[data-quick-target], [data-home-link]").forEach(link=>link.addEventListener("click",event=>{
     if(event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    if(link.dataset.quickTarget === "watchDashboard"){
+      const emptyStart = document.getElementById("watchEmptyStart");
+      if(!emptyStart.hidden) emptyStart.open = true;
+    }
     const generation = ++jumpGeneration;
     const root = document.documentElement;
     if(link.hasAttribute("data-home-link")){
@@ -3200,7 +3256,15 @@ $searchClear.addEventListener("click", ()=>{
 function syncSearchPriority(){
   $searchClear.hidden = !$q.value;
   syncTrendingSearchState();
-  const resultsFirst = Boolean($q.value.trim()) || filter !== "all";
+  const searching = Boolean($q.value.trim());
+  const context = document.getElementById("searchContext");
+  const anchorForContext = document.getElementById(searching ? "searchContextBelowResults" : "searchContextHome");
+  if(anchorForContext.nextElementSibling !== context){
+    anchorForContext.after(context);
+    document.getElementById("resultOptions").open = !searching;
+  }
+  document.getElementById("demo").classList.toggle("has-search-term", searching);
+  const resultsFirst = searching || filter !== "all";
   const anchor = resultsFirst ? $watchPriorityResults : $watchPriorityHome;
   if(!anchor || !$watchDashboard || !$watchTools) return;
   // すでに正しい位置ならDOMを触らない。再挿入すると、監視領域内のボタンを
@@ -3222,8 +3286,8 @@ function syncSearchResultJump(){
   const focused = document.activeElement === $searchResultsJump;
   $searchResultsJump.hidden = !ready;
   $searchResultsJump.disabled = !ready;
-  $searchResultsJump.textContent = ready
-    ? `検索結果を見る（${LAST_HITS.length.toLocaleString()}件）` : "検索結果を見る";
+  $searchResultsJump.setAttribute("aria-label",ready
+    ? `結果へ（${LAST_HITS.length.toLocaleString()}件）` : "結果へ");
   if(focused && !ready) focusSearchResultSummary();
 }
 $searchResultsJump.addEventListener("click", ()=>{
@@ -3392,7 +3456,7 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
   $searchShareBtn.hidden = (!LIVE || !hits.length
     || (!$q.value.trim() && filter === "all"));
   const src = LIVE ? `全 ${ITEMS.length.toLocaleString()} 品目中` : `サンプル ${ITEMS.length} 品目中`;
-  $meta.innerHTML = `<strong class="num">${hits.length.toLocaleString()}</strong> 件ヒット（${src}）`
+  $meta.innerHTML = `<strong class="num">${hits.length.toLocaleString()}</strong> 件ヒット<span class="result-total">（${src}）</span>`
     + (relaxed ? `<span class="search-relaxed-note">「${esc($q.value.trim())}」に一致する品目がないため、${relaxed.categoryLabels.length
       ? `薬効分類「${esc(relaxed.categoryLabels.join("／"))}」として`
       : "用量・剤形の区切りや塩の略記（Na・Mgなど）の表記ゆれを考慮して"}検索した結果です。</span>` : "");
@@ -5328,7 +5392,9 @@ function renderWatchDashboard(){
   const worse = WATCH_UNREAD.filter(change=>classifyWatchChange(change)==="worse").length;
   const better = WATCH_UNREAD.filter(change=>classifyWatchChange(change)==="better").length;
   const empty = FAVS.size === 0;
-  document.getElementById("watchEmptyStart").hidden = !empty;
+  const emptyStart = document.getElementById("watchEmptyStart");
+  emptyStart.hidden = !empty;
+  if(!empty) emptyStart.open = false;
   document.getElementById("watchDashboardGrid").hidden = empty;
   document.getElementById("watchDashboardActions").hidden = empty;
   $watchTools.hidden = empty;
