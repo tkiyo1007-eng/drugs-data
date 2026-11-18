@@ -446,12 +446,15 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 @media(min-width:641px) and (max-width:900px){
   header .hero-visual{display:none}
 }
-.supply-directory{margin:24px 0 0;padding-top:20px;border-top:1px solid rgba(79,128,244,.25)}
-.supply-directory h3{font-size:16px;margin-bottom:10px}
+.guide-disclosure{margin-top:16px;border-radius:16px}
+.guide-disclosure summary{padding:12px 18px;min-height:48px;cursor:pointer;color:var(--blue-deep);font-size:15px;font-weight:700}
+.supply-directory{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:16px 24px;padding:16px 18px;border-top:1px solid var(--stroke)}
+.supply-directory h3{font-size:15px;margin:0 0 4px}
+.supply-directory ul{list-style:none;padding:0;margin:0}
 .supply-directory-links{display:flex;flex-wrap:wrap;gap:8px 18px}
 .supply-directory a{display:inline-flex;align-items:center;min-height:44px;font-size:14px;
   color:var(--blue-deep);font-weight:700;text-underline-offset:3px}
-.supply-directory a:focus-visible{outline:3px solid var(--blue-mid);outline-offset:3px}
+.guide-disclosure summary:focus-visible,.supply-directory a:focus-visible{outline:3px solid var(--blue-mid);outline-offset:3px}
 
 /* ===== ライブ検索デモ ===== */
 .demo-shell{padding:32px;border-radius:28px}
@@ -833,7 +836,10 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   border:1px dashed rgba(90,107,148,.24);border-radius:16px;background:rgba(255,255,255,.36);
 }
 .demo-note{margin-top:20px;font-size:12px;color:var(--sub);text-align:center}
-.demo-note a{color:var(--blue);font-weight:700} /* 既定のリンク色だと暗背景で沈むためテーマ色に揃える */
+@media(max-width:640px){
+  #demo{padding-bottom:12px}
+  #daily-update{padding-top:24px}
+}
 
 /* 毎日の供給変更を、検索前に把握・共有できる成長導線 */
 .daily-update-card{
@@ -1969,22 +1975,6 @@ html.season-autumn .autumn-sky{display:none}
     <template id="searchContextBelowResults"></template>
     <template id="watchPriorityResults"></template>
     <p class="demo-note" id="demoNote">※ 厚生労働省公表の最新データを読み込んでいます。読み込み完了後、この画面で全品目を検索できます。</p>
-    <p class="demo-note">限定出荷・供給停止・販売中止・薬価削除予定の品目には、1品目ごとの詳細ページがあります → <a href="items/index.html">品目別の供給状況ページ一覧</a></p>
-    <nav class="supply-directory" aria-label="供給情報の一覧と確認ガイド">
-      <h3>一覧・確認ガイドから探す</h3>
-      <div class="supply-directory-links">
-        <a href="items/limited.html">限定出荷（出荷調整）</a>
-        <a href="items/stopped.html">供給停止</a>
-        <a href="items/recent-restrictions.html">最近の限定出荷・供給停止</a>
-        <a href="items/resumed.html">通常出荷への変更</a>
-        <a href="items/supplemental.html">販売中止・薬価削除予定・メーカー補足</a>
-        <a href="categories/index.html">薬効分類別（咳止め・去痰薬など）</a>
-        <a href="ingredients/index.html">成分（一般名）別</a>
-        <a href="guides/how-to-check-drug-supply.html">出荷調整の理由・見通しの確認方法</a>
-        <a href="guides/how-to-check-discontinuation-and-delisting.html">販売中止・製造中止・薬価削除の確認方法</a>
-        <a href="guides/monitor-adopted-drugs.html">採用薬をCSVでまとめて監視する方法</a>
-      </div>
-    </nav>
   </div>
 </section>
 
@@ -2009,6 +1999,37 @@ html.season-autumn .autumn-sky{display:none}
       <p class="daily-share-status" id="dailyShareStatus" role="status" aria-live="polite"></p>
     </div>
   </div>
+  <details class="guide-disclosure glass">
+    <summary>一覧・ガイドを見る</summary>
+    <nav class="supply-directory" aria-label="供給情報の一覧と確認ガイド">
+      <div>
+        <h3>出荷状況から探す</h3>
+        <ul>
+          <li><a href="items/index.html">品目別一覧</a></li>
+          <li><a href="items/limited.html">限定出荷（出荷調整）</a></li>
+          <li><a href="items/stopped.html">供給停止</a></li>
+          <li><a href="items/recent-restrictions.html">最近の限定出荷・供給停止</a></li>
+          <li><a href="items/resumed.html">通常出荷への変更</a></li>
+          <li><a href="items/supplemental.html">販売中止・薬価削除予定・メーカー補足</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>薬効・成分から探す</h3>
+        <ul>
+          <li><a href="categories/index.html">薬効分類別（咳止め・去痰薬など）</a></li>
+          <li><a href="ingredients/index.html">成分（一般名）別</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>使い方</h3>
+        <ul>
+          <li><a href="guides/how-to-check-drug-supply.html">出荷調整の理由・見通しの確認方法</a></li>
+          <li><a href="guides/how-to-check-discontinuation-and-delisting.html">販売中止・製造中止・薬価削除の確認方法</a></li>
+          <li><a href="guides/monitor-adopted-drugs.html">採用薬をCSVでまとめて監視する方法</a></li>
+        </ul>
+      </div>
+    </nav>
+  </details>
 </section>
 
 <section id="topics" class="reveal">
@@ -2552,7 +2573,7 @@ html.season-autumn .autumn-sky{display:none}
   <div class="news-list glass">
     <div class="news-item">
       <div class="news-date num">2026.11.18</div>
-      <div class="news-body"><span class="news-tag">検索画面</span>薬名を入力すると、検索欄のすぐ下で品目と供給区分を確認できます。問い合わせが多い4製品をコンパクトにまとめ、監視する薬が未登録のときは登録方法を1行にまとめました。</div>
+      <div class="news-body"><span class="news-tag">検索画面</span>薬名を入力すると、検索欄のすぐ下で品目と供給区分を確認できます。問い合わせが多い4製品をコンパクトにまとめ、監視する薬が未登録のときは登録方法を1行にまとめました。品目別一覧と確認ガイドは「最近の供給状況の変更」の下から開けます。</div>
     </div>
     <div class="news-item">
       <div class="news-date num">2026.11.17</div>
@@ -7843,7 +7864,7 @@ function failDataLoad(message){
   void loadStatusHistory();
   queueMicrotask(startNewsContent);
   document.getElementById("demoNote").textContent =
-    "※ 厚生労働省公表の実データを表示しています。「★ 監視に追加」で、次回アクセス時に変化をまとめて確認できます（このブラウザに保存）。通知や掲示板は iOS アプリでご利用いただけます。";
+    "出典：厚生労働省の公表データ";
 
   // ヒーローを実数値に更新
   const total = items.length;
