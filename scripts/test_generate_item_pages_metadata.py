@@ -636,7 +636,7 @@ class ItemPageMetadataTests(unittest.TestCase):
         self.assertEqual(output.count('rel="canonical"'), 1)
         self.assertIn('href="https://kyokyu-navi.jp/items/limited.html"', output)
         self.assertIn('href="1234567F1234.html"', output)
-        self.assertIn("実際の受注可否や在庫を示す一覧ではありません", output)
+        self.assertIn("各施設の在庫・受注可否は示しません", output)
         self.assertIn("厚生労働省の公式システム", output)
 
         sitemap = sitemap_xml({"1234567F1234": "2026-08-25"}, "2026-08-26", ITEM_HUB_SLUGS)
@@ -662,7 +662,7 @@ class ItemPageMetadataTests(unittest.TestCase):
 
         limited = hub_html("limited", entries, "2026-08-26")
         self.assertIn("<title>医薬品の出荷調整・限定出荷一覧", limited)
-        self.assertIn("<h1>医薬品の出荷調整・限定出荷一覧</h1>", limited)
+        self.assertIn("<h1>限定出荷一覧 <small>1品目</small></h1>", limited)
 
     def test_hub_membership_uses_current_status_supplements_and_verified_recovery(self):
         entry = {"status": "ok", "delist": False, "supplements": [],
