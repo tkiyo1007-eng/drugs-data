@@ -33,6 +33,7 @@ from datetime import date, datetime, timezone, timedelta
 from pathlib import Path
 from urllib.parse import quote, urlsplit
 
+import item_share_cards
 import limited_item_page
 from source_specification import load_comparison
 
@@ -1477,7 +1478,8 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
               hub_slugs=(), display_names=None, category_codes=None,
               ingredient_slugs=None, manufacturer_notices=(), catalog_yj_codes=None,
               manufacturer_bulletins=None, version_metadata=None, product_variants=(), related_topics=(),
-              specification_comparison=None):
+              specification_comparison=None, share_card=item_share_cards.DEFAULT):
+    image_path, image_alt = share_card
     limited_layout = strict_status(row.get("供給状況")) == "limited"
     name = row["商品名"].strip()
     display_name = f"{name}（{title_qualifier}）" if title_qualifier else name
@@ -1885,15 +1887,15 @@ footer a{{color:var(--sub)}}
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:url" content="{url}">
-<meta property="og:image" content="{SITE_ROOT}og_image.png">
+<meta property="og:image" content="{SITE_ROOT}{esc(image_path)}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="医薬品供給ナビの供給状況サマリー">
+<meta property="og:image:alt" content="{esc(image_alt)}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{esc(title)}">
 <meta name="twitter:description" content="{esc(desc)}">
-<meta name="twitter:image" content="{SITE_ROOT}og_image.png">
-<meta name="twitter:image:alt" content="医薬品供給ナビの供給状況サマリー">
+<meta name="twitter:image" content="{SITE_ROOT}{esc(image_path)}">
+<meta name="twitter:image:alt" content="{esc(image_alt)}">
 <meta name="apple-itunes-app" content="{smart_app_banner}">
 <script type="application/ld+json">{breadcrumb_ld}</script>
 <script type="application/ld+json">{webpage_ld}</script>
@@ -2710,6 +2712,7 @@ def main():
         entry["hubs"] = item_hub_slugs(entry, dataset_date)
         entries.append(entry)
 
+    share_cards = item_share_cards.prepare(site, targets, mhlw_excel_date(version_doc, dataset_date))
     for entry in entries:
         k = entry["key"]
         r, s = targets[k]
@@ -2736,6 +2739,7 @@ def main():
                 product_variants=by_gen.get(g, []),
                 related_topics=topic_index.get(k, []),
                 specification_comparison=specification_comparison,
+                share_card=share_cards.get(k, item_share_cards.DEFAULT),
             ), encoding="utf-8")
 
     limited_item_page.prepare_assets(site)
