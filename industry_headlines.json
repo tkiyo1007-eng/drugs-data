@@ -3,43 +3,31 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-11-18T07:16:55+09:00",
-  "last_success_at": "2026-11-18T07:16:55+09:00",
+  "checked_at": "2026-11-19T07:12:18+09:00",
+  "last_success_at": "2026-11-19T07:12:18+09:00",
   "items": [
     {
-      "title": "【日薬 岩月会長】薬局集約化推進に反論‐予算確保は国の責務",
-      "url": "https://www.yakuji.co.jp/entry141779.html",
-      "date": "2026-11-17",
+      "title": "【厚労省】「ステミラック」が本承認‐新医薬品など21品目承認",
+      "url": "https://www.yakuji.co.jp/entry141874.html",
+      "date": "2026-11-18",
       "tag": "業界ニュース"
     },
     {
-      "title": "【武田薬品】卵巣癌薬「エラヒア」発売‐新規経口抗てんかん薬も",
-      "url": "https://www.yakuji.co.jp/entry141772.html",
-      "date": "2026-11-17",
+      "title": "【NPhA】薬剤師需給推計で意見書‐将来の業務量反映求める",
+      "url": "https://www.yakuji.co.jp/entry141871.html",
+      "date": "2026-11-18",
       "tag": "業界ニュース"
     },
     {
-      "title": "【NPhA】中間年改定廃止 再び要望‐安定的な調達さらに困難",
-      "url": "https://www.yakuji.co.jp/entry141769.html",
-      "date": "2026-11-17",
+      "title": "防災考慮し医療体制検討‐日薬 岩月会長、防災庁設置に言及",
+      "url": "https://www.yakuji.co.jp/entry141868.html",
+      "date": "2026-11-18",
       "tag": "業界ニュース"
     },
     {
-      "title": "【GE・BS学会】低リスクは厳密管理不要に‐ニトロソアミン対応で提言",
-      "url": "https://www.yakuji.co.jp/entry141768.html",
-      "date": "2026-11-17",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【厚労省】後発品企業38社をA区分‐一部企業への発注殺到懸念",
-      "url": "https://www.yakuji.co.jp/entry141775.html",
-      "date": "2026-11-16",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【ロート製薬】目薬6製品を自主回収‐ベトナム拠点で管理不備",
-      "url": "https://www.yakuji.co.jp/entry141771.html",
-      "date": "2026-11-16",
+      "title": "【八戸薬剤師会】遠隔診療と地域薬局連携へ‐平時の組織力を災害時も",
+      "url": "https://www.yakuji.co.jp/entry141866.html",
+      "date": "2026-11-18",
       "tag": "業界ニュース"
     }
   ]
