@@ -33,6 +33,7 @@ from datetime import date, datetime, timezone, timedelta
 from pathlib import Path
 from urllib.parse import quote, urlsplit
 
+import item_page_trial
 from source_specification import load_comparison
 
 SITE_ROOT = "https://kyokyu-navi.jp/"
@@ -809,7 +810,8 @@ def manufacturer_notice_scope_text(target: dict) -> str:
             + (f'｜対象包装：{"／".join(packages)}' if packages else '｜包装別の内訳は未確認' if target["scope"] == "product" else ""))
 
 
-def manufacturer_notices_html(row: dict, notices=(), warning="", catalog_yj_codes=None, bulletins=None) -> str:
+def manufacturer_notices_html(row: dict, notices=(), warning="", catalog_yj_codes=None, bulletins=None,
+                              *, link_first_alternatives=False) -> str:
     matches = matching_manufacturer_notices(row, notices, bulletins)
     if not matches:
         return ""
@@ -917,7 +919,11 @@ def manufacturer_notices_html(row: dict, notices=(), warning="", catalog_yj_code
             else:
                 groups.append(candidate_group)
         if sourced_groups:
-            parts.append('<h4>代替候補（メーカー資料）</h4>'
+            anchor = ""
+            if link_first_alternatives and not warning and bulletins is not None and not manufacturer_notice_needs_review(notice, bulletins):
+                anchor = ' id="trialAlternatives"'
+                link_first_alternatives = False
+            parts.append(f'<h4{anchor}>代替候補（メーカー資料）</h4>'
                          '<p><strong>この情報だけでは切替可否を判断できません。</strong> '
                          f'<a href="{esc(notice["url"])}" target="_blank" rel="noopener" '
                          'data-dsn-event="official-source-open">代替候補の原典を確認</a></p>'
@@ -2675,6 +2681,28 @@ def main():
                 specification_comparison=specification_comparison,
             ), encoding="utf-8")
 
+        if k in item_page_trial.TRIAL_KEYS:
+            comparison = []
+            for candidate in [r, *sibs[:12]]:
+                candidate_key = item_key(candidate)
+                href = (f"../{candidate_key}.html" if candidate_key in generated_keys
+                        else SITE_ROOT + "#item=" + quote(candidate_key, safe=""))
+                candidate_status = candidate.get("供給状況") or "記載なし"
+                if is_delist(candidate):
+                    candidate_status += "（薬価削除予定）"
+                comparison.append((display_names.get(candidate_key, candidate["商品名"]), href,
+                                   candidate.get("規格") or "", candidate_status,
+                                   candidate.get("理由") or "記載なし",
+                                   supply_metadata_values(candidate).get("解除・解消見込み", "記載なし")))
+            trial_notices = manufacturer_notices_html(
+                r, notice_index.get(k, []), supplemental_state["warning"], catalog_yj_codes,
+                manufacturer_bulletins, link_first_alternatives=True)
+            item_page_trial.write_page(
+                out / "trial", dict(entry, status=strict_status(entry["supply_raw"])),
+                mhlw_excel_date(version_doc, dataset_date), dataset_date,
+                version_doc.get("version", ""), trial_notices, topic_index.get(k, []), comparison)
+
+    item_page_trial.write_index(out / "trial", entries)
     (out / "index.html").write_text(index_html(entries, dataset_date, version_doc), encoding="utf-8")
     for slug in ITEM_HUBS:
         (out / f"{slug}.html").write_text(
