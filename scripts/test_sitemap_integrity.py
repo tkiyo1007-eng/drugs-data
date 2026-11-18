@@ -1,3 +1,4 @@
+import csv
 import re
 import unittest
 import xml.etree.ElementTree as ET
@@ -5,6 +6,7 @@ from datetime import date
 from html import unescape
 from pathlib import Path
 from urllib.parse import urlsplit
+from generate_item_pages import item_key, strict_status
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -163,6 +165,12 @@ class SitemapIntegrityTests(unittest.TestCase):
             self.assertNotIn(title, titles, f"titleが重複しています: {titles.get(title)} / {page}")
             titles[title] = page
 
+    def test_published_canonical_pages_follow_all_current_official_rows(self):
+        with (ROOT / "drugs_app_ready.csv").open(encoding="utf-8-sig", newline="") as f:
+            limited = {item_key(r) for r in csv.DictReader(f) if strict_status(r.get("供給状況")) == "limited"}
+        actual = {p.stem for p in (ROOT / "items").glob("*.html") if 'class="summary" data-version=' in p.read_text(encoding="utf-8")}
+        self.assertEqual(limited, actual)
+
     def test_all_product_page_h1_names_are_unique(self):
         reserved = {"index"} | ITEM_HUBS
         headings = {}
@@ -170,9 +178,11 @@ class SitemapIntegrityTests(unittest.TestCase):
             if page.stem in reserved:
                 continue
             content = page.read_text(encoding="utf-8")
-            matches = re.findall(r'<h1>([^<]+)<span class="tag ', content)
+            matches = re.findall(r'<h1>(.*?)</h1>', content, re.S)
             self.assertEqual(1, len(matches), f"品目H1を取得できません: {page}")
-            heading = unescape(matches[0]).strip()
+            name_markup = matches[0].split('<span class="tag ', 1)[0]
+            heading = unescape(re.sub(r"<[^>]+>", "", name_markup)).strip()
+            self.assertTrue(heading, page)
             self.assertNotIn(
                 heading, headings,
                 f"品目H1が重複しています: {headings.get(heading)} / {page}",
