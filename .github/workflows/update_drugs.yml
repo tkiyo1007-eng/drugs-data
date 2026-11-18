@@ -130,10 +130,19 @@ jobs:
                   c[14] = x["stdate"]               # ステータス更新日(⑬)
                   out.append(c); seen.add(yj)
               # Excel(公式一覧)に無い既存品目はドロップ
-          # Excelの新規品目を追加（薬価・販売メーカーは空。次回ローカル変換で補完）
+          # Excelの新規品目を追加。販売元は公式の発売案内と原表の品名・YJが一致する品目に限る。
+          # 製造販売業者名の一律転記はしない。薬価は後続のマスタ補完に委ねる。
+          reviewed_new_sales_makers = {
+              # https://www.nipro.co.jp/assets/document/newsrelease/261112.pdf
+              "3999476A1020": ("ウステキヌマブＢＳ点滴静注１３０ｍｇ「ニプロ」", "ニプロ"),
+              # https://pharma-navi.bayer.jp/sites/g/files/rptbxg576/files/2026-10/hyr-npa-20261029.pdf
+              "4291103F1021": ("ヒアニュオ錠１０ｍｇ", "バイエル薬品"),
+          }
           for yj, x in xl.items():
               if yj in seen: continue
-              out.append([x["name"], x["ippan"], x["seizou"], "", x["jokyo"], x["riyu"],
+              reviewed_name, reviewed_maker = reviewed_new_sales_makers.get(yj, ("", ""))
+              sales_maker = reviewed_maker if x["name"] == reviewed_name else ""
+              out.append([x["name"], x["ippan"], x["seizou"], sales_maker, x["jokyo"], x["riyu"],
                           x["daitai"], x["date"], x["new"], yj, x["yakkou"], x["kikaku"], "", "", x["stdate"]])
 
           with open("drugs_app_ready.csv", "w", encoding="utf-8-sig", newline="") as f:
