@@ -6635,9 +6635,9 @@ function renderTrending(){
     && !/^amaluet-[1-4]$/.test(t.slug) && !/^predonine-soluble-(10|20)mg$/.test(t.slug)
     && t.slug !== "fentos").concat(webEntries);
   // 表示順は編集上の選定であり、問い合わせの集計順位ではない。
-  const featuredFirst = ["kenacort-a-injection", "movicol", "daiphen", "pentasa", "eperisone-towa",
-    "memantine-od-towa", "tamsulosin-towa", "juvela-ointment", "hilnamin", "teramuro", "antebate-lotion",
-    "zictor-tape-75mg", "micardis", "amaluet"];
+  const featuredFirst = ["kenacort-a-injection", "juvela-ointment", "teramuro", "zictor-tape-75mg",
+    "movicol", "daiphen", "pentasa", "eperisone-towa", "memantine-od-towa", "tamsulosin-towa",
+    "hilnamin", "antebate-lotion", "micardis", "amaluet"];
   entries.sort((a,b)=>{
     const aIndex=featuredFirst.indexOf(a.slug), bIndex=featuredFirst.indexOf(b.slug);
     return (aIndex<0 ? featuredFirst.length : aIndex) - (bIndex<0 ? featuredFirst.length : bIndex);
