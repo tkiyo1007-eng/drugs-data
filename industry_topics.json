@@ -3,6 +3,39 @@
   "updated_at": "2026-11-18",
   "topics": [
     {
+      "slug": "amchepry-supply-context-20261118",
+      "date": "2026.11.18",
+      "updated_at": "2026-11-18",
+      "tag": "供給の経緯",
+      "tone": "info",
+      "title": "アムシェプリの供給と製造販売後臨床試験の進捗",
+      "lede": "住友ファーマは2026年10月30日の公表資料で、製造販売後臨床試験に参加する患者への移植を優先し、試験終了後に施設や患者の範囲を広げる方針を示しました。",
+      "points": [
+        "住友ファーマの10月30日資料によると、製造販売後臨床試験の1例目の移植は2026年10月に京都大学医学部附属病院で行われました。同院も10月の移植開始を公表しています。",
+        "メーカーの適正使用ガイドでは、製造所から実施医療機関へ直接納品すると説明しています。"
+      ],
+      "notes": [
+        "下の品目欄には、厚労省が公表した出荷区分を表示しています。7月29日の限定出荷の届出で「その他の理由」とされた具体的な事情と、卸での受注可否は公表資料から確認できません。"
+      ],
+      "target_queries": [
+        "4900413X1029"
+      ],
+      "source": {
+        "name": "住友ファーマ｜10月30日決算説明会資料（PDF、スライド16）",
+        "url": "https://www.sumitomo-pharma.co.jp/ir/library/presentation/assets/pdf/ir20261030.pdf"
+      },
+      "sources": [
+        {
+          "name": "住友ファーマ｜アムシェプリ適正使用ガイド（PDF、9ページ）",
+          "url": "https://sumitomo-pharma.jp/hubfs/instruction/amchepry/pdf/AMC_P-41283v02.pdf"
+        },
+        {
+          "name": "京都大学医学部附属病院｜10月30日の発表",
+          "url": "https://www.kuhp.kyoto-u.ac.jp/info/20261030.html"
+        }
+      ]
+    },
+    {
       "slug": "mae-tsuruhara-supply-records-20261118",
       "date": "2026.11.18",
       "updated_at": "2026-11-18",
