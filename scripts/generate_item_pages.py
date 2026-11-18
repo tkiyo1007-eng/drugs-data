@@ -2341,6 +2341,17 @@ def hub_identity_html(entry):
     return '<span class="hub-identity">' + '｜'.join(parts) + '</span>' if parts else ""
 
 
+def limited_search_aliases(entry):
+    """実際の販売名から、剤形を省いた規格付き呼称だけを検索用に作る。"""
+    name = unicodedata.normalize("NFKC", entry["name"]).lower().split("「", 1)[0]
+    compact = re.sub(r"(?:配合内用剤|配合錠|配合顆粒|塩酸塩)(?=(?:ld|hd|od|ap|bp)(?![a-z]))", "", name)
+    compact = re.sub(r"(?<![0-9.])(?:錠|カプセル|細粒|顆粒|テープ)(?=[0-9])", "", compact)
+    aliases = [compact] if name != compact else []
+    if any("東和薬品" in (entry.get(field) or "") for field in ("maker", "manufacturer")):
+        aliases.append("トウワ")
+    return aliases
+
+
 def hub_html(slug, entries, dataset_date, version_metadata=None):
     """検索者とクローラーの両方に文脈を示す状態別の静的一覧。"""
     config = ITEM_HUBS[slug]
@@ -2370,6 +2381,8 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
             search_text = " ".join(dict.fromkeys(
                 str(entry.get(field) or "") for field in (
                     "key", "name", "display_name", "ingredient", "spec", "maker", "manufacturer")))
+            if slug == "limited":
+                search_text = " ".join([search_text, *limited_search_aliases(entry)])
             if slug == "supplemental":
                 search_text += " " + " ".join(entry.get("supplements") or [])
                 if entry.get("delist"):
@@ -2442,12 +2455,15 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
       </label>
       <p class="filter-hint" id="hubFilterPriceHint">検索語とこの条件の両方を満たす品目を、すべての掲載欄から表示します。メーカー案内だけの経過措置情報は、原文も別に確認してください。</p>'''
     if searchable:
+        hint = ("薬品名・成分名・メーカー名・YJコード" if slug == "limited" else
+                "薬品名・成分名・メーカー・YJコードで絞り込めます。空白で区切ると、すべての語を含む品目を表示します。")
+        example = "例：モビコールLD" if slug == "limited" else "例：薬品名 メーカー"
         filter_markup = f'''
     <section class="hub-filter" id="hubFilter" hidden aria-label="この一覧内の検索">
       <label for="hubFilterInput">この一覧内を検索</label>
-      <p class="filter-hint" id="hubFilterHint">薬品名・成分名・メーカー・YJコードで絞り込めます。空白で区切ると、すべての語を含む品目を表示します。</p>
+      <p class="filter-hint" id="hubFilterHint">{hint}</p>
       <div class="filter-controls">
-        <input id="hubFilterInput" type="search" placeholder="例：薬品名 メーカー" autocomplete="off" aria-describedby="hubFilterHint" aria-controls="hubItems">
+        <input id="hubFilterInput" type="search" placeholder="{example}" autocomplete="off" aria-describedby="hubFilterHint" aria-controls="hubItems">
         <button id="hubFilterClear" type="button" disabled>クリア</button>
       </div>{price_filter_markup}
       <p class="filter-count" id="hubFilterCount" role="status" aria-live="polite" aria-atomic="true">{len(group):,} / {len(group):,}品目を表示</p>
@@ -2482,14 +2498,41 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
     evidence_note = ('''<p class="evidence-note">理由と解除・解消見込みは公表欄の記載です。「あり」だけでは具体的な解除日を示しません。
 <a href="../guides/how-to-check-drug-supply.html#resumption">解除見込みとメーカー案内を確認する方法</a></p>'''
                      if slug in {"limited", "stopped"} else "")
-    limited_intro = ('''<section aria-labelledby="limitedGuideTitle">
-      <h2 id="limitedGuideTitle">出荷調整の薬を確認するには</h2>
-      <p>この一覧は、厚生労働省の公表区分が「限定出荷」の医薬品をまとめたものです。
-      <a href="#hubFilter">一覧内を薬品名・メーカー名で絞り込む</a>と、各品目の理由・解除見込みを確認できます。</p>
-      <p>原Excelの基準日とサイト取込日は上記に分けて表示しています。
-      <a href="recent-restrictions.html">最近の限定出荷・供給停止への区分変更</a>も確認できます。
-      公表上の区分は、個別の卸・薬局の在庫や受注可否とは異なります。</p>
-    </section>''' if slug == "limited" else "")
+    hub_navigation = f'''    <nav class="entry-nav" aria-label="医薬品の探し方と確認方法">
+      <a href="../#demo" data-dsn-event="search-cta-open">薬品名・メーカー名で検索</a>
+      <a href="../ingredients/index.html">成分別に確認</a>
+      <a href="../categories/index.html">薬効分類別に確認</a>
+      <a href="../guides/how-to-check-drug-supply.html">出荷調整の意味・確認方法</a>
+{discontinuation_link}      <a href="{OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚労省の公式システムで供給区分を確認</a>
+{price_source_link}    </nav>
+    <nav class="hub-nav" aria-label="状態別の品目一覧">{other_hubs}</nav>'''
+    if slug == "limited":
+        source_date = mhlw_excel_date(version_metadata, dataset_date) or "確認できません"
+        header = f'''    <h1>限定出荷一覧 <small>{len(group):,}品目</small></h1>
+    <p class="lede">厚労省データの基準日：{esc(source_date)}</p>{filter_markup}
+    <p class="stock-note">各施設の在庫・受注可否は示しません。</p>
+    <details class="list-guide">
+      <summary>この一覧の見方</summary>
+      {dataset_dates_html(dataset_date, version_metadata)}
+      {evidence_note}
+      {hub_navigation}
+    </details>'''
+    else:
+        header = f'''    <h1>{esc(config["h1"])}</h1>
+    <p class="lede">{esc(config["description"])}（{len(group):,}品目）</p>
+    {dataset_dates_html(dataset_date, version_metadata)}
+    <p class="notice">{esc(config["intro"])} 医薬品の使用・変更は、公式情報を確認したうえで医師・薬剤師等の専門職が判断してください。</p>
+{hub_navigation}{supplemental_navigation}{evidence_note}{price_note}{filter_markup}'''
+    limited_style = """
+h1 small{display:inline-block;vertical-align:middle;padding:2px 9px;border-radius:12px;background:#e7eefb;color:#354e72;font-size:14px;white-space:nowrap}
+.hub-filter{margin:14px 0 8px;padding:12px 14px}
+.filter-controls{flex-wrap:nowrap;margin:6px 0}
+.filter-controls input{flex:1 1 auto;width:0;font-size:16px}
+.stock-note{font-size:13px;color:#465b77}
+.list-guide{margin:2px 0 10px}
+.list-guide summary{color:#264d93;cursor:pointer;padding:9px 0;min-height:44px;font-weight:700;font-size:14px}
+.list-guide summary:focus-visible{outline:3px solid #2f63e8;outline-offset:2px}
+""" if slug == "limited" else ""
     return f"""<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -2537,7 +2580,7 @@ li span{{display:block;color:#5A6B8C;font-size:11.5px;margin-top:2px}}
 li .reason-tag{{display:inline-block;background:#ECF2FD;color:#284C8C;border-radius:6px;padding:2px 6px;margin-top:7px;font-weight:700}}
 .official{{font-size:13px;margin:22px 0}}
 footer{{font-size:12px;color:#5A6B8C;text-align:center;margin-top:34px}}
-footer a{{color:#5A6B8C}}{HUB_FILTER_STYLE if searchable else ""}
+footer a{{color:#5A6B8C}}{HUB_FILTER_STYLE if searchable else ""}{limited_style}
 </style>
 </head>
 <body>
@@ -2545,18 +2588,7 @@ footer a{{color:#5A6B8C}}{HUB_FILTER_STYLE if searchable else ""}
   <header class="site"><a href="{SITE_ROOT}">💊 医薬品供給ナビ</a></header>
   <nav class="crumb" aria-label="パンくず"><a href="{SITE_ROOT}">トップ</a> › <a href="index.html">品目別の供給状況</a> › {esc(config["label"])}</nav>
   <main>
-    <h1>{esc(config["h1"])}</h1>
-    <p class="lede">{esc(config["description"])}（{len(group):,}品目）</p>
-    {dataset_dates_html(dataset_date, version_metadata)}
-{limited_intro}    <p class="notice">{esc(config["intro"])} 医薬品の使用・変更は、公式情報を確認したうえで医師・薬剤師等の専門職が判断してください。</p>
-    <nav class="entry-nav" aria-label="医薬品の探し方と確認方法">
-      <a href="../#demo" data-dsn-event="search-cta-open">薬品名・メーカー名で検索</a>
-      <a href="../ingredients/index.html">成分別に確認</a>
-      <a href="../categories/index.html">薬効分類別に確認</a>
-      <a href="../guides/how-to-check-drug-supply.html">出荷調整の意味・確認方法</a>
-{discontinuation_link}      <a href="{OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚労省の公式システムで供給区分を確認</a>
-{price_source_link}    </nav>
-    <nav class="hub-nav" aria-label="状態別の品目一覧">{other_hubs}</nav>{supplemental_navigation}{evidence_note}{price_note}{filter_markup}
+{header}
     {list_markup}
     <p class="official"><a href="{OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システムで品目名・YJコードを再確認</a></p>
   </main>

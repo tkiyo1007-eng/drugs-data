@@ -135,6 +135,17 @@ class HubFilterTests(unittest.TestCase):
                     self.assertEqual({}, parsed.controls)
                     self.assertNotIn("data-search=", output)
 
+    def test_limited_hub_prioritizes_search_and_indexes_the_actual_strength(self):
+        sample = dict(self.entries[0], name="モビコール配合内用剤ＬＤ", hubs=["limited"])
+        output = hub_html("limited", [sample], "2026-11-18")
+        self.assertLess(output.index('id="hubFilter"'), output.index('<summary>この一覧の見方</summary>'))
+        self.assertLess(output.index('</details>'), output.index('id="hubItems"'))
+        parsed = HubParser()
+        parsed.feed(output)
+        self.assertIn("モビコールld", parsed.rows[0]["data-search"])
+        self.assertNotIn("モビコールhd", parsed.rows[0]["data-search"])
+        self.assertIn("各施設の在庫・受注可否は示しません", output)
+
     def test_restricted_hubs_keep_raw_public_fields_without_inferring_dates(self):
         self.entries[0].update({
             "supply_raw": "③限定出荷（他社品の影響）", "reason": "１．需要増 <原文>",
