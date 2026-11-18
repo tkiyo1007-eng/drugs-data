@@ -2,6 +2,509 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "towa-own-limited-20261029",
+      "maker": "東和薬品",
+      "title": "東和薬品の10月29日版供給状況一覧｜限定出荷（自社の事情）",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80558&t=6",
+      "announced_at": "2026-10-29",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "f332443d247c5220fc77bc57ac203b08bf5c43badf71635e837d1e7e3807fc57",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "東和薬品は、2026年10月29日更新の供給状況一覧で、対象品目を②限定出荷（自社の事情）と記載しています。",
+      "targets": [
+        {
+          "yj_code": "1129008F1063",
+          "product_name": "タンドスピロンクエン酸塩錠５ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            7
+          ],
+          "summary": "10月29日版の該当行では、出荷量増加と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "1139009F4063",
+          "product_name": "ラモトリギン錠１００ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            13
+          ],
+          "summary": "10月29日版の該当行では、出荷量増加と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "1179038F6068",
+          "product_name": "リスペリドンＯＤ錠２ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            13
+          ],
+          "summary": "10月29日版の該当行では、出荷量通常と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "1179038F7056",
+          "product_name": "リスペリドンＯＤ錠０．５ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            13
+          ],
+          "summary": "10月29日版の該当行では、出荷量増加と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "1179051F4052",
+          "product_name": "ミルタザピンＯＤ錠３０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            12
+          ],
+          "summary": "10月29日版の該当行では、出荷量増加と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "1190018F5193",
+          "product_name": "メマンチン塩酸塩ＯＤ錠１０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            12
+          ],
+          "summary": "10月29日版の該当行では、出荷量増加と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "1190018F6190",
+          "product_name": "メマンチン塩酸塩ＯＤ錠２０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            12
+          ],
+          "summary": "10月29日版の該当行では、出荷量増加と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "2149040F1301",
+          "product_name": "カンデサルタン錠２ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            4
+          ],
+          "summary": "10月29日版の該当行では、出荷量増加と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "2149121F1099",
+          "product_name": "ジルムロ配合錠ＬＤ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            5
+          ],
+          "summary": "10月29日版の該当行では、出荷量通常と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "2149121F2095",
+          "product_name": "ジルムロ配合錠ＨＤ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            5
+          ],
+          "summary": "10月29日版の該当行では、出荷量通常と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "2149121F4039",
+          "product_name": "ジルムロ配合ＯＤ錠ＨＤ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            5
+          ],
+          "summary": "10月29日版の該当行では、出荷量通常と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "2482009F1082",
+          "product_name": "フリウェル配合錠ＬＤ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            10
+          ],
+          "summary": "10月29日版の該当行では、出荷量通常と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "2499010F1104",
+          "product_name": "ジエノゲスト錠１ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            5
+          ],
+          "summary": "10月29日版の該当行では、出荷量増加と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "259000BF2041",
+          "product_name": "バルデナフィル錠１０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            9
+          ],
+          "summary": "10月29日版の該当行では、出荷量減少と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "259000BF3048",
+          "product_name": "バルデナフィル錠２０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            9
+          ],
+          "summary": "10月29日版の該当行では、出荷量減少と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "3150002F1280",
+          "product_name": "トコフェロール酢酸エステル錠５０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            8
+          ],
+          "summary": "10月29日版の該当行では、出荷量通常と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "3399006F2227",
+          "product_name": "サルポグレラート塩酸塩錠１００ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            5
+          ],
+          "summary": "10月29日版の該当行では、出荷量通常と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "3999016F1049",
+          "product_name": "メトトレキサート錠２ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            12
+          ],
+          "summary": "10月29日版の該当行では、出荷量通常と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "4490016M1104",
+          "product_name": "スプラタストトシル酸塩カプセル５０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            6
+          ],
+          "summary": "10月29日版の該当行では、出荷量増加と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "4490025F3140",
+          "product_name": "オロパタジン塩酸塩ＯＤ錠２．５ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            4
+          ],
+          "summary": "10月29日版の該当行では、出荷量通常と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "6113400A1154",
+          "product_name": "バンコマイシン点滴静注用０．５ｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            9
+          ],
+          "summary": "10月29日版の該当行では、出荷量通常と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "6241013F2250",
+          "product_name": "レボフロキサシン錠２５０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            14
+          ],
+          "summary": "10月29日版の該当行では、出荷量通常と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "6250029F1121",
+          "product_name": "エンテカビル錠０．５ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            3
+          ],
+          "summary": "10月29日版の該当行では、出荷量増加と記載されています。",
+          "packages": []
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカー一覧は品目単位です。対象行からは具体的な経緯、包装の内訳、代替候補を確認できません。現在の供給区分と理由は厚労省の公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "towa-other-product-limited-20261029",
+      "maker": "東和薬品",
+      "title": "東和薬品の10月29日版供給状況一覧｜限定出荷（他社品の影響）",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80558&t=6",
+      "announced_at": "2026-10-29",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "f332443d247c5220fc77bc57ac203b08bf5c43badf71635e837d1e7e3807fc57",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "東和薬品は、2026年10月29日更新の供給状況一覧で、対象品目を③限定出荷（他社品の影響）と記載しています。",
+      "targets": [
+        {
+          "yj_code": "2149121F3032",
+          "product_name": "ジルムロ配合ＯＤ錠ＬＤ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            5
+          ],
+          "summary": "10月29日版の該当行では、出荷量通常と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "2590008F1166",
+          "product_name": "タムスロシン塩酸塩ＯＤ錠０．１ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            7
+          ],
+          "summary": "10月29日版の該当行では、出荷量増加と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "3929407D1110",
+          "product_name": "レボホリナート点滴静注用２５ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            14,
+            15
+          ],
+          "summary": "10月29日版の該当行では、出荷量通常と記載されています。同日の更新履歴に限定出荷の追加として掲載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "3929407D2051",
+          "product_name": "レボホリナート点滴静注用１００ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            14,
+            15
+          ],
+          "summary": "10月29日版の該当行では、出荷量通常と記載されています。同日の更新履歴に限定出荷の追加として掲載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "4291015F1140",
+          "product_name": "レトロゾール錠２．５ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            13
+          ],
+          "summary": "10月29日版の該当行では、出荷量通常と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "6119401D1108",
+          "product_name": "テイコプラニン点滴静注用２００ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            7
+          ],
+          "summary": "10月29日版の該当行では、出荷量増加と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "6179001F1082",
+          "product_name": "ボリコナゾール錠５０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            11
+          ],
+          "summary": "10月29日版の該当行では、出荷量通常と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "6179001F2089",
+          "product_name": "ボリコナゾール錠２００ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            11
+          ],
+          "summary": "10月29日版の該当行では、出荷量通常と記載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "6250019F1276",
+          "product_name": "バラシクロビル錠５００ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            8,
+            15
+          ],
+          "summary": "10月29日版の該当行では、出荷量増加と記載されています。同日の更新履歴に限定出荷の追加として掲載されています。",
+          "packages": []
+        },
+        {
+          "yj_code": "6250031F1102",
+          "product_name": "ファムシクロビル錠２５０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            9,
+            15
+          ],
+          "summary": "10月29日版の該当行では、出荷量通常と記載されています。同日の更新履歴に限定出荷の追加として掲載されています。",
+          "packages": []
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカー一覧は品目単位です。対象行からは具体的な経緯、包装の内訳、代替候補を確認できません。現在の供給区分と理由は厚労省の公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "towa-other-limited-20261029",
+      "maker": "東和薬品",
+      "title": "東和薬品の10月29日版供給状況一覧｜限定出荷（その他）",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80558&t=6",
+      "announced_at": "2026-10-29",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "f332443d247c5220fc77bc57ac203b08bf5c43badf71635e837d1e7e3807fc57",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "東和薬品は、2026年10月29日更新の供給状況一覧で、対象品目を④限定出荷（その他）と記載しています。",
+      "targets": [
+        {
+          "yj_code": "2171006N2080",
+          "product_name": "ジルチアゼム塩酸塩徐放カプセル２００ｍｇ「トーワ」",
+          "maker": "佐藤薬品工業",
+          "scope": "product",
+          "source_pages": [
+            5
+          ],
+          "summary": "10月29日版の該当行では、出荷量増加と記載されています。",
+          "packages": [],
+          "seller": "東和薬品"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカー一覧は品目単位です。対象行からは具体的な経緯、包装の内訳、代替候補を確認できません。現在の供給区分と理由は厚労省の公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "nichiiko-mesalazine-p-limited-202604-202609",
+      "maker": "日医工",
+      "title": "メサラジン徐放錠250mg・500mg「日医工P」の月別供給実績（2026年4月〜9月）",
+      "url": "https://www.nichiiko.co.jp/medicine/new-disclosure/files/20261015_disclosure_2026_style1-4.xlsx",
+      "announced_at": "2026-10-15",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "c3ef6b7aecdc3897090cb5215546c2c64b3b6feb17156a222d8a92d84dcfcb41",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日医工グループが10月15日に公表した供給実績では、対象品目の2026年4月から9月までの供給区分はいずれも③限定出荷（他社品の影響）です。",
+      "targets": [
+        {
+          "yj_code": "2399009F1181",
+          "product_name": "メサラジン徐放錠２５０ｍｇ「日医工Ｐ」",
+          "maker": "日医工ファーマ",
+          "seller": "日医工",
+          "scope": "product",
+          "summary": "公式Excelの「様式４　供給計画と実績_202610」の466行目です。",
+          "packages": []
+        },
+        {
+          "yj_code": "2399009F2170",
+          "product_name": "メサラジン徐放錠５００ｍｇ「日医工Ｐ」",
+          "maker": "日医工ファーマ",
+          "seller": "日医工",
+          "scope": "product",
+          "summary": "公式Excelの「様式４　供給計画と実績_202610」の467行目です。",
+          "packages": []
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原典リンクはExcelです。月別の出荷対応の記録であり、具体的な経緯、包装の内訳、解除時期と代替候補はこの資料から確認できません。"
+      ],
+      "source_index_url": "https://www.nichiiko.co.jp/medicine/new-disclosure/"
+    },
+    {
+      "id": "nichiiko-nig-ferrous-limited-202604-202609",
+      "maker": "日医工",
+      "title": "クエン酸第一鉄Na錠50mg「NIG」の月別供給実績（2026年4月〜9月）",
+      "url": "https://www.nichiiko.co.jp/medicine/new-disclosure/files/20261015_disclosure_2026_style1-4.xlsx",
+      "announced_at": "2026-10-15",
+      "verified_at": "2026-11-18",
+      "content_updated_at": "2026-11-18",
+      "sha256": "c3ef6b7aecdc3897090cb5215546c2c64b3b6feb17156a222d8a92d84dcfcb41",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日医工グループが10月15日に公表した供給実績では、対象品目の2026年4月から9月までの供給区分はいずれも②限定出荷（自社の事情）です。",
+      "targets": [
+        {
+          "yj_code": "3222013F1181",
+          "product_name": "クエン酸第一鉄Ｎａ錠５０ｍｇ「ＮＩＧ」",
+          "maker": "日医工岐阜工場",
+          "seller": "日医工",
+          "scope": "product",
+          "summary": "公式Excelの「様式４　供給計画と実績_202610」の557行目です。",
+          "packages": []
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原典リンクはExcelです。月別の出荷対応の記録であり、具体的な経緯、包装の内訳、解除時期と代替候補はこの資料から確認できません。"
+      ],
+      "source_index_url": "https://www.nichiiko.co.jp/medicine/new-disclosure/"
+    },
+    {
       "id": "sawai-limited-order-history-20260408",
       "maker": "沢井製薬",
       "title": "沢井製薬の過去の限定出荷案内（2026年4月8日時点）",
