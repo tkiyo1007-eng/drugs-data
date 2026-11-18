@@ -3,6 +3,55 @@
   "updated_at": "2026-11-18",
   "topics": [
     {
+      "slug": "mae-tsuruhara-supply-records-20261118",
+      "date": "2026.11.18",
+      "updated_at": "2026-11-18",
+      "tag": "供給の経緯",
+      "tone": "info",
+      "title": "MAE・鶴原製薬の供給実績と在庫情報（2026年10月公表）",
+      "lede": "MAEの10月5日版と鶴原製薬の10月14日版で、ケトコナゾール「MYK」2品目と「ツルハラ」2品目の供給実績を確認しました。ケトコナゾールクリーム2%「MYK」には、当時の在庫減少の理由も記載されています。",
+      "points": [
+        "ケトコナゾールクリーム2%「MYK」は、10月5日版の在庫指数がDでした。備考には、一時的に供給量が増えたことで在庫が減少したと記載されています。供給計画に対する実績の指数は4〜8月が1.0で、9月は原資料に計算エラーが表示されています。",
+        "ケトコナゾールローション2%「MYK」は、10月5日版の在庫指数がAで、供給計画に対する実績の指数は4〜9月がいずれも1.0でした。",
+        "カルボシステインDS50%「ツルハラ」は、供給計画に対する実績の指数が4月から順に0.0、0.0、1.2、0.5、0.5、0.3でした。10月14日版の在庫指数はBです。",
+        "トコフェロール酢酸エステル錠100mg「ツルハラ」は、供給計画に対する実績の指数が4月から順に0.1、0.3、0.3、0.1、2.8、0.8でした。10月14日版の在庫指数はBです。"
+      ],
+      "notes": [
+        "在庫指数は公表資料で3か月を1とした指標です。今回の資料で確認できるのは10月公表時点の在庫指数と4〜9月の供給実績です。",
+        "現在の出荷区分は、下の品目欄に厚労省公表分を表示しています。現在の限定出荷に至った具体的な経緯、包装別の出荷条件、メーカーが案内した代替品は今回の資料では確認できません。"
+      ],
+      "target_queries": [
+        "2655709N1100",
+        "2655709Q1092",
+        "2233002R2045",
+        "3150002F2065"
+      ],
+      "source": {
+        "name": "MAE｜安定供給のための予備対応力（10月5日版・様式3）",
+        "url": "https://saas.actibookone.com/content/detail?param=eyJjb250ZW50TnVtIjo1ODg1MjF9&detailFlg=1&pNo=1"
+      },
+      "sources": [
+        {
+          "name": "MAE｜供給計画と実績（10月5日版・様式4）",
+          "url": "https://saas.actibookone.com/content/detail?param=eyJjb250ZW50TnVtIjo1ODg1MjJ9&detailFlg=1&pNo=1"
+        },
+        {
+          "name": "厚生労働省｜安定供給に関する企業別の公表資料一覧",
+          "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/02_00001.html"
+        }
+      ],
+      "publisher_http_sources": [
+        {
+          "name": "鶴原製薬｜安定供給のための予備対応力（10月14日版・様式3、HTTP）",
+          "url": "http://www.tsuruhara-seiyaku.co.jp/medical/member/stable_supply/pdf/202610youshiki3.pdf"
+        },
+        {
+          "name": "鶴原製薬｜供給計画と実績（10月14日版・様式4、HTTP）",
+          "url": "http://www.tsuruhara-seiyaku.co.jp/medical/member/stable_supply/pdf/202610youshiki4.pdf"
+        }
+      ]
+    },
+    {
       "slug": "towa-inventory-supply-reasons-20261118",
       "date": "2026.11.18",
       "updated_at": "2026-11-18",

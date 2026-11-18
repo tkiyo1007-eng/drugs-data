@@ -40,6 +40,10 @@ SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 RESERVED_SLUGS = {"index", "about", "privacy"}
 # 公式配布先がHTTPのみの原文は、掲載記事と照合済みのPDFを個別に指定する。
 TOPIC_PUBLISHER_HTTP_URLS = {
+    "mae-tsuruhara-supply-records-20261118": {
+        "http://www.tsuruhara-seiyaku.co.jp/medical/member/stable_supply/pdf/202610youshiki3.pdf",
+        "http://www.tsuruhara-seiyaku.co.jp/medical/member/stable_supply/pdf/202610youshiki4.pdf",
+    },
     "rakool-packaged-supply-20261118": {
         "http://www.rakool.co.jp/upload/1794528979append.pdf",
         "http://www.rakool.co.jp/upload/1791523455append.pdf",
