@@ -1,0 +1,30 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><title>品目共有カード</title><style>
+@font-face{font-family:CardJP;src:url("$font") format("woff2");font-weight:500 800}
+*{box-sizing:border-box}html,body{margin:0;width:1200px;height:630px}
+body{font-family:CardJP,sans-serif;color:white;-webkit-font-smoothing:antialiased}
+.card{position:relative;width:1200px;height:630px;overflow:hidden;background:#245cb2}
+.poster{height:537px;padding:49px 68px 40px;position:relative;isolation:isolate;background:radial-gradient(ellipse at 110% -60%,#77b4ec 0%,transparent 64%),linear-gradient(105deg,#2356a6 5%,#326cb7 70%,#467ec2)}
+.mark{position:absolute;right:-37px;top:40px;width:350px;height:350px;z-index:-1;transform:rotate(-10deg);opacity:.075;fill:white}
+.header{display:flex;align-items:center;gap:15px;position:relative;margin:0 0 33px}
+.header img{height:48px;width:48px;border-radius:11px}
+.brand{font-size:30px;font-weight:700;letter-spacing:.01em;line-height:1.28}
+.divider{height:1px;background:linear-gradient(to right,rgba(208,229,255,.28),rgba(208,229,255,.18) 70%,transparent)}
+.identity{margin-top:32px}
+.maker{font-size:26px;font-weight:500;color:#f3f8ff;line-height:1.35;margin:0 0 6px;letter-spacing:.015em}
+h1{margin:0;display:block;font-size:clamp(60px,6vw,72px);font-weight:800;letter-spacing:-.045em;line-height:1.35;white-space:nowrap}
+h1 .suffix{font-family:CardJP,sans-serif;font-weight:700;letter-spacing:-.022em;margin-left:.07em}
+.status{display:inline-flex;align-items:center;gap:13px;white-space:nowrap;margin-top:23px;padding:10px 21px 11px;border-radius:11px;color:#543305;background:#ffe6a3;line-height:1.27;font-size:39px;font-weight:700;letter-spacing:-.025em}
+.code{font-size:36px}.status.ok{background:#d8f6e4;color:#154932}.status.stopped,.status.ended{background:#ffe0dd;color:#762b24}
+.dated{position:absolute;bottom:37px;left:68px;display:flex;align-items:baseline;gap:17px}
+.dated span{font-size:25px;line-height:1.35;color:#eef7ff;font-weight:500;letter-spacing:.025em}
+.dated time{font-size:32px;line-height:1.4;color:#fff;font-weight:650;letter-spacing:.005em}
+footer{height:93px;background:#eef6ff;color:#1a3658;display:flex;align-items:center;justify-content:space-between;gap:30px;padding:0 68px;border-top:1px solid #dce7f3}
+footer .caption{font-size:24px;font-weight:600;letter-spacing:.01em}
+footer .site{font-size:29px;letter-spacing:-.02em;font-weight:650;font-family:"Helvetica Neue",Arial,sans-serif;color:#214d88}
+</style></head><body><article class="card"><div class="poster">
+<svg class="mark" viewBox="0 0 300 300" aria-hidden="true"><path d="M107 0h86v107h107v86H193v107h-86V193H0v-86h107z"/></svg>
+<header class="header"><img alt="" id="icon" src="$icon"><span class="brand">医薬品供給ナビ</span></header><div class="divider"></div>
+<div class="identity"><p class="maker">$maker</p><h1>$title</h1></div>
+<div class="status $kind">$status</div>
+<div class="dated"><span>厚生労働省公表</span><time>$date_label</time></div></div>
+<footer><span class="caption">最新の供給状況・メーカー原文</span><span class="site">kyokyu-navi.jp</span></footer></article></body></html>
