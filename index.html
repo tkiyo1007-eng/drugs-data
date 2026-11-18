@@ -2573,6 +2573,10 @@ html.season-autumn .autumn-sky{display:none}
   <div class="news-list glass">
     <div class="news-item">
       <div class="news-date num">2026.11.18</div>
+      <div class="news-body"><span class="news-tag">薬名検索</span>「モビコールLD」のように規格を続けて検索できます。限定出荷一覧では、ページ上部で品目を絞り込めます。</div>
+    </div>
+    <div class="news-item">
+      <div class="news-date num">2026.11.18</div>
       <div class="news-body"><span class="news-tag">検索画面</span>薬名を入力すると、検索欄のすぐ下で品目と供給区分を確認できます。問い合わせが多い4製品をコンパクトにまとめ、監視する薬が未登録のときは登録方法を1行にまとめました。品目別一覧と確認ガイドは「最近の供給状況の変更」の下から開けます。</div>
     </div>
     <div class="news-item">
@@ -3141,6 +3145,9 @@ function splitRelaxedTerm(term){
   // 末尾の剤形を切り離す: ロキソプロフェンナトリウム錠 → ロキソプロフェンナトリウム / 錠
   const form = RELAXED_FORM_WORDS.find(word=>head.endsWith(word) && Array.from(head).length - Array.from(word).length >= 2);
   if(form){ parts.unshift(form); head = head.slice(0, head.length - form.length); }
+  // 正式名の間にある「配合内用剤」「配合錠」等を省いた呼び方。
+  const mark = head.match(/^(.{2,}?)(ld|hd|od|ap|bp)$/u);
+  if(mark){ head = mark[1]; parts.unshift(mark[2]); }
   parts.unshift(head);
   return parts;
 }
@@ -3160,6 +3167,24 @@ function relaxedSearchPlan(rawTerms){
     for(const part of parts){
       const alts = relaxedTermAlternatives(part);
       if(parts.length > 1 || alts.length > 1) changed = true;
+      if(/^(ld|hd|od|ap|bp)$/.test(part) && parts.length > 1){
+        // 名称と規格を同じ販売名で照合する。「メーカー」の括弧内は規格に使わない。
+        const marker = new RegExp(`(?:^|[^a-z])${part}(?![a-z])`);
+        const stem = parts[0];
+        const dose = parts.at(-1);
+        const numericDose = /^[0-9]+(?:\.[0-9]+)?$/.test(dose)
+          ? new RegExp(`(?:^|[^0-9.,])${dose.replace(".", "\\.")}(?![0-9.,])`) : null;
+        terms.push({t:part, test:d=>{
+          const name = norm(d.n.split("「", 1)[0]);
+          return name.includes(stem) && marker.test(name) && (!numericDose || numericDose.test(name));
+        }});
+        continue;
+      }
+      if(part === "トウワ"){
+        changed = true;
+        terms.push({t:part, test:d=>d.q.includes(part) || d.q.includes("東和薬品")});
+        continue;
+      }
       const dosage = isDosageSearchTerm(part);
       terms.push({t:part, test:d=>alts.some(alt=>searchIndexMatchesTerm(d.q, alt, dosage))});
     }
