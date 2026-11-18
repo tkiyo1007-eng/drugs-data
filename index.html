@@ -340,10 +340,6 @@ h1 .grad .nb{
   transition:.2s;
 }
 .btn-ghost:hover{background:rgba(255,255,255,.9);transform:translateY(-2px)}
-.hero-note{font-size:12px;color:var(--sub);margin-top:16px}
-.hero-directories{display:flex;flex-wrap:wrap;gap:0 18px;margin-top:0}
-.hero-directories a{display:inline-flex;align-items:center;min-height:44px;color:var(--blue);font-size:13px;font-weight:700;text-underline-offset:3px}
-.hero-directories a:focus-visible{outline:3px solid var(--blue-mid);outline-offset:3px;border-radius:4px}
 .watch-return{
   min-height:44px;margin-top:12px;padding:9px 15px;border-radius:14px;
   display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(176,48,48,.32);
@@ -403,7 +399,6 @@ h1 .grad .nb{
 .sbar-skeleton{flex:1;background:rgba(255,255,255,.16)}
 /* 「—」と実数値で幅が変わるとレイアウトがずれるため、最小幅を確保しておく */
 #counter{display:inline-block;min-width:3.6ch}
-.float-chip .big{min-width:2.6ch;display:inline-block}
 /* 凡例は実データが載るまで高さだけ確保して空にしておく */
 .legend:empty{min-height:19px}
 .supply-bar span{transform-origin:left;animation:grow 1.1s cubic-bezier(.2,.8,.2,1) both .3s}
@@ -411,16 +406,6 @@ h1 .grad .nb{
 .legend{display:flex;flex-wrap:wrap;gap:12px 14px;font-size:12px;position:relative;padding-right:86px}
 .legend div{display:flex;align-items:center;gap:6px;opacity:.95}
 .dot{width:9px;height:9px;border-radius:50%;box-shadow:0 0 6px currentColor}
-.float-chip{
-  position:absolute;padding:12px 16px;border-radius:16px;font-size:12.5px;font-weight:700;
-  display:flex;align-items:center;gap:9px;
-  animation:float 5.5s ease-in-out infinite;
-}
-.float-chip .big{font-size:19px;font-weight:800}
-.chip1{top:-22px;left:-26px;color:var(--limited);animation-delay:.4s}
-.chip2{bottom:-20px;right:-16px;color:var(--stopped);animation-delay:1.6s}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
-@media(max-width:900px){.chip1{left:0}.chip2{right:0}}
 
 /* スマホでは検索を最初の画面内へ近づけるため、ヒーローを要点だけに圧縮する。
    集計値は検索結果内でも確認できるため、初回画面では検索開始を優先する。 */
@@ -432,9 +417,7 @@ h1 .grad .nb{
   .eyebrow{margin-bottom:10px;padding:5px 11px;font-size:11.5px}
   h1{font-size:28px;margin-bottom:8px}
   .lede{font-size:14px;line-height:1.7;margin-bottom:8px}
-  header .hero-app-link{min-height:44px;padding:10px 14px;font-size:13px}
   header .btn-primary{padding:12px 20px;font-size:14px}
-  header .hero-note{margin-top:0;font-size:11.5px}
   header .hero-visual{display:none}
   main section{padding:52px 20px}
   #demo{padding-top:16px}
@@ -454,7 +437,6 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   header h1{font-size:34px;margin-bottom:12px}
   header .lede{font-size:15px;line-height:1.7;margin-bottom:12px}
   header .cta-row{display:none}
-  header .hero-note{margin-top:8px;font-size:13px}
   #demo{padding-top:16px}
   #demo>.sec-eyebrow{display:none}
   #demo>h2{font-size:26px;margin-bottom:8px}
@@ -821,9 +803,6 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 .empty-reset:hover{background:#fff;transform:translateY(-1px)}
 .search-help{margin:8px 4px 0;font-size:11.5px;color:var(--sub);line-height:1.65}
-.supply-entry-links{display:flex;flex-wrap:wrap;gap:4px 18px;margin:10px 4px 4px}
-.supply-entry-links a{display:inline-flex;align-items:center;min-height:44px;font-size:13px;color:var(--blue);text-underline-offset:3px}
-.supply-entry-links a:focus-visible{outline:3px solid var(--blue-mid);outline-offset:3px;border-radius:4px}
 .search-relaxed-note{display:block;margin-top:4px;font-size:11.5px;color:var(--sub);line-height:1.6}
 .data-load-error{
   margin:14px 0 4px;padding:16px 17px;border-radius:16px;
@@ -1098,19 +1077,9 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .topic-note a{color:var(--blue);font-weight:700}
 @media(max-width:640px){.topic-card{padding:20px}.topic-title{font-size:15px}.topic-points{padding-left:30px}}
 
-/* 検索前に、直近の供給区分の変更を確認できる。 */
-.home-changes{margin:14px 0;padding:15px 17px;border:1px solid var(--line);border-radius:16px;background:var(--card)}
-.home-changes h3{margin:0;color:var(--ink);font-size:16px}
-.home-changes p{margin:4px 0;color:var(--sub);font-size:12px}
-.home-changes ul{list-style:none;margin:4px 0;padding:0}
-.home-changes li{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:2px 10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:13px;line-height:1.45;color:var(--ink);overflow-wrap:anywhere}
-.home-changes li small{font-size:12px;color:var(--sub)}
-.home-changes nav{display:flex;gap:0 18px;flex-wrap:wrap}
-.home-changes a{display:inline-flex;align-items:center;min-height:44px;color:var(--blue-deep);font-size:13px;font-weight:700;text-underline-offset:3px}
 /* ===== 最近問い合わせが多い製品 ===== */
 #trending{margin:20px 0 18px;padding:18px;border:1px solid var(--line);border-radius:18px;background:rgba(79,128,244,.045)}
 #trending h3{margin:0;font-size:16px;color:var(--ink)}
-.trending-intro{margin:6px 0 12px;font-size:12px;line-height:1.6;color:var(--sub)}
 .trending-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));align-items:start;gap:10px}
 .trending-list:not(.show-all) .trending-entry:nth-child(n+5){display:none}
 .trending-toggle{min-height:44px;margin-top:8px;padding:8px 2px;border:0;background:transparent;color:var(--blue-deep);font:inherit;font-size:13px;font-weight:800;cursor:pointer}
@@ -1141,14 +1110,9 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .search-intro{grid-template-columns:1fr;padding:94px 24px 0;gap:0}
 .search-intro .lede{max-width:64em;margin-bottom:0}
 .search-visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
-.search-overview{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:24px;margin:24px 0;padding-top:24px;border-top:1px solid var(--line)}
 .search-overview .pulse-card{padding:18px 20px;border-radius:18px}
 .search-overview .pulse-total{font-size:34px}
-.search-overview .float-chip{display:none}
 .search-overview .legend{padding-right:0}
-.search-overview .hero-app-link,.search-overview .btn-primary{min-height:44px;box-sizing:border-box;padding:10px 14px;font-size:13px}
-.search-overview .cta-row{gap:8px}
-.search-active .search-discovery,.search-active #searchIntentHelp,.search-active .supply-entry-links{display:none}
 #trending[hidden],#trendingSearchToggle[hidden]{display:none}
 .trending-list{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
 .trending-entry{display:flex;flex-direction:column;border:1px solid rgba(79,128,244,.24);border-radius:16px;background:rgba(79,128,244,.055);overflow:hidden}
@@ -1172,7 +1136,6 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
   .trending-chip{font-size:13px;padding:9px 10px;min-height:58px}
   .trending-hint{padding:0 10px 8px}
   .trending-names summary,.trending-reference{padding:10px;font-size:12px}
-  .search-overview{grid-template-columns:1fr;gap:12px}
 }
 @media(max-width:360px){.trending-list{grid-template-columns:1fr}}
 
@@ -1780,7 +1743,7 @@ html.season-autumn .autumn-sky{display:none}
   <div class="demo-shell glass">
     <div class="search-box">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-      <input id="q" type="search" placeholder="薬品名・成分名・メーカー名・YJコードで検索" aria-label="薬品名・成分名・メーカー名・YJコードで検索" aria-describedby="searchHelp" autocomplete="off">
+      <input id="q" type="search" placeholder="薬品名・成分名・メーカー名・YJコードで検索" aria-label="薬品名・成分名・メーカー名・YJコードで検索" autocomplete="off">
       <button type="button" class="search-clear" id="searchClear" aria-label="検索語をクリア" hidden><span aria-hidden="true">×</span></button>
     </div>
 
@@ -1789,15 +1752,6 @@ html.season-autumn .autumn-sky{display:none}
       <span>公開データに変更が見つかりました。</span>
       <button type="button" id="dataUpdateReload">検索条件を保って再読み込み</button>
     </div>
-    <section class="home-changes search-discovery" aria-labelledby="homeChangesHeading">
-      <h3 id="homeChangesHeading">直近の供給状況の変更</h3>
-      <p id="homeChangeDate" role="status">変更履歴を確認中です。</p>
-      <ul id="homeChangeList"></ul>
-      <nav aria-label="供給状況の一覧">
-        <a id="homeChangeDay" href="#daily-update">変更履歴の詳細</a>
-        <a href="items/limited.html">現在の限定出荷一覧</a>
-      </nav>
-    </section>
     <a class="price-list-link" id="topPriceListLink" hidden>
       <span class="topic-tag">薬価収載</span>
       <span class="price-list-title"></span>
@@ -1806,7 +1760,6 @@ html.season-autumn .autumn-sky{display:none}
     <button type="button" id="trendingSearchToggle" class="trending-toggle" aria-expanded="false" aria-controls="trending" hidden>問い合わせの多い製品を開く</button>
     <section id="trending" aria-labelledby="trendingHeading">
   <h3 id="trendingHeading">問い合わせが多い品目</h3>
-      <p class="trending-intro">複数規格の製品は「規格別の原因・代替案」から、メーカーと規格を選べます。代替候補はメーカー資料に記載がある場合、品目の詳細に表示します。</p>
   <div class="trending-list" id="trendingList"></div>
   <button type="button" id="trendingToggle" class="trending-toggle" aria-expanded="false" aria-controls="trendingList">ほかの製品を見る</button>
   <nav aria-label="品目別の供給情報">
@@ -1818,39 +1771,6 @@ html.season-autumn .autumn-sky{display:none}
   <p class="topic-note"><a href="products/index.html">注目製品の一覧を見る</a></p>
 </section>
 
-    <aside class="search-discovery search-overview" aria-label="サイトの案内と供給状況の集計">
-  <div class="hero-visual">
-    <div class="pulse-card">
-      <div class="pulse-head"><span>SUPPLY PULSE</span><span id="today" class="num">—</span></div>
-      <div class="pulse-total"><span class="num" id="counter">—</span><small>品目を収載</small></div>
-      <div class="pulse-sub" id="pulseSub">全国の医療用医薬品の供給ステータスを毎日集計</div>
-      <!-- 帯グラフ・凡例・数値は、実データを読み込むまで具体的な値を出さない。
-           固定値を置いておくと、取得に失敗したときに根拠のない数字が
-           本物の集計のように表示され続けてしまう（供給状況を扱う以上これは避ける） -->
-      <div class="supply-bar" id="sbar" aria-hidden="true">
-        <span class="sbar-skeleton"></span>
-      </div>
-      <div class="legend" id="legend"></div>
-    </div>
-    <div class="float-chip glass chip1"><span class="big num" id="chipLim">—</span>限定出荷</div>
-    <div class="float-chip glass chip2"><span class="big num" id="chipStop">—</span>供給停止</div>
-  </div>
-      <div class="search-links">
-    <div class="cta-row">
-      <a class="btn-primary" href="#demo" data-focus-search data-dsn-event="search-cta-open">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
-        供給状況を検索する
-      </a>
-      <a class="btn-ghost hero-app-link" href="https://apps.apple.com/jp/app/id6777696446" target="_blank" rel="noopener">iPhone版を無料で入手</a>
-    </div>
-    <nav class="hero-directories" aria-label="供給状況の一覧を開く">
-      <a href="items/limited.html">出荷調整（限定出荷）の一覧</a>
-      <a href="items/stopped.html">供給停止の一覧</a>
-    </nav>
-    <p class="hero-note">会員登録不要・Web版も無料で利用できます</p>
-      </div>
-    </aside>
-
     <div class="appearance-control" id="appearanceControl" hidden>
       <label for="appearanceSelect">外観</label>
       <select id="appearanceSelect" aria-describedby="appearanceStatus">
@@ -1861,17 +1781,6 @@ html.season-autumn .autumn-sky{display:none}
       <p class="appearance-status" id="appearanceStatus" role="status" aria-live="polite">選択はこのブラウザに保存されます。</p>
     </div>
 
-    <p class="search-help" id="searchHelp">メーカー名・YJコードにも対応。複数語は空白で区切ると、すべてを含む品目に絞り込みます。</p>
-    <p class="search-help" id="searchIntentHelp">限定出荷・供給停止は厚労省の公表区分を一覧で確認できます。販売中止・製造中止はメーカー案内、薬価削除・経過措置は厚労省の薬価資料で確認し、現在の出荷対応と分けて扱います。</p>
-    <nav class="supply-entry-links" aria-label="供給状況と終了情報の一覧・調べ方">
-      <a href="items/limited.html">出荷調整（限定出荷）の一覧</a>
-      <a href="items/stopped.html">供給停止の一覧</a>
-      <a href="guides/how-to-check-drug-supply.html">出荷調整とは・確認方法</a>
-      <a href="guides/how-to-check-drug-supply.html#shipment-volume">出荷停止と供給停止の見分け方</a>
-      <a href="items/supplemental.html#sales-notices">販売中止の案内一覧</a>
-      <a href="items/supplemental.html#price-info">薬価削除予定・経過措置</a>
-      <a href="guides/how-to-check-discontinuation-and-delisting.html#manufacturing">製造中止の確認方法</a>
-    </nav>
     <aside class="pinned-alerts" id="pinnedAlerts" aria-labelledby="pinnedAlertsTitle" hidden></aside>
     <div class="data-load-error" id="dataLoadError" role="alert" hidden>
       <strong>供給状況データを表示できません</strong>
@@ -1894,7 +1803,21 @@ html.season-autumn .autumn-sky{display:none}
     <p class="data-as-of" id="supplementalAsOf" role="status" aria-live="polite">メーカー公式案内の補足情報を確認中です。</p>
     </div>
     <details class="update-info" id="updateInfo">
-      <summary>更新情報の見方</summary>
+      <summary>供給状況の集計と更新日の見方</summary>
+      <div class="search-overview">
+        <div class="pulse-card">
+          <div class="pulse-head"><span>SUPPLY PULSE</span><span id="today" class="num">—</span></div>
+          <div class="pulse-total"><span class="num" id="counter">—</span><small>品目を収載</small></div>
+          <div class="pulse-sub" id="pulseSub">全国の医療用医薬品の供給ステータスを毎日集計</div>
+          <!-- 帯グラフ・凡例・数値は、実データを読み込むまで具体的な値を出さない。
+               固定値を置いておくと、取得に失敗したときに根拠のない数字が
+               本物の集計のように表示され続けてしまう（供給状況を扱う以上これは避ける） -->
+          <div class="supply-bar" id="sbar" aria-hidden="true">
+            <span class="sbar-skeleton"></span>
+          </div>
+          <div class="legend" id="legend"></div>
+        </div>
+      </div>
       <p>全体データ基準日：当サイトが供給データを取り込んだ日です。厚労省の原Excel基準日は、取り込んだ原資料の基準日として別に表示します。※各カードの日付は「その品目行の最終変更日」です。</p>
       <p>メーカー補足の確認日：当サイトが選定したメーカー・公表案内の確認日です。メーカーの発表日ではなく、補足の表示がないことは「差異なし」を保証しません。</p>
       <p>この画面での取得日時は、公開ファイルを読み込んだ時刻です。情報提供元の更新日時や、最新情報であることを示すものではありません。</p>
@@ -2040,7 +1963,6 @@ html.season-autumn .autumn-sky{display:none}
   <p class="sec-eyebrow">TOPICS</p>
   <h2 id="industryNewsTitle">業界ニュース</h2>
   <div class="mednews" id="medNews" role="group" aria-labelledby="industryNewsTitle" tabindex="-1">
-    <p class="sec-lede">業界ニュースの見出しを自動取得しています。本文はリンク先の薬事日報でご確認ください。供給区分はニュースから変更せず、検索とメーカー原典で確認できます。</p>
     <p class="news-status" id="medNewsStatus" role="status" aria-live="polite" aria-atomic="true">新着見出しを読み込んでいます。</p>
     <div class="news-status-actions">
       <button type="button" class="news-retry" id="medNewsRetry">新着見出しを再取得</button>
@@ -2053,7 +1975,6 @@ html.season-autumn .autumn-sky{display:none}
     </details>
   </div>
   <h3 class="editorial-news-heading">医薬品ニュース</h3>
-  <p class="sec-lede">ここは手動で編集する解説記事です。当日を含む直近30日の記事を表示し、それ以前の記事は過去記事一覧で確認できます。最新の供給状況は検索と原典でご確認ください。</p>
   <p class="news-status" id="topicStatus" role="status" aria-live="polite" aria-atomic="true">公開済みの編集記事を読み込んでいます。</p>
   <div class="news-status-actions">
     <button type="button" class="news-retry" id="topicSupplyChanges">直近の供給変更を確認</button>
@@ -2062,8 +1983,6 @@ html.season-autumn .autumn-sky{display:none}
   </div>
   <div class="topic-list" id="topicList"></div>
   <p class="topic-note"><a href="topics/index.html">過去記事を含むニュース一覧を見る</a></p>
-  <p class="topic-note">供給区分の変化は「直近の供給変更」で自動集計しています。ここに新しい解説記事がなくても、供給状況に変更がないとは限りません。</p>
-  <p class="topic-note">※ 出典をもとに編集した記事です。掲載後の訂正や状況の変化は、原典をご確認ください。過去記事への移動は、回収の終了や供給の回復を意味しません。</p>
 </section>
 
   <!-- 品目詳細へ複製する資料。ニュース欄には掲載しない。 -->
@@ -2577,10 +2496,16 @@ html.season-autumn .autumn-sky{display:none}
 </section>
 
 <section id="news" class="reveal">
-  <p class="sec-eyebrow">SITE UPDATES</p>
   <h2>サイトの更新情報</h2>
-  <p class="sec-lede">医薬品供給ナビの機能追加・修正・掲載情報の更新履歴です。公開内容を確認して手動で追記しています。</p>
   <div class="news-list glass">
+    <div class="news-item">
+      <div class="news-date num">2026.11.18</div>
+      <div class="news-body"><span class="news-tag">検索画面</span>問い合わせが多い品目は、モビコール、ユベラ、テラムロ、ジクトルの4製品を先に表示します。他の製品は「ほかの製品を見る」から開けます。検索結果までの案内も整理しました。</div>
+    </div>
+    <div class="news-item">
+      <div class="news-date num">2026.11.17</div>
+      <div class="news-body"><span class="news-tag">操作改善</span>スマホとPCで「ホーム」を独立したボタンにしました。長い品目一覧を見ている途中でも、ページの先頭に戻れます。</div>
+    </div>
     <div class="news-item">
       <div class="news-date num">2026.10.11</div>
       <div class="news-body"><span class="news-tag">機能改善</span><a href="items/limited.html">限定出荷</a>・<a href="items/stopped.html">供給停止</a>の一覧に、品目名・成分名・メーカー名・YJコードで絞り込める検索を追加しました。<p>詳細画面の閲覧位置とキーボードの操作位置を保持し、監視リストの保存失敗や通信の停止も画面で確認できるよう改善しました。供給区分・出典・医薬品データは変更していません。</p></div>
@@ -4753,19 +4678,6 @@ const $dailyUpdateShare = document.getElementById("dailyUpdateShare");
 const $dailyUpdateFeed = document.getElementById("dailyUpdateFeed");
 const $dailyShareStatus = document.getElementById("dailyShareStatus");
 let DAILY_SHARE = null;
-function renderHomeChanges(message, changed = []){
-  document.getElementById("homeChangeDate").textContent = message;
-  document.getElementById("homeChangeList").innerHTML = changed.slice(0,3).map(item=>{
-    const event = latestChangeFor(item);
-    const from = STATUS[mapPublishedStatus(event.from)].label;
-    const to = STATUS[mapPublishedStatus(event.to)].label;
-    const transition = from === to ? to + "（区分変更）" : from + " → " + to;
-    return `<li><strong>${esc(item.n)}</strong><small>${esc(transition)}</small></li>`;
-  }).join("");
-  const link = document.getElementById("homeChangeDay");
-  link.href = changed.length ? `updates/${LATEST_CHANGE_DATE.replaceAll("/","-")}.html` : "#daily-update";
-  link.textContent = changed.length ? "この日の変更一覧" : "変更履歴の詳細";
-}
 function historyStatusMessage(){
   const phase = HISTORY_STATE.phase;
   const retained = historyHasSnapshot() && (phase !== "ready" || HISTORY_STATE.source !== "network");
@@ -4786,7 +4698,6 @@ function renderDailyUpdate(items){
   document.getElementById("dailyUpdateStats").replaceChildren();
   const stateMessage = historyStatusMessage();
   if(!historyHasSnapshot()){
-    renderHomeChanges(stateMessage || "変更履歴は未確認です。");
     document.getElementById("dailyUpdateDate").textContent = HISTORY_STATE.phase === "loading" ? "変更履歴を読み込み中" : "変更履歴は未確認";
     document.getElementById("dailyUpdateTitle").textContent = HISTORY_STATE.phase === "loading" ? "供給状況の変更を確認しています" : "変更履歴を確認できません";
     document.getElementById("dailyUpdateSummary").textContent = stateMessage;
@@ -4795,7 +4706,6 @@ function renderDailyUpdate(items){
   const cacheLabel = HISTORY_STATE.source !== "network" || HISTORY_STATE.phase !== "ready" ? "前回取得分・" : "";
   const freshnessNote = "履歴の最新記録日は、全体データ基準日や履歴全体の確認済み日とは異なります。";
   if(!LATEST_CHANGE_DATE){
-    renderHomeChanges(cacheLabel + "取得した履歴に変更記録はありません。");
     document.getElementById("dailyUpdateDate").textContent = `${cacheLabel}変更記録0件`;
     document.getElementById("dailyUpdateTitle").textContent = "取得した変更履歴には、供給区分の変更記録はありません";
     document.getElementById("dailyUpdateSummary").textContent = stateMessage + "現在も変更がないことを保証するものではありません。履歴全体の確認済み日は取得できません。";
@@ -4806,8 +4716,6 @@ function renderDailyUpdate(items){
   for(const x of changed) counts[mapStatus(latestChangeFor(x).to)]++;
   const [y,m,d] = LATEST_CHANGE_DATE.replaceAll("/","-").split("-");
   const dateLabel = `${y}年${Number(m)}月${Number(d)}日`;
-  renderHomeChanges(`${cacheLabel}変更検知日 ${dateLabel}` +
-    (changed.length ? "" : "（現在の供給区分と一致する品目はありません）"), changed);
   document.getElementById("dailyUpdateDate").textContent = `${cacheLabel}履歴の最新記録 ${dateLabel}`;
   document.getElementById("dailyUpdateTitle").textContent = changed.length
     ? `${changed.length.toLocaleString()}品目の供給状況の変更記録があります`
@@ -7737,7 +7645,6 @@ function failDataLoad(message){
   document.getElementById("demoNote").textContent =
     "※ データを検証できない間は、サンプルを含む品目情報を表示しません。";
   $dailyUpdateCard.setAttribute("aria-busy","false");
-  renderHomeChanges("供給データを取得できず、変更を確認できません。");
   document.getElementById("dailyUpdateDate").textContent = "データ取得エラー";
   document.getElementById("dailyUpdateTitle").textContent = "供給変更を取得できませんでした";
   document.getElementById("dailyUpdateSummary").textContent = "時間をおいてページを再読み込みしてください。";
@@ -7875,8 +7782,6 @@ function failDataLoad(message){
   // ヒーローを実数値に更新
   const total = items.length;
   countUp(total);
-  document.getElementById("chipLim").textContent = counts.limited.toLocaleString();
-  document.getElementById("chipStop").textContent = counts.stopped.toLocaleString();
   const order=[["ok","通常出荷"],["limited","限定出荷"],["stopped","供給停止"],["ended","販売中止"]];
   const active = order.filter(([k])=>counts[k]>0);
   // 0件の供給ステータスは絞り込みピルも非表示にする。ただし「販売中止・予定」は
