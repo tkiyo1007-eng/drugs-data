@@ -6610,25 +6610,34 @@ function renderTrending(){
     'lulicon-cream':'2655712N1020',
     'meno-aid-combi-patch':'2482800S1026',
     'insulin-lispro-bs-solostar':'2492422G1023',
-    'predonine-soluble-10mg':'2456405D1027',
-    'predonine-soluble-20mg':'2456405D2023',
+    "eperisone-towa":"1249009F1422",
     'antebate-lotion':'2646730Q1026',
   };
   // Webの注目一覧だけから除外。共通データ・通常検索・既存の詳細URLは維持する。
   const hidden = new Set(["caduet", "caduet-1", "caduet-2", "caduet-3", "caduet-4",
     "gentacin-ointment", "mounjaro-injection", "loxoprofen-sodium-tape", "celecox-tablets", "concerta-tablets", "lulicon-cream"]);
   // Webの入口だけを製品群へまとめる。共通データや規格別の既存URLは変更しない。
-  const entries = TRENDING.filter(t=>!hidden.has(t.slug)
-    && !/^amaluet(?:-[1-4])?$/.test(t.slug) && t.slug !== "movicol" && t.slug !== "hilnamin" && t.slug !== "fentos" && t.slug !== "antebate-lotion");
-  entries.splice(Math.min(1, entries.length), 0,
+  const webEntries = [
     {slug:"movicol",label:"モビコール配合内用剤ＬＤ・ＨＤ",q:"モビコール"},
     {slug:"hilnamin",label:"ヒルナミン",q:"ヒルナミン"},
-    {slug:"amaluet",label:"アマルエット配合錠１番〜４番",q:"アマルエット配合錠"});
-  entries.push({slug:"teramuro",label:"テラムロ配合錠",q:"テラムロ"},
-    {slug:"fentos",label:"フェントステープ",q:"フェントステープ"},
-    {slug:"antebate-lotion",label:"アンテベートローション０．０５％",q:"アンテベートローション"});
+    {slug:"amaluet",label:"アマルエット配合錠１番〜４番",q:"アマルエット配合錠"},
+    {slug:"teramuro",label:"テラムロ配合錠",q:"テラムロ"},
+    {slug:"antebate-lotion",label:"アンテベートローション０．０５％",q:"アンテベートローション"},
+    {slug:"daiphen",label:"ダイフェン配合錠・配合顆粒",q:"ダイフェン"},
+    {slug:"pentasa",label:"ペンタサ",q:"ペンタサ"},
+    {slug:"eperisone-towa",label:"エペリゾン塩酸塩錠50mg「トーワ」",q:"エペリゾン トーワ"},
+    {slug:"memantine-od-towa",label:"メマンチン塩酸塩OD錠「トーワ」",q:"メマンチン OD トーワ"},
+    {slug:"tamsulosin-towa",label:"タムスロシン塩酸塩OD錠「トーワ」",q:"タムスロシン トーワ"},
+    {slug:"predonine-soluble",label:"水溶性プレドニン",q:"水溶性プレドニン"},
+  ];
+  const webSlugs = new Set(webEntries.map(entry=>entry.slug));
+  const entries = TRENDING.filter(t=>!hidden.has(t.slug) && !webSlugs.has(t.slug)
+    && !/^amaluet-[1-4]$/.test(t.slug) && !/^predonine-soluble-(10|20)mg$/.test(t.slug)
+    && t.slug !== "fentos").concat(webEntries);
   // 表示順は編集上の選定であり、問い合わせの集計順位ではない。
-  const featuredFirst = ["movicol", "teramuro", "juvela-ointment", "antebate-lotion", "zictor-tape-75mg", "hilnamin", "fentos", "micardis", "amaluet"];
+  const featuredFirst = ["kenacort-a-injection", "movicol", "daiphen", "pentasa", "eperisone-towa",
+    "memantine-od-towa", "tamsulosin-towa", "juvela-ointment", "hilnamin", "teramuro", "antebate-lotion",
+    "zictor-tape-75mg", "micardis", "amaluet"];
   entries.sort((a,b)=>{
     const aIndex=featuredFirst.indexOf(a.slug), bIndex=featuredFirst.indexOf(b.slug);
     return (aIndex<0 ? featuredFirst.length : aIndex) - (bIndex<0 ? featuredFirst.length : bIndex);
@@ -6644,7 +6653,11 @@ function renderTrending(){
     "cibenzoline-succinate-tablets":/^シベンゾリンコハク酸塩錠/,
     "rinderon-injection":/^リンデロン注/,
     teramuro:/^テラムロ配合錠/,
-    fentos:/^フェントステープ(?:0\.5|1|2|4|6|8)mg$/,
+    daiphen:/^ダイフェン配合(?:錠|顆粒)$/,
+    pentasa:/^ペンタサ(?:錠|顆粒|坐剤|注腸)/,
+    "memantine-od-towa":/^メマンチン塩酸塩OD錠[\d.]+mg「トーワ」$/,
+    "tamsulosin-towa":/^タムスロシン塩酸塩OD錠[\d.]+mg「トーワ」$/,
+    "predonine-soluble":/^水溶性プレドニン[\d.]+mg$/,
   };
   const singleNames = {
     "insulin-lispro-bs-solostar":"インスリン　リスプロＢＳ注ソロスター　ＨＵ「サノフィ」",
@@ -6692,7 +6705,7 @@ function renderTrending(){
     const reference = key && singles.has(key)
       ? `<a class="trending-reference" data-trending-reference="${esc(key)}" href="#item=${esc(key)}" aria-label="${esc(label)}の原因と代替案">原因と代替案</a>` : "";
     const hint = inquirySummary(hintRows) || trendingNoticeHint(hintRows);
-    return `<div class="trending-entry" data-trending-slug="${esc(t.slug)}"><a class="trending-chip" href="${key ? '#item='+details[t.slug] : '#q='+encodeURIComponent(t.q)}">${esc(label)}</a><p class="trending-hint">${esc(hint)}</p>${names}${reference}</div>`;
+    return `<div class="trending-entry" data-trending-slug="${esc(t.slug)}"><a class="trending-chip" href="${key ? '#item='+details[t.slug] : '#'+new URLSearchParams({q:t.q}).toString()}">${esc(label)}</a><p class="trending-hint">${esc(hint)}</p>${names}${reference}</div>`;
   }).join("");
   const resolve = focus=>{
     if(!focus) return null;
