@@ -3,24 +3,36 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-11-19T07:12:18+09:00",
-  "last_success_at": "2026-11-19T07:12:18+09:00",
+  "checked_at": "2026-11-20T07:07:41+09:00",
+  "last_success_at": "2026-11-20T07:07:41+09:00",
   "items": [
+    {
+      "title": "【ゼリア新薬27年3月期中間決算】海外事業好調で増収増益‐ヘパリーゼ群は微減",
+      "url": "https://www.yakuji.co.jp/entry141877.html",
+      "date": "2026-11-19",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【楽天メディカル】新たな光免疫療法で治験‐PD-L1を標的",
+      "url": "https://www.yakuji.co.jp/entry141875.html",
+      "date": "2026-11-19",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【ENSEMBLExJ】海外開発品導入を促進‐癌以外の全疾患領域に拡大",
+      "url": "https://www.yakuji.co.jp/entry141872.html",
+      "date": "2026-11-19",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【安定供給部会】国産原薬優遇案を疑問視‐政府のMCM戦略踏まえ",
+      "url": "https://www.yakuji.co.jp/entry141869.html",
+      "date": "2026-11-19",
+      "tag": "業界ニュース"
+    },
     {
       "title": "【厚労省】「ステミラック」が本承認‐新医薬品など21品目承認",
       "url": "https://www.yakuji.co.jp/entry141874.html",
-      "date": "2026-11-18",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【NPhA】薬剤師需給推計で意見書‐将来の業務量反映求める",
-      "url": "https://www.yakuji.co.jp/entry141871.html",
-      "date": "2026-11-18",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "防災考慮し医療体制検討‐日薬 岩月会長、防災庁設置に言及",
-      "url": "https://www.yakuji.co.jp/entry141868.html",
       "date": "2026-11-18",
       "tag": "業界ニュース"
     },
