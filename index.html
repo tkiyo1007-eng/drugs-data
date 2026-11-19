@@ -1301,7 +1301,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .app-cta-text{flex:1;min-width:0;position:relative}
 .app-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:24px}
 .showcase-app-icon{display:block;width:64px;height:64px;object-fit:contain;border-radius:14px;flex-shrink:0;box-shadow:0 3px 12px rgba(14,27,61,.14)}
-.app-cta .showcase-app-icon{margin:12px 0}
+.app-cta .showcase-app-icon{margin:18px 5px;outline:5px solid #fff}
 .app-gallery-card{padding:28px;display:flex;flex-direction:column;align-items:flex-start;gap:12px;min-width:0}
 .app-gallery-card h3{font-size:24px;line-height:1.4;margin:0;color:var(--ink)}
 .app-gallery-card p{font-size:15px;line-height:1.9;color:var(--sub);margin:0}
@@ -1336,6 +1336,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .app-cta-qr span{display:block;margin-top:14px;font-size:12.5px;font-weight:700;opacity:.85;letter-spacing:.02em}
 @media(max-width:760px){
   .app-cta{flex-direction:column;text-align:center;padding:44px 24px}
+  .app-cta .showcase-app-icon{margin-inline:auto}
   .app-cta p{margin:0 auto 32px}
 }
 
