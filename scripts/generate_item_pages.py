@@ -1549,10 +1549,11 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
     lifecycle_current = bool(supplemental_trusted and lifecycle_match
                              and lifecycle_verification_is_recent(
                                  lifecycle_match, supplemental_checked_date))
-    wrap = ' style="white-space:normal;overflow-wrap:anywhere;max-width:100%;margin-left:0"'
     supplemental_tags = "".join(
-        f'<span class="tag supplemental"{wrap if label in discontinuation_labels else ""}>{esc(label)}</span>'
+        f'<span class="tag supplemental{" discontinuation" if label in discontinuation_labels else ""}">{esc(label)}</span>'
         for label in supplements)
+    discontinuation_style = ('.tag.discontinuation{white-space:normal;overflow-wrap:anywhere;'
+                             'max-width:100%;margin-left:0}\n' if discontinuation_labels else "")
     supplemental_checked = ""
     if supplements:
         supplemental_checked = (f'<p class="supp-checked">メーカー補足情報の確認日：'
@@ -1828,7 +1829,7 @@ h1{{font-size:22px;line-height:1.45;margin-bottom:6px}}
 .status-ended{{color:#7A5E49;background:#F2EBE4}}
 .tag.delist{{color:#7A5E49;background:#F2EBE4}}      /* 5.04:1 */
 .tag.supplemental{{color:#6B4310;background:#FFF3D8;border:1px solid #E4B662}}
-.delist-box{{color:#7A5E49;background:#F7F1EA;border:1px solid #E3D5C6}} /* 5.31:1 */
+{discontinuation_style}.delist-box{{color:#7A5E49;background:#F7F1EA;border:1px solid #E3D5C6}} /* 5.31:1 */
 .supp{{border-radius:12px;padding:14px 16px;font-size:13px;margin:0 0 14px;line-height:1.7}}
 .supp strong{{display:block;margin-bottom:4px}}
 .supp p{{margin:3px 0}}
