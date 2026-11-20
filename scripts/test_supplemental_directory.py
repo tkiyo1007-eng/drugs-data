@@ -1,9 +1,24 @@
 import unittest
 
-from generate_item_pages import hub_html, item_page_lastmod, lifecycle_end_details, page_html
+from generate_item_pages import (
+    hub_html, item_page_lastmod, lifecycle_end_details, manufacturer_discontinuation_labels, page_html,
+)
 
 
 class SupplementalDirectoryTests(unittest.TestCase):
+    def test_discontinuation_label_keeps_the_documented_kind_scope_and_schedule(self):
+        row = {"YJコード": "1111111F1111", "商品名": "対象錠", "販売メーカー": "対象製薬"}
+        entry = {"event_type": "discontinued", "title": "対象錠 製造販売中止予定",
+                 "maker": "対象製薬", "url": "https://example.test/notice.pdf", "sha256": "a" * 64,
+                 "targets": [{"yj_code": "1111111F1111", "product_name": "対象錠",
+                              "scope": "seller_route_and_package", "seller": "A社",
+                              "packages": [{"package": "PTP100錠"}]}]}
+        self.assertEqual(manufacturer_discontinuation_labels(row, [entry]),
+                         ["メーカー：製造販売中止予定（A社・PTP100錠）"])
+        self.assertEqual(manufacturer_discontinuation_labels(row, [entry], {
+            "items": [{"url": entry["url"], "sha256": "b" * 64}],
+        }), ["メーカー：中止案内（要原文確認）"])
+
     def entry(self, key, **values):
         return {"key": key, "name": key, "maker": "対象製薬", "status": "ok",
                 "hubs": ["supplemental"], **values}
