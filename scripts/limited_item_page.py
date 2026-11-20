@@ -30,7 +30,7 @@ def comparison_html(rows, note):
 
 
 def overview_html(row, name, maker, release, source_date, imported, version, updated,
-                  delist, notices, shortcuts, spec_note):
+                  delist, notices, shortcuts, spec_note, discontinuation_labels=()):
     # Keep strength units together even on narrow screens.
     name = re.sub(r"[０-９0-9]+(?:[．.][０-９0-9]+)?(?:[％%]|[ｍm][ｇg]|[μµ]g)|(?:ＬＤ|ＨＤ|LD|HD)$",
                   r'<span class="strength">\g<0></span>', escape(name))
@@ -46,8 +46,10 @@ def overview_html(row, name, maker, release, source_date, imported, version, upd
     yj = escape(row.get("YJコード") or "")
     code = f'<span>YJ {yj}</span>' if yj else ''
     caution = '<span class="caution">薬価削除予定</span>' if delist else ''
+    manufacturer_status = "".join(
+        f'<p><strong class="caution">{escape(label)}</strong></p>' for label in discontinuation_labels)
     return f'''<div class="intro"><p class="maker">{escape(maker)}</p><h1>{name}</h1>
-<p class="spec"><b>{escape(row.get("規格") or "規格の記載なし")}</b> {code}</p>{spec_note}</div>
+<p class="spec"><b>{escape(row.get("規格") or "規格の記載なし")}</b> {code}</p>{manufacturer_status}{spec_note}</div>
 <section class="summary" data-version="{escape(version)}" data-spec-note="{int(bool(spec_note))}" data-source="{escape(source_date)}" data-imported="{escape(imported)}">
 <h2>厚労省の供給状況</h2><div class="statusline"><strong class="status limited">{escape(row["供給状況"])}</strong>{caution}
 <span>厚労省基準日 <time>{escape(source_date or "確認できません")}</time></span></div>

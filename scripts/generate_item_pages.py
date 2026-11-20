@@ -801,6 +801,30 @@ def manufacturer_notice_label(row: dict, notices=(), bulletins=None) -> str:
             else "確認済みメーカー案内")
 
 
+def manufacturer_discontinuation_labels(row, notices=(), bulletins=None):
+    labels = {}
+    for match in matching_manufacturer_notices(row, notices, bulletins):
+        notice, target = match["notice"], match["target"]
+        if notice.get("event_type") != "discontinued":
+            continue
+        kind = re.search(r"(製造販売中止|製造中止|販売中止|販売終了|包装中止|取扱い?中止)(?:の)?(予定)?",
+                         unicodedata.normalize("NFKC", notice["title"]))
+        if not kind:
+            continue
+        if match["source_changed"] or manufacturer_notice_needs_review(notice, bulletins):
+            labels["メーカー：中止案内（要原文確認）"] = None
+            continue
+        packages = (package["package"] if isinstance(package, dict) else package
+                    for package in target["packages"])
+        scope = list(dict.fromkeys(name.strip() for name in packages if name.strip()))
+        if target.get("scope", "").startswith("seller_route"):
+            scope.insert(0, target.get("seller") or "販売経路限定")
+        action = kind[1] + ("予定" if kind[2] else "の案内")
+        suffix = f'（{"・".join(scope)}）' if scope else ""
+        labels[f"メーカー：{action}{suffix}"] = None
+    return list(labels)
+
+
 def manufacturer_notice_scope_text(target: dict) -> str:
     scope = {"product": "品目", "package": "一部包装", "seller_route": "販売経路",
              "seller_route_and_package": "販売経路・一部包装"}[target["scope"]]
@@ -1513,14 +1537,23 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
     supplements = supplemental_labels(
         row, lifecycle_match, discrepancy_match, supplemental_checked_date,
         supplemental_trusted)
-    notice_label = manufacturer_notice_label(row, manufacturer_notices, manufacturer_bulletins)
-    if notice_label:
-        supplements.append(notice_label)
+    discontinuation_labels = manufacturer_discontinuation_labels(
+        row, manufacturer_notices, manufacturer_bulletins)
+    if discontinuation_labels:
+        supplements = discontinuation_labels + [
+            label for label in supplements if not label.startswith("メーカー：販売中止")]
+    else:
+        notice_label = manufacturer_notice_label(row, manufacturer_notices, manufacturer_bulletins)
+        if notice_label:
+            supplements.append(notice_label)
     lifecycle_current = bool(supplemental_trusted and lifecycle_match
                              and lifecycle_verification_is_recent(
                                  lifecycle_match, supplemental_checked_date))
     supplemental_tags = "".join(
-        f'<span class="tag supplemental">{esc(label)}</span>' for label in supplements)
+        f'<span class="tag supplemental{" discontinuation" if label in discontinuation_labels else ""}">{esc(label)}</span>'
+        for label in supplements)
+    discontinuation_style = ('.tag.discontinuation{white-space:normal;overflow-wrap:anywhere;'
+                             'max-width:100%;margin-left:0}\n' if discontinuation_labels else "")
     supplemental_checked = ""
     if supplements:
         supplemental_checked = (f'<p class="supp-checked">メーカー補足情報の確認日：'
@@ -1769,7 +1802,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
                      row, display_name, maker, public_metadata.get("解除・解消見込み"),
                      mhlw_excel_date(version_metadata, dataset_date), reference_import, reference_version,
                      official_row_date(row), delist, matching_manufacturer_notices(row, manufacturer_notices, manufacturer_bulletins),
-                     shortcuts, spec_difference_html + gas_spec_note))
+                     shortcuts, spec_difference_html + gas_spec_note, discontinuation_labels))
         # Keep warnings beside the source they qualify. Render each full notice and topic only once.
         promoted_sections = (delist_box + lifecycle_box + discrepancy_box + supplemental_checked
                              + manufacturer_box + topic_box + '<h2 id="itemDetails">品目の詳細</h2>')
@@ -1796,7 +1829,7 @@ h1{{font-size:22px;line-height:1.45;margin-bottom:6px}}
 .status-ended{{color:#7A5E49;background:#F2EBE4}}
 .tag.delist{{color:#7A5E49;background:#F2EBE4}}      /* 5.04:1 */
 .tag.supplemental{{color:#6B4310;background:#FFF3D8;border:1px solid #E4B662}}
-.delist-box{{color:#7A5E49;background:#F7F1EA;border:1px solid #E3D5C6}} /* 5.31:1 */
+{discontinuation_style}.delist-box{{color:#7A5E49;background:#F7F1EA;border:1px solid #E3D5C6}} /* 5.31:1 */
 .supp{{border-radius:12px;padding:14px 16px;font-size:13px;margin:0 0 14px;line-height:1.7}}
 .supp strong{{display:block;margin-bottom:4px}}
 .supp p{{margin:3px 0}}
