@@ -565,7 +565,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .discontinued-badge{
   font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:999px;
   color:#7B3F28;background:rgba(138,106,82,.15);border:1px solid rgba(138,106,82,.42);
-  white-space:nowrap;
+  overflow-wrap:anywhere;
 }
 .discrepancy-badge{
   font-size:10.5px;font-weight:900;padding:4px 10px;border-radius:999px;
@@ -907,6 +907,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 .modal-close:hover{background:#fff;color:var(--ink);transform:rotate(90deg)}
 .modal-badges{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+#mDiscontinuation{display:contents}
 .modal .status-tag{display:inline-block}
 .modal .delist-badge{display:inline-block;margin:0}
 .modal .delist-badge[hidden]{display:none}
@@ -2573,6 +2574,10 @@ html.season-autumn .autumn-sky{display:none}
   <h2>サイトの更新情報</h2>
   <div class="news-list glass">
     <div class="news-item">
+      <div class="news-date num">2026.11.20</div>
+      <div class="news-body"><span class="news-tag">品目表示</span>メーカーが案内した販売・製造の中止と対象包装を、検索結果と品目詳細の上部で確認できるようにしました。</div>
+    </div>
+    <div class="news-item">
       <div class="news-date num">2026.11.18</div>
       <div class="news-body"><span class="news-tag">薬名検索</span>「モビコールLD」のように規格を続けて検索できます。限定出荷一覧では、ページ上部で品目を絞り込めます。</div>
     </div>
@@ -2835,6 +2840,7 @@ html.season-autumn .autumn-sky{display:none}
     <div class="modal-badges">
       <span class="status-tag" id="mTag"></span>
       <span class="delist-badge" id="mDelist" hidden>薬価削除予定</span>
+      <span id="mDiscontinuation"></span>
     </div>
     <p class="data-load-error" id="mStorageSaveError" role="alert" hidden></p>
     <h3 id="mTitle">品目詳細</h3>
@@ -3534,13 +3540,7 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
     const days = daysAgo(d.d);
     const ago = days!=null ? `<span class="drug-ago num">（${days.toLocaleString()}日前）</span>` : "";
     const delistBadge = d.delist ? `<span class="delist-badge">薬価削除予定</span>` : "";
-    // 厚労省の現在の供給区分と、メーカーが公表した将来の販売中止は両立し得る。
-    // 「通常出荷」を上書きせず、別のバッジで販売中止予定を明示する。
-    const lifecycleNotice = lifecycleAnnouncement(d);
-    const discontinuedBadge = d.s !== "ended" && lifecycleNotice
-      ? `<span class="discontinued-badge">${lifecycleNotice.verificationRecent
-          ? "販売中止の案内あり"
-          : "販売中止案内あり（要原文確認）"}</span>` : "";
+    const discontinuedBadge = discontinuationBadgesHtml(d);
     // 厚労省区分は変更せず、日付・メーカー・製品規格まで一致した新しい
     // メーカー公式案内が異なる状態を示す場合だけ、独立した黄色バッジを付ける。
     const discrepancyBadge = discrepancyFor(d)
@@ -3569,7 +3569,7 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
       </div>
       <div class="drug-maker">${esc(d.m)}${spec}</div>
       <div class="drug-foot">
-        <span class="drug-tags"><span class="status-tag">${st.label}</span>${discrepancyBadge}${makerSupplyBadge}${packageSupplyBadge}${changeBadge}${volumeBadge}${delistBadge}${discontinuedBadge}</span>
+        <span class="drug-tags"><span class="status-tag">${st.label}</span>${discontinuedBadge}${discrepancyBadge}${makerSupplyBadge}${packageSupplyBadge}${changeBadge}${volumeBadge}${delistBadge}</span>
         <span class="drug-date num">公表行更新 ${d.d}${ago}</span>
       </div>
       ${packageSupplyBadge ? '<span class="package-supply-context">メーカー文書の記載です。現在の在庫は要確認</span>' : ''}
@@ -4336,6 +4336,28 @@ function manufacturerNoticesFor(d, includeChanged=false){
       && lifecycleMakerMatches(t.maker || notice.maker, itemMakerText(d)));
     return target ? [{notice,target}] : [];
   });
+}
+function discontinuationBadgesHtml(d){
+  const labels = new Set();
+  for(const {notice,target} of manufacturerNoticesFor(d,true)){
+    if(notice.event_type !== "discontinued") continue;
+    const kind = notice.title.normalize("NFKC").match(/(製造販売中止|製造中止|販売中止|販売終了|包装中止|取扱い?中止)(?:の)?(予定)?/);
+    if(!kind) continue;
+    if(manufacturerNoticeChanged(notice) || manufacturerNoticeNeedsReview(notice) || MANUFACTURER_NOTICES_CACHED){
+      labels.add("メーカー：中止案内（要原文確認）");
+      continue;
+    }
+    const scope = [...new Set(target.packages.map(p=>p.package.trim()).filter(Boolean))];
+    if(target.scope?.startsWith("seller_route")) scope.unshift(target.seller || "販売経路限定");
+    const action = kind[1] + (kind[2] ? "予定" : "の案内");
+    labels.add(`メーカー：${action}${scope.length ? `（${scope.join("・")}）` : ""}`);
+  }
+  if(!labels.size && d.s !== "ended"){
+    const lifecycle = lifecycleAnnouncement(d);
+    if(lifecycle) labels.add(lifecycle.verificationRecent
+      ? "販売中止の案内あり" : "販売中止案内あり（要原文確認）");
+  }
+  return [...labels].map(label=>`<span class="discontinued-badge">${esc(label)}</span>`).join("");
 }
 function manufacturerPackageBadgeHtml(item){
   const matches = manufacturerNoticesFor(item).filter(({target})=>target.packages.some(p=>validManufacturerPackageSupply(p.supply)));
@@ -5999,6 +6021,7 @@ function openDetail(d, opts={}){
   const tag = document.getElementById("mTag");
   tag.textContent = st.label;
   tag.style.setProperty("--sc", st.color);
+  document.getElementById("mDiscontinuation").innerHTML = discontinuationBadgesHtml(d);
   document.getElementById("mDelist").hidden = !d.delist;
   document.getElementById("mTitle").textContent = d.n;
   document.getElementById("mMaker").textContent = d.m;
