@@ -137,6 +137,10 @@ jobs:
               "3999476A1020": ("ウステキヌマブＢＳ点滴静注１３０ｍｇ「ニプロ」", "ニプロ"),
               # https://pharma-navi.bayer.jp/sites/g/files/rptbxg576/files/2026-10/hyr-npa-20261029.pdf
               "4291103F1021": ("ヒアニュオ錠１０ｍｇ", "バイエル薬品"),
+              # https://lundbeck-prod.adobemsbasic.com/jp/jp/press/news-archive (2026-11-13発売資料: 自社単独販売)
+              "1190412A1021": ("ビエプチ点滴静注１００ｍｇ", "ルンドベックジャパン"),
+              # https://www.abbvie.co.jp/press-release/2026-11-18-skyrizi-55mg-prefilled-syringe-launch.html
+              "3999450G6020": ("スキリージ皮下注５５ｍｇシリンジ０．３７ｍＬ", "アッヴィ"),
           }
           for yj, x in xl.items():
               if yj in seen: continue
