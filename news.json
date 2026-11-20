@@ -1,5 +1,11 @@
 [
  {
+  "date": "2026/11/20",
+  "title": "薬・ワクチンのガイド（必須版）のWebアンケート調査を開始しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/items-information/guide-for-patients/0001.html",
+  "tag": "安全対策"
+ },
+ {
   "date": "2026/11/19",
   "title": "令和8年度治験エコシステム導入推進事業の情報発信協力機関を追加募集します",
   "url": "https://www.pmda.go.jp/relief-services/0011.html",
@@ -52,11 +58,5 @@
   "title": "患者副作用報告（2026年4月1日から2026年7月31日受付分）を追加しました",
   "url": "https://www.pmda.go.jp/safety/reports/patients/0005.html",
   "tag": "安全対策"
- },
- {
-  "date": "2026/11/12",
-  "title": "医薬品の最適使用推進ガイドラインを掲載しました",
-  "url": "https://www.pmda.go.jp/review-services/drug-reviews/review-information/p-drugs/0028.html",
-  "tag": "承認審査"
  }
 ]
