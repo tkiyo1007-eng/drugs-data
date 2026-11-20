@@ -1031,6 +1031,13 @@ def lifecycle_verification_is_recent(lifecycle: dict, reference_date: str) -> bo
     return 0 <= age < 7
 
 
+def lifecycle_discontinuation_label(lifecycle: dict, current: bool) -> str:
+    source_title = unicodedata.normalize("NFKC", str(lifecycle.get("source_title") or ""))
+    manufacturing = re.search(r"製造販売中止|製造中止", source_title)
+    kind = manufacturing[0] if manufacturing else "販売中止"
+    return f"{kind}の案内あり" if current else f"{kind}案内あり（要原文確認）"
+
+
 def supplemental_labels(row: dict, lifecycle=None, discrepancy=None,
                         reference_date="", trusted=True) -> list:
     """検索・共有・一覧にも出す、検証済みメーカー補足ラベルを返す。"""
@@ -1039,8 +1046,7 @@ def supplemental_labels(row: dict, lifecycle=None, discrepancy=None,
         lifecycle_current = trusted and lifecycle_verification_is_recent(
             lifecycle, reference_date)
         labels.append("メーカー原典更新・再確認待ち" if lifecycle.get("source_changed")
-                      else "メーカー：販売中止の案内あり" if lifecycle_current
-                      else "メーカー：販売中止案内あり（要原文確認）")
+                      else f"メーカー：{lifecycle_discontinuation_label(lifecycle, lifecycle_current)}")
     if discrepancy_matches(row, discrepancy):
         manufacturer = discrepancy.get("manufacturer") or {}
         high = (trusted and discrepancy.get("confidence") == "high"
@@ -1534,15 +1540,13 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
     lifecycle = lifecycle_for_display(lifecycle, manufacturer_notices, manufacturer_bulletins)
     lifecycle_match = lifecycle if supplemental_matches(row, lifecycle) else None
     discrepancy_match = discrepancy if discrepancy_matches(row, discrepancy) else None
-    supplements = supplemental_labels(
-        row, lifecycle_match, discrepancy_match, supplemental_checked_date,
-        supplemental_trusted)
     discontinuation_labels = manufacturer_discontinuation_labels(
         row, manufacturer_notices, manufacturer_bulletins)
-    if discontinuation_labels:
-        supplements = discontinuation_labels + [
-            label for label in supplements if not label.startswith("メーカー：販売中止")]
-    else:
+    shown_lifecycle = (lifecycle_match if not discontinuation_labels
+                       or (lifecycle_match or {}).get("source_changed") else None)
+    supplements = discontinuation_labels + supplemental_labels(
+        row, shown_lifecycle, discrepancy_match, supplemental_checked_date, supplemental_trusted)
+    if not discontinuation_labels:
         notice_label = manufacturer_notice_label(row, manufacturer_notices, manufacturer_bulletins)
         if notice_label:
             supplements.append(notice_label)
@@ -1645,7 +1649,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
                              f'{lifecycle_link}</div>')
         else:
             lifecycle_box = f'''<div class="supp supp-life">
-      <strong>メーカー公式：{"販売中止の案内あり" if lifecycle_current else "販売中止案内あり（要原文確認）"}</strong>
+      <strong>メーカー公式：{esc(lifecycle_discontinuation_label(lifecycle_match, lifecycle_current))}</strong>
       <p>{esc(lifecycle_match.get("source_title") or "販売中止の案内")}'''
             if lifecycle_match.get("announced_at"):
                 lifecycle_box += f'（公表 {esc(lifecycle_match.get("announced_at"))}）'
@@ -1797,12 +1801,15 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
             shortcuts.append(("relatedTopicTitle", "過去の記録"))
         if siblings:
             shortcuts.append(("compare", "規格を比較"))
+        headline_labels = discontinuation_labels or [
+            label for label in supplements if label.startswith("メーカー：製造")
+        ]
         intro = ('<nav class="trail" aria-label="パンくず"><a href="index.html">品目別の供給状況</a> / 品目詳細</nav>'
                  + limited_item_page.overview_html(
                      row, display_name, maker, public_metadata.get("解除・解消見込み"),
                      mhlw_excel_date(version_metadata, dataset_date), reference_import, reference_version,
                      official_row_date(row), delist, matching_manufacturer_notices(row, manufacturer_notices, manufacturer_bulletins),
-                     shortcuts, spec_difference_html + gas_spec_note, discontinuation_labels))
+                     shortcuts, spec_difference_html + gas_spec_note, headline_labels))
         # Keep warnings beside the source they qualify. Render each full notice and topic only once.
         promoted_sections = (delist_box + lifecycle_box + discrepancy_box + supplemental_checked
                              + manufacturer_box + topic_box + '<h2 id="itemDetails">品目の詳細</h2>')
