@@ -3,9 +3,33 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-11-20T07:07:41+09:00",
-  "last_success_at": "2026-11-20T07:07:41+09:00",
+  "checked_at": "2026-11-21T08:31:07+09:00",
+  "last_success_at": "2026-11-21T08:31:07+09:00",
   "items": [
+    {
+      "title": "【27年度介護報酬改定】老健の薬剤師評価拡充か‐医療・介護連携を強化へ",
+      "url": "https://www.yakuji.co.jp/entry141994.html",
+      "date": "2026-11-20",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【医療保険部会】次期適正化計画の論点議論‐地域フォーミュラリに意見",
+      "url": "https://www.yakuji.co.jp/entry141991.html",
+      "date": "2026-11-20",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【医療安全情報】注射剤で投与間隔間違い‐スケジュール管理喚起",
+      "url": "https://www.yakuji.co.jp/entry141988.html",
+      "date": "2026-11-20",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【PhRMA】拡大案「到底容認できず」‐費用対評価に不満表明",
+      "url": "https://www.yakuji.co.jp/entry141987.html",
+      "date": "2026-11-20",
+      "tag": "業界ニュース"
+    },
     {
       "title": "【ゼリア新薬27年3月期中間決算】海外事業好調で増収増益‐ヘパリーゼ群は微減",
       "url": "https://www.yakuji.co.jp/entry141877.html",
@@ -28,18 +52,6 @@
       "title": "【安定供給部会】国産原薬優遇案を疑問視‐政府のMCM戦略踏まえ",
       "url": "https://www.yakuji.co.jp/entry141869.html",
       "date": "2026-11-19",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【厚労省】「ステミラック」が本承認‐新医薬品など21品目承認",
-      "url": "https://www.yakuji.co.jp/entry141874.html",
-      "date": "2026-11-18",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【八戸薬剤師会】遠隔診療と地域薬局連携へ‐平時の組織力を災害時も",
-      "url": "https://www.yakuji.co.jp/entry141866.html",
-      "date": "2026-11-18",
       "tag": "業界ニュース"
     }
   ]
