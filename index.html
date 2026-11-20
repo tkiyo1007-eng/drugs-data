@@ -1883,7 +1883,7 @@ html.season-autumn .autumn-sky{display:none}
       <button type="button" class="pill" data-f="ok" aria-pressed="false">通常出荷</button>
       <button type="button" class="pill" data-f="limited" aria-pressed="false">限定出荷</button>
       <button type="button" class="pill" data-f="stopped" aria-pressed="false">供給停止</button>
-      <button type="button" class="pill" data-f="ended" aria-pressed="false">販売中止・予定</button>
+      <button type="button" class="pill" data-f="ended" aria-pressed="false">販売・製造中止</button>
       <button type="button" class="pill" data-f="changed" id="pillChanged" aria-pressed="false" style="display:none"></button>
       <button type="button" class="pill" data-f="delist" id="pillDelist" aria-pressed="false" style="display:none"></button>
       <button type="button" class="pill" data-f="fav" id="pillFav" aria-pressed="false" style="display:none"></button>
@@ -2575,7 +2575,7 @@ html.season-autumn .autumn-sky{display:none}
   <div class="news-list glass">
     <div class="news-item">
       <div class="news-date num">2026.11.20</div>
-      <div class="news-body"><span class="news-tag">品目表示</span>メーカーが案内した販売・製造の中止と対象包装を、検索結果と品目詳細の上部で確認できるようにしました。</div>
+      <div class="news-body"><span class="news-tag">品目表示</span>メーカーが案内した販売・製造の中止と対象包装を、検索結果と品目詳細の上部で確認できます。「販売・製造中止」で絞り込むと、一部包装だけが対象の案内も探せます。</div>
     </div>
     <div class="news-item">
       <div class="news-date num">2026.11.18</div>
@@ -4054,7 +4054,8 @@ function lifecycleAnnouncement(d){
   };
 }
 function isSalesEnding(d){
-  return d.s === "ended" || d.delist || !!lifecycleFor(d);
+  return d.s === "ended" || d.delist || !!lifecycleFor(d)
+    || manufacturerNoticesFor(d,true).some(({notice})=>manufacturerDiscontinuationKind(notice));
 }
 function lifecycleEndDetails(item){
   if(!item) return "";
@@ -4215,8 +4216,7 @@ function discrepancyAnnouncement(d){
     announced_at:info.announced_at,
   };
 }
-// 「販売中止・予定」は、厚労省CSVの供給区分だけでなく、薬価削除予定と
-// メーカー公表の販売中止予定もまとめて探すための絞り込み。
+// メーカーの中止案内は品目単位と包装・販売経路単位の両方を検索対象にする。
 // 現在の厚労省CSVには供給区分そのものが「販売中止」の行が0件でも、
 // これらの補助情報には対象品目があるため、CSVの区分件数だけで隠さない。
 function refreshSalesEndingPill(items=ITEMS){
@@ -4224,8 +4224,8 @@ function refreshSalesEndingPill(items=ITEMS){
   if(!pill) return;
   const count = items.filter(isSalesEnding).length;
   pill.textContent = count
-    ? `販売中止・予定 ${count.toLocaleString()}`
-    : "販売中止・予定";
+    ? `販売・製造中止 ${count.toLocaleString()}`
+    : "販売・製造中止";
   pill.style.display = count ? "" : "none";
 }
 // 旧形式の案内・包装・要約JSONは商品名がキー。同名の別YJ・別規格へ
@@ -4250,6 +4250,8 @@ function legacySupplementalFor(map, d){
   return map[d.n] || null;
 }
 let MANUFACTURER_NOTICES = [];
+let indexedManufacturerNotices = null;
+const MANUFACTURER_NOTICES_BY_YJ = new Map();
 let MANUFACTURER_NOTICES_STATE = "loading";
 let MANUFACTURER_NOTICES_CACHED = false;
 let MANUFACTURER_BULLETINS = null;
@@ -4329,19 +4331,38 @@ function validManufacturerBulletins(data){
 }
 function manufacturerNoticesFor(d, includeChanged=false){
   if(!d || !d.yj) return [];
-  return MANUFACTURER_NOTICES.flatMap(notice=>{
+  if(indexedManufacturerNotices !== MANUFACTURER_NOTICES){
+    MANUFACTURER_NOTICES_BY_YJ.clear();
+    for(const notice of MANUFACTURER_NOTICES){
+      for(const yj of new Set(notice.targets.map(t=>t.yj_code))){
+        if(!MANUFACTURER_NOTICES_BY_YJ.has(yj)) MANUFACTURER_NOTICES_BY_YJ.set(yj,[]);
+        MANUFACTURER_NOTICES_BY_YJ.get(yj).push(notice);
+      }
+    }
+    indexedManufacturerNotices = MANUFACTURER_NOTICES;
+  }
+  const yj = normalizeYj(d.yj);
+  return (MANUFACTURER_NOTICES_BY_YJ.get(yj) || []).flatMap(notice=>{
     if(!includeChanged && manufacturerNoticeChanged(notice)) return [];
-    const target = notice.targets.find(t=>t.yj_code === normalizeYj(d.yj)
+    const target = notice.targets.find(t=>t.yj_code === yj
       && norm(t.product_name) === norm(d.n)
       && lifecycleMakerMatches(t.maker || notice.maker, itemMakerText(d)));
     return target ? [{notice,target}] : [];
   });
 }
+function manufacturerDiscontinuationKind(notice){
+  if(notice.event_type !== "discontinued") return null;
+  return String(notice.title || "").normalize("NFKC")
+    .match(/(製造販売中止|製造中止|販売中止|販売終了|包装中止|取扱い?中止)(?:の)?(予定)?/);
+}
+function lifecycleDiscontinuationLabel(lifecycle){
+  const kind = String(lifecycle.title || "").normalize("NFKC").match(/製造販売中止|製造中止/)?.[0] || "販売中止";
+  return lifecycle.verificationRecent ? `${kind}の案内あり` : `${kind}案内あり（要原文確認）`;
+}
 function discontinuationBadgesHtml(d){
   const labels = new Set();
   for(const {notice,target} of manufacturerNoticesFor(d,true)){
-    if(notice.event_type !== "discontinued") continue;
-    const kind = notice.title.normalize("NFKC").match(/(製造販売中止|製造中止|販売中止|販売終了|包装中止|取扱い?中止)(?:の)?(予定)?/);
+    const kind = manufacturerDiscontinuationKind(notice);
     if(!kind) continue;
     if(manufacturerNoticeChanged(notice) || manufacturerNoticeNeedsReview(notice) || MANUFACTURER_NOTICES_CACHED){
       labels.add("メーカー：中止案内（要原文確認）");
@@ -4354,8 +4375,10 @@ function discontinuationBadgesHtml(d){
   }
   if(!labels.size && d.s !== "ended"){
     const lifecycle = lifecycleAnnouncement(d);
-    if(lifecycle) labels.add(lifecycle.verificationRecent
-      ? "販売中止の案内あり" : "販売中止案内あり（要原文確認）");
+    if(lifecycle){
+      const label = lifecycleDiscontinuationLabel(lifecycle);
+      labels.add(label.startsWith("製造") ? `メーカー：${label}` : label);
+    }
   }
   return [...labels].map(label=>`<span class="discontinued-badge">${esc(label)}</span>`).join("");
 }
@@ -7920,7 +7943,7 @@ function failDataLoad(message){
   countUp(total);
   const order=[["ok","通常出荷"],["limited","限定出荷"],["stopped","供給停止"],["ended","販売中止"]];
   const active = order.filter(([k])=>counts[k]>0);
-  // 0件の供給ステータスは絞り込みピルも非表示にする。ただし「販売中止・予定」は
+  // 0件の供給ステータスは絞り込みピルも非表示にする。ただし「販売・製造中止」は
   // 薬価削除予定・メーカー公表情報も対象なので、別集計で表示を決める。
   for(const [k] of order){
     if(k!=="ended" && !counts[k]){
