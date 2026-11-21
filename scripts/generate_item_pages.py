@@ -59,6 +59,7 @@ PACKAGE_LANDING_KEYS = frozenset({
 PACKAGE_OVERVIEW_KEYS = frozenset({"2649805M1026", "3179106F1039"})
 LIMITED_REASON_KEYS = frozenset({"3999001Q6029", "2646730Q1026"})
 BONZOL_KEYS = frozenset({"2499007F1021", "2499007F2028"})
+ZICTOR_KEY = "1147700S1028"
 # drugs-data の generate_curated_pages.py（CATEGORY_MIN_ROWS）と同じ基準。
 # 分類ページが生成される分類だけにリンクし、404を出さない。
 CATEGORY_MIN_ROWS = 3
@@ -888,14 +889,19 @@ def package_overview_notice(key, matches, bulletins):
     return match if notice.get("event_type") in {"limited", "stopped", "resumed"} else None
 
 
+def notice_date_label(value):
+    date_parts = [int(part) for part in value.split("-")]
+    day = f"{date_parts[0]}年{date_parts[1]}月"
+    if len(date_parts) == 3:
+        day += f"{date_parts[2]}日"
+    return day
+
+
 def package_overview_content(key, match, display_name, status_label):
     notice, target = match["notice"], match["target"]
     packages = list(dict.fromkeys(p["package"] for p in target["packages"]))
     scope = "・".join(packages)
-    date_parts = [int(part) for part in notice["announced_at"].split("-")]
-    day = f"{date_parts[0]}年{date_parts[1]}月"
-    if len(date_parts) == 3:
-        day += f"{date_parts[2]}日"
+    day = notice_date_label(notice["announced_at"])
     source = (f'<a class="source-link" data-dsn-event="official-source-open" href="{esc(notice["url"])}">'
               f'{esc(day)}の{esc(notice["maker"])}の原文</a>')
     heading = "包装別のメーカー案内"
@@ -923,6 +929,59 @@ def package_overview_content(key, match, display_name, status_label):
     section = (f'<section class="{css_class}" aria-labelledby="packageBriefTitle">'
                f'<h2 id="packageBriefTitle">{heading}</h2>{body}</section>')
     return hint, f'{display_name}の厚労省公表区分は「{status_label}」。{description}', section
+
+
+def load_zictor_listing(site):
+    """Latest indexed manufacturer notice for this formal product name."""
+    try:
+        document = json.loads((site / "maker_announcements.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    return document.get("ジクトルテープ７５ｍｇ") if isinstance(document, dict) else None
+
+
+def zictor_package_overview(row, notices, bulletins, *, trusted, latest_listing):
+    """Return the same dated package comparison for the product and YJ pages."""
+    empty = ("", "", "")
+    if not trusted or item_key(row) != ZICTOR_KEY or not isinstance(latest_listing, dict):
+        return empty
+    matches = matching_manufacturer_notices(row, notices, bulletins)
+    match = package_overview_notice(ZICTOR_KEY, matches, bulletins)
+    if not match:
+        return empty
+    notice, target = match["notice"], match["target"]
+    if (notice["maker"] != "久光製薬" or latest_listing.get("maker") != notice["maker"]
+            or latest_listing.get("url") != notice["url"] or not notice.get("listed_at")
+            or latest_listing.get("announced_at") != notice["listed_at"]):
+        return empty
+    # Stable package codes distinguish two boxes that each contain 70 patches.
+    codes = ("188-48801-0", "188-48802-7")
+    packages = {p.get("unified_product_code"): p for p in target["packages"]}
+    if len(target["packages"]) != len(codes) or set(packages) != set(codes):
+        return empty
+    rows, notes = [], []
+    for code in codes:
+        package = packages[code]
+        supply = package["supply"]
+        note = supply.get("note") or supply.get("status_text")
+        if not note:
+            return empty
+        plans = [f'{PACKAGE_PLAN_LABELS[p["event"]]}：{p["timing"]}' for p in supply["plans"]]
+        detail = " ".join([note, *plans])
+        rows.append(f'<div><dt>{esc(package["package"])}</dt><dd>{esc(detail)}</dd></div>')
+        notes.append(detail)
+    day = notice_date_label(notice["announced_at"])
+    posted = notice_date_label(notice["listed_at"]) + "掲載"
+    source_label = (f"メーカー原文（{posted}）" if notice["listed_at"].startswith(notice["announced_at"])
+                    else f"{day}のメーカー原文（{posted}）")
+    section = (f'<section class="package-brief" aria-labelledby="packageBriefTitle">'
+               f'<h2 id="packageBriefTitle">久光製薬の包装別案内</h2>'
+               f'<a class="source-link" href="{esc(notice["url"])}" data-dsn-event="official-source-open">'
+               f'{esc(source_label)}</a>'
+               f'<dl class="package-brief-lines">{"".join(rows)}</dl>'
+               f'<small>原文確認日 {esc(iso_publication_date(notice["verified_at"]))}。現在の包装別の出荷状況・在庫は未確認です。</small></section>')
+    description = f'{row["商品名"]}の厚労省公表区分は「{row["供給状況"]}」。{day}の久光製薬の案内では、' + " ".join(notes)
+    return "1枚包装・7枚包装の出荷案内", description, section
 
 
 def manufacturer_notices_html(row: dict, notices=(), warning="", catalog_yj_codes=None, bulletins=None,
@@ -1321,7 +1380,7 @@ def item_page_lastmod(row: dict, lifecycle=None, discrepancy=None, manufacturer_
         dates.append(PACKAGE_LANDING_UPDATED_AT)
     if item_key(row) in PACKAGE_OVERVIEW_KEYS:
         dates.append("2026-11-21")  # 包装別の案内を品目ページの冒頭へ
-    if item_key(row) in LIMITED_REASON_KEYS | BONZOL_KEYS:
+    if item_key(row) in LIMITED_REASON_KEYS | BONZOL_KEYS or item_key(row) == ZICTOR_KEY:
         dates.append("2026-11-22")
     if is_delist(row) or supplemental_matches(row, lifecycle):
         dates.append(SUPPLEMENTAL_TEMPLATE_LASTMOD)
@@ -1603,7 +1662,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
               hub_slugs=(), display_names=None, category_codes=None,
               ingredient_slugs=None, manufacturer_notices=(), catalog_yj_codes=None,
               manufacturer_bulletins=None, version_metadata=None, product_variants=(), related_topics=(),
-              specification_comparison=None, share_card=item_share_cards.DEFAULT):
+              specification_comparison=None, share_card=item_share_cards.DEFAULT, zictor_listing=None):
     image_path, image_alt = share_card
     limited_layout = strict_status(row.get("供給状況")) == "limited"
     name = row["商品名"].strip()
@@ -1700,7 +1759,14 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
             + "。原Excelの基準日・品目行の更新日はページ内で分けて確認できます。")
     package_jump = ""
     package_overview = ""
-    if key in PACKAGE_OVERVIEW_KEYS | LIMITED_REASON_KEYS | BONZOL_KEYS:
+    if key == ZICTOR_KEY:
+        hint, comparison_desc, package_overview = zictor_package_overview(
+            row, manufacturer_notices, manufacturer_bulletins, trusted=supplemental_trusted,
+            latest_listing=zictor_listing)
+        if package_overview:
+            desc = comparison_desc
+            title = page_title(name, st["label"], supplements, title_qualifier, hint)
+    elif key in PACKAGE_OVERVIEW_KEYS | LIMITED_REASON_KEYS | BONZOL_KEYS:
         matches = matching_manufacturer_notices(row, manufacturer_notices, manufacturer_bulletins)
         overview = package_overview_notice(key, matches, manufacturer_bulletins) if supplemental_trusted else None
         if overview:
@@ -2824,6 +2890,7 @@ def main():
         latest_changes, by_key, dataset_date)
 
     topic_index = exact_target_topic_index(site)
+    zictor_listing = load_zictor_listing(site)
     category_codes = category_pages(rows)
     ingredient_slugs = ingredient_pages(rows)
 
@@ -2925,6 +2992,7 @@ def main():
                 related_topics=topic_index.get(k, []),
                 specification_comparison=specification_comparison,
                 share_card=share_cards.get(k, item_share_cards.DEFAULT),
+                zictor_listing=zictor_listing,
             ), encoding="utf-8")
 
     limited_item_page.prepare_assets(site)
