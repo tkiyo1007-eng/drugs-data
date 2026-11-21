@@ -58,7 +58,8 @@ PACKAGE_LANDING_KEYS = frozenset({
 })
 PACKAGE_OVERVIEW_KEYS = frozenset({"2649805M1026", "3179106F1039"})
 LIMITED_REASON_KEYS = frozenset({"3999001Q6029", "2646730Q1026"})
-BONZOL_KEYS = frozenset({"2499007F1021", "2499007F2028"})
+BONZOL_STRENGTHS = {"2499007F1021": "100mg", "2499007F2028": "200mg"}
+BONZOL_KEYS = frozenset(BONZOL_STRENGTHS)
 ZICTOR_KEY = "1147700S1028"
 # drugs-data の generate_curated_pages.py（CATEGORY_MIN_ROWS）と同じ基準。
 # 分類ページが生成される分類だけにリンクし、404を出さない。
@@ -262,6 +263,30 @@ def supply_answer_html(row, status, notices=(), lifecycle=None, bulletins=None):
 # ブランドと規格の対応を推測せず、確認対象の正式YJを明示する。
 REVOTOMIN_VARIANTS = frozenset({"1172014F1043", "1172014F2120", "1172014F3070",
                               "1172014B1033", "1172014B2048", "1172014D1077"})
+
+
+def bonzol_strength_selector(row, candidates, generated_keys):
+    current = row.get("YJコード")
+    if current not in BONZOL_KEYS or not BONZOL_KEYS.issubset(generated_keys):
+        return ""
+    found = set()
+    for candidate in [row, *candidates]:
+        code = candidate.get("YJコード")
+        if code not in BONZOL_KEYS:
+            continue
+        if (normalized_text(candidate.get("商品名")) != "ボンゾール錠" + BONZOL_STRENGTHS[code]
+                or normalized_text(candidate.get("販売メーカー")) != "田辺ファーマ"
+                or normalized_text(candidate.get("一般名")) != "ダナゾール"):
+            return ""
+        found.add(code)
+    if found != BONZOL_KEYS:
+        return ""
+    choices = [
+        f'<strong aria-current="page">{strength}<small>（表示中）</small></strong>' if code == current
+        else f'<a href="{code}.html" data-dsn-event="related-item-open">{strength}</a>'
+        for code, strength in BONZOL_STRENGTHS.items()
+    ]
+    return '<nav class="bonzol-strengths" aria-label="ボンゾールの規格"><span>規格</span>' + ''.join(choices) + '</nav>'
 
 
 def product_variants_html(row, candidates, generated_keys):
@@ -1958,6 +1983,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
         source_date = mhlw_excel_date(version_metadata, dataset_date) or "確認できません"
         supply_answer = f'<p>厚労省基準日　{esc(source_date)}</p>' + supply_answer
     variants_html = product_variants_html(row, product_variants, generated_keys)
+    strength_selector = bonzol_strength_selector(row, product_variants, generated_keys)
 
     topic_box = related_topics_html(related_topics)
     main_attr = ""
@@ -1988,7 +2014,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
                      row, display_name, maker, public_metadata.get("解除・解消見込み"),
                      mhlw_excel_date(version_metadata, dataset_date), reference_import, reference_version,
                      official_row_date(row), delist, matching_manufacturer_notices(row, manufacturer_notices, manufacturer_bulletins),
-                     shortcuts, spec_difference_html + gas_spec_note, headline_labels, package_overview))
+                     shortcuts, spec_difference_html + gas_spec_note, headline_labels, package_overview, strength_selector))
         # Keep warnings beside the source they qualify. Render each full notice and topic only once.
         promoted_sections = (delist_box + lifecycle_box + discrepancy_box + supplemental_checked
                              + manufacturer_box + topic_box + '<h2 id="itemDetails">品目の詳細</h2>')
@@ -2086,13 +2112,23 @@ footer a{{color:var(--sub)}}
         header = f"""  <header class="site site-with-top"><a href="{SITE_ROOT}">💊 医薬品供給ナビ</a><a class="top-link" href="../#top">トップへ</a></header>
   <nav class="crumb" aria-label="パンくず"><a href="{SITE_ROOT}">トップ</a> › <a href="index.html">品目別の供給状況</a> › {esc(display_name)}</nav>
 """
+        identity = esc(maker) + ("｜" + esc(spec) if spec else "")
+        maker_line = (f'<div class="maker bonzol-meta"><span>{identity}</span>{strength_selector}</div>'
+                      if strength_selector else f'<p class="maker">{identity}</p>')
         intro = f"""    <h1>{esc(display_name)}<span class="tag status-{status}">厚労省：{st['label']}</span>{supplemental_tags}{delist_tag}</h1>
-    <p class="maker">{esc(maker)}{('｜' + esc(spec)) if spec else ''}</p>
+    {maker_line}
 """
         legacy_share = """    <button class="share" id="shareButton" type="button">この品目ページを共有</button>
     <p class="share-status" id="shareStatus" role="status" aria-live="polite"></p>
 """
 
+    if strength_selector:
+        styles += """<style>
+.bonzol-meta,.bonzol-strengths{display:flex;flex-wrap:wrap;align-items:center;gap:0 10px}
+.bonzol-meta{margin-bottom:6px}.bonzol-strengths{font-size:14px}
+.bonzol-strengths strong{color:var(--ink)}.bonzol-strengths small{font-size:12px}
+.bonzol-strengths a{display:inline-flex;align-items:center;min-height:44px;color:var(--blue);font-weight:700;text-underline-offset:3px}
+</style>"""
     return f"""<!DOCTYPE html>
 <html lang="ja">
 <head>
