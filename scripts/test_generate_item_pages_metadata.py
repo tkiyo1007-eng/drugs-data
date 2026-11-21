@@ -837,7 +837,8 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
             def render(day, source=pending, trusted=True):
                 return page_html(row, key, status, "2025-06-14", [], {key}, manufacturer_notices=[notice],
                                  manufacturer_bulletins={"checked_at": day, "items": [source]},
-                                 supplemental_trusted=trusted)
+                                 supplemental_trusted=trusted, dataset_date="2025-06-14",
+                                 version_metadata={"version": 202506140001, "mhlw_excel_date": "2025-06-11"})
             page = render(stamp, pending if status == "limited" else dict(pending, review_status="confirmed"))
             brief = re.search(r'<section class="package-brief[^>]*>.*?</section>', page, re.S).group()
             self.assertIn("100個", brief)
@@ -850,6 +851,8 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
             if status == "limited":
                 self.assertIn("直近の自動照合は未実施", brief)
                 self.assertIn("最新の原典は再確認待ち", page)
+            else:
+                self.assertLess(page.index("厚労省基準日　2025-06-11"), page.index(brief))
             for uncertain in (render(""), render(stamp, dict(pending, sha256="f" * 64)),
                               render(stamp, dict(pending, hash_status="error")),
                               render(stamp, dict(pending, last_changed_at="2025-06-14T01:00:00+09:00")),

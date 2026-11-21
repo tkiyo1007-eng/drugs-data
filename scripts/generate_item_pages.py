@@ -1888,6 +1888,9 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
     })
     quick_answers = quick_answers_html(row, status, display_name)
     supply_answer = supply_answer_html(row, status, manufacturer_notices, lifecycle_match, manufacturer_bulletins)
+    if key in BONZOL_KEYS and not limited_layout:
+        source_date = mhlw_excel_date(version_metadata, dataset_date) or "確認できません"
+        supply_answer = f'<p>厚労省基準日　{esc(source_date)}</p>' + supply_answer
     variants_html = product_variants_html(row, product_variants, generated_keys)
 
     topic_box = related_topics_html(related_topics)
