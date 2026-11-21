@@ -30,6 +30,7 @@ from generate_item_pages import (
     manufacturer_notice_index,
     matching_manufacturer_notices,
     manufacturer_notices_html,
+    zictor_package_overview,
     load_status_changes,
     official_row_date,
     page_html,
@@ -818,6 +819,39 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
         self.assertNotIn("原典の案内年月日：2026-10-13", output)
         self.assertIn('data-source-sha256="' + "a" * 64 + '"', output)
         self.assertIn("メーカー説明の理由：製造工程上の確認事項により入庫が遅延", output)
+
+    def test_zictor_package_comparison_uses_only_the_latest_verified_original(self):
+        row = dict(self.row(), 商品名="ジクトルテープ７５ｍｇ", YJコード="1147700S1028",
+                   供給状況="②限定出荷（自社の事情）", 販売メーカー="久光製薬")
+        def package(code, name, handling):
+            return {"unified_product_code": code, "package": name,
+                    "supply": {"status": "limited", "plans": [], "status_text": "案内時点で限定出荷", "note": handling}}
+        packages = [package("188-48801-0", "1枚×70袋", "出荷を停止予定。"),
+                    package("188-48802-7", "7枚×10袋", "限定出荷継続。")]
+        target = {"product_name": row["商品名"], "yj_code": row["YJコード"], "scope": "package", "packages": packages}
+        notice = dict(self.notice(), maker="久光製薬", announced_at="2026-10", listed_at="2026-10-30",
+                      targets=[target], event_type="limited")
+        listing = {"maker": "久光製薬", "url": notice["url"], "announced_at": "2026-10-30"}
+        missing = ("", "", "")
+        def render(notices, current=listing, bulletins={"items": []}, trusted=True):
+            return zictor_package_overview(row, notices, bulletins, trusted=trusted, latest_listing=current)
+        hint, desc, block = render([notice])
+        self.assertIn("1枚包装・7枚包装", hint)
+        self.assertIn("②限定出荷", desc)
+        self.assertRegex(block, "1枚×70袋</dt><dd>出荷を停止予定")
+        self.assertRegex(block, "7枚×10袋</dt><dd>限定出荷継続")
+        self.assertIn("メーカー原文（2026年10月30日掲載）", block)
+        self.assertIn("2026年9月のメーカー原文（2026年10月30日掲載）",
+                      render([dict(notice, announced_at="2026-09")])[2])
+        for result in (
+            render([notice], trusted=False), render([notice], bulletins=None), render([notice], current=None),
+            render([notice], current=dict(listing, url=notice["url"] + "2")),
+            render([notice], current=dict(listing, announced_at="2026-11-01")),
+            render([notice], bulletins={"items": [{"url": notice["url"], "sha256": "f" * 64}]}),
+            render([notice, dict(notice, announced_at="2026-11", targets=[dict(target, packages=packages[:1])])]),
+            render([notice, dict(notice, announced_at="2026-10-22")]),
+        ):
+            self.assertEqual(missing, result)
 
     def test_dated_reason_and_discontinuation_are_scoped_to_verified_packages(self):
         for key, status, official in (("3999001Q6029", "limited", "限定出荷"),

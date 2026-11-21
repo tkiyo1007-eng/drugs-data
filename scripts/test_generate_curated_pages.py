@@ -637,6 +637,24 @@ class CuratedPageGenerationTests(unittest.TestCase):
         self.assertIn('rel="canonical"', guide_html)
         self.assertIn('data-dsn-share-page', guide_html)
 
+    def test_zictor_product_shows_verified_packaging_before_share_and_keeps_fallback(self):
+        product = {"slug": "zictor-tape-75mg", "label": "ジクトルテープ75mg", "query": "ジクトル"}
+        row = {"商品名": "ジクトルテープ７５ｍｇ", "YJコード": "1147700S1028",
+               "供給状況": "②限定出荷（自社の事情）", "更新日": "2026/10/01"}
+        section = '<section id="verified-packages">案内時点の包装別の予定</section>'
+        inputs = (product, [row], {row["YJコード"]}, {})
+        page, lastmod = product_page(*inputs, package_brief=("包装別の出荷案内", "原文の要約", section),
+                                     source_date="2026-11-20")
+        self.assertLess(page.index(section), page.index("data-dsn-share-page"))
+        self.assertIn("厚労省公表　②限定出荷（自社の事情）", page)
+        self.assertIn("2026-11-20基準", page)
+        self.assertIn('<meta name="description" content="原文の要約">', page)
+        fallback, fallback_lastmod = product_page(*inputs, source_date="2026-11-23")
+        self.assertNotIn(section, fallback)
+        self.assertNotIn("原文の要約", fallback)
+        self.assertIn("厚労省の原典で確認", fallback)
+        self.assertGreaterEqual(fallback_lastmod, lastmod)
+
     def test_checked_in_high_demand_products_have_safe_intent_specific_copy(self):
         expected = {
             "lulicon-cream": [

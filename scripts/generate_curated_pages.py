@@ -16,7 +16,8 @@ from urllib.parse import quote
 from jst_time import jst_today
 from generate_item_pages import (
     dataset_dates_html, mhlw_excel_date, version_date, load_manufacturer_notices,
-    load_manufacturer_bulletins, lifecycle_for_display,
+    load_manufacturer_bulletins, lifecycle_for_display, supplemental_context,
+    load_zictor_listing, zictor_package_overview,
 )
 from validate_shared_content import valid_topic_publisher_http_source
 
@@ -725,13 +726,20 @@ def topic_page(topic: dict, related: list[dict[str, str]], generated_keys: set[s
 
 
 def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[str],
-                 lifecycle: dict[str, dict]) -> tuple[str, str]:
+                 lifecycle: dict[str, dict], *, package_brief=("", "", ""),
+                 source_date="") -> tuple[str, str]:
     slug, label = product["slug"], product["label"]
     canonical = f"{SITE_ROOT}products/{slug}.html"
     suffix = ("規格別供給状況" if slug == "caduet" else
               "メーカー別供給状況" if len(rows) > 1 else "供給状況")
     title, description = product_seo_metadata(product, rows, suffix)
     lastmod = max((normalize_date(row.get("更新日")) for row in rows), default="")
+    hint, package_description, package_html = package_brief
+    if slug == "zictor-tape-75mg":
+        lastmod = max(lastmod, "2026-11-22", source_date)
+    if package_html:
+        title = f"{label}の供給状況｜{hint}｜医薬品供給ナビ"
+        description = package_description
     counts: dict[str, int] = {key: 0 for key in STATUS}
     for row in rows:
         counts[map_status(row.get("供給状況"))] += 1
@@ -754,20 +762,43 @@ def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[
     lede = (f"1〜4番の{len(rows)}品目を、規格ごとの現在の供給区分と更新日でまとめています。"
             if slug == "caduet" else
             f"該当する{len(rows)}品目を、現在の供給区分とメーカーごとにまとめています。")
-    body = f"""<!DOCTYPE html><html lang="ja"><head>
-{common_head(title, description, canonical, 'website', [collection, breadcrumb])}<style>{STYLE}{PRODUCT_ENTRY_STYLE}</style></head><body>
-<div class="wrap"><header class="site"><a href="../">💊 医薬品供給ナビ</a></header>
-<nav class="crumb" aria-label="パンくず"><a href="../">トップ</a> › <a href="index.html">注目製品</a> › {esc(label)}</nav><main>
-<section class="hero"><p class="eyebrow">CURRENT SUPPLY STATUS</p><h1>{esc(label)}の{suffix}</h1>
+    hero_intro = f'''<p class="eyebrow">CURRENT SUPPLY STATUS</p><h1>{esc(label)}の{suffix}</h1>
 <p class="lede">{lede}</p><div class="summary">{summary}</div>
 <nav class="product-entry" aria-label="この製品の供給情報を確認">
 <a href="{esc(query_link)}" data-dsn-event="search-cta-open">この製品をWeb版で検索</a>
 <a href="{MHLW_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚労省の原典で確認</a>
 <a href="../items/limited.html">限定出荷の品目一覧</a>
-</nav>
+</nav>'''
+    extra_style = ""
+    intent = product_intent_html(product, rows, generated_keys)
+    if package_html:
+        row = rows[0]
+        status = esc(row.get("供給状況")) or "未確認"
+        when = f"（{esc(source_date)}基準）" if source_date else ""
+        href = esc(product_row_link(product, row, generated_keys))
+        readable_name = unicodedata.normalize("NFKC", label)
+        hero_intro = (f'<h1>{esc(readable_name)}<span class="phrase">の供給状況</span></h1>'
+                      f'<p class="public-status"><strong>厚労省公表　{status}</strong>{when}</p>'
+                      f'{package_html}<nav class="product-entry" aria-label="品目と原典">'
+                      f'<a href="{href}" data-dsn-event="related-item-open">品目の詳細を見る</a>'
+                      f'<a href="{MHLW_SUPPLY_URL}" data-dsn-event="official-source-open">厚労省の原典</a></nav>')
+        extra_style = (
+            ".hero .phrase{display:inline-block}.public-status{margin:10px 0 20px;color:#41361d}.public-status strong{display:block}"
+            ".package-brief{padding:16px;background:#f2f6ff;border-radius:12px;overflow-wrap:anywhere}"
+            ".package-brief h2{margin:0 0 8px}.package-brief dl{margin:12px 0}"
+            ".package-brief dt{font-weight:700}.package-brief dd{margin:0 0 10px}"
+            ".package-brief a{display:inline-flex;align-items:center;min-height:44px}"
+            ".intent-details{margin:22px 0}.intent-details summary{padding:12px 0;font-weight:700;cursor:pointer}"
+        )
+        intent = f'<details class="intent-details"><summary>代替を検討するときの確認事項</summary>{intent}</details>'
+    body = f"""<!DOCTYPE html><html lang="ja"><head>
+{common_head(title, description, canonical, 'website', [collection, breadcrumb])}<style>{STYLE}{PRODUCT_ENTRY_STYLE}{extra_style}</style></head><body>
+<div class="wrap"><header class="site"><a href="../">💊 医薬品供給ナビ</a></header>
+<nav class="crumb" aria-label="パンくず"><a href="../">トップ</a> › <a href="index.html">注目製品</a> › {esc(label)}</nav><main>
+<section class="hero">{hero_intro}
 {share_control("この供給状況を共有")}</section>
 <h2>該当品目</h2><div class="products">{product_rows_html(rows, generated_keys, lifecycle, product)}</div>
-{product_intent_html(product, rows, generated_keys)}
+{intent}
 <div class="cta"><strong>Web版で絞り込んで確認</strong><p>公表理由やメーカー案内を確認できます。同成分・同剤形の確認候補がある場合はあわせて表示します。</p><a href="{query_link}" data-dsn-event="search-cta-open">この製品を検索する</a></div>
 </main><footer><p>厚生労働省公表データをもとにした非公式情報です。実際の流通状況は卸・メーカーにもご確認ください。</p><a href="../guides/{GUIDE_SLUG}.html">供給情報の確認ガイド</a>｜<a href="../categories/index.html">薬効分類別の供給状況</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
 {analytics_footer()}</body></html>"""
@@ -1403,17 +1434,28 @@ def main() -> int:
         topic_dates[topic["slug"]] = max(
             normalize_date(topic.get("date")), TEMPLATE_UPDATED_AT)
     product_dates: dict[str, str] = {}
+    source_date = mhlw_excel_date(version_doc, dataset_date)
     for product in products:
         matched = search_rows(rows, product.get("query"))
         if not matched:
             raise ValueError(f"{product['slug']}: CSVに一致する品目がありません")
-        page, lastmod = product_page(product, matched, generated_keys, lifecycle)
+        brief = ("", "", "")
+        if product["slug"] == "zictor-tape-75mg" and len(matched) == 1 and dataset_date:
+            try:
+                health = load_json(site / "maker_collection_health.json")
+                differences = load_json(site / "supply_discrepancies.json")
+                trusted = supplemental_context(health, differences, dataset_date)["trusted"]
+            except (OSError, ValueError):
+                trusted = False
+            brief = zictor_package_overview(matched[0], notices, bulletins, trusted=trusted,
+                                            latest_listing=load_zictor_listing(site))
+        page, lastmod = product_page(product, matched, generated_keys, lifecycle,
+                                     package_brief=brief, source_date=source_date)
         (product_dir / f"{product['slug']}.html").write_text(page, encoding="utf-8")
         curated_date = normalize_date(products_doc.get("updated_at"))
         product_dates[product["slug"]] = max(lastmod, curated_date, TEMPLATE_UPDATED_AT, PRODUCT_TEMPLATE_UPDATED_AT)
         if product["slug"] == "lulicon-cream":
             product_dates[product["slug"]] = max(product_dates[product["slug"]], "2026-09-11")
-    source_date = mhlw_excel_date(version_doc, dataset_date)
     for slug in STRENGTH_HUBS:
         (product_dir / f"{slug}.html").write_text(
             strength_hub_page(slug, rows, generated_keys, source_date), encoding="utf-8")
