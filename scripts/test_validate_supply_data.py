@@ -1,4 +1,6 @@
 import csv
+from contextlib import redirect_stderr, redirect_stdout
+import io
 import datetime as dt
 import sys
 from unittest import mock
@@ -149,8 +151,14 @@ class ValidateSupplyDataTests(unittest.TestCase):
                                           "--max-age-days", "100000"]))
         rows = [dict(row, 販売メーカー="") for row in rows[:800]] + rows[800:]
         self.write(rows)
-        self.assertNotEqual(0, vsd.main(["--csv", str(self.path), "--min-rows", "1", "--max-rows", "30000",
-                                         "--max-age-days", "100000"]))
+        output, diagnostic = io.StringIO(), io.StringIO()
+        # 期待どおりの失敗をGitHub Actionsの実エラー注記にしない。
+        with redirect_stdout(output), redirect_stderr(diagnostic):
+            self.assertNotEqual(0, vsd.main(["--csv", str(self.path), "--min-rows", "1", "--max-rows", "30000",
+                                             "--max-age-days", "100000"]))
+        self.assertIn("販売メーカーの記載なし率が上限", output.getvalue())
+        self.assertIn("販売メーカー記載なしの全体率が上限", output.getvalue())
+        self.assertIn("エラー", diagnostic.getvalue())
 
     def test_reviewed_gas_missing_sales_does_not_weaken_other_missing_checks(self):
         rows = [self.row(商品名=f"薬{i}", YJコード=f"1234567{i:05d}", 薬価="10",
