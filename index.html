@@ -3109,6 +3109,33 @@ function searchIndexMatchesTerm(searchIndex, term, dosage = isDosageSearchTerm(t
   }
   return false;
 }
+function matchesSupplySearchTerm(item, term){
+  if(term === "出荷調整" || term === "限定出荷"){
+    if(item.s === "limited") return true;
+    const maker = discrepancyFor(item)?.manufacturer;
+    return maker?.status === "limited" && !manufacturerSourceChanged(maker.url);
+  }
+  const planned = term === "販売中止予定";
+  if(!planned && item.s === "ended") return true;
+  // 薬価削除予定は薬価上の情報。販売終了の検索には品目と販売元を照合した案内を使う。
+  if(MANUFACTURER_BULLETINS_STATE !== "loaded" || MANUFACTURER_BULLETINS_CACHED) return false;
+  const lifecycle = lifecycleAnnouncement(item);
+  if(lifecycle?.verificationRecent && /販売中止|販売終了/.test(lifecycle.title)
+      && (!planned || lifecycle.lifecycle_state === "discontinuation_announced")) return true;
+  if(MANUFACTURER_NOTICES_STATE !== "loaded" || MANUFACTURER_NOTICES_CACHED) return false;
+  return manufacturerNoticesFor(item).some(({notice})=>{
+    const kind = manufacturerDiscontinuationKind(notice);
+    return kind && /販売/.test(kind[1]) && (!planned || Boolean(kind[2])) && !manufacturerNoticeNeedsReview(notice);
+  });
+}
+function saleSearchAvailability(){
+  const states = [MANUFACTURER_NOTICES_STATE, MANUFACTURER_BULLETINS_STATE, SUPPLEMENTAL_STATE.lifecycle];
+  if(states.includes("loading")) return "販売中止のメーカー案内を確認しています。";
+  if(states.some(state=>state !== "loaded") || MANUFACTURER_NOTICES_CACHED || MANUFACTURER_BULLETINS_CACHED){
+    return "メーカー案内をすべて確認できていません。";
+  }
+  return "";
+}
 // ===== 表記ゆれ救済（通常の検索が0件のときだけ使う） =====
 // 「ロキソニン60」「アムロジピン5mg」のような名称＋用量、「ロキソプロフェンナトリウム錠」の
 // ような一般名＋剤形、「酸化Mg」のような塩の略記、「咳止め」のような一般的な呼び方は、
@@ -3455,7 +3482,11 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
   // 品名ではなくコードを手元に持っていることがあるため。
   // ただし常に照合すると「200」で検索したときにYJコードの一部に当たった無関係な
   // 品目が混ざるので、コードとして書かれた語（数字始まりの7文字以上）のときだけ見る
-  const terms = norm($q.value.trim()).split(/\s+/).filter(Boolean)
+  const words = norm($q.value.trim()).split(/\s+/).filter(Boolean);
+  const supplyTerms = words.filter(t=>/^(?:出荷調整|限定出荷|販売中止(?:予定)?)$/.test(t));
+  const matchesSupply = d=>supplyTerms.every(t=>matchesSupplySearchTerm(d,t));
+  const noticeAvailability = supplyTerms.some(t=>t.startsWith("販売中止")) ? saleSearchAvailability() : "";
+  const terms = words.filter(t=>!supplyTerms.includes(t))
     .map(t => ({t, dosage:isDosageSearchTerm(t), code:/^[0-9][0-9a-z]{6,}$/.test(t)}));
   const passesFilter = d=>{
     if(filter==="changed"){
@@ -3476,7 +3507,7 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
     return true;
   };
   const strictMatch = d => terms.every(x => searchIndexMatchesTerm(d.q, x.t, x.dosage)
-    || (x.code && d.yj && d.yj.toLowerCase().includes(x.t)));
+    || (x.code && d.yj && d.yj.toLowerCase().includes(x.t))) && matchesSupply(d);
   let hits = ITEMS.filter(d=>passesFilter(d) && strictMatch(d));
   // 通常の検索が0件のときだけ、表記ゆれを考慮して再検索する（結果がある語の挙動は変えない）
   let relaxed = null;
@@ -3484,23 +3515,23 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
   if(!hits.length && terms.length && !terms.some(x=>x.code)){
     const plan = relaxedSearchPlan(terms.map(x=>x.t));
     if(plan){
-      const relaxedHits = ITEMS.filter(d=>passesFilter(d) && plan.terms.every(x=>x.test(d)));
+      const relaxedHits = ITEMS.filter(d=>passesFilter(d) && plan.terms.every(x=>x.test(d)) && matchesSupply(d));
       if(relaxedHits.length){ hits = relaxedHits; relaxed = plan; RELAXED_SEARCH = true; }
     }
   }
   // 絞り込み中に0件なら、全区分での件数を案内する（品目自体は存在する場合が多い）
   let allFilterCount = 0;
-  if(!hits.length && filter !== "all" && terms.length){
+  if(!hits.length && filter !== "all" && words.length){
     allFilterCount = ITEMS.filter(strictMatch).length;
     if(!allFilterCount){
       const plan = relaxedSearchPlan(terms.map(x=>x.t));
-      if(plan) allFilterCount = ITEMS.filter(d=>plan.terms.every(x=>x.test(d))).length;
+      if(plan) allFilterCount = ITEMS.filter(d=>plan.terms.every(x=>x.test(d)) && matchesSupply(d)).length;
     }
   }
   const shown = hits.slice(0, visibleCount);
   SHOWN = shown;
   LAST_HITS = hits;
-  renderedSearchState = {key:norm($q.value.trim()), filter};
+  renderedSearchState = {key:norm($q.value.trim()), filter, incomplete:!!noticeAvailability};
   resumePendingSearchTracking();
   resetSearchShareFeedback();
   $meta.removeAttribute("aria-busy");
@@ -3509,15 +3540,17 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
   $searchShareBtn.hidden = (!LIVE || !hits.length
     || (!$q.value.trim() && filter === "all"));
   const src = LIVE ? `全 ${ITEMS.length.toLocaleString()} 品目中` : `サンプル ${ITEMS.length} 品目中`;
-  $meta.innerHTML = `<strong class="num">${hits.length.toLocaleString()}</strong> 件ヒット<span class="result-total">（${src}）</span>`
+  $meta.innerHTML = !hits.length && noticeAvailability ? noticeAvailability : `<strong class="num">${hits.length.toLocaleString()}</strong> 件ヒット<span class="result-total">（${src}）</span>`
     + (relaxed ? `<span class="search-relaxed-note">「${esc($q.value.trim())}」に一致する品目がないため、${relaxed.categoryLabels.length
       ? `薬効分類「${esc(relaxed.categoryLabels.join("／"))}」として`
-      : "用量・剤形の区切りや塩の略記（Na・Mgなど）の表記ゆれを考慮して"}検索した結果です。</span>` : "");
+      : "用量・剤形の区切りや塩の略記（Na・Mgなど）の表記ゆれを考慮して"}検索した結果です。</span>` : "")
+    + (noticeAvailability ? `<span class="search-relaxed-note">${noticeAvailability}</span>` : "");
   syncSearchResultJump();
   if(!hits.length){
     const isFavEmpty = filter==="fav" && !FAVS.size;
     const msg = isFavEmpty
       ? `監視リストはまだ登録されていません。<br>品目カードの「★ 監視に追加」を押すとこのブラウザに保存され、ここに一覧表示されます。`
+      : noticeAvailability ? "メーカー案内の照合が必要です。品名だけでも検索できます。"
       : `該当する品目が見つかりませんでした。<br>品名の一部に短くするか、メーカー名・YJコードでお試しください。`;
     const canReset = filter!=="all" || $q.value.trim();
     // 空状態のイラスト: お気に入り0件は★、検索0件はカプセル+虫眼鏡（線画・currentColorでテーマ追従）
@@ -3714,7 +3747,8 @@ function trackCurrentSearch(){
   if(!LIVE || DATA_STATE !== "ready" || searchJumpPending || searchJumpComposing || historySearchComposing
     || ((filter === "changed" || filter === "watchChanged") && !historyHasSnapshot())
     || (filter === "ended" && SUPPLEMENTAL_STATE.lifecycle !== "loaded")
-    || renderedSearchState?.key !== key || renderedSearchState.filter !== filter) return;
+    || renderedSearchState?.key !== key || renderedSearchState.filter !== filter
+    || (!LAST_HITS.length && renderedSearchState.incomplete)) return;
   pendingTrackedSearchKey = "";
   lastTrackedSearchKey = key;
   if(LAST_HITS.length && RELAXED_SEARCH) dsnTrack("search-relaxed");
@@ -6709,6 +6743,7 @@ function renderTrending(){
     ["movicol", "products/movicol.html"],
     ["teramuro", "products/teramuro.html"],
     ["juvela-ointment", "items/2649805M1026.html"],
+    ["zictor-tape-75mg", "items/1147700S1028.html"],
   ]);
   const details = {
     'juvela-ointment':'2649805M1026',
