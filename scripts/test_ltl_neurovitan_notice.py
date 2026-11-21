@@ -9,7 +9,7 @@ from validate_manufacturer_notices import validate
 ROOT = Path(__file__).resolve().parent.parent
 
 class LtlNeurovitanNoticeTests(unittest.TestCase):
-    def test_package_scope_and_historical_plan(self):
+    def test_november_package_scope_production_restart_and_projected_volume(self):
         data = json.loads((ROOT / 'manufacturer_notices.json').read_text(encoding='utf-8'))
         with (ROOT / 'drugs_app_ready.csv').open(encoding='utf-8-sig', newline='') as f:
             rows = list(csv.DictReader(f))
@@ -20,7 +20,7 @@ class LtlNeurovitanNoticeTests(unittest.TestCase):
         self.assertEqual([p['package'] for p in notice['targets'][0]['packages']], ['500錠（PTP）', '1000錠（瓶）'])
         self.assertTrue(all(p['supply']['status'] == 'limited' for p in notice['targets'][0]['packages']))
         html = manufacturer_notices_html(row, [notice], catalog_yj_codes={r['YJコード'] for r in rows})
-        for word in ('2026-10-26', '2026-11-15', '500錠（PTP）', '1000錠（瓶）', '熊本地震', '実際の再開やその後の生産量は確認できていません', '未定'):
+        for word in ('2026-11-19', '2026-11-21', '500錠（PTP）', '1000錠（瓶）', '熊本地震', '10月下旬に生産を再開', '2027年1月下旬', '約80％', '解除時期は未定'):
             self.assertIn(word, html)
         self.assertIn('後続案内を自動追跡していません', html)
         altered = copy.deepcopy(data)

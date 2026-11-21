@@ -30,7 +30,7 @@ def comparison_html(rows, note):
 
 
 def overview_html(row, name, maker, release, source_date, imported, version, updated,
-                  delist, notices, shortcuts, spec_note, discontinuation_labels=()):
+                  delist, notices, shortcuts, spec_note, discontinuation_labels=(), package_overview=""):
     # Keep strength units together even on narrow screens.
     name = re.sub(r"[０-９0-9]+(?:[．.][０-９0-9]+)?(?:[％%]|[ｍm][ｇg]|[μµ]g)|(?:ＬＤ|ＨＤ|LD|HD)$",
                   r'<span class="strength">\g<0></span>', escape(name))
@@ -42,6 +42,7 @@ def overview_html(row, name, maker, release, source_date, imported, version, upd
                             f'{escape(notice["maker"])}の{label} <small>文書 {escape(notice["announced_at"])}</small></a>')
     if any(m["notice"]["url"].startswith("https://www.torii.co.jp/iyakuDB/") for m in notices):
         source_links.append('<small>鳥居薬品のサイトで職種の確認があります。</small>')
+    sources = "" if package_overview else f'<div class="sources">{"".join(source_links)}</div>'
     links = ''.join(f'<a href="#{anchor}">{label}</a>' for anchor, label in shortcuts)
     yj = escape(row.get("YJコード") or "")
     code = f'<span>YJ {yj}</span>' if yj else ''
@@ -57,11 +58,11 @@ def overview_html(row, name, maker, release, source_date, imported, version, upd
 <div><dt>解除・解消見込み</dt><dd>{escape(release or "記載なし")}</dd></div></dl>
 <details><summary>出典と日付</summary><p>品目行の更新日 {escape(updated or "記載なし")}<br>サイト取込日 {escape(imported or "確認できません")}<br>
 <a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html" data-dsn-event="official-source-open">厚生労働省の公表ページ</a></p></details>
-<p id="freshness" role="status">表示は上記基準日時点です。</p></section>
+<p id="freshness" role="status">表示は上記基準日時点です。</p></section>{package_overview}
 <div class="actions"><button type="button" id="share" hidden>この品目を共有</button><a href="#watchButton">監視リスト</a></div>
 <p id="feedback" role="status"></p><textarea id="manualCopy" aria-label="コピー用の共有文" readonly hidden></textarea>
 <nav class="jumps" aria-label="この品目の情報">{links}<a href="#itemDetails">品目の詳細</a></nav>
-<div class="sources">{''.join(source_links)}</div>'''
+{sources}'''
 
 
 def prepare_assets(site):

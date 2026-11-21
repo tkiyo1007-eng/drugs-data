@@ -771,6 +771,39 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
         self.assertEqual([], matching_manufacturer_notices(row, [notice]))
         self.assertEqual("", manufacturer_notices_html(row, [notice]))
 
+    def test_package_overview_keeps_date_precision_and_hides_superseded_or_uncertain_documents(self):
+        key = "3179106F1039"
+        row = dict(self.row(), YJコード=key, 供給状況="②限定出荷（自社の事情）")
+        notice = self.notice()
+        notice["targets"][0] = {"yj_code": key, "product_name": row["商品名"], "scope": "package",
+                                "packages": [{"package": "500錠（PTP）",
+                                              "supply": {"status": "limited", "status_text": "限定出荷", "plans": []}}]}
+        older = dict(notice, announced_at="2026-09", url="https://example.jp/older.pdf")
+        def render(notices, bulletins, trusted=True):
+            return page_html(row, key, "limited", "2026-11-21", [], {key},
+                             manufacturer_notices=notices, manufacturer_bulletins=bulletins,
+                             supplemental_trusted=trusted)
+        page = render([older, notice], {"items": []})
+        brief = re.search(r'<section class="package-brief".*?</section>', page, re.S).group()
+        self.assertIn("500錠（PTP）", brief)
+        self.assertIn("2026年10月の日本薬品工業の原文", brief)
+        self.assertIn(notice["url"], brief)
+        self.assertNotIn(older["url"], brief)
+        self.assertIn("500錠（PTP）のメーカー案内", page.split("</title>", 1)[0])
+        self.assertLess(page.index("厚労省の供給状況"), page.index(brief))
+        self.assertLess(page.index(brief), page.index('id="share"'))
+        changed = {"items": [{"url": notice["url"], "sha256": "b" * 64}]}
+        for uncertain_page in (
+            render([older, notice], changed),
+            render([notice], None),
+            render([notice], {"items": []}, trusted=False),
+            render([notice, dict(older, announced_at="2026-10-02")], {"items": []}),
+            render([older, dict(notice, targets=[dict(notice["targets"][0],
+                        scope="seller_route_and_package", seller="特定販売元")])], {"items": []}),
+        ):
+            self.assertNotIn('id="packageBriefTitle"', uncertain_page)
+            self.assertNotIn("500錠（PTP）のメーカー案内", uncertain_page.split("</title>", 1)[0])
+
     def test_normal_supply_page_preserves_mhlw_and_displays_only_target_seller_package(self):
         row, notice = self.row(), self.notice()
         self.assertFalse(should_generate(row, row["YJコード"], set(), {}, {}))

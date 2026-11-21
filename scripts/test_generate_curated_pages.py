@@ -30,6 +30,7 @@ from generate_curated_pages import (
     DISCONTINUATION_GUIDE_UPDATED_AT,
     GUIDE_SLUG,
     GUIDE_UPDATED_AT,
+    STRENGTH_HUBS,
     WEB_HIDDEN_FEATURED_SLUGS,
     discontinuation_guide_page,
     guide_page,
@@ -40,6 +41,7 @@ from generate_curated_pages import (
     product_page,
     product_seo_metadata,
     search_rows,
+    strength_hub_page,
     topic_page,
     topic_related_rows,
 )
@@ -294,20 +296,53 @@ class CuratedPageGenerationTests(unittest.TestCase):
         document = json.loads((ROOT / "featured_products.json").read_text())
         records = document["products"]
         before = json.dumps(records)
-        page = list_page("products", records, "2026-09-12")
+        page = list_page("products", records, "2026-09-12", {"2649805M1026", "3179106F1039"})
         for record in records:
             link = f'href="{record["slug"]}.html"'
             if record["slug"] in WEB_HIDDEN_FEATURED_SLUGS:
                 self.assertNotIn(link, page)
                 detail, _ = product_page(record, [], set(), {})
                 self.assertIn(f'products/{record["slug"]}.html', detail)
+            elif record["slug"] == "juvela-ointment":
+                self.assertIn('href="../items/2649805M1026.html"', page)
             else:
                 self.assertIn(link, page)
         self.assertEqual(before, json.dumps(records))
         self.assertEqual(9, len(WEB_HIDDEN_FEATURED_SLUGS))
         self.assertEqual(1, page.count('テラムロ配合錠'))
-        self.assertIn('href="../#q=' + quote('テラムロ', safe='') + '"', page)
+        first = page.split('<details class="other-products">')[0]
+        featured = re.findall(r'<a href="([^"]+)">[^<]+<small>', first)
+        self.assertEqual(["movicol.html", "../items/2649805M1026.html", "teramuro.html", "zictor-tape-75mg.html"], featured)
+        self.assertIn('href="../items/3179106F1039.html"', page.split('<details class="other-products">')[1])
+        self.assertNotIn("最終更新", page)
         self.assertNotIn('テラムロ配合錠', list_page('topics', [], '2026-09-12'))
+
+    def test_strength_hub_groups_only_matching_brands_and_resolves_each_item(self):
+        rows = [
+            {"商品名": "テラムロ配合錠ＡＰ「例」", "YJコード": "APKEY", "供給状況": "①通常出荷", "販売メーカー": "販売元A"},
+            {"商品名": "テラムロ配合錠BP「例」", "YJコード": "BPKEY", "供給状況": "⑤供給停止"},
+            {"商品名": "ミカムロ配合錠AP", "YJコード": "OTHER", "供給状況": "①通常出荷"},
+            {"商品名": "テラムロ配合錠AP徐放錠「例」", "YJコード": "LOOKALIKE"},
+            {"商品名": "テラムロ配合錠CP「例」", "YJコード": "NEWGRADE"},
+        ]
+        page = strength_hub_page("teramuro", rows, {"APKEY"}, "2026-11-20")
+        self.assertIn('href="#bp"', page)
+        ap_section, bp_section = page.split('<section aria-labelledby="bp">')
+        self.assertIn('href="../items/APKEY.html"', ap_section)
+        self.assertIn('href="../#item=BPKEY"', bp_section)
+        self.assertNotIn("ミカムロ", page)
+        self.assertNotIn("LOOKALIKE", page)
+        self.assertNotIn("NEWGRADE", page)
+        self.assertIn("⑤供給停止", bp_section)
+        self.assertIn("販売元A", ap_section)
+        self.assertIn("2026-11-20", page)
+        missing = strength_hub_page("movicol", [
+            {"商品名": "モビコール配合内用剤に似た名称", "YJコード": "LOOKALIKE"},
+            {"商品名": "モビコール配合内用剤LD別製品", "YJコード": "LOOKALIKE2"},
+        ], set(), "")
+        self.assertNotIn("LOOKALIKE", missing)
+        self.assertIn("基準日 未確認", missing)
+        self.assertIn("今回の公表データでは該当する品目を確認できません", missing)
 
     def test_product_entry_reuses_encoded_search_and_official_links_before_details(self):
         product = {"slug": "entry-test", "label": "確認製品", "query": '製品A & "テスト"'}
@@ -456,6 +491,8 @@ class CuratedPageGenerationTests(unittest.TestCase):
             self.assertGreaterEqual(guide.count('data-dsn-event="official-source-open"'), 3)
             self.assertIn("topics/test-release-20260817.html", sitemap)
             self.assertIn("products/test-combination-1.html", sitemap)
+            self.assertIn("products/teramuro.html", sitemap)
+            self.assertIn("products/movicol.html", sitemap)
             self.assertIn(f"guides/{GUIDE_SLUG}.html", sitemap)
             self.assertIn(f"guides/{DISCONTINUATION_GUIDE_SLUG}.html", sitemap)
             self.assertIn("<lastmod>2026-08-28</lastmod>", sitemap)
@@ -556,7 +593,7 @@ class CuratedPageGenerationTests(unittest.TestCase):
         topics = json.loads((ROOT / "industry_topics.json").read_text(encoding="utf-8"))["topics"]
         products = json.loads((ROOT / "featured_products.json").read_text(encoding="utf-8"))["products"]
         topic_slugs = {record["slug"] for record in topics}
-        product_slugs = {record["slug"] for record in products}
+        product_slugs = {record["slug"] for record in products} | set(STRENGTH_HUBS)
         topic_files = {path.stem for path in (ROOT / "topics").glob("*.html") if path.name != "index.html"}
         product_files = {path.stem for path in (ROOT / "products").glob("*.html") if path.name != "index.html"}
 
@@ -582,6 +619,8 @@ class CuratedPageGenerationTests(unittest.TestCase):
                     page = (ROOT / kind / f"{slug}.html").read_text(encoding="utf-8")
                     if kind == "products" and slug in WEB_HIDDEN_FEATURED_SLUGS:
                         self.assertNotIn(f'{slug}.html', index)
+                    elif kind == "products" and slug == "juvela-ointment":
+                        self.assertIn("../items/2649805M1026.html", index)
                     else:
                         self.assertIn(f'{slug}.html', index)
                     self.assertIn(f"{kind}/{slug}.html", sitemap)
