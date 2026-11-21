@@ -57,6 +57,8 @@ PACKAGE_LANDING_KEYS = frozenset({
     "1139003C1044", "1139003C2040", "2325401A1020", "2325401A2027", "2649805M1026",
 })
 PACKAGE_OVERVIEW_KEYS = frozenset({"2649805M1026", "3179106F1039"})
+LIMITED_REASON_KEYS = frozenset({"3999001Q6029", "2646730Q1026"})
+BONZOL_KEYS = frozenset({"2499007F1021", "2499007F2028"})
 # drugs-data の generate_curated_pages.py（CATEGORY_MIN_ROWS）と同じ基準。
 # 分類ページが生成される分類だけにリンクし、404を出さない。
 CATEGORY_MIN_ROWS = 3
@@ -836,7 +838,27 @@ def manufacturer_notice_scope_text(target: dict) -> str:
             + (f'｜対象包装：{"／".join(packages)}' if packages else '｜包装別の内訳は未確認' if target["scope"] == "product" else ""))
 
 
-def package_overview_notice(matches, bulletins):
+def dated_pdf_unchanged_before_daily_limit(notice, bulletins):
+    """Only reuse the dated original when the last attempted check succeeded and the listing still matches."""
+    records = [item for item in bulletins["items"] if item.get("url") == notice["url"]]
+    if len(records) != 1:
+        return False
+    item = records[0]
+    if item.get("hash_status") != "daily_limit" or item.get("sha256") != notice["sha256"]:
+        return False
+    try:
+        change, success, attempt, seen, batch = [datetime.fromisoformat(value) for value in
+            (item.get("last_changed_at"), item.get("last_hash_success_at"),
+             item.get("last_document_attempt_at"), item.get("last_seen"), bulletins.get("checked_at"))]
+        verified = date.fromisoformat(iso_publication_date(notice["verified_at"]))
+        now = datetime.now(timezone(timedelta(hours=9)))
+        return (change <= success == attempt <= seen <= batch <= now
+                and change.astimezone(now.tzinfo).date() < verified <= now.date())
+    except (TypeError, ValueError):
+        return False
+
+
+def package_overview_notice(key, matches, bulletins):
     """Only promote a single, dated package notice. Never fall back past a newer notice."""
     if not matches or bulletins is None:
         return None
@@ -847,14 +869,60 @@ def package_overview_notice(matches, bulletins):
         return None
     match = latest[0]
     notice, target = match["notice"], match["target"]
-    if (match["source_changed"] or manufacturer_notice_needs_review(notice, bulletins)
-            or target["scope"] != "package" or target.get("seller")
-            or notice.get("event_type") not in {"limited", "stopped", "resumed"}):
+    if match["source_changed"] or target["scope"] != "package" or target.get("seller"):
+        return None
+    pending = manufacturer_notice_needs_review(notice, bulletins)
+    if pending and not (key in LIMITED_REASON_KEYS and dated_pdf_unchanged_before_daily_limit(notice, bulletins)):
         return None
     packages = target["packages"]
-    if not packages or not all(isinstance(p, dict) and valid_package_supply(p.get("supply")) for p in packages):
+    if not packages or not all(isinstance(p, dict) and p.get("package") for p in packages):
         return None
-    return notice, list(dict.fromkeys(p["package"] for p in packages))
+    if key in LIMITED_REASON_KEYS:
+        # Scope and documented reason do not require a stock status for each package.
+        return dict(match, daily_limit=pending) if notice.get("event_type") == "limited" and notice.get("reason") else None
+    if not all(valid_package_supply(p.get("supply")) for p in packages):
+        return None
+    if key in BONZOL_KEYS:
+        return match if (notice.get("event_type") == "discontinued" and "販売中止" in notice["title"]
+                         and notice.get("summary")) else None
+    return match if notice.get("event_type") in {"limited", "stopped", "resumed"} else None
+
+
+def package_overview_content(key, match, display_name, status_label):
+    notice, target = match["notice"], match["target"]
+    packages = list(dict.fromkeys(p["package"] for p in target["packages"]))
+    scope = "・".join(packages)
+    date_parts = [int(part) for part in notice["announced_at"].split("-")]
+    day = f"{date_parts[0]}年{date_parts[1]}月"
+    if len(date_parts) == 3:
+        day += f"{date_parts[2]}日"
+    source = (f'<a class="source-link" data-dsn-event="official-source-open" href="{esc(notice["url"])}">'
+              f'{esc(day)}の{esc(notice["maker"])}の原文</a>')
+    heading = "包装別のメーカー案内"
+    body = f'<p><strong>{esc(" ／ ".join(packages))}</strong></p>{source}'
+    hint = scope + "のメーカー案内"
+    description = f'{day}の{notice["maker"]}の案内には、{scope}の出荷対応が記載されています。'
+    if key in LIMITED_REASON_KEYS:
+        heading = "メーカーが案内した限定出荷の理由"
+        hint = "メーカーが示した理由・対象包装"
+        description = f'{day}の{notice["maker"]}の案内（{scope}）。{notice["reason"]}'
+        body = f'{source}<p><strong>対象包装　{esc(" ／ ".join(packages))}</strong></p><p>{esc(notice["reason"])}</p>'
+        resumption = notice.get("resumption")
+        if isinstance(resumption, str) and resumption.strip():
+            body += f'<p><strong>案内時点の解除見通し　</strong>{esc(resumption)}</p>'
+        if match.get("daily_limit"):
+            body += f'<small>原文確認日 {esc(iso_publication_date(notice["verified_at"]))}。直近の自動照合は未実施です。</small>'
+        if notice["url"].startswith("https://www.torii.co.jp/iyakuDB/"):
+            body += '<small>原文は鳥居薬品の医療関係者向けサイトで開きます。</small>'
+    elif key in BONZOL_KEYS:
+        heading = "メーカーの販売中止予定" if "販売中止予定" in notice["title"] else "メーカーの販売中止案内"
+        hint = heading
+        description = f'{day}の{notice["maker"]}の案内。{notice["summary"]}'
+        body = f'{source}<p><strong>対象包装　{esc(" ／ ".join(packages))}</strong></p><p>{esc(notice["summary"])}</p>'
+    css_class = "package-brief stbox supp-notice" if key in BONZOL_KEYS else "package-brief"
+    section = (f'<section class="{css_class}" aria-labelledby="packageBriefTitle">'
+               f'<h2 id="packageBriefTitle">{heading}</h2>{body}</section>')
+    return hint, f'{display_name}の厚労省公表区分は「{status_label}」。{description}', section
 
 
 def manufacturer_notices_html(row: dict, notices=(), warning="", catalog_yj_codes=None, bulletins=None,
@@ -1253,6 +1321,8 @@ def item_page_lastmod(row: dict, lifecycle=None, discrepancy=None, manufacturer_
         dates.append(PACKAGE_LANDING_UPDATED_AT)
     if item_key(row) in PACKAGE_OVERVIEW_KEYS:
         dates.append("2026-11-21")  # 包装別の案内を品目ページの冒頭へ
+    if item_key(row) in LIMITED_REASON_KEYS | BONZOL_KEYS:
+        dates.append("2026-11-22")
     if is_delist(row) or supplemental_matches(row, lifecycle):
         dates.append(SUPPLEMENTAL_TEMPLATE_LASTMOD)
     if (supplemental_matches(row, lifecycle) and not lifecycle.get("source_changed")
@@ -1567,6 +1637,8 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
     discrepancy_match = discrepancy if discrepancy_matches(row, discrepancy) else None
     discontinuation_labels = manufacturer_discontinuation_labels(
         row, manufacturer_notices, manufacturer_bulletins)
+    if key in BONZOL_KEYS and discontinuation_labels and (not supplemental_trusted or manufacturer_bulletins is None):
+        discontinuation_labels = ["メーカー：中止案内（要原文確認）"]
     shown_lifecycle = (lifecycle_match if not discontinuation_labels
                        or (lifecycle_match or {}).get("source_changed") else None)
     supplements = discontinuation_labels + supplemental_labels(
@@ -1628,24 +1700,12 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
             + "。原Excelの基準日・品目行の更新日はページ内で分けて確認できます。")
     package_jump = ""
     package_overview = ""
-    if key in PACKAGE_OVERVIEW_KEYS:
+    if key in PACKAGE_OVERVIEW_KEYS | LIMITED_REASON_KEYS | BONZOL_KEYS:
         matches = matching_manufacturer_notices(row, manufacturer_notices, manufacturer_bulletins)
-        overview = package_overview_notice(matches, manufacturer_bulletins) if supplemental_trusted else None
+        overview = package_overview_notice(key, matches, manufacturer_bulletins) if supplemental_trusted else None
         if overview:
-            notice, packages = overview
-            scope = "・".join(packages)
-            date_parts = [int(part) for part in notice["announced_at"].split("-")]
-            notice_day = f"{date_parts[0]}年{date_parts[1]}月"
-            if len(date_parts) == 3:
-                notice_day += f"{date_parts[2]}日"
-            title = page_title(name, st["label"], supplements, title_qualifier, scope + "のメーカー案内")
-            desc = (f"{display_name}の厚労省公表区分は「{st['label']}」。"
-                    f"{notice_day}の{notice['maker']}の案内には、{scope}の出荷対応が記載されています。")
-            package_overview = (f'<section class="package-brief" aria-labelledby="packageBriefTitle">'
-                                '<h2 id="packageBriefTitle">包装別のメーカー案内</h2>'
-                                f'<p><strong>{esc(" ／ ".join(packages))}</strong></p>'
-                                f'<a class="source-link" data-dsn-event="official-source-open" href="{esc(notice["url"])}">'
-                                f'{esc(notice_day)}の{esc(notice["maker"])}の原文</a></section>')
+            hint, desc, package_overview = package_overview_content(key, overview, display_name, st["label"])
+            title = page_title(name, st["label"], supplements, title_qualifier, hint)
     elif key in PACKAGE_LANDING_KEYS:
         matches = matching_manufacturer_notices(row, manufacturer_notices, manufacturer_bulletins)
         packages = dict.fromkeys(
@@ -1730,6 +1790,10 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
 .package-supply-row dd strong{font-size:12px}
 @media(max-width:520px){.package-supply-row{grid-template-columns:minmax(0,1fr)}}
 """ if 'class="package-supply"' in manufacturer_box else ""
+    if key in BONZOL_KEYS and package_overview and not limited_layout:
+        package_styles += (".package-brief h2{margin:0 0 4px}.package-brief p+p{margin-top:5px}"
+                           ".package-brief .source-link{display:inline-flex;align-items:center;"
+                           "min-height:44px;font-weight:700;color:inherit}")
 
     # 詳細表: 既知の列を定義順に、その他の列は後ろに(空欄と重複情報はスキップ)
     detail_rows = []
@@ -1824,6 +1888,9 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
     })
     quick_answers = quick_answers_html(row, status, display_name)
     supply_answer = supply_answer_html(row, status, manufacturer_notices, lifecycle_match, manufacturer_bulletins)
+    if key in BONZOL_KEYS and not limited_layout:
+        source_date = mhlw_excel_date(version_metadata, dataset_date) or "確認できません"
+        supply_answer = f'<p>厚労省基準日　{esc(source_date)}</p>' + supply_answer
     variants_html = product_variants_html(row, product_variants, generated_keys)
 
     topic_box = related_topics_html(related_topics)

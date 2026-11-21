@@ -819,6 +819,47 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
         self.assertIn('data-source-sha256="' + "a" * 64 + '"', output)
         self.assertIn("メーカー説明の理由：製造工程上の確認事項により入庫が遅延", output)
 
+    def test_dated_reason_and_discontinuation_are_scoped_to_verified_packages(self):
+        for key, status, official in (("3999001Q6029", "limited", "限定出荷"),
+                                      ("2499007F1021", "ok", "通常出荷")):
+            row = dict(self.row(), YJコード=key, 供給状況=official)
+            notice = dict(self.notice(), verified_at="2025-06-13", announced_at="2025-05",
+                          event_type="limited" if status == "limited" else "discontinued",
+                          title="限定出荷" if status == "limited" else "販売中止予定のご案内",
+                          summary="在庫消尽後に販売終了予定。")
+            notice["targets"] = [dict(notice["targets"][0], yj_code=key, scope="package", seller="",
+                                      packages=[{"package": "100個", "supply": {"status": "unconfirmed", "plans": []}}])]
+            stamp = "2025-06-12T08:00:00+09:00"
+            pending = {"url": notice["url"], "sha256": notice["sha256"], "hash_status": "daily_limit",
+                       "last_changed_at": "2025-05-08T12:00:00+09:00", "last_hash_success_at": stamp,
+                       "last_document_attempt_at": stamp, "last_seen": stamp,
+                       "review_status": "needs_review", "review_reason": "原典hashの今回確認が未完了。前回内容は保持"}
+            def render(day, source=pending, trusted=True):
+                return page_html(row, key, status, "2025-06-14", [], {key}, manufacturer_notices=[notice],
+                                 manufacturer_bulletins={"checked_at": day, "items": [source]},
+                                 supplemental_trusted=trusted, dataset_date="2025-06-14",
+                                 version_metadata={"version": 202506140001, "mhlw_excel_date": "2025-06-11"})
+            page = render(stamp, pending if status == "limited" else dict(pending, review_status="confirmed"))
+            brief = re.search(r'<section class="package-brief[^>]*>.*?</section>', page, re.S).group()
+            self.assertIn("100個", brief)
+            self.assertIn("2025年5月", brief)
+            self.assertIn(notice["url"], brief)
+            self.assertIn(notice["reason"] if status == "limited" else notice["summary"], brief)
+            title = re.search(r"<title>(.*?)</title>", page).group(1)
+            self.assertIn(official, title)
+            self.assertIn("理由" if status == "limited" else "販売中止予定", title)
+            if status == "limited":
+                self.assertIn("直近の自動照合は未実施", brief)
+                self.assertIn("最新の原典は再確認待ち", page)
+            else:
+                self.assertLess(page.index("厚労省基準日　2025-06-11"), page.index(brief))
+            for uncertain in (render(""), render(stamp, dict(pending, sha256="f" * 64)),
+                              render(stamp, dict(pending, hash_status="error")),
+                              render(stamp, dict(pending, last_changed_at="2025-06-14T01:00:00+09:00")),
+                              render(stamp, dict(pending, last_document_attempt_at="2025-06-13T01:00:00+09:00")),
+                              render(stamp, trusted=False)):
+                self.assertNotIn('id="packageBriefTitle"', uncertain)
+
     def test_future_recovery_is_explicitly_a_plan_without_changing_current_supply(self):
         row = dict(self.row(), 供給状況="②限定出荷（自社の事情）")
         notice = self.notice()

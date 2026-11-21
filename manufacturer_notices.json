@@ -7379,11 +7379,12 @@
       "url": "https://med.skk-net.com/significant/item/LAGNF2610i.pdf",
       "announced_at": "2026-10",
       "listed_at": "2026-10-09",
-      "verified_at": "2026-10-14",
+      "verified_at": "2026-11-22",
+      "content_updated_at": "2026-11-22",
       "sha256": "016f1e44483890bb976a7bf53fa22e1f8094cb7d73d881971e07754b8c350332",
       "source_index_url": "https://med.skk-net.com/significant/083786.html",
       "date_precision": "month",
-      "reason": "2025年11月頃から一部増産したが増産量は限られ、製造量が需要全体を満たせない。直近は他社製品の限定出荷等の影響で想定を上回る注文。",
+      "reason": "2025年11月頃から一部増産しましたが、需要を賄いきれず、他社製品の限定出荷などの影響で注文が想定を上回ったと説明しています。",
       "alternatives": [
         {
           "indication": "慢性便秘症（器質的疾患による便秘を除く）",
@@ -7465,10 +7466,16 @@
           "yj_code": "3999001Q6029",
           "product_name": "ラグノスＮＦ経口ゼリー分包１２ｇ",
           "scope": "package",
+          "source_pages": [1],
           "packages": [
             {
               "package": "12g×84包",
-              "unified_product_code": "086220569"
+              "unified_product_code": "086220569",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情）",
+                "plans": []
+              }
             }
           ],
           "maker": "三和化学研究所"
@@ -55257,6 +55264,95 @@
         "10月19日掲載の案内の再開見込みは当時の予定です。現在の包装別出荷・受注可否はメーカー・卸にご確認ください。"
       ],
       "source_index_url": "https://www.maruishi-pharm.co.jp/medical/"
+    },
+    {
+      "id": "tanabe-bonzol-ptp-sales-end-202611",
+      "maker": "田辺ファーマ",
+      "title": "ボンゾール錠100mg・200mg　在庫消尽後の販売中止予定",
+      "url": "https://medical.tanabe-pharma.com/di/file/info/ifn_5730_P20629.pdf",
+      "source_index_url": "https://medical.tanabe-pharma.com/di/info/discontinued/",
+      "announced_at": "2026-11",
+      "verified_at": "2026-11-22",
+      "content_updated_at": "2026-11-22",
+      "sha256": "ca7e60f6c4b57eae0701c65b0c6e1a086393e33eb2b223563944d60ea006ae91",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "田辺ファーマは「諸般の事情」と説明しています。具体的な理由は記載されていません。",
+      "summary": "100mg・200mgともに、10錠シート10枚入りの包装は在庫がなくなり次第、販売を終了します。田辺ファーマは、両規格の在庫消尽を2026年12月末頃と見込んでいます。",
+      "targets": [
+        {
+          "yj_code": "2499007F1021",
+          "product_name": "ボンゾール錠１００ｍｇ",
+          "maker": "田辺ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "128-62031-9",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年12月末頃（11月のメーカー案内による見込み）"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2499007F2028",
+          "product_name": "ボンゾール錠２００ｍｇ",
+          "maker": "田辺ファーマ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "128-62036-4",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年12月末頃（11月のメーカー案内による見込み）"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "indication": "子宮内膜症",
+          "type": "田辺ファーマが案内した代替品",
+          "source_url": "https://medical.tanabe-pharma.com/di/file/info/ifn_5730_P20629.pdf",
+          "target_yj_codes": [
+            "2499007F1021",
+            "2499007F2028"
+          ],
+          "products": [
+            {
+              "name": "ディナゲスト錠１ｍｇ",
+              "yj_code": "2499010F1023",
+              "maker": "持田製薬"
+            }
+          ],
+          "cautions": [
+            "ボンゾール錠100mgの乳腺症に対する代替品には該当しません。"
+          ]
+        }
+      ],
+      "cautions": [
+        "在庫消尽時期はメーカーの見込みです。実際の販売終了日や卸の在庫は確認できていません。"
+      ]
     }
   ]
 }
