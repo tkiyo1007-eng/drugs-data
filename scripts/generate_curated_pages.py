@@ -15,7 +15,7 @@ from urllib.parse import quote
 
 from jst_time import jst_today
 from generate_item_pages import (
-    dataset_dates_html, version_date, load_manufacturer_notices,
+    dataset_dates_html, mhlw_excel_date, version_date, load_manufacturer_notices,
     load_manufacturer_bulletins, lifecycle_for_display,
 )
 from validate_shared_content import valid_topic_publisher_http_source
@@ -63,6 +63,12 @@ WEB_HIDDEN_FEATURED_SLUGS = {
     "caduet", "caduet-1", "caduet-2", "caduet-3", "caduet-4",
     "gentacin-ointment", "mounjaro-injection", "loxoprofen-sodium-tape", "celecox-tablets",
 }
+# 規格選択はWeb専用。アプリと共用のfeatured_products.jsonには追加しない。
+STRENGTH_HUBS = {
+    "movicol": ("モビコール配合内用剤", ("LD", "HD")),
+    "teramuro": ("テラムロ配合錠", ("AP", "BP")),
+}
+STRENGTH_HUB_EDIT_DATE = "2026-11-21"
 STATUS = {
     "ok": ("通常出荷", "#227D4F", "#E7F6EE", 0),
     "limited": ("限定出荷", "#9F5E11", "#FCF0DF", 1),
@@ -768,33 +774,116 @@ def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[
     return body, lastmod
 
 
-def list_page(kind: str, records: list[dict], updated_at: str) -> str:
+def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set[str],
+                      source_date: str) -> str:
+    brand, strengths = STRENGTH_HUBS[slug]
+    groups = {strength: [] for strength in strengths}
+    grades = "|".join(norm(strength) for strength in strengths)
+    manufacturer_suffix = r"(?:「[^「」]+」)?" if slug == "teramuro" else ""
+    selling_name = re.compile(rf"{re.escape(norm(brand))}\s*({grades})\s*{manufacturer_suffix}")
+    for row in rows:
+        match = selling_name.fullmatch(norm(row.get("商品名")))
+        if match:
+            groups[match.group(1).upper()].append(row)
+    heading = f"{brand}の供給状況"
+    description = f"{brand}の{'・'.join(strengths)}を選んで、厚生労働省の公表区分と品目別の詳細を確認できます。"
+    if slug == "teramuro":
+        description = "テラムロ配合錠のAP・BPについて、販売名、販売元、厚生労働省の供給区分を規格別に見比べられます。"
+    title = f"{heading}｜{'・'.join(strengths)}{'のメーカー別一覧' if slug == 'teramuro' else 'の規格別一覧'}｜医薬品供給ナビ"
+    canonical = f"{SITE_ROOT}products/{slug}.html"
+    sections, jump_links, items = [], [], []
+    for strength, members in groups.items():
+        if not members:
+            continue
+        anchor = strength.lower()
+        cards = []
+        for row in sorted(members, key=lambda item: norm(item.get("商品名"))):
+            name = row["商品名"]
+            href = row_link(row, generated_keys)
+            maker = row.get("販売メーカー") or ""
+            status = row.get("供給状況") or "公表区分未確認"
+            cards.append(f'<a class="strength-item" href="{esc(href)}" data-dsn-event="related-item-open">'
+                         f'<strong>{esc(name)}</strong><span>{esc(maker)}</span>'
+                         f'<span class="supply">{esc(status)}</span></a>')
+            items.append({"@type": "ListItem", "position": len(items) + 1, "name": name,
+                          "url": absolute_product_row_url(href)})
+        label = f"{strength}の販売元" if slug == "teramuro" else strength
+        sections.append(f'<section aria-labelledby="{anchor}"><h2 id="{anchor}">{esc(label)}</h2>'
+                        f'<div class="strength-list">{"".join(cards)}</div></section>')
+        jump_links.append(f'<a href="#{anchor}">{esc(strength)}</a>')
+    picker = (f'<nav class="strength-nav" aria-label="規格を選ぶ">{"".join(jump_links)}</nav>'
+              if slug == "teramuro" and len(jump_links) > 1 else "")
+    if not sections:
+        sections.append('<p>今回の公表データでは該当する品目を確認できません。</p>')
+    collection = {"@type": "CollectionPage", "name": heading, "url": canonical,
+                  "mainEntity": {"@type": "ItemList", "numberOfItems": len(items), "itemListElement": items}}
+    breadcrumb = {"@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "医薬品供給ナビ", "item": SITE_ROOT},
+        {"@type": "ListItem", "position": 2, "name": "最近お問い合わせの多い製品", "item": SITE_ROOT + "products/index.html"},
+        {"@type": "ListItem", "position": 3, "name": brand, "item": canonical}]}
+    return f"""<!DOCTYPE html><html lang="ja"><head>
+{common_head(title, description, canonical, 'website', [collection, breadcrumb])}<style>{STYLE}
+.strength-nav{{display:flex;gap:10px;flex-wrap:wrap}}.strength-nav a{{display:inline-flex;min-height:44px;min-width:72px;justify-content:center;align-items:center;border:1px solid #9eb7ed;border-radius:10px;font-weight:750;color:#244b9e}}
+.strength-list{{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:8px}}.strength-item{{display:grid;gap:2px;padding:12px 16px;background:#fff;border:1px solid var(--line);border-radius:12px;color:var(--ink);text-decoration:none}}.strength-item strong{{color:#244b9e;text-decoration:underline;text-underline-offset:3px}}.strength-item span{{font-size:13px;color:var(--sub)}}.strength-item .supply{{color:var(--ink);font-weight:650}}a:focus-visible{{outline:3px solid #346bd6;outline-offset:2px}}
+</style></head><body><div class="wrap"><header class="site"><a href="../">医薬品供給ナビ</a></header>
+<nav class="crumb" aria-label="パンくず"><a href="../">トップ</a> › <a href="index.html">注目製品</a> › {esc(brand)}</nav><main>
+<header class="hero"><h1>{esc(heading)}</h1><p class="note">厚労省の公表データ　基準日 {esc(source_date or '未確認')}</p>{picker}</header>
+{"".join(sections)}
+<p class="source"><a href="{MHLW_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公表情報を確認</a></p>
+{share_control("この供給状況を共有")}</main><footer><a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
+{analytics_footer()}</body></html>"""
+
+
+def list_page(kind: str, records: list[dict], updated_at: str, generated_keys: set[str] | None = None) -> str:
     topic = kind == "topics"
     heading = "話題のニュース" if topic else "最近お問い合わせの多い製品"
     description = ("医薬品の販売中止・販売移管・薬価・供給に関する話題を、出典付きでまとめています。"
-                   if topic else "最近お問い合わせの多い医薬品について、メーカー別の供給状況をまとめています。")
+                   if topic else "モビコール、ユベラ、テラムロ、ジクトルなどの供給状況を、規格や包装別に確認できます。")
     canonical = f"{SITE_ROOT}{kind}/index.html"
     links = []
+    primary = []
+    if not topic:
+        keys = generated_keys or set()
+        slugs = {record["slug"] for record in records}
+        for slug, label, detail in (
+            ("movicol", "モビコール配合内用剤", "LD・HDの規格別"),
+            ("juvela-ointment", "ユベラ軟膏", "包装別のメーカー案内"),
+            ("teramuro", "テラムロ配合錠", "AP・BPと販売元別"),
+            ("zictor-tape-75mg", "ジクトルテープ75mg", "供給状況と公表理由"),
+        ):
+            if slug not in STRENGTH_HUBS and slug not in slugs:
+                continue
+            href = f"{slug}.html"
+            if slug == "juvela-ointment" and "2649805M1026" in keys:
+                href = "../items/2649805M1026.html"
+            primary.append(f'<a href="{href}">{label}<small>{detail}</small></a>')
+        if "3179106F1039" in keys:
+            links.append('<a href="../items/3179106F1039.html">ノイロビタン配合錠<small>包装別のメーカー案内</small></a>')
     for record in records:
-        if not topic and record["slug"] in WEB_HIDDEN_FEATURED_SLUGS:
+        if not topic and record["slug"] in WEB_HIDDEN_FEATURED_SLUGS | {"juvela-ointment", "zictor-tape-75mg"}:
             continue
         label = record["title"] if topic else record["label"]
         meta = (f"{record['date']}｜{record['tag']}" if topic else "メーカー別の供給状況を確認")
         links.append(f'<a href="{esc(record["slug"])}.html">{esc(label)}<small>{esc(meta)}</small></a>')
+    listing = f'<h2>一覧</h2><div class="list">{"".join(links)}</div>'
+    intro = (f'<p class="eyebrow">CURATED</p><h1>{heading}</h1><p class="lede">{description}</p>'
+             f'<p class="note">最終更新：{esc(updated_at)}</p>\n{share_control("この一覧を共有")}')
+    extra_style = ""
     if not topic:
-        # Webのみの検索導線。共有キュレーション・iOSの一覧は変更しない。
-        links.append(f'<a href="../#q={quote("テラムロ", safe="")}">テラムロ配合錠<small>メーカー別の供給状況を確認</small></a>')
-        updated_at = max(updated_at, "2026-09-12")
+        intro = f'<h1>{heading}</h1>'
+        extra_style = '.other-products{margin:18px 0}.other-products summary{padding:12px 0;cursor:pointer;font-weight:700}.hero+.list{margin-top:16px}'
+        listing = (f'<div class="list">{"".join(primary)}</div>'
+                   f'<details class="other-products"><summary>その他の製品を見る</summary><div class="list">{"".join(links)}</div></details>'
+                   + share_control("この一覧を共有"))
     breadcrumb = {"@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "医薬品供給ナビ", "item": SITE_ROOT},
         {"@type": "ListItem", "position": 2, "name": heading, "item": canonical}]}
     title = f"{heading}｜医薬品供給ナビ"
     return f"""<!DOCTYPE html><html lang="ja"><head>
-{common_head(title, description, canonical, 'website', [breadcrumb])}<style>{STYLE}</style></head><body>
+{common_head(title, description, canonical, 'website', [breadcrumb])}<style>{STYLE}{extra_style}</style></head><body>
 <div class="wrap"><header class="site"><a href="../">💊 医薬品供給ナビ</a></header><nav class="crumb"><a href="../">トップ</a> › {heading}</nav>
-<main><section class="hero"><p class="eyebrow">CURATED</p><h1>{heading}</h1><p class="lede">{description}</p><p class="note">最終更新：{esc(updated_at)}</p>
-{share_control("この一覧を共有")}</section>
-<h2>一覧</h2><div class="list">{''.join(links)}</div></main><footer><a href="../guides/{GUIDE_SLUG}.html">供給情報の確認ガイド</a>｜<a href="../categories/index.html">薬効分類別の供給状況</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
+<main><section class="hero">{intro}</section>
+{listing}</main><footer><a href="../guides/{GUIDE_SLUG}.html">供給情報の確認ガイド</a>｜<a href="../categories/index.html">薬効分類別の供給状況</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
 {analytics_footer()}</body></html>"""
 
 
@@ -1277,7 +1366,7 @@ def main() -> int:
     topics = topics_doc.get("topics") or []
     products = products_doc.get("products") or []
     groups = category_groups(rows)
-    if len(topics) + len(products) + len(groups) + 2 > args.max_pages:
+    if len(topics) + len(products) + len(STRENGTH_HUBS) + len(groups) + 2 > args.max_pages:
         raise ValueError("生成対象が安全上限を超えています")
     ingredients = ingredient_groups(rows)
     if len(ingredients) > MAX_INGREDIENT_PAGES:
@@ -1324,6 +1413,11 @@ def main() -> int:
         product_dates[product["slug"]] = max(lastmod, curated_date, TEMPLATE_UPDATED_AT, PRODUCT_TEMPLATE_UPDATED_AT)
         if product["slug"] == "lulicon-cream":
             product_dates[product["slug"]] = max(product_dates[product["slug"]], "2026-09-11")
+    source_date = mhlw_excel_date(version_doc, dataset_date)
+    for slug in STRENGTH_HUBS:
+        (product_dir / f"{slug}.html").write_text(
+            strength_hub_page(slug, rows, generated_keys, source_date), encoding="utf-8")
+        product_dates[slug] = max(source_date, STRENGTH_HUB_EDIT_DATE)
     (guide_dir / f"{GUIDE_SLUG}.html").write_text(
         guide_page(), encoding="utf-8")
     (guide_dir / f"{WATCH_GUIDE_SLUG}.html").write_text(watch_guide_page(), encoding="utf-8")
@@ -1334,7 +1428,8 @@ def main() -> int:
             normalize_date(topics_doc.get("updated_at")), TEMPLATE_UPDATED_AT)), encoding="utf-8")
     (product_dir / "index.html").write_text(
         list_page("products", products, max(
-            normalize_date(products_doc.get("updated_at")), TEMPLATE_UPDATED_AT, PRODUCT_TEMPLATE_UPDATED_AT)), encoding="utf-8")
+            normalize_date(products_doc.get("updated_at")), TEMPLATE_UPDATED_AT, PRODUCT_TEMPLATE_UPDATED_AT),
+                  generated_keys), encoding="utf-8")
     category_dir = site / "categories"
     category_dir.mkdir(exist_ok=True)
     category_dates: dict[str, str] = {}

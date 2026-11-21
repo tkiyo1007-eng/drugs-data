@@ -56,6 +56,7 @@ PACKAGE_LANDING_UPDATED_AT = "2026-11-13"
 PACKAGE_LANDING_KEYS = frozenset({
     "1139003C1044", "1139003C2040", "2325401A1020", "2325401A2027", "2649805M1026",
 })
+PACKAGE_OVERVIEW_KEYS = frozenset({"2649805M1026", "3179106F1039"})
 # drugs-data の generate_curated_pages.py（CATEGORY_MIN_ROWS）と同じ基準。
 # 分類ページが生成される分類だけにリンクし、404を出さない。
 CATEGORY_MIN_ROWS = 3
@@ -835,6 +836,27 @@ def manufacturer_notice_scope_text(target: dict) -> str:
             + (f'｜対象包装：{"／".join(packages)}' if packages else '｜包装別の内訳は未確認' if target["scope"] == "product" else ""))
 
 
+def package_overview_notice(matches, bulletins):
+    """Only promote a single, dated package notice. Never fall back past a newer notice."""
+    if not matches or bulletins is None:
+        return None
+    latest_date = max(match["notice"]["announced_at"] for match in matches)
+    # A month-only and a day-specific notice in the same month cannot be ordered.
+    latest = [match for match in matches if latest_date.startswith(match["notice"]["announced_at"])]
+    if len(latest) != 1:
+        return None
+    match = latest[0]
+    notice, target = match["notice"], match["target"]
+    if (match["source_changed"] or manufacturer_notice_needs_review(notice, bulletins)
+            or target["scope"] != "package" or target.get("seller")
+            or notice.get("event_type") not in {"limited", "stopped", "resumed"}):
+        return None
+    packages = target["packages"]
+    if not packages or not all(isinstance(p, dict) and valid_package_supply(p.get("supply")) for p in packages):
+        return None
+    return notice, list(dict.fromkeys(p["package"] for p in packages))
+
+
 def manufacturer_notices_html(row: dict, notices=(), warning="", catalog_yj_codes=None, bulletins=None,
                               *, link_first_alternatives=False) -> str:
     matches = matching_manufacturer_notices(row, notices, bulletins)
@@ -1229,6 +1251,8 @@ def item_page_lastmod(row: dict, lifecycle=None, discrepancy=None, manufacturer_
         dates.extend(topic["date"] for topic in related_topics if topic.get("date"))
     if item_key(row) in PACKAGE_LANDING_KEYS:
         dates.append(PACKAGE_LANDING_UPDATED_AT)
+    if item_key(row) in PACKAGE_OVERVIEW_KEYS:
+        dates.append("2026-11-21")  # 包装別の案内を品目ページの冒頭へ
     if is_delist(row) or supplemental_matches(row, lifecycle):
         dates.append(SUPPLEMENTAL_TEMPLATE_LASTMOD)
     if (supplemental_matches(row, lifecycle) and not lifecycle.get("source_changed")
@@ -1441,15 +1465,16 @@ def item_hub_slugs(entry: dict, dataset_date: str) -> list:
 
 
 def page_title(name: str, status_label: str, supplements: list,
-               qualifier: str = "") -> str:
+               qualifier: str = "", manufacturer_hint: str = "") -> str:
     """検索結果で意味を保ちつつ、HTMLの推奨70文字以内へ収める。"""
     suffix = "｜医薬品供給ナビ"
     search_status_label = ("限定出荷（出荷調整）"
                            if status_label == "限定出荷" else status_label)
     qualified_name = f"{name}（{qualifier}）" if qualifier else name
+    notice_hint = manufacturer_hint or ("メーカー補足あり" if supplements else "")
     candidates = [
         (f"{qualified_name}の供給状況｜厚労省：{search_status_label}"
-         + ("｜メーカー補足あり" if supplements else "") + suffix),
+         + ("｜" + notice_hint if notice_hint else "") + suffix),
         f"{qualified_name}の供給状況｜{search_status_label}{suffix}",
         f"{qualified_name}｜供給状況{suffix}",
     ]
@@ -1602,7 +1627,26 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
             + (f"。メーカー公式補足は「{'／'.join(supplements)}」" if supplements else "")
             + "。原Excelの基準日・品目行の更新日はページ内で分けて確認できます。")
     package_jump = ""
-    if key in PACKAGE_LANDING_KEYS:
+    package_overview = ""
+    if key in PACKAGE_OVERVIEW_KEYS:
+        matches = matching_manufacturer_notices(row, manufacturer_notices, manufacturer_bulletins)
+        overview = package_overview_notice(matches, manufacturer_bulletins) if supplemental_trusted else None
+        if overview:
+            notice, packages = overview
+            scope = "・".join(packages)
+            date_parts = [int(part) for part in notice["announced_at"].split("-")]
+            notice_day = f"{date_parts[0]}年{date_parts[1]}月"
+            if len(date_parts) == 3:
+                notice_day += f"{date_parts[2]}日"
+            title = page_title(name, st["label"], supplements, title_qualifier, scope + "のメーカー案内")
+            desc = (f"{display_name}の厚労省公表区分は「{st['label']}」。"
+                    f"{notice_day}の{notice['maker']}の案内には、{scope}の出荷対応が記載されています。")
+            package_overview = (f'<section class="package-brief" aria-labelledby="packageBriefTitle">'
+                                '<h2 id="packageBriefTitle">包装別のメーカー案内</h2>'
+                                f'<p><strong>{esc(" ／ ".join(packages))}</strong></p>'
+                                f'<a class="source-link" data-dsn-event="official-source-open" href="{esc(notice["url"])}">'
+                                f'{esc(notice_day)}の{esc(notice["maker"])}の原文</a></section>')
+    elif key in PACKAGE_LANDING_KEYS:
         matches = matching_manufacturer_notices(row, manufacturer_notices, manufacturer_bulletins)
         packages = dict.fromkeys(
             package["package"] for match in matches if not match["source_changed"]
@@ -1793,8 +1837,10 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
                   '<a class="brand" href="../"><span aria-hidden="true">✚</span>医薬品供給ナビ</a>'
                   '<a href="../#top">トップへ</a></div></header>\n')
         shortcuts = []
-        if manufacturer_box:
+        if manufacturer_box and not package_overview:
             shortcuts.append(("manufacturerNoticesTitle", "メーカー案内"))
+        elif package_overview:
+            shortcuts.append(("manufacturerNoticesTitle", "包装別の出荷対応"))
         if 'id="trialAlternatives"' in manufacturer_box:
             shortcuts.append(("trialAlternatives", "原文の代替候補"))
         if topic_box:
@@ -1809,7 +1855,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
                      row, display_name, maker, public_metadata.get("解除・解消見込み"),
                      mhlw_excel_date(version_metadata, dataset_date), reference_import, reference_version,
                      official_row_date(row), delist, matching_manufacturer_notices(row, manufacturer_notices, manufacturer_bulletins),
-                     shortcuts, spec_difference_html + gas_spec_note, headline_labels))
+                     shortcuts, spec_difference_html + gas_spec_note, headline_labels, package_overview))
         # Keep warnings beside the source they qualify. Render each full notice and topic only once.
         promoted_sections = (delist_box + lifecycle_box + discrepancy_box + supplemental_checked
                              + manufacturer_box + topic_box + '<h2 id="itemDetails">品目の詳細</h2>')
@@ -1948,7 +1994,7 @@ footer a{{color:var(--sub)}}
   <div class="card">
 {intro}{promoted_sections}    <div class="stbox status-{status}">
       {supply_answer}{package_jump}
-    </div>
+    </div>{package_overview if not limited_layout else ""}
 {early_hub_link}{variants_html}
     <section class="item-freshness" aria-labelledby="itemFreshnessTitle">
       <h2 id="itemFreshnessTitle">このページが参照したデータ</h2>

@@ -25,6 +25,8 @@
 .end-details span {display:block}
 .supp-checked {font-weight:650}
 .supp-checked+.supp-warning {margin:8px 0}
+.package-brief h2 {font-size:.95rem;margin-bottom:.3rem}
+.package-brief .source-link {margin-top:.35rem;padding-inline:0;border:0;text-align:start;text-decoration:underline}
 .links,.cta,.hub-links {display:flex;flex-wrap:wrap;gap:0 14px}
 .cta {display:block}
 .cta a {margin-right:12px}

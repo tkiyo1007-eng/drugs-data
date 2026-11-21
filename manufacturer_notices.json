@@ -11677,19 +11677,19 @@
     {
       "id": "ltl-neurovitan-limited-20261026",
       "maker": "LTLファーマ",
-      "title": "ノイロビタン配合錠の限定出荷（2026年10月26日更新の一覧）",
+      "title": "ノイロビタン配合錠の限定出荷（2026年11月19日更新の一覧）",
       "url": "https://www.ltl-pharma.com/wp-content/uploads/resource/distribution_info/distribution_info.pdf",
-      "announced_at": "2026-10-26",
-      "verified_at": "2026-11-15",
-      "content_updated_at": "2026-11-15",
-      "sha256": "50a67a2628ca74474b2dcd433cbd2692ba1bfaa7f4863917042239cece6b3e2a",
+      "announced_at": "2026-11-19",
+      "verified_at": "2026-11-21",
+      "content_updated_at": "2026-11-21",
+      "sha256": "be6fed36c0de6e7607db37d6b3709a31040483affa20b44fb7235ad496502b8b",
       "collection_mode": "manual",
       "event_type": "limited",
-      "reason": "メーカーは熊本地震による製造所の被災を理由に挙げています。",
+      "reason": "2026年7月の熊本地震で製造所が被災したため、9月28日から限定出荷となっています。",
       "effective_at": "2026-09-28",
-      "resumption": "限定出荷解除見込みは未定（2026年10月26日更新時点）",
+      "resumption": "限定出荷の解除時期は未定です（2026年11月19日時点）。",
       "cautions": [
-        "メーカー一覧は2026年10月26日更新の情報です。製造委託施設の生産再開は10月下旬の予定と記載され、実際の再開やその後の生産量は確認できていません。",
+        "約80％はメーカーが11月19日に示した今後の出荷量の見込みです。限定出荷の解除時期は未定です。",
         "資料時点のメーカー案内であり、現在の受注可否・卸在庫を示すものではありません。厚労省公表区分とは別に確認してください。",
         "この資料は手動確認したもので、後続案内を自動追跡していません。"
       ],
@@ -11708,7 +11708,7 @@
               "package": "500錠（PTP）",
               "supply": {
                 "status": "limited",
-                "status_text": "限定出荷（2026年10月26日更新のメーカー一覧）",
+                "status_text": "限定出荷（2026年11月19日のメーカー一覧）",
                 "plans": []
               }
             },
@@ -11716,13 +11716,17 @@
               "package": "1000錠（瓶）",
               "supply": {
                 "status": "limited",
-                "status_text": "限定出荷（2026年10月26日更新のメーカー一覧）",
+                "status_text": "限定出荷（2026年11月19日のメーカー一覧）",
                 "plans": []
               }
             }
           ]
         }
-      ]
+      ],
+      "maker_supply_status": {
+        "handling": "製造委託施設では2026年10月下旬に生産を再開しました。",
+        "volume": "2027年1月下旬から、通常出荷時の約80％の出荷量を見込んでいます。"
+      }
     },
     {
       "id": "ltl-neurovitan-specialist-wholesalers-202609",
