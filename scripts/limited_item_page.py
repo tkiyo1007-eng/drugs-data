@@ -30,16 +30,20 @@ def comparison_html(rows, note):
 
 
 def overview_html(row, name, maker, release, source_date, imported, version, updated,
-                  delist, notices, shortcuts, spec_note, discontinuation_labels=()):
+                  delist, notices, shortcuts, spec_note, discontinuation_labels=(), *,
+                  historical_package_labels=None):
     # Keep strength units together even on narrow screens.
     name = re.sub(r"[０-９0-9]+(?:[．.][０-９0-9]+)?(?:[％%]|[ｍm][ｇg]|[μµ]g)|(?:ＬＤ|ＨＤ|LD|HD)$",
                   r'<span class="strength">\g<0></span>', escape(name))
     source_links = []
     for match in notices:
         notice = match["notice"]
+        packaging = (historical_package_labels or {}).get(notice["url"])
         label = "更新された原文" if match["source_changed"] else "原文"
+        if packaging and not match["source_changed"]:
+            label = f"当時の包装別案内（{packaging}）"
         source_links.append(f'<a class="source-link" data-dsn-event="official-source-open" href="{escape(notice["url"])}">'
-                            f'{escape(notice["maker"])}の{label} <small>文書 {escape(notice["announced_at"])}</small></a>')
+                            f'{escape(notice["maker"])}の{escape(label)} <small>文書 {escape(notice["announced_at"])}</small></a>')
     if any(m["notice"]["url"].startswith("https://www.torii.co.jp/iyakuDB/") for m in notices):
         source_links.append('<small>鳥居薬品のサイトで職種の確認があります。</small>')
     links = ''.join(f'<a href="#{anchor}">{label}</a>' for anchor, label in shortcuts)
