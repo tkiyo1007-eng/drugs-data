@@ -6704,8 +6704,12 @@ function inquiryRowText(item){
   return text ? `<small>${esc(text)}</small>` : "";
 }
 function renderTrending(){
-  // 単一品目は既存の詳細へ直行。複数メーカー・規格は選択せず検索結果へ。
-  // products/ の既存URLは削除せず、ここからの通常操作だけをWeb本体へ揃える。
+  // 専用ページがある製品はそこへ、それ以外は品目詳細か規格を選べる検索結果へ。
+  const landingPages = new Map([
+    ["movicol", "products/movicol.html"],
+    ["teramuro", "products/teramuro.html"],
+    ["juvela-ointment", "items/2649805M1026.html"],
+  ]);
   const details = {
     'juvela-ointment':'2649805M1026',
     'zictor-tape-75mg':'1147700S1028',
@@ -6807,7 +6811,8 @@ function renderTrending(){
     const reference = key && singles.has(key)
       ? `<a class="trending-reference" data-trending-reference="${esc(key)}" href="#item=${esc(key)}" aria-label="${esc(label)}の原因と代替案">原因と代替案</a>` : "";
     const hint = inquirySummary(hintRows) || trendingNoticeHint(hintRows);
-    return `<div class="trending-entry" data-trending-slug="${esc(t.slug)}"><a class="trending-chip" href="${key ? '#item='+details[t.slug] : '#'+new URLSearchParams({q:t.q}).toString()}">${esc(label)}</a><p class="trending-hint">${esc(hint)}</p>${names}${reference}</div>`;
+    const href = landingPages.get(t.slug) || (key ? '#item='+key : '#'+new URLSearchParams({q:t.q}).toString());
+    return `<div class="trending-entry" data-trending-slug="${esc(t.slug)}"><a class="trending-chip" href="${esc(href)}">${esc(label)}</a><p class="trending-hint">${esc(hint)}</p>${names}${reference}</div>`;
   }).join("");
   const resolve = focus=>{
     if(!focus) return null;
