@@ -1,6 +1,6 @@
 import unittest
 
-from generate_item_pages import page_html, supply_answer_html, product_variants_html
+from generate_item_pages import bonzol_strength_selector, page_html, supply_answer_html, product_variants_html
 
 
 class ItemAnswerContextTests(unittest.TestCase):
@@ -68,3 +68,24 @@ class ItemAnswerContextTests(unittest.TestCase):
         self.assertIn('厚労省 供給停止', result)
         self.assertEqual('', product_variants_html(row, [row, dict(other, 製造メーカー='別会社')], set()))
         self.assertEqual('', product_variants_html(row, [row, dict(other, 一般名='別成分')], set()))
+
+    def test_bonzol_strength_switch_links_only_the_verified_published_peer(self):
+        low = dict(self.row(), 商品名='ボンゾール錠１００ｍｇ', YJコード='2499007F1021', 一般名='ダナゾール',
+                   販売メーカー='田辺ファーマ', 製造メーカー='田辺ファーマ', 供給状況='①通常出荷')
+        high = dict(low, 商品名='ボンゾール錠２００ｍｇ', YJコード='2499007F2028')
+        keys = {r['YJコード'] for r in (low, high)}
+        for row, peer, current, other in ((low, high, '100mg', '200mg'), (high, low, '200mg', '100mg')):
+            nav = bonzol_strength_selector(row, [peer], keys)
+            self.assertIn(f'aria-current="page">{current}<small>（表示中）', nav)
+            self.assertIn(f'href="{peer["YJコード"]}.html" data-dsn-event="related-item-open">{other}</a>', nav)
+            self.assertNotIn(f'href="{row["YJコード"]}.html"', nav)
+            for status, label, heading in [('ok', '①通常出荷', 'class="stbox status-ok"'),
+                                           ('limited', '②限定出荷（自社の事情）', '厚労省の供給状況</h2>')]:
+                result = page_html(dict(row, 供給状況=label), row['YJコード'], status, '2026-11-22', [],
+                                   keys, product_variants=[peer])
+                self.assertLess(result.index(nav), result.index(heading))
+                self.assertNotIn('data-spec-note="1"', result)
+        for replacement in [dict(high, 販売メーカー='別会社'), dict(high, 商品名=low['商品名']),
+                            dict(high, 一般名='別成分'), dict(high, YJコード='0000000F0000')]:
+            self.assertEqual('', bonzol_strength_selector(low, [replacement], keys))
+        self.assertEqual('', bonzol_strength_selector(low, [high], {low['YJコード']}))
