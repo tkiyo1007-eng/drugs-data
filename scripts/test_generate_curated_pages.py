@@ -702,6 +702,18 @@ class CuratedPageGenerationTests(unittest.TestCase):
         other_seller = dict(row, 販売メーカー="販売元B")
         self.assertEqual("", product_package_snapshot([other_seller], index, None, {code}))
 
+        old_target = dict(target, packages=[
+            {"package": "PTP140錠", "supply": {"status": "stopped", "status_text": "販売終了", "plans": []}},
+        ])
+        old_notice = dict(notice, event_type="discontinued", announced_at="2025-07",
+                          url="https://example.test/old.pdf", targets=[old_target])
+        html = product_package_snapshot([row], {code: [notice, old_notice]}, None, {code}, include_details=True)
+        self.assertIn("PTP100錠：出荷停止", html)
+        self.assertIn("PTP140錠：販売終了", html)
+        old_target["packages"][0]["package"] = "PTP100錠"
+        html = product_package_snapshot([row], {code: [notice, old_notice]}, None, {code}, include_details=True)
+        self.assertNotIn("PTP100錠：販売終了", html)
+
     def test_sawai_teramuro_discontinuation_headline_only_names_ptp140(self):
         for code in ("2149117F1050", "2149117F2056"):
             with self.subTest(code=code):

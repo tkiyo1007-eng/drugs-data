@@ -19,7 +19,7 @@ from generate_item_pages import (
     load_manufacturer_bulletins, lifecycle_for_display, supplemental_context,
     load_zictor_listing, zictor_package_overview,
     manufacturer_notice_index, matching_manufacturer_notices,
-    manufacturer_notice_needs_review, maker_tokens, notice_date_label, valid_package_supply,
+    manufacturer_notice_needs_review, maker_tokens, notice_date_label, notice_package_names, valid_package_supply,
     PACKAGE_PLAN_LABELS,
 )
 from validate_shared_content import valid_topic_publisher_http_source
@@ -759,31 +759,44 @@ def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *, i
         current = [m for m in matches if latest.startswith(m["notice"]["announced_at"])]
         if len(current) != 1:
             continue
-        match, = current
-        notice, target = match["notice"], match["target"]
-        if (match["source_changed"] or manufacturer_notice_needs_review(notice, bulletins)
-                or target["scope"] not in {"package", "seller_route_and_package"}):
-            continue
-        seller = target["seller"] if target["scope"] == "seller_route_and_package" else ""
-        if seller and not maker_tokens(seller).issubset(maker_tokens(row.get("販売メーカー"))):
-            continue
-        packages = []
-        for package in target["packages"]:
-            supply = package.get("supply") if isinstance(package, dict) else None
-            if not valid_package_supply(supply) or not supply.get("status_text"):
+        if include_details:
+            earlier_ends = [m for m in matches if m["notice"].get("event_type") == "discontinued"
+                            and m["notice"]["announced_at"] < latest
+                            and current[0]["notice"].get("event_type") != "discontinued"]
+            if len(earlier_ends) == 1:
+                end = earlier_ends[0]
+                names = {norm(name) for name in notice_package_names(end["target"])}
+                later = [m["target"] for m in matches
+                         if m["notice"]["announced_at"] >= end["notice"]["announced_at"] and m is not end]
+                if names and all(t["scope"] in {"package", "seller_route_and_package"}
+                                 and names.isdisjoint(norm(name) for name in notice_package_names(t))
+                                 for t in later):
+                    current.append(end)
+        for match in current:
+            notice, target = match["notice"], match["target"]
+            if (match["source_changed"] or manufacturer_notice_needs_review(notice, bulletins)
+                    or target["scope"] not in {"package", "seller_route_and_package"}):
                 continue
-            details = [f'{esc(package["package"])}：{esc(supply["status_text"])}']
-            if include_details:
-                details.extend(f'{PACKAGE_PLAN_LABELS[plan["event"]]} {esc(plan["timing"].removesuffix("予定"))}'
-                               for plan in supply["plans"])
-            packages.append(f'<li>{"<br>".join(details)}</li>')
-        if not packages:
-            continue
-        href = esc(row_link(row, generated_keys))
-        name = esc(row["商品名"])
-        entries = groups.setdefault((notice["url"], notice["maker"], latest, seller), (notice, []))[1]
-        entries.append(f'<h4><a href="{href}" data-dsn-event="related-item-open">{name}</a></h4>'
-                       f'<ul>{"".join(packages)}</ul>')
+            seller = target["seller"] if target["scope"] == "seller_route_and_package" else ""
+            if seller and not maker_tokens(seller).issubset(maker_tokens(row.get("販売メーカー"))):
+                continue
+            packages = []
+            for package in target["packages"]:
+                supply = package.get("supply") if isinstance(package, dict) else None
+                if not valid_package_supply(supply) or not supply.get("status_text"):
+                    continue
+                details = [f'{esc(package["package"])}：{esc(supply["status_text"])}']
+                if include_details:
+                    details.extend(f'{PACKAGE_PLAN_LABELS[plan["event"]]} {esc(plan["timing"].removesuffix("予定"))}'
+                                   for plan in supply["plans"])
+                packages.append(f'<li>{"<br>".join(details)}</li>')
+            if not packages:
+                continue
+            href = esc(row_link(row, generated_keys))
+            name = esc(row["商品名"])
+            entries = groups.setdefault((notice["url"], notice["maker"], notice["announced_at"], seller), (notice, []))[1]
+            entries.append(f'<h4><a href="{href}" data-dsn-event="related-item-open">{name}</a></h4>'
+                           f'<ul>{"".join(packages)}</ul>')
     if not groups:
         return ""
     sections = []
@@ -793,7 +806,7 @@ def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *, i
         reason = notice.get("reason") if include_details else None
         seller_html = f'<p class="note">対象の販売元　{esc(seller)}</p>' if seller else ""
         summary_html = f'<p>{esc(summary)}</p>' if summary else ""
-        index_url = notice.get("source_index_url") if seller else None
+        index_url = notice.get("source_index_url") if seller or include_details else None
         index_html = (f'・<a href="{esc(index_url)}" data-dsn-event="official-source-open">メーカーの掲載元を確認</a>'
                       if index_url else "")
         reason_label = "販売中止の理由" if notice.get("event_type") == "discontinued" else "限定出荷の理由"
