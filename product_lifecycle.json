@@ -2653,7 +2653,14 @@
       "announced_at": "2026-10-27",
       "source_title": "2026/10/27 製造販売中止のご案内_ジメモルファンリン酸塩DS小児用2.5%「タカタ」",
       "source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000ccmb-att/Dimemorfan.pdf",
-      "verified_at": "2026-11-22"
+      "verified_at": "2026-11-22",
+      "supply_end_expected": "2027-03",
+      "supply_end_note": "高田製薬の2026年10月案内（公開転載で確認）では、製品構成の見直しに伴いバラ100gの製造販売を中止し、在庫消尽は2027年3月を見込んでいます。経過措置満了は2028年3月31日予定。代替候補としてアストミンシロップ0.25％の500mLを案内しています。",
+      "supply_end_packages": [
+        "バラ100g"
+      ],
+      "supply_end_source_url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000ccmb-att/Dimemorfan.pdf",
+      "supply_end_verified_at": "2026-11-22"
     },
     "2239001N1160": {
       "product_name": "アンブロキソール塩酸塩徐放カプセル４５ｍｇ「トーワ」",
