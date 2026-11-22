@@ -38,6 +38,7 @@ WATCH_GUIDE_SLUG = "monitor-adopted-drugs"
 WATCH_GUIDE_UPDATED_AT = "2026-09-26"
 TEMPLATE_UPDATED_AT = "2026-08-28"
 PRODUCT_TEMPLATE_UPDATED_AT = "2026-09-06"
+PRODUCT_INDEX_UPDATED_AT = "2026-11-22"
 CATEGORY_TEMPLATE_UPDATED_AT = "2026-09-25"
 REPORT_TEMPLATE_UPDATED_AT = "2026-09-25"
 CATEGORY_MIN_ROWS = 3
@@ -59,10 +60,14 @@ SEASONAL_CATEGORIES = {
                       "label": "花粉・夏季に確認が増える分類",
                       "codes": ("449", "441", "131", "132", "114", "264")},
 }
-# Web一覧のみの編集指定。共通JSONと詳細ページの生成対象は変更しない。
-WEB_HIDDEN_FEATURED_SLUGS = {
-    "caduet", "caduet-1", "caduet-2", "caduet-3", "caduet-4",
-    "gentacin-ointment", "mounjaro-injection", "loxoprofen-sodium-tape", "celecox-tablets",
+# 番号別ページへはカデュエットの比較ページから案内する。
+CADUET_STRENGTH_SLUGS = frozenset(f"caduet-{number}" for number in range(1, 5))
+PRODUCT_INDEX_SUMMARIES = {
+    "caduet": "1〜4番の規格別比較",
+    "mounjaro-injection": "規格別の供給状況",
+    "celecox-tablets": "規格別の供給状況",
+    "juvela-ointment": "製品の供給状況",
+    "gentacin-ointment": "供給状況と公表理由",
 }
 # 規格選択はWeb専用。アプリと共用のfeatured_products.jsonには追加しない。
 STRENGTH_HUBS = {
@@ -876,6 +881,7 @@ def list_page(kind: str, records: list[dict], updated_at: str, generated_keys: s
     if not topic:
         keys = generated_keys or set()
         slugs = {record["slug"] for record in records}
+        listed_in_primary = set()
         for slug, label, detail in (
             ("movicol", "モビコール配合内用剤", "LD・HDの規格別"),
             ("juvela-ointment", "ユベラ軟膏", "包装別のメーカー案内"),
@@ -887,15 +893,21 @@ def list_page(kind: str, records: list[dict], updated_at: str, generated_keys: s
             href = f"{slug}.html"
             if slug == "juvela-ointment" and "2649805M1026" in keys:
                 href = "../items/2649805M1026.html"
+            else:
+                listed_in_primary.add(slug)
             primary.append(f'<a href="{href}">{label}<small>{detail}</small></a>')
         if "3179106F1039" in keys:
             links.append('<a href="../items/3179106F1039.html">ノイロビタン配合錠<small>包装別のメーカー案内</small></a>')
     for record in records:
-        if not topic and record["slug"] in WEB_HIDDEN_FEATURED_SLUGS | {"juvela-ointment", "zictor-tape-75mg"}:
-            continue
-        label = record["title"] if topic else record["label"]
-        meta = (f"{record['date']}｜{record['tag']}" if topic else "メーカー別の供給状況を確認")
-        links.append(f'<a href="{esc(record["slug"])}.html">{esc(label)}<small>{esc(meta)}</small></a>')
+        slug = record["slug"]
+        if topic:
+            label, meta = record["title"], f"{record['date']}｜{record['tag']}"
+        else:
+            if slug in listed_in_primary or ("caduet" in slugs and slug in CADUET_STRENGTH_SLUGS):
+                continue
+            label = record["label"]
+            meta = PRODUCT_INDEX_SUMMARIES.get(slug, "メーカー別の供給状況を確認")
+        links.append(f'<a href="{esc(slug)}.html">{esc(label)}<small>{esc(meta)}</small></a>')
     listing = f'<h2>一覧</h2><div class="list">{"".join(links)}</div>'
     intro = (f'<p class="eyebrow">CURATED</p><h1>{heading}</h1><p class="lede">{description}</p>'
              f'<p class="note">最終更新：{esc(updated_at)}</p>\n{share_control("この一覧を共有")}')
@@ -1354,7 +1366,7 @@ def sitemap(topic_dates: dict[str, str], product_dates: dict[str, str],
             report_dates: dict[str, str] | None = None,
             ingredient_dates: dict[str, str] | None = None) -> str:
     topic_latest = max(topic_dates.values(), default="")
-    product_latest = max(product_dates.values(), default="")
+    product_latest = max(PRODUCT_INDEX_UPDATED_AT, max(product_dates.values(), default=""))
     entries = [("topics/index.html", topic_latest), ("products/index.html", product_latest)]
     entries += [(f"topics/{slug}.html", date) for slug, date in topic_dates.items()]
     entries += [(f"products/{slug}.html", date) for slug, date in product_dates.items()]

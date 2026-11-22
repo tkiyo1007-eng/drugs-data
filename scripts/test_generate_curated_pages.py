@@ -31,7 +31,7 @@ from generate_curated_pages import (
     GUIDE_SLUG,
     GUIDE_UPDATED_AT,
     STRENGTH_HUBS,
-    WEB_HIDDEN_FEATURED_SLUGS,
+    CADUET_STRENGTH_SLUGS,
     discontinuation_guide_page,
     guide_page,
     ingredient_page,
@@ -292,28 +292,24 @@ class CuratedPageGenerationTests(unittest.TestCase):
         self.assertEqual(discontinuation_pages[0], discontinuation_pages[1],
                          "販売中止ガイドの確認日もニュース・製品の更新日に置き換えない")
 
-    def test_web_list_hides_requested_products_without_removing_detail_pages(self):
+    def test_web_list_preserves_the_four_featured_links_and_exposes_other_products(self):
         document = json.loads((ROOT / "featured_products.json").read_text())
         records = document["products"]
         before = json.dumps(records)
         page = list_page("products", records, "2026-09-12", {"2649805M1026", "3179106F1039"})
-        for record in records:
-            link = f'href="{record["slug"]}.html"'
-            if record["slug"] in WEB_HIDDEN_FEATURED_SLUGS:
-                self.assertNotIn(link, page)
-                detail, _ = product_page(record, [], set(), {})
-                self.assertIn(f'products/{record["slug"]}.html', detail)
-            elif record["slug"] == "juvela-ointment":
-                self.assertIn('href="../items/2649805M1026.html"', page)
-            else:
-                self.assertIn(link, page)
-        self.assertEqual(before, json.dumps(records))
-        self.assertEqual(9, len(WEB_HIDDEN_FEATURED_SLUGS))
-        self.assertEqual(1, page.count('テラムロ配合錠'))
-        first = page.split('<details class="other-products">')[0]
+        first, other = page.split('<details class="other-products">')
         featured = re.findall(r'<a href="([^"]+)">[^<]+<small>', first)
         self.assertEqual(["movicol.html", "../items/2649805M1026.html", "teramuro.html", "zictor-tape-75mg.html"], featured)
-        self.assertIn('href="../items/3179106F1039.html"', page.split('<details class="other-products">')[1])
+        for record in records:
+            link = f'href="{record["slug"]}.html"'
+            if record["slug"] in CADUET_STRENGTH_SLUGS:
+                self.assertNotIn(link, page)
+            elif record["slug"] != "zictor-tape-75mg":
+                self.assertIn(link, other)
+        self.assertEqual(before, json.dumps(records))
+        self.assertEqual(1, page.count('テラムロ配合錠'))
+        self.assertIn('href="../items/3179106F1039.html"', other)
+        self.assertIn("1〜4番の規格別比較", other)
         self.assertNotIn("最終更新", page)
         self.assertNotIn('テラムロ配合錠', list_page('topics', [], '2026-09-12'))
 
@@ -617,10 +613,11 @@ class CuratedPageGenerationTests(unittest.TestCase):
             for slug in slugs:
                 with self.subTest(kind=kind, slug=slug):
                     page = (ROOT / kind / f"{slug}.html").read_text(encoding="utf-8")
-                    if kind == "products" and slug in WEB_HIDDEN_FEATURED_SLUGS:
+                    if kind == "products" and slug in CADUET_STRENGTH_SLUGS:
                         self.assertNotIn(f'{slug}.html', index)
-                    elif kind == "products" and slug == "juvela-ointment":
-                        self.assertIn("../items/2649805M1026.html", index)
+                        base_product = (ROOT / "products" / "caduet.html").read_text(encoding="utf-8")
+                        self.assertIn('href="caduet.html"', index)
+                        self.assertIn(f'href="{slug}.html"', base_product)
                     else:
                         self.assertIn(f'{slug}.html', index)
                     self.assertIn(f"{kind}/{slug}.html", sitemap)
