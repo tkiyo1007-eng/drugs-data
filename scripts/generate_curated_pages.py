@@ -747,7 +747,7 @@ def topic_page(topic: dict, related: list[dict[str, str]], generated_keys: set[s
 {analytics_footer()}</body></html>"""
 
 
-def product_package_snapshot(rows, notice_index, bulletins, generated_keys) -> str:
+def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *, include_reason=False) -> str:
     """品目に一致する最新の包装別案内を、厚労省区分と区別して掲載する。"""
     groups = {}
     for row in rows:
@@ -781,10 +781,12 @@ def product_package_snapshot(rows, notice_index, bulletins, generated_keys) -> s
     for (url, maker, day), (notice, entries) in groups.items():
         timing = notice.get("resumption")
         summary = notice.get("summary")
+        reason = notice.get("reason") if include_reason else None
         summary_html = f'<p>{esc(summary)}</p>' if summary else ""
+        reason_html = f'<p><strong>限定出荷の理由</strong>　{esc(reason)}</p>' if reason else ""
         timing_html = f'<p>案内時点の見通し　{esc(timing)}</p>' if timing else ""
         sections.append(f'<h3>{esc(notice_date_label(day))}の{esc(maker)}の案内</h3>{summary_html}{"".join(entries)}'
-                        f'{timing_html}<p><a href="{esc(url)}" data-dsn-event="official-source-open">メーカーの掲載資料を確認</a></p>')
+                        f'{reason_html}{timing_html}<p><a href="{esc(url)}" data-dsn-event="official-source-open">メーカーの掲載資料を確認</a></p>')
     return ('<section class="intent" aria-labelledby="packageSnapshotTitle">'
             '<h2 id="packageSnapshotTitle">メーカー案内の包装別情報</h2>'
             '<p class="note">収録した各資料の日付時点の案内です。現在の受注可否や在庫は各品目の原典でご確認ください。</p>'
@@ -878,7 +880,7 @@ def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[
 
 
 def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set[str],
-                      source_date: str) -> str:
+                      source_date: str, *, package_snapshot="") -> str:
     brand, strengths = STRENGTH_HUBS[slug]
     groups = {strength: [] for strength in strengths}
     grades = "|".join(norm(strength) for strength in strengths)
@@ -894,6 +896,8 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
                    "各規格の品目ページで確認できるメーカー案内への入口を掲載しています。")
     if slug == "teramuro":
         description = "テラムロ配合錠AP・BPの出荷調整を販売元別に確認。厚生労働省の供給区分を比較し、各品目のメーカー案内に進めます。"
+        if package_snapshot:
+            description = "テラムロ配合錠AP・BPの供給状況を販売元別に比較。東和薬品の案内で、限定出荷の対象包装・理由・解除見通しを確認できます。"
     title = f"{heading}｜医薬品供給ナビ"
     canonical = f"{SITE_ROOT}products/{slug}.html"
     sections, jump_links, items = [], [], []
@@ -923,8 +927,11 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
         sections.append(f'<section aria-labelledby="{anchor}"><h2 id="{anchor}">{esc(label)}</h2>'
                         f'{overview}<div class="strength-list">{"".join(cards)}</div></section>')
         jump_links.append(f'<a href="#{anchor}">{esc(strength)}</a>')
-    picker = (f'<nav class="strength-nav" aria-label="規格を選ぶ">{"".join(jump_links)}</nav>'
-              if slug == "teramuro" and len(jump_links) > 1 else "")
+    show_picker = slug == "teramuro" and len(jump_links) > 1
+    if package_snapshot:
+        jump_links.append('<a href="#packageSnapshotTitle">東和薬品の包装別案内</a>')
+    picker = (f'<nav class="strength-nav" aria-label="ページ内の供給情報">{"".join(jump_links)}</nav>'
+              if show_picker or package_snapshot else "")
     if not sections:
         sections.append('<p>今回の公表データでは該当する品目を確認できません。</p>')
     collection = {"@type": "CollectionPage", "name": heading, "url": canonical,
@@ -940,7 +947,7 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
 </style></head><body><div class="wrap"><header class="site"><a href="../">医薬品供給ナビ</a></header>
 <nav class="crumb" aria-label="パンくず"><a href="../">トップ</a> › <a href="index.html">注目製品</a> › {esc(brand)}</nav><main>
 <header class="hero"><h1>{esc(heading)}</h1><p class="note">厚労省の公表データ　基準日 {esc(source_date or '未確認')}</p>{picker}</header>
-{"".join(sections)}
+{"".join(sections)}{package_snapshot}
 <p class="source"><a href="{MHLW_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公表情報を確認</a></p>
 {share_control("この供給状況を共有")}</main><footer><a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
 {analytics_footer()}</body></html>"""
@@ -1551,8 +1558,13 @@ def main() -> int:
         if product["slug"] == "lulicon-cream":
             product_dates[product["slug"]] = max(product_dates[product["slug"]], "2026-09-11")
     for slug in STRENGTH_HUBS:
+        snapshot = ""
+        if slug == "teramuro":
+            towa_rows = [row for row in rows if item_key(row) in {"2149117F1076", "2149117F2072"}]
+            snapshot = product_package_snapshot(towa_rows, notice_index, bulletins, generated_keys,
+                                                include_reason=True)
         (product_dir / f"{slug}.html").write_text(
-            strength_hub_page(slug, rows, generated_keys, source_date), encoding="utf-8")
+            strength_hub_page(slug, rows, generated_keys, source_date, package_snapshot=snapshot), encoding="utf-8")
         product_dates[slug] = max(source_date, STRENGTH_HUB_EDIT_DATE)
     (guide_dir / f"{GUIDE_SLUG}.html").write_text(
         guide_page(), encoding="utf-8")

@@ -334,6 +334,13 @@ class CuratedPageGenerationTests(unittest.TestCase):
         self.assertIn("⑤供給停止", bp_section)
         self.assertIn("販売元A", ap_section)
         self.assertIn("2026-11-20", page)
+        self.assertNotIn('href="#packageSnapshotTitle"', page)
+        snapshot = '<section><h2 id="packageSnapshotTitle">包装別案内</h2></section>'
+        with_snapshot = strength_hub_page("teramuro", rows, {"APKEY"}, "2026-11-20",
+                                          package_snapshot=snapshot)
+        self.assertIn('href="#packageSnapshotTitle"', with_snapshot)
+        self.assertIn("限定出荷の対象包装・理由・解除見通し", with_snapshot)
+        self.assertGreater(with_snapshot.index(snapshot), with_snapshot.index('<h2 id="bp">'))
         missing = strength_hub_page("movicol", [
             {"商品名": "モビコール配合内用剤に似た名称", "YJコード": "LOOKALIKE"},
             {"商品名": "モビコール配合内用剤LD別製品", "YJコード": "LOOKALIKE2"},
@@ -666,13 +673,17 @@ class CuratedPageGenerationTests(unittest.TestCase):
                       "status": "stopped", "status_text": "出荷停止", "plans": [],
                   }}]}
         notice = {"url": "https://example.test/notice.pdf", "announced_at": "2026-11-16",
-                  "maker": "共和薬品工業", "sha256": "a" * 64, "targets": [target]}
+                  "maker": "共和薬品工業", "sha256": "a" * 64, "targets": [target],
+                  "reason": "メーカー案内の理由"}
         html = product_package_snapshot([row], {code: [notice]}, {"items": []}, {code})
         self.assertIn("2026年11月16日の共和薬品工業の案内", html)
         self.assertIn("PTP100錠：出荷停止", html)
         self.assertIn(f'href="../items/{code}.html"', html)
+        self.assertNotIn(notice["reason"], html)
+        with_reason = product_package_snapshot([row], {code: [notice]}, None, {code}, include_reason=True)
+        self.assertIn(notice["reason"], with_reason)
         changed = {"items": [{"url": notice["url"], "sha256": "b" * 64}]}
-        self.assertEqual("", product_package_snapshot([row], {code: [notice]}, changed, {code}))
+        self.assertEqual("", product_package_snapshot([row], {code: [notice]}, changed, {code}, include_reason=True))
         other_strength = dict(row, 商品名="ヒルナミン錠（50mg）")
         self.assertEqual("", product_package_snapshot([other_strength], {code: [notice]}, None, {code}))
 
