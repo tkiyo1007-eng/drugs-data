@@ -228,6 +228,21 @@ HOSPITAL_DISCONTINUATION_REFERENCES = {
     ),
 }
 PUBLIC_DISCONTINUATION_REFERENCES = {
+    "2252006R2057": (
+        "フェノテロール臭化水素酸塩DS小児用0.5%「タカタ」",
+        "2026年11月6日の中医協資料で、メーカーが供給停止と薬価削除を希望し、"
+        "厚労省が薬価基準からの削除を認めた対象品目に掲載されています。"
+        "薬価の経過措置期限は2027年3月31日です。包装別の販売終了日と在庫消尽時期は公開資料で確認できていません。",
+        (
+            ("https://www.mhlw.go.jp/content/10808000/001766365.pdf",
+             "中医協「薬価基準から削除する品目について」"),
+            ("https://www.mhlw.go.jp/content/10808000/001766366.pdf",
+             "中医協の別添一覧 9ページ・品目番号501"),
+            ("https://shinryohoshu.mhlw.go.jp/shinryohoshu/file/info/ymente261112.pdf",
+             "厚労省「医薬品マスター変更内容」7ページ"),
+        ),
+        "供給終了予定・薬価の経過措置",
+    ),
     "1169001F1245": (
         "トリヘキシフェニジル塩酸塩錠2mg「タカタ」",
         "医療用医薬品供給状況データベース（DSJP）の2025年7月15日付記録では、"
@@ -2473,8 +2488,10 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
     discontinuation_reference = hospital_reference or PUBLIC_DISCONTINUATION_REFERENCES.get(key)
     if (discontinuation_reference and normalized_text(name) == normalized_text(discontinuation_reference[0])
             and row_maker_matches(row, "高田製薬")):
-        _, discontinuation_note, discontinuation_sources = discontinuation_reference
+        _, discontinuation_note, discontinuation_sources, *reference_heading = discontinuation_reference
         heading = "病院資料による補足" if hospital_reference else "公開資料による販売中止の補足"
+        if reference_heading:
+            heading, = reference_heading
         source_links = "".join(
             f'<p><a href="{esc(url)}" target="_blank" rel="noopener" '
             f'data-dsn-event="official-source-open">出典：{esc(label)}'
@@ -2484,7 +2501,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
         hospital_box = (
             '<section class="supp supp-notice hospital-discontinuation" '
             'aria-labelledby="hospital-discontinuation-title">'
-            f'<h3 id="hospital-discontinuation-title">{heading}</h3>'
+            f'<h3 id="hospital-discontinuation-title">{esc(heading)}</h3>'
             f'<p>{esc(discontinuation_note)}</p>{source_links}'
             '</section>')
     # 包装情報を載せる品目だけに適用し、無関係な全品目のHTMLを変更しない。
