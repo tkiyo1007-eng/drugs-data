@@ -18,7 +18,7 @@ class DeployWorkflowContractTests(unittest.TestCase):
 
     def test_push_publication_requires_successful_main_validation_not_pr_or_fork(self):
         self.assertNotIn("\n  push:\n", self.deploy)
-        for condition in ("workflows: ['Validate data pipeline', '毎日データ更新']",
+        for condition in ("workflows: ['Validate data pipeline', '毎日データ更新', 'PMDA回収情報を更新']",
                           "github.event.workflow_run.conclusion == 'success'",
                           "github.event.workflow_run.head_branch == 'main'",
                           "github.event.workflow_run.head_repository.full_name == github.repository",
@@ -86,6 +86,8 @@ class DeployWorkflowContractTests(unittest.TestCase):
               {script: 0, latest: 'a', validated: 'a'},
               {script: 0, latest: 'b', validated: 'a'},
               {script: 0, latest: 'b', validated: 'a', daily: true},
+              {script: 0, latest: 'a', validated: 'a', recall: true},
+              {script: 0, latest: 'b', validated: 'a', recall: true},
               {script: 0, latest: 'b'},
               {script: 0, latest: 'b', scheduledSha: 'a'},
               {script: 1, latest: 'a', source: 'a'},
@@ -97,7 +99,7 @@ class DeployWorkflowContractTests(unittest.TestCase):
                                sha: test.scheduledSha || test.latest};
               if (test.validated) context.payload.workflow_run = {
                 head_sha: test.validated,
-                name: test.daily ? '毎日データ更新' : 'Validate data pipeline',
+                name: test.daily ? '毎日データ更新' : test.recall ? 'PMDA回収情報を更新' : 'Validate data pipeline',
               };
               const core = {notice: () => {}, setOutput: (key, value) => {output[key] = value;}};
               await new AsyncFunction('github', 'context', 'core', 'process', scripts[test.script])(
@@ -110,7 +112,7 @@ class DeployWorkflowContractTests(unittest.TestCase):
         result = subprocess.run([shutil.which("node"), "-e", harness], input=json.dumps(scripts),
                                 capture_output=True, text=True, check=True, timeout=15)
         self.assertEqual(json.loads(result.stdout), [
-            {"sha": "a"}, {}, {"sha": "b"}, {"sha": "b"}, {}, {"matches": "true"}, {"matches": "false"},
+            {"sha": "a"}, {}, {"sha": "b"}, {}, {"sha": "b"}, {"sha": "b"}, {}, {"matches": "true"}, {"matches": "false"},
         ])
 
     @unittest.skipUnless(shutil.which("node"), "Workflow内JavaScriptの隔離実行にはNodeが必要")
