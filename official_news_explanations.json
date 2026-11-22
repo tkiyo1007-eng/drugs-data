@@ -149,5 +149,71 @@
   },
   "https://www.yoshida-pharm.co.jp/files/information/653.pdf": {
     "summary": "吉田製薬の11月16日版では、50g・500gとも限定出荷です。50gは在庫消尽後に一時停止する予定で、同一覧の限定出荷解除時期は未定です。"
+  },
+  "https://www.ltl-pharma.com/wp-content/uploads/resource/distribution_info/distribution_info.pdf": {
+    "summary": "11月19日版では、熊本地震による製造所の被災でPTP500錠と瓶1000錠が限定出荷。2027年1月下旬から通常時の約8割の出荷を見込み、解除時期は未定です。"
+  },
+  "https://www.nichiiko.co.jp/medicine/file/11190/information/20261110cI1.pdf": {
+    "summary": "他社品の出荷調整で注文が増え、5mgのPTP100錠・140錠とバラ500錠を限定出荷。日医工は安定供給まで新規採用を辞退するとしています。"
+  },
+  "https://www.nichiiko.co.jp/medicine/file/11180/information/20261110cI1.pdf": {
+    "summary": "他社品の出荷調整で注文が増え、2.5mgのPTP100錠・140錠とバラ500錠を限定出荷。日医工は安定供給まで新規採用を辞退するとしています。"
+  },
+  "https://www.npi-inc.co.jp/medical/info/file/973": {
+    "summary": "11月10日版の供給一覧では、40mgは他社品の影響で限定出荷です。日本薬品工業は出荷量を「増加」としています。"
+  },
+  "https://med.sawai.co.jp/file/pr27_1322_3.pdf": {
+    "summary": "安定供給の体制が整い、11月9日から通常出荷。対象は10mgのPTP100錠・500錠とバラ100錠、20mgのPTP100錠です。"
+  },
+  "https://med.sawai.co.jp/file/pr27_235_1.pdf": {
+    "summary": "安定供給の体制が整い、沢井製薬は11月9日から50mg・100mgのPTP100錠を通常出荷に戻しました。"
+  },
+  "https://med.sawai.co.jp/file/pr27_212_1.pdf": {
+    "summary": "安定供給の体制が整い、沢井製薬は11月9日から0.5mgのPTP100錠を通常出荷に戻しました。"
+  },
+  "https://medical.nihon-generic.co.jp/a.php?id=1882": {
+    "summary": "入荷の遅れと注文増加で、100mgのPTP500錠の出荷量を調整。日本ジェネリックは同規格のPTP100錠とバラ200錠を案内しています。"
+  },
+  "https://medical.nihon-generic.co.jp/a.php?id=1880": {
+    "summary": "入荷の遅れと注文増加で、OD錠10mgのバラ100錠の出荷量を調整。日本ジェネリックは同規格のPTP14錠を案内しています。"
+  },
+  "https://www.iwakiseiyaku.co.jp/dcms_media/other/mcoosirase20261105.pdf": {
+    "summary": "品質に関する確認事項が生じ、岩城製薬は10g×10の包装を11月5日から限定出荷としました。解除時期は改めて案内する予定です。"
+  },
+  "https://medical.nihon-generic.co.jp/a.php?id=1879": {
+    "summary": "他社品の限定出荷で注文が増え、日本ジェネリックは60mgのPTP100錠・500錠を限定出荷としました。"
+  },
+  "https://medical.nihon-generic.co.jp/a.php?id=1878": {
+    "summary": "入荷の遅れと注文増加で、75mgのバラ500錠の出荷量を調整。日本ジェネリックは同規格のPTP100錠・140錠・500錠を案内しています。"
+  },
+  "https://www.kyosomirai-p.co.jp/wp-content/uploads/2026/10/info_20261102_01.pdf": {
+    "summary": "共創未来ファーマの10月30日時点の一覧では、20mgのPTP100カプセルは「自社の事情」による限定出荷で、出荷量は「増加」です。"
+  },
+  "https://med.sawai.co.jp/file/pr27_4702_1.pdf": {
+    "summary": "製造の遅れで、PTP56錠とバラ100錠は2027年1月に一時的に在庫が尽きる見込みで、次回出荷は未定です。PTP14錠は既採用先を優先して限定出荷します。"
+  },
+  "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83764&t=4&f=%E3%83%86%E3%83%A9%E3%83%A0%E3%83%AD%E9%85%8D%E5%90%88%E9%8C%A0APBP%EF%BD%A2%E3%83%88%E3%83%BC%E3%83%AF%EF%BD%A3_%E5%87%BA%E8%8D%B7%E5%86%8D%E9%96%8B%EF%BC%86%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E7%B6%99%E7%B6%9A%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf": {
+    "summary": "AP・BPは10月29日に出荷を再開しました。在庫が十分に確保できていないため限定出荷は続き、解除時期は未定です。"
+  },
+  "https://www.nichiiko.co.jp/medicine/files/20261027cI1.pdf": {
+    "summary": "安定供給の見通しが立ち、日医工は10月28日から250mgのPTP100カプセルを通常出荷に戻しました。"
+  },
+  "https://med.toaeiyo.co.jp/products/information/notice/info2610-bis.pdf": {
+    "summary": "委託先で製造を続けることが難しくなり、10mg・20mgともに限定出荷です。メーカー在庫は2027年6月に尽きる見込みで、消尽後は供給停止、再開の目途は立っていません。"
+  },
+  "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20261027_007.pdf": {
+    "summary": "25mg・50mgのPTP100錠は、10月28日以降の取引卸の受注分から通常出荷。両規格のPTP500錠は包装集約で販売中止となり、100mgのPTP100錠は出荷停止が続きます。"
+  },
+  "https://www.nc-medical.com/product_topics/p5ib910000008618-att/p5ib91000000861w.pdf": {
+    "summary": "10月27日付の案内では、納入遅れで100錠包装の在庫が逼迫する見込みとなり、140錠包装を案内しました。11月18日付の続報では、100錠包装は限定出荷で次回入荷は未定です。"
+  },
+  "https://www.nc-medical.com/product_topics/p5ib91000000860g-att/p5ib910000008614.pdf": {
+    "summary": "供給体制が整い、日本ケミファは10月27日に75mgの140錠包装の出荷調整を解除しました。"
+  },
+  "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83736&t=4&f=%E3%83%AD%E3%82%B9%E3%83%90%E3%82%B9%E3%82%BF%E3%83%81%E3%83%B3%E9%8C%A05mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%87%BA%E8%8D%B7%E5%86%8D%E9%96%8B%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B_20261026.pdf": {
+    "summary": "熊本地震後に岡山工場で追加生産し、10月26日からPTP100錠とバラ300錠を限定出荷で再開。PTP500錠の再開は別途案内されます。"
+  },
+  "https://www.ltl-pharma.com/wp-content/uploads/resource/news_file/%E3%82%AC%E3%82%B9%E3%82%BF%E3%83%BC%E6%B3%A8%E5%B0%84%E6%B6%B2_%E9%99%90%E5%AE%9A%E5%87%BA%E8%8D%B7%E3%81%AE%E3%81%94%E6%A1%88%E5%86%85.pdf?v=20261026": {
+    "summary": "他社品の影響で、LTLファーマは10月26日から10mg・20mgの各対象包装を特約店卸向けに限定出荷。通常出荷に戻る時期は未定です。"
   }
 }
