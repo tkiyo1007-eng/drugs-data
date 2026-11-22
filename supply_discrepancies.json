@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-22",
+  "generated_at": "2026-11-23",
   "source": {
     "mhlw_version": 202611230542,
     "mhlw_note": "2026年11月23日厚労省データ反映",
-    "manufacturer_checked_through": "2026-11-22"
+    "manufacturer_checked_through": "2026-11-23"
   },
   "counts": {
     "high": 2,
-    "review": 6,
-    "total": 8
+    "review": 7,
+    "total": 9
   },
   "products": {
     "2190402D2106": {
@@ -31,6 +31,34 @@
       },
       "confidence": "review",
       "reason": "関連製品の案内ですが、本品の対象規格を機械判定できません",
+      "badge": "メーカー案内あり・原文確認",
+      "evidence": {
+        "maker_match": true,
+        "exact_product_in_title": true,
+        "manufacturer_notice_is_newer": true,
+        "verified_target_source": "",
+        "verified_target_scope": ""
+      }
+    },
+    "2325003F4163": {
+      "product_name": "ファモチジンＯＤ錠２０ｍｇ「ＪＧ」",
+      "maker": "日本ジェネリック",
+      "official": {
+        "status": "ok",
+        "label": "通常出荷",
+        "updated_at": "2026-06-30"
+      },
+      "manufacturer": {
+        "status": "stopped",
+        "label": "供給停止",
+        "announced_at": "2026-09-11",
+        "maker": "日本ジェネリック",
+        "title": "2026/09/11 供給に関するお知らせ ファモチジンOD錠20mg「JG」PTP500錠包装供給停止によるPTP100錠包装代替使用のお願いを掲載いたしました",
+        "url": "https://medical.nihon-generic.co.jp/a.php?id=1862",
+        "scope": "package"
+      },
+      "confidence": "review",
+      "reason": "包装単位のメーカー案内です。製品全体の供給区分は原文で確認してください",
       "badge": "メーカー案内あり・原文確認",
       "evidence": {
         "maker_match": true,
