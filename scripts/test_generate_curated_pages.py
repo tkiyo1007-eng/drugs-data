@@ -687,6 +687,16 @@ class CuratedPageGenerationTests(unittest.TestCase):
         other_strength = dict(row, 商品名="ヒルナミン錠（50mg）")
         self.assertEqual("", product_package_snapshot([other_strength], {code: [notice]}, None, {code}))
 
+        route = dict(target, scope="seller_route_and_package", seller="販売元A")
+        route_notice = dict(notice, targets=[route], source_index_url="https://example.test/source-list.pdf")
+        index = {code: [route_notice]}
+        matching_seller = dict(row, 販売メーカー="販売元A")
+        html = product_package_snapshot([matching_seller], index, None, {code})
+        self.assertIn("対象の販売元　販売元A", html)
+        self.assertIn('href="https://example.test/source-list.pdf"', html)
+        other_seller = dict(row, 販売メーカー="販売元B")
+        self.assertEqual("", product_package_snapshot([other_seller], index, None, {code}))
+
     def test_sawai_teramuro_discontinuation_headline_only_names_ptp140(self):
         for code in ("2149117F1050", "2149117F2056"):
             with self.subTest(code=code):
