@@ -57,14 +57,16 @@ PACKAGE_LANDING_KEYS = frozenset({
     "1139003C1044", "1139003C2040", "2325401A1020", "2325401A2027", "2649805M1026",
 })
 JUVELA_KEY = "2649805M1026"
-PACKAGE_OVERVIEW_KEYS = frozenset({JUVELA_KEY, "3179106F1039"})
+HILNAMIN_TABLETS = frozenset({"1172014F1027", "1172014F2139", "1172014F3038"})
+HILNAMIN_GRANULES_KEY = "1172014C1055"
+PACKAGE_OVERVIEW_KEYS = frozenset({JUVELA_KEY, "3179106F1039"}) | HILNAMIN_TABLETS
 GENTACIN_KEY = "2634710M1077"
 ZESTAC_KEY = "2649865N1023"
 TAGAMET_KEY = "2325001F1211"
 MOVICOL_LD_KEY = "2359110B1037"
 LIMITED_REASON_KEYS = frozenset({
     "3999001Q6029", "2646730Q1026", GENTACIN_KEY,
-    MOVICOL_LD_KEY, "2149117F1076", "2149117F2072",
+    MOVICOL_LD_KEY, "2149117F1076", "2149117F2072", HILNAMIN_GRANULES_KEY,
 })
 BONZOL_STRENGTHS = {"2499007F1021": "100mg", "2499007F2028": "200mg"}
 BONZOL_KEYS = frozenset(BONZOL_STRENGTHS)
@@ -74,7 +76,7 @@ PRODUCT_SUPPLY_LINKS = {
     ZICTOR_KEY: ("zictor-tape-75mg", "ジクトルテープの1枚・7枚包装を比較"),
     **dict.fromkeys(("2149117F1076", "2149117F2072"), ("teramuro", "テラムロのAP・BPを販売元別に比較")),
     **dict.fromkeys(("2454402A2037", "2454402A3033"), ("kenacort-a-injection", "ケナコルトの40mg・50mgを比較")),
-    **dict.fromkeys(("1172014B2056", "1172014C1055", "1172014F1027", "1172014F2139", "1172014F3038"),
+    **dict.fromkeys(HILNAMIN_TABLETS | {"1172014B2056", HILNAMIN_GRANULES_KEY},
                     ("hilnamin", "ヒルナミンの散・細粒・錠剤を比較")),
 }
 OKAYAMA_OUTPATIENT_LIST = "https://pharm.hospital.okayama-u.ac.jp/iryou/pdf/saiyouyaku_ingai_ya.pdf"
@@ -1514,6 +1516,8 @@ def package_overview_notice(key, matches, bulletins):
     if key in {ZESTAC_KEY, TAGAMET_KEY}:
         return match if (notice.get("event_type") == "discontinued" and "販売中止" in notice["title"]
                          and notice.get("reason")) else None
+    if key in HILNAMIN_TABLETS and not any(p["supply"].get("status_text") for p in packages):
+        return None
     return match if notice.get("event_type") in {"limited", "stopped", "resumed"} else None
 
 
@@ -1562,6 +1566,17 @@ def package_overview_content(key, match, display_name, status_label, official_re
         hint = heading
         description = f'{day}の{notice["maker"]}の案内。{notice["summary"]}'
         body = f'{source}<p><strong>対象包装　{esc(" ／ ".join(packages))}</strong></p><p>{esc(notice["summary"])}</p>'
+    elif key in HILNAMIN_TABLETS:
+        heading = "ヒルナミン錠の包装別出荷状況"
+        hint = "包装別の出荷状況"
+        labels = {"normal": "通常出荷", "limited": "限定出荷", "stopped": "出荷停止"}
+        pack_status = [
+            f'{package["package"]}：{labels[package["supply"]["status"]]}'
+            for package in target["packages"] if package["supply"]["status"] in labels
+        ]
+        description = f'{day}の{notice["maker"]}の案内（{"、".join(pack_status)}）。'
+        body = (f'<p>{esc(day)}の{esc(notice["maker"])}の案内時点の区分です。</p>'
+                f'<ul>{"".join(f"<li>{esc(value)}</li>" for value in pack_status)}</ul>{source}')
     elif key == TAGAMET_KEY:
         heading = "タガメット錠200mgの販売中止予定"
         hint = "販売中止予定（包装別）"

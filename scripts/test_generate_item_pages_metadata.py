@@ -999,6 +999,37 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
         self.assertIn("公表理由・包装別案内", title)
         self.assertLess(desc.index("公表理由は「２．原材料調達上の問題」"), desc.index("500gボトル"))
 
+    def test_hilnamin_tablet_metadata_uses_only_latest_exact_packaging_status(self):
+        key = "1172014F2139"
+        row = dict(self.row(), 商品名="ヒルナミン錠（25mg）", YJコード=key,
+                   規格="25mg1錠", 供給状況="④限定出荷（その他）")
+        notice = dict(self.notice(), title="ヒルナミン錠の包装別情報", event_type="limited",
+                      announced_at="2026-11-16")
+        target = dict(notice["targets"][0], yj_code=key, product_name=row["商品名"],
+                      scope="package", seller="", packages=[
+                          {"package": "PTP100錠", "supply": {
+                              "status": "stopped", "status_text": "出荷停止", "plans": []}},
+                          {"package": "瓶1000錠", "supply": {
+                              "status": "limited", "status_text": "限定出荷", "plans": []}},
+                      ])
+        notice["targets"] = [target]
+        older = dict(notice, url="https://example.test/older.pdf", announced_at="2026-09",
+                     event_type="resumption_planned", title="2027年3月頃に再開予定の案内")
+        def render(bulletins):
+            return page_html(row, key, "limited", "2026-11-23", [], {key},
+                             manufacturer_notices=[older, notice], manufacturer_bulletins=bulletins)
+        page = render({"items": []})
+        section = re.search(r'<section class="package-brief[^>]*>.*?</section>', page, re.S).group()
+        desc = re.search(r'<meta name="description" content="([^"]*)">', page).group(1)
+        self.assertIn("2026年11月16日", desc)
+        self.assertIn("PTP100錠：出荷停止", desc)
+        self.assertIn("瓶1000錠：限定出荷", desc)
+        self.assertIn("厚労省公表区分は「限定出荷」", desc)
+        self.assertNotIn("2027年3月", section + desc)
+        self.assertNotIn('id="packageBriefTitle"', render({
+            "items": [{"url": notice["url"], "sha256": "f" * 64}],
+        }))
+
     def test_future_recovery_is_explicitly_a_plan_without_changing_current_supply(self):
         row = dict(self.row(), 供給状況="②限定出荷（自社の事情）")
         notice = self.notice()
