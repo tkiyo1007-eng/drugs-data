@@ -4,7 +4,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from build_official_news import build
+from build_official_news import build, maker_news
 from fetch_pmda_recalls import collect, parse_index
 
 class OfficialNewsTests(unittest.TestCase):
@@ -67,6 +67,26 @@ class OfficialNewsTests(unittest.TestCase):
         self.assertEqual(len(entries), 1)
         self.assertEqual((entries[0]["date"], entries[0]["date_label"]), ("2026-11-19", "掲載"))
         self.assertIn("PTP100錠", entries[0]["summary"])
+
+    def test_maker_dates_use_announcement_day_when_title_confirms_it(self):
+        source = "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/"
+        cases = [
+            ("2026.07.16 製品の供給に関する案内", "2026-07-16", "2026-07-16", "案内"),
+            ("2026年11月9日 製品の供給に関する案内", "2026-11-09", "2026-11-09", "案内"),
+            ("製品の供給に関する案内", "2026-07-16", "2026-11-15", "確認"),
+            ("2026/11/09 製品の供給に関する案内", "2026-11-08", "2026-11-15", "確認"),
+        ]
+        rows = [{"maker": "久光製薬", "event_type": "limited", "url": source + f"{i}.pdf",
+                 "title": title, "announced_at": published, "first_seen": "2026-11-15"}
+                for i, (title, published, _, _) in enumerate(cases)]
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "maker_announcement_events.json").write_text(
+                json.dumps({"品目": rows}), encoding="utf-8")
+            (root / "manufacturer_notices.json").write_text('{"notices":[]}', encoding="utf-8")
+            result = list(maker_news(root, {}))
+        self.assertEqual([(r["date"], r["date_label"]) for r in result],
+                         [(expected, label) for _, _, expected, label in cases])
 
 
 if __name__ == "__main__":
