@@ -2,6 +2,94 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "chemiphar-telmisartan-80-limited-202611",
+      "maker": "日本ケミファ",
+      "title": "テルミサルタン錠80mg「ケミファ」100錠包装の限定出荷",
+      "url": "https://www.nc-medical.com/product_topics/p5ib910000009omz-att/p5ib910000009onn.pdf",
+      "source_index_url": "https://www.nc-medical.com/sp/product/information/index.php?type=all&year=2026",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-18",
+      "verified_at": "2026-11-22",
+      "sha256": "5caea93647f0aed6bb0c8c5620259d076fc9e4d739f80592a33d9fb3b5514d29",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造委託先からの納入が遅れ、次の入荷まで在庫が不足する見込みのため、日本ケミファは100錠包装を限定出荷と案内しました。",
+      "maker_supply_status": {
+        "handling": "② 限定出荷（自社の事情）",
+        "volume": "B 出荷量減少"
+      },
+      "targets": [
+        {
+          "yj_code": "2149042F3133",
+          "product_name": "テルミサルタン錠８０ｍｇ「ケミファ」",
+          "maker": "日本ケミファ",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "100錠",
+              "unified_product_code": "171247105",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情）",
+                "plans": [],
+                "note": "販売包装単位コード 14987171247102。"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "次回の入荷時期は、目途が立ち次第案内するとしています。",
+        "メーカーは供給が滞った場合に代替製品の検討を求めています。案内には具体的な製品名の記載はありません。"
+      ]
+    },
+    {
+      "id": "nipro-doxazosin-2-normal-resumption-202611",
+      "maker": "ニプロ",
+      "title": "ドキサゾシン錠2mg「ニプロ」PTP100錠の通常出荷再開",
+      "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001VARKjIAP",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-17",
+      "verified_at": "2026-11-22",
+      "sha256": "38ff0fbcc57fe66850cbd27955d89c3f72cb4315a0b0ea23ce43db6dd2b84383",
+      "collection_mode": "manual",
+      "event_type": "resumed",
+      "reason": "製造委託先からの納入遅れで在庫がなくなり、一時出荷を停止していました。入庫の予定が確認できたため、ニプロは11月17日から特約店向けの通常出荷を再開すると案内しました。",
+      "maker_supply_status": {
+        "handling": "① 通常出荷",
+        "volume": "A 出荷量通常"
+      },
+      "targets": [
+        {
+          "yj_code": "2149026F3320",
+          "product_name": "ドキサゾシン錠２ｍｇ「ニプロ」",
+          "maker": "ニプロ",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "190-00599-1",
+              "supply": {
+                "status": "normal",
+                "status_text": "通常出荷（11月17日から）",
+                "plans": [],
+                "note": "統一商品コード 190-00599-1。"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": []
+    },
+    {
       "id": "nissin-dalteparin-ten-limited-202611",
       "maker": "日新製薬",
       "title": "ダルテパリンNa静注5000単位/5mL「日新」10管の限定出荷",
@@ -15087,17 +15175,42 @@
     {
       "id": "teika-hyaluronate-ts-03-discontinuation-202610",
       "maker": "テイカ製薬",
-      "title": "ヒアルロン酸ナトリウム点眼液0.3％「TS」の販売中止案内（第2報）",
+      "title": "ヒアルロン酸ナトリウム点眼液「TS」の販売中止案内（第2報）",
       "url": "https://teika-products.jp/upFiles/1791180172.pdf",
       "announced_at": "2026-10",
       "listed_at": "2026-10-05",
-      "verified_at": "2026-11-17",
-      "content_updated_at": "2026-11-17",
+      "verified_at": "2026-11-22",
+      "content_updated_at": "2026-11-22",
       "sha256": "16aef985ab055a1c74c84092ab656e7c2eb0c0aa6391c6e49579824a31992bd1",
       "collection_mode": "manual",
       "event_type": "discontinued",
       "reason": "テイカ製薬の第2報は、販売中止に伴う在庫消尽予定と経過措置期間満了予定を更新しました。この資料に具体的な販売中止理由の記載はありません。",
       "targets": [
+        {
+          "yj_code": "1319720Q3167",
+          "product_name": "ヒアルロン酸ナトリウム点眼液０．１％「ＴＳ」",
+          "maker": "テイカ製薬",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "5mL×10本",
+              "unified_product_code": "399027893",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年12月見込み（2026年10月・第2報）"
+                  }
+                ],
+                "note": "統一商品コード 399027893、販売包装単位コード 14987399027890。"
+              }
+            }
+          ]
+        },
         {
           "yj_code": "1319720Y2055",
           "product_name": "ヒアルロン酸ナトリウム点眼液０．３％「ＴＳ」",
@@ -15125,6 +15238,24 @@
         }
       ],
       "alternatives": [
+        {
+          "source_url": "https://teika-products.jp/upFiles/1791180172.pdf",
+          "target_yj_codes": [
+            "1319720Q3167"
+          ],
+          "type": "テイカ製薬が2026年10月の第2報で0.1％に対して示した同成分・同濃度の候補です。科研製薬が製造販売し、テイカ製薬が発売します。",
+          "products": [
+            {
+              "name": "ヒアルロン酸Ｎａ点眼液０．１％「科研」",
+              "yj_code": "1319720Q3221",
+              "maker": "科研製薬",
+              "scope": "5mL×10本（統一商品コード 399088023）、5mL×50本（統一商品コード 399088030）。"
+            }
+          ],
+          "cautions": [
+            "この案内はメーカー資料の発表時点のものです。候補製剤の供給区分・受注の可否は別途ご確認ください。"
+          ]
+        },
         {
           "source_url": "https://teika-products.jp/upFiles/1791180172.pdf",
           "target_yj_codes": [
