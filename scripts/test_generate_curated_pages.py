@@ -339,7 +339,7 @@ class CuratedPageGenerationTests(unittest.TestCase):
         with_snapshot = strength_hub_page("teramuro", rows, {"APKEY"}, "2026-11-20",
                                           package_snapshot=snapshot)
         self.assertIn('href="#packageSnapshotTitle"', with_snapshot)
-        self.assertIn("限定出荷の対象包装・理由・解除見通し", with_snapshot)
+        self.assertIn("出荷調整や販売中止の案内", with_snapshot)
         self.assertGreater(with_snapshot.index(snapshot), with_snapshot.index('<h2 id="bp">'))
         missing = strength_hub_page("movicol", [
             {"商品名": "モビコール配合内用剤に似た名称", "YJコード": "LOOKALIKE"},
@@ -686,6 +686,14 @@ class CuratedPageGenerationTests(unittest.TestCase):
         self.assertEqual("", product_package_snapshot([row], {code: [notice]}, changed, {code}, include_reason=True))
         other_strength = dict(row, 商品名="ヒルナミン錠（50mg）")
         self.assertEqual("", product_package_snapshot([other_strength], {code: [notice]}, None, {code}))
+
+    def test_sawai_teramuro_discontinuation_headline_only_names_ptp140(self):
+        for code in ("2149117F1050", "2149117F2056"):
+            with self.subTest(code=code):
+                page = (ROOT / "items" / f"{code}.html").read_text(encoding="utf-8")
+                self.assertIn("メーカー：販売中止の案内（PTP140錠）", page)
+                self.assertRegex(page, r'<meta name="description" content="[^"]*対象はPTP140錠。')
+                self.assertIn("PTP100錠", page)
 
     def test_checked_in_high_demand_products_have_safe_intent_specific_copy(self):
         expected = {

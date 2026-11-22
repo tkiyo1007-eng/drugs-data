@@ -783,7 +783,8 @@ def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *, i
         summary = notice.get("summary")
         reason = notice.get("reason") if include_reason else None
         summary_html = f'<p>{esc(summary)}</p>' if summary else ""
-        reason_html = f'<p><strong>限定出荷の理由</strong>　{esc(reason)}</p>' if reason else ""
+        reason_label = "販売中止の理由" if notice.get("event_type") == "discontinued" else "限定出荷の理由"
+        reason_html = f'<p><strong>{reason_label}</strong>　{esc(reason)}</p>' if reason else ""
         timing_html = f'<p>案内時点の見通し　{esc(timing)}</p>' if timing else ""
         sections.append(f'<h3>{esc(notice_date_label(day))}の{esc(maker)}の案内</h3>{summary_html}{"".join(entries)}'
                         f'{reason_html}{timing_html}<p><a href="{esc(url)}" data-dsn-event="official-source-open">メーカーの掲載資料を確認</a></p>')
@@ -897,7 +898,7 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
     if slug == "teramuro":
         description = "テラムロ配合錠AP・BPの出荷調整を販売元別に確認。厚生労働省の供給区分を比較し、各品目のメーカー案内に進めます。"
         if package_snapshot:
-            description = "テラムロ配合錠AP・BPの供給状況を販売元別に比較。メーカー案内で、限定出荷の対象包装・理由・解除見通しを確認できます。"
+            description = "テラムロ配合錠AP・BPの供給状況を販売元別に比較。メーカーの出荷調整や販売中止の案内を、規格と対象包装ごとに確認できます。"
     title = f"{heading}｜医薬品供給ナビ"
     canonical = f"{SITE_ROOT}products/{slug}.html"
     sections, jump_links, items = [], [], []
@@ -1560,7 +1561,11 @@ def main() -> int:
     for slug in STRENGTH_HUBS:
         snapshot = ""
         if slug == "teramuro":
-            notice_keys = {"2149117F1033", "2149117F2030", "2149117F1076", "2149117F2072"}
+            notice_keys = {
+                "2149117F1033", "2149117F2030",  # DSEP
+                "2149117F1076", "2149117F2072",  # トーワ
+                "2149117F1050", "2149117F2056",  # サワイ
+            }
             notice_rows = [row for row in rows if item_key(row) in notice_keys]
             snapshot = product_package_snapshot(notice_rows, notice_index, bulletins, generated_keys,
                                                 include_reason=True)
