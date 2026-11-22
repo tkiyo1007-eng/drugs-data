@@ -72,6 +72,18 @@ OKAYAMA_DISCONTINUATION_SOURCES = (
     (OKAYAMA_OUTPATIENT_LIST, "岡山大学病院 薬剤部「院外限定採用医薬品一覧」"),
 )
 HOSPITAL_DISCONTINUATION_REFERENCES = {
+    "1179044F6080": (
+        "オランザピンOD錠2.5mg「タカタ」",
+        "東邦大学医療センター大橋病院の2026年10月20日付資料に、販売中止に伴う院内採用の切り替えが記載されています。"
+        "切り替えは同院の在庫がなくなり次第とされていました。",
+        (
+            (
+                "https://www.lab.toho-u.ac.jp/med/ohashi/yakuzai/medical_agency/"
+                "ularb100000003q8-att/kyoukyuushougai20261027.pdf",
+                "東邦大学医療センター大橋病院 薬事委員会「採用薬品の切り替えのお知らせ」",
+            ),
+        ),
+    ),
     "4291011F1060": (
         "イマチニブ錠100mg「ヤクルト」",
         OKAYAMA_DISCONTINUATION_NOTE,
