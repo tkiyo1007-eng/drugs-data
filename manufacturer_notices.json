@@ -2,6 +2,62 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "nipro-temocapril-np-discontinuation-packages-202412",
+      "maker": "ニプロ",
+      "title": "テモカプリル塩酸塩錠1mg・2mg「NP」の販売中止対象包装",
+      "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uVHZ2IAO",
+      "announced_at": "2024-12",
+      "verified_at": "2026-11-22",
+      "sha256": "46f195e25d314cff1fda45c9386d0a0177fc9da306fd2373da107f586b3f3162",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "ニプロが販売中止品として掲載したのは、1mg・2mgいずれもPTP100錠です。経過措置期限は後続の案内で更新されています。",
+      "targets": [
+        {
+          "yj_code": "2144009F1050",
+          "product_name": "テモカプリル塩酸塩錠１ｍｇ「ＮＰ」",
+          "maker": "ニプロ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "190-01650-8",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": []
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2144009F2057",
+          "product_name": "テモカプリル塩酸塩錠２ｍｇ「ＮＰ」",
+          "maker": "ニプロ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "190-01660-7",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": []
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "2024年12月のメーカー資料から対象包装を確認しました。"
+      ]
+    },
+    {
       "id": "verified-discontinuation-19a53f4a834ac8d2",
       "maker": "キョーリンリメディオ",
       "title": "アリピプラゾールＯＤ錠１２ｍｇ「杏林」 ほかの製造販売中止案内",
