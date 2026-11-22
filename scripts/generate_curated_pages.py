@@ -19,7 +19,7 @@ from generate_item_pages import (
     load_manufacturer_bulletins, lifecycle_for_display, supplemental_context,
     load_zictor_listing, zictor_package_overview,
     manufacturer_notice_index, matching_manufacturer_notices,
-    manufacturer_notice_needs_review, notice_date_label, valid_package_supply,
+    manufacturer_notice_needs_review, maker_tokens, notice_date_label, valid_package_supply,
 )
 from validate_shared_content import valid_topic_publisher_http_source
 
@@ -764,7 +764,7 @@ def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *, i
                 or target["scope"] not in {"package", "seller_route_and_package"}):
             continue
         seller = target["seller"] if target["scope"] == "seller_route_and_package" else ""
-        if seller and norm(row.get("販売メーカー")) != norm(seller):
+        if seller and not maker_tokens(seller).issubset(maker_tokens(row.get("販売メーカー"))):
             continue
         packages = [
             f'<li>{esc(package["package"])}：{esc(package["supply"]["status_text"])}</li>'
@@ -793,7 +793,7 @@ def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *, i
         reason_label = "販売中止の理由" if notice.get("event_type") == "discontinued" else "限定出荷の理由"
         reason_html = f'<p><strong>{reason_label}</strong>　{esc(reason)}</p>' if reason else ""
         timing_html = f'<p>案内時点の見通し　{esc(timing)}</p>' if timing else ""
-        sections.append(f'<h3>{esc(notice_date_label(day))}の{esc(maker)}の案内</h3>{seller_html}{summary_html}{"".join(entries)}'
+        sections.append(f'<h3>{esc(notice_date_label(day))}の{esc(seller or maker)}の案内</h3>{seller_html}{summary_html}{"".join(entries)}'
                         f'{reason_html}{timing_html}<p><a href="{esc(url)}" data-dsn-event="official-source-open">メーカーの掲載資料を確認</a>{index_html}</p>')
     return ('<section class="intent" aria-labelledby="packageSnapshotTitle">'
             '<h2 id="packageSnapshotTitle">メーカー案内の包装別情報</h2>'
@@ -1574,6 +1574,7 @@ def main() -> int:
                 "2149117F1050", "2149117F2056",  # サワイ
                 "2149117F1084", "2149117F2080",  # 日医工
                 "2149117F1114", "2149117F2110",  # NIG
+                "2149117F1041", "2149117F2048",  # EE
             }
             notice_rows = [row for row in rows if item_key(row) in notice_keys]
             snapshot = product_package_snapshot(notice_rows, notice_index, bulletins, generated_keys,

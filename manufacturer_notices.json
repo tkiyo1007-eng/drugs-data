@@ -56566,14 +56566,16 @@
       "maker": "ニプロファーマ",
       "title": "テラムロ配合錠AP・BP「EE」 日医工取扱分の限定出荷",
       "url": "https://www.nichiiko.co.jp/medicine/file/90840/information/20250514cI6.pdf",
+      "source_index_url": "https://www.nichiiko.co.jp/medicine/significant/data/20261119.pdf",
       "announced_at": "2025-05",
       "listed_at": "2025-05-14",
-      "verified_at": "2026-11-17",
-      "content_updated_at": "2026-11-17",
+      "verified_at": "2026-11-23",
+      "content_updated_at": "2026-11-23",
       "sha256": "433e4b3cf161f433a272c2249289756be029258c319ca170f98f8872b48aef88",
       "collection_mode": "manual",
       "event_type": "limited",
       "reason": "他社製品の出荷調整を受け、想定を上回る注文があったため、販売元の日医工が対象包装の限定出荷を案内しました。",
+      "summary": "日医工の2026年11月19日版の供給状況一覧では、EEのAP・BPともに出荷対応は「限定出荷（他社品の影響）」、出荷量区分は「通常」です。解除見込み時期の記載はありません。",
       "targets": [
         {
           "yj_code": "2149117F1041",
