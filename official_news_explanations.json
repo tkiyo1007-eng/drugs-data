@@ -95,5 +95,59 @@
   },
   "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/261030.pdf": {
     "summary": "久光製薬の第四報では、70枚入りのうち1枚×70袋は11月下旬から当面出荷停止、7枚×10袋は限定出荷を継続する予定です。"
+  },
+  "https://medical.kyowakirin.co.jp/druginfo/drgdiscon/index.html": {
+    "summary": "協和キリンの公開一覧では、錠・OD錠の2.5mgと5mgの計4規格を2027年11月30日に販売中止予定です。経過措置の満了は2028年3月31日予定です。"
+  },
+  "https://medical.nihon-generic.co.jp/uploadfiles/medicine/KETOO_CHUUSHI_2611.pdf": {
+    "summary": "日本ジェネリックは5mL×10本を在庫がなくなり次第、販売中止予定です。在庫消尽は2027年2月頃を見込んでいます。"
+  },
+  "https://medical.nihon-generic.co.jp/uploadfiles/medicine/DOXAJ00_CHUUSHI_2611.pdf": {
+    "summary": "4規格ともPTP100錠が販売中止の対象です。0.5mg・4mgは2027年3月頃に在庫消尽見込みで、1mg・2mgは案内時点で出荷停止中です。"
+  },
+  "https://medical.nihon-generic.co.jp/uploadfiles/medicine/ARIPD12_CHUUSHI_2611.pdf": {
+    "summary": "日本ジェネリックは12mgのPTP100錠を在庫がなくなり次第、販売中止予定です。在庫消尽は2027年3月頃を見込んでいます。"
+  },
+  "https://www.shionogi.com/content/dam/hcp/jp/news/package/2026/RDDP-A-0001%28V01%29.pdf": {
+    "summary": "塩野義製薬は5g×50本と10g×50本を在庫消尽後に販売中止予定です。消尽見込みはそれぞれ2027年6月、同年3月。5g×10本と200g瓶は販売を継続します。"
+  },
+  "https://www.nc-medical.com/product_topics/p5ib910000006sw7-att/p5ib910000006swv.pdf": {
+    "summary": "日本ケミファが一部包装の終了を案内しました。デュタステリド0.5mgAV「NS」30錠、モンテルカスト細粒4mg「ケミファ」28包、同チュアブル錠5mgの28錠包装が対象です。"
+  },
+  "https://www.nc-medical.com/product_topics/p5ib910000006swx-att/p5ib910000006sxl.pdf": {
+    "summary": "日本ケミファは普通錠の取り扱いを在庫消尽後に終了します。在庫消尽は2.5mgの3包装が2027年2月、5mgのPTP100錠が同年1月の見込みです。OD錠は販売を継続します。"
+  },
+  "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83756&t=4&f=20261029_%E3%83%99%E3%82%BF%E3%82%BB%E3%83%AC%E3%83%9F%E3%83%B3%E9%85%8D%E5%90%88%E9%8C%A0_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf": {
+    "summary": "東和薬品は安定供給の見込みが立たず、在庫限りで販売中止予定です。PTP100錠は2027年9月、PTP1000錠は同年7月に在庫終了見込みで、バラ1000錠は案内時点で在庫なしです。"
+  },
+  "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83755&t=4&f=20261029_%E3%83%95%E3%83%AB%E3%82%B3%E3%83%8A%E3%82%BE%E3%83%BC%E3%83%AB%E9%9D%99%E6%B3%A8100mg200mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf": {
+    "summary": "東和薬品は50mgに集約し、100mg・200mgを在庫限りで販売中止予定です。在庫終了の見込みは100mgが2027年7月、200mgが2026年11月です。"
+  },
+  "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83754&t=4&f=20261029_%E3%83%94%E3%82%B3%E3%82%B9%E3%83%AB%E3%83%95%E3%82%A1%E3%83%BC%E3%83%88Na%E5%86%85%E7%94%A8%E6%B6%B20.75%25%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf": {
+    "summary": "東和薬品は安定供給の見込みが立たず、10mL×10本を在庫限りで販売中止予定です。在庫終了は2027年11月を見込んでいます。"
+  },
+  "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83753&t=4&f=20261029_%E3%82%B7%E3%83%B3%E3%83%90%E3%82%B9%E3%82%BF%E3%83%81%E3%83%B3%E9%8C%A020mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf": {
+    "summary": "東和薬品は5mg・10mgに集約し、20mgのPTP100錠を在庫限りで販売中止予定です。在庫終了は2027年6月を見込んでいます。"
+  },
+  "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83752&t=4&f=20261029_%E3%82%AB%E3%83%B3%E3%83%87%E3%82%B5%E3%83%AB%E3%82%BF%E3%83%B3OD%E9%8C%A02mg4mg8mg12mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf": {
+    "summary": "東和薬品は普通錠に集約し、OD錠2・4・8・12mgを販売中止予定です。案内時点で2・8・12mgは在庫なし、4mgは包装により2027年5〜6月に在庫終了見込みです。"
+  },
+  "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83751&t=4&f=20261029_%E3%82%A8%E3%83%91%E3%83%AB%E3%83%AC%E3%82%B9%E3%82%BF%E3%83%83%E3%83%88%E9%8C%A050mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf": {
+    "summary": "東和薬品は需要と安定供給を考慮し、50mgのPTP100錠を在庫限りで販売中止予定です。在庫終了は2027年11月を見込んでいます。"
+  },
+  "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83750&t=4&f=20261029_%E3%82%A4%E3%83%9E%E3%83%81%E3%83%8B%E3%83%96%E9%8C%A0200mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf": {
+    "summary": "東和薬品は100mgに集約し、200mgのPTP20錠を在庫限りで販売中止予定です。在庫終了は2027年6月を見込んでいます。"
+  },
+  "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83749&t=4&f=20261029_%E3%82%A2%E3%82%BA%E3%83%AC%E3%83%B3%E5%90%AB%E5%97%BD%E7%94%A8%E6%95%A30.4%25%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E8%B2%A9%E5%A3%B2%E4%B8%AD%E6%AD%A2%E3%81%AE%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf": {
+    "summary": "東和薬品は需要状況などを踏まえ、1.5g×800包を在庫限りで販売中止予定です。在庫終了は2027年11月を見込んでいます。"
+  },
+  "https://www.yoshida-pharm.co.jp/files/information/651.pdf": {
+    "summary": "吉田製薬の10月案内では、生産設備の不具合で50gを在庫消尽後に一時停止し、2027年1月中旬に再開見込み。500gは限定出荷を継続するとしています。"
+  },
+  "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20261027_011.pdf": {
+    "summary": "サンドは1・2・3・5mg錠を販売中止の対象としました。PTP100錠の3mgは案内時点で在庫消尽済みで、細粒1％と坐剤3mgは販売を継続します。"
+  },
+  "https://www.yoshida-pharm.co.jp/files/information/653.pdf": {
+    "summary": "吉田製薬の11月16日版では、50g・500gとも限定出荷です。50gは在庫消尽後に一時停止する予定で、同一覧の限定出荷解除時期は未定です。"
   }
 }
