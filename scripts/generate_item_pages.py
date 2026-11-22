@@ -63,6 +63,11 @@ LIMITED_REASON_KEYS = frozenset({"3999001Q6029", "2646730Q1026", GENTACIN_KEY})
 BONZOL_STRENGTHS = {"2499007F1021": "100mg", "2499007F2028": "200mg"}
 BONZOL_KEYS = frozenset(BONZOL_STRENGTHS)
 ZICTOR_KEY = "1147700S1028"
+OKAYAMA_OUTPATIENT_LIST = "https://pharm.hospital.okayama-u.ac.jp/iryou/pdf/saiyouyaku_ingai_ya.pdf"
+OKAYAMA_DISCONTINUATIONS = {
+    "4291011F1060": "イマチニブ錠100mg「ヤクルト」",
+    "4490025F4057": "オロパタジン塩酸塩OD錠5mg「タカタ」",
+}
 # drugs-data の generate_curated_pages.py（CATEGORY_MIN_ROWS）と同じ基準。
 # 分類ページが生成される分類だけにリンクし、404を出さない。
 CATEGORY_MIN_ROWS = 3
@@ -1905,6 +1910,19 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
     manufacturer_box = manufacturer_notices_html(row, manufacturer_notices, supplemental_warning,
                                                 catalog_yj_codes, manufacturer_bulletins,
                                                 link_first_alternatives=limited_layout)
+    hospital_box = ""
+    hospital_name = OKAYAMA_DISCONTINUATIONS.get(key)
+    if (hospital_name and normalized_text(name) == normalized_text(hospital_name)
+            and row_maker_matches(row, "高田製薬")):
+        hospital_box = (
+            '<section class="supp supp-notice hospital-discontinuation" '
+            'aria-labelledby="hospital-discontinuation-title">'
+            '<h3 id="hospital-discontinuation-title">病院資料による補足</h3>'
+            '<p>岡山大学病院の院外採用薬一覧に、この規格の「販売中止」の記載があります。'
+            '包装別の販売終了日は、この資料では確認できません。</p>'
+            f'<p><a href="{OKAYAMA_OUTPATIENT_LIST}" target="_blank" rel="noopener" '
+            'data-dsn-event="official-source-open">出典：岡山大学病院 薬剤部「院外限定採用医薬品一覧」（PDF）</a></p>'
+            '</section>')
     # 包装情報を載せる品目だけに適用し、無関係な全品目のHTMLを変更しない。
     package_styles = """
 .package-supply{margin:14px 0;padding:12px;border:1px solid #CCDDF7;border-radius:12px;overflow-wrap:anywhere}
@@ -2053,8 +2071,9 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
                      shortcuts, spec_difference_html + gas_spec_note, headline_labels, package_overview, strength_selector))
         # Keep warnings beside the source they qualify. Render each full notice and topic only once.
         promoted_sections = (delist_box + lifecycle_box + discrepancy_box + supplemental_checked
-                             + manufacturer_box + topic_box + '<h2 id="itemDetails">品目の詳細</h2>')
+                             + manufacturer_box + hospital_box + topic_box + '<h2 id="itemDetails">品目の詳細</h2>')
         delist_box = lifecycle_box = discrepancy_box = supplemental_checked = manufacturer_box = topic_box = ""
+        hospital_box = ""
         spec_difference_html = gas_spec_note = legacy_share = ""
     else:
         styles = f"""<style>
@@ -2233,7 +2252,7 @@ footer a{{color:var(--sub)}}
 {supplemental_checked}
 {lifecycle_box}
 {discrepancy_box}
-{manufacturer_box}
+{manufacturer_box}{hospital_box}
     <table><tbody>{''.join(detail_rows)}</tbody></table>{spec_difference_html}{gas_spec_note}
     <p class="links">
       <a href="{lp_link}" data-dsn-event="item-web-open">Web版でこの品目を開く{'（同成分・同剤形の一覧つき）' if siblings else ''}</a>
