@@ -940,6 +940,31 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
             else:
                 self.assertNotIn("販売中止予定", title)
 
+    def test_tagamet_shows_the_verified_pack_and_estimate_before_freshness(self):
+        key = "2325001F1211"
+        row = dict(self.row(), 商品名="タガメット錠200mg", YJコード=key, 供給状況="通常出荷")
+        notice = dict(self.notice(), announced_at="2026-05", event_type="discontinued",
+                      title="タガメット錠200mgの販売中止予定", reason="在庫の出荷終了に合わせて販売中止予定")
+        notice["targets"] = [dict(notice["targets"][0], yj_code=key, product_name=row["商品名"],
+                                  scope="package", seller="", packages=[{
+                                      "package": "PTP100錠", "supply": {"status": "unconfirmed",
+                                          "plans": [{"event": "stock_depletion", "timing": "2027年1月頃"}]},
+                                  }])]
+        def render(bulletins):
+            return page_html(row, key, "ok", "2026-11-23", [], {key},
+                             manufacturer_notices=[notice], manufacturer_bulletins=bulletins)
+        page = render({"items": []})
+        brief = re.search(r'<section class="package-brief[^>]*>.*?</section>', page, re.S).group()
+        self.assertIn("対象包装　PTP100錠", brief)
+        self.assertIn("出荷終了見込みは2027年1月頃", brief)
+        self.assertIn("実際の販売終了日は未確認", brief)
+        self.assertLess(page.index(brief), page.index('id="itemFreshnessTitle"'))
+        description = re.search(r'<meta name="description" content="([^"]*)">', page).group(1)
+        self.assertLess(description.index("2027年1月頃"), description.index("通常出荷"))
+        self.assertNotIn('id="packageBriefTitle"', render({
+            "items": [{"url": notice["url"], "sha256": "f" * 64}],
+        }))
+
     def test_future_recovery_is_explicitly_a_plan_without_changing_current_supply(self):
         row = dict(self.row(), 供給状況="②限定出荷（自社の事情）")
         notice = self.notice()
