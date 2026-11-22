@@ -2,6 +2,187 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "nissin-dalteparin-ten-limited-202611",
+      "maker": "日新製薬",
+      "title": "ダルテパリンNa静注5000単位/5mL「日新」10管の限定出荷",
+      "url": "https://www.yg-nissin.co.jp/products/PDF/4493_6506_z1.pdf",
+      "announced_at": "2026-11",
+      "first_seen": "2026-11-22",
+      "verified_at": "2026-11-22",
+      "sha256": "ba9dfc0fdfc440ffa80d639b82ebd81e86819802b6eca7483103289ccee778bf",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日新製薬は、他社品の影響で想定を上回る注文があり、既採用施設への安定供給が難しくなったため、5mL×10管を限定出荷と案内しました。",
+      "maker_supply_status": {
+        "handling": "③ 限定出荷（他社品の影響）",
+        "volume": "A 出荷量通常"
+      },
+      "targets": [
+        {
+          "yj_code": "3334403A1090",
+          "product_name": "ダルテパリンＮａ静注５０００単位／５ｍＬ「日新」",
+          "maker": "日新製薬",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "5mL×10管",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）",
+                "plans": [],
+                "note": "販売包装単位コード 14987447389215。"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "11月18日版の日新製薬の一覧でも、5mL×10管は限定出荷で、解除時期は未定と記載されています。"
+      ]
+    },
+    {
+      "id": "nissin-lidocaine-half-five-package-followup-202611",
+      "maker": "日新製薬",
+      "title": "リドカイン塩酸塩注0.5％「日新」5mLの包装別出荷状況（11月18日版）",
+      "url": "https://www.yg-nissin.co.jp/products/download/nissin-supplystate261118.pdf",
+      "source_index_url": "https://www.yg-nissin.co.jp/pro/supplystate.html",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-18",
+      "verified_at": "2026-11-22",
+      "sha256": "561bd10a305f333b9df03008f517a860f0d2f23018bb1c7ce757916e217602a8",
+      "collection_mode": "manual",
+      "event_type": "resumed",
+      "reason": "日新製薬の11月18日版の一覧では、5mL×10管は11月17日に通常出荷へ変更されています。5mL×50管は、他社品の影響による需要増で限定出荷が続いています。",
+      "targets": [
+        {
+          "yj_code": "1214400A5060",
+          "product_name": "リドカイン塩酸塩注０．５％「日新」",
+          "maker": "日新製薬",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "5mL×10管",
+              "supply": {
+                "status": "normal",
+                "status_text": "通常出荷（11月17日から）",
+                "plans": [],
+                "note": "販売包装単位コード 14987447170516。"
+              }
+            },
+            {
+              "package": "5mL×50管",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）",
+                "plans": [],
+                "note": "販売包装単位コード 14987447170523。限定出荷の解除時期は未定です。"
+              }
+            }
+          ],
+          "source_pages": [
+            1,
+            11
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "いずれも0.5％・5mL包装の情報です。11月18日版の資料では、両包装とも出荷量は増加と記載されています。"
+      ]
+    },
+    {
+      "id": "jg-rosuvastatin-od-5-limited-202610",
+      "maker": "日本ジェネリック",
+      "title": "ロスバスタチンOD錠5mg「JG」PTP100錠の限定出荷",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1872",
+      "source_index_url": "https://medical.nihon-generic.co.jp/medical/2189017F4056/",
+      "announced_at": "2026-10",
+      "listed_at": "2026-10-22",
+      "verified_at": "2026-11-22",
+      "sha256": "3a778ff84251a5ff7b6ba5cf632da8e1f5a09b45bd190205394c7fb6791ee5cb",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "日本ジェネリックは、他社品の限定出荷で注文が想定を上回ったため、PTP100錠を限定出荷と案内しました。",
+      "maker_supply_status": {
+        "handling": "③ 限定出荷（他社品の影響）",
+        "volume": "A 出荷量通常"
+      },
+      "targets": [
+        {
+          "yj_code": "2189017F4056",
+          "product_name": "ロスバスタチンＯＤ錠５ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（他社品の影響）",
+                "plans": [],
+                "note": "統一商品コード 792100216。"
+              },
+              "unified_product_code": "792100216"
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "日本ジェネリックの11月20日版の全品目供給状況一覧でも、PTP100錠は限定出荷です。"
+      ]
+    },
+    {
+      "id": "maruishi-nikko-phenol-zinc-500-discontinued-202407",
+      "maker": "丸石製薬",
+      "title": "フェノール・亜鉛華リニメント「ニッコー」500gの丸石製薬販売分の中止",
+      "url": "https://www.maruishi-pharm.co.jp/medical/media/phenolaenkaliniment_tyuusi_20240730.pdf",
+      "source_index_url": "https://www.maruishi-pharm.co.jp/medical/products/14177/",
+      "announced_at": "2024-07",
+      "listed_at": "2024-07-30",
+      "verified_at": "2026-11-22",
+      "sha256": "747f6414cbd4ea1f835b8cf8eaed38061e87a37237b25cb6819736d396da3c21",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "丸石製薬は諸般の事情により、同社販売の500g包装を在庫消尽後に販売中止としました。同社の製品情報にも販売中止と掲載されています。",
+      "targets": [
+        {
+          "yj_code": "2649804X1192",
+          "product_name": "フェノール・亜鉛華リニメント「ニッコー」",
+          "maker": "日興製薬",
+          "scope": "seller_route_and_package",
+          "packages": [
+            {
+              "package": "500g",
+              "supply": {
+                "status": "stopped",
+                "status_text": "丸石製薬販売分は販売中止",
+                "plans": [],
+                "note": "販売包装単位コード 14987211150928。"
+              },
+              "unified_product_code": "211-150921"
+            }
+          ],
+          "source_pages": [
+            1
+          ],
+          "seller": "丸石製薬"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "丸石製薬の案内では、日興製薬販売扱いの500g（統一商品コード 290165533）は同一製剤と記載されています。",
+        "厚労省の供給区分は品目単位です。ここでは丸石製薬販売分の案内を掲載しています。"
+      ]
+    },
+    {
       "id": "towa-amaluet2-resumed-with-limits-202611",
       "maker": "東和薬品",
       "title": "アマルエット配合錠2番「トーワ」の出荷再開・限定出荷継続",
