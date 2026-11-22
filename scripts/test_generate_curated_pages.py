@@ -38,6 +38,7 @@ from generate_curated_pages import (
     ingredient_index_page,
     list_page,
     product_intent_html,
+    product_package_snapshot,
     product_page,
     product_seo_metadata,
     search_rows,
@@ -591,7 +592,7 @@ class CuratedPageGenerationTests(unittest.TestCase):
         topics = json.loads((ROOT / "industry_topics.json").read_text(encoding="utf-8"))["topics"]
         products = json.loads((ROOT / "featured_products.json").read_text(encoding="utf-8"))["products"]
         topic_slugs = {record["slug"] for record in topics}
-        product_slugs = {record["slug"] for record in products} | set(STRENGTH_HUBS)
+        product_slugs = {record["slug"] for record in products} | set(STRENGTH_HUBS) | {"hilnamin"}
         topic_files = {path.stem for path in (ROOT / "topics").glob("*.html") if path.name != "index.html"}
         product_files = {path.stem for path in (ROOT / "products").glob("*.html") if path.name != "index.html"}
 
@@ -609,6 +610,9 @@ class CuratedPageGenerationTests(unittest.TestCase):
         for slug in archived_topics:
             self.assertNotIn(f"{slug}.html", index)
         self.assertEqual(product_slugs, product_files)
+        hilnamin = (ROOT / "products" / "hilnamin.html").read_text(encoding="utf-8")
+        for key in ("1172014B2056", "1172014C1055", "1172014F1027", "1172014F2139", "1172014F3038"):
+            self.assertIn(f'href="../items/{key}.html"', hilnamin)
         sitemap = (ROOT / "sitemap-curated.xml").read_text(encoding="utf-8")
         for kind, slugs in (("topics", topic_slugs), ("products", product_slugs)):
             index = (ROOT / kind / "index.html").read_text(encoding="utf-8")
@@ -653,6 +657,24 @@ class CuratedPageGenerationTests(unittest.TestCase):
         self.assertNotIn("原文の要約", fallback)
         self.assertIn("厚労省の原典で確認", fallback)
         self.assertGreaterEqual(fallback_lastmod, lastmod)
+
+    def test_product_packaging_snapshot_keeps_the_scope_and_hides_changed_sources(self):
+        code = "1172014F2139"
+        row = {"商品名": "ヒルナミン錠（25mg）", "YJコード": code, "製造メーカー": "共和薬品工業"}
+        target = {"yj_code": code, "product_name": row["商品名"], "scope": "package",
+                  "packages": [{"package": "PTP100錠", "supply": {
+                      "status": "stopped", "status_text": "出荷停止", "plans": [],
+                  }}]}
+        notice = {"url": "https://example.test/notice.pdf", "announced_at": "2026-11-16",
+                  "maker": "共和薬品工業", "sha256": "a" * 64, "targets": [target]}
+        html = product_package_snapshot([row], {code: [notice]}, {"items": []}, {code})
+        self.assertIn("2026年11月16日の共和薬品工業の案内", html)
+        self.assertIn("PTP100錠：出荷停止", html)
+        self.assertIn(f'href="../items/{code}.html"', html)
+        changed = {"items": [{"url": notice["url"], "sha256": "b" * 64}]}
+        self.assertEqual("", product_package_snapshot([row], {code: [notice]}, changed, {code}))
+        other_strength = dict(row, 商品名="ヒルナミン錠（50mg）")
+        self.assertEqual("", product_package_snapshot([other_strength], {code: [notice]}, None, {code}))
 
     def test_checked_in_high_demand_products_have_safe_intent_specific_copy(self):
         expected = {
