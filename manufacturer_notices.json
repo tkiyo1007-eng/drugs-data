@@ -2,6 +2,75 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "dsep-teramuro-packaging-discontinuation-202407",
+      "maker": "第一三共エスファ",
+      "title": "テラムロ配合錠AP・BP「DSEP」の一部包装の販売終了",
+      "url": "https://med.daiichisankyo-ep.co.jp/information/files/1926/EPALL1N36101-1.pdf",
+      "source_index_url": "https://med.daiichisankyo-ep.co.jp/products/end_product_list.php?certification=1",
+      "announced_at": "2024-07",
+      "listed_at": "2024-07-23",
+      "verified_at": "2026-11-23",
+      "content_updated_at": "2026-11-23",
+      "sha256": "37172f4a290e41d6cbd5016cfd7a5bbe6dcafeaf7e4b63dba8e665f98e0912bb",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "summary": "2024年7月の案内に記載された販売終了の対象包装です。販売終了日はメーカーの販売終了品目一覧で確認しました。",
+      "reason": "第一三共エスファは一部包装の販売終了を案内しました。原文で個別の理由は示していません。",
+      "targets": [
+        {
+          "yj_code": "2149117F1033",
+          "product_name": "テラムロ配合錠ＡＰ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "081186778",
+              "supply": {
+                "status": "stopped",
+                "status_text": "販売終了（2025年3月10日）",
+                "plans": []
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "081186792",
+              "supply": {
+                "status": "stopped",
+                "status_text": "販売終了（2025年4月23日）",
+                "plans": []
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149117F2030",
+          "product_name": "テラムロ配合錠ＢＰ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "081186860",
+              "supply": {
+                "status": "stopped",
+                "status_text": "販売終了（2025年6月6日）",
+                "plans": []
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": []
+    },
+    {
       "id": "nichiiko-teramuro-ap-bp-discontinuation-202510",
       "maker": "日医工",
       "title": "テラムロ配合錠AP・BP「日医工」の販売中止（成分重複品統合）",
