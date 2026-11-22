@@ -2598,6 +2598,10 @@ html.season-autumn .autumn-sky{display:none}
   <h2>サイトの更新情報</h2>
   <div class="news-list glass">
     <div class="news-item">
+      <div class="news-date num">2026.11.22</div>
+      <div class="news-body"><span class="news-tag">医薬品ニュース</span>一部のメーカー案内に「転載された文書」へのリンクを追加しました。メーカーサイトで本文を開けない場合も、対象包装や案内日を確認できます。</div>
+    </div>
+    <div class="news-item">
       <div class="news-date num">2026.11.20</div>
       <div class="news-body"><span class="news-tag">品目表示</span>メーカーが案内した販売・製造の中止と対象包装を、検索結果と品目詳細の上部で確認できます。「販売・製造中止」で絞り込むと、一部包装だけが対象の案内も探せます。</div>
     </div>
@@ -7194,6 +7198,8 @@ function validateNewsContent(raw,kind){
 }
 function renderOfficialNewsItem(item){
   const detail = item.detail ? `<a href="${esc(item.detail)}">変更品目を見る</a>` : "";
+  const reprint = item.kind === "maker" && item.reprint_url !== item.url && safeNewsUrl(item.reprint_url)
+    ? `<a href="${esc(item.reprint_url)}" target="_blank" rel="noopener noreferrer">転載された文書</a>` : "";
   const summary = item.summary ? `<p class="official-news-summary">${esc(item.summary)}</p>` : "";
   const sourceLabel = item.kind === "recall" ? "回収概要" : item.kind === "maker" ? "メーカーの原文" : "厚労省の公表資料";
   return `<li>
@@ -7203,7 +7209,7 @@ function renderOfficialNewsItem(item){
     </div>
     <h3 class="official-news-title">${esc(item.title)}</h3>${summary}
     <div class="official-news-links">${detail}
-      <a href="${esc(item.url)}" target="_blank" rel="noopener" data-dsn-event="official-source-open">${sourceLabel}</a>
+      <a href="${esc(item.url)}" target="_blank" rel="noopener" data-dsn-event="official-source-open">${sourceLabel}</a>${reprint}
     </div>
   </li>`;
 }
