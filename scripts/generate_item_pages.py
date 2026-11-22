@@ -56,7 +56,8 @@ PACKAGE_LANDING_UPDATED_AT = "2026-11-13"
 PACKAGE_LANDING_KEYS = frozenset({
     "1139003C1044", "1139003C2040", "2325401A1020", "2325401A2027", "2649805M1026",
 })
-PACKAGE_OVERVIEW_KEYS = frozenset({"2649805M1026", "3179106F1039"})
+JUVELA_KEY = "2649805M1026"
+PACKAGE_OVERVIEW_KEYS = frozenset({JUVELA_KEY, "3179106F1039"})
 GENTACIN_KEY = "2634710M1077"
 ZESTAC_KEY = "2649865N1023"
 TAGAMET_KEY = "2325001F1211"
@@ -69,7 +70,7 @@ BONZOL_STRENGTHS = {"2499007F1021": "100mg", "2499007F2028": "200mg"}
 BONZOL_KEYS = frozenset(BONZOL_STRENGTHS)
 ZICTOR_KEY = "1147700S1028"
 PRODUCT_SUPPLY_LINKS = {
-    "2649805M1026": ("juvela-ointment", "ユベラ軟膏の包装別案内"),
+    JUVELA_KEY: ("juvela-ointment", "ユベラ軟膏の包装別案内"),
     ZICTOR_KEY: ("zictor-tape-75mg", "ジクトルテープの1枚・7枚包装を比較"),
     **dict.fromkeys(("2149117F1076", "2149117F2072"), ("teramuro", "テラムロのAP・BPを販売元別に比較")),
     **dict.fromkeys(("2454402A2037", "2454402A3033"), ("kenacort-a-injection", "ケナコルトの40mg・50mgを比較")),
@@ -848,7 +849,7 @@ def supply_answer_html(row, status, notices=(), lifecycle=None, bulletins=None):
                          '理由は推測せず、メーカー原文での確認が必要です。</p>')
         parts.append(f'<p>供給停止・販売中止・製造中止・薬価削除は別の情報です。'
                      f'<a href="{DISCONTINUATION_GUIDE}">終了案内と薬価の確認手順</a>で確認先を分けて説明しています。</p>')
-    if item_key(row) == "2649805M1026" and status == "limited":
+    if item_key(row) == JUVELA_KEY and status == "limited":
         parts.append('<p>この公表区分は限定出荷です。販売中止を示す区分ではありません。</p>')
     return "".join(parts)
 
@@ -1524,7 +1525,7 @@ def notice_date_label(value):
     return day
 
 
-def package_overview_content(key, match, display_name, status_label):
+def package_overview_content(key, match, display_name, status_label, official_reason=""):
     notice, target = match["notice"], match["target"]
     packages = list(dict.fromkeys(p["package"] for p in target["packages"]))
     scope = "・".join(packages)
@@ -1600,7 +1601,9 @@ def package_overview_content(key, match, display_name, status_label):
                f'<h2 id="packageBriefTitle">{heading}</h2>{body}</section>')
     if key == TAGAMET_KEY:
         return hint, description, section
-    return hint, f'{display_name}の厚労省公表区分は「{status_label}」。{description}', section
+    if key == JUVELA_KEY and official_reason:
+        hint = "公表理由・包装別案内"
+    return hint, f'{display_name}の厚労省公表区分は「{status_label}」{official_reason}。{description}', section
 
 
 def load_zictor_listing(site):
@@ -2512,7 +2515,9 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
         matches = matching_manufacturer_notices(row, manufacturer_notices, manufacturer_bulletins)
         overview = package_overview_notice(key, matches, manufacturer_bulletins) if supplemental_trusted else None
         if overview:
-            hint, desc, package_overview = package_overview_content(key, overview, search_name, st["label"])
+            official_reason = reason_description if key == JUVELA_KEY and status == "limited" else ""
+            hint, desc, package_overview = package_overview_content(
+                key, overview, search_name, st["label"], official_reason=official_reason)
             if key == ZESTAC_KEY and priority:
                 priority = hint
             if key == TAGAMET_KEY:

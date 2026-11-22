@@ -982,6 +982,23 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
             "items": [{"url": notice["url"], "sha256": "f" * 64}],
         }))
 
+    def test_juvela_search_description_keeps_official_reason_before_packaging_notice(self):
+        key = "2649805M1026"
+        row = dict(self.row(), 商品名="ユベラ軟膏", YJコード=key,
+                   規格="１ｇ", 理由="２．原材料調達上の問題", 供給状況="②限定出荷")
+        notice = dict(self.notice(), title="ユベラ軟膏の包装別案内", event_type="stopped")
+        notice["targets"] = [dict(notice["targets"][0], yj_code=key, product_name=row["商品名"],
+                                  scope="package", seller="", packages=[{
+                                      "package": "500gボトル",
+                                      "supply": {"status": "limited", "status_text": "限定出荷", "plans": []},
+                                  }])]
+        page = page_html(row, key, "limited", "2026-11-23", [], {key},
+                         manufacturer_notices=[notice], manufacturer_bulletins={"items": []})
+        title = re.search(r"<title>(.*?)</title>", page).group(1)
+        desc = re.search(r'<meta name="description" content="([^"]*)">', page).group(1)
+        self.assertIn("公表理由・包装別案内", title)
+        self.assertLess(desc.index("公表理由は「２．原材料調達上の問題」"), desc.index("500gボトル"))
+
     def test_future_recovery_is_explicitly_a_plan_without_changing_current_supply(self):
         row = dict(self.row(), 供給状況="②限定出荷（自社の事情）")
         notice = self.notice()
