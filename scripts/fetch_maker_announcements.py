@@ -92,13 +92,22 @@ def parse_nichiiko_excel(pages=1):
 
 
 def parse_nihon_generic(pages=3):
+    base = "https://medical.nihon-generic.co.jp"
+    document_link = re.compile(
+        r'<a\b([^>]*\shref="((?:https://medical\.nihon-generic\.co\.jp)?'
+        r'(?:/uploadfiles/[^"]+\.pdf|/a\.php\?id=[0-9]+))"[^>]*)>(.*?)</a>', re.S,
+    )
     items = []
     for p in range(1, pages + 1):
-        url = "https://medical.nihon-generic.co.jp/news/" if p == 1 else f"https://medical.nihon-generic.co.jp/news/page/{p}/"
+        url = f"{base}/news/" if p == 1 else f"{base}/news/page/{p}/"
         html = fetch(url)
-        for m in re.finditer(r'<a[^>]*href="(https://medical\.nihon-generic\.co\.jp/uploadfiles/[^"]+\.pdf)"[^>]*>(.*?)</a>', html, re.S):
-            href, text = m.group(1), re.sub(r"<[^>]+>", " ", m.group(2))
-            items.append((re.sub(r"\s+", " ", text).strip(), href))
+        for attributes, href, body in document_link.findall(html):
+            if urllib.parse.urlsplit(href).path == "/a.php":
+                classes = re.search(r'\sclass="([^"]*)"', attributes)
+                if not classes or "has_pdf" not in classes.group(1).split():
+                    continue
+            text = re.sub(r"<[^>]+>", " ", body)
+            items.append((re.sub(r"\s+", " ", text).strip(), urllib.parse.urljoin(base, href)))
     return [("日本ジェネリック", t, u) for t, u in items]
 
 
@@ -615,7 +624,7 @@ def classify_event(title):
     if (re.search(r"販売中止|販売終了|製造中止|製造販売中止", t)
             and not re.search(r"他社(?:品|製品).*販売中止.*(?:影響|伴)", t)):
         return "discontinued"
-    if re.search(r"出荷再開|供給再開|限定出荷解除|出荷調整解除|供給停止解除", t):
+    if re.search(r"出荷再開|供給再開|限定出荷解除|出荷調整解除|出荷量制限(?:の)?解除|供給停止解除", t):
         return "resumed"
     if re.search(r"出荷停止|供給停止|欠品", t):
         return "stopped"
