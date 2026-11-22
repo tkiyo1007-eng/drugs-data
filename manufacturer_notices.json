@@ -2,6 +2,236 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "towa-mesalazine-er-250-shipment-stop-202610",
+      "maker": "東和薬品",
+      "title": "メサラジン徐放錠250mg「トーワ」PTP100錠の一時出荷停止",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83763&t=4&f=%E3%83%A1%E3%82%B5%E3%83%A9%E3%82%B8%E3%83%B3%E5%BE%90%E6%94%BE%E9%8C%A0250+mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%87%BA%E8%8D%B7%E5%81%9C%E6%AD%A2%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%8A%E8%A9%AB%E3%81%B3%E3%81%A8%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-22",
+      "sha256": "70ebd360a8b96d469f6a78081455a830eb7b70cb8edd6105cab5eb8e45087328",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "製造委託先で承認規格に適合した製品を製造できず、納入が遅れたと東和薬品は説明しています。10月の文書でPTP100錠の一時出荷停止を案内しました。",
+      "targets": [
+        {
+          "yj_code": "2399009F1190",
+          "product_name": "メサラジン徐放錠２５０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155080018",
+              "supply": {
+                "status": "stopped",
+                "status_text": "一時出荷停止",
+                "plans": []
+              }
+            }
+          ],
+          "source_pages": [
+            1,
+            2
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83763&t=4&f=%E3%83%A1%E3%82%B5%E3%83%A9%E3%82%B8%E3%83%B3%E5%BE%90%E6%94%BE%E9%8C%A0250+mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%87%BA%E8%8D%B7%E5%81%9C%E6%AD%A2%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%8A%E8%A9%AB%E3%81%B3%E3%81%A8%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf",
+          "target_yj_codes": [
+            "2399009F1190"
+          ],
+          "type": "東和薬品が潰瘍性大腸炎の同効薬として資料に挙げた候補です。各製品は規格や製剤が異なります。",
+          "products": [
+            {
+              "name": "アサコール錠４００ｍｇ",
+              "yj_code": "2399009F3028",
+              "maker": "ゼリア新薬工業",
+              "scope": "PTP100錠、PTP500錠"
+            },
+            {
+              "name": "リアルダ錠６００ｍｇ",
+              "yj_code": "2399009F5020",
+              "maker": "持田製薬",
+              "scope": "PTP100錠"
+            },
+            {
+              "name": "リアルダ錠１２００ｍｇ",
+              "yj_code": "2399009F4024",
+              "maker": "持田製薬",
+              "scope": "PTP56錠、PTP224錠"
+            }
+          ],
+          "cautions": [
+            "候補の供給状況や受注可否は、資料では確認できません。"
+          ]
+        }
+      ],
+      "cautions": [],
+      "first_seen": "2026-10-30",
+      "resumption": "再開時期は未定です。",
+      "maker_supply_status": {
+        "handling": "⑤ 供給停止",
+        "volume": "C 出荷停止"
+      }
+    },
+    {
+      "id": "towa-mesalazine-er-500-supply-notice-202606",
+      "maker": "東和薬品",
+      "title": "メサラジン徐放錠500mg「トーワ」PTP100錠の供給案内（2026年6月）",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=82788&t=4",
+      "announced_at": "2026-06",
+      "verified_at": "2026-11-22",
+      "sha256": "166726a0369007d5dabac6f4fb030ed0fc38dad9802b15aca6347f8f44990bc6",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造委託先で承認規格に適合した製品を製造できず、納入が遅れたと東和薬品は説明しています。6月18日時点では限定出荷で、在庫がなくなり次第、一時出荷を停止する予定と案内しました。",
+      "targets": [
+        {
+          "yj_code": "2399009F2188",
+          "product_name": "メサラジン徐放錠５００ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155100013",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（6月18日時点）",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年7月見込み（6月の案内）"
+                  }
+                ]
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [],
+      "resumption": "在庫消尽後の再開時期は未定と記載されています。",
+      "maker_supply_status": {
+        "handling": "② 限定出荷（自社の事情）",
+        "volume": "Aプラス 出荷量増加"
+      }
+    },
+    {
+      "id": "dsep-teramlo-ap-bp-supply-november-202611",
+      "maker": "第一三共エスファ",
+      "title": "テラムロ配合錠AP・BP「DSEP」の出荷制限（11月9日案内）",
+      "url": "https://med.daiichisankyo-ep.co.jp/information/files/2292/gentei_20261109_E1_G.pdf",
+      "announced_at": "2026-11",
+      "verified_at": "2026-11-22",
+      "sha256": "f9781013d71321b85020f216f38640118ac07a1499806cb5dc799727e9ca57d4",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "需要の拡大に対応して生産を続けていましたが、製造設備の一時的な不具合で在庫が減ったため、第一三共エスファは対象包装の出荷を制限しています。",
+      "targets": [
+        {
+          "yj_code": "2149117F1033",
+          "product_name": "テラムロ配合錠ＡＰ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "081186754",
+              "supply": {
+                "status": "limited",
+                "status_text": "出荷制限（11月9日の案内）",
+                "plans": []
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "081186761",
+              "supply": {
+                "status": "limited",
+                "status_text": "出荷制限（11月9日の案内）",
+                "plans": []
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        },
+        {
+          "yj_code": "2149117F2030",
+          "product_name": "テラムロ配合錠ＢＰ「ＤＳＥＰ」",
+          "maker": "第一三共エスファ",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "081186853",
+              "supply": {
+                "status": "limited",
+                "status_text": "出荷制限（11月9日の案内）",
+                "plans": []
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカーは設備を増強する方針です。生産量が増えるまでには時間がかかる見込みで、解除時期は示されていません。"
+      ],
+      "listed_at": "2026-11-09",
+      "source_index_url": "https://med.daiichisankyo-ep.co.jp/information/?certification=1"
+    },
+    {
+      "id": "chemiphar-valsartan-80-package-history-202610",
+      "maker": "日本ケミファ",
+      "title": "バルサルタン錠80mg「ケミファ」100錠包装の供給案内（10月27日）",
+      "url": "https://www.nc-medical.com/product_topics/p5ib910000008618-att/p5ib91000000861w.pdf",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-22",
+      "sha256": "765e4d13788226cf2271d0ff3df2811c2cda73bd0057daded489b5a49cb02f78",
+      "collection_mode": "manual",
+      "event_type": "supply",
+      "reason": "日本ケミファの10月27日の案内では、製造委託先からの納入が遅れ、100錠包装の在庫不足を見込んでいました。同じ製品の140錠包装を案内し、100錠包装の次回入荷は11月下旬予定としていました。",
+      "targets": [
+        {
+          "yj_code": "2149041F3201",
+          "product_name": "バルサルタン錠８０ｍｇ「ケミファ」",
+          "maker": "日本ケミファ",
+          "scope": "seller_route_and_package",
+          "packages": [
+            {
+              "package": "100錠",
+              "unified_product_code": "171786109",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [],
+                "note": "販売包装単位コード 14987171786106。案内された代替包装は140錠（統一商品コード 171786116、販売包装単位コード 14987171786113）。"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ],
+          "seller": "日本ケミファ"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "日本ケミファの11月18日版の供給一覧では、品目全体は通常出荷です。10月27日の案内で示された100錠包装の入荷予定について、実際の入荷日は確認できていません。"
+      ],
+      "listed_at": "2026-10-27",
+      "source_index_url": "https://www.nc-medical.com/sp/product/information/index.php?type=all&year=2026"
+    },
+    {
       "id": "nichiiko-paroxetine-nig-discontinuation-202611",
       "maker": "日医工",
       "title": "パロキセチン錠5mg・10mg・20mg「NIG」の販売中止予定",
