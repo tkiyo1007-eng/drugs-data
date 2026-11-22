@@ -12,6 +12,10 @@ from fetch_pmda_recalls import CLASSES, JST, PMDA
 from validate_manufacturer_notices import is_official_maker_source, valid_date
 
 SUPPLY_URL = "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html"
+REPRINT_URL = re.compile(
+    r"https://(?:pbs\.twimg\.com/media/[A-Za-z0-9_-]+\?format=png&name=large"
+    r"|www\.jsge\.or\.jp/wp-content/uploads/\d{4}/\d{2}/[A-Za-z0-9_.-]+\.pdf)"
+)
 MAKER_LABELS = {
     "discontinued": "販売・製造中止の案内",
     "package_discontinued": "包装の販売中止の案内",
@@ -83,6 +87,9 @@ def maker_news(site, explanations):
         entries[url] = dict(date=day, kind="maker", tag=label, source=maker, title=row["title"],
                             url=url, date_label="掲載" if posted else "案内" if title_confirms_day or not detected else "確認",
                             summary=note.get("summary"))
+        reprint_url = note.get("reprint_url")
+        if isinstance(reprint_url, str) and REPRINT_URL.fullmatch(reprint_url):
+            entries[url]["reprint_url"] = reprint_url
 
     # An editorial URL pair can represent a single notice after a publisher moves a file.
     # Keep both if their displayed notice metadata diverges or the reviewed original is absent.
