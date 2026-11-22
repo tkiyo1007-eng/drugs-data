@@ -2,6 +2,221 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "sandoz-amaluet-discontinuation-202603",
+      "maker": "サンド",
+      "title": "アマルエット配合錠1番・2番・3番・4番「サンド」の販売中止案内",
+      "url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20260327_001.pdf",
+      "announced_at": "2026-03",
+      "verified_at": "2026-11-22",
+      "sha256": "80cdc9cef2c6e59cf28e0eab307674a8d34f561dafd4bc4e0ee116e0341b9a8c",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "サンドは、在庫がなくなり次第、アマルエット配合錠1番〜4番の販売を中止すると案内しました。在庫消尽の見込みは規格・包装ごとに異なります。",
+      "targets": [
+        {
+          "yj_code": "2190101F1098",
+          "product_name": "アマルエット配合錠１番「サンド」",
+          "maker": "サンド",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "614414903",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年5月（案内時点の見込み）"
+                  }
+                ],
+                "note": "販売包装単位コード 14987614414900。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2190102F1092",
+          "product_name": "アマルエット配合錠２番「サンド」",
+          "maker": "サンド",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "614415009",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年8月（案内時点の見込み）"
+                  }
+                ],
+                "note": "販売包装単位コード 14987614415006。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2190103F1097",
+          "product_name": "アマルエット配合錠３番「サンド」",
+          "maker": "サンド",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "614415108",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年8月（案内時点の見込み）"
+                  }
+                ],
+                "note": "販売包装単位コード 14987614415105。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "614415115",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年6月（案内時点の見込み）"
+                  }
+                ],
+                "note": "販売包装単位コード 14987614415112。"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2190104F1091",
+          "product_name": "アマルエット配合錠４番「サンド」",
+          "maker": "サンド",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "614415207",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年7月（案内時点の見込み）"
+                  }
+                ],
+                "note": "販売包装単位コード 14987614415204。"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "614415214",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年5月（案内時点の見込み）"
+                  }
+                ],
+                "note": "販売包装単位コード 14987614415211。"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20260327_001.pdf",
+          "target_yj_codes": [
+            "2190101F1098"
+          ],
+          "type": "サンドが案内に記載した同じ番号の代替候補",
+          "products": [
+            {
+              "name": "カデュエット配合錠１番",
+              "yj_code": "2190101F1020",
+              "maker": "ヴィアトリス製薬合同会社"
+            }
+          ],
+          "cautions": [
+            "候補の現在の在庫・受注可否は原文からは確認できません。"
+          ]
+        },
+        {
+          "source_url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20260327_001.pdf",
+          "target_yj_codes": [
+            "2190102F1092"
+          ],
+          "type": "サンドが案内に記載した同じ番号の代替候補",
+          "products": [
+            {
+              "name": "カデュエット配合錠２番",
+              "yj_code": "2190102F1025",
+              "maker": "ヴィアトリス製薬合同会社"
+            }
+          ],
+          "cautions": [
+            "候補の現在の在庫・受注可否は原文からは確認できません。"
+          ]
+        },
+        {
+          "source_url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20260327_001.pdf",
+          "target_yj_codes": [
+            "2190103F1097"
+          ],
+          "type": "サンドが案内に記載した同じ番号の代替候補",
+          "products": [
+            {
+              "name": "カデュエット配合錠３番",
+              "yj_code": "2190103F1020",
+              "maker": "ヴィアトリス製薬合同会社"
+            }
+          ],
+          "cautions": [
+            "候補の現在の在庫・受注可否は原文からは確認できません。"
+          ]
+        },
+        {
+          "source_url": "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20260327_001.pdf",
+          "target_yj_codes": [
+            "2190104F1091"
+          ],
+          "type": "サンドが案内に記載した同じ番号の代替候補",
+          "products": [
+            {
+              "name": "カデュエット配合錠４番",
+              "yj_code": "2190104F1024",
+              "maker": "ヴィアトリス製薬合同会社"
+            }
+          ],
+          "cautions": [
+            "候補の現在の在庫・受注可否は原文からは確認できません。"
+          ]
+        }
+      ],
+      "cautions": [
+        "2026年3月の案内では経過措置満了時期は2027年3月です。"
+      ]
+    },
+    {
       "id": "nipro-temocapril-np-discontinuation-packages-202412",
       "maker": "ニプロ",
       "title": "テモカプリル塩酸塩錠1mg・2mg「NP」の販売中止対象包装",
