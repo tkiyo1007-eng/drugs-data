@@ -41,7 +41,8 @@ class ExactTopicLinkTests(unittest.TestCase):
             self.assertIn('記事は掲載時点の情報', rendered)
             self.assertNotIn('ルリコン', rendered)
             self.assertEqual(related_topics_html([]), '')
-            self.assertEqual(item_page_lastmod({}, related_topics=idx['2655712N1039']), '2026-11-04')
+            self.assertEqual(item_page_lastmod({}, related_topics=idx['2655712N1039']), '2026-11-23')
+            self.assertEqual(item_page_lastmod({}, related_topics=[{'date': '2026-11-24'}]), '2026-11-24')
             (site / 'industry_topics.json').write_text('{', encoding='utf-8')
             self.assertEqual(exact_target_topic_index(site), {})
 
