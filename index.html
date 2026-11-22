@@ -578,6 +578,20 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 .change-badge.to-ok{color:#1B7A4C;background:rgba(47,174,110,.14);border:1px solid rgba(47,174,110,.4)}
 .change-badge.to-warn{color:#A03030;background:rgba(225,77,77,.12);border:1px solid rgba(225,77,77,.38)}
+/* 公的機関・メーカーの新着 */
+.official-news{margin:0 0 28px;overflow-wrap:anywhere}
+.official-news h2{margin-bottom:14px}
+.official-news-list{list-style:none;margin:0;padding:0 16px;border-radius:16px}
+.official-news-list li{padding:12px 0;border-bottom:1px solid var(--stroke)}
+.official-news-list li:last-child{border-bottom:0}
+.official-news-meta,.official-news-links{display:flex;flex-wrap:wrap;align-items:baseline;gap:3px 10px}
+.official-news-meta{font-size:.78rem;color:var(--sub)}
+.official-news-meta strong{color:var(--ink)}
+.official-news-title{margin:3px 0 0;font-size:.98rem;font-weight:800;line-height:1.5}
+.official-news-summary{margin:3px 0 0;font-size:.86rem;color:var(--sub);line-height:1.6}
+.official-news-links a{display:inline-flex;align-items:center;min-height:36px;font-size:.8rem;font-weight:700;color:var(--blue)}
+.official-news-more{margin:8px 0 0}
+.official-news-more summary{padding:10px 0;min-height:44px;font-weight:700;color:var(--blue);cursor:pointer}
 /* 医療ニュース（PMDA新着） */
 .mednews{margin-top:26px}
 #topics>.editorial-news-heading{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin:32px 0 14px}
@@ -2036,6 +2050,16 @@ html.season-autumn .autumn-sky{display:none}
 
 <section id="topics" class="reveal">
   <p class="sec-eyebrow">TOPICS</p>
+  <div class="official-news" role="group" aria-labelledby="officialNewsTitle">
+    <h2 id="officialNewsTitle">供給・販売中止・回収の新着</h2>
+    <p class="news-status" id="officialNewsStatus" role="status">公表情報を読み込んでいます。</p>
+    <ul id="officialNewsList" class="official-news-list glass" aria-label="供給・販売中止・回収の新着" hidden></ul>
+    <details class="official-news-more" id="officialNewsMore" hidden>
+      <summary>ほかの新着を見る</summary>
+      <ul id="officialNewsExtra" class="official-news-list glass" aria-label="ほかの新着"></ul>
+    </details>
+    <noscript><p><a href="updates/index.html">供給変更の履歴</a> ／ <a href="https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html">PMDAの回収情報</a></p></noscript>
+  </div>
   <h2 id="industryNewsTitle">業界ニュース</h2>
   <div class="mednews" id="medNews" role="group" aria-labelledby="industryNewsTitle" tabindex="-1">
     <p class="news-status" id="medNewsStatus" role="status" aria-live="polite" aria-atomic="true">新着見出しを読み込んでいます。</p>
@@ -7168,6 +7192,59 @@ function validateNewsContent(raw,kind){
   // 共有契約の表示順を維持。全件検証してから、画面が参照するsnapshotを差し替える。
   return {items:Object.freeze(items),updatedAt:kind === "topics" ? newsDateKey(raw.updated_at) : null};
 }
+function renderOfficialNewsItem(item){
+  const detail = item.detail ? `<a href="${esc(item.detail)}">変更品目を見る</a>` : "";
+  const summary = item.summary ? `<p class="official-news-summary">${esc(item.summary)}</p>` : "";
+  const sourceLabel = item.kind === "recall" ? "回収概要" : item.kind === "maker" ? "メーカーの原文" : "厚労省の公表資料";
+  return `<li>
+    <div class="official-news-meta"><strong>${esc(item.tag)}</strong>
+      <span>${esc(item.source)}</span>
+      <span>${esc(item.date_label)} <time datetime="${item.date}">${item.date.replaceAll("-","/")}</time></span>
+    </div>
+    <h3 class="official-news-title">${esc(item.title)}</h3>${summary}
+    <div class="official-news-links">${detail}
+      <a href="${esc(item.url)}" target="_blank" rel="noopener" data-dsn-event="official-source-open">${sourceLabel}</a>
+    </div>
+  </li>`;
+}
+async function loadOfficialNews(){
+  const status = document.getElementById("officialNewsStatus");
+  const controller = new AbortController();
+  const timer = setTimeout(()=>controller.abort(),10000);
+  try{
+    const response = await fetch("official_news.json",{cache:"no-store",signal:controller.signal});
+    if(!response.ok) throw new Error("公表情報を取得できません");
+    const data = await response.json();
+    if(data?.schema_version !== 1 || !["ok","stale"].includes(data.pmda_status)
+      || !Array.isArray(data.items)) throw new TypeError("公表情報の形式が不正です");
+    const items = data.items.filter(item=>item && newsDateKey(item.date) === item.date
+      && ["supply","recall","maker"].includes(item.kind) && safeNewsUrl(item.url,item.kind === "recall")
+      && ["title","source","tag","date_label"].every(field=>typeof item[field] === "string" && item[field].trim())
+      && (item.summary == null || typeof item.summary === "string")
+      && (item.detail == null || item.detail === `/updates/${item.date}.html`));
+    if(items.length !== data.items.length) throw new TypeError("公表情報の形式が不正です");
+    const recent = newsDateWindow(items).recent;
+    const today = jstDayNumber(Date.now());
+    const explained = recent.filter(item=>item.kind !== "supply" && item.summary
+      && today - Date.parse(item.date)/86400000 < 7).slice(0,2);
+    const featured = new Set([...explained,...recent.filter(item=>!explained.includes(item))].slice(0,4));
+    const list = document.getElementById("officialNewsList");
+    const more = document.getElementById("officialNewsMore");
+    const rest = recent.filter(item=>!featured.has(item));
+    list.innerHTML = recent.filter(item=>featured.has(item)).map(renderOfficialNewsItem).join("");
+    list.hidden = !recent.length;
+    document.getElementById("officialNewsExtra").innerHTML = rest.map(renderOfficialNewsItem).join("");
+    more.hidden = !rest.length;
+    status.textContent = data.pmda_status === "stale"
+      ? "PMDAの最新の回収情報を確認できていません。取得済みの情報を表示します。"
+      : recent.length ? "" : "取得済みの情報に、直近30日の掲載対象はありません。";
+    status.hidden = !status.textContent;
+  }catch(error){
+    status.textContent = "公表情報を読み込めませんでした。時間を置いてページを再読み込みしてください。";
+  }finally{
+    clearTimeout(timer);
+  }
+}
 function newsDateWindow(items,now=Date.now()){
   const today = jstDayNumber(now), recent=[], older=[], future=[];
   for(const item of items){
@@ -8105,6 +8182,8 @@ window.addEventListener("appinstalled", ()=>{ deferredPrompt = null; syncInstall
 document.querySelectorAll('a[href*="apps.apple.com"][href*="id6777696446"]').forEach(link=>{
   link.addEventListener("click", ()=>dsnTrack("app-store-open"));
 });
+
+void loadOfficialNews();
 
 </script>
 <script data-goatcounter="https://kt1007.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
