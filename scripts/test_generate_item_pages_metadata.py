@@ -367,11 +367,11 @@ class ItemPageMetadataTests(unittest.TestCase):
 
     def test_sitemap_lastmod_uses_fixed_template_revision_without_advancing_daily(self):
         old_row = {"商品名": "対象錠", "更新日": "2024/03/11"}
-        self.assertEqual(item_page_lastmod(old_row), "2026-10-29")
+        self.assertEqual(item_page_lastmod(old_row), "2026-11-23")
         future_notice = {"product_name": "対象錠", "maker": "対象製薬",
-                         "announced_at": "2026-10-30"}
+                         "announced_at": "2026-11-24"}
         old_row["製造メーカー"] = "対象製薬"
-        self.assertEqual(item_page_lastmod(old_row, future_notice), "2026-10-30")
+        self.assertEqual(item_page_lastmod(old_row, future_notice), "2026-11-24")
 
     def test_discrepancy_must_match_current_official_row_and_manufacturer(self):
         row = {
@@ -916,7 +916,29 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
                          "案内時点の予定", "実際の販売終了日は未確認", "メーカー指定候補"):
             self.assertIn(expected, brief)
         self.assertNotIn('id="packageBriefTitle"', render([notice], {"items": [{"url": notice["url"], "sha256": "f" * 64}]}))
-        self.assertNotIn('id="packageBriefTitle"', render([notice, dict(notice, announced_at="2026-11", event_type="resumed")]))
+        resumed = render([notice, dict(notice, announced_at="2026-11", event_type="resumed")])
+        self.assertNotIn('id="packageBriefTitle"', resumed)
+        self.assertNotIn("販売中止", re.search(r"<title>(.*?)</title>", resumed).group(1))
+
+    def test_unverified_manufacturer_package_never_leads_search_metadata(self):
+        row = dict(self.row(), 規格="10mg1錠")
+        key = row["YJコード"]
+        notice = dict(self.notice(), event_type="discontinued", title="販売中止予定のご案内")
+        for trusted, bulletins in (
+            (True, {"items": []}),
+            (False, {"items": []}),
+            (True, {"items": [{"url": notice["url"], "sha256": "f" * 64}]}),
+        ):
+            page = page_html(row, key, "limited", "2026-11-23", [], {key},
+                             manufacturer_notices=[notice], manufacturer_bulletins=bulletins,
+                             supplemental_trusted=trusted)
+            title = re.search(r"<title>(.*?)</title>", page).group(1)
+            self.assertTrue(title.startswith(f'{row["商品名"]}（10mg1錠）'), title)
+            if trusted and not bulletins["items"]:
+                self.assertLess(title.index("販売中止予定"), title.index("限定出荷"))
+                self.assertIn("販売経路・包装別", title)
+            else:
+                self.assertNotIn("販売中止予定", title)
 
     def test_future_recovery_is_explicitly_a_plan_without_changing_current_supply(self):
         row = dict(self.row(), 供給状況="②限定出荷（自社の事情）")
@@ -953,13 +975,13 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
 
     def test_manual_notice_lastmod_is_not_advanced_by_generation_or_daily_attempt(self):
         row, notice = self.row(), self.notice()
-        self.assertEqual("2026-10-29", item_page_lastmod(row, manufacturer_notices=[notice]))
-        notice["listed_at"] = "2026-10-30"
-        self.assertEqual("2026-10-29", item_page_lastmod(row, manufacturer_notices=[notice]))
-        notice["content_updated_at"] = "2026-10-31"
-        self.assertEqual("2026-10-31", item_page_lastmod(row, manufacturer_notices=[notice]))
+        self.assertEqual("2026-11-23", item_page_lastmod(row, manufacturer_notices=[notice]))
+        notice["listed_at"] = "2026-11-24"
+        self.assertEqual("2026-11-23", item_page_lastmod(row, manufacturer_notices=[notice]))
+        notice["content_updated_at"] = "2026-11-25"
+        self.assertEqual("2026-11-25", item_page_lastmod(row, manufacturer_notices=[notice]))
         notice["targets"][0]["product_name"] = "別の品目"
-        self.assertEqual("2026-10-29", item_page_lastmod(row, manufacturer_notices=[notice]))
+        self.assertEqual("2026-11-23", item_page_lastmod(row, manufacturer_notices=[notice]))
 
 
     def test_discontinuation_timing_device_candidate_and_no_candidate_statement_are_not_reinterpreted(self):
@@ -1115,8 +1137,8 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
         self.assertNotIn("メーカー：販売中止の案内あり", output)
         for value in ("終了予定時期：", "2027-12", lifecycle["supply_end_note"], lifecycle["supply_end_packages"][0], "終了予定の原文確認日"):
             self.assertNotIn(value, output)
-        self.assertEqual("2026-10-29", item_page_lastmod(row, lifecycle, manufacturer_notices=[notice], manufacturer_bulletins=bulletins))
-        self.assertIn('"dateModified":"2026-10-29"', output)
+        self.assertEqual("2026-11-23", item_page_lastmod(row, lifecycle, manufacturer_notices=[notice], manufacturer_bulletins=bulletins))
+        self.assertIn('"dateModified":"2026-11-23"', output)
 
     def test_changed_lifecycle_hub_is_pending_and_does_not_search_stale_end_details(self):
         row, notice = self.row(), self.notice()
@@ -1152,7 +1174,7 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
         self.assertNotIn("確認日が7日以上前のため", output)
         self.assertNotIn("メーカー公式：販売中止の案内あり", output)
         self.assertIn("厚労省：通常出荷", output)
-        self.assertIn('"dateModified":"2026-10-29"', output)
+        self.assertIn('"dateModified":"2026-11-23"', output)
         entry = {"key": row["YJコード"], "name": row["商品名"], "maker": lifecycle["maker"],
                  "status": "ok", "updated": "2026-07-07", "lifecycle": lifecycle,
                  "lifecycle_current": False, "supplements": supplemental_labels(
@@ -1477,7 +1499,7 @@ class ItemDescriptionTests(unittest.TestCase):
         }
 
     def render(self, row, status="limited", **options):
-        return page_html(row, row["YJコード"], status, "2026-10-29", [],
+        return page_html(row, row["YJコード"], status, "2026-11-23", [],
                          {row["YJコード"]}, **options)
 
     def description(self, output):
@@ -1509,7 +1531,7 @@ class ItemDescriptionTests(unittest.TestCase):
         row = self.row(理由="", **{"解除・解消見込み": "", "更新日": ""})
         description = self.description(self.render(row))
         self.assertIn("公表理由は「記載なし」。解除・解消見込みは「記載なし」（公表区分）", description)
-        self.assertNotIn("2026-10-29", description)
+        self.assertNotIn("2026-11-23", description)
         self.assertNotIn("未定", description)
         self.assertNotIn("メーカー公式補足", description)
 
@@ -1520,6 +1542,24 @@ class ItemDescriptionTests(unittest.TestCase):
         self.assertNotIn("公表理由は", description)
         self.assertNotIn("解除・解消見込みは", description)
         self.assertNotIn("販売中止", description)
+
+    def test_search_metadata_distinguishes_edaravone_bag_from_ampoule(self):
+        for code, name, spec, packaged_notice in (
+            ("1190401A1112", "エダラボン点滴静注30mg「タカタ」", "30mg20mL1管", False),
+            ("1190401G1050", "エダラボン点滴静注30mgバッグ「タカタ」", "30mg100mL1キット", True),
+        ):
+            with self.subTest(code=code):
+                row = self.row(商品名=name, 規格=spec, 製造メーカー="高田製薬",
+                               供給状況="通常出荷", YJコード=code)
+                output = self.render(row, "ok")
+                title = re.search(r"<title>(.*?)</title>", output).group(1)
+                description = self.description(output)
+                for value in (title, description):
+                    self.assertTrue(value.startswith(f"{name}（{spec}）"), value)
+                    if packaged_notice:
+                        self.assertLess(value.index("販売中止"), value.index("通常出荷"))
+                    else:
+                        self.assertNotIn("販売中止", value)
 
     def test_unverified_and_changed_maker_labels_survive_without_becoming_official_status(self):
         row = self.row(供給状況="通常出荷")

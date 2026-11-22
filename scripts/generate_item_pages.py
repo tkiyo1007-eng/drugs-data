@@ -44,7 +44,7 @@ OFFICIAL_SUPPLY_URL = "https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-l
 MHLW_PRICE_LIST_URL = "https://www.mhlw.go.jp/topics/2026/04/tp20260401-01.html"
 # 全品目へ一次情報・状態別ハブ・運営方針の導線を追加した実質的な改訂日。
 # 日次生成日ではなく固定値にし、内容が変わらない日にlastmodを進めない。
-ITEM_PAGE_TEMPLATE_LASTMOD = "2026-10-29"  # 検索説明の公表理由・解除見込みと情報日付の区別を整理
+ITEM_PAGE_TEMPLATE_LASTMOD = "2026-11-23"  # 品目名・規格と包装別中止案内を検索用の情報に反映
 # 状態別5一覧の実質的な改訂日。個別品目のlastmodは進めない。
 HUB_TEMPLATE_LASTMOD = "2026-10-19"
 # ページ内検索の対象は、テンプレートの改訂日とは別に維持する。
@@ -227,7 +227,7 @@ HOSPITAL_DISCONTINUATION_REFERENCES = {
         ),
     ),
 }
-PUBLIC_DISCONTINUATION_REFERENCES = {
+PUBLIC_SUPPLY_END_REFERENCES = {
     "2252006R2057": (
         "フェノテロール臭化水素酸塩DS小児用0.5%「タカタ」",
         "2026年11月6日の中医協資料で、メーカーが供給停止と薬価削除を希望し、"
@@ -243,6 +243,9 @@ PUBLIC_DISCONTINUATION_REFERENCES = {
         ),
         "供給終了予定・薬価の経過措置",
     ),
+}
+# 販売中止と対象包装の両方が出典に明記されている補足資料。
+PUBLIC_DISCONTINUATION_REFERENCES = {
     "1169001F1245": (
         "トリヘキシフェニジル塩酸塩錠2mg「タカタ」",
         "医療用医薬品供給状況データベース（DSJP）の2025年7月15日付記録では、"
@@ -1407,6 +1410,11 @@ def manufacturer_notice_label(row: dict, notices=(), bulletins=None) -> str:
             else "確認済みメーカー案内")
 
 
+def notice_package_names(target: dict) -> list:
+    packages = (p["package"] if isinstance(p, dict) else p for p in target["packages"])
+    return list(dict.fromkeys(name.strip() for name in packages if name.strip()))
+
+
 def manufacturer_discontinuation_labels(row, notices=(), bulletins=None):
     labels = {}
     for match in matching_manufacturer_notices(row, notices, bulletins):
@@ -1420,9 +1428,7 @@ def manufacturer_discontinuation_labels(row, notices=(), bulletins=None):
         if match["source_changed"] or manufacturer_notice_needs_review(notice, bulletins):
             labels["メーカー：中止案内（要原文確認）"] = None
             continue
-        packages = (package["package"] if isinstance(package, dict) else package
-                    for package in target["packages"])
-        scope = list(dict.fromkeys(name.strip() for name in packages if name.strip()))
+        scope = notice_package_names(target)
         if target.get("scope", "").startswith("seller_route"):
             scope.insert(0, target.get("seller") or "販売経路限定")
         action = kind[1] + ("予定" if kind[2] else "の案内")
@@ -2224,7 +2230,7 @@ def item_hub_slugs(entry: dict, dataset_date: str) -> list:
 
 
 def page_title(name: str, status_label: str, supplements: list,
-               qualifier: str = "", manufacturer_hint: str = "") -> str:
+               qualifier: str = "", manufacturer_hint: str = "", priority_notice: str = "") -> str:
     """検索結果で意味を保ちつつ、HTMLの推奨70文字以内へ収める。"""
     suffix = "｜医薬品供給ナビ"
     search_status_label = ("限定出荷（出荷調整）"
@@ -2237,6 +2243,14 @@ def page_title(name: str, status_label: str, supplements: list,
         f"{qualified_name}の供給状況｜{search_status_label}{suffix}",
         f"{qualified_name}｜供給状況{suffix}",
     ]
+    if priority_notice:
+        candidates[:0] = [
+            f"{qualified_name}｜{priority_notice}｜厚労省：{search_status_label}{suffix}",
+            f"{qualified_name}｜{priority_notice}｜{search_status_label}{suffix}",
+            f"{qualified_name}｜{priority_notice}｜{search_status_label}",
+            f"{qualified_name}｜{priority_notice}{suffix}",
+            f"{qualified_name}｜{priority_notice}",
+        ]
     for candidate in candidates:
         if len(candidate) <= 70:
             return candidate
@@ -2247,6 +2261,50 @@ def page_title(name: str, status_label: str, supplements: list,
     tail = (f"…（{compact_qualifier}）｜供給状況{suffix}" if compact_qualifier
             else f"…｜供給状況{suffix}")
     return name[:max(1, 70 - len(tail))] + tail
+
+
+def packaged_discontinuation_metadata(row, notices, bulletins, lifecycle, trusted):
+    """確認済みの対象包装に限り、検索用のタイトルと説明に中止案内を出す。"""
+    if not trusted:
+        return "", ""
+    matches = sorted(matching_manufacturer_notices(row, notices, bulletins),
+                     key=lambda match: match["notice"]["announced_at"], reverse=True)
+    for match in matches:
+        notice, target = match["notice"], match["target"]
+        if (notice["event_type"] != "discontinued" or match["source_changed"]
+                or manufacturer_notice_needs_review(notice, bulletins)):
+            continue
+        kind = re.search(r"(製造販売中止|製造中止|販売中止|販売終了)(?:の)?(予定)?",
+                         unicodedata.normalize("NFKC", notice["title"]))
+        packages = notice_package_names(target)
+        if not kind or not packages:
+            continue
+        resumed = any(
+            other["notice"]["event_type"] == "resumed"
+            and other["notice"]["announced_at"] >= notice["announced_at"]
+            and (not other["target"].get("seller") or other["target"].get("seller") == target.get("seller"))
+            and (other["target"]["scope"] == "product"
+                 or set(packages) & set(notice_package_names(other["target"])))
+            for other in matches
+        )
+        if resumed:
+            continue
+        action = kind[1] + (kind[2] or "の案内")
+        route = (target.get("seller") or "指定の販売経路"
+                 if target["scope"].startswith("seller_route") else "")
+        scope = "・".join(dict.fromkeys(packages))
+        if route:
+            scope = f"{route}の{scope}"
+        qualifier = "販売経路・包装別" if route else "包装別"
+        day = notice_date_label(notice["announced_at"])
+        return f"{action}（{qualifier}）", f"{day}付の{notice['maker']}の{action}。対象は{scope}"
+    if (lifecycle and not lifecycle.get("source_changed") and lifecycle.get("supply_end_verified_at")
+            and lifecycle.get("supply_end_source_url") == lifecycle.get("source_url")
+            and lifecycle.get("supply_end_packages")):
+        action = lifecycle_discontinuation_label(lifecycle, True).removesuffix("あり")
+        scope = "・".join(lifecycle["supply_end_packages"])
+        return f"{action}（包装別）", f"{lifecycle['maker']}の{action}。対象は{scope}"
+    return "", ""
 
 
 def category_pages(rows: list) -> dict:
@@ -2300,6 +2358,10 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
     maker = (row.get("販売メーカー") or row.get("製造メーカー") or "").strip()
     gen = (row.get("一般名") or "").strip()
     spec = (row.get("規格") or "").strip()
+    search_qualifier = title_qualifier or spec
+    if not title_qualifier and normalized_text(spec) in normalized_text(name):
+        search_qualifier = ""
+    search_name = f"{name}（{search_qualifier}）" if search_qualifier else name
     gas_spec_note = ('<p>表示の規格は厚労省の原表と異なる場合があり、容器の容量や充填量を示すとは限りません。'
                      '実際の容器・内容量は製造販売業者や納入先にご確認ください。</p>'
                      if gen in {"酸素", "液体酸素", "窒素", "液体窒素", "二酸化炭素"} else "")
@@ -2378,13 +2440,24 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
         "imported": reference_import,
         "source": mhlw_excel_date(version_metadata, dataset_date),
     })
-    title = page_title(name, st["label"], supplements, title_qualifier)
+    hospital_reference = HOSPITAL_DISCONTINUATION_REFERENCES.get(key)
+    packaged_reference = PUBLIC_DISCONTINUATION_REFERENCES.get(key)
+    discontinuation_reference = hospital_reference or packaged_reference or PUBLIC_SUPPLY_END_REFERENCES.get(key)
+    reference_matches = (discontinuation_reference
+                         and normalized_text(name) == normalized_text(discontinuation_reference[0])
+                         and row_maker_matches(row, "高田製薬"))
+    priority, priority_description = packaged_discontinuation_metadata(
+        row, manufacturer_notices, manufacturer_bulletins, lifecycle_match, supplemental_trusted)
+    if packaged_reference and reference_matches:
+        priority = priority or "包装別の販売中止情報"
+        priority_description = packaged_reference[1].rstrip("。")
+    hint = ""
     public_metadata = supply_metadata_values(row)
     reason_description = (f"。公表理由は「{(row.get('理由') or '記載なし').strip()}」"
                           if status in {"limited", "stopped", "ended"} else "")
     release_description = (f"。解除・解消見込みは「{public_metadata.get('解除・解消見込み', '記載なし')}」（公表区分）"
                            if status in {"limited", "stopped", "ended"} else "")
-    desc = (f"{display_name}（{maker}）の厚生労働省公表データ上の供給区分は「{st['label']}」"
+    desc = (f"{search_name}{f'（{maker}）' if maker else ''}の厚生労働省公表データ上の供給区分は「{st['label']}」"
             + ("（薬価削除予定）" if delist else "")
             + reason_description
             + release_description
@@ -2397,18 +2470,14 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
             row, manufacturer_notices, manufacturer_bulletins, trusted=supplemental_trusted,
             latest_listing=zictor_listing)
         if package_overview:
-            desc = comparison_desc
-            title = page_title(name, st["label"], supplements, title_qualifier, hint)
+            desc = search_name + comparison_desc.removeprefix(row["商品名"])
     elif key in PACKAGE_OVERVIEW_KEYS | LIMITED_REASON_KEYS | BONZOL_KEYS | {ZESTAC_KEY}:
         matches = matching_manufacturer_notices(row, manufacturer_notices, manufacturer_bulletins)
         overview = package_overview_notice(key, matches, manufacturer_bulletins) if supplemental_trusted else None
         if overview:
-            hint, desc, package_overview = package_overview_content(key, overview, display_name, st["label"])
-            title = page_title(name, st["label"], supplements, title_qualifier, hint)
-            if key == GENTACIN_KEY and status == "limited":
-                title = f"{display_name}の出荷調整｜理由と対象包装｜医薬品供給ナビ"
-            elif key == ZESTAC_KEY:
-                title = f"{display_name}の販売中止の理由と包装別の予定｜医薬品供給ナビ"
+            hint, desc, package_overview = package_overview_content(key, overview, search_name, st["label"])
+            if key == ZESTAC_KEY and priority:
+                priority = hint
     elif key in PACKAGE_LANDING_KEYS:
         matches = matching_manufacturer_notices(row, manufacturer_notices, manufacturer_bulletins)
         packages = dict.fromkeys(
@@ -2417,11 +2486,15 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
             if isinstance(package, dict) and valid_package_supply(package.get("supply"))
         )
         if packages:
-            desc = (f"{display_name}（{maker}）の供給状況。厚労省の公表区分は「{st['label']}」。"
+            desc = (f"{search_name}（{maker}）の供給状況。厚労省の公表区分は「{st['label']}」。"
                     f"メーカー案内で{'・'.join(packages)}の出荷対応と予定を確認できます。"
                     "案内日・原文確認日と、厚労省原表の基準日を掲載。")
             package_jump = ('<p><a href="#manufacturerNoticesTitle">'
                             '包装別の出荷対応・予定とメーカー原文を見る</a></p>')
+    title = page_title(name, st["label"], supplements, search_qualifier, hint, priority)
+    if priority:
+        desc = (f"{search_name}。{priority_description}。厚労省の公表区分は「{st['label']}」。"
+                "対象包装・出典と供給状況を確認できます。")
     url = f"{SITE_ROOT}items/{key}.html"
     # 商品名は同名品目があるため、LPの詳細リンクも一意な品目キーを使う。
     lp_link = SITE_ROOT + "#item=" + quote(key, safe="")
@@ -2484,10 +2557,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
                                                 catalog_yj_codes, manufacturer_bulletins,
                                                 link_first_alternatives=limited_layout)
     hospital_box = ""
-    hospital_reference = HOSPITAL_DISCONTINUATION_REFERENCES.get(key)
-    discontinuation_reference = hospital_reference or PUBLIC_DISCONTINUATION_REFERENCES.get(key)
-    if (discontinuation_reference and normalized_text(name) == normalized_text(discontinuation_reference[0])
-            and row_maker_matches(row, "高田製薬")):
+    if reference_matches:
         _, discontinuation_note, discontinuation_sources, *reference_heading = discontinuation_reference
         heading = "病院資料による補足" if hospital_reference else "公開資料による販売中止の補足"
         if reference_heading:
