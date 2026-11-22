@@ -68,6 +68,14 @@ LIMITED_REASON_KEYS = frozenset({
 BONZOL_STRENGTHS = {"2499007F1021": "100mg", "2499007F2028": "200mg"}
 BONZOL_KEYS = frozenset(BONZOL_STRENGTHS)
 ZICTOR_KEY = "1147700S1028"
+PRODUCT_SUPPLY_LINKS = {
+    "2649805M1026": ("juvela-ointment", "ユベラ軟膏の包装別案内"),
+    ZICTOR_KEY: ("zictor-tape-75mg", "ジクトルテープの1枚・7枚包装を比較"),
+    **dict.fromkeys(("2149117F1076", "2149117F2072"), ("teramuro", "テラムロのAP・BPを販売元別に比較")),
+    **dict.fromkeys(("2454402A2037", "2454402A3033"), ("kenacort-a-injection", "ケナコルトの40mg・50mgを比較")),
+    **dict.fromkeys(("1172014B2056", "1172014C1055", "1172014F1027", "1172014F2139", "1172014F3038"),
+                    ("hilnamin", "ヒルナミンの散・細粒・錠剤を比較")),
+}
 OKAYAMA_OUTPATIENT_LIST = "https://pharm.hospital.okayama-u.ac.jp/iryou/pdf/saiyouyaku_ingai_ya.pdf"
 OKAYAMA_DISCONTINUATION_NOTE = (
     "岡山大学病院の院外採用薬一覧に、この規格の「販売中止」の記載があります。"
@@ -2718,6 +2726,11 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
         source_date = mhlw_excel_date(version_metadata, dataset_date) or "確認できません"
         supply_answer = f'<p>厚労省基準日　{esc(source_date)}</p>' + supply_answer
     variants_html = product_variants_html(row, product_variants, generated_keys)
+    product_supply_link = ""
+    if key in PRODUCT_SUPPLY_LINKS:
+        slug, text = PRODUCT_SUPPLY_LINKS[key]
+        product_supply_link = (f'<nav class="hub-links" aria-label="製品の供給状況">'
+                               f'<a href="../products/{slug}.html" data-dsn-event="related-item-open">{text}</a></nav>')
     strength_selector = bonzol_strength_selector(row, product_variants, generated_keys)
 
     topic_box = related_topics_html(related_topics)
@@ -2902,7 +2915,7 @@ footer a{{color:var(--sub)}}
 {intro}{promoted_sections}    <div class="stbox status-{status}">
       {supply_answer}{package_jump}
     </div>{package_overview if not limited_layout else ""}
-{early_hub_link}{variants_html}
+{early_hub_link}{product_supply_link}{variants_html}
     <section class="item-freshness" aria-labelledby="itemFreshnessTitle">
       <h2 id="itemFreshnessTitle">このページが参照したデータ</h2>
       {dataset_context}

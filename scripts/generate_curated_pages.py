@@ -18,6 +18,8 @@ from generate_item_pages import (
     dataset_dates_html, mhlw_excel_date, version_date, load_manufacturer_notices,
     load_manufacturer_bulletins, lifecycle_for_display, supplemental_context,
     load_zictor_listing, zictor_package_overview,
+    manufacturer_notice_index, matching_manufacturer_notices,
+    manufacturer_notice_needs_review, notice_date_label, valid_package_supply,
 )
 from validate_shared_content import valid_topic_publisher_http_source
 
@@ -67,8 +69,19 @@ PRODUCT_INDEX_SUMMARIES = {
     "mounjaro-injection": "規格別の供給状況",
     "celecox-tablets": "規格別の供給状況",
     "juvela-ointment": "製品の供給状況",
+    "kenacort-a-injection": "40mg/1mL・50mg/5mLの規格別",
+    "hilnamin": "散・細粒・錠剤の規格別",
     "gentacin-ointment": "供給状況と公表理由",
 }
+HILNAMIN_PRODUCT = {"slug": "hilnamin", "label": "ヒルナミン", "query": "ヒルナミン"}
+SUPPLY_COMPARISONS = {
+    "juvela-ointment": ("包装別の供給情報", "280gのチューブ包装と500gボトルのメーカー案内"),
+    "kenacort-a-injection": ("40mg・50mgの規格別",
+                             "40mg/1mL（筋注用・関節腔内用）と50mg/5mL（皮内用・関節腔内用）の供給区分"),
+    "hilnamin": ("散・細粒・錠剤の規格別",
+                 "散50％、細粒10％、錠5mg・25mg・50mgの供給区分"),
+}
+PRIORITY_PRODUCT_EDIT_DATE = "2026-11-23"
 # 規格選択はWeb専用。アプリと共用のfeatured_products.jsonには追加しない。
 STRENGTH_HUBS = {
     "movicol": ("モビコール配合内用剤", ("LD", "HD")),
@@ -329,6 +342,10 @@ def product_rows_html(rows: list[dict[str, str]], generated_keys: set[str],
 def product_seo_metadata(product: dict, rows: list[dict[str, str]], suffix: str) -> tuple[str, str]:
     """実際の検索意図に応えるが、現在区分や原因をタイトルで推測しない。"""
     slug, label = product["slug"], product["label"]
+    if slug in SUPPLY_COMPARISONS:
+        variant, detail = SUPPLY_COMPARISONS[slug]
+        return (f"{label}の出荷調整・供給状況｜{variant}｜医薬品供給ナビ",
+                f"{label}の出荷調整を確認。{detail}を掲載し、品目ページから出典を確認できます。")
     if slug == "lulicon-cream":
         current = STATUS[map_status(rows[0].get("供給状況"))][0]
         release = supply_metadata_values(rows[0]).get("解除・解消見込み", "記載なし")
@@ -730,12 +747,54 @@ def topic_page(topic: dict, related: list[dict[str, str]], generated_keys: set[s
 {analytics_footer()}</body></html>"""
 
 
+def product_package_snapshot(rows, notice_index, bulletins, generated_keys) -> str:
+    """品目に一致する最新の包装別案内を、厚労省区分と区別して掲載する。"""
+    groups = {}
+    for row in rows:
+        matches = matching_manufacturer_notices(row, notice_index.get(item_key(row), ()), bulletins)
+        if not matches:
+            continue
+        latest = max(m["notice"]["announced_at"] for m in matches)
+        current = [m for m in matches if latest.startswith(m["notice"]["announced_at"])]
+        if len(current) != 1:
+            continue
+        match, = current
+        notice, target = match["notice"], match["target"]
+        if (match["source_changed"] or manufacturer_notice_needs_review(notice, bulletins)
+                or target["scope"] != "package"):
+            continue
+        packages = [
+            f'<li>{esc(package["package"])}：{esc(package["supply"]["status_text"])}</li>'
+            for package in target["packages"] if isinstance(package, dict)
+            and valid_package_supply(package.get("supply")) and package["supply"].get("status_text")
+        ]
+        if not packages:
+            continue
+        href = esc(row_link(row, generated_keys))
+        name = esc(row["商品名"])
+        entries = groups.setdefault((notice["url"], notice["maker"], latest), (notice, []))[1]
+        entries.append(f'<h4><a href="{href}" data-dsn-event="related-item-open">{name}</a></h4>'
+                       f'<ul>{"".join(packages)}</ul>')
+    if not groups:
+        return ""
+    sections = []
+    for (url, maker, day), (notice, entries) in groups.items():
+        timing = notice.get("resumption")
+        timing_html = f'<p>案内時点の見通し　{esc(timing)}</p>' if timing else ""
+        sections.append(f'<h3>{esc(notice_date_label(day))}の{esc(maker)}の案内</h3>{"".join(entries)}'
+                        f'{timing_html}<p><a href="{esc(url)}" data-dsn-event="official-source-open">メーカーの掲載資料を確認</a></p>')
+    return ('<section class="intent" aria-labelledby="packageSnapshotTitle">'
+            '<h2 id="packageSnapshotTitle">メーカー案内の包装別情報</h2>'
+            '<p class="note">収録した各資料の日付時点の案内です。現在の受注可否や在庫は各品目の原典でご確認ください。</p>'
+            + "".join(sections) + '</section>')
+
+
 def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[str],
                  lifecycle: dict[str, dict], *, package_brief=("", "", ""),
-                 source_date="") -> tuple[str, str]:
+                 source_date="", package_snapshot="") -> tuple[str, str]:
     slug, label = product["slug"], product["label"]
     canonical = f"{SITE_ROOT}products/{slug}.html"
-    suffix = ("規格別供給状況" if slug == "caduet" else
+    suffix = ("規格別供給状況" if slug in {"caduet", "hilnamin", "kenacort-a-injection"} else
               "メーカー別供給状況" if len(rows) > 1 else "供給状況")
     title, description = product_seo_metadata(product, rows, suffix)
     lastmod = max((normalize_date(row.get("更新日")) for row in rows), default="")
@@ -743,8 +802,10 @@ def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[
     if slug == "zictor-tape-75mg":
         lastmod = max(lastmod, "2026-11-22", source_date)
     if package_html:
-        title = f"{label}の供給状況｜{hint}｜医薬品供給ナビ"
+        title = f"{label}の出荷調整・供給状況｜{hint}｜医薬品供給ナビ"
         description = package_description
+    if slug in SUPPLY_COMPARISONS or slug == "zictor-tape-75mg":
+        lastmod = max(lastmod, PRIORITY_PRODUCT_EDIT_DATE)
     counts: dict[str, int] = {key: 0 for key in STATUS}
     for row in rows:
         counts[map_status(row.get("供給状況"))] += 1
@@ -767,6 +828,10 @@ def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[
     lede = (f"1〜4番の{len(rows)}品目を、規格ごとの現在の供給区分と更新日でまとめています。"
             if slug == "caduet" else
             f"該当する{len(rows)}品目を、現在の供給区分とメーカーごとにまとめています。")
+    if slug in SUPPLY_COMPARISONS:
+        lede = f'{SUPPLY_COMPARISONS[slug][1]}を確認できます。'
+        if source_date:
+            lede += f' 厚労省の基準日 {esc(source_date)}。'
     hero_intro = f'''<p class="eyebrow">CURRENT SUPPLY STATUS</p><h1>{esc(label)}の{suffix}</h1>
 <p class="lede">{lede}</p><div class="summary">{summary}</div>
 <nav class="product-entry" aria-label="この製品の供給情報を確認">
@@ -802,7 +867,7 @@ def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[
 <nav class="crumb" aria-label="パンくず"><a href="../">トップ</a> › <a href="index.html">注目製品</a> › {esc(label)}</nav><main>
 <section class="hero">{hero_intro}
 {share_control("この供給状況を共有")}</section>
-<h2>該当品目</h2><div class="products">{product_rows_html(rows, generated_keys, lifecycle, product)}</div>
+<h2>該当品目</h2><div class="products">{product_rows_html(rows, generated_keys, lifecycle, product)}</div>{package_snapshot}
 {intent}
 <div class="cta"><strong>Web版で絞り込んで確認</strong><p>公表理由やメーカー案内を確認できます。同成分・同剤形の確認候補がある場合はあわせて表示します。</p><a href="{query_link}" data-dsn-event="search-cta-open">この製品を検索する</a></div>
 </main><footer><p>厚生労働省公表データをもとにした非公式情報です。実際の流通状況は卸・メーカーにもご確認ください。</p><a href="../guides/{GUIDE_SLUG}.html">供給情報の確認ガイド</a>｜<a href="../categories/index.html">薬効分類別の供給状況</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
@@ -846,8 +911,15 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
             items.append({"@type": "ListItem", "position": len(items) + 1, "name": name,
                           "url": absolute_product_row_url(href)})
         label = f"{strength}の販売元" if slug == "teramuro" else strength
+        overview = ""
+        if slug == "teramuro":
+            counts = {key: 0 for key in STATUS}
+            for row in members:
+                counts[map_status(row.get("供給状況"))] += 1
+            text = "・".join(f"{STATUS[key][0]} {count}品目" for key, count in counts.items() if count)
+            overview = f'<p class="note">厚労省の公表区分　{esc(text)}</p>'
         sections.append(f'<section aria-labelledby="{anchor}"><h2 id="{anchor}">{esc(label)}</h2>'
-                        f'<div class="strength-list">{"".join(cards)}</div></section>')
+                        f'{overview}<div class="strength-list">{"".join(cards)}</div></section>')
         jump_links.append(f'<a href="#{anchor}">{esc(strength)}</a>')
     picker = (f'<nav class="strength-nav" aria-label="規格を選ぶ">{"".join(jump_links)}</nav>'
               if slug == "teramuro" and len(jump_links) > 1 else "")
@@ -1409,7 +1481,10 @@ def main() -> int:
     topics_doc = load_json(site / "industry_topics.json")
     products_doc = load_json(site / "featured_products.json")
     topics = topics_doc.get("topics") or []
-    products = products_doc.get("products") or []
+    products = list(products_doc.get("products") or [])
+    hilnamin_rows = [row for row in rows if norm(row.get("商品名")).startswith("ヒルナミン")]
+    if hilnamin_rows and not any(p["slug"] == "hilnamin" for p in products):
+        products.append(HILNAMIN_PRODUCT)
     groups = category_groups(rows)
     if len(topics) + len(products) + len(STRENGTH_HUBS) + len(groups) + 2 > args.max_pages:
         raise ValueError("生成対象が安全上限を超えています")
@@ -1431,6 +1506,7 @@ def main() -> int:
         lifecycle = load_json(lifecycle_path).get("products") or {}
     notices = load_manufacturer_notices(site / 'manufacturer_notices.json')
     bulletins = load_manufacturer_bulletins(site / 'manufacturer_bulletins.json')
+    notice_index = manufacturer_notice_index(notices)
     lifecycle = {key: lifecycle_for_display(value, notices, bulletins) for key, value in lifecycle.items()}
 
     topic_dir, product_dir, guide_dir = site / "topics", site / "products", site / "guides"
@@ -1450,7 +1526,7 @@ def main() -> int:
     product_dates: dict[str, str] = {}
     source_date = mhlw_excel_date(version_doc, dataset_date)
     for product in products:
-        matched = search_rows(rows, product.get("query"))
+        matched = hilnamin_rows if product["slug"] == "hilnamin" else search_rows(rows, product.get("query"))
         if not matched:
             raise ValueError(f"{product['slug']}: CSVに一致する品目がありません")
         brief = ("", "", "")
@@ -1463,8 +1539,10 @@ def main() -> int:
                 trusted = False
             brief = zictor_package_overview(matched[0], notices, bulletins, trusted=trusted,
                                             latest_listing=load_zictor_listing(site))
+        snapshot = (product_package_snapshot(matched, notice_index, bulletins, generated_keys)
+                    if product["slug"] in SUPPLY_COMPARISONS else "")
         page, lastmod = product_page(product, matched, generated_keys, lifecycle,
-                                     package_brief=brief, source_date=source_date)
+                                     package_brief=brief, source_date=source_date, package_snapshot=snapshot)
         (product_dir / f"{product['slug']}.html").write_text(page, encoding="utf-8")
         curated_date = normalize_date(products_doc.get("updated_at"))
         product_dates[product["slug"]] = max(lastmod, curated_date, TEMPLATE_UPDATED_AT, PRODUCT_TEMPLATE_UPDATED_AT)
