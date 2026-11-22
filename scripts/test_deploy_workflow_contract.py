@@ -13,6 +13,8 @@ class DeployWorkflowContractTests(unittest.TestCase):
         root = Path(__file__).resolve().parents[1] / ".github" / "workflows"
         cls.deploy = (root / "deploy_pages.yml").read_text(encoding="utf-8")
         cls.validate = (root / "validate.yml").read_text(encoding="utf-8")
+        cls.post_x = (root / "post_x.yml").read_text(encoding="utf-8")
+        cls.indexnow = (root / "indexnow.yml").read_text(encoding="utf-8")
         cls.scripts = [textwrap.dedent(value) for value in re.findall(
             r"          script: \|\n((?:(?: {12}[^\n]*|)\n)+)", cls.deploy)]
 
@@ -70,6 +72,12 @@ class DeployWorkflowContractTests(unittest.TestCase):
         self.assertNotIn("secrets.", self.deploy)
         self.assertNotIn("contents: write", self.deploy)
         self.assertNotIn("actions: write", self.deploy)
+
+    def test_recall_only_runs_do_not_trigger_x_or_search_submissions(self):
+        title = "PMDA回収情報の公開"
+        self.assertIn(f"github.event.workflow_run.name == 'PMDA回収情報を更新' && '{title}'", self.deploy)
+        for workflow in (self.post_x, self.indexnow):
+            self.assertIn(f"github.event.workflow_run.display_title != '{title}'", workflow)
 
     @unittest.skipUnless(shutil.which("node"), "Workflow内JavaScriptの隔離実行にはNodeが必要")
     def test_actual_workflow_scripts_pin_main_and_reject_stale_results(self):
