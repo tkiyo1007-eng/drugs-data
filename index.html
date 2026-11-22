@@ -3109,6 +3109,18 @@ function searchIndexMatchesTerm(searchIndex, term, dosage = isDosageSearchTerm(t
   }
   return false;
 }
+function splitSupplySearch(query){
+  const supplyTerms = [];
+  // 品名に続けて入力された供給用語も認識する。「理由」は末尾にある場合だけ扱う。
+  const names = query.normalize("NFKC").replace(
+    /(出荷\s*調整|限定\s*出荷|販売\s*中止(?:\s*予定)?)(?:\s*理由(?=\s*$))?(?=\s|$)/g,
+    (_, status)=>{
+      supplyTerms.push(status.replace(/\s+/g, ""));
+      return " ";
+    }
+  );
+  return {supplyTerms, nameWords:names.trim().split(/\s+/).filter(Boolean)};
+}
 function matchesSupplySearchTerm(item, term){
   if(term === "出荷調整" || term === "限定出荷"){
     if(item.s === "limited") return true;
@@ -3482,11 +3494,10 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
   // 品名ではなくコードを手元に持っていることがあるため。
   // ただし常に照合すると「200」で検索したときにYJコードの一部に当たった無関係な
   // 品目が混ざるので、コードとして書かれた語（数字始まりの7文字以上）のときだけ見る
-  const words = norm($q.value.trim()).split(/\s+/).filter(Boolean);
-  const supplyTerms = words.filter(t=>/^(?:出荷調整|限定出荷|販売中止(?:予定)?)$/.test(t));
+  const {supplyTerms, nameWords} = splitSupplySearch($q.value);
   const matchesSupply = d=>supplyTerms.every(t=>matchesSupplySearchTerm(d,t));
   const noticeAvailability = supplyTerms.some(t=>t.startsWith("販売中止")) ? saleSearchAvailability() : "";
-  const terms = words.filter(t=>!supplyTerms.includes(t))
+  const terms = nameWords.map(norm)
     .map(t => ({t, dosage:isDosageSearchTerm(t), code:/^[0-9][0-9a-z]{6,}$/.test(t)}));
   const passesFilter = d=>{
     if(filter==="changed"){
@@ -3506,14 +3517,17 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
     }else if(filter!=="all" && d.s!==filter) return false;
     return true;
   };
-  const strictMatch = d => terms.every(x => searchIndexMatchesTerm(d.q, x.t, x.dosage)
-    || (x.code && d.yj && d.yj.toLowerCase().includes(x.t))) && matchesSupply(d);
+  const nameMatch = d => terms.every(x => searchIndexMatchesTerm(d.q, x.t, x.dosage)
+    || (x.code && d.yj && d.yj.toLowerCase().includes(x.t)));
+  const strictMatch = d => nameMatch(d) && matchesSupply(d);
   let hits = ITEMS.filter(d=>passesFilter(d) && strictMatch(d));
   // 通常の検索が0件のときだけ、表記ゆれを考慮して再検索する（結果がある語の挙動は変えない）
+  const normalizedNames = terms.map(x=>x.t);
+  let plan = null;
   let relaxed = null;
   RELAXED_SEARCH = false;
   if(!hits.length && terms.length && !terms.some(x=>x.code)){
-    const plan = relaxedSearchPlan(terms.map(x=>x.t));
+    plan = relaxedSearchPlan(normalizedNames);
     if(plan){
       const relaxedHits = ITEMS.filter(d=>passesFilter(d) && plan.terms.every(x=>x.test(d)) && matchesSupply(d));
       if(relaxedHits.length){ hits = relaxedHits; relaxed = plan; RELAXED_SEARCH = true; }
@@ -3521,11 +3535,11 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
   }
   // 絞り込み中に0件なら、全区分での件数を案内する（品目自体は存在する場合が多い）
   let allFilterCount = 0;
-  if(!hits.length && filter !== "all" && words.length){
+  if(!hits.length && filter !== "all" && (terms.length || supplyTerms.length)){
     allFilterCount = ITEMS.filter(strictMatch).length;
     if(!allFilterCount){
-      const plan = relaxedSearchPlan(terms.map(x=>x.t));
-      if(plan) allFilterCount = ITEMS.filter(d=>plan.terms.every(x=>x.test(d)) && matchesSupply(d)).length;
+      const unfilteredPlan = plan || relaxedSearchPlan(normalizedNames);
+      if(unfilteredPlan) allFilterCount = ITEMS.filter(d=>unfilteredPlan.terms.every(x=>x.test(d)) && matchesSupply(d)).length;
     }
   }
   const shown = hits.slice(0, visibleCount);
@@ -3548,9 +3562,12 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
   syncSearchResultJump();
   if(!hits.length){
     const isFavEmpty = filter==="fav" && !FAVS.size;
+    const canDropSupply = filter === "all" && !noticeAvailability && supplyTerms.length && terms.length
+      && (ITEMS.some(nameMatch) || (plan && ITEMS.some(d=>plan.terms.every(x=>x.test(d)))));
     const msg = isFavEmpty
       ? `監視リストはまだ登録されていません。<br>品目カードの「★ 監視に追加」を押すとこのブラウザに保存され、ここに一覧表示されます。`
       : noticeAvailability ? "メーカー案内の照合が必要です。品名だけでも検索できます。"
+      : canDropSupply ? "指定した供給状況に該当する品目が見つかりませんでした。"
       : `該当する品目が見つかりませんでした。<br>品名の一部に短くするか、メーカー名・YJコードでお試しください。`;
     const canReset = filter!=="all" || $q.value.trim();
     // 空状態のイラスト: お気に入り0件は★、検索0件はカプセル+虫眼鏡（線画・currentColorでテーマ追従）
@@ -3559,10 +3576,13 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
       : `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="24" width="30" height="14" rx="7" transform="rotate(-18 29 31)"/><path d="M18 27l18 8" transform="rotate(-18 29 31)"/><circle cx="46" cy="46" r="8"/><path d="M52 52l6 6"/></svg>`;
     const allFilterButton = allFilterCount
       ? `<br><button type="button" class="empty-reset" id="emptyAllFilters">絞り込みを外して表示（${allFilterCount.toLocaleString()}件）</button>` : "";
+    const nameSearchButton = canDropSupply
+      ? `<br><button type="button" class="empty-reset" id="emptySupplyQuery"
+                  data-query="${esc(nameWords.join(" "))}">供給状況の条件を外して検索</button>` : "";
     const activeFilterLabel = document.querySelector("#pills .pill.active")?.textContent.trim() || "すべて";
     const conditionNote = isFavEmpty ? "" : `<p class="search-help">現在の絞り込み：${esc(activeFilterLabel)}${terms.length > 1
       ? `<br>空白で区切った${terms.length}語をすべて含む品目に絞り込んでいます。` : ""}</p>`;
-    $list.innerHTML = `<div class="empty"><div class="empty-icon">${icon}</div>${msg}${conditionNote}${allFilterButton}${canReset ? `<br><button type="button" class="empty-reset" id="emptyReset">検索条件をクリア</button>` : ""}</div>`;
+    $list.innerHTML = `<div class="empty"><div class="empty-icon">${icon}</div>${msg}${conditionNote}${allFilterButton}${nameSearchButton}${canReset ? `<br><button type="button" class="empty-reset" id="emptyReset">検索条件をクリア</button>` : ""}</div>`;
     $loadMore.hidden = true;
     if(shouldSyncHash) syncHashSoon(); // 0件でも検索語をURLに残す（リロード・共有で同じ状態を再現できる）
     else restorePendingPageAnchor();
@@ -6464,8 +6484,13 @@ $list.addEventListener("click", e=>{
     focusPrimarySearchInput();
     return;
   }
-  if(e.target.id === "emptyAllFilters"){
+  if(e.target.id === "emptyAllFilters" || e.target.id === "emptySupplyQuery"){
+    if(e.target.id === "emptySupplyQuery"){
+      $q.value = e.target.dataset.query;
+      syncSearchPriority();
+    }
     setFilter("all");
+    if(e.target.id === "emptySupplyQuery") trackCurrentSearch();
     $meta.scrollIntoView({behavior:"instant", block:"start"});
     focusSearchResultSummary();
     return;
