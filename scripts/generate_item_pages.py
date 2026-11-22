@@ -72,6 +72,47 @@ OKAYAMA_DISCONTINUATION_SOURCES = (
     (OKAYAMA_OUTPATIENT_LIST, "岡山大学病院 薬剤部「院外限定採用医薬品一覧」"),
 )
 HOSPITAL_DISCONTINUATION_REFERENCES = {
+    "3929407D1136": (
+        "レボホリナート点滴静注用25mg「ヤクルト」",
+        "医療用医薬品供給状況データベース（DSJP）の2026年10月14日付記録では、"
+        "25mg×10瓶は在庫がなくなり次第販売中止、在庫消尽は2027年1月の見込みです。"
+        "兵庫中央病院の2026年9月の資料では、25mg規格の院内採用切り替えについて、"
+        "新規採用欄に「販売中止」、削除欄に「供給停止」と記載されています。",
+        (
+            (
+                "https://drugshortage.jp/drugdata.php?drugid=429623",
+                "一般社団法人asTas 医療用医薬品供給状況データベース（DSJP）",
+            ),
+            (
+                "https://hyogochuo.hosp.go.jp/section/pdf/yakuzai/yakuzai_R809.pdf",
+                "国立病院機構 兵庫中央病院「2026年9月 薬剤委員会結果」1ページ",
+            ),
+        ),
+    ),
+    "2329021D1071": (
+        "レバミピド顆粒20%「タカタ」",
+        "信州大学医学部附属病院の2026年9月16日付資料に、製造販売中止に伴う採用中止が記載されています。"
+        "同資料では、供給停止時期を2026年9月、経過措置の満了予定を2027年3月としています。",
+        (
+            (
+                "https://www.shinshu-u.ac.jp/faculty/medicine/department/master/i-pharm/"
+                "information/6d4a1afd669be4457e12042c43ca1192.pdf",
+                "信州大学医学部附属病院「第253回 薬事委員会 審議結果報告」9ページ",
+            ),
+        ),
+    ),
+    "1179042C1139": (
+        "クエチアピン細粒50%「タカタ」",
+        "信州大学医学部附属病院の2026年9月16日付資料に、製造販売中止に伴う採用品の切り替えが記載されています。"
+        "同資料では、出荷停止は2026年10月、経過措置の満了は2027年3月の予定とされています。",
+        (
+            (
+                "https://www.shinshu-u.ac.jp/faculty/medicine/department/master/i-pharm/"
+                "information/6d4a1afd669be4457e12042c43ca1192.pdf",
+                "信州大学医学部附属病院「第253回 薬事委員会 審議結果報告」8ページ",
+            ),
+        ),
+    ),
     "3929407D2060": (
         "レボホリナート点滴静注用100mg「ヤクルト」",
         "兵庫中央病院の2026年9月の薬剤委員会資料に、100mg規格の販売中止に伴う院内採用の切り替えが記載されています。"
@@ -1856,6 +1897,9 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
         for label in supplements)
     discontinuation_style = ('.tag.discontinuation{white-space:normal;overflow-wrap:anywhere;'
                              'max-width:100%;margin-left:0}\n' if discontinuation_labels else "")
+    if any("要原文確認" in label for label in supplements):
+        discontinuation_style += ('@media(max-width:420px){.tag.supplemental{white-space:normal;'
+                                  'overflow-wrap:anywhere;max-width:calc(100% - 8px)}}\n')
     supplemental_checked = ""
     if supplements:
         supplemental_checked = (f'<p class="supp-checked">メーカー補足情報の確認日：'
@@ -1999,7 +2043,8 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
         _, hospital_note, hospital_sources = hospital_reference
         source_links = "".join(
             f'<p><a href="{esc(url)}" target="_blank" rel="noopener" '
-            f'data-dsn-event="official-source-open">出典：{esc(label)}（PDF）</a></p>'
+            f'data-dsn-event="official-source-open">出典：{esc(label)}'
+            f'{"（PDF）" if url.endswith(".pdf") else ""}</a></p>'
             for url, label in hospital_sources
         )
         hospital_box = (
