@@ -64,9 +64,68 @@ BONZOL_STRENGTHS = {"2499007F1021": "100mg", "2499007F2028": "200mg"}
 BONZOL_KEYS = frozenset(BONZOL_STRENGTHS)
 ZICTOR_KEY = "1147700S1028"
 OKAYAMA_OUTPATIENT_LIST = "https://pharm.hospital.okayama-u.ac.jp/iryou/pdf/saiyouyaku_ingai_ya.pdf"
-OKAYAMA_DISCONTINUATIONS = {
-    "4291011F1060": "イマチニブ錠100mg「ヤクルト」",
-    "4490025F4057": "オロパタジン塩酸塩OD錠5mg「タカタ」",
+OKAYAMA_DISCONTINUATION_NOTE = (
+    "岡山大学病院の院外採用薬一覧に、この規格の「販売中止」の記載があります。"
+    "包装別の販売終了日は、この資料では確認できません。"
+)
+OKAYAMA_DISCONTINUATION_SOURCES = (
+    (OKAYAMA_OUTPATIENT_LIST, "岡山大学病院 薬剤部「院外限定採用医薬品一覧」"),
+)
+HOSPITAL_DISCONTINUATION_REFERENCES = {
+    "4291011F1060": (
+        "イマチニブ錠100mg「ヤクルト」",
+        OKAYAMA_DISCONTINUATION_NOTE,
+        OKAYAMA_DISCONTINUATION_SOURCES,
+    ),
+    "4490025F4057": (
+        "オロパタジン塩酸塩OD錠5mg「タカタ」",
+        OKAYAMA_DISCONTINUATION_NOTE,
+        OKAYAMA_DISCONTINUATION_SOURCES,
+    ),
+    "2259002R1118": (
+        "ツロブテロール塩酸塩DS小児用0.1%「タカタ」",
+        "福岡大学病院と公立陶生病院の薬事委員会資料に、販売中止に伴う採用の切り替えが記載されています。"
+        "福岡大学病院の2025年10月の資料では、在庫消尽は2026年1月の見込みとされていました。",
+        (
+            (
+                "https://www.m-p-a.jp/pdf/"
+                "%E5%BA%83%E5%9F%9F%E7%97%85%E9%99%A2%E3%81%8B%E3%82%89%E3%81%AE"
+                "%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B/"
+                "20251107%E3%80%80%E7%A6%8F%E5%B2%A1%E5%A4%A7%E5%AD%A6%E7%97%85%E9%99%A2"
+                "%E3%80%80%E6%8E%A1%E7%94%A8%E8%96%AC%E6%83%85%E5%A0%B1.pdf",
+                "福岡大学病院「第312回薬事委員会報告」2ページ（宗像薬剤師会掲載）",
+            ),
+            (
+                "https://www.tosei.or.jp/app/wp-content/uploads/2026/01/DI242-2.pdf",
+                "公立陶生病院「Drug Information 242」2ページ",
+            ),
+        ),
+    ),
+    "2339004C1036": (
+        "ミルラクト細粒50%",
+        "横浜旭中央総合病院の2025年9月の資料では、販売中止を理由に院外採用を終了しています。"
+        "包装別の販売終了日は、この資料では確認できません。",
+        (
+            (
+                "https://imsgroup.jp/yokohama-asahi/wp-content/uploads/2025/09/pharmacy_yakuzai_202509.pdf",
+                "横浜旭中央総合病院「新規採用・採用変更・採用中止医薬品のお知らせ」4ページ",
+            ),
+        ),
+    ),
+    "1179038S1064": (
+        "リスペリドン内用液1mg/mL「タカタ」",
+        "福岡大学病院の2026年10月の薬事委員会資料に、販売中止に伴う採用の切り替えが記載されています。"
+        "同資料では販売中止の予定時期を2027年3月としています。",
+        (
+            (
+                "https://www.m-p-a.jp/pdf/%E5%BA%83%E5%9F%9F%E7%97%85%E9%99%A2%E3%81%8B%E3%82%89%E3%81%AE%E3%8"
+                "1%8A%E7%9F%A5%E3%82%89%E3%81%9B/20261112%E3%80%80%E7%A6%8F%E5%B2%A1%E5%A4%A7%E5%AD%A6%E7%97%8"
+                "5%E9%99%A2%EF%BC%881007%E4%BB%98%E7%AC%AC318%E5%9B%9E%E8%96%AC%E4%BA%8B%E5%A7%94%E5%93%A1%E4%"
+                "BC%9A%E5%A0%B1%E5%91%8A%EF%BC%89.pdf",
+                "福岡大学病院「第318回薬事委員会報告」2ページ（宗像薬剤師会掲載）",
+            ),
+        ),
+    ),
 }
 # drugs-data の generate_curated_pages.py（CATEGORY_MIN_ROWS）と同じ基準。
 # 分類ページが生成される分類だけにリンクし、404を出さない。
@@ -1911,17 +1970,20 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
                                                 catalog_yj_codes, manufacturer_bulletins,
                                                 link_first_alternatives=limited_layout)
     hospital_box = ""
-    hospital_name = OKAYAMA_DISCONTINUATIONS.get(key)
-    if (hospital_name and normalized_text(name) == normalized_text(hospital_name)
+    hospital_reference = HOSPITAL_DISCONTINUATION_REFERENCES.get(key)
+    if (hospital_reference and normalized_text(name) == normalized_text(hospital_reference[0])
             and row_maker_matches(row, "高田製薬")):
+        _, hospital_note, hospital_sources = hospital_reference
+        source_links = "".join(
+            f'<p><a href="{esc(url)}" target="_blank" rel="noopener" '
+            f'data-dsn-event="official-source-open">出典：{esc(label)}（PDF）</a></p>'
+            for url, label in hospital_sources
+        )
         hospital_box = (
             '<section class="supp supp-notice hospital-discontinuation" '
             'aria-labelledby="hospital-discontinuation-title">'
             '<h3 id="hospital-discontinuation-title">病院資料による補足</h3>'
-            '<p>岡山大学病院の院外採用薬一覧に、この規格の「販売中止」の記載があります。'
-            '包装別の販売終了日は、この資料では確認できません。</p>'
-            f'<p><a href="{OKAYAMA_OUTPATIENT_LIST}" target="_blank" rel="noopener" '
-            'data-dsn-event="official-source-open">出典：岡山大学病院 薬剤部「院外限定採用医薬品一覧」（PDF）</a></p>'
+            f'<p>{esc(hospital_note)}</p>{source_links}'
             '</section>')
     # 包装情報を載せる品目だけに適用し、無関係な全品目のHTMLを変更しない。
     package_styles = """
