@@ -18,6 +18,7 @@ REPRINT_URL = re.compile(
 )
 MAKER_LABELS = {
     "discontinued": "販売・製造中止の案内",
+    "transitional_measure": "経過措置の案内",
     "package_discontinued": "包装の販売中止の案内",
     "handling_discontinued": "取扱中止の案内",
     "limited": "限定出荷の案内",
