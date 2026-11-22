@@ -761,7 +761,10 @@ def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *, i
         match, = current
         notice, target = match["notice"], match["target"]
         if (match["source_changed"] or manufacturer_notice_needs_review(notice, bulletins)
-                or target["scope"] != "package"):
+                or target["scope"] not in {"package", "seller_route_and_package"}):
+            continue
+        seller = target["seller"] if target["scope"] == "seller_route_and_package" else ""
+        if seller and norm(row.get("販売メーカー")) != norm(seller):
             continue
         packages = [
             f'<li>{esc(package["package"])}：{esc(package["supply"]["status_text"])}</li>'
@@ -772,22 +775,26 @@ def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *, i
             continue
         href = esc(row_link(row, generated_keys))
         name = esc(row["商品名"])
-        entries = groups.setdefault((notice["url"], notice["maker"], latest), (notice, []))[1]
+        entries = groups.setdefault((notice["url"], notice["maker"], latest, seller), (notice, []))[1]
         entries.append(f'<h4><a href="{href}" data-dsn-event="related-item-open">{name}</a></h4>'
                        f'<ul>{"".join(packages)}</ul>')
     if not groups:
         return ""
     sections = []
-    for (url, maker, day), (notice, entries) in groups.items():
+    for (url, maker, day, seller), (notice, entries) in groups.items():
         timing = notice.get("resumption")
         summary = notice.get("summary")
         reason = notice.get("reason") if include_reason else None
+        seller_html = f'<p class="note">対象の販売元　{esc(seller)}</p>' if seller else ""
         summary_html = f'<p>{esc(summary)}</p>' if summary else ""
+        index_url = notice.get("source_index_url") if seller else None
+        index_html = (f'・<a href="{esc(index_url)}" data-dsn-event="official-source-open">メーカーの掲載元を確認</a>'
+                      if index_url else "")
         reason_label = "販売中止の理由" if notice.get("event_type") == "discontinued" else "限定出荷の理由"
         reason_html = f'<p><strong>{reason_label}</strong>　{esc(reason)}</p>' if reason else ""
         timing_html = f'<p>案内時点の見通し　{esc(timing)}</p>' if timing else ""
-        sections.append(f'<h3>{esc(notice_date_label(day))}の{esc(maker)}の案内</h3>{summary_html}{"".join(entries)}'
-                        f'{reason_html}{timing_html}<p><a href="{esc(url)}" data-dsn-event="official-source-open">メーカーの掲載資料を確認</a></p>')
+        sections.append(f'<h3>{esc(notice_date_label(day))}の{esc(maker)}の案内</h3>{seller_html}{summary_html}{"".join(entries)}'
+                        f'{reason_html}{timing_html}<p><a href="{esc(url)}" data-dsn-event="official-source-open">メーカーの掲載資料を確認</a>{index_html}</p>')
     return ('<section class="intent" aria-labelledby="packageSnapshotTitle">'
             '<h2 id="packageSnapshotTitle">メーカー案内の包装別情報</h2>'
             '<p class="note">収録した各資料の日付時点の案内です。現在の受注可否や在庫は各品目の原典でご確認ください。</p>'
@@ -1566,6 +1573,7 @@ def main() -> int:
                 "2149117F1076", "2149117F2072",  # トーワ
                 "2149117F1050", "2149117F2056",  # サワイ
                 "2149117F1084", "2149117F2080",  # 日医工
+                "2149117F1114", "2149117F2110",  # NIG
             }
             notice_rows = [row for row in rows if item_key(row) in notice_keys]
             snapshot = product_package_snapshot(notice_rows, notice_index, bulletins, generated_keys,
