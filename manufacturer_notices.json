@@ -2,6 +2,44 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "yoshida-rotoextract-transitional-measure-202611",
+      "maker": "吉田製薬",
+      "title": "ロートエキス散〈ハチ〉の経過措置移行のお知らせ",
+      "url": "https://www.yoshida-pharm.co.jp/files/information/654.pdf",
+      "source_index_url": "https://www.yoshida-pharm.co.jp/product/information/",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-19",
+      "verified_at": "2026-11-22",
+      "sha256": "5cf20211f849de2e7ecdf529ab2b3f0549ddba970c6f7a80a790d0bfc02928a1",
+      "collection_mode": "manual",
+      "event_type": "transitional_measure",
+      "reason": "吉田製薬は、販売中止を案内済みの25g・500g包装について、経過措置期間が2027年3月31日に満了すると案内しています。",
+      "targets": [
+        {
+          "yj_code": "1249351B1117",
+          "product_name": "ロートエキス散〈ハチ〉",
+          "maker": "東洋製薬化成",
+          "seller": "吉田製薬",
+          "scope": "seller_route_and_package",
+          "packages": [
+            {
+              "package": "25g"
+            },
+            {
+              "package": "500g"
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "経過措置の満了日は薬価基準上の期限です。販売終了時期は吉田製薬の販売中止・予定一覧をご確認ください。"
+      ]
+    },
+    {
       "id": "towa-own-limited-20261029",
       "maker": "東和薬品",
       "title": "東和薬品の10月29日版供給状況一覧｜限定出荷（自社の事情）",
