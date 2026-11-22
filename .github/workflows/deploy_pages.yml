@@ -2,7 +2,7 @@ name: Deploy GitHub Pages
 
 on:
   workflow_run:
-    workflows: ['Validate data pipeline', '毎日データ更新']
+    workflows: ['Validate data pipeline', '毎日データ更新', 'PMDA回収情報を更新']
     types: [completed]
     branches: [main]
   workflow_dispatch:
@@ -21,6 +21,9 @@ jobs:
          (github.event.workflow_run.event == 'push' || github.event.workflow_run.event == 'workflow_dispatch')) ||
         (github.event.workflow_run.name == '毎日データ更新' &&
          (github.event.workflow_run.conclusion == 'success' || github.event.workflow_run.conclusion == 'failure') &&
+         (github.event.workflow_run.event == 'schedule' || github.event.workflow_run.event == 'workflow_dispatch')) ||
+        (github.event.workflow_run.name == 'PMDA回収情報を更新' &&
+         github.event.workflow_run.conclusion == 'success' &&
          (github.event.workflow_run.event == 'schedule' || github.event.workflow_run.event == 'workflow_dispatch')))) ||
       (github.event_name != 'workflow_run' && github.ref == 'refs/heads/main')
     runs-on: ubuntu-latest
@@ -36,9 +39,15 @@ jobs:
             // 日次更新はメーカー補足の後段が失敗しても、検証済みの厚労省コア
             // データを先にmainへcommitする。その完了イベントでは、現在のmainを
             // このWorkflow内で改めて検証してから公開する。
-            const dailyUpdate = context.payload.workflow_run?.name === '毎日データ更新';
-            const validated = dailyUpdate ? current : (context.payload.workflow_run?.head_sha || context.sha);
-            if (!dailyUpdate && validated && validated !== current) {
+            const run = context.payload.workflow_run;
+            const recallUpdate = run?.name === 'PMDA回収情報を更新';
+            const scheduledUpdate = run?.name === '毎日データ更新' || recallUpdate;
+            if (recallUpdate && run.head_sha === current) {
+              core.notice('回収情報の公開内容に変更がありません');
+              return;
+            }
+            const validated = scheduledUpdate ? current : (run?.head_sha || context.sha);
+            if (!scheduledUpdate && validated && validated !== current) {
               core.notice('検証後にmainが進んだため、古い対象の公開をスキップします');
               return;
             }
@@ -49,7 +58,7 @@ jobs:
     needs: target
     if: >-
       needs.target.outputs.sha != '' &&
-      (github.event_name != 'workflow_run' || github.event.workflow_run.name == '毎日データ更新')
+      (github.event_name != 'workflow_run' || github.event.workflow_run.name != 'Validate data pipeline')
     uses: ./.github/workflows/validate.yml
     with:
       ref: ${{ needs.target.outputs.sha }}
@@ -81,6 +90,8 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.11'
+      - name: 最新の公表情報からニュース欄のデータを生成
+        run: python3 scripts/build_official_news.py
       - name: 検証したartifactの配信整合性表を作成
         env:
           SOURCE_COMMIT: ${{ needs.target.outputs.sha }}
