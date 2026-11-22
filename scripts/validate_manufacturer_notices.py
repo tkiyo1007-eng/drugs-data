@@ -269,7 +269,7 @@ MAKER_MANUAL_SOURCE_URLS = {
     },
 }
 SCOPES = {'product', 'package', 'seller_route_and_package'}
-KINDS = {'discontinued', 'limited', 'stopped', 'resumed', 'resumption_planned', 'recall', 'transitional_measure'}
+KINDS = {'supply', 'discontinued', 'limited', 'stopped', 'resumed', 'resumption_planned', 'recall', 'transitional_measure'}
 PACKAGE_STATUSES = {'normal', 'limited', 'stopped', 'unconfirmed'}
 PACKAGE_PLAN_EVENTS = {'stock_depletion', 'shipment_resumption', 'normal_shipment', 'discontinuation'}
 FORMAL_YJ = re.compile(r'[0-9][0-9A-Z]{11}\Z')
