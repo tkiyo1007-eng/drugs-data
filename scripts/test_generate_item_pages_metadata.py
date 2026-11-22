@@ -855,6 +855,7 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
 
     def test_dated_reason_and_discontinuation_are_scoped_to_verified_packages(self):
         for key, status, official in (("3999001Q6029", "limited", "限定出荷"),
+                                      ("2634710M1077", "limited", "限定出荷"),
                                       ("2499007F1021", "ok", "通常出荷")):
             row = dict(self.row(), YJコード=key, 供給状況=official)
             notice = dict(self.notice(), verified_at="2025-06-13", announced_at="2025-05",
@@ -880,7 +881,7 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
             self.assertIn(notice["url"], brief)
             self.assertIn(notice["reason"] if status == "limited" else notice["summary"], brief)
             title = re.search(r"<title>(.*?)</title>", page).group(1)
-            self.assertIn(official, title)
+            self.assertIn("出荷調整" if key == "2634710M1077" else official, title)
             self.assertIn("理由" if status == "limited" else "販売中止予定", title)
             if status == "limited":
                 self.assertIn("直近の自動照合は未実施", brief)
@@ -893,6 +894,29 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
                               render(stamp, dict(pending, last_document_attempt_at="2025-06-13T01:00:00+09:00")),
                               render(stamp, trusted=False)):
                 self.assertNotIn('id="packageBriefTitle"', uncertain)
+
+    def test_zestac_shows_manufacturer_reason_and_dated_plans_from_latest_notice(self):
+        key = "2649865N1023"
+        row = dict(self.row(), YJコード=key, 商品名="ゼスタッククリーム", 供給状況="②限定出荷（自社の事情）")
+        notice = dict(self.notice(), title="販売中止のお知らせ", event_type="discontinued",
+                      announced_at="2026-01", reason="原薬の安定調達が難しく、在庫消尽後に販売終了。")
+        supply = {"status": "unconfirmed", "plans": [{"event": "discontinuation", "timing": "2026年6月"}]}
+        notice["targets"] = [dict(notice["targets"][0], yj_code=key, product_name=row["商品名"],
+                                  scope="package", seller="", packages=[{"package": "25g×10本", "supply": supply}])]
+        notice["alternatives"] = [
+            {"source_url": notice["url"], "target_yj_codes": [key], "products": [{"name": "メーカー指定候補"}]}
+        ]
+        def render(notices, bulletins={"items": []}):
+            return page_html(row, key, "limited", "2026-11-22", [], {key},
+                             manufacturer_notices=notices, manufacturer_bulletins=bulletins)
+        page = render([notice])
+        brief = re.search(r'<section class="package-brief[^>]*>.*?</section>', page, re.S).group()
+        self.assertIn("販売中止の理由", re.search(r"<title>(.*?)</title>", page).group(1))
+        for expected in (notice["reason"], "2026年1月", "25g×10本", "2026年6月",
+                         "案内時点の予定", "実際の販売終了日は未確認", "メーカー指定候補"):
+            self.assertIn(expected, brief)
+        self.assertNotIn('id="packageBriefTitle"', render([notice], {"items": [{"url": notice["url"], "sha256": "f" * 64}]}))
+        self.assertNotIn('id="packageBriefTitle"', render([notice, dict(notice, announced_at="2026-11", event_type="resumed")]))
 
     def test_future_recovery_is_explicitly_a_plan_without_changing_current_supply(self):
         row = dict(self.row(), 供給状況="②限定出荷（自社の事情）")

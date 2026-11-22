@@ -57,7 +57,9 @@ PACKAGE_LANDING_KEYS = frozenset({
     "1139003C1044", "1139003C2040", "2325401A1020", "2325401A2027", "2649805M1026",
 })
 PACKAGE_OVERVIEW_KEYS = frozenset({"2649805M1026", "3179106F1039"})
-LIMITED_REASON_KEYS = frozenset({"3999001Q6029", "2646730Q1026"})
+GENTACIN_KEY = "2634710M1077"
+ZESTAC_KEY = "2649865N1023"
+LIMITED_REASON_KEYS = frozenset({"3999001Q6029", "2646730Q1026", GENTACIN_KEY})
 BONZOL_STRENGTHS = {"2499007F1021": "100mg", "2499007F2028": "200mg"}
 BONZOL_KEYS = frozenset(BONZOL_STRENGTHS)
 ZICTOR_KEY = "1147700S1028"
@@ -911,6 +913,9 @@ def package_overview_notice(key, matches, bulletins):
     if key in BONZOL_KEYS:
         return match if (notice.get("event_type") == "discontinued" and "販売中止" in notice["title"]
                          and notice.get("summary")) else None
+    if key == ZESTAC_KEY:
+        return match if (notice.get("event_type") == "discontinued" and "販売中止" in notice["title"]
+                         and notice.get("reason")) else None
     return match if notice.get("event_type") in {"limited", "stopped", "resumed"} else None
 
 
@@ -945,12 +950,36 @@ def package_overview_content(key, match, display_name, status_label):
             body += f'<small>原文確認日 {esc(iso_publication_date(notice["verified_at"]))}。直近の自動照合は未実施です。</small>'
         if notice["url"].startswith("https://www.torii.co.jp/iyakuDB/"):
             body += '<small>原文は鳥居薬品の医療関係者向けサイトで開きます。</small>'
+        if key == GENTACIN_KEY:
+            hint = "限定出荷の理由・対象包装"
+            body += '<small>原文は高田製薬の医療関係者向けサイトで開きます。</small>'
     elif key in BONZOL_KEYS:
         heading = "メーカーの販売中止予定" if "販売中止予定" in notice["title"] else "メーカーの販売中止案内"
         hint = heading
         description = f'{day}の{notice["maker"]}の案内。{notice["summary"]}'
         body = f'{source}<p><strong>対象包装　{esc(" ／ ".join(packages))}</strong></p><p>{esc(notice["summary"])}</p>'
-    css_class = "package-brief stbox supp-notice" if key in BONZOL_KEYS else "package-brief"
+    elif key == ZESTAC_KEY:
+        heading = "メーカーが案内した販売中止の理由"
+        hint = "販売中止の理由・対象包装"
+        description = f'{day}の{notice["maker"]}の案内。{notice["reason"]}'
+        body = f'<p>{esc(notice["reason"])}</p>{source}'
+        plans = [
+            f'<li><strong>{esc(package["package"])}</strong>　{esc(plan["timing"])}</li>'
+            for package in target["packages"] for plan in package["supply"]["plans"]
+            if plan["event"] == "discontinuation"
+        ]
+        if plans:
+            body += ('<details><summary>包装別の販売中止予定を見る</summary>'
+                     f'<ul>{"".join(plans)}</ul>'
+                     '<p>案内時点の予定です。実際の販売終了日は未確認です。</p></details>')
+        alternatives = dict.fromkeys(
+            product["name"] for group in notice.get("alternatives", ())
+            if group.get("source_url") == notice["url"] and key in group.get("target_yj_codes", ())
+            for product in group["products"]
+        )
+        if alternatives:
+            body += f'<p><strong>メーカーが示した代替候補</strong>　{esc("、".join(alternatives))}</p>'
+    css_class = "package-brief stbox supp-notice" if key in BONZOL_KEYS or key == ZESTAC_KEY else "package-brief"
     section = (f'<section class="{css_class}" aria-labelledby="packageBriefTitle">'
                f'<h2 id="packageBriefTitle">{heading}</h2>{body}</section>')
     return hint, f'{display_name}の厚労省公表区分は「{status_label}」。{description}', section
@@ -1405,7 +1434,7 @@ def item_page_lastmod(row: dict, lifecycle=None, discrepancy=None, manufacturer_
         dates.append(PACKAGE_LANDING_UPDATED_AT)
     if item_key(row) in PACKAGE_OVERVIEW_KEYS:
         dates.append("2026-11-21")  # 包装別の案内を品目ページの冒頭へ
-    if item_key(row) in LIMITED_REASON_KEYS | BONZOL_KEYS or item_key(row) == ZICTOR_KEY:
+    if item_key(row) in LIMITED_REASON_KEYS | BONZOL_KEYS | {ZICTOR_KEY, ZESTAC_KEY}:
         dates.append("2026-11-22")
     if is_delist(row) or supplemental_matches(row, lifecycle):
         dates.append(SUPPLEMENTAL_TEMPLATE_LASTMOD)
@@ -1791,12 +1820,16 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
         if package_overview:
             desc = comparison_desc
             title = page_title(name, st["label"], supplements, title_qualifier, hint)
-    elif key in PACKAGE_OVERVIEW_KEYS | LIMITED_REASON_KEYS | BONZOL_KEYS:
+    elif key in PACKAGE_OVERVIEW_KEYS | LIMITED_REASON_KEYS | BONZOL_KEYS | {ZESTAC_KEY}:
         matches = matching_manufacturer_notices(row, manufacturer_notices, manufacturer_bulletins)
         overview = package_overview_notice(key, matches, manufacturer_bulletins) if supplemental_trusted else None
         if overview:
             hint, desc, package_overview = package_overview_content(key, overview, display_name, st["label"])
             title = page_title(name, st["label"], supplements, title_qualifier, hint)
+            if key == GENTACIN_KEY and status == "limited":
+                title = f"{display_name}の出荷調整｜理由と対象包装｜医薬品供給ナビ"
+            elif key == ZESTAC_KEY:
+                title = f"{display_name}の販売中止の理由と包装別の予定｜医薬品供給ナビ"
     elif key in PACKAGE_LANDING_KEYS:
         matches = matching_manufacturer_notices(row, manufacturer_notices, manufacturer_bulletins)
         packages = dict.fromkeys(
@@ -1881,7 +1914,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
 .package-supply-row dd strong{font-size:12px}
 @media(max-width:520px){.package-supply-row{grid-template-columns:minmax(0,1fr)}}
 """ if 'class="package-supply"' in manufacturer_box else ""
-    if key in BONZOL_KEYS and package_overview and not limited_layout:
+    if (key in BONZOL_KEYS or key == ZESTAC_KEY) and package_overview and not limited_layout:
         package_styles += (".package-brief h2{margin:0 0 4px}.package-brief p+p{margin-top:5px}"
                            ".package-brief .source-link{display:inline-flex;align-items:center;"
                            "min-height:44px;font-weight:700;color:inherit}")
@@ -2009,6 +2042,8 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
         headline_labels = discontinuation_labels or [
             label for label in supplements if label.startswith("メーカー：製造")
         ]
+        if key == ZESTAC_KEY and package_overview:
+            headline_labels = ["メーカー：販売中止の案内"]
         intro = ('<nav class="trail" aria-label="パンくず"><a href="index.html">品目別の供給状況</a> / 品目詳細</nav>'
                  + limited_item_page.overview_html(
                      row, display_name, maker, public_metadata.get("解除・解消見込み"),
