@@ -694,6 +694,9 @@ class CuratedPageGenerationTests(unittest.TestCase):
         html = product_package_snapshot([matching_seller], index, None, {code})
         self.assertIn("対象の販売元　販売元A", html)
         self.assertIn('href="https://example.test/source-list.pdf"', html)
+        joint_sellers = dict(row, 販売メーカー="販売元B・販売元A")
+        self.assertIn("対象の販売元　販売元A",
+                      product_package_snapshot([joint_sellers], index, None, {code}))
         other_seller = dict(row, 販売メーカー="販売元B")
         self.assertEqual("", product_package_snapshot([other_seller], index, None, {code}))
 
