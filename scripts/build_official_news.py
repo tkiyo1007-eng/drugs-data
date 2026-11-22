@@ -64,10 +64,14 @@ def maker_news(site, explanations):
             continue
         note = explanations.get(url, {})
         posted = note.get("posted_at") or row.get("listed_at")
-        # The automatic event's date can come from a filename. Only use a
-        # verified listing date or the date the site first found the notice.
+        # An automatic event's date can come from a filename. Prefer it to
+        # the first-seen day only when the publisher's title says the same.
+        announced = row.get("announced_at")
+        prefix = re.match(r"^(\d{4})[./年-](\d{1,2})[./月-](\d{1,2})日?\s", row["title"].lstrip())
+        titled_day = "-".join(part.zfill(2) for part in prefix.groups()) if prefix else None
+        title_confirms_day = bool(announced and titled_day == announced)
         detected = row.get("first_seen") or entries.get(url, {}).get("date")
-        day = posted or detected or row.get("announced_at")
+        day = posted or (announced if title_confirms_day else detected or announced)
         if not valid_date(day):
             continue
         # Shared announcements can cover several products. Prefer a specific
@@ -75,7 +79,7 @@ def maker_news(site, explanations):
         if url in entries and not (row.get("listed_at") and entries[url]["date_label"] != "掲載"):
             continue
         entries[url] = dict(date=day, kind="maker", tag=label, source=maker, title=row["title"],
-                            url=url, date_label="掲載" if posted else "案内" if not detected else "確認",
+                            url=url, date_label="掲載" if posted else "案内" if title_confirms_day or not detected else "確認",
                             summary=note.get("summary"))
     return entries.values()
 
