@@ -1,0 +1,38 @@
+name: PMDA回収情報を更新
+
+on:
+  schedule:
+    - cron: '23 0,4,8,12 * * *' # 日本時間 9:23 / 13:23 / 17:23 / 21:23
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-pmda-recalls
+  cancel-in-progress: false
+
+jobs:
+  update:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: PMDAの医薬品回収一覧を取得
+        run: python3 scripts/fetch_pmda_recalls.py
+      - name: 回収情報に変更があれば更新
+        run: |
+          git add pmda_recalls.json
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "PMDA回収情報を更新"
+          for attempt in 1 2 3; do
+            git pull --rebase origin main
+            if git push; then exit 0; fi
+            if [ "$attempt" -eq 3 ]; then exit 1; fi
+            sleep "$((attempt * 2))"
+          done

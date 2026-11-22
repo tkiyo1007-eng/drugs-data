@@ -1,0 +1,133 @@
+{
+  "classes": {
+    "I": {
+      "status": "ok",
+      "last_success_date": "2026-11-22",
+      "items": [
+        {
+          "id": "1-2508",
+          "date": "2026-11-18",
+          "title": "照射赤血球液‐ＬＲ「日赤」",
+          "maker": "日本赤十字社",
+          "url": "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=1-2508",
+          "ended": false
+        },
+        {
+          "id": "1-2507",
+          "date": "2026-11-18",
+          "title": "照射赤血球液‐ＬＲ「日赤」",
+          "maker": "日本赤十字社",
+          "url": "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=1-2507",
+          "ended": false
+        },
+        {
+          "id": "1-2506",
+          "date": "2026-11-09",
+          "title": "照射赤血球液‐ＬＲ「日赤」",
+          "maker": "日本赤十字社",
+          "url": "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=1-2506",
+          "ended": false
+        },
+        {
+          "id": "1-2504",
+          "date": "2026-10-29",
+          "title": "新鮮凍結血漿‐ＬＲ「日赤」４８０",
+          "maker": "日本赤十字社",
+          "url": "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=1-2504",
+          "ended": false
+        }
+      ]
+    },
+    "II": {
+      "status": "ok",
+      "last_success_date": "2026-11-22",
+      "items": [
+        {
+          "id": "2-13047",
+          "date": "2026-11-20",
+          "title": "十神湯分包顆粒",
+          "maker": "日本製薬工業株式会社",
+          "url": "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=2-13047",
+          "ended": false
+        },
+        {
+          "id": "2-13042",
+          "date": "2026-11-16",
+          "title": "ビタジェクト注キット",
+          "maker": "テルモ株式会社",
+          "url": "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=2-13042",
+          "ended": false
+        },
+        {
+          "id": "2-13035",
+          "date": "2026-11-11",
+          "title": "(1)ロートクール４０α / (2)ロートビタ４０α / (3)ロートＣキューブアイスクールａ / (4)ロートＣキューブクールａ / (5)ロートＣキューブａ / (6)ロートアイストレッチ",
+          "maker": "ロート製薬株式会社",
+          "url": "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=2-13035",
+          "ended": false
+        },
+        {
+          "id": "2-13031",
+          "date": "2026-11-09",
+          "title": "(1)ロキソプロフェンNａテープ50mg「三笠」 / (2)ロキソプロフェンNａテープ100mg「三笠」",
+          "maker": "三笠製薬株式会社",
+          "url": "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=2-13031",
+          "ended": false
+        },
+        {
+          "id": "2-13029",
+          "date": "2026-11-06",
+          "title": "リュープリンSR注射用キット11.25mg",
+          "maker": "武田薬品工業株式会社",
+          "url": "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=2-13029",
+          "ended": false
+        },
+        {
+          "id": "2-13027",
+          "date": "2026-11-05",
+          "title": "アフリベルセプトBS硝子体内注射用キット40mg／mL「NIT」",
+          "maker": "富士製薬工業株式会社",
+          "url": "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=2-13027",
+          "ended": false
+        },
+        {
+          "id": "2-13026",
+          "date": "2026-11-05",
+          "title": "カルバン錠５０",
+          "maker": "日本ケミファ株式会社",
+          "url": "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=2-13026",
+          "ended": false
+        },
+        {
+          "id": "2-13014",
+          "date": "2026-10-27",
+          "title": "テクネＭＤＰキット",
+          "maker": "PDRファーマ株式会社",
+          "url": "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=2-13014",
+          "ended": false
+        },
+        {
+          "id": "2-13012",
+          "date": "2026-10-27",
+          "title": "新クリエフ胃腸薬プラス",
+          "maker": "株式会社パナケイア製薬",
+          "url": "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=2-13012",
+          "ended": false
+        },
+        {
+          "id": "2-13011",
+          "date": "2026-10-26",
+          "title": "日本薬局方酸素",
+          "maker": "日本酸素株式会社",
+          "url": "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=2-13011",
+          "ended": false
+        }
+      ]
+    },
+    "III": {
+      "status": "ok",
+      "last_success_date": "2026-11-22",
+      "items": []
+    }
+  }
+}
