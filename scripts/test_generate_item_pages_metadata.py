@@ -1030,6 +1030,27 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
             "items": [{"url": notice["url"], "sha256": "f" * 64}],
         }))
 
+    def test_kenacort_metadata_labels_the_increase_as_a_dated_supply_plan(self):
+        key = "2454402A3033"
+        row = dict(self.row(), 商品名="ケナコルト-A40mg", YJコード=key, 供給状況="②限定出荷")
+        notice = dict(self.notice(), title="今後の供給予定について", announced_at="2026-10",
+                      summary="2026年12月から通常出荷時の約30％に増量予定。限定出荷は継続。")
+        notice["targets"] = [dict(notice["targets"][0], yj_code=key, product_name=row["商品名"],
+                                  scope="package", seller="", packages=[{"package": "10バイアル"}])]
+        def render(bulletins):
+            return page_html(row, key, "limited", "2026-11-23", [], {key},
+                             manufacturer_notices=[notice], manufacturer_bulletins=bulletins)
+        page = render({"items": []})
+        description = re.search(r'<meta name="description" content="([^"]*)">', page).group(1)
+        for text in ("厚労省公表区分は「限定出荷」", "2026年10月", "10バイアル", "約30％に増量予定"):
+            self.assertIn(text, description)
+        section = re.search(r'<section class="package-brief[^>]*>.*?</section>', page, re.S).group()
+        self.assertIn("限定出荷は継続", section)
+        self.assertIn(notice["url"], section)
+        self.assertNotIn('id="packageBriefTitle"', render({
+            "items": [{"url": notice["url"], "sha256": "f" * 64}],
+        }))
+
     def test_future_recovery_is_explicitly_a_plan_without_changing_current_supply(self):
         row = dict(self.row(), 供給状況="②限定出荷（自社の事情）")
         notice = self.notice()
