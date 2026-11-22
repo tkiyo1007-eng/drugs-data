@@ -20306,5 +20306,16 @@
    "first_seen": "2026-11-19",
    "last_checked": "2026-11-22"
   }
+ ],
+ "イソフルラン吸入麻酔液「ＶＴＲＳ」": [
+  {
+   "maker": "ヴィアトリス製薬合同会社",
+   "title": "イソフルラン吸入麻酔液「VTRS」250mLの一時出荷停止",
+   "url": "https://www.viatris-e-channel.com/viatris-products/di/info/pdf/NBZ27Q118A_%E4%BE%9B%E7%B5%A6%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%94%E6%A1%88%E5%86%85%EF%BC%88%E3%82%A4%E3%82%BD%E3%83%95%E3%83%AB%E3%83%A9%E3%83%B3%E5%90%B8%E5%85%A5%E9%BA%BB%E9%85%94%E6%B6%B2%E3%80%8CVTRS%E3%80%8D%EF%BC%89_11%E6%9C%88%E7%89%88.pdf",
+   "event_type": "stopped",
+   "announced_at": "2026-11",
+   "first_seen": "2026-11-22",
+   "last_checked": "2026-11-22"
+  }
  ]
 }

@@ -2,6 +2,166 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "towa-amaluet2-resumed-with-limits-202611",
+      "maker": "東和薬品",
+      "title": "アマルエット配合錠2番「トーワ」の出荷再開・限定出荷継続",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83806&t=4",
+      "announced_at": "2026-11",
+      "verified_at": "2026-11-22",
+      "sha256": "b92907bcc5deb81f10f5e5cdeeb2495d3bfa579e262fcd6ed19ddf815ce5ade6",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "effective_at": "2026-11-19",
+      "reason": "東和薬品は、十分な在庫を確保できておらず安定供給に時間を要するため、2026年11月19日の出荷再開後も限定出荷を続けると案内しました。",
+      "maker_supply_status": {
+        "handling": "② 限定出荷（自社の事情）",
+        "volume": "B 出荷量減少"
+      },
+      "targets": [
+        {
+          "yj_code": "2190102F1106",
+          "product_name": "アマルエット配合錠２番「トーワ」",
+          "maker": "東和薬品",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "155236101",
+              "supply": {
+                "status": "limited",
+                "status_text": "限定出荷（自社の事情）",
+                "plans": [],
+                "note": "2026年11月19日に出荷再開。解除時期は未定です。"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "対象はPTP100錠です。東和薬品は、限定出荷の解除時期を未定としています。"
+      ]
+    },
+    {
+      "id": "alfresa-dalteparin-afp-discontinuation-202610",
+      "maker": "アルフレッサ ファーマ",
+      "title": "ダルテパリンNa静注5000単位/5mL「AFP」の販売中止案内",
+      "url": "https://www.alfresa-pharma.co.jp/news/pdflink/NEWS_ID/2270/",
+      "announced_at": "2026-10",
+      "verified_at": "2026-11-22",
+      "sha256": "b94770f8450ec4e98c762600568d267e6f0414c62ba20b8840094a1878103edf",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "アルフレッサ ファーマは、諸般の事情によりメーカー在庫がなくなり次第、販売を終了すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "3334403A2208",
+          "product_name": "ダルテパリンＮａ静注５０００単位／５ｍＬ「ＡＦＰ」",
+          "maker": "共創未来ファーマ",
+          "scope": "seller_route_and_package",
+          "packages": [
+            {
+              "package": "5mL×10バイアル",
+              "unified_product_code": "274-11058-0",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "discontinuation",
+                    "timing": "2027年5月見込み（2026年10月の案内）"
+                  }
+                ]
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ],
+          "seller": "アルフレッサ ファーマ"
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.alfresa-pharma.co.jp/news/pdflink/NEWS_ID/2270/",
+          "target_yj_codes": [
+            "3334403A2208"
+          ],
+          "type": "メーカー文書に記載された代替候補",
+          "products": [
+            {
+              "name": "ダルテパリンＮａ静注５０００単位／２０ｍＬシリンジ「ニプロ」",
+              "yj_code": "3334403G5021",
+              "maker": "ニプロ",
+              "scope": "20mL×10シリンジ（統一商品コード 458-12155-5）"
+            }
+          ],
+          "cautions": [
+            "容量と容器が異なります。採用・切替の判断は製品の電子添文と医療従事者にご確認ください。"
+          ]
+        }
+      ],
+      "cautions": [
+        "販売終了時期は2026年10月のメーカー案内に記載された見込みです。",
+        "同案内の経過措置期間満了は2028年3月末予定です。"
+      ]
+    },
+    {
+      "id": "fuji-milrinone-10-discontinuation-202407",
+      "maker": "富士製薬工業",
+      "title": "ミルリノン注射液10mg「F」の販売中止案内",
+      "url": "https://www.j-circ.or.jp/cms/wp-content/uploads/2024/07/C01CE02.pdf",
+      "announced_at": "2024-07",
+      "verified_at": "2026-11-22",
+      "sha256": "727494d5d60813ffcdda48146f4703ef4b1fa56508f63d490c6ac86d901b41f7",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "富士製薬工業は、2024年7月にこの製品の販売終了を案内しました。具体的な終了理由の記載はありません。",
+      "targets": [
+        {
+          "yj_code": "2119408A2020",
+          "product_name": "ミルリノン注射液１０ｍｇ「Ｆ」",
+          "maker": "富士製薬工業",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "10mg/10mL 5瓶",
+              "unified_product_code": "431298632"
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.j-circ.or.jp/cms/wp-content/uploads/2024/07/C01CE02.pdf",
+          "target_yj_codes": [
+            "2119408A2020"
+          ],
+          "type": "メーカー文書に記載された代替候補",
+          "products": [
+            {
+              "name": "ミルリノン注１０ｍｇ「タカタ」",
+              "yj_code": "2119408A1040",
+              "maker": "高田製薬",
+              "scope": "10mg/10mL 5管（統一商品コード 120211706）"
+            }
+          ],
+          "cautions": [
+            "候補は2024年7月のメーカー案内に記載された製剤です。現在の供給状況は品目情報で確認できます。"
+          ]
+        }
+      ],
+      "cautions": [
+        "原文は日本循環器学会が公開した富士製薬工業の文書です。",
+        "同案内の経過措置期間満了は2027年3月31日予定です。"
+      ]
+    },
+    {
       "id": "jg-epalrestat-50-supply-202611",
       "maker": "日本ジェネリック",
       "title": "エパルレスタット錠50mg「JG」の限定出荷",

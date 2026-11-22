@@ -111,6 +111,9 @@ MAKER_MANUAL_SOURCE_HOSTS = {
 }
 # Specific manufacturer and distributor notices hosted outside the primary company domain.
 MAKER_MANUAL_SOURCE_URLS = {
+    '富士製薬工業': {
+        'https://www.j-circ.or.jp/cms/wp-content/uploads/2024/07/C01CE02.pdf',
+    },
     'サノフィ': {
         'https://jasweb.or.jp/information/file/20261117.pdf',
     },
