@@ -88,6 +88,32 @@ class OfficialNewsTests(unittest.TestCase):
         self.assertEqual([(r["date"], r["date_label"]) for r in result],
                          [(expected, label) for _, _, expected, label in cases])
 
+    def test_maker_feed_hides_only_reviewed_duplicates_with_matching_metadata(self):
+        base = "https://www.takata-seiyaku.co.jp/medical/topics/"
+        original_url = base + "old-att/Procaterol.pdf"
+        duplicate_url = base + "new-att/Procaterol.pdf"
+        separate_url = base + "other-att/Procaterol.pdf"
+        revised_url = base + "followup-att/Procaterol.pdf"
+        orphan_url = base + "move-att/Procaterol.pdf"
+        notice = {"maker": "高田製薬", "event_type": "supply", "announced_at": "2026-11-18",
+                  "title": "2026/11/18 プロカテロールの供給に関するお知らせ"}
+        rows = [{**notice, "url": url} for url in (original_url, duplicate_url, separate_url, orphan_url)]
+        rows.append({**notice, "url": revised_url, "event_type": "stopped"})
+        explanations = {
+            original_url: {"summary": "バラ100gが限定出荷です。"},
+            duplicate_url: {"duplicate_of": original_url},
+            revised_url: {"duplicate_of": original_url},
+            orphan_url: {"duplicate_of": base + "missing-att/Procaterol.pdf"},
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "maker_announcement_events.json").write_text(
+                json.dumps({"品目": rows}), encoding="utf-8")
+            (root / "manufacturer_notices.json").write_text('{"notices":[]}', encoding="utf-8")
+            result = {row["url"]: row for row in maker_news(root, explanations)}
+        self.assertEqual(set(result), {original_url, separate_url, revised_url, orphan_url})
+        self.assertEqual(result[original_url]["summary"], explanations[original_url]["summary"])
+
 
 if __name__ == "__main__":
     unittest.main()

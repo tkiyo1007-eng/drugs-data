@@ -81,6 +81,15 @@ def maker_news(site, explanations):
         entries[url] = dict(date=day, kind="maker", tag=label, source=maker, title=row["title"],
                             url=url, date_label="掲載" if posted else "案内" if title_confirms_day or not detected else "確認",
                             summary=note.get("summary"))
+
+    # An editorial URL pair can represent a single notice after a publisher moves a file.
+    # Keep both if their displayed notice metadata diverges or the reviewed original is absent.
+    for url, note in explanations.items():
+        original = entries.get(note.get("duplicate_of"))
+        duplicate = entries.get(url)
+        if (original and original["summary"] and duplicate and not duplicate["summary"]
+                and all(original[key] == duplicate[key] for key in ("source", "title", "date", "tag"))):
+            del entries[url]
     return entries.values()
 
 
