@@ -29,6 +29,22 @@ class AnnouncementMatchingTests(unittest.TestCase):
                 "販売メーカー": maker, "供給状況": status, "代替候補": alt}
 
     @mock.patch.object(mod, "fetch")
+    def test_nichiiko_prefers_the_listing_date_to_the_filename(self, fetch_mock):
+        url = "https://www.nichiiko.co.jp/medicine/files/20261118-03-01.pdf"
+        undated = "https://www.nichiiko.co.jp/medicine/files/20261117-01.pdf"
+        fetch_mock.return_value = (
+            '<tr><td>2026/11/19</td><td class="headline">'
+            f'<a href="{url}">テスト錠の販売中止</a></td></tr>'
+            f'<a href="{undated}">別の案内</a>'
+        )
+        notices = mod.parse_nichiiko()
+        self.assertEqual(notices, [
+            ("日医工", "2026/11/19 テスト錠の販売中止", url),
+            ("日医工", "別の案内", undated),
+        ])
+        self.assertEqual(mod.extract_announcement_date(notices[0][1], url), "2026-11-19")
+
+    @mock.patch.object(mod, "fetch")
     def test_nihon_generic_collects_only_its_document_links(self, fetch_mock):
         base = "https://medical.nihon-generic.co.jp"
         fetch_mock.return_value = (

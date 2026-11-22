@@ -2,6 +2,639 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "nichiiko-paroxetine-nig-discontinuation-202611",
+      "maker": "日医工",
+      "title": "パロキセチン錠5mg・10mg・20mg「NIG」の販売中止予定",
+      "url": "https://www.nichiiko.co.jp/medicine/files/20261118-03-01.pdf",
+      "source_index_url": "https://www.nichiiko.co.jp/medicine/whatsnew/2026/index.php",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-19",
+      "verified_at": "2026-11-22",
+      "sha256": "d4689a341ab6fdc1c2df8e59be392f711854e834d0fbccd1eefc80f25f534ef1",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "販売元は在庫がなくなり次第、対象包装の販売を中止すると案内しました。具体的な理由は資料に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "1179041F3389",
+          "product_name": "パロキセチン錠５ｍｇ「ＮＩＧ」",
+          "maker": "日医工岐阜工場",
+          "scope": "seller_route_and_package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-78982-0",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2026年12月見込み"
+                  }
+                ],
+                "note": "販売包装単位コード 14987376789827。"
+              }
+            }
+          ],
+          "source_pages": [
+            1,
+            2
+          ],
+          "seller": "日医工"
+        },
+        {
+          "yj_code": "1179041F1394",
+          "product_name": "パロキセチン錠１０ｍｇ「ＮＩＧ」",
+          "maker": "日医工岐阜工場",
+          "scope": "seller_route_and_package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-78992-9",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年4月見込み"
+                  }
+                ],
+                "note": "販売包装単位コード 14987376789926。"
+              }
+            }
+          ],
+          "source_pages": [
+            1,
+            2
+          ],
+          "seller": "日医工"
+        },
+        {
+          "yj_code": "1179041F2390",
+          "product_name": "パロキセチン錠２０ｍｇ「ＮＩＧ」",
+          "maker": "日医工岐阜工場",
+          "scope": "seller_route_and_package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-79002-4",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年7月見込み"
+                  }
+                ],
+                "note": "販売包装単位コード 14987376790021。"
+              }
+            }
+          ],
+          "source_pages": [
+            1,
+            2
+          ],
+          "seller": "日医工"
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://www.nichiiko.co.jp/medicine/files/20261118-03-01.pdf",
+          "target_yj_codes": [
+            "1179041F3389"
+          ],
+          "type": "販売元が同じ規格の代替品として案内した製品です。",
+          "products": [
+            {
+              "name": "パロキセチン錠５ｍｇ「明治」",
+              "yj_code": "1179041F3230",
+              "maker": "Meiji Seika ファルマ",
+              "scope": "PTP100錠"
+            }
+          ],
+          "cautions": [
+            "候補の供給状況や受注可否は、販売中止案内では確認できません。"
+          ]
+        },
+        {
+          "source_url": "https://www.nichiiko.co.jp/medicine/files/20261118-03-01.pdf",
+          "target_yj_codes": [
+            "1179041F1394"
+          ],
+          "type": "販売元が同じ規格の代替品として案内した製品です。",
+          "products": [
+            {
+              "name": "パロキセチン錠１０ｍｇ「明治」",
+              "yj_code": "1179041F1300",
+              "maker": "Meiji Seika ファルマ",
+              "scope": "PTP100錠、PTP500錠、バラ300錠"
+            }
+          ],
+          "cautions": [
+            "候補の供給状況や受注可否は、販売中止案内では確認できません。"
+          ]
+        },
+        {
+          "source_url": "https://www.nichiiko.co.jp/medicine/files/20261118-03-01.pdf",
+          "target_yj_codes": [
+            "1179041F2390"
+          ],
+          "type": "販売元が同じ規格の代替品として案内した製品です。",
+          "products": [
+            {
+              "name": "パロキセチン錠２０ｍｇ「明治」",
+              "yj_code": "1179041F2307",
+              "maker": "Meiji Seika ファルマ",
+              "scope": "PTP100錠、PTP500錠、バラ100錠"
+            }
+          ],
+          "cautions": [
+            "候補の供給状況や受注可否は、販売中止案内では確認できません。"
+          ]
+        }
+      ],
+      "cautions": [
+        "経過措置期間は2028年3月31日までの予定と案内されています。"
+      ]
+    },
+    {
+      "id": "jg-levofloxacin-ch-discontinuation-202611",
+      "maker": "日本ジェネリック",
+      "title": "レボフロキサシン錠250mg・500mg「CH」の販売中止予定",
+      "url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/LEVOC00_CHUUSHI_2611.pdf",
+      "source_index_url": "https://medical.nihon-generic.co.jp/news/revision/page/2/",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-13",
+      "verified_at": "2026-11-22",
+      "sha256": "c681e0c2bf1401c9fde9211d88180acf846c791643771c6b2f3535c24800111f",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "販売元は在庫がなくなり次第、対象包装の販売を中止すると案内しました。具体的な理由は資料に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "6241013F2047",
+          "product_name": "レボフロキサシン錠２５０ｍｇ「ＣＨ」",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792658113",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年3月頃"
+                  }
+                ],
+                "note": "販売包装単位コード 14987792658110。"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ],
+          "seller": "日本ジェネリック"
+        },
+        {
+          "yj_code": "6241013F3043",
+          "product_name": "レボフロキサシン錠５００ｍｇ「ＣＨ」",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "packages": [
+            {
+              "package": "PTP50錠",
+              "unified_product_code": "792658243",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年4月頃"
+                  }
+                ],
+                "note": "販売包装単位コード 14987792658240。"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ],
+          "seller": "日本ジェネリック"
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/LEVOC00_CHUUSHI_2611.pdf",
+          "target_yj_codes": [
+            "6241013F2047"
+          ],
+          "type": "販売元が同じ規格の代替品として案内した製品です。",
+          "products": [
+            {
+              "name": "レボフロキサシン錠２５０ｍｇ「ＤＳＥＰ」",
+              "yj_code": "6241013F2055",
+              "maker": "第一三共エスファ",
+              "scope": "PTP100錠、バラ100錠"
+            }
+          ],
+          "cautions": [
+            "候補の供給状況や受注可否は、販売中止案内では確認できません。"
+          ]
+        },
+        {
+          "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/LEVOC00_CHUUSHI_2611.pdf",
+          "target_yj_codes": [
+            "6241013F3043"
+          ],
+          "type": "販売元が同じ規格の代替品として案内した製品です。",
+          "products": [
+            {
+              "name": "レボフロキサシン錠５００ｍｇ「ＤＳＥＰ」",
+              "yj_code": "6241013F3051",
+              "maker": "第一三共エスファ",
+              "scope": "PTP50錠、PTP100錠、バラ100錠"
+            }
+          ],
+          "cautions": [
+            "候補の供給状況や受注可否は、販売中止案内では確認できません。"
+          ]
+        }
+      ],
+      "cautions": [
+        "経過措置期間は2028年3月31日までの予定と案内されています。"
+      ]
+    },
+    {
+      "id": "jg-bezafibrate-sr-discontinuation-202611",
+      "maker": "日本ジェネリック",
+      "title": "ベザフィブラート徐放錠100mg・200mg「JG」の販売中止案内",
+      "url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/BEZAX00_CHUUSHI_2611.pdf",
+      "source_index_url": "https://medical.nihon-generic.co.jp/news/revision/page/2/",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-13",
+      "verified_at": "2026-11-22",
+      "sha256": "f528c9b01056851537c856f039fdd40645428c30e2d602c2abfc955ba621369b",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "販売元は在庫がなくなり次第、対象包装の販売を中止すると案内しました。具体的な理由は資料に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "2183005G2150",
+          "product_name": "ベザフィブラート徐放錠１００ｍｇ「ＪＧ」",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792286316",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年4月頃"
+                  }
+                ],
+                "note": "販売包装単位コード 14987792286313。"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ],
+          "seller": "日本ジェネリック"
+        },
+        {
+          "yj_code": "2183005G1293",
+          "product_name": "ベザフィブラート徐放錠２００ｍｇ「ＪＧ」",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792286415",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "note": "販売包装単位コード 14987792286412。",
+                "status_text": "案内時点で出荷停止中"
+              }
+            },
+            {
+              "package": "PTP1000錠",
+              "unified_product_code": "792286408",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "note": "販売包装単位コード 14987792286405。",
+                "status_text": "案内時点で出荷停止中"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ],
+          "seller": "日本ジェネリック"
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/BEZAX00_CHUUSHI_2611.pdf",
+          "target_yj_codes": [
+            "2183005G2150"
+          ],
+          "type": "販売元が同じ規格の代替品として案内した製品です。",
+          "products": [
+            {
+              "name": "ベザフィブラートＳＲ錠１００ｍｇ「サワイ」",
+              "yj_code": "2183005G2133",
+              "maker": "沢井製薬",
+              "scope": "PTP100錠"
+            }
+          ],
+          "cautions": [
+            "候補の供給状況や受注可否は、販売中止案内では確認できません。"
+          ]
+        },
+        {
+          "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/BEZAX00_CHUUSHI_2611.pdf",
+          "target_yj_codes": [
+            "2183005G1293"
+          ],
+          "type": "販売元が同じ規格の代替品として案内した製品です。",
+          "products": [
+            {
+              "name": "ベザフィブラートＳＲ錠２００ｍｇ「サワイ」",
+              "yj_code": "2183005G1285",
+              "maker": "沢井製薬",
+              "scope": "PTP100錠、PTP500錠、PTP1000錠、バラ500錠"
+            }
+          ],
+          "cautions": [
+            "候補の供給状況や受注可否は、販売中止案内では確認できません。"
+          ]
+        }
+      ],
+      "cautions": [
+        "経過措置期間は2028年3月31日までの予定と案内されています。"
+      ]
+    },
+    {
+      "id": "jg-doxazosin-discontinuation-202611",
+      "maker": "日本ジェネリック",
+      "title": "ドキサゾシン錠0.5mg・1mg・2mg・4mg「JG」の販売中止案内",
+      "url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/DOXAJ00_CHUUSHI_2611.pdf",
+      "source_index_url": "https://medical.nihon-generic.co.jp/news/revision/page/2/",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-13",
+      "verified_at": "2026-11-22",
+      "sha256": "8bd21cf5f0d78917cf48ef6d0ea1b4e3c5464bd5261aafe76eadcb554bd85f8f",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "販売元は在庫がなくなり次第、対象包装の販売を中止すると案内しました。具体的な理由は資料に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "2149026F1204",
+          "product_name": "ドキサゾシン錠０．５ｍｇ「ＪＧ」",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792290412",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年3月頃"
+                  }
+                ],
+                "note": "販売包装単位コード 14987792290419。"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ],
+          "seller": "日本ジェネリック"
+        },
+        {
+          "yj_code": "2149026F2243",
+          "product_name": "ドキサゾシン錠１ｍｇ「ＪＧ」",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792290511",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "note": "販売包装単位コード 14987792290518。",
+                "status_text": "案内時点で出荷停止中"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ],
+          "seller": "日本ジェネリック"
+        },
+        {
+          "yj_code": "2149026F3240",
+          "product_name": "ドキサゾシン錠２ｍｇ「ＪＧ」",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792290610",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "note": "販売包装単位コード 14987792290617。",
+                "status_text": "案内時点で出荷停止中"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ],
+          "seller": "日本ジェネリック"
+        },
+        {
+          "yj_code": "2149026F4203",
+          "product_name": "ドキサゾシン錠４ｍｇ「ＪＧ」",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792290719",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年3月頃"
+                  }
+                ],
+                "note": "販売包装単位コード 14987792290716。"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ],
+          "seller": "日本ジェネリック"
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/DOXAJ00_CHUUSHI_2611.pdf",
+          "target_yj_codes": [
+            "2149026F1204"
+          ],
+          "type": "販売元が同じ規格の代替品として案内した製品です。",
+          "products": [
+            {
+              "name": "ドキサゾシン錠０．５ｍｇ「サワイ」",
+              "yj_code": "2149026F1140",
+              "maker": "沢井製薬",
+              "scope": "PTP100錠"
+            }
+          ],
+          "cautions": [
+            "候補の供給状況や受注可否は、販売中止案内では確認できません。"
+          ]
+        },
+        {
+          "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/DOXAJ00_CHUUSHI_2611.pdf",
+          "target_yj_codes": [
+            "2149026F2243"
+          ],
+          "type": "販売元が同じ規格の代替品として案内した製品です。",
+          "products": [
+            {
+              "name": "ドキサゾシン錠１ｍｇ「サワイ」",
+              "yj_code": "2149026F2200",
+              "maker": "沢井製薬",
+              "scope": "PTP100錠、PTP500錠、バラ500錠"
+            }
+          ],
+          "cautions": [
+            "候補の供給状況や受注可否は、販売中止案内では確認できません。"
+          ]
+        },
+        {
+          "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/DOXAJ00_CHUUSHI_2611.pdf",
+          "target_yj_codes": [
+            "2149026F3240"
+          ],
+          "type": "販売元が同じ規格の代替品として案内した製品です。",
+          "products": [
+            {
+              "name": "ドキサゾシン錠２ｍｇ「サワイ」",
+              "yj_code": "2149026F3207",
+              "maker": "沢井製薬",
+              "scope": "PTP100錠、PTP500錠、バラ500錠"
+            }
+          ],
+          "cautions": [
+            "候補の供給状況や受注可否は、販売中止案内では確認できません。"
+          ]
+        },
+        {
+          "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/DOXAJ00_CHUUSHI_2611.pdf",
+          "target_yj_codes": [
+            "2149026F4203"
+          ],
+          "type": "販売元が同じ規格の代替品として案内した製品です。",
+          "products": [
+            {
+              "name": "ドキサゾシン錠４ｍｇ「サワイ」",
+              "yj_code": "2149026F4149",
+              "maker": "沢井製薬",
+              "scope": "PTP100錠"
+            }
+          ],
+          "cautions": [
+            "候補の供給状況や受注可否は、販売中止案内では確認できません。"
+          ]
+        }
+      ],
+      "cautions": [
+        "経過措置期間は2028年3月31日までの予定と案内されています。"
+      ]
+    },
+    {
+      "id": "jg-aripiprazole-od-12-discontinuation-202611",
+      "maker": "日本ジェネリック",
+      "title": "アリピプラゾールOD錠12mg「JG」の販売中止予定",
+      "url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/ARIPD12_CHUUSHI_2611.pdf",
+      "source_index_url": "https://medical.nihon-generic.co.jp/news/revision/page/2/",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-13",
+      "verified_at": "2026-11-22",
+      "sha256": "79a4ff1e8db45c5072c0cc6666e2e6eb68a000c850f75dcbc07a3433e013d64e",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "reason": "販売元は在庫がなくなり次第、対象包装の販売を中止すると案内しました。具体的な理由は資料に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "1179045F6033",
+          "product_name": "アリピプラゾールＯＤ錠１２ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792116415",
+              "supply": {
+                "status": "unconfirmed",
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年3月頃"
+                  }
+                ],
+                "note": "販売包装単位コード 14987792116412。"
+              }
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "source_url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/ARIPD12_CHUUSHI_2611.pdf",
+          "target_yj_codes": [
+            "1179045F6033"
+          ],
+          "type": "日本ジェネリックの案内に記載された同成分・同規格の通常錠です。販売中止の対象はOD錠で、剤形が異なります。",
+          "products": [
+            {
+              "name": "アリピプラゾール錠１２ｍｇ「サワイ」",
+              "yj_code": "1179045F3077",
+              "maker": "沢井製薬",
+              "scope": "PTP100錠、バラ200錠"
+            }
+          ],
+          "cautions": [
+            "候補の供給状況や受注可否は、販売中止案内では確認できません。"
+          ]
+        }
+      ],
+      "cautions": [
+        "経過措置期間は2028年3月31日までの予定と案内されています。"
+      ]
+    },
+    {
       "id": "chemiphar-telmisartan-80-limited-202611",
       "maker": "日本ケミファ",
       "title": "テルミサルタン錠80mg「ケミファ」100錠包装の限定出荷",

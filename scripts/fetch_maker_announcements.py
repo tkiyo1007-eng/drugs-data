@@ -58,9 +58,16 @@ def parse_sawai(pages=1):
 def parse_nichiiko(pages=1):
     items = []
     html = fetch("https://www.nichiiko.co.jp/medicine/whatsnew/index.php")
-    for m in re.finditer(r'<a[^>]*href="(https://www\.nichiiko\.co\.jp/medicine/files/[^"]+\.pdf)"[^>]*>(.*?)</a>', html, re.S):
-        href, text = m.group(1), re.sub(r"<[^>]+>", " ", m.group(2))
-        items.append((re.sub(r"\s+", " ", text).strip(), href))
+    document_link = re.compile(r'<a[^>]*\shref="(https://www\.nichiiko\.co\.jp/medicine/files/[^"]+\.pdf)"[^>]*>(.*?)</a>', re.S)
+    dates = {}
+    for row in re.findall(r'<tr\b[^>]*>(.*?)</tr>', html, re.S):
+        date = re.match(r'\s*<td\b[^>]*>\s*(\d{4}/\d{1,2}/\d{1,2})\s*</td>', row)
+        if date:
+            for href, _ in document_link.findall(row):
+                dates.setdefault(href, date.group(1))
+    for href, label in document_link.findall(html):
+        text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", label)).strip()
+        items.append((f"{dates[href]} {text}" if href in dates else text, href))
     return [("日医工", t, u) for t, u in items]
 
 
