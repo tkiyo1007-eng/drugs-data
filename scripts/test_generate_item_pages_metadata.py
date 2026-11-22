@@ -830,7 +830,8 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
                     package("188-48802-7", "7枚×10袋", "限定出荷継続。")]
         target = {"product_name": row["商品名"], "yj_code": row["YJコード"], "scope": "package", "packages": packages}
         notice = dict(self.notice(), maker="久光製薬", announced_at="2026-10", listed_at="2026-10-30",
-                      targets=[target], event_type="limited")
+                      targets=[target], event_type="limited",
+                      resumption="限定出荷は2026年4月30日から。解除時期は未定です。")
         listing = {"maker": "久光製薬", "url": notice["url"], "announced_at": "2026-10-30"}
         missing = ("", "", "")
         def render(notices, current=listing, bulletins={"items": []}, trusted=True):
@@ -838,6 +839,12 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
         hint, desc, block = render([notice])
         self.assertIn("1枚包装・7枚包装", hint)
         self.assertIn("②限定出荷", desc)
+        self.assertLess(desc.index("解除時期は未定"), desc.index("出荷を停止予定"))
+        self.assertIn("限定出荷の期間", block)
+        self.assertIn(notice["resumption"], block)
+        _, no_date_desc, no_date_block = render([dict(notice, resumption="")])
+        self.assertNotIn("解除時期は未定", no_date_desc)
+        self.assertNotIn("限定出荷の期間", no_date_block)
         self.assertRegex(block, "1枚×70袋</dt><dd>出荷を停止予定")
         self.assertRegex(block, "7枚×10袋</dt><dd>限定出荷継続")
         self.assertIn("メーカー原文（2026年10月30日掲載）", block)

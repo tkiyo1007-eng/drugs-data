@@ -1671,13 +1671,18 @@ def zictor_package_overview(row, notices, bulletins, *, trusted, latest_listing)
     posted = notice_date_label(notice["listed_at"]) + "掲載"
     source_label = (f"メーカー原文（{posted}）" if notice["listed_at"].startswith(notice["announced_at"])
                     else f"{day}のメーカー原文（{posted}）")
+    period = notice.get("resumption")
+    period = period.strip() if isinstance(period, str) else ""
+    period_html = (f'<p><strong>限定出荷の期間</strong>　{esc(period)}</p>' if period else "")
     section = (f'<section class="package-brief" aria-labelledby="packageBriefTitle">'
                f'<h2 id="packageBriefTitle">久光製薬の包装別案内</h2>'
                f'<a class="source-link" href="{esc(notice["url"])}" data-dsn-event="official-source-open">'
                f'{esc(source_label)}</a>'
+               f'{period_html}'
                f'<dl class="package-brief-lines">{"".join(rows)}</dl>'
                f'<small>原文確認日 {esc(iso_publication_date(notice["verified_at"]))}。現在の包装別の出荷状況・在庫は未確認です。</small></section>')
-    description = f'{row["商品名"]}の厚労省公表区分は「{row["供給状況"]}」。{day}の久光製薬の案内では、' + " ".join(notes)
+    dated_notice = f'{day}の久光製薬の案内。{period} ' if period else f'{day}の久光製薬の案内では、'
+    description = f'{row["商品名"]}の厚労省公表区分は「{row["供給状況"]}」。{dated_notice}' + " ".join(notes)
     return "1枚包装・7枚包装の出荷案内", description, section
 
 
