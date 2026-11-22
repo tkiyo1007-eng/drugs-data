@@ -681,6 +681,13 @@ def maker_matches_row(maker, row):
     return maker_is_listed_in_row(maker, row)
 
 
+def edaravone_bag_notice_for_ampoule(name, title):
+    """バッグとアンプルの30mg製剤を区別する。"""
+    ampoule = "エダラボン点滴静注30mg「タカタ」"
+    bag = "エダラボン点滴静注30mgバッグ「タカタ」"
+    return name == ampoule and bag in title and ampoule not in title
+
+
 def is_normal_row(row):
     return "通常出荷" in (row.get("供給状況") or "")
 
@@ -875,6 +882,8 @@ def match_to_csv(announcements, csv_path, existing=None, unmatched_out=None,
         row = rows_by_name.get(name)
         if not row:
             continue
+        if edaravone_bag_notice_for_ampoule(norm(name), norm(value.get("title"))):
+            continue
         if norm(value.get("maker")) in (retained_makers or ()):
             result[name] = dict(value)
             continue  # 取得失敗を通常出荷への変更・案内消失として扱わない。
@@ -902,6 +911,8 @@ def match_to_csv(announcements, csv_path, existing=None, unmatched_out=None,
             candidates.append(result[name])
 
         def add_candidate(maker, title, url):
+            if edaravone_bag_notice_for_ampoule(name_n, norm(title)):
+                return
             candidates.append(make_announcement_record(maker, title, url, checked=today))
             # 代表案内に選ばれなかった旧報・続報も、製品への照合自体は完了している。
             used_urls.add(url)

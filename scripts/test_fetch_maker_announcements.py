@@ -68,6 +68,20 @@ class AnnouncementMatchingTests(unittest.TestCase):
     def test_shipment_volume_limit_lift_is_classified_as_resumed(self):
         self.assertEqual(mod.classify_event("生食液NS出荷量制限解除のご案内"), "resumed")
 
+    def test_edaravone_bag_discontinuation_does_not_apply_to_ampoule(self):
+        maker = "高田製薬"
+        ampoule = "エダラボン点滴静注３０ｍｇ「タカタ」"
+        bag = "エダラボン点滴静注３０ｍｇバッグ「タカタ」"
+        title = "2026/05/01 製造販売中止のご案内_エダラボン点滴静注30mgバッグ「タカタ」"
+        url = "https://www.takata-seiyaku.co.jp/medical/topics/Edaravone.pdf"
+        csv_path = self.make_csv([self.row(ampoule, maker), self.row(bag, maker)])
+        existing = {ampoule: {"maker": maker, "title": title, "url": url}}
+
+        result = mod.match_to_csv([(maker, title, url)], csv_path, existing=existing)
+
+        self.assertEqual(set(result), {bag})
+        self.assertEqual(result[bag]["url"], url)
+
     def test_hisamitsu_notices_with_pdf_verified_strength(self):
         name = "ジクトルテープ７５ｍｇ"
         other_names = ["ジクトルテープ１０ｍｇ", "ジクトルテープ７５ｍｇ「他社」"]
