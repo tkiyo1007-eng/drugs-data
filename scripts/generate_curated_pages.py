@@ -780,8 +780,10 @@ def product_package_snapshot(rows, notice_index, bulletins, generated_keys) -> s
     sections = []
     for (url, maker, day), (notice, entries) in groups.items():
         timing = notice.get("resumption")
+        summary = notice.get("summary")
+        summary_html = f'<p>{esc(summary)}</p>' if summary else ""
         timing_html = f'<p>案内時点の見通し　{esc(timing)}</p>' if timing else ""
-        sections.append(f'<h3>{esc(notice_date_label(day))}の{esc(maker)}の案内</h3>{"".join(entries)}'
+        sections.append(f'<h3>{esc(notice_date_label(day))}の{esc(maker)}の案内</h3>{summary_html}{"".join(entries)}'
                         f'{timing_html}<p><a href="{esc(url)}" data-dsn-event="official-source-open">メーカーの掲載資料を確認</a></p>')
     return ('<section class="intent" aria-labelledby="packageSnapshotTitle">'
             '<h2 id="packageSnapshotTitle">メーカー案内の包装別情報</h2>'

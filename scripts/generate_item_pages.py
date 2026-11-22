@@ -64,10 +64,11 @@ GENTACIN_KEY = "2634710M1077"
 ZESTAC_KEY = "2649865N1023"
 TAGAMET_KEY = "2325001F1211"
 MOVICOL_LD_KEY = "2359110B1037"
+KENACORT_KEYS = frozenset({"2454402A2037", "2454402A3033"})
 LIMITED_REASON_KEYS = frozenset({
     "3999001Q6029", "2646730Q1026", GENTACIN_KEY,
     MOVICOL_LD_KEY, "2149117F1076", "2149117F2072", HILNAMIN_GRANULES_KEY,
-})
+}) | KENACORT_KEYS
 BONZOL_STRENGTHS = {"2499007F1021": "100mg", "2499007F2028": "200mg"}
 BONZOL_KEYS = frozenset(BONZOL_STRENGTHS)
 ZICTOR_KEY = "1147700S1028"
@@ -75,7 +76,7 @@ PRODUCT_SUPPLY_LINKS = {
     JUVELA_KEY: ("juvela-ointment", "ユベラ軟膏の包装別案内"),
     ZICTOR_KEY: ("zictor-tape-75mg", "ジクトルテープの1枚・7枚包装を比較"),
     **dict.fromkeys(("2149117F1076", "2149117F2072"), ("teramuro", "テラムロのAP・BPを販売元別に比較")),
-    **dict.fromkeys(("2454402A2037", "2454402A3033"), ("kenacort-a-injection", "ケナコルトの40mg・50mgを比較")),
+    **dict.fromkeys(KENACORT_KEYS, ("kenacort-a-injection", "ケナコルトの40mg・50mgを比較")),
     **dict.fromkeys(HILNAMIN_TABLETS | {"1172014B2056", HILNAMIN_GRANULES_KEY},
                     ("hilnamin", "ヒルナミンの散・細粒・錠剤を比較")),
 }
@@ -1544,7 +1545,13 @@ def package_overview_content(key, match, display_name, status_label, official_re
         heading = "メーカーが案内した限定出荷の理由"
         hint = "メーカーが示した理由・対象包装"
         description = f'{day}の{notice["maker"]}の案内（{scope}）。{notice["reason"]}'
-        body = f'{source}<p><strong>対象包装　{esc(" ／ ".join(packages))}</strong></p><p>{esc(notice["reason"])}</p>'
+        body = f'{source}<p><strong>対象包装　{esc(" ／ ".join(packages))}</strong></p>'
+        if key in KENACORT_KEYS and notice.get("summary"):
+            heading = "ケナコルトのメーカー供給予定"
+            hint = "メーカーの供給予定"
+            description = f'{day}の{notice["maker"]}の案内（{scope}）。{notice["summary"]}'
+            body += f'<p>{esc(notice["summary"])}</p>'
+        body += f'<p>{esc(notice["reason"])}</p>'
         if key == MOVICOL_LD_KEY and target.get("seller"):
             body += f'<p>対象の販売元　{esc(target["seller"])}</p>'
             shipment = [p["supply"]["status_text"] for p in target["packages"]
