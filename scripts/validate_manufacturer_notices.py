@@ -33,6 +33,7 @@ MAKER_HOSTS = {
     '日医工': 'www.nichiiko.co.jp',
     '住友ファーマ': 'sumitomo-pharma.jp',
     '岩城製薬': 'www.iwakiseiyaku.co.jp',
+    '山善製薬': 'www.yamazen-pharm.co.jp',
     '杏林製薬': 'www.kyorin-pharm.co.jp',
     'キョーリンリメディオ': 'www.med.kyorin-rmd.com',
     'あすか製薬': 'www.aska-pharma.co.jp',
