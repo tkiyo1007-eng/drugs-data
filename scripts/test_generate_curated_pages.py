@@ -680,10 +680,12 @@ class CuratedPageGenerationTests(unittest.TestCase):
         self.assertIn("PTP100錠：出荷停止", html)
         self.assertIn(f'href="../items/{code}.html"', html)
         self.assertNotIn(notice["reason"], html)
-        with_reason = product_package_snapshot([row], {code: [notice]}, None, {code}, include_reason=True)
-        self.assertIn(notice["reason"], with_reason)
+        target["packages"][0]["supply"]["plans"] = [{"event": "stock_depletion", "timing": "2026年12月予定"}]
+        with_details = product_package_snapshot([row], {code: [notice]}, None, {code}, include_details=True)
+        self.assertIn(notice["reason"], with_details)
+        self.assertIn("PTP100錠：出荷停止<br>在庫消尽予定 2026年12月", with_details)
         changed = {"items": [{"url": notice["url"], "sha256": "b" * 64}]}
-        self.assertEqual("", product_package_snapshot([row], {code: [notice]}, changed, {code}, include_reason=True))
+        self.assertEqual("", product_package_snapshot([row], {code: [notice]}, changed, {code}, include_details=True))
         other_strength = dict(row, 商品名="ヒルナミン錠（50mg）")
         self.assertEqual("", product_package_snapshot([other_strength], {code: [notice]}, None, {code}))
 

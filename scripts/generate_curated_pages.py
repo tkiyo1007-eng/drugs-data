@@ -20,6 +20,7 @@ from generate_item_pages import (
     load_zictor_listing, zictor_package_overview,
     manufacturer_notice_index, matching_manufacturer_notices,
     manufacturer_notice_needs_review, maker_tokens, notice_date_label, valid_package_supply,
+    PACKAGE_PLAN_LABELS,
 )
 from validate_shared_content import valid_topic_publisher_http_source
 
@@ -747,7 +748,7 @@ def topic_page(topic: dict, related: list[dict[str, str]], generated_keys: set[s
 {analytics_footer()}</body></html>"""
 
 
-def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *, include_reason=False) -> str:
+def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *, include_details=False) -> str:
     """品目に一致する最新の包装別案内を、厚労省区分と区別して掲載する。"""
     groups = {}
     for row in rows:
@@ -766,11 +767,16 @@ def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *, i
         seller = target["seller"] if target["scope"] == "seller_route_and_package" else ""
         if seller and not maker_tokens(seller).issubset(maker_tokens(row.get("販売メーカー"))):
             continue
-        packages = [
-            f'<li>{esc(package["package"])}：{esc(package["supply"]["status_text"])}</li>'
-            for package in target["packages"] if isinstance(package, dict)
-            and valid_package_supply(package.get("supply")) and package["supply"].get("status_text")
-        ]
+        packages = []
+        for package in target["packages"]:
+            supply = package.get("supply") if isinstance(package, dict) else None
+            if not valid_package_supply(supply) or not supply.get("status_text"):
+                continue
+            details = [f'{esc(package["package"])}：{esc(supply["status_text"])}']
+            if include_details:
+                details.extend(f'{PACKAGE_PLAN_LABELS[plan["event"]]} {esc(plan["timing"].removesuffix("予定"))}'
+                               for plan in supply["plans"])
+            packages.append(f'<li>{"<br>".join(details)}</li>')
         if not packages:
             continue
         href = esc(row_link(row, generated_keys))
@@ -784,7 +790,7 @@ def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *, i
     for (url, maker, day, seller), (notice, entries) in groups.items():
         timing = notice.get("resumption")
         summary = notice.get("summary")
-        reason = notice.get("reason") if include_reason else None
+        reason = notice.get("reason") if include_details else None
         seller_html = f'<p class="note">対象の販売元　{esc(seller)}</p>' if seller else ""
         summary_html = f'<p>{esc(summary)}</p>' if summary else ""
         index_url = notice.get("source_index_url") if seller else None
@@ -1575,10 +1581,11 @@ def main() -> int:
                 "2149117F1084", "2149117F2080",  # 日医工
                 "2149117F1114", "2149117F2110",  # NIG
                 "2149117F1041", "2149117F2048",  # EE
+                "2149117F1092", "2149117F2099",  # ニプロ
             }
             notice_rows = [row for row in rows if item_key(row) in notice_keys]
             snapshot = product_package_snapshot(notice_rows, notice_index, bulletins, generated_keys,
-                                                include_reason=True)
+                                                include_details=True)
         (product_dir / f"{slug}.html").write_text(
             strength_hub_page(slug, rows, generated_keys, source_date, package_snapshot=snapshot), encoding="utf-8")
         product_dates[slug] = max(source_date, STRENGTH_HUB_EDIT_DATE)
