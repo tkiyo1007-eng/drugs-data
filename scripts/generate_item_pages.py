@@ -72,6 +72,32 @@ OKAYAMA_DISCONTINUATION_SOURCES = (
     (OKAYAMA_OUTPATIENT_LIST, "岡山大学病院 薬剤部「院外限定採用医薬品一覧」"),
 )
 HOSPITAL_DISCONTINUATION_REFERENCES = {
+    "1179039F1150": (
+        "フルボキサミンマレイン酸塩錠25mg「タカタ」",
+        "医療用医薬品供給状況データベース（DSJP）の2026年8月4日付記録では、"
+        "PTP100錠は在庫がなくなり次第販売中止で、在庫消尽の見込みは2026年9月です。"
+        "九州大学病院の2026年3月の資料には、供給停止に伴い院内で同規格の「アメル」へ切り替えると記載されています。",
+        (
+            ("https://drugshortage.jp/drugdata.php?drugid=409240",
+             "一般社団法人asTas「医療用医薬品供給状況データベース（DSJP）」"),
+            ("https://www.m-p-a.jp/pdf/広域病院からのお知らせ/20260303　九州大学病院　採用薬情報.pdf",
+             "九州大学病院の採用薬情報 2ページ（宗像薬剤師会掲載）"),
+        ),
+    ),
+    "1179039F2156": (
+        "フルボキサミンマレイン酸塩錠50mg「タカタ」",
+        "SCUELの公開記録では、対象規格に販売中止の記載があります。"
+        "九州大学病院の2026年3月の資料では、供給停止に伴い院内で同規格の「アメル」へ切り替えるとしています。"
+        "厚労省の医薬品マスターに記載された経過措置期限は2027年3月31日です。包装ごとの販売終了日は確認できていません。",
+        (
+            ("https://scueldata.me/supply-monitor/?q=フルボキサミンマレイン酸塩",
+             "SCUEL「医薬品供給モニター」"),
+            ("https://www.m-p-a.jp/pdf/広域病院からのお知らせ/20260303　九州大学病院　採用薬情報.pdf",
+             "九州大学病院の採用薬情報 2ページ（宗像薬剤師会掲載）"),
+            ("https://shinryohoshu.mhlw.go.jp/shinryohoshu/file/info/ymente261112.pdf",
+             "厚生労働省「医薬品マスター変更内容」10ページ"),
+        ),
+    ),
     "3929407D1136": (
         "レボホリナート点滴静注用25mg「ヤクルト」",
         "医療用医薬品供給状況データベース（DSJP）の2026年10月14日付記録では、"
@@ -189,6 +215,64 @@ HOSPITAL_DISCONTINUATION_REFERENCES = {
                 "福岡大学病院「第318回薬事委員会報告」2ページ（宗像薬剤師会掲載）",
             ),
         ),
+    ),
+}
+PUBLIC_DISCONTINUATION_REFERENCES = {
+    "1179050F1032": (
+        "アトモキセチン錠5mg「タカタ」",
+        "医療用医薬品供給状況データベース（DSJP）の2026年8月4日付記録では、"
+        "PTP140錠は販売中止で、在庫は消尽済みとされています。",
+        (("https://drugshortage.jp/drugdata.php?drugid=409247",
+          "一般社団法人asTas「医療用医薬品供給状況データベース（DSJP）」"),),
+    ),
+    "1179050F2039": (
+        "アトモキセチン錠10mg「タカタ」",
+        "医療用医薬品供給状況データベース（DSJP）の2026年8月4日付記録では、"
+        "PTP140錠は販売中止で、在庫は消尽済みとされています。",
+        (("https://drugshortage.jp/drugdata.php?drugid=409248",
+          "一般社団法人asTas「医療用医薬品供給状況データベース（DSJP）」"),),
+    ),
+    "1179050F3035": (
+        "アトモキセチン錠25mg「タカタ」",
+        "医療用医薬品供給状況データベース（DSJP）の2026年8月4日付記録では、"
+        "PTP140錠は販売中止で、在庫は消尽済みとされています。",
+        (("https://drugshortage.jp/drugdata.php?drugid=409249",
+          "一般社団法人asTas「医療用医薬品供給状況データベース（DSJP）」"),),
+    ),
+    "1179050F4031": (
+        "アトモキセチン錠40mg「タカタ」",
+        "医療用医薬品供給状況データベース（DSJP）の2026年8月4日付記録では、"
+        "PTP140錠は販売中止で、在庫は消尽済みとされています。",
+        (("https://drugshortage.jp/drugdata.php?drugid=409250",
+          "一般社団法人asTas「医療用医薬品供給状況データベース（DSJP）」"),),
+    ),
+    "1190018F4170": (
+        "メマンチン塩酸塩OD錠5mg「タカタ」",
+        "医療用医薬品供給状況データベース（DSJP）の2026年8月4日付記録では、"
+        "PTP56錠は販売中止で、在庫は消尽済みとされています。バラ100錠にも販売中止の記載があります。",
+        (("https://drugshortage.jp/drugdata.php?drugid=409260",
+          "一般社団法人asTas「医療用医薬品供給状況データベース（DSJP）」"),),
+    ),
+    "1190018F5177": (
+        "メマンチン塩酸塩OD錠10mg「タカタ」",
+        "医療用医薬品供給状況データベース（DSJP）の2026年8月4日付記録では、"
+        "PTP56錠は在庫がなくなり次第販売中止で、在庫消尽の見込みは2026年11月です。バラ100錠にも販売中止の記載があります。",
+        (("https://drugshortage.jp/drugdata.php?drugid=409261",
+          "一般社団法人asTas「医療用医薬品供給状況データベース（DSJP）」"),),
+    ),
+    "1319742Q1179": (
+        "レボフロキサシン点眼液0.5%「タカタ」",
+        "医療用医薬品供給状況データベース（DSJP）の2026年8月4日付記録では、"
+        "5mL×5瓶は在庫がなくなり次第販売中止で、在庫消尽の見込みは2027年2月です。5mL×10瓶にも販売中止の記載があります。",
+        (("https://drugshortage.jp/drugdata.php?drugid=409257",
+          "一般社団法人asTas「医療用医薬品供給状況データベース（DSJP）」"),),
+    ),
+    "1319742Q2116": (
+        "レボフロキサシン点眼液1.5%「タカタ」",
+        "医療用医薬品供給状況データベース（DSJP）の2026年8月4日付記録では、"
+        "5mL×10瓶は在庫がなくなり次第販売中止で、在庫消尽の見込みは2027年2月です。",
+        (("https://drugshortage.jp/drugdata.php?drugid=409259",
+          "一般社団法人asTas「医療用医薬品供給状況データベース（DSJP）」"),),
     ),
 }
 # drugs-data の generate_curated_pages.py（CATEGORY_MIN_ROWS）と同じ基準。
@@ -2038,20 +2122,22 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
                                                 link_first_alternatives=limited_layout)
     hospital_box = ""
     hospital_reference = HOSPITAL_DISCONTINUATION_REFERENCES.get(key)
-    if (hospital_reference and normalized_text(name) == normalized_text(hospital_reference[0])
+    discontinuation_reference = hospital_reference or PUBLIC_DISCONTINUATION_REFERENCES.get(key)
+    if (discontinuation_reference and normalized_text(name) == normalized_text(discontinuation_reference[0])
             and row_maker_matches(row, "高田製薬")):
-        _, hospital_note, hospital_sources = hospital_reference
+        _, discontinuation_note, discontinuation_sources = discontinuation_reference
+        heading = "病院資料による補足" if hospital_reference else "公開資料による販売中止の補足"
         source_links = "".join(
             f'<p><a href="{esc(url)}" target="_blank" rel="noopener" '
             f'data-dsn-event="official-source-open">出典：{esc(label)}'
             f'{"（PDF）" if url.endswith(".pdf") else ""}</a></p>'
-            for url, label in hospital_sources
+            for url, label in discontinuation_sources
         )
         hospital_box = (
             '<section class="supp supp-notice hospital-discontinuation" '
             'aria-labelledby="hospital-discontinuation-title">'
-            '<h3 id="hospital-discontinuation-title">病院資料による補足</h3>'
-            f'<p>{esc(hospital_note)}</p>{source_links}'
+            f'<h3 id="hospital-discontinuation-title">{heading}</h3>'
+            f'<p>{esc(discontinuation_note)}</p>{source_links}'
             '</section>')
     # 包装情報を載せる品目だけに適用し、無関係な全品目のHTMLを変更しない。
     package_styles = """
