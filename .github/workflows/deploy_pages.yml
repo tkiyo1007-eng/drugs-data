@@ -1,4 +1,5 @@
 name: Deploy GitHub Pages
+run-name: ${{ github.event.workflow_run.name == 'PMDA回収情報を更新' && 'PMDA回収情報の公開' || 'Deploy GitHub Pages' }}
 
 on:
   workflow_run:
