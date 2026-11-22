@@ -60,7 +60,11 @@ PACKAGE_OVERVIEW_KEYS = frozenset({"2649805M1026", "3179106F1039"})
 GENTACIN_KEY = "2634710M1077"
 ZESTAC_KEY = "2649865N1023"
 TAGAMET_KEY = "2325001F1211"
-LIMITED_REASON_KEYS = frozenset({"3999001Q6029", "2646730Q1026", GENTACIN_KEY})
+MOVICOL_LD_KEY = "2359110B1037"
+LIMITED_REASON_KEYS = frozenset({
+    "3999001Q6029", "2646730Q1026", GENTACIN_KEY,
+    MOVICOL_LD_KEY, "2149117F1076", "2149117F2072",
+})
 BONZOL_STRENGTHS = {"2499007F1021": "100mg", "2499007F2028": "200mg"}
 BONZOL_KEYS = frozenset(BONZOL_STRENGTHS)
 ZICTOR_KEY = "1147700S1028"
@@ -1479,7 +1483,10 @@ def package_overview_notice(key, matches, bulletins):
         return None
     match = latest[0]
     notice, target = match["notice"], match["target"]
-    if match["source_changed"] or target["scope"] != "package" or target.get("seller"):
+    package_scope = target["scope"] == "package" and not target.get("seller")
+    movicol_scope = (key == MOVICOL_LD_KEY and target["scope"] == "seller_route_and_package"
+                     and target.get("seller") == "EAファーマ")
+    if match["source_changed"] or not (package_scope or movicol_scope):
         return None
     pending = manufacturer_notice_needs_review(notice, bulletins)
     if pending and not (key in LIMITED_REASON_KEYS and dated_pdf_unchanged_before_daily_limit(notice, bulletins)):
@@ -1525,6 +1532,12 @@ def package_overview_content(key, match, display_name, status_label):
         hint = "メーカーが示した理由・対象包装"
         description = f'{day}の{notice["maker"]}の案内（{scope}）。{notice["reason"]}'
         body = f'{source}<p><strong>対象包装　{esc(" ／ ".join(packages))}</strong></p><p>{esc(notice["reason"])}</p>'
+        if key == MOVICOL_LD_KEY and target.get("seller"):
+            body += f'<p>対象の販売元　{esc(target["seller"])}</p>'
+            shipment = [p["supply"]["status_text"] for p in target["packages"]
+                        if valid_package_supply(p.get("supply")) and p["supply"].get("status_text")]
+            if shipment:
+                body += f'<p>対象包装の案内　{esc("／".join(dict.fromkeys(shipment)))}</p>'
         resumption = notice.get("resumption")
         if isinstance(resumption, str) and resumption.strip():
             body += f'<p><strong>案内時点の解除見通し　</strong>{esc(resumption)}</p>'

@@ -74,7 +74,7 @@ STRENGTH_HUBS = {
     "movicol": ("モビコール配合内用剤", ("LD", "HD")),
     "teramuro": ("テラムロ配合錠", ("AP", "BP")),
 }
-STRENGTH_HUB_EDIT_DATE = "2026-11-21"
+STRENGTH_HUB_EDIT_DATE = "2026-11-23"
 STATUS = {
     "ok": ("通常出荷", "#227D4F", "#E7F6EE", 0),
     "limited": ("限定出荷", "#9F5E11", "#FCF0DF", 1),
@@ -821,11 +821,13 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
         match = selling_name.fullmatch(norm(row.get("商品名")))
         if match:
             groups[match.group(1).upper()].append(row)
-    heading = f"{brand}の供給状況"
-    description = f"{brand}の{'・'.join(strengths)}を選んで、厚生労働省の公表区分と品目別の詳細を確認できます。"
+    grades_label = "・".join(strengths)
+    heading = f"{brand}{grades_label}の出荷調整・供給状況"
+    description = (f"{brand}{grades_label}の出荷調整を規格別に確認。厚生労働省の供給区分と、"
+                   "各規格の品目ページで確認できるメーカー案内への入口を掲載しています。")
     if slug == "teramuro":
-        description = "テラムロ配合錠のAP・BPについて、販売名、販売元、厚生労働省の供給区分を規格別に見比べられます。"
-    title = f"{heading}｜{'・'.join(strengths)}{'のメーカー別一覧' if slug == 'teramuro' else 'の規格別一覧'}｜医薬品供給ナビ"
+        description = "テラムロ配合錠AP・BPの出荷調整を販売元別に確認。厚生労働省の供給区分を比較し、各品目のメーカー案内に進めます。"
+    title = f"{heading}｜医薬品供給ナビ"
     canonical = f"{SITE_ROOT}products/{slug}.html"
     sections, jump_links, items = [], [], []
     for strength, members in groups.items():

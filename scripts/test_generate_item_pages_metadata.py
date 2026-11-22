@@ -920,6 +920,23 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
         self.assertNotIn('id="packageBriefTitle"', resumed)
         self.assertNotIn("販売中止", re.search(r"<title>(.*?)</title>", resumed).group(1))
 
+    def test_movicol_ld_summary_limits_the_reason_to_the_confirmed_seller_package(self):
+        key = "2359110B1037"
+        row = dict(self.row(), YJコード=key, 商品名="モビコール配合内用剤LD",
+                   販売メーカー="EAファーマ", 製造メーカー="EAファーマ", 供給状況="②限定出荷")
+        notice = dict(self.notice(), maker="EAファーマ", title="モビコールの限定出荷のお知らせ")
+        target = dict(notice["targets"][0], yj_code=key, product_name=row["商品名"],
+                      seller="EAファーマ", packages=[{"package": "LD 100包"}])
+        def render(seller):
+            scoped = dict(notice, targets=[dict(target, seller=seller)])
+            return page_html(row, key, "limited", "2026-11-23", [], {key},
+                             manufacturer_notices=[scoped], manufacturer_bulletins={"items": []})
+        page = render("EAファーマ")
+        brief = re.search(r'<section class="package-brief[^>]*>.*?</section>', page, re.S).group()
+        self.assertIn("対象包装　LD 100包", brief)
+        self.assertIn("対象の販売元　EAファーマ", brief)
+        self.assertNotIn('id="packageBriefTitle"', render("別の販売元"))
+
     def test_unverified_manufacturer_package_never_leads_search_metadata(self):
         row = dict(self.row(), 規格="10mg1錠")
         key = row["YJコード"]

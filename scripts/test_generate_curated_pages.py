@@ -322,6 +322,7 @@ class CuratedPageGenerationTests(unittest.TestCase):
             {"商品名": "テラムロ配合錠CP「例」", "YJコード": "NEWGRADE"},
         ]
         page = strength_hub_page("teramuro", rows, {"APKEY"}, "2026-11-20")
+        self.assertIn("<title>テラムロ配合錠AP・BPの出荷調整・供給状況｜医薬品供給ナビ</title>", page)
         self.assertIn('href="#bp"', page)
         ap_section, bp_section = page.split('<section aria-labelledby="bp">')
         self.assertIn('href="../items/APKEY.html"', ap_section)
@@ -336,6 +337,7 @@ class CuratedPageGenerationTests(unittest.TestCase):
             {"商品名": "モビコール配合内用剤に似た名称", "YJコード": "LOOKALIKE"},
             {"商品名": "モビコール配合内用剤LD別製品", "YJコード": "LOOKALIKE2"},
         ], set(), "")
+        self.assertIn("<title>モビコール配合内用剤LD・HDの出荷調整・供給状況｜医薬品供給ナビ</title>", missing)
         self.assertNotIn("LOOKALIKE", missing)
         self.assertIn("基準日 未確認", missing)
         self.assertIn("今回の公表データでは該当する品目を確認できません", missing)
