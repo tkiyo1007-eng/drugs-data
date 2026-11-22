@@ -63,6 +63,8 @@ def maker_news(site, explanations):
         if not is_official_maker_source(maker, urlsplit(url)):
             continue
         note = explanations.get(url, {})
+        # A package-level bulletin may cover multiple shipment statuses.
+        label = MAKER_LABELS.get(note.get("event_type"), label)
         posted = note.get("posted_at") or row.get("listed_at")
         # An automatic event's date can come from a filename. Prefer it to
         # the first-seen day only when the publisher's title says the same.

@@ -68,6 +68,21 @@ class OfficialNewsTests(unittest.TestCase):
         self.assertEqual((entries[0]["date"], entries[0]["date_label"]), ("2026-11-19", "掲載"))
         self.assertIn("PTP100錠", entries[0]["summary"])
 
+    def test_package_status_summary_can_use_a_general_maker_label(self):
+        url = "https://www.nichiiko.co.jp/medicine/files/supply-matrix.pdf"
+        notice = {"maker": "日医工", "title": "包装別の供給状況", "url": url,
+                  "event_type": "limited", "listed_at": "2026-11-20"}
+        summary = "PTP100錠は通常出荷、PTP1000錠は供給停止です。"
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "maker_announcement_events.json").write_text("{}", encoding="utf-8")
+            (root / "manufacturer_notices.json").write_text(
+                json.dumps({"notices": [notice]}), encoding="utf-8")
+            original, = maker_news(root, {})
+            editorial, = maker_news(root, {url: {"event_type": "supply", "summary": summary}})
+        self.assertEqual(original["tag"], "限定出荷の案内")
+        self.assertEqual(editorial, {**original, "tag": "供給に関する案内", "summary": summary})
+
     def test_maker_dates_use_announcement_day_when_title_confirms_it(self):
         source = "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/"
         cases = [
