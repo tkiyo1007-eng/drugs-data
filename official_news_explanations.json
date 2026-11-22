@@ -1,4 +1,11 @@
 {
+  "https://www.yg-nissin.co.jp/products/PDF/4493_6506_z1.pdf": {
+    "summary": "他社品の影響で注文が増え、日新製薬は5mL×10管を限定出荷にしました。11月18日版のメーカー一覧では出荷量は通常、解除時期は未定です。"
+  },
+  "https://www.yg-nissin.co.jp/products/download/nissin-supplystate261118.pdf": {
+    "event_type": "supply",
+    "summary": "日新製薬の11月18日版では、0.5％・5mL×10管が11月17日から通常出荷に戻りました。5mL×50管は需要増のため限定出荷で、解除時期は未定です。"
+  },
   "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83806&t=4": {
     "posted_at": "2026-11-19",
     "summary": "東和薬品はPTP100錠を11月19日から出荷再開しました。在庫が十分に確保できていないため、限定出荷を継続します。解除時期は未定です。"
