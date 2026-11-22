@@ -28,6 +28,30 @@ class AnnouncementMatchingTests(unittest.TestCase):
         return {"商品名": name, "一般名": "テスト成分", "製造メーカー": maker,
                 "販売メーカー": maker, "供給状況": status, "代替候補": alt}
 
+    @mock.patch.object(mod, "fetch")
+    def test_nihon_generic_collects_only_its_document_links(self, fetch_mock):
+        base = "https://medical.nihon-generic.co.jp"
+        fetch_mock.return_value = (
+            f'<a href="{base}/uploadfiles/medicine/test.pdf">直接PDFの案内</a>'
+            '<a href="/a.php?id=1884" class="has_pdf"><time>2026/11/19</time>'
+            '<span>エパルレスタット錠50mg「JG」供給に関するご案内</span></a>'
+            '<a class="news-link has_pdf" href="/a.php?id=1885">カンデサルタンの案内</a>'
+            '<a href="/a.php?id=1886">PDF扱いでないリンク</a>'
+            '<a href="https://example.com/a.php?id=1887" class="has_pdf">外部のリンク</a>'
+            '<a href="/a.php?id=1888&amp;other=1" class="has_pdf">余分なパラメータ</a>'
+            '<a data-href="/a.php?id=1889" class="has_pdf">hrefでない属性</a>'
+        )
+        result = mod.parse_nihon_generic(pages=1)
+        self.assertEqual(result, [
+            ("日本ジェネリック", "直接PDFの案内", f"{base}/uploadfiles/medicine/test.pdf"),
+            ("日本ジェネリック", "2026/11/19 エパルレスタット錠50mg「JG」供給に関するご案内", f"{base}/a.php?id=1884"),
+            ("日本ジェネリック", "カンデサルタンの案内", f"{base}/a.php?id=1885"),
+        ])
+        self.assertEqual(mod.extract_announcement_date(result[1][1]), "2026-11-19")
+
+    def test_shipment_volume_limit_lift_is_classified_as_resumed(self):
+        self.assertEqual(mod.classify_event("生食液NS出荷量制限解除のご案内"), "resumed")
+
     def test_hisamitsu_notices_with_pdf_verified_strength(self):
         name = "ジクトルテープ７５ｍｇ"
         other_names = ["ジクトルテープ１０ｍｇ", "ジクトルテープ７５ｍｇ「他社」"]

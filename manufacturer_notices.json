@@ -2,6 +2,285 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "jg-epalrestat-50-supply-202611",
+      "maker": "日本ジェネリック",
+      "title": "エパルレスタット錠50mg「JG」の限定出荷",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1884",
+      "source_index_url": "https://medical.nihon-generic.co.jp/news/",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-19",
+      "verified_at": "2026-11-22",
+      "sha256": "a4abb8572f9ab4e702686abbf8d6a11a0dc44a48ec72414ac8180d869d7392b6",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造工場の生産余力が限られ、現在の生産計画と在庫では安定供給が難しくなる見通しのためです。",
+      "maker_supply_status": {
+        "handling": "② 限定出荷（自社の事情）",
+        "volume": "B 出荷量減少"
+      },
+      "targets": [
+        {
+          "yj_code": "3999013F1266",
+          "product_name": "エパルレスタット錠５０ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792310318"
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカー案内に限定出荷の解除時期は記載されていません。"
+      ]
+    },
+    {
+      "id": "jg-candesartan-12-supply-202611",
+      "maker": "日本ジェネリック",
+      "title": "カンデサルタン錠12mg「JG」の限定出荷",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1885",
+      "source_index_url": "https://medical.nihon-generic.co.jp/news/",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-19",
+      "verified_at": "2026-11-22",
+      "sha256": "c85e3dc8ff4997c4a8eb98bb112e3ce224367b16afca74ddb504024b08e98f21",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造工場の生産余力が限られ、現在の生産計画と在庫では安定供給が難しくなる見通しのためです。",
+      "maker_supply_status": {
+        "handling": "② 限定出荷（自社の事情）",
+        "volume": "B 出荷量減少"
+      },
+      "targets": [
+        {
+          "yj_code": "2149040F4092",
+          "product_name": "カンデサルタン錠１２ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792219017"
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカー案内に限定出荷の解除時期は記載されていません。"
+      ]
+    },
+    {
+      "id": "jg-silodosin-od-2-supply-202611",
+      "maker": "日本ジェネリック",
+      "title": "シロドシンOD錠2mg「JG」の限定出荷",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1886",
+      "source_index_url": "https://medical.nihon-generic.co.jp/news/",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-19",
+      "verified_at": "2026-11-22",
+      "sha256": "1550a6936db5ac389ad370778a6fb4f753a0d3cb4cc9e289e69bc59b414b3c71",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "他社品の限定出荷を受け、想定を上回る注文が続き、今後の供給に支障が出ると判断しました。",
+      "maker_supply_status": {
+        "handling": "③ 限定出荷（他社品の影響）",
+        "volume": "A 出荷量通常"
+      },
+      "targets": [
+        {
+          "yj_code": "2590010F3174",
+          "product_name": "シロドシンＯＤ錠２ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792102524"
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカー案内に限定出荷の解除時期は記載されていません。"
+      ]
+    },
+    {
+      "id": "jg-pitavastatin-2-4-supply-202611",
+      "maker": "日本ジェネリック",
+      "title": "ピタバスタチンCa錠2mg・4mg「JG」の限定出荷",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1887",
+      "source_index_url": "https://medical.nihon-generic.co.jp/news/",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-19",
+      "verified_at": "2026-11-22",
+      "sha256": "0adaa0ff00dfdc564b631e739c7d0056946c4b4aa9669bb671a69b2421c1b43a",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造工場の生産余力が限られ、現在の生産計画と在庫では安定供給が難しくなる見通しのためです。",
+      "maker_supply_status": {
+        "handling": "② 限定出荷（自社の事情）",
+        "volume": "A 出荷量通常"
+      },
+      "targets": [
+        {
+          "yj_code": "2189016F2270",
+          "product_name": "ピタバスタチンＣａ錠２ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792218010"
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "792218058"
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "792218089"
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        },
+        {
+          "yj_code": "2189016F3225",
+          "product_name": "ピタバスタチンＣａ錠４ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792219116"
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカー案内に限定出荷の解除時期は記載されていません。"
+      ]
+    },
+    {
+      "id": "jg-bosentan-62-5-supply-202611",
+      "maker": "日本ジェネリック",
+      "title": "ボセンタン錠62.5mg「JG」の限定出荷",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1888",
+      "source_index_url": "https://medical.nihon-generic.co.jp/news/",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-19",
+      "verified_at": "2026-11-22",
+      "sha256": "b24c91a38dd104040cd2f43331aa033466bca524e96310eb9e4509e0841cded8",
+      "collection_mode": "manual",
+      "event_type": "limited",
+      "reason": "製造所の変更を検討する中で想定以上の受注があり、現在の在庫では安定供給が難しくなる見通しのためです。",
+      "maker_supply_status": {
+        "handling": "② 限定出荷（自社の事情）",
+        "volume": "A 出荷量通常"
+      },
+      "targets": [
+        {
+          "yj_code": "2190026F1049",
+          "product_name": "ボセンタン錠６２．５ｍｇ「ＪＧ」",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "packages": [
+            {
+              "package": "PTP20錠",
+              "unified_product_code": "792296223"
+            }
+          ],
+          "source_pages": [
+            1
+          ],
+          "seller": "日本ジェネリック"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "メーカー案内に限定出荷の解除時期は記載されていません。"
+      ]
+    },
+    {
+      "id": "jg-saline-ns-supply-202611",
+      "maker": "日本ジェネリック",
+      "title": "生食液NSの出荷量制限解除",
+      "url": "https://medical.nihon-generic.co.jp/a.php?id=1883",
+      "source_index_url": "https://medical.nihon-generic.co.jp/news/",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-16",
+      "verified_at": "2026-11-22",
+      "sha256": "2d1a93ff09c950f30f587419b1d230b2c349a061fa8d65bb36a6dd1ad74ce252",
+      "collection_mode": "manual",
+      "event_type": "resumed",
+      "reason": "他社品の限定出荷などにより2025年9月から行っていた出荷量の制限を、日本ジェネリックが解除しました。",
+      "maker_supply_status": {
+        "handling": "① 通常出荷",
+        "volume": "A 出荷量通常"
+      },
+      "targets": [
+        {
+          "yj_code": "3311401A1097",
+          "product_name": "生食液ＮＳ",
+          "maker": "日新製薬",
+          "scope": "seller_route_and_package",
+          "packages": [
+            {
+              "package": "5mL×50管（ルアーフィット）",
+              "unified_product_code": "792355043"
+            }
+          ],
+          "source_pages": [
+            1
+          ],
+          "seller": "日本ジェネリック"
+        },
+        {
+          "yj_code": "3311401A2115",
+          "product_name": "生食液ＮＳ",
+          "maker": "日新製薬",
+          "scope": "seller_route_and_package",
+          "packages": [
+            {
+              "package": "20mL×50管（ツイストルアー）",
+              "unified_product_code": "792355050"
+            },
+            {
+              "package": "20mL×50管（ワイドオープン）",
+              "unified_product_code": "792362355"
+            }
+          ],
+          "source_pages": [
+            1
+          ],
+          "seller": "日本ジェネリック"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "日本ジェネリックが販売する対象3包装の案内です。"
+      ]
+    },
+    {
       "id": "sanofi-intal-inhalation-resumption-plan-202611",
       "maker": "サノフィ",
       "title": "インタール吸入液1％の供給再開予定",
