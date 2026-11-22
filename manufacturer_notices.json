@@ -11288,6 +11288,7 @@
       "collection_mode": "manual",
       "event_type": "limited",
       "reason": "需要の拡大に対応して生産を続けていましたが、製造設備の一時的な不具合で在庫が減ったため、第一三共エスファは対象包装の出荷を制限しています。",
+      "resumption": "メーカーは設備を増強する方針です。生産量が増えるまでには時間がかかる見込みで、解除時期は示されていません。",
       "targets": [
         {
           "yj_code": "2149117F1033",
@@ -11340,9 +11341,7 @@
         }
       ],
       "alternatives": [],
-      "cautions": [
-        "メーカーは設備を増強する方針です。生産量が増えるまでには時間がかかる見込みで、解除時期は示されていません。"
-      ],
+      "cautions": [],
       "listed_at": "2026-11-09",
       "source_index_url": "https://med.daiichisankyo-ep.co.jp/information/?certification=1"
     },
