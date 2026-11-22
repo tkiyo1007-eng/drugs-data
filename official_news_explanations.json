@@ -35,5 +35,65 @@
   "https://www.nichiiko.co.jp/medicine/files/20261118-03-01.pdf": {
     "posted_at": "2026-11-19",
     "summary": "日医工が在庫消尽後の販売中止を案内しました。PTP100錠の在庫消尽は5mgが2026年12月、10mgが2027年4月、20mgが同年7月の見込みです。"
+  },
+  "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=2-13035": {
+    "summary": "無菌性を保証するための一部の管理に不備があり、ロート製薬が点眼薬6品目の対象ロットを自主回収。対象ロットと出荷時期は、11月12日の訂正を反映したPMDAの回収概要で確認できます。"
+  },
+  "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=1-2506": {
+    "summary": "献血者が製剤の品質に影響し得る医薬品を使っていたとの連絡を受け、日赤は未使用の1本（ロット24-3223-9715）を回収対象としました。"
+  },
+  "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=2-13031": {
+    "summary": "長期安定性試験で分解物が規格を外れたため、三笠製薬が50mg・100mgの70枚・700枚包装の一部を自主回収。対象は包装ごとにPMDAの製造番号一覧で確認できます。"
+  },
+  "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=2-13029": {
+    "summary": "ガラス製シリンジの胴体に亀裂や破損があったとの報告を受け、武田薬品工業が11.25mgキットのロット577157を自主回収の対象としました。"
+  },
+  "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=2-13026": {
+    "summary": "長期安定性試験で溶出性が規格を外れたため、日本ケミファがPTP100錠の5ロット（0014・0024・0034・0025・0035）を自主回収の対象としました。"
+  },
+  "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=2-13027": {
+    "summary": "指をかける部品の寸法が規格を外れ、投与時に外れる可能性があるため、富士製薬工業がBF25A・AK25Aの2ロットを自主回収の対象としました。"
+  },
+  "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=1-2504": {
+    "summary": "献血者の感染症検査で陽性が判明し、日赤は未使用の480mL製剤1本（ロット72-2935-9840）を回収対象としました。"
+  },
+  "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=2-13012": {
+    "summary": "有効成分の含量が規格を下回るロットが確認され、パナケイア製薬が18包包装の3ロット（H063L・J188L・K305P）を自主回収の対象としました。"
+  },
+  "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=2-13014": {
+    "summary": "バイアルラベルのない製品が納品先で見つかり、PDRファーマが2本包装と10本包装の各1ロットを自主回収。個装箱の番号は504A-5667B・504A-5667Jです。"
+  },
+  "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=2-13011": {
+    "summary": "容器の記号番号が管理システムに登録されず、適切な出荷判定を経ていなかったため、日本酸素が製造番号114261020の63本を回収対象としました。"
+  },
+  "https://sandoz-jp.cms.sandoz.com/sites/default/files/Media%20Documents/news_20261116_001.pdf": {
+    "summary": "サンドの案内では、5mL×5バイアル包装は見込みより約1か月早い11月上旬に在庫がなくなり、出荷を終了しました。"
+  },
+  "https://www.maruishi-pharm.co.jp/medical/media/syukkajokyo_20261116.pdf": {
+    "summary": "丸石製薬の11月16日版では、300mLと10mL×84包が限定出荷で、在庫がなくなり次第、一時停止の予定です。同資料の在庫消尽見込みは300mLが12月中旬、分包が10月下旬です。"
+  },
+  "https://medical.nihon-generic.co.jp/uploadfiles/medicine/BEZAX00_CHUUSHI_2611.pdf": {
+    "summary": "日本ジェネリックが在庫消尽後の販売中止を案内しました。100mgのPTP100錠は2027年4月頃に消尽する見込みで、200mgのPTP100錠・1000錠は案内時点で出荷停止中です。"
+  },
+  "https://medical.nihon-generic.co.jp/uploadfiles/medicine/LEVOC00_CHUUSHI_2611.pdf": {
+    "summary": "日本ジェネリックは在庫消尽後に販売を中止する予定です。在庫消尽の見込みは250mgのPTP100錠が2027年3月頃、500mgのPTP50錠が同年4月頃です。"
+  },
+  "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001V9g47IAB": {
+    "summary": "ニプロは供給体制が整い、30mL×10の特約店向け限定出荷を解除し、通常出荷を再開すると案内しました。"
+  },
+  "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001Uj4aLIAR": {
+    "summary": "受注が想定を上回り、ニプロは5mL×50管の新規注文を辞退し、特約店向けの出荷を割当制にすると案内しました。解除日は確定次第案内する予定です。"
+  },
+  "https://celltrionhealthcare.jp/api/common/files/download?encData=GzdYY%2BdcbfTTQDcrIBmwEmZYvdoJabxfuk15mJOetuI%3D": {
+    "summary": "セルトリオンは、増産に向けた対応で供給の目途が立ったとして、200mgの1バイアル包装を11月24日の同社受注分から通常出荷に戻す予定です。"
+  },
+  "https://www.maruishi-pharm.co.jp/medical/media/MNG_genteisyuuka-teisi_20261030.pdf": {
+    "summary": "委託先の製造が一時停止し、丸石製薬は在庫がなくなり次第、出荷を停止する予定です。在庫消尽の見込みは50gが2027年3月、100gが同年5月です。"
+  },
+  "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=83763&t=4&f=%E3%83%A1%E3%82%B5%E3%83%A9%E3%82%B8%E3%83%B3%E5%BE%90%E6%94%BE%E9%8C%A0250+mg%E3%80%8C%E3%83%88%E3%83%BC%E3%83%AF%E3%80%8D_%E5%87%BA%E8%8D%B7%E5%81%9C%E6%AD%A2%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%81%8A%E8%A9%AB%E3%81%B3%E3%81%A8%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B.pdf": {
+    "summary": "委託先で承認規格を満たす製品を製造できず納入が遅れ、東和薬品はPTP100錠の出荷を一時停止すると案内しました。再開時期は未定です。"
+  },
+  "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/261030.pdf": {
+    "summary": "久光製薬の第四報では、70枚入りのうち1枚×70袋は11月下旬から当面出荷停止、7枚×10袋は限定出荷を継続する予定です。"
   }
 }
