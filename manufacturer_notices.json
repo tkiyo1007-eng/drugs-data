@@ -2,6 +2,114 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "nichiiko-teramuro-ap-bp-discontinuation-202510",
+      "maker": "日医工",
+      "title": "テラムロ配合錠AP・BP「日医工」の販売中止（成分重複品統合）",
+      "url": "https://www.nichiiko.co.jp/medicine/file/00820/information/HJ01042-01.pdf",
+      "source_index_url": "https://www.nichiiko.co.jp/medicine/product/00820",
+      "announced_at": "2025-10",
+      "verified_at": "2026-11-23",
+      "content_updated_at": "2026-11-23",
+      "sha256": "18756381c7b5c26f4f4cdc6d7bdfc3fc049fa63026e904835e960aaa71d746e7",
+      "collection_mode": "manual",
+      "event_type": "discontinued",
+      "summary": "経過措置満了日は2027年3月31日です。日医工は当時、AP・BPそれぞれに対応する「NIG」のPTP100錠を切替候補に挙げています。",
+      "reason": "日医工は長期の供給停止後に製造再開を断念し、同じ成分を含む製品へ統合すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2149117F1084",
+          "product_name": "テラムロ配合錠ＡＰ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-00820-4",
+              "gs1_sales": "(01)14987376008201",
+              "supply": {
+                "status": "stopped",
+                "status_text": "販売中止・在庫消尽済み（2025年10月の案内）",
+                "plans": []
+              }
+            },
+            {
+              "package": "PTP140錠",
+              "unified_product_code": "376-00821-1",
+              "gs1_sales": "(01)14987376008218",
+              "supply": {
+                "status": "stopped",
+                "status_text": "販売中止・在庫消尽済み（2025年10月の案内）",
+                "plans": []
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "2149117F2080",
+          "product_name": "テラムロ配合錠ＢＰ「日医工」",
+          "maker": "日医工",
+          "scope": "package",
+          "source_pages": [
+            1
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "376-00830-3",
+              "gs1_sales": "(01)14987376008300",
+              "supply": {
+                "status": "stopped",
+                "status_text": "販売中止・在庫消尽済み（2025年10月の案内）",
+                "plans": []
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        {
+          "type": "日医工が成分重複品統合に伴い案内した同規格の切替候補",
+          "source_url": "https://www.nichiiko.co.jp/medicine/file/00820/information/HJ01042-01.pdf",
+          "target_yj_codes": [
+            "2149117F1084"
+          ],
+          "products": [
+            {
+              "name": "テラムロ配合錠ＡＰ「ＮＩＧ」",
+              "yj_code": "2149117F1114",
+              "maker": "日医工岐阜工場",
+              "scope": "PTP100錠"
+            }
+          ],
+          "cautions": [
+            "2025年10月のメーカー案内に記載された候補です。候補品の現在の供給区分は品目ページをご確認ください。"
+          ]
+        },
+        {
+          "type": "日医工が成分重複品統合に伴い案内した同規格の切替候補",
+          "source_url": "https://www.nichiiko.co.jp/medicine/file/00820/information/HJ01042-01.pdf",
+          "target_yj_codes": [
+            "2149117F2080"
+          ],
+          "products": [
+            {
+              "name": "テラムロ配合錠ＢＰ「ＮＩＧ」",
+              "yj_code": "2149117F2110",
+              "maker": "日医工岐阜工場",
+              "scope": "PTP100錠"
+            }
+          ],
+          "cautions": [
+            "2025年10月のメーカー案内に記載された候補です。候補品の現在の供給区分は品目ページをご確認ください。"
+          ]
+        }
+      ],
+      "cautions": []
+    },
+    {
       "id": "sandoz-amaluet-discontinuation-202603",
       "maker": "サンド",
       "title": "アマルエット配合錠1番・2番・3番・4番「サンド」の販売中止案内",

@@ -1565,6 +1565,7 @@ def main() -> int:
                 "2149117F1033", "2149117F2030",  # DSEP
                 "2149117F1076", "2149117F2072",  # トーワ
                 "2149117F1050", "2149117F2056",  # サワイ
+                "2149117F1084", "2149117F2080",  # 日医工
             }
             notice_rows = [row for row in rows if item_key(row) in notice_keys]
             snapshot = product_package_snapshot(notice_rows, notice_index, bulletins, generated_keys,
