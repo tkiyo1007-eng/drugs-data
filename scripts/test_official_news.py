@@ -83,6 +83,22 @@ class OfficialNewsTests(unittest.TestCase):
         self.assertEqual(original["tag"], "限定出荷の案内")
         self.assertEqual(editorial, {**original, "tag": "供給に関する案内", "summary": summary})
 
+    def test_verified_reprint_is_optional_and_preserves_manufacturer_source(self):
+        original = "https://www.takata-seiyaku.co.jp/medical/topics/notice.pdf"
+        notice = {"maker": "高田製薬", "title": "供給のお知らせ", "url": original,
+                  "event_type": "stopped", "listed_at": "2026-11-20"}
+        reprint = "https://pbs.twimg.com/media/PublishedDocument?format=png&name=large"
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "maker_announcement_events.json").write_text(
+                json.dumps({"品目": [notice]}), encoding="utf-8")
+            (root / "manufacturer_notices.json").write_text('{"notices":[]}', encoding="utf-8")
+            baseline, = maker_news(root, {})
+            with_reprint, = maker_news(root, {original: {"reprint_url": reprint}})
+            unsafe, = maker_news(root, {original: {"reprint_url": "http://example.invalid/notice.pdf"}})
+        self.assertEqual(with_reprint, {**baseline, "reprint_url": reprint})
+        self.assertEqual(unsafe, baseline)
+
     def test_maker_dates_use_announcement_day_when_title_confirms_it(self):
         source = "https://www.hisamitsu-pharm.jp/product/whatsnew/pdf/"
         cases = [
