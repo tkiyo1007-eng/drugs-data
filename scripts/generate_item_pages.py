@@ -1066,8 +1066,9 @@ def manufacturer_notices_html(row: dict, notices=(), warning="", catalog_yj_code
         elif manufacturer_notice_needs_review(notice, bulletins):
             parts.append('<p><strong>最新の原典は再確認待ちです。</strong>以下は前回確認した案内です。現在の状況は原文やメーカーにご確認ください。</p>')
         parts.append(package_supply_html(target))
+        reason_label = "案内の要点" if notice.get("event_type") == "transitional_measure" else "メーカー説明の理由"
         for label, value in (("案内の要点", notice.get("summary")), ("対象品目の案内", target.get("summary")),
-                             ("メーカー説明の理由", notice.get("reason"))):
+                             (reason_label, notice.get("reason"))):
             if value:
                 parts.append(f'<p>{esc(label)}：{esc(value)}</p>')
         timing_label = "メーカーの再開・解除に関する案内"

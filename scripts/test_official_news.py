@@ -83,6 +83,20 @@ class OfficialNewsTests(unittest.TestCase):
         self.assertEqual(original["tag"], "限定出荷の案内")
         self.assertEqual(editorial, {**original, "tag": "供給に関する案内", "summary": summary})
 
+    def test_shared_maker_source_can_name_both_products_on_one_card(self):
+        url = "https://medical.kyowakirin.co.jp/druginfo/drgdiscon/index.html"
+        base = {"maker": "協和キリン", "url": url, "event_type": "discontinued", "listed_at": "2026-11-16"}
+        notices = [{**base, "title": title} for title in ("アレロックの販売中止", "オングリザの販売中止")]
+        title = "アレロックとオングリザの販売中止予定"
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "maker_announcement_events.json").write_text("{}", encoding="utf-8")
+            (root / "manufacturer_notices.json").write_text(json.dumps({"notices": notices}), encoding="utf-8")
+            original, = maker_news(root, {})
+            shared, = maker_news(root, {url: {"title": title}})
+        self.assertEqual(original["title"], notices[0]["title"])
+        self.assertEqual(shared, {**original, "title": title})
+
     def test_verified_reprint_is_optional_and_preserves_manufacturer_source(self):
         original = "https://www.takata-seiyaku.co.jp/medical/topics/notice.pdf"
         notice = {"maker": "高田製薬", "title": "供給のお知らせ", "url": original,

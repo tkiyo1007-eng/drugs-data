@@ -111,6 +111,12 @@ MAKER_MANUAL_SOURCE_HOSTS = {
 }
 # Specific manufacturer and distributor notices hosted outside the primary company domain.
 MAKER_MANUAL_SOURCE_URLS = {
+    'サノフィ': {
+        'https://jasweb.or.jp/information/file/20261117.pdf',
+    },
+    '田辺ファーマ': {
+        'https://jasweb.or.jp/information/file/20261112.pdf',
+    },
     'クラシエ薬品': {'https://www.kampoyubi.jp/products/20241213_oshirase.pdf'},
     '日東メディック': {'https://www.pmda.go.jp/files/000283184.pdf'},
     'ニプロESファーマ': {'https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800000uVxwQIAS'},

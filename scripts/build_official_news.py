@@ -81,11 +81,13 @@ def maker_news(site, explanations):
         day = posted or (announced if title_confirms_day else detected or announced)
         if not valid_date(day):
             continue
-        # Shared announcements can cover several products. Prefer a specific
-        # matching title over a broad registry heading for the same source.
+        # Keep one card per source. An editorial title can name multiple
+        # products when the manufacturer's source is a shared list.
         if url in entries and not (row.get("listed_at") and entries[url]["date_label"] != "掲載"):
             continue
-        entries[url] = dict(date=day, kind="maker", tag=label, source=maker, title=row["title"],
+        editorial_title = note.get("title")
+        title = editorial_title.strip() if isinstance(editorial_title, str) and editorial_title.strip() else row["title"]
+        entries[url] = dict(date=day, kind="maker", tag=label, source=maker, title=title,
                             url=url, date_label="掲載" if posted else "案内" if title_confirms_day or not detected else "確認",
                             summary=note.get("summary"))
         reprint_url = note.get("reprint_url")
