@@ -2,6 +2,72 @@
   "schema_version": 1,
   "notices": [
     {
+      "id": "sanofi-intal-inhalation-resumption-plan-202611",
+      "maker": "サノフィ",
+      "title": "インタール吸入液1％の供給再開予定",
+      "url": "https://jasweb.or.jp/information/file/20261117.pdf",
+      "announced_at": "2026-11",
+      "verified_at": "2026-11-22",
+      "sha256": "957d34ee2d465d4f6e8d305a57930b3875138b6c3f0139e9b5128e2ab94fd182",
+      "collection_mode": "manual",
+      "event_type": "resumption_planned",
+      "reason": "サノフィは、再発防止措置を実施し、出荷試験で適合を確認したうえで、供給再開に必要な生産が完了したと案内しました。",
+      "resumption": {
+        "text": "2026年12月1日から卸へ順次供給する予定です。流通が安定するまでは納品に数日かかる場合があります。"
+      },
+      "targets": [
+        {
+          "yj_code": "2259701G1063",
+          "product_name": "インタール吸入液１％",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "2mL×60本（12本×5）"
+            }
+          ],
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文は日本喘息学会が2026年11月18日に掲載したサノフィの文書です。卸への供給再開予定日です。"
+      ]
+    },
+    {
+      "id": "tanabe-theodur-granules-100g-stoppage-202611",
+      "maker": "田辺ファーマ",
+      "title": "テオドール顆粒20％・100g包装の出荷停止案内",
+      "url": "https://jasweb.or.jp/information/file/20261112.pdf",
+      "announced_at": "2026-11",
+      "verified_at": "2026-11-22",
+      "sha256": "68989956971550615a800c2dd699d28c16edacf249d6f7caa09e6fc9d436186f",
+      "collection_mode": "manual",
+      "event_type": "stopped",
+      "reason": "次回入庫予定のロットが出荷前の溶出試験で規格に適合せず、田辺ファーマは原因究明のため製造を一時停止し、在庫消尽後に出荷を停止すると案内しました。",
+      "targets": [
+        {
+          "yj_code": "2251001D1061",
+          "product_name": "テオドール顆粒２０％",
+          "scope": "package",
+          "packages": [
+            {
+              "package": "100g（袋・バラ）"
+            }
+          ],
+          "summary": "メーカー在庫の消尽は2026年12月頃の見込みです。出荷再開時期は未定です。",
+          "source_pages": [
+            1
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "原文は日本喘息学会が2026年11月12日に掲載した田辺ファーマの文書です。"
+      ]
+    },
+    {
       "id": "yoshida-rotoextract-transitional-measure-202611",
       "maker": "吉田製薬",
       "title": "ロートエキス散〈ハチ〉の経過措置移行のお知らせ",
