@@ -59,6 +59,7 @@ PACKAGE_LANDING_KEYS = frozenset({
 PACKAGE_OVERVIEW_KEYS = frozenset({"2649805M1026", "3179106F1039"})
 GENTACIN_KEY = "2634710M1077"
 ZESTAC_KEY = "2649865N1023"
+TAGAMET_KEY = "2325001F1211"
 LIMITED_REASON_KEYS = frozenset({"3999001Q6029", "2646730Q1026", GENTACIN_KEY})
 BONZOL_STRENGTHS = {"2499007F1021": "100mg", "2499007F2028": "200mg"}
 BONZOL_KEYS = frozenset(BONZOL_STRENGTHS)
@@ -1494,7 +1495,7 @@ def package_overview_notice(key, matches, bulletins):
     if key in BONZOL_KEYS:
         return match if (notice.get("event_type") == "discontinued" and "販売中止" in notice["title"]
                          and notice.get("summary")) else None
-    if key == ZESTAC_KEY:
+    if key in {ZESTAC_KEY, TAGAMET_KEY}:
         return match if (notice.get("event_type") == "discontinued" and "販売中止" in notice["title"]
                          and notice.get("reason")) else None
     return match if notice.get("event_type") in {"limited", "stopped", "resumed"} else None
@@ -1539,6 +1540,19 @@ def package_overview_content(key, match, display_name, status_label):
         hint = heading
         description = f'{day}の{notice["maker"]}の案内。{notice["summary"]}'
         body = f'{source}<p><strong>対象包装　{esc(" ／ ".join(packages))}</strong></p><p>{esc(notice["summary"])}</p>'
+    elif key == TAGAMET_KEY:
+        heading = "タガメット錠200mgの販売中止予定"
+        hint = "販売中止予定（包装別）"
+        timings = [
+            f'{package["package"]}の出荷終了見込みは{plan["timing"]}です。'
+            for package in target["packages"] for plan in package["supply"]["plans"]
+            if plan["event"] == "stock_depletion"
+        ]
+        description = f'{day}の{notice["maker"]}の販売中止案内。対象は{scope}。{"".join(timings)}'
+        body = (f'<p><strong>対象包装　{esc(scope)}</strong></p>'
+                + "".join(f'<p>{esc(timing)}</p>' for timing in timings)
+                + '<p>メーカーの案内時点の見込みです。実際の販売終了日は未確認です。</p>'
+                + source)
     elif key == ZESTAC_KEY:
         heading = "メーカーが案内した販売中止の理由"
         hint = "販売中止の理由・対象包装"
@@ -1560,9 +1574,11 @@ def package_overview_content(key, match, display_name, status_label):
         )
         if alternatives:
             body += f'<p><strong>メーカーが示した代替候補</strong>　{esc("、".join(alternatives))}</p>'
-    css_class = "package-brief stbox supp-notice" if key in BONZOL_KEYS or key == ZESTAC_KEY else "package-brief"
+    css_class = "package-brief stbox supp-notice" if key in BONZOL_KEYS | {ZESTAC_KEY, TAGAMET_KEY} else "package-brief"
     section = (f'<section class="{css_class}" aria-labelledby="packageBriefTitle">'
                f'<h2 id="packageBriefTitle">{heading}</h2>{body}</section>')
+    if key == TAGAMET_KEY:
+        return hint, description, section
     return hint, f'{display_name}の厚労省公表区分は「{status_label}」。{description}', section
 
 
@@ -2471,13 +2487,16 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
             latest_listing=zictor_listing)
         if package_overview:
             desc = search_name + comparison_desc.removeprefix(row["商品名"])
-    elif key in PACKAGE_OVERVIEW_KEYS | LIMITED_REASON_KEYS | BONZOL_KEYS | {ZESTAC_KEY}:
+    elif key in PACKAGE_OVERVIEW_KEYS | LIMITED_REASON_KEYS | BONZOL_KEYS | {ZESTAC_KEY, TAGAMET_KEY}:
         matches = matching_manufacturer_notices(row, manufacturer_notices, manufacturer_bulletins)
         overview = package_overview_notice(key, matches, manufacturer_bulletins) if supplemental_trusted else None
         if overview:
             hint, desc, package_overview = package_overview_content(key, overview, search_name, st["label"])
             if key == ZESTAC_KEY and priority:
                 priority = hint
+            if key == TAGAMET_KEY:
+                priority = hint
+                priority_description = desc.rstrip("。")
     elif key in PACKAGE_LANDING_KEYS:
         matches = matching_manufacturer_notices(row, manufacturer_notices, manufacturer_bulletins)
         packages = dict.fromkeys(
@@ -2584,7 +2603,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
 .package-supply-row dd strong{font-size:12px}
 @media(max-width:520px){.package-supply-row{grid-template-columns:minmax(0,1fr)}}
 """ if 'class="package-supply"' in manufacturer_box else ""
-    if (key in BONZOL_KEYS or key == ZESTAC_KEY) and package_overview and not limited_layout:
+    if key in BONZOL_KEYS | {ZESTAC_KEY, TAGAMET_KEY} and package_overview and not limited_layout:
         package_styles += (".package-brief h2{margin:0 0 4px}.package-brief p+p{margin-top:5px}"
                            ".package-brief .source-link{display:inline-flex;align-items:center;"
                            "min-height:44px;font-weight:700;color:inherit}")
