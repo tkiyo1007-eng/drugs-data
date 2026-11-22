@@ -67554,36 +67554,6 @@
                 "plans": [],
                 "note": "統一商品コード080132776、販売包装単位コード14987080132773。"
               }
-            },
-            {
-              "package": "PTP100錠",
-              "unified_product_code": "080132714",
-              "gs1_sales": "(01)14987080132711",
-              "supply": {
-                "status": "unconfirmed",
-                "plans": [],
-                "note": "販売継続と案内（2023年5月時点）。統一商品コード080132714。"
-              }
-            },
-            {
-              "package": "PTP500錠",
-              "unified_product_code": "080132721",
-              "gs1_sales": "(01)14987080132728",
-              "supply": {
-                "status": "unconfirmed",
-                "plans": [],
-                "note": "販売継続と案内（2023年5月時点）。統一商品コード080132721。"
-              }
-            },
-            {
-              "package": "バラ100錠",
-              "unified_product_code": "080132745",
-              "gs1_sales": "(01)14987080132742",
-              "supply": {
-                "status": "unconfirmed",
-                "plans": [],
-                "note": "販売継続と案内（2023年5月時点）。統一商品コード080132745。"
-              }
             }
           ],
           "source_pages": [
@@ -67956,16 +67926,6 @@
                 "status_text": "販売中止・在庫消尽済み（2023年5月の案内）",
                 "plans": [],
                 "note": "統一商品コード080133773、販売包装単位コード14987080133770。"
-              }
-            },
-            {
-              "package": "PTP100錠",
-              "unified_product_code": "080133711",
-              "gs1_sales": "(01)14987080133718",
-              "supply": {
-                "status": "unconfirmed",
-                "plans": [],
-                "note": "販売継続と案内（2023年5月時点）。統一商品コード080133711。"
               }
             }
           ],
