@@ -3637,7 +3637,7 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
       </label>
       <p class="filter-hint" id="hubFilterPriceHint">検索語とこの条件の両方を満たす品目を、すべての掲載欄から表示します。メーカー案内だけの経過措置情報は、原文も別に確認してください。</p>'''
     if searchable:
-        hint = ("薬品名・成分名・メーカー名・YJコード" if slug == "limited" else
+        hint = ("薬品名・成分名・メーカー名・YJコード" if outlook_hub else
                 "薬品名・成分名・メーカー・YJコードで絞り込めます。空白で区切ると、すべての語を含む品目を表示します。")
         example = "例：モビコールLD" if slug == "limited" else "例：薬品名 メーカー"
         empty_notice = ("この一覧に該当する品目はありません。" if outlook_hub else
@@ -3700,24 +3700,28 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
 {discontinuation_link}      <a href="{OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚労省の公式システムで供給区分を確認</a>
 {price_source_link}    </nav>
     <nav class="hub-nav" aria-label="状態別の品目一覧">{other_hubs}</nav>'''
-    if slug == "limited":
+    notice = (f'<p class="notice">{esc(config["intro"])} '
+              '医薬品の使用・変更は、公式情報を確認したうえで医師・薬剤師等の専門職が判断してください。</p>')
+    if outlook_hub:
         source_date = mhlw_excel_date(version_metadata, dataset_date) or "確認できません"
-        header = f'''    <h1>限定出荷一覧 <small>{len(group):,}品目</small></h1>
+        heading = "限定出荷一覧" if slug == "limited" else config["h1"]
+        guide_notice = f'\n      {notice}' if slug == "stopped" else ""
+        header = f'''    <h1>{esc(heading)} <small>{len(group):,}品目</small></h1>
     <p class="lede">厚労省データの基準日：{esc(source_date)}</p>{filter_markup}{outlook_links}
     <p class="stock-note">各施設の在庫・受注可否は示しません。</p>
     <details class="list-guide">
       <summary>この一覧の見方</summary>
-      {dataset_dates_html(dataset_date, version_metadata)}
+      {dataset_dates_html(dataset_date, version_metadata)}{guide_notice}
       {evidence_note}
       {hub_navigation}
     </details>'''
     else:
         header = f'''    <h1>{esc(config["h1"])}</h1>
     <p class="lede">{esc(config["description"])}（{len(group):,}品目）</p>
-    {dataset_dates_html(dataset_date, version_metadata)}{filter_markup + outlook_links if slug == "stopped" else ""}
-    <p class="notice">{esc(config["intro"])} 医薬品の使用・変更は、公式情報を確認したうえで医師・薬剤師等の専門職が判断してください。</p>
-{hub_navigation}{supplemental_navigation}{evidence_note}{price_note}{filter_markup if slug != "stopped" else ""}'''
-    limited_style = """
+    {dataset_dates_html(dataset_date, version_metadata)}
+    {notice}
+{hub_navigation}{supplemental_navigation}{evidence_note}{price_note}{filter_markup}'''
+    compact_list_style = """
 h1 small{display:inline-block;vertical-align:middle;padding:2px 9px;border-radius:12px;background:#e7eefb;color:#354e72;font-size:14px;white-space:nowrap}
 .hub-filter{margin:14px 0 8px;padding:12px 14px}
 .filter-controls{flex-wrap:nowrap;margin:6px 0}
@@ -3726,7 +3730,7 @@ h1 small{display:inline-block;vertical-align:middle;padding:2px 9px;border-radiu
 .list-guide{margin:2px 0 10px}
 .list-guide summary{color:#264d93;cursor:pointer;padding:9px 0;min-height:44px;font-weight:700;font-size:14px}
 .list-guide summary:focus-visible{outline:3px solid #2f63e8;outline-offset:2px}
-""" if slug == "limited" else ""
+""" if outlook_hub else ""
     outlook_style = """
 .outlook-list-links,.outlook-list-links .hub-nav{margin:0;gap:0 18px}
 .outlook-list-links a{color:#264d93;font-size:14px;font-weight:700}
@@ -3781,7 +3785,7 @@ li span{{display:block;color:#5A6B8C;font-size:11.5px;margin-top:2px}}
 li .reason-tag{{display:inline-block;background:#ECF2FD;color:#284C8C;border-radius:6px;padding:2px 6px;margin-top:7px;font-weight:700}}
 .official{{font-size:13px;margin:22px 0}}
 footer{{font-size:12px;color:#5A6B8C;text-align:center;margin-top:34px}}
-footer a{{color:#5A6B8C}}{HUB_FILTER_STYLE if searchable else ""}{limited_style}{outlook_style}
+footer a{{color:#5A6B8C}}{HUB_FILTER_STYLE if searchable else ""}{compact_list_style}{outlook_style}
 </style>
 </head>
 <body>
