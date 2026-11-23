@@ -14,6 +14,32 @@ CURRENT_LABEL = re.compile(
     r"医療用医薬品供給状況(?:報告)?\((?:令和(?P<era>元|[0-9]{1,2})年|(?P<year>[0-9]{4})年)"
     r"(?P<month>[0-9]{1,2})月(?P<day>[0-9]{1,2})日現在\)"
 )
+JUVELA_YJ_CODE = "2649805M1026"
+RELEASE_OUTLOOK_COLUMN = "16限定出荷の解除見込み/供給停止の解消見込み/販売中止品の在庫消尽時期"
+
+
+def release_outlook_is_expected(value):
+    return bool(re.fullmatch(r"ア\.\s*あり", unicodedata.normalize("NFKC", str(value or "")).strip()))
+
+
+def extract_juvela_release_outlook(header, rows):
+    """品目に一致する限定出荷の解除見込みだけを、今回の原表から取り出す。"""
+    columns = [index for index, name in enumerate(header)
+               if "".join(unicodedata.normalize("NFKC", str(name or "")).split()) == RELEASE_OUTLOOK_COLUMN]
+    matches = [row for row in rows if len(row) > 4 and str(row[4]).strip() == JUVELA_YJ_CODE]
+    if len(columns) != 1 or len(matches) != 1:
+        return ""
+    column, row = columns[0], matches[0]
+    if (len(row) <= max(column, 14) or str(row[5]).strip() != "ユベラ軟膏"
+            or not str(row[11]).strip().startswith(("②", "③", "④"))
+            or not release_outlook_is_expected(row[14])):
+        return ""
+    value = row[column]
+    if isinstance(value, dt.date):
+        return f"{value.year}年{value.month}月{value.day}日"
+    if isinstance(value, str) and unicodedata.normalize("NFKC", value).strip() not in {"", "-", "―", "未定"}:
+        return value.strip()
+    return ""
 
 
 def decode_supply_page(body: bytes) -> str:

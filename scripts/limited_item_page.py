@@ -31,7 +31,7 @@ def comparison_html(rows, note):
 
 def overview_html(row, name, maker, release, source_date, imported, version, updated,
                   delist, notices, shortcuts, spec_note, discontinuation_labels=(), package_overview="",
-                  strength_selector="", *, product_supply_link=""):
+                  strength_selector="", *, product_supply_link="", item_release_outlook=None):
     # Keep strength units together even on narrow screens.
     name = re.sub(r"[０-９0-9]+(?:[．.][０-９0-9]+)?(?:[％%]|[ｍm][ｇg]|[μµ]g)|(?:ＬＤ|ＨＤ|LD|HD)$",
                   r'<span class="strength">\g<0></span>', escape(name))
@@ -50,13 +50,20 @@ def overview_html(row, name, maker, release, source_date, imported, version, upd
     caution = '<span class="caution">薬価削除予定</span>' if delist else ''
     manufacturer_status = "".join(
         f'<p><strong class="caution">{escape(label)}</strong></p>' for label in discontinuation_labels)
+    release_fact = f'<div><dt>解除・解消見込み</dt><dd>{escape(release or "記載なし")}</dd></div>'
+    release_source = ""
+    if item_release_outlook:
+        period, url = item_release_outlook
+        release_fact = f'<div><dt>解除見込み（品目全体）</dt><dd>{escape(period)}</dd></div>'
+        release_source = ('<p><small>包装ごとの再開時期は未確認です。'
+                          f'<a href="{escape(url)}" data-dsn-event="official-source-open">厚労省原表（Excel）</a></small></p>')
     return f'''<div class="intro"><p class="maker">{escape(maker)}</p><h1>{name}</h1>
 <p class="spec"><b>{escape(row.get("規格") or "規格の記載なし")}</b> {code}</p>{manufacturer_status}{strength_selector}{spec_note}</div>{product_supply_link}
 <section class="summary" data-version="{escape(version)}" data-spec-note="{int(bool(spec_note))}" data-source="{escape(source_date)}" data-imported="{escape(imported)}">
 <h2>厚労省の供給状況</h2><div class="statusline"><strong class="status limited">{escape(row["供給状況"])}</strong>{caution}
 <span>厚労省基準日 <time>{escape(source_date or "確認できません")}</time></span></div>
 <dl class="facts"><div><dt>公表理由</dt><dd>{escape(row.get("理由") or "記載なし")}</dd></div>
-<div><dt>解除・解消見込み</dt><dd>{escape(release or "記載なし")}</dd></div></dl>
+{release_fact}</dl>{release_source}
 <details><summary>出典と日付</summary><p>品目行の更新日 {escape(updated or "記載なし")}<br>サイト取込日 {escape(imported or "確認できません")}<br>
 <a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html" data-dsn-event="official-source-open">厚生労働省の公表ページ</a></p></details>
 <p id="freshness" role="status">表示は上記基準日時点です。</p></section>{package_overview}
