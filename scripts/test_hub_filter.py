@@ -135,6 +135,18 @@ class HubFilterTests(unittest.TestCase):
                     self.assertEqual({}, parsed.controls)
                     self.assertNotIn("data-search=", output)
 
+    def test_outlook_filter_label_counts_eligible_rows_in_each_list(self):
+        entries = [
+            dict(self.entries[0], release_period="2027年3月"),
+            dict(self.entries[1], release="ア. あり"),
+            self.entries[2],
+        ]
+        for slug, count in (("limited", 1), ("stopped", 0)):
+            with self.subTest(slug=slug):
+                output = hub_html(slug, entries, "2026-10-10")
+                self.assertIn(f"<span>見込み時期あり（{count}品目）</span>", output)
+                self.assertEqual(count, output.count(' data-outlook="1"'))
+
     def test_limited_hub_prioritizes_search_and_indexes_the_actual_strength(self):
         sample = dict(self.entries[0], name="モビコール配合内用剤ＬＤ", hubs=["limited"])
         output = hub_html("limited", [sample], "2026-11-18")
