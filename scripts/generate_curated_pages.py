@@ -90,6 +90,7 @@ STRENGTH_HUBS = {
     "teramuro": ("テラムロ配合錠", ("AP", "BP")),
 }
 STRENGTH_HUB_EDIT_DATE = "2026-11-23"
+MOVICOL_KEYS = {"2359110B1037", "2359110B2025"}
 STATUS = {
     "ok": ("通常出荷", "#227D4F", "#E7F6EE", 0),
     "limited": ("限定出荷", "#9F5E11", "#FCF0DF", 1),
@@ -759,7 +760,7 @@ def topic_page(topic: dict, related: list[dict[str, str]], generated_keys: set[s
 
 def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *,
                              include_details=False, show_notice_details=False,
-                             link_comparison=False) -> tuple[str, set[str]]:
+                             link_comparison=False, show_package_notes=False) -> tuple[str, set[str]]:
     """品目に一致する最新の包装別案内を、厚労省区分と区別して掲載する。"""
     groups = {}
     package_keys = set()
@@ -804,6 +805,8 @@ def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *,
                 if include_details:
                     details.extend(f'{PACKAGE_PLAN_LABELS[plan["event"]]} {esc(plan["timing"].removesuffix("予定"))}'
                                    for plan in supply["plans"])
+                if show_package_notes and supply.get("note"):
+                    details.append(esc(supply["note"]))
                 packages.append(f'<li>{"<br>".join(details)}</li>')
             if not packages:
                 continue
@@ -1009,7 +1012,8 @@ def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[
 
 
 def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set[str],
-                      source_date: str, *, package_snapshot="", package_keys=frozenset()) -> str:
+                      source_date: str, *, package_snapshot="", package_keys=frozenset(),
+                      mhlw_source=None) -> str:
     brand, strengths = STRENGTH_HUBS[slug]
     groups = {strength: [] for strength in strengths}
     grades = "|".join(norm(strength) for strength in strengths)
@@ -1031,12 +1035,15 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
         description = "テラムロ配合錠AP・BPの出荷調整を販売元別に確認。厚生労働省の供給区分を比較し、各品目のメーカー案内に進めます。"
         if package_snapshot:
             description = "テラムロ配合錠AP・BPの供給状況を販売元別に比較。メーカーの出荷調整や販売中止の案内を、規格と対象包装ごとに確認できます。"
+    if slug == "movicol" and package_snapshot:
+        description = "モビコールLD・HDの厚労省公表区分と解除・解消見込みを比較。EAファーマ販売の100包は、メーカーの包装別案内を確認できます。"
     title = f"{heading}{'｜販売元別' if slug == 'teramuro' else ''}｜医薬品供給ナビ"
     purpose = ('<p class="lede">厚労省の供給区分をAP・BPと販売元ごとに比較できます。'
                'メーカー資料がある品目は、該当する包装別案内も確認できます。</p>'
                if slug == "teramuro" else "")
     canonical = f"{SITE_ROOT}products/{slug}.html"
     sections, jump_links, items = [], [], []
+    workbook = ""
     for strength, members in groups.items():
         if not members:
             continue
@@ -1048,11 +1055,19 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
             maker = row.get("販売メーカー") or ""
             status = row.get("供給状況") or "公表区分未確認"
             key = item_key(row)
-            comparison_id = f' id="comparison-{esc(key)}"' if slug == "teramuro" else ""
+            comparison_id = f' id="comparison-{esc(key)}"' if slug == "teramuro" or key in package_keys else ""
             item_id = "" if key in package_keys else comparison_id
+            outlook_html = ""
+            if slug == "movicol" and key in MOVICOL_KEYS:
+                release = supply_metadata_values(row).get("解除・解消見込み")
+                outlook = official_item_outlook(row, key, release, source_date, mhlw_source)
+                if outlook:
+                    period, workbook = outlook
+                    action = "解除" if map_status(status) == "limited" else "解消"
+                    outlook_html = f'<span>{action}見込み（品目全体）　{esc(period)}</span>'
             card = (f'<a class="strength-item"{item_id} href="{esc(href)}" data-dsn-event="related-item-open">'
                     f'<strong>{esc(name)}</strong><span>{esc(maker)}</span>'
-                    f'<span class="supply">{esc(status)}</span></a>')
+                    f'<span class="supply">{esc(status)}</span>{outlook_html}</a>')
             if key in package_keys:
                 card = (f'<div class="strength-card"{comparison_id} tabindex="-1">{card}'
                         '<a class="strength-packages" '
@@ -1071,7 +1086,7 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
         sections.append(f'<section aria-labelledby="{anchor}"><h2 id="{anchor}">{esc(label)}</h2>'
                         f'{overview}<div class="strength-list">{"".join(cards)}</div></section>')
         jump_links.append(f'<a href="#{anchor}">{esc(strength)}</a>')
-    show_picker = slug == "teramuro" and len(jump_links) > 1
+    show_picker = len(jump_links) > 1
     if package_snapshot:
         jump_links.append('<a href="#packageSnapshotTitle">包装別のメーカー案内</a>')
     packaging_change = ""
@@ -1111,6 +1126,10 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
               if show_picker or package_snapshot or packaging_change else "")
     if not sections:
         sections.append('<p>今回の公表データでは該当する品目を確認できません。</p>')
+    workbook_link = (f' ・ <a href="{esc(workbook)}" data-dsn-event="official-source-open">厚労省原表（Excel）</a>'
+                     if workbook else "")
+    if package_snapshot and slug == "movicol":
+        purpose = '<p class="lede">厚労省の品目全体の公表区分と、EAファーマの包装別案内を確認できます。</p>'
     collection = {"@type": "CollectionPage", "name": heading, "url": canonical,
                   "mainEntity": {"@type": "ItemList", "numberOfItems": len(items), "itemListElement": items}}
     breadcrumb = {"@type": "BreadcrumbList", "itemListElement": [
@@ -1126,7 +1145,7 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
         '.packages-back{display:inline-flex;align-items:center;min-height:44px;color:#244b9e;font-size:13px}'
         '[id^="comparison-"],[id^="packages-"]{scroll-margin-block-start:16px}'
         '[id^="comparison-"]:target{outline:2px solid #346bd6;outline-offset:2px}'
-        if slug == "teramuro" else ""
+        if slug == "teramuro" or package_keys else ""
     )
     return f"""<!DOCTYPE html><html lang="ja"><head>
 {common_head(title, description, canonical, 'website', [collection, breadcrumb])}<style>{STYLE}
@@ -1134,7 +1153,7 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
 .strength-list{{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:8px}}.strength-item{{display:grid;gap:2px;padding:12px 16px;background:#fff;border:1px solid var(--line);border-radius:12px;color:var(--ink);text-decoration:none}}.strength-item strong{{color:#244b9e;text-decoration:underline;text-underline-offset:3px}}.strength-item span{{font-size:13px;color:var(--sub)}}.strength-item .supply{{color:var(--ink);font-weight:650}}a:focus-visible{{outline:3px solid #346bd6;outline-offset:2px}}
 {package_style}</style></head><body><div class="wrap"><header class="site"><a href="../">医薬品供給ナビ</a></header>
 <nav class="crumb" aria-label="パンくず"><a href="../">トップ</a> › <a href="index.html">注目製品</a> › {esc(brand)}</nav><main>
-<header class="hero"><h1>{esc(heading)}</h1><p class="note">厚労省の公表データ　基準日 {esc(source_date or '未確認')}</p>{purpose}{picker}</header>
+<header class="hero"><h1>{esc(heading)}</h1><p class="note">厚労省の公表データ　基準日 {esc(source_date or '未確認')}{workbook_link}</p>{purpose}{picker}</header>
 {"".join(sections)}{maker_supply_note}{package_snapshot}{packaging_change}
 <p class="source"><a href="{MHLW_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公表情報を確認</a></p>
 {share_control("この供給状況を共有")}</main><footer><a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
@@ -1758,11 +1777,17 @@ def main() -> int:
             notice_rows = [row for row in rows if teramuro_strength(row.get("商品名"))]
             snapshot, package_keys = product_package_snapshot(
                 notice_rows, notice_index, bulletins, generated_keys, include_details=True)
+        elif slug == "movicol":
+            notice_rows = [row for row in rows if item_key(row) in MOVICOL_KEYS]
+            snapshot, package_keys = product_package_snapshot(
+                notice_rows, notice_index, bulletins, generated_keys,
+                include_details=True, show_package_notes=True)
         (product_dir / f"{slug}.html").write_text(
             strength_hub_page(slug, rows, generated_keys, source_date,
-                              package_snapshot=snapshot, package_keys=package_keys), encoding="utf-8")
+                              package_snapshot=snapshot, package_keys=package_keys,
+                              mhlw_source=mhlw_source), encoding="utf-8")
         product_dates[slug] = max(source_date, STRENGTH_HUB_EDIT_DATE)
-        if slug == "teramuro":
+        if slug in {"teramuro", "movicol"}:
             product_dates[slug] = max(product_dates[slug], PRIORITY_PRODUCT_EDIT_DATE)
     (guide_dir / f"{GUIDE_SLUG}.html").write_text(
         guide_page(), encoding="utf-8")
