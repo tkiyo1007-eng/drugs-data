@@ -3627,18 +3627,17 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
         sales_price_count = sum(bool(entry.get("delist"))
                                 and supplemental_bucket(entry) == "sales-notices"
                                 for entry in group)
-        price_note = (f'<p class="price-note" id="price-info">厚労省データの薬価削除予定・経過措置期限は、全体で{price_count:,}品目に収録しています。'
+        price_note = (f'\n      <p class="price-note">厚労省データの薬価削除予定・経過措置期限は、全体で{price_count:,}品目に収録しています。'
                       f'そのうち{sales_price_count:,}品目は「販売中止の案内・公表区分がある品目」欄に掲載しています。'
-                      '薬価削除済み、製造・販売の終了や終了日を示すものではありません。</p>')
-        price_filter_markup = '''
+                      '薬価削除済み、製造・販売の終了や終了日を示すものではありません。</p>'
+                      '\n      <p class="filter-hint" id="hubFilterPriceHint">検索語とこの条件の両方を満たす品目を、すべての掲載欄から表示します。'
+                      'メーカー案内だけの経過措置情報は、原文も別に確認してください。</p>')
+        price_filter_markup = f'''
       <label class="price-filter">
         <input id="hubFilterPriceOnly" type="checkbox" aria-describedby="hubFilterPriceHint" aria-controls="hubItems">
-        <span>厚労省の薬価削除予定・経過措置期限が収録された品目だけ表示</span>
-      </label>
-      <p class="filter-hint" id="hubFilterPriceHint">検索語とこの条件の両方を満たす品目を、すべての掲載欄から表示します。メーカー案内だけの経過措置情報は、原文も別に確認してください。</p>'''
+        <span>厚労省の薬価削除予定・経過措置期限あり（{price_count:,}品目）</span>
+      </label>'''
     if searchable:
-        hint = ("薬品名・成分名・メーカー名・YJコード" if outlook_hub else
-                "薬品名・成分名・メーカー・YJコードで絞り込めます。空白で区切ると、すべての語を含む品目を表示します。")
         example = "例：モビコールLD" if slug == "limited" else "例：薬品名 メーカー"
         empty_notice = ("この一覧に該当する品目はありません。" if outlook_hub else
                         "この一覧内に該当する品目なし。すべての医薬品の検索結果ではありません。検索語を変えるか、クリアしてご確認ください。")
@@ -3647,7 +3646,7 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
         filter_markup = f'''
     <section class="hub-filter" id="hubFilter" hidden aria-label="この一覧内の検索">
       <label for="hubFilterInput">この一覧内を検索</label>
-      <p class="filter-hint" id="hubFilterHint">{hint}</p>
+      <p class="filter-hint" id="hubFilterHint">薬品名・成分名・メーカー名・YJコード</p>
       <div class="filter-controls">
         <input id="hubFilterInput" type="search" placeholder="{example}" autocomplete="off" aria-describedby="hubFilterHint" aria-controls="hubItems">
         <button id="hubFilterClear" type="button" disabled>クリア</button>
@@ -3711,11 +3710,12 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
         guide_notice = f'\n      {notice}' if slug != "limited" else ""
         guide_evidence = f'\n      {evidence_note}' if evidence_note else ""
         stock_note = '\n    <p class="stock-note">各施設の在庫・受注可否は示しません。</p>' if outlook_hub else ""
+        price_anchor = ' id="price-info"' if slug == "supplemental" else ""
         header = f'''    <h1>{esc(heading)} <small>{len(group):,}品目</small></h1>
-    <p class="lede">厚労省データの基準日：{esc(source_date)}</p>{price_note}{filter_markup}{outlook_links}{stock_note}
+    <p class="lede"{price_anchor}>厚労省データの基準日：{esc(source_date)}</p>{filter_markup}{outlook_links}{stock_note}
     <details class="list-guide">
       <summary>この一覧の見方</summary>
-      {dataset_dates_html(dataset_date, version_metadata)}{guide_notice}{guide_evidence}
+      {dataset_dates_html(dataset_date, version_metadata)}{guide_notice}{guide_evidence}{price_note}
       {hub_navigation}
     </details>{supplemental_navigation}'''
     else:

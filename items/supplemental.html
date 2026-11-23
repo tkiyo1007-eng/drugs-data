@@ -79,19 +79,18 @@ h1 small{display:inline-block;vertical-align:middle;padding:2px 9px;border-radiu
   <nav class="crumb" aria-label="パンくず"><a href="https://kyokyu-navi.jp/">トップ</a> › <a href="index.html">品目別の供給状況</a> › 販売中止・メーカー補足</nav>
   <main>
     <h1>販売中止・薬価削除予定・メーカー補足 <small>2,190品目</small></h1>
-    <p class="lede">厚労省データの基準日：2026-11-20</p><p class="price-note" id="price-info">厚労省データの薬価削除予定・経過措置期限は、全体で1,041品目に収録しています。そのうち310品目は「販売中止の案内・公表区分がある品目」欄に掲載しています。薬価削除済み、製造・販売の終了や終了日を示すものではありません。</p>
+    <p class="lede" id="price-info">厚労省データの基準日：2026-11-20</p>
     <section class="hub-filter" id="hubFilter" hidden aria-label="この一覧内の検索">
       <label for="hubFilterInput">この一覧内を検索</label>
-      <p class="filter-hint" id="hubFilterHint">薬品名・成分名・メーカー・YJコードで絞り込めます。空白で区切ると、すべての語を含む品目を表示します。</p>
+      <p class="filter-hint" id="hubFilterHint">薬品名・成分名・メーカー名・YJコード</p>
       <div class="filter-controls">
         <input id="hubFilterInput" type="search" placeholder="例：薬品名 メーカー" autocomplete="off" aria-describedby="hubFilterHint" aria-controls="hubItems">
         <button id="hubFilterClear" type="button" disabled>クリア</button>
       </div>
       <label class="price-filter">
         <input id="hubFilterPriceOnly" type="checkbox" aria-describedby="hubFilterPriceHint" aria-controls="hubItems">
-        <span>厚労省の薬価削除予定・経過措置期限が収録された品目だけ表示</span>
+        <span>厚労省の薬価削除予定・経過措置期限あり（1,041品目）</span>
       </label>
-      <p class="filter-hint" id="hubFilterPriceHint">検索語とこの条件の両方を満たす品目を、すべての掲載欄から表示します。メーカー案内だけの経過措置情報は、原文も別に確認してください。</p>
       <p class="filter-count" id="hubFilterCount" role="status" aria-live="polite" aria-atomic="true">2,190 / 2,190品目を表示</p>
       <p class="filter-empty" id="hubFilterEmpty" hidden>この一覧内に該当する品目なし。すべての医薬品の検索結果ではありません。検索語を変えるか、クリアしてご確認ください。</p>
     </section>
@@ -99,6 +98,8 @@ h1 small{display:inline-block;vertical-align:middle;padding:2px 9px;border-radiu
       <summary>この一覧の見方</summary>
       <p class="dataset-context">厚労省原Excelの基準日：<span class="mhlw-excel-date" aria-live="polite">2026-11-20</span><br>サイト全体の公開データ基準日（サイト取込日）：<span class="dataset-date" aria-live="polite">2026-11-23</span><br><span class="dataset-date-context">HTML生成時の確認情報です。</span>品目行の更新日やメーカー補足の確認日とは別の情報です。</p>
       <p class="notice">販売中止・薬価削除予定、またはメーカー公式の補足情報を収録した品目を掲載しています。厚生労働省の現在の供給区分とメーカーの今後の予定は別の情報です。 医薬品の使用・変更は、公式情報を確認したうえで医師・薬剤師等の専門職が判断してください。</p>
+      <p class="price-note">厚労省データの薬価削除予定・経過措置期限は、全体で1,041品目に収録しています。そのうち310品目は「販売中止の案内・公表区分がある品目」欄に掲載しています。薬価削除済み、製造・販売の終了や終了日を示すものではありません。</p>
+      <p class="filter-hint" id="hubFilterPriceHint">検索語とこの条件の両方を満たす品目を、すべての掲載欄から表示します。メーカー案内だけの経過措置情報は、原文も別に確認してください。</p>
           <nav class="entry-nav" aria-label="医薬品の探し方と確認方法">
       <a href="../#demo" data-dsn-event="search-cta-open">薬品名・メーカー名で検索</a>
       <a href="../ingredients/index.html">成分別に確認</a>
