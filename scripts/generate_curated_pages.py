@@ -915,6 +915,7 @@ def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[
             lede += f' 厚労省の基準日 {esc(source_date)}。'
     items_heading = "<h2>該当品目</h2>"
     primary_link = f'<a href="{esc(query_link)}" data-dsn-event="search-cta-open">この製品をWeb版で検索</a>'
+    snapshot_before_items = ""
     if slug in {"kenacort-a-injection", "hilnamin"}:
         items_heading = '<h2 id="productItems">規格別の品目</h2>'
         if slug == "kenacort-a-injection" and package_snapshot:
@@ -929,6 +930,9 @@ def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[
     elif slug == "juvela-ointment" and len(rows) == 1:
         href = esc(product_row_link(product, rows[0], generated_keys))
         primary_link = f'<a href="{href}" data-dsn-event="related-item-open">ユベラ軟膏の品目詳細を見る</a>' + primary_link
+        if package_snapshot:
+            primary_link = '<a href="#packageSnapshotTitle">包装別の案内を見る</a>' + primary_link
+            snapshot_before_items, package_snapshot = package_snapshot, ""
     limited_link = ("" if slug in SUPPLY_COMPARISONS
                     else '<a href="../items/limited.html">限定出荷の品目一覧</a>')
     hero_intro = f'''<p class="eyebrow">CURRENT SUPPLY STATUS</p><h1>{esc(label)}の{suffix}</h1>
@@ -940,6 +944,14 @@ def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[
 </nav>'''
     strength_links = ""
     extra_style = ""
+    if slug == "juvela-ointment":
+        extra_style = (
+            '.product-outlook{margin:16px 0;padding:12px 14px;border:1px solid #c6d8f4;'
+            'border-radius:12px;background:#f2f6ff;font-size:14px}'
+            '.product-outlook strong{font-size:16px}'
+            '.product-outlook a{display:inline-flex;align-items:center;min-height:44px}'
+            '#packageSnapshotTitle{scroll-margin-block-start:16px}'
+        )
     if slug == "hilnamin":
         links = "".join(
             f'<a href="#comparison-{esc(item_key(row))}">'
@@ -956,8 +968,11 @@ def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[
             '[id^="comparison-"],[id^="packages-"]{scroll-margin-block-start:16px}'
             '[id^="comparison-"]:target,[id^="packages-"]:target{outline:2px solid #2F63E8;outline-offset:3px}'
         )
-    cards = product_rows_html(rows, generated_keys, lifecycle, product, link_strengths=slug == "hilnamin",
-                              package_keys=package_keys)
+    items_section = ""
+    if not package_html or len(rows) != 1 or is_delist(rows[0]) or lifecycle.get(item_key(rows[0])):
+        cards = product_rows_html(rows, generated_keys, lifecycle, product, link_strengths=slug == "hilnamin",
+                                  package_keys=package_keys)
+        items_section = f'{items_heading}{strength_links}<div class="products">{cards}</div>'
     intent = product_intent_html(product, rows, generated_keys)
     if package_html:
         row = rows[0]
@@ -985,7 +1000,7 @@ def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[
 <nav class="crumb" aria-label="パンくず"><a href="../">トップ</a> › <a href="index.html">注目製品</a> › {esc(label)}</nav><main>
 <section class="hero">{hero_intro}
 {share_control("この供給状況を共有")}</section>
-{items_heading}{strength_links}<div class="products">{cards}</div>{package_snapshot}
+{snapshot_before_items}{items_section}{package_snapshot}
 {intent}
 <div class="cta"><strong>Web版で絞り込んで確認</strong><p>公表理由やメーカー案内を確認できます。同成分・同剤形の確認候補がある場合はあわせて表示します。</p><a href="{query_link}" data-dsn-event="search-cta-open">この製品を検索する</a></div>
 </main><footer><p>厚生労働省公表データをもとにした非公式情報です。実際の流通状況は卸・メーカーにもご確認ください。</p><a href="../guides/{GUIDE_SLUG}.html">供給情報の確認ガイド</a>｜<a href="../categories/index.html">薬効分類別の供給状況</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>

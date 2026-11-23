@@ -690,10 +690,17 @@ class CuratedPageGenerationTests(unittest.TestCase):
         self.assertIn("2026-11-20基準", page)
         self.assertIn('<title>ジクトルテープ75mgの出荷調整・供給状況｜包装別の出荷案内', page)
         self.assertIn('久光製薬の資料で示された1枚包装・7枚包装の出荷予定', page)
+        self.assertNotIn('<h2>該当品目</h2>', page)
+        self.assertIn(f'href="../items/{row["YJコード"]}.html"', page)
+        with_delisting, _ = product_page(
+            product, [dict(row, 代替候補="薬価削除予定")], {row["YJコード"]}, {},
+            package_brief=("包装別の出荷案内", "原文の要約", section), source_date="2026-11-20")
+        self.assertIn("薬価削除予定</span>", with_delisting)
         fallback, fallback_lastmod = product_page(*inputs, source_date="2026-11-23")
         self.assertNotIn(section, fallback)
         self.assertNotIn("原文の要約", fallback)
         self.assertIn("厚労省の原典で確認", fallback)
+        self.assertIn('<h2>該当品目</h2>', fallback)
         self.assertGreaterEqual(fallback_lastmod, lastmod)
 
     def test_juvela_product_highlights_only_outlook_from_matching_workbook(self):
@@ -714,6 +721,13 @@ class CuratedPageGenerationTests(unittest.TestCase):
         self.assertIn(f'href="{url}"', hero)
         self.assertIn("包装ごとの再開時期はメーカー案内で確認", hero)
         self.assertIn('href="../items/2649805M1026.html"', hero)
+        self.assertNotIn('href="#packageSnapshotTitle"', hero)
+        snapshot = '<section><h2 id="packageSnapshotTitle">包装別の案内</h2></section>'
+        with_packaging, _ = product_page(product, [row], {key}, {}, source_date="2026-11-20",
+                                         mhlw_source=source, package_snapshot=snapshot)
+        self.assertIn('href="#packageSnapshotTitle">包装別の案内を見る</a>', with_packaging)
+        self.assertLess(with_packaging.index("解除見込み（品目全体）"), with_packaging.index(snapshot))
+        self.assertLess(with_packaging.index(snapshot), with_packaging.index('<h2>該当品目</h2>'))
         for omitted in (render(None), render(source, "①通常出荷"),
                         render(dict(source, excel_date="2026-11-19")),
                         render(dict(source, url="https://example.test/outlook.xlsx"))):
