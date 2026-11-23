@@ -975,6 +975,31 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
             else:
                 self.assertNotIn("販売中止予定", title)
 
+    def test_bonzol_separates_the_exact_package_plan_from_the_pricing_deadline(self):
+        keys = {"2499007F1021": ("100mg", "128-62031-9"), "2499007F2028": ("200mg", "128-62036-4")}
+        for key, (strength, product_code) in keys.items():
+            with self.subTest(strength=strength):
+                row = dict(self.row(), 商品名=f"ボンゾール錠{strength}", YJコード=key)
+                notice = dict(self.notice(), announced_at="2026-11", event_type="discontinued",
+                              title="ボンゾール錠の販売中止予定", summary="両規格は在庫消尽後に販売終了します。")
+                notice["targets"] = [dict(notice["targets"][0], yj_code=key, product_name=row["商品名"],
+                                          scope="package", seller="", packages=[{
+                                              "package": "PTP100錠", "unified_product_code": product_code,
+                                              "supply": {"status": "unconfirmed", "plans": [
+                                                  {"event": "stock_depletion", "timing": "2026年12月末頃"}]},
+                                          }])]
+                page = page_html(row, key, "ok", "2026-11-23", [], set(keys),
+                                 manufacturer_notices=[notice], manufacturer_bulletins={"items": []})
+                brief = page.split('id="packageBriefTitle"', 1)[1].split("</section>", 1)[0]
+                self.assertIn("対象包装　PTP100錠", brief)
+                self.assertIn(product_code, brief)
+                self.assertIn("2026年12月末頃", brief)
+                self.assertNotIn("2027年3月31日", brief)
+                pricing = page.split('id="pricingTransitionTitle"', 1)[1].split("</section>", 1)[0]
+                self.assertIn("2027年3月31日", pricing)
+                self.assertIn("ymente261112.pdf#page=3", pricing)
+                self.assertNotIn("延長を申請", pricing)
+
     def test_tagamet_shows_the_verified_pack_and_estimate_before_freshness(self):
         key = "2325001F1211"
         row = dict(self.row(), 商品名="タガメット錠200mg", YJコード=key, 供給状況="通常出荷")

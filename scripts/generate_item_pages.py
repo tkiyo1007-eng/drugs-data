@@ -1622,8 +1622,22 @@ def package_overview_content(key, match, display_name, status_label, official_re
     elif key in BONZOL_KEYS:
         heading = "メーカーの販売中止予定" if "販売中止予定" in notice["title"] else "メーカーの販売中止案内"
         hint = heading
-        description = f'{day}の{notice["maker"]}の案内。{notice["summary"]}'
-        body = f'{source}<p><strong>対象包装　{esc(" ／ ".join(packages))}</strong></p><p>{esc(notice["summary"])}</p>'
+        package_rows = []
+        estimates = []
+        for package in target["packages"]:
+            package_name = package["package"]
+            code = package.get("unified_product_code")
+            code_html = f'<br><small>統一商品コード {esc(code)}</small>' if code else ""
+            package_rows.append(f'<p><strong>対象包装　{esc(package_name)}</strong>{code_html}</p>')
+            for plan in package["supply"]["plans"]:
+                if plan["event"] == "stock_depletion":
+                    timing = plan["timing"]
+                    estimates.append(f'{package_name}の在庫消尽見込みは{timing}です。')
+                    package_rows.append(f'<p><strong>在庫消尽見込み　{esc(timing)}</strong></p>')
+        description = f'{day}の{notice["maker"]}の販売中止案内。{"".join(estimates) or notice["summary"]}'
+        body = ("".join(package_rows)
+                + (f'<p>{esc(notice["summary"])}</p>' if not estimates else '<p>在庫がなくなり次第、販売を終了する予定です。</p>')
+                + source)
     elif key in HILNAMIN_TABLETS:
         heading = "ヒルナミン錠の包装別出荷状況"
         hint = "包装別の出荷状況"
@@ -1673,7 +1687,7 @@ def package_overview_content(key, match, display_name, status_label, official_re
     css_class = "package-brief stbox supp-notice" if key in BONZOL_KEYS | {ZESTAC_KEY} | TAGAMET_KEYS else "package-brief"
     section = (f'<section class="{css_class}" aria-labelledby="packageBriefTitle">'
                f'<h2 id="packageBriefTitle">{heading}</h2>{body}</section>')
-    if key in TAGAMET_KEYS:
+    if key in TAGAMET_KEYS | BONZOL_KEYS:
         return hint, description, section
     if key == JUVELA_KEY and official_reason:
         hint = "公表理由・包装別案内"
@@ -2607,6 +2621,9 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
             if key in TAGAMET_KEYS:
                 priority = hint
                 priority_description = desc.rstrip("。")
+            elif key in BONZOL_KEYS:
+                priority = priority or hint
+                priority_description = desc.rstrip("。")
     elif key in PACKAGE_LANDING_KEYS:
         matches = matching_manufacturer_notices(row, manufacturer_notices, manufacturer_bulletins)
         packages = dict.fromkeys(
@@ -2837,17 +2854,21 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
             label = "タガメット注射液200mg" if key == TAGAMET_KEY else "タガメット錠200mg"
             tagamet_links = (f'<nav class="hub-links" aria-label="タガメットの別剤形">'
                              f'<a href="{other}.html" data-dsn-event="related-item-open">{label}を見る</a></nav>')
-    tagamet_price_notice = ""
-    if key == TAGAMET_KEY:
-        tagamet_price_notice = (
-            '<section class="stbox" aria-labelledby="tagametPricingTitle">'
-            '<h2 id="tagametPricingTitle">薬価の経過措置</h2>'
-            '<p>厚労省の2026年11月公表資料では、経過措置期限は<strong>2027年3月31日</strong>です。</p>'
+    pricing_notice = ""
+    if key in BONZOL_KEYS or key == TAGAMET_KEY:
+        extension = (
             '<p>住友ファーマは11月16日、2028年3月31日までの延長を申請する予定と案内しました。</p>'
-            '<p><a href="https://shinryohoshu.mhlw.go.jp/shinryohoshu/file/info/ymente261112.pdf" '
-            'data-dsn-event="official-source-open">厚労省の公表資料</a> ／ '
             '<a href="https://sumitomo-pharma.jp/hubfs/product/package_notification/2026/tag_cet_pyl_gas_keikasochi_20261116.pdf" '
-            'data-dsn-event="official-source-open">住友ファーマの延長予定の案内</a></p></section>'
+            'data-dsn-event="official-source-open">住友ファーマの延長予定の案内</a>'
+            if key == TAGAMET_KEY else ""
+        )
+        pricing_notice = (
+            '<section class="stbox" aria-labelledby="pricingTransitionTitle">'
+            '<h2 id="pricingTransitionTitle">薬価の経過措置</h2>'
+            '<p>厚労省の2026年11月公表資料では、経過措置期限は<strong>2027年3月31日</strong>です。</p>'
+            '<p><a href="https://shinryohoshu.mhlw.go.jp/shinryohoshu/file/info/ymente261112.pdf#page=3" '
+            'data-dsn-event="official-source-open">厚労省の公表資料</a></p>'
+            f'{extension}</section>'
         )
     product_supply_link = ""
     teramuro_comparison = ""
@@ -3048,7 +3069,7 @@ footer a{{color:var(--sub)}}
 {intro}{promoted_sections}    <div class="stbox status-{status}">
       {supply_answer}{package_jump}
     </div>{package_overview if not limited_layout else ""}
-{tagamet_price_notice}{tagamet_links}{early_hub_link}{product_supply_link}{variants_html}
+{pricing_notice}{tagamet_links}{early_hub_link}{product_supply_link}{variants_html}
     <section class="item-freshness" aria-labelledby="itemFreshnessTitle">
       <h2 id="itemFreshnessTitle">このページが参照したデータ</h2>
       {dataset_context}
