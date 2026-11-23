@@ -961,6 +961,7 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
     maker_supply_note = ""
     if slug == "teramuro":
         jump_links.append('<a href="#dsepPackagingTitle">DSEPの包装変更</a>')
+        jump_links.append('<a href="#nigTransferTitle">NIGの販売元変更</a>')
         maker_supply_note = '''<section class="intent" aria-labelledby="makerSupplyTitle">
 <h2 id="makerSupplyTitle">メーカーの出荷状況一覧</h2>
 <h3 id="towaSupplyTitle">トーワの出荷状況</h3>
@@ -980,6 +981,14 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
 <li><strong>BP</strong>　PTP100錠（081-186853）</li></ul>
 <p>3包装とも包装工程の製造所が変更され、PTPシート裏面のロット番号が見やすくなります。個装箱の仕様と梱包箱のサイズ・積み付けも変更されます。</p>
 <p><a href="https://med.daiichisankyo-ep.co.jp/information/files/2294/EPALL1N50401-1.pdf" data-dsn-event="official-source-open">第一三共エスファの原文PDFを確認</a></p>
+</section>
+<section class="intent" aria-labelledby="nigTransferTitle">
+<h2 id="nigTransferTitle">NIGの販売元変更と包装コード</h2>
+<p>販売元は2026年2月1日に武田薬品工業から日医工に移管されました。AP・BPのPTP100錠の日医工からの発売日は<strong>2026年2月9日</strong>です。</p>
+<h3>統一商品コード（移管前 → 移管後）</h3>
+<ul><li><strong>AP PTP100錠</strong>　123-87483-0 → 376-78452-8</li>
+<li><strong>BP PTP100錠</strong>　123-87484-7 → 376-78462-7</li></ul>
+<p><a href="https://www.nichiiko.co.jp/medicine/file/78450/information/GHI0312-01.pdf#page=5" data-dsn-event="official-source-open">日医工の販売元変更案内</a>・<a href="https://www.nichiiko.co.jp/medicine/file/78450/information/HL1012-03.pdf" data-dsn-event="official-source-open">発売日と包装情報の案内（2026年5月27日更新）</a></p>
 </section>'''
     picker = (f'<nav class="strength-nav" aria-label="ページ内の供給情報">{"".join(jump_links)}</nav>'
               if show_picker or package_snapshot or packaging_change else "")

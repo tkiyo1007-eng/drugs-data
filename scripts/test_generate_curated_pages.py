@@ -355,6 +355,12 @@ class CuratedPageGenerationTests(unittest.TestCase):
         self.assertIn("新包装の市場出荷</strong>　案内時点で時期は未公表", packaging)
         self.assertIn("PTP100錠（081-186754）、PTP500錠（081-186761）", packaging)
         self.assertIn("BP</strong>　PTP100錠（081-186853）", packaging)
+        self.assertIn('href="#nigTransferTitle"', with_snapshot)
+        transfer = with_snapshot.split('<h2 id="nigTransferTitle">', 1)[1].split("</section>", 1)[0]
+        self.assertIn("2026年2月1日", transfer)
+        self.assertIn("2026年2月9日", transfer)
+        self.assertIn("123-87483-0 → 376-78452-8", transfer)
+        self.assertIn("123-87484-7 → 376-78462-7", transfer)
         missing = strength_hub_page("movicol", [
             {"商品名": "モビコール配合内用剤に似た名称", "YJコード": "LOOKALIKE"},
             {"商品名": "モビコール配合内用剤LD別製品", "YJコード": "LOOKALIKE2"},
