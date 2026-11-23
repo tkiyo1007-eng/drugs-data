@@ -138,12 +138,9 @@ class HubFilterTests(unittest.TestCase):
                 self.assertIn("https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list", output)
                 if slug in {"limited", "stopped", "supplemental"}:
                     self.assertIn("hidden", parsed.controls["hubFilter"])
-                    if slug == "supplemental":
-                        self.assertIn("この一覧内に該当する品目なし", output)
-                        self.assertIn("すべての医薬品の検索結果ではありません", output)
-                    else:
-                        self.assertIn("この一覧に該当する品目はありません。", output)
-                        self.assertIn("hidden", parsed.controls["hubFilterOutlookReset"])
+                    self.assertIn("この一覧に該当する品目はありません。", output)
+                    reset_id = "hubFilterPriceReset" if slug == "supplemental" else "hubFilterOutlookReset"
+                    self.assertIn("hidden", parsed.controls[reset_id])
                 else:
                     self.assertEqual({}, parsed.controls)
                     self.assertNotIn("data-search=", output)
@@ -501,7 +498,8 @@ function setup(before = "", omitFlag = false, hash = "") {
   const nodes = {
     hubFilter: node(), hubItems: node({querySelectorAll: selector => selector === "li" ? rows : groups}),
     hubFilterInput: node({value: "", focus() { this.focused = true; }}),
-    hubFilterPriceOnly: node({checked: false}), hubFilterClear: node({disabled: true}),
+    hubFilterPriceOnly: node({checked: false, focus() { this.focused = true; }}),
+    hubFilterPriceReset: node(), hubFilterClear: node({disabled: true}),
     hubPriceLabel: node({textContent: "厚労省の薬価削除予定・経過措置期限あり（2品目）"}),
     hubFilterCount: node({textContent: ""}), hubFilterEmpty: node()
   };
@@ -514,6 +512,7 @@ function setup(before = "", omitFlag = false, hash = "") {
 const live = setup();
 const input = live.nodes.hubFilterInput;
 const price = live.nodes.hubFilterPriceOnly;
+const priceReset = live.nodes.hubFilterPriceReset;
 const priceLabel = live.nodes.hubPriceLabel;
 const clear = live.nodes.hubFilterClear;
 const visible = () => live.rows.filter(row => !row.hidden).map(row => row.key).sort();
@@ -539,9 +538,18 @@ assert.equal(priceLabel.textContent, "厚労省の薬価削除予定・経過措
 assert.equal(live.nodes.hubFilterEmpty.hidden, false);
 assert.equal(live.nodes.hubFilterCount.textContent, "0 / 3品目を表示");
 assert.ok(live.groups.every(group => group.hidden));
-toggle(false);
+assert.equal(priceReset.hidden, false);
+assert.equal(priceReset.textContent, "絞り込みを外して1品目を表示");
+priceReset.handlers.click();
+assert.equal(input.value, "薬価削除予定という名前");
+assert.equal(price.checked, false);
+assert.equal(price.focused, true);
+assert.equal(priceReset.hidden, true);
 assert.deepEqual(visible(), ["3333333F3333"]);
 toggle(true);
+search("該当しない検索語");
+assert.deepEqual(visible(), []);
+assert.equal(priceReset.hidden, true);
 clear.handlers.click();
 assert.equal(input.value, "");
 assert.equal(price.checked, false);
