@@ -1572,6 +1572,19 @@ def package_overview_content(key, match, display_name, status_label, official_re
         if key == GENTACIN_KEY:
             hint = "限定出荷の理由・対象包装"
             body += '<small>原文は高田製薬の医療関係者向けサイトで開きます。</small>'
+    elif key == JUVELA_KEY:
+        heading = f'{notice["maker"]}の包装別案内'
+        pack_status = [
+            (package["package"], package["supply"].get("status_text") or "出荷対応の記載なし")
+            for package in target["packages"]
+        ]
+        rows = "".join(f'<div><dt>{esc(name)}</dt><dd>{esc(status)}</dd></div>'
+                       for name, status in pack_status)
+        body = (f'<p>{esc(day)}の案内時点の出荷対応</p>'
+                f'<dl class="package-brief-lines">{rows}</dl>'
+                '<small>現在の包装別の出荷状況は未確認です。</small><br>' + source)
+        description = (f'{day}の{notice["maker"]}の案内時点では、'
+                       + "、".join(f"{name}：{status}" for name, status in pack_status) + "。")
     elif key in BONZOL_KEYS:
         heading = "メーカーの販売中止予定" if "販売中止予定" in notice["title"] else "メーカーの販売中止案内"
         hint = heading
