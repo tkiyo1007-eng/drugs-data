@@ -3386,6 +3386,20 @@ HUB_FILTER_SCRIPT = r"""<script>
     function safelyApplyFilter(){
       try{ applyFilter(); }catch(error){ showAll(); }
     }
+    function syncOutlookUrl(){
+      if(!outlookOnly || typeof window === "undefined") return;
+      try{
+        const url = new URL(window.location.href);
+        if(outlookOnly.checked){
+          if(url.searchParams.get("outlook") === "1") return;
+          url.searchParams.set("outlook", "1");
+        }else{
+          if(!url.searchParams.has("outlook")) return;
+          url.searchParams.delete("outlook");
+        }
+        window.history.replaceState(window.history.state, "", url);
+      }catch(error){ /* The filter still works if the URL cannot be changed. */ }
+    }
     input.addEventListener("input", safelyApplyFilter);
     input.addEventListener("compositionend", function(){
       setTimeout(function(){
@@ -3393,12 +3407,19 @@ HUB_FILTER_SCRIPT = r"""<script>
       }, 0);
     });
     if(priceOnly) priceOnly.addEventListener("change", safelyApplyFilter);
-    if(outlookOnly) outlookOnly.addEventListener("change", safelyApplyFilter);
+    if(outlookOnly && typeof window !== "undefined"){
+      outlookOnly.checked = new URL(window.location.href).searchParams.get("outlook") === "1";
+      outlookOnly.addEventListener("change", function(){
+        safelyApplyFilter();
+        syncOutlookUrl();
+      });
+    }
     clear.addEventListener("click", function(){
       input.value = "";
       if(priceOnly) priceOnly.checked = false;
       if(outlookOnly) outlookOnly.checked = false;
       safelyApplyFilter();
+      syncOutlookUrl();
       input.focus();
     });
     function applyPriceEntry(){
