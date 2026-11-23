@@ -3570,10 +3570,11 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
     price_filter_markup = ""
     outlook_filter_markup = ""
     if slug in {"limited", "stopped"}:
-        outlook_filter_markup = '''
+        outlook_count = sum(bool(entry.get("release_period")) for entry in group)
+        outlook_filter_markup = f'''
       <label class="outlook-filter">
         <input id="hubFilterOutlookOnly" type="checkbox" aria-controls="hubItems">
-        <span>見込み時期あり</span>
+        <span>見込み時期あり（{outlook_count:,}品目）</span>
       </label>'''
     price_note = ""
     if slug == "supplemental":
