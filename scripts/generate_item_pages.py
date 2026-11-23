@@ -1119,6 +1119,21 @@ def mhlw_excel_date(version, dataset_date: str) -> str:
     return value if source_day <= imported_day else ""
 
 
+def official_item_outlook(row, key, release, excel_date, mhlw_source):
+    if (strict_status(row.get("供給状況")) not in {"limited", "stopped"}
+            or not excel_date or not isinstance(mhlw_source, dict)
+            or mhlw_source.get("excel_date") != excel_date or not release_outlook_is_expected(release)):
+        return None
+    outlooks = mhlw_source.get("release_outlooks")
+    period = outlooks.get(key) if isinstance(outlooks, dict) else None
+    if not isinstance(period, str) or not period.strip():
+        return None
+    try:
+        return period.strip(), workbook_url(mhlw_source.get("url"))
+    except ValueError:
+        return None
+
+
 def dataset_dates_html(dataset_date: str, version_metadata=None) -> str:
     """取込日・原典日・品目日を分け、JavaScriptなしでも生成時点を示す。"""
     source_date = mhlw_excel_date(version_metadata, dataset_date)
@@ -2774,17 +2789,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
     quick_answers = quick_answers_html(row, status, display_name)
     excel_date = mhlw_excel_date(version_metadata, dataset_date)
     release = public_metadata.get("解除・解消見込み")
-    item_release_outlook = None
-    if ((limited_layout or (status == "stopped" and strict_status(row.get("供給状況")) == "stopped"))
-            and excel_date and isinstance(mhlw_source, dict) and mhlw_source.get("excel_date") == excel_date
-            and release_outlook_is_expected(release)):
-        outlooks = mhlw_source.get("release_outlooks")
-        period = outlooks.get(key) if isinstance(outlooks, dict) else None
-        if isinstance(period, str) and period.strip():
-            try:
-                item_release_outlook = (period.strip(), workbook_url(mhlw_source.get("url")))
-            except ValueError:
-                pass
+    item_release_outlook = official_item_outlook(row, key, release, excel_date, mhlw_source)
     supply_answer = supply_answer_html(row, status, manufacturer_notices, lifecycle_match, manufacturer_bulletins)
     if status == "stopped" and item_release_outlook:
         period, source_url = item_release_outlook
@@ -3407,9 +3412,10 @@ HUB_FILTER_SCRIPT = r"""<script>
 
 def hub_supply_evidence(entry):
     """出荷対応・理由・解除見込みの公表欄を、区分や日付へ推定せず表示する。"""
-    fields = (("出荷対応（厚労省原文）", "supply_raw"),
-              ("理由（公表欄）", "reason"),
-              ("解除・解消見込み（公表区分）", "release"))
+    label = "解除見込み" if entry["status"] == "limited" else "解消見込み"
+    outlook = ((f"{label}（品目全体）", "release_period") if entry.get("release_period")
+               else ("解除・解消見込み（公表区分）", "release"))
+    fields = (("出荷対応（厚労省原文）", "supply_raw"), ("理由（公表欄）", "reason"), outlook)
     missing = "公表欄の記載なし（詳細・原典で確認）"
     return '<dl class="hub-evidence">' + "".join(
         f'<div><dt>{label}</dt><dd>{esc(entry.get(field) or missing)}</dd></div>'
@@ -3797,6 +3803,7 @@ def main():
         key: identity["display_name"] for key, identity in identities.items()
     }
     entries = []
+    excel_date = mhlw_excel_date(version_doc, dataset_date)
     for k, (r, s) in targets.items():
         lifecycle = lifecycle_products.get(k)
         discrepancy = discrepancy_products.get(k)
@@ -3833,10 +3840,13 @@ def main():
         }
         if entry["manufacturer_notices"]:
             entry["supplements"].append(manufacturer_notice_label(r, notice_index.get(k, []), manufacturer_bulletins))
+        outlook = official_item_outlook(r, k, entry["release"], excel_date, mhlw_source)
+        if outlook:
+            entry["release_period"] = outlook[0]
         entry["hubs"] = item_hub_slugs(entry, dataset_date)
         entries.append(entry)
 
-    share_cards = item_share_cards.prepare(site, targets, mhlw_excel_date(version_doc, dataset_date))
+    share_cards = item_share_cards.prepare(site, targets, excel_date)
     for entry in entries:
         k = entry["key"]
         r, s = targets[k]

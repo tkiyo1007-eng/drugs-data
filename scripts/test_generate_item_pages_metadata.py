@@ -644,6 +644,17 @@ class ItemPageMetadataTests(unittest.TestCase):
         for slug in ITEM_HUB_SLUGS:
             self.assertEqual(sitemap.count(f"items/{slug}.html"), 1)
 
+    def test_status_hubs_show_the_concrete_item_outlook_when_available(self):
+        for status, label in (("limited", "解除"), ("stopped", "解消")):
+            entry = {"key": "1234567F1234", "name": "対象錠", "maker": "対象製薬", "status": status,
+                     "release": "ア. あり", "hubs": [status],
+                     "release_period": "2027年3月"}
+            page = hub_html(status, [entry], "2026-11-23")
+            self.assertIn(f"<dt>{label}見込み（品目全体）</dt><dd>2027年3月</dd>", page)
+            entry.pop("release_period")
+            self.assertIn("<dt>解除・解消見込み（公表区分）</dt><dd>ア. あり</dd>",
+                          hub_html(status, [entry], "2026-11-23"))
+
     def test_recent_restrictions_hub_explains_scope_and_lists_change_date(self):
         entries = [{
             "key": "1234567F1234", "name": "対象錠", "display_name": "対象錠",
