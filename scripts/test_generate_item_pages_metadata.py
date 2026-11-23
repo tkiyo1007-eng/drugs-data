@@ -996,6 +996,9 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
         notice = dict(self.notice(), title="ユベラ軟膏の包装別案内", event_type="stopped")
         notice["targets"] = [dict(notice["targets"][0], yj_code=key, product_name=row["商品名"],
                                   scope="package", seller="", packages=[{
+                                      "package": "280g［56gチューブ×5］",
+                                      "supply": {"status": "stopped", "status_text": "出荷停止・供給停止", "plans": []},
+                                  }, {
                                       "package": "500gボトル",
                                       "supply": {"status": "limited", "status_text": "限定出荷", "plans": []},
                                   }])]
@@ -1005,6 +1008,14 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
         desc = re.search(r'<meta name="description" content="([^"]*)">', page).group(1)
         self.assertIn("公表理由・包装別案内", title)
         self.assertLess(desc.index("公表理由は「２．原材料調達上の問題」"), desc.index("500gボトル"))
+        self.assertIn("280g［56gチューブ×5］：出荷停止・供給停止", desc)
+        self.assertIn("500gボトル：限定出荷", desc)
+        brief = re.search(r'<section class="package-brief".*?</section>', page, re.S).group()
+        self.assertIn("<dt>280g［56gチューブ×5］</dt><dd>出荷停止・供給停止</dd>", brief)
+        self.assertIn("<dt>500gボトル</dt><dd>限定出荷</dd>", brief)
+        self.assertIn("案内時点の出荷対応", brief)
+        self.assertIn("現在の包装別の出荷状況は未確認", brief)
+        self.assertLess(page.index(brief), page.index('id="manufacturerNoticesTitle"'))
 
     def test_hilnamin_tablet_metadata_uses_only_latest_exact_packaging_status(self):
         key = "1172014F2139"
