@@ -3342,6 +3342,7 @@ HUB_FILTER_SCRIPT = r"""<script>
   const count = document.getElementById("hubFilterCount");
   const empty = document.getElementById("hubFilterEmpty");
   const priceOnly = document.getElementById("hubFilterPriceOnly");
+  const priceLabel = document.getElementById("hubPriceLabel");
   const outlookOnly = document.getElementById("hubFilterOutlookOnly");
   const outlookReset = document.getElementById("hubFilterOutlookReset");
   const outlookLabel = document.getElementById("hubOutlookLabel");
@@ -3387,17 +3388,23 @@ HUB_FILTER_SCRIPT = r"""<script>
       let shown = 0;
       let matchingRows = 0;
       let matchingOutlooks = 0;
+      let matchingPrices = 0;
       entries.forEach(function(entry){
         const matchesSearch = (!priceOnly || !priceOnly.checked || entry.priceInfo)
           && terms.every(function(term){ return entry.text.includes(term); });
         if(matchesSearch) matchingRows += 1;
         if(matchesSearch && entry.outlook) matchingOutlooks += 1;
+        if(matchesSearch && entry.priceInfo) matchingPrices += 1;
         const visible = matchesSearch && (!outlookOnly?.checked || entry.outlook);
         entry.row.hidden = !visible;
         if(visible) shown += 1;
       });
       if(outlookLabel){
         outlookLabel.textContent = "見込み時期あり（" + matchingOutlooks.toLocaleString("ja-JP") + "品目）";
+      }
+      if(priceLabel){
+        priceLabel.textContent = "厚労省の薬価削除予定・経過措置期限あり（"
+          + matchingPrices.toLocaleString("ja-JP") + "品目）";
       }
       Array.from(list.querySelectorAll(".supplemental-group")).forEach(function(group){
         group.hidden = !Array.from(group.querySelectorAll("li")).some(function(row){ return !row.hidden; });
@@ -3635,7 +3642,7 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
         price_filter_markup = f'''
       <label class="price-filter">
         <input id="hubFilterPriceOnly" type="checkbox" aria-describedby="hubFilterPriceHint" aria-controls="hubItems">
-        <span>厚労省の薬価削除予定・経過措置期限あり（{price_count:,}品目）</span>
+        <span id="hubPriceLabel">厚労省の薬価削除予定・経過措置期限あり（{price_count:,}品目）</span>
       </label>'''
     if searchable:
         example = "例：モビコールLD" if slug == "limited" else "例：薬品名 メーカー"

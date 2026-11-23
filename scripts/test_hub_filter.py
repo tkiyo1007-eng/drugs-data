@@ -99,7 +99,7 @@ class HubFilterTests(unittest.TestCase):
         self.assertEqual("hubFilterPriceHint", checkbox["aria-describedby"])
         self.assertEqual("hubItems", checkbox["aria-controls"])
         self.assertNotIn("checked", checkbox)
-        self.assertRegex(output, r'<label class="price-filter">\s*<input id="hubFilterPriceOnly"[^>]*>\s*<span>厚労省の薬価削除予定・経過措置期限あり（2品目）</span>\s*</label>')
+        self.assertRegex(output, r'<label class="price-filter">\s*<input id="hubFilterPriceOnly"[^>]*>\s*<span id="hubPriceLabel">厚労省の薬価削除予定・経過措置期限あり（2品目）</span>\s*</label>')
         self.assertIn("厚労省データの薬価削除予定・経過措置期限は、全体で2品目", output)
         self.assertIn("メーカー案内だけの経過措置情報は、原文も別に確認してください", output)
         self.assertNotIn('for="hubFilterPriceOnly"', output)
@@ -502,6 +502,7 @@ function setup(before = "", omitFlag = false, hash = "") {
     hubFilter: node(), hubItems: node({querySelectorAll: selector => selector === "li" ? rows : groups}),
     hubFilterInput: node({value: "", focus() { this.focused = true; }}),
     hubFilterPriceOnly: node({checked: false}), hubFilterClear: node({disabled: true}),
+    hubPriceLabel: node({textContent: "厚労省の薬価削除予定・経過措置期限あり（2品目）"}),
     hubFilterCount: node({textContent: ""}), hubFilterEmpty: node()
   };
   const window = {location: {hash}, handlers: {}, addEventListener(event, fn) { this.handlers[event] = fn; }};
@@ -513,11 +514,15 @@ function setup(before = "", omitFlag = false, hash = "") {
 const live = setup();
 const input = live.nodes.hubFilterInput;
 const price = live.nodes.hubFilterPriceOnly;
+const priceLabel = live.nodes.hubPriceLabel;
 const clear = live.nodes.hubFilterClear;
 const visible = () => live.rows.filter(row => !row.hidden).map(row => row.key).sort();
 const search = text => { input.value = text; input.handlers.input(); };
 const toggle = value => { price.checked = value; price.handlers.change(); };
 assert.deepEqual(visible(), ["1111111F1111", "2222222F2222", "3333333F3333"]);
+search("テスト 対象製薬");
+assert.equal(priceLabel.textContent, "厚労省の薬価削除予定・経過措置期限あり（1品目）");
+search("");
 toggle(true);
 assert.deepEqual(visible(), ["1111111F1111", "2222222F2222"]);
 assert.equal(live.nodes.hubFilterCount.textContent, "2 / 3品目を表示");
@@ -527,8 +532,10 @@ assert.deepEqual(live.groups.map(group => [group.id, group.hidden]), [
 assert.equal(clear.disabled, false);
 search("テスト 対象製薬");
 assert.deepEqual(visible(), ["2222222F2222"]);
+assert.equal(priceLabel.textContent, "厚労省の薬価削除予定・経過措置期限あり（1品目）");
 search("薬価削除予定という名前");
 assert.deepEqual(visible(), []); // The words alone never make delist=false qualify.
+assert.equal(priceLabel.textContent, "厚労省の薬価削除予定・経過措置期限あり（0品目）");
 assert.equal(live.nodes.hubFilterEmpty.hidden, false);
 assert.equal(live.nodes.hubFilterCount.textContent, "0 / 3品目を表示");
 assert.ok(live.groups.every(group => group.hidden));
@@ -540,6 +547,7 @@ assert.equal(input.value, "");
 assert.equal(price.checked, false);
 assert.equal(input.focused, true);
 assert.equal(clear.disabled, true);
+assert.equal(priceLabel.textContent, "厚労省の薬価削除予定・経過措置期限あり（2品目）");
 assert.equal(live.nodes.hubFilterEmpty.hidden, true);
 assert.deepEqual(visible(), ["1111111F1111", "2222222F2222", "3333333F3333"]);
 assert.ok(live.groups.every(group => !group.hidden));
