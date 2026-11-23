@@ -103,6 +103,12 @@ class HubFilterTests(unittest.TestCase):
         self.assertIn("メーカー案内だけの経過措置情報は、原文も別に確認してください", output)
         self.assertNotIn('for="hubFilterPriceOnly"', output)
         self.assertLess(output.index('class="price-note"'), output.index('id="hubFilter"'))
+        self.assertLess(output.index('id="hubFilter"'), output.index('aria-label="補足情報の種類から探す"'))
+        self.assertLess(output.index('id="hubFilter"'), output.index('<details class="list-guide">'))
+        self.assertIn("<h1>販売中止・薬価削除予定・メーカー補足 <small>3品目</small></h1>", output)
+        guide = re.search(r'<details class="list-guide">.*?</details>', output, re.S).group()
+        self.assertIn('class="dataset-context"', guide)
+        self.assertIn(MHLW_PRICE_LIST_URL, guide)
         for slug in ITEM_HUB_SLUGS - {"supplemental"}:
             other = hub_html(slug, [dict(entry, hubs=[slug]) for entry in entries], "2026-10-10")
             other_parsed = HubParser()

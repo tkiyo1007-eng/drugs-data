@@ -3702,25 +3702,28 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
     <nav class="hub-nav" aria-label="状態別の品目一覧">{other_hubs}</nav>'''
     notice = (f'<p class="notice">{esc(config["intro"])} '
               '医薬品の使用・変更は、公式情報を確認したうえで医師・薬剤師等の専門職が判断してください。</p>')
-    if outlook_hub:
+    if searchable:
         source_date = mhlw_excel_date(version_metadata, dataset_date) or "確認できません"
-        heading = "限定出荷一覧" if slug == "limited" else config["h1"]
-        guide_notice = f'\n      {notice}' if slug == "stopped" else ""
+        heading = {
+            "limited": "限定出荷一覧",
+            "supplemental": "販売中止・薬価削除予定・メーカー補足",
+        }.get(slug, config["h1"])
+        guide_notice = f'\n      {notice}' if slug != "limited" else ""
+        guide_evidence = f'\n      {evidence_note}' if evidence_note else ""
+        stock_note = '\n    <p class="stock-note">各施設の在庫・受注可否は示しません。</p>' if outlook_hub else ""
         header = f'''    <h1>{esc(heading)} <small>{len(group):,}品目</small></h1>
-    <p class="lede">厚労省データの基準日：{esc(source_date)}</p>{filter_markup}{outlook_links}
-    <p class="stock-note">各施設の在庫・受注可否は示しません。</p>
+    <p class="lede">厚労省データの基準日：{esc(source_date)}</p>{price_note}{filter_markup}{outlook_links}{stock_note}
     <details class="list-guide">
       <summary>この一覧の見方</summary>
-      {dataset_dates_html(dataset_date, version_metadata)}{guide_notice}
-      {evidence_note}
+      {dataset_dates_html(dataset_date, version_metadata)}{guide_notice}{guide_evidence}
       {hub_navigation}
-    </details>'''
+    </details>{supplemental_navigation}'''
     else:
         header = f'''    <h1>{esc(config["h1"])}</h1>
     <p class="lede">{esc(config["description"])}（{len(group):,}品目）</p>
     {dataset_dates_html(dataset_date, version_metadata)}
     {notice}
-{hub_navigation}{supplemental_navigation}{evidence_note}{price_note}{filter_markup}'''
+{hub_navigation}'''
     compact_list_style = """
 h1 small{display:inline-block;vertical-align:middle;padding:2px 9px;border-radius:12px;background:#e7eefb;color:#354e72;font-size:14px;white-space:nowrap}
 .hub-filter{margin:14px 0 8px;padding:12px 14px}
@@ -3730,7 +3733,7 @@ h1 small{display:inline-block;vertical-align:middle;padding:2px 9px;border-radiu
 .list-guide{margin:2px 0 10px}
 .list-guide summary{color:#264d93;cursor:pointer;padding:9px 0;min-height:44px;font-weight:700;font-size:14px}
 .list-guide summary:focus-visible{outline:3px solid #2f63e8;outline-offset:2px}
-""" if outlook_hub else ""
+""" if searchable else ""
     outlook_style = """
 .outlook-list-links,.outlook-list-links .hub-nav{margin:0;gap:0 18px}
 .outlook-list-links a{color:#264d93;font-size:14px;font-weight:700}
