@@ -380,6 +380,41 @@ class CuratedPageGenerationTests(unittest.TestCase):
         self.assertIn("基準日 未確認", missing)
         self.assertIn("今回の公表データでは該当する品目を確認できません", missing)
 
+    def test_movicol_distinguishes_official_outlooks_from_packaging_and_falls_back(self):
+        ld, hd = "2359110B1037", "2359110B2025"
+        rows = [
+            {"商品名": "モビコール配合内用剤" + strength, "YJコード": key,
+             "供給状況": "②限定出荷（自社の事情）",
+             "代替候補": "解除/解消見込み: ア. あり / 出荷量状況: B．出荷量減少"}
+            for strength, key in (("ＬＤ", ld), ("ＨＤ", hd))
+        ]
+        url = "https://www.mhlw.go.jp/content/10800000/261120iyakuhinkyoukyu.xlsx"
+        meta = {"url": url, "excel_date": "2026-11-20", "release_outlooks": {hd: "2027年6月頃"}}
+        snapshot = '<section><h2 id="packageSnapshotTitle">包装別案内</h2></section>'
+        page = strength_hub_page("movicol", rows, {ld, hd}, "2026-11-20", mhlw_source=meta,
+                                 package_snapshot=snapshot, package_keys={ld})
+        ld_section, hd_section = page.split('<section aria-labelledby="hd">')
+        self.assertIn('href="#ld">LD</a>', ld_section)
+        self.assertIn('href="#hd">HD</a>', ld_section)
+        self.assertNotIn("解除見込み（品目全体）", ld_section)
+        self.assertIn("解除見込み（品目全体）　2027年6月頃", hd_section)
+        self.assertIn(f'href="{url}"', page)
+        self.assertIn(f'href="#packages-{ld}"', ld_section)
+        self.assertNotIn(f'href="#packages-{hd}"', page)
+        fallback = strength_hub_page("movicol", rows, {ld, hd}, "2026-11-23", mhlw_source=meta)
+        self.assertNotIn("2027年6月頃", fallback)
+        self.assertNotIn('href="#packageSnapshotTitle"', fallback)
+
+    def test_generated_movicol_has_both_dated_packaging_notices(self):
+        page = (ROOT / "products" / "movicol.html").read_text(encoding="utf-8")
+        self.assertIn('id="packages-2359110B1037"', page)
+        self.assertIn('id="packages-2359110B2025"', page)
+        self.assertIn("2026年10月のEAファーマの案内", page)
+        self.assertIn("LD 100包（EAファーマ販売）", page)
+        self.assertIn("HD 100包（EAファーマ販売）", page)
+        self.assertIn("2026年12月から一時出荷停止予定", page)
+        self.assertIn("MVC-H-2-PM-05818.pdf", page)
+
     def test_product_entry_reuses_encoded_search_and_official_links_before_details(self):
         product = {"slug": "entry-test", "label": "確認製品", "query": '製品A & "テスト"'}
         page, _ = product_page(product, [], set(), {})
