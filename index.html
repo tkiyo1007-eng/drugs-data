@@ -536,6 +536,8 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .drug-spec{color:#B7C1DA;margin-left:6px}
 .drug-spec::before{content:"・"}
 .drug-outlook{margin:5px 0 0;font-size:12px;line-height:1.5;overflow-wrap:anywhere}
+.drug-compare-link{display:inline-flex;align-items:center;min-height:44px;max-width:100%;font-size:13px;font-weight:700;color:var(--blue-deep);text-decoration:underline;text-underline-offset:3px}
+.drug-compare-link:focus-visible{outline:2px solid var(--blue-deep);outline-offset:2px;border-radius:4px}
 .drug-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:4px 10px}
 .status-tag{
   font-size:11.5px;font-weight:800;padding:4px 12px;border-radius:999px;
@@ -2621,6 +2623,10 @@ html.season-autumn .autumn-sky{display:none}
   <div class="news-list glass">
     <div class="news-item">
       <div class="news-date num">2026.11.24</div>
+      <div class="news-body"><span class="news-tag">テラムロの比較</span>検索結果から、テラムロ配合錠の該当する規格・販売元の比較欄へ直接移動できます。比較欄から各品目の包装別案内も確認できます。</div>
+    </div>
+    <div class="news-item">
+      <div class="news-date num">2026.11.24</div>
       <div class="news-body"><span class="news-tag">品目詳細</span>品目ページで、供給区分や見込みのあとにメーカー案内を確認しやすくしました。販売中止の案内は、対象が品目全体か、一部包装や特定の販売元に限られるかを見出しに表示します。</div>
     </div>
     <div class="news-item">
@@ -3672,6 +3678,7 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
     else restorePendingPageAnchor();
     return;
   }
+  const showComparisons = LIVE && nameWords.length > 0;
   $list.innerHTML = shown.map((d,i)=>{
     const st = STATUS[d.s];
     const days = daysAgo(d.d);
@@ -3699,6 +3706,11 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
     const favorite = isFav(d);
     const favoriteAction = favorite ? "監視リストから解除" : "監視リストに追加";
     const favoriteLabel = favorite ? "★ 監視中" : "★ 監視に追加";
+    const comparisonLink = showComparisons && /^2149117F[0-9]{4}$/.test(d.yj)
+      && supplyReferenceId(d) === "teramuroResearchReference"
+      ? `<a class="drug-compare-link" href="${TERAMURO_PRODUCT_PAGE}#comparison-${d.yj}"
+          aria-label="規格・販売元を比較（${esc(d.n)}）" data-dsn-event="related-item-open">規格・販売元を比較</a>`
+      : "";
     return `<article class="drug-card" data-i="${i}" style="--sc:${st.color};animation-delay:${Math.min(i*35,350)}ms">
       <div class="drug-head">
         <div class="drug-name"><button type="button" class="drug-open" aria-haspopup="dialog">${esc(d.n)}</button></div>
@@ -3711,6 +3723,7 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
       </div>
       ${supplyOutlookHtml(d)}
       ${packageSupplyBadge ? '<span class="package-supply-context">メーカー文書の記載です。現在の在庫は要確認</span>' : ''}
+      ${comparisonLink}
     </article>`;
   }).join("");
   const remaining = hits.length - shown.length;
@@ -5108,9 +5121,7 @@ function refreshHistoryViews(){
   historyViewPending = false;
   // 履歴到着時は既存カードの順序・DOMを保つ。履歴依存条件だけ現在値で更新する。
   const active = document.activeElement;
-  const activeCard = active?.closest(".drug-card");
-  const activeKey = activeCard?.querySelector(".fav-btn")?.dataset.key;
-  const activeClass = active?.classList.contains("fav-btn") ? ".fav-btn" : ".drug-open";
+  const activeResult = captureSearchResultFocus(active);
   const y = window.scrollY, x = window.scrollX;
   const anchor = historyReadingAnchor(active, y);
   const top = anchor?.getBoundingClientRect().top;
@@ -5135,9 +5146,8 @@ function refreshHistoryViews(){
     }
   }
   let focusTarget = active;
-  if(activeKey && !active.isConnected){
-    focusTarget = [...$list.querySelectorAll(".drug-card")]
-      .find(card=>card.querySelector(".fav-btn")?.dataset.key === activeKey)?.querySelector(activeClass);
+  if(activeResult && !active.isConnected){
+    focusTarget = searchResultFocusTarget(activeResult);
     if(!focusTarget){
       // 履歴条件から品目が外れた場合もbodyへフォーカスを落とさず結果状態を知らせる。
       $meta.setAttribute("tabindex","-1");
@@ -5149,7 +5159,7 @@ function refreshHistoryViews(){
   const focusFallback = active && active !== document.body && !canRestoreHistoryFocus(focusTarget);
   if(focusFallback) focusTarget = historyFocusFallback(active);
   if(focusTarget?.isConnected && document.activeElement !== focusTarget) focusTarget.focus({preventScroll:true});
-  const stable = focusFallback ? null : anchor?.isConnected ? anchor : activeKey && focusTarget !== $meta ? focusTarget : null;
+  const stable = focusFallback ? null : anchor?.isConnected ? anchor : activeResult && focusTarget !== $meta ? focusTarget : null;
   const offset = stable?.isConnected && top != null ? stable.getBoundingClientRect().top - top : 0;
   const activeModal = active?.closest("#mBack .modal");
   if(activeModal){
@@ -5382,13 +5392,13 @@ function updateFavPill(){
 function captureSearchResultFocus(element){
   if(!element || !$list.contains(element)) return null;
   const card = element.closest(".drug-card"), favorite = card?.querySelector(".fav-btn");
-  if(!favorite || (!element.classList.contains("fav-btn") && !element.classList.contains("drug-open"))) return null;
-  return {key:favorite.dataset.key, control:element.classList.contains("fav-btn") ? "favorite" : "detail"};
+  const control = [".fav-btn", ".drug-open", ".drug-compare-link"].find(selector=>element.matches(selector));
+  return favorite && control ? {key:favorite.dataset.key, control} : null;
 }
 function searchResultFocusTarget(saved){
   if(!saved) return null;
   const favorite = [...$list.querySelectorAll(".fav-btn")].find(button=>button.dataset.key === saved.key);
-  return saved.control === "favorite" ? favorite : favorite?.closest(".drug-card")?.querySelector(".drug-open");
+  return favorite?.closest(".drug-card")?.querySelector(saved.control);
 }
 function renderSupplementalSearchResults(shouldSyncHash){
   const resultFocus = captureSearchResultFocus(document.activeElement);
@@ -5970,6 +5980,7 @@ function updateDetailHistoryNote(item){
     modal.scrollTop = scrollTop;
   }
 }
+const TERAMURO_PRODUCT_PAGE = "products/teramuro.html";
 function supplyReferenceId(d){
   const normalize = value => String(value || '').normalize('NFKC').replace(/\s/g,'');
   const refs = {
@@ -6346,7 +6357,7 @@ function openDetail(d, opts={}){
         const bSpec = targetSpec && norm(b.spec || "")===targetSpec ? 0 : 1;
         return (aSpec-bSpec) || (effSev(a)-effSev(b)) || a.n.localeCompare(b.n,"ja");
       });
-    if(sameG.length) relHtml += relatedBlock(`同成分・同剤形${dWarm ? "（温感タイプ）" : ""}の確認候補（${sameG.length}件・同規格優先）`, sameG.slice(0,6));
+    if(sameG.length) relHtml += relatedBlock(`同成分・同剤形${dWarm ? "（温感タイプ）" : ""}の確認候補（厚労省データ・${sameG.length}件）`, sameG.slice(0,6));
   }
   if(relHtml){
     $mRel.innerHTML = relHtml +
@@ -6618,6 +6629,11 @@ function sparkAt(el){
   setTimeout(()=>burst.remove(), 700);
 }
 $list.addEventListener("click", e=>{
+  if(e.target.closest(".drug-compare-link")){
+    // 比較へ移動して戻ったとき、直前に入力した検索条件を復元できるようにする。
+    if(hashTimer !== null){ clearTimeout(hashTimer); hashTimer = null; syncHash(); }
+    return;
+  }
   // 0件の復帰ボタンは再描画で消えるため、次に操作する場所へ焦点を渡す。
   if(e.target.id === "emptyReset"){
     $q.value = ""; setFilter("all");
@@ -6907,7 +6923,7 @@ function renderTrending(){
   // 専用ページがある製品はそこへ、それ以外は品目詳細か規格を選べる検索結果へ。
   const landingPages = new Map([
     ["movicol", "products/movicol.html"],
-    ["teramuro", "products/teramuro.html"],
+    ["teramuro", TERAMURO_PRODUCT_PAGE],
     ["juvela-ointment", "products/juvela-ointment.html"],
     ["zictor-tape-75mg", "products/zictor-tape-75mg.html"],
   ]);
