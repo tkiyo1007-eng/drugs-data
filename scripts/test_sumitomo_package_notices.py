@@ -51,7 +51,7 @@ class SumitomoPackages(unittest.TestCase):
         self.assertIn('2mL×10アンプルの出荷終了見込みは2028年2月頃', brief)
         self.assertIn('2mL×50アンプルの出荷終了見込みは2027年2月頃', brief)
         self.assertIn('href="2325001F1211.html"', page)
-        self.assertNotIn('id="tagametPricingTitle"', page)
+        self.assertNotIn('id="pricingTransitionTitle"', page)
         page = render(tablet, [resume, end])
         brief = page.split('id="packageBriefTitle"', 1)[1].split('</section>', 1)[0]
         self.assertIn('PTP100錠の出荷終了見込みは2027年1月頃', brief)
