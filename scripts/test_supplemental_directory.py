@@ -95,10 +95,10 @@ class SupplementalDirectoryTests(unittest.TestCase):
         notice = {"product_name": "対象錠", "maker": "対象製薬",
                   "source_url": "https://example.test/current.pdf",
                   "supply_end_source_url": "https://example.test/current.pdf",
-                  "supply_end_verified_at": "2026-11-24"}
-        self.assertEqual("2026-11-24", item_page_lastmod(row, notice))
+                  "supply_end_verified_at": "2026-11-25"}
+        self.assertEqual("2026-11-25", item_page_lastmod(row, notice))
         notice["supply_end_source_url"] = "https://example.test/old.pdf"
-        self.assertEqual("2026-11-23", item_page_lastmod(row, notice))
+        self.assertEqual("2026-11-24", item_page_lastmod(row, notice))
 
 
 if __name__ == "__main__":

@@ -3,7 +3,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
-from generate_item_pages import (load_manufacturer_notices, manufacturer_notices_html,
+from generate_item_pages import (load_manufacturer_notices, manufacturer_notices_html, page_html,
                                  package_supply_html, valid_package_supply)
 
 
@@ -125,6 +125,41 @@ class PackageSupplyPageTests(unittest.TestCase):
         self.assertIn("2026-10-18", output)
         self.assertIn("メーカー公式案内の原文を確認", output)
         self.assertIn("厚生労働省の現在の供給区分と分けて", output)
+
+    def test_discontinuation_heading_shows_scope_and_packaging(self):
+        notice = self.notice()
+        notice.update(event_type="discontinued", title="販売中止予定のお知らせ")
+        target = notice["targets"][0]
+        for scope, expected in (
+            ("package", "一部包装（PTP100錠／PTP1000錠）"),
+            ("seller_route_and_package", "テスト販売元の取扱分・一部包装（PTP100錠／PTP1000錠）"),
+            ("seller_route", "テスト販売元の取扱分"),
+            ("product", "対象品目全体"),
+        ):
+            with self.subTest(scope=scope):
+                target["scope"] = scope
+                target["seller"] = "テスト販売元" if scope.startswith("seller_route") else ""
+                output = manufacturer_notices_html(self.row(), [notice], bulletins={"items": []})
+                self.assertIn(f'<h3>販売中止予定のお知らせ<span class="notice-heading-scope">{expected}</span></h3>', output)
+        output = manufacturer_notices_html(self.row(), [notice], bulletins=None)
+        self.assertNotIn('class="notice-heading-scope"', output)
+
+    def test_supply_and_dated_original_precede_secondary_tools(self):
+        notice = self.notice()
+        notice["event_type"] = "restricted"
+        row = dict(self.row(), 供給状況="⑤供給停止", 理由="１．需要増")
+        output = page_html(row, row["YJコード"], "stopped", "2026-11-23", [], set(),
+                           dataset_date="2026-11-23",
+                           version_metadata={"version": "202611230930", "mhlw_excel_date": "2026-11-20"},
+                           manufacturer_notices=[notice], manufacturer_bulletins={"items": []})
+        markers = ("厚労省基準日", "公表理由", 'id="manufacturerNoticesTitle"',
+                   "メーカー説明の理由", 'class="package-supply"', "メーカー公式案内の原文を確認",
+                   'id="watchButton"', 'id="itemSearchForm"')
+        body = output.split("<main>", 1)[1]
+        for marker in markers:
+            self.assertIn(marker, body[:body.index("</main>")])
+        order = [body.index(marker) for marker in markers]
+        self.assertEqual(sorted(order), order)
 
 
 if __name__ == "__main__":
