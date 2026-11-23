@@ -64,6 +64,8 @@ PACKAGE_OVERVIEW_KEYS = frozenset({JUVELA_KEY, "3179106F1039"}) | HILNAMIN_TABLE
 GENTACIN_KEY = "2634710M1077"
 ZESTAC_KEY = "2649865N1023"
 TAGAMET_KEY = "2325001F1211"
+TAGAMET_INJECTION_KEY = "2325400A1077"
+TAGAMET_KEYS = {TAGAMET_KEY, TAGAMET_INJECTION_KEY}
 MOVICOL_LD_KEY = "2359110B1037"
 KENACORT_KEYS = frozenset({"2454402A2037", "2454402A3033"})
 LIMITED_REASON_KEYS = frozenset({
@@ -1519,6 +1521,9 @@ def dated_pdf_unchanged_before_daily_limit(notice, bulletins):
 
 def package_overview_notice(key, matches, bulletins):
     """Only promote a single, dated package notice. Never fall back past a newer notice."""
+    if key in TAGAMET_KEYS:
+        # 限定出荷の解除と、後日の販売中止予定は同じ包装に併存する。
+        matches = [match for match in matches if match["notice"]["event_type"] != "resumed"]
     if not matches or bulletins is None:
         return None
     latest_date = max(match["notice"]["announced_at"] for match in matches)
@@ -1547,7 +1552,7 @@ def package_overview_notice(key, matches, bulletins):
     if key in BONZOL_KEYS:
         return match if (notice.get("event_type") == "discontinued" and "販売中止" in notice["title"]
                          and notice.get("summary")) else None
-    if key in {ZESTAC_KEY, TAGAMET_KEY}:
+    if key in {ZESTAC_KEY} | TAGAMET_KEYS:
         return match if (notice.get("event_type") == "discontinued" and "販売中止" in notice["title"]
                          and notice.get("reason")) else None
     if key in HILNAMIN_TABLETS and not any(p["supply"].get("status_text") for p in packages):
@@ -1630,8 +1635,9 @@ def package_overview_content(key, match, display_name, status_label, official_re
         description = f'{day}の{notice["maker"]}の案内（{"、".join(pack_status)}）。'
         body = (f'<p>{esc(day)}の{esc(notice["maker"])}の案内時点の区分です。</p>'
                 f'<ul>{"".join(f"<li>{esc(value)}</li>" for value in pack_status)}</ul>{source}')
-    elif key == TAGAMET_KEY:
-        heading = "タガメット錠200mgの販売中止予定"
+    elif key in TAGAMET_KEYS:
+        heading = ("タガメット錠200mgの販売中止予定" if key == TAGAMET_KEY
+                   else "タガメット注射液200mgの販売中止予定")
         hint = "販売中止予定（包装別）"
         timings = [
             f'{package["package"]}の出荷終了見込みは{plan["timing"]}です。'
@@ -1664,10 +1670,10 @@ def package_overview_content(key, match, display_name, status_label, official_re
         )
         if alternatives:
             body += f'<p><strong>メーカーが示した代替候補</strong>　{esc("、".join(alternatives))}</p>'
-    css_class = "package-brief stbox supp-notice" if key in BONZOL_KEYS | {ZESTAC_KEY, TAGAMET_KEY} else "package-brief"
+    css_class = "package-brief stbox supp-notice" if key in BONZOL_KEYS | {ZESTAC_KEY} | TAGAMET_KEYS else "package-brief"
     section = (f'<section class="{css_class}" aria-labelledby="packageBriefTitle">'
                f'<h2 id="packageBriefTitle">{heading}</h2>{body}</section>')
-    if key == TAGAMET_KEY:
+    if key in TAGAMET_KEYS:
         return hint, description, section
     if key == JUVELA_KEY and official_reason:
         hint = "公表理由・包装別案内"
@@ -2589,7 +2595,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
             latest_listing=zictor_listing)
         if package_overview:
             desc = search_name + comparison_desc.removeprefix(row["商品名"])
-    elif key in PACKAGE_OVERVIEW_KEYS | LIMITED_REASON_KEYS | BONZOL_KEYS | {ZESTAC_KEY, TAGAMET_KEY}:
+    elif key in PACKAGE_OVERVIEW_KEYS | LIMITED_REASON_KEYS | BONZOL_KEYS | {ZESTAC_KEY} | TAGAMET_KEYS:
         matches = matching_manufacturer_notices(row, manufacturer_notices, manufacturer_bulletins)
         overview = package_overview_notice(key, matches, manufacturer_bulletins) if supplemental_trusted else None
         if overview:
@@ -2598,7 +2604,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
                 key, overview, search_name, st["label"], official_reason=official_reason)
             if key == ZESTAC_KEY and priority:
                 priority = hint
-            if key == TAGAMET_KEY:
+            if key in TAGAMET_KEYS:
                 priority = hint
                 priority_description = desc.rstrip("。")
     elif key in PACKAGE_LANDING_KEYS:
@@ -2707,7 +2713,7 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
 .package-supply-row dd strong{font-size:12px}
 @media(max-width:520px){.package-supply-row{grid-template-columns:minmax(0,1fr)}}
 """ if 'class="package-supply"' in manufacturer_box else ""
-    if key in BONZOL_KEYS | {ZESTAC_KEY, TAGAMET_KEY} and package_overview and not limited_layout:
+    if key in BONZOL_KEYS | {ZESTAC_KEY} | TAGAMET_KEYS and package_overview and not limited_layout:
         package_styles += (".package-brief h2{margin:0 0 4px}.package-brief p+p{margin-top:5px}"
                            ".package-brief .source-link{display:inline-flex;align-items:center;"
                            "min-height:44px;font-weight:700;color:inherit}")
@@ -2824,6 +2830,25 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
         supply_answer += (f'<p><strong>解消見込み（厚労省の公表区分）</strong>　'
                           f'{esc(release or "記載なし")}</p>')
     variants_html = product_variants_html(row, product_variants, generated_keys)
+    tagamet_links = ""
+    if key in TAGAMET_KEYS:
+        other = TAGAMET_INJECTION_KEY if key == TAGAMET_KEY else TAGAMET_KEY
+        if other in generated_keys:
+            label = "タガメット注射液200mg" if key == TAGAMET_KEY else "タガメット錠200mg"
+            tagamet_links = (f'<nav class="hub-links" aria-label="タガメットの別剤形">'
+                             f'<a href="{other}.html" data-dsn-event="related-item-open">{label}を見る</a></nav>')
+    tagamet_price_notice = ""
+    if key == TAGAMET_KEY:
+        tagamet_price_notice = (
+            '<section class="stbox" aria-labelledby="tagametPricingTitle">'
+            '<h2 id="tagametPricingTitle">薬価の経過措置</h2>'
+            '<p>厚労省の2026年11月公表資料では、経過措置期限は<strong>2027年3月31日</strong>です。</p>'
+            '<p>住友ファーマは11月16日、2028年3月31日までの延長を申請する予定と案内しました。</p>'
+            '<p><a href="https://shinryohoshu.mhlw.go.jp/shinryohoshu/file/info/ymente261112.pdf" '
+            'data-dsn-event="official-source-open">厚労省の公表資料</a> ／ '
+            '<a href="https://sumitomo-pharma.jp/hubfs/product/package_notification/2026/tag_cet_pyl_gas_keikasochi_20261116.pdf" '
+            'data-dsn-event="official-source-open">住友ファーマの延長予定の案内</a></p></section>'
+        )
     product_supply_link = ""
     teramuro_comparison = ""
     if teramuro_strength(name):
@@ -3023,7 +3048,7 @@ footer a{{color:var(--sub)}}
 {intro}{promoted_sections}    <div class="stbox status-{status}">
       {supply_answer}{package_jump}
     </div>{package_overview if not limited_layout else ""}
-{early_hub_link}{product_supply_link}{variants_html}
+{tagamet_price_notice}{tagamet_links}{early_hub_link}{product_supply_link}{variants_html}
     <section class="item-freshness" aria-labelledby="itemFreshnessTitle">
       <h2 id="itemFreshnessTitle">このページが参照したデータ</h2>
       {dataset_context}
