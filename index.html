@@ -534,6 +534,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .drug-maker{font-size:12px;color:var(--sub);margin-bottom:10px}
 .drug-spec{color:#B7C1DA;margin-left:6px}
 .drug-spec::before{content:"・"}
+.drug-outlook{margin:5px 0 0;font-size:12px;line-height:1.5;overflow-wrap:anywhere}
 .drug-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:4px 10px}
 .status-tag{
   font-size:11.5px;font-weight:800;padding:4px 12px;border-radius:999px;
@@ -2599,6 +2600,10 @@ html.season-autumn .autumn-sky{display:none}
   <div class="news-list glass">
     <div class="news-item">
       <div class="news-date num">2026.11.23</div>
+      <div class="news-body"><span class="news-tag">解除・解消見込み</span>厚労省が時期を公表した品目は、検索結果や限定出荷・供給停止の一覧で、品目全体の見込みを確認できます。</div>
+    </div>
+    <div class="news-item">
+      <div class="news-date num">2026.11.23</div>
       <div class="news-body"><span class="news-tag">包装別の案内</span>トップの品目名から、<a href="products/juvela-ointment.html">ユベラ軟膏</a>と<a href="products/zictor-tape-75mg.html">ジクトルテープ75mg</a>の包装別情報を開けるようにしました。</div>
     </div>
     <div class="news-item">
@@ -3657,6 +3662,7 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
         <span class="drug-tags"><span class="status-tag">${st.label}</span>${discontinuedBadge}${discrepancyBadge}${makerSupplyBadge}${packageSupplyBadge}${changeBadge}${volumeBadge}${delistBadge}</span>
         <span class="drug-date num">公表行更新 ${d.d}${ago}</span>
       </div>
+      ${supplyOutlookHtml(d)}
       ${packageSupplyBadge ? '<span class="package-supply-context">メーカー文書の記載です。現在の在庫は要確認</span>' : ''}
     </article>`;
   }).join("");
@@ -3912,6 +3918,16 @@ let detailCloseSearchSnapshot = null;
 // 規格・供給状況など現場で先に確認したい項目を上位に、コード類は下位に並べる
 const DETAIL_ORDER = ["規格","供給状況","理由","解除・解消見込み","出荷量状況","代替候補","一般名","製造メーカー","販売メーカー","薬効分類","薬価","経過措置期限","ステータス更新日","更新日","YJコード"];
 let SPECIFICATION_COMPARISON = null;
+let RELEASE_OUTLOOKS = null;
+function supplyOutlookHtml(item){
+  if(!LIVE || !SOURCE_DATE || RELEASE_OUTLOOKS?.date !== SOURCE_DATE
+      || !["limited", "stopped"].includes(item.s)) return "";
+  const periods = RELEASE_OUTLOOKS.periods;
+  const period = Object.hasOwn(periods, item.yj) ? periods[item.yj] : null;
+  if(typeof period !== "string" || !period.trim()) return "";
+  const label = item.s === "limited" ? "解除見込み" : "解消見込み";
+  return `<p class="drug-outlook"><strong>厚労省の${label}</strong>　${esc(period.trim())}</p>`;
+}
 function specificationDifference(d){
   const comparison = SPECIFICATION_COMPARISON;
   if(!comparison || !SOURCE_DATE || comparison.source_date !== SOURCE_DATE) return null;
@@ -4604,11 +4620,10 @@ function loadSupplementalData(){
     Promise.all([fetchFirst(["specification_differences.json"]), fetchFirst(["mhlw_source.json"]),
       fetchFirst(["public-data-manifest.json?source_comparison=1"])])
       .then(async ([comparisonResponse, sourceResponse, manifestResponse])=>{
-        if(!comparisonResponse || !sourceResponse || !manifestResponse || responseUsesCachedData(comparisonResponse)
-            || responseUsesCachedData(sourceResponse) || responseUsesCachedData(manifestResponse)) throw new Error("source comparison unavailable");
-        const [comparison, source, manifest, csv, comparisonHash, sourceHash] = await Promise.all([
-          comparisonResponse.json(), sourceResponse.json(), manifestResponse.json(),
-          LOADED_PUBLIC_DATA.get("drugs_app_ready.csv"), LOADED_PUBLIC_DATA.get("specification_differences.json"),
+        if(!sourceResponse || !manifestResponse || responseUsesCachedData(sourceResponse)
+            || responseUsesCachedData(manifestResponse)) throw new Error("source metadata unavailable");
+        const [source, manifest, csv, sourceHash] = await Promise.all([
+          sourceResponse.json(), manifestResponse.json(), LOADED_PUBLIC_DATA.get("drugs_app_ready.csv"),
           LOADED_PUBLIC_DATA.get("mhlw_source.json")
         ]);
         const matchesPublished = (name, actual)=>{
@@ -4620,19 +4635,28 @@ function loadSupplementalData(){
         const fileDate = /^([0-9]{6})iyakuhinkyoukyu\.xlsx$/i.exec(source.file || "");
         if(manifest?.schema_version !== 1 || !/^[0-9a-f]{40}$/.test(manifest.source_commit || "")
             || !matchesPublished("drugs_app_ready.csv", csv)
-            || !matchesPublished("specification_differences.json", comparisonHash)
             || !matchesPublished("mhlw_source.json", sourceHash)
-            || comparison?.schema_version !== 1 || !comparison.differences
-            || typeof comparison.differences !== "object" || Array.isArray(comparison.differences)
-            || !csv || csv.sha256 !== comparison.csv_sha256
-            || !/^[0-9a-f]{64}$/.test(source.sha256 || "") || source.sha256 !== comparison.source_sha256
-            || source.excel_date !== comparison.source_date || !/^\d{4}-\d{2}-\d{2}$/.test(source.excel_date || "")
+            || !/^[0-9a-f]{64}$/.test(source.sha256 || "")
+            || !/^\d{4}-\d{2}-\d{2}$/.test(source.excel_date || "")
             || !validSupplyDate(source.excel_date.replaceAll("-", "/"))
             || url.protocol !== "https:" || !["www.mhlw.go.jp", "mhlw.go.jp"].includes(url.hostname)
             || url.username || url.password || (url.port && url.port !== "443")
             || typeof source.file !== "string" || !/^[^/\\]+\.xlsx$/i.test(source.file)
             || !url.pathname.startsWith("/content/") || pathName !== source.file
-            || (fileDate && fileDate[1] !== source.excel_date.slice(2).replaceAll("-", ""))) throw new Error("source comparison mismatch");
+            || (fileDate && fileDate[1] !== source.excel_date.slice(2).replaceAll("-", ""))) throw new Error("source metadata mismatch");
+        const periods = source.release_outlooks;
+        if(periods && typeof periods === "object" && !Array.isArray(periods)){
+          RELEASE_OUTLOOKS = {date: source.excel_date, periods};
+        }
+        if(!comparisonResponse || responseUsesCachedData(comparisonResponse)) return;
+        const [comparison, comparisonHash] = await Promise.all([
+          comparisonResponse.json(), LOADED_PUBLIC_DATA.get("specification_differences.json")
+        ]);
+        if(!matchesPublished("specification_differences.json", comparisonHash)
+            || comparison?.schema_version !== 1 || !comparison.differences
+            || typeof comparison.differences !== "object" || Array.isArray(comparison.differences)
+            || csv.sha256 !== comparison.csv_sha256 || source.sha256 !== comparison.source_sha256
+            || source.excel_date !== comparison.source_date) throw new Error("source comparison mismatch");
         const rowsByCode = new Map(ITEMS.map(item=>[item.yj, item]));
         const comparableSpec = value=>value.normalize("NFKC").toLowerCase().replace(/\s/g, "");
         for(const [key, entry] of Object.entries(comparison.differences)){
@@ -8133,6 +8157,7 @@ function failDataLoad(message){
   }else{
     setDatasetDate("");
   }
+  if(RELEASE_OUTLOOKS?.date === SOURCE_DATE) renderSupplementalSearchResults(false);
   initialSupplyCheckFinished = true;
   void checkForPublishedUpdate(initialManifest);
  }catch(e){
