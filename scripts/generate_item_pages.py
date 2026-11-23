@@ -35,6 +35,7 @@ from urllib.parse import quote, urlsplit
 
 import item_share_cards
 import limited_item_page
+from mhlw_supply_source import release_outlook_is_expected, workbook_url
 from source_specification import load_comparison
 
 SITE_ROOT = "https://kyokyu-navi.jp/"
@@ -2434,7 +2435,8 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
               hub_slugs=(), display_names=None, category_codes=None,
               ingredient_slugs=None, manufacturer_notices=(), catalog_yj_codes=None,
               manufacturer_bulletins=None, version_metadata=None, product_variants=(), related_topics=(),
-              specification_comparison=None, share_card=item_share_cards.DEFAULT, zictor_listing=None):
+              specification_comparison=None, share_card=item_share_cards.DEFAULT, zictor_listing=None,
+              mhlw_source=None):
     image_path, image_alt = share_card
     limited_layout = strict_status(row.get("供給状況")) == "limited"
     name = row["商品名"].strip()
@@ -2815,13 +2817,24 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
         ]
         if key == ZESTAC_KEY and package_overview:
             headline_labels = ["メーカー：販売中止の案内"]
+        excel_date = mhlw_excel_date(version_metadata, dataset_date)
+        release = public_metadata.get("解除・解消見込み")
+        item_release_outlook = None
+        if (key == JUVELA_KEY and name == "ユベラ軟膏" and release_outlook_is_expected(release)
+                and excel_date and isinstance(mhlw_source, dict) and mhlw_source.get("excel_date") == excel_date):
+            period = mhlw_source.get("juvela_release_outlook")
+            if isinstance(period, str) and period.strip():
+                try:
+                    item_release_outlook = (period.strip(), workbook_url(mhlw_source.get("url")))
+                except ValueError:
+                    pass
         intro = ('<nav class="trail" aria-label="パンくず"><a href="index.html">品目別の供給状況</a> / 品目詳細</nav>'
                  + limited_item_page.overview_html(
-                     row, display_name, maker, public_metadata.get("解除・解消見込み"),
-                     mhlw_excel_date(version_metadata, dataset_date), reference_import, reference_version,
+                     row, display_name, maker, release, excel_date, reference_import, reference_version,
                      official_row_date(row), delist, matching_manufacturer_notices(row, manufacturer_notices, manufacturer_bulletins),
                      shortcuts, spec_difference_html + gas_spec_note, headline_labels, package_overview,
-                     strength_selector, product_supply_link=teramuro_comparison))
+                     strength_selector, product_supply_link=teramuro_comparison,
+                     item_release_outlook=item_release_outlook))
         # Keep warnings beside the source they qualify. Render each full notice and topic only once.
         promoted_sections = (delist_box + lifecycle_box + discrepancy_box + supplemental_checked
                              + manufacturer_box + hospital_box + topic_box + '<h2 id="itemDetails">品目の詳細</h2>')
@@ -3698,6 +3711,10 @@ def main():
 
     rows = load_csv(Path(args.csv))
     print(f"CSV: {len(rows):,}行")
+    try:
+        mhlw_source = json.loads((site / "mhlw_source.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        mhlw_source = None
 
     try:
         lifecycle_doc = load_required_json(site / "product_lifecycle.json", "販売中止補足データ")
@@ -3837,6 +3854,7 @@ def main():
                 specification_comparison=specification_comparison,
                 share_card=share_cards.get(k, item_share_cards.DEFAULT),
                 zictor_listing=zictor_listing,
+                mhlw_source=mhlw_source,
             ), encoding="utf-8")
 
     limited_item_page.prepare_assets(site)

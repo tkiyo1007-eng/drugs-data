@@ -74,8 +74,9 @@ jobs:
       - name: 供給状況だけ更新（既存CSVの薬価・メーカーは保持）
         run: |
           python3 - <<'EOF'
-          import openpyxl, datetime, csv
+          import openpyxl, datetime, csv, json
           from scripts.check_supply_source_identity import require_unique_codes
+          from scripts.mhlw_supply_source import extract_juvela_release_outlook
 
           def to_date(v):
               if v is None or v == "": return ""
@@ -151,6 +152,17 @@ jobs:
 
           with open("drugs_app_ready.csv", "w", encoding="utf-8-sig", newline="") as f:
               csv.writer(f, lineterminator="\n").writerows(out)
+          # 日付付き原表の記録と一緒に更新し、空欄・未定になったら以前の値を残さない。
+          with open("mhlw_source.json", encoding="utf-8") as f:
+              source = json.load(f)
+          outlook = extract_juvela_release_outlook(rows[hidx], data)
+          if outlook:
+              source["juvela_release_outlook"] = outlook
+          else:
+              source.pop("juvela_release_outlook", None)
+          with open("mhlw_source.json", "w", encoding="utf-8") as f:
+              json.dump(source, f, ensure_ascii=False, indent=2)
+              f.write("\n")
           print(f"✅ 更新完了: 既存更新 {len(seen)}件 / 新規追加 {len(xl)-len(seen)}件 / 総 {len(out)-1}行")
           EOF
 
