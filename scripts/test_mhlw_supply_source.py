@@ -32,6 +32,10 @@ class MhlwSupplySourceTests(unittest.TestCase):
         row[14] = "ウ. 未定"
         self.assertEqual({}, extract_release_outlooks(header, [row]))
         row[14], row[11] = "ア. あり", "⑤供給停止"
+        self.assertEqual({row[4]: "2027年3月"}, extract_release_outlooks(header, [row]))
+        row[16], row[15] = "D．薬価削除予定", "2027年3月在庫消尽見込み"
+        self.assertEqual({}, extract_release_outlooks(header, [row]))
+        row[16], row[15] = "C．出荷停止", "原料供給開始後、解消見込"
         self.assertEqual({}, extract_release_outlooks(header, [row]))
 
     def page(self, label="医療用医薬品供給状況（令和８年10月13日現在）", href=None):

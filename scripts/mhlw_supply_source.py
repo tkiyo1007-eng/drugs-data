@@ -26,7 +26,7 @@ def release_outlook_is_expected(value):
 
 
 def extract_release_outlooks(header, rows):
-    """限定出荷の解除見込みに具体的な時期がある行だけをYJコードで保持する。"""
+    """限定出荷の解除・供給停止の解消時期が明記された行をYJコードで保持する。"""
     columns = [index for index, name in enumerate(header)
                if "".join(unicodedata.normalize("NFKC", str(name or "")).split()) == RELEASE_OUTLOOK_COLUMN]
     if len(columns) != 1:
@@ -37,8 +37,11 @@ def extract_release_outlooks(header, rows):
     outlooks = {}
     for key, row in identified_rows:
         if (len(row) <= max(column, 14) or not re.fullmatch(r"[0-9A-Z]{12}", key) or counts[key] != 1
-                or not str(row[11]).strip().startswith(("②", "③", "④"))
+                or not str(row[11]).strip().startswith(("②", "③", "④", "⑤"))
                 or not release_outlook_is_expected(row[14])):
+            continue
+        # ⑯には薬価削除予定品の在庫消尽時期も入るため、⑰で識別する。
+        if len(row) > 16 and unicodedata.normalize("NFKC", str(row[16])).strip().startswith("D."):
             continue
         value = row[column]
         if isinstance(value, dt.date):
