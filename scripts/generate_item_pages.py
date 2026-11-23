@@ -67,9 +67,10 @@ TAGAMET_KEY = "2325001F1211"
 TAGAMET_INJECTION_KEY = "2325400A1077"
 TAGAMET_KEYS = {TAGAMET_KEY, TAGAMET_INJECTION_KEY}
 MOVICOL_LD_KEY = "2359110B1037"
+LAGNOS_NF_KEY = "3999001Q6029"
 KENACORT_KEYS = frozenset({"2454402A2037", "2454402A3033"})
 LIMITED_REASON_KEYS = frozenset({
-    "3999001Q6029", "2646730Q1026", GENTACIN_KEY,
+    LAGNOS_NF_KEY, "2646730Q1026", GENTACIN_KEY,
     MOVICOL_LD_KEY, "2149117F1076", "2149117F2072", HILNAMIN_GRANULES_KEY,
 }) | KENACORT_KEYS
 BONZOL_STRENGTHS = {"2499007F1021": "100mg", "2499007F2028": "200mg"}
@@ -1589,6 +1590,19 @@ def package_overview_content(key, match, display_name, status_label, official_re
             hint = "メーカーの供給予定"
             description = f'{day}の{notice["maker"]}の案内（{scope}）。{notice["summary"]}'
             body += f'<p>{esc(notice["summary"])}</p>'
+        if key == LAGNOS_NF_KEY:
+            heading = "三和化学研究所の包装別案内"
+            codes = [p["unified_product_code"] for p in target["packages"] if p.get("unified_product_code")]
+            if codes:
+                body += f'<p>統一商品コード　{esc("・".join(codes))}</p>'
+            if notice.get("listed_at"):
+                body += f'<p><small>メーカー掲載日 {esc(notice_date_label(notice["listed_at"]))}</small></p>'
+            if notice.get("manufacturer_status"):
+                body += f'<p><strong>出荷対応　{esc(notice["manufacturer_status"])}</strong></p>'
+            if notice.get("manufacturer_volume"):
+                body += f'<p>出荷量　{esc(notice["manufacturer_volume"])}</p>'
+            if notice.get("summary"):
+                body += f'<p><small>{esc(notice["summary"])}</small></p>'
         body += f'<p>{esc(notice["reason"])}</p>'
         if key == MOVICOL_LD_KEY and target.get("seller"):
             body += f'<p>対象の販売元　{esc(target["seller"])}</p>'
@@ -2916,7 +2930,8 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
                      official_row_date(row), delist, matching_manufacturer_notices(row, manufacturer_notices, manufacturer_bulletins),
                      shortcuts, spec_difference_html + gas_spec_note, headline_labels, package_overview,
                      strength_selector, product_supply_link=teramuro_comparison,
-                     item_release_outlook=item_release_outlook))
+                     item_release_outlook=item_release_outlook,
+                     shipment_volume=public_metadata.get("出荷量状況", "") if key == LAGNOS_NF_KEY else ""))
         # Keep warnings beside the source they qualify. Render each full notice and topic only once.
         promoted_sections = (delist_box + lifecycle_box + discrepancy_box + supplemental_checked
                              + manufacturer_box + hospital_box + topic_box + '<h2 id="itemDetails">品目の詳細</h2>')
