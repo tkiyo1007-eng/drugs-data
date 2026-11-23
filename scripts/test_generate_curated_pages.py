@@ -340,6 +340,7 @@ class CuratedPageGenerationTests(unittest.TestCase):
                                           package_snapshot=snapshot, package_keys={"APKEY"})
         self.assertIn('href="#packageSnapshotTitle"', with_snapshot)
         self.assertIn('href="#packages-APKEY"', with_snapshot)
+        self.assertIn('id="comparison-APKEY"', with_snapshot)
         self.assertNotIn('href="#packages-BPKEY"', with_snapshot)
         self.assertIn("出荷調整や販売中止の案内", with_snapshot)
         self.assertGreater(with_snapshot.index(snapshot), with_snapshot.index('<h2 id="bp">'))
@@ -710,6 +711,7 @@ class CuratedPageGenerationTests(unittest.TestCase):
         with_details, keys = product_package_snapshot([row], {code: [notice]}, None, {code}, include_details=True)
         self.assertEqual({code}, keys)
         self.assertIn(f'id="packages-{code}"', with_details)
+        self.assertIn(f'href="#comparison-{code}"', with_details)
         self.assertIn(notice["reason"], with_details)
         self.assertIn("PTP100錠：出荷停止<br>在庫消尽予定 2026年12月", with_details)
         changed = {"items": [{"url": notice["url"], "sha256": "b" * 64}]}
@@ -741,6 +743,7 @@ class CuratedPageGenerationTests(unittest.TestCase):
         self.assertIn("PTP140錠：販売終了", html)
         self.assertEqual({code}, keys)
         self.assertEqual(1, html.count(f'id="packages-{code}"'))
+        self.assertEqual(2, html.count(f'href="#comparison-{code}"'))
         old_target["packages"][0]["package"] = "PTP100錠"
         html, _ = product_package_snapshot([row], {code: [notice, old_notice]}, None, {code}, include_details=True)
         self.assertNotIn("PTP100錠：販売終了", html)
