@@ -975,6 +975,31 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
             else:
                 self.assertNotIn("販売中止予定", title)
 
+    def test_lagnos_distinguishes_published_item_volume_from_manufacturer_pack_volume(self):
+        key = "3999001Q6029"
+        row = dict(self.row(), 商品名="ラグノスNF経口ゼリー分包12g", YJコード=key,
+                   供給状況="②限定出荷（自社の事情）", 出荷量状況="B．出荷量減少")
+        notice = dict(self.notice(), manufacturer_volume="Aプラス 出荷量増加",
+                      manufacturer_status="②限定出荷（自社の事情）", resumption="限定出荷解除日 未定",
+                      summary="メーカーの月平均出荷量を基準にしています。")
+        notice["targets"] = [dict(notice["targets"][0], yj_code=key, product_name=row["商品名"],
+                                  scope="package", seller="", packages=[{
+                                      "package": "12g×84包", "unified_product_code": "086220569",
+                                  }])]
+        def render(trusted):
+            return page_html(row, key, "limited", "2026-11-23", [], {key}, supplemental_trusted=trusted,
+                             manufacturer_notices=[notice], manufacturer_bulletins={"items": []})
+        page = render(True)
+        official = page.split("<h2>厚労省の供給状況</h2>", 1)[1].split("</section>", 1)[0]
+        self.assertIn("<dt>出荷量</dt><dd>B．出荷量減少</dd>", official)
+        self.assertNotIn("Aプラス", official)
+        brief = page.split('id="packageBriefTitle"', 1)[1].split("</section>", 1)[0]
+        for value in ("12g×84包", "086220569", "Aプラス 出荷量増加", "月平均出荷量",
+                      "2026年10月13日", "未定"):
+            self.assertIn(value, brief)
+        self.assertNotIn("B．出荷量減少", brief)
+        self.assertNotIn('id="packageBriefTitle"', render(False))
+
     def test_bonzol_separates_the_exact_package_plan_from_the_pricing_deadline(self):
         keys = {"2499007F1021": ("100mg", "128-62031-9"), "2499007F2028": ("200mg", "128-62036-4")}
         for key, (strength, product_code) in keys.items():
