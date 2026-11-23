@@ -975,6 +975,36 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
             else:
                 self.assertNotIn("販売中止予定", title)
 
+    def test_antebate_shows_current_outlook_and_original_covered_packs_separately(self):
+        key = "2646730Q1026"
+        row = dict(self.row(), 商品名="アンテベートローション0.05%", YJコード=key,
+                   供給状況="④限定出荷（その他）", 理由="１．需要増",
+                   **{"解除・解消見込み": "ウ. 未定", "出荷量状況": "A．出荷量通常"})
+        notice = dict(self.notice(), resumption="目途が立ち次第案内", maker_supply_status={"volume": "A 出荷量通常"})
+        notice["targets"] = [dict(notice["targets"][0], yj_code=key, product_name=row["商品名"],
+                                  scope="package", seller="", packages=[
+                                      {"package": "10g×10本", "unified_product_code": "158143215"},
+                                      {"package": "10g×50本", "unified_product_code": "158143239"},
+                                  ])]
+        url = "https://www.mhlw.go.jp/content/10800000/261120iyakuhinkyoukyu.xlsx"
+        def render(source_date="2026-11-20", trusted=True):
+            return page_html(row, key, "limited", "2026-11-23", [], {key},
+                             manufacturer_notices=[notice], manufacturer_bulletins={"items": []},
+                             supplemental_trusted=trusted,
+                             dataset_date="2026-11-23",
+                             version_metadata={"version": "20261123", "mhlw_excel_date": "2026-11-20"},
+                             mhlw_source={"url": url, "excel_date": source_date})
+        page = render()
+        official = page.split("<h2>厚労省の供給状況</h2>", 1)[1].split("</section>", 1)[0]
+        self.assertIn("ウ. 未定", official)
+        self.assertIn("１．需要増", official)
+        self.assertIn(f'href="{url}"', official)
+        brief = page.split('id="packageBriefTitle"', 1)[1].split("</section>", 1)[0]
+        for value in ("10g×10本", "158143215", "10g×50本", "158143239", "目途が立ち次第案内"):
+            self.assertIn(value, brief)
+        self.assertNotIn(url, render("2026-11-19"))
+        self.assertNotIn('id="packageBriefTitle"', render(trusted=False))
+
     def test_lagnos_distinguishes_published_item_volume_from_manufacturer_pack_volume(self):
         key = "3999001Q6029"
         row = dict(self.row(), 商品名="ラグノスNF経口ゼリー分包12g", YJコード=key,

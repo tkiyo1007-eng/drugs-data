@@ -32,7 +32,7 @@ def comparison_html(rows, note):
 def overview_html(row, name, maker, release, source_date, imported, version, updated,
                   delist, notices, shortcuts, spec_note, discontinuation_labels=(), package_overview="",
                   strength_selector="", *, product_supply_link="", item_release_outlook=None,
-                  shipment_volume=""):
+                  shipment_volume="", source_workbook=""):
     # Keep strength units together even on narrow screens.
     name = re.sub(r"[０-９0-9]+(?:[．.][０-９0-9]+)?(?:[％%]|[ｍm][ｇg]|[μµ]g)|(?:ＬＤ|ＨＤ|LD|HD)$",
                   r'<span class="strength">\g<0></span>', escape(name))
@@ -59,6 +59,10 @@ def overview_html(row, name, maker, release, source_date, imported, version, upd
         shipment_fact = (f'<div><dt>出荷量</dt><dd>{escape(shipment_volume)}</dd>'
                          f'<dd><small>{item_date}</small></dd></div>')
         details_item_date = ""
+    workbook_link = ""
+    if source_workbook and not item_release_outlook:
+        workbook_link = (f'<p><a href="{escape(source_workbook)}" data-dsn-event="official-source-open">'
+                         '厚労省原表（Excel）</a></p>')
     release_source = ""
     if item_release_outlook:
         period, url = item_release_outlook
@@ -72,7 +76,7 @@ def overview_html(row, name, maker, release, source_date, imported, version, upd
 <h2>厚労省の供給状況</h2><div class="statusline"><strong class="status limited">{escape(row["供給状況"])}</strong>{caution}
 <span>厚労省基準日 <time>{escape(source_date or "確認できません")}</time></span></div>
 <dl class="facts"><div><dt>公表理由</dt><dd>{escape(row.get("理由") or "記載なし")}</dd></div>
-{release_fact}{shipment_fact}</dl>{release_source}
+{release_fact}{shipment_fact}</dl>{release_source}{workbook_link}
 <details><summary>出典と日付</summary><p>{details_item_date}サイト取込日 {escape(imported or "確認できません")}<br>
 <a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html" data-dsn-event="official-source-open">厚生労働省の公表ページ</a></p></details>
 <p id="freshness" role="status">表示は上記基準日時点です。</p></section>{package_overview}

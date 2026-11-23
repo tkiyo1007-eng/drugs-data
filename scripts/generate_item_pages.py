@@ -68,9 +68,10 @@ TAGAMET_INJECTION_KEY = "2325400A1077"
 TAGAMET_KEYS = {TAGAMET_KEY, TAGAMET_INJECTION_KEY}
 MOVICOL_LD_KEY = "2359110B1037"
 LAGNOS_NF_KEY = "3999001Q6029"
+ANTEBATE_LOTION_KEY = "2646730Q1026"
 KENACORT_KEYS = frozenset({"2454402A2037", "2454402A3033"})
 LIMITED_REASON_KEYS = frozenset({
-    LAGNOS_NF_KEY, "2646730Q1026", GENTACIN_KEY,
+    LAGNOS_NF_KEY, ANTEBATE_LOTION_KEY, GENTACIN_KEY,
     MOVICOL_LD_KEY, "2149117F1076", "2149117F2072", HILNAMIN_GRANULES_KEY,
 }) | KENACORT_KEYS
 BONZOL_STRENGTHS = {"2499007F1021": "100mg", "2499007F2028": "200mg"}
@@ -1122,19 +1123,27 @@ def mhlw_excel_date(version, dataset_date: str) -> str:
     return value if source_day <= imported_day else ""
 
 
+def item_workbook_url(excel_date, mhlw_source):
+    if not excel_date or not isinstance(mhlw_source, dict) or mhlw_source.get("excel_date") != excel_date:
+        return ""
+    try:
+        return workbook_url(mhlw_source.get("url"))
+    except ValueError:
+        return ""
+
+
 def official_item_outlook(row, key, release, excel_date, mhlw_source):
     if (strict_status(row.get("供給状況")) not in {"limited", "stopped"}
-            or not excel_date or not isinstance(mhlw_source, dict)
-            or mhlw_source.get("excel_date") != excel_date or not release_outlook_is_expected(release)):
+            or not release_outlook_is_expected(release)):
+        return None
+    url = item_workbook_url(excel_date, mhlw_source)
+    if not url:
         return None
     outlooks = mhlw_source.get("release_outlooks")
     period = outlooks.get(key) if isinstance(outlooks, dict) else None
     if not isinstance(period, str) or not period.strip():
         return None
-    try:
-        return period.strip(), workbook_url(mhlw_source.get("url"))
-    except ValueError:
-        return None
+    return period.strip(), url
 
 
 def dataset_dates_html(dataset_date: str, version_metadata=None) -> str:
@@ -1603,6 +1612,17 @@ def package_overview_content(key, match, display_name, status_label, official_re
                 body += f'<p>出荷量　{esc(notice["manufacturer_volume"])}</p>'
             if notice.get("summary"):
                 body += f'<p><small>{esc(notice["summary"])}</small></p>'
+        if key == ANTEBATE_LOTION_KEY:
+            heading = "鳥居薬品の限定出荷案内"
+            scope_rows = []
+            for package in target["packages"]:
+                code = package.get("unified_product_code")
+                code_html = f'　<small>統一商品コード {esc(code)}</small>' if code else ""
+                scope_rows.append(f'<li>{esc(package["package"])}{code_html}</li>')
+            body = f'{source}<p><strong>対象包装</strong></p><ul>{"".join(scope_rows)}</ul>'
+            volume = (notice.get("maker_supply_status") or {}).get("volume")
+            if volume:
+                body += f'<p>案内時点の出荷量　{esc(volume)}</p>'
         body += f'<p>{esc(notice["reason"])}</p>'
         if key == MOVICOL_LD_KEY and target.get("seller"):
             body += f'<p>対象の販売元　{esc(target["seller"])}</p>'
@@ -2931,7 +2951,10 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
                      shortcuts, spec_difference_html + gas_spec_note, headline_labels, package_overview,
                      strength_selector, product_supply_link=teramuro_comparison,
                      item_release_outlook=item_release_outlook,
-                     shipment_volume=public_metadata.get("出荷量状況", "") if key == LAGNOS_NF_KEY else ""))
+                     shipment_volume=public_metadata.get("出荷量状況", "")
+                     if key in {LAGNOS_NF_KEY, ANTEBATE_LOTION_KEY} else "",
+                     source_workbook=item_workbook_url(excel_date, mhlw_source)
+                     if key == ANTEBATE_LOTION_KEY else ""))
         # Keep warnings beside the source they qualify. Render each full notice and topic only once.
         promoted_sections = (delist_box + lifecycle_box + discrepancy_box + supplemental_checked
                              + manufacturer_box + hospital_box + topic_box + '<h2 id="itemDetails">品目の詳細</h2>')
