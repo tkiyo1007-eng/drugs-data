@@ -3578,7 +3578,8 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
     filter_markup = ""
     price_filter_markup = ""
     outlook_filter_markup = ""
-    if slug in {"limited", "stopped"}:
+    outlook_hub = slug in {"limited", "stopped"}
+    if outlook_hub:
         outlook_count = sum(bool(entry.get("release_period")) for entry in group)
         outlook_filter_markup = f'''
       <label class="outlook-filter">
@@ -3644,10 +3645,12 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
     evidence_note = ('''<p class="evidence-note">理由と解除・解消見込みは公表欄の記載です。「あり」だけでは具体的な解除日を示しません。
 <a href="../guides/how-to-check-drug-supply.html#resumption">解除見込みとメーカー案内を確認する方法</a></p>'''
                      if slug in {"limited", "stopped"} else "")
-    outlook_search_id = ' id="hubOutlookSiteSearch"' if slug in {"limited", "stopped"} else ""
+    search_near_filter = ('\n    <a href="../#demo" id="hubOutlookSiteSearch" data-dsn-event="search-cta-open">'
+                          'サイト全体を検索</a>' if outlook_hub else "")
+    search_in_navigation = ('' if outlook_hub else
+                            '      <a href="../#demo" data-dsn-event="search-cta-open">薬品名・メーカー名で検索</a>\n')
     hub_navigation = f'''    <nav class="entry-nav" aria-label="医薬品の探し方と確認方法">
-      <a href="../#demo"{outlook_search_id} data-dsn-event="search-cta-open">薬品名・メーカー名で検索</a>
-      <a href="../ingredients/index.html">成分別に確認</a>
+{search_in_navigation}      <a href="../ingredients/index.html">成分別に確認</a>
       <a href="../categories/index.html">薬効分類別に確認</a>
       <a href="../guides/how-to-check-drug-supply.html">出荷調整の意味・確認方法</a>
 {discontinuation_link}      <a href="{OFFICIAL_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚労省の公式システムで供給区分を確認</a>
@@ -3656,7 +3659,7 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
     if slug == "limited":
         source_date = mhlw_excel_date(version_metadata, dataset_date) or "確認できません"
         header = f'''    <h1>限定出荷一覧 <small>{len(group):,}品目</small></h1>
-    <p class="lede">厚労省データの基準日：{esc(source_date)}</p>{filter_markup}
+    <p class="lede">厚労省データの基準日：{esc(source_date)}</p>{filter_markup}{search_near_filter}
     <p class="stock-note">各施設の在庫・受注可否は示しません。</p>
     <details class="list-guide">
       <summary>この一覧の見方</summary>
@@ -3667,7 +3670,7 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
     else:
         header = f'''    <h1>{esc(config["h1"])}</h1>
     <p class="lede">{esc(config["description"])}（{len(group):,}品目）</p>
-    {dataset_dates_html(dataset_date, version_metadata)}{filter_markup if slug == "stopped" else ""}
+    {dataset_dates_html(dataset_date, version_metadata)}{filter_markup + search_near_filter if slug == "stopped" else ""}
     <p class="notice">{esc(config["intro"])} 医薬品の使用・変更は、公式情報を確認したうえで医師・薬剤師等の専門職が判断してください。</p>
 {hub_navigation}{supplemental_navigation}{evidence_note}{price_note}{filter_markup if slug != "stopped" else ""}'''
     limited_style = """
@@ -3680,6 +3683,9 @@ h1 small{display:inline-block;vertical-align:middle;padding:2px 9px;border-radiu
 .list-guide summary{color:#264d93;cursor:pointer;padding:9px 0;min-height:44px;font-weight:700;font-size:14px}
 .list-guide summary:focus-visible{outline:3px solid #2f63e8;outline-offset:2px}
 """ if slug == "limited" else ""
+    outlook_search_style = ('\n#hubOutlookSiteSearch{display:inline-flex;align-items:center;min-height:44px;'
+                            'color:#264d93;font-size:14px;font-weight:700;text-underline-offset:3px}'
+                            if outlook_hub else "")
     return f"""<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -3727,7 +3733,7 @@ li span{{display:block;color:#5A6B8C;font-size:11.5px;margin-top:2px}}
 li .reason-tag{{display:inline-block;background:#ECF2FD;color:#284C8C;border-radius:6px;padding:2px 6px;margin-top:7px;font-weight:700}}
 .official{{font-size:13px;margin:22px 0}}
 footer{{font-size:12px;color:#5A6B8C;text-align:center;margin-top:34px}}
-footer a{{color:#5A6B8C}}{HUB_FILTER_STYLE if searchable else ""}{limited_style}
+footer a{{color:#5A6B8C}}{HUB_FILTER_STYLE if searchable else ""}{limited_style}{outlook_search_style}
 </style>
 </head>
 <body>

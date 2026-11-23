@@ -137,6 +137,12 @@ class HubFilterTests(unittest.TestCase):
                 outlook_search_link = [link for link in parsed.anchors if link.get("id") == "hubOutlookSiteSearch"]
                 self.assertEqual(["../#demo"] if slug in {"limited", "stopped"} else [],
                                  [link["href"] for link in outlook_search_link])
+                if outlook_search_link:
+                    self.assertRegex(
+                        output,
+                        r'</section>\s*<a href="\.\./#demo" id="hubOutlookSiteSearch"[^>]*>サイト全体を検索</a>',
+                    )
+                    self.assertEqual(1, parsed.links.count("../#demo"))
 
     def test_outlook_filter_label_counts_eligible_rows_in_each_list(self):
         entries = [
