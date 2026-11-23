@@ -487,6 +487,7 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 }
 .pill:hover{transform:translateY(-1px)}
 .pill.active{color:#fff;background:linear-gradient(135deg,var(--blue-mid),var(--blue));box-shadow:0 6px 16px -6px rgba(47,99,232,.6)}
+.pill[data-f="outlook"]:disabled{opacity:.6;cursor:default}
 .pill[data-f="limited"].active{background:linear-gradient(135deg,#F2A94F,var(--limited));box-shadow:0 6px 16px -6px rgba(232,145,47,.6)}
 .pill[data-f="stopped"].active{background:linear-gradient(135deg,#F06B6B,var(--stopped));box-shadow:0 6px 16px -6px rgba(225,77,77,.6)}
 .pill[data-f="ended"].active{background:linear-gradient(135deg,#A5876C,var(--ended));box-shadow:0 6px 16px -6px rgba(138,106,82,.6)}
@@ -1895,6 +1896,7 @@ html.season-autumn .autumn-sky{display:none}
     </div>
     <div class="pills" id="pills" role="group" aria-label="供給状況で絞り込む">
       <button type="button" class="pill active" data-f="all" aria-pressed="true">すべて</button>
+      <button type="button" class="pill" data-f="outlook" id="pillOutlook" aria-pressed="false" disabled>見込み時期あり</button>
       <button type="button" class="pill" data-f="ok" aria-pressed="false">通常出荷</button>
       <button type="button" class="pill" data-f="limited" aria-pressed="false">限定出荷</button>
       <button type="button" class="pill" data-f="stopped" aria-pressed="false">供給停止</button>
@@ -2600,7 +2602,7 @@ html.season-autumn .autumn-sky{display:none}
   <div class="news-list glass">
     <div class="news-item">
       <div class="news-date num">2026.11.23</div>
-      <div class="news-body"><span class="news-tag">解除・解消見込み</span>厚労省が時期を公表した品目は、検索結果や限定出荷・供給停止の一覧で、品目全体の見込みを確認できます。</div>
+      <div class="news-body"><span class="news-tag">解除・解消見込み</span>検索結果と限定出荷・供給停止の一覧で、厚労省が品目全体の時期を公表した薬だけに絞り込めます。</div>
     </div>
     <div class="news-item">
       <div class="news-date num">2026.11.23</div>
@@ -3326,7 +3328,9 @@ document.getElementById("watchEmptySearch").addEventListener("click", ()=>{
 
 function setDataControlsEnabled(enabled){
   $q.disabled = !enabled;
-  document.querySelectorAll("#pills button").forEach(button=>{ button.disabled = !enabled; });
+  document.querySelectorAll("#pills button").forEach(button=>{
+    button.disabled = !enabled || (button.id === "pillOutlook" && !releaseOutlooksReady());
+  });
   $pageSize.disabled = !enabled;
   if(!enabled) $watchImportBtn.disabled = true;
   const emptyImport = document.getElementById("watchEmptyImport");
@@ -3498,6 +3502,18 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
     }
     return;
   }
+  if(filter === "outlook" && !releaseOutlooksReady()){
+    SHOWN = []; LAST_HITS = [];
+    syncSearchResultJump();
+    $csvBtn.hidden = true; $searchShareBtn.hidden = true; $loadMore.hidden = true;
+    resetSearchShareFeedback();
+    $meta.removeAttribute("aria-busy");
+    $list.removeAttribute("aria-busy");
+    $meta.textContent = "見込み時期のデータを確認できると表示します";
+    $list.innerHTML = '<div class="data-loading">「すべて」や供給区分での検索も利用できます。</div>';
+    if(shouldSyncHash) syncHashSoon();
+    return;
+  }
   // 履歴が不明な状態を検索0件と混同しない。検索条件・共有URLはそのまま保つ。
   if((filter === "changed" || filter === "watchChanged") && !historyHasSnapshot()){
     SHOWN = []; LAST_HITS = [];
@@ -3549,6 +3565,8 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
       if(!isFav(d)) return false;
     }else if(filter==="delist"){
       if(!d.delist) return false;
+    }else if(filter==="outlook"){
+      if(!releaseOutlookFor(d)) return false;
     }else if(filter==="ended"){
       if(!isSalesEnding(d)) return false;
     }else if(filter!=="all" && d.s!==filter) return false;
@@ -3679,7 +3697,7 @@ function render(shouldSyncHash = !isOrdinaryPageAnchor()){
 
 // 検索語と絞り込みをURLハッシュに保持（リロード・共有で同じ検索結果を再現できる）
 // #item= / #drug=（品目詳細の直リンク）が開いているときは上書きしない
-const HASH_FILTERS = ["ok","limited","stopped","ended","changed","delist","fav","watchChanged","watchDiscrepancy"];
+const HASH_FILTERS = ["ok","limited","stopped","outlook","ended","changed","delist","fav","watchChanged","watchDiscrepancy"];
 function syncHash(){
   if(location.hash.startsWith("#item=") || location.hash.startsWith("#drug=")) return;
   const p = new URLSearchParams();
@@ -3919,14 +3937,20 @@ let detailCloseSearchSnapshot = null;
 const DETAIL_ORDER = ["規格","供給状況","理由","解除・解消見込み","出荷量状況","代替候補","一般名","製造メーカー","販売メーカー","薬効分類","薬価","経過措置期限","ステータス更新日","更新日","YJコード"];
 let SPECIFICATION_COMPARISON = null;
 let RELEASE_OUTLOOKS = null;
-function supplyOutlookHtml(item){
-  if(!LIVE || !SOURCE_DATE || RELEASE_OUTLOOKS?.date !== SOURCE_DATE
-      || !["limited", "stopped"].includes(item.s)) return "";
+function releaseOutlooksReady(){
+  return LIVE && !!SOURCE_DATE && RELEASE_OUTLOOKS?.date === SOURCE_DATE;
+}
+function releaseOutlookFor(item){
+  if(!releaseOutlooksReady() || (item.s !== "limited" && item.s !== "stopped")) return "";
   const periods = RELEASE_OUTLOOKS.periods;
   const period = Object.hasOwn(periods, item.yj) ? periods[item.yj] : null;
-  if(typeof period !== "string" || !period.trim()) return "";
+  return typeof period === "string" ? period.trim() : "";
+}
+function supplyOutlookHtml(item){
+  const period = releaseOutlookFor(item);
+  if(!period) return "";
   const label = item.s === "limited" ? "解除見込み" : "解消見込み";
-  return `<p class="drug-outlook"><strong>厚労省の${label}</strong>　${esc(period.trim())}</p>`;
+  return `<p class="drug-outlook"><strong>厚労省の${label}</strong>　${esc(period)}</p>`;
 }
 function specificationDifference(d){
   const comparison = SPECIFICATION_COMPARISON;
@@ -4647,6 +4671,10 @@ function loadSupplementalData(){
         const periods = source.release_outlooks;
         if(periods && typeof periods === "object" && !Array.isArray(periods)){
           RELEASE_OUTLOOKS = {date: source.excel_date, periods};
+          if(releaseOutlooksReady()){
+            document.getElementById("pillOutlook").disabled = false;
+            renderSupplementalSearchResults(false);
+          }
         }
         if(!comparisonResponse || responseUsesCachedData(comparisonResponse)) return;
         const [comparison, comparisonHash] = await Promise.all([
@@ -8157,7 +8185,10 @@ function failDataLoad(message){
   }else{
     setDatasetDate("");
   }
-  if(RELEASE_OUTLOOKS?.date === SOURCE_DATE) renderSupplementalSearchResults(false);
+  if(releaseOutlooksReady()){
+    document.getElementById("pillOutlook").disabled = false;
+    renderSupplementalSearchResults(false);
+  }
   initialSupplyCheckFinished = true;
   void checkForPublishedUpdate(initialManifest);
  }catch(e){
