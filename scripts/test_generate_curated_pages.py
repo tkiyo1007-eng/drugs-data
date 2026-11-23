@@ -341,6 +341,10 @@ class CuratedPageGenerationTests(unittest.TestCase):
         self.assertIn('href="#packageSnapshotTitle"', with_snapshot)
         self.assertIn("出荷調整や販売中止の案内", with_snapshot)
         self.assertGreater(with_snapshot.index(snapshot), with_snapshot.index('<h2 id="bp">'))
+        sawai_supply = with_snapshot.split('<h2 id="sawaiSupplyTitle">', 1)[1].split("</section>", 1)[0]
+        self.assertIn("2026年11月13日版では、AP・BPともに", sawai_supply)
+        self.assertIn("限定出荷（他社品の影響）", sawai_supply)
+        self.assertIn('href="https://med.sawai.co.jp/file/pr115_4577_1.pdf#page=8"', sawai_supply)
         self.assertIn('href="#dsepPackagingTitle"', with_snapshot)
         packaging = with_snapshot.split('<h2 id="dsepPackagingTitle">', 1)[1].split("</section>", 1)[0]
         self.assertIn("AG呼称の使用終了</strong>　2027年1月1日から", packaging)
@@ -354,6 +358,7 @@ class CuratedPageGenerationTests(unittest.TestCase):
         self.assertIn("<title>モビコール配合内用剤LD・HDの出荷調整・供給状況｜医薬品供給ナビ</title>", missing)
         self.assertNotIn("LOOKALIKE", missing)
         self.assertNotIn("dsepPackagingTitle", missing)
+        self.assertNotIn("sawaiSupplyTitle", missing)
         self.assertIn("基準日 未確認", missing)
         self.assertIn("今回の公表データでは該当する品目を確認できません", missing)
 
