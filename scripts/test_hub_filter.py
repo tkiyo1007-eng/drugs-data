@@ -271,7 +271,8 @@ class HubFilterTests(unittest.TestCase):
 
     @unittest.skipUnless(shutil.which("node"), "Node.js is needed to exercise input events")
     def test_real_script_normalizes_and_filters_and_recovers_from_failure(self):
-        output = hub_html("limited", self.entries, "2026-10-10")
+        entries = [dict(self.entries[0], release_period="2027年3月"), *self.entries[1:]]
+        output = hub_html("limited", entries, "2026-10-10")
         parsed = HubParser()
         parsed.feed(output)
         script = next(
@@ -294,7 +295,7 @@ function setup(before = "") {
   const nodes = {
     hubFilter: node(), hubItems: node({querySelectorAll: selector => selector === "li" ? rows : []}),
     hubFilterInput: node({value: "", focus() { this.focused = true; }}),
-    hubFilterClear: node({disabled: true}),
+    hubFilterClear: node({disabled: true}), hubFilterOutlookOnly: node({checked: false}),
     hubFilterCount: node({textContent: ""}), hubFilterEmpty: node()
   };
   const context = vm.createContext({document: {getElementById: id => nodes[id]}});
@@ -309,6 +310,14 @@ const visible = () => live.rows.filter(row => !row.hidden)
   .map(row => row.textContent.split(" ")[0]).sort();
 const search = text => { input.value = text; input.handlers.input(); };
 assert.equal(live.nodes.hubFilter.hidden, false);
+assert.deepEqual(visible(), ["1111111F1111", "2222222F2222"]);
+const outlook=live.nodes.hubFilterOutlookOnly;
+outlook.checked=true; outlook.handlers.change();
+assert.deepEqual(visible(), ["1111111F1111"]);
+search("テスト");
+assert.deepEqual(visible(), []);
+clear.handlers.click();
+assert.equal(outlook.checked, false);
 assert.deepEqual(visible(), ["1111111F1111", "2222222F2222"]);
 assert.equal(live.nodes.hubFilterCount.textContent, "2 / 2品目を表示");
 search("ゆべら　えーざい");

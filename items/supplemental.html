@@ -54,9 +54,9 @@ footer a{color:#5A6B8C}
 .filter-controls button{min-height:44px;padding:10px 16px;border:1px solid #B6C8EB;border-radius:10px;font:inherit;font-weight:700;color:#2F63E8;background:#fff;cursor:pointer}
 .filter-controls button:disabled{color:#5A6B8C;cursor:default}
 .filter-controls input:focus-visible,.filter-controls button:focus-visible{outline:3px solid #2F63E8;outline-offset:2px}
-.hub-filter .price-filter{display:flex;align-items:center;gap:10px;min-height:44px;font-size:14px;cursor:pointer}
-.price-filter input{flex:none;width:20px;height:20px;margin:0;accent-color:#2F63E8}
-.price-filter input:focus-visible{outline:3px solid #2F63E8;outline-offset:3px}
+.hub-filter :is(.price-filter,.outlook-filter){display:flex;align-items:center;gap:10px;min-height:44px;font-size:14px;cursor:pointer}
+:is(.price-filter,.outlook-filter) input{flex:none;width:20px;height:20px;margin:0;accent-color:#2F63E8}
+:is(.price-filter,.outlook-filter) input:focus-visible{outline:3px solid #2F63E8;outline-offset:3px}
 .price-note{font-size:13px;color:#5A6B8C;margin:14px 0}
 .filter-empty{margin-top:10px;font-size:13px;color:#5A6B8C}
 #hubItems li[hidden]{display:none}
@@ -113,6 +113,7 @@ footer a{color:#5A6B8C}
   const count = document.getElementById("hubFilterCount");
   const empty = document.getElementById("hubFilterEmpty");
   const priceOnly = document.getElementById("hubFilterPriceOnly");
+  const outlookOnly = document.getElementById("hubFilterOutlookOnly");
   if(!panel || !list || !input || !clear || !count || !empty) return;
   function showAll(){
     Array.from(list.querySelectorAll("li")).forEach(function(row){ row.hidden = false; });
@@ -120,6 +121,7 @@ footer a{color:#5A6B8C}
     panel.hidden = true;
     empty.hidden = true;
     if(priceOnly) priceOnly.checked = false;
+    if(outlookOnly) outlookOnly.checked = false;
   }
   function normalize(value){
     return String(value || "").normalize("NFKC").toLowerCase()
@@ -128,13 +130,15 @@ footer a{color:#5A6B8C}
   try{
     const entries = Array.from(list.querySelectorAll("li")).map(function(row){
       return {row:row, text:normalize(row.getAttribute("data-search") || row.textContent),
-        priceInfo:row.getAttribute("data-price-info") === "1"};
+        priceInfo:row.getAttribute("data-price-info") === "1",
+        outlook:row.getAttribute("data-outlook") === "1"};
     });
     let appliedValue = null;
     function applyFilter(){
       const terms = normalize(input.value).trim().split(/\s+/).filter(Boolean);
       const matches = entries.map(function(entry){
         return (!priceOnly || !priceOnly.checked || entry.priceInfo)
+          && (!outlookOnly || !outlookOnly.checked || entry.outlook)
           && terms.every(function(term){ return entry.text.includes(term); });
       });
       let shown = 0;
@@ -148,7 +152,7 @@ footer a{color:#5A6B8C}
       count.textContent = shown.toLocaleString("ja-JP") + " / "
         + entries.length.toLocaleString("ja-JP") + "品目を表示";
       empty.hidden = shown !== 0;
-      clear.disabled = input.value.length === 0 && (!priceOnly || !priceOnly.checked);
+      clear.disabled = input.value.length === 0 && !priceOnly?.checked && !outlookOnly?.checked;
       appliedValue = input.value;
     }
     function safelyApplyFilter(){
@@ -161,9 +165,11 @@ footer a{color:#5A6B8C}
       }, 0);
     });
     if(priceOnly) priceOnly.addEventListener("change", safelyApplyFilter);
+    if(outlookOnly) outlookOnly.addEventListener("change", safelyApplyFilter);
     clear.addEventListener("click", function(){
       input.value = "";
       if(priceOnly) priceOnly.checked = false;
+      if(outlookOnly) outlookOnly.checked = false;
       safelyApplyFilter();
       input.focus();
     });

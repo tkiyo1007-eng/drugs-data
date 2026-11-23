@@ -3322,9 +3322,9 @@ HUB_FILTER_STYLE = """
 .filter-controls button{min-height:44px;padding:10px 16px;border:1px solid #B6C8EB;border-radius:10px;font:inherit;font-weight:700;color:#2F63E8;background:#fff;cursor:pointer}
 .filter-controls button:disabled{color:#5A6B8C;cursor:default}
 .filter-controls input:focus-visible,.filter-controls button:focus-visible{outline:3px solid #2F63E8;outline-offset:2px}
-.hub-filter .price-filter{display:flex;align-items:center;gap:10px;min-height:44px;font-size:14px;cursor:pointer}
-.price-filter input{flex:none;width:20px;height:20px;margin:0;accent-color:#2F63E8}
-.price-filter input:focus-visible{outline:3px solid #2F63E8;outline-offset:3px}
+.hub-filter :is(.price-filter,.outlook-filter){display:flex;align-items:center;gap:10px;min-height:44px;font-size:14px;cursor:pointer}
+:is(.price-filter,.outlook-filter) input{flex:none;width:20px;height:20px;margin:0;accent-color:#2F63E8}
+:is(.price-filter,.outlook-filter) input:focus-visible{outline:3px solid #2F63E8;outline-offset:3px}
 .price-note{font-size:13px;color:#5A6B8C;margin:14px 0}
 .filter-empty{margin-top:10px;font-size:13px;color:#5A6B8C}
 #hubItems li[hidden]{display:none}
@@ -3341,6 +3341,7 @@ HUB_FILTER_SCRIPT = r"""<script>
   const count = document.getElementById("hubFilterCount");
   const empty = document.getElementById("hubFilterEmpty");
   const priceOnly = document.getElementById("hubFilterPriceOnly");
+  const outlookOnly = document.getElementById("hubFilterOutlookOnly");
   if(!panel || !list || !input || !clear || !count || !empty) return;
   function showAll(){
     Array.from(list.querySelectorAll("li")).forEach(function(row){ row.hidden = false; });
@@ -3348,6 +3349,7 @@ HUB_FILTER_SCRIPT = r"""<script>
     panel.hidden = true;
     empty.hidden = true;
     if(priceOnly) priceOnly.checked = false;
+    if(outlookOnly) outlookOnly.checked = false;
   }
   function normalize(value){
     return String(value || "").normalize("NFKC").toLowerCase()
@@ -3356,13 +3358,15 @@ HUB_FILTER_SCRIPT = r"""<script>
   try{
     const entries = Array.from(list.querySelectorAll("li")).map(function(row){
       return {row:row, text:normalize(row.getAttribute("data-search") || row.textContent),
-        priceInfo:row.getAttribute("data-price-info") === "1"};
+        priceInfo:row.getAttribute("data-price-info") === "1",
+        outlook:row.getAttribute("data-outlook") === "1"};
     });
     let appliedValue = null;
     function applyFilter(){
       const terms = normalize(input.value).trim().split(/\s+/).filter(Boolean);
       const matches = entries.map(function(entry){
         return (!priceOnly || !priceOnly.checked || entry.priceInfo)
+          && (!outlookOnly || !outlookOnly.checked || entry.outlook)
           && terms.every(function(term){ return entry.text.includes(term); });
       });
       let shown = 0;
@@ -3376,7 +3380,7 @@ HUB_FILTER_SCRIPT = r"""<script>
       count.textContent = shown.toLocaleString("ja-JP") + " / "
         + entries.length.toLocaleString("ja-JP") + "品目を表示";
       empty.hidden = shown !== 0;
-      clear.disabled = input.value.length === 0 && (!priceOnly || !priceOnly.checked);
+      clear.disabled = input.value.length === 0 && !priceOnly?.checked && !outlookOnly?.checked;
       appliedValue = input.value;
     }
     function safelyApplyFilter(){
@@ -3389,9 +3393,11 @@ HUB_FILTER_SCRIPT = r"""<script>
       }, 0);
     });
     if(priceOnly) priceOnly.addEventListener("change", safelyApplyFilter);
+    if(outlookOnly) outlookOnly.addEventListener("change", safelyApplyFilter);
     clear.addEventListener("click", function(){
       input.value = "";
       if(priceOnly) priceOnly.checked = false;
+      if(outlookOnly) outlookOnly.checked = false;
       safelyApplyFilter();
       input.focus();
     });
@@ -3486,6 +3492,8 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
                     search_text += " " + " ".join(str(lifecycle.get(field) or "") for field in (
                         "supply_end_expected", "supply_end_note"))
             search_attr = f' data-search="{esc(search_text)}"'
+            if slug in {"limited", "stopped"} and entry.get("release_period"):
+                search_attr += ' data-outlook="1"'
             if slug == "supplemental":
                 search_attr += f' data-price-info="{1 if entry.get("delist") else 0}"'
         rendered = (
@@ -3532,6 +3540,13 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
     })
     filter_markup = ""
     price_filter_markup = ""
+    outlook_filter_markup = ""
+    if slug in {"limited", "stopped"}:
+        outlook_filter_markup = '''
+      <label class="outlook-filter">
+        <input id="hubFilterOutlookOnly" type="checkbox" aria-controls="hubItems">
+        <span>見込み時期あり</span>
+      </label>'''
     price_note = ""
     if slug == "supplemental":
         price_count = sum(bool(entry.get("delist")) for entry in group)
@@ -3558,7 +3573,7 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
       <div class="filter-controls">
         <input id="hubFilterInput" type="search" placeholder="{example}" autocomplete="off" aria-describedby="hubFilterHint" aria-controls="hubItems">
         <button id="hubFilterClear" type="button" disabled>クリア</button>
-      </div>{price_filter_markup}
+      </div>{price_filter_markup}{outlook_filter_markup}
       <p class="filter-count" id="hubFilterCount" role="status" aria-live="polite" aria-atomic="true">{len(group):,} / {len(group):,}品目を表示</p>
       <p class="filter-empty" id="hubFilterEmpty" hidden>この一覧内に該当する品目なし。すべての医薬品の検索結果ではありません。検索語を変えるか、クリアしてご確認ください。</p>
     </section>'''
@@ -3613,9 +3628,9 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
     else:
         header = f'''    <h1>{esc(config["h1"])}</h1>
     <p class="lede">{esc(config["description"])}（{len(group):,}品目）</p>
-    {dataset_dates_html(dataset_date, version_metadata)}
+    {dataset_dates_html(dataset_date, version_metadata)}{filter_markup if slug == "stopped" else ""}
     <p class="notice">{esc(config["intro"])} 医薬品の使用・変更は、公式情報を確認したうえで医師・薬剤師等の専門職が判断してください。</p>
-{hub_navigation}{supplemental_navigation}{evidence_note}{price_note}{filter_markup}'''
+{hub_navigation}{supplemental_navigation}{evidence_note}{price_note}{filter_markup if slug != "stopped" else ""}'''
     limited_style = """
 h1 small{display:inline-block;vertical-align:middle;padding:2px 9px;border-radius:12px;background:#e7eefb;color:#354e72;font-size:14px;white-space:nowrap}
 .hub-filter{margin:14px 0 8px;padding:12px 14px}
