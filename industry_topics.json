@@ -1,7 +1,31 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-18",
+  "updated_at": "2026-11-24",
   "topics": [
+    {
+      "slug": "pmda-2-13047-toshinto-recall-20261124",
+      "date": "2026.11.24",
+      "updated_at": "2026-11-24",
+      "tag": "自主回収",
+      "tone": "alert",
+      "title": "十神湯分包顆粒、9包・270包の計8ロットを自主回収",
+      "lede": "日本製薬工業が、十神湯分包顆粒の9包・270包包装の一部を自主回収しています。製造機器に由来する金属片が見つかったためで、PMDAの回収一覧には11月20日にクラスIIとして掲載されました。",
+      "points": [
+        "9包包装の対象ロットは01H23B、01H23D、01H23F、01H23Hです。",
+        "270包包装の対象ロットは01H23A、01H23C、01H23E、01H23Gです。",
+        "回収開始は11月17日です。対象の包装・ロットや出荷時期は、PMDAの回収概要で確認できます。"
+      ],
+      "source": {
+        "name": "PMDA｜十神湯分包顆粒の回収概要（2-13047）",
+        "url": "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=2-13047"
+      },
+      "sources": [
+        {
+          "name": "PMDA｜2026年度クラスII回収一覧（医薬品、11月20日掲載）",
+          "url": "https://www.info.pmda.go.jp/kaisyuu/rcidx26-2m.html"
+        }
+      ]
+    },
     {
       "slug": "refixia-1000-supply-history-20261118",
       "date": "2026.11.18",
