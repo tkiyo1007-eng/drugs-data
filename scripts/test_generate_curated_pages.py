@@ -342,6 +342,7 @@ class CuratedPageGenerationTests(unittest.TestCase):
         self.assertIn('href="#packages-APKEY"', with_snapshot)
         self.assertIn('id="comparison-APKEY"', with_snapshot)
         self.assertNotIn('href="#packages-BPKEY"', with_snapshot)
+        self.assertIn('id="comparison-BPKEY"', with_snapshot)
         self.assertIn("出荷調整や販売中止の案内", with_snapshot)
         self.assertGreater(with_snapshot.index(snapshot), with_snapshot.index('<h2 id="bp">'))
         towa_supply = with_snapshot.split('<h3 id="towaSupplyTitle">', 1)[1].split('<h3 id="sawaiSupplyTitle">', 1)[0]
@@ -747,6 +748,18 @@ class CuratedPageGenerationTests(unittest.TestCase):
         old_target["packages"][0]["package"] = "PTP100錠"
         html, _ = product_package_snapshot([row], {code: [notice, old_notice]}, None, {code}, include_details=True)
         self.assertNotIn("PTP100錠：販売終了", html)
+
+    def test_teramuro_item_comparison_links_match_the_hub_cards(self):
+        hub = (ROOT / "products" / "teramuro.html").read_text(encoding="utf-8")
+        keys = re.findall(r'id="comparison-(2149117F\d{4})"', hub)
+        self.assertTrue(keys)
+        self.assertEqual(len(keys), len(set(keys)))
+        for key in keys:
+            with self.subTest(key=key):
+                item = (ROOT / "items" / f"{key}.html").read_text(encoding="utf-8")
+                href = f'href="../products/teramuro.html#comparison-{key}"'
+                self.assertEqual(item.count(href), 1)
+                self.assertLess(item.index(href), item.index('id="itemFreshnessTitle"'))
 
     def test_sawai_teramuro_discontinuation_headline_only_names_ptp140(self):
         for code in ("2149117F1050", "2149117F2056"):
