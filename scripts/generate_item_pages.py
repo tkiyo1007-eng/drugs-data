@@ -75,7 +75,6 @@ ZICTOR_KEY = "1147700S1028"
 PRODUCT_SUPPLY_LINKS = {
     JUVELA_KEY: ("juvela-ointment", "ユベラ軟膏の包装別案内"),
     ZICTOR_KEY: ("zictor-tape-75mg", "ジクトルテープの1枚・7枚包装を比較"),
-    **dict.fromkeys(("2149117F1076", "2149117F2072"), ("teramuro", "テラムロのAP・BPを販売元別に比較")),
     **dict.fromkeys(KENACORT_KEYS, ("kenacort-a-injection", "ケナコルトの40mg・50mgを比較")),
     **dict.fromkeys(HILNAMIN_TABLETS | {"1172014B2056", HILNAMIN_GRANULES_KEY},
                     ("hilnamin", "ヒルナミンの散・細粒・錠剤を比較")),
@@ -1132,6 +1131,11 @@ def dataset_dates_html(dataset_date: str, version_metadata=None) -> str:
 
 def normalized_text(value: str) -> str:
     return re.sub(r"\s+", "", unicodedata.normalize("NFKC", str(value or ""))).casefold()
+
+
+def teramuro_strength(name: str) -> str:
+    match = re.fullmatch(r"テラムロ配合錠(ap|bp)(?:「[^「」]+」)?", normalized_text(name))
+    return match[1].upper() if match else ""
 
 
 SUPPLEMENTAL_MAKER_ALIASES = {
@@ -2759,6 +2763,13 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
         supply_answer = f'<p>厚労省基準日　{esc(source_date)}</p>' + supply_answer
     variants_html = product_variants_html(row, product_variants, generated_keys)
     product_supply_link = ""
+    teramuro_comparison = ""
+    if teramuro_strength(name):
+        teramuro_comparison = (
+            '<nav class="hub-links" aria-label="テラムロの供給状況">'
+            f'<a href="../products/teramuro.html#comparison-{esc(key)}" data-dsn-event="related-item-open">'
+            'テラムロの供給状況を販売元別に比較</a></nav>'
+        )
     if key in PRODUCT_SUPPLY_LINKS:
         slug, text = PRODUCT_SUPPLY_LINKS[key]
         product_supply_link = (f'<nav class="hub-links" aria-label="製品の供給状況">'
@@ -2796,7 +2807,8 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
                      row, display_name, maker, public_metadata.get("解除・解消見込み"),
                      mhlw_excel_date(version_metadata, dataset_date), reference_import, reference_version,
                      official_row_date(row), delist, matching_manufacturer_notices(row, manufacturer_notices, manufacturer_bulletins),
-                     shortcuts, spec_difference_html + gas_spec_note, headline_labels, package_overview, strength_selector))
+                     shortcuts, spec_difference_html + gas_spec_note, headline_labels, package_overview,
+                     strength_selector, product_supply_link=teramuro_comparison))
         # Keep warnings beside the source they qualify. Render each full notice and topic only once.
         promoted_sections = (delist_box + lifecycle_box + discrepancy_box + supplemental_checked
                              + manufacturer_box + hospital_box + topic_box + '<h2 id="itemDetails">品目の詳細</h2>')
@@ -2899,7 +2911,7 @@ footer a{{color:var(--sub)}}
         maker_line = (f'<div class="maker bonzol-meta"><span>{identity}</span>{strength_selector}</div>'
                       if strength_selector else f'<p class="maker">{identity}</p>')
         intro = f"""    <h1>{esc(display_name)}<span class="tag status-{status}">厚労省：{st['label']}</span>{supplemental_tags}{delist_tag}</h1>
-    {maker_line}
+    {maker_line}{teramuro_comparison}
 """
         legacy_share = """    <button class="share" id="shareButton" type="button">この品目ページを共有</button>
     <p class="share-status" id="shareStatus" role="status" aria-live="polite"></p>

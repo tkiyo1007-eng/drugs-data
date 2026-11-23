@@ -20,7 +20,7 @@ from generate_item_pages import (
     load_zictor_listing, zictor_package_overview,
     manufacturer_notice_index, matching_manufacturer_notices,
     manufacturer_notice_needs_review, maker_tokens, notice_date_label, notice_package_names, valid_package_supply,
-    PACKAGE_PLAN_LABELS,
+    PACKAGE_PLAN_LABELS, teramuro_strength,
 )
 from validate_shared_content import valid_topic_publisher_http_source
 
@@ -922,12 +922,16 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
     brand, strengths = STRENGTH_HUBS[slug]
     groups = {strength: [] for strength in strengths}
     grades = "|".join(norm(strength) for strength in strengths)
-    manufacturer_suffix = r"(?:「[^「」]+」)?" if slug == "teramuro" else ""
-    selling_name = re.compile(rf"{re.escape(norm(brand))}\s*({grades})\s*{manufacturer_suffix}")
+    selling_name = re.compile(rf"{re.escape(norm(brand))}\s*({grades})")
     for row in rows:
-        match = selling_name.fullmatch(norm(row.get("商品名")))
-        if match:
-            groups[match.group(1).upper()].append(row)
+        name = row.get("商品名")
+        if slug == "teramuro":
+            strength = teramuro_strength(name)
+        else:
+            match = selling_name.fullmatch(norm(name))
+            strength = match[1].upper() if match else ""
+        if strength:
+            groups[strength].append(row)
     grades_label = "・".join(strengths)
     heading = f"{brand}{grades_label}の出荷調整・供給状況"
     description = (f"{brand}{grades_label}の出荷調整を規格別に確認。厚生労働省の供給区分と、"
@@ -949,12 +953,14 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
             href = row_link(row, generated_keys)
             maker = row.get("販売メーカー") or ""
             status = row.get("供給状況") or "公表区分未確認"
-            card = (f'<a class="strength-item" href="{esc(href)}" data-dsn-event="related-item-open">'
+            key = item_key(row)
+            comparison_id = f' id="comparison-{esc(key)}"' if slug == "teramuro" else ""
+            item_id = "" if key in package_keys else comparison_id
+            card = (f'<a class="strength-item"{item_id} href="{esc(href)}" data-dsn-event="related-item-open">'
                     f'<strong>{esc(name)}</strong><span>{esc(maker)}</span>'
                     f'<span class="supply">{esc(status)}</span></a>')
-            key = item_key(row)
             if key in package_keys:
-                card = (f'<div class="strength-card" id="comparison-{esc(key)}" tabindex="-1">{card}'
+                card = (f'<div class="strength-card"{comparison_id} tabindex="-1">{card}'
                         '<a class="strength-packages" '
                         f'href="#packages-{esc(key)}" aria-label="{esc(name)}の包装別案内">包装別案内</a></div>')
             cards.append(card)
@@ -1024,9 +1030,9 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
         '.strength-packages{display:grid;place-items:center;min-height:44px;padding:0 10px;'
         'border-left:1px solid var(--line);color:#244b9e;font-size:13px;font-weight:700;white-space:nowrap}'
         '.packages-back{display:inline-flex;align-items:center;min-height:44px;color:#244b9e;font-size:13px}'
-        '.strength-card,[id^="packages-"]{scroll-margin-block-start:16px}'
-        '.strength-card:target{outline:2px solid #346bd6;outline-offset:2px}'
-        if package_keys else ""
+        '[id^="comparison-"],[id^="packages-"]{scroll-margin-block-start:16px}'
+        '[id^="comparison-"]:target{outline:2px solid #346bd6;outline-offset:2px}'
+        if slug == "teramuro" else ""
     )
     return f"""<!DOCTYPE html><html lang="ja"><head>
 {common_head(title, description, canonical, 'website', [collection, breadcrumb])}<style>{STYLE}
@@ -1649,16 +1655,7 @@ def main() -> int:
         snapshot = ""
         package_keys = set()
         if slug == "teramuro":
-            notice_keys = {
-                "2149117F1033", "2149117F2030",  # DSEP
-                "2149117F1076", "2149117F2072",  # トーワ
-                "2149117F1050", "2149117F2056",  # サワイ
-                "2149117F1084", "2149117F2080",  # 日医工
-                "2149117F1114", "2149117F2110",  # NIG
-                "2149117F1041", "2149117F2048",  # EE
-                "2149117F1092", "2149117F2099",  # ニプロ
-            }
-            notice_rows = [row for row in rows if item_key(row) in notice_keys]
+            notice_rows = [row for row in rows if teramuro_strength(row.get("商品名"))]
             snapshot, package_keys = product_package_snapshot(
                 notice_rows, notice_index, bulletins, generated_keys, include_details=True)
         (product_dir / f"{slug}.html").write_text(
