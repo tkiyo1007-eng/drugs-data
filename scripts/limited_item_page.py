@@ -56,7 +56,8 @@ def overview_html(row, name, maker, release, source_date, imported, version, upd
         period, url = item_release_outlook
         release_fact = f'<div><dt>解除見込み（品目全体）</dt><dd>{escape(period)}</dd></div>'
         release_source = ('<p><small>包装ごとの再開時期はメーカー案内をご確認ください。'
-                          f'<a href="{escape(url)}" data-dsn-event="official-source-open">厚労省原表（Excel）</a></small></p>')
+                          f'<a href="{escape(url)}" data-dsn-event="official-source-open">厚労省原表（Excel）</a></small></p>'
+                          '<p><a href="limited.html?outlook=1">解除見込みのある限定出荷品を見る</a></p>')
     return f'''<div class="intro"><p class="maker">{escape(maker)}</p><h1>{name}</h1>
 <p class="spec"><b>{escape(row.get("規格") or "規格の記載なし")}</b> {code}</p>{manufacturer_status}{strength_selector}{spec_note}</div>{product_supply_link}
 <section class="summary" data-version="{escape(version)}" data-spec-note="{int(bool(spec_note))}" data-source="{escape(source_date)}" data-imported="{escape(imported)}">

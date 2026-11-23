@@ -1045,6 +1045,7 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
         self.assertIn("解除見込み（品目全体）", summary)
         self.assertIn("2027年3月", summary)
         self.assertIn(f'href="{url}"', summary)
+        self.assertIn('href="limited.html?outlook=1">解除見込みのある限定出荷品を見る</a>', summary)
         self.assertIn("包装ごとの再開時期はメーカー案内をご確認ください", summary)
         self.assertNotIn("2027年6月", summary)
         self.assertIn("2027年4月", render(dict(source, release_outlooks={key: "2027年4月"})))
@@ -1054,6 +1055,7 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
                         render(dict(source, url="//example.test/file.xlsx")),
                         render(source, 代替候補="解除/解消見込み: ウ. 未定 / 出荷量状況: B．出荷量減少")):
             self.assertNotIn("2027年3月", omitted)
+            self.assertNotIn("limited.html?outlook=1", omitted)
 
     def test_stopped_resolution_outlook_uses_public_date_and_keeps_packaging_separate(self):
         row = dict(self.row(), 供給状況="⑤供給停止",
@@ -1078,11 +1080,13 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
         for expected in ("解消見込み（品目全体）", "2027年4月", "2026-11-20", f'href="{url}"'):
             self.assertIn(expected, outlook)
         self.assertNotIn("2027年6月頃", outlook)
+        self.assertIn('href="stopped.html?outlook=1">解消見込みのある供給停止品を見る</a>', outlook)
         self.assertIn("出荷再開予定：2027年6月頃", page[page.index('id="manufacturerNoticesTitle"'):])
         self.assertIn("2027年5月", render(dict(source, release_outlooks={key: "2027年5月"})))
         for omitted in (render(dict(source, excel_date="2026-11-19")), render(dict(source, release_outlooks={})),
                         render(source, 代替候補="解除/解消見込み: ウ. 未定 / 出荷量状況: C．出荷停止")):
             self.assertNotIn("official-resolution-outlook", omitted)
+            self.assertNotIn("stopped.html?outlook=1", omitted)
 
     def test_hilnamin_tablet_metadata_uses_only_latest_exact_packaging_status(self):
         key = "1172014F2139"
