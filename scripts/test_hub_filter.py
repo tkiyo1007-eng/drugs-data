@@ -296,7 +296,8 @@ function setup(before = "", href = "https://example.test/items/limited.html") {
     hubFilter: node(), hubItems: node({querySelectorAll: selector => selector === "li" ? rows : []}),
     hubFilterInput: node({value: "", focus() { this.focused = true; }}),
     hubFilterClear: node({disabled: true}), hubFilterOutlookOnly: node({checked: false}),
-    hubFilterCount: node({textContent: ""}), hubFilterEmpty: node()
+    hubFilterCount: node({textContent: ""}), hubFilterEmpty: node(),
+    hubOutlookPeer: node({href: "stopped.html", getAttribute: name => name === "href" ? "stopped.html" : null})
   };
   const window = {
     location: {href}, history: {state: null, replaceState(state, title, url) {
@@ -320,12 +321,15 @@ const outlook=live.nodes.hubFilterOutlookOnly;
 outlook.checked=true; outlook.handlers.change();
 assert.deepEqual(visible(), ["1111111F1111"]);
 assert.equal(new URL(live.window.location.href).searchParams.get("outlook"), "1");
+assert.equal(live.nodes.hubOutlookPeer.href, "stopped.html?outlook=1");
 const shared = setup("", "https://example.test/items/limited.html?keep=x&outlook=1#example");
 assert.equal(shared.nodes.hubFilterOutlookOnly.checked, true);
 assert.deepEqual(visible(shared), ["1111111F1111"]);
+assert.equal(shared.nodes.hubOutlookPeer.href, "stopped.html?outlook=1");
 shared.nodes.hubFilterClear.handlers.click();
 assert.deepEqual(visible(shared), ["1111111F1111", "2222222F2222"]);
 assert.equal(shared.window.location.href, "https://example.test/items/limited.html?keep=x#example");
+assert.equal(shared.nodes.hubOutlookPeer.href, "stopped.html");
 const invalid = setup("", "https://example.test/items/limited.html?outlook=0");
 assert.equal(invalid.nodes.hubFilterOutlookOnly.checked, false);
 assert.deepEqual(visible(invalid), ["1111111F1111", "2222222F2222"]);

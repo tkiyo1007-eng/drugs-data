@@ -114,6 +114,8 @@ footer a{color:#5A6B8C}
   const empty = document.getElementById("hubFilterEmpty");
   const priceOnly = document.getElementById("hubFilterPriceOnly");
   const outlookOnly = document.getElementById("hubFilterOutlookOnly");
+  const outlookPeer = document.getElementById("hubOutlookPeer");
+  const outlookPeerHref = outlookPeer?.getAttribute("href");
   if(!panel || !list || !input || !clear || !count || !empty) return;
   function showAll(){
     Array.from(list.querySelectorAll("li")).forEach(function(row){ row.hidden = false; });
@@ -122,6 +124,7 @@ footer a{color:#5A6B8C}
     empty.hidden = true;
     if(priceOnly) priceOnly.checked = false;
     if(outlookOnly) outlookOnly.checked = false;
+    if(outlookPeerHref) outlookPeer.href = outlookPeerHref;
   }
   function normalize(value){
     return String(value || "").normalize("NFKC").toLowerCase()
@@ -153,6 +156,9 @@ footer a{color:#5A6B8C}
         + entries.length.toLocaleString("ja-JP") + "品目を表示";
       empty.hidden = shown !== 0;
       clear.disabled = input.value.length === 0 && !priceOnly?.checked && !outlookOnly?.checked;
+      if(outlookPeerHref){
+        outlookPeer.href = outlookPeerHref + (outlookOnly?.checked ? "?outlook=1" : "");
+      }
       appliedValue = input.value;
     }
     function safelyApplyFilter(){

@@ -3342,6 +3342,8 @@ HUB_FILTER_SCRIPT = r"""<script>
   const empty = document.getElementById("hubFilterEmpty");
   const priceOnly = document.getElementById("hubFilterPriceOnly");
   const outlookOnly = document.getElementById("hubFilterOutlookOnly");
+  const outlookPeer = document.getElementById("hubOutlookPeer");
+  const outlookPeerHref = outlookPeer?.getAttribute("href");
   if(!panel || !list || !input || !clear || !count || !empty) return;
   function showAll(){
     Array.from(list.querySelectorAll("li")).forEach(function(row){ row.hidden = false; });
@@ -3350,6 +3352,7 @@ HUB_FILTER_SCRIPT = r"""<script>
     empty.hidden = true;
     if(priceOnly) priceOnly.checked = false;
     if(outlookOnly) outlookOnly.checked = false;
+    if(outlookPeerHref) outlookPeer.href = outlookPeerHref;
   }
   function normalize(value){
     return String(value || "").normalize("NFKC").toLowerCase()
@@ -3381,6 +3384,9 @@ HUB_FILTER_SCRIPT = r"""<script>
         + entries.length.toLocaleString("ja-JP") + "品目を表示";
       empty.hidden = shown !== 0;
       clear.disabled = input.value.length === 0 && !priceOnly?.checked && !outlookOnly?.checked;
+      if(outlookPeerHref){
+        outlookPeer.href = outlookPeerHref + (outlookOnly?.checked ? "?outlook=1" : "");
+      }
       appliedValue = input.value;
     }
     function safelyApplyFilter(){
@@ -3533,9 +3539,10 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
     other_hub_links = []
     for other_slug, other in ITEM_HUBS.items():
         current = ' aria-current="page"' if other_slug == slug else ""
+        outlook_peer = ' id="hubOutlookPeer"' if {slug, other_slug} == {"limited", "stopped"} else ""
         count = sum(other_slug in entry.get("hubs", []) for entry in entries)
         other_hub_links.append(
-            f'<a href="{other_slug}.html"{current}>'
+            f'<a href="{other_slug}.html"{current}{outlook_peer}>'
             f'{esc(other["label"])}（{count:,}）</a>')
     other_hubs = "".join(other_hub_links)
     structured = ld_json({
