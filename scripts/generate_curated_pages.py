@@ -748,11 +748,14 @@ def topic_page(topic: dict, related: list[dict[str, str]], generated_keys: set[s
 {analytics_footer()}</body></html>"""
 
 
-def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *, include_details=False) -> str:
+def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *,
+                             include_details=False) -> tuple[str, set[str]]:
     """品目に一致する最新の包装別案内を、厚労省区分と区別して掲載する。"""
     groups = {}
+    package_keys = set()
     for row in rows:
-        matches = matching_manufacturer_notices(row, notice_index.get(item_key(row), ()), bulletins)
+        key = item_key(row)
+        matches = matching_manufacturer_notices(row, notice_index.get(key, ()), bulletins)
         if not matches:
             continue
         latest = max(m["notice"]["announced_at"] for m in matches)
@@ -794,11 +797,15 @@ def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *, i
                 continue
             href = esc(row_link(row, generated_keys))
             name = esc(row["商品名"])
+            anchor = ""
+            if include_details and key not in package_keys:
+                package_keys.add(key)
+                anchor = f' id="packages-{esc(key)}"'
             entries = groups.setdefault((notice["url"], notice["maker"], notice["announced_at"], seller), (notice, []))[1]
-            entries.append(f'<h4><a href="{href}" data-dsn-event="related-item-open">{name}</a></h4>'
+            entries.append(f'<h4{anchor}><a href="{href}" data-dsn-event="related-item-open">{name}</a></h4>'
                            f'<ul>{"".join(packages)}</ul>')
     if not groups:
-        return ""
+        return "", package_keys
     sections = []
     for (url, maker, day, seller), (notice, entries) in groups.items():
         timing = notice.get("resumption")
@@ -817,7 +824,7 @@ def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *, i
     return ('<section class="intent" aria-labelledby="packageSnapshotTitle">'
             '<h2 id="packageSnapshotTitle">メーカー案内の包装別情報</h2>'
             '<p class="note">収録した各資料の日付時点の案内です。現在の受注可否や在庫は各品目の原典でご確認ください。</p>'
-            + "".join(sections) + '</section>')
+            + "".join(sections) + '</section>', package_keys)
 
 
 def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[str],
@@ -907,7 +914,7 @@ def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[
 
 
 def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set[str],
-                      source_date: str, *, package_snapshot="") -> str:
+                      source_date: str, *, package_snapshot="", package_keys=frozenset()) -> str:
     brand, strengths = STRENGTH_HUBS[slug]
     groups = {strength: [] for strength in strengths}
     grades = "|".join(norm(strength) for strength in strengths)
@@ -938,9 +945,14 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
             href = row_link(row, generated_keys)
             maker = row.get("販売メーカー") or ""
             status = row.get("供給状況") or "公表区分未確認"
-            cards.append(f'<a class="strength-item" href="{esc(href)}" data-dsn-event="related-item-open">'
-                         f'<strong>{esc(name)}</strong><span>{esc(maker)}</span>'
-                         f'<span class="supply">{esc(status)}</span></a>')
+            card = (f'<a class="strength-item" href="{esc(href)}" data-dsn-event="related-item-open">'
+                    f'<strong>{esc(name)}</strong><span>{esc(maker)}</span>'
+                    f'<span class="supply">{esc(status)}</span></a>')
+            key = item_key(row)
+            if key in package_keys:
+                card = (f'<div class="strength-card">{card}<a class="strength-packages" '
+                        f'href="#packages-{esc(key)}" aria-label="{esc(name)}の包装別案内">包装別案内</a></div>')
+            cards.append(card)
             items.append({"@type": "ListItem", "position": len(items) + 1, "name": name,
                           "url": absolute_product_row_url(href)})
         label = f"{strength}の販売元" if slug == "teramuro" else strength
@@ -1000,11 +1012,20 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
         {"@type": "ListItem", "position": 1, "name": "医薬品供給ナビ", "item": SITE_ROOT},
         {"@type": "ListItem", "position": 2, "name": "最近お問い合わせの多い製品", "item": SITE_ROOT + "products/index.html"},
         {"@type": "ListItem", "position": 3, "name": brand, "item": canonical}]}
+    package_style = (
+        '.strength-card{display:grid;grid-template-columns:minmax(0,1fr) auto;background:#fff;'
+        'border:1px solid var(--line);border-radius:12px}'
+        '.strength-card .strength-item{border:0;border-radius:11px 0 0 11px;overflow-wrap:anywhere}'
+        '.strength-packages{display:grid;place-items:center;min-height:44px;padding:0 10px;'
+        'border-left:1px solid var(--line);color:#244b9e;font-size:13px;font-weight:700;white-space:nowrap}'
+        '[id^="packages-"]{scroll-margin-block-start:16px}'
+        if package_keys else ""
+    )
     return f"""<!DOCTYPE html><html lang="ja"><head>
 {common_head(title, description, canonical, 'website', [collection, breadcrumb])}<style>{STYLE}
 .strength-nav{{display:flex;gap:10px;flex-wrap:wrap}}.strength-nav a{{display:inline-flex;min-height:44px;min-width:72px;justify-content:center;align-items:center;border:1px solid #9eb7ed;border-radius:10px;font-weight:750;color:#244b9e}}
 .strength-list{{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:8px}}.strength-item{{display:grid;gap:2px;padding:12px 16px;background:#fff;border:1px solid var(--line);border-radius:12px;color:var(--ink);text-decoration:none}}.strength-item strong{{color:#244b9e;text-decoration:underline;text-underline-offset:3px}}.strength-item span{{font-size:13px;color:var(--sub)}}.strength-item .supply{{color:var(--ink);font-weight:650}}a:focus-visible{{outline:3px solid #346bd6;outline-offset:2px}}
-</style></head><body><div class="wrap"><header class="site"><a href="../">医薬品供給ナビ</a></header>
+{package_style}</style></head><body><div class="wrap"><header class="site"><a href="../">医薬品供給ナビ</a></header>
 <nav class="crumb" aria-label="パンくず"><a href="../">トップ</a> › <a href="index.html">注目製品</a> › {esc(brand)}</nav><main>
 <header class="hero"><h1>{esc(heading)}</h1><p class="note">厚労省の公表データ　基準日 {esc(source_date or '未確認')}</p>{picker}</header>
 {"".join(sections)}{maker_supply_note}{package_snapshot}{packaging_change}
@@ -1608,8 +1629,8 @@ def main() -> int:
                 trusted = False
             brief = zictor_package_overview(matched[0], notices, bulletins, trusted=trusted,
                                             latest_listing=load_zictor_listing(site))
-        snapshot = (product_package_snapshot(matched, notice_index, bulletins, generated_keys)
-                    if product["slug"] in SUPPLY_COMPARISONS else "")
+        snapshot, _ = (product_package_snapshot(matched, notice_index, bulletins, generated_keys)
+                       if product["slug"] in SUPPLY_COMPARISONS else ("", set()))
         page, lastmod = product_page(product, matched, generated_keys, lifecycle,
                                      package_brief=brief, source_date=source_date, package_snapshot=snapshot)
         (product_dir / f"{product['slug']}.html").write_text(page, encoding="utf-8")
@@ -1619,6 +1640,7 @@ def main() -> int:
             product_dates[product["slug"]] = max(product_dates[product["slug"]], "2026-09-11")
     for slug in STRENGTH_HUBS:
         snapshot = ""
+        package_keys = set()
         if slug == "teramuro":
             notice_keys = {
                 "2149117F1033", "2149117F2030",  # DSEP
@@ -1630,10 +1652,11 @@ def main() -> int:
                 "2149117F1092", "2149117F2099",  # ニプロ
             }
             notice_rows = [row for row in rows if item_key(row) in notice_keys]
-            snapshot = product_package_snapshot(notice_rows, notice_index, bulletins, generated_keys,
-                                                include_details=True)
+            snapshot, package_keys = product_package_snapshot(
+                notice_rows, notice_index, bulletins, generated_keys, include_details=True)
         (product_dir / f"{slug}.html").write_text(
-            strength_hub_page(slug, rows, generated_keys, source_date, package_snapshot=snapshot), encoding="utf-8")
+            strength_hub_page(slug, rows, generated_keys, source_date,
+                              package_snapshot=snapshot, package_keys=package_keys), encoding="utf-8")
         product_dates[slug] = max(source_date, STRENGTH_HUB_EDIT_DATE)
     (guide_dir / f"{GUIDE_SLUG}.html").write_text(
         guide_page(), encoding="utf-8")

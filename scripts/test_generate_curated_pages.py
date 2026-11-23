@@ -337,8 +337,10 @@ class CuratedPageGenerationTests(unittest.TestCase):
         self.assertNotIn('href="#packageSnapshotTitle"', page)
         snapshot = '<section><h2 id="packageSnapshotTitle">包装別案内</h2></section>'
         with_snapshot = strength_hub_page("teramuro", rows, {"APKEY"}, "2026-11-20",
-                                          package_snapshot=snapshot)
+                                          package_snapshot=snapshot, package_keys={"APKEY"})
         self.assertIn('href="#packageSnapshotTitle"', with_snapshot)
+        self.assertIn('href="#packages-APKEY"', with_snapshot)
+        self.assertNotIn('href="#packages-BPKEY"', with_snapshot)
         self.assertIn("出荷調整や販売中止の案内", with_snapshot)
         self.assertGreater(with_snapshot.index(snapshot), with_snapshot.index('<h2 id="bp">'))
         towa_supply = with_snapshot.split('<h3 id="towaSupplyTitle">', 1)[1].split('<h3 id="sawaiSupplyTitle">', 1)[0]
@@ -698,43 +700,49 @@ class CuratedPageGenerationTests(unittest.TestCase):
         notice = {"url": "https://example.test/notice.pdf", "announced_at": "2026-11-16",
                   "maker": "共和薬品工業", "sha256": "a" * 64, "targets": [target],
                   "reason": "メーカー案内の理由"}
-        html = product_package_snapshot([row], {code: [notice]}, {"items": []}, {code})
+        html, keys = product_package_snapshot([row], {code: [notice]}, {"items": []}, {code})
+        self.assertEqual(set(), keys)
         self.assertIn("2026年11月16日の共和薬品工業の案内", html)
         self.assertIn("PTP100錠：出荷停止", html)
         self.assertIn(f'href="../items/{code}.html"', html)
         self.assertNotIn(notice["reason"], html)
         target["packages"][0]["supply"]["plans"] = [{"event": "stock_depletion", "timing": "2026年12月予定"}]
-        with_details = product_package_snapshot([row], {code: [notice]}, None, {code}, include_details=True)
+        with_details, keys = product_package_snapshot([row], {code: [notice]}, None, {code}, include_details=True)
+        self.assertEqual({code}, keys)
+        self.assertIn(f'id="packages-{code}"', with_details)
         self.assertIn(notice["reason"], with_details)
         self.assertIn("PTP100錠：出荷停止<br>在庫消尽予定 2026年12月", with_details)
         changed = {"items": [{"url": notice["url"], "sha256": "b" * 64}]}
-        self.assertEqual("", product_package_snapshot([row], {code: [notice]}, changed, {code}, include_details=True))
+        self.assertEqual(("", set()), product_package_snapshot(
+            [row], {code: [notice]}, changed, {code}, include_details=True))
         other_strength = dict(row, 商品名="ヒルナミン錠（50mg）")
-        self.assertEqual("", product_package_snapshot([other_strength], {code: [notice]}, None, {code}))
+        self.assertEqual(("", set()), product_package_snapshot([other_strength], {code: [notice]}, None, {code}))
 
         route = dict(target, scope="seller_route_and_package", seller="販売元A")
         route_notice = dict(notice, targets=[route], source_index_url="https://example.test/source-list.pdf")
         index = {code: [route_notice]}
         matching_seller = dict(row, 販売メーカー="販売元A")
-        html = product_package_snapshot([matching_seller], index, None, {code})
+        html, _ = product_package_snapshot([matching_seller], index, None, {code})
         self.assertIn("対象の販売元　販売元A", html)
         self.assertIn('href="https://example.test/source-list.pdf"', html)
         joint_sellers = dict(row, 販売メーカー="販売元B・販売元A")
-        self.assertIn("対象の販売元　販売元A",
-                      product_package_snapshot([joint_sellers], index, None, {code}))
+        html, _ = product_package_snapshot([joint_sellers], index, None, {code})
+        self.assertIn("対象の販売元　販売元A", html)
         other_seller = dict(row, 販売メーカー="販売元B")
-        self.assertEqual("", product_package_snapshot([other_seller], index, None, {code}))
+        self.assertEqual(("", set()), product_package_snapshot([other_seller], index, None, {code}))
 
         old_target = dict(target, packages=[
             {"package": "PTP140錠", "supply": {"status": "stopped", "status_text": "販売終了", "plans": []}},
         ])
         old_notice = dict(notice, event_type="discontinued", announced_at="2025-07",
                           url="https://example.test/old.pdf", targets=[old_target])
-        html = product_package_snapshot([row], {code: [notice, old_notice]}, None, {code}, include_details=True)
+        html, keys = product_package_snapshot([row], {code: [notice, old_notice]}, None, {code}, include_details=True)
         self.assertIn("PTP100錠：出荷停止", html)
         self.assertIn("PTP140錠：販売終了", html)
+        self.assertEqual({code}, keys)
+        self.assertEqual(1, html.count(f'id="packages-{code}"'))
         old_target["packages"][0]["package"] = "PTP100錠"
-        html = product_package_snapshot([row], {code: [notice, old_notice]}, None, {code}, include_details=True)
+        html, _ = product_package_snapshot([row], {code: [notice, old_notice]}, None, {code}, include_details=True)
         self.assertNotIn("PTP100錠：販売終了", html)
 
     def test_sawai_teramuro_discontinuation_headline_only_names_ptp140(self):
