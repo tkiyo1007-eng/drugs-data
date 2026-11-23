@@ -300,12 +300,14 @@ class CuratedPageGenerationTests(unittest.TestCase):
         page = list_page("products", records, "2026-09-12", {"2649805M1026", "3179106F1039"})
         first, other = page.split('<details class="other-products">')
         featured = re.findall(r'<a href="([^"]+)">[^<]+<small>', first)
-        self.assertEqual(["movicol.html", "../items/2649805M1026.html", "teramuro.html", "zictor-tape-75mg.html"], featured)
+        self.assertEqual(["movicol.html", "juvela-ointment.html", "teramuro.html", "zictor-tape-75mg.html"], featured)
         for record in records:
             link = f'href="{record["slug"]}.html"'
-            if record["slug"] in CADUET_STRENGTH_SLUGS:
+            if f'{record["slug"]}.html' in featured:
+                self.assertNotIn(link, other)
+            elif record["slug"] in CADUET_STRENGTH_SLUGS:
                 self.assertNotIn(link, page)
-            elif record["slug"] != "zictor-tape-75mg":
+            else:
                 self.assertIn(link, other)
         self.assertEqual(before, json.dumps(records))
         self.assertEqual(1, page.count('テラムロ配合錠'))

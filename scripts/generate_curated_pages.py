@@ -1067,12 +1067,8 @@ def list_page(kind: str, records: list[dict], updated_at: str, generated_keys: s
         ):
             if slug not in STRENGTH_HUBS and slug not in slugs:
                 continue
-            href = f"{slug}.html"
-            if slug == "juvela-ointment" and "2649805M1026" in keys:
-                href = "../items/2649805M1026.html"
-            else:
-                listed_in_primary.add(slug)
-            primary.append(f'<a href="{href}">{label}<small>{detail}</small></a>')
+            listed_in_primary.add(slug)
+            primary.append(f'<a href="{slug}.html">{label}<small>{detail}</small></a>')
         if "3179106F1039" in keys:
             links.append('<a href="../items/3179106F1039.html">ノイロビタン配合錠<small>包装別のメーカー案内</small></a>')
     for record in records:
