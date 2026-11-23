@@ -1044,6 +1044,35 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
                         render(source, 代替候補="解除/解消見込み: ウ. 未定 / 出荷量状況: B．出荷量減少")):
             self.assertNotIn("2027年3月", omitted)
 
+    def test_stopped_resolution_outlook_uses_public_date_and_keeps_packaging_separate(self):
+        row = dict(self.row(), 供給状況="⑤供給停止",
+                   代替候補="解除/解消見込み: ア. あり / 出荷量状況: C．出荷停止")
+        key = row["YJコード"]
+        url = "https://www.mhlw.go.jp/content/10800000/261120iyakuhinkyoukyu.xlsx"
+        source = {"url": url, "excel_date": "2026-11-20", "release_outlooks": {key: "2027年4月"}}
+        version = {"version": 202611230542, "mhlw_excel_date": "2026-11-20"}
+        notice = dict(self.notice(), event_type="stopped")
+        notice["targets"][0]["packages"][0]["supply"] = {
+            "status": "stopped", "status_text": "出荷停止",
+            "plans": [{"event": "shipment_resumption", "timing": "2027年6月頃"}],
+        }
+
+        def render(meta, **changes):
+            return page_html(dict(row, **changes), key, "stopped", "2026-11-23", [], {key},
+                             dataset_date="2026-11-23", version_metadata=version, mhlw_source=meta,
+                             manufacturer_notices=[notice], manufacturer_bulletins={"items": []})
+
+        page = render(source)
+        outlook = re.search(r'<div class="official-resolution-outlook">.*?</div>', page, re.S).group()
+        for expected in ("解消見込み（品目全体）", "2027年4月", "2026-11-20", f'href="{url}"'):
+            self.assertIn(expected, outlook)
+        self.assertNotIn("2027年6月頃", outlook)
+        self.assertIn("出荷再開予定：2027年6月頃", page[page.index('id="manufacturerNoticesTitle"'):])
+        self.assertIn("2027年5月", render(dict(source, release_outlooks={key: "2027年5月"})))
+        for omitted in (render(dict(source, excel_date="2026-11-19")), render(dict(source, release_outlooks={})),
+                        render(source, 代替候補="解除/解消見込み: ウ. 未定 / 出荷量状況: C．出荷停止")):
+            self.assertNotIn("official-resolution-outlook", omitted)
+
     def test_hilnamin_tablet_metadata_uses_only_latest_exact_packaging_status(self):
         key = "1172014F2139"
         row = dict(self.row(), 商品名="ヒルナミン錠（25mg）", YJコード=key,

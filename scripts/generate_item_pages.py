@@ -2772,7 +2772,29 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
         "isPartOf": {"@type": "WebSite", "name": "医薬品供給ナビ", "url": SITE_ROOT},
     })
     quick_answers = quick_answers_html(row, status, display_name)
+    excel_date = mhlw_excel_date(version_metadata, dataset_date)
+    release = public_metadata.get("解除・解消見込み")
+    item_release_outlook = None
+    if ((limited_layout or (status == "stopped" and strict_status(row.get("供給状況")) == "stopped"))
+            and excel_date and isinstance(mhlw_source, dict) and mhlw_source.get("excel_date") == excel_date
+            and release_outlook_is_expected(release)):
+        outlooks = mhlw_source.get("release_outlooks")
+        period = outlooks.get(key) if isinstance(outlooks, dict) else None
+        if isinstance(period, str) and period.strip():
+            try:
+                item_release_outlook = (period.strip(), workbook_url(mhlw_source.get("url")))
+            except ValueError:
+                pass
     supply_answer = supply_answer_html(row, status, manufacturer_notices, lifecycle_match, manufacturer_bulletins)
+    if status == "stopped" and item_release_outlook:
+        period, source_url = item_release_outlook
+        supply_answer = (
+            '<div class="official-resolution-outlook">'
+            f'<p><strong>解消見込み（品目全体）</strong>　{esc(period)}</p>'
+            f'<p><small>厚労省基準日 <time>{esc(excel_date)}</time>　'
+            f'<a href="{esc(source_url)}" data-dsn-event="official-source-open">厚労省原表（Excel）</a><br>'
+            '包装ごとの再開時期はメーカー案内をご確認ください。</small></p></div>'
+        ) + supply_answer
     if key in BONZOL_KEYS and not limited_layout:
         source_date = mhlw_excel_date(version_metadata, dataset_date) or "確認できません"
         supply_answer = f'<p>厚労省基準日　{esc(source_date)}</p>' + supply_answer
@@ -2817,18 +2839,6 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
         ]
         if key == ZESTAC_KEY and package_overview:
             headline_labels = ["メーカー：販売中止の案内"]
-        excel_date = mhlw_excel_date(version_metadata, dataset_date)
-        release = public_metadata.get("解除・解消見込み")
-        item_release_outlook = None
-        if (excel_date and isinstance(mhlw_source, dict) and mhlw_source.get("excel_date") == excel_date
-                and release_outlook_is_expected(release)):
-            outlooks = mhlw_source.get("release_outlooks")
-            period = outlooks.get(key) if isinstance(outlooks, dict) else None
-            if isinstance(period, str) and period.strip():
-                try:
-                    item_release_outlook = (period.strip(), workbook_url(mhlw_source.get("url")))
-                except ValueError:
-                    pass
         intro = ('<nav class="trail" aria-label="パンくず"><a href="index.html">品目別の供給状況</a> / 品目詳細</nav>'
                  + limited_item_page.overview_html(
                      row, display_name, maker, release, excel_date, reference_import, reference_version,
