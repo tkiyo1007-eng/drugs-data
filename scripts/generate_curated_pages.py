@@ -314,7 +314,8 @@ def absolute_product_row_url(href: str) -> str:
 
 
 def product_rows_html(rows: list[dict[str, str]], generated_keys: set[str],
-                      lifecycle: dict[str, dict], product: dict | None = None) -> str:
+                      lifecycle: dict[str, dict], product: dict | None = None, *,
+                      link_strengths=False, package_keys=frozenset()) -> str:
     cards = []
     for row in rows:
         status = map_status(row.get("供給状況"))
@@ -334,8 +335,12 @@ def product_rows_html(rows: list[dict[str, str]], generated_keys: set[str],
         updated = (row.get("更新日") or "").replace("/", "-")
         href = (product_row_link(product, row, generated_keys)
                 if product else row_link(row, generated_keys))
-        cards.append(f"""<div class="product">
-  <div><a href="{href}" data-dsn-event="related-item-open">{esc(row.get('商品名'))}</a><div class="meta">{esc(spec)}</div></div>
+        anchor = f' id="comparison-{esc(key)}" tabindex="-1"' if link_strengths else ""
+        packaging = (f'<a class="packages-back" href="#packages-{esc(key)}" '
+                     f'aria-label="{esc(row.get("商品名"))}のメーカー包装別案内">包装別案内を見る</a>'
+                     if key in package_keys else "")
+        cards.append(f"""<div class="product"{anchor}>
+  <div><a href="{href}" data-dsn-event="related-item-open">{esc(row.get('商品名'))}</a><div class="meta">{esc(spec)}</div>{packaging}</div>
   <div class="meta">{esc(maker)}<br>更新 {esc(updated)}</div><div>{badges}</div>
 </div>""")
     return "".join(cards)
@@ -753,7 +758,8 @@ def topic_page(topic: dict, related: list[dict[str, str]], generated_keys: set[s
 
 
 def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *,
-                             include_details=False, show_notice_details=False) -> tuple[str, set[str]]:
+                             include_details=False, show_notice_details=False,
+                             link_comparison=False) -> tuple[str, set[str]]:
     """品目に一致する最新の包装別案内を、厚労省区分と区別して掲載する。"""
     groups = {}
     package_keys = set()
@@ -805,10 +811,10 @@ def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *,
             name = esc(row["商品名"])
             anchor = ""
             back_link = ""
-            if include_details and key not in package_keys:
-                package_keys.add(key)
-                anchor = f' id="packages-{esc(key)}" tabindex="-1"'
-            if include_details:
+            if include_details or link_comparison:
+                if key not in package_keys:
+                    package_keys.add(key)
+                    anchor = f' id="packages-{esc(key)}" tabindex="-1"'
                 back_link = (f'<a class="packages-back" href="#comparison-{esc(key)}" '
                              f'aria-label="{name}の比較カードに戻る">比較に戻る</a>')
             entries = groups.setdefault((notice["url"], notice["maker"], notice["announced_at"], seller), (notice, []))[1]
@@ -846,7 +852,8 @@ def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *,
 
 def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[str],
                  lifecycle: dict[str, dict], *, package_brief=("", "", ""),
-                 source_date="", package_snapshot="", mhlw_source=None) -> tuple[str, str]:
+                 source_date="", package_snapshot="", package_keys=frozenset(),
+                 mhlw_source=None) -> tuple[str, str]:
     slug, label = product["slug"], product["label"]
     if slug == "zictor-tape-75mg":
         label = unicodedata.normalize("NFKC", label)
@@ -931,7 +938,26 @@ def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[
 <a href="{MHLW_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚労省の原典で確認</a>
 {limited_link}
 </nav>'''
+    strength_links = ""
     extra_style = ""
+    if slug == "hilnamin":
+        links = "".join(
+            f'<a href="#comparison-{esc(item_key(row))}">'
+            f'{esc(unicodedata.normalize("NFKC", row["商品名"]).removeprefix(label).replace("(", "").replace(")", ""))}</a>'
+            for row in rows
+        )
+        strength_links = f'<nav class="strength-links" aria-label="規格を選ぶ">{links}</nav>'
+        extra_style = (
+            '.strength-links{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}'
+            '.strength-links a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;'
+            'border:1px solid var(--line);border-radius:10px;background:#fff;font-size:14px;font-weight:750}'
+            '.packages-back{display:inline-flex;align-items:center;min-height:44px;font-size:13px;color:#244b9e}'
+            '.product .packages-back{text-decoration:underline;text-underline-offset:3px}'
+            '[id^="comparison-"],[id^="packages-"]{scroll-margin-block-start:16px}'
+            '[id^="comparison-"]:target,[id^="packages-"]:target{outline:2px solid #2F63E8;outline-offset:3px}'
+        )
+    cards = product_rows_html(rows, generated_keys, lifecycle, product, link_strengths=slug == "hilnamin",
+                              package_keys=package_keys)
     intent = product_intent_html(product, rows, generated_keys)
     if package_html:
         row = rows[0]
@@ -959,7 +985,7 @@ def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[
 <nav class="crumb" aria-label="パンくず"><a href="../">トップ</a> › <a href="index.html">注目製品</a> › {esc(label)}</nav><main>
 <section class="hero">{hero_intro}
 {share_control("この供給状況を共有")}</section>
-{items_heading}<div class="products">{product_rows_html(rows, generated_keys, lifecycle, product)}</div>{package_snapshot}
+{items_heading}{strength_links}<div class="products">{cards}</div>{package_snapshot}
 {intent}
 <div class="cta"><strong>Web版で絞り込んで確認</strong><p>公表理由やメーカー案内を確認できます。同成分・同剤形の確認候補がある場合はあわせて表示します。</p><a href="{query_link}" data-dsn-event="search-cta-open">この製品を検索する</a></div>
 </main><footer><p>厚生労働省公表データをもとにした非公式情報です。実際の流通状況は卸・メーカーにもご確認ください。</p><a href="../guides/{GUIDE_SLUG}.html">供給情報の確認ガイド</a>｜<a href="../categories/index.html">薬効分類別の供給状況</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
@@ -1697,12 +1723,14 @@ def main() -> int:
                 trusted = False
             brief = zictor_package_overview(matched[0], notices, bulletins, trusted=trusted,
                                             latest_listing=load_zictor_listing(site))
-        snapshot, _ = (product_package_snapshot(matched, notice_index, bulletins, generated_keys,
-                                                show_notice_details=product["slug"] == "kenacort-a-injection")
-                       if product["slug"] in SUPPLY_COMPARISONS else ("", set()))
+        snapshot, package_keys = (product_package_snapshot(
+            matched, notice_index, bulletins, generated_keys,
+            show_notice_details=product["slug"] == "kenacort-a-injection",
+            link_comparison=product["slug"] == "hilnamin")
+            if product["slug"] in SUPPLY_COMPARISONS else ("", set()))
         page, lastmod = product_page(product, matched, generated_keys, lifecycle,
                                      package_brief=brief, source_date=source_date, package_snapshot=snapshot,
-                                     mhlw_source=mhlw_source)
+                                     package_keys=package_keys, mhlw_source=mhlw_source)
         (product_dir / f"{product['slug']}.html").write_text(page, encoding="utf-8")
         curated_date = normalize_date(products_doc.get("updated_at"))
         product_dates[product["slug"]] = max(lastmod, curated_date, TEMPLATE_UPDATED_AT, PRODUCT_TEMPLATE_UPDATED_AT)

@@ -732,6 +732,36 @@ class CuratedPageGenerationTests(unittest.TestCase):
                 self.assertIn('<h2 id="productItems">規格別の品目</h2>', page)
                 self.assertIn(f'href="../items/{key}.html"', page)
 
+    def test_hilnamin_links_each_strength_to_its_matching_package_notice(self):
+        product = {"slug": "hilnamin", "label": "ヒルナミン", "query": "ヒルナミン"}
+        powder, granules = "1172014B2056", "1172014C1055"
+        rows = [
+            {"YJコード": key, "商品名": "ヒルナミン" + name, "販売メーカー": "テスト製薬",
+             "供給状況": "②限定出荷（自社の事情）"}
+            for key, name in ((powder, "散５０％"), (granules, "細粒１０％"))
+        ]
+        keys = {powder, granules}
+        notice = {
+            "url": "https://example.test/a.pdf", "announced_at": "2026-10",
+            "maker": "テスト製薬", "sha256": "a" * 64, "event_type": "limited",
+            "targets": [{"yj_code": granules, "product_name": rows[1]["商品名"],
+                         "scope": "package", "packages": [
+                             {"package": "100g", "supply": {"status": "limited",
+                                                            "status_text": "限定出荷", "plans": []}}]}],
+        }
+        snapshot, package_keys = product_package_snapshot(
+            rows, {granules: [notice]}, {"items": []}, keys, link_comparison=True)
+        page, _ = product_page(product, rows, keys, {}, package_snapshot=snapshot, package_keys=package_keys)
+        for key in keys:
+            self.assertEqual(page.count(f'id="comparison-{key}"'), 1)
+            self.assertIn(f'href="#comparison-{key}"', page)
+        self.assertIn(f'href="#comparison-{powder}">散50%</a>', page)
+        self.assertIn(f'href="#packages-{granules}"', page)
+        self.assertEqual(page.count(f'id="packages-{granules}"'), 1)
+        self.assertNotIn(f'#packages-{powder}', page)
+        fallback, _ = product_page(product, rows, keys, {})
+        self.assertNotIn('#packages-', fallback)
+
     def test_kenacort_article_links_to_product_comparison_for_both_exact_targets(self):
         topic = json.loads((ROOT / "industry_topics.json").read_text(encoding="utf-8"))
         topic = next(item for item in topic["topics"] if item["slug"] == "kenacort-supply-plan-20261020")
