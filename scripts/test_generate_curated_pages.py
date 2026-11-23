@@ -380,6 +380,32 @@ class CuratedPageGenerationTests(unittest.TestCase):
         self.assertIn("基準日 未確認", missing)
         self.assertIn("今回の公表データでは該当する品目を確認できません", missing)
 
+    def test_teramuro_comparison_keeps_same_seller_product_names_separate(self):
+        rows = [
+            {"商品名": "テラムロ配合錠ＡＰ「ＮＩＧ」", "YJコード": "APNIG", "販売メーカー": "日医工",
+             "供給状況": "③限定出荷（他社品の影響）"},
+            {"商品名": "テラムロ配合錠BP「NIG」", "YJコード": "BPNIG", "販売メーカー": "日医工",
+             "供給状況": "⑤供給停止"},
+            {"商品名": "テラムロ配合錠AP「日医工」", "YJコード": "APNIK", "販売メーカー": "日医工"},
+            {"商品名": "テラムロ配合錠AP徐放錠「NIG」", "YJコード": "OTHER", "販売メーカー": "日医工"},
+        ]
+        page = strength_hub_page("teramuro", rows, {"APNIG", "BPNIG", "APNIK"}, "2026-11-20")
+        picker = page.split('<details class="seller-picker">', 1)[1].split("</details>", 1)[0]
+        labels = re.findall(r'<li>(.*?)</li>', picker, re.S)
+        self.assertEqual(len(labels), 2)
+        nig, nichiiko = labels
+        self.assertIn("「NIG」", nig)
+        self.assertIn('href="#comparison-APNIG"', nig)
+        self.assertIn('href="#comparison-BPNIG"', nig)
+        self.assertIn("限定出荷", nig)
+        self.assertIn("供給停止", nig)
+        self.assertIn("「日医工」", nichiiko)
+        self.assertIn('href="#comparison-APNIK"', nichiiko)
+        self.assertIn("公表区分未確認", nichiiko)
+        self.assertNotIn("BPNIG", nichiiko)
+        self.assertNotIn("OTHER", picker)
+        self.assertNotIn('class="seller-picker"', strength_hub_page("teramuro", [], set(), ""))
+
     def test_movicol_distinguishes_official_outlooks_from_packaging_and_falls_back(self):
         ld, hd = "2359110B1037", "2359110B2025"
         rows = [
