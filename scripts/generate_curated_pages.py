@@ -958,8 +958,14 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
     if package_snapshot:
         jump_links.append('<a href="#packageSnapshotTitle">包装別のメーカー案内</a>')
     packaging_change = ""
+    maker_supply_note = ""
     if slug == "teramuro":
         jump_links.append('<a href="#dsepPackagingTitle">DSEPの包装変更</a>')
+        maker_supply_note = '''<section class="intent" aria-labelledby="sawaiSupplyTitle">
+<h2 id="sawaiSupplyTitle">サワイの出荷状況</h2>
+<p>沢井製薬の2026年11月13日版では、AP・BPともに出荷量が<strong>減少</strong>し、出荷対応は<strong>限定出荷（他社品の影響）</strong>です。解除見込み時期の記載はありません。</p>
+<p><a href="https://med.sawai.co.jp/file/pr115_4577_1.pdf#page=8" data-dsn-event="official-source-open">沢井製薬の供給状況一覧（随時更新）</a></p>
+</section>'''
         packaging_change = '''<section class="intent" aria-labelledby="dsepPackagingTitle">
 <h2 id="dsepPackagingTitle">DSEPのAG呼称終了と包装変更</h2>
 <p class="note">第一三共エスファの2026年11月17日掲載資料</p>
@@ -988,7 +994,7 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
 </style></head><body><div class="wrap"><header class="site"><a href="../">医薬品供給ナビ</a></header>
 <nav class="crumb" aria-label="パンくず"><a href="../">トップ</a> › <a href="index.html">注目製品</a> › {esc(brand)}</nav><main>
 <header class="hero"><h1>{esc(heading)}</h1><p class="note">厚労省の公表データ　基準日 {esc(source_date or '未確認')}</p>{picker}</header>
-{"".join(sections)}{package_snapshot}{packaging_change}
+{"".join(sections)}{maker_supply_note}{package_snapshot}{packaging_change}
 <p class="source"><a href="{MHLW_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公表情報を確認</a></p>
 {share_control("この供給状況を共有")}</main><footer><a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
 {analytics_footer()}</body></html>"""
