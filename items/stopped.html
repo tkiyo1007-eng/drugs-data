@@ -63,6 +63,9 @@ footer a{color:#5A6B8C}
 .supplemental-group[hidden]{display:none}
 
 #hubOutlookSiteSearch{display:inline-flex;align-items:center;min-height:44px;color:#264d93;font-size:14px;font-weight:700;text-underline-offset:3px}
+#hubFilterOutlookReset{margin-top:6px;min-height:44px;padding:8px 12px;border:1px solid #B6C8EB;border-radius:10px;color:#264d93;background:#fff;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+#hubFilterOutlookReset:focus-visible{outline:3px solid #2F63E8;outline-offset:2px}
+
 </style>
 </head>
 <body>
@@ -85,7 +88,8 @@ footer a{color:#5A6B8C}
         <span id="hubOutlookLabel">見込み時期あり（12品目）</span>
       </label>
       <p class="filter-count" id="hubFilterCount" role="status" aria-live="polite" aria-atomic="true">1,002 / 1,002品目を表示</p>
-      <p class="filter-empty" id="hubFilterEmpty" hidden>この一覧内に該当する品目なし。すべての医薬品の検索結果ではありません。検索語を変えるか、クリアしてご確認ください。</p>
+      <p class="filter-empty" id="hubFilterEmpty" hidden>この一覧に該当する品目はありません。</p>
+      <button id="hubFilterOutlookReset" type="button" aria-controls="hubItems" hidden>見込み時期の絞り込みを外す</button>
     </section>
     <a href="../#demo" id="hubOutlookSiteSearch" data-dsn-event="search-cta-open">サイト全体を検索</a>
     <p class="notice">厚生労働省公表データ上の供給区分が「供給停止」の品目を掲載しています。出荷再開見込みはメーカーの最新案内もご確認ください。 医薬品の使用・変更は、公式情報を確認したうえで医師・薬剤師等の専門職が判断してください。</p>
@@ -113,6 +117,7 @@ footer a{color:#5A6B8C}
   const empty = document.getElementById("hubFilterEmpty");
   const priceOnly = document.getElementById("hubFilterPriceOnly");
   const outlookOnly = document.getElementById("hubFilterOutlookOnly");
+  const outlookReset = document.getElementById("hubFilterOutlookReset");
   const outlookLabel = document.getElementById("hubOutlookLabel");
   const outlookPeer = document.getElementById("hubOutlookPeer");
   const outlookPeerHref = outlookPeer?.getAttribute("href");
@@ -151,10 +156,12 @@ footer a{color:#5A6B8C}
     function applyFilter(){
       const terms = normalize(input.value).trim().split(/\s+/).filter(Boolean);
       let shown = 0;
+      let matchingRows = 0;
       let matchingOutlooks = 0;
       entries.forEach(function(entry){
         const matchesSearch = (!priceOnly || !priceOnly.checked || entry.priceInfo)
           && terms.every(function(term){ return entry.text.includes(term); });
+        if(matchesSearch) matchingRows += 1;
         if(matchesSearch && entry.outlook) matchingOutlooks += 1;
         const visible = matchesSearch && (!outlookOnly?.checked || entry.outlook);
         entry.row.hidden = !visible;
@@ -169,6 +176,12 @@ footer a{color:#5A6B8C}
       count.textContent = shown.toLocaleString("ja-JP") + " / "
         + entries.length.toLocaleString("ja-JP") + "品目を表示";
       empty.hidden = shown !== 0;
+      if(outlookReset){
+        const canExpand = shown === 0 && outlookOnly.checked && matchingRows > 0;
+        empty.textContent = canExpand ? "見込み時期ありの品目はありません。" : "この一覧に該当する品目はありません。";
+        outlookReset.hidden = !canExpand;
+        if(canExpand) outlookReset.textContent = "絞り込みを外して" + matchingRows.toLocaleString("ja-JP") + "品目を表示";
+      }
       clear.disabled = input.value.length === 0 && !priceOnly?.checked && !outlookOnly?.checked;
       syncSearchLinks(input.value.trim());
       appliedValue = input.value;
@@ -199,9 +212,15 @@ footer a{color:#5A6B8C}
     if(priceOnly) priceOnly.addEventListener("change", safelyApplyFilter);
     if(outlookOnly && typeof window !== "undefined"){
       outlookOnly.checked = new URL(window.location.href).searchParams.get("outlook") === "1";
-      outlookOnly.addEventListener("change", function(){
+      function applyOutlookFilter(){
         safelyApplyFilter();
         syncOutlookUrl();
+      }
+      outlookOnly.addEventListener("change", applyOutlookFilter);
+      outlookReset?.addEventListener("click", function(){
+        outlookOnly.checked = false;
+        applyOutlookFilter();
+        if(!panel.hidden) outlookOnly.focus({preventScroll:true});
       });
     }
     clear.addEventListener("click", function(){

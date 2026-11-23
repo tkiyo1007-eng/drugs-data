@@ -129,8 +129,12 @@ class HubFilterTests(unittest.TestCase):
                 self.assertIn("https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list", output)
                 if slug in {"limited", "stopped", "supplemental"}:
                     self.assertIn("hidden", parsed.controls["hubFilter"])
-                    self.assertIn("この一覧内に該当する品目なし", output)
-                    self.assertIn("すべての医薬品の検索結果ではありません", output)
+                    if slug == "supplemental":
+                        self.assertIn("この一覧内に該当する品目なし", output)
+                        self.assertIn("すべての医薬品の検索結果ではありません", output)
+                    else:
+                        self.assertIn("この一覧に該当する品目はありません。", output)
+                        self.assertIn("hidden", parsed.controls["hubFilterOutlookReset"])
                 else:
                     self.assertEqual({}, parsed.controls)
                     self.assertNotIn("data-search=", output)
@@ -316,7 +320,9 @@ function setup(before = "", href = "https://example.test/items/limited.html") {
   const nodes = {
     hubFilter: node(), hubItems: node({querySelectorAll: selector => selector === "li" ? rows : []}),
     hubFilterInput: node({value: "", focus() { this.focused = true; }}),
-    hubFilterClear: node({disabled: true}), hubFilterOutlookOnly: node({checked: false}),
+    hubFilterClear: node({disabled: true}),
+    hubFilterOutlookOnly: node({checked: false, focus() { this.focused = true; }}),
+    hubFilterOutlookReset: node(),
     hubFilterCount: node({textContent: ""}), hubFilterEmpty: node(),
     hubOutlookLabel: node({textContent: "見込み時期あり（1品目）"}),
     hubOutlookSiteSearch: node({href: "../#demo"}),
@@ -336,6 +342,7 @@ const live = setup();
 const input = live.nodes.hubFilterInput;
 const clear = live.nodes.hubFilterClear;
 const outlookLabel = live.nodes.hubOutlookLabel;
+const outlookReset = live.nodes.hubFilterOutlookReset;
 const siteSearchLink = live.nodes.hubOutlookSiteSearch;
 const siteSearchParams = () => Object.fromEntries(new URLSearchParams(siteSearchLink.href.split("#")[1]));
 const visible = (instance = live) => instance.rows.filter(row => !row.hidden)
@@ -367,6 +374,16 @@ assert.deepEqual(visible(), []);
 assert.equal(outlookLabel.textContent, "見込み時期あり（0品目）");
 assert.deepEqual(siteSearchParams(), {q: "テスト", f: "outlook"});
 assert.equal(new URL(live.window.location.href).searchParams.has("q"), false);
+assert.equal(outlookReset.hidden, false);
+assert.equal(outlookReset.textContent, "絞り込みを外して1品目を表示");
+outlookReset.handlers.click();
+assert.equal(input.value, "テスト");
+assert.deepEqual(visible(), ["2222222F2222"]);
+assert.equal(outlook.checked, false);
+assert.equal(outlook.focused, true);
+assert.equal(outlookReset.hidden, true);
+assert.equal(new URL(live.window.location.href).searchParams.has("outlook"), false);
+assert.deepEqual(siteSearchParams(), {q: "テスト"});
 clear.handlers.click();
 assert.equal(outlook.checked, false);
 assert.deepEqual(visible(), ["1111111F1111", "2222222F2222"]);
@@ -387,6 +404,7 @@ assert.deepEqual(visible(), ["1111111F1111"]);
 search("ユベラ 対象製薬");
 assert.deepEqual(visible(), []);
 assert.equal(live.nodes.hubFilterEmpty.hidden, false);
+assert.equal(outlookReset.hidden, true);
 assert.equal(live.nodes.hubFilterCount.textContent, "0 / 2品目を表示");
 clear.handlers.click();
 assert.equal(input.value, "");
