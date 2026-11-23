@@ -3348,10 +3348,15 @@ HUB_FILTER_SCRIPT = r"""<script>
   const outlookPeerHref = outlookPeer?.getAttribute("href");
   const outlookSiteSearch = document.getElementById("hubOutlookSiteSearch");
   if(!panel || !list || !input || !clear || !count || !empty) return;
-  function syncOutlookLinks(){
+  function syncSearchLinks(query = ""){
     const checked = outlookOnly?.checked;
     if(outlookPeerHref) outlookPeer.href = outlookPeerHref + (checked ? "?outlook=1" : "");
-    if(outlookSiteSearch) outlookSiteSearch.href = checked ? "../#f=outlook" : "../#demo";
+    if(outlookSiteSearch){
+      const params = new URLSearchParams();
+      if(query) params.set("q", query);
+      if(checked) params.set("f", "outlook");
+      outlookSiteSearch.href = "../#" + (params.toString() || "demo");
+    }
   }
   function showAll(){
     Array.from(list.querySelectorAll("li")).forEach(function(row){ row.hidden = false; });
@@ -3360,7 +3365,7 @@ HUB_FILTER_SCRIPT = r"""<script>
     empty.hidden = true;
     if(priceOnly) priceOnly.checked = false;
     if(outlookOnly) outlookOnly.checked = false;
-    syncOutlookLinks();
+    syncSearchLinks();
   }
   function normalize(value){
     return String(value || "").normalize("NFKC").toLowerCase()
@@ -3395,7 +3400,7 @@ HUB_FILTER_SCRIPT = r"""<script>
         + entries.length.toLocaleString("ja-JP") + "品目を表示";
       empty.hidden = shown !== 0;
       clear.disabled = input.value.length === 0 && !priceOnly?.checked && !outlookOnly?.checked;
-      syncOutlookLinks();
+      syncSearchLinks(input.value.trim());
       appliedValue = input.value;
     }
     function safelyApplyFilter(){
