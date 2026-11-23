@@ -1017,12 +1017,12 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
         self.assertIn("現在の包装別の出荷状況は未確認", brief)
         self.assertLess(page.index(brief), page.index('id="manufacturerNoticesTitle"'))
 
-    def test_juvela_item_release_outlook_is_scoped_to_the_matching_official_workbook(self):
-        key = "2649805M1026"
-        row = dict(self.row(), 商品名="ユベラ軟膏", YJコード=key, 供給状況="②限定出荷（自社の事情）",
+    def test_item_release_outlook_is_scoped_to_its_yj_and_matching_official_workbook(self):
+        key = "2359110B1037"
+        row = dict(self.row(), 商品名="モビコール配合内用剤ＬＤ", YJコード=key, 供給状況="②限定出荷（自社の事情）",
                    代替候補="解除/解消見込み: ア. あり / 出荷量状況: B．出荷量減少")
         url = "https://www.mhlw.go.jp/content/10800000/261120iyakuhinkyoukyu.xlsx"
-        source = {"url": url, "excel_date": "2026-11-20", "juvela_release_outlook": "2027年3月"}
+        source = {"url": url, "excel_date": "2026-11-20", "release_outlooks": {key: "2027年3月", "2649805M1026": "2027年6月"}}
         version = {"version": 202611230542, "mhlw_excel_date": "2026-11-20"}
 
         def render(meta, **changes):
@@ -1034,10 +1034,12 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
         self.assertIn("解除見込み（品目全体）", summary)
         self.assertIn("2027年3月", summary)
         self.assertIn(f'href="{url}"', summary)
-        self.assertIn("包装ごとの再開時期は未確認", summary)
-        self.assertIn("2027年4月", render(dict(source, juvela_release_outlook="2027年4月")))
+        self.assertIn("包装ごとの再開時期はメーカー案内をご確認ください", summary)
+        self.assertNotIn("2027年6月", summary)
+        self.assertIn("2027年4月", render(dict(source, release_outlooks={key: "2027年4月"})))
         for omitted in (render(None), render(dict(source, excel_date="2026-11-19")),
-                        render(dict(source, juvela_release_outlook="")),
+                        render(dict(source, release_outlooks={})),
+                        render(source, 供給状況="①通常出荷"),
                         render(dict(source, url="//example.test/file.xlsx")),
                         render(source, 代替候補="解除/解消見込み: ウ. 未定 / 出荷量状況: B．出荷量減少")):
             self.assertNotIn("2027年3月", omitted)

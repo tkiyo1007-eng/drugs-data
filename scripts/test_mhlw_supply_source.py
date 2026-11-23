@@ -1,30 +1,38 @@
 import datetime as dt
 import unittest
 
-from mhlw_supply_source import extract_juvela_release_outlook, supply_source_from_page
+from mhlw_supply_source import extract_release_outlooks, supply_source_from_page
 
 
 class MhlwSupplySourceTests(unittest.TestCase):
     TODAY = dt.date(2026, 10, 14)
     URL = "https://www.mhlw.go.jp/content/10800000/001758803.xlsx"
 
-    def test_juvela_release_outlook_follows_the_explicit_workbook_value(self):
+    def test_release_outlooks_follow_explicit_workbook_values_by_yj(self):
         header = [""] * 20
         header[15] = "⑯限定出荷の解除見込み／\n供給停止の解消見込み／\n販売中止品の在庫消尽時期"
         row = [""] * 20
         row[4], row[5], row[11], row[14] = "2649805M1026", "ユベラ軟膏", "②限定出荷（自社の事情）", "ア. あり"
         for value, expected in (("2027年3月", "2027年3月"), ("2027年４月下旬", "2027年４月下旬"),
-                                (dt.datetime(2027, 5, 10), "2027年5月10日"), ("", ""), ("－", "")):
+                                (dt.datetime(2027, 5, 10), "2027年5月10日"), ("", ""), ("－", ""), ("時期調整中", ""), ("未定（2027年3月に案内予定）", ""),
+                                ("解除見込み2026/6/末", "解除見込み2026/6/末"), ("2027-04-01", "2027-04-01"),
+                                ("３か月以内", "３か月以内")):
             with self.subTest(value=value):
                 row[15] = value
-                self.assertEqual(expected, extract_juvela_release_outlook(header, [row]))
+                self.assertEqual({row[4]: expected} if expected else {}, extract_release_outlooks(header, [row]))
         row[15] = "2027年3月"
-        self.assertEqual("", extract_juvela_release_outlook([""] * 20, [row]))
-        self.assertEqual("", extract_juvela_release_outlook(header, [row, row]))
+        other = row.copy()
+        other[4], other[5], other[15] = "2359110B1037", "モビコール配合内用剤ＬＤ", "2027年6月頃"
+        self.assertEqual({row[4]: "2027年3月", other[4]: "2027年6月頃"},
+                         extract_release_outlooks(header, [row, other]))
+        other[14], other[15] = "エ. －", "2027年3月在庫消尽見込み"
+        self.assertEqual({row[4]: "2027年3月"}, extract_release_outlooks(header, [row, other]))
+        self.assertEqual({}, extract_release_outlooks([""] * 20, [row]))
+        self.assertEqual({}, extract_release_outlooks(header, [row, row]))
         row[14] = "ウ. 未定"
-        self.assertEqual("", extract_juvela_release_outlook(header, [row]))
+        self.assertEqual({}, extract_release_outlooks(header, [row]))
         row[14], row[11] = "ア. あり", "⑤供給停止"
-        self.assertEqual("", extract_juvela_release_outlook(header, [row]))
+        self.assertEqual({}, extract_release_outlooks(header, [row]))
 
     def page(self, label="医療用医薬品供給状況（令和８年10月13日現在）", href=None):
         return f'<a href="{href or self.URL}">{label}</a>'

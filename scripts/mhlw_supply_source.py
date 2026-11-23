@@ -4,6 +4,7 @@ from __future__ import annotations
 import datetime as dt
 import re
 import unicodedata
+from collections import Counter
 from html.parser import HTMLParser
 from urllib.parse import unquote, urljoin, urlsplit
 
@@ -14,32 +15,39 @@ CURRENT_LABEL = re.compile(
     r"医療用医薬品供給状況(?:報告)?\((?:令和(?P<era>元|[0-9]{1,2})年|(?P<year>[0-9]{4})年)"
     r"(?P<month>[0-9]{1,2})月(?P<day>[0-9]{1,2})日現在\)"
 )
-JUVELA_YJ_CODE = "2649805M1026"
 RELEASE_OUTLOOK_COLUMN = "16限定出荷の解除見込み/供給停止の解消見込み/販売中止品の在庫消尽時期"
+OUTLOOK_TIMING = re.compile(
+    r"\d{4}\s*年|\d{1,2}\s*月|\d{4}\s*[-/]\s*\d{1,2}|\d+\s*(?:か月|ヶ月|カ月|箇月|週間|日以内)"
+)
 
 
 def release_outlook_is_expected(value):
     return bool(re.fullmatch(r"ア\.\s*あり", unicodedata.normalize("NFKC", str(value or "")).strip()))
 
 
-def extract_juvela_release_outlook(header, rows):
-    """品目に一致する限定出荷の解除見込みだけを、今回の原表から取り出す。"""
+def extract_release_outlooks(header, rows):
+    """限定出荷の解除見込みに具体的な時期がある行だけをYJコードで保持する。"""
     columns = [index for index, name in enumerate(header)
                if "".join(unicodedata.normalize("NFKC", str(name or "")).split()) == RELEASE_OUTLOOK_COLUMN]
-    matches = [row for row in rows if len(row) > 4 and str(row[4]).strip() == JUVELA_YJ_CODE]
-    if len(columns) != 1 or len(matches) != 1:
-        return ""
-    column, row = columns[0], matches[0]
-    if (len(row) <= max(column, 14) or str(row[5]).strip() != "ユベラ軟膏"
-            or not str(row[11]).strip().startswith(("②", "③", "④"))
-            or not release_outlook_is_expected(row[14])):
-        return ""
-    value = row[column]
-    if isinstance(value, dt.date):
-        return f"{value.year}年{value.month}月{value.day}日"
-    if isinstance(value, str) and unicodedata.normalize("NFKC", value).strip() not in {"", "-", "―", "未定"}:
-        return value.strip()
-    return ""
+    if len(columns) != 1:
+        return {}
+    column = columns[0]
+    identified_rows = [(str(row[4]).strip(), row) for row in rows if len(row) > 4]
+    counts = Counter(key for key, _ in identified_rows)
+    outlooks = {}
+    for key, row in identified_rows:
+        if (len(row) <= max(column, 14) or not re.fullmatch(r"[0-9A-Z]{12}", key) or counts[key] != 1
+                or not str(row[11]).strip().startswith(("②", "③", "④"))
+                or not release_outlook_is_expected(row[14])):
+            continue
+        value = row[column]
+        if isinstance(value, dt.date):
+            outlooks[key] = f"{value.year}年{value.month}月{value.day}日"
+        elif isinstance(value, str):
+            normalized = unicodedata.normalize("NFKC", value)
+            if OUTLOOK_TIMING.search(normalized) and not re.match(r"\s*(?:未定|不明)", normalized):
+                outlooks[key] = value.strip()
+    return outlooks
 
 
 def decode_supply_page(body: bytes) -> str:
