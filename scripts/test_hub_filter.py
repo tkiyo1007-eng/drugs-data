@@ -284,7 +284,7 @@ class HubFilterTests(unittest.TestCase):
 const assert = require("node:assert/strict");
 const vm = require("node:vm");
 const payload = JSON.parse(process.argv[1]);
-function setup(before = "") {
+function setup(before = "", href = "https://example.test/items/limited.html") {
   const rows = payload.rows.map(attrs => ({
     hidden: false, textContent: attrs["data-search"],
     getAttribute: name => attrs[name] ?? null
@@ -298,15 +298,20 @@ function setup(before = "") {
     hubFilterClear: node({disabled: true}), hubFilterOutlookOnly: node({checked: false}),
     hubFilterCount: node({textContent: ""}), hubFilterEmpty: node()
   };
-  const context = vm.createContext({document: {getElementById: id => nodes[id]}});
+  const window = {
+    location: {href}, history: {state: null, replaceState(state, title, url) {
+      window.location.href = String(url);
+    }}
+  };
+  const context = vm.createContext({URL, window, document: {getElementById: id => nodes[id]}});
   if (before) vm.runInContext(before, context);
   vm.runInContext(payload.script, context);
-  return {rows, nodes, context};
+  return {rows, nodes, context, window};
 }
 const live = setup();
 const input = live.nodes.hubFilterInput;
 const clear = live.nodes.hubFilterClear;
-const visible = () => live.rows.filter(row => !row.hidden)
+const visible = (instance = live) => instance.rows.filter(row => !row.hidden)
   .map(row => row.textContent.split(" ")[0]).sort();
 const search = text => { input.value = text; input.handlers.input(); };
 assert.equal(live.nodes.hubFilter.hidden, false);
@@ -314,6 +319,16 @@ assert.deepEqual(visible(), ["1111111F1111", "2222222F2222"]);
 const outlook=live.nodes.hubFilterOutlookOnly;
 outlook.checked=true; outlook.handlers.change();
 assert.deepEqual(visible(), ["1111111F1111"]);
+assert.equal(new URL(live.window.location.href).searchParams.get("outlook"), "1");
+const shared = setup("", "https://example.test/items/limited.html?keep=x&outlook=1#example");
+assert.equal(shared.nodes.hubFilterOutlookOnly.checked, true);
+assert.deepEqual(visible(shared), ["1111111F1111"]);
+shared.nodes.hubFilterClear.handlers.click();
+assert.deepEqual(visible(shared), ["1111111F1111", "2222222F2222"]);
+assert.equal(shared.window.location.href, "https://example.test/items/limited.html?keep=x#example");
+const invalid = setup("", "https://example.test/items/limited.html?outlook=0");
+assert.equal(invalid.nodes.hubFilterOutlookOnly.checked, false);
+assert.deepEqual(visible(invalid), ["1111111F1111", "2222222F2222"]);
 search("テスト");
 assert.deepEqual(visible(), []);
 clear.handlers.click();
