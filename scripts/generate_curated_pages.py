@@ -20,7 +20,7 @@ from generate_item_pages import (
     load_zictor_listing, zictor_package_overview,
     manufacturer_notice_index, matching_manufacturer_notices,
     manufacturer_notice_needs_review, maker_tokens, notice_date_label, notice_package_names, valid_package_supply,
-    PACKAGE_PLAN_LABELS, teramuro_strength,
+    PACKAGE_PLAN_LABELS, JUVELA_KEY, official_item_outlook, teramuro_strength,
 )
 from validate_shared_content import valid_topic_publisher_http_source
 
@@ -82,7 +82,7 @@ SUPPLY_COMPARISONS = {
     "hilnamin": ("散・細粒・錠剤の規格別",
                  "散50％、細粒10％、錠5mg・25mg・50mgの供給区分"),
 }
-PRIORITY_PRODUCT_EDIT_DATE = "2026-11-23"
+PRIORITY_PRODUCT_EDIT_DATE = "2026-11-24"
 # 規格選択はWeb専用。アプリと共用のfeatured_products.jsonには追加しない。
 STRENGTH_HUBS = {
     "movicol": ("モビコール配合内用剤", ("LD", "HD")),
@@ -833,21 +833,40 @@ def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *,
 
 def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[str],
                  lifecycle: dict[str, dict], *, package_brief=("", "", ""),
-                 source_date="", package_snapshot="") -> tuple[str, str]:
+                 source_date="", package_snapshot="", mhlw_source=None) -> tuple[str, str]:
     slug, label = product["slug"], product["label"]
+    if slug == "zictor-tape-75mg":
+        label = unicodedata.normalize("NFKC", label)
+        product = dict(product, label=label)
     canonical = f"{SITE_ROOT}products/{slug}.html"
     suffix = ("規格別供給状況" if slug in {"caduet", "hilnamin", "kenacort-a-injection"} else
               "メーカー別供給状況" if len(rows) > 1 else "供給状況")
     title, description = product_seo_metadata(product, rows, suffix)
     lastmod = max((normalize_date(row.get("更新日")) for row in rows), default="")
     hint, package_description, package_html = package_brief
-    if slug == "zictor-tape-75mg":
-        lastmod = max(lastmod, "2026-11-22", source_date)
     if package_html:
         title = f"{label}の出荷調整・供給状況｜{hint}｜医薬品供給ナビ"
-        description = package_description
+        description = (f'{label}の厚労省公表区分は「{rows[0].get("供給状況") or "未確認"}」。'
+                       '久光製薬の資料で示された1枚包装・7枚包装の出荷予定と原文を確認できます。'
+                       if slug == "zictor-tape-75mg" else package_description)
     if slug in SUPPLY_COMPARISONS or slug == "zictor-tape-75mg":
-        lastmod = max(lastmod, PRIORITY_PRODUCT_EDIT_DATE)
+        lastmod = max(lastmod, source_date, PRIORITY_PRODUCT_EDIT_DATE)
+    outlook_summary = ""
+    if slug == "juvela-ointment" and len(rows) == 1 and item_key(rows[0]) == JUVELA_KEY:
+        row = rows[0]
+        status = row.get("供給状況") or "未確認"
+        release = supply_metadata_values(row).get("解除・解消見込み")
+        outlook = official_item_outlook(row, JUVELA_KEY, release, source_date, mhlw_source)
+        if outlook:
+            period, workbook = outlook
+            action = "解除" if map_status(status) == "limited" else "解消"
+            title = f"{label}の出荷調整・供給状況｜{action}見込みと包装別案内｜医薬品供給ナビ"
+            description = (f'{label}の厚労省公表区分は「{status}」。'
+                           f'品目全体の{action}見込みは{period}（{source_date}基準）。'
+                           '包装別の情報はメーカー案内で確認できます。')
+            outlook_summary = (f'<p class="product-outlook"><strong>{action}見込み（品目全体）　{esc(period)}</strong><br>'
+                               f'<a href="{esc(workbook)}" data-dsn-event="official-source-open">厚労省原表（Excel）</a>'
+                               '　包装ごとの再開時期はメーカー案内で確認できます。</p>')
     counts: dict[str, int] = {key: 0 for key in STATUS}
     for row in rows:
         counts[map_status(row.get("供給状況"))] += 1
@@ -874,12 +893,22 @@ def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[
         lede = f'{SUPPLY_COMPARISONS[slug][1]}を確認できます。'
         if source_date:
             lede += f' 厚労省の基準日 {esc(source_date)}。'
+    items_heading = "<h2>該当品目</h2>"
+    primary_link = f'<a href="{esc(query_link)}" data-dsn-event="search-cta-open">この製品をWeb版で検索</a>'
+    if slug in {"kenacort-a-injection", "hilnamin"}:
+        items_heading = '<h2 id="productItems">規格別の品目</h2>'
+        primary_link = '<a href="#productItems">規格別の供給状況を見る</a>' + primary_link
+    elif slug == "juvela-ointment" and len(rows) == 1:
+        href = esc(product_row_link(product, rows[0], generated_keys))
+        primary_link = f'<a href="{href}" data-dsn-event="related-item-open">ユベラ軟膏の品目詳細を見る</a>' + primary_link
+    limited_link = ("" if slug in SUPPLY_COMPARISONS
+                    else '<a href="../items/limited.html">限定出荷の品目一覧</a>')
     hero_intro = f'''<p class="eyebrow">CURRENT SUPPLY STATUS</p><h1>{esc(label)}の{suffix}</h1>
-<p class="lede">{lede}</p><div class="summary">{summary}</div>
+<p class="lede">{lede}</p><div class="summary">{summary}</div>{outlook_summary}
 <nav class="product-entry" aria-label="この製品の供給情報を確認">
-<a href="{esc(query_link)}" data-dsn-event="search-cta-open">この製品をWeb版で検索</a>
+{primary_link}
 <a href="{MHLW_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚労省の原典で確認</a>
-<a href="../items/limited.html">限定出荷の品目一覧</a>
+{limited_link}
 </nav>'''
     extra_style = ""
     intent = product_intent_html(product, rows, generated_keys)
@@ -909,7 +938,7 @@ def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[
 <nav class="crumb" aria-label="パンくず"><a href="../">トップ</a> › <a href="index.html">注目製品</a> › {esc(label)}</nav><main>
 <section class="hero">{hero_intro}
 {share_control("この供給状況を共有")}</section>
-<h2>該当品目</h2><div class="products">{product_rows_html(rows, generated_keys, lifecycle, product)}</div>{package_snapshot}
+{items_heading}<div class="products">{product_rows_html(rows, generated_keys, lifecycle, product)}</div>{package_snapshot}
 {intent}
 <div class="cta"><strong>Web版で絞り込んで確認</strong><p>公表理由やメーカー案内を確認できます。同成分・同剤形の確認候補がある場合はあわせて表示します。</p><a href="{query_link}" data-dsn-event="search-cta-open">この製品を検索する</a></div>
 </main><footer><p>厚生労働省公表データをもとにした非公式情報です。実際の流通状況は卸・メーカーにもご確認ください。</p><a href="../guides/{GUIDE_SLUG}.html">供給情報の確認ガイド</a>｜<a href="../categories/index.html">薬効分類別の供給状況</a>｜<a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
@@ -940,7 +969,10 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
         description = "テラムロ配合錠AP・BPの出荷調整を販売元別に確認。厚生労働省の供給区分を比較し、各品目のメーカー案内に進めます。"
         if package_snapshot:
             description = "テラムロ配合錠AP・BPの供給状況を販売元別に比較。メーカーの出荷調整や販売中止の案内を、規格と対象包装ごとに確認できます。"
-    title = f"{heading}｜医薬品供給ナビ"
+    title = f"{heading}{'｜販売元別' if slug == 'teramuro' else ''}｜医薬品供給ナビ"
+    purpose = ('<p class="lede">厚労省の供給区分をAP・BPと販売元ごとに比較できます。'
+               'メーカー資料がある品目は、該当する包装別案内も確認できます。</p>'
+               if slug == "teramuro" else "")
     canonical = f"{SITE_ROOT}products/{slug}.html"
     sections, jump_links, items = [], [], []
     for strength, members in groups.items():
@@ -1040,7 +1072,7 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
 .strength-list{{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:8px}}.strength-item{{display:grid;gap:2px;padding:12px 16px;background:#fff;border:1px solid var(--line);border-radius:12px;color:var(--ink);text-decoration:none}}.strength-item strong{{color:#244b9e;text-decoration:underline;text-underline-offset:3px}}.strength-item span{{font-size:13px;color:var(--sub)}}.strength-item .supply{{color:var(--ink);font-weight:650}}a:focus-visible{{outline:3px solid #346bd6;outline-offset:2px}}
 {package_style}</style></head><body><div class="wrap"><header class="site"><a href="../">医薬品供給ナビ</a></header>
 <nav class="crumb" aria-label="パンくず"><a href="../">トップ</a> › <a href="index.html">注目製品</a> › {esc(brand)}</nav><main>
-<header class="hero"><h1>{esc(heading)}</h1><p class="note">厚労省の公表データ　基準日 {esc(source_date or '未確認')}</p>{picker}</header>
+<header class="hero"><h1>{esc(heading)}</h1><p class="note">厚労省の公表データ　基準日 {esc(source_date or '未確認')}</p>{purpose}{picker}</header>
 {"".join(sections)}{maker_supply_note}{package_snapshot}{packaging_change}
 <p class="source"><a href="{MHLW_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公表情報を確認</a></p>
 {share_control("この供給状況を共有")}</main><footer><a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
@@ -1624,6 +1656,10 @@ def main() -> int:
             normalize_date(topic.get("date")), TEMPLATE_UPDATED_AT)
     product_dates: dict[str, str] = {}
     source_date = mhlw_excel_date(version_doc, dataset_date)
+    try:
+        mhlw_source = load_json(site / "mhlw_source.json")
+    except (OSError, ValueError):
+        mhlw_source = None
     for product in products:
         matched = hilnamin_rows if product["slug"] == "hilnamin" else search_rows(rows, product.get("query"))
         if not matched:
@@ -1641,7 +1677,8 @@ def main() -> int:
         snapshot, _ = (product_package_snapshot(matched, notice_index, bulletins, generated_keys)
                        if product["slug"] in SUPPLY_COMPARISONS else ("", set()))
         page, lastmod = product_page(product, matched, generated_keys, lifecycle,
-                                     package_brief=brief, source_date=source_date, package_snapshot=snapshot)
+                                     package_brief=brief, source_date=source_date, package_snapshot=snapshot,
+                                     mhlw_source=mhlw_source)
         (product_dir / f"{product['slug']}.html").write_text(page, encoding="utf-8")
         curated_date = normalize_date(products_doc.get("updated_at"))
         product_dates[product["slug"]] = max(lastmod, curated_date, TEMPLATE_UPDATED_AT, PRODUCT_TEMPLATE_UPDATED_AT)
@@ -1658,6 +1695,8 @@ def main() -> int:
             strength_hub_page(slug, rows, generated_keys, source_date,
                               package_snapshot=snapshot, package_keys=package_keys), encoding="utf-8")
         product_dates[slug] = max(source_date, STRENGTH_HUB_EDIT_DATE)
+        if slug == "teramuro":
+            product_dates[slug] = max(product_dates[slug], PRIORITY_PRODUCT_EDIT_DATE)
     (guide_dir / f"{GUIDE_SLUG}.html").write_text(
         guide_page(), encoding="utf-8")
     (guide_dir / f"{WATCH_GUIDE_SLUG}.html").write_text(watch_guide_page(), encoding="utf-8")

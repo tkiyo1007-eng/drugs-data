@@ -325,7 +325,8 @@ class CuratedPageGenerationTests(unittest.TestCase):
             {"商品名": "テラムロ配合錠CP「例」", "YJコード": "NEWGRADE"},
         ]
         page = strength_hub_page("teramuro", rows, {"APKEY"}, "2026-11-20")
-        self.assertIn("<title>テラムロ配合錠AP・BPの出荷調整・供給状況｜医薬品供給ナビ</title>", page)
+        self.assertIn("<title>テラムロ配合錠AP・BPの出荷調整・供給状況｜販売元別｜医薬品供給ナビ</title>", page)
+        self.assertIn("厚労省の供給区分をAP・BPと販売元ごとに比較できます", page)
         self.assertIn('href="#bp"', page)
         ap_section, bp_section = page.split('<section aria-labelledby="bp">')
         self.assertIn('href="../items/APKEY.html"', ap_section)
@@ -687,12 +688,49 @@ class CuratedPageGenerationTests(unittest.TestCase):
         self.assertLess(page.index(section), page.index("data-dsn-share-page"))
         self.assertIn("厚労省公表　②限定出荷（自社の事情）", page)
         self.assertIn("2026-11-20基準", page)
-        self.assertIn('<meta name="description" content="原文の要約">', page)
+        self.assertIn('<title>ジクトルテープ75mgの出荷調整・供給状況｜包装別の出荷案内', page)
+        self.assertIn('久光製薬の資料で示された1枚包装・7枚包装の出荷予定', page)
         fallback, fallback_lastmod = product_page(*inputs, source_date="2026-11-23")
         self.assertNotIn(section, fallback)
         self.assertNotIn("原文の要約", fallback)
         self.assertIn("厚労省の原典で確認", fallback)
         self.assertGreaterEqual(fallback_lastmod, lastmod)
+
+    def test_juvela_product_highlights_only_outlook_from_matching_workbook(self):
+        product = {"slug": "juvela-ointment", "label": "ユベラ軟膏", "query": "ユベラ軟膏"}
+        key = "2649805M1026"
+        row = {"商品名": "ユベラ軟膏", "YJコード": key, "供給状況": "②限定出荷（自社の事情）",
+               "代替候補": "解除/解消見込み: ア. あり / 出荷量状況: B．出荷量減少"}
+        url = "https://www.mhlw.go.jp/content/10800000/261120iyakuhinkyoukyu.xlsx"
+        source = {"url": url, "excel_date": "2026-11-20", "release_outlooks": {key: "2027年3月"}}
+        def render(meta, shipment="②限定出荷（自社の事情）"):
+            return product_page(product, [dict(row, 供給状況=shipment)], {key}, {},
+                                source_date="2026-11-20", mhlw_source=meta)[0]
+        page = render(source)
+        hero = page.split('<section class="hero">', 1)[1].split("</section>", 1)[0]
+        self.assertIn("解除見込み（品目全体）", hero)
+        self.assertIn("2027年3月", hero)
+        self.assertIn("2026-11-20", hero)
+        self.assertIn(f'href="{url}"', hero)
+        self.assertIn("包装ごとの再開時期はメーカー案内で確認", hero)
+        self.assertIn('href="../items/2649805M1026.html"', hero)
+        for omitted in (render(None), render(source, "①通常出荷"),
+                        render(dict(source, excel_date="2026-11-19")),
+                        render(dict(source, url="https://example.test/outlook.xlsx"))):
+            self.assertNotIn("2027年3月", omitted)
+            self.assertNotIn("解除見込み（品目全体）", omitted)
+
+    def test_priority_product_hero_links_to_available_strengths(self):
+        for slug, label in (("kenacort-a-injection", "ケナコルト－Ａ注"), ("hilnamin", "ヒルナミン")):
+            with self.subTest(slug=slug):
+                product = {"slug": slug, "label": label, "query": label}
+                key = "1172014F2139"
+                row = {"商品名": label + "の試験規格", "YJコード": key, "供給状況": "①通常出荷"}
+                page, _ = product_page(product, [row], {key}, {}, source_date="2026-11-20")
+                self.assertIn(f"<h1>{label}の規格別供給状況</h1>", page)
+                self.assertIn('href="#productItems">規格別の供給状況を見る</a>', page)
+                self.assertIn('<h2 id="productItems">規格別の品目</h2>', page)
+                self.assertIn(f'href="../items/{key}.html"', page)
 
     def test_product_packaging_snapshot_keeps_the_scope_and_hides_changed_sources(self):
         code = "1172014F2139"
