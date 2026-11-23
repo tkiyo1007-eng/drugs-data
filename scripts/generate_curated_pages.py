@@ -957,8 +957,22 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
     show_picker = slug == "teramuro" and len(jump_links) > 1
     if package_snapshot:
         jump_links.append('<a href="#packageSnapshotTitle">包装別のメーカー案内</a>')
+    packaging_change = ""
+    if slug == "teramuro":
+        jump_links.append('<a href="#dsepPackagingTitle">DSEPの包装変更</a>')
+        packaging_change = '''<section class="intent" aria-labelledby="dsepPackagingTitle">
+<h2 id="dsepPackagingTitle">DSEPのAG呼称終了と包装変更</h2>
+<p class="note">第一三共エスファの2026年11月17日掲載資料</p>
+<ul><li><strong>AG呼称の使用終了</strong>　2027年1月1日から</li>
+<li><strong>新包装の市場出荷</strong>　案内時点で時期は未公表。決まり次第、メーカーが案内します。</li></ul>
+<h3>包装変更の対象</h3>
+<ul><li><strong>AP</strong>　PTP100錠（081-186754）、PTP500錠（081-186761）</li>
+<li><strong>BP</strong>　PTP100錠（081-186853）</li></ul>
+<p>3包装とも包装工程の製造所が変更され、PTPシート裏面のロット番号が見やすくなります。個装箱の仕様と梱包箱のサイズ・積み付けも変更されます。</p>
+<p><a href="https://med.daiichisankyo-ep.co.jp/information/files/2294/EPALL1N50401-1.pdf" data-dsn-event="official-source-open">第一三共エスファの原文PDFを確認</a></p>
+</section>'''
     picker = (f'<nav class="strength-nav" aria-label="ページ内の供給情報">{"".join(jump_links)}</nav>'
-              if show_picker or package_snapshot else "")
+              if show_picker or package_snapshot or packaging_change else "")
     if not sections:
         sections.append('<p>今回の公表データでは該当する品目を確認できません。</p>')
     collection = {"@type": "CollectionPage", "name": heading, "url": canonical,
@@ -974,7 +988,7 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
 </style></head><body><div class="wrap"><header class="site"><a href="../">医薬品供給ナビ</a></header>
 <nav class="crumb" aria-label="パンくず"><a href="../">トップ</a> › <a href="index.html">注目製品</a> › {esc(brand)}</nav><main>
 <header class="hero"><h1>{esc(heading)}</h1><p class="note">厚労省の公表データ　基準日 {esc(source_date or '未確認')}</p>{picker}</header>
-{"".join(sections)}{package_snapshot}
+{"".join(sections)}{package_snapshot}{packaging_change}
 <p class="source"><a href="{MHLW_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公表情報を確認</a></p>
 {share_control("この供給状況を共有")}</main><footer><a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
 {analytics_footer()}</body></html>"""
