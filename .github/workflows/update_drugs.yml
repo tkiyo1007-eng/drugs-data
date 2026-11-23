@@ -76,7 +76,7 @@ jobs:
           python3 - <<'EOF'
           import openpyxl, datetime, csv, json
           from scripts.check_supply_source_identity import require_unique_codes
-          from scripts.mhlw_supply_source import extract_juvela_release_outlook
+          from scripts.mhlw_supply_source import extract_release_outlooks
 
           def to_date(v):
               if v is None or v == "": return ""
@@ -155,11 +155,7 @@ jobs:
           # 日付付き原表の記録と一緒に更新し、空欄・未定になったら以前の値を残さない。
           with open("mhlw_source.json", encoding="utf-8") as f:
               source = json.load(f)
-          outlook = extract_juvela_release_outlook(rows[hidx], data)
-          if outlook:
-              source["juvela_release_outlook"] = outlook
-          else:
-              source.pop("juvela_release_outlook", None)
+          source["release_outlooks"] = extract_release_outlooks(rows[hidx], data)
           with open("mhlw_source.json", "w", encoding="utf-8") as f:
               json.dump(source, f, ensure_ascii=False, indent=2)
               f.write("\n")

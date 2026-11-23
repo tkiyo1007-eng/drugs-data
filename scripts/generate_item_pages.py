@@ -2820,9 +2820,10 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
         excel_date = mhlw_excel_date(version_metadata, dataset_date)
         release = public_metadata.get("解除・解消見込み")
         item_release_outlook = None
-        if (key == JUVELA_KEY and name == "ユベラ軟膏" and release_outlook_is_expected(release)
-                and excel_date and isinstance(mhlw_source, dict) and mhlw_source.get("excel_date") == excel_date):
-            period = mhlw_source.get("juvela_release_outlook")
+        if (excel_date and isinstance(mhlw_source, dict) and mhlw_source.get("excel_date") == excel_date
+                and release_outlook_is_expected(release)):
+            outlooks = mhlw_source.get("release_outlooks")
+            period = outlooks.get(key) if isinstance(outlooks, dict) else None
             if isinstance(period, str) and period.strip():
                 try:
                     item_release_outlook = (period.strip(), workbook_url(mhlw_source.get("url")))
