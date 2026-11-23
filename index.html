@@ -612,6 +612,9 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .mednews-item a:hover{color:var(--blue);text-decoration:underline}
 .mednews-note{font-size:10.5px;color:var(--sub);margin-top:8px}
 .news-status{font-size:.875rem;line-height:1.8;color:var(--sub);margin:12px 0;overflow-wrap:anywhere}
+.news-status-details:not([hidden]){margin-bottom:10px;color:var(--sub);font-size:.8125rem}
+.news-status-details summary{display:list-item;min-height:44px;padding:10px 0;cursor:pointer;color:var(--blue-deep);font-weight:700}
+.news-status-details p{margin:0 0 8px;line-height:1.7;overflow-wrap:anywhere}
 .news-status-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:10px 0 18px}
 .news-status-actions a{font-size:.875rem;color:var(--blue);font-weight:700}
 .news-retry{font:inherit;font-size:.875rem;color:var(--blue);background:transparent;border:1px solid currentColor;border-radius:999px;padding:8px 16px;min-height:44px;cursor:pointer}
@@ -1177,12 +1180,17 @@ h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;line-height:1.4;margin-botto
 .search-row{display:flex;gap:8px;align-items:stretch;margin-bottom:12px}
 .search-row .search-box{flex:1;min-width:0;margin:0}
 .search-row .search-results-jump{width:auto;flex:none;margin:0;padding:8px 12px}
+.search-recent-changes:not([hidden]){display:flex;flex-wrap:wrap;align-items:center;gap:0 10px;width:fit-content;min-height:44px;margin:0 0 8px;color:var(--blue-deep);font-size:.875rem;font-weight:700;text-underline-offset:3px}
+.search-recent-changes span{color:var(--sub);font-size:.8125rem}
+.demo-shell:has(.search-recent-changes:not([hidden])) .pills{margin-bottom:6px}
 .result-options{margin-left:auto;max-width:100%}
 .result-options summary{display:none;cursor:pointer;color:var(--blue-deep);font-size:13px;font-weight:700;padding:10px 2px;min-height:44px}
 .has-search-term .result-options summary{display:list-item}
 .has-search-term .result-options[open]{width:100%}
 .result-options .search-share-status:empty{display:none}
 @media(max-width:640px){
+  #demo .pills{flex-wrap:nowrap;overflow-x:auto;gap:6px;padding:3px 2px}
+  #demo .pill{flex:none;white-space:nowrap;min-height:44px;padding-inline:10px}
   body:has(#demo.has-search-term) .search-intro h1{font-size:17px;line-height:1.35;margin:5px 0 0}
   body:has(#demo.has-search-term) .search-intro h1 br,body:has(#demo.has-search-term) .search-intro .lede{display:none}
   .has-search-term .search-box{padding:6px 12px}
@@ -1832,6 +1840,22 @@ html.season-autumn .autumn-sky{display:none}
     <div class="data-freshness-notice" id="sourceStaleNotice" role="status" aria-live="polite" hidden>
       <span>厚労省の原Excel基準日から7日以上経過しています。<a href="https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-list" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公式システム</a>もご確認ください。</span>
     </div>
+    <div class="pills" id="pills" role="group" aria-label="供給状況で絞り込む">
+      <button type="button" class="pill active" data-f="all" aria-pressed="true">すべて</button>
+      <button type="button" class="pill" data-f="limited" aria-pressed="false">限定出荷</button>
+      <button type="button" class="pill" data-f="stopped" aria-pressed="false">供給停止</button>
+      <button type="button" class="pill" data-f="outlook" id="pillOutlook" aria-pressed="false" disabled>見込み時期あり</button>
+      <button type="button" class="pill" data-f="ok" aria-pressed="false">通常出荷</button>
+      <button type="button" class="pill" data-f="ended" aria-pressed="false">販売・製造中止</button>
+      <button type="button" class="pill" data-f="changed" id="pillChanged" aria-pressed="false" style="display:none"></button>
+      <button type="button" class="pill" data-f="delist" id="pillDelist" aria-pressed="false" style="display:none"></button>
+      <button type="button" class="pill" data-f="fav" id="pillFav" aria-pressed="false" style="display:none"></button>
+      <button type="button" class="pill" data-f="watchChanged" id="pillWatchChanged" aria-pressed="false" style="display:none"></button>
+      <button type="button" class="pill" data-f="watchDiscrepancy" id="pillWatchDiscrepancy" aria-pressed="false" style="display:none"></button>
+    </div>
+    <a class="search-recent-changes" id="searchRecentChanges" href="#daily-update">
+      最近の供給変更を見る<span id="searchRecentChangesSummary" hidden></span>
+    </a>
     <template id="searchContextHome"></template>
     <div id="searchContext">
     <a class="price-list-link" id="topPriceListLink" hidden>
@@ -1893,19 +1917,6 @@ html.season-autumn .autumn-sky{display:none}
       <p>メーカー補足の確認日：当サイトが選定したメーカー・公表案内の確認日です。メーカーの発表日ではなく、補足の表示がないことは「差異なし」を保証しません。</p>
       <p>この画面での取得日時は、公開ファイルを読み込んだ時刻です。情報提供元の更新日時や、最新情報であることを示すものではありません。</p>
     </details>
-    </div>
-    <div class="pills" id="pills" role="group" aria-label="供給状況で絞り込む">
-      <button type="button" class="pill active" data-f="all" aria-pressed="true">すべて</button>
-      <button type="button" class="pill" data-f="outlook" id="pillOutlook" aria-pressed="false" disabled>見込み時期あり</button>
-      <button type="button" class="pill" data-f="ok" aria-pressed="false">通常出荷</button>
-      <button type="button" class="pill" data-f="limited" aria-pressed="false">限定出荷</button>
-      <button type="button" class="pill" data-f="stopped" aria-pressed="false">供給停止</button>
-      <button type="button" class="pill" data-f="ended" aria-pressed="false">販売・製造中止</button>
-      <button type="button" class="pill" data-f="changed" id="pillChanged" aria-pressed="false" style="display:none"></button>
-      <button type="button" class="pill" data-f="delist" id="pillDelist" aria-pressed="false" style="display:none"></button>
-      <button type="button" class="pill" data-f="fav" id="pillFav" aria-pressed="false" style="display:none"></button>
-      <button type="button" class="pill" data-f="watchChanged" id="pillWatchChanged" aria-pressed="false" style="display:none"></button>
-      <button type="button" class="pill" data-f="watchDiscrepancy" id="pillWatchDiscrepancy" aria-pressed="false" style="display:none"></button>
     </div>
     <!-- 空検索では監視リストを先に案内する。検索語または絞り込みがある間は、
          JSでこの2要素を結果の後ろへ移し、視覚順と読み上げ順を一致させる。 -->
@@ -2066,6 +2077,10 @@ html.season-autumn .autumn-sky{display:none}
   <h2 id="industryNewsTitle">業界ニュース</h2>
   <div class="mednews" id="medNews" role="group" aria-labelledby="industryNewsTitle" tabindex="-1">
     <p class="news-status" id="medNewsStatus" role="status" aria-live="polite" aria-atomic="true">新着見出しを読み込んでいます。</p>
+    <details class="news-status-details" id="medNewsStatusDetails" hidden>
+      <summary>掲載日と取得日時の詳細</summary>
+      <p></p>
+    </details>
     <div class="news-status-actions">
       <button type="button" class="news-retry" id="medNewsRetry">新着見出しを再取得</button>
       <a href="https://www.yakuji.co.jp/" target="_blank" rel="noopener">薬事日報で最新記事を見る</a>
@@ -2076,8 +2091,12 @@ html.season-autumn .autumn-sky{display:none}
       <div class="mednews-list glass" id="medNewsArchiveList"></div>
     </details>
   </div>
-  <h3 class="editorial-news-heading">医薬品ニュース</h3>
+  <h2 class="editorial-news-heading" id="editorialNewsTitle">編集記事</h2>
   <p class="news-status" id="topicStatus" role="status" aria-live="polite" aria-atomic="true">公開済みの編集記事を読み込んでいます。</p>
+  <details class="news-status-details" id="topicStatusDetails" hidden>
+    <summary>記事日付と取得日時の詳細</summary>
+    <p></p>
+  </details>
   <div class="news-status-actions">
     <button type="button" class="news-retry" id="topicSupplyChanges">直近の供給変更を確認</button>
     <button type="button" class="news-retry" id="topicRetry">編集記事を再取得</button>
@@ -2600,6 +2619,10 @@ html.season-autumn .autumn-sky{display:none}
 <section id="news" class="reveal">
   <h2>サイトの更新情報</h2>
   <div class="news-list glass">
+    <div class="news-item">
+      <div class="news-date num">2026.11.24</div>
+      <div class="news-body"><span class="news-tag">検索・ニュース</span>検索欄のすぐ下に絞り込みと最近の供給変更へのリンクを置きました。ニュースの取得日時は各欄の詳細から確認できます。</div>
+    </div>
     <div class="news-item">
       <div class="news-date num">2026.11.23</div>
       <div class="news-body"><span class="news-tag">解除・解消見込み</span>検索や限定出荷・供給停止の一覧で、入力した検索語に合う品目のうち、具体的な見込み時期がある件数を確認できます。</div>
@@ -3399,6 +3422,7 @@ function syncSearchPriority(){
   }
   document.getElementById("demo").classList.toggle("has-search-term", searching);
   const resultsFirst = searching || filter !== "all";
+  document.getElementById("searchRecentChanges").hidden = resultsFirst;
   const anchor = resultsFirst ? $watchPriorityResults : $watchPriorityHome;
   if(!anchor || !$watchDashboard || !$watchTools) return;
   // すでに正しい位置ならDOMを触らない。再挿入すると、監視領域内のボタンを
@@ -3951,10 +3975,12 @@ function refreshReleaseOutlookPill(enabled = true, count){
   const pill = document.getElementById("pillOutlook");
   const ready = enabled && releaseOutlooksReady();
   pill.disabled = !ready;
-  if(ready && count !== undefined){
-    pill.textContent = `見込み時期あり（${count.toLocaleString("ja-JP")}品目）`;
-  }else{
-    pill.textContent = "見込み時期あり";
+  const label = ready && count !== undefined
+    ? `見込み時期あり（${count.toLocaleString("ja-JP")}品目）`
+    : "見込み時期あり";
+  if(pill.textContent !== label){
+    pill.textContent = label;
+    if(pill.classList?.contains("active")) keepPillInView(pill);
   }
   return ready;
 }
@@ -4994,6 +5020,8 @@ function historyStatusMessage(){
   return message + source + (!historyHasSnapshot() && phase !== "ready" ? "未確認の変更件数は判定していません。" : "");
 }
 function renderDailyUpdate(items){
+  const shortcutSummary = document.getElementById("searchRecentChangesSummary");
+  shortcutSummary.hidden = true;
   DAILY_SHARE = null;
   $dailyUpdateView.disabled = true;
   $dailyUpdateShare.disabled = true;
@@ -5021,6 +5049,10 @@ function renderDailyUpdate(items){
   for(const x of changed) counts[mapStatus(latestChangeFor(x).to)]++;
   const [y,m,d] = LATEST_CHANGE_DATE.replaceAll("/","-").split("-");
   const dateLabel = `${y}年${Number(m)}月${Number(d)}日`;
+  if(historyCanConfirm() && changed.length){
+    shortcutSummary.textContent = `${Number(m)}月${Number(d)}日・${changed.length.toLocaleString()}品目`;
+    shortcutSummary.hidden = false;
+  }
   document.getElementById("dailyUpdateDate").textContent = `${cacheLabel}履歴の最新記録 ${dateLabel}`;
   document.getElementById("dailyUpdateTitle").textContent = changed.length
     ? `${changed.length.toLocaleString()}品目の供給状況の変更記録があります`
@@ -5314,6 +5346,16 @@ function setActivePill(f){
     p.classList.toggle("active", on);
     p.setAttribute("aria-pressed", String(on));
   });
+  keepPillInView(document.querySelector("#pills .pill.active"));
+}
+function keepPillInView(active){
+  if(!active?.getClientRects().length) return;
+  const group = active.parentElement;
+  if(group.scrollWidth <= group.clientWidth) return;
+  const bounds = group.getBoundingClientRect();
+  const selected = active.getBoundingClientRect();
+  if(selected.left < bounds.left) group.scrollLeft += selected.left - bounds.left;
+  else if(selected.right > bounds.right) group.scrollLeft += selected.right - bounds.right;
 }
 function setFilter(f, {historyOrder=true} = {}){
   filter = f;
@@ -7369,6 +7411,24 @@ function newsStatusMessage(state,kind,now=Date.now()){
   }
   return message;
 }
+function compactNewsStatus(state,kind,now=Date.now()){
+  if(state.phase !== "ready" || state.source !== "network" || !state.snapshot) return "";
+  if(kind === "headlines" && (state.snapshot.collectionStatus !== "ok"
+      || !state.snapshot.lastSuccessAt || now-Date.parse(state.snapshot.lastSuccessAt) > 48*60*60*1000)) return "";
+  const {recent,future} = newsDateWindow(state.snapshot.items,now);
+  if(!recent.length || future.length) return "";
+  const latest = recent.map(item=>newsDateKey(item.date)).sort().pop();
+  const [,month,day] = latest.split("-");
+  return `${kind === "topics" ? "最新記事" : "最新の掲載日"} ${Number(month)}月${Number(day)}日`;
+}
+function showNewsStatus(status,details,state,kind){
+  const now = Date.now();
+  const full = newsStatusMessage(state,kind,now);
+  const compact = compactNewsStatus(state,kind,now);
+  status.textContent = compact || full;
+  details.hidden = !compact && !details.matches(":focus-within");
+  if(!details.hidden) details.querySelector("p").textContent = full;
+}
 async function requestNewsContent(kind,signal){
   const file = kind === "topics" ? "industry_topics.json" : kind === "headlines" ? "industry_headlines.json" : "news.json";
   const urls = [...new Set([file,`https://kyokyu-navi.jp/${file}`].map(url=>new URL(url,location.href).href))];
@@ -7535,6 +7595,7 @@ function refreshNewsViews(kind){
   if(kind === "topics") renderPinnedAlerts(document.getElementById("pinnedAlerts"), state.snapshot?.items || []);
   if(kind === "topics") renderTopPriceList();
   const status = document.getElementById(kind === "topics" ? "topicStatus" : "medNewsStatus");
+  const statusDetails = document.getElementById(kind === "topics" ? "topicStatusDetails" : "medNewsStatusDetails");
   const retry = document.getElementById(kind === "topics" ? "topicRetry" : "medNewsRetry");
   const list = document.getElementById(kind === "topics" ? "topicList" : "medNewsList");
   const archive = kind !== "topics" ? document.getElementById("medNewsArchive") : null;
@@ -7544,7 +7605,7 @@ function refreshNewsViews(kind){
   if(list.contains(document.activeElement) || archive?.contains(document.activeElement)){
     state.viewPending = true;
     const focused = document.activeElement, top = focused.getBoundingClientRect().top;
-    status.textContent = newsStatusMessage({...state,...state.displayed,
+    showNewsStatus(status,statusDetails,{...state,...state.displayed,
       phase:state.phase === "ready" ? "deferred" : state.phase},kind);
     // 状態文の折返し行数が変わっても、操作中のリンクの画面内位置を保つ。
     const shift = focused.getBoundingClientRect().top - top;
@@ -7553,7 +7614,7 @@ function refreshNewsViews(kind){
   }
   state.viewPending = false;
   const selection = newsDateWindow(state.snapshot?.items || []);
-  status.textContent = newsStatusMessage(state,kind);
+  showNewsStatus(status,statusDetails,state,kind);
   state.displayed = {snapshot:state.snapshot,source:state.source,receivedAt:state.receivedAt};
   if(kind === "topics") renderTopics(selection.recent);
   else{
