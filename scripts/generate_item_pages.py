@@ -3343,6 +3343,7 @@ HUB_FILTER_SCRIPT = r"""<script>
   const empty = document.getElementById("hubFilterEmpty");
   const priceOnly = document.getElementById("hubFilterPriceOnly");
   const outlookOnly = document.getElementById("hubFilterOutlookOnly");
+  const outlookReset = document.getElementById("hubFilterOutlookReset");
   const outlookLabel = document.getElementById("hubOutlookLabel");
   const outlookPeer = document.getElementById("hubOutlookPeer");
   const outlookPeerHref = outlookPeer?.getAttribute("href");
@@ -3381,10 +3382,12 @@ HUB_FILTER_SCRIPT = r"""<script>
     function applyFilter(){
       const terms = normalize(input.value).trim().split(/\s+/).filter(Boolean);
       let shown = 0;
+      let matchingRows = 0;
       let matchingOutlooks = 0;
       entries.forEach(function(entry){
         const matchesSearch = (!priceOnly || !priceOnly.checked || entry.priceInfo)
           && terms.every(function(term){ return entry.text.includes(term); });
+        if(matchesSearch) matchingRows += 1;
         if(matchesSearch && entry.outlook) matchingOutlooks += 1;
         const visible = matchesSearch && (!outlookOnly?.checked || entry.outlook);
         entry.row.hidden = !visible;
@@ -3399,6 +3402,12 @@ HUB_FILTER_SCRIPT = r"""<script>
       count.textContent = shown.toLocaleString("ja-JP") + " / "
         + entries.length.toLocaleString("ja-JP") + "品目を表示";
       empty.hidden = shown !== 0;
+      if(outlookReset){
+        const canExpand = shown === 0 && outlookOnly.checked && matchingRows > 0;
+        empty.textContent = canExpand ? "見込み時期ありの品目はありません。" : "この一覧に該当する品目はありません。";
+        outlookReset.hidden = !canExpand;
+        if(canExpand) outlookReset.textContent = "絞り込みを外して" + matchingRows.toLocaleString("ja-JP") + "品目を表示";
+      }
       clear.disabled = input.value.length === 0 && !priceOnly?.checked && !outlookOnly?.checked;
       syncSearchLinks(input.value.trim());
       appliedValue = input.value;
@@ -3429,9 +3438,15 @@ HUB_FILTER_SCRIPT = r"""<script>
     if(priceOnly) priceOnly.addEventListener("change", safelyApplyFilter);
     if(outlookOnly && typeof window !== "undefined"){
       outlookOnly.checked = new URL(window.location.href).searchParams.get("outlook") === "1";
-      outlookOnly.addEventListener("change", function(){
+      function applyOutlookFilter(){
         safelyApplyFilter();
         syncOutlookUrl();
+      }
+      outlookOnly.addEventListener("change", applyOutlookFilter);
+      outlookReset?.addEventListener("click", function(){
+        outlookOnly.checked = false;
+        applyOutlookFilter();
+        if(!panel.hidden) outlookOnly.focus({preventScroll:true});
       });
     }
     clear.addEventListener("click", function(){
@@ -3610,6 +3625,10 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
         hint = ("薬品名・成分名・メーカー名・YJコード" if slug == "limited" else
                 "薬品名・成分名・メーカー・YJコードで絞り込めます。空白で区切ると、すべての語を含む品目を表示します。")
         example = "例：モビコールLD" if slug == "limited" else "例：薬品名 メーカー"
+        empty_notice = ("この一覧に該当する品目はありません。" if outlook_hub else
+                        "この一覧内に該当する品目なし。すべての医薬品の検索結果ではありません。検索語を変えるか、クリアしてご確認ください。")
+        outlook_reset = ('\n      <button id="hubFilterOutlookReset" type="button" aria-controls="hubItems" hidden>'
+                         '見込み時期の絞り込みを外す</button>' if outlook_hub else "")
         filter_markup = f'''
     <section class="hub-filter" id="hubFilter" hidden aria-label="この一覧内の検索">
       <label for="hubFilterInput">この一覧内を検索</label>
@@ -3619,7 +3638,7 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
         <button id="hubFilterClear" type="button" disabled>クリア</button>
       </div>{price_filter_markup}{outlook_filter_markup}
       <p class="filter-count" id="hubFilterCount" role="status" aria-live="polite" aria-atomic="true">{len(group):,} / {len(group):,}品目を表示</p>
-      <p class="filter-empty" id="hubFilterEmpty" hidden>この一覧内に該当する品目なし。すべての医薬品の検索結果ではありません。検索語を変えるか、クリアしてご確認ください。</p>
+      <p class="filter-empty" id="hubFilterEmpty" hidden>{empty_notice}</p>{outlook_reset}
     </section>'''
     list_id = ' id="hubItems"' if searchable else ""
     list_markup = f'<ul{list_id}>{"".join(items)}</ul>'
@@ -3688,9 +3707,11 @@ h1 small{display:inline-block;vertical-align:middle;padding:2px 9px;border-radiu
 .list-guide summary{color:#264d93;cursor:pointer;padding:9px 0;min-height:44px;font-weight:700;font-size:14px}
 .list-guide summary:focus-visible{outline:3px solid #2f63e8;outline-offset:2px}
 """ if slug == "limited" else ""
-    outlook_search_style = ('\n#hubOutlookSiteSearch{display:inline-flex;align-items:center;min-height:44px;'
-                            'color:#264d93;font-size:14px;font-weight:700;text-underline-offset:3px}'
-                            if outlook_hub else "")
+    outlook_style = """
+#hubOutlookSiteSearch{display:inline-flex;align-items:center;min-height:44px;color:#264d93;font-size:14px;font-weight:700;text-underline-offset:3px}
+#hubFilterOutlookReset{margin-top:6px;min-height:44px;padding:8px 12px;border:1px solid #B6C8EB;border-radius:10px;color:#264d93;background:#fff;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+#hubFilterOutlookReset:focus-visible{outline:3px solid #2F63E8;outline-offset:2px}
+""" if outlook_hub else ""
     return f"""<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -3738,7 +3759,7 @@ li span{{display:block;color:#5A6B8C;font-size:11.5px;margin-top:2px}}
 li .reason-tag{{display:inline-block;background:#ECF2FD;color:#284C8C;border-radius:6px;padding:2px 6px;margin-top:7px;font-weight:700}}
 .official{{font-size:13px;margin:22px 0}}
 footer{{font-size:12px;color:#5A6B8C;text-align:center;margin-top:34px}}
-footer a{{color:#5A6B8C}}{HUB_FILTER_STYLE if searchable else ""}{limited_style}{outlook_search_style}
+footer a{{color:#5A6B8C}}{HUB_FILTER_STYLE if searchable else ""}{limited_style}{outlook_style}
 </style>
 </head>
 <body>
