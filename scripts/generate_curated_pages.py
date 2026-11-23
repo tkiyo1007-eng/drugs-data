@@ -20,7 +20,7 @@ from generate_item_pages import (
     load_zictor_listing, zictor_package_overview,
     manufacturer_notice_index, matching_manufacturer_notices,
     manufacturer_notice_needs_review, maker_tokens, notice_date_label, notice_package_names, valid_package_supply,
-    PACKAGE_PLAN_LABELS, JUVELA_KEY, KENACORT_KEYS, official_item_outlook, teramuro_strength,
+    PACKAGE_PLAN_LABELS, JUVELA_KEY, KENACORT_KEYS, official_item_outlook, strict_status, teramuro_strength,
 )
 from validate_shared_content import valid_topic_publisher_http_source
 
@@ -1011,6 +1011,31 @@ def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[
     return body, lastmod
 
 
+def teramuro_seller_picker(groups: dict[str, list[dict[str, str]]]) -> str:
+    sellers = {}
+    for strength, members in groups.items():
+        for row in members:
+            name = unicodedata.normalize("NFKC", row["商品名"])
+            suffix = name.partition("「")[2].removesuffix("」")
+            label = f"「{suffix}」" if suffix else "テラムロ配合錠"
+            seller = (row.get("販売メーカー") or "").strip()
+            status = strict_status(row.get("供給状況"))
+            short_status = STATUS[status][0] if status else "公表区分未確認"
+            accessible_label = esc(f"{label} {seller} {strength} {short_status}")
+            link = (f'<a href="#comparison-{esc(item_key(row))}" aria-label="{accessible_label}">'
+                    f'<strong>{strength}</strong> {short_status}</a>')
+            sellers.setdefault((label, seller), []).append(link)
+    if not sellers:
+        return ""
+    entries = "".join(
+        f'<li><span><strong>{esc(label)}</strong> {esc(seller)}</span>'
+        f'<div>{"".join(links)}</div></li>'
+        for (label, seller), links in sellers.items()
+    )
+    return ('<details class="seller-picker"><summary>製品名・販売元で比較</summary>'
+            f'<ul>{entries}</ul></details>')
+
+
 def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set[str],
                       source_date: str, *, package_snapshot="", package_keys=frozenset(),
                       mhlw_source=None) -> str:
@@ -1124,6 +1149,19 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
 </section>'''
     picker = (f'<nav class="strength-nav" aria-label="ページ内の供給情報">{"".join(jump_links)}</nav>'
               if show_picker or package_snapshot or packaging_change else "")
+    seller_picker = teramuro_seller_picker(groups) if slug == "teramuro" else ""
+    seller_style = (
+        '.seller-picker{margin:12px 0}'
+        '.seller-picker summary{min-height:44px;padding:10px 12px;border-radius:10px;'
+        'background:#f2f6ff;color:#244b9e;font-weight:750;cursor:pointer}'
+        '.seller-picker ul{list-style:none;margin:0;padding:0}'
+        '.seller-picker li{padding:8px 0;border-bottom:1px solid var(--line)}'
+        '.seller-picker li span{font-size:14px;overflow-wrap:anywhere}'
+        '.seller-picker li div{display:flex;gap:6px;flex-wrap:wrap}'
+        '.seller-picker a{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 8px;'
+        'border:1px solid var(--line);border-radius:8px;color:#244b9e;font-size:13px;text-underline-offset:2px}'
+        if seller_picker else ""
+    )
     if not sections:
         sections.append('<p>今回の公表データでは該当する品目を確認できません。</p>')
     workbook_link = (f' ・ <a href="{esc(workbook)}" data-dsn-event="official-source-open">厚労省原表（Excel）</a>'
@@ -1151,9 +1189,9 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
 {common_head(title, description, canonical, 'website', [collection, breadcrumb])}<style>{STYLE}
 .strength-nav{{display:flex;gap:10px;flex-wrap:wrap}}.strength-nav a{{display:inline-flex;min-height:44px;min-width:72px;justify-content:center;align-items:center;border:1px solid #9eb7ed;border-radius:10px;font-weight:750;color:#244b9e}}
 .strength-list{{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:8px}}.strength-item{{display:grid;gap:2px;padding:12px 16px;background:#fff;border:1px solid var(--line);border-radius:12px;color:var(--ink);text-decoration:none}}.strength-item strong{{color:#244b9e;text-decoration:underline;text-underline-offset:3px}}.strength-item span{{font-size:13px;color:var(--sub)}}.strength-item .supply{{color:var(--ink);font-weight:650}}a:focus-visible{{outline:3px solid #346bd6;outline-offset:2px}}
-{package_style}</style></head><body><div class="wrap"><header class="site"><a href="../">医薬品供給ナビ</a></header>
+{package_style}{seller_style}</style></head><body><div class="wrap"><header class="site"><a href="../">医薬品供給ナビ</a></header>
 <nav class="crumb" aria-label="パンくず"><a href="../">トップ</a> › <a href="index.html">注目製品</a> › {esc(brand)}</nav><main>
-<header class="hero"><h1>{esc(heading)}</h1><p class="note">厚労省の公表データ　基準日 {esc(source_date or '未確認')}{workbook_link}</p>{purpose}{picker}</header>
+<header class="hero"><h1>{esc(heading)}</h1><p class="note">厚労省の公表データ　基準日 {esc(source_date or '未確認')}{workbook_link}</p>{purpose}{seller_picker}{picker}</header>
 {"".join(sections)}{maker_supply_note}{package_snapshot}{packaging_change}
 <p class="source"><a href="{MHLW_SUPPLY_URL}" target="_blank" rel="noopener" data-dsn-event="official-source-open">厚生労働省の公表情報を確認</a></p>
 {share_control("この供給状況を共有")}</main><footer><a href="../about.html">運営情報・編集方針</a>｜<a href="../privacy.html">プライバシー</a></footer></div>
