@@ -142,11 +142,14 @@ h1 small{display:inline-block;vertical-align:middle;padding:2px 9px;border-radiu
   const outlookSiteSearch = document.getElementById("hubOutlookSiteSearch");
   if(!panel || !list || !input || !clear || !count || !empty) return;
   function syncSearchLinks(query = ""){
+    if(!outlookPeerHref && !outlookSiteSearch) return;
     const checked = outlookOnly?.checked;
-    if(outlookPeerHref) outlookPeer.href = outlookPeerHref + (checked ? "?outlook=1" : "");
+    const params = new URLSearchParams();
+    if(query) params.set("q", query);
+    if(outlookPeerHref){
+      outlookPeer.href = outlookPeerHref + (checked ? "?outlook=1" : "") + (query ? "#" + params : "");
+    }
     if(outlookSiteSearch){
-      const params = new URLSearchParams();
-      if(query) params.set("q", query);
       if(checked) params.set("f", "outlook");
       outlookSiteSearch.href = "../#" + (params.toString() || "demo");
     }
@@ -229,7 +232,17 @@ h1 small{display:inline-block;vertical-align:middle;padding:2px 9px;border-radiu
     });
     if(priceOnly) priceOnly.addEventListener("change", safelyApplyFilter);
     if(outlookOnly && typeof window !== "undefined"){
-      outlookOnly.checked = new URL(window.location.href).searchParams.get("outlook") === "1";
+      const url = new URL(window.location.href);
+      outlookOnly.checked = url.searchParams.get("outlook") === "1";
+      const transferred = new URLSearchParams(url.hash.slice(1));
+      if(transferred.has("q")){
+        input.value = transferred.get("q");
+        // 検索語は切替時だけ引き継ぎ、以後はこの一覧内で編集する。
+        transferred.delete("q");
+        url.hash = transferred.toString();
+        try{ window.history.replaceState(window.history.state, "", url); }
+        catch(error){ /* A blocked history change must not prevent search. */ }
+      }
       function applyOutlookFilter(){
         safelyApplyFilter();
         syncOutlookUrl();
