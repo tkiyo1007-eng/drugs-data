@@ -2798,7 +2798,8 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
             f'<p><strong>解消見込み（品目全体）</strong>　{esc(period)}</p>'
             f'<p><small>厚労省基準日 <time>{esc(excel_date)}</time>　'
             f'<a href="{esc(source_url)}" data-dsn-event="official-source-open">厚労省原表（Excel）</a><br>'
-            '包装ごとの再開時期はメーカー案内をご確認ください。</small></p></div>'
+            '包装ごとの再開時期はメーカー案内をご確認ください。</small></p>'
+            '<p><a href="stopped.html?outlook=1">解消見込みのある供給停止品を見る</a></p></div>'
         ) + supply_answer
     if key in BONZOL_KEYS and not limited_layout:
         source_date = mhlw_excel_date(version_metadata, dataset_date) or "確認できません"
