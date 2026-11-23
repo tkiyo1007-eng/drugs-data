@@ -45,7 +45,7 @@ OFFICIAL_SUPPLY_URL = "https://iyakuhin-kyokyu.mhlw.go.jp/public/supply-status-l
 MHLW_PRICE_LIST_URL = "https://www.mhlw.go.jp/topics/2026/04/tp20260401-01.html"
 # 全品目へ一次情報・状態別ハブ・運営方針の導線を追加した実質的な改訂日。
 # 日次生成日ではなく固定値にし、内容が変わらない日にlastmodを進めない。
-ITEM_PAGE_TEMPLATE_LASTMOD = "2026-11-23"  # 品目名・規格と包装別中止案内を検索用の情報に反映
+ITEM_PAGE_TEMPLATE_LASTMOD = "2026-11-24"  # 供給状況とメーカー原文を読む順番の見直し
 # 状態別5一覧の実質的な改訂日。個別品目のlastmodは進めない。
 HUB_TEMPLATE_LASTMOD = "2026-10-19"
 # ページ内検索の対象は、テンプレートの改訂日とは別に維持する。
@@ -1484,6 +1484,19 @@ def manufacturer_notice_scope_text(target: dict) -> str:
             + (f'｜対象包装：{"／".join(packages)}' if packages else '｜包装別の内訳は未確認' if target["scope"] == "product" else ""))
 
 
+def discontinuation_heading_scope(target: dict) -> str:
+    scope = target["scope"]
+    if scope == "product":
+        return "対象品目全体"
+    seller = target.get("seller")
+    seller_scope = f"{seller}の取扱分" if seller else "対象の販売経路"
+    if scope == "seller_route":
+        return seller_scope
+    packages = "／".join(notice_package_names(target))
+    package_scope = f"一部包装（{packages}）" if packages else "一部包装"
+    return f"{seller_scope}・{package_scope}" if scope == "seller_route_and_package" else package_scope
+
+
 def dated_pdf_unchanged_before_daily_limit(notice, bulletins):
     """Only reuse the dated original when the last attempted check succeeded and the listing still matches."""
     records = [item for item in bulletins["items"] if item.get("url") == notice["url"]]
@@ -1746,7 +1759,6 @@ def manufacturer_notices_html(row: dict, notices=(), warning="", catalog_yj_code
             parts.append('<p><strong>原典の再確認状況を取得できませんでした。</strong>以下は前回確認した案内です。現在の状況は原文やメーカーにご確認ください。</p>')
         elif manufacturer_notice_needs_review(notice, bulletins):
             parts.append('<p><strong>最新の原典は再確認待ちです。</strong>以下は前回確認した案内です。現在の状況は原文やメーカーにご確認ください。</p>')
-        parts.append(package_supply_html(target))
         reason_label = "案内の要点" if notice.get("event_type") == "transitional_measure" else "メーカー説明の理由"
         for label, value in (("案内の要点", notice.get("summary")), ("対象品目の案内", target.get("summary")),
                              (reason_label, notice.get("reason"))):
@@ -1768,6 +1780,7 @@ def manufacturer_notices_html(row: dict, notices=(), warning="", catalog_yj_code
             parts.append(f'<p>{esc(timing_label)}：{esc(timing)}</p>')
         if notice.get("event_type") == "resumption_planned":
             parts.append('<p>メーカーの再開予定の案内です。再開の実施日は確認できていません。</p>')
+        parts.append(package_supply_html(target))
         supply = notice.get("maker_supply_status") or {}
         handling = notice.get("manufacturer_status") or supply.get("handling")
         volume = notice.get("manufacturer_volume") or supply.get("volume")
@@ -1793,6 +1806,8 @@ def manufacturer_notices_html(row: dict, notices=(), warning="", catalog_yj_code
             if str(pmda_source.get("url") or "").startswith("https://"):
                 parts.append(f'<p><a href="{esc(pmda_source["url"])}" target="_blank" rel="noopener" '
                              'data-dsn-event="official-source-open">PMDAの回収情報を確認</a></p>')
+        parts.append(f'<p><a href="{esc(notice["url"])}" target="_blank" rel="noopener" '
+                     'data-dsn-event="official-source-open">メーカー公式案内の原文を確認</a></p>')
         groups = []
         sourced_groups = []
         for group in notice.get("alternatives", []):
@@ -1850,10 +1865,12 @@ def manufacturer_notices_html(row: dict, notices=(), warning="", catalog_yj_code
                     and not index_url.username and not index_url.password):
                 parts.append(f'<p><a href="{esc(notice["source_index_url"])}" target="_blank" rel="noopener" '
                              'data-dsn-event="official-source-open">メーカー公式一覧からこの案内を開く</a></p>')
-        parts.append(f'<p><a href="{esc(notice["url"])}" target="_blank" rel="noopener" '
-                     'data-dsn-event="official-source-open">メーカー公式案内の原文を確認</a></p>')
+        heading_scope = ""
+        if (notice.get("event_type") == "discontinued" and bulletins is not None
+                and not manufacturer_notice_needs_review(notice, bulletins)):
+            heading_scope = f'<span class="notice-heading-scope">{esc(discontinuation_heading_scope(target))}</span>'
         cards.append(f'<article class="supp supp-notice" data-notice-id="{esc(notice["id"])}" '
-                     f'data-source-sha256="{esc(notice["sha256"])}"><h3>{esc(notice["title"])}</h3>'
+                     f'data-source-sha256="{esc(notice["sha256"])}"><h3>{esc(notice["title"])}{heading_scope}</h3>'
                      + "".join(parts) + '</article>')
     caution = (f'<p class="supp-warning">自動収集の確認注意：{esc(warning)}。原文を再確認してください。</p>'
                if warning else "")
@@ -2791,19 +2808,21 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
     release = public_metadata.get("解除・解消見込み")
     item_release_outlook = official_item_outlook(row, key, release, excel_date, mhlw_source)
     supply_answer = supply_answer_html(row, status, manufacturer_notices, lifecycle_match, manufacturer_bulletins)
+    if not limited_layout:
+        supply_answer = f'<p>厚労省基準日　<time>{esc(excel_date or "確認できません")}</time></p>' + supply_answer
     if status == "stopped" and item_release_outlook:
         period, source_url = item_release_outlook
-        supply_answer = (
+        supply_answer += (
             '<div class="official-resolution-outlook">'
             f'<p><strong>解消見込み（品目全体）</strong>　{esc(period)}</p>'
             f'<p><small>厚労省基準日 <time>{esc(excel_date)}</time>　'
             f'<a href="{esc(source_url)}" data-dsn-event="official-source-open">厚労省原表（Excel）</a><br>'
             '包装ごとの再開時期はメーカー案内をご確認ください。</small></p>'
             '<p><a href="stopped.html?outlook=1">解消見込みのある供給停止品を見る</a></p></div>'
-        ) + supply_answer
-    if key in BONZOL_KEYS and not limited_layout:
-        source_date = mhlw_excel_date(version_metadata, dataset_date) or "確認できません"
-        supply_answer = f'<p>厚労省基準日　{esc(source_date)}</p>' + supply_answer
+        )
+    elif status == "stopped":
+        supply_answer += (f'<p><strong>解消見込み（厚労省の公表区分）</strong>　'
+                          f'{esc(release or "記載なし")}</p>')
     variants_html = product_variants_html(row, product_variants, generated_keys)
     product_supply_link = ""
     teramuro_comparison = ""
@@ -2967,6 +2986,8 @@ footer a{{color:var(--sub)}}
 .bonzol-strengths strong{color:var(--ink)}.bonzol-strengths small{font-size:12px}
 .bonzol-strengths a{display:inline-flex;align-items:center;min-height:44px;color:var(--blue);font-weight:700;text-underline-offset:3px}
 </style>"""
+    if 'class="notice-heading-scope"' in promoted_sections or 'class="notice-heading-scope"' in manufacturer_box:
+        styles += '<style>.notice-heading-scope{display:block;margin-top:3px;font-size:.9em;overflow-wrap:anywhere}</style>'
     return f"""<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -3015,6 +3036,7 @@ footer a{{color:var(--sub)}}
         <a href="{lp_link}" data-dsn-event="item-web-open">Web版で同じ品目の現在の表示を確認</a>
       </div>
     </section>
+{delist_box}{supplemental_checked}{lifecycle_box}{discrepancy_box}{manufacturer_box}{hospital_box}
     <div class="watch-card">
       <button class="watch-button" id="watchButton" type="button" aria-pressed="false">☆ この品目を監視リストに追加</button>
       <p class="watch-note">このブラウザ内だけに保存し、次回Web版を開いたときに変化を確認できます。Web版から通知は届きません（プッシュ通知はiOSアプリのみ）。</p>
@@ -3031,11 +3053,6 @@ footer a{{color:var(--sub)}}
       </div>
       <p class="item-search-note" id="itemSearchNote">検索語はURLの#以降に保持し、アクセス解析には送りません。</p>
     </form>
-{delist_box}
-{supplemental_checked}
-{lifecycle_box}
-{discrepancy_box}
-{manufacturer_box}{hospital_box}
     <table><tbody>{''.join(detail_rows)}</tbody></table>{spec_difference_html}{gas_spec_note}
     <p class="links">
       <a href="{lp_link}" data-dsn-event="item-web-open">Web版でこの品目を開く{'（同成分・同剤形の一覧つき）' if siblings else ''}</a>

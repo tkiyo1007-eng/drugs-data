@@ -367,7 +367,7 @@ class ItemPageMetadataTests(unittest.TestCase):
 
     def test_sitemap_lastmod_uses_fixed_template_revision_without_advancing_daily(self):
         old_row = {"商品名": "対象錠", "更新日": "2024/03/11"}
-        self.assertEqual(item_page_lastmod(old_row), "2026-11-23")
+        self.assertEqual(item_page_lastmod(old_row), "2026-11-24")
         future_notice = {"product_name": "対象錠", "maker": "対象製薬",
                          "announced_at": "2026-11-24"}
         old_row["製造メーカー"] = "対象製薬"
@@ -905,7 +905,7 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
                 self.assertIn("直近の自動照合は未実施", brief)
                 self.assertIn("最新の原典は再確認待ち", page)
             else:
-                self.assertLess(page.index("厚労省基準日　2025-06-11"), page.index(brief))
+                self.assertLess(page.index("厚労省基準日　<time>2025-06-11</time>"), page.index(brief))
             for uncertain in (render(""), render(stamp, dict(pending, sha256="f" * 64)),
                               render(stamp, dict(pending, hash_status="error")),
                               render(stamp, dict(pending, last_changed_at="2025-06-14T01:00:00+09:00")),
@@ -1175,13 +1175,13 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
 
     def test_manual_notice_lastmod_is_not_advanced_by_generation_or_daily_attempt(self):
         row, notice = self.row(), self.notice()
-        self.assertEqual("2026-11-23", item_page_lastmod(row, manufacturer_notices=[notice]))
-        notice["listed_at"] = "2026-11-24"
-        self.assertEqual("2026-11-23", item_page_lastmod(row, manufacturer_notices=[notice]))
-        notice["content_updated_at"] = "2026-11-25"
-        self.assertEqual("2026-11-25", item_page_lastmod(row, manufacturer_notices=[notice]))
+        self.assertEqual("2026-11-24", item_page_lastmod(row, manufacturer_notices=[notice]))
+        notice["listed_at"] = "2026-11-25"
+        self.assertEqual("2026-11-24", item_page_lastmod(row, manufacturer_notices=[notice]))
+        notice["content_updated_at"] = "2026-11-26"
+        self.assertEqual("2026-11-26", item_page_lastmod(row, manufacturer_notices=[notice]))
         notice["targets"][0]["product_name"] = "別の品目"
-        self.assertEqual("2026-11-23", item_page_lastmod(row, manufacturer_notices=[notice]))
+        self.assertEqual("2026-11-24", item_page_lastmod(row, manufacturer_notices=[notice]))
 
 
     def test_discontinuation_timing_device_candidate_and_no_candidate_statement_are_not_reinterpreted(self):
@@ -1337,8 +1337,8 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
         self.assertNotIn("メーカー：販売中止の案内あり", output)
         for value in ("終了予定時期：", "2027-12", lifecycle["supply_end_note"], lifecycle["supply_end_packages"][0], "終了予定の原文確認日"):
             self.assertNotIn(value, output)
-        self.assertEqual("2026-11-23", item_page_lastmod(row, lifecycle, manufacturer_notices=[notice], manufacturer_bulletins=bulletins))
-        self.assertIn('"dateModified":"2026-11-23"', output)
+        self.assertEqual("2026-11-24", item_page_lastmod(row, lifecycle, manufacturer_notices=[notice], manufacturer_bulletins=bulletins))
+        self.assertIn('"dateModified":"2026-11-24"', output)
 
     def test_changed_lifecycle_hub_is_pending_and_does_not_search_stale_end_details(self):
         row, notice = self.row(), self.notice()
@@ -1374,7 +1374,7 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
         self.assertNotIn("確認日が7日以上前のため", output)
         self.assertNotIn("メーカー公式：販売中止の案内あり", output)
         self.assertIn("厚労省：通常出荷", output)
-        self.assertIn('"dateModified":"2026-11-23"', output)
+        self.assertIn('"dateModified":"2026-11-24"', output)
         entry = {"key": row["YJコード"], "name": row["商品名"], "maker": lifecycle["maker"],
                  "status": "ok", "updated": "2026-07-07", "lifecycle": lifecycle,
                  "lifecycle_current": False, "supplements": supplemental_labels(
