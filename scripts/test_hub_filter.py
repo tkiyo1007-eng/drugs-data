@@ -153,6 +153,21 @@ class HubFilterTests(unittest.TestCase):
                     self.assertEqual(1, parsed.links.count("../#demo"))
                     self.assertEqual(1, parsed.links.count(f"{peer}.html"))
 
+    def test_stopped_hub_puts_search_above_the_source_guide(self):
+        output = hub_html("stopped", self.entries, "2026-11-23",
+                          {"version": 202611230542, "mhlw_excel_date": "2026-11-20"})
+        self.assertIn("<h1>供給停止の医薬品一覧 <small>1品目</small></h1>", output)
+        self.assertLess(output.index("厚労省データの基準日：2026-11-20"),
+                        output.index('id="hubFilter"'))
+        start = output.index('<details class="list-guide">')
+        self.assertLess(output.index('id="hubOutlookSiteSearch"'), start)
+        guide = output[start:output.index("</details>", start)]
+        self.assertIn("<summary>この一覧の見方</summary>", guide)
+        self.assertIn('class="dataset-context"', guide)
+        self.assertIn("出荷再開見込みはメーカーの最新案内もご確認ください。", guide)
+        self.assertIn(OFFICIAL_SUPPLY_URL, guide)
+        self.assertLess(start, output.index('id="hubItems"'))
+
     def test_outlook_filter_label_counts_eligible_rows_in_each_list(self):
         entries = [
             dict(self.entries[0], release_period="2027年3月"),
