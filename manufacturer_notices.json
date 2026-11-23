@@ -24181,8 +24181,12 @@
               "unified_product_code": "116-23481-8",
               "supply": {
                 "status": "unconfirmed",
-                "plans": [],
-                "note": "メーカーが案内した出荷終了時期：2028年2月頃。"
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2028年2月頃"
+                  }
+                ]
               }
             },
             {
@@ -24190,8 +24194,12 @@
               "unified_product_code": "116-23491-7",
               "supply": {
                 "status": "unconfirmed",
-                "plans": [],
-                "note": "メーカーが案内した出荷終了時期：2027年2月頃。"
+                "plans": [
+                  {
+                    "event": "stock_depletion",
+                    "timing": "2027年2月頃"
+                  }
+                ]
               }
             }
           ]
@@ -24228,7 +24236,8 @@
       ],
       "maker": "住友ファーマ",
       "announced_at": "2026-09",
-      "verified_at": "2026-11-08",
+      "listed_at": "2026-09-15",
+      "verified_at": "2026-11-24",
       "collection_mode": "manual",
       "event_type": "discontinued",
       "reason": "メーカーは諸般の事情により、在庫品の出荷終了をもって販売を中止すると案内しています。",
@@ -50298,6 +50307,41 @@
       "cautions": [
         "2025年3月の同社案内に、他社シメチジン製剤の販売中止に伴う需要増と、PTP100錠の在庫量を十分確保できない事情の記載があります。",
         "資料の日付時点の案内です。現在の品目区分は厚労省公表欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "sumitomo-tagamet200-ptp100-resumed-202611",
+      "maker": "住友ファーマ",
+      "title": "タガメット錠200mg PTP100錠 限定出荷解除のご案内",
+      "url": "https://sumitomo-pharma.jp/hubfs/product/package_notification/2026/tagamet_gentei_20261117.pdf",
+      "announced_at": "2026-11",
+      "listed_at": "2026-11-17",
+      "verified_at": "2026-11-24",
+      "sha256": "90f8c0185222c1e36e275a14ac8f77490ec6e681b11847b9ee9b6dc432245b39",
+      "collection_mode": "manual",
+      "event_type": "resumed",
+      "reason": "住友ファーマは特約店向けの限定出荷を解除し、PTP100錠を通常出荷にすると案内しました。",
+      "alternatives": [],
+      "cautions": ["2026年11月の出荷対応の案内です。販売中止予定は2026年5月の包装別案内をご確認ください。"],
+      "targets": [
+        {
+          "yj_code": "2325001F1211",
+          "product_name": "タガメット錠２００ｍｇ",
+          "maker": "住友ファーマ",
+          "scope": "package",
+          "source_pages": [1],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "116-23431-3",
+              "supply": {
+                "status": "normal",
+                "status_text": "通常出荷",
+                "plans": []
+              }
+            }
+          ]
+        }
       ]
     },
     {
