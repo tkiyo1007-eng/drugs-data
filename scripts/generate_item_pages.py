@@ -3346,7 +3346,13 @@ HUB_FILTER_SCRIPT = r"""<script>
   const outlookLabel = document.getElementById("hubOutlookLabel");
   const outlookPeer = document.getElementById("hubOutlookPeer");
   const outlookPeerHref = outlookPeer?.getAttribute("href");
+  const outlookSiteSearch = document.getElementById("hubOutlookSiteSearch");
   if(!panel || !list || !input || !clear || !count || !empty) return;
+  function syncOutlookLinks(){
+    const checked = outlookOnly?.checked;
+    if(outlookPeerHref) outlookPeer.href = outlookPeerHref + (checked ? "?outlook=1" : "");
+    if(outlookSiteSearch) outlookSiteSearch.href = checked ? "../#f=outlook" : "../#demo";
+  }
   function showAll(){
     Array.from(list.querySelectorAll("li")).forEach(function(row){ row.hidden = false; });
     Array.from(list.querySelectorAll(".supplemental-group")).forEach(function(group){ group.hidden = false; });
@@ -3354,7 +3360,7 @@ HUB_FILTER_SCRIPT = r"""<script>
     empty.hidden = true;
     if(priceOnly) priceOnly.checked = false;
     if(outlookOnly) outlookOnly.checked = false;
-    if(outlookPeerHref) outlookPeer.href = outlookPeerHref;
+    syncOutlookLinks();
   }
   function normalize(value){
     return String(value || "").normalize("NFKC").toLowerCase()
@@ -3389,9 +3395,7 @@ HUB_FILTER_SCRIPT = r"""<script>
         + entries.length.toLocaleString("ja-JP") + "品目を表示";
       empty.hidden = shown !== 0;
       clear.disabled = input.value.length === 0 && !priceOnly?.checked && !outlookOnly?.checked;
-      if(outlookPeerHref){
-        outlookPeer.href = outlookPeerHref + (outlookOnly?.checked ? "?outlook=1" : "");
-      }
+      syncOutlookLinks();
       appliedValue = input.value;
     }
     function safelyApplyFilter(){
@@ -3640,8 +3644,9 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
     evidence_note = ('''<p class="evidence-note">理由と解除・解消見込みは公表欄の記載です。「あり」だけでは具体的な解除日を示しません。
 <a href="../guides/how-to-check-drug-supply.html#resumption">解除見込みとメーカー案内を確認する方法</a></p>'''
                      if slug in {"limited", "stopped"} else "")
+    outlook_search_id = ' id="hubOutlookSiteSearch"' if slug in {"limited", "stopped"} else ""
     hub_navigation = f'''    <nav class="entry-nav" aria-label="医薬品の探し方と確認方法">
-      <a href="../#demo" data-dsn-event="search-cta-open">薬品名・メーカー名で検索</a>
+      <a href="../#demo"{outlook_search_id} data-dsn-event="search-cta-open">薬品名・メーカー名で検索</a>
       <a href="../ingredients/index.html">成分別に確認</a>
       <a href="../categories/index.html">薬効分類別に確認</a>
       <a href="../guides/how-to-check-drug-supply.html">出荷調整の意味・確認方法</a>

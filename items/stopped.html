@@ -88,7 +88,7 @@ footer a{color:#5A6B8C}
     </section>
     <p class="notice">厚生労働省公表データ上の供給区分が「供給停止」の品目を掲載しています。出荷再開見込みはメーカーの最新案内もご確認ください。 医薬品の使用・変更は、公式情報を確認したうえで医師・薬剤師等の専門職が判断してください。</p>
     <nav class="entry-nav" aria-label="医薬品の探し方と確認方法">
-      <a href="../#demo" data-dsn-event="search-cta-open">薬品名・メーカー名で検索</a>
+      <a href="../#demo" id="hubOutlookSiteSearch" data-dsn-event="search-cta-open">薬品名・メーカー名で検索</a>
       <a href="../ingredients/index.html">成分別に確認</a>
       <a href="../categories/index.html">薬効分類別に確認</a>
       <a href="../guides/how-to-check-drug-supply.html">出荷調整の意味・確認方法</a>
@@ -115,7 +115,13 @@ footer a{color:#5A6B8C}
   const outlookLabel = document.getElementById("hubOutlookLabel");
   const outlookPeer = document.getElementById("hubOutlookPeer");
   const outlookPeerHref = outlookPeer?.getAttribute("href");
+  const outlookSiteSearch = document.getElementById("hubOutlookSiteSearch");
   if(!panel || !list || !input || !clear || !count || !empty) return;
+  function syncOutlookLinks(){
+    const checked = outlookOnly?.checked;
+    if(outlookPeerHref) outlookPeer.href = outlookPeerHref + (checked ? "?outlook=1" : "");
+    if(outlookSiteSearch) outlookSiteSearch.href = checked ? "../#f=outlook" : "../#demo";
+  }
   function showAll(){
     Array.from(list.querySelectorAll("li")).forEach(function(row){ row.hidden = false; });
     Array.from(list.querySelectorAll(".supplemental-group")).forEach(function(group){ group.hidden = false; });
@@ -123,7 +129,7 @@ footer a{color:#5A6B8C}
     empty.hidden = true;
     if(priceOnly) priceOnly.checked = false;
     if(outlookOnly) outlookOnly.checked = false;
-    if(outlookPeerHref) outlookPeer.href = outlookPeerHref;
+    syncOutlookLinks();
   }
   function normalize(value){
     return String(value || "").normalize("NFKC").toLowerCase()
@@ -158,9 +164,7 @@ footer a{color:#5A6B8C}
         + entries.length.toLocaleString("ja-JP") + "品目を表示";
       empty.hidden = shown !== 0;
       clear.disabled = input.value.length === 0 && !priceOnly?.checked && !outlookOnly?.checked;
-      if(outlookPeerHref){
-        outlookPeer.href = outlookPeerHref + (outlookOnly?.checked ? "?outlook=1" : "");
-      }
+      syncOutlookLinks();
       appliedValue = input.value;
     }
     function safelyApplyFilter(){

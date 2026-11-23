@@ -134,6 +134,9 @@ class HubFilterTests(unittest.TestCase):
                 else:
                     self.assertEqual({}, parsed.controls)
                     self.assertNotIn("data-search=", output)
+                outlook_search_link = [link for link in parsed.anchors if link.get("id") == "hubOutlookSiteSearch"]
+                self.assertEqual(["../#demo"] if slug in {"limited", "stopped"} else [],
+                                 [link["href"] for link in outlook_search_link])
 
     def test_outlook_filter_label_counts_eligible_rows_in_each_list(self):
         entries = [
@@ -310,6 +313,7 @@ function setup(before = "", href = "https://example.test/items/limited.html") {
     hubFilterClear: node({disabled: true}), hubFilterOutlookOnly: node({checked: false}),
     hubFilterCount: node({textContent: ""}), hubFilterEmpty: node(),
     hubOutlookLabel: node({textContent: "見込み時期あり（1品目）"}),
+    hubOutlookSiteSearch: node({href: "../#demo"}),
     hubOutlookPeer: node({href: "stopped.html", getAttribute: name => name === "href" ? "stopped.html" : null})
   };
   const window = {
@@ -336,14 +340,17 @@ outlook.checked=true; outlook.handlers.change();
 assert.deepEqual(visible(), ["1111111F1111"]);
 assert.equal(new URL(live.window.location.href).searchParams.get("outlook"), "1");
 assert.equal(live.nodes.hubOutlookPeer.href, "stopped.html?outlook=1");
+assert.equal(live.nodes.hubOutlookSiteSearch.href, "../#f=outlook");
 const shared = setup("", "https://example.test/items/limited.html?keep=x&outlook=1#example");
 assert.equal(shared.nodes.hubFilterOutlookOnly.checked, true);
 assert.deepEqual(visible(shared), ["1111111F1111"]);
 assert.equal(shared.nodes.hubOutlookPeer.href, "stopped.html?outlook=1");
+assert.equal(shared.nodes.hubOutlookSiteSearch.href, "../#f=outlook");
 shared.nodes.hubFilterClear.handlers.click();
 assert.deepEqual(visible(shared), ["1111111F1111", "2222222F2222"]);
 assert.equal(shared.window.location.href, "https://example.test/items/limited.html?keep=x#example");
 assert.equal(shared.nodes.hubOutlookPeer.href, "stopped.html");
+assert.equal(shared.nodes.hubOutlookSiteSearch.href, "../#demo");
 const invalid = setup("", "https://example.test/items/limited.html?outlook=0");
 assert.equal(invalid.nodes.hubFilterOutlookOnly.checked, false);
 assert.deepEqual(visible(invalid), ["1111111F1111", "2222222F2222"]);
@@ -382,6 +389,7 @@ vm.runInContext("String.prototype.normalize = undefined", live.context);
 input.handlers.input();
 assert.deepEqual(visible(), ["1111111F1111", "2222222F2222"]);
 assert.equal(live.nodes.hubFilter.hidden, true);
+assert.equal(live.nodes.hubOutlookSiteSearch.href, "../#demo");
 const unsupported = setup("String.prototype.normalize = undefined");
 assert.equal(unsupported.nodes.hubFilter.hidden, true);
 assert.ok(unsupported.rows.every(row => !row.hidden));
