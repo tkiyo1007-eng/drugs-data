@@ -32,7 +32,7 @@ def comparison_html(rows, note):
 def overview_html(row, name, maker, release, source_date, imported, version, updated,
                   delist, notices, shortcuts, spec_note, discontinuation_labels=(), package_overview="",
                   strength_selector="", *, product_supply_link="", item_release_outlook=None,
-                  shipment_volume="", source_workbook=""):
+                  shipment_volume="", source_workbook="", notice_status=""):
     # Keep strength units together even on narrow screens.
     name = re.sub(r"[０-９0-9]+(?:[．.][０-９0-9]+)?(?:[％%]|[ｍm][ｇg]|[μµ]g)|(?:ＬＤ|ＨＤ|LD|HD)$",
                   r'<span class="strength">\g<0></span>', escape(name))
@@ -70,6 +70,7 @@ def overview_html(row, name, maker, release, source_date, imported, version, upd
         release_source = ('<p><small>包装ごとの再開時期はメーカー案内をご確認ください。'
                           f'<a href="{escape(url)}" data-dsn-event="official-source-open">厚労省原表（Excel）</a></small></p>'
                           '<p><a href="limited.html?outlook=1">解除見込みのある限定出荷品を見る</a></p>')
+    manufacturer_note = f'<p><small>{escape(notice_status)}</small></p>' if notice_status else ""
     return f'''<div class="intro"><p class="maker">{escape(maker)}</p><h1>{name}</h1>
 <p class="spec"><b>{escape(row.get("規格") or "規格の記載なし")}</b> {code}</p>{manufacturer_status}{strength_selector}{spec_note}</div>{product_supply_link}
 <section class="summary" data-version="{escape(version)}" data-spec-note="{int(bool(spec_note))}" data-source="{escape(source_date)}" data-imported="{escape(imported)}">
@@ -79,7 +80,7 @@ def overview_html(row, name, maker, release, source_date, imported, version, upd
 {release_fact}{shipment_fact}</dl>{release_source}{workbook_link}
 <details><summary>出典と日付</summary><p>{details_item_date}サイト取込日 {escape(imported or "確認できません")}<br>
 <a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryou/kouhatu-iyaku/04_00003.html" data-dsn-event="official-source-open">厚生労働省の公表ページ</a></p></details>
-<p id="freshness" role="status">表示は上記基準日時点です。</p></section>{package_overview}
+<p id="freshness" role="status">表示は上記基準日時点です。</p>{manufacturer_note}</section>{package_overview}
 <div class="actions"><button type="button" id="share" hidden>この品目を共有</button><a href="#watchButton">監視リスト</a></div>
 <p id="feedback" role="status"></p><textarea id="manualCopy" aria-label="コピー用の共有文" readonly hidden></textarea>
 <nav class="jumps" aria-label="この品目の情報">{links}<a href="#itemDetails">品目の詳細</a></nav>

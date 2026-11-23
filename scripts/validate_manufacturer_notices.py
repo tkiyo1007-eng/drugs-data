@@ -348,6 +348,9 @@ def validate(document, rows):
         ids.add(label)
         for field in ['maker', 'title', 'reason']:
             if not isinstance(n.get(field), str) or not n[field].strip(): errors.append(label + ': missing ' + field)
+        observed = n.get('observed_source_sha256')
+        if 'observed_source_sha256' in n and (not isinstance(observed, str) or not re.fullmatch(r'[a-f0-9]{64}', observed)):
+            errors.append(label + ': invalid observed source sha256')
         if 'maker_supply_status' in n:
             status = n['maker_supply_status']
             if (not isinstance(status, dict) or any(

@@ -975,6 +975,42 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
             else:
                 self.assertNotIn("販売中止予定", title)
 
+    def test_limited_pages_promote_scoped_notice_without_inventing_package_timing(self):
+        key = self.row()["YJコード"]
+        row = dict(self.row(), 供給状況="②限定出荷（自社の事情）")
+        notice = self.notice()
+        notice["targets"][0]["packages"].append({
+            "package": "100T", "supply": {"status": "limited", "status_text": "限定出荷",
+                                         "plans": [{"event": "shipment_resumption", "timing": "2027年2月頃"}]},
+        })
+        notice["expected_resumption"] = {"display": "2027年春頃"}
+        url = "https://www.mhlw.go.jp/content/10800000/261120iyakuhinkyoukyu.xlsx"
+        def render(notices, bulletins=None, trusted=True):
+            return page_html(row, key, "limited", "2026-11-23", [], {key}, dataset_date="2026-11-23",
+                             version_metadata={"version": "20261123", "mhlw_excel_date": "2026-11-20"},
+                             mhlw_source={"url": url, "excel_date": "2026-11-20"},
+                             manufacturer_notices=notices, manufacturer_bulletins=bulletins,
+                             supplemental_trusted=trusted)
+        page = render([notice], {"items": []})
+        summary = page.split('id="limitedManufacturerTitle"', 1)[1].split("</section>", 1)[0]
+        for value in ("500T", "100T", "販売元", "日本薬品工業", "製造工程上", "2027年2月頃",
+                      "2027年春頃", "2026年10月", notice["url"]):
+            self.assertIn(value, summary)
+        self.assertIn(f'href="{url}"', page.split("</section>", 1)[0])
+        self.assertLess(page.index(summary), page.index('id="manufacturerNoticesTitle"'))
+        changed = {"items": [{"url": notice["url"], "sha256": "f" * 64}]}
+        self.assertNotIn('id="limitedManufacturerTitle"', render([notice], changed))
+        manually_changed = dict(notice, observed_source_sha256="f" * 64)
+        self.assertIn("メーカーの供給案内は原典の再確認待ち", render([manually_changed], {"items": []}))
+        newer = dict(notice, announced_at="2026-11-11", url="https://example.test/latest.pdf")
+        review = {"items": [{"url": newer["url"], "sha256": "f" * 64}]}
+        self.assertNotIn('id="limitedManufacturerTitle"', render([notice, newer], review))
+        only_start = dict(self.notice(), effective_at="2026-10-30")
+        start_summary = render([only_start], {"items": []}).split('id="limitedManufacturerTitle"', 1)[1].split("</section>", 1)[0]
+        self.assertNotIn("2026-10-30", start_summary)
+        self.assertNotIn('id="limitedManufacturerTitle"', render([notice], {"items": []}, False))
+        self.assertIn("確認済みのメーカー供給案内は未掲載", render([], {"items": []}))
+
     def test_antebate_shows_current_outlook_and_original_covered_packs_separately(self):
         key = "2646730Q1026"
         row = dict(self.row(), 商品名="アンテベートローション0.05%", YJコード=key,
