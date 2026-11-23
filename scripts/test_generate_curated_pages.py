@@ -341,7 +341,11 @@ class CuratedPageGenerationTests(unittest.TestCase):
         self.assertIn('href="#packageSnapshotTitle"', with_snapshot)
         self.assertIn("出荷調整や販売中止の案内", with_snapshot)
         self.assertGreater(with_snapshot.index(snapshot), with_snapshot.index('<h2 id="bp">'))
-        sawai_supply = with_snapshot.split('<h2 id="sawaiSupplyTitle">', 1)[1].split("</section>", 1)[0]
+        towa_supply = with_snapshot.split('<h3 id="towaSupplyTitle">', 1)[1].split('<h3 id="sawaiSupplyTitle">', 1)[0]
+        self.assertIn("2026年11月19日版では、AP・BPともに", towa_supply)
+        self.assertIn("限定出荷（自社の事情）", towa_supply)
+        self.assertIn('href="https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80558&amp;t=6#page=7"', towa_supply)
+        sawai_supply = with_snapshot.split('<h3 id="sawaiSupplyTitle">', 1)[1].split("</section>", 1)[0]
         self.assertIn("2026年11月13日版では、AP・BPともに", sawai_supply)
         self.assertIn("限定出荷（他社品の影響）", sawai_supply)
         self.assertIn('href="https://med.sawai.co.jp/file/pr115_4577_1.pdf#page=8"', sawai_supply)
@@ -359,6 +363,7 @@ class CuratedPageGenerationTests(unittest.TestCase):
         self.assertNotIn("LOOKALIKE", missing)
         self.assertNotIn("dsepPackagingTitle", missing)
         self.assertNotIn("sawaiSupplyTitle", missing)
+        self.assertNotIn("towaSupplyTitle", missing)
         self.assertIn("基準日 未確認", missing)
         self.assertIn("今回の公表データでは該当する品目を確認できません", missing)
 

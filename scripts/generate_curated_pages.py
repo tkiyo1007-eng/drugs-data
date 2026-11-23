@@ -961,8 +961,12 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
     maker_supply_note = ""
     if slug == "teramuro":
         jump_links.append('<a href="#dsepPackagingTitle">DSEPの包装変更</a>')
-        maker_supply_note = '''<section class="intent" aria-labelledby="sawaiSupplyTitle">
-<h2 id="sawaiSupplyTitle">サワイの出荷状況</h2>
+        maker_supply_note = '''<section class="intent" aria-labelledby="makerSupplyTitle">
+<h2 id="makerSupplyTitle">メーカーの出荷状況一覧</h2>
+<h3 id="towaSupplyTitle">トーワの出荷状況</h3>
+<p>東和薬品の2026年11月19日版では、AP・BPともに出荷量が<strong>減少</strong>し、出荷対応は<strong>限定出荷（自社の事情）</strong>です。解除見込み時期の記載はありません。</p>
+<p><a href="https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80558&amp;t=6#page=7" data-dsn-event="official-source-open">東和薬品の供給状況一覧（随時更新）</a></p>
+<h3 id="sawaiSupplyTitle">サワイの出荷状況</h3>
 <p>沢井製薬の2026年11月13日版では、AP・BPともに出荷量が<strong>減少</strong>し、出荷対応は<strong>限定出荷（他社品の影響）</strong>です。解除見込み時期の記載はありません。</p>
 <p><a href="https://med.sawai.co.jp/file/pr115_4577_1.pdf#page=8" data-dsn-event="official-source-open">沢井製薬の供給状況一覧（随時更新）</a></p>
 </section>'''
