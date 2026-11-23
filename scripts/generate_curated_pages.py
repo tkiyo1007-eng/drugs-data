@@ -20,7 +20,7 @@ from generate_item_pages import (
     load_zictor_listing, zictor_package_overview,
     manufacturer_notice_index, matching_manufacturer_notices,
     manufacturer_notice_needs_review, maker_tokens, notice_date_label, notice_package_names, valid_package_supply,
-    PACKAGE_PLAN_LABELS, JUVELA_KEY, official_item_outlook, teramuro_strength,
+    PACKAGE_PLAN_LABELS, JUVELA_KEY, KENACORT_KEYS, official_item_outlook, teramuro_strength,
 )
 from validate_shared_content import valid_topic_publisher_http_source
 
@@ -83,6 +83,7 @@ SUPPLY_COMPARISONS = {
                  "散50％、細粒10％、錠5mg・25mg・50mgの供給区分"),
 }
 PRIORITY_PRODUCT_EDIT_DATE = "2026-11-24"
+KENACORT_TOPIC_SLUG = "kenacort-supply-plan-20261020"
 # 規格選択はWeb専用。アプリと共用のfeatured_products.jsonには追加しない。
 STRENGTH_HUBS = {
     "movicol": ("モビコール配合内用剤", ("LD", "HD")),
@@ -717,6 +718,9 @@ def topic_page(topic: dict, related: list[dict[str, str]], generated_keys: set[s
     # 対象品目を「関連品目」に混ぜると、製品自体が自分の関連品として見えてしまうため。
     targets = targets or []
     target_keys = {item_key(row) for row in targets}
+    product_link = ('<p class="source"><a href="../products/kenacort-a-injection.html#productItems" '
+                    'data-dsn-event="related-item-open">ケナコルト40mg・50mgの供給状況を比較する</a></p>'
+                    if slug == KENACORT_TOPIC_SLUG and KENACORT_KEYS.issubset(target_keys) else "")
     related = [row for row in related if item_key(row) not in target_keys]
     if targets or related:
         related_html += ('<section aria-label="供給情報の基準日">'
@@ -738,7 +742,7 @@ def topic_page(topic: dict, related: list[dict[str, str]], generated_keys: set[s
 <div class="wrap"><header class="site site-with-top"><a href="../">💊 医薬品供給ナビ</a><a class="top-link" href="../#top">トップへ</a></header>
 <nav class="crumb"><a href="../">トップ</a> › <a href="index.html">話題のニュース</a> › {esc(topic['tag'])}</nav><main>
 <article class="hero"><p class="eyebrow">{esc(topic['tag'])}｜{esc(topic['date'])}</p><h1>{esc(topic['title'])}</h1>
-<p class="lede">{esc(topic['lede'])}</p>{f'<ul class="points">{points}</ul>' if points else ''}
+<p class="lede">{esc(topic['lede'])}</p>{product_link}{f'<ul class="points">{points}</ul>' if points else ''}
 {publisher_html}<p class="source">{source_label}：<a href="{esc(source['url'])}" target="_blank" rel="noopener" data-dsn-event="official-source-open">{esc(source['name'])}</a></p>
 {share_control("この記事を共有")}</article>{prices_html}
 {supplement}
@@ -749,7 +753,7 @@ def topic_page(topic: dict, related: list[dict[str, str]], generated_keys: set[s
 
 
 def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *,
-                             include_details=False) -> tuple[str, set[str]]:
+                             include_details=False, show_notice_details=False) -> tuple[str, set[str]]:
     """品目に一致する最新の包装別案内を、厚労省区分と区別して掲載する。"""
     groups = {}
     package_keys = set()
@@ -789,6 +793,8 @@ def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *,
                 if not valid_package_supply(supply) or not supply.get("status_text"):
                     continue
                 details = [f'{esc(package["package"])}：{esc(supply["status_text"])}']
+                if show_notice_details and package.get("unified_product_code"):
+                    details.append(f'統一商品コード {esc(package["unified_product_code"])}')
                 if include_details:
                     details.extend(f'{PACKAGE_PLAN_LABELS[plan["event"]]} {esc(plan["timing"].removesuffix("予定"))}'
                                    for plan in supply["plans"])
@@ -814,7 +820,7 @@ def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *,
     for (url, maker, day, seller), (notice, entries) in groups.items():
         timing = notice.get("resumption")
         summary = notice.get("summary")
-        reason = notice.get("reason") if include_details else None
+        reason = notice.get("reason") if include_details or show_notice_details else None
         seller_html = f'<p class="note">対象の販売元　{esc(seller)}</p>' if seller else ""
         summary_html = f'<p>{esc(summary)}</p>' if summary else ""
         index_url = notice.get("source_index_url") if seller or include_details else None
@@ -823,6 +829,13 @@ def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *,
         reason_label = "販売中止の理由" if notice.get("event_type") == "discontinued" else "限定出荷の理由"
         reason_html = f'<p><strong>{reason_label}</strong>　{esc(reason)}</p>' if reason else ""
         timing_html = f'<p>案内時点の見通し　{esc(timing)}</p>' if timing else ""
+        if show_notice_details:
+            date_text = "。".join(f"{label} {notice_date_label(notice[key])}"
+                                  for key, label in (("listed_at", "メーカー公式掲載日"), ("verified_at", "原文確認日"))
+                                  if notice.get(key))
+            dates_html = f'<p class="note">{esc(date_text)}</p>' if date_text else ""
+            summary_html = dates_html + summary_html + reason_html
+            reason_html = ""
         sections.append(f'<h3>{esc(notice_date_label(day))}の{esc(seller or maker)}の案内</h3>{seller_html}{summary_html}{"".join(entries)}'
                         f'{reason_html}{timing_html}<p><a href="{esc(url)}" data-dsn-event="official-source-open">メーカーの掲載資料を確認</a>{index_html}</p>')
     return ('<section class="intent" aria-labelledby="packageSnapshotTitle">'
@@ -897,6 +910,14 @@ def product_page(product: dict, rows: list[dict[str, str]], generated_keys: set[
     primary_link = f'<a href="{esc(query_link)}" data-dsn-event="search-cta-open">この製品をWeb版で検索</a>'
     if slug in {"kenacort-a-injection", "hilnamin"}:
         items_heading = '<h2 id="productItems">規格別の品目</h2>'
+        if slug == "kenacort-a-injection" and package_snapshot:
+            title = f"{label}の出荷調整・供給状況｜40mg・50mgの規格別と供給予定｜医薬品供給ナビ"
+            description = (f"{label}の40mg/1mLと50mg/5mLの厚労省公表区分を比較。"
+                           "メーカーが案内した出荷予定・限定出荷の理由・対象包装と原文も確認できます。")
+            collection.update(name=title, description=description)
+            primary_link = '<a href="#packageSnapshotTitle">メーカーの供給予定・対象包装</a>'
+            package_snapshot += (f'<p class="source"><a href="../topics/{KENACORT_TOPIC_SLUG}.html" '
+                                 'data-dsn-event="related-item-open">メーカー発表時の記事を読む</a></p>')
         primary_link = '<a href="#productItems">規格別の供給状況を見る</a>' + primary_link
     elif slug == "juvela-ointment" and len(rows) == 1:
         href = esc(product_row_link(product, rows[0], generated_keys))
@@ -1654,6 +1675,8 @@ def main() -> int:
             encoding="utf-8")
         topic_dates[topic["slug"]] = max(
             normalize_date(topic.get("date")), TEMPLATE_UPDATED_AT)
+        if topic["slug"] == KENACORT_TOPIC_SLUG:
+            topic_dates[topic["slug"]] = max(topic_dates[topic["slug"]], normalize_date(topic.get("updated_at")))
     product_dates: dict[str, str] = {}
     source_date = mhlw_excel_date(version_doc, dataset_date)
     try:
@@ -1674,7 +1697,8 @@ def main() -> int:
                 trusted = False
             brief = zictor_package_overview(matched[0], notices, bulletins, trusted=trusted,
                                             latest_listing=load_zictor_listing(site))
-        snapshot, _ = (product_package_snapshot(matched, notice_index, bulletins, generated_keys)
+        snapshot, _ = (product_package_snapshot(matched, notice_index, bulletins, generated_keys,
+                                                show_notice_details=product["slug"] == "kenacort-a-injection")
                        if product["slug"] in SUPPLY_COMPARISONS else ("", set()))
         page, lastmod = product_page(product, matched, generated_keys, lifecycle,
                                      package_brief=brief, source_date=source_date, package_snapshot=snapshot,

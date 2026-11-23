@@ -732,6 +732,39 @@ class CuratedPageGenerationTests(unittest.TestCase):
                 self.assertIn('<h2 id="productItems">規格別の品目</h2>', page)
                 self.assertIn(f'href="../items/{key}.html"', page)
 
+    def test_kenacort_article_links_to_product_comparison_for_both_exact_targets(self):
+        topic = json.loads((ROOT / "industry_topics.json").read_text(encoding="utf-8"))
+        topic = next(item for item in topic["topics"] if item["slug"] == "kenacort-supply-plan-20261020")
+        keys = set(topic["target_queries"])
+        targets = [{"YJコード": key, "商品名": f"対象品目 {key}"} for key in sorted(keys)]
+        html = topic_page(topic, [], keys, {}, "2026-11-24", targets)
+        link = 'href="../products/kenacort-a-injection.html#productItems"'
+        self.assertLess(html.index(link), html.index('<ul class="points">'))
+        self.assertNotIn(link, topic_page(topic, [], keys, {}, "2026-11-24", targets[:1]))
+
+    def test_kenacort_comparison_prioritizes_the_dated_packaging_notice(self):
+        key = "2454402A3033"
+        product = {"slug":"kenacort-a-injection", "label":"ケナコルト－Ａ注", "query":"ケナコルト"}
+        row = {"YJコード":key, "商品名":"ケナコルトＡ", "供給状況":"②限定出荷（自社の事情）",
+               "販売メーカー":"テスト製薬"}
+        target = {"yj_code":key, "product_name":row["商品名"], "scope":"package", "packages":[
+            {"package":"10バイアル", "unified_product_code":"279-11523-8", "supply":{
+                "status":"limited", "status_text":"限定出荷", "plans":[]}}]}
+        notice = {"url":"https://example.test/a.pdf", "announced_at":"2026-10", "listed_at":"2026-10-19",
+                  "verified_at":"2026-11-24", "maker":"テスト製薬", "sha256":"a"*64, "targets":[target],
+                  "summary":"12月から通常時の約30％まで出荷量を引き上げる予定です。", "event_type":"limited",
+                  "reason":"新製造ラインの適格性評価が長期化したため。"}
+        args = (product,[row],{key},{})
+        snapshot, _ = product_package_snapshot([row], {key:[notice]}, {"items":[]}, {key}, show_notice_details=True)
+        page, _ = product_page(*args, package_snapshot=snapshot)
+        self.assertIn('href="#packageSnapshotTitle">メーカーの供給予定・対象包装</a>', page)
+        self.assertIn("メーカー公式掲載日 2026年10月19日", page)
+        self.assertIn("統一商品コード 279-11523-8", page)
+        self.assertIn(notice["reason"], page)
+        self.assertIn('href="../topics/kenacort-supply-plan-20261020.html"', page)
+        fallback, _ = product_page(*args)
+        self.assertNotIn('href="#packageSnapshotTitle"', fallback)
+
     def test_product_packaging_snapshot_keeps_the_scope_and_hides_changed_sources(self):
         code = "1172014F2139"
         row = {"商品名": "ヒルナミン錠（25mg）", "YJコード": code, "製造メーカー": "共和薬品工業"}
