@@ -1276,6 +1276,9 @@ def load_manufacturer_notices(path: Path) -> list:
         if (not notice["url"].startswith("https://")
                 or not re.fullmatch(r"[0-9a-f]{64}", notice["sha256"])):
             raise ValueError("確認済みメーカー案内の原典URLまたはSHA256が不正です")
+        if "observed_source_sha256" in notice and not re.fullmatch(
+                r"[0-9a-f]{64}", str(notice["observed_source_sha256"])):
+            raise ValueError("再照合したメーカー原典のSHA256が不正です")
         for field in ("announced_at", "listed_at", "verified_at", "content_updated_at"):
             value = notice.get(field)
             if value is None and field not in {"announced_at", "verified_at"}:
@@ -1394,6 +1397,9 @@ def load_manufacturer_bulletins(path: Path):
 
 
 def manufacturer_notice_changed(notice: dict, bulletins=None) -> bool:
+    observed = notice.get("observed_source_sha256")
+    if observed and observed != notice.get("sha256"):
+        return True
     return bool(bulletins and any(item.get("url") == notice.get("url")
                                 and item.get("sha256") and item["sha256"] != notice.get("sha256")
                                 for item in bulletins.get("items", [])))
@@ -1494,6 +1500,61 @@ def manufacturer_notice_scope_text(target: dict) -> str:
     return (f'対象範囲：{scope}'
             + (f'｜販売元：{target["seller"]}' if target.get("seller") else "")
             + (f'｜対象包装：{"／".join(packages)}' if packages else '｜包装別の内訳は未確認' if target["scope"] == "product" else ""))
+
+
+def limited_manufacturer_overview(matches, bulletins, trusted):
+    """Show dated supply notices while preserving the scope of source and packaging."""
+    supply_kinds = {"limited", "stopped", "supply", "resumed", "resumption_planned"}
+    candidates = [match for match in matches if match["notice"]["event_type"] in supply_kinds]
+    if not candidates:
+        return "", "確認済みのメーカー供給案内は未掲載です。"
+    latest = max(match["notice"]["announced_at"] for match in candidates)
+    entries = []
+    if trusted and bulletins is not None:
+        for match in candidates:
+            notice = match["notice"]
+            if not latest.startswith(notice["announced_at"]) or match["source_changed"]:
+                continue
+            if manufacturer_notice_needs_review(notice, bulletins):
+                continue
+            entries.append(limited_manufacturer_notice_card(notice, match["target"]))
+    if not entries:
+        return "", "メーカーの供給案内は原典の再確認待ちです。"
+    return ('<section class="package-brief" aria-labelledby="limitedManufacturerTitle">'
+            '<h2 id="limitedManufacturerTitle">メーカーの供給案内</h2>'
+            + "".join(entries) + "</section>", "")
+
+
+def limited_manufacturer_notice_card(notice, target):
+    day = notice_date_label(notice["announced_at"])
+    reason = notice.get("reason")
+    reason_html = f'<p><strong>メーカーが示した理由</strong>　{esc(reason)}</p>' if reason else ""
+    seller = f'<p>対象の販売元　{esc(target["seller"])}</p>' if target.get("seller") else ""
+    names = "・".join(notice_package_names(target))
+    packages = (f'<p><strong>対象包装</strong>　{esc(names)}</p>' if names
+                else '<p>対象包装の内訳は収録されていません。</p>')
+    expected = notice.get("expected_resumption") or {}
+    timing = expected.get("display") or notice.get("resumption")
+    if notice["event_type"] in {"resumed", "resumption_planned"}:
+        timing = target.get("planned_timing") or timing or notice.get("effective_at")
+    if isinstance(timing, dict):
+        timing = timing.get("text")
+    projected = f'<p><strong>案内の再開・解除情報</strong>　{esc(timing)}</p>' if timing else ""
+    package_plans = []
+    for package in target.get("packages", []):
+        supply = package.get("supply") if isinstance(package, dict) else None
+        if not valid_package_supply(supply):
+            continue
+        for plan in supply["plans"]:
+            if plan["event"] in {"shipment_resumption", "normal_shipment"}:
+                package_plans.append(f'<li>{esc(package["package"])}　{PACKAGE_PLAN_LABELS[plan["event"]]}　{esc(plan["timing"])}</li>')
+    plans = f'<ul>{"".join(package_plans)}</ul>' if package_plans else ""
+    if not projected and not plans:
+        projected = '<p>解除時期の記載は確認できていません。</p>'
+    return (f'<article><h3>{esc(day)}の{esc(notice["maker"])}の案内</h3>'
+            f'{seller}{reason_html}{packages}{projected}{plans}'
+            f'<a class="source-link" href="{esc(notice["url"])}" data-dsn-event="official-source-open">'
+            'メーカー原文を確認</a></article>')
 
 
 def discontinuation_heading_scope(target: dict) -> str:
@@ -2929,10 +2990,16 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
                   '<a class="brand" href="../"><span aria-hidden="true">✚</span>医薬品供給ナビ</a>'
                   '<a href="../#top">トップへ</a></div></header>\n')
         shortcuts = []
+        matched_notices = matching_manufacturer_notices(row, manufacturer_notices, manufacturer_bulletins)
+        notice_status = ""
+        if not package_overview:
+            package_overview, notice_status = limited_manufacturer_overview(
+                matched_notices, manufacturer_bulletins, supplemental_trusted)
         if manufacturer_box and not package_overview:
             shortcuts.append(("manufacturerNoticesTitle", "メーカー案内"))
         elif package_overview:
-            shortcuts.append(("manufacturerNoticesTitle", "包装別の出荷対応"))
+            label = "メーカー案内の詳細" if 'id="limitedManufacturerTitle"' in package_overview else "包装別の出荷対応"
+            shortcuts.append(("manufacturerNoticesTitle", label))
         if 'id="trialAlternatives"' in manufacturer_box:
             shortcuts.append(("trialAlternatives", "原文の代替候補"))
         if topic_box:
@@ -2947,14 +3014,14 @@ def page_html(row, key, status, jst_today, siblings, generated_keys,
         intro = ('<nav class="trail" aria-label="パンくず"><a href="index.html">品目別の供給状況</a> / 品目詳細</nav>'
                  + limited_item_page.overview_html(
                      row, display_name, maker, release, excel_date, reference_import, reference_version,
-                     official_row_date(row), delist, matching_manufacturer_notices(row, manufacturer_notices, manufacturer_bulletins),
+                     official_row_date(row), delist, matched_notices,
                      shortcuts, spec_difference_html + gas_spec_note, headline_labels, package_overview,
                      strength_selector, product_supply_link=teramuro_comparison,
                      item_release_outlook=item_release_outlook,
                      shipment_volume=public_metadata.get("出荷量状況", "")
                      if key in {LAGNOS_NF_KEY, ANTEBATE_LOTION_KEY} else "",
-                     source_workbook=item_workbook_url(excel_date, mhlw_source)
-                     if key == ANTEBATE_LOTION_KEY else ""))
+                     source_workbook=item_workbook_url(excel_date, mhlw_source),
+                     notice_status=notice_status))
         # Keep warnings beside the source they qualify. Render each full notice and topic only once.
         promoted_sections = (delist_box + lifecycle_box + discrepancy_box + supplemental_checked
                              + manufacturer_box + hospital_box + topic_box + '<h2 id="itemDetails">品目の詳細</h2>')
