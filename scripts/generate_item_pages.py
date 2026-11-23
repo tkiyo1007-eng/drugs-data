@@ -3565,13 +3565,16 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
 
     title = f'{config["h1"]}｜医薬品供給ナビ'
     url = f'{SITE_ROOT}items/{slug}.html'
+    outlook_peer_slug = {"limited": "stopped", "stopped": "limited"}.get(slug)
+    outlook_hub = outlook_peer_slug is not None
     other_hub_links = []
     for other_slug, other in ITEM_HUBS.items():
+        if other_slug == outlook_peer_slug:
+            continue
         current = ' aria-current="page"' if other_slug == slug else ""
-        outlook_peer = ' id="hubOutlookPeer"' if {slug, other_slug} == {"limited", "stopped"} else ""
         count = sum(other_slug in entry.get("hubs", []) for entry in entries)
         other_hub_links.append(
-            f'<a href="{other_slug}.html"{current}{outlook_peer}>'
+            f'<a href="{other_slug}.html"{current}>'
             f'{esc(other["label"])}（{count:,}）</a>')
     other_hubs = "".join(other_hub_links)
     structured = ld_json({
@@ -3598,7 +3601,6 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
     filter_markup = ""
     price_filter_markup = ""
     outlook_filter_markup = ""
-    outlook_hub = slug in {"limited", "stopped"}
     if outlook_hub:
         outlook_count = sum(bool(entry.get("release_period")) for entry in group)
         outlook_filter_markup = f'''
@@ -3669,8 +3671,13 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
     evidence_note = ('''<p class="evidence-note">理由と解除・解消見込みは公表欄の記載です。「あり」だけでは具体的な解除日を示しません。
 <a href="../guides/how-to-check-drug-supply.html#resumption">解除見込みとメーカー案内を確認する方法</a></p>'''
                      if slug in {"limited", "stopped"} else "")
-    search_near_filter = ('\n    <a href="../#demo" id="hubOutlookSiteSearch" data-dsn-event="search-cta-open">'
-                          'サイト全体を検索</a>' if outlook_hub else "")
+    outlook_links = ""
+    if outlook_hub:
+        outlook_links = f'''
+    <nav class="entry-nav outlook-list-links" aria-label="一覧の切り替えとサイト内検索">
+      <span class="hub-nav"><a href="{outlook_peer_slug}.html" id="hubOutlookPeer">{STATUSES[outlook_peer_slug]["label"]}一覧</a></span>
+      <a href="../#demo" id="hubOutlookSiteSearch" data-dsn-event="search-cta-open">サイト全体を検索</a>
+    </nav>'''
     search_in_navigation = ('' if outlook_hub else
                             '      <a href="../#demo" data-dsn-event="search-cta-open">薬品名・メーカー名で検索</a>\n')
     hub_navigation = f'''    <nav class="entry-nav" aria-label="医薬品の探し方と確認方法">
@@ -3683,7 +3690,7 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
     if slug == "limited":
         source_date = mhlw_excel_date(version_metadata, dataset_date) or "確認できません"
         header = f'''    <h1>限定出荷一覧 <small>{len(group):,}品目</small></h1>
-    <p class="lede">厚労省データの基準日：{esc(source_date)}</p>{filter_markup}{search_near_filter}
+    <p class="lede">厚労省データの基準日：{esc(source_date)}</p>{filter_markup}{outlook_links}
     <p class="stock-note">各施設の在庫・受注可否は示しません。</p>
     <details class="list-guide">
       <summary>この一覧の見方</summary>
@@ -3694,7 +3701,7 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
     else:
         header = f'''    <h1>{esc(config["h1"])}</h1>
     <p class="lede">{esc(config["description"])}（{len(group):,}品目）</p>
-    {dataset_dates_html(dataset_date, version_metadata)}{filter_markup + search_near_filter if slug == "stopped" else ""}
+    {dataset_dates_html(dataset_date, version_metadata)}{filter_markup + outlook_links if slug == "stopped" else ""}
     <p class="notice">{esc(config["intro"])} 医薬品の使用・変更は、公式情報を確認したうえで医師・薬剤師等の専門職が判断してください。</p>
 {hub_navigation}{supplemental_navigation}{evidence_note}{price_note}{filter_markup if slug != "stopped" else ""}'''
     limited_style = """
@@ -3708,7 +3715,9 @@ h1 small{display:inline-block;vertical-align:middle;padding:2px 9px;border-radiu
 .list-guide summary:focus-visible{outline:3px solid #2f63e8;outline-offset:2px}
 """ if slug == "limited" else ""
     outlook_style = """
-#hubOutlookSiteSearch{display:inline-flex;align-items:center;min-height:44px;color:#264d93;font-size:14px;font-weight:700;text-underline-offset:3px}
+.outlook-list-links,.outlook-list-links .hub-nav{margin:0;gap:0 18px}
+.outlook-list-links a{color:#264d93;font-size:14px;font-weight:700}
+.outlook-list-links .hub-nav a{background:none;border:0;padding:0;text-decoration:underline}
 #hubFilterOutlookReset{margin-top:6px;min-height:44px;padding:8px 12px;border:1px solid #B6C8EB;border-radius:10px;color:#264d93;background:#fff;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
 #hubFilterOutlookReset:focus-visible{outline:3px solid #2F63E8;outline-offset:2px}
 """ if outlook_hub else ""

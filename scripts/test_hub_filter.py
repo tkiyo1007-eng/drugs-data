@@ -142,11 +142,16 @@ class HubFilterTests(unittest.TestCase):
                 self.assertEqual(["../#demo"] if slug in {"limited", "stopped"} else [],
                                  [link["href"] for link in outlook_search_link])
                 if outlook_search_link:
+                    peer = "stopped" if slug == "limited" else "limited"
+                    peer_label = "供給停止一覧" if slug == "limited" else "限定出荷一覧"
                     self.assertRegex(
                         output,
-                        r'</section>\s*<a href="\.\./#demo" id="hubOutlookSiteSearch"[^>]*>サイト全体を検索</a>',
+                        r'</section>\s*<nav class="entry-nav outlook-list-links"[^>]*>'
+                        rf'\s*<span class="hub-nav"><a href="{peer}\.html" id="hubOutlookPeer">{peer_label}</a></span>'
+                        r'\s*<a href="\.\./#demo" id="hubOutlookSiteSearch"[^>]*>サイト全体を検索</a>\s*</nav>',
                     )
                     self.assertEqual(1, parsed.links.count("../#demo"))
+                    self.assertEqual(1, parsed.links.count(f"{peer}.html"))
 
     def test_outlook_filter_label_counts_eligible_rows_in_each_list(self):
         entries = [
