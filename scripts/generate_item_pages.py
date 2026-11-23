@@ -3342,6 +3342,7 @@ HUB_FILTER_SCRIPT = r"""<script>
   const empty = document.getElementById("hubFilterEmpty");
   const priceOnly = document.getElementById("hubFilterPriceOnly");
   const outlookOnly = document.getElementById("hubFilterOutlookOnly");
+  const outlookLabel = document.getElementById("hubOutlookLabel");
   const outlookPeer = document.getElementById("hubOutlookPeer");
   const outlookPeerHref = outlookPeer?.getAttribute("href");
   if(!panel || !list || !input || !clear || !count || !empty) return;
@@ -3367,16 +3368,19 @@ HUB_FILTER_SCRIPT = r"""<script>
     let appliedValue = null;
     function applyFilter(){
       const terms = normalize(input.value).trim().split(/\s+/).filter(Boolean);
-      const matches = entries.map(function(entry){
-        return (!priceOnly || !priceOnly.checked || entry.priceInfo)
-          && (!outlookOnly || !outlookOnly.checked || entry.outlook)
-          && terms.every(function(term){ return entry.text.includes(term); });
-      });
       let shown = 0;
-      entries.forEach(function(entry, index){
-        entry.row.hidden = !matches[index];
-        if(matches[index]) shown += 1;
+      let matchingOutlooks = 0;
+      entries.forEach(function(entry){
+        const matchesSearch = (!priceOnly || !priceOnly.checked || entry.priceInfo)
+          && terms.every(function(term){ return entry.text.includes(term); });
+        if(matchesSearch && entry.outlook) matchingOutlooks += 1;
+        const visible = matchesSearch && (!outlookOnly?.checked || entry.outlook);
+        entry.row.hidden = !visible;
+        if(visible) shown += 1;
       });
+      if(outlookLabel){
+        outlookLabel.textContent = "見込み時期あり（" + matchingOutlooks.toLocaleString("ja-JP") + "品目）";
+      }
       Array.from(list.querySelectorAll(".supplemental-group")).forEach(function(group){
         group.hidden = !Array.from(group.querySelectorAll("li")).some(function(row){ return !row.hidden; });
       });
@@ -3574,7 +3578,7 @@ def hub_html(slug, entries, dataset_date, version_metadata=None):
         outlook_filter_markup = f'''
       <label class="outlook-filter">
         <input id="hubFilterOutlookOnly" type="checkbox" aria-controls="hubItems">
-        <span>見込み時期あり（{outlook_count:,}品目）</span>
+        <span id="hubOutlookLabel">見込み時期あり（{outlook_count:,}品目）</span>
       </label>'''
     price_note = ""
     if slug == "supplemental":

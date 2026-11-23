@@ -144,7 +144,7 @@ class HubFilterTests(unittest.TestCase):
         for slug, count in (("limited", 1), ("stopped", 0)):
             with self.subTest(slug=slug):
                 output = hub_html(slug, entries, "2026-10-10")
-                self.assertIn(f"<span>見込み時期あり（{count}品目）</span>", output)
+                self.assertIn(f'<span id="hubOutlookLabel">見込み時期あり（{count}品目）</span>', output)
                 self.assertEqual(count, output.count(' data-outlook="1"'))
 
     def test_limited_hub_prioritizes_search_and_indexes_the_actual_strength(self):
@@ -309,6 +309,7 @@ function setup(before = "", href = "https://example.test/items/limited.html") {
     hubFilterInput: node({value: "", focus() { this.focused = true; }}),
     hubFilterClear: node({disabled: true}), hubFilterOutlookOnly: node({checked: false}),
     hubFilterCount: node({textContent: ""}), hubFilterEmpty: node(),
+    hubOutlookLabel: node({textContent: "見込み時期あり（1品目）"}),
     hubOutlookPeer: node({href: "stopped.html", getAttribute: name => name === "href" ? "stopped.html" : null})
   };
   const window = {
@@ -324,6 +325,7 @@ function setup(before = "", href = "https://example.test/items/limited.html") {
 const live = setup();
 const input = live.nodes.hubFilterInput;
 const clear = live.nodes.hubFilterClear;
+const outlookLabel = live.nodes.hubOutlookLabel;
 const visible = (instance = live) => instance.rows.filter(row => !row.hidden)
   .map(row => row.textContent.split(" ")[0]).sort();
 const search = text => { input.value = text; input.handlers.input(); };
@@ -347,15 +349,18 @@ assert.equal(invalid.nodes.hubFilterOutlookOnly.checked, false);
 assert.deepEqual(visible(invalid), ["1111111F1111", "2222222F2222"]);
 search("テスト");
 assert.deepEqual(visible(), []);
+assert.equal(outlookLabel.textContent, "見込み時期あり（0品目）");
 clear.handlers.click();
 assert.equal(outlook.checked, false);
 assert.deepEqual(visible(), ["1111111F1111", "2222222F2222"]);
 assert.equal(live.nodes.hubFilterCount.textContent, "2 / 2品目を表示");
+assert.equal(outlookLabel.textContent, "見込み時期あり（1品目）");
 search("ゆべら　えーざい");
 assert.deepEqual(visible(), ["1111111F1111"]);
 assert.equal(live.nodes.hubFilterCount.textContent, "1 / 2品目を表示");
 search("ｱｾﾄｱﾐﾉﾌｪﾝ １０ｍｇ");
 assert.deepEqual(visible(), ["2222222F2222"]);
+assert.equal(outlookLabel.textContent, "見込み時期あり（0品目）");
 search("１１１１１１１ｆ１１１１");
 assert.deepEqual(visible(), ["1111111F1111"]);
 search("製造会社");
