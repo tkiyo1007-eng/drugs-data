@@ -798,12 +798,16 @@ def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *,
             href = esc(row_link(row, generated_keys))
             name = esc(row["商品名"])
             anchor = ""
+            back_link = ""
             if include_details and key not in package_keys:
                 package_keys.add(key)
-                anchor = f' id="packages-{esc(key)}"'
+                anchor = f' id="packages-{esc(key)}" tabindex="-1"'
+            if include_details:
+                back_link = (f'<a class="packages-back" href="#comparison-{esc(key)}" '
+                             f'aria-label="{name}の比較カードに戻る">比較に戻る</a>')
             entries = groups.setdefault((notice["url"], notice["maker"], notice["announced_at"], seller), (notice, []))[1]
             entries.append(f'<h4{anchor}><a href="{href}" data-dsn-event="related-item-open">{name}</a></h4>'
-                           f'<ul>{"".join(packages)}</ul>')
+                           f'<ul>{"".join(packages)}</ul>{back_link}')
     if not groups:
         return "", package_keys
     sections = []
@@ -950,7 +954,8 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
                     f'<span class="supply">{esc(status)}</span></a>')
             key = item_key(row)
             if key in package_keys:
-                card = (f'<div class="strength-card">{card}<a class="strength-packages" '
+                card = (f'<div class="strength-card" id="comparison-{esc(key)}" tabindex="-1">{card}'
+                        '<a class="strength-packages" '
                         f'href="#packages-{esc(key)}" aria-label="{esc(name)}の包装別案内">包装別案内</a></div>')
             cards.append(card)
             items.append({"@type": "ListItem", "position": len(items) + 1, "name": name,
@@ -1018,7 +1023,9 @@ def strength_hub_page(slug: str, rows: list[dict[str, str]], generated_keys: set
         '.strength-card .strength-item{border:0;border-radius:11px 0 0 11px;overflow-wrap:anywhere}'
         '.strength-packages{display:grid;place-items:center;min-height:44px;padding:0 10px;'
         'border-left:1px solid var(--line);color:#244b9e;font-size:13px;font-weight:700;white-space:nowrap}'
-        '[id^="packages-"]{scroll-margin-block-start:16px}'
+        '.packages-back{display:inline-flex;align-items:center;min-height:44px;color:#244b9e;font-size:13px}'
+        '.strength-card,[id^="packages-"]{scroll-margin-block-start:16px}'
+        '.strength-card:target{outline:2px solid #346bd6;outline-offset:2px}'
         if package_keys else ""
     )
     return f"""<!DOCTYPE html><html lang="ja"><head>
