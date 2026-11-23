@@ -11460,10 +11460,12 @@
       "title": "テラムロ配合錠AP・BP「DSEP」の出荷制限（11月9日案内）",
       "url": "https://med.daiichisankyo-ep.co.jp/information/files/2292/gentei_20261109_E1_G.pdf",
       "announced_at": "2026-11",
-      "verified_at": "2026-11-22",
+      "verified_at": "2026-11-23",
+      "content_updated_at": "2026-11-23",
       "sha256": "f9781013d71321b85020f216f38640118ac07a1499806cb5dc799727e9ca57d4",
       "collection_mode": "manual",
       "event_type": "limited",
+      "summary": "第一三共エスファの2026年11月9日版の一覧では、対象3包装とも出荷量は「減少」、出荷対応は「限定出荷（自社の事情）」です。限定出荷開始日は2025年5月13日と記載されています。",
       "reason": "需要の拡大に対応して生産を続けていましたが、製造設備の一時的な不具合で在庫が減ったため、第一三共エスファは対象包装の出荷を制限しています。",
       "resumption": "メーカーは設備を増強する方針です。生産量が増えるまでには時間がかかる見込みで、解除時期は示されていません。",
       "targets": [
@@ -11520,7 +11522,7 @@
       "alternatives": [],
       "cautions": [],
       "listed_at": "2026-11-09",
-      "source_index_url": "https://med.daiichisankyo-ep.co.jp/information/?certification=1"
+      "source_index_url": "https://med.daiichisankyo-ep.co.jp/other_attachment/files/1/genteilist_20261109_E1_F.xlsx"
     },
     {
       "id": "chemiphar-valsartan-80-package-history-202610",
