@@ -10792,5 +10792,17 @@
  ],
  "https://medical.nihon-generic.co.jp/a.php?id=1883": [],
  "https://medical.nihon-generic.co.jp/a.php?id=1869": [],
- "https://www.nichiiko.co.jp/medicine/files/20261027cI2.pdf": []
+ "https://www.nichiiko.co.jp/medicine/files/20261027cI2.pdf": [],
+ "https://med.sawai.co.jp/file/pr27_1271_2.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr27_1270_2.pdf": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
+ ]
 }

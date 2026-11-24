@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-24",
+  "generated_at": "2026-11-25",
   "source": {
     "mhlw_version": 202611250005,
     "mhlw_note": "2026年11月25日厚労省データ反映",
-    "manufacturer_checked_through": "2026-11-24"
+    "manufacturer_checked_through": "2026-11-25"
   },
   "counts": {
-    "high": 2,
+    "high": 3,
     "review": 7,
-    "total": 9
+    "total": 10
   },
   "products": {
     "2190402D2106": {
@@ -259,6 +259,34 @@
       "evidence": {
         "maker_match": true,
         "exact_product_in_title": false,
+        "manufacturer_notice_is_newer": true,
+        "verified_target_source": "",
+        "verified_target_scope": ""
+      }
+    },
+    "6241010F1080": {
+      "product_name": "トスフロキサシントシル酸塩錠７５ｍｇ「サワイ」",
+      "maker": "沢井製薬",
+      "official": {
+        "status": "limited",
+        "label": "限定出荷（自社の事情）",
+        "updated_at": "2026-07-21"
+      },
+      "manufacturer": {
+        "status": "ok",
+        "label": "限定出荷解除・通常出荷",
+        "announced_at": "2026-11-24",
+        "maker": "沢井製薬",
+        "title": "2026/11/24 供給関連 PDF NEW トスフロキサシントシル酸塩錠75mg「サワイ」限定出荷解除のご案内 PDF NEW",
+        "url": "https://med.sawai.co.jp/file/pr27_1270_2.pdf",
+        "scope": "product"
+      },
+      "confidence": "high",
+      "reason": "メーカー・製品規格・公表日の一致を確認",
+      "badge": "情報差異あり",
+      "evidence": {
+        "maker_match": true,
+        "exact_product_in_title": true,
         "manufacturer_notice_is_newer": true,
         "verified_target_source": "",
         "verified_target_scope": ""

@@ -1,6 +1,42 @@
 [
  {
   "date": "2026/11/24",
+  "title": "クラスI回収 該当回収品目　照射赤血球液-LR「日赤」",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html",
+  "tag": "回収"
+ },
+ {
+  "date": "2026/11/24",
+  "title": "医薬品・医療機器等安全性情報 No.434（厚生労働省発行）を掲載しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/safety-info/0166.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/11/24",
+  "title": "[イベント]2026年度 医療機器規制と審査の最適化のための協働計画における承認審査等に関する講習会のご案内",
+  "url": "https://www.pmda.go.jp/review-services/symposia/0213.html",
+  "tag": "承認審査"
+ },
+ {
+  "date": "2026/11/24",
+  "title": "1月の簡易相談実施予定を掲載しました（医療機器等）",
+  "url": "https://www.pmda.go.jp/review-services/f2f-pre/consultations/0015.html",
+  "tag": "承認審査"
+ },
+ {
+  "date": "2026/11/24",
+  "title": "「副作用が疑われる症例報告に関する情報」に2026年7月分の情報を追加しました",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/adr-info/suspected-adr/0005.html",
+  "tag": "安全対策"
+ },
+ {
+  "date": "2026/11/24",
+  "title": "プログラム医療機器のページを更新（講習会資料の英訳公開、職員募集）しました。",
+  "url": "https://www.pmda.go.jp/review-services/drug-reviews/about-reviews/devices/0048.html",
+  "tag": "承認審査"
+ },
+ {
+  "date": "2026/11/24",
   "title": "オレンジレターNo.30を掲載しました。",
   "url": "https://www.pmda.go.jp/review-services/gmp-qms-gctp/gmp/0011.html",
   "tag": "承認審査"
@@ -22,41 +58,5 @@
   "title": "令和8年度治験エコシステム導入推進事業の情報発信協力機関を追加募集します",
   "url": "https://www.pmda.go.jp/relief-services/0011.html",
   "tag": "承認審査"
- },
- {
-  "date": "2026/11/18",
-  "title": "クラスI回収 該当回収品目　照射赤血球液-LR「日赤」、他1件",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html",
-  "tag": "回収"
- },
- {
-  "date": "2026/11/18",
-  "title": "IRB登録情報を更新しました",
-  "url": "https://www.pmda.go.jp/review-services/trials/0008.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/11/17",
-  "title": "新医薬品の承認品目一覧（2026年11月16日承認分まで）を掲載しました",
-  "url": "https://www.pmda.go.jp/review-services/drug-reviews/review-information/p-drugs/0040.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/11/17",
-  "title": "医薬品の適応判定を目的として承認されたコンパニオン診断薬等（2026年11月12日版）を掲載しました",
-  "url": "https://www.pmda.go.jp/review-services/drug-reviews/review-information/cd/0001.html",
-  "tag": "承認審査"
- },
- {
-  "date": "2026/11/16",
-  "title": "「定期の予防接種等による副反応疑いの報告等の取扱いについて」の一部改正について」を掲載しました",
-  "url": "https://www.pmda.go.jp/safety/reports/hcp/prev-vacc-act/0003.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/11/16",
-  "title": "添付文書改訂相談に基づく添付文書改訂（医薬品）を掲載しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/revision-based-on-the-consultation/0001.html",
-  "tag": "安全対策"
  }
 ]
