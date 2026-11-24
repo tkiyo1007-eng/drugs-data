@@ -3,9 +3,21 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-11-25T00:05:29+09:00",
-  "last_success_at": "2026-11-25T00:05:29+09:00",
+  "checked_at": "2026-11-25T08:28:16+09:00",
+  "last_success_at": "2026-11-25T08:28:16+09:00",
   "items": [
+    {
+      "title": "【厚労省】供給システムに不正侵入‐企業担当者の情報漏洩も",
+      "url": "https://www.yakuji.co.jp/entry142064.html",
+      "date": "2026-11-25",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【GE薬協議会】先発品撤退で情報消失経験‐国による一元管理を提言",
+      "url": "https://www.yakuji.co.jp/entry142062.html",
+      "date": "2026-11-25",
+      "tag": "業界ニュース"
+    },
     {
       "title": "【JACDS】SMBGのOTC化推進要望‐薬剤師関与へ仕組み整備を",
       "url": "https://www.yakuji.co.jp/entry141998.html",
@@ -28,30 +40,6 @@
       "title": "薬剤師関与の販売制度を‐NPhA 藤井会長、OTC使用で適切に助言",
       "url": "https://www.yakuji.co.jp/entry141989.html",
       "date": "2026-11-24",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【27年度介護報酬改定】老健の薬剤師評価拡充か‐医療・介護連携を強化へ",
-      "url": "https://www.yakuji.co.jp/entry141994.html",
-      "date": "2026-11-20",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【医療保険部会】次期適正化計画の論点議論‐地域フォーミュラリに意見",
-      "url": "https://www.yakuji.co.jp/entry141991.html",
-      "date": "2026-11-20",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【医療安全情報】注射剤で投与間隔間違い‐スケジュール管理喚起",
-      "url": "https://www.yakuji.co.jp/entry141988.html",
-      "date": "2026-11-20",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【PhRMA】拡大案「到底容認できず」‐費用対評価に不満表明",
-      "url": "https://www.yakuji.co.jp/entry141987.html",
-      "date": "2026-11-20",
       "tag": "業界ニュース"
     }
   ]
