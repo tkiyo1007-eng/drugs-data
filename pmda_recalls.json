@@ -2,7 +2,7 @@
   "classes": {
     "I": {
       "status": "ok",
-      "last_success_date": "2026-11-24",
+      "last_success_date": "2026-11-25",
       "items": [
         {
           "id": "1-2509",
@@ -48,7 +48,7 @@
     },
     "II": {
       "status": "ok",
-      "last_success_date": "2026-11-24",
+      "last_success_date": "2026-11-25",
       "items": [
         {
           "id": "2-13051",
@@ -129,20 +129,12 @@
           "maker": "株式会社パナケイア製薬",
           "url": "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=2-13012",
           "ended": false
-        },
-        {
-          "id": "2-13011",
-          "date": "2026-10-26",
-          "title": "日本薬局方酸素",
-          "maker": "日本酸素株式会社",
-          "url": "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=2-13011",
-          "ended": false
         }
       ]
     },
     "III": {
       "status": "ok",
-      "last_success_date": "2026-11-24",
+      "last_success_date": "2026-11-25",
       "items": []
     }
   }
