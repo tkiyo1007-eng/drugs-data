@@ -1,5 +1,17 @@
 [
  {
+  "date": "2026/11/24",
+  "title": "オレンジレターNo.30を掲載しました。",
+  "url": "https://www.pmda.go.jp/review-services/gmp-qms-gctp/gmp/0011.html",
+  "tag": "承認審査"
+ },
+ {
+  "date": "2026/11/24",
+  "title": "RS戦略相談に係る相談手数料低額要件適用申請に関するFAQ（2026年（令和8年）11月24日版）を掲載しました。",
+  "url": "https://www.pmda.go.jp/review-services/f2f-pre/strategies/0005.html",
+  "tag": "承認審査"
+ },
+ {
   "date": "2026/11/20",
   "title": "薬・ワクチンのガイド（必須版）のWebアンケート調査を開始しました",
   "url": "https://www.pmda.go.jp/safety/info-services/drugs/items-information/guide-for-patients/0001.html",
@@ -45,18 +57,6 @@
   "date": "2026/11/16",
   "title": "添付文書改訂相談に基づく添付文書改訂（医薬品）を掲載しました",
   "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/revision-based-on-the-consultation/0001.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/11/16",
-  "title": "［MID-NET］MID-NETの利活用状況を更新しました",
-  "url": "https://www.pmda.go.jp/safety/mid-net/0010.html",
-  "tag": "安全対策"
- },
- {
-  "date": "2026/11/16",
-  "title": "患者副作用報告（2026年4月1日から2026年7月31日受付分）を追加しました",
-  "url": "https://www.pmda.go.jp/safety/reports/patients/0005.html",
   "tag": "安全対策"
  }
 ]
