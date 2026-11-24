@@ -1529,6 +1529,9 @@ def limited_manufacturer_notice_card(notice, target):
     day = notice_date_label(notice["announced_at"])
     reason = notice.get("reason")
     reason_html = f'<p><strong>メーカーが示した理由</strong>　{esc(reason)}</p>' if reason else ""
+    is_supply_snapshot = notice["event_type"] == "supply"
+    summary = target.get("summary") if is_supply_snapshot else ""
+    summary_html = f'<p>{esc(summary)}</p>' if summary and summary != reason else ""
     seller = f'<p>対象の販売元　{esc(target["seller"])}</p>' if target.get("seller") else ""
     names = "・".join(notice_package_names(target))
     packages = (f'<p><strong>対象包装</strong>　{esc(names)}</p>' if names
@@ -1541,18 +1544,25 @@ def limited_manufacturer_notice_card(notice, target):
         timing = timing.get("text")
     projected = f'<p><strong>案内の再開・解除情報</strong>　{esc(timing)}</p>' if timing else ""
     package_plans = []
+    package_statuses = []
     for package in target.get("packages", []):
         supply = package.get("supply") if isinstance(package, dict) else None
         if not valid_package_supply(supply):
             continue
+        if is_supply_snapshot and supply.get("status_text"):
+            package_statuses.append(f'<li>{esc(package["package"])}　{esc(supply["status_text"])}</li>')
         for plan in supply["plans"]:
             if plan["event"] in {"shipment_resumption", "normal_shipment"}:
                 package_plans.append(f'<li>{esc(package["package"])}　{PACKAGE_PLAN_LABELS[plan["event"]]}　{esc(plan["timing"])}</li>')
     plans = f'<ul>{"".join(package_plans)}</ul>' if package_plans else ""
+    if package_statuses:
+        packages = f'<p><strong>対象包装</strong></p><ul>{"".join(package_statuses)}</ul>'
+        if len(package_statuses) != len(target.get("packages", [])):
+            packages += f'<p>案内の対象　{esc(names)}</p>'
     if not projected and not plans:
         projected = '<p>解除時期の記載は確認できていません。</p>'
     return (f'<article><h3>{esc(day)}の{esc(notice["maker"])}の案内</h3>'
-            f'{seller}{reason_html}{packages}{projected}{plans}'
+            f'{seller}{summary_html}{reason_html}{packages}{projected}{plans}'
             f'<a class="source-link" href="{esc(notice["url"])}" data-dsn-event="official-source-open">'
             'メーカー原文を確認</a></article>')
 

@@ -767,6 +767,10 @@ def product_package_snapshot(rows, notice_index, bulletins, generated_keys, *,
     for row in rows:
         key = item_key(row)
         matches = matching_manufacturer_notices(row, notice_index.get(key, ()), bulletins)
+        matches = [match for match in matches
+                   if not (match["notice"].get("event_type") == "supply"
+                           and match["target"]["scope"] == "product"
+                           and not match["target"].get("packages"))]
         if not matches:
             continue
         latest = max(m["notice"]["announced_at"] for m in matches)
