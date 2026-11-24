@@ -1,9 +1,15 @@
 name: 毎日データ更新
+run-name: ${{ inputs.recovery_source != '' && format('供給更新の自動復旧 {0}', inputs.recovery_source) || '毎日データ更新' }}
 
 on:
   schedule:
   - cron: '10 14 * * *'  # 日本時間 毎日23時10分
   workflow_dispatch:       # 手動実行も可能
+    inputs:
+      recovery_source:
+        description: 自動復旧が確認した原表の日付とSHA-256
+        type: string
+        required: false
 
 concurrency:
   group: update-drugs
@@ -29,9 +35,11 @@ jobs:
         run: python3 -m unittest discover -s scripts -p 'test_*.py'
 
       - name: 供給状況Excel ダウンロード（厚労省ページからリンク取得）
+        env:
+          RECOVERY_SOURCE: ${{ inputs.recovery_source }}
         run: |
           python3 - <<'EOF'
-          import requests, json, hashlib
+          import requests, json, hashlib, os
           from scripts.jst_time import jst_today
           from scripts.mhlw_supply_source import MHLW_SUPPLY_PAGE, decode_supply_page, supply_source_from_page
           r = requests.get(MHLW_SUPPLY_PAGE, timeout=30)
@@ -52,6 +60,9 @@ jobs:
           with open("supply_latest.xlsx", "wb") as f:
               f.write(r2.content)
           source["sha256"] = hashlib.sha256(r2.content).hexdigest()
+          expected = os.environ.get("RECOVERY_SOURCE")
+          if expected and expected != f"{source['excel_date']}:{source['sha256']}":
+              raise SystemExit("自動復旧の確認後に原表が変わりました。次回の照合を待ちます。")
           print(f"✅ ダウンロード成功: {len(r2.content)} bytes")
           # 取り込んだ厚労省ファイルを記録する。コア公開と同じcommitに含めるため、後段で
           # 失敗すると記録は前回のまま残り、公開データ健全性監視が未反映を検出できる。
