@@ -886,6 +886,10 @@ class CuratedPageGenerationTests(unittest.TestCase):
         self.assertIn("PTP100錠：出荷停止", html)
         self.assertIn(f'href="../items/{code}.html"', html)
         self.assertNotIn(notice["reason"], html)
+        product_snapshot = dict(notice, announced_at="2026-11-24", event_type="supply",
+                                targets=[dict(target, scope="product", packages=[])])
+        self.assertEqual((html, keys), product_package_snapshot(
+            [row], {code: [notice, product_snapshot]}, {"items": []}, {code}))
         target["packages"][0]["supply"]["plans"] = [{"event": "stock_depletion", "timing": "2026年12月予定"}]
         with_details, keys = product_package_snapshot([row], {code: [notice]}, None, {code}, include_details=True)
         self.assertEqual({code}, keys)

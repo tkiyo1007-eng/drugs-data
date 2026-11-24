@@ -68617,6 +68617,1287 @@
       "cautions": [
         "在庫消尽時期はメーカーの見込みです。実際の販売終了日や卸の在庫は確認できていません。"
       ]
+    },
+    {
+      "id": "towa-supply-list-20261119",
+      "maker": "東和薬品",
+      "title": "東和薬品の製品供給状況一覧（2026-11-19版）",
+      "url": "https://med.towayakuhin.co.jp/medical/product/fileloader.php?id=80558&t=6",
+      "announced_at": "2026-11-19",
+      "verified_at": "2026-11-24",
+      "content_updated_at": "2026-11-24",
+      "sha256": "fd43773def3910e8f9ab6991cfcf53066497737a5223d2a1a331a2ab4abe2295",
+      "collection_mode": "manual",
+      "event_type": "supply",
+      "reason": "個別の出荷調整理由は、この一覧に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "1129008F1063",
+          "product_name": "タンドスピロンクエン酸塩錠５ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            7
+          ],
+          "packages": [],
+          "summary": "出荷対応は②「限定出荷（自社の事情）」、出荷量の区分はAプラス「出荷量増加」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "1139009F4063",
+          "product_name": "ラモトリギン錠１００ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            13
+          ],
+          "packages": [],
+          "summary": "出荷対応は②「限定出荷（自社の事情）」、出荷量の区分はAプラス「出荷量増加」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "1179038F6068",
+          "product_name": "リスペリドンＯＤ錠２ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            13
+          ],
+          "packages": [],
+          "summary": "出荷対応は②「限定出荷（自社の事情）」、出荷量の区分はA「出荷量通常」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "1179038F7056",
+          "product_name": "リスペリドンＯＤ錠０．５ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            13
+          ],
+          "packages": [],
+          "summary": "出荷対応は②「限定出荷（自社の事情）」、出荷量の区分はAプラス「出荷量増加」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "1179051F4052",
+          "product_name": "ミルタザピンＯＤ錠３０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            12
+          ],
+          "packages": [],
+          "summary": "出荷対応は②「限定出荷（自社の事情）」、出荷量の区分はAプラス「出荷量増加」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "1190018F5193",
+          "product_name": "メマンチン塩酸塩ＯＤ錠１０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            12
+          ],
+          "packages": [],
+          "summary": "出荷対応は②「限定出荷（自社の事情）」、出荷量の区分はAプラス「出荷量増加」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "1190018F6190",
+          "product_name": "メマンチン塩酸塩ＯＤ錠２０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            12
+          ],
+          "packages": [],
+          "summary": "出荷対応は②「限定出荷（自社の事情）」、出荷量の区分はAプラス「出荷量増加」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "1319720Y2071",
+          "product_name": "ヒアルロン酸ナトリウム点眼液０．３％「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            9
+          ],
+          "packages": [],
+          "summary": "出荷対応は②「限定出荷（自社の事情）」、出荷量の区分はD「薬価削除予定」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "2149040F1301",
+          "product_name": "カンデサルタン錠２ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            4
+          ],
+          "packages": [],
+          "summary": "出荷対応は②「限定出荷（自社の事情）」、出荷量の区分はAプラス「出荷量増加」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "2149121F1099",
+          "product_name": "ジルムロ配合錠ＬＤ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            5
+          ],
+          "packages": [],
+          "summary": "出荷対応は②「限定出荷（自社の事情）」、出荷量の区分はA「出荷量通常」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "2149121F2095",
+          "product_name": "ジルムロ配合錠ＨＤ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            5
+          ],
+          "packages": [],
+          "summary": "出荷対応は②「限定出荷（自社の事情）」、出荷量の区分はA「出荷量通常」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "2149121F3032",
+          "product_name": "ジルムロ配合ＯＤ錠ＬＤ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            5
+          ],
+          "packages": [],
+          "summary": "出荷対応は③「限定出荷（他社品の影響）」、出荷量の区分はA「出荷量通常」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "2149121F4039",
+          "product_name": "ジルムロ配合ＯＤ錠ＨＤ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            5
+          ],
+          "packages": [],
+          "summary": "出荷対応は②「限定出荷（自社の事情）」、出荷量の区分はA「出荷量通常」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "2171006N2080",
+          "product_name": "ジルチアゼム塩酸塩徐放カプセル２００ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            5
+          ],
+          "packages": [],
+          "summary": "出荷対応は④「限定出荷（その他）」、出荷量の区分はAプラス「出荷量増加」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "2189017F2215",
+          "product_name": "ロスバスタチン錠５ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            14
+          ],
+          "packages": [],
+          "summary": "出荷対応は④「限定出荷（その他）」、出荷量の区分はAプラス「出荷量増加」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "2239001N1160",
+          "product_name": "アンブロキソール塩酸塩徐放カプセル４５ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            2
+          ],
+          "packages": [],
+          "summary": "出荷対応は②「限定出荷（自社の事情）」、出荷量の区分はD「薬価削除予定」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "2459100F1197",
+          "product_name": "ベタセレミン配合錠",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            11
+          ],
+          "packages": [],
+          "summary": "出荷対応は②「限定出荷（自社の事情）」、出荷量の区分はA「出荷量通常」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "2482009F1082",
+          "product_name": "フリウェル配合錠ＬＤ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            10
+          ],
+          "packages": [],
+          "summary": "出荷対応は②「限定出荷（自社の事情）」、出荷量の区分はA「出荷量通常」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "2499010F1104",
+          "product_name": "ジエノゲスト錠１ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            5
+          ],
+          "packages": [],
+          "summary": "出荷対応は②「限定出荷（自社の事情）」、出荷量の区分はAプラス「出荷量増加」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "2590008F1166",
+          "product_name": "タムスロシン塩酸塩ＯＤ錠０．１ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            7
+          ],
+          "packages": [],
+          "summary": "出荷対応は③「限定出荷（他社品の影響）」、出荷量の区分はAプラス「出荷量増加」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "259000BF2041",
+          "product_name": "バルデナフィル錠１０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            9
+          ],
+          "packages": [],
+          "summary": "出荷対応は②「限定出荷（自社の事情）」、出荷量の区分はB「出荷量減少」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "259000BF3048",
+          "product_name": "バルデナフィル錠２０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            9
+          ],
+          "packages": [],
+          "summary": "出荷対応は②「限定出荷（自社の事情）」、出荷量の区分はB「出荷量減少」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "2659710N1217",
+          "product_name": "テルビナフィン塩酸塩クリーム１％「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            7
+          ],
+          "packages": [],
+          "summary": "出荷対応は③「限定出荷（他社品の影響）」、出荷量の区分はAプラス「出荷量増加」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "3150002F1280",
+          "product_name": "トコフェロール酢酸エステル錠５０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            8
+          ],
+          "packages": [],
+          "summary": "出荷対応は②「限定出荷（自社の事情）」、出荷量の区分はA「出荷量通常」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "3399006F2227",
+          "product_name": "サルポグレラート塩酸塩錠１００ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            5
+          ],
+          "packages": [],
+          "summary": "出荷対応は②「限定出荷（自社の事情）」、出荷量の区分はA「出荷量通常」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "3929407D1110",
+          "product_name": "レボホリナート点滴静注用２５ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            14
+          ],
+          "packages": [],
+          "summary": "出荷対応は③「限定出荷（他社品の影響）」、出荷量の区分はA「出荷量通常」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "3929407D2051",
+          "product_name": "レボホリナート点滴静注用１００ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            14
+          ],
+          "packages": [],
+          "summary": "出荷対応は③「限定出荷（他社品の影響）」、出荷量の区分はA「出荷量通常」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "3999016F1049",
+          "product_name": "メトトレキサート錠２ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            12
+          ],
+          "packages": [],
+          "summary": "出荷対応は②「限定出荷（自社の事情）」、出荷量の区分はA「出荷量通常」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "4291015F1140",
+          "product_name": "レトロゾール錠２．５ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            13
+          ],
+          "packages": [],
+          "summary": "出荷対応は③「限定出荷（他社品の影響）」、出荷量の区分はA「出荷量通常」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "4490016M1104",
+          "product_name": "スプラタストトシル酸塩カプセル５０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            6
+          ],
+          "packages": [],
+          "summary": "出荷対応は②「限定出荷（自社の事情）」、出荷量の区分はAプラス「出荷量増加」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "4490025F3140",
+          "product_name": "オロパタジン塩酸塩ＯＤ錠２．５ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            4
+          ],
+          "packages": [],
+          "summary": "出荷対応は②「限定出荷（自社の事情）」、出荷量の区分はA「出荷量通常」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "6113400A1154",
+          "product_name": "バンコマイシン点滴静注用０．５ｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            9
+          ],
+          "packages": [],
+          "summary": "出荷対応は②「限定出荷（自社の事情）」、出荷量の区分はA「出荷量通常」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "6119401D1108",
+          "product_name": "テイコプラニン点滴静注用２００ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            7
+          ],
+          "packages": [],
+          "summary": "出荷対応は③「限定出荷（他社品の影響）」、出荷量の区分はAプラス「出荷量増加」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "6179001F1082",
+          "product_name": "ボリコナゾール錠５０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            11
+          ],
+          "packages": [],
+          "summary": "出荷対応は③「限定出荷（他社品の影響）」、出荷量の区分はA「出荷量通常」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "6179001F2089",
+          "product_name": "ボリコナゾール錠２００ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            11
+          ],
+          "packages": [],
+          "summary": "出荷対応は③「限定出荷（他社品の影響）」、出荷量の区分はA「出荷量通常」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "6241013F2250",
+          "product_name": "レボフロキサシン錠２５０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            14
+          ],
+          "packages": [],
+          "summary": "出荷対応は②「限定出荷（自社の事情）」、出荷量の区分はA「出荷量通常」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "6250019F1276",
+          "product_name": "バラシクロビル錠５００ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            8
+          ],
+          "packages": [],
+          "summary": "出荷対応は③「限定出荷（他社品の影響）」、出荷量の区分はAプラス「出荷量増加」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "6250029F1121",
+          "product_name": "エンテカビル錠０．５ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            3
+          ],
+          "packages": [],
+          "summary": "出荷対応は②「限定出荷（自社の事情）」、出荷量の区分はAプラス「出荷量増加」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "6250031F1102",
+          "product_name": "ファムシクロビル錠２５０ｍｇ「トーワ」",
+          "maker": "東和薬品",
+          "scope": "product",
+          "source_pages": [
+            9
+          ],
+          "packages": [],
+          "summary": "出荷対応は③「限定出荷（他社品の影響）」、出荷量の区分はA「出荷量通常」です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。品目全体の公表区分は厚労省の欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "sawai-supply-list-20261124",
+      "maker": "沢井製薬",
+      "title": "沢井製薬の製品供給状況一覧（2026-11-24版）",
+      "url": "https://med.sawai.co.jp/pdf/announce/announce20.pdf",
+      "announced_at": "2026-11-24",
+      "verified_at": "2026-11-24",
+      "content_updated_at": "2026-11-24",
+      "sha256": "9b3211cf400598930ae3c6eda89e5349c44f0fd2e41f23cce5ebd7b4c2fc06aa",
+      "collection_mode": "manual",
+      "event_type": "supply",
+      "reason": "個別の出荷調整理由は、この一覧に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "1190018F4154",
+          "product_name": "メマンチン塩酸塩ＯＤ錠５ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            12
+          ],
+          "packages": [],
+          "summary": "出荷対応は②限定出荷（自社の事情）、出荷量の区分はB．出荷量減少です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "2123014F2228",
+          "product_name": "アロチノロール塩酸塩錠１０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            2
+          ],
+          "packages": [],
+          "summary": "出荷対応は③限定出荷（他社品の影響）、出荷量の区分はB．出荷量減少です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "2129005F1200",
+          "product_name": "ジソピラミド徐放錠１５０ｍｇ「ＳＷ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            5
+          ],
+          "packages": [],
+          "summary": "出荷対応は②限定出荷（自社の事情）、出荷量の区分はB．出荷量減少です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "2149037F3078",
+          "product_name": "シルニジピン錠２０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            6
+          ],
+          "packages": [],
+          "summary": "出荷対応は②限定出荷（自社の事情）、出荷量の区分はD．薬価削除予定です。 一覧の見込み欄は「販売中止」です。"
+        },
+        {
+          "yj_code": "2149042F4024",
+          "product_name": "テルミサルタンＯＤ錠２０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            8
+          ],
+          "packages": [],
+          "summary": "出荷対応は②限定出荷（自社の事情）、出荷量の区分はD．薬価削除予定です。 一覧の見込み欄は「販売中止」です。"
+        },
+        {
+          "yj_code": "2149042F5020",
+          "product_name": "テルミサルタンＯＤ錠４０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            8
+          ],
+          "packages": [],
+          "summary": "出荷対応は②限定出荷（自社の事情）、出荷量の区分はD．薬価削除予定です。 一覧の見込み欄は「販売中止」です。"
+        },
+        {
+          "yj_code": "2149110F1210",
+          "product_name": "ロサルヒド配合錠ＬＤ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            14
+          ],
+          "packages": [],
+          "summary": "出荷対応は③限定出荷（他社品の影響）、出荷量の区分はB．出荷量減少です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "2149112F1073",
+          "product_name": "バルヒディオ配合錠ＭＤ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            9
+          ],
+          "packages": [],
+          "summary": "出荷対応は⑤供給停止、出荷量の区分はD．薬価削除予定です。 一覧の見込み欄は「販売中止」です。"
+        },
+        {
+          "yj_code": "2149113F1043",
+          "product_name": "テルチア配合錠ＡＰ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            8
+          ],
+          "packages": [],
+          "summary": "出荷対応は③限定出荷（他社品の影響）、出荷量の区分はB．出荷量減少です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "2149113F2040",
+          "product_name": "テルチア配合錠ＢＰ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            8
+          ],
+          "packages": [],
+          "summary": "出荷対応は③限定出荷（他社品の影響）、出荷量の区分はB．出荷量減少です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "2149117F1050",
+          "product_name": "テラムロ配合錠ＡＰ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            8
+          ],
+          "packages": [],
+          "summary": "出荷対応は③限定出荷（他社品の影響）、出荷量の区分はB．出荷量減少です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "2149117F2056",
+          "product_name": "テラムロ配合錠ＢＰ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            8
+          ],
+          "packages": [],
+          "summary": "出荷対応は③限定出荷（他社品の影響）、出荷量の区分はB．出荷量減少です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "2189008F1465",
+          "product_name": "プロブコール錠２５０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            11
+          ],
+          "packages": [],
+          "summary": "出荷対応は⑤供給停止、出荷量の区分はC．出荷停止です。 一覧の見込み欄は「販売中止」です。"
+        },
+        {
+          "yj_code": "2189017F4145",
+          "product_name": "ロスバスタチンＯＤ錠５ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            14
+          ],
+          "packages": [],
+          "summary": "出荷対応は③限定出荷（他社品の影響）、出荷量の区分はB．出荷量減少です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "2190101F1080",
+          "product_name": "アマルエット配合錠１番「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": [],
+          "summary": "出荷対応は③限定出荷（他社品の影響）、出荷量の区分はD．薬価削除予定です。 一覧の見込み欄は「販売中止」です。"
+        },
+        {
+          "yj_code": "2190102F1084",
+          "product_name": "アマルエット配合錠２番「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": [],
+          "summary": "出荷対応は③限定出荷（他社品の影響）、出荷量の区分はD．薬価削除予定です。 一覧の見込み欄は「販売中止」です。"
+        },
+        {
+          "yj_code": "2190103F1089",
+          "product_name": "アマルエット配合錠３番「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": [],
+          "summary": "出荷対応は③限定出荷（他社品の影響）、出荷量の区分はD．薬価削除予定です。 一覧の見込み欄は「販売中止」です。"
+        },
+        {
+          "yj_code": "2190104F1083",
+          "product_name": "アマルエット配合錠４番「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            1
+          ],
+          "packages": [],
+          "summary": "出荷対応は③限定出荷（他社品の影響）、出荷量の区分はD．薬価削除予定です。 一覧の見込み欄は「販売中止」です。"
+        },
+        {
+          "yj_code": "2399006F1579",
+          "product_name": "トリメブチンマレイン酸塩錠１００ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            8
+          ],
+          "packages": [],
+          "summary": "出荷対応は②限定出荷（自社の事情）、出荷量の区分はB．出荷量減少です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "2399008F1110",
+          "product_name": "イトプリド塩酸塩錠５０ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            2
+          ],
+          "packages": [],
+          "summary": "出荷対応は②限定出荷（自社の事情）、出荷量の区分はB．出荷量減少です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "2590002F1517",
+          "product_name": "フラボキサート塩酸塩錠２００ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            10
+          ],
+          "packages": [],
+          "summary": "出荷対応は③限定出荷（他社品の影響）、出荷量の区分はD．薬価削除予定です。 一覧の見込み欄は「販売中止」です。"
+        },
+        {
+          "yj_code": "2659710N1209",
+          "product_name": "テルビナフィン塩酸塩クリーム１％「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            8
+          ],
+          "packages": [],
+          "summary": "出荷対応は②限定出荷（自社の事情）、出荷量の区分はB．出荷量減少です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "4490025F4154",
+          "product_name": "オロパタジン塩酸塩ＯＤ錠５ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            4
+          ],
+          "packages": [],
+          "summary": "出荷対応は②限定出荷（自社の事情）、出荷量の区分はB．出荷量減少です。 解除時期と包装別の内訳は、この一覧に記載がありません。"
+        },
+        {
+          "yj_code": "4490026C1099",
+          "product_name": "モンテルカスト細粒４ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            13
+          ],
+          "packages": [],
+          "summary": "出荷対応は②限定出荷（自社の事情）、出荷量の区分はB．出荷量減少です。 一覧の見込み欄は「販売中止」です。"
+        },
+        {
+          "yj_code": "4490026F1184",
+          "product_name": "モンテルカストチュアブル錠５ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            13
+          ],
+          "packages": [],
+          "summary": "出荷対応は③限定出荷（他社品の影響）、出荷量の区分はB．出荷量減少です。 一覧の見込み欄は「販売中止」です。"
+        },
+        {
+          "yj_code": "6250019F1233",
+          "product_name": "バラシクロビル錠５００ｍｇ「サワイ」",
+          "maker": "沢井製薬",
+          "scope": "product",
+          "source_pages": [
+            9
+          ],
+          "packages": [],
+          "summary": "出荷対応は②限定出荷（自社の事情）、出荷量の区分はB．出荷量減少です。 一覧の見込み欄は「販売中止」です。"
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。品目全体の公表区分は厚労省の欄をご確認ください。"
+      ]
+    },
+    {
+      "id": "jg-supply-list-20261120",
+      "maker": "日本ジェネリック",
+      "title": "日本ジェネリックの製品供給状況一覧（2026-11-20版）",
+      "url": "https://medical.nihon-generic.co.jp/uploadfiles/news/JG_product_list.pdf",
+      "announced_at": "2026-11-20",
+      "verified_at": "2026-11-24",
+      "content_updated_at": "2026-11-24",
+      "sha256": "c530452fe7914af1f0dda1eef7c6fb5f4d4afe0031d2581190e4ff19761286aa",
+      "collection_mode": "manual",
+      "event_type": "supply",
+      "reason": "個別の出荷調整理由は、この一覧に記載されていません。",
+      "targets": [
+        {
+          "yj_code": "6132005C1240",
+          "product_name": "セファクロル細粒小児用１０％「ＪＧ」",
+          "maker": "長生堂製薬",
+          "seller": "日本ジェネリック",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            4
+          ],
+          "packages": [
+            {
+              "package": "バラ100g",
+              "unified_product_code": "792657987",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "出荷対応 ③限定出荷（他社品の影響）／出荷量欄 B:出荷量減少"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6132008C1022",
+          "product_name": "セフスパン細粒５０ｍｇ",
+          "maker": "長生堂製薬",
+          "seller": "日本ジェネリック",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            5
+          ],
+          "packages": [
+            {
+              "package": "バラ100g",
+              "unified_product_code": "792655617",
+              "supply": {
+                "status": "normal",
+                "plans": [],
+                "status_text": "出荷対応 ①通常出荷／出荷量欄 A:出荷量通常"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6132005M1245",
+          "product_name": "セファクロルカプセル２５０ｍｇ「ＪＧ」",
+          "maker": "長生堂製薬",
+          "seller": "日本ジェネリック",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            4
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "792657819",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "status_text": "出荷対応 ⑤供給停止／出荷量欄 C:出荷停止"
+              }
+            },
+            {
+              "package": "PTP600カプセル",
+              "unified_product_code": "792657840",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "status_text": "出荷対応 ⑤供給停止／出荷量欄 C:出荷停止"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6132016C1035",
+          "product_name": "セフカペンピボキシル塩酸塩細粒小児用１０％「ＣＨ」",
+          "maker": "長生堂製薬",
+          "seller": "日本ジェネリック",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            5
+          ],
+          "packages": [
+            {
+              "package": "バラ100g",
+              "unified_product_code": "792654818",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "status_text": "出荷対応 ⑤供給停止／出荷量欄 C:出荷停止"
+              }
+            },
+            {
+              "package": "0.5g×120包",
+              "unified_product_code": "792654825",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "status_text": "出荷対応 ⑤供給停止／出荷量欄 包装中止"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6132016F1040",
+          "product_name": "セフカペンピボキシル塩酸塩錠７５ｍｇ「ＣＨ」",
+          "maker": "長生堂製薬",
+          "seller": "日本ジェネリック",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            5
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792654610",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "status_text": "出荷対応 ⑤供給停止／出荷量欄 C:出荷停止"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6132016F2046",
+          "product_name": "セフカペンピボキシル塩酸塩錠１００ｍｇ「ＣＨ」",
+          "maker": "長生堂製薬",
+          "seller": "日本ジェネリック",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            5
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792654719",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "status_text": "出荷対応 ⑤供給停止／出荷量欄 C:出荷停止"
+              }
+            },
+            {
+              "package": "PTP120錠（15錠×8）",
+              "unified_product_code": "792654726",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "status_text": "出荷対応 ⑤供給停止／出荷量欄 C:出荷停止"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "792654757",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "status_text": "出荷対応 ⑤供給停止／出荷量欄 C:出荷停止"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6132013M1126",
+          "product_name": "セフジニルカプセル５０ｍｇ「ＪＧ」",
+          "maker": "長生堂製薬",
+          "seller": "日本ジェネリック",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            5
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "792657215",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "status_text": "出荷対応 ⑤供給停止／出荷量欄 C:出荷停止"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6132013M2149",
+          "product_name": "セフジニルカプセル１００ｍｇ「ＪＧ」",
+          "maker": "長生堂製薬",
+          "seller": "日本ジェネリック",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            5
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "792657314",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "status_text": "出荷対応 ⑤供給停止／出荷量欄 C:出荷停止"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6132008M1028",
+          "product_name": "セフスパンカプセル５０ｍｇ",
+          "maker": "長生堂製薬",
+          "seller": "日本ジェネリック",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            5
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "792655419",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "status_text": "出荷対応 ⑤供給停止／出荷量欄 C:出荷停止"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6132008M2024",
+          "product_name": "セフスパンカプセル１００ｍｇ",
+          "maker": "長生堂製薬",
+          "seller": "日本ジェネリック",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            5
+          ],
+          "packages": [
+            {
+              "package": "PTP100カプセル",
+              "unified_product_code": "792655518",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "status_text": "出荷対応 ⑤供給停止／出荷量欄 C:出荷停止"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "6132011F1101",
+          "product_name": "セフポドキシムプロキセチル錠１００ｍｇ「ＪＧ」",
+          "maker": "長生堂製薬",
+          "seller": "日本ジェネリック",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            5
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792657512",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "status_text": "出荷対応 ⑤供給停止／出荷量欄 C:出荷停止"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3222013F1149",
+          "product_name": "クエン酸第一鉄Ｎａ錠５０ｍｇ「ＪＧ」",
+          "maker": "日本ジェネリック",
+          "scope": "package",
+          "source_pages": [
+            3
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠",
+              "unified_product_code": "792312510",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "出荷対応 ③限定出荷（他社品の影響）／出荷量欄 A:出荷量通常"
+              }
+            },
+            {
+              "package": "PTP500錠",
+              "unified_product_code": "792312558",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "出荷対応 ③限定出荷（他社品の影響）／出荷量欄 A:出荷量通常"
+              }
+            },
+            {
+              "package": "バラ500錠",
+              "unified_product_code": "792312589",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "出荷対応 ③限定出荷（他社品の影響）／出荷量欄 A:出荷量通常"
+              }
+            }
+          ]
+        },
+        {
+          "yj_code": "3922001F1098",
+          "product_name": "タチオン錠５０ｍｇ",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            5
+          ],
+          "packages": [
+            {
+              "package": "PTP600錠",
+              "unified_product_code": "792360436",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "出荷対応 ④限定出荷（その他）／出荷量欄 包装中止"
+              }
+            },
+            {
+              "package": "PTP120錠",
+              "unified_product_code": "792360443",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "出荷対応 ④限定出荷（その他）／出荷量欄 A:出荷量通常"
+              }
+            }
+          ],
+          "seller": "日本ジェネリック"
+        },
+        {
+          "yj_code": "3922001F2248",
+          "product_name": "タチオン錠１００ｍｇ",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            5
+          ],
+          "packages": [
+            {
+              "package": "PTP1050錠",
+              "unified_product_code": "792360542",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "status_text": "出荷対応 ⑤供給停止／出荷量欄 包装中止"
+              }
+            },
+            {
+              "package": "PTP120錠",
+              "unified_product_code": "792360511",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "出荷対応 ④限定出荷（その他）／出荷量欄 A:出荷量通常"
+              }
+            },
+            {
+              "package": "PTP600錠",
+              "unified_product_code": "792360535",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "出荷対応 ④限定出荷（その他）／出荷量欄 A:出荷量通常"
+              }
+            }
+          ],
+          "seller": "日本ジェネリック"
+        },
+        {
+          "yj_code": "6219001H1102",
+          "product_name": "サラゾスルファピリジン腸溶錠５００ｍｇ「ＣＨ」",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            4
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "792658410",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "出荷対応 ②限定出荷（自社の事情）／出荷量欄 A:出荷量通常"
+              }
+            },
+            {
+              "package": "PTP500錠（10錠×50）",
+              "unified_product_code": "792658458",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "出荷対応 ②限定出荷（自社の事情）／出荷量欄 A:出荷量通常"
+              }
+            }
+          ],
+          "seller": "日本ジェネリック"
+        },
+        {
+          "yj_code": "4490020F2043",
+          "product_name": "セチリジン塩酸塩錠１０ｍｇ「ＣＨ」",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            4
+          ],
+          "packages": [
+            {
+              "package": "PTP100錠（10錠×10）",
+              "unified_product_code": "792451813",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "出荷対応 ②限定出荷（自社の事情）／出荷量欄 D:販売中止"
+              }
+            }
+          ],
+          "seller": "日本ジェネリック"
+        },
+        {
+          "yj_code": "3922400D1060",
+          "product_name": "タチオン注射用１００ｍｇ",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            5
+          ],
+          "packages": [
+            {
+              "package": "50管",
+              "unified_product_code": "792360757",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "出荷対応 ④限定出荷（その他）／出荷量欄 A:出荷量通常"
+              }
+            }
+          ],
+          "seller": "日本ジェネリック"
+        },
+        {
+          "yj_code": "3922400D3128",
+          "product_name": "タチオン注射用２００ｍｇ",
+          "maker": "長生堂製薬",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            5
+          ],
+          "packages": [
+            {
+              "package": "50管",
+              "unified_product_code": "792360856",
+              "supply": {
+                "status": "limited",
+                "plans": [],
+                "status_text": "出荷対応 ④限定出荷（その他）／出荷量欄 A:出荷量通常"
+              }
+            }
+          ],
+          "seller": "日本ジェネリック"
+        },
+        {
+          "yj_code": "2399707M1057",
+          "product_name": "オルテクサー口腔用軟膏０．１％",
+          "maker": "ビーブランド・メディコーデンタル",
+          "scope": "seller_route_and_package",
+          "source_pages": [
+            3
+          ],
+          "packages": [
+            {
+              "package": "5g",
+              "unified_product_code": "792295585",
+              "supply": {
+                "status": "normal",
+                "plans": [],
+                "status_text": "出荷対応 ①通常出荷／出荷量欄 A:出荷量通常"
+              }
+            }
+          ],
+          "seller": "日本ジェネリック"
+        },
+        {
+          "yj_code": "2171700S1176",
+          "product_name": "硝酸イソソルビドテープ４０ｍｇ「東光」",
+          "maker": "東光薬品工業",
+          "scope": "seller_route_and_package",
+          "seller": "日本ジェネリック",
+          "source_pages": [
+            10
+          ],
+          "packages": [
+            {
+              "package": "100枚（1枚×100）",
+              "unified_product_code": "792101022",
+              "supply": {
+                "status": "stopped",
+                "plans": [],
+                "status_text": "出荷対応 ⑤供給停止／出荷量欄 取扱中止"
+              }
+            }
+          ]
+        }
+      ],
+      "alternatives": [],
+      "cautions": [
+        "資料の日付時点の案内です。品目全体の公表区分は厚労省の欄をご確認ください。"
+      ]
     }
   ]
 }

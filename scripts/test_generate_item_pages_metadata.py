@@ -984,6 +984,8 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
                                          "plans": [{"event": "shipment_resumption", "timing": "2027年2月頃"}]},
         })
         notice["expected_resumption"] = {"display": "2027年春頃"}
+        notice["event_type"] = "supply"
+        notice["targets"][0]["summary"] = "この品目の出荷量は通常です。"
         url = "https://www.mhlw.go.jp/content/10800000/261120iyakuhinkyoukyu.xlsx"
         def render(notices, bulletins=None, trusted=True):
             return page_html(row, key, "limited", "2026-11-23", [], {key}, dataset_date="2026-11-23",
@@ -994,7 +996,7 @@ class VerifiedManufacturerNoticeTests(unittest.TestCase):
         page = render([notice], {"items": []})
         summary = page.split('id="limitedManufacturerTitle"', 1)[1].split("</section>", 1)[0]
         for value in ("500T", "100T", "販売元", "日本薬品工業", "製造工程上", "2027年2月頃",
-                      "2027年春頃", "2026年10月", notice["url"]):
+                      "2027年春頃", "2026年10月", "この品目の出荷量は通常", notice["url"]):
             self.assertIn(value, summary)
         self.assertIn(f'href="{url}"', page.split("</section>", 1)[0])
         self.assertLess(page.index(summary), page.index('id="manufacturerNoticesTitle"'))
