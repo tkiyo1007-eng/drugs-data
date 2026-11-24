@@ -1,0 +1,32 @@
+name: 供給状況の公開遅れを自動復旧
+
+on:
+  schedule:
+    # 日本時間 7:37、9:37〜23:37の2時間ごと、翌2:37。
+    - cron: '37 0,2,4,6,8,10,12,14,17,22 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: supply-release-recovery
+  cancel-in-progress: false
+
+jobs:
+  recover:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: 原表・取込済みデータ・公開サイトを照合
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/recover_supply_release.py

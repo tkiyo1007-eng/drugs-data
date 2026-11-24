@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 class MhlwDownloadWorkflowTests(unittest.TestCase):
     def run_download(self, page, *, page_encoding="utf-8", content_type="text/html; charset=UTF-8",
-                     received_day=None):
+                     received_day=None, recovery_source=""):
         # 実際の日次stepを実行し、公式ページとworkbookのネットワーク境界だけを置換。
         workflow = (ROOT / ".github/workflows/update_drugs.yml").read_text()
         step = workflow.split("name: 供給状況Excel ダウンロード（厚労省ページからリンク取得）", 1)[1]
@@ -46,11 +46,12 @@ class MhlwDownloadWorkflowTests(unittest.TestCase):
             try:
                 os.chdir(folder)
                 with mock.patch.dict(sys.modules, {"requests": requests}), \
+                        mock.patch.dict(os.environ, {"RECOVERY_SOURCE": recovery_source}), \
                         mock.patch("scripts.jst_time.jst_today", side_effect=lambda: clock[0]), \
                         contextlib.redirect_stdout(output):
                     try:
                         exec(compile(program, "<actual-download-workflow>", "exec"), {})
-                    except ValueError as error:
+                    except (ValueError, SystemExit) as error:
                         self.last_output = output.getvalue()
                         return None, requests.get.call_args_list, sorted(p.name for p in Path(folder).iterdir()), str(error)
                 self.last_output = output.getvalue()
@@ -67,6 +68,18 @@ class MhlwDownloadWorkflowTests(unittest.TestCase):
         self.assertIsNone(error)
         self.assertEqual(record, {"file": "001758803.xlsx", "url": "https://www.mhlw.go.jp/content/10800000/001758803.xlsx", "excel_date": "2026-10-13", "sha256": hashlib.sha256(b"test-only-workbook-payload").hexdigest()})
         self.assertEqual(calls[1], mock.call(record["url"], timeout=60))
+
+    def test_recovery_cannot_ingest_a_different_workbook_from_the_one_it_checked(self):
+        page = '<a href="/content/10800000/001758803.xlsx">医療用医薬品供給状況（令和８年10月13日現在）</a>'
+        mismatched = f"2026-10-13:{'0' * 64}"
+        record, _, files, error = self.run_download(page, recovery_source=mismatched)
+        self.assertIsNone(record)
+        self.assertNotIn("mhlw_source.json", files)
+        self.assertIn("原表が変わりました", error)
+        matched = "2026-10-13:" + hashlib.sha256(b"test-only-workbook-payload").hexdigest()
+        record, _, _, error = self.run_download(page, recovery_source=matched)
+        self.assertIsNone(error)
+        self.assertEqual(f"{record['excel_date']}:{record['sha256']}", matched)
 
     def test_ambiguous_or_undated_source_stops_before_download_or_metadata_write(self):
         valid = '<a href="/content/10800000/001758803.xlsx">医療用医薬品供給状況（令和８年10月13日現在）</a>'

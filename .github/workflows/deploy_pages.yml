@@ -1,5 +1,5 @@
 name: Deploy GitHub Pages
-run-name: ${{ github.event.workflow_run.name == 'PMDA回収情報を更新' && 'PMDA回収情報の公開' || 'Deploy GitHub Pages' }}
+run-name: ${{ inputs.recovery_source != '' && format('供給更新の自動復旧 {0}', inputs.recovery_source) || github.event.workflow_run.name == 'PMDA回収情報を更新' && 'PMDA回収情報の公開' || 'Deploy GitHub Pages' }}
 
 on:
   workflow_run:
@@ -7,6 +7,11 @@ on:
     types: [completed]
     branches: [main]
   workflow_dispatch:
+    inputs:
+      recovery_source:
+        description: 自動復旧が確認した取込済み原表の日付とSHA-256
+        type: string
+        required: false
 
 permissions:
   contents: read

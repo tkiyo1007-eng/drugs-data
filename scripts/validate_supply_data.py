@@ -250,7 +250,9 @@ def validate_csv(path, *, today=None, min_rows=10000, max_rows=30000, max_age_da
             f"対象外を除き{guarded_missing:,}/{len(rows):,}件（{guarded_missing_rate:.2f}%、"
             f"上限 {max_missing_sales_maker_rate:.2f}%）")
     if max_missing_sales_maker_rate is not None and missing_sales_maker_rate > 4.5:
-        errors.append(f"販売メーカー記載なしの全体率が上限を超えています: {missing_sales_maker_rate:.2f}%（上限 4.50%）")
+        errors.append(
+            f"販売メーカー記載なしの全体率が上限を超えています: "
+            f"{missing_sales_maker:,}/{len(rows):,}件（{missing_sales_maker_rate:.4f}%、上限 4.50%）")
     missing_price = sum(not (row.get("薬価") or "").strip() for row in rows)
     missing_price_rate = (missing_price / len(rows) * 100) if rows else 0.0
     if max_missing_price_rate is not None and missing_price_rate > max_missing_price_rate:
