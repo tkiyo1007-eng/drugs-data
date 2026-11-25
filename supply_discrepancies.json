@@ -2,44 +2,16 @@
   "schema_version": 1,
   "generated_at": "2026-11-25",
   "source": {
-    "mhlw_version": 202611250828,
+    "mhlw_version": 202611252041,
     "mhlw_note": "2026年11月25日厚労省データ反映",
     "manufacturer_checked_through": "2026-11-25"
   },
   "counts": {
     "high": 3,
-    "review": 7,
-    "total": 10
+    "review": 6,
+    "total": 9
   },
   "products": {
-    "2190402D2106": {
-      "product_name": "アルプロスタジルアルファデクス点滴静注用５００μｇ「タカタ」",
-      "maker": "高田製薬",
-      "official": {
-        "status": "limited",
-        "label": "限定出荷（自社の事情）",
-        "updated_at": "2026-02-02"
-      },
-      "manufacturer": {
-        "status": "stopped",
-        "label": "供給停止",
-        "announced_at": "2026-11-18",
-        "maker": "高田製薬",
-        "title": "2026/11/18 出荷停止に関するお知らせとお詫び_アルプロスタジルアルファデクス点滴静注用 500μg「タカタ」",
-        "url": "https://www.takata-seiyaku.co.jp/medical/topics/hpj79b000000cr5j-att/Alprostadil.pdf",
-        "scope": "ambiguous"
-      },
-      "confidence": "review",
-      "reason": "関連製品の案内ですが、本品の対象規格を機械判定できません",
-      "badge": "メーカー案内あり・原文確認",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": true,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "",
-        "verified_target_scope": ""
-      }
-    },
     "2325003F4163": {
       "product_name": "ファモチジンＯＤ錠２０ｍｇ「ＪＧ」",
       "maker": "日本ジェネリック",

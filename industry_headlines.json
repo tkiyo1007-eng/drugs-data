@@ -3,9 +3,15 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-11-25T08:28:16+09:00",
-  "last_success_at": "2026-11-25T08:28:16+09:00",
+  "checked_at": "2026-11-25T20:41:48+09:00",
+  "last_success_at": "2026-11-25T20:41:48+09:00",
   "items": [
+    {
+      "title": "【財政審が建議】27年度改定 完全実施を‐薬局減算は対象拡大も",
+      "url": "https://www.yakuji.co.jp/entry142066.html",
+      "date": "2026-11-25",
+      "tag": "業界ニュース"
+    },
     {
       "title": "【厚労省】供給システムに不正侵入‐企業担当者の情報漏洩も",
       "url": "https://www.yakuji.co.jp/entry142064.html",
@@ -19,26 +25,20 @@
       "tag": "業界ニュース"
     },
     {
+      "title": "【厚労省検討会議】タミフルOTC化に慎重論‐賛成意見5000件超も高い壁",
+      "url": "https://www.yakuji.co.jp/entry142060.html",
+      "date": "2026-11-25",
+      "tag": "業界ニュース"
+    },
+    {
       "title": "【JACDS】SMBGのOTC化推進要望‐薬剤師関与へ仕組み整備を",
       "url": "https://www.yakuji.co.jp/entry141998.html",
       "date": "2026-11-24",
       "tag": "業界ニュース"
     },
     {
-      "title": "【科研製薬】「エクテリー」が順調に拡大‐初の経口HAE治療薬",
-      "url": "https://www.yakuji.co.jp/entry141996.html",
-      "date": "2026-11-24",
-      "tag": "業界ニュース"
-    },
-    {
       "title": "【ツムラ】漢方製剤の情報提供強化‐胃腸症、睡眠障害領域で",
       "url": "https://www.yakuji.co.jp/entry141993.html",
-      "date": "2026-11-24",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "薬剤師関与の販売制度を‐NPhA 藤井会長、OTC使用で適切に助言",
-      "url": "https://www.yakuji.co.jp/entry141989.html",
       "date": "2026-11-24",
       "tag": "業界ニュース"
     }

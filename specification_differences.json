@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "source_date": "2026-11-24",
-  "source_sha256": "7d5c80bcffcf3e6daf24c224a61f597fa5dbf1145e774764c38df6b1a897106b",
-  "csv_sha256": "2838385b7de6a7ac0abb2fb0dd4230000d191ad485125f1d3993201577002617",
+  "source_date": "2026-11-25",
+  "source_sha256": "b3573d700f1167ab0170dac35070b07d24e1b65256baaa7da3ddc92cdd0fbfc7",
+  "csv_sha256": "7236a2d1c263a42b66542886b533ac87dff07bc6bf3aa63bc5069250fe7c5ff3",
   "differences": {
     "X00110": {
       "retained": "１Ｌ",
