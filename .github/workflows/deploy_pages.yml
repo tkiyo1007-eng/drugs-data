@@ -110,6 +110,11 @@ jobs:
           name: ${{ env.PAGES_ARTIFACT_NAME }}
   deploy:
     needs: [target, prepare_publication]
+    # main の検証が別の実行ですでに成功している場合、この実行の validate は
+    # skipped。暗黙の success() では、その skip が deploy にも伝播する。
+    if: >-
+      !cancelled() && needs.target.result == 'success' &&
+      needs.prepare_publication.result == 'success'
     runs-on: ubuntu-latest
     permissions:
       actions: read

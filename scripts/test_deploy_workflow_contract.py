@@ -80,6 +80,8 @@ class DeployWorkflowContractTests(unittest.TestCase):
         self.assertNotIn("pages: write", stage)
         self.assertNotIn("actions/upload-pages-artifact@", deploy)
         self.assertIn("needs: [target, prepare_publication]", deploy)
+        self.assertIn("!cancelled() && needs.target.result == 'success' &&", deploy)
+        self.assertIn("needs.prepare_publication.result == 'success'", deploy)
         self.assertIn("needs.prepare_publication.outputs.artifact_name", deploy)
         self.assertIn("needs.prepare_publication.outputs.artifact_id", deploy)
         self.assertNotIn("github.run_attempt", deploy)
