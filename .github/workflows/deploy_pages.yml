@@ -69,7 +69,8 @@ jobs:
     with:
       ref: ${{ needs.target.outputs.sha }}
       core_release: true
-  deploy:
+  # 先にアップロードを完了し、別のジョブで公開する（actions/deploy-pages#451）。
+  prepare_publication:
     needs: [target, validate]
     if: >-
       always() && needs.target.result == 'success' && needs.target.outputs.sha != '' &&
@@ -77,19 +78,16 @@ jobs:
        needs.validate.result == 'success')
     runs-on: ubuntu-latest
     permissions:
-      actions: read
       contents: read
-      pages: write
-      id-token: write
+      pages: read
     env:
       PAGES_ARTIFACT_NAME: github-pages-${{ github.run_attempt }}
-    concurrency:
-      group: pages
-      cancel-in-progress: true
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      artifact_name: ${{ steps.artifact_name.outputs.value }}
+      artifact_id: ${{ steps.upload.outputs.artifact_id }}
     steps:
+      - id: artifact_name
+        run: printf 'value=%s\n' "$PAGES_ARTIFACT_NAME" >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@v5
         with:
           ref: ${{ needs.target.outputs.sha }}
@@ -110,10 +108,26 @@ jobs:
         with:
           path: .
           name: ${{ env.PAGES_ARTIFACT_NAME }}
+  deploy:
+    needs: [target, prepare_publication]
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      pages: write
+      id-token: write
+    env:
+      PAGES_ARTIFACT_NAME: ${{ needs.prepare_publication.outputs.artifact_name }}
+      PAGES_ARTIFACT_ID: ${{ needs.prepare_publication.outputs.artifact_id }}
+    concurrency:
+      group: pages
+      cancel-in-progress: true
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: アップロードした公開ファイルが参照可能になるまで待機
         uses: actions/github-script@v8
-        env:
-          PAGES_ARTIFACT_ID: ${{ steps.upload.outputs.artifact_id }}
         with:
           script: |
             const name = process.env.PAGES_ARTIFACT_NAME;

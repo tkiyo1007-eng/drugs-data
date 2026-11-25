@@ -73,6 +73,18 @@ class DeployWorkflowContractTests(unittest.TestCase):
         self.assertNotIn("contents: write", self.deploy)
         self.assertNotIn("actions: write", self.deploy)
 
+    def test_upload_and_publish_are_separate_jobs_with_stable_artifact_identity(self):
+        stage = self.deploy.split("\n  prepare_publication:\n", 1)[1].split("\n  deploy:\n", 1)[0]
+        deploy = self.deploy.split("\n  deploy:\n", 1)[1]
+        self.assertIn("actions/upload-pages-artifact@", stage)
+        self.assertNotIn("pages: write", stage)
+        self.assertNotIn("actions/upload-pages-artifact@", deploy)
+        self.assertIn("needs: [target, prepare_publication]", deploy)
+        self.assertIn("needs.prepare_publication.outputs.artifact_name", deploy)
+        self.assertIn("needs.prepare_publication.outputs.artifact_id", deploy)
+        self.assertNotIn("github.run_attempt", deploy)
+        self.assertIn("actions/deploy-pages@", deploy)
+
     def test_recall_only_runs_do_not_trigger_x_or_search_submissions(self):
         title = "PMDA回収情報の公開"
         self.assertIn(f"github.event.workflow_run.name == 'PMDA回収情報を更新' && '{title}'", self.deploy)
