@@ -10804,5 +10804,78 @@
    "pkg": "PTP100錠",
    "until": ""
   }
- ]
+ ],
+ "https://medical.nihon-generic.co.jp/uploadfiles/medicine/SLDSN4_CHUUSHI_2611.pdf": [
+  {
+   "pkg": "バラ200錠",
+   "until": "2027年1月"
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  }
+ ],
+ "https://medical.nihon-generic.co.jp/a.php?id=1865": [
+  {
+   "pkg": "バラ100g",
+   "until": ""
+  }
+ ],
+ "https://med.sawai.co.jp/file/pr27_4623_1.pdf": [
+  {
+   "pkg": "PTP14錠",
+   "until": "2026年12月"
+  },
+  {
+   "pkg": "PTP140錠",
+   "until": "2026年12月"
+  }
+ ],
+ "https://www.nc-medical.com/product_topics/p5ib91000000a0j9-att/p5ib91000000a0jx.pdf": [],
+ "https://medical.nihon-generic.co.jp/a.php?id=1862": [
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
+ ],
+ "https://medical.nihon-generic.co.jp/a.php?id=1875": [
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  }
+ ],
+ "https://medical.nihon-generic.co.jp/a.php?id=1880": [
+  {
+   "pkg": "バラ100錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP14錠",
+   "until": ""
+  }
+ ],
+ "https://medical.nihon-generic.co.jp/a.php?id=1882": [
+  {
+   "pkg": "PTP500錠",
+   "until": ""
+  },
+  {
+   "pkg": "PTP100錠",
+   "until": ""
+  },
+  {
+   "pkg": "バラ200錠",
+   "until": ""
+  }
+ ],
+ "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001WqJtHIAV": [],
+ "https://www.nc-medical.com/product_topics/p5ib91000000a0k1-att/p5ib91000000a0kp.pdf": []
 }

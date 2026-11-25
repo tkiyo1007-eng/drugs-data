@@ -1305,10 +1305,10 @@
  },
  "メトホルミン塩酸塩錠２５０ｍｇ「ＳＮ」": {
   "maker": "日本ケミファ",
-  "title": "2026年4月24日 メトホルミン塩酸塩錠250mg「SN」 出荷調整に関するお知らせ",
-  "url": "https://www.nc-medical.com/product_topics/f4bj0h000000knx2-att/f4bj0h000000knxq.pdf",
-  "event_type": "limited",
-  "announced_at": "2026-04-24",
+  "title": "2026年11月25日 メトホルミン塩酸塩錠250mg「SN」 製品供給に関するお知らせ",
+  "url": "https://www.nc-medical.com/product_topics/p5ib91000000a0k1-att/p5ib91000000a0kp.pdf",
+  "event_type": "supply",
+  "announced_at": "2026-11-25",
   "checked": "2026-11-25"
  },
  "シロドシンＯＤ錠２ｍｇ「サワイ」": {
@@ -7357,6 +7357,38 @@
   "announced_at": "2026-11-19",
   "checked": "2026-11-25"
  },
+ "シロドシンＯＤ錠２ｍｇ「ＪＧ」": {
+  "maker": "日本ジェネリック",
+  "title": "2026/11/19 供給に関するお知らせ シロドシンOD錠2mg「JG」供給に関するお詫びとご案内を掲載いたしました",
+  "url": "https://medical.nihon-generic.co.jp/a.php?id=1886",
+  "event_type": "supply",
+  "announced_at": "2026-11-19",
+  "checked": "2026-11-25"
+ },
+ "デュロキセチンカプセル２０ｍｇ「タカタ」": {
+  "maker": "高田製薬",
+  "title": "2026/11/18 供給に関するお知らせとお詫び_デュロキセチンカプセル20mg「タカタ」",
+  "url": "https://www.takata-seiyaku.co.jp/medical/topics/jbargn00000006ru-att/Duloxetine20.pdf",
+  "event_type": "supply",
+  "announced_at": "2026-11-18",
+  "checked": "2026-11-25"
+ },
+ "デュロキセチンカプセル３０ｍｇ「タカタ」": {
+  "maker": "高田製薬",
+  "title": "2026/11/18 供給に関するお知らせとお詫び_デュロキセチンカプセル30mg「タカタ」",
+  "url": "https://www.takata-seiyaku.co.jp/medical/topics/jbargn00000006qf-att/Duloxetine30.pdf",
+  "event_type": "supply",
+  "announced_at": "2026-11-18",
+  "checked": "2026-11-25"
+ },
+ "プロカテロール塩酸塩ＤＳ０．０１％「タカタ」": {
+  "maker": "高田製薬",
+  "title": "2026/11/18 供給に関するお知らせとお詫び_プロカテロール塩酸塩DS0.01%「タカタ」",
+  "url": "https://www.takata-seiyaku.co.jp/medical/topics/jbargn00000006t9-att/Procaterol.pdf",
+  "event_type": "supply",
+  "announced_at": "2026-11-18",
+  "checked": "2026-11-25"
+ },
  "ｄ－クロルフェニラミンマレイン酸塩錠２ｍｇ「ＮＩＧ」": {
   "maker": "日医工",
   "title": "d-クロルフェニラミンマレイン酸塩錠2mg「NIG」 供給状況に関するお知らせ",
@@ -8558,12 +8590,12 @@
   "announced_at": "2024-09-06",
   "checked": "2026-11-25"
  },
- "シロドシンＯＤ錠２ｍｇ「ＪＧ」": {
+ "シロドシン錠４ｍｇ「ＪＧ」": {
   "maker": "日本ジェネリック",
-  "title": "2026/11/19 供給に関するお知らせ シロドシンOD錠2mg「JG」供給に関するお詫びとご案内を掲載いたしました",
-  "url": "https://medical.nihon-generic.co.jp/a.php?id=1886",
+  "title": "2026/11/25 供給に関するお知らせ シロドシン錠4mg「JG」 包装単位集約のご案内を掲載いたしました",
+  "url": "https://medical.nihon-generic.co.jp/uploadfiles/medicine/SLDSN4_CHUUSHI_2611.pdf",
   "event_type": "supply",
-  "announced_at": "2026-11-19",
+  "announced_at": "2026-11-25",
   "checked": "2026-11-25"
  },
  "スピロノラクトン錠２５ｍｇ「日医工」": {
@@ -8813,22 +8845,6 @@
   "title": "テプレノンカプセル50mg「日医工P」 供給状況に関するお知らせ",
   "url": "https://www.nichiiko.co.jp/medicine/file/71070/information/20240717cI2.pdf",
   "event_type": "supply",
-  "checked": "2026-11-25"
- },
- "デュロキセチンカプセル２０ｍｇ「タカタ」": {
-  "maker": "高田製薬",
-  "title": "2026/11/18 供給に関するお知らせとお詫び_デュロキセチンカプセル20mg「タカタ」",
-  "url": "https://www.takata-seiyaku.co.jp/medical/topics/jbargn00000006ru-att/Duloxetine20.pdf",
-  "event_type": "supply",
-  "announced_at": "2026-11-18",
-  "checked": "2026-11-25"
- },
- "デュロキセチンカプセル３０ｍｇ「タカタ」": {
-  "maker": "高田製薬",
-  "title": "2026/11/18 供給に関するお知らせとお詫び_デュロキセチンカプセル30mg「タカタ」",
-  "url": "https://www.takata-seiyaku.co.jp/medical/topics/jbargn00000006qf-att/Duloxetine30.pdf",
-  "event_type": "supply",
-  "announced_at": "2026-11-18",
   "checked": "2026-11-25"
  },
  "デュロキセチンカプセル３０ｍｇ「ＤＳＥＰ」": {
@@ -9222,6 +9238,14 @@
   "event_type": "supply",
   "checked": "2026-11-25"
  },
+ "バラシクロビル錠５００ｍｇ「ケミファ」": {
+  "maker": "日本ケミファ",
+  "title": "2026年11月25日 バラシクロビル錠500mg「ケミファ」 出荷調整解除のお知らせ",
+  "url": "https://www.nc-medical.com/product_topics/p5ib91000000a0j9-att/p5ib91000000a0jx.pdf",
+  "event_type": "resumed",
+  "announced_at": "2026-11-25",
+  "checked": "2026-11-25"
+ },
  "バルサルタン錠２０ｍｇ「ＤＳＥＰ」": {
   "maker": "第一三共エスファ",
   "title": "2025.05.12 供給関連情報 バルサルタン錠 20mg｢DSEP｣PTP100 錠 限定出荷解除のお知らせ",
@@ -9600,14 +9624,6 @@
   "title": "プレガバリンカプセル75mg「日医工」 供給状況に関するお知らせ",
   "url": "https://www.nichiiko.co.jp/medicine/file/36320/information/20230601cI6.pdf",
   "event_type": "supply",
-  "checked": "2026-11-25"
- },
- "プロカテロール塩酸塩ＤＳ０．０１％「タカタ」": {
-  "maker": "高田製薬",
-  "title": "2026/11/18 供給に関するお知らせとお詫び_プロカテロール塩酸塩DS0.01%「タカタ」",
-  "url": "https://www.takata-seiyaku.co.jp/medical/topics/jbargn00000006t9-att/Procaterol.pdf",
-  "event_type": "supply",
-  "announced_at": "2026-11-18",
   "checked": "2026-11-25"
  },
  "プロカテロール塩酸塩シロップ５μｇ／ｍＬ「日医工」": {
@@ -10918,6 +10934,22 @@
   "event_type": "supply",
   "checked": "2026-11-25"
  },
+ "シプロフロキサシン点滴静注液２００ｍｇ「ＮＰ」": {
+  "maker": "ニプロ",
+  "title": "2026年11月25日 ワイスタール配合静注用1g・シプロフロキサシン点滴静注液200mg「NP」／400mg「ニプロ」限定出荷解除のご案内",
+  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001WqJtHIAV",
+  "event_type": "resumed",
+  "announced_at": "2026-11-25",
+  "checked": "2026-11-25"
+ },
+ "シプロフロキサシン点滴静注液４００ｍｇ「ニプロ」": {
+  "maker": "ニプロ",
+  "title": "2026年11月25日 ワイスタール配合静注用1g・シプロフロキサシン点滴静注液200mg「NP」／400mg「ニプロ」限定出荷解除のご案内",
+  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001WqJtHIAV",
+  "event_type": "resumed",
+  "announced_at": "2026-11-25",
+  "checked": "2026-11-25"
+ },
  "セファゾリンＮａ点滴静注用１ｇバッグ「ＮＰ」": {
   "maker": "日医工",
   "title": "セファゾリンNa点滴静注用1gバッグ「NP」 供給状況に関するお知らせ",
@@ -10972,6 +11004,14 @@
   "title": "セフォチアム静注用1gバッグ「日医工」 供給状況に関するお知らせ",
   "url": "https://www.nichiiko.co.jp/medicine/file/23580/information/20250326cI6.pdf",
   "event_type": "supply",
+  "checked": "2026-11-25"
+ },
+ "ワイスタール配合静注用１ｇ": {
+  "maker": "ニプロ",
+  "title": "2026年11月25日 ワイスタール配合静注用1g・シプロフロキサシン点滴静注液200mg「NP」／400mg「ニプロ」限定出荷解除のご案内",
+  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001WqJtHIAV",
+  "event_type": "resumed",
+  "announced_at": "2026-11-25",
   "checked": "2026-11-25"
  },
  "セフトリアキソンナトリウム点滴用１ｇバッグ「ＮＰ」": {
