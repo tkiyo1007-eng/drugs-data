@@ -56,6 +56,18 @@ class UpdateWorkflowContractTests(unittest.TestCase):
         self.assertEqual(self.workflow.count("for push_attempt in 1 2 3 4 5"), 2)
         self.assertEqual(self.workflow.count("git pull --rebase origin main"), 2)
 
+    def test_direct_publication_requires_validated_core_to_have_been_pushed(self):
+        core = self.workflow.split("id: push_core", 1)[1].split("id: maker_refresh", 1)[0]
+        self.assertIn("if git push; then", core)
+        self.assertIn('echo "pushed=true" >> "$GITHUB_OUTPUT"', core)
+        publish = self.workflow.split("name: 検証済み供給データのPages公開を直接起動", 1)[1]
+        self.assertIn("!cancelled()", publish)
+        self.assertIn("inputs.recovery_source != ''", publish)
+        self.assertIn("steps.push_core.outputs.pushed == 'true'", publish)
+        self.assertIn("gh workflow run deploy_pages.yml --ref main", publish)
+        self.assertIn("supply_import=true", publish)
+        self.assertIn("actions: write", self.workflow)
+
     def test_core_commit_contains_csv_version_and_core_generated_pages(self):
         start = self.workflow.index("検証済み厚労省コアデータと対応ページを先に公開")
         end = self.workflow.index("メーカー補足情報を一時領域で取得・検証")
