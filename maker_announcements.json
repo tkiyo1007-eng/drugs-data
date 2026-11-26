@@ -7389,38 +7389,6 @@
   "announced_at": "2026-11-18",
   "checked": "2026-11-26"
  },
- "バラシクロビル錠５００ｍｇ「ケミファ」": {
-  "maker": "日本ケミファ",
-  "title": "2026年11月25日 バラシクロビル錠500mg「ケミファ」 出荷調整解除のお知らせ",
-  "url": "https://www.nc-medical.com/product_topics/p5ib91000000a0j9-att/p5ib91000000a0jx.pdf",
-  "event_type": "resumed",
-  "announced_at": "2026-11-25",
-  "checked": "2026-11-26"
- },
- "シプロフロキサシン点滴静注液２００ｍｇ「ＮＰ」": {
-  "maker": "ニプロ",
-  "title": "2026年11月25日 ワイスタール配合静注用1g・シプロフロキサシン点滴静注液200mg「NP」／400mg「ニプロ」限定出荷解除のご案内",
-  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001WqJtHIAV",
-  "event_type": "resumed",
-  "announced_at": "2026-11-25",
-  "checked": "2026-11-26"
- },
- "シプロフロキサシン点滴静注液４００ｍｇ「ニプロ」": {
-  "maker": "ニプロ",
-  "title": "2026年11月25日 ワイスタール配合静注用1g・シプロフロキサシン点滴静注液200mg「NP」／400mg「ニプロ」限定出荷解除のご案内",
-  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001WqJtHIAV",
-  "event_type": "resumed",
-  "announced_at": "2026-11-25",
-  "checked": "2026-11-26"
- },
- "ワイスタール配合静注用１ｇ": {
-  "maker": "ニプロ",
-  "title": "2026年11月25日 ワイスタール配合静注用1g・シプロフロキサシン点滴静注液200mg「NP」／400mg「ニプロ」限定出荷解除のご案内",
-  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001WqJtHIAV",
-  "event_type": "resumed",
-  "announced_at": "2026-11-25",
-  "checked": "2026-11-26"
- },
  "ｄ－クロルフェニラミンマレイン酸塩錠２ｍｇ「ＮＩＧ」": {
   "maker": "日医工",
   "title": "d-クロルフェニラミンマレイン酸塩錠2mg「NIG」 供給状況に関するお知らせ",
@@ -7476,6 +7444,13 @@
   "maker": "日医工",
   "title": "アカルボース錠100mg「NIG」 供給状況に関するお知らせ",
   "url": "https://www.nichiiko.co.jp/medicine/file/71250/information/20240508cG1.pdf",
+  "event_type": "supply",
+  "checked": "2026-11-26"
+ },
+ "ジルムロ配合ＯＤ錠ＨＤ「日医工」": {
+  "maker": "日医工",
+  "title": "ジルムロ配合OD錠HD「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/06050/information/20261125cI3.pdf",
   "event_type": "supply",
   "checked": "2026-11-26"
  },
@@ -8791,6 +8766,20 @@
   "announced_at": "2026-08-31",
   "checked": "2026-11-26"
  },
+ "タダラフィル錠２．５ｍｇＺＡ「日医工」": {
+  "maker": "日医工",
+  "title": "タダラフィル錠2.5mgZA「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/33250/information/20261125cI4.pdf",
+  "event_type": "supply",
+  "checked": "2026-11-26"
+ },
+ "タダラフィル錠５ｍｇＺＡ「日医工」": {
+  "maker": "日医工",
+  "title": "タダラフィル錠5mgZA「日医工」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/33260/information/20261125cI4.pdf",
+  "event_type": "supply",
+  "checked": "2026-11-26"
+ },
  "タムスロシン塩酸塩ＯＤ錠０．１ｍｇ「日医工」": {
   "maker": "日医工",
   "title": "タムスロシン塩酸塩OD錠0.1mg「日医工」 供給状況に関するお知らせ",
@@ -8913,21 +8902,21 @@
  "テルミサルタン錠２０ｍｇ「日医工」": {
   "maker": "日医工",
   "title": "テルミサルタン錠20mg「日医工」 供給状況に関するお知らせ",
-  "url": "https://www.nichiiko.co.jp/medicine/file/00170/information/20230510cI8.pdf",
+  "url": "https://www.nichiiko.co.jp/medicine/file/00170/information/20261125cI6.pdf",
   "event_type": "supply",
   "checked": "2026-11-26"
  },
  "テルミサルタン錠４０ｍｇ「日医工」": {
   "maker": "日医工",
   "title": "テルミサルタン錠40mg「日医工」 供給状況に関するお知らせ",
-  "url": "https://www.nichiiko.co.jp/medicine/file/00180/information/20230510cI8.pdf",
+  "url": "https://www.nichiiko.co.jp/medicine/file/00180/information/20261125cI6.pdf",
   "event_type": "supply",
   "checked": "2026-11-26"
  },
  "テルミサルタン錠８０ｍｇ「日医工」": {
   "maker": "日医工",
   "title": "テルミサルタン錠80mg「日医工」 供給状況に関するお知らせ",
-  "url": "https://www.nichiiko.co.jp/medicine/file/00190/information/20230510cI8.pdf",
+  "url": "https://www.nichiiko.co.jp/medicine/file/00190/information/20261125cI6.pdf",
   "event_type": "supply",
   "checked": "2026-11-26"
  },
@@ -9268,6 +9257,14 @@
   "title": "ペングッド錠250mg 供給状況に関するお知らせ",
   "url": "https://www.nichiiko.co.jp/medicine/file/17400/information/20250730cI2.pdf",
   "event_type": "supply",
+  "checked": "2026-11-26"
+ },
+ "バラシクロビル錠５００ｍｇ「ケミファ」": {
+  "maker": "日本ケミファ",
+  "title": "2026年11月25日 バラシクロビル錠500mg「ケミファ」 出荷調整解除のお知らせ",
+  "url": "https://www.nc-medical.com/product_topics/p5ib91000000a0j9-att/p5ib91000000a0jx.pdf",
+  "event_type": "resumed",
+  "announced_at": "2026-11-25",
   "checked": "2026-11-26"
  },
  "バルサルタン錠２０ｍｇ「ＤＳＥＰ」": {
@@ -10423,8 +10420,8 @@
  },
  "ロスバスタチン錠５ｍｇ「ＮＩＧ」": {
   "maker": "日医工",
-  "title": "ロスバスタチン錠2.5mg「NIG」 供給状況に関するお知らせ",
-  "url": "https://www.nichiiko.co.jp/medicine/files/20230712cG7.pdf",
+  "title": "ロスバスタチン錠5mg「NIG」 供給状況に関するお知らせ",
+  "url": "https://www.nichiiko.co.jp/medicine/file/70890/information/20261125cI11.pdf",
   "event_type": "supply",
   "checked": "2026-11-26"
  },
@@ -10958,6 +10955,22 @@
   "event_type": "supply",
   "checked": "2026-11-26"
  },
+ "シプロフロキサシン点滴静注液２００ｍｇ「ＮＰ」": {
+  "maker": "ニプロ",
+  "title": "2026年11月25日 ワイスタール配合静注用1g・シプロフロキサシン点滴静注液200mg「NP」／400mg「ニプロ」限定出荷解除のご案内",
+  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001WqJtHIAV",
+  "event_type": "resumed",
+  "announced_at": "2026-11-25",
+  "checked": "2026-11-26"
+ },
+ "シプロフロキサシン点滴静注液４００ｍｇ「ニプロ」": {
+  "maker": "ニプロ",
+  "title": "2026年11月25日 ワイスタール配合静注用1g・シプロフロキサシン点滴静注液200mg「NP」／400mg「ニプロ」限定出荷解除のご案内",
+  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001WqJtHIAV",
+  "event_type": "resumed",
+  "announced_at": "2026-11-25",
+  "checked": "2026-11-26"
+ },
  "セファゾリンＮａ点滴静注用１ｇバッグ「ＮＰ」": {
   "maker": "日医工",
   "title": "セファゾリンNa点滴静注用1gバッグ「NP」 供給状況に関するお知らせ",
@@ -11012,6 +11025,14 @@
   "title": "セフォチアム静注用1gバッグ「日医工」 供給状況に関するお知らせ",
   "url": "https://www.nichiiko.co.jp/medicine/file/23580/information/20250326cI6.pdf",
   "event_type": "supply",
+  "checked": "2026-11-26"
+ },
+ "ワイスタール配合静注用１ｇ": {
+  "maker": "ニプロ",
+  "title": "2026年11月25日 ワイスタール配合静注用1g・シプロフロキサシン点滴静注液200mg「NP」／400mg「ニプロ」限定出荷解除のご案内",
+  "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001WqJtHIAV",
+  "event_type": "resumed",
+  "announced_at": "2026-11-25",
   "checked": "2026-11-26"
  },
  "セフトリアキソンナトリウム点滴用１ｇバッグ「ＮＰ」": {
