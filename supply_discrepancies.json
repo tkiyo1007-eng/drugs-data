@@ -2,14 +2,14 @@
   "schema_version": 1,
   "generated_at": "2026-11-26",
   "source": {
-    "mhlw_version": 202611260804,
+    "mhlw_version": 202611262323,
     "mhlw_note": "2026年11月26日厚労省データ反映",
     "manufacturer_checked_through": "2026-11-26"
   },
   "counts": {
-    "high": 6,
-    "review": 7,
-    "total": 13
+    "high": 3,
+    "review": 6,
+    "total": 9
   },
   "products": {
     "2325003F4163": {
@@ -208,34 +208,6 @@
         "verified_target_scope": ""
       }
     },
-    "6139500F2179": {
-      "product_name": "ワイスタール配合静注用１ｇ",
-      "maker": "ニプロ",
-      "official": {
-        "status": "limited",
-        "label": "限定出荷（他社品の影響）",
-        "updated_at": "2025-02-14"
-      },
-      "manufacturer": {
-        "status": "ok",
-        "label": "限定出荷解除・通常出荷",
-        "announced_at": "2026-11-25",
-        "maker": "ニプロ",
-        "title": "2026年11月25日 ワイスタール配合静注用1g・シプロフロキサシン点滴静注液200mg「NP」／400mg「ニプロ」限定出荷解除のご案内",
-        "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001WqJtHIAV",
-        "scope": "product"
-      },
-      "confidence": "high",
-      "reason": "メーカー・製品規格・公表日の一致を確認",
-      "badge": "情報差異あり",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": true,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "",
-        "verified_target_scope": ""
-      }
-    },
     "6179001F2038": {
       "product_name": "ボリコナゾール錠２００ｍｇ「ＤＳＥＰ」",
       "maker": "第一三共エスファ",
@@ -279,90 +251,6 @@
         "maker": "沢井製薬",
         "title": "2026/11/24 供給関連 PDF NEW トスフロキサシントシル酸塩錠75mg「サワイ」限定出荷解除のご案内 PDF NEW",
         "url": "https://med.sawai.co.jp/file/pr27_1270_2.pdf",
-        "scope": "product"
-      },
-      "confidence": "high",
-      "reason": "メーカー・製品規格・公表日の一致を確認",
-      "badge": "情報差異あり",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": true,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "",
-        "verified_target_scope": ""
-      }
-    },
-    "6241400A4064": {
-      "product_name": "シプロフロキサシン点滴静注液２００ｍｇ「ＮＰ」",
-      "maker": "ニプロ",
-      "official": {
-        "status": "limited",
-        "label": "限定出荷（他社品の影響）",
-        "updated_at": "2025-10-01"
-      },
-      "manufacturer": {
-        "status": "ok",
-        "label": "限定出荷解除・通常出荷",
-        "announced_at": "2026-11-25",
-        "maker": "ニプロ",
-        "title": "2026年11月25日 ワイスタール配合静注用1g・シプロフロキサシン点滴静注液200mg「NP」／400mg「ニプロ」限定出荷解除のご案内",
-        "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001WqJtHIAV",
-        "scope": "product"
-      },
-      "confidence": "high",
-      "reason": "メーカー・製品規格・公表日の一致を確認",
-      "badge": "情報差異あり",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": true,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "",
-        "verified_target_scope": ""
-      }
-    },
-    "6241400A6032": {
-      "product_name": "シプロフロキサシン点滴静注液４００ｍｇ「ニプロ」",
-      "maker": "ニプロ",
-      "official": {
-        "status": "limited",
-        "label": "限定出荷（他社品の影響）",
-        "updated_at": "2025-10-01"
-      },
-      "manufacturer": {
-        "status": "ok",
-        "label": "限定出荷解除・通常出荷",
-        "announced_at": "2026-11-25",
-        "maker": "ニプロ",
-        "title": "2026年11月25日 ワイスタール配合静注用1g・シプロフロキサシン点滴静注液200mg「NP」／400mg「ニプロ」限定出荷解除のご案内",
-        "url": "https://med.nipro.co.jp/sfsites/c/sfc/servlet.shepherd/version/download/068Q800001WqJtHIAV",
-        "scope": "ambiguous"
-      },
-      "confidence": "review",
-      "reason": "関連製品の案内ですが、本品の対象規格を機械判定できません",
-      "badge": "メーカー案内あり・原文確認",
-      "evidence": {
-        "maker_match": true,
-        "exact_product_in_title": false,
-        "manufacturer_notice_is_newer": true,
-        "verified_target_source": "",
-        "verified_target_scope": ""
-      }
-    },
-    "6250019F1217": {
-      "product_name": "バラシクロビル錠５００ｍｇ「ケミファ」",
-      "maker": "日本ケミファ・日本薬品工業",
-      "official": {
-        "status": "limited",
-        "label": "限定出荷（他社品の影響）",
-        "updated_at": "2026-10-26"
-      },
-      "manufacturer": {
-        "status": "ok",
-        "label": "限定出荷解除・通常出荷",
-        "announced_at": "2026-11-25",
-        "maker": "日本ケミファ",
-        "title": "2026年11月25日 バラシクロビル錠500mg「ケミファ」 出荷調整解除のお知らせ",
-        "url": "https://www.nc-medical.com/product_topics/p5ib91000000a0j9-att/p5ib91000000a0jx.pdf",
         "scope": "product"
       },
       "confidence": "high",

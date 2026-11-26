@@ -3,12 +3,18 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-11-26T08:03:59+09:00",
-  "last_success_at": "2026-11-26T08:03:59+09:00",
+  "checked_at": "2026-11-26T23:23:34+09:00",
+  "last_success_at": "2026-11-26T23:23:34+09:00",
   "items": [
     {
       "title": "【塩野義製薬】神経筋疾患など重点領域に‐買収後のR＆D戦略発表",
       "url": "https://www.yakuji.co.jp/entry142072.html",
+      "date": "2026-11-26",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【エーザイ】AD進行1年以上遅らせる‐「レケンビ」5年投与で",
+      "url": "https://www.yakuji.co.jp/entry142071.html",
       "date": "2026-11-26",
       "tag": "業界ニュース"
     },
@@ -19,20 +25,14 @@
       "tag": "業界ニュース"
     },
     {
+      "title": "【東北医科薬科大病院】病院間連携で薬剤師育成‐各施設の機能活用",
+      "url": "https://www.yakuji.co.jp/entry142068.html",
+      "date": "2026-11-26",
+      "tag": "業界ニュース"
+    },
+    {
       "title": "【財政審が建議】27年度改定 完全実施を‐薬局減算は対象拡大も",
       "url": "https://www.yakuji.co.jp/entry142066.html",
-      "date": "2026-11-25",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【厚労省】供給システムに不正侵入‐企業担当者の情報漏洩も",
-      "url": "https://www.yakuji.co.jp/entry142064.html",
-      "date": "2026-11-25",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【GE薬協議会】先発品撤退で情報消失経験‐国による一元管理を提言",
-      "url": "https://www.yakuji.co.jp/entry142062.html",
       "date": "2026-11-25",
       "tag": "業界ニュース"
     },
@@ -40,18 +40,6 @@
       "title": "【厚労省検討会議】タミフルOTC化に慎重論‐賛成意見5000件超も高い壁",
       "url": "https://www.yakuji.co.jp/entry142060.html",
       "date": "2026-11-25",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【JACDS】SMBGのOTC化推進要望‐薬剤師関与へ仕組み整備を",
-      "url": "https://www.yakuji.co.jp/entry141998.html",
-      "date": "2026-11-24",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【ツムラ】漢方製剤の情報提供強化‐胃腸症、睡眠障害領域で",
-      "url": "https://www.yakuji.co.jp/entry141993.html",
-      "date": "2026-11-24",
       "tag": "業界ニュース"
     }
   ]
