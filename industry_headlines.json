@@ -3,9 +3,33 @@
   "source_name": "薬事日報",
   "source_url": "https://www.yakuji.co.jp/",
   "status": "ok",
-  "checked_at": "2026-11-27T01:42:19+09:00",
-  "last_success_at": "2026-11-27T01:42:19+09:00",
+  "checked_at": "2026-11-27T07:57:33+09:00",
+  "last_success_at": "2026-11-27T07:57:33+09:00",
   "items": [
+    {
+      "title": "【独ベーリンガー】心血管リスク抑え治療可能‐肥満症薬第III相で確認",
+      "url": "https://www.yakuji.co.jp/entry142210.html",
+      "date": "2026-11-27",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "厚生労働省 中井審議官、「一定のルールが必要」‐先発品撤退後の情報公開",
+      "url": "https://www.yakuji.co.jp/entry142201.html",
+      "date": "2026-11-27",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【厚労省】外国価格調整見直し提案‐創薬力検討部会で主な意見",
+      "url": "https://www.yakuji.co.jp/entry142199.html",
+      "date": "2026-11-27",
+      "tag": "業界ニュース"
+    },
+    {
+      "title": "【日薬連】医薬品政策、一体的議論を‐意思決定機関の新設提案",
+      "url": "https://www.yakuji.co.jp/entry142198.html",
+      "date": "2026-11-27",
+      "tag": "業界ニュース"
+    },
     {
       "title": "【塩野義製薬】神経筋疾患など重点領域に‐買収後のR＆D戦略発表",
       "url": "https://www.yakuji.co.jp/entry142072.html",
@@ -28,18 +52,6 @@
       "title": "【東北医科薬科大病院】病院間連携で薬剤師育成‐各施設の機能活用",
       "url": "https://www.yakuji.co.jp/entry142068.html",
       "date": "2026-11-26",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【財政審が建議】27年度改定 完全実施を‐薬局減算は対象拡大も",
-      "url": "https://www.yakuji.co.jp/entry142066.html",
-      "date": "2026-11-25",
-      "tag": "業界ニュース"
-    },
-    {
-      "title": "【厚労省検討会議】タミフルOTC化に慎重論‐賛成意見5000件超も高い壁",
-      "url": "https://www.yakuji.co.jp/entry142060.html",
-      "date": "2026-11-25",
       "tag": "業界ニュース"
     }
   ]
