@@ -30,6 +30,7 @@ class DeployWorkflowContractTests(unittest.TestCase):
 
     def test_bot_daily_update_starts_validated_publication_without_waiting_for_clock(self):
         self.assertIn("github.event.workflow_run.name == '毎日データ更新'", self.deploy)
+        self.assertIn("github.event.workflow_run.display_title == '毎日データ更新'", self.deploy)
         self.assertIn("github.event.workflow_run.event == 'schedule'", self.deploy)
         self.assertIn("github.event.workflow_run.conclusion == 'failure'", self.deploy)
         self.assertNotIn("\n  schedule:\n", self.deploy)
@@ -95,7 +96,7 @@ class DeployWorkflowContractTests(unittest.TestCase):
 
     @unittest.skipUnless(shutil.which("node"), "Workflow内JavaScriptの隔離実行にはNodeが必要")
     def test_actual_workflow_scripts_pin_main_and_reject_stale_results(self):
-        self.assertEqual(len(self.scripts), 3)
+        self.assertEqual(len(self.scripts), 4)
         scripts = [self.scripts[0], self.scripts[2]]
         harness = r"""
           let input = '';
@@ -112,6 +113,7 @@ class DeployWorkflowContractTests(unittest.TestCase):
               {script: 0, latest: 'b', validated: 'a', recall: true},
               {script: 0, latest: 'b'},
               {script: 0, latest: 'b', scheduledSha: 'a'},
+              {script: 0, latest: 'b', scheduledSha: 'a', supplyImport: 'true'},
               {script: 1, latest: 'a', source: 'a'},
               {script: 1, latest: 'b', source: 'a'},
             ]) {
@@ -125,7 +127,7 @@ class DeployWorkflowContractTests(unittest.TestCase):
               };
               const core = {notice: () => {}, setOutput: (key, value) => {output[key] = value;}};
               await new AsyncFunction('github', 'context', 'core', 'process', scripts[test.script])(
-                github, context, core, {env: {SOURCE_COMMIT: test.source}});
+                github, context, core, {env: {SOURCE_COMMIT: test.source, SUPPLY_IMPORT: test.supplyImport}});
               outputs.push(output);
             }
             console.log(JSON.stringify(outputs));
@@ -134,7 +136,8 @@ class DeployWorkflowContractTests(unittest.TestCase):
         result = subprocess.run([shutil.which("node"), "-e", harness], input=json.dumps(scripts),
                                 capture_output=True, text=True, check=True, timeout=15)
         self.assertEqual(json.loads(result.stdout), [
-            {"sha": "a"}, {}, {"sha": "b"}, {}, {"sha": "b"}, {"sha": "b"}, {}, {"matches": "true"}, {"matches": "false"},
+            {"sha": "a"}, {}, {"sha": "b"}, {}, {"sha": "b"}, {"sha": "b"}, {}, {"sha": "b"},
+            {"matches": "true"}, {"matches": "false"},
         ])
 
     @unittest.skipUnless(shutil.which("node"), "Workflow内JavaScriptの隔離実行にはNodeが必要")
@@ -172,6 +175,38 @@ class DeployWorkflowContractTests(unittest.TestCase):
           })().catch(error => { console.error(error); process.exitCode = 1; });
         """
         subprocess.run([shutil.which("node"), "-e", harness], input=self.scripts[1],
+                       text=True, check=True, timeout=15)
+
+    @unittest.skipUnless(shutil.which("node"), "Workflow内JavaScriptの隔離実行にはNodeが必要")
+    def test_supply_publication_checks_manifest_commit_and_metadata_bytes(self):
+        harness = r"""
+          const assert = require('node:assert/strict');
+          const { createHash } = require('node:crypto');
+          const script = require('node:fs').readFileSync(0, 'utf8');
+          const AsyncFunction = Object.getPrototypeOf(async function() {}).constructor;
+          const check = new AsyncFunction('require', 'fetch', 'core', 'process', 'setTimeout', script);
+          const source = {excel_date: '2026-11-26', sha256: 'a'.repeat(64)};
+          const body = Buffer.from(JSON.stringify(source));
+          const entry = {bytes: body.length, sha256: createHash('sha256').update(body).digest('hex')};
+          async function run(manifest) {
+            const notices = [];
+            const fetch = async (url) => ({
+              ok: true,
+              arrayBuffer: async () => url.includes('public-data-manifest.json')
+                ? Buffer.from(JSON.stringify(manifest)) : body,
+            });
+            await check(require, fetch, {notice: message => notices.push(message), info: () => {}},
+              {env: {SOURCE_COMMIT: 'new'}}, resolve => resolve());
+            return notices;
+          }
+          (async () => {
+            const manifest = {source_commit: 'new', files: {'mhlw_source.json': entry}};
+            assert.equal((await run(manifest)).length, 1);
+            await assert.rejects(run({...manifest, source_commit: 'old'}), /公開commit/);
+            await assert.rejects(run({...manifest, files: {'mhlw_source.json': {...entry, sha256: 'wrong'}}}), /一致しません/);
+          })().catch(error => { console.error(error); process.exitCode = 1; });
+        """
+        subprocess.run([shutil.which("node"), "-e", harness], input=self.scripts[3],
                        text=True, check=True, timeout=15)
 
 
