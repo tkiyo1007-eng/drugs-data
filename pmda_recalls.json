@@ -2,7 +2,7 @@
   "classes": {
     "I": {
       "status": "ok",
-      "last_success_date": "2026-11-27",
+      "last_success_date": "2026-11-28",
       "items": [
         {
           "id": "1-2511",
@@ -51,20 +51,12 @@
           "maker": "日本赤十字社",
           "url": "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=1-2506",
           "ended": false
-        },
-        {
-          "id": "1-2504",
-          "date": "2026-10-29",
-          "title": "新鮮凍結血漿‐ＬＲ「日赤」４８０",
-          "maker": "日本赤十字社",
-          "url": "https://www.info.pmda.go.jp/rgo/MainServlet?recallno=1-2504",
-          "ended": false
         }
       ]
     },
     "II": {
       "status": "ok",
-      "last_success_date": "2026-11-27",
+      "last_success_date": "2026-11-28",
       "items": [
         {
           "id": "2-13051",
@@ -134,7 +126,7 @@
     },
     "III": {
       "status": "ok",
-      "last_success_date": "2026-11-27",
+      "last_success_date": "2026-11-28",
       "items": []
     }
   }
