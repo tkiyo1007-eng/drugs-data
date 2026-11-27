@@ -1,15 +1,21 @@
 [
  {
+  "date": "2026/11/27",
+  "title": "クラスI回収 該当回収品目　照射赤血球液-LR「日赤」",
+  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html",
+  "tag": "回収"
+ },
+ {
+  "date": "2026/11/27",
+  "title": "GMPラウンドテーブル会議（地方開催：福島）の開催報告を掲載しました",
+  "url": "https://www.pmda.go.jp/review-services/gmp-qms-gctp/gmp/0023.html",
+  "tag": "承認審査"
+ },
+ {
   "date": "2026/11/26",
   "title": "先駆的医薬品一覧を更新しました",
   "url": "https://www.pmda.go.jp/review-services/drug-reviews/0003.html",
   "tag": "承認審査"
- },
- {
-  "date": "2026/11/25",
-  "title": "クラスI回収 該当回収品目　照射赤血球液-LR「日赤」",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/calling-attention/recall-info/0002.html",
-  "tag": "回収"
  },
  {
   "date": "2026/11/25",
@@ -52,11 +58,5 @@
   "title": "1月の簡易相談実施予定を掲載しました（医療機器等）",
   "url": "https://www.pmda.go.jp/review-services/f2f-pre/consultations/0015.html",
   "tag": "承認審査"
- },
- {
-  "date": "2026/11/24",
-  "title": "「副作用が疑われる症例報告に関する情報」に2026年7月分の情報を追加しました",
-  "url": "https://www.pmda.go.jp/safety/info-services/drugs/adr-info/suspected-adr/0005.html",
-  "tag": "安全対策"
  }
 ]
